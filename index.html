@@ -356,6 +356,7 @@ button.primary:hover { background: #333; }
 .toast.success { background: #155724; }
 .toast.error { background: #721c24; }
 </style>
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 </head>
 <body>
 
@@ -364,6 +365,7 @@ button.primary:hover { background: #333; }
   <div class="no-print" style="text-align: right; margin-bottom: 10px;">
     <button onclick="App.switchMode('wizard')" id="btn-wizard">Wizard Mode</button>
     <button onclick="App.switchMode('play')" id="btn-play">Play Mode</button>
+    <button class="primary" onclick="App.exportPDF()">Export PDF</button>
     <button onclick="window.print()">Print (A4)</button>
     <button onclick="App.saveCharacter()">Save (Ctrl+S)</button>
     <button onclick="App.loadCharacter()">Load</button>
@@ -2109,6 +2111,140 @@ App.renderSpecialEffectsReference = function() {
       `).join('')}
     </table>
   `;
+};
+
+// =============================================================================
+// PDF EXPORT
+// =============================================================================
+
+App.fillPDFField = function(form, fieldName, value) {
+  try {
+    const field = form.getTextField(fieldName);
+    if (field && value && value !== 'undefined' && value !== 'null') {
+      field.setText(String(value));
+    }
+  } catch (e) {
+    // Field doesn't exist in template — skip silently
+  }
+};
+
+App.exportPDF = async function() {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.pdf';
+  input.onchange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    try {
+      const arrayBuffer = await file.arrayBuffer();
+      const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
+      const form = pdfDoc.getForm();
+
+      // Identity
+      App.fillPDFField(form, 'Character Name', CharacterData.name);
+      App.fillPDFField(form, 'Race/Culture', CharacterData.culture);
+      App.fillPDFField(form, 'Career', CharacterData.career);
+      App.fillPDFField(form, 'Homeland', CharacterData.homeland);
+      App.fillPDFField(form, 'Age', String(CharacterData.age));
+
+      // Characteristics
+      ['STR','CON','SIZ','DEX','INT','POW','CHA'].forEach(stat => {
+        App.fillPDFField(form, stat, String(CharacterData.characteristics[stat]));
+      });
+
+      // Derived attributes
+      const attrs = CharacterData.attributes;
+      App.fillPDFField(form, 'Action Points', String(attrs.actionPoints));
+      App.fillPDFField(form, 'Damage Modifier', attrs.damageModifier);
+      App.fillPDFField(form, 'Healing Rate', String(attrs.healingRate));
+      App.fillPDFField(form, 'Movement Rate', String(attrs.movementRate));
+      App.fillPDFField(form, 'Initiative Bonus', String(attrs.initiativeBonus));
+      App.fillPDFField(form, 'Luck Points', String(attrs.luckPoints));
+
+      // Hit locations
+      if (attrs.hitPoints) {
+        const locMap = {
+          'Head': 'head', 'Chest': 'chest', 'Abdomen': 'abdomen',
+          'Left Arm': 'leftArm', 'Right Arm': 'rightArm',
+          'Left Leg': 'leftLeg', 'Right Leg': 'rightLeg'
+        };
+        Object.entries(locMap).forEach(([pdfName, dataKey]) => {
+          if (attrs.hitPoints[dataKey] !== undefined) {
+            App.fillPDFField(form, pdfName, String(attrs.hitPoints[dataKey]));
+            App.fillPDFField(form, pdfName + ' Max', String(attrs.hitPoints[dataKey]));
+          }
+        });
+      }
+
+      // Skills
+      const allSkills = App.compileAllSkills ? Array.from(App.compileAllSkills().values()) : [];
+
+      // Standard skills -> Culture_SK_*
+      let skIdx = 1;
+      allSkills.filter(s => s.isStandard !== false).forEach(skill => {
+        if (skIdx <= 14) {
+          App.fillPDFField(form, `Culture_SK_${skIdx}`, `${skill.name} ${skill.base + skill.cultural + skill.career + skill.bonus}%`);
+          skIdx++;
+        }
+      });
+
+      // Professional skills -> Career_PK_*
+      let pkIdx = 1;
+      allSkills.filter(s => s.isStandard === false && !s.name.startsWith('Combat Style')).forEach(skill => {
+        const total = skill.base + skill.cultural + skill.career + skill.bonus;
+        if (total > 0 && pkIdx <= 9) {
+          App.fillPDFField(form, `Career_PK_${pkIdx}`, `${skill.name} ${total}%`);
+          pkIdx++;
+        }
+      });
+
+      // Folk magic spells
+      const allSpells = [...(CharacterData.folkMagicSpells || []), ...(CharacterData.careerFolkMagic || [])];
+      allSpells.forEach((spell, i) => {
+        if (i < 20) {
+          App.fillPDFField(form, `Spell ${i + 1}`, spell);
+        }
+      });
+
+      // Passions
+      (CharacterData.passions || []).forEach((p, i) => {
+        const name = typeof p === 'string' ? p : p.name || p.type;
+        if (i < 7) {
+          App.fillPDFField(form, `P3__Career_PA_${i + 1}`, name);
+        }
+      });
+
+      // Weapons
+      (CharacterData.weapons || []).forEach((w, i) => {
+        if (i < 7) {
+          const idx = i + 1;
+          App.fillPDFField(form, `Weapon ${idx}`, w.name);
+          App.fillPDFField(form, `Damage ${idx}`, w.damage);
+          App.fillPDFField(form, `Size ${idx}`, w.size);
+          App.fillPDFField(form, `Reach ${idx}`, w.reach);
+          App.fillPDFField(form, `AP ${idx}`, String(w.ap));
+          App.fillPDFField(form, `HP ${idx}`, String(w.hp));
+        }
+      });
+
+      // Save and download
+      const pdfBytes = await pdfDoc.save();
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${CharacterData.name || 'character'}.pdf`;
+      a.click();
+      URL.revokeObjectURL(url);
+
+      App.showToast('PDF exported!', 'success');
+    } catch (err) {
+      console.error('PDF export failed:', err);
+      App.showToast('PDF export failed: ' + err.message, 'error');
+    }
+  };
+  input.click();
 };
 
 // =============================================================================
