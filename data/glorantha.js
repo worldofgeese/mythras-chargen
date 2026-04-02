@@ -12,13 +12,13 @@ const GLORANTHA_HOMELAND_MAP = {
   'God Forgot': ['God Forgot', 'Casino Town'],
   'Lunar Heartland': ['Lunar Heartland', 'Glamour', 'Alkoth', 'Yuthuppa'],
   'Praxian': ['Prax', 'Pimper\'s Block', 'Pavis County'],
-  'Provincial Lunar/Tarsh': ['Tarsh', 'Furthest', 'Bagnot', 'Alda-Chur'],
-  'Sartarite/Heortling': ['Sartar', 'Boldhome', 'Clearwine', 'Jonstown', 'Swenstown', 'Wilmskirk', 'Apple Lane'],
+  'Lunar Provincial': ['Tarsh', 'Furthest', 'Bagnot', 'Alda-Chur'],
+  'Sartarite (Heortling)': ['Sartar', 'Boldhome', 'Clearwine', 'Jonstown', 'Swenstown', 'Wilmskirk', 'Apple Lane'],
   'Telmori Hsunchen': ['Telmori Wilds', 'Telmori Forest']
 };
 
 const GLORANTHA_SUGGESTED_BUILDS = {
-  'Sartarite/Heortling': [
+  'Sartarite (Heortling)': [
     {name: 'Orlanthi Warrior', career: 'Warrior', chars: {STR:14,CON:12,SIZ:12,DEX:11,INT:10,POW:8,CHA:8}},
     {name: 'Storm Voice', career: 'Priest', chars: {STR:8,CON:10,SIZ:10,DEX:8,INT:13,POW:15,CHA:11}},
     {name: 'Clan Thane', career: 'Noble', chars: {STR:11,CON:10,SIZ:12,DEX:10,INT:11,POW:10,CHA:11}}
