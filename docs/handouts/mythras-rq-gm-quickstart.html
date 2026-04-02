@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RuneQuest-in-Mythras GM Quickstart</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f8fb;
+      --surface: rgba(255, 255, 255, 0.96);
+      --surface-strong: #eaf3fb;
+      --border: rgba(16, 35, 51, 0.22);
+      --text: #102333;
+      --text-dim: #234156;
+      --blue: #0f4c81;
+      --teal: #0f766e;
+      --blue-soft: rgba(15, 76, 129, 0.12);
+      --teal-soft: rgba(15, 118, 110, 0.14);
+      --shadow: 0 24px 60px rgba(20, 52, 79, 0.1);
+      --font-body: "IBM Plex Sans", "Segoe UI", sans-serif;
+      --font-mono: "IBM Plex Mono", "Cascadia Code", Consolas, monospace;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #08131d;
+        --surface: rgba(15, 28, 41, 0.96);
+        --surface-strong: #173043;
+        --border: rgba(192, 220, 242, 0.26);
+        --text: #f3f8fc;
+        --text-dim: #d6e5f1;
+        --blue: #8dcfff;
+        --teal: #7be3d9;
+        --blue-soft: rgba(141, 207, 255, 0.16);
+        --teal-soft: rgba(123, 227, 217, 0.18);
+        --shadow: 0 24px 60px rgba(0, 0, 0, 0.38);
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: var(--font-body);
+      background:
+        linear-gradient(180deg, rgba(18, 80, 125, 0.06), transparent 34%),
+        radial-gradient(circle at 18% 8%, rgba(15, 118, 110, 0.12), transparent 22%),
+        radial-gradient(circle at 85% 12%, rgba(18, 80, 125, 0.12), transparent 28%),
+        var(--bg);
+      line-height: 1.45;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(18, 80, 125, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 80, 125, 0.05) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.75;
+    }
+
+    main {
+      position: relative;
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 34px 28px 42px;
+    }
+
+    .hero, .panel, .example, .footer-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      animation: fadeUp 700ms ease both;
+    }
+
+    .hero {
+      padding: 28px 30px 24px;
+      background:
+        linear-gradient(145deg, var(--surface-strong), transparent 86%),
+        var(--surface);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 { margin: 0; }
+
+    h1 {
+      margin-top: 16px;
+      font-size: clamp(2.4rem, 4.6vw, 4rem);
+      letter-spacing: -0.03em;
+      max-width: 14ch;
+      line-height: 0.96;
+    }
+
+    .lede {
+      margin-top: 14px;
+      max-width: 76ch;
+      color: var(--text-dim);
+      font-size: 15px;
+    }
+
+    .rule-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .rule-chip {
+      padding: 14px 12px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: var(--surface-strong);
+      min-height: 100%;
+    }
+
+    .rule-chip strong, .sub strong, .item strong, .row strong, .flow-step strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+
+    .rule-chip span, .sub span, .item span, .row span, .flow-step {
+      color: var(--text);
+      font-size: 12.5px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 22px;
+      margin-top: 22px;
+    }
+
+    .stack { display: grid; gap: 22px; }
+
+    .panel { padding: 22px; }
+
+    .panel h2, .example h2, .footer-card h2 {
+      font-size: 1.85rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+
+    .panel p {
+      margin: 0 0 14px;
+      color: var(--text-dim);
+      font-size: 13.5px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 12px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .row:first-child { border-top: 0; padding-top: 0; }
+
+    .badge {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--teal-soft);
+      color: var(--teal);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .sub-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .sub, .item {
+      padding: 12px 13px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--surface-strong);
+    }
+
+    .sub strong { color: var(--blue); font-family: var(--font-mono); font-size: 12px; }
+
+    .source {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border: 1px dashed var(--border);
+      border-radius: 16px;
+      background: var(--surface-strong);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .source::before {
+      content: "Sources";
+      display: block;
+      margin-bottom: 6px;
+      color: var(--blue);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .example {
+      padding: 24px;
+      background:
+        radial-gradient(circle at top right, var(--blue-soft), transparent 30%),
+        linear-gradient(135deg, var(--surface-strong), transparent 84%),
+        var(--surface);
+    }
+
+    .flow {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .flow-step {
+      padding: 14px 16px;
+      border-left: 4px solid var(--blue);
+      border-radius: 16px;
+      background: var(--surface-strong);
+    }
+
+    .footer-card {
+      margin-top: 22px;
+      padding: 24px;
+    }
+
+    .readmore {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero, .panel, .example, .footer-card { animation: none; }
+    }
+
+    @media (max-width: 1150px) {
+      .rule-strip, .layout, .sub-grid, .readmore { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div class="eyebrow">Starter Set GM Quickstart</div>
+      <h1>Run RuneQuest Adventures with Mythras Under the Hood</h1>
+      <p class="lede">Use the Starter Set for scene intent, NPC motives, lore, and adventure structure. Use <strong>Mythras Core</strong> for chargen, skill math, initiative, Action Points, combat styles, and Special Effects. Use <strong>Adventures in Glorantha</strong> plus the cult one-pagers for rune-affinity casting and devotional pools.</p>
+
+      <div class="rule-strip">
+        <div class="rule-chip">
+          <strong>Pregens are rebuilt Mythras characters</strong>
+            <span>Strict 75-point human rebuild, no patched RuneQuest math.</span>
+        </div>
+        <div class="rule-chip">
+          <strong>No Strike Rank</strong>
+          <span>Run initiative and Action Points exactly as Mythras does.</span>
+        </div>
+        <div class="rule-chip">
+          <strong>Combat styles replace weapon skills</strong>
+          <span>Use the style line for attacks, parries, and tactical identity.</span>
+        </div>
+        <div class="rule-chip">
+          <strong>No custom skills on sheets</strong>
+          <span>Translate legacy adventure calls to Mythras Core skills.</span>
+        </div>
+        <div class="rule-chip">
+          <strong>Rune affinity casts miracles</strong>
+          <span>Devotional pools replace Rune Points; Devotion still matters.</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="layout">
+      <div class="stack">
+        <section class="panel">
+          <h2>Read This In Order</h2>
+          <p>This is the minimum reading stack to run the Starter Set in RuneQuest-in-Mythras without paging around blindly at the table.</p>
+          <div class="row"><div class="badge">R1</div><div><strong>Read Starter Set Book 4 pages 2-4 first.</strong><span>That gives you Apple Lane, the cast, the campaign frame, and what each adventure is trying to do.</span></div></div>
+          <div class="row"><div class="badge">R2</div><div><strong>Read the adventure you plan to run straight through.</strong><span>Use Book 4 pages 5-23 for <em>A Rough Landing</em>, 24-47 for <em>A Fire in the Darkness</em>, or 48-75 for <em>The Rainbow Mounds</em>. Read for clues, pacing, factions, and consequences.</span></div></div>
+          <div class="row"><div class="badge">R3</div><div><strong>Read Mythras Core pages 37-54.</strong><span>That covers the main resolution engine, opposed rolls, standard skills, professional skills, and Passions you will actually call for in play.</span></div></div>
+          <div class="row"><div class="badge">R4</div><div><strong>Read Mythras Core pages 86-109.</strong><span>You need initiative, Action Points, hit locations, Special Effects, weapons, armor, and movement before the first real fight.</span></div></div>
+          <div class="row"><div class="badge">R5</div><div><strong>Read Mythras Core pages 121-129 and 179-182, then AiG pages 71-74.</strong><span>That gives you folk magic, divine magic, and the RuneQuest-in-Mythras rule that rune affinity launches miracles while devotional pool pays for them.</span></div></div>
+          <div class="row"><div class="badge">R6</div><div><strong>Read the converted pregens and their cult handouts together.</strong><span>Use the one-page cult sheets for runes, duties, and miracle tone; use the converted Mythras sheets for all actual rolls and combat handling.</span></div></div>
+          <div class="row"><div class="badge">R7</div><div><strong>Prep only the opposition the session can actually reach.</strong><span>Convert scene-facing NPCs and monsters now, keep the rest as notes until the players are on that track.</span></div></div>
+          <div class="source">Mythras Core pp. 37-54, 86-109, 121-129, and 179-182; Adventures in Glorantha pp. 71-74; Starter Set Book 4 pp. 2-75; cult one-pagers for each active cult.</div>
+        </section>
+
+        <section class="panel">
+          <h2>Common Starter Set Substitutions</h2>
+          <div class="sub-grid">
+            <div class="sub"><strong>Scan / Listen / Search</strong><span>Use <em>Perception</em>.</span></div>
+            <div class="sub"><strong>Dodge</strong><span>Use <em>Evade</em>.</span></div>
+            <div class="sub"><strong>Battle</strong><span>Use <em>Lore (Strategy and Tactics)</em>.</span></div>
+            <div class="sub"><strong>Bargain / Evaluate</strong><span>Use <em>Commerce</em>.</span></div>
+            <div class="sub"><strong>Intimidate</strong><span>Use <em>Influence</em>.</span></div>
+            <div class="sub"><strong>Worship (Cult)</strong><span>Use <em>Devotion (Cult)</em> on sheet, rune affinity to cast.</span></div>
+            <div class="sub"><strong>Spirit Combat</strong><span>Use <em>Binding</em> for trained animists, otherwise <em>Willpower</em>.</span></div>
+            <div class="sub"><strong>Farm / Herd / Plant Lore</strong><span>Use <em>Craft</em> or <em>Lore</em> specialisations.</span></div>
+          </div>
+          <div class="source">Sources: Mythras Core pp. 37-46; Adventures in Glorantha pp. 71-74; Starter Set Book 1 pp. 17-21 and 34-51.</div>
+        </section>
+      </div>
+
+      <div class="stack">
+        <section class="panel">
+          <h2>Adventure Coverage</h2>
+          <div class="row"><div class="badge">AR</div><div><strong>A Rough Landing</strong><span>Starter Set Book 4 pp. 5-23. Expect social pressure, market chaos, investigation, tunnels, and a few sharp combats.</span></div></div>
+          <div class="row"><div class="badge">FD</div><div><strong>A Fire in the Darkness</strong><span>Starter Set Book 4 pp. 24-47. Prep investigation skills, urban movement, firefighting, and cult magic cues.</span></div></div>
+          <div class="row"><div class="badge">RM</div><div><strong>The Rainbow Mounds</strong><span>Starter Set Book 4 pp. 48-75. Prep faction reactions, dungeon pressure, spirit or miracle edge cases, and only the monsters likely to hit play.</span></div></div>
+          <div class="source">Sources: Starter Set Book 4 pp. 2-4 and 5-75.</div>
+        </section>
+
+        <section class="example">
+          <h2>Brief Combat Conversion Example</h2>
+          <div class="flow">
+            <div class="flow-step"><strong>1. Keep the scene, swap the engine.</strong> In the market riot from <em>A Rough Landing</em>, the text gives you drunken trolls, panicked merchants, and a volatile public space. Keep all of that.</div>
+            <div class="flow-step"><strong>2. Replace legacy calls immediately.</strong> The scene mentions <em>Scan</em> and <em>Intimidate</em>. At your table those become <em>Perception</em> and usually <em>Influence</em>, with <em>Brawn</em> or a resistance roll if the troll physically shoves someone.</div>
+            <div class="flow-step"><strong>3. If weapons come out, start Mythras combat.</strong> Roll initiative, track Action Points, and attack with combat styles instead of weapon percentages or Strike Rank timing.</div>
+            <div class="flow-step"><strong>4. Use Special Effects to make the scene bite.</strong> A troll winning the exchange might <em>Trip</em> a hero into smashed stalls; a player winning might <em>Choose Location</em> or <em>Bleed</em>.</div>
+            <div class="flow-step"><strong>5. If a miracle enters play, use AiG casting.</strong> Roll the required rune affinity to launch it, spend from devotional pool, and let <em>Devotion</em> guide power and cult tone.</div>
+          </div>
+          <div class="source">Scene: Starter Set Book 4 pp. 5-8. Combat: Mythras Core pp. 86-100. Rune conversion: Adventures in Glorantha pp. 71-74.</div>
+        </section>
+      </div>
+    </div>
+
+    <section class="footer-card">
+      <h2>Keep These Open</h2>
+      <div class="readmore">
+        <div class="item"><strong>Strict build rules</strong><span>Mythras Core pp. 8-12, 13-24, 26-34, and 37-54.</span></div>
+        <div class="item"><strong>Combat engine</strong><span>Mythras Core pp. 86-109.</span></div>
+        <div class="item"><strong>Folk magic and theism</strong><span>Mythras Core pp. 121-129 and 179-182.</span></div>
+        <div class="item"><strong>Rune-affinity casting</strong><span>Adventures in Glorantha pp. 71-74.</span></div>
+        <div class="item"><strong>Starter Set scenario text</strong><span>Book 4 pp. 5-75, plus Book 1 pp. 17-21 and 34-51 for pregens and legacy terminology.</span></div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

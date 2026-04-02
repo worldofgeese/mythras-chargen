@@ -1,0 +1,223 @@
+{
+  "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+  "extracted_at": "2026-04-02",
+  "page": "p.26-41",
+  "note": "Mechanical data only - skills, combat styles, spells, starting values. OCR source was incomplete for 6 of 8 cultures (God Forgot, Lunar Heartland, Praxian, Provincial Lunar/Tarsh, Sartarite/Heortling, Telmori) - only lore text was captured, mechanical stats sections were truncated/missing.",
+  "cultures": [
+    {
+      "name": "Balazaring",
+      "page": "p.26-28",
+      "culture_type": "Primitive",
+      "standard_skills": [
+        "Athletics",
+        "Brawn",
+        "Endurance",
+        "Evade",
+        "Locale",
+        "Perception",
+        "Stealth",
+        "Boating or Swim"
+      ],
+      "professional_skills": [
+        "Craft (any)",
+        "Healing",
+        "Lore (any)",
+        "Musicianship",
+        "Navigate",
+        "Survival",
+        "Track"
+      ],
+      "combat_styles": [
+        {
+          "name": "Hunter Raider",
+          "weapons": ["Spear", "Bow", "Sling"],
+          "traits": ["Skirmisher"]
+        },
+        {
+          "name": "Pony Cavalry",
+          "weapons": ["Spear", "Bow"],
+          "traits": ["Mounted"]
+        },
+        {
+          "name": "Hawk Slayer",
+          "weapons": ["Longspear"],
+          "traits": ["Mounted"]
+        }
+      ],
+      "passions": [
+        { "type": "Loyalty", "focus": "Clan", "base_value": "POW+CHA+30%" },
+        { "type": "Loyalty", "focus": "City", "base_value": "POW+CHA+30%" },
+        { "type": "Love or Hate", "focus": "character's choice", "base_value": "POW+CHA+30%" }
+      ],
+      "folk_magic_spells": [
+        "Beastcall (Dog, Pig or Giant Hawk)",
+        "Bladesharp",
+        "Cleanse",
+        "Coordination",
+        "Deflect",
+        "Dry",
+        "Find Game",
+        "Ignite",
+        "Mobility",
+        "Speedart"
+      ],
+      "starting_money": {
+        "currency": "Lunars",
+        "amount_formula": "4d6x2"
+      }
+    },
+    {
+      "name": "Esrolian",
+      "page": "p.28-29",
+      "culture_type": "Civilised",
+      "standard_skills": [
+        "Conceal",
+        "Deceit",
+        "Drive",
+        "Influence",
+        "Insight",
+        "Locale",
+        "Perception",
+        "Willpower"
+      ],
+      "professional_skills": [
+        "Art (any)",
+        "Commerce",
+        "Craft (any)",
+        "Courtesy",
+        "Language (any)",
+        "Lore (any, but Politics is common)",
+        "Musicianship",
+        "Streetwise"
+      ],
+      "combat_styles": [
+        {
+          "name": "Citizen Legionary",
+          "weapons": ["Shortsword", "Shield", "Javelin", "Sling"],
+          "traits": ["Formation Fighting"]
+        },
+        {
+          "name": "City-State Phalangite",
+          "weapons": ["Longspear/Sarissa", "Bow"],
+          "traits": ["Formation Fighting"]
+        },
+        {
+          "name": "Clan Protector",
+          "weapons": ["Shortsword", "Shield", "Shortspear"],
+          "traits": ["Daredevil"]
+        }
+      ],
+      "passions": [
+        { "type": "Loyalty", "focus": "Clan", "base_value": "POW+CHA+30%" },
+        { "type": "Loyalty", "focus": "Grandmother", "base_value": "POW+CHA+50%" },
+        { "type": "Loyalty", "focus": "Queen", "base_value": "POW+CHA+25%" }
+      ],
+      "folk_magic_spells": [
+        "Alarm",
+        "Appraise",
+        "Bladesharp",
+        "Calculate",
+        "Calm",
+        "Glamour",
+        "Heal",
+        "Lock",
+        "Perfume",
+        "Repair"
+      ],
+      "starting_money": {
+        "currency": "Lunars",
+        "amount_formula": "4d6x15"
+      }
+    },
+    {
+      "name": "God Forgot",
+      "page": "p.29-30",
+      "culture_type": "Civilised",
+      "standard_skills": "NOT FOUND IN SOURCE - OCR truncated before mechanical stats section",
+      "professional_skills": "NOT FOUND IN SOURCE - OCR truncated before mechanical stats section",
+      "combat_styles": "NOT FOUND IN SOURCE - OCR truncated before mechanical stats section",
+      "passions": "NOT FOUND IN SOURCE - OCR truncated before mechanical stats section",
+      "folk_magic_spells": "NOT FOUND IN SOURCE - OCR truncated before mechanical stats section",
+      "starting_money": {
+        "currency": "Lunars",
+        "amount_formula": "4d6x15",
+        "source": "creation-summary table"
+      }
+    },
+    {
+      "name": "Lunar Heartland",
+      "page": "p.30-32",
+      "culture_type": "Civilised",
+      "standard_skills": "NOT FOUND IN SOURCE - culture section not present in OCR",
+      "professional_skills": "NOT FOUND IN SOURCE - culture section not present in OCR",
+      "combat_styles": "NOT FOUND IN SOURCE - culture section not present in OCR",
+      "passions": "NOT FOUND IN SOURCE - culture section not present in OCR",
+      "folk_magic_spells": "NOT FOUND IN SOURCE - culture section not present in OCR",
+      "starting_money": {
+        "currency": "Lunars",
+        "amount_formula": "4d6x10",
+        "source": "creation-summary table"
+      }
+    },
+    {
+      "name": "Praxian",
+      "page": "p.32-35",
+      "culture_type": "Nomad",
+      "standard_skills": "NOT FOUND IN SOURCE - culture section not present in OCR",
+      "professional_skills": "NOT FOUND IN SOURCE - culture section not present in OCR",
+      "combat_styles": "NOT FOUND IN SOURCE - culture section not present in OCR",
+      "passions": "NOT FOUND IN SOURCE - culture section not present in OCR",
+      "folk_magic_spells": "NOT FOUND IN SOURCE - culture section not present in OCR",
+      "starting_money": {
+        "currency": "Lunars",
+        "amount_formula": "4d6x15",
+        "source": "creation-summary table"
+      }
+    },
+    {
+      "name": "Provincial Lunar/Tarsh",
+      "page": "p.35-37",
+      "culture_type": "Barbarian",
+      "standard_skills": "NOT FOUND IN SOURCE - culture section not present in OCR",
+      "professional_skills": "NOT FOUND IN SOURCE - culture section not present in OCR",
+      "combat_styles": "NOT FOUND IN SOURCE - culture section not present in OCR",
+      "passions": "NOT FOUND IN SOURCE - culture section not present in OCR",
+      "folk_magic_spells": "NOT FOUND IN SOURCE - culture section not present in OCR",
+      "starting_money": {
+        "currency": "Lunars",
+        "amount_formula": "4d6x5",
+        "source": "creation-summary table"
+      }
+    },
+    {
+      "name": "Sartarite/Heortling",
+      "page": "p.37-39",
+      "culture_type": "Barbarian",
+      "standard_skills": "NOT FOUND IN SOURCE - culture section not present in OCR",
+      "professional_skills": "NOT FOUND IN SOURCE - culture section not present in OCR",
+      "combat_styles": "NOT FOUND IN SOURCE - culture section not present in OCR",
+      "passions": "NOT FOUND IN SOURCE - culture section not present in OCR",
+      "folk_magic_spells": "NOT FOUND IN SOURCE - culture section not present in OCR",
+      "starting_money": {
+        "currency": "Lunars",
+        "amount_formula": "4d6x10",
+        "source": "creation-summary table"
+      }
+    },
+    {
+      "name": "Telmori Hsunchen",
+      "page": "p.39-41",
+      "culture_type": "Primitive",
+      "standard_skills": "NOT FOUND IN SOURCE - OCR truncated before mechanical stats section",
+      "professional_skills": "NOT FOUND IN SOURCE - OCR truncated before mechanical stats section",
+      "combat_styles": "NOT FOUND IN SOURCE - OCR truncated before mechanical stats section",
+      "passions": "NOT FOUND IN SOURCE - OCR truncated before mechanical stats section",
+      "folk_magic_spells": "NOT FOUND IN SOURCE - OCR truncated before mechanical stats section",
+      "starting_money": {
+        "currency": "Lunars",
+        "amount_formula": "4d6x2",
+        "source": "creation-summary table"
+      }
+    }
+  ]
+}

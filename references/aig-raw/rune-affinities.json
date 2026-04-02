@@ -1,0 +1,45 @@
+{
+  "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+  "extracted_at": "2026-04-02",
+  "page": "p.24 (Step 5: Cultural Skills and Magic)",
+  "rune_affinities": {
+    "count": 3,
+    "assignment": {
+      "first_rune": "POWx2+30%",
+      "second_rune": "POWx2+20%",
+      "third_rune": "POWx2+10%"
+    },
+    "note": "Assign in whatever order the player desires"
+  },
+  "elemental_runes": [
+    {
+      "name": "Darkness",
+      "symbol_note": "Associated with trolls, darkness creatures, shadow"
+    },
+    {
+      "name": "Water",
+      "symbol_note": "Associated with seas, rivers, rain"
+    },
+    {
+      "name": "Earth",
+      "symbol_note": "Associated with earth goddesses, fertility, stability"
+    },
+    {
+      "name": "Fire/Sky",
+      "symbol_note": "Associated with sun gods, light, purity"
+    },
+    {
+      "name": "Air",
+      "symbol_note": "Associated with Orlanth, storms, wind, violence"
+    },
+    {
+      "name": "Moon",
+      "symbol_note": "Associated with Lunar religion, cycles, illumination"
+    }
+  ],
+  "rune_magic_note": "Rune Affinities replace Exhort skill for casting Rune Spells. An initiate must roll against the Rune Affinity that controls the spell being cast. Devotion skill judges Intensity and Magnitude.",
+  "source_quotes": {
+    "casting": "the skill of Exhort is now replaced by whatever Rune Affinity controls the particular spell being cast",
+    "example": "an initiate of Yelmalio who wished to cast a Sun Spear would need to roll against their Fire Rune affinity"
+  }
+}

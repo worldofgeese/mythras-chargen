@@ -1,0 +1,55 @@
+{
+  "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+  "extracted_at": "2026-04-02",
+  "note": "Career categories by culture. From culture descriptions and creation-summary step 8.",
+  "careers_by_culture": [
+    {
+      "culture": "Balazaring",
+      "career_category": "All Primitive",
+      "reference": "RuneQuest page 40",
+      "source": "OCR text: 'All Primitive careers (see RUNEQUEST page 40)'"
+    },
+    {
+      "culture": "Esrolian",
+      "career_category": "All Civilised",
+      "reference": "RuneQuest page 40",
+      "source": "OCR text: 'All Civilised (see page 40 of RUNEQUEST)'"
+    },
+    {
+      "culture": "God Forgot",
+      "career_category": "All Civilised",
+      "reference": "RuneQuest page 40",
+      "source": "Inferred from culture_type Civilised; mechanical section not in OCR"
+    },
+    {
+      "culture": "Lunar Heartland",
+      "career_category": "All Civilised",
+      "reference": "RuneQuest page 40",
+      "source": "Inferred from culture_type Civilised; mechanical section not in OCR"
+    },
+    {
+      "culture": "Praxian",
+      "career_category": "All Nomad",
+      "reference": "RuneQuest page 40",
+      "source": "Inferred from culture_type Nomad; mechanical section not in OCR"
+    },
+    {
+      "culture": "Provincial Lunar/Tarsh",
+      "career_category": "All Barbarian",
+      "reference": "RuneQuest page 40",
+      "source": "Inferred from culture_type Barbarian; mechanical section not in OCR"
+    },
+    {
+      "culture": "Sartarite/Heortling",
+      "career_category": "All Barbarian",
+      "reference": "RuneQuest page 40",
+      "source": "Inferred from culture_type Barbarian; mechanical section not in OCR"
+    },
+    {
+      "culture": "Telmori Hsunchen",
+      "career_category": "All Primitive",
+      "reference": "RuneQuest page 40",
+      "source": "Inferred from culture_type Primitive; mechanical section not in OCR"
+    }
+  ]
+}

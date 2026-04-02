@@ -1,0 +1,42 @@
+{
+  "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+  "extracted_at": "2026-04-02",
+  "page": "p.65-67",
+  "notes": {
+    "damage": "Base damage dice",
+    "damage_mod": "Can damage modifier be applied? Y=Yes, N=No, H=Half",
+    "force": "Force rating (equivalent to Size): S=Small, M=Medium, L=Large, H=Huge, E=Enormous",
+    "range": "Close/Effective/Long range in metres",
+    "load": "Turns required to load/reload",
+    "impale_size": "Effective size if weapon impales (S/M/—)",
+    "enc": "Encumbrance",
+    "ammunition_costs": "Arrows (dozen)=4 SP, Quarrels (dozen)=3 SP, Lead sling bullets (20)=1 SP, Blowgun darts (6)=2 SP, Thrown darts (dozen)=2 SP"
+  },
+  "ranged_weapons": [
+    {"name": "Atlatl", "damage": "—", "damage_mod": "—", "force": "+1 Step", "range": "+0/+25/+75", "load": 1, "combat_effects": [], "impale_size": "—", "enc": 1, "ap": 1, "hp": 4, "milieu": ["P"], "cost": 10, "notes": "Adds to throwing dart/spear range and force"},
+    {"name": "Blowgun", "damage": "—", "damage_mod": "N", "force": "—", "range": "10/20/30", "load": 2, "combat_effects": [], "impale_size": "—", "enc": 0, "ap": 1, "hp": 4, "milieu": ["P"], "cost": 30},
+    {"name": "Bolas", "damage": "1d4", "damage_mod": "N", "force": "—", "range": "10/25/50", "load": 0, "combat_effects": ["Entangle"], "impale_size": "—", "enc": 0, "ap": 2, "hp": 2, "milieu": ["P", "A"], "cost": 10},
+    {"name": "Dagger", "damage": "1d4", "damage_mod": "Y", "force": "S", "range": "5/10/20", "load": 0, "combat_effects": ["Impale"], "impale_size": "S", "enc": 0, "ap": 6, "hp": 8, "milieu": ["All"], "cost": 30},
+    {"name": "Dart", "damage": "1d4", "damage_mod": "Y", "force": "S", "range": "5/10/20", "load": 0, "combat_effects": ["Impale"], "impale_size": "S", "enc": 0, "ap": 2, "hp": 1, "milieu": ["P", "A"], "cost": 10},
+    {"name": "Discus", "damage": "1d4+1", "damage_mod": "Y", "force": "L", "range": "5/20/40", "load": 0, "combat_effects": ["Stun Location"], "impale_size": "—", "enc": 0, "ap": 2, "hp": 3, "milieu": ["A"], "cost": 30},
+    {"name": "Hatchet", "damage": "1d6", "damage_mod": "Y", "force": "S", "range": "10/20/30", "load": 0, "combat_effects": ["Bleed"], "impale_size": "—", "enc": 1, "ap": 4, "hp": 6, "milieu": ["All"], "cost": 25},
+    {"name": "Heavy crossbow", "damage": "1d10", "damage_mod": "N", "force": "H", "range": "20/150/300", "load": 4, "combat_effects": ["Impale", "Sunder"], "impale_size": "S", "enc": 2, "ap": 4, "hp": 8, "milieu": ["M", "E"], "cost": 350},
+    {"name": "Javelin", "damage": "1d8+1", "damage_mod": "Y", "force": "H", "range": "10/20/50", "load": 0, "combat_effects": ["Impale", "Pin Weapon (Shield)"], "impale_size": "M", "enc": 1, "ap": 3, "hp": 8, "milieu": ["A", "M"], "cost": 20, "notes": "Can use Pin Weapon special effect against shields without needing a Critical"},
+    {"name": "Light crossbow", "damage": "1d8", "damage_mod": "N", "force": "L", "range": "20/100/200", "load": 3, "combat_effects": ["Impale"], "impale_size": "S", "enc": 1, "ap": 4, "hp": 5, "milieu": ["M", "E"], "cost": 150},
+    {"name": "Long bow", "damage": "1d8", "damage_mod": "Y", "force": "H", "range": "15/125/250", "load": 2, "combat_effects": ["Impale"], "impale_size": "S", "enc": 1, "ap": 4, "hp": 7, "milieu": ["M"], "cost": 200},
+    {"name": "Net", "damage": "—", "damage_mod": "N", "force": "—", "range": "3/5/10", "load": 0, "combat_effects": ["Entangle"], "impale_size": "—", "enc": 3, "ap": 2, "hp": 20, "milieu": ["All"], "cost": 20},
+    {"name": "Recurve bow", "damage": "1d8", "damage_mod": "Y", "force": "H", "range": "15/125/250", "load": 2, "combat_effects": ["Impale"], "impale_size": "S", "enc": 1, "ap": 4, "hp": 8, "milieu": ["A", "M"], "cost": 225},
+    {"name": "Short bow", "damage": "1d6", "damage_mod": "Y", "force": "L", "range": "15/100/200", "load": 2, "combat_effects": ["Impale"], "impale_size": "S", "enc": 1, "ap": 4, "hp": 4, "milieu": ["P", "A", "M"], "cost": 75},
+    {"name": "Shortspear", "damage": "1d8", "damage_mod": "Y", "force": "L", "range": "10/15/30", "load": 0, "combat_effects": ["Impale"], "impale_size": "M", "enc": 1, "ap": 4, "hp": 5, "milieu": ["All"], "cost": 20},
+    {"name": "Sling", "damage": "1d8", "damage_mod": "N", "force": "L", "range": "10/150/300", "load": 3, "combat_effects": ["Stun Location"], "impale_size": "—", "enc": 0, "ap": 1, "hp": 2, "milieu": ["P", "A", "M"], "cost": 5},
+    {"name": "Staff sling", "damage": "2d6", "damage_mod": "N", "force": "E", "range": "5/25/50", "load": 4, "combat_effects": ["Stun Location"], "impale_size": "—", "enc": 2, "ap": 3, "hp": 6, "milieu": ["A", "M"], "cost": 20},
+    {"name": "Stone/Rock", "damage": "1d3", "damage_mod": "Y", "force": "S", "range": "5/10/20", "load": 0, "combat_effects": ["Stun Location"], "impale_size": "—", "enc": 0, "ap": 0, "hp": 0, "milieu": ["All"], "cost": 0},
+    {"name": "Trident", "damage": "1d8", "damage_mod": "Y", "force": "L", "range": "10/15/30", "load": 0, "combat_effects": ["Barbed", "Impale"], "impale_size": "M", "enc": 2, "ap": 4, "hp": 10, "milieu": ["A", "M"], "cost": 155}
+  ],
+  "range_notes": {
+    "close_range": "Distance over which Choose Location may be used as special effect (target must be stationary or unaware)",
+    "effective_range": "No significant modifiers on accuracy or power",
+    "long_range": "Damage is halved and Force is reduced by one step",
+    "distance_penalties": "See p.108 for skill penalties based on range"
+  }
+}

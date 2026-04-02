@@ -1,0 +1,51 @@
+{
+  "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+  "extracted_at": "2026-04-02",
+  "note": "Named combat styles from culture sections. Only Balazaring and Esrolian had complete data in OCR source.",
+  "combat_styles": [
+    {
+      "culture": "Balazaring",
+      "name": "Hunter Raider",
+      "weapons": ["Spear", "Bow", "Sling"],
+      "traits": ["Skirmisher"]
+    },
+    {
+      "culture": "Balazaring",
+      "name": "Pony Cavalry",
+      "weapons": ["Spear", "Bow"],
+      "traits": ["Mounted"]
+    },
+    {
+      "culture": "Balazaring",
+      "name": "Hawk Slayer",
+      "weapons": ["Longspear"],
+      "traits": ["Mounted"]
+    },
+    {
+      "culture": "Esrolian",
+      "name": "Citizen Legionary",
+      "weapons": ["Shortsword", "Shield", "Javelin", "Sling"],
+      "traits": ["Formation Fighting"]
+    },
+    {
+      "culture": "Esrolian",
+      "name": "City-State Phalangite",
+      "weapons": ["Longspear/Sarissa", "Bow"],
+      "traits": ["Formation Fighting"]
+    },
+    {
+      "culture": "Esrolian",
+      "name": "Clan Protector",
+      "weapons": ["Shortsword", "Shield", "Shortspear"],
+      "traits": ["Daredevil"]
+    }
+  ],
+  "missing_cultures": [
+    "God Forgot",
+    "Lunar Heartland",
+    "Praxian",
+    "Provincial Lunar/Tarsh",
+    "Sartarite/Heortling",
+    "Telmori Hsunchen"
+  ]
+}

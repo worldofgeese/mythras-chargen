@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Jonstown: RuneQuest Player Quickstart</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #efe4d1;
+      --bg-deep: #e5d3b5;
+      --paper: #f9f2e7;
+      --panel: #f3e6d2;
+      --panel-strong: #ead4b4;
+      --ink: #20170f;
+      --ink-soft: #5a4633;
+      --rule: rgba(58, 38, 21, 0.2);
+      --rust: #8f4023;
+      --sage: #556d43;
+      --gold: #af7d2d;
+      --shadow: 0 18px 42px rgba(49, 30, 16, 0.14);
+      --font-display: "Fraunces", Georgia, serif;
+      --font-body: "IBM Plex Sans", "Segoe UI", sans-serif;
+      --font-mono: "IBM Plex Mono", "Cascadia Code", monospace;
+    }
+
+    * { box-sizing: border-box; min-width: 0; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.45;
+      background:
+        radial-gradient(circle at top left, rgba(143, 64, 35, 0.16), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(85, 109, 67, 0.12), transparent 26%),
+        linear-gradient(180deg, var(--bg), var(--bg-deep));
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.3;
+      background-image:
+        linear-gradient(rgba(32, 23, 15, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(32, 23, 15, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    main {
+      position: relative;
+      max-width: 1460px;
+      margin: 0 auto;
+      padding: 28px;
+    }
+
+    .sheet {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.38), transparent 24%),
+        var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .hero-panel,
+    .intro-card,
+    .play-card,
+    .combat-card,
+    .roster-card,
+    .reads-card {
+      background: rgba(255, 249, 241, 0.82);
+      border: 1px solid var(--rule);
+      border-radius: 22px;
+      padding: 18px 18px 16px;
+    }
+
+    .hero-copy {
+      padding: 4px 2px 2px;
+    }
+
+    .kicker {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 999px;
+      padding: 7px 12px;
+      background: rgba(143, 64, 35, 0.12);
+      color: var(--rust);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 0.95;
+    }
+
+    h1 {
+      margin-top: 14px;
+      font-size: clamp(2.8rem, 5vw, 4.6rem);
+      max-width: 10ch;
+    }
+
+    .lede {
+      margin: 14px 0 0;
+      max-width: 64ch;
+      font-size: 15px;
+      color: var(--ink-soft);
+    }
+
+    .hero-points {
+      margin: 18px 0 0;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .hero-point {
+      padding: 12px;
+      background: rgba(234, 212, 180, 0.48);
+      border: 1px solid rgba(58, 38, 21, 0.12);
+      border-radius: 18px;
+    }
+
+    .hero-point strong,
+    .step strong,
+    .pitch strong,
+    .read strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 13px;
+      color: var(--ink);
+    }
+
+    .hero-point span,
+    .step span,
+    .pitch span,
+    .read span,
+    .intro-card p,
+    .combat-card p,
+    .footnote,
+    .readout,
+    .example-line {
+      color: var(--ink-soft);
+      font-size: 12.5px;
+    }
+
+    .intro-card {
+      background:
+        linear-gradient(180deg, rgba(85, 109, 67, 0.08), transparent 32%),
+        rgba(255, 249, 241, 0.9);
+    }
+
+    .intro-card h2,
+    .play-card h2,
+    .combat-card h2,
+    .roster-card h2,
+    .reads-card h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .intro-list,
+    .steps,
+    .reads {
+      display: grid;
+      gap: 10px;
+    }
+
+    .intro-item,
+    .step,
+    .read {
+      border-top: 1px solid var(--rule);
+      padding-top: 10px;
+    }
+
+    .intro-item:first-child,
+    .step:first-child,
+    .read:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .intro-item strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .steps {
+      margin-top: 6px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(175, 125, 45, 0.18);
+      color: #7c581b;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .combat-example {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .example-line {
+      padding: 11px 12px;
+      border-left: 4px solid var(--rust);
+      border-radius: 14px;
+      background: rgba(234, 212, 180, 0.36);
+    }
+
+    .example-line strong {
+      color: var(--ink);
+    }
+
+    .roster-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .pitch {
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(234, 212, 180, 0.34);
+      border: 1px solid rgba(58, 38, 21, 0.12);
+    }
+
+    .pitch code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--rust);
+      background: rgba(143, 64, 35, 0.08);
+      padding: 2px 5px;
+      border-radius: 999px;
+    }
+
+    .reads-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .read {
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(255, 249, 241, 0.9);
+      border: 1px solid rgba(58, 38, 21, 0.1);
+    }
+
+    .cit {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      width: fit-content;
+      margin-top: 7px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(85, 109, 67, 0.2);
+      background: rgba(85, 109, 67, 0.1);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--sage);
+      letter-spacing: 0.01em;
+    }
+
+    .cit::before {
+      content: "Source";
+      color: var(--rust);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 10px;
+    }
+
+    .footer-band {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--rule);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-band strong {
+      color: var(--rust);
+    }
+
+    @media (max-width: 1160px) {
+      .hero,
+      .layout,
+      .reads-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      main { padding: 14px; }
+      .sheet { padding: 16px; }
+      .hero-points,
+      .roster-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      body::before {
+        display: none;
+      }
+
+      main {
+        max-width: none;
+        padding: 0;
+      }
+
+      .sheet {
+        border-radius: 0;
+        box-shadow: none;
+        border: 0;
+        padding: 10mm;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="sheet">
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="kicker">Player Handout • Session One • Jonstown 1625</div>
+          <h1>Welcome to RuneQuest</h1>
+          <p class="lede">You’re adventurers in Glorantha: a myth-filled bronze-age world where gods are real, your cult matters, and your loyalties shape who you become. You’ve arrived in war-scarred Jonstown looking for shelter, work, and the next right thing to do together. <span class="cit">Starter Set Book 4 pp. 5-8</span></p>
+          <div class="hero-points">
+            <div class="hero-point">
+              <strong>Gods are active.</strong>
+              <span>Cults grant magic, duties, and identity. Runes show the powers that pull on your life. <span class="cit">Starter Set Book 1 pp. 18-22</span></span>
+            </div>
+            <div class="hero-point">
+              <strong>Violence matters.</strong>
+              <span>Combat is dangerous, fast, and full of lasting consequences. Winning cleanly matters. <span class="cit">Book 4 p. 5; Mythras Core pp. 86-100</span></span>
+            </div>
+            <div class="hero-point">
+              <strong>You already belong.</strong>
+              <span>Your group starts as allies and traveling companions, not strangers in a tavern. <span class="cit">Starter Set Book 4 p. 5</span></span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="intro-card">
+          <h2>The Opening Situation</h2>
+          <p>Dark Season. Jonstown is still recovering from war. Mercenaries, refugees, and hungry opportunists crowd the streets. You’ve made it through the North Gate at dusk and headed for the North Market hoping to find food, beds, and maybe paid work.</p>
+          <div class="intro-list">
+            <div class="intro-item">
+              <strong>What you know.</strong>
+              The Battle of Dangerford was recent. The Lunar Empire has been driven out, but no one thinks the land is safe yet. <span class="cit">Starter Set Book 4 p. 6</span>
+            </div>
+            <div class="intro-item">
+              <strong>What matters.</strong>
+              Passions like Honor, Loyalty, Hate, and Devotion are not decoration. They guide choices and can help you act decisively. <span class="cit">Starter Set Book 4 p. 5; Starter Set Book 1 pp. 17-19</span>
+            </div>
+            <div class="intro-item">
+              <strong>What this first adventure feels like.</strong>
+              Street trouble, hard choices, wounded pride, social pressure, and a city that hasn’t decided whether to trust you yet. <span class="cit">Starter Set Book 4 pp. 5-10</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="layout">
+        <div class="stack">
+          <section class="play-card">
+            <h2>How To Play</h2>
+            <div class="steps">
+              <div class="step">
+                <div class="badge">1</div>
+                <div>
+                  <strong>Roll d100 and try to get equal to or under the skill on your sheet.</strong>
+                  <span>You’ll most often roll a skill, a Passion, a rune affinity, or a combat style. <span class="cit">Mythras Core pp. 37-46</span></span>
+                </div>
+              </div>
+              <div class="step">
+                <div class="badge">2</div>
+                <div>
+                  <strong>If someone opposes you, the better success wins.</strong>
+                  <span>That’s true in arguments, chases, and fights. A better quality of success beats a worse one. <span class="cit">Mythras Core pp. 37-46</span></span>
+                </div>
+              </div>
+              <div class="step">
+                <div class="badge">3</div>
+                <div>
+                  <strong>In combat, you act with Action Points.</strong>
+                  <span>Attack, parry, evade, react, and press advantages by spending Action Points at the right moment. <span class="cit">Mythras Core pp. 86-100</span></span>
+                </div>
+              </div>
+              <div class="step">
+                <div class="badge">4</div>
+                <div>
+                  <strong>Use Passions and Runes when the fiction supports them.</strong>
+                  <span>If your Honor, Loyalty, Devotion, or rune nature clearly applies, bring it in. That’s how heroes feel larger than life. <span class="cit">Starter Set Book 1 pp. 17-22</span></span>
+                </div>
+              </div>
+              <div class="step">
+                <div class="badge">5</div>
+                <div>
+                  <strong>Magic comes from your cult and your runes.</strong>
+              <span>Folk magic is broad and practical. Miracles key off the right rune affinity and your Devotion. <span class="cit">Mythras Core pp. 179-182; Adventures in Glorantha pp. 71-74</span></span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="combat-card">
+            <h2>One Exchange In Combat</h2>
+            <p>The first adventure opens with trouble in the North Market, so this is the sort of thing you’ll do right away. <span class="cit">Starter Set Book 4 pp. 7-10</span></p>
+            <div class="combat-example">
+              <div class="example-line"><strong>Vasana rides in.</strong> She spends 1 Action Point to attack with <em>Vinga Cavalry</em>, the combat style that covers her weapons and mounted fighting. <span class="cit">Mythras Core pp. 86-90</span></div>
+              <div class="example-line"><strong>The troll reacts.</strong> It spends 1 Action Point to parry. Both sides roll. The better result wins the exchange. <span class="cit">Mythras Core pp. 90-96</span></div>
+              <div class="example-line"><strong>If Vasana wins cleanly, damage lands and a Special Effect may follow.</strong> That might mean forcing a stumble, choosing a location, or opening the enemy up for the next ally. <span class="cit">Mythras Core pp. 96-100</span></div>
+              <div class="example-line"><strong>If she calls on a miracle, the right rune does the casting.</strong> Her cult and rune affinities matter in play, not just as backstory. <span class="cit">Adventures in Glorantha pp. 71-74</span></div>
+            </div>
+          </section>
+        </div>
+
+        <div class="stack">
+          <section class="roster-card">
+            <h2>The Pregenerated Heroes</h2>
+            <div class="roster-grid">
+              <div class="pitch"><strong>Vasana</strong><span>Scarred bison-rider war leader. Front-line cavalry, pride, vengeance, command. <code>leader / rider</code> <span class="cit">Folio p. 1</span></span></div>
+              <div class="pitch"><strong>Yanioth</strong><span>Ernaldan priestess and healer. Strong support magic, social force, earth mysteries. <code>healer / priest</code> <span class="cit">Folio p. 3</span></span></div>
+              <div class="pitch"><strong>Harmast</strong><span>Wealthy negotiator and dangerous duelist. Good for bargains, words, and precise violence. <code>talker / duelist</code> <span class="cit">Folio p. 5</span></span></div>
+              <div class="pitch"><strong>Vishi Dunn</strong><span>Praxian spirit-talker with hard-earned loyalties. Weird magic, warnings, and spirit sense. <code>shaman / scout</code> <span class="cit">Folio p. 7</span></span></div>
+              <div class="pitch"><strong>Vostor</strong><span>Scarred former Lunar infantryman. Tough shield soldier with divided loyalties. <code>tank / veteran</code> <span class="cit">Folio p. 9</span></span></div>
+              <div class="pitch"><strong>Sorala</strong><span>Nochet scholar who can still fight. Knowledge, languages, and patient magic. <code>sage / investigator</code> <span class="cit">Folio p. 11</span></span></div>
+              <div class="pitch"><strong>Nathem</strong><span>Quiet hunter from Old Tarsh. Bow, fieldcraft, patience, and survival. <code>archer / woodsman</code> <span class="cit">Folio p. 13</span></span></div>
+              <div class="pitch"><strong>Aranda</strong><span>Axe Maiden from Nochet. Armored avenger with a sacred cause and little fear. <code>slayer / zealot</code> <span class="cit">Folio p. 15</span></span></div>
+              <div class="pitch"><strong>Dazarim</strong><span>Sable-riding Praxian bandit. Fast, mobile, proud, and hard to pin down. <code>nomad / rider</code> <span class="cit">Folio p. 17</span></span></div>
+              <div class="pitch"><strong>Ionara</strong><span>Pure Horse People priestess of Maran Gor. Fierce authority, earth-shaking magic, and cavalry skill. <code>priest / rider</code> <span class="cit">Folio p. 19</span></span></div>
+            </div>
+          </section>
+
+          <section class="reads-card">
+            <h2>Where To Read More</h2>
+            <div class="reads-grid">
+              <div class="read">
+                <strong>What Glorantha feels like</strong>
+                <span>Gods, cults, runes, and why community matters. <span class="cit">Starter Set Book 4 pp. 5-6; Starter Set Book 1 pp. 18-22</span></span>
+              </div>
+              <div class="read">
+                <strong>The first-session setup</strong>
+                <span>How the group starts together and what Jonstown is like right now. <span class="cit">Starter Set Book 4 pp. 5-9</span></span>
+              </div>
+              <div class="read">
+                <strong>Playing your sheet</strong>
+                <span>Core tests, opposed rolls, and practical skill use. <span class="cit">Mythras Core pp. 37-46</span></span>
+              </div>
+              <div class="read">
+                <strong>Surviving a fight</strong>
+                <span>Action Points, attacks, parries, dodges, damage, and wounds. <span class="cit">Mythras Core pp. 86-100; Starter Set Book 1 pp. 21-31</span></span>
+              </div>
+            </div>
+
+            <div class="footer-band">
+              <div class="footnote"><strong>Table promise:</strong> you do not need to memorize the rules. Bring your hero’s personality, ask what’s possible, and lean on your loyalties when things get hard.</div>
+              <div class="readout"><span class="cit">Player-facing summary built from Starter Set Book 4 pp. 5-10, Starter Set Book 1 pp. 17-22 and 21-31, Mythras Core pp. 37-46 and 86-100, and the pregen folios pp. 1-19.</span></div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

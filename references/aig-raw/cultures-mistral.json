@@ -1,0 +1,399 @@
+{
+  "source": "Adventures in Glorantha (GenCon 2015 Preview) — Mistral OCR extraction",
+  "extracted_at": "2026-04-02",
+  "cultures": [
+    {
+      "name": "Balazaring",
+      "page": "not in OCR range (before p.29)",
+      "culture_type": "Primitive",
+      "standard_skills": [],
+      "professional_skills": [],
+      "careers": "",
+      "combat_styles": [],
+      "folk_magic_spells": [],
+      "passions": [],
+      "starting_money": {"currency": "Lunars", "formula": "4d6x2"},
+      "notes": "Balazaring culture pages were not included in this OCR extraction (p.29-41). Only starting money from creation-summary p.25 is recorded."
+    },
+    {
+      "name": "Esrolian",
+      "page": "p.29",
+      "culture_type": "Civilised",
+      "standard_skills": ["Conceal", "Deceit", "Drive", "Influence", "Insight", "Locale", "Perception", "Willpower"],
+      "professional_skills": ["Art (any)", "Commerce", "Craft (any)", "Courtesy", "Language (any)", "Lore (any, but Politics is common)", "Musicianship", "Streetwise"],
+      "careers": "All Civilised (see page 40 of RUNEQUEST)",
+      "combat_styles": [
+        {
+          "name": "Citizen Legionary",
+          "weapons": ["Shortsword", "Shield", "Javelin", "Sling"],
+          "traits": ["Formation Fighting"],
+          "restrictions": null
+        },
+        {
+          "name": "City-State Phalangite",
+          "weapons": ["Longspear/Sarissa", "Bow"],
+          "traits": ["Formation Fighting"],
+          "restrictions": null
+        },
+        {
+          "name": "Clan Protector",
+          "weapons": ["Shortsword", "Shield", "Shortspear"],
+          "traits": ["Daredevil"],
+          "restrictions": null
+        }
+      ],
+      "folk_magic_spells": ["Alarm", "Appraise", "Bladesharp", "Calculate", "Calm", "Glamour", "Heal", "Lock", "Perfume", "Repair"],
+      "passions": [
+        {"type": "Loyalty", "focus": "Clan", "formula": "POW+CHA+30"},
+        {"type": "Loyalty", "focus": "Grandmother", "formula": "POW+CHA+50"},
+        {"type": "Loyalty", "focus": "Queen", "formula": "POW+CHA+25"}
+      ],
+      "starting_money": {"currency": "Lunars", "formula": "4d6x15"},
+      "notes": "Esrolian Social Class section precedes skills. Clan Status determined by 1d100: 01-25 Enfranchised House, 26-00 Client House. Social divisions use Civilised Social Class from RUNEQUEST p.31. Esrolians have all three Passions at starting values. Loyalty to Grandmother must never be exceeded by Clan or Queen loyalty."
+    },
+    {
+      "name": "God Forgot",
+      "page": "p.29-31",
+      "culture_type": "Civilised",
+      "standard_skills": ["Conceal", "Deceit", "Endurance", "Influence", "Insight", "Locale", "Willpower"],
+      "professional_skills": ["Commerce", "Craft (any)", "Courtesy", "Engineering", "Gambling", "Lore (any)", "Mechanisms", "Streetwise"],
+      "careers": "Career is dependent on caste. Dronars: Beast Handler, Courtesan, Crafter, Entertainer, Farmer, Fisher, Herder, Hunter, Merchant, Miner, Sailor, Scout, Thief. Horali: Warrior. Zzistori: Sorcerer. Talar: Agent, Alchemist, Courtier, Official, Scholar, Warrior.",
+      "combat_styles": [
+        {
+          "name": "Horali Militia",
+          "weapons": ["1H Spear", "Western Infantry Shield", "Sling"],
+          "traits": ["Shield Wall"],
+          "restrictions": null
+        },
+        {
+          "name": "God Forgotten Horali",
+          "weapons": ["Sword", "Shield", "Spear", "Sling"],
+          "traits": ["Skirmisher"],
+          "restrictions": null
+        },
+        {
+          "name": "Talar Defensive School",
+          "weapons": ["Unarmed", "Shortsword", "Dagger", "Buckler"],
+          "traits": ["Improvised Weapons"],
+          "restrictions": null
+        }
+      ],
+      "folk_magic_spells": ["Alarm", "Avert", "Bladesharp", "Bludgeon", "Find Truth", "Heal", "Perfume", "Pierce", "Preserve", "Protection"],
+      "passions": [
+        {"type": "Loyalty", "focus": "Caste", "formula": "formula not printed"},
+        {"type": "Despise", "focus": "Gods", "formula": "formula not printed"},
+        {"type": "Hate", "focus": "Outsiders", "formula": "formula not printed"},
+        {"type": "Suffer", "focus": "Willingly", "formula": "formula not printed"}
+      ],
+      "starting_money": {"currency": "Lunars", "formula": "4d6x15"},
+      "notes": "Atheist culture. Four castes: Talars (Yellow/Nobility), Zzistori (Blue/Wizards), Horali (Red/Soldiers), Dronars (Brown/Workers). Zzistori must take Shaping as an adjunct to their sorcerous skills. Talar and Zzistori castes are immortal. Gods are not worshipped; Rune Magic unavailable. Spirit Magic viewed as pointless. Folk Magic considered diluted sorcery."
+    },
+    {
+      "name": "Lunar Heartland",
+      "page": "p.31-33",
+      "culture_type": "Civilised",
+      "standard_skills_note": "As per Civilised, RUNEQUEST page 21. Mythras Civilised standard skills are: Conceal, Deceit, Drive, Influence, Insight, Locale, Perception, Willpower",
+      "standard_skills": ["As per Civilised, RUNEQUEST page 21"],
+      "professional_skills": ["As per Civilised, RUNEQUEST page 22"],
+      "careers": "All Civilised careers are open to Lunar Heartlanders.",
+      "combat_styles": [
+        {
+          "name": "Dara Happan Urbanite",
+          "weapons": ["Club", "Dagger", "Shortsword", "Buckler"],
+          "traits": ["Defensive Minded"],
+          "restrictions": null
+        },
+        {
+          "name": "Dart Contestant",
+          "weapons": ["Dart", "Dagger", "Shortsword"],
+          "traits": ["Assassination", "Daredevil"],
+          "restrictions": "only available to Agent career"
+        },
+        {
+          "name": "Sagittan Peltast",
+          "weapons": ["Composite Bow", "Sling", "Pelorian Peltast Shield", "Dagger"],
+          "traits": ["Ranged Marksman", "Skirmishing"],
+          "restrictions": null
+        },
+        {
+          "name": "Lunar Corps Hoplite",
+          "weapons": ["1H Spear", "Pelorian Aspis", "Sickle Sword/Khopesh", "Kontos"],
+          "traits": ["Formation Fighting", "Shield Wall", "Siege Warfare"],
+          "restrictions": "only available to Warrior career"
+        },
+        {
+          "name": "Dara Happan Heavy Infantry",
+          "weapons": ["Kontos", "Dara Happan Hoplon", "Shortsword", "Dart"],
+          "traits": ["Formation Fighting", "Hoplon Fighting – can use kontos and hoplon together", "Intimidating Scream"],
+          "restrictions": null
+        },
+        {
+          "name": "Pelorian Cavalry",
+          "weapons": ["Composite Bow", "Kontos", "Pelorian Aspis", "Sickle Sword/Khopesh", "Pelorian Peltast Shield"],
+          "traits": ["Beast-back Lancer", "Mounted Combat", "Mounted Skirmishing"],
+          "restrictions": null
+        },
+        {
+          "name": "Pelorian Noble",
+          "weapons": ["Sickle Sword/Khopesh", "1H Spear", "Pelorian Aspis", "Composite Bow"],
+          "traits": ["Formation Fighting", "Mounted Combat", "Ranged Marksman"],
+          "restrictions": "only available to those of Aristocracy or Ruling class"
+        }
+      ],
+      "folk_magic_spells": ["Avert", "Bladesharp", "Calculate", "Firearrow", "Glamour", "Heal", "Light", "Pierce", "Polish", "Protection"],
+      "passions": [
+        {"type": "Loyalty", "focus": "the Red Emperor", "formula": "formula not printed"},
+        {"type": "Love", "focus": "Ideal, Sibling, Lover and so on", "formula": "formula not printed"},
+        {"type": "Hate", "focus": "Disobedience", "formula": "formula not printed"}
+      ],
+      "starting_money": {"currency": "Lunars", "formula": "4d6x10"},
+      "notes": "Two cultural subtypes: Dara Happan (urban, Solar) and Lodrilli (rural, agricultural). Society divided into Nobles, Witnesses and Officers, Headmen, Workers and Slaves. Lunar Magic waxes and wanes with Red Moon phases. OCR says 'As per Civilised, RUNEQUEST page 21/22' for standard/professional skills. The footnote markers (*/**/***) map: (*) Agent career only, (**) Warrior career only, (***) Aristocracy or Ruling class only."
+    },
+    {
+      "name": "Lunar Provincial",
+      "page": "p.33-34",
+      "culture_type": "Civilised",
+      "standard_skills": ["Conceal", "Deceit", "Endurance", "Influence", "Insight", "Locale", "Willpower"],
+      "professional_skills": ["Art (any)", "Commerce", "Craft (any)", "Courtesy", "Culture", "Language (local)", "Lore (any)", "Streetwise"],
+      "careers": "Any Civilised",
+      "combat_styles": [
+        {
+          "name": "Lunar Corps Hoplite",
+          "weapons": ["1H Spear", "Pelorian Aspis", "Sickle Sword/Khopesh"],
+          "traits": ["Formation Fighting", "Shield Wall", "Siege Warfare"],
+          "restrictions": "only available to Warrior career"
+        },
+        {
+          "name": "Pelorian Cavalry",
+          "weapons": ["Composite Bow", "Pelorian Aspis", "Sickle Sword/Khopesh", "Kontos", "Pelorian Peltast Shield"],
+          "traits": ["Beast-back Lancer", "Mounted Combat", "Mounted Skirmishing"],
+          "restrictions": "only available to Warrior career"
+        },
+        {
+          "name": "Colonial Noble",
+          "weapons": ["1H Spear", "Pelorian Aspis", "Sickle Sword/Khopesh", "Composite Bow"],
+          "traits": ["Formation Fighting", "Mounted Combat", "Ranged Marksman"],
+          "restrictions": "only available to those of Aristocracy or Ruling class"
+        },
+        {
+          "name": "Colonial Survivalist",
+          "weapons": ["Shortsword", "Dagger", "Sling"],
+          "traits": ["Hidden Weapons"],
+          "restrictions": null
+        }
+      ],
+      "folk_magic_spells": ["Alarm", "Appraise", "Bladesharp", "Calm", "Cleanse", "Dry", "Find Safe Shelter", "Incognito", "Ignite", "Preserve"],
+      "passions": [
+        {"type": "Loyalty", "focus": "Empire", "formula": "formula not printed"},
+        {"type": "Love", "focus": "Character's Choice", "formula": "formula not printed"},
+        {"type": "Love or Hate", "focus": "Locals", "formula": "formula not printed"}
+      ],
+      "starting_money": {"currency": "Lunars", "formula": "4d6x5"},
+      "notes": "Provincial Lunars far from heartland. Worship Seven Mothers. Recognize local gods. Footnote markers: (**) Warrior career only, (***) Aristocracy or Ruling class only. Tarshite characters choose either Lunar Provincial or Sartarite culture."
+    },
+    {
+      "name": "Praxian",
+      "page": "p.35-36",
+      "culture_type": "Nomad",
+      "standard_skills_note": "As per Nomadic, RUNEQUEST page 23",
+      "standard_skills": ["As per Nomadic, RUNEQUEST page 23"],
+      "professional_skills": ["As per Nomadic, RUNEQUEST page 23"],
+      "careers": "Any Nomad.",
+      "combat_styles": [
+        {
+          "name": "Agimori",
+          "weapons": ["1H Spear", "Club", "Doraddi War Shield", "Javelin"],
+          "traits": ["Batter Aside", "Knockout Blow", "Shield Splitter"],
+          "restrictions": null
+        },
+        {
+          "name": "Baboon",
+          "weapons": ["Thrown Stone", "Sling", "1H Spear", "2H Spear"],
+          "traits": ["Daredevil", "Intimidating Scream", "Swashbuckling"],
+          "restrictions": null
+        },
+        {
+          "name": "Basmoli",
+          "weapons": ["1H Spear", "2H Spear", "Dagger", "Javelin"],
+          "traits": ["Blind Fighting", "Daredevil", "Ranged Marksman"],
+          "restrictions": null
+        },
+        {
+          "name": "Bison",
+          "weapons": ["1H Axe", "Javelin", "Lance", "1H Sword", "Praxian Shield"],
+          "traits": ["Beast-back Lancer", "Mounted Combat", "Shield Splitter"],
+          "restrictions": null
+        },
+        {
+          "name": "Bolo Lizard",
+          "weapons": ["Bolas", "Dagger", "1H Spear", "Praxian Shield"],
+          "traits": ["Mancatcher", "Mounted Combat", "Skirmishing"],
+          "restrictions": null
+        },
+        {
+          "name": "Cannibal Cult",
+          "weapons": ["Dagger", "Club", "Net", "Whip"],
+          "traits": ["Assassination", "Knockout Blow", "Mancatcher"],
+          "restrictions": null
+        },
+        {
+          "name": "High Llama",
+          "weapons": ["Javelin", "Lance", "Long Axe", "2H Spear", "Praxian Shield"],
+          "traits": ["Mounted Combat", "Throw Weapons", "Trained Beast"],
+          "restrictions": null
+        },
+        {
+          "name": "Impala",
+          "weapons": ["1H Axe", "Composite Bow", "Dart", "Praxian Shield"],
+          "traits": ["Mounted Combat", "Prancing", "Ranged Marksman"],
+          "restrictions": null
+        },
+        {
+          "name": "Morokanth",
+          "weapons": ["Claws", "Club", "1H Spear", "2H Spear", "Praxian Shield"],
+          "traits": ["Batter Aside", "Do or Die (Claws)", "Shield Splitter"],
+          "restrictions": null
+        },
+        {
+          "name": "Ostrich",
+          "weapons": ["Boomerang", "Dart", "Sling", "1H Spear", "Praxian Shield"],
+          "traits": ["Mounted Combat", "Ranged Marksman", "Skirmishing"],
+          "restrictions": null
+        },
+        {
+          "name": "Pol-Joni",
+          "weapons": ["1H Spear", "1H Axe", "Short Bow", "Praxian Shield"],
+          "traits": ["Assassination", "Mounted Combat", "Skirmishing"],
+          "restrictions": null,
+          "notes": "or select weapons from an alternate Praxian tribe or Orlanthi combat style"
+        },
+        {
+          "name": "Rhino",
+          "weapons": ["Javelin", "Lance", "Long Axe", "Mace", "Praxian Shield"],
+          "traits": ["Beast-back Lancer", "Intimidating Scream", "Mounted Combat"],
+          "restrictions": null
+        },
+        {
+          "name": "Sable",
+          "weapons": ["Composite Bow", "Lance", "Scimitar", "Praxian Shield"],
+          "traits": ["Beast-back Lancer", "Mounted Combat", "Ranged Marksman"],
+          "restrictions": null
+        },
+        {
+          "name": "Unicorn",
+          "weapons": ["Bow", "Dart", "Lance", "Shortsword", "Pelorian Peltast Shield"],
+          "traits": ["Beast-back Lancer", "Kuschile Archery", "Mounted Combat"],
+          "restrictions": null
+        },
+        {
+          "name": "Zebra (Pavis Survivors)",
+          "weapons": ["Composite Bow", "1H Spear", "Broadsword", "Orlanthi Round Shield"],
+          "traits": ["Beast-back Lancer", "Mounted Combat", "Trained Beast"],
+          "restrictions": null
+        }
+      ],
+      "folk_magic_spells": ["Appraise", "Beastcall (Tribal Beast)", "Bladesharp", "Cleanse", "Deflect", "Dry", "Fanaticism", "Find (Water, Food, Shelter)", "Heal", "Preserve"],
+      "passions": [
+        {"type": "Hate", "focus": "Horses", "formula": "formula not printed"},
+        {"type": "Hate", "focus": "Chaos", "formula": "formula not printed"},
+        {"type": "Distrust", "focus": "Foreigners", "formula": "formula not printed"},
+        {"type": "Fear", "focus": "Water", "formula": "formula not printed"}
+      ],
+      "starting_money": {"currency": "Lunars", "formula": "4d6x15"},
+      "notes": "Combat styles are tribal — each tribe has its own style. Riding beast tribes use traits like Skirmisher when mounted but not afoot. Men-and-a-half use Taller SIZ modification; Impala, Bolo Lizard and Ostrich use Smaller modification (p.24). Metal goods highly prized. Horses are taboo. Five Great Tribes: Bison, High Llama, Impala, Sable, Morokanth."
+    },
+    {
+      "name": "Sartarite (Heortling)",
+      "page": "p.35-38",
+      "culture_type": "Barbarian",
+      "standard_skills_note": "As per Barbarian, RUNEQUEST page 20",
+      "standard_skills": ["As per Barbarian, RUNEQUEST page 20"],
+      "professional_skills": ["As per Barbarian, RUNEQUEST page 20"],
+      "careers": "Any Barbarian. Note: If a player chooses to play an Orlanthi hailing from a city such as Boldhome, Nochet or similar, then substitute the Barbarian skill and career choices with Civilised instead.",
+      "combat_styles": [
+        {
+          "name": "Hill Clan Levy",
+          "weapons": ["1H Axe", "1H Spear", "Orlanthi Round Shield", "Longbow or Javelin"],
+          "traits": ["Intimidating Scream", "Throw Weapons"],
+          "restrictions": null
+        },
+        {
+          "name": "Upland Crofter",
+          "weapons": ["Sling", "1H Spear", "Orlanthi Round Shield"],
+          "traits": ["Ranged Marksman", "Skirmishing"],
+          "restrictions": "only available to Herder, Hunter or Scout career"
+        },
+        {
+          "name": "Alynx Brother",
+          "weapons": ["Dagger", "1H Spear", "Javelin"],
+          "traits": ["Daredevil", "Do or Die", "Trained Beast"],
+          "restrictions": "only available to Herder, Hunter or Scout career"
+        },
+        {
+          "name": "Loyal Housecarl",
+          "weapons": ["Broadsword", "1H Spear", "Orlanthi Scutum", "Greataxe"],
+          "traits": ["Batter Aside", "Intimidating Scream", "Shield Wall"],
+          "restrictions": "only available to Warrior career"
+        },
+        {
+          "name": "Sartarite Noble",
+          "weapons": ["Broadsword", "1H Spear", "Orlanthi Scutum", "Javelin"],
+          "traits": ["Intimidating Scream", "Mounted Combat", "Shield Wall"],
+          "restrictions": "only available to those of Gentry or Ruling class"
+        },
+        {
+          "name": "Esrolian Cohort",
+          "weapons": ["Greataxe", "Shortsword", "Orlanthi Scutum", "Javelin"],
+          "traits": ["Formation Fighting", "Shield Splitter", "Shield Wall"],
+          "restrictions": "only available to those of Gentry or Ruling class"
+        },
+        {
+          "name": "Tarshite Militia",
+          "weapons": ["Shortsword", "1H Spear", "Peltast Shield", "Javelin"],
+          "traits": ["Defensive Minded", "Formation Fighting", "Siege Warfare"],
+          "restrictions": "only available to those of Gentry or Ruling class"
+        }
+      ],
+      "folk_magic_spells": ["Avert", "Beastcall (Alynx or Herd Animal)", "Bladesharp", "Coordination", "Fanaticism", "Find Herd Animal", "Mindspeech", "Mobility", "Pet", "Protection"],
+      "passions": [
+        {"type": "Loyalty", "focus": "Clan", "formula": "formula not printed"},
+        {"type": "Love", "focus": "Freedom", "formula": "formula not printed"},
+        {"type": "Hate", "focus": "Opposing Clan", "formula": "formula not printed"},
+        {"type": "Hate", "focus": "Oppression (or Lunars)", "formula": "formula not printed"}
+      ],
+      "starting_money": {"currency": "Lunars", "formula": "4d6x10"},
+      "notes": "Social Status uses Barbarian table from RUNEQUEST p.31. Rank names: Outcast, Thrall (Slave), Carl or Cottar (Freeman), Thane (Gentry), Chieftain (Ruling). Footnote markers: (*) Herder/Hunter/Scout career, (**) Warrior career, (***) Gentry or Ruling class. OCR has typo 'Spcar' for Spear in Alynx Brother. Esrolian Cohort and Tarshite Militia listed under Sartarite combat styles (representing regional variants)."
+    },
+    {
+      "name": "Telmori Hsunchen",
+      "page": "p.39-41",
+      "culture_type": "Primitive",
+      "standard_skills": ["Athletics", "Brawn", "Endurance", "Evade", "Locale", "Perception", "Stealth"],
+      "professional_skills": ["Craft (any)", "Healing", "Lore (Telmori)", "Musicianship", "Navigate", "Survival", "Track"],
+      "careers": "Any Primitive (see RUNEQUEST page 40).",
+      "combat_styles": [
+        {
+          "name": "Telmori Hunter",
+          "weapons": ["Club", "1H Spear", "2H Spear", "Javelin", "Short Bow"],
+          "traits": ["Intimidating Scream", "Trained Beast (Wolf)"],
+          "restrictions": null
+        },
+        {
+          "name": "Wolf Hunter",
+          "weapons": ["Teeth and Claws"],
+          "traits": ["Intimidating Scream", "Mancatcher"],
+          "restrictions": null,
+          "notes": "Can be used in either human or lupine forms. In wolf form also gains Unarmed Prowess trait."
+        }
+      ],
+      "folk_magic_spells": ["Beastcall (Wolf)", "Bladesharp", "Cleanse", "Deflect", "Find Prey", "Find Food", "Heat", "Ignite", "Pathway", "Pierce"],
+      "passions": [
+        {"type": "Loyalty", "focus": "Pack", "formula": "formula not printed"},
+        {"type": "Love", "focus": "Freedom", "formula": "formula not printed"},
+        {"type": "Hate", "focus": "Lunars", "formula": "formula not printed"}
+      ],
+      "starting_money": {"currency": "Lunars", "formula": "4d6x2"},
+      "notes": "Hsunchen (Beast People) — Neolithic hunter-gatherers. Totemic wolf identity. Cursed Strain in Dragon Pass: every Wildday (full Lunar Moon) they metamorphose into full lupine form (Lycanthropy rules from RUNEQUEST p.396). Nysalor blessed their wolf-form hides to be impervious to bronze, bone, stone, wood, flesh or claw. Later cursed by Talor the Laughing Warrior. Practice Animism through Korgatsu Spirit Tradition."
+    }
+  ]
+}

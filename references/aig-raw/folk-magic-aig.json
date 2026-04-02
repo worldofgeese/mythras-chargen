@@ -1,0 +1,61 @@
+{
+  "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+  "extracted_at": "2026-04-02",
+  "note": "Folk magic spells mentioned in culture lists. Only Balazaring and Esrolian had complete spell lists in the OCR source. Other 6 cultures' spell lists were not captured.",
+  "core_reference": "Mythras/RuneQuest 6th Edition Folk Magic spell list",
+  "spells_from_cultures": {
+    "Balazaring": [
+      "Beastcall (Dog, Pig or Giant Hawk)",
+      "Bladesharp",
+      "Cleanse",
+      "Coordination",
+      "Deflect",
+      "Dry",
+      "Find Game",
+      "Ignite",
+      "Mobility",
+      "Speedart"
+    ],
+    "Esrolian": [
+      "Alarm",
+      "Appraise",
+      "Bladesharp",
+      "Calculate",
+      "Calm",
+      "Glamour",
+      "Heal",
+      "Lock",
+      "Perfume",
+      "Repair"
+    ]
+  },
+  "unique_spells_alphabetical": [
+    "Alarm",
+    "Appraise",
+    "Beastcall",
+    "Bladesharp",
+    "Calculate",
+    "Calm",
+    "Cleanse",
+    "Coordination",
+    "Deflect",
+    "Dry",
+    "Find Game",
+    "Glamour",
+    "Heal",
+    "Ignite",
+    "Lock",
+    "Mobility",
+    "Perfume",
+    "Repair",
+    "Speedart"
+  ],
+  "missing_cultures": [
+    "God Forgot",
+    "Lunar Heartland",
+    "Praxian",
+    "Provincial Lunar/Tarsh",
+    "Sartarite/Heortling",
+    "Telmori Hsunchen"
+  ]
+}

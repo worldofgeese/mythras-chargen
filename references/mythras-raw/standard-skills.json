@@ -1,0 +1,34 @@
+{
+  "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+  "extracted_at": "2026-04-02",
+  "page": "p.12, p.54",
+  "standard_skills": [
+    { "name": "Athletics", "formula": "STR+DEX" },
+    { "name": "Boating", "formula": "STR+CON" },
+    { "name": "Brawn", "formula": "STR+SIZ" },
+    { "name": "Conceal", "formula": "DEX+POW" },
+    { "name": "Customs", "formula": "INTx2" },
+    { "name": "Dance", "formula": "DEX+CHA" },
+    { "name": "Deceit", "formula": "INT+CHA" },
+    { "name": "Drive", "formula": "DEX+POW" },
+    { "name": "Endurance", "formula": "CONx2" },
+    { "name": "Evade", "formula": "DEXx2" },
+    { "name": "First Aid", "formula": "INT+DEX" },
+    { "name": "Influence", "formula": "CHAx2" },
+    { "name": "Insight", "formula": "INT+POW" },
+    { "name": "Locale", "formula": "INTx2" },
+    { "name": "Native Tongue", "formula": "INT+CHA" },
+    { "name": "Perception", "formula": "INT+POW" },
+    { "name": "Ride", "formula": "DEX+POW" },
+    { "name": "Sing", "formula": "CHA+POW" },
+    { "name": "Stealth", "formula": "DEX+INT" },
+    { "name": "Swim", "formula": "STR+CON" },
+    { "name": "Unarmed", "formula": "STR+DEX" },
+    { "name": "Willpower", "formula": "POWx2" }
+  ],
+  "combat_style": {
+    "name": "Combat Style",
+    "formula": "STR+DEX",
+    "note": "Treated as a Standard Skill for distribution purposes"
+  }
+}

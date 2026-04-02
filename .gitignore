@@ -1,0 +1,6 @@
+node_modules/
+.cook/
+*.pyc
+__pycache__/
+output/
+.playwright-cli/

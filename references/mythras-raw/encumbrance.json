@@ -1,0 +1,30 @@
+{
+  "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+  "extracted_at": "2026-04-02",
+  "page": "p.78",
+  "encumbrance_capacity": {
+    "base_capacity": "STR \u00d7 2",
+    "notes": "Everyday clothing does not count, armour does"
+  },
+  "burdened_threshold": {
+    "condition": "Total ENC > STR \u00d7 2",
+    "effects": [
+      "Skills using STR or DEX become one grade harder (including combat)",
+      "Base Movement Rate drops by 2 metres",
+      "Cannot sprint",
+      "Carrying the load counts as Medium activity for Fatigue"
+    ]
+  },
+  "armour_enc_rules": {
+    "worn": "Only half the total ENC of armour counts towards Encumbrance Capacity",
+    "carried": "Full ENC value of armour counts towards Encumbrance Capacity"
+  },
+  "enc_to_siz_ratio": {
+    "default": "3 ENC = 1 SIZ",
+    "notes": "May adjust to 2:1 or 1:1 depending on item density. 20 zero-ENC items = 1 ENC"
+  },
+  "non_human_encumbrance": {
+    "rule": "Multiply total ENC by ratio of creature's average SIZ to human average SIZ",
+    "page": "p.78"
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+  "extracted_at": "2026-04-02",
+  "action_points": {
+    "page": "p.9",
+    "formula": "INT + DEX",
+    "table": [
+      { "range": "12 or Less", "min": 0, "max": 12, "action_points": 1 },
+      { "range": "13-24", "min": 13, "max": 24, "action_points": 2 },
+      { "range": "25-36", "min": 25, "max": 36, "action_points": 3 }
+    ],
+    "progression": "For every additional 12 points, +1"
+  },
+  "damage_modifier": {
+    "page": "p.10",
+    "formula": "STR + SIZ",
+    "table": [
+      { "range": "5 or Less", "min": 0, "max": 5, "damage_modifier": "-1d8" },
+      { "range": "6-10", "min": 6, "max": 10, "damage_modifier": "-1d6" },
+      { "range": "11-15", "min": 11, "max": 15, "damage_modifier": "-1d4" },
+      { "range": "16-20", "min": 16, "max": 20, "damage_modifier": "-1d2" },
+      { "range": "21-25", "min": 21, "max": 25, "damage_modifier": "+0" },
+      { "range": "26-30", "min": 26, "max": 30, "damage_modifier": "+1d2" },
+      { "range": "31-35", "min": 31, "max": 35, "damage_modifier": "+1d4" },
+      { "range": "36-40", "min": 36, "max": 40, "damage_modifier": "+1d6" },
+      { "range": "41-45", "min": 41, "max": 45, "damage_modifier": "+1d8" },
+      { "range": "46-50", "min": 46, "max": 50, "damage_modifier": "+1d10" },
+      { "range": "51-60", "min": 51, "max": 60, "damage_modifier": "+1d12" },
+      { "range": "61-70", "min": 61, "max": 70, "damage_modifier": "+2d6" },
+      { "range": "71-80", "min": 71, "max": 80, "damage_modifier": "+1d8+1d6" },
+      { "range": "81-90", "min": 81, "max": 90, "damage_modifier": "+2d8" },
+      { "range": "91-100", "min": 91, "max": 100, "damage_modifier": "+1d10+1d8" },
+      { "range": "101-110", "min": 101, "max": 110, "damage_modifier": "+2d10" },
+      { "range": "111-120", "min": 111, "max": 120, "damage_modifier": "+2d10+1d2" },
+      { "range": "121-130", "min": 121, "max": 130, "damage_modifier": "+2d10+1d4" }
+    ],
+    "progression": "Each 10 points: Continue Progression"
+  },
+  "experience_modifier": {
+    "page": "p.10",
+    "formula": "CHA",
+    "table": [
+      { "range": "6 or Less", "min": 0, "max": 6, "experience_modifier": -1 },
+      { "range": "7-12", "min": 7, "max": 12, "experience_modifier": 0 },
+      { "range": "13-18", "min": 13, "max": 18, "experience_modifier": 1 }
+    ],
+    "progression": "Each 6 points: +1"
+  },
+  "healing_rate": {
+    "page": "p.10",
+    "formula": "CON",
+    "table": [
+      { "range": "6 or Less", "min": 0, "max": 6, "healing_rate": 1 },
+      { "range": "7-12", "min": 7, "max": 12, "healing_rate": 2 },
+      { "range": "13-18", "min": 13, "max": 18, "healing_rate": 3 }
+    ],
+    "progression": "Each 6 points: +1"
+  },
+  "height_weight": {
+    "page": "p.10",
+    "table": [
+      { "SIZ": 1, "height_cm": "1-45", "lithe_kg": "1-5", "medium_kg": "1-7", "heavy_kg": "1-9" },
+      { "SIZ": 2, "height_cm": "46-80", "lithe_kg": "6-10", "medium_kg": "8-14", "heavy_kg": "10-18" },
+      { "SIZ": 3, "height_cm": "81-105", "lithe_kg": "11-15", "medium_kg": "15-21", "heavy_kg": "19-27" },
+      { "SIZ": 4, "height_cm": "106-120", "lithe_kg": "16-20", "medium_kg": "22-28", "heavy_kg": "28-36" },
+      { "SIZ": 5, "height_cm": "121-130", "lithe_kg": "21-25", "medium_kg": "29-35", "heavy_kg": "37-45" },
+      { "SIZ": 6, "height_cm": "131-140", "lithe_kg": "26-30", "medium_kg": "36-42", "heavy_kg": "46-54" },
+      { "SIZ": 7, "height_cm": "141-150", "lithe_kg": "31-35", "medium_kg": "43-49", "heavy_kg": "55-63" },
+      { "SIZ": 8, "height_cm": "151-155", "lithe_kg": "36-40", "medium_kg": "50-56", "heavy_kg": "64-72" },
+      { "SIZ": 9, "height_cm": "156-160", "lithe_kg": "41-45", "medium_kg": "57-63", "heavy_kg": "73-81" },
+      { "SIZ": 10, "height_cm": "161-165", "lithe_kg": "46-50", "medium_kg": "64-70", "heavy_kg": "82-90" },
+      { "SIZ": 11, "height_cm": "166-170", "lithe_kg": "51-55", "medium_kg": "71-77", "heavy_kg": "91-99" },
+      { "SIZ": 12, "height_cm": "171-175", "lithe_kg": "56-60", "medium_kg": "78-84", "heavy_kg": "100-108" },
+      { "SIZ": 13, "height_cm": "176-180", "lithe_kg": "61-65", "medium_kg": "85-91", "heavy_kg": "109-117" },
+      { "SIZ": 14, "height_cm": "181-185", "lithe_kg": "66-70", "medium_kg": "92-98", "heavy_kg": "118-126" },
+      { "SIZ": 15, "height_cm": "186-190", "lithe_kg": "71-75", "medium_kg": "99-105", "heavy_kg": "127-135" },
+      { "SIZ": 16, "height_cm": "191-195", "lithe_kg": "76-80", "medium_kg": "106-112", "heavy_kg": "136-144" },
+      { "SIZ": 17, "height_cm": "196-200", "lithe_kg": "81-85", "medium_kg": "113-119", "heavy_kg": "145-153" },
+      { "SIZ": 18, "height_cm": "201-205", "lithe_kg": "86-90", "medium_kg": "120-126", "heavy_kg": "154-162" },
+      { "SIZ": 19, "height_cm": "206-210", "lithe_kg": "91-95", "medium_kg": "127-133", "heavy_kg": "163-171" },
+      { "SIZ": 20, "height_cm": "211-215", "lithe_kg": "96-100", "medium_kg": "134-140", "heavy_kg": "172-180" },
+      { "SIZ": 21, "height_cm": "216-220", "lithe_kg": "101-105", "medium_kg": "141-147", "heavy_kg": "181-189" }
+    ],
+    "progression": "Each point: +5 cm, +5 Kg (Lithe), +7 Kg (Medium), +9 Kg (Heavy)"
+  },
+  "hit_points_per_location": {
+    "page": "p.11",
+    "formula": "CON + SIZ",
+    "locations": ["Head", "Chest", "Abdomen", "Each Arm", "Leg"],
+    "table": [
+      {
+        "range": "1-5", "min": 1, "max": 5,
+        "head": 1, "chest": 3, "abdomen": 2, "each_arm": 1, "leg": 1
+      },
+      {
+        "range": "6-10", "min": 6, "max": 10,
+        "head": 2, "chest": 4, "abdomen": 3, "each_arm": 1, "leg": 2
+      },
+      {
+        "range": "11-15", "min": 11, "max": 15,
+        "head": 3, "chest": 5, "abdomen": 4, "each_arm": 2, "leg": 3
+      },
+      {
+        "range": "16-20", "min": 16, "max": 20,
+        "head": 4, "chest": 6, "abdomen": 5, "each_arm": 3, "leg": 4
+      },
+      {
+        "range": "21-25", "min": 21, "max": 25,
+        "head": 5, "chest": 7, "abdomen": 6, "each_arm": 4, "leg": 5
+      },
+      {
+        "range": "26-30", "min": 26, "max": 30,
+        "head": 6, "chest": 8, "abdomen": 7, "each_arm": 5, "leg": 6
+      },
+      {
+        "range": "31-35", "min": 31, "max": 35,
+        "head": 7, "chest": 9, "abdomen": 8, "each_arm": 6, "leg": 7
+      },
+      {
+        "range": "36-40", "min": 36, "max": 40,
+        "head": 8, "chest": 10, "abdomen": 9, "each_arm": 7, "leg": 8
+      }
+    ],
+    "progression": "For every additional 5 points: +1 to each location"
+  },
+  "initiative_bonus": {
+    "page": "p.11",
+    "formula": "(DEX + INT) / 2",
+    "note": "Round down"
+  },
+  "luck_points": {
+    "page": "p.11",
+    "formula": "POW",
+    "table": [
+      { "range": "6 or Less", "min": 0, "max": 6, "luck_points": 1 },
+      { "range": "7-12", "min": 7, "max": 12, "luck_points": 2 },
+      { "range": "13-18", "min": 13, "max": 18, "luck_points": 3 }
+    ],
+    "progression": "Each 6 points: +1"
+  },
+  "magic_points": {
+    "page": "p.11",
+    "formula": "POW",
+    "note": "Magic Points equal POW"
+  },
+  "movement_rate": {
+    "page": "p.12",
+    "human_default": 6,
+    "unit": "metres"
+  }
+}

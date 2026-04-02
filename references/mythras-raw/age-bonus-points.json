@@ -1,0 +1,50 @@
+{
+  "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+  "extracted_at": "2026-04-02",
+  "page": "p.32-33",
+  "age_table": [
+    {
+      "category": "Young",
+      "age_roll": "1d6+10",
+      "bonus_skill_points": 100,
+      "max_skill_increase": 10,
+      "background_event_rolls": 0
+    },
+    {
+      "category": "Adult",
+      "age_roll": "2d6+15",
+      "bonus_skill_points": 150,
+      "max_skill_increase": 15,
+      "background_event_rolls": 1
+    },
+    {
+      "category": "Middle Aged",
+      "age_roll": "3d6+25",
+      "bonus_skill_points": 200,
+      "max_skill_increase": 20,
+      "background_event_rolls": 2
+    },
+    {
+      "category": "Senior",
+      "age_roll": "4d6+40",
+      "bonus_skill_points": 250,
+      "max_skill_increase": 25,
+      "background_event_rolls": 3,
+      "note": "Subject to Ageing rules (p.70)"
+    },
+    {
+      "category": "Old",
+      "age_roll": "5d6+60",
+      "bonus_skill_points": 300,
+      "max_skill_increase": 30,
+      "background_event_rolls": 4,
+      "note": "Subject to Ageing rules (p.70)"
+    }
+  ],
+  "bonus_skill_points_rules": {
+    "hobby_skill": "Allow the character the option of choosing one final new Combat Style or Professional Skill, reflecting a personal hobby or interest",
+    "distribution": "Distribute points amongst whatever skills the character currently has; increasing each skill by 1% for every point spent on improving it",
+    "restriction": "Save for the optional hobby skill, no points may be assigned to those Combat Styles or Professional Skills not learned as part of their Culture or Career",
+    "max_note": "No individual skill can receive more points than indicated by their Age Category"
+  }
+}

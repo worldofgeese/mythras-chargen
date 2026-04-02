@@ -1,0 +1,42 @@
+{
+  "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+  "extracted_at": "2026-04-02",
+  "page": "p.37",
+  "character_creation_summary": {
+    "step_1_characteristics": {
+      "method_roll": {
+        "dice": { "3d6": ["STR", "CON", "DEX", "POW", "CHA"], "2d6+6": ["SIZ", "INT"] }
+      },
+      "method_point_buy": {
+        "total_points": 75,
+        "minimum": { "default": 3, "INT": 6, "SIZ": 6 },
+        "maximum": 18,
+        "rule": "All Characteristic Points must be used in the design process"
+      }
+    },
+    "step_2_attributes": {
+      "note": "Calculate Action Points, Damage Modifier, Experience Modifier, Healing Rate, Hit Points, Initiative Bonus, Luck Points, Magic Points, Movement Rate from characteristics"
+    },
+    "step_3_culture": {
+      "skill_points": 100,
+      "minimum_per_skill": 5,
+      "maximum_per_skill": 15,
+      "customs_bonus": 40,
+      "native_tongue_bonus": 40,
+      "note": "Customs and Native Tongue each gain +40% automatically"
+    },
+    "step_4_career": {
+      "skill_points": 100,
+      "maximum_per_skill": 15,
+      "professional_skills_chosen": "up to 3",
+      "rule": "Not all available skills need to be improved"
+    },
+    "step_5_bonus_points": {
+      "default_age_category": "Adult",
+      "default_bonus_points": 150,
+      "default_max_per_skill": 15,
+      "hobby_skill": "Choose one additional Professional Skill or Combat Style as hobby",
+      "rule": "Points may only be applied to skills already learned via Culture or Career, except the hobby skill"
+    }
+  }
+}

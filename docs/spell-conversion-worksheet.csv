@@ -1,0 +1,9 @@
+original_spell,required_rune_affinity,Mythras_resource_cost,casting_action_notes,unresolved_edge_case
+Fearless,Air,2 points from devotional pool,Roll the relevant rune affinity to invoke and use Devotion to judge magnitude or intensity,None for first-pass play
+Lightning,Air,1 or more points from devotional pool,Roll Air to invoke and use Devotion to support intensity as the pool permits,Keep the cult packet's permitted scaling clear at the table
+Shield,Air,1 or more points from devotional pool,Roll the relevant protecting rune affinity and use Devotion to set final strength,Confirm whether a specific subcult treats this as only Air or a broader cult-protection expression
+Passage,Movement,1 point from devotional pool,Roll Movement to invoke and use Devotion for final scale,Clarify how it interacts with especially strong magical seals in the current scenario
+Path Watch,Movement,2 points from devotional pool,Roll Movement to invoke before travel and keep Devotion for final scope,Decide how much warning detail you reveal on a success
+Heal Body,Earth or other life-giving cult rune,3 points from devotional pool,Roll the relevant rune to invoke and use Devotion for final potency,Confirm whether your table restricts it by cult rank or leaves starter-set access intact
+Knowledge,Truth,2 points from devotional pool,Roll Truth to invoke and use Devotion to determine depth of revelation,Decide how much history one casting should reveal for very old objects
+Mindblast,Moon or Truth depending cult expression,2 points from devotional pool,Roll the listed cult rune affinity to invoke and use Devotion for final force,Confirm which Seven Mothers expression governs the spell in your campaign packet

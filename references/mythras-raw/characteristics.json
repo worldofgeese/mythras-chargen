@@ -1,0 +1,19 @@
+{
+  "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+  "extracted_at": "2026-04-02",
+  "characteristics": {
+    "page": "p.7-9",
+    "list": ["STR", "CON", "SIZ", "DEX", "INT", "POW", "CHA"],
+    "human_dice": {
+      "3d6": ["STR", "CON", "DEX", "POW", "CHA"],
+      "2d6+6": ["SIZ", "INT"]
+    },
+    "point_buy": {
+      "page": "p.37",
+      "total_points": 75,
+      "minimum": { "default": 3, "INT": 6, "SIZ": 6 },
+      "maximum": 18,
+      "rule": "All Characteristic Points must be used in the design process"
+    }
+  }
+}
