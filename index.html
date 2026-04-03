@@ -1115,13 +1115,15 @@ const App = {
     if (!this.validateCurrentStep()) {
       return;
     }
-    
+
     if (this.currentStep < 11) {
       this.currentStep++;
       this.renderCurrentStep();
       this.updateStepIndicator();
       window.scrollTo(0, 0);
     } else {
+      // Ensure starting equipment is populated before switching to Play Mode
+      this.autoPopulateStartingEquipment();
       this.switchMode('play');
     }
   },
@@ -1418,7 +1420,8 @@ const App = {
   toggleCollapsible(header) {
     const content = header.nextElementSibling;
     content.classList.toggle('hidden');
-    header.textContent = content.classList.contains('hidden') ? '▶ ' + header.textContent.substr(2) : '▼ ' + header.textContent.substr(2);
+    const baseText = header.textContent.replace(/^[▶▼]\s*/, '');
+    header.textContent = content.classList.contains('hidden') ? '▶ ' + baseText : '▼ ' + baseText;
   },
   
   attachKeyboardShortcuts() {
@@ -1917,6 +1920,11 @@ App.applyBuild = function(build) {
 };
 
 App.getHomelandSuggestions = function(culture) {
+  // Use GLORANTHA_HOMELAND_MAP if available, otherwise fallback to inline data
+  if (typeof window.GLORANTHA_HOMELAND_MAP !== 'undefined' && window.GLORANTHA_HOMELAND_MAP[culture]) {
+    return window.GLORANTHA_HOMELAND_MAP[culture];
+  }
+
   const homelandData = {
     'Balazaring': ['Balazar', 'Elder Wilds', 'Votankiland'],
     'Esrolian': ['Nochet', 'Esrolia', 'Ezel'],
@@ -3178,29 +3186,35 @@ App.renderSkillRow = function(skill) {
 
 App.renderPlayCombat = function() {
   const container = document.getElementById('play-combat');
+  const hasWeapons = CharacterData.weapons && CharacterData.weapons.length > 0;
+
   container.innerHTML = `
-    <div class="weapon-row">
-      <div>Weapon</div>
-      <div>Skill</div>
-      <div>Damage</div>
-      <div>Size</div>
-      <div>Reach</div>
-      <div>AP</div>
-      <div>HP</div>
-      <div>Actions</div>
-    </div>
-    ${CharacterData.weapons.map((w, i) => `
+    ${hasWeapons ? `
       <div class="weapon-row">
-        <div>${w.name}</div>
-        <div><input type="number" value="${w.skill || 0}" placeholder="%" title="Skill %" style="width: 50px;"></div>
-        <div>${w.damage}</div>
-        <div>${w.size}</div>
-        <div>${w.reach}</div>
-        <div>${w.ap}</div>
-        <div>${w.hp}</div>
-        <div><button onclick="App.removeWeapon(${i})">×</button></div>
+        <div>Weapon</div>
+        <div>Skill</div>
+        <div>Damage</div>
+        <div>Size</div>
+        <div>Reach</div>
+        <div>AP</div>
+        <div>HP</div>
+        <div>Actions</div>
       </div>
-    `).join('')}
+      ${CharacterData.weapons.map((w, i) => `
+        <div class="weapon-row">
+          <div>${w.name}</div>
+          <div><input type="number" value="${w.skill || 0}" placeholder="%" title="Skill %" style="width: 50px;"></div>
+          <div>${w.damage}</div>
+          <div>${w.size}</div>
+          <div>${w.reach}</div>
+          <div>${w.ap}</div>
+          <div>${w.hp}</div>
+          <div><button onclick="App.removeWeapon(${i})">×</button></div>
+        </div>
+      `).join('')}
+    ` : `
+      <p style="color: #666; font-style: italic; margin-bottom: 10px;">No weapons added yet. Use the button below to add weapons to your character.</p>
+    `}
     <button onclick="App.addWeaponPlay()" style="margin-top: 10px;">+ Add Weapon</button>
   `;
 };
@@ -3219,41 +3233,58 @@ App.removeWeapon = function(index) {
 App.renderPlayRunes = function() {
   const container = document.getElementById('play-runes');
   const runeAff = CharacterData.attributes.runeAffinities || {};
+  const runeNames = CharacterData.runeAffinities || {};
 
-  container.innerHTML = `
+  const hasRunes = runeNames.primary || runeNames.secondary || runeNames.tertiary;
+
+  container.innerHTML = hasRunes ? `
     <div class="grid-3">
-      <div><strong>Primary:</strong> ${CharacterData.runeAffinities.primary || 'None'} (${runeAff.primary || 0}%)</div>
-      <div><strong>Secondary:</strong> ${CharacterData.runeAffinities.secondary || 'None'} (${runeAff.secondary || 0}%)</div>
-      <div><strong>Tertiary:</strong> ${CharacterData.runeAffinities.tertiary || 'None'} (${runeAff.tertiary || 0}%)</div>
+      <div><strong>Primary:</strong> ${runeNames.primary || 'None'} (${runeAff.primary || 0}%)</div>
+      <div><strong>Secondary:</strong> ${runeNames.secondary || 'None'} (${runeAff.secondary || 0}%)</div>
+      <div><strong>Tertiary:</strong> ${runeNames.tertiary || 'None'} (${runeAff.tertiary || 0}%)</div>
     </div>
+  ` : `
+    <p style="color: #666; font-style: italic;">No rune affinities selected during character creation.</p>
   `;
 };
 
 App.renderPlayMagic = function() {
   const container = document.getElementById('play-magic');
-  const folkMagicBase = CharacterData.attributes.folkMagicBase;
-  const allSpells = [...CharacterData.folkMagicSpells, ...CharacterData.careerFolkMagic];
-  
+  const folkMagicBase = CharacterData.attributes.folkMagicBase || 0;
+  const allSpells = [
+    ...(CharacterData.folkMagicSpells || []),
+    ...(CharacterData.careerFolkMagic || [])
+  ];
+
   container.innerHTML = `
     <h3>Folk Magic (${folkMagicBase}%)</h3>
-    <ul>
-      ${allSpells.map(spell => `<li>${spell}</li>`).join('')}
-    </ul>
+    ${allSpells.length > 0 ? `
+      <ul>
+        ${allSpells.map(spell => `<li>${spell}</li>`).join('')}
+      </ul>
+    ` : `
+      <p style="color: #666; font-style: italic;">No folk magic spells selected during character creation.</p>
+    `}
   `;
 };
 
 App.renderPlayEquipment = function() {
   const container = document.getElementById('play-equipment');
-  const totalEnc = CharacterData.equipment.reduce((sum, item) => sum + ((item.enc || 0) * (item.quantity || 1)), 0);
+  const equipment = CharacterData.equipment || [];
+  const totalEnc = equipment.reduce((sum, item) => sum + ((item.enc || 0) * (item.quantity || 1)), 0);
   const enc = CharacterData.attributes.encumbrance || {};
   const unencumbered = enc.unencumbered || 0;
   const overloaded = enc.overloaded || 0;
 
   container.innerHTML = `
     <p><strong>Total ENC:</strong> ${totalEnc} / ${unencumbered} (${totalEnc > overloaded ? 'Overloaded!' : totalEnc > unencumbered ? 'Burdened' : 'Unencumbered'})</p>
-    <ul>
-      ${CharacterData.equipment.map(item => `<li>${item.name} (${item.quantity || 1}× ENC ${item.enc || 0})</li>`).join('')}
-    </ul>
+    ${equipment.length > 0 ? `
+      <ul>
+        ${equipment.map(item => `<li>${item.name} (${item.quantity || 1}× ENC ${item.enc || 0})</li>`).join('')}
+      </ul>
+    ` : `
+      <p style="color: #666; font-style: italic;">No equipment added. Starting equipment is auto-populated at character completion.</p>
+    `}
   `;
 };
 
