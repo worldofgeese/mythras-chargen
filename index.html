@@ -2919,6 +2919,36 @@ App.autoPopulateStartingEquipment = function() {
   ];
   CharacterData.equipment = starterKit;
 
+  // Auto-add weapons from combat styles (if not already added)
+  if (CharacterData.weapons.length === 0 && CharacterData.combatStyles) {
+    const addedWeapons = new Set();
+    CharacterData.combatStyles.forEach(cs => {
+      if (!cs || !cs.weapons) return;
+      // Get weapons from CULTURES_DATA combat styles
+      const culture = CULTURES_DATA.find(c => c.name === CharacterData.culture);
+      if (!culture) return;
+      const styleData = culture.combatStyles.find(s => s.name === cs.name);
+      if (!styleData || !styleData.weapons) return;
+      // Add first 2 weapons from the style
+      styleData.weapons.slice(0, 2).forEach(wName => {
+        if (addedWeapons.has(wName)) return;
+        addedWeapons.add(wName);
+        const weaponData = WEAPONS_DATA.find(w => w.name === wName);
+        if (weaponData) {
+          CharacterData.weapons.push({
+            name: weaponData.name,
+            damage: weaponData.damage || '',
+            size: weaponData.size || 'M',
+            reach: weaponData.reach || 'M',
+            ap: weaponData.armour_points || 0,
+            hp: weaponData.hit_points || 0,
+            skill: cs.skill || 0
+          });
+        }
+      });
+    });
+  }
+
   // Roll starting money if not yet rolled
   if (!CharacterData.startingMoney) {
     this.rollStartingMoney();
@@ -2936,10 +2966,6 @@ App.renderStep11 = function() {
   div.innerHTML = `
     <div class="step-header">Step 11: Review & Play <span class="page-ref">(Adventures in Glorantha p.23-24)</span></div>
     <h2>Character Complete!</h2>
-
-    <div class="character-summary">
-      ${this.generateCharacterSummary()}
-    </div>
 
     <div style="background: #f5f5f5; padding: 20px; border: 1px solid #000;">
       <h3>${CharacterData.name || 'Unnamed Character'}</h3>
@@ -3057,7 +3083,10 @@ App.renderPlayMode = function() {
         <h2>Equipment <span class="page-ref">(Mythras p.107-128)</span></h2>
         <div id="play-equipment"></div>
 
-        <h2>Notes</h2>
+        <h2>Notes & Background</h2>
+        ${CharacterData.family ? `<div style="margin-bottom: 10px;"><strong>Family:</strong><p style="white-space: pre-wrap; background: #fafafa; padding: 8px; border: 1px solid #ddd;">${CharacterData.family || ''}</p></div>` : ''}
+        ${CharacterData.backgroundEvents ? `<div style="margin-bottom: 10px;"><strong>Background Events:</strong><p style="white-space: pre-wrap; background: #fafafa; padding: 8px; border: 1px solid #ddd;">${CharacterData.backgroundEvents || ''}</p></div>` : ''}
+        <label>Notes</label>
         <textarea data-persist="notes" rows="6"></textarea>
 
         <!-- Print-only pocketfold reference -->
@@ -3307,12 +3336,27 @@ App.renderPlayCombat = function() {
       <p style="color: #666; font-style: italic; margin-bottom: 10px;">No weapons added yet. Use the button below to add weapons to your character.</p>
     `}
     <button onclick="App.addWeaponPlay()" style="margin-top: 10px;">+ Add Weapon</button>
+    <div id="weapons-list"></div>
   `;
 };
 
 App.addWeaponPlay = function() {
-  this.addWeapon();
-  this.renderPlayCombat();
+  // Create autocomplete in play-mode combat section
+  const container = document.getElementById('weapons-list');
+  if (!container) return;
+  this.createAutocomplete('weapons-list', WEAPONS_DATA, 'Start typing weapon name...', (weapon) => {
+    CharacterData.weapons.push({
+      name: weapon.name,
+      damage: weapon.damage || '',
+      size: weapon.size || 'M',
+      reach: weapon.reach || 'M',
+      ap: weapon.armour_points || 0,
+      hp: weapon.hit_points || 0,
+      skill: 0
+    });
+    this.saveToLocalStorage();
+    this.renderPlayCombat();
+  });
 };
 
 App.removeWeapon = function(index) {
@@ -3783,7 +3827,60 @@ App.exportSinglePagePDF = async function() {
       const yPos = y - (i * 12);
       drawText(`${w.name} - Dmg: ${w.damage || ''} Size: ${w.size || ''} Reach: ${w.reach || ''}`, leftMargin, yPos, { size: 8 });
     });
-    y -= (weapons.length > 0 ? weapons.length * 12 : 0) + 15;
+    y -= (weapons.length > 0 ? weapons.length * 12 : 0) + 5;
+
+    // Armor
+    const armor = CharacterData.armor || [];
+    if (armor.length > 0 && y > 100) {
+      armor.slice(0, 5).forEach((a, i) => {
+        const yPos = y - (i * 12);
+        drawText(`${a.name} - AP: ${a.ap || 0}`, leftMargin + 260, yPos, { size: 8 });
+      });
+      y -= armor.length * 12;
+    }
+
+    // Equipment
+    const equip = CharacterData.equipment || [];
+    if (equip.length > 0 && y > 80) {
+      drawText('EQUIPMENT', leftMargin, y, { bold: true, size: 10 });
+      y -= 15;
+      const equipText = equip.map(e => e.name).join(', ');
+      drawText(equipText.substring(0, 80), leftMargin, y, { size: 8 });
+      y -= 15;
+      if (CharacterData.startingMoney) {
+        drawText(`Starting Money: ${CharacterData.startingMoney} Lunars`, leftMargin, y, { size: 8 });
+        y -= 15;
+      }
+    }
+
+    // Passions
+    const passions = CharacterData.passions || [];
+    if (passions.length > 0 && y > 80) {
+      drawText('PASSIONS', leftMargin, y, { bold: true, size: 10 });
+      y -= 15;
+      passions.slice(0, 6).forEach((p, i) => {
+        const col = i % 2;
+        const row = Math.floor(i / 2);
+        const x = leftMargin + (col * 260);
+        const yPos = y - (row * 12);
+        if (yPos > 60) {
+          drawText(`${p.name || ''}: ${p.value || ''}%`, x, yPos, { size: 8 });
+        }
+      });
+      y -= Math.ceil(passions.length / 2) * 12 + 5;
+    }
+
+    // Rune Affinities
+    const runes = CharacterData.runeAffinities || {};
+    if ((runes.primary || runes.secondary || runes.tertiary) && y > 60) {
+      drawText('RUNE AFFINITIES', leftMargin, y, { bold: true, size: 10 });
+      y -= 15;
+      const runeAff = CharacterData.attributes.runeAffinities || {};
+      if (runes.primary) drawText(`${runes.primary}: ${runeAff.primary || 0}%`, leftMargin, y, { size: 8 });
+      if (runes.secondary) drawText(`${runes.secondary}: ${runeAff.secondary || 0}%`, leftMargin + 150, y, { size: 8 });
+      if (runes.tertiary) drawText(`${runes.tertiary}: ${runeAff.tertiary || 0}%`, leftMargin + 300, y, { size: 8 });
+      y -= 15;
+    }
 
     // Magic
     if (y > 60) {
@@ -3800,6 +3897,20 @@ App.exportSinglePagePDF = async function() {
           drawText(spell.substring(0, 20), x, yPos, { size: 8 });
         }
       });
+    }
+
+    // Notes & Background
+    if (y > 60) {
+      const notes = CharacterData.notes || '';
+      const bg = CharacterData.backgroundEvents || '';
+      const family = CharacterData.family || '';
+      if (notes || bg || family) {
+        drawText('NOTES', leftMargin, y, { bold: true, size: 10 });
+        y -= 12;
+        if (family) { drawText(`Family: ${family.substring(0, 80)}`, leftMargin, y, { size: 7 }); y -= 10; }
+        if (bg) { drawText(`Background: ${bg.substring(0, 80)}`, leftMargin, y, { size: 7 }); y -= 10; }
+        if (notes) { drawText(`Notes: ${notes.substring(0, 80)}`, leftMargin, y, { size: 7 }); y -= 10; }
+      }
     }
 
     // Footer
