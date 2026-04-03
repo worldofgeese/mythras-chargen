@@ -310,25 +310,40 @@
 
         // Run all tests after iframe loads
         function waitForIframe() {
-            return new Promise((resolve) => {
+            return new Promise((resolve, reject) => {
                 const iframe = document.getElementById('app-iframe');
+                let attempts = 0;
+                const maxAttempts = 100; // 5 seconds max
 
                 function checkIframe() {
-                    if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
-                        resolve();
-                    } else {
-                        setTimeout(checkIframe, 50);
+                    attempts++;
+                    try {
+                        const appWin = iframe.contentWindow;
+                        const doc = iframe.contentDocument;
+
+                        // Check if document is ready and App is available
+                        if (doc && doc.readyState === 'complete' && appWin && appWin.App) {
+                            console.log('[Test] App iframe loaded successfully');
+                            resolve();
+                        } else if (attempts >= maxAttempts) {
+                            reject(new Error('Timeout: App iframe did not load within 5 seconds'));
+                        } else {
+                            setTimeout(checkIframe, 50);
+                        }
+                    } catch (error) {
+                        if (attempts >= maxAttempts) {
+                            reject(error);
+                        } else {
+                            setTimeout(checkIframe, 50);
+                        }
                     }
                 }
 
-                if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
-                    resolve();
-                } else {
-                    iframe.onload = () => {
-                        // Give it a moment to fully render
-                        setTimeout(resolve, 100);
-                    };
-                }
+                // Wait a moment for iframe to start loading
+                iframe.onload = () => setTimeout(checkIframe, 100);
+
+                // Also start checking immediately in case it's already loaded
+                setTimeout(checkIframe, 100);
             });
         }
 

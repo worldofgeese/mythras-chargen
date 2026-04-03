@@ -3341,13 +3341,25 @@ window.FOLK_MAGIC_DESCRIPTIONS = {
   }
 };
 
+// Helper to escape HTML entities for safe insertion
+function escapeHtml(text) {
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 // Create tooltip-wrapped spell name for UI display
 App.spellWithTooltip = function(spellName) {
   if (typeof spellName !== 'string') return String(spellName);
   const spellData = window.FOLK_MAGIC_DESCRIPTIONS[spellName];
   if (spellData) {
     const tooltipText = `${spellData.description} (${spellData.page})`;
-    return `<span class="spell-name" title="${tooltipText}">${spellName}</span>`;
+    const escapedTooltip = escapeHtml(tooltipText);
+    const escapedSpellName = escapeHtml(spellName);
+    return `<span class="spell-name" title="${escapedTooltip}">${escapedSpellName}</span>`;
   }
   return spellName;
 };
@@ -3624,6 +3636,9 @@ App.exportPDF = async function() {
 // =============================================================================
 // INITIALIZATION
 // =============================================================================
+
+// Expose App to window for unit testing
+window.App = App;
 
 document.addEventListener('DOMContentLoaded', () => {
   App.init();

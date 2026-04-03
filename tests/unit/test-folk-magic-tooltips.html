@@ -239,18 +239,10 @@
             });
 
             it('should include both description and page citation in tooltip', () => {
-                if (!window.FOLK_MAGIC_DESCRIPTIONS) {
-                    window.FOLK_MAGIC_DESCRIPTIONS = {
-                        'Heal': {
-                            description: 'Restores 1 hit point per intensity to a single hit location',
-                            page: 'Mythras Core p.129'
-                        }
-                    };
-                }
-
+                // Use the real Heal spell data from the app (p.126, not p.129)
                 const result = window.spellWithTooltip('Heal');
                 assert.includes(result, 'Restores 1 hit point', 'Should include description');
-                assert.includes(result, 'p.129', 'Should include page citation');
+                assert.includes(result, 'p.126', 'Should include page citation (from real FOLK_MAGIC_DESCRIPTIONS)');
             });
 
             it('should handle unknown spells gracefully (no tooltip)', () => {
