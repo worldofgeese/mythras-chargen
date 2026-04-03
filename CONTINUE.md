@@ -20,7 +20,9 @@ The chargen wizard works end-to-end for character creation. Attestable provenanc
 
 ### Architecture
 - Modular Glorantha data (`data/glorantha.js`, removable)
-- Browser-side PDF export via pdf-lib
+- Browser-side PDF export via pdf-lib (dual paths):
+  - Simple: single-page PDF from scratch
+  - Template: fills `templates/mythras-sheet.pdf` form fields (Phase 2 dependency)
 - Hyperclay HTML export (self-contained character sheet)
 - Build script (`scripts/build-standalone.py`)
 - Merged rqim-starter-set-kit docs and scripts

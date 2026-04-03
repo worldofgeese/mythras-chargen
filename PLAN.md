@@ -4,8 +4,8 @@
 
 | # | Decision | Choice |
 |---|----------|--------|
-| 1 | PDF export | Browser-side (pdf-lib), no server |
-| 2 | Custom character PDF | 3 pages (no cover), pregens get 4-page with folio cover |
+| 1 | PDF export | Browser-side (pdf-lib), dual paths: simple (1-page from scratch) + template (fills form fields) |
+| 2 | Custom character PDF | Simple: 1 page. Template: 3 pages (no cover), pregens get 4-page with folio cover |
 | 3 | Repo name | `mythras-chargen` |
 | 4 | Skill formulas | Attestable wins. INT+CHA for Native Tongue/Language (Mythras Core p.12) |
 | 5 | Pregen validation | Phase 2 (needs local files from Tao's machine) |
@@ -65,13 +65,15 @@
 - index.html loads `data/glorantha.js` via `<script src>` if present
 - Fallback: if not loaded, show generic Mythras culture templates (Primitive, Barbarian, Civilised, Nomad) with base skills from Mythras Core
 
-### Task 1.3: Add browser-side PDF export
+### Task 1.3: Add browser-side PDF export (dual paths)
 - Add pdf-lib (CDN or inline) to index.html
-- Implement "Export PDF" button in Play Mode
-- Load PDF template from `<input type="file">` or companion path
+- Implement two "Export PDF" buttons in Play Mode:
+  - **Simple**: Single-page PDF created from scratch (quick export)
+  - **Template**: Load PDF template from `<input type="file">`, fill form fields
 - Map CharacterData fields to PDF form field names (using rqim's pdf-field-map.md)
-- Generate 3-page PDF for custom characters
-- Test with template from rqim repo
+- Template path generates 3-page PDF for custom characters
+- Template path required for Phase 2 pregen compatibility
+- Test both paths with template from rqim repo
 
 ### Task 1.4: Import rqim docs and scripts
 - Copy all docs from rqim `docs/mythras-glorantha-starter-set/` → `docs/`

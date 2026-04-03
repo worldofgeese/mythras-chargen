@@ -645,7 +645,8 @@ button.primary:hover { background: #333; }
     <button onclick="App.saveCharacter()">Save (Ctrl+S)</button>
     <button onclick="App.loadCharacter()">Load</button>
     <button onclick="App.exportHyperclay()" id="btn-export-html" disabled title="Download a self-contained HTML file you can use offline">Export Standalone HTML</button>
-    <button onclick="App.exportPDF()" id="btn-export-pdf" disabled title="Generate a single-page PDF character sheet">Export PDF</button>
+    <button onclick="App.exportSinglePagePDF()" id="btn-export-pdf-simple" disabled title="Generate a single-page PDF character sheet (quick export)">Export PDF (Simple)</button>
+    <button onclick="App.exportTemplatePDF()" id="btn-export-pdf-template" disabled title="Fill the official Mythras character sheet PDF template (for pregens & Phase 2)">Export PDF (Template)</button>
   </div>
 
   <!-- WIZARD MODE -->
@@ -1095,9 +1096,11 @@ const App = {
     // Print and export only available in Play Mode (finished character)
     const printBtn = document.getElementById('btn-print');
     const htmlBtn = document.getElementById('btn-export-html');
-    const pdfBtn = document.getElementById('btn-export-pdf');
+    const pdfSimpleBtn = document.getElementById('btn-export-pdf-simple');
+    const pdfTemplateBtn = document.getElementById('btn-export-pdf-template');
     if (htmlBtn) { htmlBtn.disabled = mode !== 'play'; }
-    if (pdfBtn) { pdfBtn.disabled = mode !== 'play'; }
+    if (pdfSimpleBtn) { pdfSimpleBtn.disabled = mode !== 'play'; }
+    if (pdfTemplateBtn) { pdfTemplateBtn.disabled = mode !== 'play'; }
     if (printBtn) {
       printBtn.disabled = mode !== 'play';
       printBtn.title = mode !== 'play' ? 'Complete character creation first' : 'Print character sheet';
@@ -3426,7 +3429,8 @@ App.fillPDFField = function(form, fieldName, value) {
   } catch(e) { /* field not found, skip */ }
 };
 
-App.exportPDF = async function() {
+// Single-page PDF export (creates PDF from scratch)
+App.exportSinglePagePDF = async function() {
   try {
     const { PDFDocument, rgb, StandardFonts } = PDFLib;
     const pdfDoc = await PDFDocument.create();
@@ -3595,6 +3599,120 @@ App.exportPDF = async function() {
     console.error('PDF export failed:', err);
     App.showToast('PDF export failed: ' + err.message, 'error');
   }
+};
+
+// Template-based PDF export (fills templates/mythras-sheet.pdf form fields)
+// Required for Phase 2 pregen validation and compatibility
+App.exportTemplatePDF = async function() {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.pdf';
+  input.onchange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    try {
+      const arrayBuffer = await file.arrayBuffer();
+      const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
+      const form = pdfDoc.getForm();
+
+      // Identity
+      App.fillPDFField(form, 'Character Name', CharacterData.name);
+      App.fillPDFField(form, 'Race/Culture', CharacterData.culture);
+      App.fillPDFField(form, 'Career', CharacterData.career);
+      App.fillPDFField(form, 'Homeland', CharacterData.homeland);
+      App.fillPDFField(form, 'Age', String(CharacterData.age));
+
+      // Characteristics
+      ['STR','CON','SIZ','DEX','INT','POW','CHA'].forEach(stat => {
+        App.fillPDFField(form, stat, String(CharacterData.characteristics[stat]));
+      });
+
+      // Derived attributes
+      const attrs = CharacterData.attributes;
+      App.fillPDFField(form, 'Action Points', String(attrs.actionPoints));
+      App.fillPDFField(form, 'Damage Modifier', attrs.damageModifier);
+      App.fillPDFField(form, 'Healing Rate', String(attrs.healingRate));
+      App.fillPDFField(form, 'Movement Rate', String(attrs.movementRate));
+      App.fillPDFField(form, 'Initiative Bonus', String(attrs.initiativeBonus));
+      App.fillPDFField(form, 'Luck Points', String(attrs.luckPoints));
+
+      // Hit locations
+      const hitPoints = attrs.hitPoints || {};
+      App.fillPDFField(form, 'Head HP', String(hitPoints.head || ''));
+      App.fillPDFField(form, 'Chest HP', String(hitPoints.chest || ''));
+      App.fillPDFField(form, 'Abdomen HP', String(hitPoints.abdomen || ''));
+      App.fillPDFField(form, 'Left Arm HP', String(hitPoints.leftArm || ''));
+      App.fillPDFField(form, 'Right Arm HP', String(hitPoints.rightArm || ''));
+      App.fillPDFField(form, 'Left Leg HP', String(hitPoints.leftLeg || ''));
+      App.fillPDFField(form, 'Right Leg HP', String(hitPoints.rightLeg || ''));
+
+      // Skills
+      const allSkills = App.compileAllSkills ? App.compileAllSkills() : new Map();
+      let skillIndex = 1;
+      for (const [name, skill] of allSkills) {
+        const total = skill.base + (skill.cultural || 0) + (skill.career || 0) + (skill.bonus || 0);
+        if (total > 0) {
+          App.fillPDFField(form, `Skill ${skillIndex}`, name);
+          App.fillPDFField(form, `Skill ${skillIndex} Value`, String(total));
+          skillIndex++;
+          if (skillIndex > 50) break; // PDF template limit
+        }
+      }
+
+      // Combat styles
+      const combatStyles = CharacterData.combatStyles || [];
+      combatStyles.forEach((style, i) => {
+        if (i < 5) {
+          App.fillPDFField(form, `Combat Style ${i+1}`, style.name);
+          App.fillPDFField(form, `Combat Style ${i+1} Value`, String(style.value || ''));
+        }
+      });
+
+      // Weapons
+      const weapons = CharacterData.weapons || [];
+      weapons.forEach((w, i) => {
+        if (i < 10) {
+          App.fillPDFField(form, `Weapon ${i+1}`, w.name);
+          App.fillPDFField(form, `Weapon ${i+1} Damage`, w.damage || '');
+          App.fillPDFField(form, `Weapon ${i+1} Size`, w.size || '');
+          App.fillPDFField(form, `Weapon ${i+1} Reach`, w.reach || '');
+        }
+      });
+
+      // Magic
+      const allSpells = [...(CharacterData.folkMagicSpells || []), ...(CharacterData.careerFolkMagic || [])];
+      allSpells.forEach((spell, i) => {
+        if (i < 30) {
+          App.fillPDFField(form, `Spell ${i+1}`, spell);
+        }
+      });
+
+      // Passions
+      const passions = CharacterData.passions || [];
+      passions.forEach((p, i) => {
+        if (i < 10) {
+          App.fillPDFField(form, `Passion ${i+1}`, p.name);
+          App.fillPDFField(form, `Passion ${i+1} Value`, String(p.value || ''));
+        }
+      });
+
+      const pdfBytes = await pdfDoc.save();
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${CharacterData.name || 'character'}-mythras-sheet.pdf`;
+      a.click();
+      URL.revokeObjectURL(url);
+
+      App.showToast('Template PDF filled and exported!', 'success');
+    } catch (err) {
+      console.error('Template PDF export failed:', err);
+      App.showToast('Template PDF export failed: ' + err.message, 'error');
+    }
+  };
+  input.click();
 };
 
 // =============================================================================
