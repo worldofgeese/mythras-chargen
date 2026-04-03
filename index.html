@@ -665,91 +665,8 @@ button.primary:hover { background: #333; }
   </div>
 
   <!-- PLAY MODE -->
-  <div id="play-mode" class="hidden">
-    <div class="play-layout">
-      <div class="sidebar">
-        <h2>Identity</h2>
-        <div class="field">
-          <label>Name</label>
-          <input type="text" data-persist="name" id="play-name">
-        </div>
-        <div class="grid-2">
-          <div class="field">
-            <label>Culture</label>
-            <input type="text" data-persist="culture" id="play-culture" readonly>
-          </div>
-          <div class="field">
-            <label>Career</label>
-            <input type="text" data-persist="career" id="play-career" readonly>
-          </div>
-        </div>
-        <div class="grid-2">
-          <div class="field">
-            <label>Age</label>
-            <input type="number" data-persist="age" id="play-age" readonly>
-          </div>
-          <div class="field">
-            <label>Gender</label>
-            <input type="text" data-persist="gender" id="play-gender">
-          </div>
-        </div>
-
-        <h2>Characteristics</h2>
-        <div id="play-characteristics"></div>
-
-        <h2>Attributes</h2>
-        <div id="play-attributes"></div>
-
-        <h2>Hit Locations</h2>
-        <div id="play-hit-locations"></div>
-      </div>
-
-      <div class="main-content">
-        <h2>Skills <span class="page-ref">(Mythras p.38-54)</span></h2>
-        <div class="field">
-          <label>Difficulty Modifier</label>
-          <select id="difficulty-modifier" onchange="App.updateSkillDisplay()">
-            <option value="Very Easy">Very Easy (×2.0)</option>
-            <option value="Easy">Easy (×1.5)</option>
-            <option value="Standard" selected>Standard (×1.0)</option>
-            <option value="Hard">Hard (×0.66)</option>
-            <option value="Formidable">Formidable (×0.5)</option>
-            <option value="Herculean">Herculean (×0.1)</option>
-          </select>
-        </div>
-        <div id="play-skills"></div>
-
-        <h2>Combat <span class="page-ref">(Mythras p.74-106)</span></h2>
-        <div id="play-combat"></div>
-
-        <h2>Rune Affinities <span class="page-ref">(Adventures in Glorantha p.24)</span></h2>
-        <div id="play-runes"></div>
-
-        <h2>Magic <span class="page-ref">(Adventures in Glorantha p.178-220)</span></h2>
-        <div id="play-magic"></div>
-
-        <h2>Equipment <span class="page-ref">(Mythras p.107-128)</span></h2>
-        <div id="play-equipment"></div>
-
-        <h2>Notes</h2>
-        <textarea data-persist="notes" rows="6"></textarea>
-
-        <!-- Print-only pocketfold reference -->
-        <div class="print-only" style="display: none; margin-top: 20px; padding: 10px; border-top: 1px solid #ccc; font-size: 9pt; color: #666;">
-          📖 Make a pocket-sized version of this sheet at <b>pocketverter.pages.dev</b> — no cutting required, just fold!
-          Learn more: <b>3skulls.itch.io/pocketfold</b>
-        </div>
-
-        <!-- Special Effects Reference -->
-        <div class="collapsible">
-          <div class="collapsible-header" onclick="App.toggleCollapsible(this)">
-            ▶ Special Effects Reference (44 effects)
-          </div>
-          <div class="collapsible-content hidden" id="special-effects-ref"></div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div id="play-mode" style="display:none">>
+  
 
   <!-- TRADEMARK FOOTER -->
   <div id="trademark-footer" style="margin-top: 30px; padding: 15px; border-top: 2px solid #000; font-size: 11px; line-height: 1.6; color: #333;">
@@ -1156,19 +1073,23 @@ const App = {
   
   switchMode(mode) {
     this.mode = mode;
-    document.getElementById('wizard-mode').classList.toggle('hidden', mode !== 'wizard');
-    document.getElementById('play-mode').classList.toggle('hidden', mode !== 'play');
+    
+    // Hide wizard immediately
+    document.getElementById('wizard-mode').style.display = mode === 'wizard' ? '' : 'none';
     document.getElementById('btn-wizard').classList.toggle('primary', mode === 'wizard');
     document.getElementById('btn-play').classList.toggle('primary', mode === 'play');
     
-    // Export buttons only available in Play Mode (finished character)
     const htmlBtn = document.getElementById('btn-export-html');
     const pdfSimpleBtn = document.getElementById('btn-export-pdf-simple');
     if (htmlBtn) { htmlBtn.disabled = mode !== 'play'; }
     if (pdfSimpleBtn) { pdfSimpleBtn.disabled = mode !== 'play'; }
 
-        if (mode === 'play') {
+    if (mode === 'play') {
+      // Render while still hidden, then show
       this.renderPlayMode();
+      document.getElementById('play-mode').style.display = '';
+    } else {
+      document.getElementById('play-mode').style.display = 'none';
     }
   },
   
@@ -3064,6 +2985,92 @@ App.renderStep11 = function() {
 // =============================================================================
 
 App.renderPlayMode = function() {
+  // Build play-mode DOM dynamically (avoids layout storm on mode switch)
+  const playEl = document.getElementById('play-mode');
+  if (!playEl.querySelector('.play-layout')) {
+    playEl.innerHTML = `<div class="play-layout">
+      <div class="sidebar">
+        <h2>Identity</h2>
+        <div class="field">
+          <label>Name</label>
+          <input type="text" data-persist="name" id="play-name">
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Culture</label>
+            <input type="text" data-persist="culture" id="play-culture" readonly>
+          </div>
+          <div class="field">
+            <label>Career</label>
+            <input type="text" data-persist="career" id="play-career" readonly>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Age</label>
+            <input type="number" data-persist="age" id="play-age" readonly>
+          </div>
+          <div class="field">
+            <label>Gender</label>
+            <input type="text" data-persist="gender" id="play-gender">
+          </div>
+        </div>
+
+        <h2>Characteristics</h2>
+        <div id="play-characteristics"></div>
+
+        <h2>Attributes</h2>
+        <div id="play-attributes"></div>
+
+        <h2>Hit Locations</h2>
+        <div id="play-hit-locations"></div>
+      </div>
+
+      <div class="main-content">
+        <h2>Skills <span class="page-ref">(Mythras p.38-54)</span></h2>
+        <div class="field">
+          <label>Difficulty Modifier</label>
+          <select id="difficulty-modifier" onchange="App.updateSkillDisplay()">
+            <option value="Very Easy">Very Easy (×2.0)</option>
+            <option value="Easy">Easy (×1.5)</option>
+            <option value="Standard" selected>Standard (×1.0)</option>
+            <option value="Hard">Hard (×0.66)</option>
+            <option value="Formidable">Formidable (×0.5)</option>
+            <option value="Herculean">Herculean (×0.1)</option>
+          </select>
+        </div>
+        <div id="play-skills"></div>
+
+        <h2>Combat <span class="page-ref">(Mythras p.74-106)</span></h2>
+        <div id="play-combat"></div>
+
+        <h2>Rune Affinities <span class="page-ref">(Adventures in Glorantha p.24)</span></h2>
+        <div id="play-runes"></div>
+
+        <h2>Magic <span class="page-ref">(Adventures in Glorantha p.178-220)</span></h2>
+        <div id="play-magic"></div>
+
+        <h2>Equipment <span class="page-ref">(Mythras p.107-128)</span></h2>
+        <div id="play-equipment"></div>
+
+        <h2>Notes</h2>
+        <textarea data-persist="notes" rows="6"></textarea>
+
+        <!-- Print-only pocketfold reference -->
+        <div class="print-only" style="display: none; margin-top: 20px; padding: 10px; border-top: 1px solid #ccc; font-size: 9pt; color: #666;">
+          📖 Make a pocket-sized version of this sheet at <b>pocketverter.pages.dev</b> — no cutting required, just fold!
+          Learn more: <b>3skulls.itch.io/pocketfold</b>
+        </div>
+
+        <!-- Special Effects Reference -->
+        <div class="collapsible">
+          <div class="collapsible-header" onclick="App.toggleCollapsible(this)">
+            ▶ Special Effects Reference (44 effects)
+          </div>
+          <div class="collapsible-content hidden" id="special-effects-ref"></div>
+        </div>`;
+  }
+
   // Ensure attributes are calculated before rendering (fixes blank play mode)
   CharacterData.attributes = Calc.calculateAllAttributes(CharacterData.characteristics);
 
@@ -3934,6 +3941,12 @@ window.App = App;
 
 document.addEventListener('DOMContentLoaded', () => {
   App.init();
+  // Hash-based mode switching for playwright automation
+  if (location.hash === '#play') App.switchMode('play');
+  window.addEventListener('hashchange', () => {
+    if (location.hash === '#play') App.switchMode('play');
+    if (location.hash === '#wizard') App.switchMode('wizard');
+  });
 });
 
 </script>
