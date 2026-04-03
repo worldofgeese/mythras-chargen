@@ -641,7 +641,7 @@ button.primary:hover { background: #333; }
   <div class="no-print" style="display: flex; flex-wrap: wrap; gap: 5px; justify-content: flex-end; margin-bottom: 10px;">
     <button onclick="App.switchMode('wizard')" id="btn-wizard">Wizard Mode</button>
     <button onclick="App.switchMode('play')" id="btn-play">Play Mode</button>
-    <button onclick="App.printSheet()" id="btn-print" disabled title="Print the Play Mode character sheet via browser print dialog">Print Sheet</button>
+    <button onclick="App.printSheet()" id="btn-print" disabled title="Open browser print dialog to print or save as PDF">Print Character Sheet</button>
     <button onclick="App.saveCharacter()">Save (Ctrl+S)</button>
     <button onclick="App.loadCharacter()">Load</button>
     <button onclick="App.exportHyperclay()" id="btn-export-html" disabled title="Download a self-contained HTML file you can use offline">Export Standalone HTML</button>
@@ -1505,6 +1505,29 @@ App.skillWithTooltip = function(name) {
   return name;
 };
 
+// Resolve generic combat style labels to actual style names from culture data
+App.resolveCombatStyleName = function(skillName, cultureData) {
+  // If not a generic combat style label, return as-is
+  const isGenericStyle = skillName === 'Combat Style (Cultural Style)' ||
+                        skillName === 'Combat Style (Speciality Style)';
+  if (!isGenericStyle) {
+    return skillName;
+  }
+
+  // If no culture data or no combat styles, return generic label
+  if (!cultureData || !cultureData.combatStyles || cultureData.combatStyles.length === 0) {
+    return skillName;
+  }
+
+  // Get first combat style (most cultures have one primary style)
+  const firstStyle = cultureData.combatStyles[0];
+
+  // Handle both string format ("Spear and Shield") and object format ({name: "...", weapons: []})
+  const styleName = typeof firstStyle === 'string' ? firstStyle : firstStyle.name;
+
+  return `Combat Style (${styleName})`;
+};
+
 App.renderBodyDiagram = function(hitPoints, includeArmor = false) {
   const head = hitPoints['Head'] || 0;
   const chest = hitPoints['Chest'] || 0;
@@ -2052,8 +2075,8 @@ App.renderStep5 = function() {
     const checked = CharacterData.folkMagicSpells.includes(spell);
     const row = document.createElement('div');
     row.innerHTML = `
-      <label><input type="checkbox" ${checked ? 'checked' : ''} 
-        onchange="App.toggleFolkMagicSpell('${spell}', this.checked, 3)"> ${spell}</label>
+      <label><input type="checkbox" ${checked ? 'checked' : ''}
+        onchange="App.toggleFolkMagicSpell('${spell}', this.checked, 3)"> ${App.spellWithTooltip(spell)}</label>
     `;
     folkList.appendChild(row);
   });
@@ -2367,7 +2390,7 @@ App.renderStep9 = function() {
       Points Remaining: ${remaining} / 100
     </div>
 
-    <h3>Career Skills</h3>
+    <h3>Professional Skills</h3>
     <div id="career-skills-list"></div>
 
     <h3>Additional Folk Magic (select 2 more)</h3>
@@ -2420,8 +2443,8 @@ App.renderStep9 = function() {
         const checked = CharacterData.careerFolkMagic.includes(spell);
         const row = document.createElement('div');
         row.innerHTML = `
-          <label><input type="checkbox" ${checked ? 'checked' : ''} 
-            onchange="App.toggleCareerFolkMagicSpell('${spell}', this.checked)"> ${spell}</label>
+          <label><input type="checkbox" ${checked ? 'checked' : ''}
+            onchange="App.toggleCareerFolkMagicSpell('${spell}', this.checked)"> ${App.spellWithTooltip(spell)}</label>
         `;
         spellContainer.appendChild(row);
       });
@@ -2434,8 +2457,8 @@ App.renderStep9 = function() {
       const checked = CharacterData.careerFolkMagic.includes(spell);
       const row = document.createElement('div');
       row.innerHTML = `
-        <label><input type="checkbox" ${checked ? 'checked' : ''} 
-          onchange="App.toggleCareerFolkMagicSpell('${spell}', this.checked)"> ${spell}</label>
+        <label><input type="checkbox" ${checked ? 'checked' : ''}
+          onchange="App.toggleCareerFolkMagicSpell('${spell}', this.checked)"> ${App.spellWithTooltip(spell)}</label>
       `;
       folkList.appendChild(row);
     });
@@ -3135,15 +3158,8 @@ App.renderSkillRow = function(skill) {
   const modified = Calc.applyDifficultyModifier(total, difficulty);
   
   // Display actual combat style name if applicable
-  let displayName = skill.name;
-  if (skill.name === 'Combat Style (Cultural Style)' && CharacterData.culture) {
-    const culture = CULTURES_DATA.find(c => c.name === CharacterData.culture);
-    if (culture && culture.combatStyles && culture.combatStyles.length > 0) {
-      const firstStyle = culture.combatStyles[0];
-      const styleName = typeof firstStyle === 'string' ? firstStyle : firstStyle.name;
-      displayName = `Combat Style (${styleName})`;
-    }
-  }
+  const culture = CharacterData.culture ? CULTURES_DATA.find(c => c.name === CharacterData.culture) : null;
+  const displayName = App.resolveCombatStyleName(skill.name, culture);
   
   return `
     <tr>
@@ -3267,6 +3283,89 @@ App.renderSpecialEffectsReference = function() {
 // =============================================================================
 
 const FOLK_MAGIC_SPELLS = ["Avert", "Alarm", "Appraise", "Babel", "Babble", "Beastcall", "Befuddle", "Bladesharp", "Bludgeon", "Breath", "Calm", "Calculate", "Chill", "Cleanse", "Clearpath", "Coordination", "Darkness", "Deflect", "Detect Magic", "Disruption", "Dry", "Dullblade", "Endurance", "Extinguish", "Fanaticism", "Find Game", "Firearrow", "Fireblade", "Glamour", "Glue", "Handfire", "Heal", "Heatwave", "Ignite", "Ironhand", "Knock", "Light", "Lock", "Lucky", "Magnify", "Might", "Mindspeech", "Mobility", "Pathway", "Perfume", "Pet", "Pierce", "Polish", "Protection", "Repair", "Repugnance", "Shock", "Slow", "Speedart", "Spiritshield", "Tire", "Tidy", "Translate", "Vigour", "Voice", "Warmth", "Witchsight"];
+
+// =============================================================================
+// FOLK MAGIC SPELL DESCRIPTIONS (Mythras Core p.122-130)
+// =============================================================================
+// TODO: Complete extraction of all 70 spells from source PDF
+// Currently includes common spells as demonstration of pattern
+window.FOLK_MAGIC_DESCRIPTIONS = {
+  "Bladesharp": {
+    description: "Increases weapon damage by 1 point per intensity",
+    page: "Mythras Core p.123"
+  },
+  "Heal": {
+    description: "Restores 1 hit point per intensity to a single hit location",
+    page: "Mythras Core p.126"
+  },
+  "Protection": {
+    description: "Provides 1 armor point per intensity to all hit locations",
+    page: "Mythras Core p.128"
+  },
+  "Avert": {
+    description: "Deflects a single ranged attack if intensity beats attack roll",
+    page: "Mythras Core p.122"
+  },
+  "Befuddle": {
+    description: "Target loses 1 INT per intensity if they fail to resist",
+    page: "Mythras Core p.123"
+  },
+  "Calm": {
+    description: "Soothes hostile emotions, reducing aggression",
+    page: "Mythras Core p.123"
+  },
+  "Deflect": {
+    description: "Parries melee attacks with +5% per intensity to parry skill",
+    page: "Mythras Core p.124"
+  },
+  "Disruption": {
+    description: "Damages target with 1d3 damage per intensity if they fail to resist",
+    page: "Mythras Core p.125"
+  },
+  "Extinguish": {
+    description: "Instantly puts out fires up to intensity in SIZ",
+    page: "Mythras Core p.125"
+  },
+  "Ignite": {
+    description: "Sets fire to flammable object up to intensity in SIZ",
+    page: "Mythras Core p.126"
+  },
+  "Light": {
+    description: "Creates light illuminating 5m radius per intensity",
+    page: "Mythras Core p.127"
+  },
+  "Mobility": {
+    description: "Increases movement rate by 1m per intensity",
+    page: "Mythras Core p.127"
+  },
+  "Speedart": {
+    description: "Gives ranged weapon +1 damage and +5m range per intensity",
+    page: "Mythras Core p.129"
+  }
+};
+
+// Helper to escape HTML entities for safe insertion
+function escapeHtml(text) {
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+// Create tooltip-wrapped spell name for UI display
+App.spellWithTooltip = function(spellName) {
+  if (typeof spellName !== 'string') return String(spellName);
+  const spellData = window.FOLK_MAGIC_DESCRIPTIONS[spellName];
+  if (spellData) {
+    const tooltipText = `${spellData.description} (${spellData.page})`;
+    const escapedTooltip = escapeHtml(tooltipText);
+    const escapedSpellName = escapeHtml(spellName);
+    return `<span class="spell-name" title="${escapedTooltip}">${escapedSpellName}</span>`;
+  }
+  return spellName;
+};
 
 // =============================================================================
 // EXPORT FUNCTIONS
@@ -3718,6 +3817,9 @@ App.exportTemplatePDF = async function() {
 // =============================================================================
 // INITIALIZATION
 // =============================================================================
+
+// Expose App to window for unit testing
+window.App = App;
 
 document.addEventListener('DOMContentLoaded', () => {
   App.init();
