@@ -1453,8 +1453,8 @@ const App = {
   toggleCollapsible(header) {
     const content = header.nextElementSibling;
     content.classList.toggle('hidden');
-    const baseText = header.textContent.replace(/^[▶▼]\s*/, '');
-    header.textContent = content.classList.contains('hidden') ? '▶ ' + baseText : '▼ ' + baseText;
+    const baseText = header.textContent.replace(/^[\u25B6\u25BC▶▼\s]+/, '').trim();
+    header.textContent = (content.classList.contains('hidden') ? '▶ ' : '▼ ') + baseText;
   },
   
   attachKeyboardShortcuts() {
