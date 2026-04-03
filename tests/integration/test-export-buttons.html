@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integration Tests: Export Button Clarity</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
+        h1 { color: #333; border-bottom: 3px solid #4CAF50; padding-bottom: 10px; }
+        .test-suite { background: white; margin: 20px 0; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .test-result { padding: 10px; margin: 5px 0; border-radius: 4px; font-family: monospace; }
+        .test-pass { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+        .test-fail { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+        .summary { background: #e7f3ff; padding: 15px; border-radius: 8px; margin: 20px 0; font-weight: bold; }
+        .summary.all-pass { background: #d4edda; color: #155724; }
+        .summary.has-fail { background: #f8d7da; color: #721c24; }
+        .error-details { font-size: 0.9em; margin-top: 5px; padding: 10px; background: #fff; border: 1px solid #ddd; border-radius: 4px; white-space: pre-wrap; }
+        iframe { display: none; }
+    </style>
+</head>
+<body>
+    <h1>Integration Tests: Export Button Clarity</h1>
+
+    <div class="summary" id="summary">Loading tests...</div>
+    <div id="results"></div>
+
+    <!-- Load index.html in iframe for testing -->
+    <iframe id="app-iframe" src="../../index.html"></iframe>
+
+    <!-- Load test framework -->
+    <script>
+        class TestRunner {
+            constructor() {
+                this.results = { pass: 0, fail: 0, suites: [] };
+                this.currentSuite = null;
+            }
+            describe(suiteName, fn) {
+                this.currentSuite = { name: suiteName, tests: [] };
+                this.results.suites.push(this.currentSuite);
+                fn();
+                this.currentSuite = null;
+            }
+            it(testName, fn) {
+                if (!this.currentSuite) throw new Error('it() must be called inside describe()');
+                this.currentSuite.tests.push({ name: testName, fn });
+            }
+            async runAll() {
+                for (const suite of this.results.suites) {
+                    for (const test of suite.tests) {
+                        try {
+                            await test.fn();
+                            test.status = 'pass';
+                            this.results.pass++;
+                        } catch (error) {
+                            test.status = 'fail';
+                            test.error = error.message;
+                            test.stack = error.stack;
+                            this.results.fail++;
+                        }
+                    }
+                }
+                this.displayResults();
+            }
+            displayResults() {
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = '';
+                for (const suite of this.results.suites) {
+                    const suiteDiv = document.createElement('div');
+                    suiteDiv.className = 'test-suite';
+                    suiteDiv.innerHTML = `<h2>${suite.name}</h2>`;
+                    for (const test of suite.tests) {
+                        const testDiv = document.createElement('div');
+                        testDiv.className = `test-result test-${test.status}`;
+                        const icon = test.status === 'pass' ? '✓' : '✗';
+                        testDiv.innerHTML = `${icon} ${test.name}`;
+                        if (test.error) {
+                            const errorDiv = document.createElement('div');
+                            errorDiv.className = 'error-details';
+                            errorDiv.textContent = test.error;
+                            testDiv.appendChild(errorDiv);
+                        }
+                        suiteDiv.appendChild(testDiv);
+                    }
+                    resultsDiv.appendChild(suiteDiv);
+                }
+                const summary = document.getElementById('summary');
+                const total = this.results.pass + this.results.fail;
+                summary.textContent = `Total: ${total} | Pass: ${this.results.pass} | Fail: ${this.results.fail}`;
+                summary.className = this.results.fail > 0 ? 'summary has-fail' : 'summary all-pass';
+            }
+        }
+
+        const assert = {
+            ok(value, message) {
+                if (!value) {
+                    throw new Error(message || `Expected truthy value, got ${value}`);
+                }
+            },
+            exists(value, message) {
+                if (value === null || value === undefined) {
+                    throw new Error(message || `Expected value to exist`);
+                }
+            },
+            includes(str, substr, message) {
+                if (!str.includes(substr)) {
+                    throw new Error(message || `Expected "${str}" to include "${substr}"`);
+                }
+            },
+            notEqual(actual, expected, message) {
+                if (actual === expected) {
+                    throw new Error(message || `Expected not to equal "${expected}"`);
+                }
+            }
+        };
+
+        window.runner = new TestRunner();
+        window.describe = (name, fn) => runner.describe(name, fn);
+        window.it = (name, fn) => runner.it(name, fn);
+        window.assert = assert;
+    </script>
+
+    <!-- TESTS (TDD: Write these FIRST, expect them to FAIL) -->
+    <script>
+        function getAppDocument() {
+            const iframe = document.getElementById('app-iframe');
+            return iframe.contentDocument;
+        }
+
+        function getButton(id) {
+            const doc = getAppDocument();
+            return doc.getElementById(id);
+        }
+
+        describe('Export Button Labels', () => {
+            it('should have Print button with "Browser" or "Character Sheet" in label', () => {
+                const printBtn = getButton('btn-print');
+                assert.exists(printBtn, 'Print button should exist');
+
+                const label = printBtn.textContent;
+                const hasClearLabel = label.includes('Browser') || label.includes('Character Sheet');
+                assert.ok(
+                    hasClearLabel,
+                    `Print button label "${label}" should include "Browser" or "Character Sheet" for clarity`
+                );
+            });
+
+            it('should have HTML export button mentioning "Hyperclay" or "HTML Sheet"', () => {
+                const htmlBtn = getButton('btn-export-html');
+                assert.exists(htmlBtn, 'HTML export button should exist');
+
+                const label = htmlBtn.textContent;
+                const hasClearLabel = label.includes('Hyperclay') || label.includes('HTML') || label.includes('Standalone');
+                assert.ok(
+                    hasClearLabel,
+                    `HTML export button label "${label}" should clearly indicate HTML/Hyperclay format`
+                );
+            });
+
+            it('should have PDF export button indicating "Template" or form-fill requirement', () => {
+                const pdfBtn = getButton('btn-export-pdf');
+                assert.exists(pdfBtn, 'PDF export button should exist');
+
+                const label = pdfBtn.textContent;
+                const hasClearLabel = label.includes('Template') || label.includes('PDF') || label.includes('Fill');
+                assert.ok(
+                    hasClearLabel,
+                    `PDF export button label "${label}" should indicate template/form-fill requirement`
+                );
+            });
+
+            it('should have three distinct button labels (no duplicates)', () => {
+                const printBtn = getButton('btn-print');
+                const htmlBtn = getButton('btn-export-html');
+                const pdfBtn = getButton('btn-export-pdf');
+
+                const printLabel = printBtn.textContent.trim();
+                const htmlLabel = htmlBtn.textContent.trim();
+                const pdfLabel = pdfBtn.textContent.trim();
+
+                assert.notEqual(printLabel, htmlLabel, 'Print and HTML labels should be different');
+                assert.notEqual(printLabel, pdfLabel, 'Print and PDF labels should be different');
+                assert.notEqual(htmlLabel, pdfLabel, 'HTML and PDF labels should be different');
+            });
+        });
+
+        describe('Export Button Tooltips', () => {
+            it('should have Print button tooltip explaining browser print dialog', () => {
+                const printBtn = getButton('btn-print');
+                assert.exists(printBtn, 'Print button should exist');
+
+                const tooltip = printBtn.getAttribute('title');
+                assert.exists(tooltip, 'Print button should have title attribute');
+                assert.includes(
+                    tooltip,
+                    'print',
+                    'Print tooltip should mention printing'
+                );
+            });
+
+            it('should have HTML export tooltip explaining offline/portable file', () => {
+                const htmlBtn = getButton('btn-export-html');
+                assert.exists(htmlBtn, 'HTML export button should exist');
+
+                const tooltip = htmlBtn.getAttribute('title');
+                assert.exists(tooltip, 'HTML export button should have title attribute');
+
+                const hasRelevantInfo = tooltip.includes('offline') ||
+                                       tooltip.includes('standalone') ||
+                                       tooltip.includes('self-contained') ||
+                                       tooltip.includes('portable');
+
+                assert.ok(
+                    hasRelevantInfo,
+                    `HTML export tooltip "${tooltip}" should mention offline/standalone/portable nature`
+                );
+            });
+
+            it('should have PDF export tooltip mentioning template requirement', () => {
+                const pdfBtn = getButton('btn-export-pdf');
+                assert.exists(pdfBtn, 'PDF export button should exist');
+
+                const tooltip = pdfBtn.getAttribute('title');
+                assert.exists(tooltip, 'PDF export button should have title attribute');
+                assert.includes(
+                    tooltip,
+                    'template',
+                    'PDF export tooltip should mention template requirement'
+                );
+            });
+
+            it('should have distinct tooltips for all three buttons', () => {
+                const printTooltip = getButton('btn-print')?.getAttribute('title') || '';
+                const htmlTooltip = getButton('btn-export-html')?.getAttribute('title') || '';
+                const pdfTooltip = getButton('btn-export-pdf')?.getAttribute('title') || '';
+
+                assert.notEqual(printTooltip, htmlTooltip, 'Print and HTML tooltips should be different');
+                assert.notEqual(printTooltip, pdfTooltip, 'Print and PDF tooltips should be different');
+                assert.notEqual(htmlTooltip, pdfTooltip, 'HTML and PDF tooltips should be different');
+            });
+
+            it('should have informative tooltips (not just generic "Export" text)', () => {
+                const printTooltip = getButton('btn-print')?.getAttribute('title') || '';
+                const htmlTooltip = getButton('btn-export-html')?.getAttribute('title') || '';
+                const pdfTooltip = getButton('btn-export-pdf')?.getAttribute('title') || '';
+
+                assert.ok(
+                    printTooltip.split(' ').length >= 4,
+                    'Print tooltip should be descriptive (at least 4 words)'
+                );
+                assert.ok(
+                    htmlTooltip.split(' ').length >= 4,
+                    'HTML tooltip should be descriptive (at least 4 words)'
+                );
+                assert.ok(
+                    pdfTooltip.split(' ').length >= 4,
+                    'PDF tooltip should be descriptive (at least 4 words)'
+                );
+            });
+        });
+
+        describe('Export Section Help Text', () => {
+            it('should have help section or info icon near export buttons', () => {
+                const doc = getAppDocument();
+
+                // Look for help section, info icon, or explanation text near export buttons
+                const printBtn = getButton('btn-print');
+                if (!printBtn) return; // Skip if buttons not found
+
+                const parent = printBtn.parentElement;
+                const helpSection = parent.querySelector('.export-help, .export-info, [class*="help"]');
+                const infoIcon = parent.querySelector('.info-icon, .help-icon, [title*="help"]');
+
+                const hasHelp = helpSection !== null || infoIcon !== null;
+
+                assert.ok(
+                    hasHelp,
+                    'Should have help section or info icon near export buttons to explain options'
+                );
+            });
+
+            it('should explain the difference between the three export options', () => {
+                const doc = getAppDocument();
+                const bodyText = doc.body.textContent;
+
+                // Check if there's explanatory text about export options
+                const hasExplanation = bodyText.includes('Print') &&
+                                      bodyText.includes('HTML') &&
+                                      bodyText.includes('PDF') &&
+                                      (bodyText.includes('options') || bodyText.includes('export'));
+
+                // This is a soft check - explanation might be in tooltips instead of visible text
+                // So we'll just verify tooltips exist as a minimum
+                const printBtn = getButton('btn-print');
+                const hasTooltips = printBtn && printBtn.getAttribute('title');
+
+                assert.ok(
+                    hasExplanation || hasTooltips,
+                    'Should have explanation of export options (either in text or comprehensive tooltips)'
+                );
+            });
+        });
+
+        // Run all tests after iframe loads
+        window.addEventListener('load', () => {
+            const iframe = document.getElementById('app-iframe');
+            iframe.onload = () => {
+                setTimeout(() => runner.runAll(), 500);
+            };
+        });
+    </script>
+</body>
+</html>

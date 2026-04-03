@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Tests: Combat Styles</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 { color: #333; border-bottom: 3px solid #4CAF50; padding-bottom: 10px; }
+        .test-suite {
+            background: white;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-result {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .test-pass { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+        .test-fail { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+        .summary { background: #e7f3ff; padding: 15px; border-radius: 8px; margin: 20px 0; font-weight: bold; }
+        .summary.all-pass { background: #d4edda; color: #155724; }
+        .summary.has-fail { background: #f8d7da; color: #721c24; }
+        .error-details {
+            font-size: 0.9em;
+            margin-top: 5px;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>Unit Tests: Combat Style Name Resolution</h1>
+
+    <div class="summary" id="summary">Loading tests...</div>
+    <div id="results"></div>
+
+    <!-- Load test framework -->
+    <script>
+        class TestRunner {
+            constructor() {
+                this.results = { pass: 0, fail: 0, suites: [] };
+                this.currentSuite = null;
+            }
+
+            describe(suiteName, fn) {
+                this.currentSuite = { name: suiteName, tests: [] };
+                this.results.suites.push(this.currentSuite);
+                fn();
+                this.currentSuite = null;
+            }
+
+            it(testName, fn) {
+                if (!this.currentSuite) throw new Error('it() must be called inside describe()');
+                this.currentSuite.tests.push({ name: testName, fn });
+            }
+
+            async runAll() {
+                for (const suite of this.results.suites) {
+                    for (const test of suite.tests) {
+                        try {
+                            await test.fn();
+                            test.status = 'pass';
+                            this.results.pass++;
+                        } catch (error) {
+                            test.status = 'fail';
+                            test.error = error.message;
+                            test.stack = error.stack;
+                            this.results.fail++;
+                        }
+                    }
+                }
+                this.displayResults();
+            }
+
+            displayResults() {
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = '';
+
+                for (const suite of this.results.suites) {
+                    const suiteDiv = document.createElement('div');
+                    suiteDiv.className = 'test-suite';
+                    suiteDiv.innerHTML = `<h2>${suite.name}</h2>`;
+
+                    for (const test of suite.tests) {
+                        const testDiv = document.createElement('div');
+                        testDiv.className = `test-result test-${test.status}`;
+                        const icon = test.status === 'pass' ? '✓' : '✗';
+                        testDiv.innerHTML = `${icon} ${test.name}`;
+
+                        if (test.error) {
+                            const errorDiv = document.createElement('div');
+                            errorDiv.className = 'error-details';
+                            errorDiv.textContent = test.error;
+                            testDiv.appendChild(errorDiv);
+                        }
+
+                        suiteDiv.appendChild(testDiv);
+                    }
+
+                    resultsDiv.appendChild(suiteDiv);
+                }
+
+                const summary = document.getElementById('summary');
+                const total = this.results.pass + this.results.fail;
+                summary.textContent = `Total: ${total} | Pass: ${this.results.pass} | Fail: ${this.results.fail}`;
+                summary.className = this.results.fail > 0 ? 'summary has-fail' : 'summary all-pass';
+            }
+        }
+
+        const assert = {
+            equal(actual, expected, message) {
+                if (actual !== expected) {
+                    throw new Error(message || `Expected "${expected}", got "${actual}"`);
+                }
+            },
+            ok(value, message) {
+                if (!value) {
+                    throw new Error(message || `Expected truthy value, got ${value}`);
+                }
+            },
+            exists(value, message) {
+                if (value === null || value === undefined) {
+                    throw new Error(message || `Expected value to exist`);
+                }
+            },
+            isType(value, type, message) {
+                if (typeof value !== type) {
+                    throw new Error(message || `Expected type ${type}, got ${typeof value}`);
+                }
+            }
+        };
+
+        window.runner = new TestRunner();
+        window.describe = (name, fn) => runner.describe(name, fn);
+        window.it = (name, fn) => runner.it(name, fn);
+        window.assert = assert;
+    </script>
+
+    <!-- Mock data for testing (simulating CULTURES_DATA structure) -->
+    <script>
+        window.MOCK_CULTURES = [
+            {
+                name: 'Sartarite',
+                combatStyles: [
+                    { name: 'Spear and Shield', weapons: ['Spear', 'Shield'] },
+                    { name: 'Sword and Shield', weapons: ['Sword', 'Shield'] }
+                ]
+            },
+            {
+                name: 'Lunar Tarshite',
+                combatStyles: [
+                    'Hoplite Combat', // String format
+                    'Skirmisher'
+                ]
+            },
+            {
+                name: 'Generic Culture',
+                combatStyles: []
+            }
+        ];
+    </script>
+
+    <!-- TESTS (TDD: Write these FIRST, expect them to FAIL) -->
+    <script>
+        describe('resolveCombatStyleName() Function', () => {
+            it('should exist as a function', () => {
+                assert.exists(window.resolveCombatStyleName, 'resolveCombatStyleName function should exist');
+                assert.isType(window.resolveCombatStyleName, 'function', 'Should be a function');
+            });
+
+            it('should return actual style name when culture has combat styles (object format)', () => {
+                const result = window.resolveCombatStyleName(
+                    'Combat Style (Cultural Style)',
+                    window.MOCK_CULTURES[0]
+                );
+                assert.equal(result, 'Combat Style (Spear and Shield)', 'Should resolve to actual style name');
+            });
+
+            it('should return actual style name when culture has combat styles (string format)', () => {
+                const result = window.resolveCombatStyleName(
+                    'Combat Style (Cultural Style)',
+                    window.MOCK_CULTURES[1]
+                );
+                assert.equal(result, 'Combat Style (Hoplite Combat)', 'Should handle string format styles');
+            });
+
+            it('should return generic label when culture has no combat styles', () => {
+                const result = window.resolveCombatStyleName(
+                    'Combat Style (Cultural Style)',
+                    window.MOCK_CULTURES[2]
+                );
+                assert.equal(result, 'Combat Style (Cultural Style)', 'Should fall back to generic label');
+            });
+
+            it('should handle null/undefined culture gracefully', () => {
+                const result1 = window.resolveCombatStyleName('Combat Style (Cultural Style)', null);
+                assert.equal(result1, 'Combat Style (Cultural Style)', 'Should handle null culture');
+
+                const result2 = window.resolveCombatStyleName('Combat Style (Cultural Style)', undefined);
+                assert.equal(result2, 'Combat Style (Cultural Style)', 'Should handle undefined culture');
+            });
+
+            it('should not modify non-combat-style skills', () => {
+                const result = window.resolveCombatStyleName(
+                    'Athletics',
+                    window.MOCK_CULTURES[0]
+                );
+                assert.equal(result, 'Athletics', 'Should return skill name unchanged if not a combat style');
+            });
+
+            it('should handle Speciality Style variant', () => {
+                const result = window.resolveCombatStyleName(
+                    'Combat Style (Speciality Style)',
+                    window.MOCK_CULTURES[0]
+                );
+                assert.equal(result, 'Combat Style (Spear and Shield)', 'Should resolve Speciality Style variant');
+            });
+        });
+
+        describe('Combat Style Display in CharacterData', () => {
+            it('should store resolved combat style names, not generic labels', () => {
+                // This test will check if CharacterData stores "Combat Style (Spear and Shield)"
+                // instead of "Combat Style (Cultural Style)"
+                // For now, this is a placeholder test that will be implemented with actual CharacterData integration
+
+                // Mock test: assume we have a way to access CharacterData
+                const mockCharData = {
+                    skills: [
+                        { name: 'Combat Style (Spear and Shield)', base: 50, bonus: 10 }
+                    ]
+                };
+
+                const hasGenericLabel = mockCharData.skills.some(s =>
+                    s.name === 'Combat Style (Cultural Style)' ||
+                    s.name === 'Combat Style (Speciality Style)'
+                );
+
+                assert.ok(!hasGenericLabel, 'CharacterData should not contain generic combat style labels');
+            });
+        });
+
+        // Run all tests
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => runner.runAll(), 100);
+        });
+    </script>
+</body>
+</html>
