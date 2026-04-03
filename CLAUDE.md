@@ -20,7 +20,9 @@ Single-file HTML character generator for the Mythras RPG with optional Glorantha
 - **Engine**: Vanilla JavaScript, no frameworks, no build step
 - **Data flow**: `SKILLS_DATA` + `CULTURES_DATA` + `WEAPONS_DATA` → wizard steps → `CharacterData` → Play Mode / PDF export
 - **Modularity**: Glorantha content is in `data/glorantha.js`. If the file isn't loaded, `index.html` falls back to generic Mythras culture templates.
-- **PDF export**: Browser-side via pdf-lib, fills the form fields in `templates/mythras-sheet.pdf`
+- **PDF export**: Two paths available via pdf-lib:
+  - **Simple**: Single-page PDF created from scratch (quick export)
+  - **Template**: Fills form fields in `templates/mythras-sheet.pdf` (required for Phase 2 pregens)
 
 ## Source Rules (read AGENTS.md for full details)
 

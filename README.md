@@ -6,7 +6,9 @@ A character creation tool for the Mythras roleplaying game, with optional Gloran
 
 - **12-step character creation wizard** — follows the Mythras Core Rulebook character creation process
 - **Play Mode** — interactive character sheet for at-the-table use with dice roller, skill checks, and combat tracking
-- **PDF Export** — fill a standard Mythras character sheet PDF directly in the browser (Phase 1)
+- **PDF Export** — two export options:
+  - **Simple**: Single-page PDF created from scratch (quick export)
+  - **Template**: Fill the official Mythras character sheet PDF form (required for Phase 2 pregen compatibility)
 - **Attestable data** — every skill formula, culture, combat style, and derived attribute traces back to a specific source page
 
 ## Quick Start

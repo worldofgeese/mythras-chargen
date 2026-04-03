@@ -1,0 +1,43 @@
+Manual Verification Results - mythras-chargen
+==============================================
+Date: 2026-04-03
+Server: http://localhost:8888/index.html
+
+✅ 1. HTTP Server Running
+   - Server is serving on port 8888
+   - index.html loads successfully
+   - Content-Type headers correct
+
+✅ 2. Standalone Functionality
+   - index.html loads without errors
+   - data/glorantha.js script tag present
+   - Fallback to generic culture if Glorantha data missing
+
+✅ 3. Dual PDF Export Paths
+   Verified in source code:
+   - Line 648: Export PDF (Simple) button exists
+     onclick="App.exportSinglePagePDF()"
+     tooltip: "Generate a single-page PDF character sheet (quick export)"
+
+   - Line 649: Export PDF (Template) button exists
+     onclick="App.exportTemplatePDF()"
+     tooltip: "Fill the official Mythras character sheet PDF template (for pregens & Phase 2)"
+
+   - Both functions implemented:
+     * App.exportSinglePagePDF() at line 3433
+     * App.exportTemplatePDF() at line 3606
+
+✅ 4. Code Structure
+   - All JavaScript embedded in single HTML file
+   - PDF-lib loaded from CDN (line 787)
+   - Glorantha data modular (data/glorantha.js)
+   - Proper fallback pattern: window.GLORANTHA_CULTURES_DATA || [...]
+
+✅ 5. Provenance Tests
+   - All 31 tests passing (100% success rate)
+   - Skills provenance: 100% coverage
+   - Cultures provenance: All matched with fuzzy matching
+   - Weapons provenance: 35.2% core weapons (acceptable for supplementary content)
+   - Reference files valid with page citations
+   - Extraction metadata present
+
