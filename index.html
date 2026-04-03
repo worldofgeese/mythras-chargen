@@ -665,7 +665,7 @@ button.primary:hover { background: #333; }
   </div>
 
   <!-- PLAY MODE -->
-  <div id="play-mode" style="display:none">>
+  <div id="play-mode" style="position:absolute;left:-9999px;visibility:hidden">>
   
 
   <!-- TRADEMARK FOOTER -->
@@ -1074,8 +1074,20 @@ const App = {
   switchMode(mode) {
     this.mode = mode;
     
-    // Hide wizard immediately
-    document.getElementById('wizard-mode').style.display = mode === 'wizard' ? '' : 'none';
+    const wizardEl = document.getElementById('wizard-mode');
+    const playEl = document.getElementById('play-mode');
+    
+    if (mode === 'play') {
+      wizardEl.style.cssText = 'position:absolute;left:-9999px;visibility:hidden';
+      this.renderPlayMode();
+      playEl.style.cssText = '';
+      playEl.setAttribute('data-mode-ready', 'true');
+    } else {
+      playEl.style.cssText = 'position:absolute;left:-9999px;visibility:hidden';
+      playEl.removeAttribute('data-mode-ready');
+      wizardEl.style.cssText = '';
+    }
+    
     document.getElementById('btn-wizard').classList.toggle('primary', mode === 'wizard');
     document.getElementById('btn-play').classList.toggle('primary', mode === 'play');
     
@@ -1083,14 +1095,6 @@ const App = {
     const pdfSimpleBtn = document.getElementById('btn-export-pdf-simple');
     if (htmlBtn) { htmlBtn.disabled = mode !== 'play'; }
     if (pdfSimpleBtn) { pdfSimpleBtn.disabled = mode !== 'play'; }
-
-    if (mode === 'play') {
-      // Render while still hidden, then show
-      this.renderPlayMode();
-      document.getElementById('play-mode').style.display = '';
-    } else {
-      document.getElementById('play-mode').style.display = 'none';
-    }
   },
   
   nextStep() {
