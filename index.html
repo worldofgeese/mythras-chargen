@@ -645,7 +645,7 @@ button.primary:hover { background: #333; }
     <button onclick="App.saveCharacter()">Save (Ctrl+S)</button>
     <button onclick="App.loadCharacter()">Load</button>
     <button onclick="App.exportHyperclay()" id="btn-export-html" disabled title="Download a self-contained HTML file you can use offline">Export Standalone HTML</button>
-    <button onclick="App.exportPDF()" id="btn-export-pdf" disabled title="Select your Mythras PDF template to fill with character data">Export PDF</button>
+    <button onclick="App.exportPDF()" id="btn-export-pdf" disabled title="Generate a single-page PDF character sheet">Export PDF</button>
   </div>
 
   <!-- WIZARD MODE -->
@@ -3427,111 +3427,174 @@ App.fillPDFField = function(form, fieldName, value) {
 };
 
 App.exportPDF = async function() {
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = '.pdf';
-  input.onchange = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+  try {
+    const { PDFDocument, rgb, StandardFonts } = PDFLib;
+    const pdfDoc = await PDFDocument.create();
+    const page = pdfDoc.addPage([595, 842]); // A4 size
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
 
-    try {
-      const arrayBuffer = await file.arrayBuffer();
-      const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
-      const form = pdfDoc.getForm();
+    const { width, height } = page.getSize();
+    let y = height - 40;
+    const leftMargin = 40;
+    const rightMargin = width - 40;
+    const colWidth = (rightMargin - leftMargin) / 3;
 
-      App.fillPDFField(form, 'Character Name', CharacterData.name);
-      App.fillPDFField(form, 'Race/Culture', CharacterData.culture);
-      App.fillPDFField(form, 'Career', CharacterData.career);
-      App.fillPDFField(form, 'Homeland', CharacterData.homeland);
-      App.fillPDFField(form, 'Age', String(CharacterData.age));
-
-      ['STR','CON','SIZ','DEX','INT','POW','CHA'].forEach(stat => {
-        App.fillPDFField(form, stat, String(CharacterData.characteristics[stat]));
+    // Helper to draw text
+    const drawText = (text, x, yPos, options = {}) => {
+      page.drawText(String(text), {
+        x, y: yPos,
+        size: options.size || 10,
+        font: options.bold ? boldFont : font,
+        color: rgb(0, 0, 0),
+        ...options
       });
+    };
 
-      const attrs = CharacterData.attributes;
-      App.fillPDFField(form, 'Action Points', String(attrs.actionPoints));
-      App.fillPDFField(form, 'Damage Modifier', attrs.damageModifier);
-      App.fillPDFField(form, 'Healing Rate', String(attrs.healingRate));
-      App.fillPDFField(form, 'Movement Rate', String(attrs.movementRate));
-      App.fillPDFField(form, 'Initiative Bonus', String(attrs.initiativeBonus));
-      App.fillPDFField(form, 'Luck Points', String(attrs.luckPoints));
+    // Helper for drawing boxes
+    const drawBox = (x, yPos, boxWidth, boxHeight) => {
+      page.drawRectangle({
+        x, y: yPos,
+        width: boxWidth,
+        height: boxHeight,
+        borderColor: rgb(0, 0, 0),
+        borderWidth: 1
+      });
+    };
 
-      if (attrs.hitPoints) {
-        const locMap = {
-          'Head': 'head', 'Chest': 'chest', 'Abdomen': 'abdomen',
-          'Left Arm': 'leftArm', 'Right Arm': 'rightArm',
-          'Left Leg': 'leftLeg', 'Right Leg': 'rightLeg'
-        };
-        Object.entries(locMap).forEach(([pdfName, dataKey]) => {
-          if (attrs.hitPoints[dataKey] !== undefined) {
-            App.fillPDFField(form, pdfName, String(attrs.hitPoints[dataKey]));
-            App.fillPDFField(form, pdfName + ' Max', String(attrs.hitPoints[dataKey]));
-          }
-        });
+    // Title
+    drawText('MYTHRAS CHARACTER SHEET', leftMargin, y, { size: 16, bold: true });
+    y -= 25;
+
+    // Character Identity
+    drawText(`Name: ${CharacterData.name || ''}`, leftMargin, y, { bold: true, size: 11 });
+    y -= 15;
+    drawText(`Culture: ${CharacterData.culture || ''}  |  Career: ${CharacterData.career || ''}  |  Homeland: ${CharacterData.homeland || ''}  |  Age: ${CharacterData.age || ''}`, leftMargin, y, { size: 9 });
+    y -= 20;
+
+    // Characteristics (horizontal layout)
+    const chars = ['STR','CON','SIZ','DEX','INT','POW','CHA'];
+    const charBoxWidth = (rightMargin - leftMargin) / 7;
+    chars.forEach((stat, i) => {
+      const x = leftMargin + (i * charBoxWidth);
+      drawBox(x, y - 15, charBoxWidth - 2, 30);
+      drawText(stat, x + 5, y, { bold: true, size: 9 });
+      drawText(CharacterData.characteristics[stat] || '', x + charBoxWidth/2 - 5, y - 12, { size: 12, bold: true });
+    });
+    y -= 40;
+
+    // Attributes (3 columns)
+    const attrs = CharacterData.attributes || {};
+    const attrList = [
+      ['Action Points', attrs.actionPoints],
+      ['Initiative', attrs.initiativeBonus],
+      ['Damage Mod', attrs.damageModifier],
+      ['Healing Rate', attrs.healingRate],
+      ['Movement', attrs.movementRate],
+      ['Luck Points', attrs.luckPoints]
+    ];
+
+    attrList.forEach((attr, i) => {
+      const col = i % 3;
+      const row = Math.floor(i / 3);
+      const x = leftMargin + (col * colWidth);
+      const yPos = y - (row * 15);
+      drawText(`${attr[0]}: `, x, yPos, { bold: true, size: 9 });
+      drawText(attr[1] || '', x + 80, yPos, { size: 9 });
+    });
+    y -= 35;
+
+    // Hit Locations
+    drawText('HIT LOCATIONS', leftMargin, y, { bold: true, size: 10 });
+    y -= 15;
+    const hitPoints = attrs.hitPoints || {};
+    const locations = [
+      ['Head', hitPoints.head],
+      ['Chest', hitPoints.chest],
+      ['Abdomen', hitPoints.abdomen],
+      ['L.Arm', hitPoints.leftArm],
+      ['R.Arm', hitPoints.rightArm],
+      ['L.Leg', hitPoints.leftLeg],
+      ['R.Leg', hitPoints.rightLeg]
+    ];
+
+    locations.forEach((loc, i) => {
+      const col = i % 4;
+      const row = Math.floor(i / 4);
+      const x = leftMargin + (col * 130);
+      const yPos = y - (row * 15);
+      drawText(`${loc[0]}: ${loc[1] || ''}`, x, yPos, { size: 8 });
+    });
+    y -= 35;
+
+    // Skills (two columns)
+    drawText('SKILLS', leftMargin, y, { bold: true, size: 10 });
+    y -= 15;
+    const allSkills = App.compileAllSkills ? Array.from(App.compileAllSkills().values()) : [];
+    const skillsToShow = allSkills.filter(s => {
+      const total = s.base + (s.cultural || 0) + (s.career || 0) + (s.bonus || 0);
+      return total > 0;
+    }).slice(0, 40);
+
+    skillsToShow.forEach((skill, i) => {
+      const col = i % 2;
+      const row = Math.floor(i / 2);
+      const x = leftMargin + (col * 260);
+      const yPos = y - (row * 12);
+      const total = skill.base + (skill.cultural || 0) + (skill.career || 0) + (skill.bonus || 0);
+
+      if (yPos > 150) {
+        const skillText = `${skill.name}: ${total}%`;
+        drawText(skillText.substring(0, 35), x, yPos, { size: 8 });
       }
+    });
+    y = 145;
 
-      const allSkills = App.compileAllSkills ? Array.from(App.compileAllSkills().values()) : [];
+    // Combat & Equipment
+    drawText('COMBAT & EQUIPMENT', leftMargin, y, { bold: true, size: 10 });
+    y -= 15;
+    const weapons = CharacterData.weapons || [];
+    weapons.slice(0, 5).forEach((w, i) => {
+      const yPos = y - (i * 12);
+      drawText(`${w.name} - Dmg: ${w.damage || ''} Size: ${w.size || ''} Reach: ${w.reach || ''}`, leftMargin, yPos, { size: 8 });
+    });
+    y -= (weapons.length > 0 ? weapons.length * 12 : 0) + 15;
 
-      let skIdx = 1;
-      allSkills.filter(s => s.isStandard !== false).forEach(skill => {
-        if (skIdx <= 14) {
-          App.fillPDFField(form, `Culture_SK_${skIdx}`, `${skill.name} ${skill.base + skill.cultural + skill.career + skill.bonus}%`);
-          skIdx++;
-        }
-      });
-
-      let pkIdx = 1;
-      allSkills.filter(s => s.isStandard === false && !s.name.startsWith('Combat Style')).forEach(skill => {
-        const total = skill.base + skill.cultural + skill.career + skill.bonus;
-        if (total > 0 && pkIdx <= 9) {
-          App.fillPDFField(form, `Career_PK_${pkIdx}`, `${skill.name} ${total}%`);
-          pkIdx++;
-        }
-      });
-
+    // Magic
+    if (y > 60) {
+      drawText('MAGIC', leftMargin, y, { bold: true, size: 10 });
+      y -= 15;
       const allSpells = [...(CharacterData.folkMagicSpells || []), ...(CharacterData.careerFolkMagic || [])];
-      allSpells.forEach((spell, i) => {
-        if (i < 20) {
-          App.fillPDFField(form, `Spell ${i + 1}`, spell);
+      const spellsToShow = allSpells.slice(0, 15);
+      spellsToShow.forEach((spell, i) => {
+        const col = i % 3;
+        const row = Math.floor(i / 3);
+        const x = leftMargin + (col * 170);
+        const yPos = y - (row * 12);
+        if (yPos > 45) {
+          drawText(spell.substring(0, 20), x, yPos, { size: 8 });
         }
       });
-
-      (CharacterData.passions || []).forEach((p, i) => {
-        const name = typeof p === 'string' ? p : p.name || p.type;
-        if (i < 7) {
-          App.fillPDFField(form, `P3__Career_PA_${i + 1}`, name);
-        }
-      });
-
-      (CharacterData.weapons || []).forEach((w, i) => {
-        if (i < 7) {
-          const idx = i + 1;
-          App.fillPDFField(form, `Weapon ${idx}`, w.name);
-          App.fillPDFField(form, `Damage ${idx}`, w.damage);
-          App.fillPDFField(form, `Size ${idx}`, w.size);
-          App.fillPDFField(form, `Reach ${idx}`, w.reach);
-          App.fillPDFField(form, `AP ${idx}`, String(w.ap));
-          App.fillPDFField(form, `HP ${idx}`, String(w.hp));
-        }
-      });
-
-      const pdfBytes = await pdfDoc.save();
-      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${CharacterData.name || 'character'}.pdf`;
-      a.click();
-      URL.revokeObjectURL(url);
-
-      App.showToast('PDF exported!', 'success');
-    } catch (err) {
-      console.error('PDF export failed:', err);
-      App.showToast('PDF export failed: ' + err.message, 'error');
     }
-  };
-  input.click();
+
+    // Footer
+    drawText('Generated with mythras-chargen', leftMargin, 30, { size: 7 });
+    drawText('Mythras is a Registered Trademark of The Design Mechanism Inc', leftMargin, 20, { size: 6 });
+
+    const pdfBytes = await pdfDoc.save();
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${CharacterData.name || 'character'}-sheet.pdf`;
+    a.click();
+    URL.revokeObjectURL(url);
+
+    App.showToast('Single-page PDF exported!', 'success');
+  } catch (err) {
+    console.error('PDF export failed:', err);
+    App.showToast('PDF export failed: ' + err.message, 'error');
+  }
 };
 
 // =============================================================================
