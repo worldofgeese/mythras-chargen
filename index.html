@@ -3286,7 +3286,7 @@ const FOLK_MAGIC_SPELLS = ["Avert", "Alarm", "Appraise", "Babel", "Babble", "Bea
 // =============================================================================
 // TODO: Complete extraction of all 70 spells from source PDF
 // Currently includes common spells as demonstration of pattern
-const FOLK_MAGIC_DESCRIPTIONS = {
+window.FOLK_MAGIC_DESCRIPTIONS = {
   "Bladesharp": {
     description: "Increases weapon damage by 1 point per intensity",
     page: "Mythras Core p.123"
@@ -3344,7 +3344,7 @@ const FOLK_MAGIC_DESCRIPTIONS = {
 // Create tooltip-wrapped spell name for UI display
 App.spellWithTooltip = function(spellName) {
   if (typeof spellName !== 'string') return String(spellName);
-  const spellData = FOLK_MAGIC_DESCRIPTIONS[spellName];
+  const spellData = window.FOLK_MAGIC_DESCRIPTIONS[spellName];
   if (spellData) {
     const tooltipText = `${spellData.description} (${spellData.page})`;
     return `<span class="spell-name" title="${tooltipText}">${spellName}</span>`;

@@ -21,17 +21,32 @@ tests/
 
 ## Running Tests
 
-### Browser Tests (Unit + Integration)
+### Prerequisites
+Start a local HTTP server in the project root:
+```bash
+python3 -m http.server 8765
+# or
+npx http-server -p 8765
+```
 
-1. Open `test-runner.html` in a browser
-2. View test results (red/green)
-3. Click individual test file links for detailed runs
+### Test Runner (All Tests)
+Open in browser:
+```
+http://localhost:8765/tests/test-runner.html
+```
+
+This page loads all four test suites and displays:
+- Overall summary at the top (Pass/Fail counts)
+- Individual results for each test suite embedded in iframes
+- Green = All Pass, Red = Has Failures
 
 ### Individual Test Files
 
-Each test file can be run standalone:
-- Open `unit/test-combat-styles.html` in browser
-- View test results for that specific suite
+Each test file can be run standalone by opening in browser:
+- **Combat Styles (Unit)**: http://localhost:8765/tests/unit/test-combat-styles.html
+- **Folk Magic Tooltips (Unit)**: http://localhost:8765/tests/unit/test-folk-magic-tooltips.html
+- **Terminology (Integration)**: http://localhost:8765/tests/integration/test-terminology.html
+- **Export Buttons (Integration)**: http://localhost:8765/tests/integration/test-export-buttons.html
 
 ### End-to-End Tests (Playwright)
 

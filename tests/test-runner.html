@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mythras CharGen - Test Runner</title>
+    <title>Test Runner - All Tests</title>
     <style>
         body {
             font-family: system-ui, -apple-system, sans-serif;
@@ -74,220 +74,150 @@
             white-space: pre-wrap;
         }
         .test-link {
-            display: block;
-            padding: 10px;
-            margin: 5px 0;
-            background: #fff;
-            border: 1px solid #ddd;
+            display: inline-block;
+            padding: 8px 15px;
+            margin: 5px;
+            background: #007bff;
+            color: white;
             border-radius: 4px;
             text-decoration: none;
-            color: #007bff;
         }
         .test-link:hover {
-            background: #f8f9fa;
-            border-color: #007bff;
+            background: #0056b3;
+        }
+        .test-iframe {
+            width: 100%;
+            height: 600px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+        .loading {
+            background: #fff3cd;
+            color: #856404;
         }
     </style>
 </head>
 <body>
-    <h1>Mythras CharGen - Test Suite</h1>
+    <h1>Test Runner - All Tests</h1>
 
-    <div class="summary" id="summary">
-        <span id="summary-text">Loading tests...</span>
+    <div class="summary loading" id="overall-summary">Loading tests...</div>
+
+    <div style="margin: 20px 0;">
+        <strong>Open individual tests:</strong><br>
+        <a href="unit/test-combat-styles.html" target="_blank" class="test-link">Combat Styles (Unit)</a>
+        <a href="unit/test-folk-magic-tooltips.html" target="_blank" class="test-link">Folk Magic Tooltips (Unit)</a>
+        <a href="integration/test-terminology.html" target="_blank" class="test-link">Terminology (Integration)</a>
+        <a href="integration/test-export-buttons.html" target="_blank" class="test-link">Export Buttons (Integration)</a>
     </div>
 
     <div class="test-suite">
-        <h2>Test Files</h2>
-        <div id="test-files"></div>
+        <h2>Unit Test: Combat Styles</h2>
+        <div id="status-combat" style="padding: 10px; margin: 10px 0;">Loading...</div>
+        <iframe class="test-iframe" id="iframe-combat" src="unit/test-combat-styles.html"></iframe>
     </div>
 
-    <div id="results"></div>
+    <div class="test-suite">
+        <h2>Unit Test: Folk Magic Tooltips</h2>
+        <div id="status-folk" style="padding: 10px; margin: 10px 0;">Loading...</div>
+        <iframe class="test-iframe" id="iframe-folk" src="unit/test-folk-magic-tooltips.html"></iframe>
+    </div>
+
+    <div class="test-suite">
+        <h2>Integration Test: Terminology</h2>
+        <div id="status-terminology" style="padding: 10px; margin: 10px 0;">Loading...</div>
+        <iframe class="test-iframe" id="iframe-terminology" src="integration/test-terminology.html"></iframe>
+    </div>
+
+    <div class="test-suite">
+        <h2>Integration Test: Export Buttons</h2>
+        <div id="status-export" style="padding: 10px; margin: 10px 0;">Loading...</div>
+        <iframe class="test-iframe" id="iframe-export" src="integration/test-export-buttons.html"></iframe>
+    </div>
 
     <script>
-        // Simple test framework
-        class TestRunner {
-            constructor() {
-                this.tests = [];
-                this.currentSuite = null;
-                this.results = {
-                    pass: 0,
-                    fail: 0,
-                    pending: 0,
-                    suites: []
-                };
-            }
+        const tests = [
+            { name: 'Combat Styles', iframe: 'iframe-combat', status: 'status-combat' },
+            { name: 'Folk Magic Tooltips', iframe: 'iframe-folk', status: 'status-folk' },
+            { name: 'Terminology', iframe: 'iframe-terminology', status: 'status-terminology' },
+            { name: 'Export Buttons', iframe: 'iframe-export', status: 'status-export' }
+        ];
 
-            describe(suiteName, fn) {
-                this.currentSuite = {
-                    name: suiteName,
-                    tests: []
-                };
-                this.results.suites.push(this.currentSuite);
-                fn();
-                this.currentSuite = null;
-            }
+        let totalPass = 0;
+        let totalFail = 0;
+        let completedTests = 0;
 
-            it(testName, fn) {
-                if (!this.currentSuite) {
-                    throw new Error('it() must be called inside describe()');
-                }
-                this.currentSuite.tests.push({ name: testName, fn });
-            }
+        function checkTestResults(testConfig) {
+            const iframe = document.getElementById(testConfig.iframe);
+            const statusDiv = document.getElementById(testConfig.status);
 
-            async runAll() {
-                for (const suite of this.results.suites) {
-                    for (const test of suite.tests) {
-                        try {
-                            if (!test.fn) {
-                                // Pending test
-                                test.status = 'pending';
-                                this.results.pending++;
+            function poll() {
+                try {
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    const summary = iframeDoc.getElementById('summary');
+
+                    if (summary && summary.textContent && !summary.textContent.includes('Loading')) {
+                        const summaryText = summary.textContent;
+                        statusDiv.textContent = summaryText;
+
+                        // Parse results
+                        const passMatch = summaryText.match(/Pass:\s*(\d+)/);
+                        const failMatch = summaryText.match(/Fail:\s*(\d+)/);
+
+                        if (passMatch && failMatch) {
+                            const pass = parseInt(passMatch[1]);
+                            const fail = parseInt(failMatch[1]);
+
+                            totalPass += pass;
+                            totalFail += fail;
+
+                            if (fail > 0) {
+                                statusDiv.style.background = '#f8d7da';
+                                statusDiv.style.color = '#721c24';
                             } else {
-                                await test.fn();
-                                test.status = 'pass';
-                                this.results.pass++;
+                                statusDiv.style.background = '#d4edda';
+                                statusDiv.style.color = '#155724';
                             }
-                        } catch (error) {
-                            test.status = 'fail';
-                            test.error = error.message;
-                            test.stack = error.stack;
-                            this.results.fail++;
                         }
+
+                        completedTests++;
+                        updateOverallSummary();
+                    } else {
+                        setTimeout(poll, 200);
                     }
+                } catch (error) {
+                    statusDiv.textContent = `Error: ${error.message}`;
+                    statusDiv.style.background = '#f8d7da';
+                    completedTests++;
+                    totalFail++;
+                    updateOverallSummary();
                 }
-                this.displayResults();
             }
 
-            displayResults() {
-                const resultsDiv = document.getElementById('results');
-                resultsDiv.innerHTML = '';
+            // Start polling after iframe loads
+            iframe.onload = () => {
+                setTimeout(poll, 500);
+            };
+        }
 
-                for (const suite of this.results.suites) {
-                    const suiteDiv = document.createElement('div');
-                    suiteDiv.className = 'test-suite';
+        function updateOverallSummary() {
+            const summary = document.getElementById('overall-summary');
 
-                    const suiteTitle = document.createElement('h2');
-                    suiteTitle.textContent = suite.name;
-                    suiteDiv.appendChild(suiteTitle);
+            if (completedTests === tests.length) {
+                const total = totalPass + totalFail;
+                summary.textContent = `Overall Results: ${total} tests | Pass: ${totalPass} | Fail: ${totalFail}`;
 
-                    for (const test of suite.tests) {
-                        const testDiv = document.createElement('div');
-                        testDiv.className = `test-result test-${test.status}`;
-
-                        const icon = test.status === 'pass' ? '✓' : test.status === 'fail' ? '✗' : '○';
-                        testDiv.innerHTML = `${icon} ${test.name}`;
-
-                        if (test.error) {
-                            const errorDiv = document.createElement('div');
-                            errorDiv.className = 'error-details';
-                            errorDiv.textContent = test.error;
-                            testDiv.appendChild(errorDiv);
-                        }
-
-                        suiteDiv.appendChild(testDiv);
-                    }
-
-                    resultsDiv.appendChild(suiteDiv);
-                }
-
-                // Update summary
-                const summary = document.getElementById('summary');
-                const summaryText = document.getElementById('summary-text');
-                const total = this.results.pass + this.results.fail + this.results.pending;
-
-                summaryText.textContent = `Total: ${total} | Pass: ${this.results.pass} | Fail: ${this.results.fail} | Pending: ${this.results.pending}`;
-
-                if (this.results.fail > 0) {
+                if (totalFail > 0) {
                     summary.className = 'summary has-fail';
-                } else if (this.results.pending === 0) {
+                } else {
                     summary.className = 'summary all-pass';
                 }
+            } else {
+                summary.textContent = `Loading tests... (${completedTests}/${tests.length} completed)`;
             }
         }
 
-        // Assertion helpers
-        const assert = {
-            equal(actual, expected, message) {
-                if (actual !== expected) {
-                    throw new Error(message || `Expected ${expected}, got ${actual}`);
-                }
-            },
-            notEqual(actual, expected, message) {
-                if (actual === expected) {
-                    throw new Error(message || `Expected not to equal ${expected}`);
-                }
-            },
-            ok(value, message) {
-                if (!value) {
-                    throw new Error(message || `Expected truthy value, got ${value}`);
-                }
-            },
-            throws(fn, message) {
-                try {
-                    fn();
-                    throw new Error(message || 'Expected function to throw');
-                } catch (error) {
-                    // Expected
-                }
-            },
-            includes(array, value, message) {
-                if (!array.includes(value)) {
-                    throw new Error(message || `Expected array to include ${value}`);
-                }
-            },
-            exists(value, message) {
-                if (value === null || value === undefined) {
-                    throw new Error(message || `Expected value to exist`);
-                }
-            }
-        };
-
-        // Global test runner instance
-        window.runner = new TestRunner();
-        window.describe = (name, fn) => runner.describe(name, fn);
-        window.it = (name, fn) => runner.it(name, fn);
-        window.assert = assert;
-
-        // Test file registry
-        const testFiles = [
-            { name: 'Unit: Combat Styles', path: 'unit/test-combat-styles.html' },
-            { name: 'Unit: Folk Magic Tooltips', path: 'unit/test-folk-magic-tooltips.html' },
-            { name: 'Integration: Terminology', path: 'integration/test-terminology.html' },
-            { name: 'Integration: Export Buttons', path: 'integration/test-export-buttons.html' }
-        ];
-
-        // Display test file links
-        const testFilesDiv = document.getElementById('test-files');
-        testFiles.forEach(file => {
-            const link = document.createElement('a');
-            link.href = file.path;
-            link.className = 'test-link';
-            link.textContent = file.name;
-            link.target = '_blank';
-            testFilesDiv.appendChild(link);
-        });
-
-        // Simple smoke test
-        describe('Test Runner Smoke Test', () => {
-            it('should have test runner available', () => {
-                assert.exists(window.runner, 'Test runner should exist');
-            });
-
-            it('should have assert helpers', () => {
-                assert.exists(window.assert, 'Assert helpers should exist');
-                assert.equal(1, 1, 'Basic assertion should work');
-            });
-
-            it('should handle failing tests', () => {
-                // This test intentionally passes
-                assert.ok(true, 'This should pass');
-            });
-        });
-
-        // Run all tests
-        window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => runner.runAll(), 100);
-        });
+        // Start checking all tests
+        tests.forEach(checkTestResults);
     </script>
 </body>
 </html>

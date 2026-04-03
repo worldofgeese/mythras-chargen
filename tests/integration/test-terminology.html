@@ -240,11 +240,37 @@
         });
 
         // Run all tests after iframe loads
-        window.addEventListener('load', () => {
-            const iframe = document.getElementById('app-iframe');
-            iframe.onload = () => {
-                setTimeout(() => runner.runAll(), 500);
-            };
+        function waitForIframe() {
+            return new Promise((resolve) => {
+                const iframe = document.getElementById('app-iframe');
+
+                function checkIframe() {
+                    if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
+                        resolve();
+                    } else {
+                        setTimeout(checkIframe, 50);
+                    }
+                }
+
+                if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
+                    resolve();
+                } else {
+                    iframe.onload = () => {
+                        // Give it a moment to fully render
+                        setTimeout(resolve, 100);
+                    };
+                }
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                await waitForIframe();
+                await runner.runAll();
+            } catch (error) {
+                document.getElementById('summary').textContent = 'ERROR: Failed to load app - ' + error.message;
+                document.getElementById('summary').className = 'summary has-fail';
+            }
         });
     </script>
 </body>

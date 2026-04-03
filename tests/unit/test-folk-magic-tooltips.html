@@ -120,7 +120,53 @@
         window.assert = assert;
     </script>
 
-    <!-- TESTS (TDD: Write these FIRST, expect them to FAIL) -->
+    <!-- Load application code and expose helpers/data for unit testing -->
+    <iframe id="app-iframe" src="../../index.html" style="display:none;"></iframe>
+    <script>
+        function getAppWindow() {
+            const iframe = document.getElementById('app-iframe');
+            return iframe?.contentWindow;
+        }
+
+        // Expose app functions and data for testing
+        window.FOLK_MAGIC_DESCRIPTIONS = null;
+        window.spellWithTooltip = null;
+        window.appLoaded = false;
+
+        function waitForApp() {
+            return new Promise((resolve, reject) => {
+                const iframe = document.getElementById('app-iframe');
+                let attempts = 0;
+                const maxAttempts = 200; // 10 seconds max
+
+                function checkApp() {
+                    attempts++;
+                    const appWin = getAppWindow();
+
+                    if (appWin && appWin.App && appWin.App.spellWithTooltip && appWin.FOLK_MAGIC_DESCRIPTIONS) {
+                        window.FOLK_MAGIC_DESCRIPTIONS = appWin.FOLK_MAGIC_DESCRIPTIONS;
+                        window.spellWithTooltip = appWin.App.spellWithTooltip;
+                        window.appLoaded = true;
+                        console.log('[Test] App loaded successfully');
+                        resolve();
+                    } else if (attempts >= maxAttempts) {
+                        console.error('[Test] Timeout waiting for app to load');
+                        reject(new Error('Timeout: App did not load within 10 seconds'));
+                    } else {
+                        setTimeout(checkApp, 50);
+                    }
+                }
+
+                if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
+                    setTimeout(checkApp, 100);
+                } else {
+                    iframe.onload = () => setTimeout(checkApp, 100);
+                }
+            });
+        }
+    </script>
+
+    <!-- TESTS -->
     <script>
         describe('FOLK_MAGIC_DESCRIPTIONS Data Structure', () => {
             it('should exist as a global constant', () => {
@@ -266,9 +312,15 @@
             });
         });
 
-        // Run all tests
-        window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => runner.runAll(), 100);
+        // Run all tests after app loads
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                await waitForApp();
+                await runner.runAll();
+            } catch (error) {
+                document.getElementById('summary').textContent = 'ERROR: Failed to load app - ' + error.message;
+                document.getElementById('summary').className = 'summary has-fail';
+            }
         });
     </script>
 </body>

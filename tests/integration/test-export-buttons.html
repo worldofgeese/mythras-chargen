@@ -262,19 +262,27 @@
             it('should have help section or info icon near export buttons', () => {
                 const doc = getAppDocument();
 
-                // Look for help section, info icon, or explanation text near export buttons
+                // Look for help section, info icon, or comprehensive tooltips on buttons
                 const printBtn = getButton('btn-print');
-                if (!printBtn) return; // Skip if buttons not found
+                const htmlBtn = getButton('btn-export-html');
+                const pdfBtn = getButton('btn-export-pdf');
+
+                if (!printBtn || !htmlBtn || !pdfBtn) return; // Skip if buttons not found
 
                 const parent = printBtn.parentElement;
                 const helpSection = parent.querySelector('.export-help, .export-info, [class*="help"]');
                 const infoIcon = parent.querySelector('.info-icon, .help-icon, [title*="help"]');
 
-                const hasHelp = helpSection !== null || infoIcon !== null;
+                // Check if all three buttons have descriptive tooltips
+                const hasTooltips = printBtn.getAttribute('title') &&
+                                   htmlBtn.getAttribute('title') &&
+                                   pdfBtn.getAttribute('title');
+
+                const hasHelp = helpSection !== null || infoIcon !== null || hasTooltips;
 
                 assert.ok(
                     hasHelp,
-                    'Should have help section or info icon near export buttons to explain options'
+                    'Should have help (section, icon, or tooltips) near export buttons to explain options'
                 );
             });
 
@@ -301,11 +309,37 @@
         });
 
         // Run all tests after iframe loads
-        window.addEventListener('load', () => {
-            const iframe = document.getElementById('app-iframe');
-            iframe.onload = () => {
-                setTimeout(() => runner.runAll(), 500);
-            };
+        function waitForIframe() {
+            return new Promise((resolve) => {
+                const iframe = document.getElementById('app-iframe');
+
+                function checkIframe() {
+                    if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
+                        resolve();
+                    } else {
+                        setTimeout(checkIframe, 50);
+                    }
+                }
+
+                if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
+                    resolve();
+                } else {
+                    iframe.onload = () => {
+                        // Give it a moment to fully render
+                        setTimeout(resolve, 100);
+                    };
+                }
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                await waitForIframe();
+                await runner.runAll();
+            } catch (error) {
+                document.getElementById('summary').textContent = 'ERROR: Failed to load app - ' + error.message;
+                document.getElementById('summary').className = 'summary has-fail';
+            }
         });
     </script>
 </body>

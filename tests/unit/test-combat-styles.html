@@ -150,7 +150,8 @@
         window.assert = assert;
     </script>
 
-    <!-- Mock data for testing (simulating CULTURES_DATA structure) -->
+    <!-- Load application code and expose helpers for unit testing -->
+    <iframe id="app-iframe" src="../../index.html" style="display:none;"></iframe>
     <script>
         window.MOCK_CULTURES = [
             {
@@ -163,7 +164,7 @@
             {
                 name: 'Lunar Tarshite',
                 combatStyles: [
-                    'Hoplite Combat', // String format
+                    'Hoplite Combat',
                     'Skirmisher'
                 ]
             },
@@ -172,9 +173,49 @@
                 combatStyles: []
             }
         ];
+
+        function getAppWindow() {
+            const iframe = document.getElementById('app-iframe');
+            return iframe?.contentWindow;
+        }
+
+        // Expose app functions for testing
+        window.resolveCombatStyleName = null;
+        window.appLoaded = false;
+
+        function waitForApp() {
+            return new Promise((resolve, reject) => {
+                const iframe = document.getElementById('app-iframe');
+                let attempts = 0;
+                const maxAttempts = 200; // 10 seconds max
+
+                function checkApp() {
+                    attempts++;
+                    const appWin = getAppWindow();
+
+                    if (appWin && appWin.App && appWin.App.resolveCombatStyleName) {
+                        window.resolveCombatStyleName = appWin.App.resolveCombatStyleName;
+                        window.appLoaded = true;
+                        console.log('[Test] App loaded successfully');
+                        resolve();
+                    } else if (attempts >= maxAttempts) {
+                        console.error('[Test] Timeout waiting for app to load');
+                        reject(new Error('Timeout: App did not load within 10 seconds'));
+                    } else {
+                        setTimeout(checkApp, 50);
+                    }
+                }
+
+                if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
+                    setTimeout(checkApp, 100);
+                } else {
+                    iframe.onload = () => setTimeout(checkApp, 100);
+                }
+            });
+        }
     </script>
 
-    <!-- TESTS (TDD: Write these FIRST, expect them to FAIL) -->
+    <!-- TESTS -->
     <script>
         describe('resolveCombatStyleName() Function', () => {
             it('should exist as a function', () => {
@@ -253,9 +294,15 @@
             });
         });
 
-        // Run all tests
-        window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => runner.runAll(), 100);
+        // Run all tests after app loads
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                await waitForApp();
+                await runner.runAll();
+            } catch (error) {
+                document.getElementById('summary').textContent = 'ERROR: Failed to load app - ' + error.message;
+                document.getElementById('summary').className = 'summary has-fail';
+            }
         });
     </script>
 </body>
