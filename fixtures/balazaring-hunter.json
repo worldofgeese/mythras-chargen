@@ -1,0 +1,163 @@
+{
+  "name": "Kor Elkson",
+  "concept": "Balazaring hunter and scout",
+  "characteristics": {
+    "STR": 12,
+    "CON": 13,
+    "SIZ": 10,
+    "DEX": 14,
+    "INT": 10,
+    "POW": 11,
+    "CHA": 9
+  },
+  "charMethod": "point-buy",
+  "attributes": {
+    "actionPoints": 2,
+    "experienceModifier": -1,
+    "healingRate": 3,
+    "luckPoints": 2,
+    "magicPoints": 11,
+    "initiativeBonus": 0,
+    "damageModifier": "+0",
+    "hitPoints": {
+      "Head": 5,
+      "Chest": 7,
+      "Abdomen": 6,
+      "Right Arm": 4,
+      "Left Arm": 4,
+      "Right Leg": 5,
+      "Left Leg": 5
+    },
+    "encumbrance": {
+      "unencumbered": 24,
+      "burdened": 25,
+      "overloaded": 37,
+      "noMovement": 48
+    },
+    "runeAffinities": {
+      "primary": 52,
+      "secondary": 42,
+      "tertiary": 32
+    },
+    "folkMagicBase": 50,
+    "movementRate": 6
+  },
+  "culture": "Balazaring",
+  "homeland": "Elkoi",
+  "age": 22,
+  "gender": "Male",
+  "family": "",
+  "backgroundEvents": "",
+  "career": "Hunter",
+  "culturalSkills": {
+    "Athletics": 15,
+    "Brawn": 10,
+    "Endurance": 15,
+    "Evade": 15,
+    "Locale": 10,
+    "Perception": 15,
+    "Stealth": 15,
+    "Swim": 10
+  },
+  "careerSkills": {
+    "Track": 15,
+    "Survival": 15,
+    "Navigate": 15,
+    "Healing": 15,
+    "Lore (Animal)": 15,
+    "Musicianship": 10,
+    "Craft (Bowyer)": 15
+  },
+  "bonusSkills": {},
+  "hobbySkillName": null,
+  "folkMagicSpells": [
+    "Beastcall",
+    "Coordination",
+    "Find",
+    "Heal",
+    "Protection"
+  ],
+  "careerFolkMagic": [],
+  "runeAffinities": {
+    "primary": null,
+    "secondary": null,
+    "tertiary": null
+  },
+  "passions": [
+    "Love (Clan): 50",
+    "Hate (Lunar Empire): 50"
+  ],
+  "combatStyles": [
+    {
+      "name": "Balazaring Hunter",
+      "skill": 60,
+      "weapons": [
+        "Javelin",
+        "Short Spear",
+        "Sling",
+        "Dagger"
+      ],
+      "traits": []
+    }
+  ],
+  "weapons": [
+    {
+      "name": "Javelin",
+      "quantity": 3
+    },
+    {
+      "name": "Short Spear",
+      "quantity": 1
+    },
+    {
+      "name": "Sling",
+      "quantity": 1
+    },
+    {
+      "name": "Dagger",
+      "quantity": 1
+    }
+  ],
+  "armor": [
+    "Leather Cuirass"
+  ],
+  "equipment": [
+    "Backpack",
+    "Waterskin",
+    "Rope (10m)",
+    "Flint and tinder"
+  ],
+  "startingMoney": 48,
+  "notes": "A skilled hunter from the Elkoi citadel, trained in tracking and wilderness survival.",
+  "background": "Born in the Balazar region, Kor learned to hunt from his father and has provided for his clan since his youth.",
+  "hitPoints": {
+    "Head": {
+      "current": 5,
+      "max": 5
+    },
+    "Chest": {
+      "current": 7,
+      "max": 7
+    },
+    "Abdomen": {
+      "current": 6,
+      "max": 6
+    },
+    "Right Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Leg": {
+      "current": 5,
+      "max": 5
+    },
+    "Left Leg": {
+      "current": 5,
+      "max": 5
+    }
+  }
+}
