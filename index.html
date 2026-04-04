@@ -3557,10 +3557,23 @@ App.exportSinglePagePDF = async function() {
     // Combat & Equipment
     drawText('COMBAT & EQUIPMENT', leftMargin, y, { bold: true, size: 10 });
     y -= 15;
+
+    // Combat Styles
+    const combatStyles = CharacterData.combatStyles || [];
+    combatStyles.slice(0, 5).forEach((style, i) => {
+      const yPos = y - (i * 12);
+      if (yPos > 50) {
+        drawText(`${style.name}: ${style.skill}%`, leftMargin, yPos, { size: 9, bold: true });
+      }
+    });
+    y -= (combatStyles.length > 0 ? combatStyles.length * 12 : 0) + 10;
+
     const weapons = CharacterData.weapons || [];
     weapons.slice(0, 5).forEach((w, i) => {
       const yPos = y - (i * 12);
-      drawText(`${w.name} - Dmg: ${w.damage || ''} Size: ${w.size || ''} Reach: ${w.reach || ''}`, leftMargin, yPos, { size: 8 });
+      if (yPos > 50) {
+        drawText(`${w.name} - Dmg: ${w.damage || ''} Size: ${w.size || ''} Reach: ${w.reach || ''}`, leftMargin, yPos, { size: 8 });
+      }
     });
     y -= (weapons.length > 0 ? weapons.length * 12 : 0) + 15;
 
@@ -3579,6 +3592,40 @@ App.exportSinglePagePDF = async function() {
           drawText(spell.substring(0, 20), x, yPos, { size: 8 });
         }
       });
+    }
+
+    // Character Notes
+    if (y > 80) {
+      y -= 20;
+      drawText('CHARACTER NOTES', leftMargin, y, { bold: true, size: 10 });
+      y -= 12;
+
+      // Concept
+      if (CharacterData.concept) {
+        drawText(`Concept: ${CharacterData.concept.substring(0, 80)}`, leftMargin, y, { size: 8 });
+        y -= 12;
+      }
+
+      // Background
+      if (CharacterData.background && y > 50) {
+        const bgLines = CharacterData.background.substring(0, 200).match(/.{1,75}/g) || [];
+        bgLines.slice(0, 2).forEach((line, i) => {
+          if (y > 45) {
+            drawText(`Background: ${line}`, leftMargin, y - (i * 10), { size: 8 });
+          }
+        });
+        y -= bgLines.length * 10 + 2;
+      }
+
+      // Notes
+      if (CharacterData.notes && y > 50) {
+        const noteLines = CharacterData.notes.substring(0, 150).match(/.{1,75}/g) || [];
+        noteLines.slice(0, 2).forEach((line, i) => {
+          if (y > 45) {
+            drawText(`Notes: ${line}`, leftMargin, y - (i * 10), { size: 8 });
+          }
+        });
+      }
     }
 
     // Footer
