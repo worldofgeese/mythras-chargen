@@ -1160,6 +1160,72 @@ const Calc = {
       folkMagicBase: this.folkMagicBase(POW, CHA),
       movementRate: 6
     };
+  },
+
+  // =============================================================================
+  // WAVE 2 GOAL F: SAFE FORMULA EVALUATION (NO EVAL)
+  // =============================================================================
+
+  /**
+   * Safely evaluate a dice formula without using eval()
+   * Supports: stat names (STR, DEX, etc), dice notation (2d6, 1d8), addition, subtraction
+   * Example: "STR+DEX+2d6" or "2d6+1d8+1d6+11"
+   *
+   * @param {string} formula - Formula string (e.g., "STR+DEX+2d6", "2d6+1d8+11")
+   * @param {object} context - Context object with stat values (e.g., {STR: 14, DEX: 12})
+   * @returns {number} Evaluated result
+   */
+  safeEvalDiceFormula(formula, context = {}) {
+    if (!formula || typeof formula !== 'string') {
+      return 0;
+    }
+
+    // Remove all whitespace
+    formula = formula.replace(/\s+/g, '');
+
+    // Helper: roll dice (e.g., "2d6" returns 2-12)
+    const rollDice = (count, sides) => {
+      let total = 0;
+      for (let i = 0; i < count; i++) {
+        total += Math.floor(Math.random() * sides) + 1;
+      }
+      return total;
+    };
+
+    // Replace dice notation with rolled values
+    // Match patterns like "2d6", "1d8", "3d4", etc.
+    formula = formula.replace(/(\d+)d(\d+)/gi, (match, count, sides) => {
+      const c = parseInt(count, 10);
+      const s = parseInt(sides, 10);
+      return rollDice(c, s).toString();
+    });
+
+    // Replace stat names with their values from context
+    // Support: STR, CON, SIZ, DEX, INT, POW, CHA
+    const statNames = ['STR', 'CON', 'SIZ', 'DEX', 'INT', 'POW', 'CHA'];
+    statNames.forEach(stat => {
+      const value = context[stat] || 0;
+      // Use word boundaries to avoid partial matches
+      const regex = new RegExp('\\b' + stat + '\\b', 'g');
+      formula = formula.replace(regex, value.toString());
+    });
+
+    // Now we have a simple arithmetic expression with only numbers and +/-
+    // Parse and evaluate safely using the Function constructor (safer than eval)
+    // Validate that the formula only contains numbers, +, -, *, /, parentheses
+    if (!/^[\d+\-*/().]+$/.test(formula)) {
+      console.error('Invalid formula after substitution:', formula);
+      return 0;
+    }
+
+    try {
+      // Use Function constructor (scoped, safer than eval)
+      const result = new Function('return ' + formula)();
+      return Math.floor(result); // Round down to integer
+    } catch (e) {
+      console.error('Formula evaluation error:', e, 'Formula:', formula);
+      return 0;
+    }
   }
 };
 
@@ -2489,8 +2555,8 @@ App.selectHomeland = function(homeland) {
 
 App.evaluateFormula = function(formula) {
   if (!formula) return 30;
-  const {POW, CHA} = CharacterData.characteristics;
-  return eval(formula.replace(/POW/g, POW).replace(/CHA/g, CHA));
+  // Use safe formula evaluator (Wave 2 Goal F - no eval)
+  return Calc.safeEvalDiceFormula(formula, CharacterData.characteristics);
 };
 
 App.renderCultureDetails = function() {
