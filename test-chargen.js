@@ -2454,6 +2454,59 @@ section('Wave 3 Goal 4: Template PDF Field Coverage');
 }
 
 // ============================================================
+section('Wave 3 Goal 5: Vendor pdf-lib Locally');
+// ============================================================
+
+// Test 5.1: lib/pdf-lib.min.js exists
+{
+  const libPath = path.join(__dirname, 'lib', 'pdf-lib.min.js');
+  if (fs.existsSync(libPath)) {
+    const stats = fs.statSync(libPath);
+    if (stats.size > 400000) {
+      pass(`lib/pdf-lib.min.js exists (${Math.floor(stats.size / 1024)}KB)`);
+    } else {
+      fail('lib/pdf-lib.min.js too small or corrupt');
+    }
+  } else {
+    fail('lib/pdf-lib.min.js not found');
+  }
+}
+
+// Test 5.2: index.html references local pdf-lib
+{
+  const htmlPath = path.join(__dirname, 'index.html');
+  const html = fs.readFileSync(htmlPath, 'utf8');
+  if (html.includes('src="lib/pdf-lib.min.js"')) {
+    pass('index.html references local lib/pdf-lib.min.js');
+  } else {
+    fail('index.html does not reference local pdf-lib');
+  }
+}
+
+// Test 5.3: index.html does NOT reference CDN
+{
+  const htmlPath = path.join(__dirname, 'index.html');
+  const html = fs.readFileSync(htmlPath, 'utf8');
+  const cdnPattern = /<script[^>]+src="https:\/\/unpkg\.com\/pdf-lib/;
+  if (!cdnPattern.test(html)) {
+    pass('index.html does not load pdf-lib from CDN');
+  } else {
+    fail('index.html still has CDN reference for pdf-lib');
+  }
+}
+
+// Test 5.4: CDN URL preserved in comment
+{
+  const htmlPath = path.join(__dirname, 'index.html');
+  const html = fs.readFileSync(htmlPath, 'utf8');
+  if (html.includes('Previously: https://unpkg.com/pdf-lib')) {
+    pass('CDN URL preserved in HTML comment for reference');
+  } else {
+    info('CDN URL not preserved (optional)');
+  }
+}
+
+// ============================================================
 section('Test Summary');
 // ============================================================
 
