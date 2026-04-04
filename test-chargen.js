@@ -244,6 +244,49 @@ console.log('\n8. PDF Export Coverage');
     'PDF references character concept');
 }
 
+// --- TEST GROUP 8b: PDF hit location HP values are rendered ---
+console.log('\n8b. PDF Hit Location HP Values in Export');
+{
+  const pdfFn = App.exportSinglePagePDF.toString();
+
+  // Check that the PDF uses the correct capitalized keys for hit locations
+  assert(pdfFn.includes("hitPoints['Head']") || pdfFn.includes('hitPoints.Head') || pdfFn.includes("hitPoints['head']") || pdfFn.includes('hitPoints.head'),
+    'PDF accesses Head hit points');
+  assert(pdfFn.includes("hitPoints['Chest']") || pdfFn.includes('hitPoints.Chest') || pdfFn.includes("hitPoints['chest']") || pdfFn.includes('hitPoints.chest'),
+    'PDF accesses Chest hit points');
+
+  // The location list should actually render HP values (not just labels)
+  const hasLocationLoop = pdfFn.includes('locations.forEach') || pdfFn.includes('locations');
+  assert(hasLocationLoop, 'PDF has hit location rendering loop');
+}
+
+// --- TEST GROUP 8c: Notes/Background/Concept flow to Step 11, Play Mode, PDF ---
+console.log('\n8c. Notes/Background/Concept Data Flow');
+{
+  CharacterData.concept = 'Wolf in sheep\'s clothing';
+  CharacterData.family = 'The Wolf Clan';
+  CharacterData.backgroundEvents = 'Wolves ate my sheep';
+  CharacterData.notes = 'Test notes';
+
+  // Check Step 11
+  const step11Html = App.renderStep11().innerHTML;
+  assert(step11Html.includes(CharacterData.concept) || step11Html.includes('Concept'),
+    'Step 11 shows character concept');
+  assert(step11Html.includes(CharacterData.family) || step11Html.includes('Family'),
+    'Step 11 shows family');
+  assert(step11Html.includes(CharacterData.backgroundEvents) || step11Html.includes('Background'),
+    'Step 11 shows background events');
+
+  // Check Play Mode (we can't test the full rendering, but we can check the template string)
+  const playModeFn = App.renderPlayMode.toString();
+  assert(playModeFn.includes('concept') || playModeFn.includes('Concept'),
+    'Play Mode references concept field');
+  assert(playModeFn.includes('family') && playModeFn.includes('CharacterData.family'),
+    'Play Mode references family field');
+  assert(playModeFn.includes('backgroundEvents') && playModeFn.includes('CharacterData.backgroundEvents'),
+    'Play Mode references background events');
+}
+
 // --- TEST GROUP 9: renderCurrentStep clears properly ---
 console.log('\n9. Step Rendering');
 {

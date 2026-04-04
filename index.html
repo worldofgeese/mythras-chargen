@@ -2923,17 +2923,35 @@ App.autoPopulateStartingEquipment = function() {
   if (CharacterData.weapons.length === 0 && CharacterData.combatStyles) {
     const addedWeapons = new Set();
     CharacterData.combatStyles.forEach(cs => {
-      if (!cs || !cs.weapons) return;
+      const csName = typeof cs === 'object' ? cs.name : cs;
+      const csSkill = typeof cs === 'object' ? cs.skill : 0;
+
       // Get weapons from CULTURES_DATA combat styles
       const culture = CULTURES_DATA.find(c => c.name === CharacterData.culture);
       if (!culture) return;
-      const styleData = culture.combatStyles.find(s => s.name === cs.name);
-      if (!styleData || !styleData.weapons) return;
-      // Add first 2 weapons from the style
-      styleData.weapons.slice(0, 2).forEach(wName => {
+      const styleData = culture.combatStyles.find(s => s.name === csName || (typeof s === 'string' && s === csName));
+      if (!styleData) return;
+
+      // Get weapons list from style data
+      const weapons = typeof styleData === 'object' ? styleData.weapons : [];
+      if (!weapons || weapons.length === 0) return;
+
+      // Add first 2-3 weapons from the style
+      weapons.slice(0, 3).forEach(wName => {
         if (addedWeapons.has(wName)) return;
         addedWeapons.add(wName);
-        const weaponData = WEAPONS_DATA.find(w => w.name === wName);
+
+        // Fuzzy match weapon name - try exact match first, then partial match
+        let weaponData = WEAPONS_DATA.find(w => w.name === wName);
+        if (!weaponData) {
+          // Try fuzzy matching - check if weapon name contains or is contained in the search name
+          const normalizedSearch = wName.toLowerCase();
+          weaponData = WEAPONS_DATA.find(w => {
+            const normalizedName = w.name.toLowerCase();
+            return normalizedName.includes(normalizedSearch) || normalizedSearch.includes(normalizedName);
+          });
+        }
+
         if (weaponData) {
           CharacterData.weapons.push({
             name: weaponData.name,
@@ -2942,7 +2960,7 @@ App.autoPopulateStartingEquipment = function() {
             reach: weaponData.reach || 'M',
             ap: weaponData.armour_points || 0,
             hp: weaponData.hit_points || 0,
-            skill: cs.skill || 0
+            skill: csSkill || 0
           });
         }
       });
@@ -2969,9 +2987,12 @@ App.renderStep11 = function() {
 
     <div style="background: #f5f5f5; padding: 20px; border: 1px solid #000;">
       <h3>${CharacterData.name || 'Unnamed Character'}</h3>
+      ${CharacterData.concept ? `<p><strong>Concept:</strong> ${CharacterData.concept}</p>` : ''}
       <p><strong>Culture:</strong> ${CharacterData.culture}</p>
       <p><strong>Career:</strong> ${CharacterData.career}</p>
       <p><strong>Age:</strong> ${CharacterData.age}</p>
+      ${CharacterData.family ? `<p><strong>Family:</strong> ${CharacterData.family}</p>` : ''}
+      ${CharacterData.backgroundEvents ? `<p><strong>Background:</strong> ${CharacterData.backgroundEvents}</p>` : ''}
 
       <h4>Characteristics</h4>
       <div class="grid-3">
@@ -3084,6 +3105,7 @@ App.renderPlayMode = function() {
         <div id="play-equipment"></div>
 
         <h2>Notes & Background</h2>
+        ${CharacterData.concept ? `<div style="margin-bottom: 10px;"><strong>Concept:</strong><p style="white-space: pre-wrap; background: #fafafa; padding: 8px; border: 1px solid #ddd;">${CharacterData.concept || ''}</p></div>` : ''}
         ${CharacterData.family ? `<div style="margin-bottom: 10px;"><strong>Family:</strong><p style="white-space: pre-wrap; background: #fafafa; padding: 8px; border: 1px solid #ddd;">${CharacterData.family || ''}</p></div>` : ''}
         ${CharacterData.backgroundEvents ? `<div style="margin-bottom: 10px;"><strong>Background Events:</strong><p style="white-space: pre-wrap; background: #fafafa; padding: 8px; border: 1px solid #ddd;">${CharacterData.backgroundEvents || ''}</p></div>` : ''}
         <label>Notes</label>
@@ -3223,6 +3245,23 @@ App.compileAllSkills = function() {
   const {STR, CON, SIZ, DEX, INT, POW, CHA} = CharacterData.characteristics;
   const statMap = {STR, CON, SIZ, DEX, INT, POW, CHA};
 
+  // Helper to resolve combat style names
+  const resolveSkillName = (skillName) => {
+    const isGenericStyle = skillName === 'Combat Style (Cultural Style)' ||
+                          skillName === 'Combat Style (Speciality Style)';
+    if (!isGenericStyle) return skillName;
+
+    // Get the actual combat style name from CharacterData.combatStyles
+    if (CharacterData.combatStyles && CharacterData.combatStyles.length > 0) {
+      const styleIndex = skillName === 'Combat Style (Cultural Style)' ? 0 :
+                        (CharacterData.combatStyles.length > 1 ? 1 : 0);
+      const style = CharacterData.combatStyles[styleIndex];
+      const styleName = typeof style === 'object' ? style.name : style;
+      return `Combat Style (${styleName})`;
+    }
+    return skillName;
+  };
+
   // Standard skills (always available to everyone per Mythras RAW)
   const standardSkills = [
     'Athletics', 'Boating', 'Brawn', 'Conceal', 'Customs()', 'Dance', 'Deceit', 'Drive',
@@ -3248,8 +3287,9 @@ App.compileAllSkills = function() {
       const stat2 = statMap[stat2Name] || 0;
       const base = Calc.skillBaseValue(stat1, stat2, skillDef.starting_bonus);
 
-      skills.set(skillDef.name, {
-        name: skillDef.name,
+      const resolvedName = resolveSkillName(skillDef.name);
+      skills.set(resolvedName, {
+        name: resolvedName,
         base: base,
         cultural: CharacterData.culturalSkills[skillDef.name] || 0,
         career: CharacterData.careerSkills[skillDef.name] || 0,
@@ -3264,9 +3304,10 @@ App.compileAllSkills = function() {
       // Skip passion skills
       if (skillName.startsWith('A ') || skillName.startsWith('An ')) return;
 
-      if (!skills.has(skillName)) {
-        skills.set(skillName, {
-          name: skillName,
+      const resolvedName = resolveSkillName(skillName);
+      if (!skills.has(resolvedName)) {
+        skills.set(resolvedName, {
+          name: resolvedName,
           base: 0,
           cultural: CharacterData.culturalSkills[skillName] || 0,
           career: CharacterData.careerSkills[skillName] || 0,
@@ -3274,6 +3315,28 @@ App.compileAllSkills = function() {
         });
       }
     });
+
+  // Add combat styles from CharacterData.combatStyles (they have already been trained)
+  if (CharacterData.combatStyles && CharacterData.combatStyles.length > 0) {
+    CharacterData.combatStyles.forEach((style, index) => {
+      const styleName = typeof style === 'object' ? style.name : style;
+      const styleSkill = typeof style === 'object' ? style.skill : 0;
+      const combatStyleName = `Combat Style (${styleName})`;
+
+      // If the style isn't already in skills, add it
+      if (!skills.has(combatStyleName)) {
+        // Find the generic key in culturalSkills/careerSkills
+        const genericKey = index === 0 ? 'Combat Style (Cultural Style)' : 'Combat Style (Speciality Style)';
+        skills.set(combatStyleName, {
+          name: combatStyleName,
+          base: styleSkill,
+          cultural: CharacterData.culturalSkills[genericKey] || 0,
+          career: CharacterData.careerSkills[genericKey] || 0,
+          bonus: CharacterData.bonusSkills[genericKey] || 0
+        });
+      }
+    });
+  }
 
   return Array.from(skills.values()).filter(s => s.base > 0 || s.cultural > 0 || s.career > 0 || s.bonus > 0);
 };
@@ -3738,6 +3801,10 @@ App.exportSinglePagePDF = async function() {
     // Character Identity
     drawText(`Name: ${CharacterData.name || ''}`, leftMargin, y, { bold: true, size: 11 });
     y -= 15;
+    if (CharacterData.concept) {
+      drawText(`Concept: ${CharacterData.concept}`, leftMargin, y, { size: 9 });
+      y -= 15;
+    }
     drawText(`Culture: ${CharacterData.culture || ''}  |  Career: ${CharacterData.career || ''}  |  Homeland: ${CharacterData.homeland || ''}  |  Age: ${CharacterData.age || ''}`, leftMargin, y, { size: 9 });
     y -= 20;
 
@@ -3778,13 +3845,13 @@ App.exportSinglePagePDF = async function() {
     y -= 15;
     const hitPoints = attrs.hitPoints || {};
     const locations = [
-      ['Head', hitPoints.head],
-      ['Chest', hitPoints.chest],
-      ['Abdomen', hitPoints.abdomen],
-      ['L.Arm', hitPoints.leftArm],
-      ['R.Arm', hitPoints.rightArm],
-      ['L.Leg', hitPoints.leftLeg],
-      ['R.Leg', hitPoints.rightLeg]
+      ['Head', hitPoints['Head']],
+      ['Chest', hitPoints['Chest']],
+      ['Abdomen', hitPoints['Abdomen']],
+      ['L.Arm', hitPoints['Left Arm']],
+      ['R.Arm', hitPoints['Right Arm']],
+      ['L.Leg', hitPoints['Left Leg']],
+      ['R.Leg', hitPoints['Right Leg']]
     ];
 
     locations.forEach((loc, i) => {
