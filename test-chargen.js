@@ -1574,7 +1574,8 @@ section('Wave 2 Goal C: Skill Compilation Consolidation');
     let appAthletics, helpersAthletics;
     if (Array.isArray(appResult)) {
       const entry = appResult.find(s => s.name === 'Athletics');
-      appAthletics = entry ? entry.value : null;
+      // Calculate total from breakdown: base + cultural + career + bonus
+      appAthletics = entry ? (entry.base + entry.cultural + entry.career + entry.bonus) : null;
     } else if (appResult instanceof Map) {
       appAthletics = appResult.get('Athletics');
     } else {
