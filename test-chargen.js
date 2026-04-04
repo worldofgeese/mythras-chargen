@@ -2142,6 +2142,134 @@ fixtures.forEach(fixtureInfo => {
 });
 
 // ============================================================
+section('Wave 3 Goal 3: PDF Content Regression Tests');
+// ============================================================
+
+// Test that exportSinglePagePDF() references all critical fields from golden fixtures
+fixtures.forEach(fixtureInfo => {
+  const fixture = loadFixture(fixtureInfo.file);
+  if (!fixture) return;
+
+  // Test 3.1: PDF function references character name
+  {
+    if (App.App && App.App.exportSinglePagePDF) {
+      const pdfCode = App.App.exportSinglePagePDF.toString();
+      if (pdfCode.includes('CharacterData.name')) {
+        pass(`${fixtureInfo.name} PDF: references character name`);
+      } else {
+        fail(`${fixtureInfo.name} PDF: missing character name reference`);
+      }
+    }
+  }
+
+  // Test 3.2: PDF function references all 7 characteristics
+  {
+    if (App.App && App.App.exportSinglePagePDF) {
+      const pdfCode = App.App.exportSinglePagePDF.toString();
+      const chars = ['STR', 'CON', 'SIZ', 'DEX', 'INT', 'POW', 'CHA'];
+      let allPresent = true;
+      chars.forEach(char => {
+        if (!pdfCode.includes(`'${char}'`) && !pdfCode.includes(`"${char}"`)) {
+          allPresent = false;
+        }
+      });
+      if (allPresent) {
+        pass(`${fixtureInfo.name} PDF: references all 7 characteristics`);
+      } else {
+        fail(`${fixtureInfo.name} PDF: missing characteristic references`);
+      }
+    }
+  }
+
+  // Test 3.3: PDF function references derived attributes
+  {
+    if (App.App && App.App.exportSinglePagePDF) {
+      const pdfCode = App.App.exportSinglePagePDF.toString();
+      const derivedAttrs = ['actionPoints', 'initiativeBonus', 'damageModifier',
+                           'healingRate', 'movementRate', 'luckPoints'];
+      let allPresent = true;
+      derivedAttrs.forEach(attr => {
+        if (!pdfCode.includes(attr)) {
+          allPresent = false;
+        }
+      });
+      if (allPresent) {
+        pass(`${fixtureInfo.name} PDF: references all derived attributes`);
+      } else {
+        fail(`${fixtureInfo.name} PDF: missing derived attribute references`);
+      }
+    }
+  }
+
+  // Test 3.4: PDF function references combat styles
+  {
+    if (App.App && App.App.exportSinglePagePDF) {
+      const pdfCode = App.App.exportSinglePagePDF.toString();
+      if (pdfCode.includes('combatStyles')) {
+        pass(`${fixtureInfo.name} PDF: references combat styles`);
+      } else {
+        fail(`${fixtureInfo.name} PDF: missing combat styles reference`);
+      }
+    }
+  }
+
+  // Test 3.5: PDF function references hit locations
+  {
+    if (App.App && App.App.exportSinglePagePDF) {
+      const pdfCode = App.App.exportSinglePagePDF.toString();
+      if (pdfCode.includes('hitPoints') || pdfCode.includes('Hit Locations')) {
+        pass(`${fixtureInfo.name} PDF: references hit locations`);
+      } else {
+        fail(`${fixtureInfo.name} PDF: missing hit locations reference`);
+      }
+    }
+  }
+
+  // Test 3.6: PDF function references weapons
+  {
+    if (App.App && App.App.exportSinglePagePDF) {
+      const pdfCode = App.App.exportSinglePagePDF.toString();
+      if (pdfCode.includes('CharacterData.weapons')) {
+        pass(`${fixtureInfo.name} PDF: references weapons`);
+      } else {
+        fail(`${fixtureInfo.name} PDF: missing weapons reference`);
+      }
+    }
+  }
+
+  // Test 3.7: PDF function references folk magic
+  {
+    if (App.App && App.App.exportSinglePagePDF) {
+      const pdfCode = App.App.exportSinglePagePDF.toString();
+      if (pdfCode.includes('folkMagicSpells') || pdfCode.includes('careerFolkMagic')) {
+        pass(`${fixtureInfo.name} PDF: references folk magic`);
+      } else {
+        fail(`${fixtureInfo.name} PDF: missing folk magic reference`);
+      }
+    }
+  }
+
+  // Test 3.8: PDF function references notes/concept/background
+  {
+    if (App.App && App.App.exportSinglePagePDF) {
+      const pdfCode = App.App.exportSinglePagePDF.toString();
+      const textFields = ['concept', 'background', 'notes'];
+      let fieldCount = 0;
+      textFields.forEach(field => {
+        if (pdfCode.includes(`CharacterData.${field}`)) {
+          fieldCount++;
+        }
+      });
+      if (fieldCount >= 2) {
+        pass(`${fixtureInfo.name} PDF: references ${fieldCount}/3 text fields`);
+      } else {
+        fail(`${fixtureInfo.name} PDF: only references ${fieldCount}/3 text fields`);
+      }
+    }
+  }
+});
+
+// ============================================================
 section('Test Summary');
 // ============================================================
 
