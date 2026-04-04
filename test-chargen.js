@@ -635,22 +635,22 @@ section('Risk 4: Normalized Character Model (Helpers Module)');
     const testChar = createTestCharacter();
     testChar.characteristics = { STR: 12, CON: 14, SIZ: 11, DEX: 12, INT: 10, POW: 9, CHA: 8 };
 
-    // Expected: (SIZ 11 + CON 14) / 2 = 12.5 -> 13 base
-    // Head: 13 + 0 = 13
-    // Chest: 13 + 2 = 15
+    // Expected: (SIZ 11 + CON 14) = 25, Math.ceil(25/5) = 5 base
+    // Head: 5 + 0 = 5
+    // Chest: 5 + 2 = 7
     const headHP = App.Helpers.getHitLocationHP(testChar, 'Head');
     const chestHP = App.Helpers.getHitLocationHP(testChar, 'Chest');
 
-    if (headHP === 13) {
-      pass('Helpers.getHitLocationHP() calculates Head HP correctly (13)');
+    if (headHP === 5) {
+      pass('Helpers.getHitLocationHP() calculates Head HP correctly (5)');
     } else {
-      fail(`Helpers.getHitLocationHP() Head HP incorrect (expected 13, got ${headHP})`);
+      fail(`Helpers.getHitLocationHP() Head HP incorrect (expected 5, got ${headHP})`);
     }
 
-    if (chestHP === 15) {
-      pass('Helpers.getHitLocationHP() calculates Chest HP correctly (15)');
+    if (chestHP === 7) {
+      pass('Helpers.getHitLocationHP() calculates Chest HP correctly (7)');
     } else {
-      fail(`Helpers.getHitLocationHP() Chest HP incorrect (expected 15, got ${chestHP})`);
+      fail(`Helpers.getHitLocationHP() Chest HP incorrect (expected 7, got ${chestHP})`);
     }
   } else {
     fail('Helpers.getHitLocationHP() not yet implemented');
@@ -708,9 +708,10 @@ section('Risk 5: Data Attestation & Validation Layer');
     App.CharacterData.characteristics = { STR: 14, CON: 12, SIZ: 11, DEX: 12, INT: 10, POW: 9, CHA: 8 };
     App.CharacterData.culturalSkills = { 'Athletics': 40 };
     App.CharacterData.weapons = ['Broadsword'];
+    // CON 12 + SIZ 11 = 23, Math.ceil(23/5) = 5 base -> Head=5, Chest=7
     App.CharacterData.hitPoints = {
-      'Head': { current: 12, max: 12 },
-      'Chest': { current: 14, max: 14 }
+      'Head': { current: 5, max: 5 },
+      'Chest': { current: 7, max: 7 }
     };
 
     const result = App.CharacterData.validate();
