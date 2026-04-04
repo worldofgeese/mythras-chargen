@@ -566,13 +566,133 @@ section('Risk 4: Normalized Character Model (Helpers Module)');
   }
 }
 
-// Test 4.2: Check if Helpers module exists
+// Test 4.2: Helpers.resolveWeapon() - canonical weapon lookup
 {
-  // This will fail initially (TDD - write failing test first)
-  fail('Helpers.resolveWeapon() not yet implemented (TDD: implement this)');
-  fail('Helpers.normalizeCombatStyle() not yet implemented (TDD: implement this)');
-  fail('Helpers.getHitLocationHP() not yet implemented (TDD: implement this)');
-  fail('Helpers.getCompiledSkills() not yet implemented (TDD: implement this)');
+  if (App.Helpers && App.Helpers.resolveWeapon) {
+    // Test direct lookup
+    const broadsword = App.Helpers.resolveWeapon('Broadsword');
+    if (broadsword && broadsword.name === 'Broadsword') {
+      pass('Helpers.resolveWeapon() resolves canonical weapon name');
+    } else {
+      fail('Helpers.resolveWeapon() failed to resolve Broadsword');
+    }
+
+    // Test alias resolution
+    const sword1H = App.Helpers.resolveWeapon('1H Sword');
+    if (sword1H && sword1H.name === 'Broadsword') {
+      pass('Helpers.resolveWeapon() resolves weapon alias (1H Sword -> Broadsword)');
+    } else {
+      fail('Helpers.resolveWeapon() failed to resolve 1H Sword alias');
+    }
+
+    // Test null handling
+    const nullWeapon = App.Helpers.resolveWeapon(null);
+    if (nullWeapon === null) {
+      pass('Helpers.resolveWeapon() returns null for null input');
+    } else {
+      fail('Helpers.resolveWeapon() does not handle null correctly');
+    }
+  } else {
+    fail('Helpers.resolveWeapon() not yet implemented');
+  }
+}
+
+// Test 4.3: Helpers.normalizeCombatStyle()
+{
+  if (App.Helpers && App.Helpers.normalizeCombatStyle) {
+    // Test with Glorantha culture if available
+    if (App.GLORANTHA_CULTURES_DATA && App.GLORANTHA_CULTURES_DATA.length > 0) {
+      const balazaring = App.GLORANTHA_CULTURES_DATA.find(c => c.name === 'Balazaring');
+      if (balazaring && balazaring.combatStyles && balazaring.combatStyles.length > 0) {
+        const styleName = balazaring.combatStyles[0].name;
+        const normalized = App.Helpers.normalizeCombatStyle('Balazaring', styleName);
+
+        if (normalized.displayName === styleName) {
+          pass('Helpers.normalizeCombatStyle() returns correct display name');
+        } else {
+          fail('Helpers.normalizeCombatStyle() display name mismatch');
+        }
+
+        if (normalized.weapons && Array.isArray(normalized.weapons)) {
+          pass(`Helpers.normalizeCombatStyle() resolves ${normalized.weapons.length} weapons`);
+        } else {
+          fail('Helpers.normalizeCombatStyle() weapons array missing or invalid');
+        }
+      } else {
+        info('Skipping normalizeCombatStyle test - Balazaring culture data incomplete');
+      }
+    } else {
+      info('Skipping normalizeCombatStyle test - Glorantha cultures not loaded');
+    }
+  } else {
+    fail('Helpers.normalizeCombatStyle() not yet implemented');
+  }
+}
+
+// Test 4.4: Helpers.getHitLocationHP()
+{
+  if (App.Helpers && App.Helpers.getHitLocationHP) {
+    const testChar = createTestCharacter();
+    testChar.characteristics = { STR: 12, CON: 14, SIZ: 11, DEX: 12, INT: 10, POW: 9, CHA: 8 };
+
+    // Expected: (SIZ 11 + CON 14) / 2 = 12.5 -> 13 base
+    // Head: 13 + 0 = 13
+    // Chest: 13 + 2 = 15
+    const headHP = App.Helpers.getHitLocationHP(testChar, 'Head');
+    const chestHP = App.Helpers.getHitLocationHP(testChar, 'Chest');
+
+    if (headHP === 13) {
+      pass('Helpers.getHitLocationHP() calculates Head HP correctly (13)');
+    } else {
+      fail(`Helpers.getHitLocationHP() Head HP incorrect (expected 13, got ${headHP})`);
+    }
+
+    if (chestHP === 15) {
+      pass('Helpers.getHitLocationHP() calculates Chest HP correctly (15)');
+    } else {
+      fail(`Helpers.getHitLocationHP() Chest HP incorrect (expected 15, got ${chestHP})`);
+    }
+  } else {
+    fail('Helpers.getHitLocationHP() not yet implemented');
+  }
+}
+
+// Test 4.5: Helpers.getCompiledSkills()
+{
+  if (App.Helpers && App.Helpers.getCompiledSkills) {
+    const testChar = createTestCharacter();
+    testChar.characteristics = { STR: 14, CON: 12, SIZ: 11, DEX: 12, INT: 10, POW: 9, CHA: 8 };
+    testChar.culturalSkills = { 'Athletics': 40 };
+    testChar.careerSkills = { 'Athletics': 10 };
+    testChar.bonusSkills = { 'Lore (Strategy)': 40 };
+
+    const compiled = App.Helpers.getCompiledSkills(testChar);
+
+    if (compiled instanceof Map) {
+      pass('Helpers.getCompiledSkills() returns a Map');
+    } else {
+      fail('Helpers.getCompiledSkills() does not return a Map');
+    }
+
+    // Athletics base = STR (14) + DEX (12) = 26
+    // + cultural (40) + career (10) = 76
+    const athleticsValue = compiled.get('Athletics');
+    if (athleticsValue === 76) {
+      pass('Helpers.getCompiledSkills() calculates Athletics correctly (76)');
+    } else {
+      fail(`Helpers.getCompiledSkills() Athletics incorrect (expected 76, got ${athleticsValue})`);
+    }
+
+    // Check bonus skill
+    const loreValue = compiled.get('Lore (Strategy)');
+    if (loreValue >= 40) {
+      pass(`Helpers.getCompiledSkills() includes bonus skills (Lore: ${loreValue})`);
+    } else {
+      fail(`Helpers.getCompiledSkills() bonus skill incorrect (expected >=40, got ${loreValue})`);
+    }
+  } else {
+    fail('Helpers.getCompiledSkills() not yet implemented');
+  }
 }
 
 // ============================================================

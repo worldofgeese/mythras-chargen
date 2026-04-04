@@ -911,6 +911,161 @@ const CULTURE_BUILDS = {
 };
 
 // =============================================================================
+// WEAPON CANONICALIZATION & HELPERS MODULE
+// =============================================================================
+
+// Weapon alias map - resolves culture weapon references to canonical WEAPONS_DATA names
+// Source: deterministic weapon canonicalization (commit 82a509e)
+const WEAPON_ALIASES = {
+  '1H Spear': 'Shortspear',
+  '2H Spear': 'Longspear',
+  '1H Axe': 'Battleaxe',
+  '1H Sword': 'Broadsword',
+  'Spear': 'Shortspear',
+  'Sword': 'Broadsword',
+  'Axe': 'Battleaxe',
+  'Bow': 'Short Bow',
+  'Shield': 'Heater',
+  'Sickle Sword/Khopesh': 'Khopesh',
+  'Longspear/Sarissa': 'Sarissa',
+  'Halberd/Poleaxe': 'Halberd',
+  'Glaive/Rhomphaia': 'Glaive',
+  'Pike/Sarissa': 'Pike',
+  'Teeth and Claws': 'Claws/Talons',
+  'Claws': 'Claws/Talons'
+};
+
+// Helpers module - normalized character model operations
+const Helpers = {
+  /**
+   * Resolve weapon name to canonical WEAPONS_DATA entry
+   * @param {string} name - Weapon name (may be alias or canonical)
+   * @returns {object|null} Canonical weapon object from WEAPONS_DATA, or null if not found
+   */
+  resolveWeapon(name) {
+    if (!name) return null;
+
+    // Check alias map first
+    const canonical = WEAPON_ALIASES[name] || name;
+
+    // Find in WEAPONS_DATA (case-insensitive)
+    const weapon = WEAPONS_DATA.find(w =>
+      w.name.toLowerCase() === canonical.toLowerCase()
+    );
+
+    if (weapon) return weapon;
+
+    // Fuzzy match as fallback
+    const fuzzy = WEAPONS_DATA.find(w =>
+      w.name.toLowerCase().includes(canonical.toLowerCase()) ||
+      canonical.toLowerCase().includes(w.name.toLowerCase())
+    );
+
+    return fuzzy || null;
+  },
+
+  /**
+   * Normalize combat style for a culture
+   * @param {string} culture - Culture name
+   * @param {string} styleName - Combat style name
+   * @returns {object} {displayName: string, weapons: [resolved weapon objects]}
+   */
+  normalizeCombatStyle(culture, styleName) {
+    const result = {
+      displayName: styleName,
+      weapons: []
+    };
+
+    // Find culture data
+    const cultureData = CULTURES_DATA.find(c => c.name === culture);
+    if (!cultureData || !cultureData.combatStyles) {
+      return result;
+    }
+
+    // Find combat style in culture
+    const style = cultureData.combatStyles.find(s => s.name === styleName);
+    if (!style || !style.weapons) {
+      return result;
+    }
+
+    // Resolve all weapons
+    result.weapons = style.weapons
+      .map(w => this.resolveWeapon(w))
+      .filter(w => w !== null);
+
+    return result;
+  },
+
+  /**
+   * Get computed hit location HP for a character
+   * @param {object} characterData - CharacterData object
+   * @param {string} locationName - Hit location name (e.g., "Head", "Chest")
+   * @returns {number} Computed HP for that location
+   */
+  getHitLocationHP(characterData, locationName) {
+    const chars = characterData.characteristics || {};
+    const siz = chars.SIZ || 10;
+    const con = chars.CON || 10;
+
+    // Base HP calculation: (SIZ + CON) / 2, rounded up
+    const baseHP = Math.ceil((siz + con) / 2);
+
+    // Find location modifier
+    const location = HIT_LOCATIONS.find(loc => loc.name === locationName);
+    if (!location) return baseHP;
+
+    const modifier = location.hpMod || 0;
+    return baseHP + modifier;
+  },
+
+  /**
+   * Get all skills with final values (base + cultural + career + bonus)
+   * @param {object} characterData - CharacterData object
+   * @returns {Map<string, number>} Map of skill name -> final value
+   */
+  getCompiledSkills(characterData) {
+    const compiledSkills = new Map();
+
+    // Calculate base values for all skills
+    SKILLS_DATA.forEach(skill => {
+      const baseStats = skill.base_stats || [];
+      const chars = characterData.characteristics || {};
+
+      let baseValue = skill.starting_bonus || 0;
+      if (baseStats.length > 0) {
+        const sum = baseStats.reduce((acc, stat) => acc + (chars[stat] || 10), 0);
+        baseValue += sum;
+      }
+
+      compiledSkills.set(skill.name, baseValue);
+    });
+
+    // Add cultural skills
+    const cultural = characterData.culturalSkills || {};
+    for (const [skillName, bonus] of Object.entries(cultural)) {
+      const current = compiledSkills.get(skillName) || 0;
+      compiledSkills.set(skillName, current + bonus);
+    }
+
+    // Add career skills
+    const career = characterData.careerSkills || {};
+    for (const [skillName, bonus] of Object.entries(career)) {
+      const current = compiledSkills.get(skillName) || 0;
+      compiledSkills.set(skillName, current + bonus);
+    }
+
+    // Add bonus skills
+    const bonus = characterData.bonusSkills || {};
+    for (const [skillName, bonusVal] of Object.entries(bonus)) {
+      const current = compiledSkills.get(skillName) || 0;
+      compiledSkills.set(skillName, current + bonusVal);
+    }
+
+    return compiledSkills;
+  }
+};
+
+// =============================================================================
 // CALCULATION FUNCTIONS (ported from Python)
 // =============================================================================
 
