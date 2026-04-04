@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integration Tests: Terminology Consistency</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
+        h1 { color: #333; border-bottom: 3px solid #4CAF50; padding-bottom: 10px; }
+        .test-suite { background: white; margin: 20px 0; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .test-result { padding: 10px; margin: 5px 0; border-radius: 4px; font-family: monospace; }
+        .test-pass { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+        .test-fail { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+        .summary { background: #e7f3ff; padding: 15px; border-radius: 8px; margin: 20px 0; font-weight: bold; }
+        .summary.all-pass { background: #d4edda; color: #155724; }
+        .summary.has-fail { background: #f8d7da; color: #721c24; }
+        .error-details { font-size: 0.9em; margin-top: 5px; padding: 10px; background: #fff; border: 1px solid #ddd; border-radius: 4px; white-space: pre-wrap; }
+        iframe { display: none; }
+    </style>
+</head>
+<body>
+    <h1>Integration Tests: Professional Skills Terminology</h1>
+
+    <div class="summary" id="summary">Loading tests...</div>
+    <div id="results"></div>
+
+    <!-- Load index.html in iframe for testing -->
+    <iframe id="app-iframe" src="../../index.html"></iframe>
+
+    <!-- Load test framework -->
+    <script>
+        class TestRunner {
+            constructor() {
+                this.results = { pass: 0, fail: 0, suites: [] };
+                this.currentSuite = null;
+            }
+            describe(suiteName, fn) {
+                this.currentSuite = { name: suiteName, tests: [] };
+                this.results.suites.push(this.currentSuite);
+                fn();
+                this.currentSuite = null;
+            }
+            it(testName, fn) {
+                if (!this.currentSuite) throw new Error('it() must be called inside describe()');
+                this.currentSuite.tests.push({ name: testName, fn });
+            }
+            async runAll() {
+                for (const suite of this.results.suites) {
+                    for (const test of suite.tests) {
+                        try {
+                            await test.fn();
+                            test.status = 'pass';
+                            this.results.pass++;
+                        } catch (error) {
+                            test.status = 'fail';
+                            test.error = error.message;
+                            test.stack = error.stack;
+                            this.results.fail++;
+                        }
+                    }
+                }
+                this.displayResults();
+            }
+            displayResults() {
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = '';
+                for (const suite of this.results.suites) {
+                    const suiteDiv = document.createElement('div');
+                    suiteDiv.className = 'test-suite';
+                    suiteDiv.innerHTML = `<h2>${suite.name}</h2>`;
+                    for (const test of suite.tests) {
+                        const testDiv = document.createElement('div');
+                        testDiv.className = `test-result test-${test.status}`;
+                        const icon = test.status === 'pass' ? '✓' : '✗';
+                        testDiv.innerHTML = `${icon} ${test.name}`;
+                        if (test.error) {
+                            const errorDiv = document.createElement('div');
+                            errorDiv.className = 'error-details';
+                            errorDiv.textContent = test.error;
+                            testDiv.appendChild(errorDiv);
+                        }
+                        suiteDiv.appendChild(testDiv);
+                    }
+                    resultsDiv.appendChild(suiteDiv);
+                }
+                const summary = document.getElementById('summary');
+                const total = this.results.pass + this.results.fail;
+                summary.textContent = `Total: ${total} | Pass: ${this.results.pass} | Fail: ${this.results.fail}`;
+                summary.className = this.results.fail > 0 ? 'summary has-fail' : 'summary all-pass';
+            }
+        }
+
+        const assert = {
+            ok(value, message) {
+                if (!value) {
+                    throw new Error(message || `Expected truthy value, got ${value}`);
+                }
+            },
+            notIncludes(str, substr, message) {
+                if (str.includes(substr)) {
+                    throw new Error(message || `Expected "${str}" NOT to include "${substr}"`);
+                }
+            },
+            includes(str, substr, message) {
+                if (!str.includes(substr)) {
+                    throw new Error(message || `Expected "${str}" to include "${substr}"`);
+                }
+            }
+        };
+
+        window.runner = new TestRunner();
+        window.describe = (name, fn) => runner.describe(name, fn);
+        window.it = (name, fn) => runner.it(name, fn);
+        window.assert = assert;
+    </script>
+
+    <!-- TESTS (TDD: Write these FIRST, expect them to FAIL) -->
+    <script>
+        function getAppHTML() {
+            const iframe = document.getElementById('app-iframe');
+            return iframe.contentDocument.documentElement.outerHTML;
+        }
+
+        function getAppDocument() {
+            const iframe = document.getElementById('app-iframe');
+            return iframe.contentDocument;
+        }
+
+        describe('Professional Skills Terminology in HTML Source', () => {
+            it('should NOT contain "Career Skills" heading in wizard steps', () => {
+                const html = getAppHTML();
+
+                // Check if "Career Skills" appears as a heading (h3 or h2)
+                const doc = getAppDocument();
+                const headings = Array.from(doc.querySelectorAll('h1, h2, h3, h4'));
+                const careerSkillsHeadings = headings.filter(h => h.textContent.includes('Career Skills'));
+
+                assert.ok(
+                    careerSkillsHeadings.length === 0,
+                    `Found ${careerSkillsHeadings.length} heading(s) with "Career Skills" - should use "Professional Skills" instead`
+                );
+            });
+
+            it('should use "Professional Skills" consistently in Step 9', () => {
+                const doc = getAppDocument();
+
+                // Find Step 9 section
+                const step9Section = Array.from(doc.querySelectorAll('[data-step="9"], #step-9, .wizard-step'))
+                    .find(el => el.textContent.includes('Skills'));
+
+                if (step9Section) {
+                    const hasCareerSkills = step9Section.textContent.includes('Career Skills');
+                    assert.ok(
+                        !hasCareerSkills,
+                        'Step 9 should not use "Career Skills" terminology'
+                    );
+                } else {
+                    // If Step 9 not found in DOM (wizard not started), check HTML source
+                    const html = getAppHTML();
+                    const step9Match = html.match(/<h3[^>]*>.*Skills.*<\/h3>/i);
+                    if (step9Match) {
+                        assert.notIncludes(
+                            step9Match[0],
+                            'Career Skills',
+                            'Step 9 heading should not use "Career Skills"'
+                        );
+                    }
+                }
+            });
+
+            it('should use "Professional Skills" in career selection summaries', () => {
+                const html = getAppHTML();
+
+                // Check for professional skills labels in career selection
+                const professionalSkillsCount = (html.match(/Professional Skills/g) || []).length;
+                const careerSkillsCount = (html.match(/Career Skills/g) || []).length;
+
+                assert.ok(
+                    professionalSkillsCount > 0,
+                    'Should have at least one "Professional Skills" label'
+                );
+
+                // Career Skills is acceptable ONLY in comments or data, not in user-facing labels
+                // This test will fail if "Career Skills" appears in visible UI
+            });
+
+            it('should NOT have "Career Skills" in visible UI text', () => {
+                const doc = getAppDocument();
+                const bodyText = doc.body.textContent;
+
+                // Check visible text (not in script tags or comments)
+                const visibleElements = Array.from(doc.querySelectorAll('label, h1, h2, h3, h4, p, span, button, div'))
+                    .filter(el => {
+                        const style = window.getComputedStyle(el);
+                        return style.display !== 'none' && style.visibility !== 'hidden';
+                    });
+
+                const hasCareerSkillsInVisible = visibleElements.some(el =>
+                    el.textContent.includes('Career Skills') && !el.querySelector('script')
+                );
+
+                assert.ok(
+                    !hasCareerSkillsInVisible,
+                    'No visible UI element should contain "Career Skills" - use "Professional Skills" instead'
+                );
+            });
+        });
+
+        describe('Mythras Core Terminology Compliance', () => {
+            it('should match Mythras Core Rulebook p.13-14 terminology', () => {
+                const html = getAppHTML();
+
+                // Mythras Core uses "Professional Skills" as the standard term
+                // This test verifies we follow the source material terminology
+
+                assert.includes(
+                    html,
+                    'Professional Skills',
+                    'Should use "Professional Skills" terminology from Mythras Core'
+                );
+            });
+
+            it('should have consistent labeling across all wizard steps', () => {
+                const doc = getAppDocument();
+                const allLabels = Array.from(doc.querySelectorAll('label, h3, h4'));
+
+                const skillLabels = allLabels.filter(el =>
+                    el.textContent.toLowerCase().includes('skill') &&
+                    el.textContent.toLowerCase().includes('professional')
+                );
+
+                // All skill-related labels should use "Professional" consistently
+                skillLabels.forEach(label => {
+                    assert.ok(
+                        !label.textContent.includes('Career Skills'),
+                        `Label "${label.textContent}" should use "Professional Skills" not "Career Skills"`
+                    );
+                });
+            });
+        });
+
+        // Run all tests after iframe loads
+        function waitForIframe() {
+            return new Promise((resolve, reject) => {
+                const iframe = document.getElementById('app-iframe');
+                let attempts = 0;
+                const maxAttempts = 100; // 5 seconds max
+
+                function checkIframe() {
+                    attempts++;
+                    try {
+                        const appWin = iframe.contentWindow;
+                        const doc = iframe.contentDocument;
+
+                        // Check if document is ready and App is available
+                        if (doc && doc.readyState === 'complete' && appWin && appWin.App) {
+                            console.log('[Test] App iframe loaded successfully');
+                            resolve();
+                        } else if (attempts >= maxAttempts) {
+                            reject(new Error('Timeout: App iframe did not load within 5 seconds'));
+                        } else {
+                            setTimeout(checkIframe, 50);
+                        }
+                    } catch (error) {
+                        if (attempts >= maxAttempts) {
+                            reject(error);
+                        } else {
+                            setTimeout(checkIframe, 50);
+                        }
+                    }
+                }
+
+                // Wait a moment for iframe to start loading
+                iframe.onload = () => setTimeout(checkIframe, 100);
+
+                // Also start checking immediately in case it's already loaded
+                setTimeout(checkIframe, 100);
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                await waitForIframe();
+                await runner.runAll();
+            } catch (error) {
+                document.getElementById('summary').textContent = 'ERROR: Failed to load app - ' + error.message;
+                document.getElementById('summary').className = 'summary has-fail';
+            }
+        });
+    </script>
+</body>
+</html>

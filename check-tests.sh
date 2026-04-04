@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo "=== Mythras CharGen Test Harness Check ==="
+echo ""
+echo "Test runner is available at:"
+echo "  http://localhost:8765/tests/test-runner.html"
+echo ""
+echo "This page will load all four test suites in iframes and display:"
+echo "  - Overall pass/fail summary at the top"
+echo "  - Individual test results for each suite"
+echo ""
+echo "The tests should complete automatically within 10-15 seconds."
+echo ""
+echo "To view, open the URL above in a web browser."
+echo "Or run: xdg-open http://localhost:8765/tests/test-runner.html"
+echo ""

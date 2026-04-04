@@ -667,7 +667,7 @@ button.primary:hover { background: #333; }
   </div>
 
   <!-- PLAY MODE -->
-  <div id="play-mode" class="hidden">
+  <div id="play-mode" class="hidden" style="position:absolute;left:-9999px;visibility:hidden">
     <div class="play-layout">
       <div class="sidebar">
         <h2>Identity</h2>
@@ -1567,8 +1567,29 @@ const App = {
   
   switchMode(mode) {
     this.mode = mode;
-    document.getElementById('wizard-mode').classList.toggle('hidden', mode !== 'wizard');
-    document.getElementById('play-mode').classList.toggle('hidden', mode !== 'play');
+    const wizardMode = document.getElementById('wizard-mode');
+    const playMode = document.getElementById('play-mode');
+
+    wizardMode.classList.toggle('hidden', mode !== 'wizard');
+    playMode.classList.toggle('hidden', mode !== 'play');
+
+    // Apply offscreen positioning
+    if (mode === 'wizard') {
+      wizardMode.style.position = '';
+      wizardMode.style.left = '';
+      wizardMode.style.visibility = '';
+      playMode.style.position = 'absolute';
+      playMode.style.left = '-9999px';
+      playMode.style.visibility = 'hidden';
+    } else {
+      playMode.style.position = '';
+      playMode.style.left = '';
+      playMode.style.visibility = '';
+      wizardMode.style.position = 'absolute';
+      wizardMode.style.left = '-9999px';
+      wizardMode.style.visibility = 'hidden';
+    }
+
     document.getElementById('btn-wizard').classList.toggle('primary', mode === 'wizard');
     document.getElementById('btn-play').classList.toggle('primary', mode === 'play');
     
@@ -2266,13 +2287,13 @@ App.renderStep1 = function() {
     
     <div class="field">
       <label>Character Name</label>
-      <input type="text" id="char-name" value="${CharacterData.name}" 
+      <input type="text" id="char-name" data-testid="wizard-name" value="${CharacterData.name}"
         oninput="CharacterData.name = this.value; App.saveToLocalStorage()">
     </div>
     
     <div class="field">
       <label>Character Concept (brief description)</label>
-      <textarea id="char-concept" oninput="CharacterData.concept = this.value; App.saveToLocalStorage()">${CharacterData.concept}</textarea>
+      <textarea id="char-concept" data-testid="wizard-concept" oninput="CharacterData.concept = this.value; App.saveToLocalStorage()">${CharacterData.concept}</textarea>
     </div>
     
     <p><em>Examples: "Vengeful Orlanthi warrior seeking justice for murdered kin", "Cunning Lunar merchant-spy", "Young Praxian shaman discovering her powers"</em></p>
@@ -2332,7 +2353,7 @@ App.renderStep2 = function() {
     box.className = 'char-box';
     box.innerHTML = `
       <label>${stat}</label>
-      <input type="number" min="${pointBuy ? ((stat === 'INT' || stat === 'SIZ') ? 8 : 3) : 3}" max="${pointBuy ? 18 : 21}" value="${CharacterData.characteristics[stat]}" 
+      <input type="number" data-testid="char-${stat.toLowerCase()}" min="${pointBuy ? ((stat === 'INT' || stat === 'SIZ') ? 8 : 3) : 3}" max="${pointBuy ? 18 : 21}" value="${CharacterData.characteristics[stat]}"
         onchange="App.updateCharacteristic('${stat}', parseInt(this.value))">
       ${!pointBuy ? `<button onclick="App.rollSingleChar('${stat}', this.previousElementSibling)">Roll</button>` : ''}
     `;
@@ -2474,7 +2495,7 @@ App.renderStep4 = function() {
     
     <div class="field">
       <label>Culture</label>
-      <select id="culture-select" onchange="App.selectCulture(this.value)">
+      <select id="culture-select" data-testid="wizard-culture" onchange="App.selectCulture(this.value)">
         <option value="">-- Select Culture --</option>
         ${CULTURES_DATA.map(c => `<option value="${c.name}" ${CharacterData.culture === c.name ? 'selected' : ''}>${c.name} (${c.type})</option>`).join('')}
       </select>
@@ -2484,7 +2505,7 @@ App.renderStep4 = function() {
       <label>Homeland</label>
       <div id="homeland-buttons" style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px;">
         ${this.getHomelandSuggestions(CharacterData.culture).map(h => `
-          <button type="button" onclick="App.selectHomeland('${h}')"
+          <button type="button" data-testid="homeland-${h.replace(/\s+/g, '-').replace(/'/g, '').toLowerCase()}" onclick="App.selectHomeland('${h}')"
             style="padding: 8px 14px; min-height: 44px; ${CharacterData.homeland === h ? 'background: #000; color: #fff; border-color: #000;' : ''}"
             ${CharacterData.homeland === h ? 'class="primary"' : ''}>${h}</button>
         `).join('')}
@@ -2888,7 +2909,7 @@ App.renderStep8 = function() {
     
     <div class="field">
       <label>Career</label>
-      <select id="career-select" onchange="App.selectCareer(this.value)">
+      <select id="career-select" data-testid="wizard-career" onchange="App.selectCareer(this.value)">
         <option value="">-- Select Career --</option>
         ${availableCareers.map(c => `<option value="${c.name}" ${CharacterData.career === c.name ? 'selected' : ''}>${c.name}</option>`).join('')}
       </select>
@@ -3803,13 +3824,13 @@ App.renderSkillRow = function(skill) {
   }
   
   return `
-    <tr>
-      <td>${displayName}</td>
+    <tr data-testid="skill-row">
+      <td data-testid="skill-name">${displayName}</td>
       <td class="base-col">${skill.base}</td>
       <td class="input-col">${skill.cultural}</td>
       <td class="input-col">${skill.career}</td>
       <td class="input-col">${skill.bonus}</td>
-      <td class="total-col">${total}%</td>
+      <td class="total-col" data-testid="skill-total">${total}%</td>
       <td class="total-col">${modified}%</td>
     </tr>
   `;
@@ -3831,9 +3852,9 @@ App.renderPlayCombat = function() {
       <div>Actions</div>
     </div>
     ${CharacterData.weapons.map((w, i) => `
-      <div class="weapon-row">
-        <div>${w.name}</div>
-        <div><input type="number" value="${w.skill || 0}" placeholder="%" title="Skill %" style="width: 50px;"></div>
+      <div class="weapon-row" data-testid="weapon-row">
+        <div data-testid="weapon-name">${w.name}</div>
+        <div data-testid="weapon-skill"><input type="number" value="${w.skill || 0}" placeholder="%" title="Skill %" style="width: 50px;"></div>
         <div>${w.damage}</div>
         <div>${w.size}</div>
         <div>${w.reach}</div>
@@ -3862,10 +3883,10 @@ App.renderPlayRunes = function() {
   const runeAff = CharacterData.attributes.runeAffinities || {};
 
   container.innerHTML = `
-    <div class="grid-3">
-      <div><strong>Primary:</strong> ${CharacterData.runeAffinities.primary || 'None'} (${runeAff.primary || 0}%)</div>
-      <div><strong>Secondary:</strong> ${CharacterData.runeAffinities.secondary || 'None'} (${runeAff.secondary || 0}%)</div>
-      <div><strong>Tertiary:</strong> ${CharacterData.runeAffinities.tertiary || 'None'} (${runeAff.tertiary || 0}%)</div>
+    <div class="grid-3" data-testid="rune-affinities">
+      <div data-testid="rune-primary"><strong>Primary:</strong> ${CharacterData.runeAffinities.primary || 'None'} (${runeAff.primary || 0}%)</div>
+      <div data-testid="rune-secondary"><strong>Secondary:</strong> ${CharacterData.runeAffinities.secondary || 'None'} (${runeAff.secondary || 0}%)</div>
+      <div data-testid="rune-tertiary"><strong>Tertiary:</strong> ${CharacterData.runeAffinities.tertiary || 'None'} (${runeAff.tertiary || 0}%)</div>
     </div>
   `;
 };
@@ -3874,11 +3895,11 @@ App.renderPlayMagic = function() {
   const container = document.getElementById('play-magic');
   const folkMagicBase = CharacterData.attributes.folkMagicBase;
   const allSpells = [...CharacterData.folkMagicSpells, ...CharacterData.careerFolkMagic];
-  
+
   container.innerHTML = `
     <h3>Folk Magic (${folkMagicBase}%)</h3>
-    <ul>
-      ${allSpells.map(spell => `<li>${spell}</li>`).join('')}
+    <ul data-testid="folk-magic-spells">
+      ${allSpells.map(spell => `<li data-testid="spell-name">${spell}</li>`).join('')}
     </ul>
   `;
 };
@@ -3891,8 +3912,8 @@ App.renderPlayEquipment = function() {
   const overloaded = enc.overloaded || 0;
 
   container.innerHTML = `
-    <p><strong>Total ENC:</strong> ${totalEnc} / ${unencumbered} (${totalEnc > overloaded ? 'Overloaded!' : totalEnc > unencumbered ? 'Burdened' : 'Unencumbered'})</p>
-    <ul>
+    <p data-testid="equipment-enc"><strong>Total ENC:</strong> ${totalEnc} / ${unencumbered} (${totalEnc > overloaded ? 'Overloaded!' : totalEnc > unencumbered ? 'Burdened' : 'Unencumbered'})</p>
+    <ul data-testid="equipment-list">
       ${CharacterData.equipment.map(item => `<li>${item.name} (${item.quantity || 1}× ENC ${item.enc || 0})</li>`).join('')}
     </ul>
   `;

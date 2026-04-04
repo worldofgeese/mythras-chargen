@@ -1,5 +1,7 @@
 # CLAUDE.md — mythras-chargen
 
+**Read AGENTS.md first.**
+
 This file provides context for AI-assisted development sessions (Claude Code, Codex, or similar).
 
 ## Project Summary
