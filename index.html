@@ -1219,9 +1219,164 @@ const CharacterData = {
   equipment: [],
   weapons: [],
   armor: [],
-  
+  combatStyles: [],
+
   // Step 12: Final
-  notes: ''
+  notes: '',
+  background: '',
+
+  // Hit points (Play Mode tracking)
+  hitPoints: {},
+
+  /**
+   * Validate character data for completeness and correctness
+   * @returns {object} {valid: boolean, errors: string[]}
+   */
+  validate() {
+    const errors = [];
+
+    // Required fields
+    if (!this.name || this.name.trim() === '') {
+      errors.push('Character name is required');
+    }
+
+    if (!this.culture) {
+      errors.push('Culture is required');
+    }
+
+    // Characteristics range (3-21 for humans in point-buy)
+    const chars = this.characteristics || {};
+    const charNames = ['STR', 'CON', 'SIZ', 'DEX', 'INT', 'POW', 'CHA'];
+    charNames.forEach(charName => {
+      const value = chars[charName];
+      if (value === undefined || value === null) {
+        errors.push(`Characteristic ${charName} is missing`);
+      } else if (value < 3 || value > 21) {
+        errors.push(`Characteristic ${charName} out of range (${value}): must be 3-21`);
+      }
+    });
+
+    // Skill values (0-200)
+    const allSkills = {
+      ...this.culturalSkills,
+      ...this.careerSkills,
+      ...this.bonusSkills
+    };
+
+    for (const [skillName, value] of Object.entries(allSkills)) {
+      if (value < 0 || value > 200) {
+        errors.push(`Skill "${skillName}" out of range (${value}): must be 0-200`);
+      }
+    }
+
+    // Weapon references
+    const weapons = this.weapons || [];
+    weapons.forEach(weaponName => {
+      const resolved = Helpers.resolveWeapon(weaponName);
+      if (!resolved) {
+        errors.push(`Weapon "${weaponName}" not found in WEAPONS_DATA`);
+      }
+    });
+
+    // Hit location HP consistency
+    const hitPoints = this.hitPoints || {};
+    for (const [location, hp] of Object.entries(hitPoints)) {
+      if (hp && typeof hp === 'object' && 'max' in hp) {
+        const expectedMax = Helpers.getHitLocationHP(this, location);
+        if (hp.max !== expectedMax) {
+          errors.push(`Hit location "${location}" HP inconsistent (has ${hp.max}, expected ${expectedMax})`);
+        }
+      }
+    }
+
+    return {
+      valid: errors.length === 0,
+      errors: errors
+    };
+  },
+
+  /**
+   * Serialize character data to JSON
+   * @returns {string} JSON string
+   */
+  toJSON() {
+    return JSON.stringify({
+      name: this.name,
+      concept: this.concept,
+      characteristics: {...this.characteristics},
+      charMethod: this.charMethod,
+      attributes: {...this.attributes},
+      culture: this.culture,
+      homeland: this.homeland,
+      culturalSkills: {...this.culturalSkills},
+      runeAffinities: {...this.runeAffinities},
+      folkMagicSpells: [...this.folkMagicSpells],
+      passions: [...this.passions],
+      age: this.age,
+      gender: this.gender,
+      family: this.family,
+      backgroundEvents: this.backgroundEvents,
+      career: this.career,
+      careerSkills: {...this.careerSkills},
+      careerFolkMagic: [...this.careerFolkMagic],
+      bonusSkills: {...this.bonusSkills},
+      hobbySkillName: this.hobbySkillName,
+      startingMoney: this.startingMoney,
+      equipment: [...this.equipment],
+      weapons: [...this.weapons],
+      armor: [...this.armor],
+      combatStyles: [...this.combatStyles],
+      notes: this.notes,
+      background: this.background,
+      hitPoints: JSON.parse(JSON.stringify(this.hitPoints || {}))
+    }, null, 2);
+  },
+
+  /**
+   * Deserialize character data from JSON
+   * @param {string} jsonString - JSON string
+   * @returns {boolean} Success status
+   */
+  fromJSON(jsonString) {
+    try {
+      const data = JSON.parse(jsonString);
+
+      // Restore all fields
+      this.name = data.name || '';
+      this.concept = data.concept || '';
+      this.characteristics = data.characteristics || {STR:10,CON:10,SIZ:10,DEX:10,INT:10,POW:10,CHA:10};
+      this.charMethod = data.charMethod || 'point-buy';
+      this.attributes = data.attributes || {};
+      this.culture = data.culture || null;
+      this.homeland = data.homeland || '';
+      this.culturalSkills = data.culturalSkills || {};
+      this.runeAffinities = data.runeAffinities || {primary:null,secondary:null,tertiary:null};
+      this.folkMagicSpells = data.folkMagicSpells || [];
+      this.passions = data.passions || [];
+      this.age = data.age || 21;
+      this.gender = data.gender || '';
+      this.family = data.family || '';
+      this.backgroundEvents = data.backgroundEvents || '';
+      this.career = data.career || null;
+      this.careerSkills = data.careerSkills || {};
+      this.careerFolkMagic = data.careerFolkMagic || [];
+      this.bonusSkills = data.bonusSkills || {};
+      this.hobbySkillName = data.hobbySkillName || null;
+      this.startingMoney = data.startingMoney || 0;
+      this.equipment = data.equipment || [];
+      this.weapons = data.weapons || [];
+      this.armor = data.armor || [];
+      this.combatStyles = data.combatStyles || [];
+      this.notes = data.notes || '';
+      this.background = data.background || '';
+      this.hitPoints = data.hitPoints || {};
+
+      return true;
+    } catch (e) {
+      console.error('fromJSON failed:', e);
+      return false;
+    }
+  }
 };
 
 // =============================================================================

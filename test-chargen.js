@@ -699,53 +699,152 @@ section('Risk 4: Normalized Character Model (Helpers Module)');
 section('Risk 5: Data Attestation & Validation Layer');
 // ============================================================
 
-// Test 5.1: CharacterData.validate() function existence
+// Test 5.1: CharacterData.validate() function existence and valid character
 {
-  // This will fail initially (TDD)
-  fail('CharacterData.validate() not yet implemented (TDD: implement this)');
+  if (App.CharacterData && App.CharacterData.validate) {
+    // Set up a valid character
+    App.CharacterData.name = 'Valid Character';
+    App.CharacterData.culture = 'Generic';
+    App.CharacterData.characteristics = { STR: 14, CON: 12, SIZ: 11, DEX: 12, INT: 10, POW: 9, CHA: 8 };
+    App.CharacterData.culturalSkills = { 'Athletics': 40 };
+    App.CharacterData.weapons = ['Broadsword'];
+    App.CharacterData.hitPoints = {
+      'Head': { current: 12, max: 12 },
+      'Chest': { current: 14, max: 14 }
+    };
+
+    const result = App.CharacterData.validate();
+    if (result && typeof result === 'object' && 'valid' in result && 'errors' in result) {
+      pass('CharacterData.validate() returns {valid, errors} object');
+
+      if (result.valid === true) {
+        pass('Valid character passes validation');
+      } else {
+        fail(`Valid character failed validation: ${result.errors.join(', ')}`);
+      }
+    } else {
+      fail('CharacterData.validate() does not return proper structure');
+    }
+  } else {
+    fail('CharacterData.validate() not implemented');
+  }
 }
 
 // Test 5.2: Characteristic range validation
 {
-  const char = createTestCharacter();
-  char.characteristics.STR = 25; // Invalid: too high
+  if (App.CharacterData && App.CharacterData.validate) {
+    const originalSTR = App.CharacterData.characteristics.STR;
+    App.CharacterData.characteristics.STR = 25; // Invalid: too high
 
-  // This will fail initially (TDD)
-  fail('Characteristic range validation not implemented (TDD: should reject STR=25)');
+    const result = App.CharacterData.validate();
+    if (!result.valid && result.errors.some(e => e.includes('STR') && e.includes('range'))) {
+      pass('Characteristic range validation rejects STR=25');
+    } else {
+      fail('Characteristic range validation did not reject STR=25');
+    }
+
+    // Restore
+    App.CharacterData.characteristics.STR = originalSTR;
+  }
 }
 
 // Test 5.3: Skill value validation
 {
-  const char = createTestCharacter();
-  char.culturalSkills['Athletics'] = 250; // Invalid: too high
+  if (App.CharacterData && App.CharacterData.validate) {
+    App.CharacterData.culturalSkills['Athletics'] = 250; // Invalid: too high
 
-  // This will fail initially (TDD)
-  fail('Skill value validation not implemented (TDD: should reject skill=250)');
+    const result = App.CharacterData.validate();
+    if (!result.valid && result.errors.some(e => e.includes('Athletics') && e.includes('range'))) {
+      pass('Skill value validation rejects Athletics=250');
+    } else {
+      fail('Skill value validation did not reject Athletics=250');
+    }
+
+    // Restore
+    App.CharacterData.culturalSkills['Athletics'] = 40;
+  }
 }
 
 // Test 5.4: Required fields validation
 {
-  const char = createTestCharacter();
-  delete char.name; // Missing required field
+  if (App.CharacterData && App.CharacterData.validate) {
+    const originalName = App.CharacterData.name;
+    App.CharacterData.name = ''; // Missing required field
 
-  // This will fail initially (TDD)
-  fail('Required field validation not implemented (TDD: should require name)');
+    const result = App.CharacterData.validate();
+    if (!result.valid && result.errors.some(e => e.includes('name') && e.includes('required'))) {
+      pass('Required field validation rejects empty name');
+    } else {
+      fail('Required field validation did not reject empty name');
+    }
+
+    // Restore
+    App.CharacterData.name = originalName;
+  }
 }
 
 // Test 5.5: Weapon reference validation
 {
-  const char = createTestCharacter();
-  char.weapons = ['InvalidWeaponName12345']; // Invalid weapon
+  if (App.CharacterData && App.CharacterData.validate) {
+    const originalWeapons = App.CharacterData.weapons;
+    App.CharacterData.weapons = ['InvalidWeaponName12345']; // Invalid weapon
 
-  // This will fail initially (TDD)
-  fail('Weapon reference validation not implemented (TDD: should reject invalid weapon)');
+    const result = App.CharacterData.validate();
+    if (!result.valid && result.errors.some(e => e.includes('InvalidWeaponName12345') && e.includes('not found'))) {
+      pass('Weapon reference validation rejects invalid weapon');
+    } else {
+      fail('Weapon reference validation did not reject invalid weapon');
+    }
+
+    // Restore
+    App.CharacterData.weapons = originalWeapons;
+  }
 }
 
 // Test 5.6: JSON serialization round-trip
 {
-  // This will fail initially (TDD)
-  fail('CharacterData.toJSON() not implemented (TDD: implement serialization)');
-  fail('CharacterData.fromJSON() not implemented (TDD: implement deserialization)');
+  if (App.CharacterData && App.CharacterData.toJSON && App.CharacterData.fromJSON) {
+    // Set up test data
+    App.CharacterData.name = 'JSON Test Character';
+    App.CharacterData.culture = 'Generic';
+    App.CharacterData.characteristics = { STR: 15, CON: 13, SIZ: 12, DEX: 14, INT: 11, POW: 10, CHA: 9 };
+    App.CharacterData.culturalSkills = { 'Ride': 45, 'Locale': 30 };
+    App.CharacterData.notes = 'Test notes for serialization';
+
+    // Serialize
+    const json = App.CharacterData.toJSON();
+    if (json && typeof json === 'string' && json.length > 100) {
+      pass(`CharacterData.toJSON() generates JSON (${json.length} bytes)`);
+    } else {
+      fail('CharacterData.toJSON() failed to generate valid JSON');
+    }
+
+    // Modify data
+    const originalName = App.CharacterData.name;
+    App.CharacterData.name = 'Modified';
+
+    // Deserialize
+    const success = App.CharacterData.fromJSON(json);
+    if (success) {
+      pass('CharacterData.fromJSON() succeeded');
+
+      if (App.CharacterData.name === originalName) {
+        pass('CharacterData round-trip preserves name');
+      } else {
+        fail(`CharacterData round-trip name mismatch: expected "${originalName}", got "${App.CharacterData.name}"`);
+      }
+
+      if (App.CharacterData.culturalSkills['Ride'] === 45) {
+        pass('CharacterData round-trip preserves skills');
+      } else {
+        fail('CharacterData round-trip lost skills data');
+      }
+    } else {
+      fail('CharacterData.fromJSON() failed');
+    }
+  } else {
+    fail('CharacterData.toJSON()/fromJSON() not implemented');
+  }
 }
 
 // ============================================================
