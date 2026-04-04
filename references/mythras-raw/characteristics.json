@@ -12,7 +12,7 @@
     "point_buy": {
       "page": "p.37",
       "total_points": 75,
-      "minimum": { "default": 3, "INT": 6, "SIZ": 6 },
+      "minimum": { "default": 3, "INT": 8, "SIZ": 8 },
       "maximum": 18,
       "rule": "All Characteristic Points must be used in the design process"
     }
