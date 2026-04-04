@@ -99,13 +99,13 @@ const sandbox = vm.createContext({
 try {
   vm.runInContext(dataScript, sandbox, { filename: 'data.js' });
   vm.runInContext(appScript, sandbox, { filename: 'app.js' });
-  vm.runInContext('this.CharacterData = CharacterData; this.Calc = Calc; this.App = App; this.CULTURES_DATA = CULTURES_DATA; this.CULTURE_BUILDS = CULTURE_BUILDS; this.WEAPONS_DATA = WEAPONS_DATA; this.GLORANTHA_HOMELAND_MAP = GLORANTHA_HOMELAND_MAP; this.GLORANTHA_CULTURES_DATA = GLORANTHA_CULTURES_DATA; this.SKILLS_DATA = SKILLS_DATA; this.HIT_LOCATIONS = HIT_LOCATIONS; this.SPECIAL_EFFECTS_DATA = SPECIAL_EFFECTS_DATA;', sandbox);
+  vm.runInContext('this.CharacterData = CharacterData; this.Calc = Calc; this.App = App; this.CULTURES_DATA = CULTURES_DATA; this.CULTURE_BUILDS = CULTURE_BUILDS; this.WEAPONS_DATA = WEAPONS_DATA; this.WEAPON_ALIASES = WEAPON_ALIASES; this.GLORANTHA_HOMELAND_MAP = GLORANTHA_HOMELAND_MAP; this.GLORANTHA_CULTURES_DATA = GLORANTHA_CULTURES_DATA; this.SKILLS_DATA = SKILLS_DATA; this.HIT_LOCATIONS = HIT_LOCATIONS; this.SPECIAL_EFFECTS_DATA = SPECIAL_EFFECTS_DATA;', sandbox);
 } catch(e) {
   console.error('Failed to load scripts:', e.message);
   process.exit(1);
 }
 
-const { CharacterData, Calc, App, CULTURES_DATA, CULTURE_BUILDS, WEAPONS_DATA,
+const { CharacterData, Calc, App, CULTURES_DATA, CULTURE_BUILDS, WEAPONS_DATA, WEAPON_ALIASES,
         GLORANTHA_HOMELAND_MAP, GLORANTHA_CULTURES_DATA, SKILLS_DATA,
         HIT_LOCATIONS, SPECIAL_EFFECTS_DATA } = sandbox;
 
@@ -322,6 +322,118 @@ console.log('\n10. Function Separation');
     // May fail in mock env due to DOM lookups, that's OK
   }
   assert(typeof App.renderSkillRow === 'function', 'renderSkillRow is independently accessible');
+}
+
+// --- TEST GROUP 11: Weapon canonicalization for ALL culture combat styles ---
+console.log('\n11. Weapon Canonicalization (Domain-Wide)');
+{
+  const cultures = GLORANTHA_CULTURES_DATA || CULTURES_DATA;
+  const unresolved = [];
+
+  cultures.forEach(culture => {
+    if (!culture.combatStyles) return;
+
+    culture.combatStyles.forEach(cs => {
+      if (!cs.weapons) return;
+
+      cs.weapons.forEach(weaponRef => {
+        // Canonicalize weapon name using alias map
+        const canonicalName = WEAPON_ALIASES[weaponRef] || weaponRef;
+
+        // Try exact match with canonical name
+        let weaponData = WEAPONS_DATA.find(w => w.name === canonicalName);
+
+        if (!weaponData) {
+          // Fallback: try exact match with original name
+          weaponData = WEAPONS_DATA.find(w => w.name === weaponRef);
+        }
+
+        if (!weaponData) {
+          // Final fallback: fuzzy matching
+          const normalizedSearch = canonicalName.toLowerCase();
+          weaponData = WEAPONS_DATA.find(w => {
+            const normalizedName = w.name.toLowerCase();
+            return normalizedName.includes(normalizedSearch) || normalizedSearch.includes(normalizedName);
+          });
+        }
+
+        if (!weaponData) {
+          unresolved.push(`${culture.name} > ${cs.name} > "${weaponRef}" (canon: "${canonicalName}")`);
+        }
+      });
+    });
+  });
+
+  if (unresolved.length > 0) {
+    console.log('    Unresolved weapon references:');
+    unresolved.forEach(u => console.log(`      ${u}`));
+  }
+  assert(unresolved.length === 0, `All weapon references resolve to WEAPONS_DATA (${unresolved.length} unresolved)`);
+}
+
+// --- TEST GROUP 12: No generic combat style labels in compiled skills ---
+console.log('\n12. No Generic Combat Style Labels (All Cultures)');
+{
+  const cultures = GLORANTHA_CULTURES_DATA || CULTURES_DATA;
+
+  cultures.forEach(culture => {
+    CharacterData.culture = culture.name;
+    CharacterData.combatStyles = [];
+
+    if (culture.combatStyles && culture.combatStyles.length > 0) {
+      // Pick first combat style
+      const cs = culture.combatStyles[0];
+      CharacterData.combatStyles = [{ name: cs.name, skill: 40 }];
+
+      const skills = App.compileAllSkills();
+      const combatSkills = skills.filter(s => s.name.toLowerCase().includes('combat style'));
+
+      const hasGenericCultural = combatSkills.some(s => s.name === 'Combat Style (Cultural Style)');
+      const hasGenericSpeciality = combatSkills.some(s => s.name === 'Combat Style (Speciality Style)');
+
+      assert(!hasGenericCultural, `${culture.name}: no generic "Combat Style (Cultural Style)"`);
+      assert(!hasGenericSpeciality, `${culture.name}: no generic "Combat Style (Speciality Style)"`);
+    }
+  });
+}
+
+// --- TEST GROUP 13: Every culture can auto-populate at least one weapon ---
+console.log('\n13. Auto-Populate Weapons (All Cultures)');
+{
+  const cultures = GLORANTHA_CULTURES_DATA || CULTURES_DATA;
+
+  cultures.forEach(culture => {
+    CharacterData.culture = culture.name;
+    CharacterData.weapons = [];
+    CharacterData.equipment = [];
+    CharacterData.combatStyles = [];
+
+    if (culture.combatStyles && culture.combatStyles.length > 0) {
+      const cs = culture.combatStyles[0];
+      CharacterData.combatStyles = [{ name: cs.name, skill: 40 }];
+
+      App.autoPopulateStartingEquipment();
+
+      assert(CharacterData.weapons.length > 0, `${culture.name} (${cs.name}): auto-populated ${CharacterData.weapons.length} weapon(s)`);
+    }
+  });
+}
+
+// --- TEST GROUP 14: PDF uses canonical hit location keys ---
+console.log('\n14. PDF Hit Location Canonical Keys');
+{
+  const pdfFn = App.exportSinglePagePDF.toString();
+
+  // Check that PDF uses the correct capitalized keys matching HIT_LOCATIONS
+  const locationNames = HIT_LOCATIONS.map(loc => loc.name);
+
+  // PDF should reference at least some canonical location names
+  const referencesHead = pdfFn.includes("'Head'") || pdfFn.includes('"Head"');
+  const referencesChest = pdfFn.includes("'Chest'") || pdfFn.includes('"Chest"');
+  const referencesLocations = pdfFn.includes('HIT_LOCATIONS') || pdfFn.includes('locations');
+
+  assert(referencesLocations, 'PDF references hit locations data structure');
+  assert(referencesHead || referencesChest, 'PDF uses canonical location key names');
 }
 
 // ============================================================
