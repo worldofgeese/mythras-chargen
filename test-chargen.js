@@ -183,6 +183,7 @@ function loadApp() {
         HIT_LOCATIONS,
         GLORANTHA_CULTURES_DATA: typeof GLORANTHA_CULTURES_DATA !== 'undefined' ? GLORANTHA_CULTURES_DATA : null,
         Helpers: typeof Helpers !== 'undefined' ? Helpers : null,
+        normalizeCharacter: (typeof App !== 'undefined' && App.normalizeCharacter) ? App.normalizeCharacter : null,
       };
     `, sandbox);
   } catch(e) {
@@ -1323,6 +1324,562 @@ section('Golden Character Calculation Tests');
     pass('Golden Character: Praxian Beast Rider calculations correct');
   } else {
     fail('Golden Character: Praxian Beast Rider failed', failures[0]);
+  }
+}
+
+// ============================================================
+section('Wave 2 Goal A: normalizeCharacter() Projection Layer');
+// ============================================================
+
+// Test A.1: normalizeCharacter() function exists
+{
+  if (App.App && App.App.normalizeCharacter) {
+    pass('normalizeCharacter() function exists');
+  } else {
+    fail('normalizeCharacter() function not yet implemented (Goal A)');
+  }
+}
+
+// Test A.2: normalizeCharacter() returns correct structure
+{
+  if (App.App && App.App.normalizeCharacter) {
+    const testChar = createTestCharacter();
+    const normalized = App.App.normalizeCharacter(testChar);
+
+    if (normalized && typeof normalized === 'object') {
+      pass('normalizeCharacter() returns an object');
+    } else {
+      fail('normalizeCharacter() does not return an object');
+    }
+
+    // Check required top-level fields
+    const requiredFields = ['name', 'race', 'culture', 'profession', 'characteristics', 'attributes', 'skills', 'combatStyles', 'hitLocations', 'passions', 'folkMagic', 'equipment'];
+    const missingFields = requiredFields.filter(f => !(f in normalized));
+    if (missingFields.length === 0) {
+      pass('normalizeCharacter() has all required top-level fields');
+    } else {
+      fail(`normalizeCharacter() missing fields: ${missingFields.join(', ')}`);
+    }
+  }
+}
+
+// Test A.3: normalizeCharacter() characteristics structure
+{
+  if (App.App && App.App.normalizeCharacter) {
+    const testChar = createTestCharacter();
+    testChar.characteristics = { STR: 14, CON: 12, SIZ: 11, DEX: 12, INT: 10, POW: 9, CHA: 8 };
+    const normalized = App.App.normalizeCharacter(testChar);
+
+    if (normalized.characteristics) {
+      const chars = normalized.characteristics;
+      if (chars.STR === 14 && chars.CON === 12 && chars.SIZ === 11 && chars.DEX === 12 && chars.INT === 10 && chars.POW === 9 && chars.CHA === 8) {
+        pass('normalizeCharacter() preserves all 7 characteristics');
+      } else {
+        fail('normalizeCharacter() characteristics values incorrect');
+      }
+    } else {
+      fail('normalizeCharacter() missing characteristics');
+    }
+  }
+}
+
+// Test A.4: normalizeCharacter() attributes from Calc
+{
+  if (App.App && App.App.normalizeCharacter) {
+    const testChar = createTestCharacter();
+    testChar.characteristics = { STR: 14, CON: 12, SIZ: 11, DEX: 12, INT: 10, POW: 9, CHA: 8 };
+    const normalized = App.App.normalizeCharacter(testChar);
+
+    if (normalized.attributes) {
+      const attrs = normalized.attributes;
+      const requiredAttrs = ['actionPoints', 'initiativeBonus', 'damageModifier', 'experienceModifier', 'healingRate', 'luckPoints', 'magicPoints'];
+      const missingAttrs = requiredAttrs.filter(a => !(a in attrs));
+      if (missingAttrs.length === 0) {
+        pass('normalizeCharacter() includes all required attributes');
+      } else {
+        fail(`normalizeCharacter() missing attributes: ${missingAttrs.join(', ')}`);
+      }
+
+      // Verify one calculation
+      if (attrs.actionPoints === 2) { // DEX 12 + INT 10 = 22, Math.ceil(22/12) = 2
+        pass('normalizeCharacter() calculates actionPoints correctly (2)');
+      } else {
+        fail(`normalizeCharacter() actionPoints incorrect (expected 2, got ${attrs.actionPoints})`);
+      }
+    } else {
+      fail('normalizeCharacter() missing attributes');
+    }
+  }
+}
+
+// Test A.5: normalizeCharacter() skills as Map or object
+{
+  if (App.App && App.App.normalizeCharacter) {
+    const testChar = createTestCharacter();
+    testChar.characteristics = { STR: 14, CON: 12, SIZ: 11, DEX: 12, INT: 10, POW: 9, CHA: 8 };
+    testChar.culturalSkills = { 'Athletics': 40 };
+    testChar.careerSkills = { 'Athletics': 10 };
+    const normalized = App.App.normalizeCharacter(testChar);
+
+    if (normalized.skills) {
+      const skills = normalized.skills;
+      let athleticsValue;
+
+      if (skills instanceof Map) {
+        athleticsValue = skills.get('Athletics');
+      } else {
+        athleticsValue = skills['Athletics'];
+      }
+
+      // Athletics base = STR (14) + DEX (12) = 26, + cultural (40) + career (10) = 76
+      if (athleticsValue === 76) {
+        pass('normalizeCharacter() computes skills correctly (Athletics = 76)');
+      } else {
+        fail(`normalizeCharacter() Athletics incorrect (expected 76, got ${athleticsValue})`);
+      }
+    } else {
+      fail('normalizeCharacter() missing skills');
+    }
+  }
+}
+
+// Test A.6: normalizeCharacter() combatStyles with weapons array
+{
+  if (App.App && App.App.normalizeCharacter) {
+    const testChar = createTestCharacter();
+    testChar.combatStyles = [
+      { name: 'Sword & Shield', skill: 50, weapons: ['Broadsword', 'Kite Shield'] }
+    ];
+    const normalized = App.App.normalizeCharacter(testChar);
+
+    if (normalized.combatStyles && Array.isArray(normalized.combatStyles)) {
+      pass('normalizeCharacter() includes combatStyles array');
+
+      const style = normalized.combatStyles[0];
+      if (style && style.name && Array.isArray(style.weapons)) {
+        pass('normalizeCharacter() combatStyle has name and weapons array');
+      } else {
+        fail('normalizeCharacter() combatStyle structure incorrect');
+      }
+    } else {
+      fail('normalizeCharacter() combatStyles missing or not an array');
+    }
+  }
+}
+
+// Test A.7: normalizeCharacter() hitLocations with current/max
+{
+  if (App.App && App.App.normalizeCharacter) {
+    const testChar = createTestCharacter();
+    testChar.characteristics = { STR: 14, CON: 12, SIZ: 11, DEX: 12, INT: 10, POW: 9, CHA: 8 };
+    const normalized = App.App.normalizeCharacter(testChar);
+
+    if (normalized.hitLocations && Array.isArray(normalized.hitLocations)) {
+      pass('normalizeCharacter() includes hitLocations array');
+
+      if (normalized.hitLocations.length === 7) {
+        pass('normalizeCharacter() has 7 hit locations');
+      } else {
+        fail(`normalizeCharacter() has ${normalized.hitLocations.length} hit locations (expected 7)`);
+      }
+
+      const head = normalized.hitLocations.find(loc => loc.name === 'Head');
+      if (head && 'current' in head && 'max' in head) {
+        pass('normalizeCharacter() hitLocation has current and max fields');
+
+        // CON 12 + SIZ 11 = 23, Math.ceil(23/5) = 5
+        if (head.max === 5 && head.current === 5) {
+          pass('normalizeCharacter() Head HP correct (5/5)');
+        } else {
+          fail(`normalizeCharacter() Head HP incorrect (expected 5/5, got ${head.current}/${head.max})`);
+        }
+      } else {
+        fail('normalizeCharacter() hitLocation structure incorrect');
+      }
+    } else {
+      fail('normalizeCharacter() hitLocations missing or not an array');
+    }
+  }
+}
+
+// Test A.8: normalizeCharacter() equipment structure
+{
+  if (App.App && App.App.normalizeCharacter) {
+    const testChar = createTestCharacter();
+    testChar.weapons = ['Broadsword'];
+    testChar.armor = ['Leather'];
+    testChar.equipment = ['Backpack'];
+    const normalized = App.App.normalizeCharacter(testChar);
+
+    if (normalized.equipment && typeof normalized.equipment === 'object') {
+      pass('normalizeCharacter() includes equipment object');
+
+      if ('weapons' in normalized.equipment && 'armor' in normalized.equipment && 'items' in normalized.equipment) {
+        pass('normalizeCharacter() equipment has weapons, armor, items fields');
+      } else {
+        fail('normalizeCharacter() equipment structure incomplete');
+      }
+    } else {
+      fail('normalizeCharacter() equipment missing or not an object');
+    }
+  }
+}
+
+// Test A.9: normalizeCharacter() is pure (no side effects)
+{
+  if (App.App && App.App.normalizeCharacter) {
+    const testChar = createTestCharacter();
+    const originalName = testChar.name;
+    const originalSTR = testChar.characteristics.STR;
+
+    const normalized = App.App.normalizeCharacter(testChar);
+
+    // Check input not mutated
+    if (testChar.name === originalName && testChar.characteristics.STR === originalSTR) {
+      pass('normalizeCharacter() does not mutate input (pure function)');
+    } else {
+      fail('normalizeCharacter() mutates input (not pure)');
+    }
+  }
+}
+
+// ============================================================
+section('Wave 2 Goal C: Skill Compilation Consolidation');
+// ============================================================
+
+// Test C.1: App.compileAllSkills() delegates to Helpers.getCompiledSkills()
+{
+  if (App.App && App.App.compileAllSkills && App.Helpers && App.Helpers.getCompiledSkills) {
+    const testChar = createTestCharacter();
+    testChar.characteristics = { STR: 14, CON: 12, SIZ: 11, DEX: 12, INT: 10, POW: 9, CHA: 8 };
+    testChar.culturalSkills = { 'Athletics': 40 };
+    testChar.careerSkills = { 'Athletics': 10 };
+
+    // Save original CharacterData state
+    const origChars = { ...App.CharacterData.characteristics };
+    const origCultural = { ...App.CharacterData.culturalSkills };
+    const origCareer = { ...App.CharacterData.careerSkills };
+
+    // Set test data
+    App.CharacterData.characteristics = testChar.characteristics;
+    App.CharacterData.culturalSkills = testChar.culturalSkills;
+    App.CharacterData.careerSkills = testChar.careerSkills;
+    App.CharacterData.bonusSkills = {};
+
+    // Get results from both
+    const appResult = App.App.compileAllSkills();
+    const helpersResult = App.Helpers.getCompiledSkills(App.CharacterData);
+
+    // Compare Athletics value
+    let appAthletics, helpersAthletics;
+    if (Array.isArray(appResult)) {
+      const entry = appResult.find(s => s.name === 'Athletics');
+      appAthletics = entry ? entry.value : null;
+    } else if (appResult instanceof Map) {
+      appAthletics = appResult.get('Athletics');
+    } else {
+      appAthletics = appResult['Athletics'];
+    }
+
+    helpersAthletics = helpersResult.get('Athletics');
+
+    if (appAthletics === helpersAthletics && appAthletics === 76) {
+      pass('App.compileAllSkills() produces same result as Helpers.getCompiledSkills() (Athletics = 76)');
+    } else {
+      fail(`Skill compilation mismatch: App=${appAthletics}, Helpers=${helpersAthletics}`);
+    }
+
+    // Restore
+    App.CharacterData.characteristics = origChars;
+    App.CharacterData.culturalSkills = origCultural;
+    App.CharacterData.careerSkills = origCareer;
+  }
+}
+
+// ============================================================
+section('Wave 2 Goal D: Standardize Weapon Data Shape');
+// ============================================================
+
+// Test D.1: normalizeCharacter() weapons are always objects
+{
+  if (App.App && App.App.normalizeCharacter) {
+    const testChar = createTestCharacter();
+    testChar.weapons = ['Broadsword', 'Dagger']; // Input as strings
+    const normalized = App.App.normalizeCharacter(testChar);
+
+    if (normalized.equipment && normalized.equipment.weapons) {
+      const weapons = normalized.equipment.weapons;
+      if (Array.isArray(weapons) && weapons.length > 0) {
+        const allObjects = weapons.every(w => typeof w === 'object' && 'name' in w && 'quantity' in w);
+        if (allObjects) {
+          pass('normalizeCharacter() weapons are all objects with {name, quantity}');
+        } else {
+          fail('normalizeCharacter() weapons not all objects');
+        }
+      } else {
+        fail('normalizeCharacter() weapons array empty or missing');
+      }
+    }
+  }
+}
+
+// Test D.2: normalizeCharacter() handles mixed weapon input
+{
+  if (App.App && App.App.normalizeCharacter) {
+    const testChar = createTestCharacter();
+    testChar.weapons = [
+      'Broadsword',
+      { name: 'Spear', quantity: 2 },
+      'Dagger'
+    ];
+    const normalized = App.App.normalizeCharacter(testChar);
+
+    if (normalized.equipment && normalized.equipment.weapons) {
+      const weapons = normalized.equipment.weapons;
+      const allObjects = weapons.every(w => typeof w === 'object' && 'name' in w && 'quantity' in w);
+      if (allObjects) {
+        pass('normalizeCharacter() normalizes mixed weapon format');
+
+        const broadsword = weapons.find(w => w.name === 'Broadsword');
+        const spear = weapons.find(w => w.name === 'Spear');
+        if (broadsword && broadsword.quantity === 1 && spear && spear.quantity === 2) {
+          pass('normalizeCharacter() sets default quantity=1 and preserves existing quantity');
+        } else {
+          fail('normalizeCharacter() weapon quantities incorrect');
+        }
+      } else {
+        fail('normalizeCharacter() did not normalize mixed weapon format');
+      }
+    }
+  }
+}
+
+// ============================================================
+section('Wave 2 Goal E: Schema Versioning & Migration');
+// ============================================================
+
+// Test E.1: CharacterData.getSchemaVersion() exists
+{
+  if (App.CharacterData && App.CharacterData.getSchemaVersion) {
+    const version = App.CharacterData.getSchemaVersion();
+    if (version === 1) {
+      pass('CharacterData.getSchemaVersion() returns 1');
+    } else {
+      fail(`CharacterData.getSchemaVersion() returns ${version} (expected 1)`);
+    }
+  } else {
+    fail('CharacterData.getSchemaVersion() not yet implemented (Goal E)');
+  }
+}
+
+// Test E.2: CharacterData.saveToLocalStorage() includes version
+{
+  if (App.CharacterData && App.CharacterData.saveToLocalStorage && App.CharacterData.getSchemaVersion) {
+    // Mock localStorage
+    let savedData = null;
+    const mockStorage = {
+      setItem: (key, value) => { savedData = value; },
+      getItem: (key) => savedData,
+      removeItem: (key) => { savedData = null; }
+    };
+
+    // Save with mock
+    const origSetItem = global.localStorage ? global.localStorage.setItem : null;
+    if (typeof localStorage !== 'undefined') {
+      const origLS = localStorage;
+      global.localStorage = mockStorage;
+      App.CharacterData.saveToLocalStorage();
+      global.localStorage = origLS;
+    } else {
+      // For test env, directly check the method signature
+      const saveCode = App.CharacterData.saveToLocalStorage.toString();
+      if (saveCode.includes('version') && saveCode.includes('getSchemaVersion')) {
+        pass('CharacterData.saveToLocalStorage() includes version field (code inspection)');
+      } else {
+        fail('CharacterData.saveToLocalStorage() does not include version (Goal E)');
+      }
+    }
+
+    if (savedData) {
+      try {
+        const payload = JSON.parse(savedData);
+        if ('version' in payload && 'data' in payload) {
+          pass('CharacterData.saveToLocalStorage() saves {version, data} payload');
+          if (payload.version === 1) {
+            pass('Saved payload version is 1');
+          } else {
+            fail(`Saved payload version is ${payload.version} (expected 1)`);
+          }
+        } else {
+          fail('Saved payload missing version or data field');
+        }
+      } catch (e) {
+        fail('Saved payload is not valid JSON');
+      }
+    }
+  }
+}
+
+// Test E.3: CharacterData.loadFromLocalStorage() handles version 1
+{
+  if (App.CharacterData && App.CharacterData.loadFromLocalStorage) {
+    const testPayload = {
+      version: 1,
+      data: {
+        name: 'Test Load',
+        characteristics: { STR: 14, CON: 12, SIZ: 11, DEX: 12, INT: 10, POW: 9, CHA: 8 }
+      }
+    };
+
+    const result = App.CharacterData.loadFromLocalStorage(JSON.stringify(testPayload));
+    if (result) {
+      pass('CharacterData.loadFromLocalStorage() handles version 1 payload');
+      if (result.name === 'Test Load') {
+        pass('loadFromLocalStorage() returns correct data');
+      } else {
+        fail('loadFromLocalStorage() data mismatch');
+      }
+    } else {
+      fail('CharacterData.loadFromLocalStorage() returned null for valid payload');
+    }
+  } else {
+    fail('CharacterData.loadFromLocalStorage() not yet implemented (Goal E)');
+  }
+}
+
+// Test E.4: CharacterData.migrateV0toV1() migrates legacy data
+{
+  if (App.CharacterData && App.CharacterData.migrateV0toV1) {
+    const legacyData = {
+      name: 'Legacy Character',
+      characteristics: { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 10, POW: 10, CHA: 10 }
+    };
+
+    const migrated = App.CharacterData.migrateV0toV1(legacyData);
+    if (migrated) {
+      pass('CharacterData.migrateV0toV1() returns migrated data');
+      if (migrated.schemaVersion === 1) {
+        pass('Migrated data has schemaVersion = 1');
+      } else {
+        fail('Migrated data missing schemaVersion = 1');
+      }
+      if (migrated.name === 'Legacy Character') {
+        pass('Migrated data preserves original fields');
+      } else {
+        fail('Migrated data lost original fields');
+      }
+    } else {
+      fail('CharacterData.migrateV0toV1() returned null');
+    }
+  } else {
+    fail('CharacterData.migrateV0toV1() not yet implemented (Goal E)');
+  }
+}
+
+// Test E.5: loadFromLocalStorage() auto-migrates V0 data
+{
+  if (App.CharacterData && App.CharacterData.loadFromLocalStorage) {
+    const legacyPayload = {
+      name: 'Old Character',
+      characteristics: { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 10, POW: 10, CHA: 10 }
+    };
+
+    const result = App.CharacterData.loadFromLocalStorage(JSON.stringify(legacyPayload));
+    if (result && result.schemaVersion === 1) {
+      pass('loadFromLocalStorage() auto-migrates legacy V0 data');
+    } else {
+      fail('loadFromLocalStorage() did not migrate V0 data');
+    }
+  }
+}
+
+// Test E.6: loadFromLocalStorage() rejects unknown version
+{
+  if (App.CharacterData && App.CharacterData.loadFromLocalStorage) {
+    const futurePayload = {
+      version: 999,
+      data: { name: 'Future Character' }
+    };
+
+    const result = App.CharacterData.loadFromLocalStorage(JSON.stringify(futurePayload));
+    if (result === null) {
+      pass('loadFromLocalStorage() rejects unknown version (returns null)');
+    } else {
+      fail('loadFromLocalStorage() did not reject unknown version');
+    }
+  }
+}
+
+// ============================================================
+section('Wave 2 Goal F: Eliminate eval() for Formula Evaluation');
+// ============================================================
+
+// Test F.1: safeEvalDiceFormula() exists
+{
+  if (App.App && App.App.safeEvalDiceFormula) {
+    pass('safeEvalDiceFormula() function exists');
+  } else if (App.Calc && App.Calc.safeEvalDiceFormula) {
+    pass('Calc.safeEvalDiceFormula() function exists');
+  } else {
+    fail('safeEvalDiceFormula() not yet implemented (Goal F)');
+  }
+}
+
+// Test F.2: safeEvalDiceFormula() evaluates simple addition
+{
+  const safeEval = (App.App && App.App.safeEvalDiceFormula) || (App.Calc && App.Calc.safeEvalDiceFormula);
+  if (safeEval) {
+    const context = { STR: 14, DEX: 12 };
+    const result = safeEval('STR+DEX', context);
+    if (result === 26) {
+      pass('safeEvalDiceFormula() evaluates STR+DEX correctly (26)');
+    } else {
+      fail(`safeEvalDiceFormula() STR+DEX incorrect (expected 26, got ${result})`);
+    }
+  }
+}
+
+// Test F.3: safeEvalDiceFormula() evaluates dice formulas
+{
+  const safeEval = (App.App && App.App.safeEvalDiceFormula) || (App.Calc && App.Calc.safeEvalDiceFormula);
+  if (safeEval) {
+    const context = { STR: 10, DEX: 10 };
+    const result = safeEval('STR+DEX+2d6', context);
+    // Result should be 20 + (2d6 roll between 2-12) = 22-32
+    if (result >= 22 && result <= 32) {
+      pass('safeEvalDiceFormula() evaluates STR+DEX+2d6 in valid range (22-32)');
+    } else {
+      fail(`safeEvalDiceFormula() 2d6 result out of range (got ${result}, expected 22-32)`);
+    }
+  }
+}
+
+// Test F.4: safeEvalDiceFormula() handles complex formula
+{
+  const safeEval = (App.App && App.App.safeEvalDiceFormula) || (App.Calc && App.Calc.safeEvalDiceFormula);
+  if (safeEval) {
+    const context = {};
+    const result = safeEval('2d6+1d8+1d6+11', context);
+    // 2d6 (2-12) + 1d8 (1-8) + 1d6 (1-6) + 11 = 15-37
+    if (result >= 15 && result <= 37) {
+      pass('safeEvalDiceFormula() evaluates complex formula 2d6+1d8+1d6+11');
+    } else {
+      fail(`safeEvalDiceFormula() complex formula out of range (got ${result}, expected 15-37)`);
+    }
+  }
+}
+
+// Test F.5: Calc.calculateFormula() uses safe evaluator (no eval)
+{
+  if (App.Calc && App.Calc.calculateFormula) {
+    const funcCode = App.Calc.calculateFormula.toString();
+    if (!funcCode.includes('eval(')) {
+      pass('Calc.calculateFormula() does not use eval()');
+    } else {
+      fail('Calc.calculateFormula() still uses eval() (Goal F)');
+    }
+  } else {
+    info('Calc.calculateFormula() not found - skipping eval check');
   }
 }
 
