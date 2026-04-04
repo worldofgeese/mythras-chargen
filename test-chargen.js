@@ -1001,6 +1001,332 @@ section('Bug 1: Helpers.getHitLocationHP() Formula Correctness');
 }
 
 // ============================================================
+section('Reference Data Validation');
+// ============================================================
+
+// Load reference data
+const refAttributes = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/mythras-raw/attributes.json'), 'utf8'));
+
+// Test: Action Points table validation
+{
+  const apTable = refAttributes.action_points.table;
+  let allMatch = true;
+  let failures = [];
+
+  apTable.forEach(row => {
+    // Test min and max of each range by splitting DEX+INT evenly
+    // Skip values less than 2 (need at least 1+1 for two characteristics)
+    [Math.max(row.min, 2), row.max].forEach(total => {
+      const dex = Math.floor(total / 2);
+      const int = total - dex;
+      const calculated = App.Calc.actionPoints(dex, int);
+
+      if (calculated !== row.action_points) {
+        allMatch = false;
+        failures.push(`DEX+INT=${total} (${dex}+${int}): expected ${row.action_points}, got ${calculated}`);
+      }
+    });
+  });
+
+  if (allMatch) {
+    pass('Action Points table matches reference data for all boundary cases');
+  } else {
+    fail('Action Points table validation failed', failures[0]);
+  }
+}
+
+// Test: Damage Modifier table validation
+{
+  const dmTable = refAttributes.damage_modifier.table;
+  let allMatch = true;
+  let failures = [];
+
+  dmTable.slice(0, 10).forEach(row => {
+    // Test min and max of each range by splitting STR+SIZ evenly
+    [row.min, row.max].forEach(total => {
+      const str = Math.floor(total / 2);
+      const siz = total - str;
+      const calculated = App.Calc.damageModifier(str, siz);
+
+      if (calculated !== row.damage_modifier) {
+        allMatch = false;
+        failures.push(`STR+SIZ=${total} (${str}+${siz}): expected ${row.damage_modifier}, got ${calculated}`);
+      }
+    });
+  });
+
+  if (allMatch) {
+    pass('Damage Modifier table matches reference data for first 10 entries');
+  } else {
+    fail('Damage Modifier table validation failed', failures[0]);
+  }
+}
+
+// Test: Experience Modifier table validation
+{
+  const expTable = refAttributes.experience_modifier.table;
+  let allMatch = true;
+  let failures = [];
+
+  expTable.forEach(row => {
+    // Only test values >= 1 (characteristic minimums)
+    [Math.max(row.min, 1), row.max].forEach(value => {
+      const calculated = App.Calc.experienceModifier(value);
+
+      if (calculated !== row.experience_modifier) {
+        allMatch = false;
+        failures.push(`CHA=${value}: expected ${row.experience_modifier}, got ${calculated}`);
+      }
+    });
+  });
+
+  if (allMatch) {
+    pass('Experience Modifier table matches reference data');
+  } else {
+    fail('Experience Modifier table validation failed', failures[0]);
+  }
+}
+
+// Test: Healing Rate table validation
+{
+  const healTable = refAttributes.healing_rate.table;
+  let allMatch = true;
+  let failures = [];
+
+  healTable.forEach(row => {
+    // Only test values >= 1 (characteristic minimums)
+    [Math.max(row.min, 1), row.max].forEach(value => {
+      const calculated = App.Calc.healingRate(value);
+
+      if (calculated !== row.healing_rate) {
+        allMatch = false;
+        failures.push(`CON=${value}: expected ${row.healing_rate}, got ${calculated}`);
+      }
+    });
+  });
+
+  if (allMatch) {
+    pass('Healing Rate table matches reference data');
+  } else {
+    fail('Healing Rate table validation failed', failures[0]);
+  }
+}
+
+// Test: Luck Points table validation
+{
+  const luckTable = refAttributes.luck_points.table;
+  let allMatch = true;
+  let failures = [];
+
+  luckTable.forEach(row => {
+    // Only test values >= 1 (characteristic minimums)
+    [Math.max(row.min, 1), row.max].forEach(value => {
+      const calculated = App.Calc.luckPoints(value);
+
+      if (calculated !== row.luck_points) {
+        allMatch = false;
+        failures.push(`POW=${value}: expected ${row.luck_points}, got ${calculated}`);
+      }
+    });
+  });
+
+  if (allMatch) {
+    pass('Luck Points table matches reference data');
+  } else {
+    fail('Luck Points table validation failed', failures[0]);
+  }
+}
+
+// Test: Hit Points per Location table validation
+{
+  const hpTable = refAttributes.hit_points_per_location.table;
+  let allMatch = true;
+  let failures = [];
+
+  hpTable.forEach(row => {
+    [row.min, row.max].forEach(conSizTotal => {
+      // Test with CON=total, SIZ=0 and CON=0, SIZ=total
+      const calculated1 = App.Calc.hitPointsPerLocation(conSizTotal, 0);
+      const calculated2 = App.Calc.hitPointsPerLocation(0, conSizTotal);
+
+      const expected = {
+        'Head': row.head,
+        'Chest': row.chest,
+        'Abdomen': row.abdomen,
+        'Right Arm': row.each_arm,
+        'Left Arm': row.each_arm,
+        'Right Leg': row.leg,
+        'Left Leg': row.leg
+      };
+
+      const calc = calculated1;
+      Object.keys(expected).forEach(location => {
+        if (calc[location] !== expected[location]) {
+          allMatch = false;
+          failures.push(`CON+SIZ=${conSizTotal}, ${location}: expected ${expected[location]}, got ${calc[location]}`);
+        }
+      });
+    });
+  });
+
+  if (allMatch) {
+    pass('Hit Points per Location table matches reference data for all locations');
+  } else {
+    fail('Hit Points per Location table validation failed', failures[0]);
+  }
+}
+
+// ============================================================
+section('Cross-Verification Tests');
+// ============================================================
+
+// Test: DAMAGE_MOD_TABLE format
+{
+  let allHavePrefix = true;
+  let failures = [];
+
+  for (let i = 5; i <= 20; i++) {
+    const value = App.Calc.damageModifier(i * 5, 0); // Create values in the positive range
+    if (value && !value.startsWith('+')) {
+      allHavePrefix = false;
+      failures.push(`Index ${i}: ${value} missing + prefix`);
+    }
+  }
+
+  if (allHavePrefix) {
+    pass('DAMAGE_MOD_TABLE non-negative entries all have + prefix');
+  } else {
+    fail('DAMAGE_MOD_TABLE format test failed', failures[0]);
+  }
+}
+
+// ============================================================
+section('Golden Character Calculation Tests');
+// ============================================================
+
+// Golden Character 1: Balazaring Hunter
+{
+  const char1 = { STR: 12, CON: 13, SIZ: 10, DEX: 14, INT: 10, POW: 8, CHA: 8 };
+  const attrs = App.Calc.calculateAllAttributes(char1);
+
+  // Verify all attributes
+  const expected = {
+    actionPoints: 2,
+    damageModifier: '+0',
+    experienceModifier: 0,
+    healingRate: 3,
+    luckPoints: 2,
+    magicPoints: 8,
+    initiativeBonus: 12
+  };
+
+  let allMatch = true;
+  let failures = [];
+
+  Object.keys(expected).forEach(key => {
+    if (attrs[key] !== expected[key]) {
+      allMatch = false;
+      failures.push(`${key}: expected ${expected[key]}, got ${attrs[key]}`);
+    }
+  });
+
+  // Verify hit locations
+  const expectedHP = { Head: 5, Chest: 7, Abdomen: 6, 'Right Arm': 4, 'Left Arm': 4, 'Right Leg': 5, 'Left Leg': 5 };
+  Object.keys(expectedHP).forEach(location => {
+    if (attrs.hitPoints[location] !== expectedHP[location]) {
+      allMatch = false;
+      failures.push(`${location} HP: expected ${expectedHP[location]}, got ${attrs.hitPoints[location]}`);
+    }
+  });
+
+  if (allMatch) {
+    pass('Golden Character: Balazaring Hunter calculations correct');
+  } else {
+    fail('Golden Character: Balazaring Hunter failed', failures[0]);
+  }
+}
+
+// Golden Character 2: Sartarite Warrior
+{
+  const char2 = { STR: 14, CON: 12, SIZ: 12, DEX: 11, INT: 10, POW: 8, CHA: 8 };
+  const attrs = App.Calc.calculateAllAttributes(char2);
+
+  const expected = {
+    actionPoints: 2,
+    damageModifier: '+1d2',
+    experienceModifier: 0,
+    healingRate: 2,
+    luckPoints: 2,
+    magicPoints: 8,
+    initiativeBonus: 10
+  };
+
+  let allMatch = true;
+  let failures = [];
+
+  Object.keys(expected).forEach(key => {
+    if (attrs[key] !== expected[key]) {
+      allMatch = false;
+      failures.push(`${key}: expected ${expected[key]}, got ${attrs[key]}`);
+    }
+  });
+
+  const expectedHP = { Head: 5, Chest: 7, Abdomen: 6, 'Right Arm': 4, 'Left Arm': 4, 'Right Leg': 5, 'Left Leg': 5 };
+  Object.keys(expectedHP).forEach(location => {
+    if (attrs.hitPoints[location] !== expectedHP[location]) {
+      allMatch = false;
+      failures.push(`${location} HP: expected ${expectedHP[location]}, got ${attrs.hitPoints[location]}`);
+    }
+  });
+
+  if (allMatch) {
+    pass('Golden Character: Sartarite Warrior calculations correct');
+  } else {
+    fail('Golden Character: Sartarite Warrior failed', failures[0]);
+  }
+}
+
+// Golden Character 3: Praxian Beast Rider
+{
+  const char3 = { STR: 13, CON: 12, SIZ: 11, DEX: 12, INT: 10, POW: 9, CHA: 8 };
+  const attrs = App.Calc.calculateAllAttributes(char3);
+
+  const expected = {
+    actionPoints: 2,
+    damageModifier: '+0',
+    experienceModifier: 0,
+    healingRate: 2,
+    luckPoints: 2,
+    magicPoints: 9,
+    initiativeBonus: 11
+  };
+
+  let allMatch = true;
+  let failures = [];
+
+  Object.keys(expected).forEach(key => {
+    if (attrs[key] !== expected[key]) {
+      allMatch = false;
+      failures.push(`${key}: expected ${expected[key]}, got ${attrs[key]}`);
+    }
+  });
+
+  const expectedHP = { Head: 5, Chest: 7, Abdomen: 6, 'Right Arm': 4, 'Left Arm': 4, 'Right Leg': 5, 'Left Leg': 5 };
+  Object.keys(expectedHP).forEach(location => {
+    if (attrs.hitPoints[location] !== expectedHP[location]) {
+      allMatch = false;
+      failures.push(`${location} HP: expected ${expectedHP[location]}, got ${attrs.hitPoints[location]}`);
+    }
+  });
+
+  if (allMatch) {
+    pass('Golden Character: Praxian Beast Rider calculations correct');
+  } else {
+    fail('Golden Character: Praxian Beast Rider failed', failures[0]);
+  }
+}
+
+// ============================================================
 section('Test Summary');
 // ============================================================
 
