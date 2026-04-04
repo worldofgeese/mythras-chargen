@@ -1372,6 +1372,112 @@ const CharacterData = {
       console.error('fromJSON failed:', e);
       return false;
     }
+  },
+
+  // =============================================================================
+  // WAVE 2 GOAL E: SCHEMA VERSIONING & MIGRATION
+  // =============================================================================
+
+  /**
+   * Get current schema version
+   * @returns {number} Schema version (1 for baseline)
+   */
+  getSchemaVersion() {
+    return 1;
+  },
+
+  /**
+   * Save character data to localStorage with schema version
+   */
+  saveToLocalStorage() {
+    const payload = {
+      version: this.getSchemaVersion(),
+      data: {
+        name: this.name,
+        concept: this.concept,
+        characteristics: {...this.characteristics},
+        charMethod: this.charMethod,
+        attributes: {...this.attributes},
+        culture: this.culture,
+        homeland: this.homeland,
+        culturalSkills: {...this.culturalSkills},
+        runeAffinities: {...this.runeAffinities},
+        folkMagicSpells: [...this.folkMagicSpells],
+        passions: [...this.passions],
+        age: this.age,
+        gender: this.gender,
+        family: this.family,
+        backgroundEvents: this.backgroundEvents,
+        career: this.career,
+        careerSkills: {...this.careerSkills},
+        careerFolkMagic: [...this.careerFolkMagic],
+        bonusSkills: {...this.bonusSkills},
+        hobbySkillName: this.hobbySkillName,
+        startingMoney: this.startingMoney,
+        equipment: [...this.equipment],
+        weapons: [...this.weapons],
+        armor: [...this.armor],
+        combatStyles: [...this.combatStyles],
+        notes: this.notes,
+        background: this.background,
+        hitPoints: JSON.parse(JSON.stringify(this.hitPoints || {})),
+        schemaVersion: this.getSchemaVersion() // Include in data for redundancy
+      }
+    };
+
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('mythrasChargenCharacter', JSON.stringify(payload));
+    }
+  },
+
+  /**
+   * Load character data from localStorage with version handling
+   * @param {string} jsonString - JSON string from localStorage
+   * @returns {object|null} Migrated data object or null
+   */
+  loadFromLocalStorage(jsonString) {
+    try {
+      const payload = JSON.parse(jsonString);
+
+      // Check for version field
+      if (payload.version === undefined) {
+        // Legacy V0 data - no version field
+        return this.migrateV0toV1(payload);
+      }
+
+      if (payload.version === 1) {
+        // Current version - return data as-is
+        return payload.data;
+      }
+
+      // Unknown future version - reject and clear storage
+      console.warn(`Unknown schema version ${payload.version} - clearing storage`);
+      if (typeof localStorage !== 'undefined') {
+        localStorage.removeItem('mythrasChargenCharacter');
+      }
+      return null;
+
+    } catch (e) {
+      console.error('loadFromLocalStorage failed:', e);
+      return null;
+    }
+  },
+
+  /**
+   * Migrate legacy V0 data to V1
+   * @param {object} legacyData - Legacy character data without version field
+   * @returns {object} Migrated V1 data
+   */
+  migrateV0toV1(legacyData) {
+    // V0 -> V1 migration: just add schemaVersion field
+    // No structural changes needed for baseline migration
+    const migrated = {
+      ...legacyData,
+      schemaVersion: 1
+    };
+
+    console.log('Migrated legacy V0 character data to V1');
+    return migrated;
   }
 };
 
@@ -1746,14 +1852,19 @@ const App = {
   },
   
   saveToLocalStorage() {
-    localStorage.setItem('aig-character', JSON.stringify(CharacterData));
+    // Delegate to CharacterData.saveToLocalStorage() (Wave 2 Goal E)
+    CharacterData.saveToLocalStorage();
   },
-  
+
   loadFromLocalStorage() {
-    const saved = localStorage.getItem('aig-character');
+    // Load with schema version handling (Wave 2 Goal E)
+    const saved = localStorage.getItem('mythrasChargenCharacter');
     if (saved) {
-      Object.assign(CharacterData, JSON.parse(saved));
-      CharacterData.attributes = Calc.calculateAllAttributes(CharacterData.characteristics);
+      const data = CharacterData.loadFromLocalStorage(saved);
+      if (data) {
+        Object.assign(CharacterData, data);
+        CharacterData.attributes = Calc.calculateAllAttributes(CharacterData.characteristics);
+      }
     }
   },
   
