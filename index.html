@@ -1794,6 +1794,163 @@ const App = {
       }
     };
     input.click();
+  },
+
+  /**
+   * Canonical Domain Projection Layer (Wave 2 Goal A)
+   *
+   * Creates a normalized, read-only view of character data with canonical domain fields only.
+   * This is the single source of truth for character state representation.
+   *
+   * @param {object} rawCharacterData - Raw CharacterData object with mixed source/derived/meta fields
+   * @returns {object} Normalized character object with canonical domain fields
+   */
+  normalizeCharacter(rawCharacterData) {
+    const chars = rawCharacterData.characteristics || {};
+    const { STR, CON, SIZ, DEX, INT, POW, CHA } = chars;
+
+    // Calculate all derived attributes using Calc functions
+    const derivedAttrs = Calc.calculateAllAttributes(chars);
+
+    // Get compiled skills using Helpers
+    const skillsMap = Helpers.getCompiledSkills(rawCharacterData);
+
+    // Convert Map to plain object for easier serialization
+    const skillsObj = {};
+    for (const [name, value] of skillsMap.entries()) {
+      skillsObj[name] = value;
+    }
+
+    // Normalize combat styles
+    const combatStyles = (rawCharacterData.combatStyles || []).map(style => {
+      // Extract weapons array - handle both string and object formats
+      let weapons = [];
+      if (style.weapons) {
+        weapons = style.weapons.map(w => {
+          if (typeof w === 'string') {
+            return w;
+          } else if (w && typeof w === 'object' && w.name) {
+            return w.name;
+          }
+          return String(w);
+        });
+      }
+
+      return {
+        name: style.name || '',
+        traits: style.traits || [],
+        weapons: weapons,
+        skill: style.skill || 0
+      };
+    });
+
+    // Build hit locations array from Calc
+    const hitPointsMap = Calc.hitPointsPerLocation(CON || 10, SIZ || 10);
+    const hitLocations = Object.entries(hitPointsMap).map(([name, max]) => {
+      // Check if we have current HP from saved data
+      const current = (rawCharacterData.hitPoints && rawCharacterData.hitPoints[name])
+        ? rawCharacterData.hitPoints[name].current || max
+        : max;
+
+      return { name, max, current };
+    });
+
+    // Normalize passions
+    const passions = (rawCharacterData.passions || []).map(p => {
+      if (typeof p === 'string') {
+        // Parse "Name: Value" format
+        const match = p.match(/^(.+?):\s*(\d+)$/);
+        if (match) {
+          return { name: match[1].trim(), value: parseInt(match[2], 10) };
+        }
+        return { name: p, value: 0 };
+      } else if (p && typeof p === 'object') {
+        return { name: p.name || '', value: p.value || 0 };
+      }
+      return { name: String(p), value: 0 };
+    });
+
+    // Normalize folk magic
+    const folkMagic = rawCharacterData.folkMagicSpells || rawCharacterData.folkMagic || [];
+
+    // Normalize equipment
+    const weapons = (rawCharacterData.weapons || []).map(w => {
+      if (typeof w === 'string') {
+        return { name: w, quantity: 1 };
+      } else if (w && typeof w === 'object') {
+        return {
+          name: w.name || String(w),
+          quantity: w.quantity || 1
+        };
+      }
+      return { name: String(w), quantity: 1 };
+    });
+
+    const armor = (rawCharacterData.armor || []).map(a => {
+      if (typeof a === 'string') {
+        return { location: 'Body', ap: 0 }; // Default - will be improved in future
+      } else if (a && typeof a === 'object') {
+        return {
+          location: a.location || 'Body',
+          ap: a.ap || 0
+        };
+      }
+      return { location: 'Body', ap: 0 };
+    });
+
+    const items = rawCharacterData.equipment || [];
+
+    return {
+      // Identity & stats
+      name: rawCharacterData.name || '',
+      race: rawCharacterData.race || 'Human',
+      culture: rawCharacterData.culture || '',
+      profession: rawCharacterData.career || rawCharacterData.profession || '',
+
+      // Characteristics (all integers)
+      characteristics: {
+        STR: STR || 10,
+        CON: CON || 10,
+        SIZ: SIZ || 10,
+        DEX: DEX || 10,
+        INT: INT || 10,
+        POW: POW || 10,
+        CHA: CHA || 10
+      },
+
+      // Derived attributes (from Calc)
+      attributes: {
+        actionPoints: derivedAttrs.actionPoints,
+        initiativeBonus: derivedAttrs.initiativeBonus,
+        damageModifier: derivedAttrs.damageModifier,
+        experienceModifier: derivedAttrs.experienceModifier,
+        healingRate: derivedAttrs.healingRate,
+        luckPoints: derivedAttrs.luckPoints,
+        magicPoints: derivedAttrs.magicPoints
+      },
+
+      // Skills (compiled from Helpers)
+      skills: skillsObj,
+
+      // Combat styles (normalized)
+      combatStyles: combatStyles,
+
+      // Hit locations (from Calc with current/max)
+      hitLocations: hitLocations,
+
+      // Passions (normalized)
+      passions: passions,
+
+      // Folk magic (array of spell names)
+      folkMagic: Array.isArray(folkMagic) ? folkMagic : [],
+
+      // Equipment (grouped by type, all normalized to objects)
+      equipment: {
+        weapons: weapons,
+        armor: armor,
+        items: Array.isArray(items) ? items : []
+      }
+    };
   }
 };
 
