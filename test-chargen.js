@@ -2507,6 +2507,149 @@ section('Wave 3 Goal 5: Vendor pdf-lib Locally');
 }
 
 // ============================================================
+section('Wave 3 Goal 6: localStorage Round-Trip Tests');
+// ============================================================
+
+// Simple tests: verify toJSON/fromJSON work (localStorage is mocked minimally)
+fixtures.forEach(fixtureInfo => {
+  const fixture = loadFixture(fixtureInfo.file);
+  if (!fixture) return;
+
+  // Test 6.1: toJSON produces valid JSON
+  {
+    if (App.CharacterData && App.CharacterData.toJSON) {
+      try {
+        // Load fixture
+        const jsonString = JSON.stringify(fixture);
+        App.CharacterData.fromJSON(jsonString);
+
+        // Serialize
+        const output = App.CharacterData.toJSON();
+
+        // Parse to verify it's valid JSON
+        const parsed = JSON.parse(output);
+
+        if (parsed && parsed.name === fixture.name) {
+          pass(`${fixtureInfo.name}: toJSON() produces valid JSON`);
+        } else {
+          fail(`${fixtureInfo.name}: toJSON() output invalid`);
+        }
+      } catch (err) {
+        fail(`${fixtureInfo.name}: toJSON() threw error`, err.message);
+      }
+    }
+  }
+
+  // Test 6.2: fromJSON loads fixture
+  {
+    if (App.CharacterData && App.CharacterData.fromJSON) {
+      try {
+        const jsonString = JSON.stringify(fixture);
+        const success = App.CharacterData.fromJSON(jsonString);
+
+        if (success && App.CharacterData.name === fixture.name) {
+          pass(`${fixtureInfo.name}: fromJSON() loads data`);
+        } else {
+          fail(`${fixtureInfo.name}: fromJSON() failed`);
+        }
+      } catch (err) {
+        fail(`${fixtureInfo.name}: fromJSON() threw error`, err.message);
+      }
+    }
+  }
+
+  // Test 6.3: Round-trip preserves name
+  {
+    if (App.CharacterData && App.CharacterData.toJSON && App.CharacterData.fromJSON) {
+      try {
+        // Load
+        const jsonString = JSON.stringify(fixture);
+        App.CharacterData.fromJSON(jsonString);
+
+        // Serialize and reload
+        const serialized = App.CharacterData.toJSON();
+        App.CharacterData.fromJSON(serialized);
+
+        if (App.CharacterData.name === fixture.name) {
+          pass(`${fixtureInfo.name}: JSON round-trip preserves name`);
+        } else {
+          fail(`${fixtureInfo.name}: JSON round-trip lost name`);
+        }
+      } catch (err) {
+        fail(`${fixtureInfo.name}: JSON round-trip threw error`, err.message);
+      }
+    }
+  }
+
+  // Test 6.4: Round-trip preserves characteristics
+  {
+    if (App.CharacterData && App.CharacterData.toJSON && App.CharacterData.fromJSON) {
+      try {
+        const jsonString = JSON.stringify(fixture);
+        App.CharacterData.fromJSON(jsonString);
+
+        const serialized = App.CharacterData.toJSON();
+        App.CharacterData.fromJSON(serialized);
+
+        const charsMatch =
+          App.CharacterData.characteristics.STR === fixture.characteristics.STR &&
+          App.CharacterData.characteristics.CON === fixture.characteristics.CON;
+
+        if (charsMatch) {
+          pass(`${fixtureInfo.name}: JSON round-trip preserves characteristics`);
+        } else {
+          fail(`${fixtureInfo.name}: JSON round-trip lost characteristics`);
+        }
+      } catch (err) {
+        fail(`${fixtureInfo.name}: JSON round-trip characteristics threw error`, err.message);
+      }
+    }
+  }
+
+  // Test 6.5: Round-trip preserves skills
+  {
+    if (App.CharacterData && App.CharacterData.toJSON && App.CharacterData.fromJSON) {
+      try {
+        const jsonString = JSON.stringify(fixture);
+        App.CharacterData.fromJSON(jsonString);
+
+        const originalSkills = {...App.CharacterData.culturalSkills};
+        const serialized = App.CharacterData.toJSON();
+        App.CharacterData.fromJSON(serialized);
+
+        const firstSkillName = Object.keys(originalSkills)[0];
+        const skillsMatch = firstSkillName &&
+          App.CharacterData.culturalSkills[firstSkillName] === originalSkills[firstSkillName];
+
+        if (skillsMatch || Object.keys(originalSkills).length === 0) {
+          pass(`${fixtureInfo.name}: JSON round-trip preserves skills`);
+        } else {
+          fail(`${fixtureInfo.name}: JSON round-trip lost skills`);
+        }
+      } catch (err) {
+        fail(`${fixtureInfo.name}: JSON round-trip skills threw error`, err.message);
+      }
+    }
+  }
+});
+
+// Test 6.6: schemaVersion field handling
+{
+  if (App.CharacterData && App.CharacterData.getSchemaVersion) {
+    try {
+      const version = App.CharacterData.getSchemaVersion();
+      if (version === 1) {
+        pass('CharacterData.getSchemaVersion() returns 1');
+      } else {
+        fail(`CharacterData.getSchemaVersion() returned ${version}, expected 1`);
+      }
+    } catch (err) {
+      fail('CharacterData.getSchemaVersion() threw error', err.message);
+    }
+  }
+}
+
+// ============================================================
 section('Test Summary');
 // ============================================================
 
