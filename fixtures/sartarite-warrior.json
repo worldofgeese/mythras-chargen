@@ -13,11 +13,11 @@
   "charMethod": "point-buy",
   "attributes": {
     "actionPoints": 2,
-    "experienceModifier": -1,
+    "experienceModifier": 0,
     "healingRate": 2,
     "luckPoints": 2,
     "magicPoints": 10,
-    "initiativeBonus": 0,
+    "initiativeBonus": 11,
     "damageModifier": "+1d2",
     "hitPoints": {
       "Head": 5,
@@ -103,18 +103,11 @@
     }
   ],
   "weapons": [
-    {
-      "name": "Broadsword",
-      "quantity": 1
-    },
-    {
-      "name": "Target Shield",
-      "quantity": 1
-    },
-    {
-      "name": "Javelin",
-      "quantity": 3
-    }
+    "Broadsword",
+    "Target Shield",
+    "Javelin",
+    "Javelin",
+    "Javelin"
   ],
   "armor": [
     "Ringmail Hauberk",

@@ -1885,6 +1885,263 @@ section('Wave 2 Goal F: Eliminate eval() for Formula Evaluation');
 }
 
 // ============================================================
+section('Wave 3 Goal 2: Golden Fixture Tests');
+// ============================================================
+
+// Helper: Load a fixture file
+function loadFixture(filename) {
+  const fixturePath = path.join(__dirname, 'fixtures', filename);
+  try {
+    const content = fs.readFileSync(fixturePath, 'utf8');
+    return JSON.parse(content);
+  } catch (err) {
+    return null;
+  }
+}
+
+const fixtures = [
+  { file: 'balazaring-hunter.json', name: 'Balazaring Hunter' },
+  { file: 'sartarite-warrior.json', name: 'Sartarite Warrior' },
+  { file: 'praxian-beast-rider.json', name: 'Praxian Beast Rider' },
+  { file: 'telmori-wolfbrother.json', name: 'Telmori Wolfbrother' }
+];
+
+fixtures.forEach(fixtureInfo => {
+  const fixture = loadFixture(fixtureInfo.file);
+
+  if (!fixture) {
+    fail(`${fixtureInfo.name}: fixture file not found or invalid JSON`);
+    return;
+  }
+
+  // Test 2.1: Fixture loads successfully
+  {
+    if (fixture && fixture.name && fixture.characteristics) {
+      pass(`${fixtureInfo.name}: fixture loaded successfully`);
+    } else {
+      fail(`${fixtureInfo.name}: fixture missing required fields`);
+    }
+  }
+
+  // Test 2.2: CharacterData.fromJSON() can parse the fixture
+  {
+    if (App.CharacterData && App.CharacterData.fromJSON) {
+      const jsonString = JSON.stringify(fixture);
+      const success = App.CharacterData.fromJSON(jsonString);
+      if (success) {
+        pass(`${fixtureInfo.name}: CharacterData.fromJSON() successful`);
+      } else {
+        fail(`${fixtureInfo.name}: CharacterData.fromJSON() failed`);
+      }
+    }
+  }
+
+  // Test 2.3: normalizeCharacter() runs without error
+  {
+    if (App.App && App.App.normalizeCharacter) {
+      try {
+        const normalized = App.App.normalizeCharacter(fixture);
+        if (normalized && normalized.name) {
+          pass(`${fixtureInfo.name}: normalizeCharacter() successful`);
+        } else {
+          fail(`${fixtureInfo.name}: normalizeCharacter() returned invalid data`);
+        }
+      } catch (err) {
+        fail(`${fixtureInfo.name}: normalizeCharacter() threw error`, err.message);
+      }
+    }
+  }
+
+  // Test 2.4: Derived attributes match expected values
+  {
+    const chars = fixture.characteristics;
+    const expectedAttrs = fixture.attributes;
+    const calculatedAttrs = App.Calc.calculateAllAttributes(chars);
+
+    let attributesMatch = true;
+    let firstMismatch = null;
+
+    const keysToCheck = ['actionPoints', 'experienceModifier', 'healingRate',
+                         'luckPoints', 'magicPoints', 'initiativeBonus', 'damageModifier'];
+
+    keysToCheck.forEach(key => {
+      if (expectedAttrs[key] !== calculatedAttrs[key]) {
+        attributesMatch = false;
+        if (!firstMismatch) {
+          firstMismatch = `${key}: expected ${expectedAttrs[key]}, got ${calculatedAttrs[key]}`;
+        }
+      }
+    });
+
+    if (attributesMatch) {
+      pass(`${fixtureInfo.name}: derived attributes match calculated values`);
+    } else {
+      fail(`${fixtureInfo.name}: derived attributes mismatch`, firstMismatch);
+    }
+  }
+
+  // Test 2.5: Hit location HP matches reference table
+  {
+    const chars = fixture.characteristics;
+    const expectedHP = fixture.attributes.hitPoints;
+    const calculatedHP = App.Calc.hitPointsPerLocation(chars.CON, chars.SIZ);
+
+    let hpMatch = true;
+    let firstMismatch = null;
+
+    Object.keys(expectedHP).forEach(location => {
+      if (expectedHP[location] !== calculatedHP[location]) {
+        hpMatch = false;
+        if (!firstMismatch) {
+          firstMismatch = `${location}: expected ${expectedHP[location]}, got ${calculatedHP[location]}`;
+        }
+      }
+    });
+
+    if (hpMatch) {
+      pass(`${fixtureInfo.name}: hit location HP matches reference table`);
+    } else {
+      fail(`${fixtureInfo.name}: hit location HP mismatch`, firstMismatch);
+    }
+  }
+
+  // Test 2.6: Skills are within valid ranges (0-200)
+  {
+    const allSkills = {
+      ...fixture.culturalSkills,
+      ...fixture.careerSkills,
+      ...fixture.bonusSkills
+    };
+
+    let allValid = true;
+    let firstInvalid = null;
+
+    Object.entries(allSkills).forEach(([skillName, value]) => {
+      if (value < 0 || value > 200) {
+        allValid = false;
+        if (!firstInvalid) {
+          firstInvalid = `${skillName}: ${value} (out of range 0-200)`;
+        }
+      }
+    });
+
+    if (allValid) {
+      pass(`${fixtureInfo.name}: all skill values in valid range`);
+    } else {
+      fail(`${fixtureInfo.name}: invalid skill value`, firstInvalid);
+    }
+  }
+
+  // Test 2.7: Combat style weapons are valid
+  {
+    if (fixture.combatStyles && fixture.combatStyles.length > 0) {
+      let allWeaponsValid = true;
+      let firstInvalid = null;
+
+      fixture.combatStyles.forEach(style => {
+        if (style.weapons && Array.isArray(style.weapons)) {
+          style.weapons.forEach(weapon => {
+            const weaponName = typeof weapon === 'string' ? weapon : weapon.name;
+            const resolved = App.Helpers.resolveWeapon(weaponName);
+
+            if (!resolved) {
+              allWeaponsValid = false;
+              if (!firstInvalid) {
+                firstInvalid = `"${weaponName}" in style "${style.name}"`;
+              }
+            }
+          });
+        }
+      });
+
+      if (allWeaponsValid) {
+        pass(`${fixtureInfo.name}: all combat style weapons valid`);
+      } else {
+        fail(`${fixtureInfo.name}: invalid weapon reference`, firstInvalid);
+      }
+    } else {
+      info(`${fixtureInfo.name}: no combat styles to validate`);
+    }
+  }
+
+  // Test 2.8: Passions have correct format and values
+  {
+    if (fixture.passions && Array.isArray(fixture.passions)) {
+      let allValid = true;
+      let firstInvalid = null;
+
+      fixture.passions.forEach(passion => {
+        const passionStr = typeof passion === 'string' ? passion : `${passion.name}: ${passion.value}`;
+        const match = passionStr.match(/^(.+?):\s*(\d+)$/);
+
+        if (!match) {
+          allValid = false;
+          if (!firstInvalid) {
+            firstInvalid = `Invalid format: "${passionStr}"`;
+          }
+        } else {
+          const value = parseInt(match[2], 10);
+          if (value < 0 || value > 200) {
+            allValid = false;
+            if (!firstInvalid) {
+              firstInvalid = `${match[1]}: ${value} (out of range)`;
+            }
+          }
+        }
+      });
+
+      if (allValid) {
+        pass(`${fixtureInfo.name}: passions correctly formatted`);
+      } else {
+        fail(`${fixtureInfo.name}: passion format/value error`, firstInvalid);
+      }
+    }
+  }
+
+  // Test 2.9: CharacterData.validate() returns valid
+  {
+    if (App.CharacterData && App.CharacterData.validate) {
+      // Load fixture into CharacterData
+      const jsonString = JSON.stringify(fixture);
+      App.CharacterData.fromJSON(jsonString);
+
+      const validation = App.CharacterData.validate();
+
+      if (validation.valid === true) {
+        pass(`${fixtureInfo.name}: CharacterData.validate() returns valid`);
+      } else {
+        fail(`${fixtureInfo.name}: CharacterData.validate() failed`,
+             validation.errors ? validation.errors[0] : 'unknown error');
+      }
+    }
+  }
+
+  // Test 2.10: Hit points structure is complete
+  {
+    const hp = fixture.hitPoints;
+    const requiredLocations = ['Head', 'Chest', 'Abdomen', 'Right Arm', 'Left Arm', 'Right Leg', 'Left Leg'];
+
+    let allLocationsPresent = true;
+    let missingLocation = null;
+
+    requiredLocations.forEach(loc => {
+      if (!hp[loc] || typeof hp[loc].current !== 'number' || typeof hp[loc].max !== 'number') {
+        allLocationsPresent = false;
+        if (!missingLocation) {
+          missingLocation = loc;
+        }
+      }
+    });
+
+    if (allLocationsPresent) {
+      pass(`${fixtureInfo.name}: all 7 hit locations present with current/max`);
+    } else {
+      fail(`${fixtureInfo.name}: missing or invalid hit location`, missingLocation);
+    }
+  }
+});
+
+// ============================================================
 section('Test Summary');
 // ============================================================
 

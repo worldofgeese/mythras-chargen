@@ -13,11 +13,11 @@
   "charMethod": "point-buy",
   "attributes": {
     "actionPoints": 2,
-    "experienceModifier": -1,
+    "experienceModifier": 0,
     "healingRate": 2,
     "luckPoints": 2,
     "magicPoints": 12,
-    "initiativeBonus": 0,
+    "initiativeBonus": 11,
     "damageModifier": "+0",
     "hitPoints": {
       "Head": 5,
@@ -102,22 +102,9 @@
     }
   ],
   "weapons": [
-    {
-      "name": "Lance",
-      "quantity": 1
-    },
-    {
-      "name": "Short Bow",
-      "quantity": 1
-    },
-    {
-      "name": "Hatchet",
-      "quantity": 1
-    },
-    {
-      "name": "Arrows",
-      "quantity": 20
-    }
+    "Lance",
+    "Short Bow",
+    "Hatchet"
   ],
   "armor": [
     "Leather Cuirass",

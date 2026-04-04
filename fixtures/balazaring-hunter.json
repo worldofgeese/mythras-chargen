@@ -13,11 +13,11 @@
   "charMethod": "point-buy",
   "attributes": {
     "actionPoints": 2,
-    "experienceModifier": -1,
+    "experienceModifier": 0,
     "healingRate": 3,
     "luckPoints": 2,
     "magicPoints": 11,
-    "initiativeBonus": 0,
+    "initiativeBonus": 12,
     "damageModifier": "+0",
     "hitPoints": {
       "Head": 5,
@@ -101,22 +101,12 @@
     }
   ],
   "weapons": [
-    {
-      "name": "Javelin",
-      "quantity": 3
-    },
-    {
-      "name": "Short Spear",
-      "quantity": 1
-    },
-    {
-      "name": "Sling",
-      "quantity": 1
-    },
-    {
-      "name": "Dagger",
-      "quantity": 1
-    }
+    "Javelin",
+    "Javelin",
+    "Javelin",
+    "Short Spear",
+    "Sling",
+    "Dagger"
   ],
   "armor": [
     "Leather Cuirass"

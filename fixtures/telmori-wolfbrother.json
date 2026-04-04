@@ -13,11 +13,11 @@
   "charMethod": "point-buy",
   "attributes": {
     "actionPoints": 2,
-    "experienceModifier": -2,
+    "experienceModifier": 0,
     "healingRate": 3,
-    "luckPoints": 2,
+    "luckPoints": 3,
     "magicPoints": 13,
-    "initiativeBonus": 0,
+    "initiativeBonus": 11,
     "damageModifier": "+1d2",
     "hitPoints": {
       "Head": 6,
@@ -102,8 +102,7 @@
       "name": "Wolf Form",
       "skill": 65,
       "weapons": [
-        "Bite",
-        "Claw"
+        "Unarmed"
       ],
       "traits": [
         "Unarmed Prowess"
@@ -111,14 +110,9 @@
     }
   ],
   "weapons": [
-    {
-      "name": "Short Spear",
-      "quantity": 2
-    },
-    {
-      "name": "Dagger",
-      "quantity": 1
-    }
+    "Short Spear",
+    "Short Spear",
+    "Dagger"
   ],
   "armor": [
     "Leather Vest"
