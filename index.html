@@ -1004,18 +1004,14 @@ const Helpers = {
    */
   getHitLocationHP(characterData, locationName) {
     const chars = characterData.characteristics || {};
-    const siz = chars.SIZ || 10;
     const con = chars.CON || 10;
+    const siz = chars.SIZ || 10;
 
-    // Base HP calculation: (SIZ + CON) / 2, rounded up
-    const baseHP = Math.ceil((siz + con) / 2);
+    // Use Calc.hitPointsPerLocation for correct table-based formula
+    const hitPoints = Calc.hitPointsPerLocation(con, siz);
 
-    // Find location modifier
-    const location = HIT_LOCATIONS.find(loc => loc.name === locationName);
-    if (!location) return baseHP;
-
-    const modifier = location.hpMod || 0;
-    return baseHP + modifier;
+    // Return HP for the specified location
+    return hitPoints[locationName] || 0;
   },
 
   /**
