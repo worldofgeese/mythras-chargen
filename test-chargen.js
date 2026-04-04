@@ -906,6 +906,100 @@ section('Risk 6: Browser Validation');
 }
 
 // ============================================================
+section('Bug 1: Helpers.getHitLocationHP() Formula Correctness');
+// ============================================================
+
+// Test 1.1: CON 13 + SIZ 11 = 24 -> base should be 5 (Math.ceil(24/5))
+{
+  if (App.Helpers && App.Helpers.getHitLocationHP) {
+    const testChar = { characteristics: { CON: 13, SIZ: 11 } };
+    const headHP = App.Helpers.getHitLocationHP(testChar, 'Head');
+
+    // Correct formula: Math.ceil((13 + 11) / 5) = Math.ceil(24/5) = 5
+    if (headHP === 5) {
+      pass('Bug 1: Helpers.getHitLocationHP() Head HP correct for CON 13, SIZ 11 (5)');
+    } else {
+      fail(`Bug 1: Helpers.getHitLocationHP() Head HP wrong (expected 5, got ${headHP})`);
+    }
+
+    const chestHP = App.Helpers.getHitLocationHP(testChar, 'Chest');
+    // Chest should be base + 2 = 5 + 2 = 7
+    if (chestHP === 7) {
+      pass('Bug 1: Helpers.getHitLocationHP() Chest HP correct for CON 13, SIZ 11 (7)');
+    } else {
+      fail(`Bug 1: Helpers.getHitLocationHP() Chest HP wrong (expected 7, got ${chestHP})`);
+    }
+  }
+}
+
+// Test 1.2: Match reference table - CON+SIZ = 1-5 range
+{
+  if (App.Helpers && App.Helpers.getHitLocationHP) {
+    const testChar = { characteristics: { CON: 3, SIZ: 2 } }; // Total = 5
+    const headHP = App.Helpers.getHitLocationHP(testChar, 'Head');
+    if (headHP === 1) {
+      pass('Bug 1: Reference table CON+SIZ=5 -> Head=1');
+    } else {
+      fail(`Bug 1: Reference table CON+SIZ=5 -> Head should be 1, got ${headHP}`);
+    }
+  }
+}
+
+// Test 1.3: Match reference table - CON+SIZ = 11-15 range
+{
+  if (App.Helpers && App.Helpers.getHitLocationHP) {
+    const testChar = { characteristics: { CON: 7, SIZ: 6 } }; // Total = 13
+    const headHP = App.Helpers.getHitLocationHP(testChar, 'Head');
+    const chestHP = App.Helpers.getHitLocationHP(testChar, 'Chest');
+    const abdomenHP = App.Helpers.getHitLocationHP(testChar, 'Abdomen');
+    const armHP = App.Helpers.getHitLocationHP(testChar, 'Right Arm');
+    const legHP = App.Helpers.getHitLocationHP(testChar, 'Right Leg');
+
+    // Math.ceil(13/5) = 3, so Head=3, Chest=5, Abdomen=4, Arm=2, Leg=3
+    if (headHP === 3 && chestHP === 5 && abdomenHP === 4 && armHP === 2 && legHP === 3) {
+      pass('Bug 1: Reference table CON+SIZ=13 matches all locations (3/5/4/2/3)');
+    } else {
+      fail(`Bug 1: Reference table CON+SIZ=13 wrong (got ${headHP}/${chestHP}/${abdomenHP}/${armHP}/${legHP}, expected 3/5/4/2/3)`);
+    }
+  }
+}
+
+// Test 1.4: Helpers.getHitLocationHP() must match Calc.hitPointsPerLocation()
+{
+  if (App.Helpers && App.Helpers.getHitLocationHP && App.Calc && App.Calc.hitPointsPerLocation) {
+    const testCases = [
+      { CON: 12, SIZ: 13 },
+      { CON: 10, SIZ: 10 },
+      { CON: 14, SIZ: 11 },
+      { CON: 8, SIZ: 9 },
+      { CON: 16, SIZ: 15 }
+    ];
+
+    let allMatch = true;
+    let mismatchDetails = [];
+
+    testCases.forEach(testCase => {
+      const calcResult = App.Calc.hitPointsPerLocation(testCase.CON, testCase.SIZ);
+      const testChar = { characteristics: testCase };
+
+      Object.keys(calcResult).forEach(location => {
+        const helpersResult = App.Helpers.getHitLocationHP(testChar, location);
+        if (helpersResult !== calcResult[location]) {
+          allMatch = false;
+          mismatchDetails.push(`CON ${testCase.CON}, SIZ ${testCase.SIZ}, ${location}: Helpers=${helpersResult}, Calc=${calcResult[location]}`);
+        }
+      });
+    });
+
+    if (allMatch) {
+      pass('Bug 1: Helpers.getHitLocationHP() matches Calc.hitPointsPerLocation() for 5 test cases');
+    } else {
+      fail(`Bug 1: Helpers.getHitLocationHP() does NOT match Calc.hitPointsPerLocation()`, mismatchDetails[0]);
+    }
+  }
+}
+
+// ============================================================
 section('Test Summary');
 // ============================================================
 
