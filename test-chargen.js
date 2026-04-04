@@ -2270,6 +2270,190 @@ fixtures.forEach(fixtureInfo => {
 });
 
 // ============================================================
+section('Wave 3 Goal 4: Template PDF Field Coverage');
+// ============================================================
+
+// Test 4.1: Verify pdf-field-map.json exists
+{
+  const mapPath = path.join(__dirname, 'references', 'pdf-field-map.json');
+  if (fs.existsSync(mapPath)) {
+    const content = fs.readFileSync(mapPath, 'utf8');
+    const fields = JSON.parse(content);
+    if (Array.isArray(fields) && fields.length > 1000) {
+      pass(`pdf-field-map.json exists with ${fields.length} fields`);
+    } else {
+      fail('pdf-field-map.json missing or incomplete');
+    }
+  } else {
+    fail('pdf-field-map.json not found');
+  }
+}
+
+// Test 4.2: exportTemplatePDF() fills character name
+{
+  if (App.App && App.App.exportTemplatePDF) {
+    const pdfCode = App.App.exportTemplatePDF.toString();
+    if (pdfCode.includes('CharacterData.name')) {
+      pass('Template PDF: fills character name field');
+    } else {
+      fail('Template PDF: missing character name mapping');
+    }
+  }
+}
+
+// Test 4.3: exportTemplatePDF() fills all 7 characteristics
+{
+  if (App.App && App.App.exportTemplatePDF) {
+    const pdfCode = App.App.exportTemplatePDF.toString();
+    const chars = ['STR', 'CON', 'SIZ', 'DEX', 'INT', 'POW', 'CHA'];
+    let allMapped = true;
+    chars.forEach(char => {
+      if (!pdfCode.includes(`'${char}'`) && !pdfCode.includes(`"${char}"`)) {
+        allMapped = false;
+      }
+    });
+    if (allMapped) {
+      pass('Template PDF: fills all 7 characteristics');
+    } else {
+      fail('Template PDF: missing characteristic mapping');
+    }
+  }
+}
+
+// Test 4.4: exportTemplatePDF() fills derived attributes
+{
+  if (App.App && App.App.exportTemplatePDF) {
+    const pdfCode = App.App.exportTemplatePDF.toString();
+    const attrs = ['actionPoints', 'damageModifier', 'healingRate',
+                   'movementRate', 'initiativeBonus', 'luckPoints'];
+    let allMapped = true;
+    attrs.forEach(attr => {
+      if (!pdfCode.includes(attr)) {
+        allMapped = false;
+      }
+    });
+    if (allMapped) {
+      pass('Template PDF: fills all derived attributes');
+    } else {
+      fail('Template PDF: missing derived attribute mapping');
+    }
+  }
+}
+
+// Test 4.5: exportTemplatePDF() fills hit locations
+{
+  if (App.App && App.App.exportTemplatePDF) {
+    const pdfCode = App.App.exportTemplatePDF.toString();
+    const locations = ['head', 'chest', 'abdomen', 'leftArm', 'rightArm', 'leftLeg', 'rightLeg'];
+    let allMapped = true;
+    locations.forEach(loc => {
+      if (!pdfCode.includes(loc)) {
+        allMapped = false;
+      }
+    });
+    if (allMapped) {
+      pass('Template PDF: fills all 7 hit locations');
+    } else {
+      fail('Template PDF: missing hit location mapping');
+    }
+  }
+}
+
+// Test 4.6: exportTemplatePDF() fills skills
+{
+  if (App.App && App.App.exportTemplatePDF) {
+    const pdfCode = App.App.exportTemplatePDF.toString();
+    if (pdfCode.includes('compileAllSkills')) {
+      pass('Template PDF: fills skills from compileAllSkills()');
+    } else {
+      fail('Template PDF: missing skills mapping');
+    }
+  }
+}
+
+// Test 4.7: exportTemplatePDF() fills combat styles
+{
+  if (App.App && App.App.exportTemplatePDF) {
+    const pdfCode = App.App.exportTemplatePDF.toString();
+    if (pdfCode.includes('CharacterData.combatStyles')) {
+      pass('Template PDF: fills combat styles');
+    } else {
+      fail('Template PDF: missing combat styles mapping');
+    }
+  }
+}
+
+// Test 4.8: exportTemplatePDF() fills weapons
+{
+  if (App.App && App.App.exportTemplatePDF) {
+    const pdfCode = App.App.exportTemplatePDF.toString();
+    if (pdfCode.includes('CharacterData.weapons')) {
+      pass('Template PDF: fills weapons');
+    } else {
+      fail('Template PDF: missing weapons mapping');
+    }
+  }
+}
+
+// Test 4.9: exportTemplatePDF() fills folk magic
+{
+  if (App.App && App.App.exportTemplatePDF) {
+    const pdfCode = App.App.exportTemplatePDF.toString();
+    if (pdfCode.includes('folkMagicSpells') || pdfCode.includes('careerFolkMagic')) {
+      pass('Template PDF: fills folk magic spells');
+    } else {
+      fail('Template PDF: missing folk magic mapping');
+    }
+  }
+}
+
+// Test 4.10: exportTemplatePDF() fills passions
+{
+  if (App.App && App.App.exportTemplatePDF) {
+    const pdfCode = App.App.exportTemplatePDF.toString();
+    if (pdfCode.includes('CharacterData.passions')) {
+      pass('Template PDF: fills passions');
+    } else {
+      fail('Template PDF: missing passions mapping');
+    }
+  }
+}
+
+// Test 4.11: normalizeCharacter() provides all data needed for template PDF
+{
+  if (App.App && App.App.normalizeCharacter) {
+    const testChar = createTestCharacter();
+    const normalized = App.App.normalizeCharacter(testChar);
+
+    // Note: normalizeCharacter uses 'profession' not 'career', and doesn't include homeland/age
+    // Those are accessed directly from CharacterData in the template export
+    const requiredFields = [
+      'name', 'race', 'culture', 'profession',
+      'characteristics', 'attributes', 'skills', 'combatStyles',
+      'hitLocations', 'folkMagic', 'passions', 'equipment'
+    ];
+
+    let allPresent = true;
+    let missingField = null;
+
+    requiredFields.forEach(field => {
+      if (!(field in normalized)) {
+        allPresent = false;
+        if (!missingField) {
+          missingField = field;
+        }
+      }
+    });
+
+    if (allPresent) {
+      pass('normalizeCharacter() provides all core fields for template PDF');
+    } else {
+      fail('normalizeCharacter() missing required field', missingField);
+    }
+  }
+}
+
+// ============================================================
 section('Test Summary');
 // ============================================================
 
