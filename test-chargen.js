@@ -1684,22 +1684,11 @@ section('Wave 2 Goal E: Schema Versioning & Migration');
       removeItem: (key) => { savedData = null; }
     };
 
-    // Save with mock
-    const origSetItem = global.localStorage ? global.localStorage.setItem : null;
-    if (typeof localStorage !== 'undefined') {
-      const origLS = localStorage;
-      global.localStorage = mockStorage;
-      App.CharacterData.saveToLocalStorage();
-      global.localStorage = origLS;
-    } else {
-      // For test env, directly check the method signature
-      const saveCode = App.CharacterData.saveToLocalStorage.toString();
-      if (saveCode.includes('version') && saveCode.includes('getSchemaVersion')) {
-        pass('CharacterData.saveToLocalStorage() includes version field (code inspection)');
-      } else {
-        fail('CharacterData.saveToLocalStorage() does not include version (Goal E)');
-      }
-    }
+    // Save with mock - replace localStorage in the sandbox context
+    const origLS = localStorage;
+    localStorage = mockStorage;
+    App.CharacterData.saveToLocalStorage();
+    localStorage = origLS;
 
     if (savedData) {
       try {
