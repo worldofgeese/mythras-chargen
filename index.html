@@ -3531,8 +3531,16 @@ App.renderPlaySkills = function() {
   `;
 };
 
+/**
+ * Compile all skills with breakdown (Wave 2 Goal C - delegates to Helpers)
+ * @returns {Array} Array of skill objects with {name, base, cultural, career, bonus}
+ */
 App.compileAllSkills = function() {
-  const skills = new Map();
+  // Delegate to Helpers.getCompiledSkills() for the core calculation (Goal C)
+  const compiledMap = Helpers.getCompiledSkills(CharacterData);
+
+  // Convert Map to array format expected by UI components
+  const skills = [];
   const {STR, CON, SIZ, DEX, INT, POW, CHA} = CharacterData.characteristics;
   const statMap = {STR, CON, SIZ, DEX, INT, POW, CHA};
 
@@ -3543,52 +3551,60 @@ App.compileAllSkills = function() {
     'Perception', 'Ride', 'Sing', 'Stealth', 'Swim', 'Unarmed', 'Willpower'
   ];
 
-  // Add all standard skills (always shown)
-  SKILLS_DATA.forEach(skillDef => {
-    if (skillDef.name.includes('(any)') || skillDef.name.includes('Rune:')) return;
+  // Build array with breakdown format
+  for (const [skillName, totalValue] of compiledMap.entries()) {
     // Skip passion skills (they start with "A " or "An ")
-    if (skillDef.name.startsWith('A ') || skillDef.name.startsWith('An ')) return;
+    if (skillName.startsWith('A ') || skillName.startsWith('An ')) continue;
 
-    const isStandardSkill = standardSkills.includes(skillDef.name);
-    const hasPoints = (CharacterData.culturalSkills[skillDef.name] || 0) > 0 ||
-                      (CharacterData.careerSkills[skillDef.name] || 0) > 0 ||
-                      (CharacterData.bonusSkills[skillDef.name] || 0) > 0;
+    // Find skill definition to get base stats
+    const skillDef = SKILLS_DATA.find(s => s.name === skillName);
 
-    // Only add if it's a standard skill OR if it has points allocated (selected professional skill)
-    if (isStandardSkill || hasPoints) {
-      const [stat1Name, stat2Name] = skillDef.base_stats;
+    let baseValue = 0;
+    if (skillDef) {
+      const [stat1Name, stat2Name] = skillDef.base_stats || [];
       const stat1 = statMap[stat1Name] || 0;
       const stat2 = statMap[stat2Name] || 0;
-      const base = Calc.skillBaseValue(stat1, stat2, skillDef.starting_bonus);
+      baseValue = Calc.skillBaseValue(stat1, stat2, skillDef.starting_bonus || 0);
+    }
 
-      skills.set(skillDef.name, {
-        name: skillDef.name,
-        base: base,
-        cultural: CharacterData.culturalSkills[skillDef.name] || 0,
-        career: CharacterData.careerSkills[skillDef.name] || 0,
-        bonus: CharacterData.bonusSkills[skillDef.name] || 0
+    const cultural = CharacterData.culturalSkills[skillName] || 0;
+    const career = CharacterData.careerSkills[skillName] || 0;
+    const bonus = CharacterData.bonusSkills[skillName] || 0;
+
+    // Only include standard skills or skills with points allocated
+    const isStandardSkill = standardSkills.includes(skillName);
+    const hasPoints = cultural > 0 || career > 0 || bonus > 0;
+
+    if (isStandardSkill || hasPoints) {
+      skills.push({
+        name: skillName,
+        base: baseValue,
+        cultural: cultural,
+        career: career,
+        bonus: bonus
       });
     }
-  });
+  }
 
-  // Add custom skills (selected during character creation)
+  // Add any custom skills that might have been allocated but not in SKILLS_DATA
   [...Object.keys(CharacterData.culturalSkills), ...Object.keys(CharacterData.careerSkills), ...Object.keys(CharacterData.bonusSkills)]
     .forEach(skillName => {
       // Skip passion skills
       if (skillName.startsWith('A ') || skillName.startsWith('An ')) return;
 
-      if (!skills.has(skillName)) {
-        skills.set(skillName, {
-          name: skillName,
-          base: 0,
-          cultural: CharacterData.culturalSkills[skillName] || 0,
-          career: CharacterData.careerSkills[skillName] || 0,
-          bonus: CharacterData.bonusSkills[skillName] || 0
-        });
-      }
+      // Skip if already added
+      if (skills.some(s => s.name === skillName)) return;
+
+      skills.push({
+        name: skillName,
+        base: 0,
+        cultural: CharacterData.culturalSkills[skillName] || 0,
+        career: CharacterData.careerSkills[skillName] || 0,
+        bonus: CharacterData.bonusSkills[skillName] || 0
+      });
     });
 
-  return Array.from(skills.values()).filter(s => s.base > 0 || s.cultural > 0 || s.career > 0 || s.bonus > 0);
+  return skills.filter(s => s.base > 0 || s.cultural > 0 || s.career > 0 || s.bonus > 0);
 };
 
 App.updateSkillDisplay = function() {
