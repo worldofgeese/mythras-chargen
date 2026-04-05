@@ -3230,7 +3230,7 @@ App.generateRandomCharacter = function() {
     });
   }
 
-  // 10. Pick folk magic spells
+  // 10. Pick folk magic spells (need exactly 3 for Step 5 validation)
   CharacterData.folkMagicSpells = [];
   if (culture.folkMagic && culture.folkMagic.length > 0) {
     const numSpells = Math.min(3, culture.folkMagic.length);
@@ -3265,7 +3265,6 @@ App.generateRandomCharacter = function() {
 
   // 14. Career skills — replicate what selectCareer() does
   CharacterData.careerSkills = {};
-  CharacterData.careerFolkMagic = [];
   CharacterData.selectedProfessionalSkills = [];
 
   // Add all career standard skills at 0 (so they appear in the UI)
@@ -3327,13 +3326,29 @@ App.generateRandomCharacter = function() {
     }
   }
 
-  // 16. Equipment
+  // 16. Career folk magic — 2 ADDITIONAL spells (Step 9 requires this)
+  // Must be set AFTER step 14 which resets careerFolkMagic
+  CharacterData.careerFolkMagic = [];
+  if (typeof FOLK_MAGIC_SPELLS !== 'undefined') {
+    const available = FOLK_MAGIC_SPELLS.filter(s => !CharacterData.folkMagicSpells.includes(s));
+    const shuffledFM = available.sort(() => Math.random() - 0.5);
+    CharacterData.careerFolkMagic = shuffledFM.slice(0, Math.min(2, shuffledFM.length));
+  }
+
+  // 17. Equipment
   CharacterData.equipment = [];
   CharacterData.weapons = [];
   CharacterData.armor = [];
   CharacterData.startingMoney = 0;
-  CharacterData.notes = '';
+  CharacterData.notes = 'Generated randomly for testing';
+  CharacterData.background = CharacterData.backgroundEvents || '';
+
+  // 17. Initialize hit points from characteristics
+  const hp = Calc.hitPointsPerLocation(CharacterData.characteristics.CON, CharacterData.characteristics.SIZ);
   CharacterData.hitPoints = {};
+  Object.entries(hp).forEach(([loc, max]) => {
+    CharacterData.hitPoints[loc] = { current: max, max: max };
+  });
 
   // Auto-populate equipment
   App.autoPopulateStartingEquipment();

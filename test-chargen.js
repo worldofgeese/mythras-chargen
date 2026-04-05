@@ -2737,17 +2737,46 @@ section('Random Character Generator');
     if (!careerOver) pass('Random: no career skill exceeds 15');
     else fail('Random: career skill ' + careerOver[0] + ' has ' + careerOver[1] + ' (max 15)');
 
-    // Folk magic
-    if (CD.folkMagicSpells.length > 0) pass('Random: folkMagicSpells populated (' + CD.folkMagicSpells.length + ')');
-    else fail('Random: folkMagicSpells is empty');
+    // Folk magic — Step 5 validation requires exactly 3
+    if (CD.folkMagicSpells.length === 3) pass('Random: exactly 3 folk magic spells');
+    else fail('Random: folkMagicSpells has ' + CD.folkMagicSpells.length + ' (need 3)');
 
-    // Rune affinities
-    if (CD.runeAffinities.primary) pass('Random: rune primary set (' + CD.runeAffinities.primary + ')');
-    else fail('Random: rune primary is null/empty');
+    // Career folk magic — Step 9 requires exactly 2
+    if (CD.careerFolkMagic && CD.careerFolkMagic.length === 2) pass('Random: careerFolkMagic has exactly 2 spells');
+    else fail('Random: careerFolkMagic has ' + (CD.careerFolkMagic ? CD.careerFolkMagic.length : 'undefined') + ' (need 2)');
 
-    // Passions
-    if (CD.passions.length > 0) pass('Random: passions populated (' + CD.passions.length + ')');
-    else fail('Random: passions is empty');
+    // Career folk magic should not overlap with cultural folk magic
+    if (CD.careerFolkMagic && CD.folkMagicSpells) {
+      const overlap = CD.careerFolkMagic.filter(s => CD.folkMagicSpells.includes(s));
+      if (overlap.length === 0) pass('Random: careerFolkMagic does not overlap with folkMagicSpells');
+      else fail('Random: careerFolkMagic overlaps: ' + overlap.join(', '));
+    }
+
+    // Rune affinities — Step 5 requires ALL THREE set
+    if (CD.runeAffinities.primary && CD.runeAffinities.secondary && CD.runeAffinities.tertiary)
+      pass('Random: all 3 rune affinities set (' + CD.runeAffinities.primary + '/' + CD.runeAffinities.secondary + '/' + CD.runeAffinities.tertiary + ')');
+    else fail('Random: rune affinities incomplete: ' + JSON.stringify(CD.runeAffinities));
+
+    // selectedProfessionalSkills — Step 8 requires exactly 3
+    if (CD.selectedProfessionalSkills && CD.selectedProfessionalSkills.length === 3)
+      pass('Random: exactly 3 professional skills selected');
+    else fail('Random: selectedProfessionalSkills has ' + (CD.selectedProfessionalSkills ? CD.selectedProfessionalSkills.length : 'undefined') + ' (need 3)');
+
+    // Passions should have names AND values
+    if (CD.passions.length > 0 && CD.passions[0].name && CD.passions[0].value > 0)
+      pass('Random: passions have names and values (' + CD.passions.length + ')');
+    else fail('Random: passions missing name or value');
+
+    // Hit points should be initialized with current/max for all 7 locations
+    const hpKeys = Object.keys(CD.hitPoints || {});
+    if (hpKeys.length >= 7) pass('Random: hitPoints has ' + hpKeys.length + ' locations');
+    else fail('Random: hitPoints has ' + hpKeys.length + ' locations (need 7)');
+
+    if (hpKeys.length > 0) {
+      const headHP = CD.hitPoints['Head'];
+      if (headHP && headHP.current > 0 && headHP.max > 0) pass('Random: Head HP initialized (' + headHP.current + '/' + headHP.max + ')');
+      else fail('Random: Head HP not properly initialized');
+    }
 
     // Combat styles
     if (CD.combatStyles.length > 0 && CD.combatStyles[0].name) pass('Random: combat style set (' + CD.combatStyles[0].name + ')');
@@ -2767,7 +2796,12 @@ section('Random Character Generator');
     if (!CD.folkMagicSpells.includes('Old Spell')) pass('Random: old folkMagic cleared');
     else fail('Random: old spell "Old Spell" still present');
 
-    // (bonus points fully-spent test is above with cultural/career)
+    // Validate ALL steps would pass
+    // Step 5: cultural=100, folkMagic=3, all runes set (tested above)
+    // Step 8: career set, 3 pro skills (tested above)
+    // Step 9: career=100, careerFolkMagic=2 (tested above)
+    // Step 10: bonus=exact (tested above)
+    // If any of these are wrong, the wizard would block advancement.
 
     // Restore mocks
     AppObj.renderCurrentStep = origRender;
