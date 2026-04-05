@@ -2793,6 +2793,20 @@ section('Random Character Generator');
     if (!CD.weapons.some(w => w.name === 'Old Sword')) pass('Random: old weapons cleared');
     else fail('Random: old weapon "Old Sword" still present');
 
+    // Weapons should have full stats (damage, size, reach, ap, hp)
+    if (CD.weapons.length > 0) {
+      pass('Random: weapons populated (' + CD.weapons.length + ')');
+      const w = CD.weapons[0];
+      if (w.damage && w.size && w.reach !== undefined) pass('Random: weapon has full stats (' + w.name + ' dmg:' + w.damage + ')');
+      else fail('Random: weapon missing stats: ' + JSON.stringify(w));
+    } else {
+      fail('Random: no weapons populated from combat style');
+    }
+
+    // Armor should be populated
+    if (CD.armor.length > 0) pass('Random: armor populated (' + CD.armor[0].name + ')');
+    else fail('Random: armor is empty');
+
     if (!CD.folkMagicSpells.includes('Old Spell')) pass('Random: old folkMagic cleared');
     else fail('Random: old spell "Old Spell" still present');
 

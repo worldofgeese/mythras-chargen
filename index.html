@@ -651,8 +651,8 @@ button.primary:hover { background: #333; }
     </p>
   </div>
 </div>
-<!-- Previously: https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js -->
-<script src="lib/pdf-lib.min.js"></script>
+<!-- pdf-lib: try local first, fall back to CDN for standalone use -->
+<script src="lib/pdf-lib.min.js" onerror="var s=document.createElement('script');s.src='https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js';document.head.appendChild(s);"></script>
 <!-- Glorantha data inlined into CULTURES_DATA -->
 <script>
 // =============================================================================
@@ -3353,17 +3353,34 @@ App.generateRandomCharacter = function() {
   // Auto-populate equipment
   App.autoPopulateStartingEquipment();
 
-  // Auto-populate weapons from combat style
+  // Auto-populate weapons from combat style WITH FULL STATS
   if (CharacterData.combatStyles.length > 0) {
     const style = CharacterData.combatStyles[0];
     style.weapons.slice(0, 3).forEach(weaponName => {
-      const resolved = Helpers.resolveWeapon(weaponName);
-      const weaponData = WEAPONS_DATA.find(w => w.name === (resolved || weaponName));
+      const weaponData = Helpers.resolveWeapon(weaponName);
       if (weaponData) {
-        CharacterData.weapons.push({ name: weaponData.name, quantity: 1 });
+        CharacterData.weapons.push({
+          name: weaponData.name,
+          damage: weaponData.damage || '',
+          size: weaponData.size || '',
+          reach: weaponData.reach || '',
+          ap: weaponData.armour_points || 0,
+          hp: weaponData.hit_points || 0,
+          skill: 0,
+          quantity: 1
+        });
       }
     });
   }
+
+  // Add basic armor based on culture type
+  const armorByCultureType = {
+    'Primitive': [{name: 'Furs/Hide Shirt', ap: 1, locations: 'Chest, Abdomen'}],
+    'Barbarian': [{name: 'Leather Hauberk', ap: 2, locations: 'Chest, Abdomen, Arms'}],
+    'Civilised': [{name: 'Leather Cuirass', ap: 2, locations: 'Chest, Abdomen'}, {name: 'Leather Greaves', ap: 2, locations: 'Legs'}],
+    'Nomad': [{name: 'Leather Hauberk', ap: 2, locations: 'Chest, Abdomen'}]
+  };
+  CharacterData.armor = armorByCultureType[culture.type] || [{name: 'Leather Vest', ap: 1, locations: 'Chest'}];
 
   // Roll starting money
   App.rollStartingMoney();
@@ -3786,6 +3803,9 @@ App.compileAllSkills = function() {
 };
 
 App.updateSkillDisplay = function() {
+  this.renderPlaySkills();
+};
+
 App.renderSkillRow = function(skill) {
   const total = skill.base + skill.cultural + skill.career + skill.bonus;
   const difficulty = document.getElementById('difficulty-modifier')?.value || 'Standard';
@@ -3813,8 +3833,6 @@ App.renderSkillRow = function(skill) {
       <td class="total-col">${modified}%</td>
     </tr>
   `;
-};
-  this.renderPlaySkills();
 };
 
 App.renderPlayCombat = function() {
