@@ -23,7 +23,16 @@ def build():
     html = INDEX.read_text(encoding="utf-8")
     glorantha = GLORANTHA.read_text(encoding="utf-8")
 
-    # Remove external script tag
+    # Inline pdf-lib
+    pdflib_path = ROOT / "lib" / "pdf-lib.min.js"
+    if pdflib_path.exists():
+        pdflib = pdflib_path.read_text(encoding="utf-8")
+        html = html.replace(
+            '<script src="lib/pdf-lib.min.js"></script>',
+            f'<script>\n{pdflib}\n</script>'
+        )
+
+    # Remove external glorantha script tag
     html = html.replace('<script src="data/glorantha.js"></script>\n', '')
     html = html.replace('<script src="data/glorantha.js"></script>', '')
 
