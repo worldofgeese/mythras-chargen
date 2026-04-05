@@ -540,6 +540,7 @@ button.primary:hover { background: #333; }
     <button onclick="App.saveCharacter()">Save (Ctrl+S)</button>
     <button onclick="App.loadCharacter()">Load</button>
     <button onclick="App.exportSinglePagePDF()" id="btn-export-pdf" disabled title="Generate a single-page PDF character sheet (quick export)">Export PDF</button>
+    <button onclick="App.generateRandomCharacter()" title="Generate a completely random character for testing">🎲 Random</button>
   </div>
 
   <!-- WIZARD MODE -->
@@ -3075,6 +3076,204 @@ App.createAutocomplete = function(containerId, dataSource, placeholder, onSelect
 
   container.insertBefore(autoDiv, container.querySelector('button'));
   input.focus();
+};
+
+// =============================================================================
+// RANDOM CHARACTER GENERATOR (Testing Tool)
+// =============================================================================
+
+App.generateRandomCharacter = function() {
+  const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+  const roll = (n, sides) => { let t = 0; for (let i = 0; i < n; i++) t += Math.floor(Math.random() * sides) + 1; return t; };
+
+  // Random name parts
+  const firstNames = ['Argrath','Kallyr','Vasana','Yanioth','Sorala','Harmast','Biturian','Griselda','Jarang','Vostor','Leika','Erinestra','Vishi','Broyan','Hofstaring','Minaryth','Korol','Ernaldesta','Hendroste','Orgovalt'];
+  const epithets = ['the Bold','Ironfist','Skullcleaver','Silvertongue','the Wanderer','Stormborn','the Unbroken','Wyrmfriend','the Scarred','Deathwalker','the Pious','Fireheart','Shadowmane','the Tall','Riverson'];
+  const concepts = [
+    'Vengeful warrior seeking justice for murdered kin',
+    'Cunning merchant-spy with divided loyalties',
+    'Young shaman discovering terrifying powers',
+    'Disgraced noble seeking redemption through deeds',
+    'Wolf in sheep\'s clothing — a killer hiding among priests',
+    'Grizzled mercenary tired of war but unable to stop',
+    'Healer who has seen too much death',
+    'Escaped slave with a burning hatred of masters',
+    'Religious fanatic on a personal crusade',
+    'Trickster god devotee spreading chaos for fun',
+    'Last survivor of a destroyed clan',
+    'Scholar obsessed with forbidden knowledge',
+    'Beast-rider bonded to a dying mount',
+    'Orphan raised by trollkin, despised by humans',
+    'Storm Voice whose god has fallen silent'
+  ];
+  const genders = ['Male','Female','Non-binary'];
+  const familyOptions = [
+    'Both parents alive, 3 siblings',
+    'Orphan raised by clan elders',
+    'Mother was a priestess, father unknown',
+    'Last of a large family killed by Lunars',
+    'Adopted by a foreign trader',
+    'Twin sibling lost at birth',
+    'Noble family fallen on hard times',
+    'Parents are herders, simple folk'
+  ];
+  const bgEventOptions = [
+    'Survived a Tusk Rider raid as a child',
+    'Witnessed a Heroquest at sacred ground',
+    'Accused of theft but later exonerated',
+    'Won a local wrestling tournament',
+    'Lost a finger in a hunting accident',
+    'Fell in love with someone from a rival clan',
+    'Found a strange stone that glows at night',
+    'Served briefly in a Lunar auxiliary unit',
+    'Saved a child from drowning in a river',
+    'Had a prophetic dream of fire and ruin'
+  ];
+
+  // 1. Pick culture
+  const culture = pick(CULTURES_DATA);
+  CharacterData.culture = culture.name;
+
+  // 2. Pick homeland
+  const homelands = App.getHomelandSuggestions(culture.name);
+  CharacterData.homeland = homelands.length > 0 ? pick(homelands) : '';
+
+  // 3. Roll characteristics (3d6 for STR/CON/DEX/POW/CHA, 2d6+6 for SIZ/INT)
+  CharacterData.characteristics = {
+    STR: roll(3, 6), CON: roll(3, 6), SIZ: roll(2, 6) + 6,
+    DEX: roll(3, 6), INT: roll(2, 6) + 6, POW: roll(3, 6), CHA: roll(3, 6)
+  };
+  CharacterData.charMethod = 'dice';
+
+  // 4. Calculate attributes
+  CharacterData.attributes = Calc.calculateAllAttributes(CharacterData.characteristics);
+
+  // 5. Pick career compatible with culture type
+  const cultureTypeMap = {'Civilised':'civilised','Barbarian':'barbarian','Nomad':'nomad','Primitive':'primitive'};
+  const cType = cultureTypeMap[culture.type] || 'all';
+  const availableCareers = CAREERS_DATA.filter(c => c.type === 'all' || c.type === cType);
+  const career = pick(availableCareers);
+  CharacterData.career = career.name;
+
+  // 6. Name and concept
+  CharacterData.name = pick(firstNames) + ' ' + pick(epithets);
+  CharacterData.concept = pick(concepts);
+  CharacterData.gender = pick(genders);
+
+  // 7. Age
+  CharacterData.age = 17 + Math.floor(Math.random() * 25); // 17-41
+  const ageCategory = Calc.getAgeCategory(CharacterData.age);
+
+  // 8. Distribute cultural skills randomly
+  CharacterData.culturalSkills = {};
+  const cultureStandard = culture.standardSkills.filter(s => typeof s === 'string');
+  const culturePro = culture.professionalSkills.filter(s => typeof s === 'string');
+  const allCulturalSkills = [...cultureStandard, ...culturePro].slice(0, 10);
+  let culturalPtsLeft = 100;
+  allCulturalSkills.forEach(skill => {
+    const pts = Math.min(15, Math.floor(Math.random() * 20));
+    const actual = Math.min(pts, culturalPtsLeft);
+    if (actual > 0) { CharacterData.culturalSkills[skill] = actual; culturalPtsLeft -= actual; }
+  });
+
+  // 9. Pick combat styles from culture
+  CharacterData.combatStyles = [];
+  if (culture.combatStyles && culture.combatStyles.length > 0) {
+    const style = pick(culture.combatStyles);
+    CharacterData.combatStyles.push({
+      name: style.name,
+      weapons: [...style.weapons],
+      traits: [...style.traits],
+      value: 0
+    });
+  }
+
+  // 10. Pick folk magic spells
+  CharacterData.folkMagicSpells = [];
+  if (culture.folkMagic && culture.folkMagic.length > 0) {
+    const numSpells = Math.min(3, culture.folkMagic.length);
+    const shuffled = [...culture.folkMagic].sort(() => Math.random() - 0.5);
+    CharacterData.folkMagicSpells = shuffled.slice(0, numSpells);
+  }
+
+  // 11. Pick rune affinities
+  const elementalRunes = RUNES_DATA.filter(r => r.rune_type === 'Elemental');
+  const powerRunes = RUNES_DATA.filter(r => r.rune_type === 'Power');
+  CharacterData.runeAffinities = {
+    primary: elementalRunes.length > 0 ? pick(elementalRunes).short_name : null,
+    secondary: elementalRunes.length > 1 ? pick(elementalRunes).short_name : null,
+    tertiary: powerRunes.length > 0 ? pick(powerRunes).short_name : null
+  };
+
+  // 12. Pick passions from culture
+  CharacterData.passions = [];
+  if (culture.passions) {
+    culture.passions.forEach(p => {
+      if (typeof p === 'string') {
+        CharacterData.passions.push({ name: p, value: 60 + Math.floor(Math.random() * 20) });
+      } else if (p.name) {
+        CharacterData.passions.push({ name: p.name, value: 60 + Math.floor(Math.random() * 20) });
+      }
+    });
+  }
+
+  // 13. Background
+  CharacterData.family = pick(familyOptions);
+  CharacterData.backgroundEvents = pick(bgEventOptions);
+
+  // 14. Distribute career skills
+  CharacterData.careerSkills = {};
+  const careerAllSkills = [...career.standardSkills, ...career.professionalSkills].slice(0, 8);
+  let careerPtsLeft = 100;
+  careerAllSkills.forEach(skill => {
+    const pts = Math.min(15, Math.floor(Math.random() * 20));
+    const actual = Math.min(pts, careerPtsLeft);
+    if (actual > 0) { CharacterData.careerSkills[skill] = actual; careerPtsLeft -= actual; }
+  });
+  CharacterData.careerFolkMagic = [];
+
+  // 15. Distribute bonus skills
+  CharacterData.bonusSkills = {};
+  const bonusPool = ageCategory ? ageCategory.bonusPoints : 150;
+  const allSkillNames = [...new Set([...cultureStandard, ...culturePro, ...careerAllSkills])];
+  let bonusPtsLeft = bonusPool;
+  allSkillNames.forEach(skill => {
+    const maxPer = ageCategory ? ageCategory.maxPerSkill : 15;
+    const pts = Math.min(maxPer, Math.floor(Math.random() * (maxPer + 5)));
+    const actual = Math.min(pts, bonusPtsLeft);
+    if (actual > 0) { CharacterData.bonusSkills[skill] = actual; bonusPtsLeft -= actual; }
+  });
+
+  // 16. Equipment
+  CharacterData.equipment = [];
+  CharacterData.weapons = [];
+  CharacterData.armor = [];
+  CharacterData.startingMoney = 0;
+  CharacterData.notes = '';
+  CharacterData.hitPoints = {};
+
+  // Auto-populate equipment
+  App.autoPopulateStartingEquipment();
+
+  // Auto-populate weapons from combat style
+  if (CharacterData.combatStyles.length > 0) {
+    const style = CharacterData.combatStyles[0];
+    style.weapons.slice(0, 3).forEach(weaponName => {
+      const resolved = Helpers.resolveWeapon(weaponName);
+      const weaponData = WEAPONS_DATA.find(w => w.name === (resolved || weaponName));
+      if (weaponData) {
+        CharacterData.weapons.push({ name: weaponData.name, quantity: 1 });
+      }
+    });
+  }
+
+  // Roll starting money
+  App.rollStartingMoney();
+
+  // Navigate to Step 1 and render
+  App.currentStep = 1;
+  App.renderCurrentStep();
+  App.showToast(`Generated: ${CharacterData.name} — ${culture.name} ${career.name}`, 'success');
 };
 
 App.rollStartingMoney = function() {
