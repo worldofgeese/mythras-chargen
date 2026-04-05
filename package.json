@@ -5,14 +5,9 @@
   "name": "mythras-pdf-decapod",
   "version": "1.0.0",
   "description": "A character creation tool for the Mythras roleplaying game, with optional Glorantha support via Adventures in Glorantha.",
-  "main": "e2e-test.js",
-  "directories": {
-    "doc": "docs",
-    "lib": "lib",
-    "test": "tests"
-  },
+  "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test-chargen.js"
   },
   "repository": {
     "type": "git",
