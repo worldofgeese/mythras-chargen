@@ -628,7 +628,8 @@ button.primary:hover { background: #333; }
         <div id="play-equipment"></div>
 
         <h2>Notes</h2>
-        <textarea data-persist="notes" rows="6"></textarea>
+        <textarea id="play-notes" data-persist="notes" rows="6" 
+          oninput="CharacterData.notes = this.value; App.saveToLocalStorage();"></textarea>
 
         <!-- Special Effects Reference -->
         <div class="collapsible">
@@ -1603,7 +1604,8 @@ const App = {
   toggleCollapsible(header) {
     const content = header.nextElementSibling;
     content.classList.toggle('hidden');
-    header.textContent = content.classList.contains('hidden') ? '▶ ' + header.textContent.substr(2) : '▼ ' + header.textContent.substr(2);
+    const text = header.textContent.trim().replace(/^[▶▼]\s*/, '');
+    header.textContent = content.classList.contains('hidden') ? '▶ ' + text : '▼ ' + text;
   },
   
   attachKeyboardShortcuts() {
@@ -3625,6 +3627,17 @@ App.renderPlayMode = function() {
   document.getElementById('play-career').value = CharacterData.career || '';
   document.getElementById('play-age').value = CharacterData.age || '';
   document.getElementById('play-gender').value = CharacterData.gender || '';
+
+  // Populate notes, concept, family, background
+  const notesEl = document.getElementById('play-notes');
+  if (notesEl) {
+    const parts = [];
+    if (CharacterData.concept) parts.push('Concept: ' + CharacterData.concept);
+    if (CharacterData.family) parts.push('Family: ' + CharacterData.family);
+    if (CharacterData.backgroundEvents) parts.push('Background: ' + CharacterData.backgroundEvents);
+    if (CharacterData.notes && CharacterData.notes !== 'Generated randomly for testing') parts.push(CharacterData.notes);
+    notesEl.value = parts.join('\n\n') || CharacterData.notes || '';
+  }
 
   this.renderPlayCharacteristics();
   this.renderPlayAttributes();
