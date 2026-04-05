@@ -2713,8 +2713,29 @@ section('Random Character Generator');
     else fail('Random: careerSkills is empty');
 
     // Cultural skills with points
-    if (Object.values(CD.culturalSkills).some(v => v > 0)) pass('Random: culturalSkills has points');
-    else fail('Random: culturalSkills has no points');
+    // Points must be FULLY spent — not just "has entries"
+    const culturalSpent = Object.values(CD.culturalSkills).reduce((a, b) => a + b, 0);
+    if (culturalSpent === 100) pass('Random: cultural skills spent exactly 100 points');
+    else fail('Random: cultural skills spent ' + culturalSpent + '/100 points');
+
+    const careerSpent = Object.values(CD.careerSkills).reduce((a, b) => a + b, 0);
+    if (careerSpent === 100) pass('Random: career skills spent exactly 100 points');
+    else fail('Random: career skills spent ' + careerSpent + '/100 points');
+
+    const ageCategory = App.Calc.getAgeCategory(CD.age);
+    const expectedBonus = ageCategory ? ageCategory.bonusPoints : 150;
+    const bonusSpent = Object.values(CD.bonusSkills).reduce((a, b) => a + b, 0);
+    if (bonusSpent === expectedBonus) pass('Random: bonus skills spent exactly ' + expectedBonus + ' points');
+    else fail('Random: bonus skills spent ' + bonusSpent + '/' + expectedBonus + ' points');
+
+    // No skill should exceed 15 per pool
+    const culturalOver = Object.entries(CD.culturalSkills).find(([k, v]) => v > 15);
+    if (!culturalOver) pass('Random: no cultural skill exceeds 15');
+    else fail('Random: cultural skill ' + culturalOver[0] + ' has ' + culturalOver[1] + ' (max 15)');
+
+    const careerOver = Object.entries(CD.careerSkills).find(([k, v]) => v > 15);
+    if (!careerOver) pass('Random: no career skill exceeds 15');
+    else fail('Random: career skill ' + careerOver[0] + ' has ' + careerOver[1] + ' (max 15)');
 
     // Folk magic
     if (CD.folkMagicSpells.length > 0) pass('Random: folkMagicSpells populated (' + CD.folkMagicSpells.length + ')');
@@ -2746,9 +2767,7 @@ section('Random Character Generator');
     if (!CD.folkMagicSpells.includes('Old Spell')) pass('Random: old folkMagic cleared');
     else fail('Random: old spell "Old Spell" still present');
 
-    // Bonus skills
-    if (Object.keys(CD.bonusSkills).length > 0) pass('Random: bonusSkills has entries');
-    else fail('Random: bonusSkills is empty');
+    // (bonus points fully-spent test is above with cultural/career)
 
     // Restore mocks
     AppObj.renderCurrentStep = origRender;

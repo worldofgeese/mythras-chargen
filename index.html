@@ -3195,17 +3195,28 @@ App.generateRandomCharacter = function() {
   CharacterData.age = 17 + Math.floor(Math.random() * 25); // 17-41
   const ageCategory = Calc.getAgeCategory(CharacterData.age);
 
-  // 8. Distribute cultural skills randomly
+  // 8. Distribute cultural skills — spend ALL 100 points
   CharacterData.culturalSkills = {};
   const cultureStandard = culture.standardSkills.filter(s => typeof s === 'string');
   const culturePro = culture.professionalSkills.filter(s => typeof s === 'string');
   const allCulturalSkills = [...cultureStandard, ...culturePro].slice(0, 10);
   let culturalPtsLeft = 100;
+  // First pass: distribute randomly
   allCulturalSkills.forEach(skill => {
-    const pts = Math.min(15, Math.floor(Math.random() * 20));
+    const pts = Math.min(15, Math.floor(Math.random() * 16));
     const actual = Math.min(pts, culturalPtsLeft);
     if (actual > 0) { CharacterData.culturalSkills[skill] = actual; culturalPtsLeft -= actual; }
   });
+  // Second pass: spend remaining points
+  while (culturalPtsLeft > 0 && allCulturalSkills.length > 0) {
+    const skill = allCulturalSkills[Math.floor(Math.random() * allCulturalSkills.length)];
+    const current = CharacterData.culturalSkills[skill] || 0;
+    if (current < 15) {
+      const add = Math.min(15 - current, culturalPtsLeft);
+      CharacterData.culturalSkills[skill] = current + add;
+      culturalPtsLeft -= add;
+    }
+  }
 
   // 9. Pick combat styles from culture
   CharacterData.combatStyles = [];
@@ -3273,26 +3284,48 @@ App.generateRandomCharacter = function() {
     selectedPro.forEach(skill => { CharacterData.careerSkills[skill] = 0; });
   }
 
-  // Now distribute 100 career points across all career skills
+  // Now distribute ALL 100 career points across career skills
   const allCareerSkillNames = Object.keys(CharacterData.careerSkills);
   let careerPtsLeft = 100;
+  // First pass
   allCareerSkillNames.forEach(skill => {
-    const pts = Math.min(15, Math.floor(Math.random() * 20));
+    const pts = Math.min(15, Math.floor(Math.random() * 16));
     const actual = Math.min(pts, careerPtsLeft);
     if (actual > 0) { CharacterData.careerSkills[skill] += actual; careerPtsLeft -= actual; }
   });
+  // Second pass: spend remaining
+  while (careerPtsLeft > 0 && allCareerSkillNames.length > 0) {
+    const skill = allCareerSkillNames[Math.floor(Math.random() * allCareerSkillNames.length)];
+    const current = CharacterData.careerSkills[skill] || 0;
+    if (current < 15) {
+      const add = Math.min(15 - current, careerPtsLeft);
+      CharacterData.careerSkills[skill] = current + add;
+      careerPtsLeft -= add;
+    }
+  }
 
-  // 15. Distribute bonus skills
+  // 15. Distribute ALL bonus skills points
   CharacterData.bonusSkills = {};
   const bonusPool = ageCategory ? ageCategory.bonusPoints : 150;
+  const maxPerBonus = ageCategory ? ageCategory.maxPerSkill : 15;
   const allSkillNames = [...new Set([...cultureStandard, ...culturePro, ...allCareerSkillNames])];
   let bonusPtsLeft = bonusPool;
+  // First pass
   allSkillNames.forEach(skill => {
-    const maxPer = ageCategory ? ageCategory.maxPerSkill : 15;
-    const pts = Math.min(maxPer, Math.floor(Math.random() * (maxPer + 5)));
+    const pts = Math.min(maxPerBonus, Math.floor(Math.random() * (maxPerBonus + 1)));
     const actual = Math.min(pts, bonusPtsLeft);
     if (actual > 0) { CharacterData.bonusSkills[skill] = actual; bonusPtsLeft -= actual; }
   });
+  // Second pass: spend remaining
+  while (bonusPtsLeft > 0 && allSkillNames.length > 0) {
+    const skill = allSkillNames[Math.floor(Math.random() * allSkillNames.length)];
+    const current = CharacterData.bonusSkills[skill] || 0;
+    if (current < maxPerBonus) {
+      const add = Math.min(maxPerBonus - current, bonusPtsLeft);
+      CharacterData.bonusSkills[skill] = current + add;
+      bonusPtsLeft -= add;
+    }
+  }
 
   // 16. Equipment
   CharacterData.equipment = [];
