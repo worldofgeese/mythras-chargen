@@ -3086,6 +3086,37 @@ App.generateRandomCharacter = function() {
   const pick = arr => arr[Math.floor(Math.random() * arr.length)];
   const roll = (n, sides) => { let t = 0; for (let i = 0; i < n; i++) t += Math.floor(Math.random() * sides) + 1; return t; };
 
+  // === HARD RESET: wipe ALL CharacterData fields ===
+  CharacterData.name = '';
+  CharacterData.concept = '';
+  CharacterData.characteristics = {STR:10, CON:10, SIZ:10, DEX:10, INT:10, POW:10, CHA:10};
+  CharacterData.charMethod = 'dice';
+  CharacterData.attributes = {};
+  CharacterData.culture = null;
+  CharacterData.homeland = '';
+  CharacterData.culturalSkills = {};
+  CharacterData.runeAffinities = {primary: null, secondary: null, tertiary: null};
+  CharacterData.folkMagicSpells = [];
+  CharacterData.passions = [];
+  CharacterData.age = 21;
+  CharacterData.gender = '';
+  CharacterData.family = '';
+  CharacterData.backgroundEvents = '';
+  CharacterData.career = null;
+  CharacterData.careerSkills = {};
+  CharacterData.careerFolkMagic = [];
+  CharacterData.selectedProfessionalSkills = [];
+  CharacterData.bonusSkills = {};
+  CharacterData.hobbySkillName = null;
+  CharacterData.startingMoney = 0;
+  CharacterData.equipment = [];
+  CharacterData.weapons = [];
+  CharacterData.armor = [];
+  CharacterData.combatStyles = [];
+  CharacterData.notes = '';
+  CharacterData.background = '';
+  CharacterData.hitPoints = {};
+
   // Random name parts
   const firstNames = ['Argrath','Kallyr','Vasana','Yanioth','Sorala','Harmast','Biturian','Griselda','Jarang','Vostor','Leika','Erinestra','Vishi','Broyan','Hofstaring','Minaryth','Korol','Ernaldesta','Hendroste','Orgovalt'];
   const epithets = ['the Bold','Ironfist','Skullcleaver','Silvertongue','the Wanderer','Stormborn','the Unbroken','Wyrmfriend','the Scarred','Deathwalker','the Pious','Fireheart','Shadowmane','the Tall','Riverson'];
@@ -3221,21 +3252,40 @@ App.generateRandomCharacter = function() {
   CharacterData.family = pick(familyOptions);
   CharacterData.backgroundEvents = pick(bgEventOptions);
 
-  // 14. Distribute career skills
+  // 14. Career skills — replicate what selectCareer() does
   CharacterData.careerSkills = {};
-  const careerAllSkills = [...career.standardSkills, ...career.professionalSkills].slice(0, 8);
+  CharacterData.careerFolkMagic = [];
+  CharacterData.selectedProfessionalSkills = [];
+
+  // Add all career standard skills at 0 (so they appear in the UI)
+  if (career.standardSkills) {
+    career.standardSkills.forEach(skill => { CharacterData.careerSkills[skill] = 0; });
+  }
+  // Add career combat styles at 0
+  if (career.combatStyles) {
+    career.combatStyles.forEach(style => { CharacterData.careerSkills[style] = 0; });
+  }
+  // Select up to 3 professional skills randomly
+  if (career.professionalSkills && career.professionalSkills.length > 0) {
+    const shuffledPro = [...career.professionalSkills].sort(() => Math.random() - 0.5);
+    const selectedPro = shuffledPro.slice(0, Math.min(3, shuffledPro.length));
+    CharacterData.selectedProfessionalSkills = selectedPro;
+    selectedPro.forEach(skill => { CharacterData.careerSkills[skill] = 0; });
+  }
+
+  // Now distribute 100 career points across all career skills
+  const allCareerSkillNames = Object.keys(CharacterData.careerSkills);
   let careerPtsLeft = 100;
-  careerAllSkills.forEach(skill => {
+  allCareerSkillNames.forEach(skill => {
     const pts = Math.min(15, Math.floor(Math.random() * 20));
     const actual = Math.min(pts, careerPtsLeft);
-    if (actual > 0) { CharacterData.careerSkills[skill] = actual; careerPtsLeft -= actual; }
+    if (actual > 0) { CharacterData.careerSkills[skill] += actual; careerPtsLeft -= actual; }
   });
-  CharacterData.careerFolkMagic = [];
 
   // 15. Distribute bonus skills
   CharacterData.bonusSkills = {};
   const bonusPool = ageCategory ? ageCategory.bonusPoints : 150;
-  const allSkillNames = [...new Set([...cultureStandard, ...culturePro, ...careerAllSkills])];
+  const allSkillNames = [...new Set([...cultureStandard, ...culturePro, ...allCareerSkillNames])];
   let bonusPtsLeft = bonusPool;
   allSkillNames.forEach(skill => {
     const maxPer = ageCategory ? ageCategory.maxPerSkill : 15;

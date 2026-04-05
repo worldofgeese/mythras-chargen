@@ -184,6 +184,7 @@ function loadApp() {
         GLORANTHA_CULTURES_DATA: typeof GLORANTHA_CULTURES_DATA !== 'undefined' ? GLORANTHA_CULTURES_DATA : null,
         Helpers: typeof Helpers !== 'undefined' ? Helpers : null,
         normalizeCharacter: (typeof App !== 'undefined' && App.normalizeCharacter) ? App.normalizeCharacter : null,
+        CAREERS_DATA: typeof CAREERS_DATA !== 'undefined' ? CAREERS_DATA : null,
       };
     `, sandbox);
   } catch(e) {
@@ -2635,6 +2636,124 @@ fixtures.forEach(fixtureInfo => {
     } catch (err) {
       fail('CharacterData.getSchemaVersion() threw error', err.message);
     }
+  }
+}
+
+// ============================================================
+section('Random Character Generator');
+// ============================================================
+
+// ============================================================
+section('Random Character Generator');
+// ============================================================
+
+// Test: generateRandomCharacter fully resets state
+{
+  const CD = App.CharacterData;
+  const AppObj = App.App;
+  const CULTURES = App.CULTURES_DATA;
+  const CAREERS = App.CAREERS_DATA || [];
+
+  if (!AppObj || !AppObj.generateRandomCharacter) {
+    info('App.generateRandomCharacter not found - skipping random tests');
+  } else {
+    // Set prior state that should get wiped
+    CD.name = 'Old Character';
+    CD.concept = 'Old concept';
+    CD.culture = 'Balazaring';
+    CD.career = 'Warrior';
+    CD.culturalSkills = { 'Athletics': 10 };
+    CD.careerSkills = { 'Brawn': 5 };
+    CD.bonusSkills = { 'Stealth': 8 };
+    CD.weapons = [{ name: 'Old Sword', quantity: 1 }];
+    CD.folkMagicSpells = ['Old Spell'];
+
+    // Mock DOM-dependent functions for Node
+    const origRender = AppObj.renderCurrentStep;
+    const origToast = AppObj.showToast;
+    const origSave = AppObj.saveToLocalStorage;
+    AppObj.renderCurrentStep = function() {};
+    AppObj.showToast = function() {};
+    AppObj.saveToLocalStorage = function() {};
+
+    AppObj.generateRandomCharacter();
+
+    // Identity
+    if (CD.name && CD.name.length > 0 && CD.name !== 'Old Character') pass('Random: name is set and changed');
+    else fail('Random: name is empty or unchanged: ' + CD.name);
+
+    if (CD.concept && CD.concept.length > 0) pass('Random: concept is set');
+    else fail('Random: concept is empty');
+
+    // Culture & homeland
+    if (CULTURES.some(c => c.name === CD.culture)) pass('Random: culture is valid (' + CD.culture + ')');
+    else fail('Random: invalid culture: ' + CD.culture);
+
+    if (CD.homeland && CD.homeland.length > 0) pass('Random: homeland is set (' + CD.homeland + ')');
+    else fail('Random: homeland is empty');
+
+    // Career
+    if (CD.career && CD.career.length > 0) pass('Random: career is set (' + CD.career + ')');
+    else fail('Random: career is empty');
+
+    // Characteristics
+    if (Object.values(CD.characteristics).some(v => v !== 10)) pass('Random: characteristics are rolled');
+    else fail('Random: characteristics are all 10 (not rolled)');
+
+    if (CD.characteristics.SIZ >= 8 && CD.characteristics.SIZ <= 18) pass('Random: SIZ in 2d6+6 range (' + CD.characteristics.SIZ + ')');
+    else fail('Random: SIZ out of range: ' + CD.characteristics.SIZ);
+
+    // Attributes
+    if (CD.attributes && CD.attributes.actionPoints > 0) pass('Random: attributes calculated');
+    else fail('Random: attributes not calculated');
+
+    // Career skills - the key test
+    const careerSkillCount = Object.keys(CD.careerSkills).length;
+    if (careerSkillCount > 0) pass('Random: careerSkills has ' + careerSkillCount + ' entries');
+    else fail('Random: careerSkills is empty');
+
+    // Cultural skills with points
+    if (Object.values(CD.culturalSkills).some(v => v > 0)) pass('Random: culturalSkills has points');
+    else fail('Random: culturalSkills has no points');
+
+    // Folk magic
+    if (CD.folkMagicSpells.length > 0) pass('Random: folkMagicSpells populated (' + CD.folkMagicSpells.length + ')');
+    else fail('Random: folkMagicSpells is empty');
+
+    // Rune affinities
+    if (CD.runeAffinities.primary) pass('Random: rune primary set (' + CD.runeAffinities.primary + ')');
+    else fail('Random: rune primary is null/empty');
+
+    // Passions
+    if (CD.passions.length > 0) pass('Random: passions populated (' + CD.passions.length + ')');
+    else fail('Random: passions is empty');
+
+    // Combat styles
+    if (CD.combatStyles.length > 0 && CD.combatStyles[0].name) pass('Random: combat style set (' + CD.combatStyles[0].name + ')');
+    else fail('Random: combat styles empty or unnamed');
+
+    // Equipment
+    if (CD.equipment.length > 0) pass('Random: equipment populated');
+    else fail('Random: equipment is empty');
+
+    if (CD.startingMoney > 0) pass('Random: startingMoney is ' + CD.startingMoney);
+    else fail('Random: startingMoney is 0');
+
+    // Old state wiped
+    if (!CD.weapons.some(w => w.name === 'Old Sword')) pass('Random: old weapons cleared');
+    else fail('Random: old weapon "Old Sword" still present');
+
+    if (!CD.folkMagicSpells.includes('Old Spell')) pass('Random: old folkMagic cleared');
+    else fail('Random: old spell "Old Spell" still present');
+
+    // Bonus skills
+    if (Object.keys(CD.bonusSkills).length > 0) pass('Random: bonusSkills has entries');
+    else fail('Random: bonusSkills is empty');
+
+    // Restore mocks
+    AppObj.renderCurrentStep = origRender;
+    AppObj.showToast = origToast;
+    AppObj.saveToLocalStorage = origSave;
   }
 }
 
