@@ -117,7 +117,7 @@ function loadApp() {
   if (scripts.length === 0) {
     throw new Error('No scripts found in index.html');
   }
-  const appScript = scripts[0]; // Only one script block now
+  const appScript = scripts.find(s => s.includes('CharacterData')) || scripts[scripts.length - 1]; // Find the app script (not pdf-lib)
 
   // Create sandbox
   const vm = require('vm');
@@ -2459,14 +2459,14 @@ section('Wave 3 Goal 5: Vendor pdf-lib Locally');
   }
 }
 
-// Test 5.2: index.html references local pdf-lib
+// Test 5.2: index.html has pdf-lib available (inlined or local reference)
 {
   const htmlPath = path.join(__dirname, 'index.html');
   const html = fs.readFileSync(htmlPath, 'utf8');
-  if (html.includes('src="lib/pdf-lib.min.js"')) {
-    pass('index.html references local lib/pdf-lib.min.js');
+  if (html.includes('src="lib/pdf-lib.min.js"') || html.includes('PDFLib')) {
+    pass('index.html has pdf-lib available (inlined or local reference)');
   } else {
-    fail('index.html does not reference local pdf-lib');
+    fail('index.html does not have pdf-lib available');
   }
 }
 

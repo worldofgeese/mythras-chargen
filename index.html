@@ -4144,6 +4144,16 @@ const FOLK_MAGIC_SPELLS = ["Avert", "Alarm", "Appraise", "Babel", "Babble", "Bea
 // Single-page PDF export (creates PDF from scratch)
 App.exportSinglePagePDF = async function() {
   try {
+    // Wait for PDFLib if CDN fallback is still loading
+    if (typeof PDFLib === 'undefined') {
+      await new Promise((resolve, reject) => {
+        let attempts = 0;
+        const check = setInterval(() => {
+          if (typeof PDFLib !== 'undefined') { clearInterval(check); resolve(); }
+          else if (++attempts > 50) { clearInterval(check); reject(new Error('PDFLib failed to load')); }
+        }, 100);
+      });
+    }
     const { PDFDocument, rgb, StandardFonts } = PDFLib;
     const pdfDoc = await PDFDocument.create();
     const page = pdfDoc.addPage([595, 842]); // A4 size
