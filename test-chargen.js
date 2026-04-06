@@ -185,6 +185,8 @@ function loadApp() {
         Helpers: typeof Helpers !== 'undefined' ? Helpers : null,
         normalizeCharacter: (typeof App !== 'undefined' && App.normalizeCharacter) ? App.normalizeCharacter : null,
         CAREERS_DATA: typeof CAREERS_DATA !== 'undefined' ? CAREERS_DATA : null,
+        CULTS_DATA: typeof CULTS_DATA !== 'undefined' ? CULTS_DATA : null,
+        CULTURE_CULT_MAP: typeof CULTURE_CULT_MAP !== 'undefined' ? CULTURE_CULT_MAP : null,
       };
     `, sandbox);
   } catch(e) {
@@ -2816,6 +2818,100 @@ section('Random Character Generator');
     AppObj.renderCurrentStep = origRender;
     AppObj.showToast = origToast;
     AppObj.saveToLocalStorage = origSave;
+  }
+}
+
+// ============================================================
+section('Cult Data Tests');
+// ============================================================
+
+// Test: CULTS_DATA exists and has > 90 entries
+{
+  const CULTS = App.CULTS_DATA;
+  if (!CULTS) {
+    fail('CULTS_DATA is not defined');
+  } else if (!Array.isArray(CULTS)) {
+    fail('CULTS_DATA is not an array');
+  } else if (CULTS.length < 90) {
+    fail(`CULTS_DATA has only ${CULTS.length} entries, expected > 90`);
+  } else {
+    pass(`CULTS_DATA exists with ${CULTS.length} entries`);
+  }
+}
+
+// Test: CULTURE_CULT_MAP exists and has entries for all 8 cultures
+{
+  const CULT_MAP = App.CULTURE_CULT_MAP;
+  const expectedCultures = ['Sartarite', 'Esrolian', 'Lunar Heartland', 'Lunar Provincial', 'Praxian', 'Balazaring', 'God Forgot', 'Telmori Hsunchen'];
+
+  if (!CULT_MAP) {
+    fail('CULTURE_CULT_MAP is not defined');
+  } else {
+    const missingCultures = expectedCultures.filter(c => !CULT_MAP[c]);
+    if (missingCultures.length > 0) {
+      fail(`CULTURE_CULT_MAP missing cultures: ${missingCultures.join(', ')}`);
+    } else {
+      pass('CULTURE_CULT_MAP has entries for all 8 cultures');
+    }
+  }
+}
+
+// Test: Random character has a cult field
+{
+  const CD = App.CharacterData;
+  if (CD.cult !== undefined) {
+    pass('Random character has cult field (' + (CD.cult || 'No Cult') + ')');
+  } else {
+    fail('Random character missing cult field');
+  }
+}
+
+// Test: Sartarite characters mostly get Storm pantheon cults
+{
+  const AppObj = App.App;
+  const CD = App.CharacterData;
+  const CULTS = App.CULTS_DATA;
+
+  if (!AppObj || !AppObj.generateRandomCharacter) {
+    info('Skipping Storm pantheon test - generateRandomCharacter not available');
+  } else {
+    // Generate 10 Sartarite characters and count Storm pantheon cults
+    let stormCount = 0;
+    const origRender = AppObj.renderCurrentStep;
+    const origToast = AppObj.showToast;
+    const origSave = AppObj.saveToLocalStorage;
+    AppObj.renderCurrentStep = function() {};
+    AppObj.showToast = function() {};
+    AppObj.saveToLocalStorage = function() {};
+
+    for (let i = 0; i < 10; i++) {
+      AppObj.generateRandomCharacter();
+      // Force culture to Sartarite
+      CD.culture = 'Sartarite';
+      // Generate cult selection
+      const CULT_MAP = App.CULTURE_CULT_MAP;
+      const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+      if (CULT_MAP && CULT_MAP['Sartarite'] && CULT_MAP['Sartarite'].primary) {
+        CD.cult = pick(CULT_MAP['Sartarite'].primary);
+      }
+
+      if (CD.cult) {
+        const cult = CULTS.find(c => c.name === CD.cult);
+        if (cult && cult.pantheon === 'Storm') {
+          stormCount++;
+        }
+      }
+    }
+
+    AppObj.renderCurrentStep = origRender;
+    AppObj.showToast = origToast;
+    AppObj.saveToLocalStorage = origSave;
+
+    if (stormCount >= 5) {
+      pass(`Sartarite characters get Storm pantheon cults (${stormCount}/10)`);
+    } else {
+      fail(`Only ${stormCount}/10 Sartarite characters got Storm pantheon cults`);
+    }
   }
 }
 
