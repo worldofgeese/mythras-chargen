@@ -8,7 +8,8 @@ Open `index.html` in any browser. No server, no build step. Everything is self-c
 
 ## Features
 
-- **12-step wizard** — characteristics, culture, career, skills, combat, runes, magic, equipment
+- **12-step wizard** — characteristics, culture, career, skills, combat, runes, **cult selection**, magic, equipment
+- **94 Gloranthan cults** — Storm, Yelm, Lunar, Praxian, Darkness pantheons from [Notes from Pavis](https://notesfrompavis.blog/) Cult One-Pagers (2019 edition)
 - **8 Gloranthan cultures** — Sartarite, Praxian (15 tribes), Esrolian, Lunar, Telmori, Balazaring, God Forgot, Lunar Provincial
 - **Play Mode** — interactive sheet with dice roller, difficulty modifiers, combat tracking, collapsible Special Effects reference
 - **Random generation** — one-click fully valid character for any culture
@@ -21,12 +22,13 @@ Open `index.html` in any browser. No server, no build step. Everything is self-c
 |--------|-----------------|
 | Mythras Core Rulebook (TDM, 3rd Printing 2018) | Skills, attributes, age tables, weapons, armour, careers, folk magic, combat |
 | Adventures in Glorantha (TDM, GenCon 2015 Preview) | 8 cultures, 44 combat styles, rune affinities, culture-specific magic |
+| Notes from Pavis Cult One-Pagers (2019 edition) | 94 cult definitions — skills, folk magic, miracles, personality traits, cult relationships |
 
 ## Project Structure
 
 ```
 ├── index.html                  # Character sheet — wizard + play mode + PDF export
-├── test-chargen.js             # 217 tests (node, no dependencies)
+├── test-chargen.js             # 221 tests (node, no dependencies)
 ├── lib/
 │   └── pdf-lib.min.js          # PDF generation (also loaded via CDN fallback)
 ├── data/
@@ -34,12 +36,17 @@ Open `index.html` in any browser. No server, no build step. Everything is self-c
 ├── references/                 # Canonical reference data with page citations
 │   ├── mythras-raw/            # 12 files from Mythras Core
 │   ├── aig-raw/                # 7 files from Adventures in Glorantha
+│   ├── cults-upstream/         # 286 cult one-pager PDFs (Notes from Pavis)
+│   ├── cults-raw/              # 94 extracted cult JSONs by pantheon
+│   ├── culture-cult-map.json   # Which cults are available per culture
 │   └── pdf-field-map.json      # PDF template field mapping
 ├── templates/
 │   └── mythras-sheet.pdf       # Official Mythras PDF template (for pregen pipeline)
 ├── scripts/
 │   ├── generate_starter_set_pregens.py   # Pregen pipeline: JSON → filled PDF + cover pages
 │   ├── validate_character_sheet.py       # Validate character JSON against Mythras rules
+│   ├── extract-cults.py                  # Extract cult data from upstream PDFs to JSON
+│   ├── fix-cult-data.py                  # Clean OCR artifacts from cult personality traits
 │   └── build-standalone.py               # Build dist/mythras-chargen-standalone.html
 ├── fixtures/                   # Test character fixtures (4 cultures)
 ├── docs/                       # GM reference docs

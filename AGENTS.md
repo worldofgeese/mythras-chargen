@@ -38,6 +38,19 @@ Every data field traces back to a source PDF through a reference JSON:
 ### Extraction Methods
 - **pdftotext**: Mythras Core (text-layer pages)
 - **Mistral OCR API**: AiG p.29-41 (image-embedded pages)
+- **pypdf**: Cult One-Pagers (286 PDFs, extracted via `scripts/extract-cults.py`)
+
+### Cults (references/cults-raw/ + references/cults-upstream/)
+| Pantheon | Cults | Coverage |
+|----------|-------|----------|
+| Storm | 32 | Orlanth, Ernalda, Humakt, Issaries, Chalana Arroy, Storm Bull, etc. |
+| Yelm | 17 | Yelm, Yelmalio, Buserian, Lodril, etc. |
+| Lunar | 12 | Seven Mothers (7), Etyries, Crimson Bat, etc. |
+| Praxian | 14 | Eiritha, Waha, Storm Bull, Foundchild, Daka Fal, etc. |
+| Darkness | 19 | Zorak Zoran, Kyger Litor, Argan Argar, Xiola Umbar, etc. |
+
+Upstream: Notes from Pavis Cult One-Pagers (2019 edition, v5.2)
+Culture-to-cult mapping: `references/culture-cult-map.json`
 - **Image + vision model**: AiG p.31 (God Forgot stats)
 - **web_search**: Trademark statements
 
@@ -58,6 +71,22 @@ Both statements are in the HTML footer:
 ## Key File
 - `aig-character-sheet.html` — single self-contained file (HTML + CSS + JS)
 
+## Playwright Testing
+The HTML is fully testable with playwright-cli. Mode switching uses CSS `display:none` (no offscreen positioning tricks that break automation).
+
+```bash
+# Start server + open browser
+python3 -m http.server 8765 &
+playwright-cli open http://localhost:8765/index.html
+
+# Generate character and verify
+playwright-cli eval "void(App.generateRandomCharacter())"
+playwright-cli eval "''+CharacterData.cult+'/'+CharacterData.culture"
+playwright-cli eval "void(App.switchMode('play'))"
+playwright-cli eval "document.querySelector('#play-cult').value"
+playwright-cli screenshot --filename=play-mode.png
+```
+
 ## Data Constants
 | Constant | Entries | Source |
 |----------|---------|--------|
@@ -67,6 +96,8 @@ Both statements are in the HTML footer:
 | AGE_TABLE | 5 rows | Mythras Core p.32-33 |
 | FOLK_MAGIC_SPELLS | 62 spells | Mythras Core p.122-130 + AiG |
 | CAREERS_DATA | 24 careers | Mythras Core p.28-34 |
+| CULTS_DATA | 94 cults | Notes from Pavis CultOnePagers2019 |
+| CULTURE_CULT_MAP | 8 cultures | Derived from cult areas + AiG cultures |
 | COMBAT_TRAITS_DATA | 114 traits | Mythras Core + AiG |
 | DAMAGE_MOD_TABLE | 20 entries | Mythras Core p.10 |
 
