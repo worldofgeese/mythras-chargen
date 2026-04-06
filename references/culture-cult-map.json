@@ -1,0 +1,40 @@
+{
+  "source": "Derived from CultOnePagers2019 areas + AiG culture descriptions",
+  "note": "Maps each AiG culture to available cults. 'primary' = most common/expected. 'secondary' = available but less typical. Based on pantheon geography and cult area data.",
+  "cultures": {
+    "Sartarite": {
+      "primary": ["Orlanth", "Ernalda", "Humakt", "Issaries", "Lhankor Mhy", "Chalana Arroy"],
+      "secondary": ["Storm Bull", "Eurmal", "Odayla", "Babeester Gor", "Maran Gor", "Vinga", "Barntar", "Heler", "Yinkin", "Elmal", "Ty Kora Tek", "Engizi", "Asrelia", "Donandar", "Lanbril", "Foundchild"]
+    },
+    "Esrolian": {
+      "primary": ["Ernalda", "Babeester Gor", "Chalana Arroy", "Issaries", "Lhankor Mhy", "Ty Kora Tek"],
+      "secondary": ["Orlanth", "Humakt", "Asrelia", "Maran Gor", "Donandar", "Eurmal", "Lanbril", "Grain Goddesses", "Uleria", "Argan Argar"]
+    },
+    "Lunar Heartland": {
+      "primary": ["7 Mothers - Yanafal Tarnils", "7 Mothers - Irrippi Ontor", "7 Mothers - Jakaleel", "7 Mothers - Danfive Xaron", "7 Mothers - Teelo Norri", "7 Mothers - Queen Deezola", "7 Mothers - She Who Waits", "Etyries"],
+      "secondary": ["Yelm", "Lodril", "Dendara", "Buserian", "Shargash", "Polaris", "Lanbril", "Uleria", "Chalana Arroy", "Lokarnos"]
+    },
+    "Lunar Provincial": {
+      "primary": ["7 Mothers - Yanafal Tarnils", "7 Mothers - Irrippi Ontor", "Etyries"],
+      "secondary": ["Orlanth", "Ernalda", "Humakt", "Issaries", "Yelmalio", "Chalana Arroy", "Lhankor Mhy", "Lanbril", "7 Mothers - Jakaleel", "7 Mothers - Danfive Xaron", "7 Mothers - Teelo Norri", "7 Mothers - Queen Deezola"]
+    },
+    "Praxian": {
+      "primary": ["Waha", "Eiritha", "Storm Bull", "Foundchild", "Daka Fal"],
+      "secondary": ["Chalana Arroy", "Issaries", "Humakt", "Lanbril", "Zorak Zoran", "Pavis", "Zola Fel", "Basmol", "Gagarth"]
+    },
+    "Balazaring": {
+      "primary": ["Foundchild", "Yelmalio", "Daka Fal"],
+      "secondary": ["Storm Bull", "Chalana Arroy", "Orlanth", "Waha", "Eiritha", "Odayla"]
+    },
+    "God Forgot": {
+      "primary": [],
+      "secondary": ["Lhankor Mhy", "Issaries", "Chalana Arroy", "Dormal"],
+      "note": "God Forgot is explicitly atheistic/secularist. Cults are rare — 'No cult' is the expected default here."
+    },
+    "Telmori Hsunchen": {
+      "primary": ["Telmor"],
+      "secondary": ["Storm Bull", "Foundchild", "Odayla", "Orlanth"],
+      "note": "Telmori primarily worship their wolf ancestor Telmor. Telmor cult data is in Hsunchen pantheon."
+    }
+  }
+}
