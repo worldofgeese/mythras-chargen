@@ -1,0 +1,97 @@
+{
+  "name": "Issaries",
+  "pantheon": "Storm",
+  "source": "CultOnePagers2019/Storm/Issaries.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nCustoms",
+    "Influence",
+    "Insight",
+    "Courtesy",
+    "Culture(named culture)",
+    "Literacy",
+    "Lore (cult)",
+    "Navigation",
+    "Commerce",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Alarm",
+    "Appraise",
+    "Countermagic",
+    "Find Enemies",
+    "Glamour",
+    "Glue",
+    "Magnify",
+    "Mindspeech",
+    "Mobility",
+    "Repair",
+    "Translate"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Forgivingl Mercifull",
+    "Peacefull Generousl",
+    "Compassionatel Adventurouss",
+    "Dynamics Impulsives",
+    "Recklesss"
+  ],
+  "enemyCults": [
+    "Bagog",
+    "Cacodemon",
+    "Crimson Bat",
+    "Nysalor",
+    "Krarsht",
+    "Lanbril",
+    "Mallia",
+    "Primal Chaos"
+  ],
+  "hostileCults": [
+    "Blackfang"
+  ],
+  "friendlyCults": [
+    "Aranea",
+    "Argan Argar",
+    "Caladra&Aurelion",
+    "Daka Fal",
+    "Flintnail",
+    "Frog Woman",
+    "Geo",
+    "Gorakiki"
+  ],
+  "associatedCults": [
+    "Chalana Arroy",
+    "Lhankor Mhy",
+    "Orlanth",
+    "Eurmal"
+  ],
+  "areas": [
+    "Coastal Pamaltela",
+    "Dragon Pass",
+    "East",
+    "Fonrit",
+    "Holy Country",
+    "Lunar",
+    "Oceans",
+    "West"
+  ],
+  "holyDays": [
+    "Sea/Movement/Wild",
+    "Fire/Movement/Wild",
+    "Earth/Harmony/God",
+    "Earth/Movement/Wild\nDark/Movement/Wild",
+    "Storm/Movement/Wild",
+    "Sacred Time/Fate Week/Wild",
+    "Sacred Time/God\nWeek/Wild\nls\nIssaries\nGod of Trade\n2019 version\nAIG/RQG etc"
+  ],
+  "spiritSocieties": [],
+  "runeAssociations": {},
+  "oppositeRune": "Disorder"
+}

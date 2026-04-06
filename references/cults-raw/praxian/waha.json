@@ -1,0 +1,94 @@
+{
+  "name": "Waha",
+  "pantheon": "Praxian",
+  "source": "CultOnePagers2019/Praxian/Waha.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Must be a male tribal member. Must know one spell",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.Must be a male tribal member. Must know one spell\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Must be of\nnoble blood.  Bold skills are mandatory\nCult Skills (Oath is taken at initiate)\nLocale",
+    "Lore (cult)",
+    "Navigation",
+    "Oratory",
+    "Survival",
+    "Track",
+    "Combat style (Tribal)",
+    "Dance(Shaman)",
+    "Perception(Shaman)",
+    "Ride",
+    "Sing(Shaman)",
+    "Binding(Shaman)",
+    "Craft (butchery)",
+    "Devotion",
+    "Runic\nAffinity",
+    "Trance(Shaman)"
+  ],
+  "folkMagic": [
+    "Countermagic",
+    "Dispel Magic",
+    "Distraction",
+    "Find Spirit",
+    "Heal",
+    "Protection",
+    "Second Sight",
+    "Slow",
+    "Speedart",
+    "Spiritshield",
+    "Vigour"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Tribal",
+    "Social",
+    "Relentlesst Ruthlesst",
+    "Unemotionalt Ascetict"
+  ],
+  "enemyCults": [
+    "Bagog",
+    "Cacodemon",
+    "Crimson Bat",
+    "Nysalor",
+    "Krarsht",
+    "Mallia",
+    "Primal Chaos",
+    "Thanatar",
+    "Thed"
+  ],
+  "hostileCults": [
+    "Seven Mothers",
+    "Eurmal"
+  ],
+  "friendlyCults": [
+    "Chalana Arroy",
+    "Ernalda"
+  ],
+  "associatedCults": [
+    "Eiritha",
+    "Foundchild",
+    "Storm Bull"
+  ],
+  "areas": [
+    "Coastal Pamaltela",
+    "Dragon Pass",
+    "East",
+    "Fonrit",
+    "Holy Country",
+    "Lunar",
+    "Oceans",
+    "West"
+  ],
+  "holyDays": [
+    "Sea/Death/God",
+    "Fire/Death/God",
+    "Earth/Death/God",
+    "Earth/Fertility/God",
+    "Dark/Death/God\nStorm/Death/Wild"
+  ],
+  "spiritSocieties": [],
+  "runeAssociations": {},
+  "oppositeRune": "Life"
+}

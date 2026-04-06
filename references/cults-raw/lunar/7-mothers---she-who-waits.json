@@ -1,0 +1,84 @@
+{
+  "name": "7 Mothers - She Who Waits",
+  "pantheon": "Lunar",
+  "source": "CultOnePagers2019/Lunar/7 Mothers - She Who Waits.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nDevotion",
+    "Runic Affinity",
+    "Willpower",
+    "Sedenyic Philosophy\u2076",
+    "Conceal",
+    "Deceit",
+    "Insight",
+    "Perception"
+  ],
+  "folkMagic": [
+    "Avert",
+    "Incognito",
+    "Phantasm"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Proud",
+    "Just",
+    "Authoritative",
+    "Tolerant",
+    "Balanced",
+    "Spiritualliberation",
+    "Open"
+  ],
+  "enemyCults": [
+    "Hostile Cults: Blackfang",
+    "Mallia",
+    "Orlanth",
+    "Thanatar",
+    "Zorak Zoran"
+  ],
+  "hostileCults": [
+    "Blackfang",
+    "Mallia",
+    "Orlanth",
+    "Thanatar",
+    "Zorak Zoran"
+  ],
+  "friendlyCults": [
+    "Aldrya",
+    "Aranea",
+    "Argan Argar",
+    "Caladra&Aurelion",
+    "Chalana Arroy",
+    "Crimson Bat",
+    "Daka Fal"
+  ],
+  "associatedCults": [
+    "Nysalor",
+    "Lodril",
+    "Primal Chaos"
+  ],
+  "areas": [
+    "Dragon Pass",
+    "Lunar"
+  ],
+  "holyDays": [
+    "Sea/Illusion/Wild",
+    "Fire/Illusion/Wild",
+    "Earth/Illusion/Wild",
+    "Dark/Disorder/God",
+    "Dark/Illusion/Wild\nStorm/Illusion/Wild\nRune Meanings: Mastery: Leadership",
+    "Authority",
+    "Sovereignty",
+    "Moon: Illusion",
+    "Cycles",
+    "Balance\nThis document uses trademarks and/or copyrights owned by Chaosium Inc/Moon Design Publications\nLLC",
+    "which are used under Chaosium Inc\u2019s Fan Material Policy, We are expressly prohibited from\ncharging you to use or access this content. This site is not published, endorsed, or specifically approved\nby Chaosium Inc. For more information about Chaosium Inc\u2019s products, please visit www.chaosium.com.\n\"Mythras\u201d is a Registered Trademark of The Design Mechanism Inc, and is used with permission, http:\n//notesfrompavis.blog 3/15/2019 9:13:32 PM Version: 5.2"
+  ],
+  "spiritSocieties": [],
+  "runeAssociations": {}
+}

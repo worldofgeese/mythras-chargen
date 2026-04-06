@@ -1,0 +1,72 @@
+{
+  "name": "Babeester Gor",
+  "pantheon": "Storm",
+  "source": "CultOnePagers2019/Storm/Babeester Gor.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Only women may join",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.Only women may join\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nCombat style with axe",
+    "Brawn",
+    "Endurance",
+    "Perception",
+    "Willpower",
+    "Lore (cult)",
+    "Track",
+    "Devotion",
+    "Runic\nAffinity"
+  ],
+  "folkMagic": [
+    "Bladesharp",
+    "Demoralise",
+    "Disruption",
+    "Find Enemies",
+    "Heal",
+    "Might",
+    "Vigour"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Pragmatice Prudente",
+    "Worldlye Sensuale",
+    "Relentlesst Ruthlesst",
+    "Unemotionalt Ascetict"
+  ],
+  "enemyCults": [
+    "Hostile Cults: Daka Fal",
+    "Seven Mothers"
+  ],
+  "hostileCults": [
+    "Daka Fal",
+    "Seven Mothers"
+  ],
+  "friendlyCults": [
+    "Chalana Arroy",
+    "Odayla",
+    "Orlanth",
+    "Yinkin"
+  ],
+  "associatedCults": [
+    "Maran Gor"
+  ],
+  "areas": [
+    "Coastal Pamaltela",
+    "Dragon Pass",
+    "East",
+    "Fonrit",
+    "Holy Country",
+    "Inland Pamaltela",
+    "Lunar"
+  ],
+  "holyDays": [
+    "Earth/Death/Freeze",
+    "Dark/Disorder/Wild"
+  ],
+  "spiritSocieties": [],
+  "runeAssociations": {},
+  "oppositeRune": "Life"
+}

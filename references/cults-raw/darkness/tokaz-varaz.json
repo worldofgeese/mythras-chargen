@@ -1,0 +1,47 @@
+{
+  "name": "Tokaz Varaz",
+  "pantheon": "Darkness",
+  "source": "CultOnePagers2019/Darkness/Tokaz Varaz.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Trollkin",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.Trollkin\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nRunic Affinity",
+    "Devotion",
+    "Combat Style with Sling",
+    "Evade"
+  ],
+  "folkMagic": [
+    "Disruption()",
+    "Heal()"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Cruelo Coldo",
+    "Secretiveo Patiento",
+    "Destructivej Recklessj",
+    "Selfishj Greedyj"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Coastal Pamaltela",
+    "Dragon Pass",
+    "East",
+    "Genertela",
+    "Inland Pamaltela",
+    "Lunar",
+    "Oceans",
+    "West"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "runeAssociations": {},
+  "oppositeRune": "Harmony"
+}

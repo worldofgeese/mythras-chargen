@@ -1,0 +1,87 @@
+{
+  "name": "Maran Gor",
+  "pantheon": "Storm",
+  "source": "CultOnePagers2019/Storm/Maran Gor.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Must be\ncelibate",
+    "unmarried woman Bold skills are mandatory\nCult Skills (Oath is taken at initiate)\nCombat style (any)",
+    "Brawn",
+    "Endurance",
+    "Locale",
+    "Perception",
+    "Willpower",
+    "Lore (cult)",
+    "Lore (earth)",
+    "Athletics",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Befuddle",
+    "Bladesharp",
+    "Bludgeon",
+    "Demoralise",
+    "Disruption",
+    "Dullblade",
+    "Heal",
+    "Ironhand",
+    "Might",
+    "Vigour"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Pragmatice Prudente",
+    "Worldlye Sensuale",
+    "Relentlesst Ruthlesst",
+    "Unemotionalt Ascetict",
+    "Destructivej Recklessj"
+  ],
+  "enemyCults": [
+    "Hostile Cults: Eurmal",
+    "Seven Mothers"
+  ],
+  "hostileCults": [
+    "Eurmal",
+    "Seven Mothers"
+  ],
+  "friendlyCults": [
+    "Chalana Arroy",
+    "Eiritha",
+    "Issaries",
+    "Odayla",
+    "Orlanth",
+    "Yinkin"
+  ],
+  "associatedCults": [
+    "Babeester Gor",
+    "Ernalda"
+  ],
+  "areas": [
+    "Coastal Pamaltela",
+    "Dragon Pass",
+    "East",
+    "Fonrit",
+    "Holy Country",
+    "Inland Pamaltela",
+    "Lunar"
+  ],
+  "holyDays": [
+    "Sea/Disorder/Clay",
+    "Fire/Disorder/Clay",
+    "Earth/Disorder/Clay",
+    "Earth/Fertility/Wild",
+    "Dark/Disorder/Clay\nDark/Death/Clay",
+    "Dark/Stasis/Winds",
+    "Storm/Disorder/Clay\ntej\nMaran Gor\nThe Earth Shaker\n2019 version\nAIG/RQG etc"
+  ],
+  "spiritSocieties": [],
+  "runeAssociations": {},
+  "oppositeRune": "Harmony"
+}

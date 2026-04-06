@@ -1,0 +1,93 @@
+{
+  "name": "Humakt",
+  "pantheon": "Storm",
+  "source": "CultOnePagers2019/Storm/Humakt.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.One of the shown skills must be a sword combat skill",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.One of the shown skills must be a sword combat skill\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nCombat style (any)",
+    "Conceal",
+    "Endurance",
+    "Evade",
+    "First aid",
+    "Ride",
+    "Willpower",
+    "Craft (armoring)",
+    "Lore (cult)",
+    "Oratory",
+    "Sense assassin\u00b9",
+    "Combat style with sword",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Bladesharp",
+    "Coordination",
+    "Demoralise",
+    "Disruption",
+    "Dullblade",
+    "Find Enemies",
+    "Find Undead",
+    "Fireblade",
+    "Heal",
+    "Might",
+    "Parry",
+    "Protection",
+    "Repair",
+    "Vigour"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Relentlesst Ruthlesst",
+    "Unemotionalt Ascetict",
+    "Truthfuly Observanty",
+    "Dutifuly Faithfuly",
+    "Fairy"
+  ],
+  "enemyCults": [
+    "Thanatar",
+    "Vivamort"
+  ],
+  "hostileCults": [
+    "Blackfang",
+    "Cacodemon",
+    "Krarsht",
+    "Lanbril",
+    "Mallia",
+    "Seven Mothers",
+    "Zorak Zoran"
+  ],
+  "friendlyCults": [
+    "Orlanth",
+    "Yinkin"
+  ],
+  "associatedCults": [
+    "Holy Days"
+  ],
+  "areas": [
+    "Coastal Pamaltela",
+    "Dragon Pass",
+    "East",
+    "Fonrit",
+    "Holy Country",
+    "Lunar",
+    "Oceans",
+    "West"
+  ],
+  "holyDays": [
+    "Sea/Death/Water",
+    "Fire/Death/Fire",
+    "Earth/Death/Clay",
+    "Dark/Death/Freeze",
+    "Storm/Death/Winds",
+    "Sacred\nTime/Fate Week/Clay"
+  ],
+  "spiritSocieties": [],
+  "runeAssociations": {},
+  "oppositeRune": "Illusion"
+}

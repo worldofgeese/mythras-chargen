@@ -1,0 +1,63 @@
+{
+  "name": "Yara Aranis",
+  "pantheon": "Lunar",
+  "source": "CultOnePagers2019/Lunar/Yara Aranis.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Must be eligible for joining the Lunar army",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.Must be eligible for joining the Lunar army\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nCombat Style(any)",
+    "Ride",
+    "Perception",
+    "Track",
+    "Runic Affinity",
+    "Language(New Pelorian)"
+  ],
+  "folkMagic": [
+    "Avert",
+    "Befuddle",
+    "Bladesharp",
+    "Coordination",
+    "Demoralise",
+    "Disruption",
+    "Dullblade",
+    "Fanaticism",
+    "Find\nEnemy",
+    "Ironhand",
+    "Might",
+    "Mobility",
+    "Protection",
+    "Vigour"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Evil",
+    "Chaos",
+    "Tolerant",
+    "Balanced",
+    "Spiritualliberation",
+    "Open"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Dragon Pass, Lunar"
+  ],
+  "holyDays": [
+    "Sea/Death/Wild",
+    "Fire/Death/Wild",
+    "Earth/Death/Wild",
+    "Dark/Death/Wild",
+    "Storm/Death/Wild",
+    "Can command Lune",
+    "Fear"
+  ],
+  "spiritSocieties": [],
+  "runeAssociations": {}
+}

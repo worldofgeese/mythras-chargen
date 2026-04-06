@@ -1,0 +1,48 @@
+{
+  "name": "Dark Eater",
+  "pantheon": "Praxian",
+  "source": "CultOnePagers2019/Praxian/Dark Eater.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Morocanth who has at least one parent who is an initiate of Dark Eater",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.Morocanth who has at least one parent who is an initiate of Dark Eater\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nCombat Style(Natural)",
+    "Unarmed",
+    "Evade",
+    "Runic Affinity",
+    "Devotion"
+  ],
+  "folkMagic": [
+    "Beslave\u2079",
+    "Bladesharp",
+    "Bludgeon",
+    "Darkness",
+    "Demoralize",
+    "Fanaticism",
+    "Ironhand",
+    "Light"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Cruelo Coldo",
+    "Secretiveo Patiento",
+    "Destructivej Recklessj",
+    "Selfishj Greedyj",
+    "Soullessu Fiendishu"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Dragon Pass"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "runeAssociations": {},
+  "oppositeRune": "Harmony"
+}

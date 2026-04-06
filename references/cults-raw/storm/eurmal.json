@@ -1,0 +1,87 @@
+{
+  "name": "Eurmal",
+  "pantheon": "Storm",
+  "source": "CultOnePagers2019/Storm/Eurmal.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Must be willing to become outlaw plus special test by the trickster priest",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.Must be willing to become outlaw plus special test by the trickster priest\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nConceal",
+    "Customs",
+    "Deceit",
+    "Acrobatics",
+    "Acting",
+    "Disguise",
+    "Lore (cult)",
+    "Seduction",
+    "Sleight",
+    "Streetwise",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Disruption",
+    "Glamour",
+    "Hotfoot\u00b2",
+    "Ignite",
+    "Shimmer",
+    "Silence"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Destructivej Recklessj",
+    "Selfishj Greedyj",
+    "Deceitfuli Cowardlyi",
+    "Corruptedi Imaginativei",
+    "Subjectivei"
+  ],
+  "enemyCults": [
+    "Bagog",
+    "Cacodemon",
+    "Crimson Bat",
+    "Nysalor",
+    "Krarsht",
+    "Mallia",
+    "Primal Chaos",
+    "Thanatar",
+    "Thed"
+  ],
+  "hostileCults": [
+    "Babeester Gor",
+    "Daka Fal",
+    "Eiritha",
+    "Engizi",
+    "Foundchild",
+    "Maran Gor",
+    "Seven Mothers",
+    "Storm"
+  ],
+  "friendlyCults": [
+    "Odayla",
+    "Yinkin"
+  ],
+  "associatedCults": [
+    "Chalana Arroy",
+    "Issaries",
+    "Lhankhor Mhy",
+    "Orlanth"
+  ],
+  "areas": [
+    "Coastal Pamaltela",
+    "Dragon Pass",
+    "East",
+    "Fonrit",
+    "Holy Country",
+    "Lunar",
+    "Oceans",
+    "West"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "runeAssociations": {},
+  "oppositeRune": "Harmony"
+}

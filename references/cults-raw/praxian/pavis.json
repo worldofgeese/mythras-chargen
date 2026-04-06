@@ -1,0 +1,78 @@
+{
+  "name": "Pavis",
+  "pantheon": "Praxian",
+  "source": "CultOnePagers2019/Praxian/Pavis.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Born in Pavis.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.Born in Pavis.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Rune levels\nmust stay within city. Bold skills are mandatory\nCult Skills (Oath is taken at initiate)\nCombat style with axe",
+    "Combat style with hammer",
+    "Customs",
+    "Locale",
+    "Bureaucracy",
+    "Craft (masonry)",
+    "Engineering",
+    "Invocation",
+    "Literacy",
+    "Lore (cult)",
+    "Shaping",
+    "Devotion",
+    "Runic Affinity",
+    "Language (old\nwyrmish)"
+  ],
+  "folkMagic": [
+    "Glue(Lay)",
+    "Heal",
+    "Might"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Tribal",
+    "Social"
+  ],
+  "enemyCults": [
+    "Bagog",
+    "Cacodemon",
+    "Mallia",
+    "Thanatar",
+    "Vivamort"
+  ],
+  "hostileCults": [
+    "Blackfang",
+    "Krarsht",
+    "Lanbril",
+    "Primal Chaos",
+    "Storm Bull",
+    "Thed",
+    "Zorak Zoran"
+  ],
+  "friendlyCults": [
+    "Argan Argar",
+    "Chalana Arroy",
+    "Eiritha",
+    "Geo",
+    "Issaries",
+    "Lhankor Mhy",
+    "Lodril",
+    "Orlanth",
+    "Yelm"
+  ],
+  "associatedCults": [
+    "Aldrya",
+    "Flintnail",
+    "Zola Fel"
+  ],
+  "areas": [
+    "Dragon Pass"
+  ],
+  "holyDays": [
+    "Earth/Fertility/God\nRune Meanings: Man: Mortal Humanoids, Slave\nThis document uses trademarks and/or copyrights owned by Chaosium Inc/Moon Design Publications\nLLC, which are used under Chaosium Inc\u2019s Fan Material Policy, We are expressly prohibited from\ncharging you to use or access this content. This site is not published, endorsed, or specifically approved\nby Chaosium Inc. For more information about Chaosium Inc\u2019s products, please visit www.chaosium.com.\n\"Mythras\u201d is a Registered Trademark of The Design Mechanism Inc, and is used with permission, http:\n,\nPavis\nCity God of Pavis\n2019 version\nAIG/RQG etc\n//notesfrompavis.blog 3/15/2019 9:13:32 PM Version: 5.2"
+  ],
+  "spiritSocieties": [],
+  "runeAssociations": {}
+}

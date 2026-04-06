@@ -1,0 +1,93 @@
+{
+  "name": "Odayla",
+  "pantheon": "Storm",
+  "source": "CultOnePagers2019/Storm/Odayla.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Must hunt and kill at least one prey beast per season to donate to their\npoeple.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.Must hunt and kill at least one prey beast per season to donate to their\npoeple. They must always use the peaceful cut on any animal killed for food\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Most\nimpressive animal brought in in the the Great Hunt Bold skills are mandatory\nCult Skills (Oath is taken at initiate)\nCombat style with missile attack",
+    "Athletics",
+    "Locale",
+    "Perception",
+    "Stealth",
+    "Lore (animal)",
+    "Lore (cult)",
+    "Navigation",
+    "Track",
+    "Butchering",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Beastcall(Waterfowl)",
+    "Beastcall(Wild Cattle)",
+    "Detect Life",
+    "Disruption",
+    "Heal",
+    "Might",
+    "Mobility",
+    "Protection",
+    "Slow",
+    "Speedart",
+    "Spiritshield"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Uncouth",
+    "Rough",
+    "Loyal",
+    "Wild",
+    "Instinctive",
+    "Savage",
+    "Passionateg Proudg",
+    "Unpredictableg"
+  ],
+  "enemyCults": [
+    "Hostile Cults: Seven Mothers"
+  ],
+  "hostileCults": [
+    "Seven Mothers"
+  ],
+  "friendlyCults": [
+    "Argan Argar",
+    "Babeester Gor",
+    "Chalana Arroy",
+    "Ernalda",
+    "Eurmal",
+    "Issaries",
+    "Lhankor Mhy"
+  ],
+  "associatedCults": [
+    "Daka Fal",
+    "Foundchild",
+    "Orlanth",
+    "Yinkin"
+  ],
+  "areas": [
+    "Coastal Pamaltela",
+    "Dragon Pass",
+    "East",
+    "Fonrit",
+    "Holy Country",
+    "Lunar",
+    "Oceans",
+    "West"
+  ],
+  "holyDays": [
+    "Sea/Disorder/Freeze",
+    "Sea/Fertility/Water",
+    "Fire/Harmony/Fire",
+    "Fire/Illusion/Wild",
+    "Earth/Disorder/Wild\nEarth/Movement/Wild",
+    "Dark/Disorder/Freeze",
+    "Dark/Death/Clay",
+    "Storm/Harmony/Wild\nStorm/Harmony/God"
+  ],
+  "spiritSocieties": [],
+  "runeAssociations": {}
+}

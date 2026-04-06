@@ -1,0 +1,51 @@
+{
+  "name": "Gerak Kag",
+  "pantheon": "Darkness",
+  "source": "CultOnePagers2019/Darkness/Gerak Kag.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity. Examiners\nneed to be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Initiate needs to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity. Examiners\nneed to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity. Bold\nskills are mandatory\nSource - see for detailed info\nGods Of Glorantha\u00b2\nContinents:Genertela",
+    "Oceans",
+    "Pamaltela\nMain Areas: Coastal Pamaltela",
+    "Dragon Pass",
+    "East",
+    "Genertela",
+    "Inland Pamaltela",
+    "Lunar",
+    "Oceans",
+    "West\nLocalities: Blue Moon Plateau",
+    "Dagori Inkarth",
+    "Elder Wilds",
+    "Errinoru Jungle",
+    "Fronela",
+    "Halikiv",
+    "Jrusteli\nIsles",
+    "Keniryan Sea",
+    "Koromondol",
+    "Pavis",
+    "Tarmo Mountains",
+    "Valinds Glacier",
+    "Yolp Mountains\nAreas\nDarkness\nPantheons\nLore (cult)",
+    "Devotion",
+    "Runic Affinity\nRequirements to Join\nCruelo Coldo Secretiveo Patiento Adventurouss Dynamics Impulsives Recklesss Energetics\nRebelliouss\nPersonalityTraits\nOpposite:Stasis"
+  ],
+  "folkMagic": [],
+  "miracles": [],
+  "personalityTraits": [],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Coastal Pamaltela, Dragon Pass, East, Genertela, Inland Pamaltela, Lunar, Oceans, West"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "runeAssociations": {},
+  "oppositeRune": "Stasis"
+}

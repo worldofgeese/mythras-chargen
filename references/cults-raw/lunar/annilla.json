@@ -1,0 +1,61 @@
+{
+  "name": "Annilla",
+  "pantheon": "Lunar",
+  "source": "CultOnePagers2019/Lunar/Annilla.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Will be invited by a member. Requires knowing the person for 10 years",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.Will be invited by a member. Requires knowing the person for 10 years\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Must be an\nopening for a priest. Bold skills are mandatory\nCult Skills (Oath is taken at initiate)\nConceal",
+    "Mechanisms",
+    "Stealth",
+    "Combat skill (any)",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Beastcall (Species)",
+    "Befuddle",
+    "Countermagic",
+    "Darkness",
+    "Dullblade",
+    "Extinguish",
+    "Glamour",
+    "Glue",
+    "Incognito",
+    "Mindspeech",
+    "Second Sight",
+    "Slow"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Cruelo Coldo",
+    "Secretiveo Patiento",
+    "Tolerant",
+    "Balanced",
+    "Spiritualliberation",
+    "Open",
+    "Mercurialw"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Coastal Pamaltela",
+    "Dragon Pass",
+    "East",
+    "Fonrit",
+    "Genertela",
+    "Inland Pamaltela",
+    "Lunar",
+    "Oceans"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "runeAssociations": {}
+}

@@ -1,0 +1,76 @@
+{
+  "name": "Donandar",
+  "pantheon": "Yelm",
+  "source": "CultOnePagers2019/Yelm/Donandar.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Must have\nbeen initiate for at least 5 years Bold skills are mandatory\nCult Skills (Oath is taken at initiate)\nDance",
+    "Stealth",
+    "Lore (cult)",
+    "Musicianship",
+    "Oratory",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [],
+  "miracles": [],
+  "personalityTraits": [
+    "Forgivingl Mercifull",
+    "Peacefull Generousl",
+    "Compassionatel Deceitfuli",
+    "Cowardlyi Corruptedi",
+    "Imaginativei"
+  ],
+  "enemyCults": [
+    "Cacodemon",
+    "Crimson Bat",
+    "Mallia",
+    "Thanatar"
+  ],
+  "hostileCults": [
+    "Bagog",
+    "Blackfang",
+    "Nysalor",
+    "Krarsht",
+    "Primal Chaos",
+    "Thed",
+    "Vivamort"
+  ],
+  "friendlyCults": [
+    "Caladra&Aurelion",
+    "Chalana Arroy",
+    "Geo",
+    "Issaries",
+    "Kyger Litor",
+    "Orlanth",
+    "Yelm",
+    "Yelmalio"
+  ],
+  "associatedCults": [
+    "Holy Days"
+  ],
+  "areas": [
+    "Coastal Pamaltela",
+    "Dragon Pass",
+    "East",
+    "Fonrit",
+    "Holy Country",
+    "Inland Pamaltela",
+    "Lunar"
+  ],
+  "holyDays": [
+    "Sea/Movement/Water",
+    "Fire/Illusion/Fire",
+    "Earth/Movement/Clay",
+    "Dark/Illusion/Freeze\nStorm/Harmony/Winds"
+  ],
+  "spiritSocieties": [],
+  "runeAssociations": {},
+  "oppositeRune": "Disorder"
+}

@@ -1,0 +1,43 @@
+{
+  "name": "Gorgorma",
+  "pantheon": "Yelm",
+  "source": "CultOnePagers2019/Yelm/Gorgorma.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nAthletics",
+    "Lore(cult)",
+    "Perception",
+    "Combat Style(1h/2h Axe\u00a0 Spear\u00a0 Unarmed))\u00a0 Stealth\u00a0 Runic Affinity"
+  ],
+  "folkMagic": [
+    "Bladesharp\u00a0 Demoralise\u00a0 Disruption\u00a0 Slow"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Cruelo Coldo",
+    "Secretiveo Patiento",
+    "Pragmatice Prudente",
+    "Worldlye Sensuale"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Dragon Pass",
+    "Inland Pamaltela",
+    "Lunar"
+  ],
+  "holyDays": [
+    "Sea/Disorder/Clay",
+    "Can command Boar\u00a0Dog\u00a0Ghost\u00a0Gnome\u00a0Pain"
+  ],
+  "spiritSocieties": [],
+  "runeAssociations": {}
+}

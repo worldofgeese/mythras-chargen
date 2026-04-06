@@ -1,0 +1,79 @@
+{
+  "name": "Daka Fal",
+  "pantheon": "Praxian",
+  "source": "CultOnePagers2019/Praxian/Daka Fal.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Initiates must be willing to disavow all previous cult connections. They must be",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.Initiates must be willing to disavow all previous cult connections. They must be\ninitiated by a priest of the cult",
+    "or by a shaman.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Must\novercome ancestor spirit invoked by examiners. Overcome ancestor becomes allied spirit Bold skills are\nmandatory\nCult Skills (Oath is taken at initiate)\nLore (cult)",
+    "Survival",
+    "Track",
+    "Any skill",
+    "Lore(Ancestors)",
+    "Runic Affinitiy",
+    "Binding(Shaman)",
+    "Trance\n(Shaman)",
+    "Spirit Speech",
+    "Spirit Rune Runic Affinitiy"
+  ],
+  "folkMagic": [],
+  "miracles": [],
+  "personalityTraits": [
+    "Tribal",
+    "Social",
+    "Ecstaticb Spiritualb",
+    "Awareb Mysticalb"
+  ],
+  "enemyCults": [
+    "Crimson Bat",
+    "Mallia",
+    "Primal Chaos",
+    "Thanatar",
+    "Vivamort"
+  ],
+  "hostileCults": [
+    "Argan Argar",
+    "Bagog",
+    "Caladra&Aurelion",
+    "Flintnail",
+    "Geo",
+    "Humakt",
+    "Issaries",
+    "Krarsht",
+    "Lhankor"
+  ],
+  "friendlyCults": [
+    "Aldrya",
+    "Kyger Litor"
+  ],
+  "associatedCults": [
+    "Odayla",
+    "Yinkin"
+  ],
+  "areas": [
+    "Dragon Pass"
+  ],
+  "holyDays": [
+    "Sacred Time/Fate Week/Freeze",
+    "Sacred Time/Fate Week/Water",
+    "Sacred Time/Fate Week/Clay\nSacred Time/Fate Week/Winds",
+    "Sacred Time/Fate Week/Fire",
+    "Sacred Time/Fate Week/Wild",
+    "Sacred\nTime/Fate Week/God",
+    "Sacred Time/God Week/Freeze",
+    "Sacred Time/God Week/Water",
+    "Sacred\nTime/God Week/Clay",
+    "Sacred Time/God Week/Winds",
+    "Sacred Time/God Week/Fire",
+    "Sacred\nTime/God Week/Wild",
+    "Sacred Time/God Week/God"
+  ],
+  "spiritSocieties": [],
+  "runeAssociations": {}
+}

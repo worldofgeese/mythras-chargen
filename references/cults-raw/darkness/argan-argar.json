@@ -1,0 +1,116 @@
+{
+  "name": "Argan Argar",
+  "pantheon": "Darkness",
+  "source": "CultOnePagers2019/Darkness/Argan Argar.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nCustoms",
+    "Influence",
+    "Insight",
+    "Commerce",
+    "Culture(named culture)",
+    "Literacy",
+    "Lore (cult)",
+    "Lore (human)",
+    "Navigation",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Darkwall",
+    "Find Magic",
+    "Glamour",
+    "Lantern\u00b2",
+    "Light",
+    "Lightwall\u00b2",
+    "Protection",
+    "Vigour"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Cruelo Coldo",
+    "Secretiveo Patiento",
+    "Forgivingl Mercifull",
+    "Peacefull Generousl",
+    "Compassionatel"
+  ],
+  "enemyCults": [
+    "Bagog",
+    "Cacodemon",
+    "Crimson Bat",
+    "Nysalor",
+    "Krarsht",
+    "Primal Chaos",
+    "Thanatar",
+    "Thed"
+  ],
+  "hostileCults": [
+    "Caladra&Aurelion",
+    "Lanbril",
+    "Mallia",
+    "Sun Dragon",
+    "Yelm",
+    "Yelmalio",
+    "Yelorna"
+  ],
+  "friendlyCults": [
+    "Aranea",
+    "Chalana Arroy",
+    "Daka Fal",
+    "Frog Woman",
+    "Geo",
+    "Humakt",
+    "Issaries",
+    "Kyger Litor"
+  ],
+  "associatedCults": [
+    "Gorakiki",
+    "Ernalda"
+  ],
+  "areas": [
+    "Coastal Pamaltela",
+    "Dragon Pass",
+    "East",
+    "Genertela",
+    "Inland Pamaltela",
+    "Lunar",
+    "Oceans",
+    "West"
+  ],
+  "holyDays": [
+    "Sea/Harmony/Freeze",
+    "Fire/Harmony/Winds",
+    "Earth/Harmony/Fire",
+    "Dark/Harmony/Water\nStorm/Harmony/Freeze\nCan converse with insects using spells\nRune Meanings: Darkness: Darkness",
+    "Cold",
+    "Underworld",
+    "Hunger",
+    "Insects",
+    "Harmony: Harmony",
+    "Co-operation\nHealing\nol\nArgan Argar\nGod of Surface Darkness\n2019 version\nAIG/RQG etc",
+    "Color:",
+    "Purple",
+    "Action:",
+    "Conceal",
+    "Metal:",
+    "Lead",
+    "Sense:",
+    "Hearing",
+    "Emotion:",
+    "Fear",
+    "Signature\nweapon:",
+    "Club",
+    "Instrument:",
+    "Drum\nThis document uses trademarks and/or copyrights owned by Chaosium Inc/Moon Design Publications\nLLC",
+    "which are used under Chaosium Inc\u2019s Fan Material Policy, We are expressly prohibited from\ncharging you to use or access this content. This site is not published, endorsed, or specifically approved\nby Chaosium Inc. For more information about Chaosium Inc\u2019s products, please visit www.chaosium.com.\n\"Mythras\u201d is a Registered Trademark of The Design Mechanism Inc, and is used with permission, http:\n//notesfrompavis.blog 3/15/2019 9:13:32 PM Version: 5.2"
+  ],
+  "spiritSocieties": [],
+  "runeAssociations": {},
+  "oppositeRune": "Disorder"
+}

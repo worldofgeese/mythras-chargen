@@ -1,0 +1,107 @@
+{
+  "name": "Kyger Litor",
+  "pantheon": "Darkness",
+  "source": "CultOnePagers2019/Darkness/Kyger Litor.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.All full trolls - automatic. Non trolls - long list of requirements",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.All full trolls - automatic. Non trolls - long list of requirements\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nAthletics",
+    "Conceal",
+    "Perception",
+    "Literacy",
+    "Lore (cult)",
+    "Combat style (any)",
+    "Dance(Shaman)",
+    "Sing\n(Shaman)",
+    "Binding(Shaman)",
+    "Devotion",
+    "Runic Affinity",
+    "Trance(Shaman)"
+  ],
+  "folkMagic": [
+    "Befuddle",
+    "Bludgeon",
+    "Countermagic",
+    "Darkwall",
+    "Demoralise",
+    "Disruption",
+    "Dullblade",
+    "Extinguish",
+    "Firearrow",
+    "Fireblade",
+    "Heal",
+    "Ignite",
+    "Lantern\u00b2",
+    "Light",
+    "Lightwall\u00b2",
+    "Protection",
+    "Second Sight",
+    "Slow",
+    "Spiritshield"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Cruelo Coldo",
+    "Secretiveo Patiento",
+    "Tribal",
+    "Social"
+  ],
+  "enemyCults": [
+    "Bagog",
+    "Cacodemon",
+    "Crimson Bat",
+    "Nysalor",
+    "Krarsht",
+    "Primal Chaos",
+    "Thanatar",
+    "Thed"
+  ],
+  "hostileCults": [
+    "Aldrya",
+    "Caladra&Aurelion",
+    "Chalana Arroy",
+    "Flintnail",
+    "Issaries",
+    "Lhankor Mhy",
+    "Lodril",
+    "Mallia"
+  ],
+  "friendlyCults": [
+    "Aranea",
+    "Argan Argar",
+    "Donandar",
+    "Foundchild",
+    "Gorakiki",
+    "Storm Bull"
+  ],
+  "associatedCults": [
+    "Daka Fal",
+    "Xiola Umbar",
+    "Zorak Zoran"
+  ],
+  "areas": [
+    "Coastal Pamaltela",
+    "Dragon Pass",
+    "East",
+    "Genertela",
+    "Inland Pamaltela",
+    "Lunar",
+    "Oceans",
+    "West"
+  ],
+  "holyDays": [
+    "Sea/Harmony/Freeze",
+    "Fire/Harmony/Freeze",
+    "Earth/Harmony/Freeze",
+    "Dark/Disorder/God\nDark/Harmony/Freeze",
+    "Dark/Harmony/Freeze",
+    "Storm/Harmony/Freeze"
+  ],
+  "spiritSocieties": [],
+  "runeAssociations": {}
+}

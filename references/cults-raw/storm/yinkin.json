@@ -1,0 +1,86 @@
+{
+  "name": "Yinkin",
+  "pantheon": "Storm",
+  "source": "CultOnePagers2019/Storm/Yinkin.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Must have an alynx raised from kitten and be acceptable to local acolyte",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.Must have an alynx raised from kitten and be acceptable to local acolyte\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nLore (cult)",
+    "Lore(Animal)",
+    "Perception",
+    "Track",
+    "Stealth",
+    "Athletics",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Any Feline Control Spells",
+    "Beastcall(Alynx)",
+    "Coordinate",
+    "Detect Life",
+    "Disruption",
+    "Glamour",
+    "Heal",
+    "Mobility",
+    "Silence",
+    "Slow"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Uncouth",
+    "Rough",
+    "Loyal",
+    "Wild",
+    "Instinctive",
+    "Savage",
+    "Passionateg Proudg",
+    "Unpredictableg"
+  ],
+  "enemyCults": [
+    "Hostile Cults: Seven Mothers"
+  ],
+  "hostileCults": [
+    "Seven Mothers"
+  ],
+  "friendlyCults": [
+    "Argan Argar",
+    "Chalana Arroy",
+    "Eiritha",
+    "Ernalda",
+    "Eurmal",
+    "Humakt",
+    "Issaries",
+    "Lhankor Mhy"
+  ],
+  "associatedCults": [
+    "Daka Fal",
+    "Foundchild",
+    "Odayla",
+    "Orlanth"
+  ],
+  "areas": [
+    "Coastal Pamaltela",
+    "Dragon Pass",
+    "East",
+    "Fonrit",
+    "Holy Country",
+    "Lunar",
+    "Oceans",
+    "West"
+  ],
+  "holyDays": [
+    "Sea/Stasis/Wild",
+    "Fire/Harmony/Fire",
+    "Earth/Harmony/Wild",
+    "Dark/Disorder/Freeze",
+    "Storm/Harmony/Fire\nSacred Time/God Week/Winds"
+  ],
+  "spiritSocieties": [],
+  "runeAssociations": {}
+}

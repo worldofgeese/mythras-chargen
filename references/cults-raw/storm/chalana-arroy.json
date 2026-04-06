@@ -1,0 +1,108 @@
+{
+  "name": "Chalana Arroy",
+  "pantheon": "Storm",
+  "source": "CultOnePagers2019/Storm/Chalana Arroy.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Never harm an intelligent creature or needlessly cause pain to any living\nthing.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.Never harm an intelligent creature or needlessly cause pain to any living\nthing. No combat but Evade. Protect non chaos foes incapacitated by healer\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Must know\nheal 6 and never broken cult vows since becoming initiate Bold skills are mandatory\nCult Skills (Oath is taken at initiate)\nEndurance",
+    "Willpower",
+    "Lore (cult)",
+    "Lore (human)",
+    "First aid",
+    "Devotion",
+    "Runic Affinity",
+    "Healing"
+  ],
+  "folkMagic": [
+    "Befuddle",
+    "Bladesharp",
+    "Bludgeon",
+    "Calm",
+    "Control Species",
+    "Demoralise",
+    "Disruption",
+    "Dullblade",
+    "Fanaticism",
+    "Firearrow",
+    "Fireblade",
+    "Heal",
+    "Ironhand",
+    "Light",
+    "Multimissile",
+    "Shimmer",
+    "Sleep",
+    "Speedart"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Generousx Lustfulx",
+    "Pleasureseekingx Forgivingl",
+    "Mercifull Peacefull",
+    "Generousl Compassionatel"
+  ],
+  "enemyCults": [
+    "Lanbril",
+    "Mallia",
+    "Primal Chaos",
+    "Vivamort"
+  ],
+  "hostileCults": [
+    "Cacodemon",
+    "Krarsht",
+    "Thanatar",
+    "Zorak Zoran"
+  ],
+  "friendlyCults": [
+    "Argan Argar",
+    "Caladra&Aurelion",
+    "Daka Fal",
+    "Donandar",
+    "Eiritha",
+    "Flintnail",
+    "Foundchild",
+    "Frog"
+  ],
+  "associatedCults": [
+    "Aldrya",
+    "Geo",
+    "Issaries",
+    "Lhankor Mhy",
+    "Orlanth",
+    "Storm Bull",
+    "Yelm",
+    "Ernalda",
+    "Eurmal"
+  ],
+  "areas": [
+    "Coastal Pamaltela",
+    "Dragon Pass",
+    "East",
+    "Fonrit",
+    "Holy Country",
+    "Inland Pamaltela",
+    "Lunar"
+  ],
+  "holyDays": [
+    "Sea/Fertility/Wild",
+    "Fire/Fertility/Wild",
+    "Earth/Fertility/Wild",
+    "Dark/Fertility/Wild",
+    "Storm/Fertility/Wild",
+    "Sacred\nTime/God Week/Freeze",
+    "Sacred Time/God Week/Water",
+    "Sacred Time/God Week/Clay",
+    "Sacred\nTime/God Week/Winds",
+    "Sacred Time/God Week/Fire",
+    "Sacred Time/God Week/Wild",
+    "Sacred\nTime/God Week/God"
+  ],
+  "spiritSocieties": [],
+  "runeAssociations": {},
+  "oppositeRune": "Death"
+}

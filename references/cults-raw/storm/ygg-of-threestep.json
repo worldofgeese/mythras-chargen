@@ -1,0 +1,50 @@
+{
+  "name": "Ygg of Threestep",
+  "pantheon": "Storm",
+  "source": "CultOnePagers2019/Storm/Ygg of Threestep.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Kill captured foe.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.Kill captured foe.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nEndurance",
+    "Combat style (Edged Weapons)",
+    "Lore(Seas)",
+    "Lore(Cult)",
+    "Seamanship",
+    "Navigate",
+    "Brawn",
+    "Boating",
+    "Devotion",
+    "Runic Affinityion"
+  ],
+  "folkMagic": [
+    "Bladesharp",
+    "Coordination",
+    "Fanaticism",
+    "Frostbite",
+    "Heal",
+    "Repair",
+    "Shove"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Passionateg Proudg",
+    "Unpredictableg Violentg",
+    "Mercurialw Capriciousw",
+    "Mutablew"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Coastal Pamaltela, Dragon Pass, East, Fonrit, Holy Country, Lunar, Oceans, West"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "runeAssociations": {}
+}

@@ -1,0 +1,93 @@
+{
+  "name": "Ernalda",
+  "pantheon": "Storm",
+  "source": "CultOnePagers2019/Storm/Ernalda.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Must be a\nwoman and given birth to a healthy child Bold skills are mandatory\nCult Skills (Oath is taken at initiate)\nCustoms",
+    "Endurance",
+    "Influence",
+    "Locale",
+    "Willpower",
+    "Courtesy",
+    "Lore (animal)",
+    "Lore (cult)",
+    "Lore (earth)",
+    "Lore (plant)",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Befuddle",
+    "Demoralize",
+    "Heal",
+    "Might",
+    "Second Sight",
+    "Shimmer",
+    "Slow",
+    "Vigour"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Generousx Lustfulx",
+    "Pleasureseekingx Pragmatice",
+    "Prudente Worldlye",
+    "Sensuale Forgivingl",
+    "Mercifull"
+  ],
+  "enemyCults": [
+    "In Essence All Chaos Cults"
+  ],
+  "hostileCults": [
+    "Eurmal"
+  ],
+  "friendlyCults": [
+    "Engizi",
+    "Issaries",
+    "Lhankhor Mhy",
+    "Odayla",
+    "Yinkin"
+  ],
+  "associatedCults": [
+    "Argan Argar",
+    "Babeester Gor",
+    "Chalana Arroy",
+    "Eiritha",
+    "Maran Gor",
+    "Orlanth",
+    "Storm Bull"
+  ],
+  "areas": [
+    "Coastal Pamaltela",
+    "Dragon Pass",
+    "East",
+    "Fonrit",
+    "Holy Country",
+    "Lunar",
+    "Oceans",
+    "West"
+  ],
+  "holyDays": [
+    "Sea/Harmony/Water",
+    "Sea/Fertility/Clay",
+    "Fire/Fertility/Clay",
+    "Earth/Fertility/Freeze\nEarth/Fertility/Water",
+    "Earth/Fertility/Clay",
+    "Earth/Fertility/Winds",
+    "Earth/Fertility/Fire\nEarth/Fertility/Wild",
+    "Earth/Fertility/God",
+    "Earth/Movement/Clay",
+    "Dark/Fertility/Clay\nDark/Illusion/Freeze",
+    "Storm/Fertility/Clay",
+    "Storm/Movement/Winds"
+  ],
+  "spiritSocieties": [],
+  "runeAssociations": {},
+  "oppositeRune": "Death"
+}

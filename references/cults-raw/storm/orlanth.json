@@ -1,0 +1,108 @@
+{
+  "name": "Orlanth",
+  "pantheon": "Storm",
+  "source": "CultOnePagers2019/Storm/Orlanth.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nCombat style (any)",
+    "Athletics",
+    "Evade",
+    "Native tongue",
+    "Perception",
+    "Ride",
+    "Stealth",
+    "Language(stormspeech)",
+    "Lore (cult)",
+    "Navigation",
+    "Oratory",
+    "Combat style with sword",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Bladesharp",
+    "Demoralise",
+    "Disruption",
+    "Fanaticism",
+    "Find Enemies",
+    "Heal",
+    "Might",
+    "Mobility",
+    "Protection"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Proud",
+    "Just",
+    "Authoritative",
+    "Adventurouss Dynamics",
+    "Impulsives Recklesss",
+    "Energetics Rebelliouss"
+  ],
+  "enemyCults": [
+    "Bagog",
+    "Cacodemon",
+    "Crimson Bat",
+    "Nysalor",
+    "Krarsht",
+    "Mallia",
+    "Primal Chaos",
+    "Thanatar",
+    "Thed"
+  ],
+  "hostileCults": [
+    "Seven Mothers",
+    "Yelorna",
+    "Zorak Zoran",
+    "Ompalam"
+  ],
+  "friendlyCults": [
+    "Argan Argar",
+    "Foundchild",
+    "Geo",
+    "Humakt",
+    "Lodril",
+    "Pavis",
+    "Babeester Gor",
+    "Maran Gor",
+    "Yinkin"
+  ],
+  "associatedCults": [
+    "Chalana Arroy",
+    "Issaries",
+    "Lhankor Mhy",
+    "Storm Bull",
+    "Engizi",
+    "Ernalda",
+    "Eurmal",
+    "Odayla"
+  ],
+  "areas": [
+    "Coastal Pamaltela",
+    "Dragon Pass",
+    "East",
+    "Fonrit",
+    "Holy Country",
+    "Lunar",
+    "Oceans",
+    "West"
+  ],
+  "holyDays": [
+    "Sea/Stasis/Winds",
+    "Sea/Movement/Winds",
+    "Fire/Disorder/Freeze",
+    "Fire/Movement/Winds\nFire/Movement/God",
+    "Earth/Movement/Winds",
+    "Dark/Movement/Winds",
+    "Storm/Movement/Winds\nSacred Time/Fate Week/Winds"
+  ],
+  "spiritSocieties": [],
+  "runeAssociations": {},
+  "oppositeRune": "Stasis"
+}

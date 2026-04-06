@@ -1,0 +1,58 @@
+{
+  "name": "Ty Kora Tek",
+  "pantheon": "Storm",
+  "source": "CultOnePagers2019/Storm/Ty Kora Tek.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Must be a woman past the age of child-bearing and have a 100% in\nPrepare Corpse",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.Must be a woman past the age of child-bearing and have a 100% in\nPrepare Corpse\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nCustoms",
+    "Endurance",
+    "Influence",
+    "Willpower",
+    "Lore",
+    "Lore (cult)",
+    "Devotion",
+    "Runic Affinity",
+    "Literacy",
+    "Lore\n(Prepare Corpse)"
+  ],
+  "folkMagic": [
+    "Alarm",
+    "Curse",
+    "Dispel Magic",
+    "Extinguish",
+    "Find Magic",
+    "Second Sight"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Pragmatice Prudente",
+    "Worldlye Sensuale",
+    "Relentlesst Ruthlesst",
+    "Unemotionalt Ascetict"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Coastal Pamaltela",
+    "Dragon Pass",
+    "East",
+    "Fonrit",
+    "Holy Country",
+    "Inland Pamaltela",
+    "Lunar"
+  ],
+  "holyDays": [
+    "Dark/Illusion/Clay"
+  ],
+  "spiritSocieties": [],
+  "runeAssociations": {},
+  "oppositeRune": "Life"
+}

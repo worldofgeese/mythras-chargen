@@ -1,0 +1,101 @@
+{
+  "name": "Eiritha",
+  "pantheon": "Praxian",
+  "source": "CultOnePagers2019/Praxian/Eiritha.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Any female member of tribe in good standing. Outsiders need to be adopted\nfirst",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.Any female member of tribe in good standing. Outsiders need to be adopted\nfirst\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nCustoms",
+    "Influence",
+    "Locale",
+    "Willpower",
+    "Lore (animal)",
+    "Lore (cult)",
+    "Lore (earth)",
+    "Lore (plant)",
+    "Lore (World)",
+    "Survival",
+    "Understand Herd Beasts\u00b9",
+    "Dance(Shaman)",
+    "Sing(Shaman)",
+    "Binding(Shaman)",
+    "Devotion",
+    "Runic Affinity",
+    "Literacy",
+    "Trance(Shaman)"
+  ],
+  "folkMagic": [
+    "Bladesharp",
+    "Bludgeon",
+    "Disruption",
+    "Fanaticism",
+    "Firearrow",
+    "Fireblade",
+    "Heal",
+    "Ironhand",
+    "Magnify",
+    "Multimissile",
+    "Protection",
+    "Shock",
+    "Slow",
+    "Speedart",
+    "Spiritshield"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Generousx Lustfulx",
+    "Pleasureseekingx Uncouth",
+    "Rough",
+    "Loyal",
+    "Wild",
+    "Instinctive",
+    "Savage"
+  ],
+  "enemyCults": [
+    "Bagog",
+    "Cacodemon",
+    "Crimson Bat",
+    "Nysalor",
+    "Krarsht",
+    "Mallia",
+    "Primal Chaos",
+    "Thanatar",
+    "Thed"
+  ],
+  "hostileCults": [
+    "Zorak Zoran"
+  ],
+  "friendlyCults": [
+    "Chalana Arroy",
+    "Lodril",
+    "Xiola Umbar",
+    "Babeester Gor",
+    "Maran Gor",
+    "Yinkin"
+  ],
+  "associatedCults": [
+    "Aldrya",
+    "Storm Bull",
+    "Waha",
+    "Ernalda"
+  ],
+  "areas": [
+    "Dragon Pass"
+  ],
+  "holyDays": [
+    "Sea/Fertility/Clay",
+    "Fire/Fertility/Clay",
+    "Earth/Fertility/Clay",
+    "Earth/Fertility/God",
+    "Dark/Fertility/Clay\nDark/Movement/Water",
+    "Storm/Fertility/Clay"
+  ],
+  "spiritSocieties": [],
+  "runeAssociations": {},
+  "oppositeRune": "Death"
+}

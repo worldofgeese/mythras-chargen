@@ -1,0 +1,86 @@
+{
+  "name": "Foundchild",
+  "pantheon": "Praxian",
+  "source": "CultOnePagers2019/Praxian/Foundchild.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Must hunt and kill at least one prey beast per season to donate to their\npoeple.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "to be convinced at 3 of them.Must hunt and kill at least one prey beast per season to donate to their\npoeple. They must always use the peaceful cut on any animal killed for food\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
+    "Most\nimpressive animal brought in in the the Great Hunt Bold skills are mandatory\nCult Skills (Oath is taken at initiate)\nAthletics",
+    "Locale",
+    "Perception",
+    "Lore (animal)",
+    "Navigation",
+    "Disguise",
+    "Stealth",
+    "Butchering",
+    "Combat style\nwith missile attack",
+    "Devotion",
+    "Runic Affinity",
+    "Track"
+  ],
+  "folkMagic": [
+    "Beastcall(Bison)",
+    "Beastcall(Bolo Lizard)",
+    "Beastcall(Herdmen)",
+    "Beastcall(High Llama)",
+    "Beastcall(Impala)",
+    "Beastcall(Rhino)",
+    "Beastcall(Sable)",
+    "Beastcall(Zebra)",
+    "Disruption",
+    "Find Life",
+    "Magnify",
+    "Mobility",
+    "Multimissile",
+    "Silence",
+    "Slow",
+    "Speedart"
+  ],
+  "miracles": [],
+  "personalityTraits": [
+    "Relentlesst Ruthlesst",
+    "Unemotionalt Ascetict",
+    "Forgivingl Mercifull",
+    "Peacefull Generousl",
+    "Compassionatel"
+  ],
+  "enemyCults": [
+    "Crimson Bat",
+    "Nysalor",
+    "Mallia",
+    "Primal Chaos",
+    "Thanatar",
+    "Vivamort"
+  ],
+  "hostileCults": [
+    "Bagog",
+    "Cacodemon",
+    "Krarsht",
+    "Thed",
+    "Eurmal"
+  ],
+  "friendlyCults": [
+    "Chalana Arroy",
+    "Frog Woman",
+    "Kyger Litor",
+    "Orlanth",
+    "Xiola Umbar"
+  ],
+  "associatedCults": [
+    "Waha",
+    "Odayla",
+    "Yinkin"
+  ],
+  "areas": [
+    "Dragon Pass"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "runeAssociations": {},
+  "oppositeRune": "Disorder"
+}
