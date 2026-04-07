@@ -3,6 +3,14 @@
 ## What This Is
 A single-file HTML character generator for Adventures in Glorantha (Mythras engine). Creates Gloranthan characters through a 12-step wizard and provides a Play Mode for at-the-table use.
 
+## Design Rules
+
+1. **Single-file delivery.** `index.html` is one self-contained HTML file. No external calls. No CDN fallbacks. No `<script src="...">` references. All JavaScript — including pdf-lib — is inlined. The file must work when opened from a local filesystem with no server, no internet, no companion files.
+
+2. **Glorantha data stays inline.** `CULTURES_DATA`, `CAREERS_DATA`, `CULTS_DATA`, `WEAPONS_DATA`, and all other reference constants are embedded directly in `index.html`. Do not externalize them.
+
+3. **Workers must not break inlining.** Any worker editing `index.html` must verify the file remains self-contained after their changes. `lib/pdf-lib.min.js` exists for the test harness and build pipeline — it is NOT a runtime dependency.
+
 ## Source Hierarchy
 1. **Mythras Core Rulebook** (TDM, 3rd Printing 2018) — engine of truth
 2. **Adventures in Glorantha** (TDM, GenCon 2015 Preview) — Gloranthan overlay
