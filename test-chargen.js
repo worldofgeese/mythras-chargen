@@ -2493,6 +2493,18 @@ section('Wave 3 Goal 5: Vendor pdf-lib Locally');
   }
 }
 
+// Test 5.5: No external script references (single-file design rule)
+{
+  const htmlPath = path.join(__dirname, 'index.html');
+  const html = fs.readFileSync(htmlPath, 'utf8');
+  const externalScripts = html.match(/<script[^>]+src=["'][^"']+["']/g) || [];
+  if (externalScripts.length === 0) {
+    pass('index.html has no external script references (self-contained)');
+  } else {
+    fail(`index.html has ${externalScripts.length} external script reference(s): ${externalScripts[0]}`);
+  }
+}
+
 // ============================================================
 section('Wave 3 Goal 6: localStorage Round-Trip Tests');
 // ============================================================
