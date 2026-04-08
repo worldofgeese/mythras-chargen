@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Glorantha Campaign Consent, Lines, and Veils</title>
+  <style>
+    :root {
+      --bg: #111116;
+      --panel: #1a1a22;
+      --text: #f4f1ff;
+      --muted: #b9b2d0;
+      --accent: #9b6dff;
+      --accent2: #6ed6c1;
+      --line: #323244;
+      --danger: #ff8ca1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      background: linear-gradient(180deg, #0e0e14 0%, #171722 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+    .hero, .card {
+      background: rgba(26,26,34,.94);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 12px 36px rgba(0,0,0,.28);
+    }
+    .hero {
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+    }
+    .hero p, .hero li, .muted { color: var(--muted); }
+    .hero ul { margin: 10px 0 0 18px; }
+    .card { padding: 22px; margin: 20px 0; }
+    h2 { margin: 0 0 14px; font-size: 1.35rem; }
+    h3 { margin: 18px 0 10px; font-size: 1rem; color: var(--accent2); }
+    label { display: block; font-weight: 600; margin-bottom: 8px; }
+    .field { margin: 16px 0 22px; }
+    input[type="text"], textarea, select {
+      width: 100%;
+      background: #11111a;
+      color: var(--text);
+      border: 1px solid #3c3c53;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font: inherit;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    .options { display: grid; gap: 8px; }
+    .inline-options { display: flex; flex-wrap: wrap; gap: 10px 16px; }
+    .inline-options label, .options label { font-weight: 500; }
+    .checkgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 8px 16px;
+      margin-top: 10px;
+    }
+    .matrix {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 900px;
+      background: #12121a;
+    }
+    th, td {
+      border-bottom: 1px solid #2b2b3a;
+      padding: 10px 12px;
+      vertical-align: top;
+      text-align: left;
+      font-size: .95rem;
+    }
+    th { color: var(--accent2); background: #171722; position: sticky; top: 0; }
+    td.center, th.center { text-align: center; }
+    .small { font-size: .9rem; color: var(--muted); }
+    .note {
+      border-left: 4px solid var(--accent);
+      padding: 12px 14px;
+      background: rgba(155,109,255,.08);
+      border-radius: 10px;
+      margin: 12px 0 0;
+    }
+    .submit {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    button {
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), #c183ff);
+      color: white;
+      padding: 14px 22px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .success, .error {
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      display: none;
+    }
+    .success { background: rgba(110,214,193,.12); border: 1px solid rgba(110,214,193,.35); }
+    .error { background: rgba(255,140,161,.12); border: 1px solid rgba(255,140,161,.35); }
+    .required::after { content: ' *'; color: var(--danger); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <form id="consent-form">
+      <section class="hero">
+        <h1>Glorantha Campaign Consent, Lines, and Veils</h1>
+        <p>Please answer honestly. You do not need to justify any boundary.</p>
+        <p>This campaign may include violence, monsters, captivity, madness, religious conflict, body horror, child endangerment, and mythic or ritual power dynamics.</p>
+        <ul>
+          <li>No sex or romance between player characters</li>
+          <li>No erotic roleplay between PCs and NPCs</li>
+          <li>No sexual violence or criminally abusive sexual content</li>
+          <li>Anyone can say <strong>“pause for a minute”</strong> at any time and we stop immediately</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>1. Basic preferences</h2>
+        <div class="field">
+          <label class="required" for="player_name">Name</label>
+          <input id="player_name" name="player_name" type="text" required>
+        </div>
+        <div class="field">
+          <label>Would you like me to follow up privately about any of your answers?</label>
+          <div class="inline-options">
+            <label><input type="radio" name="private_followup" value="Yes"> Yes</label>
+            <label><input type="radio" name="private_followup" value="No"> No</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Do you want your responses treated as private between you and me, rather than discussed in detail with the whole group?</label>
+          <div class="options">
+            <label><input type="radio" name="privacy_preference" value="Yes"> Yes</label>
+            <label><input type="radio" name="privacy_preference" value="No"> No</label>
+            <label><input type="radio" name="privacy_preference" value="Mostly private, but okay to summarize anonymously"> Mostly private, but okay to summarize anonymously</label>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>2. Safety tool baseline</h2>
+        <div class="field">
+          <label>If something becomes uncomfortable in play, are you comfortable using “pause for a minute” out loud?</label>
+          <div class="options">
+            <label><input type="radio" name="pause_preference" value="Yes"> Yes</label>
+            <label><input type="radio" name="pause_preference" value="Maybe, but I'd prefer another option too"> Maybe, but I’d prefer another option too</label>
+            <label><input type="radio" name="pause_preference" value="No, I'd prefer a nonverbal or chat-based option"> No, I’d prefer a nonverbal or chat-based option</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Would you like an additional private check-in option during play?</label>
+          <div class="inline-options">
+            <label><input type="radio" name="private_checkin" value="Yes, please"> Yes, please</label>
+            <label><input type="radio" name="private_checkin" value="Maybe"> Maybe</label>
+            <label><input type="radio" name="private_checkin" value="No need"> No need</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>If an intense scene happens, would you like a check-in afterward?</label>
+          <div class="options">
+            <label><input type="radio" name="aftercare_preference" value="Yes, during a break"> Yes, during a break</label>
+            <label><input type="radio" name="aftercare_preference" value="Yes, after session"> Yes, after session</label>
+            <label><input type="radio" name="aftercare_preference" value="Only if it seemed intense to the GM"> Only if it seemed intense to the GM</label>
+            <label><input type="radio" name="aftercare_preference" value="No need"> No need</label>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>3. General content limits</h2>
+        <p class="small">For each item, choose the level you are comfortable with.</p>
+        <div id="matrix-general"></div>
+      </section>
+
+      <section class="card">
+        <h2>4. Kink and power-dynamic content</h2>
+        <p class="small">Some themes in Glorantha, mythology, religion, magic, and social hierarchy can overlap with BDSM imagery or power dynamics. I want to know not just whether these are acceptable, but how you want them handled, if at all.</p>
+        <div id="matrix-kink"></div>
+        <div class="field">
+          <label>Nonconsensual abuse framed as erotic is</label>
+          <div class="inline-options">
+            <label><input type="radio" name="eroticized_nonconsent" value="Not allowed under any circumstances"> Not allowed under any circumstances</label>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>5. Distinguishing context</h2>
+        <div id="contexts"></div>
+      </section>
+
+      <section class="card">
+        <h2>6. Explicit character boundaries</h2>
+        <div class="field">
+          <label>No sex or romance between PCs</label>
+          <div class="inline-options"><label><input type="radio" name="no_pc_pc_romance" value="Agree"> Agree</label></div>
+        </div>
+        <div class="field">
+          <label>No erotic roleplay between PCs and NPCs</label>
+          <div class="inline-options"><label><input type="radio" name="no_pc_npc_erotic_rp" value="Agree"> Agree</label></div>
+        </div>
+        <div class="field">
+          <label>Light flirtation with NPCs is</label>
+          <div class="options">
+            <label><input type="radio" name="npc_flirtation" value="Not wanted"> Not wanted</label>
+            <label><input type="radio" name="npc_flirtation" value="Okay if brief"> Okay if brief</label>
+            <label><input type="radio" name="npc_flirtation" value="Okay if player-initiated"> Okay if player-initiated</label>
+            <label><input type="radio" name="npc_flirtation" value="Okay, fade to black if it would go further"> Okay, fade to black if it would go further</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>If romantic or suggestive material comes up, I prefer</label>
+          <div class="options">
+            <label><input type="radio" name="romance_handling" value="None"> None</label>
+            <label><input type="radio" name="romance_handling" value="Light implication only"> Light implication only</label>
+            <label><input type="radio" name="romance_handling" value="Fade to black"> Fade to black</label>
+            <label><input type="radio" name="romance_handling" value="Ask me first"> Ask me first</label>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>7. Agency and consent edge cases</h2>
+        <div id="matrix-agency"></div>
+      </section>
+
+      <section class="card">
+        <h2>8. Glorantha-specific themes</h2>
+        <p class="small">Glorantha has strong themes of myth, cult devotion, divine authority, sexuality in some religious traditions, and intense social obligations. I’d like to know what tone you want around those.</p>
+        <div id="matrix-glorantha"></div>
+      </section>
+
+      <section class="card">
+        <h2>9. Open text</h2>
+        <div class="field">
+          <label class="required" for="hard_lines">What topics or content do you absolutely not want in this game?</label>
+          <textarea id="hard_lines" name="hard_lines" required></textarea>
+        </div>
+        <div class="field">
+          <label for="conditional_boundaries">Are there themes that are not always a no, but would need special care, prior discussion, or a fade-to-black approach?</label>
+          <textarea id="conditional_boundaries" name="conditional_boundaries"></textarea>
+        </div>
+        <div class="field">
+          <label for="conditional_interests">Are there themes you actively enjoy in fiction or games, but only under specific conditions? If so, what are the conditions?</label>
+          <textarea id="conditional_interests" name="conditional_interests"></textarea>
+        </div>
+        <div class="field">
+          <label for="checkin_notes">Is there anything you want me to know about how to check in with you well if a scene gets intense?</label>
+          <textarea id="checkin_notes" name="checkin_notes"></textarea>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>10. Final confirmation</h2>
+        <div class="field">
+          <label><input type="checkbox" name="can_change_mind" value="Yes" required> I understand I can change my mind later, and can bring up new lines or veils at any point.</label>
+        </div>
+        <div class="field">
+          <label><input type="checkbox" name="pause_understood" value="Yes" required> I understand “pause for a minute” can be used by anyone, including the GM, at any time.</label>
+        </div>
+        <div class="note">Your responses are sent directly to Tao over Telegram by Kypris. This form does not require a login.</div>
+      </section>
+
+      <section class="card">
+        <div class="submit">
+          <button type="submit">Send responses</button>
+          <span class="muted">You can revise your boundaries later.</span>
+        </div>
+        <div class="success" id="success-box">Thanks. Your responses were sent.</div>
+        <div class="error" id="error-box">Something went wrong sending the form. Please try again, or send Tao your answers directly.</div>
+      </section>
+    </form>
+  </div>
+
+  <script>
+    const generalRows = [
+      'Violence','Gore','Body horror','Madness / mental breakdown','Magical compulsion / loss of control','Captivity / imprisonment','Torture / interrogation','Ritual sacrifice','Religious coercion','Persecution / mob violence','Xenophobia / hatred between peoples or cults','Child endangerment','Harm to animals','Parasitic or corrupting monsters','Transformation / mutation / corruption','Slavery / servitude','Humiliation / degradation','Pregnancy / fertility themes','Sexuality in religious contexts','Romance','Flirtation','Grief / bereavement'
+    ];
+    const basicLabels = {
+      player_name: 'Name',
+      private_followup: 'Private follow-up wanted',
+      privacy_preference: 'Privacy preference',
+      pause_preference: 'Comfortable saying “pause for a minute”',
+      private_checkin: 'Additional private check-in option',
+      aftercare_preference: 'After intense scenes, check in'
+    };
+    const kinkRows = [
+      'Bondage / restraint','Collars / ownership language','Service dynamics','Dominance / submission','Obedience rituals','Humiliation','Degradation','Pain in an eroticized frame','Pain in a ritual / ordeal frame','Public exposure or embarrassment','Devotional surrender','Possession / ecstatic loss of self','Ritualized punishment','Body marking / branding / scarification','Transformation with erotic or symbolic overtones','Petplay-coded imagery','Master / servant dynamics','Consensual power exchange aesthetics'
+    ];
+    const scale = [
+      'Line, do not include','Veil, off-screen / abstract only','Okay in light or non-graphic form','Okay as part of the setting or story','Okay, but check with me before centering it','Enthusiastic yes / interested in exploring'
+    ];
+    const agencyRows = [
+      'Magical charm or mental influence','Frenzy / rage effects','Catatonia / paralysis','Possession','Forced transformation','Capture by enemies','Interrogation scenes','Ritual obligations that override preference','Divine demands on a character','Geas / oath / taboo pressure','Intoxication or altered states','Helplessness while conscious'
+    ];
+    const agencyCols = ['Line','Veil','Okay with caution','Okay','Ask first if it targets my PC'];
+    const gloranthaRows = [
+      'Cult initiation rites','Divine possession','Sacred sexuality','Fertility rites','Temple sexuality','Religious ecstasy','Harsh tribal justice','Mythic ordeal','Sacrificial symbolism','Devotion overriding personal desire','Public ritual shame','Oath-binding'
+    ];
+    const contexts = [
+      ['Bondage / restraint','ctx_restraint'],['Service / submission','ctx_service'],['Humiliation','ctx_humiliation'],['Devotional surrender','ctx_devotion'],['Ritual ordeal / pain','ctx_ordeal'],['Possession / ecstasy / altered states','ctx_possession'],['Transformation','ctx_transformation'],['Authority / ownership language','ctx_authority']
+    ];
+    const contextLabelMap = Object.fromEntries(contexts.map(([label, key]) => [key, label]));
+    const contextOptions = ['not okay in any context','okay as background worldbuilding only','okay for NPCs','okay for my PC to encounter','okay for my PC to be involved in','okay only if discussed first','not sure, ask me case-by-case'];
+
+    function renderMatrix(targetId, namePrefix, rows, cols) {
+      const target = document.getElementById(targetId);
+      const table = document.createElement('div');
+      table.className = 'matrix';
+      const colHeads = cols.map(c => `<th class="center">${c}</th>`).join('');
+      const body = rows.map((row, rIdx) => {
+        const cells = cols.map((col, cIdx) => `<td class="center"><input type="radio" name="${namePrefix}_${rIdx}" value="${col}" aria-label="${row} - ${col}"></td>`).join('');
+        return `<tr><td>${row}</td>${cells}</tr>`;
+      }).join('');
+      table.innerHTML = `<table><thead><tr><th>Theme</th>${colHeads}</tr></thead><tbody>${body}</tbody></table>`;
+      target.appendChild(table);
+    }
+
+    renderMatrix('matrix-general', 'general_content', generalRows, scale);
+    renderMatrix('matrix-kink', 'kink_content', kinkRows, scale);
+    renderMatrix('matrix-agency', 'agency_edge_cases', agencyRows, agencyCols);
+    renderMatrix('matrix-glorantha', 'glorantha_specific', gloranthaRows, scale);
+
+    const ctxTarget = document.getElementById('contexts');
+    contexts.forEach(([label, name]) => {
+      const div = document.createElement('div');
+      div.className = 'field';
+      div.innerHTML = `<label>If ${label.toLowerCase()} appears, what contexts are okay?</label><div class="checkgrid">${contextOptions.map(opt => `<label><input type="checkbox" name="${name}" value="${opt}"> ${opt}</label>`).join('')}</div>`;
+      ctxTarget.appendChild(div);
+    });
+
+    const form = document.getElementById('consent-form');
+    const successBox = document.getElementById('success-box');
+    const errorBox = document.getElementById('error-box');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      successBox.style.display = 'none';
+      errorBox.style.display = 'none';
+      const fd = new FormData(form);
+
+      const payload = {};
+      for (const [key, value] of fd.entries()) {
+        if (payload[key]) {
+          if (!Array.isArray(payload[key])) payload[key] = [payload[key]];
+          payload[key].push(value);
+        } else {
+          payload[key] = value;
+        }
+      }
+
+      try {
+        const lines = [];
+        const pushSection = (title) => {
+          if (lines.length) lines.push('');
+          lines.push(title);
+        };
+        const pushEntry = (label, value) => {
+          if (value === undefined || value === null || value === '') return;
+          if (Array.isArray(value)) {
+            lines.push(`${label}: ${value.join(', ')}`);
+          } else {
+            lines.push(`${label}: ${value}`);
+          }
+        };
+
+        pushSection('Glorantha campaign consent response');
+        pushSection('Basic preferences');
+        Object.entries(basicLabels).forEach(([key, label]) => pushEntry(label, payload[key]));
+
+        pushSection('General content limits');
+        generalRows.forEach((label, idx) => pushEntry(label, payload[`general_content_${idx}`]));
+
+        pushSection('Kink and power-dynamic content');
+        kinkRows.forEach((label, idx) => pushEntry(label, payload[`kink_content_${idx}`]));
+
+        pushSection('Context distinctions');
+        Object.entries(contextLabelMap).forEach(([key, label]) => pushEntry(label, payload[key]));
+
+        pushSection('Character boundaries');
+        pushEntry('Light flirtation with NPCs', payload.npc_flirtation);
+        pushEntry('If romantic or suggestive material comes up', payload.romance_handling);
+
+        pushSection('Open-text answers');
+        pushEntry('Hard lines', payload.hard_lines);
+        pushEntry('Conditional boundaries', payload.conditional_boundaries);
+        pushEntry('Conditional interests', payload.conditional_interests);
+        pushEntry('Check-in notes', payload.checkin_notes);
+
+        pushSection('Final confirmation');
+        pushEntry('Can change mind later', payload.can_change_mind);
+        pushEntry('Pause tool understood', payload.pause_understood);
+
+        const message = lines.join('\n');
+
+        const res = await fetch('https://api.telegram.org/bot7935991058:AAFK1w0w0i_J00OGsU0OvpTT1o0-0naGJ78/sendMessage', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            chat_id: '488228716',
+            text: message
+          })
+        });
+
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data?.ok) {
+          throw new Error(data?.description || data?.error || 'submit failed');
+        }
+        form.reset();
+        successBox.style.display = 'block';
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      } catch (err) {
+        errorBox.textContent = 'Something went wrong sending the form. Please try again, or send Tao your answers directly.' + (err?.message ? ` (${err.message})` : '');
+        errorBox.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
