@@ -11,7 +11,6 @@ Single-file HTML character generator for the Mythras RPG with optional Glorantha
 ## Key Files
 
 - `index.html` — the entire application (HTML + CSS + JS, ~2200 lines)
-- `data/glorantha.js` — modular Glorantha culture data (removable without breaking the engine)
 - `templates/mythras-sheet.pdf` — PDF form template for character export
 - `references/` — JSON files with page-cited game data (the attestable chain)
 - `AGENTS.md` — source hierarchy, active rules, what NOT to use
@@ -21,7 +20,7 @@ Single-file HTML character generator for the Mythras RPG with optional Glorantha
 
 - **Engine**: Vanilla JavaScript, no frameworks, no build step
 - **Data flow**: `SKILLS_DATA` + `CULTURES_DATA` + `WEAPONS_DATA` → wizard steps → `CharacterData` → Play Mode / PDF export
-- **Modularity**: Glorantha content is in `data/glorantha.js`. If the file isn't loaded, `index.html` falls back to generic Mythras culture templates.
+- **Single-file delivery**: current `index.html` is the canonical fully inlined artifact. Do not reintroduce modular data dependencies.
 - **PDF export**: Two paths available via pdf-lib:
   - **Simple**: Single-page PDF created from scratch (quick export)
   - **Template**: Fills form fields in `templates/mythras-sheet.pdf` (required for Phase 2 pregens)
@@ -59,7 +58,7 @@ When adding or modifying game data:
 - **Mythras (TDM)**: Permission pending — IP not the sticking point
 - **Glorantha (Chaosium)**: Email sent, awaiting reply
 - **Action**: Keep repo private until both permissions secured
-- **Contingency**: If Chaosium says no, delete `data/glorantha.js` and ship as generic Mythras chargen
+- **Contingency**: If licensing ever requires stripping Glorantha content, build a separate generic Mythras variant deliberately. Do not rely on runtime modular fallback.
 
 ## Phase 2 (Not Yet Started)
 

@@ -31,7 +31,6 @@ Open `index.html` in any browser. No server, no build step. Everything is self-c
 ├── test-chargen.js             # 221 tests (node, no dependencies)
 ├── lib/
 │   └── pdf-lib.min.js          # PDF generation (also loaded via CDN fallback)
-├── data/
 │   └── glorantha.js            # Gloranthan culture data (source file; inlined into index.html)
 ├── references/                 # Canonical reference data with page citations
 │   ├── mythras-raw/            # 12 files from Mythras Core
@@ -47,7 +46,7 @@ Open `index.html` in any browser. No server, no build step. Everything is self-c
 │   ├── validate_character_sheet.py       # Validate character JSON against Mythras rules
 │   ├── extract-cults.py                  # Extract cult data from upstream PDFs to JSON
 │   ├── fix-cult-data.py                  # Clean OCR artifacts from cult personality traits
-│   └── build-standalone.py               # Build dist/mythras-chargen-standalone.html
+│   └── build-standalone.py               # Copy canonical index.html into dist/
 ├── fixtures/                   # Test character fixtures (4 cultures)
 ├── docs/                       # GM reference docs
 │   ├── conversion-guide.md
@@ -87,7 +86,7 @@ Requires local pregen assets not included in this repo (source character data, c
 
 ```bash
 python3 scripts/build-standalone.py
-# produces dist/mythras-chargen-standalone.html
+# produces a distribution copy of the canonical self-contained index.html
 ```
 
 ## Licensing
