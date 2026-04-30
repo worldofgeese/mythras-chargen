@@ -57,7 +57,9 @@
     "Ride": 15,
     "Stealth": 10,
     "Navigate": 15,
-    "Willpower": 10
+    "Willpower": 10,
+    "Language (Praxian)": 0,
+    "Tradetalk": 0
   },
   "careerSkills": {
     "Lore (Animal)": 15,

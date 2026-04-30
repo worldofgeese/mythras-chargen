@@ -1,0 +1,272 @@
+{
+  "name": "Yanioth Vareena's Dtr.",
+  "concept": "Sartarite / Colymar Apprentice priestess",
+  "characteristics": {
+    "STR": 8,
+    "CON": 9,
+    "SIZ": 12,
+    "DEX": 11,
+    "INT": 12,
+    "POW": 11,
+    "CHA": 12
+  },
+  "charMethod": "pregen",
+  "attributes": {
+    "actionPoints": 2,
+    "experienceModifier": 0,
+    "healingRate": 2,
+    "luckPoints": 2,
+    "magicPoints": 11,
+    "magicPointsMax": 21,
+    "initiativeBonus": 12,
+    "damageModifier": "-1d2",
+    "hitPoints": {
+      "Head": 5,
+      "Chest": 7,
+      "Abdomen": 6,
+      "Right Arm": 4,
+      "Left Arm": 4,
+      "Right Leg": 5,
+      "Left Leg": 5
+    },
+    "movementRate": 6,
+    "devotionPoints": 4,
+    "devotionPointsMax": 4,
+    "encumbrance": {
+      "unencumbered": 8,
+      "burdened": 16,
+      "overloaded": 24
+    }
+  },
+  "culture": "Sartarite / Colymar",
+  "homeland": "Ernaldori clan, Colymar",
+  "age": 23,
+  "gender": "she/her",
+  "socialClass": "Freewoman",
+  "physical": {
+    "hand": "Right",
+    "frame": "Average",
+    "height": "180",
+    "weight": "70"
+  },
+  "career": "Apprentice priestess",
+  "standardSkills": {
+    "Athletics": 19,
+    "Boating": 17,
+    "Conceal": 22,
+    "Customs": 30,
+    "Dance": 65,
+    "Deceit": 24,
+    "Drive": 22,
+    "First Aid": 50,
+    "Influence": 60,
+    "Insight": 35,
+    "Locale": 35,
+    "Perception": 30,
+    "Ride": 22,
+    "Sing": 70,
+    "Stealth": 23,
+    "Swim": 40,
+    "Unarmed": 19,
+    "Brawn": 20,
+    "Endurance": 18,
+    "Evade": 35,
+    "Willpower": 22
+  },
+  "professionalSkills": {
+    "Bureaucracy": 35,
+    "Craft (Animal Husb.)": 23,
+    "Craft (Farming)": 30,
+    "Literacy (Theyalan)": 24,
+    "Lore (Ernalda)": 40,
+    "Lore (Plants)": 25,
+    "Lore (Sartar)": 35
+  },
+  "languages": {
+    "Heortling": 60,
+    "Earthtongue": 30,
+    "Esrolian": 30
+  },
+  "magicSkills": {
+    "Devot. (Ern.)": 80,
+    "Exhort": 70,
+    "Folk Magic": 70,
+    "Meditation": 35
+  },
+  "combatStyles": [
+    {
+      "name": "Ernaldan Guard",
+      "skill": 65,
+      "weapons": [
+        "Dagger",
+        "Battleaxe",
+        "Medium Shield",
+        "Recurve Bow"
+      ],
+      "traits": []
+    },
+    {
+      "name": "Earth Priestess",
+      "skill": 45,
+      "weapons": [
+        "Dagger",
+        "Battleaxe",
+        "Medium Shield",
+        "Recurve Bow"
+      ],
+      "traits": []
+    }
+  ],
+  "passions": [
+    "Devotion (Ernalda): 80",
+    "Hate (Lunar Empire): 60",
+    "Love (family): 70",
+    "Loyalty (Colymar Tribe): 70",
+    "Loyalty (Ernaldori Clan): 70",
+    "Loyalty (Queen Samastina): 60",
+    "Loyalty (Sartar): 60"
+  ],
+  "folkMagicSpells": [
+    "Befuddle 2",
+    "Heal 3"
+  ],
+  "miracles": [
+    "Charisma 1",
+    "Heal Body 3",
+    "Inviolable 1",
+    "Summon Earth Elemental"
+  ],
+  "weapons": {
+    "melee": [
+      {
+        "name": "Dagger",
+        "damage": "1d4+2+1d4",
+        "size": "S",
+        "reach": "T",
+        "combatEffects": "Bleed",
+        "traits": "None",
+        "ap": 6,
+        "hp": 6,
+        "enc": 1
+      },
+      {
+        "name": "Battleaxe",
+        "damage": "1d8+2+1d4",
+        "size": "L",
+        "reach": "M",
+        "combatEffects": "Bleed, Sunder",
+        "traits": "None",
+        "ap": 4,
+        "hp": 8,
+        "enc": 1
+      },
+      {
+        "name": "Medium Shield",
+        "damage": "1d4+1d4",
+        "size": "L",
+        "reach": "S",
+        "combatEffects": "Bash, Stun Location",
+        "traits": "Ranged Parry",
+        "ap": 6,
+        "hp": 12,
+        "enc": 2
+      }
+    ],
+    "ranged": [
+      {
+        "name": "Recurve Bow",
+        "damage": "1d8+1",
+        "force": "H",
+        "damageModifier": "Yes",
+        "range": "15/125/250",
+        "combatEffects": "Impale S",
+        "loadTurns": 2,
+        "ap": 4,
+        "hp": 8,
+        "enc": 1
+      }
+    ]
+  },
+  "armor": [],
+  "equipment": [
+    "Store cryst.",
+    "160 L coin",
+    "Luxury goods (1050 L)"
+  ],
+  "startingMoney": 160,
+  "cult": {
+    "name": "Ernalda Initiate",
+    "parent": "Earth 90%"
+  },
+  "runeAffinities": {
+    "Fertility": 85,
+    "Beast": 85
+  },
+  "hitPoints": {
+    "Head": {
+      "current": 5,
+      "max": 5
+    },
+    "Chest": {
+      "current": 7,
+      "max": 7
+    },
+    "Abdomen": {
+      "current": 6,
+      "max": 6
+    },
+    "Right Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Leg": {
+      "current": 5,
+      "max": 5
+    },
+    "Left Leg": {
+      "current": 5,
+      "max": 5
+    }
+  },
+  "background": "Runes\nEarth Elemental\nElemental Affinities\nPower Affinities\n \n Death\n0\n \n Fertility\n85\n \n Movement\n0\n \n Stasis\n0\n \n Illusion\n0\n \nTruth\n0\n \n Disorder\n0\n0\n85\n \n Man\n \n Beast\n \n Harmony\n0\nFemale, age 23. Apprentice priestess of Ernalda of the \nErnaldori clan of the Colymar Tribe. \nCall me Yanioth Vareena’s Daughter, and like my mother, you \nwill know me as a priestess of Ernalda. Praised be the Earth and \nall its secrets! \nI know the sacred dances of life and lust as well as the rites \nof birth and renewal. I speak to spirits of the higher worlds and \nthose of the earth, and I know the ways of knitting flesh and bone \nto their wholeness. \nWith my half-sister Vasana, I ventured to Nochet, and there I \nearned the blessing and favor of Queen Samastina. Now I travel \nwith Vasana, following the path my goddess has set before me. \nYanioth wears the traditional vestments of an Ernaldan priestess, \nand has a tone ranging from lofty to occasionally salacious. \nDespite this, she is helpful and generous to her friends, and \nruthless towards her enemies. \nShe is Vasana’s half-sister, sharing the same mother, Vare-\nena, but with a different father. Yanioth’s grandmother died at \nGrizzly Peak defending the Feathered Horse Queen, and her \nmother (Vareena, a priestess of Ernalda) stayed completely out \nof the next twenty years of conflict. \nIt was a great shock to her mother that Yanioth accompa-\nnied her half-sister to Nochet, where she gained the blessing \nand favor of Queen Samastina. Yanioth was present at the \nBattle of Pennel Ford, accompanied Argrath to summon Jaldon, \nand helped acclaim Kallyr Starbrow as Prince.\nHow to Play Yanioth\n\t\n. You are a natural born leader with a Charisma 17. \nBut you are not much of a fighter—let others do the \nfighting for you.\n\t\n. You have plenty of healing magic—Heal 3 for minor \nwounds, Heal Body for someone near death.\n\t\n. Your Charisma Rune spell makes you socially \nunstoppable—for 15 minutes.\n\t\n. You have many strong passions—use them when \nappropriate to augment your skills. If Vasana and \nHarmast are in play, they are your family.\n\t\n. Your Earth elemental can be a game-changer, but it costs \nall of your Rune points to Summon and Command a \nMedium Earth Elemental.\n\t\n. Your high Fertility and Earth Runes makes you worldly \nand pleasure-seeking. Your high Beast Rune puts you in \ntouch with your base instincts.\nYANIOTH VAREENA’S \nDAUGHTER\n90\n0\n0\n0\n0\n0\n \n Fire\n \n Water\n \n Earth\n \n Air\n \n Darkness\n \n Moon",
+  "notes": [
+    "Traditional Ernaldan vestments",
+    "Half-sister of Vasana",
+    "Present at Pennel Ford",
+    "Helped acclaim Kallyr Starbrow",
+    "Carries rich gifts from Nochet",
+    "Better healer than front-line",
+    "Composite bow is secondary"
+  ],
+  "mentalTraits": [
+    "Generous to friends",
+    "Ruthless to enemies",
+    "Pleasure-seeking under"
+  ],
+  "wounds": [],
+  "reminders": [
+    "Rep. 26/Rans. 1000 L",
+    "Heal Body for dying allies",
+    "Summon elem. costs pool",
+    "Vasana & Harmast family",
+    "Loyal to Queen Samastina",
+    "Earth & Fertility lead",
+    "Passions aid social scenes"
+  ],
+  "magicItems": [
+    "Store cryst. +10 MP"
+  ],
+  "traits": [
+    "Queen Samastina's favor"
+  ],
+  "otherMagic": [
+    {
+      "type": "Ally",
+      "detail": "Medium earth elemental"
+    }
+  ]
+}

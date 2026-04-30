@@ -1,0 +1,297 @@
+{
+  "name": "Harmast Baranthos' Son",
+  "concept": "Sartarite / Colymar Wealthy farmer &",
+  "characteristics": {
+    "STR": 10,
+    "CON": 7,
+    "SIZ": 11,
+    "DEX": 13,
+    "INT": 15,
+    "POW": 12,
+    "CHA": 7
+  },
+  "charMethod": "pregen",
+  "attributes": {
+    "actionPoints": 3,
+    "experienceModifier": 0,
+    "healingRate": 2,
+    "luckPoints": 2,
+    "magicPoints": 12,
+    "magicPointsMax": 12,
+    "initiativeBonus": 14,
+    "damageModifier": "+0",
+    "hitPoints": {
+      "Head": 4,
+      "Chest": 6,
+      "Abdomen": 5,
+      "Right Arm": 3,
+      "Left Arm": 3,
+      "Right Leg": 4,
+      "Left Leg": 4
+    },
+    "movementRate": 6,
+    "devotionPoints": 3,
+    "devotionPointsMax": 3,
+    "encumbrance": {
+      "unencumbered": 10,
+      "burdened": 20,
+      "overloaded": 30
+    }
+  },
+  "culture": "Sartarite / Colymar",
+  "homeland": "Ernaldori clan, Colymar",
+  "age": 21,
+  "gender": "he/him",
+  "socialClass": "Nobleman",
+  "physical": {
+    "hand": "Right",
+    "frame": "Average",
+    "height": "170",
+    "weight": "70"
+  },
+  "career": "Wealthy farmer &",
+  "standardSkills": {
+    "Athletics": 23,
+    "Boating": 17,
+    "Conceal": 25,
+    "Customs": 70,
+    "Dance": 20,
+    "Deceit": 22,
+    "Drive": 25,
+    "First Aid": 28,
+    "Influence": 65,
+    "Insight": 60,
+    "Locale": 40,
+    "Perception": 35,
+    "Ride": 40,
+    "Sing": 35,
+    "Stealth": 30,
+    "Swim": 17,
+    "Unarmed": 23,
+    "Brawn": 21,
+    "Endurance": 14,
+    "Evade": 46,
+    "Willpower": 24
+  },
+  "professionalSkills": {
+    "Bureaucracy": 50,
+    "Commerce": 65,
+    "Craft (Animal Husb.)": 28,
+    "Craft (Farming)": 35,
+    "Literacy (Theyalan)": 30,
+    "Lore (Issaries)": 30,
+    "Lore (Sartar)": 40
+  },
+  "languages": {
+    "Heortling": 60,
+    "Tradetalk": 45,
+    "Esrolian": 30
+  },
+  "magicSkills": {
+    "Devot. (Issar.)": 60,
+    "Exhort": 55,
+    "Folk Magic": 65,
+    "Meditation": 22
+  },
+  "combatStyles": [
+    {
+      "name": "Issaries Duelist",
+      "skill": 100,
+      "weapons": [
+        "Broadsword",
+        "Battleaxe",
+        "Dagger",
+        "Medium Shield"
+      ],
+      "traits": []
+    },
+    {
+      "name": "Caravan Skirmisher",
+      "skill": 45,
+      "weapons": [
+        "Broadsword",
+        "Battleaxe",
+        "Dagger",
+        "Medium Shield"
+      ],
+      "traits": []
+    }
+  ],
+  "passions": [
+    "Hate (Grey Dog): 60",
+    "Love (family): 80",
+    "Loyalty (Colymar Tribe): 60",
+    "Loyalty (Ernaldori Clan): 60",
+    "Loyalty (Issaries Temple): 60",
+    "Loyalty (Sartar): 80"
+  ],
+  "folkMagicSpells": [
+    "Detect Enemies 1",
+    "Farsee 1",
+    "Glamour 2",
+    "Mobility 1"
+  ],
+  "miracles": [
+    "Passage 1",
+    "Path Watch 2",
+    "Spell Trading 2"
+  ],
+  "weapons": {
+    "melee": [
+      {
+        "name": "Broadsword",
+        "damage": "1d8+1+1d4",
+        "size": "M",
+        "reach": "M",
+        "combatEffects": "Bleed, Impale",
+        "traits": "None",
+        "ap": 6,
+        "hp": 10,
+        "enc": 2
+      },
+      {
+        "name": "Battleaxe",
+        "damage": "1d8+2+1d4",
+        "size": "L",
+        "reach": "M",
+        "combatEffects": "Bleed, Sunder",
+        "traits": "None",
+        "ap": 4,
+        "hp": 8,
+        "enc": 1
+      },
+      {
+        "name": "Dagger",
+        "damage": "1d4+2+1d4",
+        "size": "S",
+        "reach": "T",
+        "combatEffects": "Bleed",
+        "traits": "None",
+        "ap": 6,
+        "hp": 6,
+        "enc": 1
+      },
+      {
+        "name": "Medium Shield",
+        "damage": "1d4+1d4",
+        "size": "L",
+        "reach": "S",
+        "combatEffects": "Bash, Stun Location",
+        "traits": "Ranged Parry",
+        "ap": 6,
+        "hp": 12,
+        "enc": 2
+      }
+    ],
+    "ranged": []
+  },
+  "armor": [
+    {
+      "name": "Closed Helm",
+      "ap": 5,
+      "enc": 1
+    },
+    {
+      "name": "Plate Vambrace",
+      "ap": 6,
+      "enc": 1
+    },
+    {
+      "name": "Plate Vambrace",
+      "ap": 6,
+      "enc": 1
+    },
+    {
+      "name": "Segmented Plate Hauberk",
+      "ap": 6,
+      "enc": 4
+    },
+    {
+      "name": "Plate Greave",
+      "ap": 6,
+      "enc": 1
+    },
+    {
+      "name": "Plate Greave",
+      "ap": 6,
+      "enc": 1
+    }
+  ],
+  "equipment": [
+    "Healing potion",
+    "Healing potion",
+    "Healing potion",
+    "150 L coin",
+    "Issaries medallion"
+  ],
+  "startingMoney": 150,
+  "cult": {
+    "name": "Issaries Initiate",
+    "parent": "Air 90%"
+  },
+  "runeAffinities": {
+    "Harmony": 90,
+    "Movement": 75,
+    "Disorder": 90
+  },
+  "hitPoints": {
+    "Head": {
+      "current": 4,
+      "max": 4
+    },
+    "Chest": {
+      "current": 6,
+      "max": 6
+    },
+    "Abdomen": {
+      "current": 5,
+      "max": 5
+    },
+    "Right Arm": {
+      "current": 3,
+      "max": 3
+    },
+    "Left Arm": {
+      "current": 3,
+      "max": 3
+    },
+    "Right Leg": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Leg": {
+      "current": 4,
+      "max": 4
+    }
+  },
+  "background": "Runes\nRiding Zebras\nElemental Affinities\nPower Affinities\n \n Death\n0\n \n Fertility\n0\n \n Movement\n75\n \n Stasis\n0\n \n Illusion\n0\n \nTruth\n0\n \n Disorder\n90\n0\n0\n \n Man\n \n Beast\n \n Harmony\n0\nMale, age 21. Wealthy farmer of the Ernaldori clan of the \nColymar Tribe. \nHarmast is my name, and I am the firstborn of the great chieftain \nBaranthos. You have no doubt heard of me. My clan, the Ernaldori, \nare loyal Sartarites, famed for our prudence and our success. \nTrue, my clan defended Colymar tribal lands while others \nrushed off to war, but when they returned, where were the thanks \nfor our service? I fought in the Battle at Pennel Ford alongside my \nkinsfolk, and saw the crowning of the Prince of Sartar. \nMy friends and enemies alike know me for a man of words, \nan envoy and skilled negotiator, but they also know that this fine \nsword at my side is not for show. \nHarmast is a noble from the Colymar tribe. His father is \nchieftain of the Ernaldori clan, and his grandfather and great-\nuncle were kings. His family is famed for its loyalty to Sartar \nand for their caution: Harmast’s family survived the Lunar \nOccupation with their lives (and wealth) intact, whereas others \nof their clan perished. \nAs a member of the cult of Issaries, Harmast tried to avoid \nthe growing conflict in Dragon Pass, preferring talk and nego-\ntiation to warfare. However, following the Great Winter, he \nkilled a thane from the Grey Dog clan in a duel. The thane’s \nkin have sworn vengeance upon Harmast. Harmast fought at \nthe Battle of Pennel Ford alongside his kinfolk, Vasana and \nYanioth. He witnessed the Dragonrise and fought for Starbrow \nduring the Liberation of Sartar, acclaiming her as Prince. \nOf average appearance, Harmast’s garments and gear are \nfiner than most, displaying his family’s wealth. He is occasion-\nally arrogant, and quickly defensive when it comes to his choice \nto remain and defend his family’s farm estate when others of \nhis kin answered King Broyan’s call. \nHarmast is a dealmaker: when he can’t negotiate a way out \nof a problem, he relies upon his fearsome skills as a duelist. \nGenerally, he tries to remain out of conflicts, but does not \nhesitate to act decisively when drawn into them.\nHow to Play Harmast\n\t\n. You are a chieftain’s son, very intelligent, with good \nBargain and Manage Household skills. But with a \nCharisma of only 10, people don’t pay attention to you. \nUse Glamour when you want to raise your Charisma.\n\t\n. Your strongest passions are Love (family)—including \nVasana and Yanioth, if present—and Loyalty (Sartar). \n\t\n. You are skilled melee fighter and have excellent armor, but \nrelatively few hit points. You are a duelist, not a brawler! \n\t\n. Path Watch is useful when on the road or if fearing \nan ambush. \n\t\n. Your high Harmony Rune makes you a natural \npeacemaker. Your high Air Rune makes you passionate \nand proud.\n\t\n. You are not a particularly good rider and can barely fight \nwhile mounted. Your high Fertility and Earth Runes \nmakes you worldly and pleasure-seeking. Your high Beast \nRune puts you in touch with your base instincts.\nHarmast \nBaranthos’ son\n0\n0\n0\n0\n0\n90\n \n Fire\n \n Water\n \n Earth\n \n Air\n \n Darkness\n \n Moon",
+  "notes": [
+    "Chieftain's eldest son",
+    "Grey Dog feud still active",
+    "Excellent armor, low total HP",
+    "Better duelist than brawler",
+    "Carries 150 L in coin",
+    "Healing potions restore 1d10"
+  ],
+  "mentalTraits": [
+    "Arrogant when challenged",
+    "Peacemaker under Harmony",
+    "Proud under Air"
+  ],
+  "wounds": [],
+  "reminders": [
+    "Rep. 15/Rans. 500 L",
+    "Best at trade or duels",
+    "Glamour fixes weak CHA",
+    "Love family 80",
+    "Loyalty Sartar 80",
+    "Weak in mounted combat",
+    "Use Path Watch on the road"
+  ],
+  "mounts": [
+    "Two riding zebras"
+  ],
+  "magicItems": [
+    "3 healing potions"
+  ]
+}

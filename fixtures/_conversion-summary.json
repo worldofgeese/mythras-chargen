@@ -1,0 +1,54 @@
+{
+  "converted": [
+    "aranda",
+    "dazarim",
+    "harmast",
+    "ionara",
+    "mago",
+    "makarios",
+    "narres",
+    "nathem",
+    "sorala",
+    "varakos",
+    "vasana",
+    "vishi",
+    "vostor",
+    "yanioth"
+  ],
+  "issues": {},
+  "skillMapping": {
+    "standardSkills_SK_1_to_17": [
+      "Athletics",
+      "Boating",
+      "Conceal",
+      "Customs",
+      "Dance",
+      "Deceit",
+      "Drive",
+      "First Aid",
+      "Influence",
+      "Insight",
+      "Locale",
+      "Perception",
+      "Ride",
+      "Sing",
+      "Stealth",
+      "Swim",
+      "Unarmed"
+    ],
+    "resistanceSkills_RE_1_to_4": [
+      "Brawn",
+      "Endurance",
+      "Evade",
+      "Willpower"
+    ]
+  },
+  "notes": [
+    "Skills SK_1-17 map to: Athletics, Boating, Conceal, Customs, Dance, Deceit, Drive, First Aid, Influence, Insight, Locale, Perception, Ride, Sing, Stealth, Swim, Unarmed",
+    "Resistance skills RE_1-4 map to: Brawn, Endurance, Evade, Willpower",
+    "All Total_ values used (not base or VE/E/HD/FM/HC tiers)",
+    "Rune affinities extracted from Cult_3-5 fields and page 1 text",
+    "Magic entries categorized by type (Folk Magic, Miracle, Sorcery, etc.)",
+    "Background text extracted from page 1 narrative"
+  ]
+}

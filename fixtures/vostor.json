@@ -1,0 +1,312 @@
+{
+  "name": "Vostor Son of Pyjeem",
+  "concept": "Lunar Tarshite Infantry veteran",
+  "characteristics": {
+    "STR": 11,
+    "CON": 11,
+    "SIZ": 11,
+    "DEX": 11,
+    "INT": 12,
+    "POW": 11,
+    "CHA": 8
+  },
+  "charMethod": "pregen",
+  "attributes": {
+    "actionPoints": 2,
+    "experienceModifier": 0,
+    "healingRate": 2,
+    "luckPoints": 2,
+    "magicPoints": 11,
+    "magicPointsMax": 11,
+    "initiativeBonus": 12,
+    "damageModifier": "+0",
+    "hitPoints": {
+      "Head": 5,
+      "Chest": 7,
+      "Abdomen": 6,
+      "Right Arm": 4,
+      "Left Arm": 4,
+      "Right Leg": 5,
+      "Left Leg": 5
+    },
+    "movementRate": 6,
+    "devotionPoints": 3,
+    "devotionPointsMax": 3,
+    "encumbrance": {
+      "unencumbered": 11,
+      "burdened": 22,
+      "overloaded": 33
+    }
+  },
+  "culture": "Lunar Tarshite",
+  "homeland": "Dunstop, Lunar Tarsh",
+  "age": 21,
+  "gender": "he/him",
+  "socialClass": "Commoner",
+  "physical": {
+    "hand": "Right",
+    "frame": "Average",
+    "height": "170",
+    "weight": "70"
+  },
+  "career": "Infantry veteran",
+  "standardSkills": {
+    "Athletics": 22,
+    "Boating": 22,
+    "Conceal": 22,
+    "Customs": 40,
+    "Dance": 19,
+    "Deceit": 20,
+    "Drive": 22,
+    "First Aid": 30,
+    "Influence": 20,
+    "Insight": 23,
+    "Locale": 30,
+    "Perception": 65,
+    "Ride": 22,
+    "Sing": 30,
+    "Stealth": 23,
+    "Swim": 22,
+    "Unarmed": 22,
+    "Brawn": 22,
+    "Endurance": 22,
+    "Evade": 35,
+    "Willpower": 22
+  },
+  "professionalSkills": {
+    "Craft (Farming)": 35,
+    "Literacy (N. Pelorian)": 24,
+    "Lore (Astronomy)": 24,
+    "Lore (7 Mothers)": 25,
+    "Lore (Strat/Tact)": 55,
+    "Lore (Tarsh)": 30
+  },
+  "languages": {
+    "N. Pelorian": 70,
+    "Dara Happan": 35,
+    "Tarshite": 30
+  },
+  "magicSkills": {
+    "Devot. (7 Mths)": 60,
+    "Exhort": 30,
+    "Folk Magic": 45,
+    "Meditation": 23
+  },
+  "combatStyles": [
+    {
+      "name": "Lunar Infantryman",
+      "skill": 90,
+      "weapons": [
+        "Kopis",
+        "Dagger",
+        "Medium Shield",
+        "Large Shield",
+        "Recurve Bow"
+      ],
+      "traits": []
+    },
+    {
+      "name": "Lunar Archer",
+      "skill": 50,
+      "weapons": [
+        "Kopis",
+        "Dagger",
+        "Medium Shield",
+        "Large Shield",
+        "Recurve Bow"
+      ],
+      "traits": []
+    }
+  ],
+  "passions": [
+    "Devotion (7 Mothers): 60",
+    "Fear (Dragons): 60",
+    "Hate (King Pharandros): 60",
+    "Honor: 70",
+    "Love (family): 60",
+    "Loyalty (Fazzur Wideread): 80",
+    "Loyalty (Red Emperor): 60"
+  ],
+  "folkMagicSpells": [
+    "Befuddle 2",
+    "Glamour 2",
+    "Heal 1"
+  ],
+  "miracles": [
+    "Madness 2",
+    "Mindblast 2",
+    "Summon Fire Elemental 1"
+  ],
+  "weapons": {
+    "melee": [
+      {
+        "name": "Kopis",
+        "damage": "1d8+1+1d4",
+        "size": "M",
+        "reach": "M",
+        "combatEffects": "Bleed",
+        "traits": "None",
+        "ap": 6,
+        "hp": 12,
+        "enc": 2
+      },
+      {
+        "name": "Dagger",
+        "damage": "1d4+2+1d4",
+        "size": "S",
+        "reach": "T",
+        "combatEffects": "Bleed",
+        "traits": "None",
+        "ap": 6,
+        "hp": 6,
+        "enc": 1
+      },
+      {
+        "name": "Medium Shield",
+        "damage": "1d4+1d4",
+        "size": "L",
+        "reach": "S",
+        "combatEffects": "Bash, Stun Location",
+        "traits": "Ranged Parry",
+        "ap": 6,
+        "hp": 12,
+        "enc": 2
+      },
+      {
+        "name": "Large Shield",
+        "damage": "1d6+1d4",
+        "size": "H",
+        "reach": "S",
+        "combatEffects": "Bash, Stun Location",
+        "traits": "Ranged Parry",
+        "ap": 8,
+        "hp": 16,
+        "enc": 3
+      }
+    ],
+    "ranged": [
+      {
+        "name": "Recurve Bow",
+        "damage": "1d8+1",
+        "force": "H",
+        "damageModifier": "Yes",
+        "range": "15/125/250",
+        "combatEffects": "Impale S",
+        "loadTurns": 2,
+        "ap": 4,
+        "hp": 8,
+        "enc": 1
+      }
+    ]
+  },
+  "armor": [
+    {
+      "name": "Closed Helm",
+      "ap": 5,
+      "enc": 1
+    },
+    {
+      "name": "Plate Vambrace",
+      "ap": 6,
+      "enc": 1
+    },
+    {
+      "name": "Plate Vambrace",
+      "ap": 6,
+      "enc": 1
+    },
+    {
+      "name": "Heavy Scale Hauberk",
+      "ap": 5,
+      "enc": 4
+    },
+    {
+      "name": "Plate Greave",
+      "ap": 6,
+      "enc": 1
+    },
+    {
+      "name": "Plate Greave",
+      "ap": 6,
+      "enc": 1
+    }
+  ],
+  "equipment": [
+    "Heal 2 matrix buckle",
+    "125 L coin"
+  ],
+  "startingMoney": 125,
+  "cult": {
+    "name": "7 Mothers Initiate",
+    "parent": "Moon 80%"
+  },
+  "runeAffinities": {
+    "Disorder": 75,
+    "Illusion": 75,
+    "Harmony": 75
+  },
+  "hitPoints": {
+    "Head": {
+      "current": 5,
+      "max": 5
+    },
+    "Chest": {
+      "current": 7,
+      "max": 7
+    },
+    "Abdomen": {
+      "current": 6,
+      "max": 6
+    },
+    "Right Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Leg": {
+      "current": 5,
+      "max": 5
+    },
+    "Left Leg": {
+      "current": 5,
+      "max": 5
+    }
+  },
+  "background": "Runes\nFire Elemental\nElemental Affinities\nPower Affinities\n \n Death\n0\n \n Fertility\n0\n \n Movement\n0\n \n Stasis\n0\n \n Illusion\n75\n \nTruth\n0\n \n Disorder\n0\n0\n0\n \n Man\n \n Beast\n \n Harmony\n75\nMale, 21 years old. Heavy infantry soldier from Dunstop \nin Lunar Tarsh. \nHold before you strike, brave adventurers! \nIt is true that I am a Lunar, out of Dunstop in Tarsh, but I \nhave renounced any allegiance to the Lunar Empire, and have \nchosen to follow a destiny other than that of invader. \nMy name is Vostor. Though I am a deserter, I am no common \ntraitor! I put my kopis-sword and shield to use serving the Red \nEmperor in Nochet and at the Battle of Pennel Ford, and in \nhis name I was nearly maimed by the savage called Harrek the \nBerserk. While I recovered, an attempt was made on my life, a \npurge initiated by the new regime. I had little choice but to leave, \nor face imprisonment or assassination. \nI have found acceptance, even friends, among my former \nenemies, and now I am my own man, seeking my own path \nin the world. \nVostor, Son of Pyjeem, is from a long line of Lunar Tarshite \nsoldiers from Dunstop. He has a powerful physique, but his \nmost noticeable feature is a ragged row of fearsome scars across \nthe side of his face and his arm, healed but still testament to \nthe terrible injury he suffered. \nVostor’s grandfather fought and died for the Red Emperor \nat the Battle of Grizzly Peak. His son Pyjeem followed General \nFazzur Wideread, but died with great glory in the Hendriking \nCampaign when Vostor was still a child. \nAt adulthood, Vostor joined the Dunstop Foot and was \nshocked when the Red Emperor replaced Fazzur Wideread as the \nGovernor-General of Dragon Pass. Nonetheless, he followed his \nregiment to Esrolia and fought valiantly in the siege of Nochet. \nHowever, the Empire failed to take the city. At the Battle of \nPennel Ford Vostor was nearly killed by Harrek the Berserk, \ngaining the terrible scars across his face and arm. Vostor returned \nto Dragon Pass to recover but, during the retreat from Sartar, \npartisans of King Pharandros tried to assassinate him as part of \na purge of those officers who were loyal to Fazzur.\nRather than be murdered, Vostor deserted and sought allies \namongst his former enemies in Sartar.\nHow to Play Vostor\n\t\n. You are a Lunar soldier who has joined with his former \nenemies. Decide which of the other characters is the \nleader and support them like a good soldier should. \n\t\n. You are an all-around tough soldier, with good skills, good \ndamage, good armor, and good hit points. \n\t\n. Your best passions are Loyalty (Fazzur Wideread) and \nHonor. Bond with other characters with a high Honor.\n\t\n. When it comes to the Lunar Empire, you are a mess of \ncontradictory passions. You are loyal to Fazzur Wideread, \nbut hate the Lunar king of Tarsh, his superior. You are \nreflexively loyal to the Red Emperor. \n\t\n. Your ability to communicate with the local barbarians \nis limited—speak slowly and loudly. If they don’t \nunderstand you, repeat it slower and louder.\nVOSTOR  \nSON OF PYJEEM\n0\n0\n80\n0\n0\n0\n \n Fire\n \n Water\n \n Earth\n \n Air\n \n Darkness\n \n Moon",
+  "notes": [
+    "Former Dunstop foot soldier",
+    "Turned on the Lunar Empire",
+    "Followed Argrath into Dragon",
+    "Kopis & large shield",
+    "125 L in coin and booty"
+  ],
+  "mentalTraits": [
+    "Bitter survivor",
+    "Moon & Disorder pull hard",
+    "Still disciplined under"
+  ],
+  "wounds": [
+    "Scarred face from rebel"
+  ],
+  "reminders": [
+    "Rep. 19/Rans. 500 L",
+    "Good all-round soldier",
+    "Loyal to Fazzur 80",
+    "Low Heortling slows talk",
+    "Large shield is his anchor",
+    "Remember Fire elem.",
+    "Conflicted Lunar loyalties"
+  ],
+  "magicItems": [
+    "Heal 2 matrix buckle"
+  ],
+  "otherMagic": [
+    {
+      "type": "Ally",
+      "detail": "Small fire elemental"
+    }
+  ]
+}

@@ -1,0 +1,379 @@
+{
+  "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+  "extracted_at": "2026-04-30",
+  "page": "p.96-101",
+  "special_effects": {
+    "description": "In combat, when one side achieves more levels of success than the other in a Differential Roll, they gain Special Effects equal to the difference. Effects are chosen from the table below.",
+    "table": [
+      {
+        "name": "Accidental Injury",
+        "offensive": false, "defensive": true,
+        "specific_weapon": null,
+        "specific_roll": "Attacker Fumbles",
+        "stackable": false,
+        "description": "Defender deflects/twists attacker's strike so they injure themselves. Attacker rolls own weapon damage on random hit location. If unarmed, tears/breaks something internal (ignores armour)."
+      },
+      {
+        "name": "Arise",
+        "offensive": false, "defensive": true,
+        "specific_weapon": null,
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Defender uses momentary opening to roll back to their feet."
+      },
+      {
+        "name": "Bash",
+        "offensive": true, "defensive": false,
+        "specific_weapon": "Shields or Bludgeoning",
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Knock opponent off balance. Shields: 1m per 2 damage rolled. Bludgeoning: 1m per 3 damage. Works on creatures up to 2x attacker's SIZ. If forced into obstacle: Hard Athletics/Acrobatics or fall."
+      },
+      {
+        "name": "Bleed",
+        "offensive": true, "defensive": false,
+        "specific_weapon": "Cutting Weapons",
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Cut open major blood vessel. Must overcome AP and injure. Defender: opposed Endurance vs original attack. Failure: lose 1 Fatigue level per Combat Round until collapse/death. Staunched by First Aid; violent action re-opens wound."
+      },
+      {
+        "name": "Blind Opponent",
+        "offensive": false, "defensive": true,
+        "specific_weapon": null,
+        "specific_roll": "Defender Criticals",
+        "stackable": false,
+        "description": "Briefly blind attacker (sand, reflected light, etc.). Attacker: opposed Evade (or weapon style if using shield) vs defender's parry roll. Failure: Blindness modifier for 1d3 turns."
+      },
+      {
+        "name": "Bypass Armour",
+        "offensive": true, "defensive": false,
+        "specific_weapon": null,
+        "specific_roll": "Attacker Criticals",
+        "stackable": true,
+        "description": "Find gap in natural or worn armour. If wearing armour above natural, must choose which to bypass. Can stack to bypass both. Magic protection counts as worn."
+      },
+      {
+        "name": "Choose Location",
+        "offensive": true, "defensive": false,
+        "specific_weapon": "See Description",
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Freely select hit location for melee (must be within reach). Ranged: Critical only, unless target is stationary/unaware at close range."
+      },
+      {
+        "name": "Circumvent Cover",
+        "offensive": true, "defensive": false,
+        "specific_weapon": "Ranged Weapons",
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Fire around target's cover (self-guided ammo or trick shot). Trick shots treated as Critical only with reduced damage."
+      },
+      {
+        "name": "Circumvent Parry",
+        "offensive": true, "defensive": false,
+        "specific_weapon": null,
+        "specific_roll": "Attacker Criticals",
+        "stackable": false,
+        "description": "Completely bypass an otherwise successful parry."
+      },
+      {
+        "name": "Close Range",
+        "offensive": true, "defensive": true,
+        "specific_weapon": null,
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Automatically change engagement range to favour shorter weapon."
+      },
+      {
+        "name": "Compel Surrender",
+        "offensive": true, "defensive": true,
+        "specific_weapon": null,
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Force surrender of helpless/disadvantaged opponent (disarmed, prone, serious wound, etc.). No damage dealt — only threatened. Opposed Willpower vs original attack/parry roll. GM may reserve for NPCs only."
+      },
+      {
+        "name": "Damage Weapon",
+        "offensive": true, "defensive": true,
+        "specific_weapon": null,
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Damage opponent's weapon. Apply damage to weapon's AP/HP instead of wielder. Weapon at 0 HP = broken."
+      },
+      {
+        "name": "Disarm Opponent",
+        "offensive": true, "defensive": true,
+        "specific_weapon": null,
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Knock/yank/twist weapon from hand. Opposed Combat Style vs original roll. Weapon size difference adjusts difficulty (larger weapon = easier disarm). Weapon flung Damage Modifier metres. Works up to 2x attacker's STR."
+      },
+      {
+        "name": "Drop Foe",
+        "offensive": true, "defensive": false,
+        "specific_weapon": "Siege Weapons, Firearms",
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Target must pass Opposed Endurance vs attack roll or become incapacitated from shock/pain. Recovery via First Aid, magic, or wait (1 hour / Healing Rate)."
+      },
+      {
+        "name": "Duck Back",
+        "offensive": false, "defensive": true,
+        "specific_weapon": "Ranged Weapons",
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Immediately duck back into cover without waiting for next Turn. Must be adjacent to cover."
+      },
+      {
+        "name": "Enhance Parry",
+        "offensive": false, "defensive": true,
+        "specific_weapon": null,
+        "specific_roll": "Defender Criticals",
+        "stackable": false,
+        "description": "Deflect entire force of attack regardless of weapon Size."
+      },
+      {
+        "name": "Entangle",
+        "offensive": true, "defensive": true,
+        "specific_weapon": "Entangling Weapons",
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Immobilize struck location (arm: can't use item; leg: can't move; head/chest/abdomen: all skills one grade harder). Next turn: auto Trip Opponent attempt for 1 AP. Victim can break free via Brawn opposed roll, or win SE for Damage Weapon/Disarm/Slip Free."
+      },
+      {
+        "name": "Flurry",
+        "offensive": true, "defensive": false,
+        "specific_weapon": "Unarmed",
+        "specific_roll": null,
+        "stackable": true,
+        "description": "Immediate follow-up unarmed attack with different limb/body part. Costs 1 AP. Allows several attacks in sequence before defender responds offensively."
+      },
+      {
+        "name": "Force Failure",
+        "offensive": true, "defensive": true,
+        "specific_weapon": null,
+        "specific_roll": "Opponent Fumbles",
+        "stackable": false,
+        "description": "Combine with any SE requiring an opposed roll — opponent automatically fails resistance. E.g., Force Failure + Disarm = auto-disarm."
+      },
+      {
+        "name": "Grip",
+        "offensive": true, "defensive": false,
+        "specific_weapon": "Unarmed",
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Hold onto opponent with empty hand/claw/tail/tentacle within Unarmed reach. Prevents changing weapon range or disengaging. Break free: opposed Brawn or Unarmed vs gripper's choice. Some grippers too strong to escape."
+      },
+      {
+        "name": "Impale",
+        "offensive": true, "defensive": false,
+        "specific_weapon": "Impaling Weapons",
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Roll weapon damage twice, choose better result. If armour penetrated and wound caused: option to leave weapon in wound (difficulty penalty based on creature SIZ vs weapon size) or yank free next turn (half normal damage, no DM, ignores armour). Impaled weapon can't parry."
+      },
+      {
+        "name": "Kill Silently",
+        "offensive": true, "defensive": false,
+        "specific_weapon": "Small Weapons",
+        "specific_roll": "See Description",
+        "stackable": false,
+        "description": "Requires Assassination combat style trait. Surprised targets only, first attack only. Cover mouth + stab/cut/garrotte. Prevents victim crying out for entire round. Serious/Major wound = auto-fail Endurance."
+      },
+      {
+        "name": "Marksman",
+        "offensive": true, "defensive": false,
+        "specific_weapon": "Ranged Weapons",
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Move hit location one step to adjacent body area. Must follow physiology."
+      },
+      {
+        "name": "Maximise Damage",
+        "offensive": true, "defensive": false,
+        "specific_weapon": null,
+        "specific_roll": "Attacker Criticals",
+        "stackable": true,
+        "description": "Substitute one weapon damage die for its maximum value. E.g., 1d6 → 6, 2d6 → 1d6+6. Does not affect Damage Modifier (must be rolled normally). Works for natural weapons."
+      },
+      {
+        "name": "Open Range",
+        "offensive": false, "defensive": true,
+        "specific_weapon": null,
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Change engagement range to favour longer weapon."
+      },
+      {
+        "name": "Overextend Opponent",
+        "offensive": false, "defensive": true,
+        "specific_weapon": null,
+        "specific_roll": null,
+        "stackable": true,
+        "description": "Defender sidesteps/retreats — opponent can't attack next turn."
+      },
+      {
+        "name": "Overpenetration",
+        "offensive": true, "defensive": false,
+        "specific_weapon": "Ranged Weapons",
+        "specific_roll": "Critical Only",
+        "stackable": false,
+        "description": "Shot passes through first target to hit second behind (if overcomes body armour). Second victim: half damage. Other SEs not applied to second target."
+      },
+      {
+        "name": "Pin Down",
+        "offensive": true, "defensive": false,
+        "specific_weapon": "Ranged Weapons",
+        "specific_roll": null,
+        "stackable": true,
+        "description": "Opposed Willpower vs attack roll. Failure: target hunkers behind cover, can't return fire next Turn. Works even if no damage dealt (intimidation). Target can crawl, reload, communicate while pinned."
+      },
+      {
+        "name": "Pin Weapon",
+        "offensive": true, "defensive": true,
+        "specific_weapon": null,
+        "specific_roll": "Critical Only",
+        "stackable": false,
+        "description": "Pin opponent's weapon/shield using body/positioning. Opponent must spend AP and wrestle free (as per Grip). Failure = item stays unusable."
+      },
+      {
+        "name": "Prepare Counter",
+        "offensive": true, "defensive": true,
+        "specific_weapon": null,
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Pre-plan counter to specific SE (note secretly). If opponent uses that SE, auto-substitute with your own offensive or defensive SE."
+      },
+      {
+        "name": "Press Advantage",
+        "offensive": true, "defensive": false,
+        "specific_weapon": null,
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Pressure opponent to stay defensive — can't attack next turn. Establishes unbroken attack sequence. Foes will disengage, call for help, or use Prepare Counter."
+      },
+      {
+        "name": "Rapid Reload",
+        "offensive": true, "defensive": true,
+        "specific_weapon": "Ranged Weapons",
+        "specific_roll": null,
+        "stackable": true,
+        "description": "Reduce reload time by 1."
+      },
+      {
+        "name": "Remise",
+        "offensive": true, "defensive": false,
+        "specific_weapon": "Small Weapon Only",
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Sequential follow-up attack with Small weapon on opponent's next turn. Forces foe to change proactive action to reactive."
+      },
+      {
+        "name": "Scar Foe",
+        "offensive": true, "defensive": true,
+        "specific_weapon": null,
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Permanent disfiguring scar (slice across face, inscribed letter, etc.)."
+      },
+      {
+        "name": "Select Target",
+        "offensive": false, "defensive": true,
+        "specific_weapon": null,
+        "specific_roll": "Attacker Fumbles",
+        "stackable": false,
+        "description": "Deflect fumbled blow into adjacent bystander. New target must be within reach (melee) or line of fire (ranged). Auto-hit, no SE. Target completely surprised."
+      },
+      {
+        "name": "Slip Free",
+        "offensive": false, "defensive": true,
+        "specific_weapon": null,
+        "specific_roll": "Defender Criticals",
+        "stackable": false,
+        "description": "Auto-escape Entangle, Grip, or Pin."
+      },
+      {
+        "name": "Spoil Spell",
+        "offensive": true, "defensive": false,
+        "specific_weapon": null,
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Automatically ruin spell being cast, if blow overcomes AP and injures target."
+      },
+      {
+        "name": "Stand Fast",
+        "offensive": false, "defensive": true,
+        "specific_weapon": null,
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Brace against knockback effects of any damage received."
+      },
+      {
+        "name": "Stun Location",
+        "offensive": true, "defensive": false,
+        "specific_weapon": "Bludgeoning Weapons",
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Must overcome AP and injure. Opposed Endurance vs original attack. Failure: location incapacitated for turns = damage dealt. Torso: stagger, defend only. Head: briefly insensible."
+      },
+      {
+        "name": "Sunder",
+        "offensive": true, "defensive": false,
+        "specific_weapon": "Axes, Two Handed Weapons",
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Damage armour AP value. Weapon damage (after reductions for parry/magic) applied to armour's AP. Surplus AP damage reduces armour permanently. Remaining damage after AP reaches 0 carries to location HP."
+      },
+      {
+        "name": "Take Weapon",
+        "offensive": true, "defensive": true,
+        "specific_weapon": "Unarmed",
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Yank/twist weapon from opponent's hand. Opposed Combat Style vs original Unarmed roll. Loser's weapon is taken and usable by winner. Size irrelevant, but only works on creatures up to 2x attacker's STR."
+      },
+      {
+        "name": "Trip Opponent",
+        "offensive": true, "defensive": true,
+        "specific_weapon": null,
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Overbalance/throw opponent to ground. Opposed Brawn, Evade, or Acrobatics vs original roll. Quadrupeds may substitute Athletics and treat roll one grade easier."
+      },
+      {
+        "name": "Weapon Malfunction",
+        "offensive": false, "defensive": true,
+        "specific_weapon": "Ranged Weapons",
+        "specific_roll": "Attacker Fumbles",
+        "stackable": false,
+        "description": "Attacker's weapon malfunctions. Useless until repaired."
+      },
+      {
+        "name": "Withdraw",
+        "offensive": false, "defensive": true,
+        "specific_weapon": null,
+        "specific_roll": null,
+        "stackable": false,
+        "description": "Auto-disengage from opponent. Break engagement without needing Change Range or Outmanoeuvre."
+      }
+    ],
+    "close_combat_situational_modifiers": {
+      "page": "p.101",
+      "table": [
+        { "situation": "Attacking a helpless target", "difficulty": "Automatic" },
+        { "situation": "Attacking in a confined situation", "difficulty": "Hard" },
+        { "situation": "Defending while on lower ground or against mounted foe", "difficulty": "Hard" },
+        { "situation": "Fighting while on unstable ground", "difficulty": "Hard" },
+        { "situation": "Fighting whilst crouching or from one knee", "difficulty": "Hard" },
+        { "situation": "Fighting in poor visibility (thick fog, snowstorm)", "difficulty": "Hard" },
+        { "situation": "Defending against an attack from behind", "difficulty": "Formidable" },
+        { "situation": "Fighting while prone", "difficulty": "Formidable" },
+        { "situation": "Fighting in partial darkness (dim illumination)", "difficulty": "Formidable" },
+        { "situation": "Fighting in pitch black (no illumination)", "difficulty": "Herculean" },
+        { "situation": "Blinded or loss of primary perceptive sense", "difficulty": "Herculean" }
+      ],
+      "note": "Applied to attacking, parrying, and evading equally unless stated otherwise. Use most severe if multiple situations apply."
+    }
+  }
+}

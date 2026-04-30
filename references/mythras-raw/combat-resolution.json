@@ -1,0 +1,103 @@
+{
+  "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+  "extracted_at": "2026-04-30",
+  "page": "p.50-52",
+  "contested_rolls": {
+    "overview": "When a skill is actively resisted by an opponent, use a Contested Roll. Two types: Opposed Rolls and Differential Rolls.",
+    "opposed_rolls": {
+      "page": "p.50",
+      "description": "Both participants roll respective skills. Winner gains the better level of success. If same level, winner has the highest dice roll still within skill range.",
+      "resolution": {
+        "levels": ["Critical", "Success", "Failure", "Fumble"],
+        "rule": "Better level wins. Same level: higher roll within range wins.",
+        "both_fail": "Either re-roll with dramatic tension, or GM narrates circumstances fitting the failure."
+      },
+      "examples_table": [
+        { "activity": "Bargaining/Haggling", "opposing_skills": "Commerce vs Commerce, Influence vs Commerce" },
+        { "activity": "Chasing/Racing", "opposing_skills": "Athletics vs Athletics, Athletics vs Endurance, Ride vs Ride" },
+        { "activity": "Deceiving or Lying", "opposing_skills": "Deceit vs Insight, Sleight vs Perception" },
+        { "activity": "Displaying Loyalty", "opposing_skills": "Passion vs Passion, Passion vs Insight, Passion vs Influence" },
+        { "activity": "Getting out of the Way", "opposing_skills": "Evade vs Athletics, Evade vs Mechanisms, Evade vs Ride" },
+        { "activity": "Hiding or Sneaking", "opposing_skills": "Stealth vs Perception, Stealth vs Track" },
+        { "activity": "Pulling Rank", "opposing_skills": "Influence vs Willpower, Deceit vs Willpower" },
+        { "activity": "Staying the Course", "opposing_skills": "Endurance vs Endurance, Endurance vs Brawn" },
+        { "activity": "Swaying a Crowd", "opposing_skills": "Oratory vs Willpower" },
+        { "activity": "Test of Strength", "opposing_skills": "Brawn vs Brawn, Brawn vs Endurance" },
+        { "activity": "Test of Wills", "opposing_skills": "Willpower vs Willpower, Seduction vs Willpower" }
+      ]
+    },
+    "differential_rolls": {
+      "page": "p.51",
+      "description": "Both participants roll against respective skills. No outright winner — the difference in success levels determines advantage. Primarily used for combat resolution.",
+      "results_table": {
+        "note": "Read as Protagonist result vs Antagonist result. Value is who benefits and by how many levels.",
+        "grid": [
+          {
+            "protagonist": "Critical",
+            "vs_critical": "No Benefit",
+            "vs_success": "Protagonist 1 level",
+            "vs_failure": "Protagonist 2 levels",
+            "vs_fumble": "Protagonist 3 levels"
+          },
+          {
+            "protagonist": "Success",
+            "vs_critical": "Antagonist 1 level",
+            "vs_success": "No Benefit",
+            "vs_failure": "Protagonist 1 level",
+            "vs_fumble": "Protagonist 2 levels"
+          },
+          {
+            "protagonist": "Failure",
+            "vs_critical": "Antagonist 2 levels",
+            "vs_success": "Antagonist 1 level",
+            "vs_failure": "No Benefit",
+            "vs_fumble": "No Benefit"
+          },
+          {
+            "protagonist": "Fumble",
+            "vs_critical": "Antagonist 3 levels",
+            "vs_success": "Antagonist 2 levels",
+            "vs_failure": "No Benefit",
+            "vs_fumble": "No Benefit"
+          }
+        ]
+      }
+    },
+    "skills_over_100": {
+      "page": "p.51",
+      "rule": "If the highest skilled participant exceeds 100%, subtract the difference between 100 and their skill from ALL participants (including themselves).",
+      "note": "Calculate after circumstance modifiers are applied.",
+      "quick_hack": "Round penalty up to nearest 10% for speed. E.g., skill 113% → subtract 20% from everyone."
+    },
+    "group_rolls": {
+      "page": "p.51-52",
+      "team_roll": {
+        "description": "Success is co-operative. Roll once for the highest skill in the team. Success = everyone succeeds. Failure = everyone fails.",
+        "reverse": "For situations where one failure ruins it for all, roll for the lowest skill instead."
+      },
+      "sorting_roll": {
+        "description": "Success is individual. GM makes one roll. Those whose skill equals or exceeds the roll succeed; those below fail."
+      },
+      "proportional_success": {
+        "description": "For large groups, the skill percentage equals the proportion of the group that succeeds. E.g., Athletics 75 → 75 out of 100 soldiers succeed."
+      }
+    }
+  },
+  "augmenting_skills": {
+    "page": "p.50",
+    "description": "One skill can aid another. The augmenting skill increases the primary skill by twice its Critical range (i.e., 20% of the augmenting skill value).",
+    "rules": [
+      "Only one augmenting skill at a time",
+      "Augmenting skill must be appropriate to circumstances (GM decides)",
+      "Critical and Fumble ranges stay based on unaugmented primary skill",
+      "Characters can augment other characters' skills to assist them",
+      "A character being aided cannot also augment themselves"
+    ],
+    "example": "Locale 33% augments Ride 38% → adds 7% (20% of 33) → Ride becomes 45%. Critical still at 4%."
+  },
+  "capping_skills": {
+    "page": "p.50",
+    "description": "For a particular roll, the primary skill is restricted to the value of a secondary skill (if lower). Used when full ability is limited by unusual circumstances.",
+    "example": "Lore (Strategy) 48% capped by Language (Korathian) 23% → rolls at 23%."
+  }
+}

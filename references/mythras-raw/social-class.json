@@ -1,0 +1,51 @@
+{
+  "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+  "extracted_at": "2026-04-30",
+  "page": "p.21, 24",
+  "starting_money": {
+    "note": "Base starting money by culture type. Multiply by social class Money Modifier.",
+    "barbarian": "4d6x50 SP",
+    "civilised": "4d6x75 SP",
+    "nomad": "4d6x25 SP",
+    "primitive": "4d6x10 SP"
+  },
+  "social_class_tables": {
+    "barbarian": [
+      { "d100_range": "01-05", "class": "Outcast", "example_titles": "Exile, Outlaw", "money_modifier": 0.25, "background_resources": "Nothing but the clothes on their back, and maybe some personal armament" },
+      { "d100_range": "06-15", "class": "Slave", "example_titles": "Bondsman, Caxtos, Peon, Serf, Thrall", "money_modifier": 0.5, "background_resources": "Resides on owners property; owns a few keepsakes" },
+      { "d100_range": "16-80", "class": "Freeman", "example_titles": "Churl, Commoner, Feine, Freedman, Karl, Labourer", "money_modifier": 1, "background_resources": "Rented accommodation or farmland; possesses own tools or livestock, simple weapons" },
+      { "d100_range": "81-95", "class": "Gentry", "example_titles": "Ealdormen, Flaith, Hauldr, Reeve, Thane", "money_modifier": 3, "background_resources": "Owns a house, and either a farmstead, business or ship; furniture; tools, weapons & armour, mount, several servant or slave retainers; support from locals" },
+      { "d100_range": "96-100", "class": "Ruling", "example_titles": "Chieftain, Cyning, Eorl, Jarl, King", "money_modifier": 5, "background_resources": "As above but lives in a great hall and possessions are of excellent quality; fealty from a country or smaller region" }
+    ],
+    "civilised": [
+      { "d100_range": "01-02", "class": "Outcast", "example_titles": "Beggar, Mendicant, Vagabond, Vagrant", "money_modifier": 0.25, "background_resources": "Nothing but the clothes on their back, and maybe some personal armament" },
+      { "d100_range": "03-20", "class": "Slave", "example_titles": "Chattel, Captive, Helot, Servant", "money_modifier": 0.5, "background_resources": "Resides on owners property; owns a few keepsakes" },
+      { "d100_range": "21-70", "class": "Freeman", "example_titles": "Citizen, Peasant, Proletariat, Tenant, Vassal", "money_modifier": 1, "background_resources": "Rented accommodation or farmland; possesses own tools or livestock; simple weapons" },
+      { "d100_range": "71-95", "class": "Gentry", "example_titles": "Bailiff, Equite, Master, Official, Steward, Warden", "money_modifier": 3, "background_resources": "Owns property, farm or business; furniture, tools, weapons & armour, mount, several servant or slave retainers; support from locals" },
+      { "d100_range": "96-99", "class": "Aristocracy", "example_titles": "Archon, Baron, Count, Duke, Lord, Nawab, Noble, Oligarch, Patrician, Satrap", "money_modifier": 5, "background_resources": "Owns several properties, extensive farmlands or multiple businesses; expensive furniture, tools, weapons & armour, mounts, many servants or slaves; fealty from regional inhabitants" },
+      { "d100_range": "100", "class": "Ruling", "example_titles": "Caliph, Czar, Dictator, Emperor, Imperator, Maharajah, Mogul, Pasha, Pharaoh, Potentate, Prince, Rajah, Shah, Sultan, Tyrant", "money_modifier": 10, "background_resources": "As above but of priceless quality; fealty from a dominion or nation" }
+    ],
+    "nomad": [
+      { "d100_range": "01-05", "class": "Outcast", "example_titles": "Outlaw, Rebel", "money_modifier": 0.25, "background_resources": "Nothing but the clothes on their back, maybe some personal armament, and mount or small boat if suitable" },
+      { "d100_range": "06-10", "class": "Slave", "example_titles": "Bool, Convict, Prisoner, Thrall", "money_modifier": 0.5, "background_resources": "Resides on conquered lands, or in owner's yurt or vessel, owns a few keepsakes, plus tools or simple weapon" },
+      { "d100_range": "11-90", "class": "Freeman", "example_titles": "Arad, Haran, Kinsmen, Subjects", "money_modifier": 1, "background_resources": "Possesses own mounts, cart or small boat; owns yurt or similar, half a dozen livestock, weapons, simple armour, a slave or two" },
+      { "d100_range": "91-100", "class": "Ruling", "example_titles": "Chieftain, Emir, Khan, Khaqan, Sea Lord, Sheikh", "money_modifier": 3, "background_resources": "Owns many mounts, carts or boats; large yurt or similar, several dozen livestock, good weapons, good armour, some slaves, fealty from tribe and conquered peoples" }
+    ],
+    "primitive": [
+      { "d100_range": "01-05", "class": "Outcast", "example_titles": "Outlaw", "money_modifier": 0.25, "background_resources": "A weapon and a few knickknacks" },
+      { "d100_range": "06-80", "class": "Freeman", "example_titles": "Tribesman", "money_modifier": 1, "background_resources": "Simple home, tools, and primitive weapons" },
+      { "d100_range": "81-100", "class": "Ruling", "example_titles": "Chieftain, Elder", "money_modifier": 2, "background_resources": "Large hall; valuable skins, totems, trophies, tools, cooking implements, decorated primitive weapons, simple armour; support from tribe" }
+    ]
+  },
+  "culture_type_mapping": {
+    "note": "Maps AiG Gloranthan cultures to Mythras Core culture types for social class lookup",
+    "Balazaring": "primitive",
+    "Esrolian": "civilised",
+    "God Forgot": "civilised",
+    "Lunar Heartland": "civilised",
+    "Praxian": "nomad",
+    "Provincial Lunar/Tarsh": "barbarian",
+    "Sartarite/Heortling": "barbarian",
+    "Telmori Hsunchen": "primitive"
+  }
+}

@@ -1,0 +1,261 @@
+{
+  "name": "Vishi Dunn",
+  "concept": "Praxian / Blue Llama Spirit rider shaman",
+  "characteristics": {
+    "STR": 9,
+    "CON": 9,
+    "SIZ": 10,
+    "DEX": 9,
+    "INT": 14,
+    "POW": 13,
+    "CHA": 11
+  },
+  "charMethod": "pregen",
+  "attributes": {
+    "actionPoints": 2,
+    "experienceModifier": 0,
+    "healingRate": 2,
+    "luckPoints": 3,
+    "magicPoints": 13,
+    "magicPointsMax": 27,
+    "initiativeBonus": 12,
+    "damageModifier": "-1d2",
+    "hitPoints": {
+      "Head": 4,
+      "Chest": 6,
+      "Abdomen": 5,
+      "Right Arm": 3,
+      "Left Arm": 3,
+      "Right Leg": 4,
+      "Left Leg": 4
+    },
+    "movementRate": 6,
+    "devotionPoints": 3,
+    "devotionPointsMax": 3,
+    "encumbrance": {
+      "unencumbered": 9,
+      "burdened": 18,
+      "overloaded": 27
+    }
+  },
+  "culture": "Praxian / Blue Llama",
+  "homeland": "Blue Llama clan, High",
+  "age": 21,
+  "gender": "he/him",
+  "socialClass": "Nomad",
+  "physical": {
+    "hand": "Right",
+    "frame": "Average",
+    "height": "180",
+    "weight": "70"
+  },
+  "career": "Spirit rider shaman",
+  "standardSkills": {
+    "Athletics": 18,
+    "Boating": 18,
+    "Conceal": 22,
+    "Customs": 40,
+    "Dance": 20,
+    "Deceit": 25,
+    "Drive": 22,
+    "First Aid": 50,
+    "Influence": 45,
+    "Insight": 27,
+    "Locale": 45,
+    "Perception": 50,
+    "Ride": 40,
+    "Sing": 45,
+    "Stealth": 23,
+    "Swim": 18,
+    "Unarmed": 18,
+    "Brawn": 19,
+    "Endurance": 18,
+    "Evade": 46,
+    "Willpower": 26
+  },
+  "professionalSkills": {
+    "Craft (Animal Husb.)": 50,
+    "Craft (Butchery)": 50,
+    "Lore (Animals)": 40,
+    "Lore (Plants)": 45,
+    "Lore (Prax)": 45,
+    "Lore (Spirits)": 40,
+    "Lore (Strat/Tact)": 30
+  },
+  "languages": {
+    "Praxian": 65,
+    "Spiritspeech": 50,
+    "Heortling": 25
+  },
+  "magicSkills": {
+    "Devotion (Waha)": 60,
+    "Exhort": 35,
+    "Folk Magic": 95,
+    "Binding": 95
+  },
+  "combatStyles": [
+    {
+      "name": "Blue Llama Spirit",
+      "skill": 60,
+      "weapons": [
+        "Lance",
+        "Dagger-axe",
+        "Dagger",
+        "Pole Lasso"
+      ],
+      "traits": []
+    }
+  ],
+  "passions": [
+    "Hate (Chaos): 60",
+    "Hate (Lunar Empire): 70",
+    "Honor: 60",
+    "Love (family): 60",
+    "Loyalty (Argrath): 80",
+    "Loyalty (High Llama Tribe): 57",
+    "Loyalty (Sabera Spiritrider): 60"
+  ],
+  "folkMagicSpells": [
+    "Detect Spirit 1",
+    "Heal 1",
+    "Second Sight 3",
+    "Spirit Binding 1",
+    "Spirit Screen 3"
+  ],
+  "miracles": [
+    "Axis Mundi 1",
+    "Discorporation 1",
+    "Shield 1+"
+  ],
+  "weapons": {
+    "melee": [
+      {
+        "name": "Lance",
+        "damage": "1d10+1+1d4",
+        "size": "H",
+        "reach": "VL",
+        "combatEffects": "Impale, Sunder",
+        "traits": "Mount",
+        "ap": 4,
+        "hp": 10,
+        "enc": 3
+      },
+      {
+        "name": "Dagger-axe",
+        "damage": "3d6+1d4",
+        "size": "H",
+        "reach": "L",
+        "combatEffects": "Bleed, Sunder",
+        "traits": "Two-Handed",
+        "ap": 4,
+        "hp": 10,
+        "enc": 2
+      },
+      {
+        "name": "Dagger",
+        "damage": "1d4+2+1d4",
+        "size": "S",
+        "reach": "T",
+        "combatEffects": "Bleed",
+        "traits": "None",
+        "ap": 6,
+        "hp": 6,
+        "enc": 1
+      },
+      {
+        "name": "Pole Lasso",
+        "damage": "Grapples",
+        "size": "M",
+        "reach": "VL",
+        "combatEffects": "Trip, Pin Weapon",
+        "traits": "Entangle",
+        "ap": 2,
+        "hp": 4,
+        "enc": 1
+      }
+    ],
+    "ranged": []
+  },
+  "armor": [],
+  "equipment": [
+    "Store cryst.",
+    "5 L coin",
+    "Loot in saddlebags (400 L)",
+    "Robe and loincloth"
+  ],
+  "startingMoney": 5,
+  "cult": {
+    "name": "Waha Initiate",
+    "parent": "Man 85%"
+  },
+  "runeAffinities": {
+    "Death": 80,
+    "Air": 55
+  },
+  "hitPoints": {
+    "Head": {
+      "current": 4,
+      "max": 4
+    },
+    "Chest": {
+      "current": 6,
+      "max": 6
+    },
+    "Abdomen": {
+      "current": 5,
+      "max": 5
+    },
+    "Right Arm": {
+      "current": 3,
+      "max": 3
+    },
+    "Left Arm": {
+      "current": 3,
+      "max": 3
+    },
+    "Right Leg": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Leg": {
+      "current": 4,
+      "max": 4
+    }
+  },
+  "background": "Runes\nCousin Monkey\nElemental Affinities\nPower Affinities\n \n Death\n80\n \n Fertility\n0\n \n Movement\n0\n \n Stasis\n0\n \n Illusion\n0\n \nTruth\n0\n \n Disorder\n0\n85\n0\n \n Man\n \n Beast\n \n Harmony\n0\n0\n0\n0\n0\n0\n55\n \n Fire\n \n Water\n \n Earth\n \n Air\n \n Darkness\n \n Moon\nVishi Dunn\nMale, age 21. Assistant shaman of the Blue Llama Clan of \nthe High Llama Tribe in Prax. \nI am Vishi Dunn, known more in the Spirit World than this one. \nAs shaman of the Blue Llama clan, I ranged far and wide, seen \nmuch war and death. Some have called me Vishi Kinslayer, but \nthat name was born of loyalty, not betrayal.\nI believe that there is no greater chance for peace than Argrath’s \npromise. I saw Pavis liberated, and there I found friends in Vasana \nand her allies. Now I ride with them and offering counsel and \nwarnings from the Spirit World, if any will listen.\nPay no attention to Cousin Monkey, my lackey. He is a coward \nand says little of value. \nVishi Dunn is a Rider of the Blue Llama clan. He has the \nshaved head and queue of the High Llama Tribe, and is \nheavily tattooed. He wears a bright yak-wool robe with ornate \ndesigns upon it, and rough sandals, though he prefers to go \nbarefoot when possible. His skin is darkened through many \nyears in the sun.\nHis grandfather fought for the High King at Grizzly Peak \nand was killed by Lunar spirits, and his father was killed by \nthe Lunar Empire at the First Battle of Moonbroth.\nDuring his initiation, Vishi was almost killed by spirits. \nHe was apprenticed to a shaman, Sabera Spiritrider, who \ntaught him how to interact with the Spirit World. When he \nheard that the White Bull would try to summon the demigod \nJaldon Goldentooth, Vishi went to Jaldongrave to witness it. \nJaldon returned, and Vishi Dunn swore loyalty to the White \nBull. When one of his kinsmen opposed allying with Argrath, \nVishi killed him. Now he is called Kinslayer, a nickname he \ndoes not deny.\nVishi followed Argrath and Jaldon to liberate Pavis, and \nbefriended Vasana. He accompanied her back to Dragon Pass. \nHe is intensely loyal to Argrath, almost a zealot.\nHow to Play Vishi Dunn\n\t\n. You are a proud Praxian nomad of the desert plains. \nYou are very smart and are a good leader. But it is your \nmagical power than really shines.\n\t\n. Your strongest passion is your Loyalty (Argrath). Use it \nwhen appropriate to augment your skills.\n\t\n. You are not a good melee fighter and have no armor \nunless you cast your Shield spell.\n\t\n. Your Spirit Combat skill is extremely good. Use Detect \nSpirits and Spirit Screen liberally. Second Sight can let \nyou assess how powerful a spirit is. \n\t\n. Your ability to communicate with the local barbarians is \nlimited—speak slowly and loudly. \n\t\n. Your high Death Rune lets you ignore pleasure and pain. \nYour high Man Rune means you care about Praxian \ncustoms and society. \n\t\n. Cousin Monkey is wonderful fun. Play up his antics.",
+  "notes": [
+    "Blue Llama shaman and rider",
+    "Found allies after Pavis was",
+    "Carries plunder from Pavis",
+    "Works w/ spirits more than",
+    "Pole lasso is for capture &",
+    "Cousin Monkey is trusted"
+  ],
+  "mentalTraits": [
+    "Proud Praxian nomad",
+    "Detached under high Death",
+    "Society-minded under high"
+  ],
+  "wounds": [],
+  "reminders": [
+    "Rep. 9/Rans. 250 L",
+    "Robe + Shield only",
+    "Loyalty Argrath 80",
+    "2nd Sight & Spirit Screen",
+    "Cousin Monkey shines",
+    "Talk is rough w/ locals",
+    "Death & Man runes lead"
+  ],
+  "mounts": [
+    "High llama"
+  ],
+  "magicItems": [
+    "Store cryst. +14 MP"
+  ],
+  "otherMagic": [
+    {
+      "type": "Ally",
+      "detail": "Cousin Monkey"
+    }
+  ]
+}

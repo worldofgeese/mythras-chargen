@@ -1,0 +1,271 @@
+{
+  "name": "Dazarim Crescentblade",
+  "concept": "Praxian / Sable Rider Nomad bandit",
+  "characteristics": {
+    "STR": 10,
+    "CON": 9,
+    "SIZ": 13,
+    "DEX": 9,
+    "INT": 12,
+    "POW": 11,
+    "CHA": 11
+  },
+  "charMethod": "pregen",
+  "attributes": {
+    "actionPoints": 2,
+    "experienceModifier": 0,
+    "healingRate": 2,
+    "luckPoints": 2,
+    "magicPoints": 11,
+    "magicPointsMax": 11,
+    "initiativeBonus": 11,
+    "damageModifier": "+0",
+    "hitPoints": {
+      "Head": 5,
+      "Chest": 7,
+      "Abdomen": 6,
+      "Right Arm": 4,
+      "Left Arm": 4,
+      "Right Leg": 5,
+      "Left Leg": 5
+    },
+    "movementRate": 6,
+    "devotionPoints": 3,
+    "devotionPointsMax": 3,
+    "encumbrance": {
+      "unencumbered": 10,
+      "burdened": 20,
+      "overloaded": 30
+    }
+  },
+  "culture": "Praxian / Sable Rider",
+  "homeland": "Sable Rider tribe, Prax",
+  "age": 21,
+  "gender": "he/him",
+  "socialClass": "Nomad",
+  "physical": {
+    "hand": "Right",
+    "frame": "Average",
+    "height": "170",
+    "weight": "70"
+  },
+  "career": "Nomad bandit",
+  "standardSkills": {
+    "Athletics": 31,
+    "Boating": 19,
+    "Conceal": 20,
+    "Customs": 30,
+    "Dance": 20,
+    "Deceit": 23,
+    "Drive": 20,
+    "First Aid": 25,
+    "Influence": 30,
+    "Insight": 25,
+    "Locale": 35,
+    "Perception": 30,
+    "Ride": 60,
+    "Sing": 45,
+    "Stealth": 35,
+    "Swim": 19,
+    "Unarmed": 19,
+    "Brawn": 23,
+    "Endurance": 18,
+    "Evade": 44,
+    "Willpower": 22
+  },
+  "professionalSkills": {
+    "Commerce": 25,
+    "Craft (Animal Husb.)": 40,
+    "Craft (Butchery)": 30,
+    "Lore (Animals)": 24,
+    "Lore (Astronomy)": 40,
+    "Lore (Plants)": 24,
+    "Lore (Prax)": 35
+  },
+  "languages": {
+    "Praxian": 55,
+    "Firespeech": 25,
+    "Tradetalk": 25
+  },
+  "magicSkills": {
+    "Devot. (W. Bull)": 70,
+    "Devot. (Yelm.)": 70,
+    "Exhort": 30,
+    "Folk Magic": 55
+  },
+  "combatStyles": [
+    {
+      "name": "Sable Rider Nomad",
+      "skill": 85,
+      "weapons": [
+        "Kopis",
+        "Dagger",
+        "Javelin",
+        "Medium Shield"
+      ],
+      "traits": []
+    }
+  ],
+  "passions": [
+    "Devotion (White Bull): 70",
+    "Devotion (Yelmalio): 70",
+    "Hate (Chaos): 60",
+    "Hate (Lunar Empire): 60",
+    "Hate (Tusk Riders): 60",
+    "Love (family): 60",
+    "Loyalty (Sable Riders): 70"
+  ],
+  "folkMagicSpells": [
+    "Coordination 2",
+    "Detect Gold 1",
+    "Farsee 1",
+    "Repair 1"
+  ],
+  "miracles": [
+    "Catseye 1",
+    "Sunbright 2",
+    "Sureshot 1"
+  ],
+  "weapons": {
+    "melee": [
+      {
+        "name": "Kopis",
+        "damage": "1d8+1+1d4",
+        "size": "M",
+        "reach": "M",
+        "combatEffects": "Bleed",
+        "traits": "None",
+        "ap": 6,
+        "hp": 12,
+        "enc": 2
+      },
+      {
+        "name": "Dagger",
+        "damage": "1d4+2+1d4",
+        "size": "S",
+        "reach": "T",
+        "combatEffects": "Bleed",
+        "traits": "None",
+        "ap": 6,
+        "hp": 6,
+        "enc": 1
+      },
+      {
+        "name": "Javelin",
+        "damage": "1d6+1d4",
+        "size": "M",
+        "reach": "M",
+        "combatEffects": "Impale",
+        "traits": "Thrown",
+        "ap": 4,
+        "hp": 8,
+        "enc": 1
+      },
+      {
+        "name": "Medium Shield",
+        "damage": "1d4+1d4",
+        "size": "L",
+        "reach": "S",
+        "combatEffects": "Bash, Stun Location",
+        "traits": "Ranged Parry",
+        "ap": 6,
+        "hp": 12,
+        "enc": 2
+      }
+    ],
+    "ranged": []
+  },
+  "armor": [
+    {
+      "name": "Heavy Leather Cuirass",
+      "ap": 2,
+      "enc": 2
+    },
+    {
+      "name": "Leather Skirt",
+      "ap": 1,
+      "enc": 1
+    }
+  ],
+  "equipment": [
+    "58 L coin",
+    "Nomad kit"
+  ],
+  "startingMoney": 58,
+  "cult": {
+    "name": "Yelmalio Initiate",
+    "parent": "Truth 90%"
+  },
+  "runeAffinities": {
+    "Movement": 90,
+    "Fire": 70,
+    "Moon": 60,
+    "Truth": 90
+  },
+  "hitPoints": {
+    "Head": {
+      "current": 5,
+      "max": 5
+    },
+    "Chest": {
+      "current": 7,
+      "max": 7
+    },
+    "Abdomen": {
+      "current": 6,
+      "max": 6
+    },
+    "Right Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Leg": {
+      "current": 5,
+      "max": 5
+    },
+    "Left Leg": {
+      "current": 5,
+      "max": 5
+    }
+  },
+  "background": "Runes\nSable Antelope\nElemental Affinities\nPower Affinities\n \n Death\n0\n \n Fertility\n0\n \n Movement\n90\n \n Stasis\n0\n \n Illusion\n0\n \nTruth\n90\n \n Disorder\n0\n0\n0\n \n Man\n \n Beast\n \n Harmony\n0\nMale, age 21. Bandit of the Sable Rider Tribe in Prax.\nI am Dazarim of the Sable Riders of Prax, and I am proud to \nbe a descendant of the great bandit-king Patyan, a legend among \nmy people. Greatness is in my lineage. My mother was the bandit \nchieftain Loram, and she taught me more about riding and desert \nsurvival than you will ever learn. I am as at home atop my mount \nas I am the ground and can ride like the wind. \nI have ridden from one end of the Praxian wastelands to the \nother and I have seen and done many things. I was there when \nArgrath and his allies summoned Jaldon Goldentooth to acclaim \nhim as the White Bull, and I and my fellow bandits rode alongside \nhim against the Lunars at their New Temple. There, I fought \ndemons and was near overcome, but I also survived that. \nNow I ride throughout Dragon Pass to see what I can see, to \ndo what must be done. Stay clear of my sable, for its horns are as \nsharp as my sword. \nOne of the Animal Riders of Prax, Dazarim Crescentblade \nis a tall, lean desert nomad, rarely far from his mount, a \nbeautiful crescent-horned sable antelope. His lineage is a mix \nof respected and common, claiming descent from Patyan, a \nfamous Sable Rider bandit about whom folktales are told. His \nmother Loram was also a bandit and fought valiantly in both \ninvasions of Prax. She told Dazarim stories about seeing the \nLunars surrender to the Pap Priestesses, and the formation of \nthe White Bull Society. Enthralled, Dazarim grew up in her \nbandit band, fighting and raiding along his clanfolk. \nThe Praxian wasteland is a wide and varied place: Dazarim \nwas nearly slain by a band of Tusk Riders his raiders came \nacross, causing him to develop an intense hatred for them, \nbut he later met with a group of nomadic desert centaurs and \npledged friendship to their leader. \nHe was present when Jaldon Goldentooth was summoned, \nand, along with others of his bandit band, swore loyalty to \nArgrath himself. When Argrath fought alongside them at \nthe New Lunar Temple, Dazarim was nearly driven mad by \nLunar-summoned demons outside the New Lunar Temple. He \nhas since recovered but is wary of all Lunar sorcery.\nHow to Play Dazarim\n\t\n. You are a proud Praxian Nomad from the desert plains. \nYou are smart and a good leader. However, your ability to \ncommunicate with the local barbarians is limited.\n\t\n. You are very skilled with your kopis and are better at \nparrying with it than your shield. Unfortunately you have \npoor armor, so you are weak against missile weapons.\n\t\n. Your strongest Passions are your fanatical devotion and \nloyalty to the White Bull. Use this to augment skills when \nappropriate.\n\t\n. Your Rune magic helps you fight in the dark or \nunderground. This is good, because you must challenge \nall Darkness creatures on sight, to first blood or beyond.\n\t\n. Your high Truth Rune means you despise lies and \ndeception. You are a straight shooter and would rather say \nnothing than say something deceptive.\nDaZARIM \ncrescentblade\n0\n0\n60\n70\n0\n0\n \n Fire\n \n Water\n \n Earth\n \n Air\n \n Darkness\n \n Moon",
+  "notes": [
+    "Sable Rider nomad and bandit",
+    "Followed Argrath and Jaldon",
+    "Fought demons at New Lunar",
+    "Kopis is his primary weapon",
+    "58 L in raiding booty"
+  ],
+  "mentalTraits": [
+    "Blunt and humorless",
+    "Truth makes lies",
+    "Movement keeps him"
+  ],
+  "wounds": [],
+  "reminders": [
+    "Rep. 5/Rans. none",
+    "Truth & Movement lead",
+    "Poor armor versus missiles",
+    "Limited local speech",
+    "White Bull zeal drives him",
+    "Never ignore Darkness foes",
+    "Sunbright in dark fights"
+  ],
+  "mounts": [
+    "Sevara the sable antelope"
+  ],
+  "otherMagic": [
+    {
+      "type": "Gift",
+      "detail": "Half damage from fire"
+    },
+    {
+      "type": "Geas",
+      "detail": "Challenge Darkness"
+    }
+  ]
+}

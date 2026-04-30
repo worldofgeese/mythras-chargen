@@ -57,7 +57,9 @@
     "Locale": 10,
     "Perception": 15,
     "Stealth": 15,
-    "Swim": 10
+    "Swim": 10,
+    "Language (Balazaring)": 0,
+    "Tradetalk": 0
   },
   "careerSkills": {
     "Track": 15,

@@ -1,0 +1,250 @@
+{
+  "name": "Narres Runepainter",
+  "concept": "Esrolian / Necropolis Tattoo artist",
+  "characteristics": {
+    "STR": 8,
+    "CON": 10,
+    "SIZ": 12,
+    "DEX": 11,
+    "INT": 13,
+    "POW": 11,
+    "CHA": 10
+  },
+  "charMethod": "pregen",
+  "attributes": {
+    "actionPoints": 2,
+    "experienceModifier": 0,
+    "healingRate": 2,
+    "luckPoints": 2,
+    "magicPoints": 11,
+    "magicPointsMax": 23,
+    "initiativeBonus": 12,
+    "damageModifier": "-1d2",
+    "hitPoints": {
+      "Head": 5,
+      "Chest": 7,
+      "Abdomen": 6,
+      "Right Arm": 4,
+      "Left Arm": 4,
+      "Right Leg": 5,
+      "Left Leg": 5
+    },
+    "movementRate": 6,
+    "devotionPoints": 3,
+    "devotionPointsMax": 3,
+    "encumbrance": {
+      "unencumbered": 8,
+      "burdened": 16,
+      "overloaded": 24
+    }
+  },
+  "culture": "Esrolian / Necropolis",
+  "homeland": "Necropolis, Esrolia",
+  "age": 21,
+  "gender": "they/them",
+  "socialClass": "Commoner",
+  "physical": {
+    "hand": "Right",
+    "frame": "Lithe",
+    "height": "170",
+    "weight": "60"
+  },
+  "career": "Tattoo artist",
+  "standardSkills": {
+    "Athletics": 63,
+    "Boating": 18,
+    "Conceal": 22,
+    "Customs": 30,
+    "Dance": 21,
+    "Deceit": 70,
+    "Drive": 22,
+    "First Aid": 24,
+    "Influence": 60,
+    "Insight": 24,
+    "Locale": 26,
+    "Perception": 55,
+    "Ride": 22,
+    "Sing": 21,
+    "Stealth": 50,
+    "Swim": 18,
+    "Unarmed": 19,
+    "Brawn": 20,
+    "Endurance": 20,
+    "Evade": 82,
+    "Willpower": 22
+  },
+  "professionalSkills": {
+    "Commerce": 23,
+    "Craft (Farming)": 40,
+    "Craft (Tattooing)": 45,
+    "Lore (Esrolia)": 45,
+    "Lore (Eurmal)": 26,
+    "Disguise": 40,
+    "Sleight": 45
+  },
+  "languages": {
+    "Esrolian": 55,
+    "Heortling": 28,
+    "Tradetalk": 25
+  },
+  "magicSkills": {
+    "Devotion (Eurmal)": 60,
+    "Exhort": 50,
+    "Folk Magic": 45,
+    "Meditation": 23
+  },
+  "combatStyles": [
+    {
+      "name": "Runepainter",
+      "skill": 45,
+      "weapons": [
+        "Rapier",
+        "Small Shield",
+        "Throwing Axe"
+      ],
+      "traits": []
+    }
+  ],
+  "passions": [
+    "Fear (Dragons): 60",
+    "Hate (authority): 60",
+    "Hate (Lunar Empire): 60",
+    "Love (family): 70",
+    "Loyalty (Holy Country): 70",
+    "Loyalty (Necropolis): 60",
+    "Loyalty (Vulture Eagle Clan): 60"
+  ],
+  "folkMagicSpells": [
+    "Glamour 2",
+    "Shimmer 2",
+    "Silence 1"
+  ],
+  "miracles": [
+    "Become Other Sex 1",
+    "Illusory Sound 1+",
+    "Reflection 1+"
+  ],
+  "weapons": {
+    "melee": [
+      {
+        "name": "Rapier",
+        "damage": "1d6+2+1d4",
+        "size": "M",
+        "reach": "L",
+        "combatEffects": "Bleed, Impale",
+        "traits": "None",
+        "ap": 6,
+        "hp": 8,
+        "enc": 1
+      },
+      {
+        "name": "Small Shield",
+        "damage": "1d3+1d4",
+        "size": "M",
+        "reach": "S",
+        "combatEffects": "Bash, Stun Location",
+        "traits": "Ranged Parry",
+        "ap": 4,
+        "hp": 8,
+        "enc": 1
+      }
+    ],
+    "ranged": [
+      {
+        "name": "Throwing Axe",
+        "damage": "1d6+1d2",
+        "force": "M",
+        "damageModifier": "No",
+        "range": "8/16/32",
+        "combatEffects": "Bleed",
+        "loadTurns": 1,
+        "ap": 4,
+        "hp": 8,
+        "enc": 1
+      }
+    ]
+  },
+  "armor": [],
+  "equipment": [
+    "Tattooing kit",
+    "Lock picks and jimmy",
+    "12-point POW crystal",
+    "1830 L coin and booty"
+  ],
+  "startingMoney": 1830,
+  "cult": {
+    "name": "Eurmal",
+    "parent": "Movement 75%"
+  },
+  "runeAffinities": {
+    "Illusion": 50,
+    "Disorder": 25,
+    "Movement": 75,
+    "Harmony": 25
+  },
+  "hitPoints": {
+    "Head": {
+      "current": 5,
+      "max": 5
+    },
+    "Chest": {
+      "current": 7,
+      "max": 7
+    },
+    "Abdomen": {
+      "current": 6,
+      "max": 6
+    },
+    "Right Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Leg": {
+      "current": 5,
+      "max": 5
+    },
+    "Left Leg": {
+      "current": 5,
+      "max": 5
+    }
+  },
+  "background": "Runes\nTattoo Implements\nElemental Affinities\nPower Affinities\n \n Death\n0\n \n Fertility\n0\n \n Movement\n75\n \n Stasis\n0\n \n Illusion\n50\n \nTruth\n0\n \n Disorder\n0\n0\n0\n \n Man\n \n Beast\n \n Harmony\n25\nHuman, age 21. Tattoo artist of the Necropolis in Esrolia.\nI suspect that you have never met anyone like me. I am Narres \nRunepainter, an artist, and there is little else that I care \nto share now.  \nI make my living inscribing Runes and other symbols in ink \nupon bodies, those of the living and the dead. I learned this art in \nthe Necropolis, preparing the bodies of the deceased for their final \nrest. People say many things when they are being inscribed—living \nand dead alike—and reveal much that they should not. \nI have seen much since I left the Necropolis. I have ventured \nfar, and yet my wanderlust grows stronger every day. I have known \nmuch conflict, where I find many to draw my designs upon. \nNarres’ grandfather was a soldier of in Nochet, retiring at \na good age and passing his sword to his daughter, Vondyla, \nNarres’ mother. She put that sword to use against the Wolf \nPirates but grew weary of bloodshed.  \nWhen Narres was born, Vondyla gave her child to the \nNecropolis in Esrolia, where Narres tended to corpses and \nreadied them for interment. This was a good place to learn \nthe arts of tattooing, to anoint the dead in preparation for \ntheir afterlife. After leaving the Necroplis, Narres was caught \nup in the civil war in Esrolia, fighting the hated Red Earth \nsupporters. Narres survived the Siege of Nochet and fought in \nthe Battle of Pennel Ford, nearly slain there by Lunar magic. \nWhen the Dragon rose beneath the Temple of the Reaching \nMoon, Narres was there, but escaped the madness to which \nmany succumbed.\nAs an initiate of Eurmal the Trickster, Narres is drawn to \nthe god’s aspects as a Shapechanger, a being that must assume \ndifferent forms to survive. Narres enjoys challenging assump-\ntions and revealing the transitory nature of truth, anything that \nemphasizes the amorphous, transitory nature of reality itself.\nHow to Play Narres\n\t\n. You are a sacred Trickster, and mock the assumptions \nand pretensions of others, parody excessive seriousness, \nand deflate pomposity. You show what is wrong with the \nordinary way of doing things, and how to do ordinary \nthings the “wrong way.” \n\t\n. When you are identified as a Trickster, you may make fun \nof—and even be downright rude to—priests and tribal \nleaders without fear of sanction, at least wherever the \nOrlanth cult rules. Unfortunately, many others tend to \npunish you for your sacred duties!\n\t\n. You are a mediocre fighter, but have a great Dodge skill!\n\t\n. You have good Communication and Stealth skills.\n\t\n. You have many passions and loyalties that can drive you \nin different directions.\n\t\n. Your high Water Rune makes you mercurial and \nchangeable; your high Death Rune means you are \nseparated from the concerns of ordinary life.\nNArRES \nrunepainter\n0\n0\n0\n0\n0\n0\n \n Fire\n \n Water\n \n Earth\n \n Air\n \n Darkness\n \n Moon",
+  "notes": [
+    "Raised in Necropolis of",
+    "Tattooed the living & the dead",
+    "Caught up in Esrolian civil",
+    "Fought Red Earth supporters &",
+    "Escaped the Dragonrise madness",
+    "Eurmal initiate drawn to",
+    "Carries tattoo kit, picks,",
+    "430 L inheritance plus 1400 L"
+  ],
+  "mentalTraits": [
+    "Mercurial trickster",
+    "Deflates pretension",
+    "Necropolis outsider"
+  ],
+  "wounds": [],
+  "reminders": [
+    "Rep. 2/Rans. 250",
+    "Sacred trickster duties",
+    "Dodge 82 keeps you alive",
+    "Movement and Illusion lead",
+    "Don't trade blows long",
+    "Store cryst. adds 12 MP",
+    "Mock pomposity on sight"
+  ],
+  "magicItems": [
+    "12-point POW crystal"
+  ],
+  "otherMagic": [
+    {
+      "type": "Kit",
+      "detail": "Tattoo gear and picks"
+    }
+  ]
+}

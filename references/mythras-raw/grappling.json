@@ -1,0 +1,55 @@
+{
+  "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+  "extracted_at": "2026-04-30",
+  "page": "p.105-106",
+  "grappling": {
+    "initiation": {
+      "description": "Grappling attacks are resolved using an opposed roll of the attacker's Unarmed skill versus the combat skill used by the defender.",
+      "outcome_attacker_wins": "Grapple is established.",
+      "outcome_defender_wins": "Grapple fails.",
+      "special_effects": "If one combatant achieves one or more levels of success over the opponent, they may select an equal number of Special Effects (as with Evade).",
+      "requirements": "The grappling limb or appendage must be empty and capable of hooking, sticking, or gripping."
+    },
+    "effects_by_location": {
+      "limb": {
+        "effect": "Grappled limb is rendered inoperable while grappled.",
+        "examples": "Arm: cannot use whatever it's holding. Leg: cannot walk/run."
+      },
+      "head_or_torso": {
+        "effect": "Imposes a difficulty penalty of Hard against any skill the opponent attempts.",
+        "note": "This applies to ALL skills, not just combat."
+      }
+    },
+    "sustaining_damage": {
+      "description": "On following turns, the grappler may make unarmed attacks to inflict damage on the grappled body part.",
+      "damage": "Equal to the grappler's Damage Modifier only (crushing, twisting, strangulating). No weapon damage die.",
+      "defense": "The defender may oppose with their own Unarmed or Brawn skill to reduce or block the damage.",
+      "cost": "Costs an Action Point per attack."
+    },
+    "breaking_free": {
+      "action": "Struggle (combat action, costs 1 Action Point)",
+      "description": "Performed on the victim's turn.",
+      "roll": "Opposed roll: victim's Brawn OR Unarmed vs grappler's choice of Brawn OR Unarmed.",
+      "success": "Victim breaks free.",
+      "note": "Some attackers using Brawn may be so strong that no amount of brute force or cunning technique can overcome their grip."
+    }
+  },
+  "unarmed_combat_context": {
+    "page": "p.105-106",
+    "key_points": [
+      "Unarmed combat can be used interchangeably with any other weapon style if target is within reach",
+      "Must declare intent (striking or grappling) in advance — resolution differs",
+      "Unarmed combat can be used defensively to parry weapon attacks — damage reduced by comparative weapon Sizes",
+      "Stepping within reach of armed opponent reduces effective Size of opponent's weapon",
+      "Human unarmed attacks: Size Small, Reach Touch, Damage 1d3"
+    ],
+    "striking": {
+      "description": "Resolved same as normal weapon attacks.",
+      "specific_special_effects": ["Flurry", "Grip", "Take Weapon"]
+    },
+    "parrying_weapons_unarmed": {
+      "description": "Not simply blocking — uses subtle techniques: pressing against hand/hilt, stepping close to reduce angular momentum, deflecting thrusts, grabbing weapon on haft or near grip.",
+      "requirements": ["Intelligent enough to use techniques", "Within unarmed range (crucial — longer reach is dangerous)"]
+    }
+  }
+}

@@ -1,0 +1,240 @@
+{
+  "name": "Makarios, son o/",
+  "concept": "Sartarite / Colymar Temple healer",
+  "characteristics": {
+    "STR": 8,
+    "CON": 11,
+    "SIZ": 13,
+    "DEX": 11,
+    "INT": 12,
+    "POW": 10,
+    "CHA": 10
+  },
+  "charMethod": "pregen",
+  "attributes": {
+    "actionPoints": 2,
+    "experienceModifier": 0,
+    "healingRate": 2,
+    "luckPoints": 2,
+    "magicPoints": 10,
+    "magicPointsMax": 10,
+    "initiativeBonus": 12,
+    "damageModifier": "+0",
+    "hitPoints": {
+      "Head": 5,
+      "Chest": 7,
+      "Abdomen": 6,
+      "Right Arm": 4,
+      "Left Arm": 4,
+      "Right Leg": 5,
+      "Left Leg": 5
+    },
+    "movementRate": 6,
+    "devotionPoints": 3,
+    "devotionPointsMax": 3,
+    "encumbrance": {
+      "unencumbered": 8,
+      "burdened": 16,
+      "overloaded": 24
+    }
+  },
+  "culture": "Sartarite / Colymar",
+  "homeland": "Clearwine, Colymar",
+  "age": 21,
+  "gender": "he/him",
+  "socialClass": "Commoner",
+  "physical": {
+    "hand": "Right",
+    "frame": "Average",
+    "height": "175",
+    "weight": "68"
+  },
+  "career": "Temple healer",
+  "standardSkills": {
+    "Athletics": 47,
+    "Boating": 19,
+    "Conceal": 21,
+    "Customs": 30,
+    "Dance": 21,
+    "Deceit": 22,
+    "Drive": 21,
+    "First Aid": 85,
+    "Influence": 45,
+    "Insight": 60,
+    "Locale": 24,
+    "Perception": 40,
+    "Ride": 21,
+    "Sing": 45,
+    "Stealth": 23,
+    "Swim": 19,
+    "Unarmed": 19,
+    "Brawn": 21,
+    "Endurance": 22,
+    "Evade": 33,
+    "Willpower": 20
+  },
+  "professionalSkills": {
+    "Craft (Alchemy)": 23,
+    "Craft (Farming)": 35,
+    "Healing": 40,
+    "Literacy (Theyalan)": 35,
+    "Lore (Chalana Arroy)": 25,
+    "Lore (Plants)": 40,
+    "Lore (Sartar)": 35
+  },
+  "languages": {
+    "Heortling": 55,
+    "Esrolian": 28,
+    "Tradetalk": 22
+  },
+  "magicSkills": {
+    "Devot. (Chalana": 70,
+    "Exhort": 35,
+    "Folk Magic": 45,
+    "Meditation": 30
+  },
+  "combatStyles": [
+    {
+      "name": "Chalana Arroy",
+      "skill": 60,
+      "weapons": [
+        "Dagger",
+        "Sling"
+      ],
+      "traits": []
+    }
+  ],
+  "passions": [
+    "Devotion (Chalana Arroy): 70",
+    "Hate (Lunar Empire): 60",
+    "Hate (Trolls): 60",
+    "Honor: 60",
+    "Love (family): 80",
+    "Loyalty (Argrath): 60",
+    "Loyalty (Chalana Arroy Temple): 60"
+  ],
+  "folkMagicSpells": [
+    "Heal 2",
+    "Sleep 3"
+  ],
+  "miracles": [
+    "Harmony 1+",
+    "Heal Body 3",
+    "Resurrect 3"
+  ],
+  "weapons": {
+    "melee": [
+      {
+        "name": "Dagger",
+        "damage": "1d4+2+1d4",
+        "size": "S",
+        "reach": "T",
+        "combatEffects": "Bleed",
+        "traits": "None",
+        "ap": 6,
+        "hp": 6,
+        "enc": 1
+      }
+    ],
+    "ranged": [
+      {
+        "name": "Sling",
+        "damage": "1d8+1d2",
+        "force": "S",
+        "damageModifier": "No",
+        "range": "20/40/80",
+        "combatEffects": "Stun Location",
+        "loadTurns": 1,
+        "ap": 2,
+        "hp": 0,
+        "enc": 0
+      }
+    ]
+  },
+  "armor": [],
+  "equipment": [
+    "Healer's kit",
+    "Temple robes",
+    "620 L coin and booty"
+  ],
+  "startingMoney": 620,
+  "cult": {
+    "name": "Chalana Arroy",
+    "parent": "Fertility 85%"
+  },
+  "runeAffinities": {
+    "Harmony": 80,
+    "Earth": 40,
+    "Fertility": 85,
+    "Disorder": 80
+  },
+  "hitPoints": {
+    "Head": {
+      "current": 5,
+      "max": 5
+    },
+    "Chest": {
+      "current": 7,
+      "max": 7
+    },
+    "Abdomen": {
+      "current": 6,
+      "max": 6
+    },
+    "Right Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Leg": {
+      "current": 5,
+      "max": 5
+    },
+    "Left Leg": {
+      "current": 5,
+      "max": 5
+    }
+  },
+  "background": "Runes\nElemental Affinities\nPower Affinities\n \n Death\n0\n \n Fertility\n85\n \n Movement\n0\n \n Stasis\n0\n \n Illusion\n0\n \nTruth\n0\n \n Disorder\n80\n0\n0\n \n Man\n \n Beast\n \n Harmony\n0\n40\n0\n0\n0\n0\n0\n \n Fire\n \n Water\n \n Earth\n \n Air\n \n Darkness\n \n Moon\nMakarios, son of \ntharassa\nMale, age 21. Healer from Clearwine, member of Orlmarth \nClan of the Colymar Tribe.\nGreetings. You have nothing to fear from me. I am Makarios, son \nof Tharassa, a healer of Chalana Arroy. I have pledged my life to \nserving others as the goddess wishes. If you are injured, I will heal \nyou. If you seek counsel, I will tell you what I can. If you are in \nneed, I will give you what I have. \nI am from Clearwine, and I grew up within the hospital \ntemple of Chalana Arroy, orphaned in the Great Winter that \nclaimed my mother’s life. I spent much time learning herb-craft \nwith the priestesses of Ernalda, who shared their bounty with us \nat a time when others had nothing. \nThis beautiful creature upon my shoulders is Whisper. She \nfound me when I was dying, nearly slain by trolls, and sought those \nwho could rescue me. She is a bit shy, so do not feel offended if she \nis quiet to you. She warms to others eventually, as she did to me. \nMakarios’ grandmother was a scribe of Lankhor Mhy, \nspecializing in ancient texts relating to the healing arts. Though \nshe died before he was born, her presence loomed largely in \nhis household.\nHis mother joined the cult of Chalana Arroy and became \na High Healer. but froze to death in the first year of the Great \nWinter along with her husband, leaving Makarios an orphan \nand a ward of the Chalana Arroy temple. While herb-gathering, \nhe fell victim to a troll raid and was nearly slain. Dying in the \nsnow, he was found by an ‘awakened’ white serpent (possess-\ning human-level intelligence and spirit), which protected him \nand tended to him until he could be found. This remarkable \noccurrence gave him the favor of the Ernaldan temple, seeing \nthe serpent as a sign. Makarios named it ‘Whisper’ and keeps \nit with him always.\nMost recently, Makarios participated in the Liberation of \nPavis. As a result of his loyalty to Argrath, Makarios received \na considerable amount of wealth in the form of spoils of war, \na bounty he is unsure what to do with, given its origin.\nHow to Play Makarios\n\t\n. You are a pacifist, sworn to non-violence. Try to resolve \nevery obstacle without letting the others resort to violence. \nIn any case, you never willingly harm an intelligent \ncreatures or needlessly cause pain to a living thing.\n\t\n. Your strongest Passions are Love (family), Devotion (Chalana \nArroy), and Loyalty (Colymar Tribe). You tend to support \nother adventurers from that tribe.\n\t\n. You have powerful healing magic, including the incredible \nability to Resurrect the recently killed. Use it sparingly! \nYou do not have that many Rune points. \n\t\n. Harmony and Sleep are good non-violent ways to \novercome dangerous opponents without harming them.\n\t\n. Your high Fertility and Harmony Runes reinforce your \ndedication to Life and Peace. Your high Earth Rune makes \nyou very practical—except when it comes to violence.",
+  "notes": [
+    "Clearwine healer raised in",
+    "Mother died in Great Winter",
+    "Ernaldan priestesses helped",
+    "Whisper awakened serpent saved",
+    "Served in Liberation of Pavis",
+    "Troubled by origin of his war",
+    "Carries healer's kit & temple",
+    "20 L in coin, 100 L in"
+  ],
+  "mentalTraits": [
+    "Merciful and practical",
+    "Violence deeply resisted",
+    "Temple-raised orphan"
+  ],
+  "wounds": [],
+  "reminders": [
+    "Rep. 9/Rans. 500",
+    "Pacifist healer first",
+    "Never harm sentient life",
+    "Heal Body costs pool",
+    "Resurrect is emergency",
+    "Whisper warns, not fights",
+    "Fertility and Harmony lead"
+  ],
+  "magicItems": [
+    "Healer's kit"
+  ],
+  "otherMagic": [
+    {
+      "type": "Companion",
+      "detail": "Whisper the serpent"
+    },
+    {
+      "type": "Oath",
+      "detail": "Never harm sentient life"
+    }
+  ]
+}

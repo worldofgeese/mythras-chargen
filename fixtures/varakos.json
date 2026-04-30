@@ -1,0 +1,320 @@
+{
+  "name": "Varakos Wolfkiller",
+  "concept": "Sartarite / Colymar Heavy infantry",
+  "characteristics": {
+    "STR": 15,
+    "CON": 10,
+    "SIZ": 13,
+    "DEX": 9,
+    "INT": 10,
+    "POW": 9,
+    "CHA": 9
+  },
+  "charMethod": "pregen",
+  "attributes": {
+    "actionPoints": 2,
+    "experienceModifier": 0,
+    "healingRate": 2,
+    "luckPoints": 2,
+    "magicPoints": 9,
+    "magicPointsMax": 9,
+    "initiativeBonus": 10,
+    "damageModifier": "+1d2",
+    "hitPoints": {
+      "Head": 5,
+      "Chest": 7,
+      "Abdomen": 6,
+      "Right Arm": 4,
+      "Left Arm": 4,
+      "Right Leg": 5,
+      "Left Leg": 5
+    },
+    "movementRate": 6,
+    "devotionPoints": 3,
+    "devotionPointsMax": 3,
+    "encumbrance": {
+      "unencumbered": 15,
+      "burdened": 30,
+      "overloaded": 45
+    }
+  },
+  "culture": "Sartarite / Colymar",
+  "homeland": "Orlmarth clan, Colymar",
+  "age": 21,
+  "gender": "he/him",
+  "socialClass": "Commoner",
+  "physical": {
+    "hand": "Right",
+    "frame": "Muscular",
+    "height": "183",
+    "weight": "84"
+  },
+  "career": "Heavy infantry",
+  "standardSkills": {
+    "Athletics": 38,
+    "Boating": 25,
+    "Conceal": 18,
+    "Customs": 25,
+    "Dance": 18,
+    "Deceit": 19,
+    "Drive": 18,
+    "First Aid": 25,
+    "Influence": 55,
+    "Insight": 19,
+    "Locale": 20,
+    "Perception": 60,
+    "Ride": 18,
+    "Sing": 30,
+    "Stealth": 19,
+    "Swim": 25,
+    "Unarmed": 24,
+    "Brawn": 28,
+    "Endurance": 20,
+    "Evade": 37,
+    "Willpower": 18
+  },
+  "professionalSkills": {
+    "Craft (Animal Husb.)": 19,
+    "Craft (Farming)": 30,
+    "Lore (Humakt)": 30,
+    "Lore (Sartar)": 30,
+    "Lore (Strat/Tact)": 60
+  },
+  "languages": {
+    "Heortling": 50,
+    "Esrolian": 25,
+    "Tradetalk": 20
+  },
+  "magicSkills": {
+    "Devotion (Humakt)": 60,
+    "Exhort": 35,
+    "Folk Magic": 45,
+    "Meditation": 20
+  },
+  "combatStyles": [
+    {
+      "name": "Humakti Swordthane",
+      "skill": 90,
+      "weapons": [
+        "Broadsword",
+        "Shortsword",
+        "Dagger",
+        "Medium Shield",
+        "Recurve Bow"
+      ],
+      "traits": []
+    },
+    {
+      "name": "Orlmarth Archer",
+      "skill": 60,
+      "weapons": [
+        "Broadsword",
+        "Shortsword",
+        "Dagger",
+        "Medium Shield",
+        "Recurve Bow"
+      ],
+      "traits": []
+    }
+  ],
+  "passions": [
+    "Devotion (Humakt): 60",
+    "Fear (Dragons): 60",
+    "Hate (Lismelder Tribe): 60",
+    "Hate (Lunar Empire): 70",
+    "Hate (Wolf Pirates): 60",
+    "Honor: 70",
+    "Loyalty (Colymar Tribe): 60"
+  ],
+  "folkMagicSpells": [
+    "Bladesharp 2",
+    "Detect Enemies 1",
+    "Heal 1",
+    "Protection 1"
+  ],
+  "miracles": [
+    "Detect Truth 1",
+    "Shield 1+",
+    "Truesword 1"
+  ],
+  "weapons": {
+    "melee": [
+      {
+        "name": "Broadsword",
+        "damage": "1d8+2+1d6",
+        "size": "M",
+        "reach": "M",
+        "combatEffects": "Bleed, Impale",
+        "traits": "None",
+        "ap": 6,
+        "hp": 12,
+        "enc": 2
+      },
+      {
+        "name": "Shortsword",
+        "damage": "1d6+1+1d6",
+        "size": "S",
+        "reach": "S",
+        "combatEffects": "Bleed, Impale",
+        "traits": "None",
+        "ap": 6,
+        "hp": 12,
+        "enc": 1
+      },
+      {
+        "name": "Dagger",
+        "damage": "1d4+2+1d6",
+        "size": "S",
+        "reach": "T",
+        "combatEffects": "Bleed",
+        "traits": "None",
+        "ap": 6,
+        "hp": 6,
+        "enc": 1
+      },
+      {
+        "name": "Medium Shield",
+        "damage": "1d4+1d6",
+        "size": "L",
+        "reach": "S",
+        "combatEffects": "Bash, Stun Location",
+        "traits": "Ranged Parry",
+        "ap": 6,
+        "hp": 12,
+        "enc": 2
+      }
+    ],
+    "ranged": [
+      {
+        "name": "Recurve Bow",
+        "damage": "1d8+1",
+        "force": "H",
+        "damageModifier": "Yes",
+        "range": "15/125/250",
+        "combatEffects": "Impale S",
+        "loadTurns": 2,
+        "ap": 4,
+        "hp": 8,
+        "enc": 1
+      }
+    ]
+  },
+  "armor": [
+    {
+      "name": "Closed Helm",
+      "ap": 5,
+      "enc": 1
+    },
+    {
+      "name": "Plate Vambrace",
+      "ap": 6,
+      "enc": 1
+    },
+    {
+      "name": "Plate Vambrace",
+      "ap": 6,
+      "enc": 1
+    },
+    {
+      "name": "Heavy Scale Hauberk",
+      "ap": 5,
+      "enc": 4
+    },
+    {
+      "name": "Plate Greave",
+      "ap": 6,
+      "enc": 1
+    },
+    {
+      "name": "Plate Greave",
+      "ap": 6,
+      "enc": 1
+    }
+  ],
+  "equipment": [
+    "Death-rune broadsword",
+    "Strength 2 armband",
+    "150 L coin and booty"
+  ],
+  "startingMoney": 150,
+  "cult": {
+    "name": "Humakt",
+    "parent": "Death 90%"
+  },
+  "runeAffinities": {
+    "Truth": 75,
+    "Movement": 75,
+    "Death": 90
+  },
+  "hitPoints": {
+    "Head": {
+      "current": 5,
+      "max": 5
+    },
+    "Chest": {
+      "current": 7,
+      "max": 7
+    },
+    "Abdomen": {
+      "current": 6,
+      "max": 6
+    },
+    "Right Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Leg": {
+      "current": 5,
+      "max": 5
+    },
+    "Left Leg": {
+      "current": 5,
+      "max": 5
+    }
+  },
+  "background": "Runes\nWolf Pelt Cloak\nElemental Affinities\nPower Affinities\n \n Death\n90\n \n Fertility\n0\n \n Movement\n75\n \n Stasis\n0\n \n Illusion\n0\n \nTruth\n75\n \n Disorder\n0\n0\n0\n \n Man\n \n Beast\n \n Harmony\n0\nMale, age 21. Heavy infantry soldier of the Orlmarth clan \nof the Colymar Tribe.\nVarakos Wolfkiller they call me, and for good reason! The mighty \nbeast I fought nearly slew me—see these scars at my throat—but \nI prevailed and killed it instead, taking its fur to warm me. Per-\nhaps if it had won, it might have made a cloak out of my own \nrough skin. Ha! \nI am a Humakti. The Sword Lord has bid me to never love \nanother, though I am still a loyal friend and staunch battle-brother \nto all who would fight alongside me. \nWould that the whole miserable Lunar Empire had a single \nneck I could cut with my sword!\nGenerally, when people see Varakos coming, they move away.\nHis grandfather Tarakos was a simple farmer from the \nOrlmarth Clan in the Colymar Tribe, but he fought in the Holy \nCountry and the tales he told helped instill in his family the \ncontempt for the Lunar Empire. He died in a battle with the \nLismelder Tribe. Tarakos’s son Araskos—Varakos’ father—was \na soldier and embraced the worship of Humakt. Araskos fought \nin Starbrow’s Rebellion and was exiled by the Lunars for two \nyear, then died in the Great Winter. \nIn the second year of the Great Winter, Varakos went south \nto Esrolia, enlisting as a soldier. He fought gloriously in that time \nof civil unrest, earning renown at the Battle of Pennel Ford. He \npledged loyalty to Queen Samastina after defending her from \nLunar assassins. After that, he fell in with the Wolf Pirates in \nthe Sack of the City of Wonders, but they betrayed him and \nleft him for dead.\nVarakos returned to Sartar in time to witness the Dragon-\nrise, and took part in the Liberation of Sartar, witnessing Kallyr \nStarbrow take the throne as King. Now he seeks battle, to fight \nthe Lunar Empire, and to better himself that he might become \na weapon worthy of Humakt, his patron god.\nHow to Play Varakos\n\t\n. You are a killing machine with a sword in both hands, \nexcellent combat skills, good armor, and high damage. \n\t\n. Your strongest passions are your Honor and your Hate \nLunar Empire. Follow the Code of Honor—don’t kill \nunarmed people, accept surrender, and protect those \nwho have surrendered to you. You are also Loyal to \nthe Colymar Tribe and tend to support other player \ncharacters from that tribe. However, you cannot Love.\n\t\n. Cast Bladesharp 2 before fighting to get an edge in \ncombat. Truesword gives your sword damage a big boost \nand is only a 1-point Rune spell. Shield is useful if you \nneed to increase your armor points. \n\t\n. Your high Death Rune means you ignore pain and \npleasure, and live for Death. You do not fear it, and due \nto your cult’s view on death, you cannot be resurrected.\nVaraKos \nWolf-killer\n0\n0\n0\n0\n0\n0\n \n Fire\n \n Water\n \n Earth\n \n Air\n \n Darkness\n \n Moon",
+  "notes": [
+    "Orlmarth heavy infantryman &",
+    "Killed wolf that gave him his",
+    "Fought in Esrolia, Pennel",
+    "Defended Queen Samastina from",
+    "Betrayed by Wolf Pirates after",
+    "Humakt forbids Love passions &",
+    "Golden serpent armband stores",
+    "20 L in coin & 130 L in war"
+  ],
+  "mentalTraits": [
+    "Bleak sword devotee",
+    "Honor above comfort",
+    "People clear a path"
+  ],
+  "wounds": [
+    "Wolf scars at throat"
+  ],
+  "reminders": [
+    "Rep. 15/Rans. 500",
+    "Bladesharp before melee",
+    "Truesword ends fights",
+    "Humakt geas: no Love",
+    "Death and Truth lead",
+    "Armor ruins stealth",
+    "Hates Lunars and pirates"
+  ],
+  "magicItems": [
+    "Strength 2 matrix"
+  ],
+  "otherMagic": [
+    {
+      "type": "Gift",
+      "detail": "Recover MP twice as fast"
+    },
+    {
+      "type": "Geas",
+      "detail": "No Love passions"
+    }
+  ]
+}

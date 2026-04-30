@@ -56,7 +56,9 @@
     "Evade": 10,
     "Locale": 10,
     "Perception": 15,
-    "Stealth": 10
+    "Stealth": 10,
+    "Language (Telmori)": 0,
+    "Tradetalk": 0
   },
   "careerSkills": {
     "Craft (Trapping)": 10,
