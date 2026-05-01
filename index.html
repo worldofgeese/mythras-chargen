@@ -479,6 +479,15 @@ button.primary:hover { background: #333; }
   #play-combat .weapon-row:first-child { display: none; }
   #play-combat .weapon-row > div { margin: 4px 0; font-size: 13px; }
   #play-combat .weapon-row > div:first-child { font-weight: 600; font-size: 15px; margin-bottom: 8px; }
+  /* Fix: Bullet/line collision in Play Mode (Issue #3) */
+  #play-magic ul, #play-equipment ul { margin-top: 8px; }
+  #play-magic h3, #play-equipment h3, #play-passions h3 { margin-bottom: 8px; }
+  .combat-style-card { border: 1px solid #999; padding: 10px; margin: 8px 0; border-radius: 4px; background: #f5f5f5; }
+  .combat-style-card .style-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+  .combat-style-card .style-detail { font-size: 12px; color: #333; margin: 2px 0; }
+  .passion-row { display: grid; grid-template-columns: 2fr 60px; gap: 8px; margin: 4px 0; align-items: center; }
+  .passion-row .passion-name { font-size: 13px; }
+  .passion-row .passion-value { text-align: center; font-weight: 600; }
   .skill-row { grid-template-columns: 1fr; }
   .skill-row button { width: 100%; }
   .attributes-grid { grid-template-columns: 1fr; }
@@ -630,6 +639,9 @@ button.primary:hover { background: #333; }
 
         <h2>Rune Affinities <span class="page-ref">(Adventures in Glorantha p.24)</span></h2>
         <div id="play-runes"></div>
+
+        <h2>Passions <span class="page-ref">(Mythras p.30)</span></h2>
+        <div id="play-passions"></div>
 
         <h2>Magic <span class="page-ref">(Adventures in Glorantha p.178-220)</span></h2>
         <div id="play-magic"></div>
@@ -2509,6 +2521,20 @@ App.selectCulture = function(cultureName) {
       if (p.choice) return {name: '', value: 30, choice: p.choice, needsSubject: p.needsSubject !== undefined ? p.needsSubject : false};
       return {name: p.name, value: this.evaluateFormula(p.formula)};
     });
+    // Auto-apply first unrestricted combat style from culture (Issue #2)
+    CharacterData.combatStyles = [];
+    if (culture.combatStyles && culture.combatStyles.length > 0) {
+      const unrestricted = culture.combatStyles.filter(cs => !cs.restrictions);
+      const styleToApply = unrestricted.length > 0 ? unrestricted[0] : culture.combatStyles[0];
+      const baseSkill = (CharacterData.characteristics.STR || 0) + (CharacterData.characteristics.DEX || 0);
+      CharacterData.combatStyles.push({
+        name: styleToApply.name,
+        weapons: styleToApply.weapons || [],
+        traits: styleToApply.traits || [],
+        skill: baseSkill,
+        notes: styleToApply.notes || ''
+      });
+    }
     this.saveToLocalStorage();
     this.renderCurrentStep();
   }
@@ -4358,6 +4384,7 @@ App.renderPlayMode = function() {
   this.renderPlaySkills();
   this.renderPlayCombat();
   this.renderPlayRunes();
+  this.renderPlayPassions();
   this.renderPlayMagic();
   this.renderPlayEquipment();
   // Special effects reference is rendered lazily when opened (perf for headless Chrome)
@@ -4569,7 +4596,22 @@ App.renderSkillRow = function(skill) {
 
 App.renderPlayCombat = function() {
   const container = document.getElementById('play-combat');
+  // Render combat styles
+  const combatStyles = CharacterData.combatStyles || [];
+  let stylesHtml = '';
+  if (combatStyles.length > 0) {
+    stylesHtml = '<h3>Combat Styles</h3>' + combatStyles.map(cs => `
+      <div class="combat-style-card">
+        <div class="style-name">${cs.name} (${cs.skill || 0}%)</div>
+        <div class="style-detail"><strong>Weapons:</strong> ${(cs.weapons || []).join(', ')}</div>
+        <div class="style-detail"><strong>Traits:</strong> ${(cs.traits || []).join(', ')}</div>
+        ${cs.notes ? `<div class="style-detail"><em>${cs.notes}</em></div>` : ''}
+      </div>
+    `).join('');
+  }
   container.innerHTML = `
+    ${stylesHtml}
+    <h3>Weapons</h3>
     <div class="weapon-row">
       <div>Weapon</div>
       <div>Skill</div>
@@ -4618,6 +4660,21 @@ App.renderPlayRunes = function() {
       <div data-testid="rune-tertiary"><strong>Tertiary:</strong> ${CharacterData.runeAffinities.tertiary || 'None'} (${runeAff.tertiary || 0}%)</div>
     </div>
   `;
+};
+
+App.renderPlayPassions = function() {
+  const container = document.getElementById('play-passions');
+  if (!container) return;
+  const passions = CharacterData.passions || [];
+  if (passions.length === 0) {
+    container.innerHTML = '<p style="font-size: 13px; color: #666;">No passions assigned.</p>';
+    return;
+  }
+  container.innerHTML = passions.map(p => {
+    const name = p.name || (p.choice ? '(not yet chosen)' : 'Unknown');
+    const value = p.value || 30;
+    return `<div class="passion-row"><span class="passion-name">${name}</span><span class="passion-value">${value}%</span></div>`;
+  }).join('');
 };
 
 App.renderPlayMagic = function() {
@@ -4862,10 +4919,14 @@ App.exportSinglePagePDF = async function() {
     const combatStyles = CharacterData.combatStyles || [];
     if (combatStyles.length > 0) {
       combatStyles.slice(0, 4).forEach((style, i) => {
-        const styleText = `${style.name}: ${style.skill}%`;
+        const styleText = `${style.name}: ${style.skill || 0}%`;
         const traits = style.traits ? ` (${style.traits.join(', ')})` : '';
-        drawText(styleText + traits.substring(0, 50), leftMargin + 5, y, { size: 8, bold: true });
-        y -= 11;
+        drawText(styleText + traits, leftMargin + 5, y, { size: 8, bold: true });
+        y -= 10;
+        if (style.weapons && style.weapons.length > 0) {
+          drawText('Weapons: ' + style.weapons.join(', '), leftMargin + 10, y, { size: 7 });
+          y -= 10;
+        }
       });
       y -= 3;
     }
@@ -4941,6 +5002,26 @@ App.exportSinglePagePDF = async function() {
     }
 
     // =========================================================================
+    // PASSIONS
+    // =========================================================================
+    const passions = CharacterData.passions || [];
+    const namedPassions = passions.filter(p => p.name);
+    if (namedPassions.length > 0 && y > 60) {
+      drawText('PASSIONS', leftMargin, y, { bold: true, size: 9 });
+      y -= 12;
+      namedPassions.slice(0, 8).forEach((p, i) => {
+        const col = i % 3;
+        const row = Math.floor(i / 3);
+        const x = leftMargin + (col * (pageWidth / 3));
+        const yPos = y - (row * 10);
+        if (yPos > 40) {
+          drawText(`${p.name}: ${p.value || 30}%`, x, yPos, { size: 7 });
+        }
+      });
+      y -= Math.ceil(namedPassions.length / 3) * 10 + 8;
+    }
+
+    // =========================================================================
     // MAGIC
     // =========================================================================
     const allSpells = [...(CharacterData.folkMagicSpells || []), ...(CharacterData.careerFolkMagic || [])];
@@ -4948,16 +5029,17 @@ App.exportSinglePagePDF = async function() {
       drawText('FOLK MAGIC', leftMargin, y, { bold: true, size: 9 });
       y -= 12;
       const spellsToShow = allSpells.slice(0, 20);
+      const spellColCount = 3;
       spellsToShow.forEach((spell, i) => {
-        const col = i % 4;
-        const row = Math.floor(i / 4);
-        const x = leftMargin + (col * (pageWidth / 4));
+        const col = i % spellColCount;
+        const row = Math.floor(i / spellColCount);
+        const x = leftMargin + (col * (pageWidth / spellColCount));
         const yPos = y - (row * 9);
         if (yPos > 40) {
-          drawText(spell.substring(0, 18), x, yPos, { size: 7 });
+          drawText(spell.substring(0, 35), x, yPos, { size: 7 });
         }
       });
-      y -= Math.ceil(spellsToShow.length / 4) * 9 + 8;
+      y -= Math.ceil(spellsToShow.length / spellColCount) * 9 + 8;
     }
 
     // =========================================================================
@@ -4974,7 +5056,7 @@ App.exportSinglePagePDF = async function() {
         const yPos = y - (row * 9);
         if (yPos > 38) {
           const itemText = typeof item === 'string' ? item : item.name || '';
-          drawText(itemText.substring(0, 30), x, yPos, { size: 7 });
+          drawText(itemText.substring(0, 45), x, yPos, { size: 7 });
         }
       });
       y -= Math.ceil(equipment.length / 2) * 9 + 5;
