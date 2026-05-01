@@ -1,0 +1,45 @@
+{
+  "source": "Mythras Core Rulebook (3rd Printing, 2018)",
+  "extracted_at": "2026-05-01",
+  "page": "p.34-37",
+  "magic_overview": {
+    "description": "Mythras offers several types of magic. Whether characters begin with access depends on cultural background, starting career, and accessibility of magic in the setting.",
+    "types": [
+      {
+        "name": "Folk Magic",
+        "description": "Usually only learned by petty magicians or common folk in lands where magic is ubiquitous. Has minor effects upon the world but can be potent. Originates from and is connected to the natural world and emotions.",
+        "skills": ["Folk Magic"],
+        "availability": "Most accessible — common in all culture types"
+      },
+      {
+        "name": "Animism",
+        "description": "Animists derive magic from summoning and controlling spirits and supernatural creatures. Spirits are negotiated with or enslaved, forming agreements or being bound into fetishes. Animist must follow strict taboos or binding contracts.",
+        "skills": ["Trance", "Binding"],
+        "availability": "Primitive and Nomadic cultures primarily; Barbarian occasionally"
+      },
+      {
+        "name": "Mysticism",
+        "description": "Mystics draw magic from self mastery and understanding. Their insight into the inner self allows incredible acts of mental and physical excellence. Magic does not extend beyond themselves but they become a tool to manipulate the world.",
+        "skills": ["Mysticism", "Meditation"],
+        "availability": "Varies by setting"
+      },
+      {
+        "name": "Sorcery",
+        "description": "Sorcerers twist the laws of the world using invocation of powerful spells. Exceptionally flexible but can be unbound or dismissed by other magics. Independence from supernatural beings means self-reliance.",
+        "skills": ["Invocation", "Shaping"],
+        "availability": "Civilised cultures primarily; career-dependent"
+      },
+      {
+        "name": "Theism",
+        "description": "Theists are rewarded with power from the gods in exchange for loyalty and service. Their miracles channel divine power and can be devastating. Requires continual dedication and sacrifices.",
+        "skills": ["Devotion", "Exhort"],
+        "availability": "All culture types via cult membership"
+      }
+    ],
+    "cult_membership": {
+      "description": "Optional stage. Many cultures initiate young adults into a cult or social organisation as a rite of passage. Cults offer training, magic, and social/professional networks.",
+      "starting_rank": "No higher than Common Member at character creation",
+      "reference": "Cults and Brotherhoods chapter, p.192"
+    }
+  }
+}

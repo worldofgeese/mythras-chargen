@@ -1,0 +1,59 @@
+{
+  "source": "Mythras Core Rulebook (3rd Printing, 2018)",
+  "extracted_at": "2026-05-01",
+  "page": "p.33-34",
+  "equipment_starting": {
+    "description": "Starting equipment determined by culture and social class. Starting money multiplied by social class Money Modifier.",
+    "starting_money": {
+      "barbarian": "4d6 × 50 silver pieces",
+      "civilised": "4d6 × 75 silver pieces",
+      "nomadic": "4d6 × 25 silver pieces",
+      "primitive": "4d6 × 10 silver pieces"
+    },
+    "money_modifier_note": "Multiply starting money by the Money Modifier from social class. Additional money from modifier may be goods/chattels rather than coin at GM discretion.",
+    "equipment_by_class": [
+      {
+        "class": "Exile",
+        "clothing": "One set of ragged, probably dirty clothes",
+        "weapons": "One well used weapon of provenance suitable to origin",
+        "armour": "Roll 1d6-3. If > 0, outworn armour worth that many AP covering 1d3 locations. Otherwise none.",
+        "transport": "None"
+      },
+      {
+        "class": "Slave",
+        "clothing": "One or two sets of clothes suitable for position and work",
+        "weapons": "None",
+        "armour": "None",
+        "transport": "None"
+      },
+      {
+        "class": "Freeman",
+        "clothing": "Two sets of common, undecorated clothes suitable to occupation",
+        "weapons": "1d2 simple weapons suited to culture (axes, clubs, knives, spears, slings)",
+        "armour": "Roll 1d3. Represents AP for armour covering 1d6 locations.",
+        "transport": "Own back, Raft, Handcart or Beast of Burden"
+      },
+      {
+        "class": "Gentry",
+        "clothing": "1d6+1 sets of good quality clothing with modest decoration",
+        "weapons": "1d3+1 weapons of higher status/quality (swords, maces, shields, bows, great weapons)",
+        "armour": "Full set of protection worth 1d2+2 AP",
+        "transport": "Hired or Slave Porter, Boat, Wagon or Riding Mount"
+      },
+      {
+        "class": "Aristocracy",
+        "clothing": "1d6+3 sets of expensive clothing with lots of decoration",
+        "weapons": "1d3+3 weapons of expensive quality, decorated with precious substances",
+        "armour": "Full set of protection worth 1d2+3 AP",
+        "transport": "Palanquin, Ship, Chariot or Several Fine Mounts"
+      },
+      {
+        "class": "Ruling",
+        "clothing": "1d6+6 sets of rare, priceless materials, as opulent as good taste allows",
+        "weapons": "1d3+6 weapons of exquisite craftsmanship, priceless due to heredity or materials",
+        "armour": "Full set of protection worth 1d2+4 AP",
+        "transport": "Expensive Palanquin with matched Bearers, Warship, Exquisite Carriage or Several Magnificent Mounts"
+      }
+    ]
+  }
+}

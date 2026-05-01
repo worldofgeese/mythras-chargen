@@ -1,0 +1,57 @@
+{
+  "source": "Mythras Core Rulebook (3rd Printing, 2018)",
+  "extracted_at": "2026-05-01",
+  "page": "p.23-27",
+  "passions": {
+    "description": "Passions represent loyalties and allegiances, strongly held beliefs or ideals, and emotions felt towards someone or something. They are measured like skills (1-100+) with a starting value based on characteristics.",
+    "optional_rule": true,
+    "verbs": ["Comfort", "Desire", "Despise", "Destroy", "Espouse", "Fear", "Flee", "Foreswear", "Hate", "Love", "Loyalty to", "Protect", "Repudiate", "Respect", "Seek", "Subvert", "Torment", "Uphold"],
+    "starting_values": [
+      {
+        "object": "A person, in a romantic or familial context",
+        "examples": "Lover, Sibling, Wife, Parent, Aloof or Unsuspecting Object of Desire",
+        "formula": "30 + loved one's POW + loved one's CHA"
+      },
+      {
+        "object": "A person in a platonic context (a friendship or loyalty)",
+        "examples": "Leader, Teacher, Ruler, Master, Rescuer, Priest, Enemy",
+        "formula": "30 + character's POW + subject's CHA"
+      },
+      {
+        "object": "A person in an averse context",
+        "examples": "Enemy leader, Rival worker, Husband of Desired Lover, Murderer of Friend, Thief",
+        "formula": "30 + character's POW + subject's CHA"
+      },
+      {
+        "object": "An organisation or group of people",
+        "examples": "Family, School, Temple, Religion, Local Community, Military Unit, Guild, Nobles",
+        "formula": "30 + character's POW + character's INT"
+      },
+      {
+        "object": "A race or species",
+        "examples": "Foreigners, Non Humans, Tigers, Supernatural Beasts, Ghosts, Primitives",
+        "formula": "30 + character's POW × 2"
+      },
+      {
+        "object": "A place",
+        "examples": "A Country, Home Town, Holy Place, Capital City, Graveyards, Mountains",
+        "formula": "30 + character's POW + character's INT"
+      },
+      {
+        "object": "An object or substance",
+        "examples": "The Iron Throne, Diabolic Relic, Magic, Darkness, Ancient Heirloom, Gemstones",
+        "formula": "30 + character's POW × 2"
+      },
+      {
+        "object": "A concept or ideal",
+        "examples": "An Ethic, Moral Code, Freedom, Personal Honour, Betrayal, Dishonesty",
+        "formula": "30 + character's POW + character's INT"
+      }
+    ],
+    "gm_modification": "All Starting Percentages may be modified by the Games Master to reflect deeper or lesser devotion.",
+    "reciprocation": "Where a person is concerned, the Passion does not need to be reciprocated. Unreciprocated love can strengthen or weaken by 1d10%.",
+    "establishment": "A Passion can be established at any point — during character creation or during play. State the intent and give it an appropriate adjective.",
+    "improvement": "Passions can be improved like skills, or increased/decreased by the GM depending on circumstances.",
+    "usage_reference": "Chapter 6 details how Passions are used in play."
+  }
+}

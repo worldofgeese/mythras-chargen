@@ -1,0 +1,76 @@
+{
+  "source": "Mythras Core Rulebook (3rd Printing, 2018)",
+  "extracted_at": "2026-05-01",
+  "page": "p.22-23",
+  "community": {
+    "family": {
+      "parents": {
+        "roll": "1d100",
+        "table": [
+          {"range": "01-20", "result": "Both Parents living"},
+          {"range": "21-40", "result": "Single Parent – Father"},
+          {"range": "41-60", "result": "One birth parent plus step-parent"},
+          {"range": "61-80", "result": "Single Parent – Mother"},
+          {"range": "81-00", "result": "Both parents dead"}
+        ]
+      },
+      "siblings": {
+        "roll": "1d100",
+        "table": [
+          {"range": "01-10", "result": "None"},
+          {"range": "11-30", "result": "1d4"},
+          {"range": "31-70", "result": "1d6"},
+          {"range": "71-90", "result": "1d8"},
+          {"range": "91-00", "result": "1d10"}
+        ]
+      },
+      "extended_family": {
+        "roll": "1d100",
+        "columns": ["Grandparents", "Aunts & Uncles", "Cousins"],
+        "table": [
+          {"range": "01-10", "grandparents": "None", "aunts_uncles": "None", "cousins": "None"},
+          {"range": "11-30", "grandparents": "1d2-1", "aunts_uncles": "1d2", "cousins": "1d3"},
+          {"range": "31-70", "grandparents": "1d3-1", "aunts_uncles": "1d3", "cousins": "1d4"},
+          {"range": "71-90", "grandparents": "1d3", "aunts_uncles": "1d4", "cousins": "1d6"},
+          {"range": "91-00", "grandparents": "1d3+1", "aunts_uncles": "1d6", "cousins": "1d8"}
+        ]
+      }
+    },
+    "connections": {
+      "roll": "1d100",
+      "table": [
+        {"range": "01-20", "connections": "No connections of note", "allies_contacts_enemies_rivals": "None"},
+        {"range": "21-80", "connections": "Family enjoys reasonable connections within its community", "allies_contacts_enemies_rivals": "Roll 1d4. On a 1 you gain an Ally; 2 a Contact; 3 an Enemy; 4 a Rival"},
+        {"range": "81-90", "connections": "Family is well connected in the community and is known to those commanding local power", "allies_contacts_enemies_rivals": "As above but roll twice"},
+        {"range": "91-95", "connections": "As above, but the family also enjoys some status with those commanding regional power", "allies_contacts_enemies_rivals": "As above but roll thrice"},
+        {"range": "96-00", "connections": "As above but the family also enjoys some status with those commanding national power", "allies_contacts_enemies_rivals": "As above but roll four times"}
+      ]
+    },
+    "reputation": {
+      "roll": "1d100",
+      "table": [
+        {"range": "01-15", "reputation": "Family has a poor reputation", "result": "1d3 Enemies or Rivals"},
+        {"range": "16-35", "reputation": "Family's reputation is sound, but there may be a few skeletons and secrets better left locked away", "result": "1 Enemy or Rival"},
+        {"range": "36-65", "reputation": "A sound family reputation", "result": "-"},
+        {"range": "66-85", "reputation": "Family enjoys a good reputation although there may be those either inside or outside the family who could tarnish it", "result": "1 Contact or Ally"},
+        {"range": "86-00", "reputation": "Family's reputation is untarnished and of excellent standing", "result": "1d3 Contacts or Allies"}
+      ]
+    },
+    "allies_contacts_rivals_enemies": {
+      "ally": "A friend, colleague or relation who shares the same cause and will offer help and guidance when called upon.",
+      "contact": "People of potential influence the character knows. An acquaintance who can help, not one who will.",
+      "rival": "Those who oppose the character for the same or similar goals, and will attempt to interfere with or harass him.",
+      "enemy": "Someone who wishes the character harm, and will go to lengths to ensure the character suffers."
+    },
+    "personal_connections": {
+      "description": "Characters adventuring together can form personal connections explaining why they are together.",
+      "group_luck_points": "Starts at 2, increases by 1 per character who has formed a personal connection within the group. Can only be drawn upon when actively helping another character."
+    },
+    "marriage": {
+      "roll": "1d100 vs base Influence skill",
+      "betrothed": "Roll ≤ base Influence",
+      "married": "Roll ≤ 10% of base Influence",
+      "children": "1d4-1 children, ages 1d4 each. Identical age rolls = twins/triplets."
+    }
+  }
+}

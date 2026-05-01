@@ -1,0 +1,43 @@
+{
+  "source": "Mythras Core Rulebook (3rd Printing, 2018)",
+  "extracted_at": "2026-05-01",
+  "page": "p.14-18",
+  "cultures": {
+    "description": "Four basic human cultures. Each provides Standard Skills, Professional Skills (pick 3), optional Combat Style, 100 culture points (min 5/max 15 per skill), and cultural Passions. Customs and Native Tongue get +40% regardless of culture.",
+    "skill_points": {
+      "total": 100,
+      "minimum_per_skill": 5,
+      "maximum_per_skill": 15,
+      "customs_bonus": 40,
+      "native_tongue_bonus": 40
+    },
+    "barbarian": {
+      "type": "Barbarian",
+      "standard_skills": ["Athletics", "Brawn", "Endurance", "First Aid", "Locale", "Perception", {"choice": ["Boating", "Ride"]}],
+      "professional_skills": ["Craft (any)", "Healing", "Lore (any)", "Musicianship", "Navigate", "Seamanship", "Survival", "Track"],
+      "combat_style_examples": ["Barbarian Fyrdman", "Berserker", "Horse Eater", "Seaborne Reiver", "Weapon Thegn", "Wolf Hunter"],
+      "passions": ["Loyalty to Clan Chieftain", "Love (friend, sibling or romantic lover)", "Hate (creature, rival or clan)"]
+    },
+    "civilised": {
+      "type": "Civilised",
+      "standard_skills": ["Conceal", "Deceit", "Drive", "Influence", "Insight", "Locale", "Willpower"],
+      "professional_skills": ["Art (any)", "Commerce", "Craft (any)", "Courtesy", "Language (any)", "Lore (any)", "Musicianship", "Streetwise"],
+      "combat_style_examples": ["Citizen Legionary", "City-state Phalangite", "Levied Archer", "Light Skirmisher", "Street Thug", "Town Militia"],
+      "passions": ["Loyalty to Town/City", "Love (friend, sibling or romantic lover)", "Hate (rival, gang, district or city)"]
+    },
+    "nomadic": {
+      "type": "Nomad",
+      "standard_skills": ["Endurance", "First Aid", "Locale", "Perception", "Stealth", {"choice": ["Athletics", "Boating", "Swim", "Drive", "Ride"], "pick": 2}],
+      "professional_skills": ["Craft (any)", "Culture (any)", "Language (any)", "Lore (any)", "Musicianship", "Navigate", "Survival", "Track"],
+      "combat_style_examples": ["Camel Cavalry", "Feathered Death Flinger", "Horse Lord", "Whale Hunter", "Wheeled Warrior", "Wolf Runner"],
+      "passions": ["Loyalty to Tribal Chieftain/Khan", "Love (friend, sibling or romantic lover)", "Hate (creature, rival or tribe)"]
+    },
+    "primitive": {
+      "type": "Primitive",
+      "standard_skills": ["Brawn", "Endurance", "Evade", "Locale", "Perception", "Stealth", {"choice": ["Athletics", "Boating", "Swim"]}],
+      "professional_skills": ["Craft (any)", "Healing", "Lore (any)", "Musicianship", "Navigate", "Survival", "Track"],
+      "combat_style_examples": ["Flint Death Dealer", "Ghost Warrior", "Head Hunter", "Jaguar Brother", "Jungle Savage", "Savannah Hunter"],
+      "passions": ["Loyalty to Chief/Headman", "Love (friend, sibling or romantic lover)", "Hate (something that scares or intimidates you)"]
+    }
+  }
+}
