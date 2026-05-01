@@ -24,6 +24,10 @@ Single-file HTML character generator for the Mythras RPG with optional Glorantha
 - **PDF export**: Two paths available via pdf-lib:
   - **Simple**: Single-page PDF created from scratch (quick export)
   - **Template**: Fills form fields in `templates/mythras-sheet.pdf` (required for Phase 2 pregens)
+- **Passion model**: Every passion has a specific object in parentheses — e.g. "Hate (Chaos)", never bare "Hate". Choice passions use `{"choice":[...], "needsSubject": true}` with a datalist of culture-appropriate suggestions. Starting value: POW+CHA+30 (stored as `formula` field).
+- **Combat style model**: Cultures define named combat styles with weapons, traits, and optional restrictions. Auto-applied on culture selection (dropdown if multiple unrestricted). Career combat style placeholders like "Combat Style (Cultural Style)" resolve to the actual cultural style.
+- **Career filtering**: Careers filtered by culture type (Primitive/Barbarian/Nomad/Civilised + "all").
+- **Starting money**: Dice formula strings (e.g. "4d6×2 Lunars") are parsed and rolled, not displayed as raw text.
 
 ## Source Rules (read AGENTS.md for full details)
 
@@ -51,6 +55,9 @@ When adding or modifying game data:
 - 1 hobby professional skill in bonus points
 - Initiative Bonus rounds DOWN (Math.floor)
 - Native Tongue and Language = INT + CHA (Mythras Core p.12)
+- Passions always need a specific object — see AGENTS.md Active Rules
+- Combat styles auto-apply from culture; careers resolve placeholder styles
+- Careers filter by culture type
 - Both trademark statements must remain in the footer
 
 ## Licensing Status

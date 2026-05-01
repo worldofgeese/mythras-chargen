@@ -34,6 +34,13 @@ Every data field traces back to a source PDF through a reference JSON:
 | armour.json | p.57-58 | Armour stats |
 | encumbrance.json | p.69-71 | Encumbrance rules |
 | careers-by-culture.json | p.28 | Careers per culture type |
+| social-class.json | p.31 | Social class table |
+| passions.json | p.23-27 | Passion types, values, intensity |
+| background-events.json | p.18-22 | Background events tables |
+| community.json | p.22-23 | Family/allies/contacts generation |
+| equipment-starting.json | p.33-34 | Starting equipment by culture type |
+| cultures.json | p.14-18 | Generic culture templates |
+| magic-overview.json | p.34-37 | Magic types and chargen allocation |
 
 ### AiG (references/aig-raw/)
 | File | Source Pages | Contents |
@@ -70,6 +77,11 @@ Culture-to-cult mapping: `references/culture-cult-map.json`
 - Initiative Bonus: Math.floor((DEX+INT)/2) — rounds down
 - Folk magic list curated for Glorantha (62 spells)
 - Rune affinities: 3 elemental runes at POW×2 + 30/20/10%
+- **Passions always have a specific object** — "Hate (Chaos)" not "Hate". All passion types: Loyalty, Love, Hate, Fear, Desire, Devotion, Despise. Starting value: POW+CHA+30 unless culture specifies otherwise (e.g. Esrolian Loyalty to Grandmother at POW+CHA+50).
+- **Combat styles auto-apply from culture** — the first unrestricted style is granted at STR+DEX. When multiple unrestricted styles exist, player chooses via dropdown.
+- **Careers filter by culture type** — Primitive cultures see Primitive + "all" careers only. Civilised see Civilised + "all". Etc.
+- **Career combat style placeholders resolve** — "Combat Style (Cultural Style)" maps to the character's actual cultural combat style.
+- **Starting money is rolled** — "4d6×2 Lunars" is parsed and evaluated, not displayed as a string.
 
 ## Trademark Compliance
 Both statements are in the HTML footer:
@@ -77,7 +89,7 @@ Both statements are in the HTML footer:
 - Chaosium Fan Policy: Full statement with www.chaosium.com link
 
 ## Key File
-- `aig-character-sheet.html` — single self-contained file (HTML + CSS + JS)
+- `index.html` — single self-contained file (HTML + CSS + JS)
 
 ## Playwright Testing
 The HTML is fully testable with playwright-cli. Mode switching uses CSS `display:none` (no offscreen positioning tricks that break automation).
@@ -100,6 +112,7 @@ playwright-cli screenshot --filename=play-mode.png
 |----------|---------|--------|
 | SKILLS_DATA | 75 | Mythras Core p.12, p.45-54 |
 | CULTURES_DATA | 8 cultures, 44 combat styles | AiG p.26-41 |
+| SOCIAL_CLASS_TABLE | Social classes | Mythras Core p.31 |
 | WEAPONS_DATA | 284 weapons | Mythras Core p.74-106 |
 | AGE_TABLE | 5 rows | Mythras Core p.32-33 |
 | FOLK_MAGIC_SPELLS | 62 spells | Mythras Core p.122-130 + AiG |
