@@ -1,0 +1,50 @@
+{
+  "source": "RuneQuest Starter Set Book 2: The World of Glorantha (2021)",
+  "extracted_at": "2026-04-10",
+  "page": "p.23-31, 43-58",
+  "jonstown_overview": {
+    "role_in_starter_set": {
+      "summary": "Jonstown and the surrounding area are the setting for the RuneQuest Starter Set, giving adventurers a base of operations and a ready source of adventures.",
+      "page": "p.2"
+    },
+    "city_identity": {
+      "summary": "Jonstown is a city in northern Sartar, notable for its temples, scribal culture, markets, and strategic position near tribal lands and trade routes.",
+      "page": "p.23-27"
+    },
+    "citizenship": {
+      "summary": "Citizenship resembles clan membership, bringing prestige, political voice, legal rights, and access to food allotments, but it must be requested and maintained.",
+      "page": "p.31"
+    },
+    "government": {
+      "city_ring": "Jonstown is governed by a thirteen-member City Ring appointed by tribal kings and high priests.",
+      "city_rex": "The City Rex leads the city, oversees militia and scribes, and is nominated by the Prince and acclaimed by the citizens.",
+      "page": "p.31"
+    },
+    "military": {
+      "city_guard": "Permanent force of about 50 trained mercenaries, with about 40 part-time deputies available.",
+      "militia": "The city can quickly muster about 500 able-bodied fighters, and within days about 2,500 more from local tribes.",
+      "page": "p.31"
+    },
+    "economy": {
+      "guilds": "Guilds regulate trades, prices, and membership, and operate as independent legal bodies under Orlanthi law.",
+      "free_sages": "The initiates and priests of Lhankor Mhy form the Free Sages, a powerful scribal and scholarly body central to city administration and commerce.",
+      "page": "p.32"
+    },
+    "quarters": [
+      {"name": "Upper City", "detail": "Public temples, government buildings, and wealthy residences.", "page": "p.43-46"},
+      {"name": "Scholar's Quarter", "detail": "Dominated by the Jonstown Library, scribes, and related commerce.", "page": "p.47-49"},
+      {"name": "Merchant's Quarter", "detail": "Markets, inns, merchant houses, and commercial guild activity.", "page": "p.50-51"},
+      {"name": "Crafter's Quarter", "detail": "Workshops, craft guilds, and ordinary city life.", "page": "p.51-52"}
+    ],
+    "daily_life": {
+      "housing": "Buildings are generally one or two stories, with forms varying by wealth from crowded rooms shared with animals to frescoed multi-room residences.",
+      "food": "Grain, meat, and fish are the major food sources, with city-managed storage and distribution helping stabilize supply.",
+      "cost_of_living": "Standards range from destitute to noble, with suggested seasonal costs in Lunars.",
+      "page": "p.29-30"
+    },
+    "outside_jonstown": {
+      "summary": "The surrounding region includes tribal settlements, sacred sites, inns, ruins, and adventure locations such as Apple Lane, Dangerford, and the Rainbow Mounds.",
+      "page": "p.57-61"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "source": "RuneQuest Starter Set Book 2: The World of Glorantha (2021)",
+  "extracted_at": "2026-04-10",
+  "page": "p.57-61",
+  "outside_jonstown": {
+    "overview": {
+      "summary": "The map of the Jonstown area depicts nearby villages, sacred sites, inns, ruins, trade routes, and adventure locations. Some are further detailed in other Starter Set materials, but Book 2 identifies them for use around Jonstown.",
+      "page": "p.57"
+    },
+    "locations": [
+      {"name": "Apple Lane", "detail": "Overdeveloped but quiet roadside hamlet intended as a travel stop.", "page": "p.57"},
+      {"name": "Birne's Squeeze", "detail": "Narrow ravine notorious for robbery.", "page": "p.57"},
+      {"name": "Chaos Ground", "detail": "Tainted place created by the Crimson Bat's bleeding in 1602, now a power site for Chaos.", "page": "p.57"},
+      {"name": "Dangerford", "detail": "Important trade village on the road between Alda-Chur and Boldhome.", "page": "p.57"},
+      {"name": "Dangerford Fort", "detail": "Strategic crossing fort over The Creek and site of many battles.", "page": "p.57"},
+      {"name": "Dragonewt Road", "detail": "Magic road marked by carved plinths and used by dragonewts to move through the Middle World in uncanny ways.", "page": "p.57"},
+      {"name": "Drum Top", "detail": "Hill associated with the giant Lant Ulfar and special drumming magic.", "page": "p.58"},
+      {"name": "Dwarf Cliff", "detail": "Sheer cliff said to hide a sealed dwarf colony.", "page": "p.58"},
+      {"name": "Geo's Ridge Inn", "detail": "High mountain inn cut into solid rock.", "page": "p.58"},
+      {"name": "Geo's River Inn", "detail": "Caravanserai protected by dragonewts on a safer trade route.", "page": "p.58"},
+      {"name": "Goodhaven", "detail": "Cinsina village and caravan stopping point.", "page": "p.58"},
+      {"name": "Horse Town", "detail": "Horse-breeding pasture and market site.", "page": "p.58"},
+      {"name": "Larnste's Table", "detail": "Plateau sacred to Orlanth Adventurous and site of Sartarite defeat.", "page": "p.58"},
+      {"name": "Mernyr's Landing", "detail": "Small farm community around an abandoned estate.", "page": "p.60"},
+      {"name": "Old Vampire Cave", "detail": "Dark and evil place best avoided.", "page": "p.60"},
+      {"name": "Rainbow Mounds", "detail": "Ancient colorful mound complex with cavern labyrinth and multiple occupants over time.", "page": "p.60"},
+      {"name": "Trade Think Market", "detail": "Safe human-dragonewt trading site.", "page": "p.60"},
+      {"name": "Two Ridge Fort", "detail": "Ancient fortress and political-religious center of the Malani Tribe.", "page": "p.60-61"},
+      {"name": "White Crow Inn", "detail": "Roadside rest stop between Jonstown and Alda-Chur.", "page": "p.61"}
+    ],
+    "regional_pattern": {
+      "summary": "The area around Jonstown is dense with clan settlements, tribal centers, sacred geography, trade infrastructure, and old mythic or military ruins, making it a strong sandbox for local adventures.",
+      "page": "p.57-61"
+    }
+  }
+}

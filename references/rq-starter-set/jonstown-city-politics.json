@@ -1,0 +1,62 @@
+{
+  "source": "RuneQuest Starter Set Book 2: The World of Glorantha (2021)",
+  "extracted_at": "2026-04-10",
+  "page": "p.31-32",
+  "jonstown_city_politics": {
+    "citizenship": {
+      "requirements": [
+        "Be at least a lay member of Orlanth",
+        "Own the land on which one lives",
+        "Have income",
+        "Pay taxes to the city",
+        "Reside in Jonstown",
+        "Bear arms to defend the city if able"
+      ],
+      "rights": [
+        "Speak at the seasonal assembly",
+        "Obtain justice from the City Ring",
+        "Respectful protection by the city guard",
+        "Become a guild member",
+        "Receive a portion of city food supplies"
+      ],
+      "page": "p.31"
+    },
+    "city_ring": {
+      "summary": "The thirteen-member City Ring governs Jonstown, appointed by tribal kings and leading temple high priests.",
+      "responsibilities": [
+        "Resolve legal disputes through judges",
+        "Levy taxes",
+        "Control food and communal property distribution",
+        "Keep peace within the walls",
+        "Schedule building and public works",
+        "Organize celebrations",
+        "Enter treaties and contracts",
+        "Sacrifice to the city wyter, Hauberk Jon"
+      ],
+      "page": "p.31"
+    },
+    "city_rex": {
+      "summary": "The City Rex heads the City Ring, leads the militia, appoints scribes, and oversees city funds.",
+      "current_holder": "Orngerin Holdfast shortly after the liberation in Earth Season 1625.",
+      "page": "p.31"
+    },
+    "security": {
+      "city_guard": "Permanent force of 50 mercenaries, with about 40 part-time deputies.",
+      "militia": "About 500 city fighters can muster quickly, with another 2,500 from local tribes within days.",
+      "page": "p.31"
+    },
+    "guilds_and_scribes": {
+      "guilds": "Guilds hold monopolies over trades and act as independent legal bodies.",
+      "free_sages": "The Free Sages are the most powerful guild-like body, selling scribal and scholarly services and supporting administration and commerce.",
+      "page": "p.32"
+    },
+    "criminal_elements": {
+      "summary": "The city has footpads, burglars, pickpockets, bandits outside the walls, and a Lanbril-connected thief ring called the Night Stalkers.",
+      "page": "p.32"
+    },
+    "lunars_after_liberation": {
+      "summary": "After liberation, many Lunars fled, died, or were enslaved, but about 100 remain in the city, especially in the Crafter's Quarter and under temple protection.",
+      "page": "p.32"
+    }
+  }
+}

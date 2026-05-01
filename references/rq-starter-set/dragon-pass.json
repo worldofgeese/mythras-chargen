@@ -1,0 +1,58 @@
+{
+  "source": "RuneQuest Starter Set Book 2: The World of Glorantha (2021)",
+  "extracted_at": "2026-04-10",
+  "page": "p.15-22",
+  "dragon_pass": {
+    "world_scope": {
+      "summary": "The Starter Set focuses on Dragon Pass, especially northern Sartar and Jonstown.",
+      "page": "p.15-16"
+    },
+    "regions": [
+      {
+        "name": "Sartar",
+        "detail": "Mountain kingdom in Dragon Pass, homeland of many Orlanthi tribes and the primary focus of Jonstown-based play.",
+        "page": "p.16-19"
+      },
+      {
+        "name": "Esrolia",
+        "detail": "Rich southern land strongly associated with Earth cults and trade.",
+        "page": "p.16-19"
+      },
+      {
+        "name": "Prax",
+        "detail": "Harsh land of animal nomads west of Sartar.",
+        "page": "p.16-19"
+      },
+      {
+        "name": "Old Tarsh / Lunar Tarsh",
+        "detail": "Northern lands shaped by Lunar influence and political conflict.",
+        "page": "p.16-19"
+      },
+      {
+        "name": "Grazelands",
+        "detail": "Horse-centered region east of Dragon Pass.",
+        "page": "p.16-19"
+      }
+    ],
+    "major_landmarks": [
+      {
+        "name": "Kero Fin",
+        "detail": "Dominant mountain of Dragon Pass, nearly 12 kilometers high and central to the region's mythic geography.",
+        "page": "p.3-4"
+      },
+      {
+        "name": "Dragon Pass",
+        "detail": "A mythically and strategically important crossroads region contested by powerful peoples and empires.",
+        "page": "p.15-16"
+      }
+    ],
+    "myth_and_history": {
+      "summary": "Dragon Pass history is shaped by mythic ages, tribal settlement, Sartar's kingdom-building, Lunar conquest, and recent liberation.",
+      "page": "p.20-22"
+    },
+    "starter_set_relevance": {
+      "summary": "Understanding Dragon Pass gives players the political and cultural context for Jonstown, local tribes, Lunar conflict, cult loyalties, and the opening situation of play.",
+      "page": "p.16-22"
+    }
+  }
+}

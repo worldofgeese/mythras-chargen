@@ -1,0 +1,15 @@
+{
+  "source": "RuneQuest Starter Set Book 2: The World of Glorantha (2021)",
+  "extracted_at": "2026-04-10",
+  "page": "p.41-43",
+  "jonstown_group": {
+    "name": "Other Individuals of Note",
+    "members": [
+      {"name": "Yerinna the Short", "role": "Master of the Bakers Guild", "page": "p.41"},
+      {"name": "Andrin Swenson", "role": "Proprietor of the Black Alynx Inn", "page": "p.41"},
+      {"name": "Sarostip Prince-Killer", "role": "Sword Lord of Humakt", "page": "p.42"},
+      {"name": "Ernalsulva Entarios' Daughter", "role": "High Priestess of Ernalda", "page": "p.42-43"},
+      {"name": "Korang Jester", "role": "Priest of Eurmal", "page": "p.43"}
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "RuneQuest Starter Set Book 2: The World of Glorantha (2021)",
+  "extracted_at": "2026-04-10",
+  "page": "p.30, 44, 46",
+  "jonstown_prices_and_services": {
+    "cost_of_living": [
+      {"standard": "Destitute", "cost": "0 L per season", "page": "p.30"},
+      {"standard": "Poor", "cost": "about 3 L per season", "page": "p.30"},
+      {"standard": "Free", "cost": "about 12 L per season", "page": "p.30"},
+      {"standard": "Noble", "cost": "about 40 L per season", "page": "p.30"}
+    ],
+    "shopping_examples": {
+      "summary": "Book 2 gives example prices for cloaks, clothes, dresses, drinks, food, guards, heralds, horses, inns, jewelry, labor, lamps, instruments, research, riding gear, sacrifice, tools, and torches.",
+      "page": "p.44"
+    },
+    "healing_for_hire": {
+      "summary": "Suggested donations are given for first aid, disease treatment, poisoning treatment, magical healing, regrowing limbs, resurrection, and other healing spells.",
+      "page": "p.46"
+    }
+  }
+}

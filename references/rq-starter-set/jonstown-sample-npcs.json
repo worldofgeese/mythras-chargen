@@ -1,0 +1,25 @@
+{
+  "source": "RuneQuest Starter Set Book 2: The World of Glorantha (2021)",
+  "extracted_at": "2026-04-10",
+  "page": "p.53-56",
+  "jonstown_sample_npcs": {
+    "overview": {
+      "summary": "Book 2 provides typical Jonstown residents and social types for gamemaster use, including social assumptions and full example stat blocks.",
+      "page": "p.53"
+    },
+    "sample_types": [
+      {"name": "Typical Resident", "detail": "Recent émigré, refugee, poor or unfree person without rights to vote or own property.", "page": "p.53"},
+      {"name": "Typical Citizen", "detail": "Better-fed and better-off than a mere resident, meeting citizenship requirements described earlier.", "page": "p.53"},
+      {"name": "City Guard", "detail": "Professional guardsman serving the City Rex and city laws.", "page": "p.54"},
+      {"name": "Militia Member", "detail": "Citizen-soldier expected to defend the city when called.", "page": "p.54"},
+      {"name": "Free Sage", "detail": "Lhankor Mhy-affiliated scribe or scholar available for hire.", "page": "p.55"},
+      {"name": "Merchant", "detail": "Commercial actor in Jonstown's guild and temple economy.", "page": "p.55"},
+      {"name": "Thief", "detail": "Typical criminal or Night Stalker-adjacent rogue.", "page": "p.56"},
+      {"name": "Lunar Resident", "detail": "Typical remaining initiate of the Seven Mothers in Jonstown after liberation.", "page": "p.56"}
+    ],
+    "stats_note": {
+      "summary": "Each sample includes characteristic values, attacks, hit locations, attributes, Runes, cults or spirit magic, Passions, armor, skills, languages, and ransom values where relevant.",
+      "page": "p.53-56"
+    }
+  }
+}

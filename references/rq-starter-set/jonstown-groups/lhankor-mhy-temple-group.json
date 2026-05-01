@@ -1,0 +1,18 @@
+{
+  "source": "RuneQuest Starter Set Book 2: The World of Glorantha (2021)",
+  "extracted_at": "2026-04-10",
+  "page": "p.37-39",
+  "jonstown_group": {
+    "name": "Lhankor Mhy Temple Group",
+    "members": [
+      {"name": "Garangian Bronze-Guts", "role": "High Priest and Chief Librarian", "page": "p.38"},
+      {"name": "Aranastaya", "role": "Provost of Apprentices", "page": "p.39"},
+      {"name": "Garstal Shavetop", "role": "Master of draconic lore", "page": "p.39"},
+      {"name": "Kalf the Maker", "role": "Master of alchemical arts", "page": "p.39"},
+      {"name": "Krisgrin Many-Tongue", "role": "Sage of geometry and Mostali/Jrusteli lore", "page": "p.39"},
+      {"name": "Mata Min", "role": "Chief Priestess of the Jonstown Library", "page": "p.39"},
+      {"name": "Poroniel Wolf-Netter", "role": "Animal taxonomy sage", "page": "p.39"},
+      {"name": "Vala the Undying", "role": "Undead sage maintaining the Jonstown Compendium", "page": "p.39"}
+    ]
+  }
+}

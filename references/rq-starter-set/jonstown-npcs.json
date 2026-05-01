@@ -1,0 +1,44 @@
+{
+  "source": "RuneQuest Starter Set Book 2: The World of Glorantha (2021)",
+  "extracted_at": "2026-04-10",
+  "page": "p.32-42",
+  "jonstown_npcs": {
+    "city_government": [
+      {"name": "Orngerin Holdfast", "role": "City Rex of Jonstown", "detail": "Wind Lord of Orlanth Rex, chief lieutenant of Kallyr Starbrow, focused on the military weakness of Sartar.", "page": "p.32-33"},
+      {"name": "Jorjera Latish", "role": "City Administrator", "detail": "Lhankor Mhy sage and skilled bureaucrat who unofficially runs much of the city's administration.", "page": "p.33-34"},
+      {"name": "Erryn Mercy", "role": "High Priestess of Chalana Arroy", "detail": "Respected healer and patient political voice on the City Ring.", "page": "p.34-35"}
+    ],
+    "issaries_group": [
+      {"name": "Joh Mith", "role": "Issaries Goldentongue priest", "detail": "Popular merchant-priest and City Ring member focused on price balance and trade.", "page": "p.35-36"},
+      {"name": "Darvast Hornos", "role": "Merchant priest", "detail": "One of the Exchangers, expert at making deals happen.", "page": "p.37"},
+      {"name": "Darningle Hornos", "role": "Money lender", "detail": "Quiet, risk-calculating younger Hornos brother.", "page": "p.37"},
+      {"name": "Lyserian Goodspeech", "role": "Former City Rex", "detail": "Pro-Lunar negotiator preserved from exile by tribal protection after liberation.", "page": "p.37"}
+    ],
+    "lhankor_mhy_group": [
+      {"name": "Garangian Bronze-Guts", "role": "High Priest and Chief Librarian", "detail": "Old scholar and author of the Compendium of Persons Eminent in Every Branch of Learning.", "page": "p.38"},
+      {"name": "Aranastaya", "role": "Provost of Apprentices", "detail": "Strict disciplinarian who cares deeply for apprentices.", "page": "p.39"},
+      {"name": "Garstal Shavetop", "role": "Draconic lore master", "detail": "Expert in dragonewt and dragon lore.", "page": "p.39"},
+      {"name": "Kalf the Maker", "role": "Alchemist", "detail": "Master of Mostali-influenced alchemical arts.", "page": "p.39"},
+      {"name": "Krisgrin Many-Tongue", "role": "Sage", "detail": "Specialist in geometry, Jrusteli lore, and Mostali lore.", "page": "p.39"},
+      {"name": "Mata Min", "role": "Chief Priestess of the Jonstown Library", "detail": "Oversees magical training and treasure evaluation.", "page": "p.39"},
+      {"name": "Poroniel Wolf-Netter", "role": "Animal taxonomy sage", "detail": "Known for studying captured Telmori and dire wolves.", "page": "p.39"},
+      {"name": "Vala the Undying", "role": "Undead sage", "detail": "Remains at the high scribe's table until the Jonstown Compendium is complete.", "page": "p.39"}
+    ],
+    "orlanth_group": [
+      {"name": "Bardrinor Red Cow", "role": "Storm Voice and City Ring representative", "detail": "Calm, reasoned, wealthy, and shrewd political representative of the Cinsina Tribe.", "page": "p.39-40"},
+      {"name": "Gollanth the Exile", "role": "High Storm Voice", "detail": "Exiled participant in Starbrow's Rebellion who returned with the liberating army.", "page": "p.39-40"},
+      {"name": "Harshax Elkenvale", "role": "Culbrea chieftain", "detail": "Educated patron who believes Orlanthi must ally with Elder Races against the Lunars.", "page": "p.41"}
+    ],
+    "other_notables": [
+      {"name": "Yerinna the Short", "role": "Master of the Bakers Guild", "detail": "Powerful guild leader due to control over food supplies.", "page": "p.41"},
+      {"name": "Andrin Swenson", "role": "Innkeeper of the Black Alynx", "detail": "Aggressive, shrewd Issaries initiate and plotter.", "page": "p.41"},
+      {"name": "Sarostip Prince-Killer", "role": "Sword Lord of Humakt", "detail": "Famed killer of Temertain the Philosopher and major Humakti leader in Sartar.", "page": "p.42"},
+      {"name": "Ernalsulva Entarios' Daughter", "role": "High Priestess of Ernalda", "detail": "Beloved negotiator and leader speaking for the Ernalda temple and associated cults.", "page": "p.42-43"},
+      {"name": "Korang Jester", "role": "Priest of Eurmal", "detail": "Awkward truth-teller and longstanding, mysterious City Ring member.", "page": "p.43"}
+    ],
+    "stats_note": {
+      "summary": "Book 2 gives full stat blocks for major NPCs including characteristics, combat values, Runes, cults, spells, Passions, skills, languages, magic items, and ransom values.",
+      "page": "p.32-42"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "source": "RuneQuest Starter Set Book 2: The World of Glorantha (2021)",
+  "extracted_at": "2026-04-10",
+  "page": "p.35-37",
+  "jonstown_group": {
+    "name": "Issaries Temple Group",
+    "members": [
+      {"name": "Joh Mith", "role": "Issaries Goldentongue priest", "page": "p.35-36"},
+      {"name": "Darvast Hornos", "role": "Exchanger and priest of Garzeen", "page": "p.37"},
+      {"name": "Darningle Hornos", "role": "Money lender and investor", "page": "p.37"},
+      {"name": "Lyserian Goodspeech", "role": "Former City Rex aligned with cooperation under occupation", "page": "p.37"}
+    ]
+  }
+}

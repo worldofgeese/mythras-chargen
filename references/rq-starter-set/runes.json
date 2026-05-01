@@ -1,0 +1,51 @@
+{
+  "source": "RuneQuest Starter Set Book 2: The World of Glorantha (2021)",
+  "extracted_at": "2026-04-10",
+  "page": "p.4-6",
+  "runes": {
+    "overview": {
+      "summary": "Runes are cosmic archetypes, including Elements, Powers, Conditions, and Forms. An adventurer's affinity with different Runes affects magical potential, personality, and characteristics.",
+      "page": "p.4"
+    },
+    "elemental_runes": [
+      {"name": "Darkness", "characteristic": "SIZ", "color": "black", "skill_category": "Stealth", "weapons": ["club", "mace", "rock"], "page": "p.5"},
+      {"name": "Water", "characteristic": "DEX", "color": "blue", "skill_category": "Agility", "weapons": ["net", "trident", "whip"], "page": "p.5"},
+      {"name": "Earth", "characteristic": "CON", "color": "green", "skill_category": "Communication", "weapons": ["axe"], "page": "p.5"},
+      {"name": "Fire/Sky", "characteristic": "INT", "color": "yellow", "skill_category": "Perception", "weapons": ["spear", "bow"], "page": "p.5"},
+      {"name": "Air", "characteristic": "STR", "color": "orange", "skill_category": "Manipulation", "weapons": ["sword"], "page": "p.5"},
+      {"name": "Moon", "characteristic": "POW", "color": "red", "skill_category": "Magic", "weapons": ["curved blades", "kopis", "sickle-sword"], "page": "p.5"}
+    ],
+    "power_runes": [
+      {"name": "Stasis", "opposed_to": "Movement", "page": "p.5"},
+      {"name": "Movement", "opposed_to": "Stasis", "page": "p.5"},
+      {"name": "Truth", "opposed_to": "Illusion", "page": "p.5"},
+      {"name": "Illusion", "opposed_to": "Truth", "page": "p.5"},
+      {"name": "Fertility", "opposed_to": "Death", "page": "p.5"},
+      {"name": "Death", "opposed_to": "Fertility", "page": "p.5"},
+      {"name": "Harmony", "opposed_to": "Disorder", "page": "p.5"},
+      {"name": "Disorder", "opposed_to": "Harmony", "page": "p.5"}
+    ],
+    "form_runes": [
+      {"name": "Beast", "detail": "Associated with dragon progenitors and four-legged creatures.", "page": "p.6"},
+      {"name": "Man", "detail": "Represents the humanoid shape and Grandfather Mortal.", "page": "p.6"},
+      {"name": "Plant", "detail": "Symbol of the first life on Glorantha.", "page": "p.6"},
+      {"name": "Dragonewt", "detail": "Exotic rune associated with Dragonewts and found only in the Dragon Pass area.", "page": "p.6"},
+      {"name": "Spirit", "detail": "Describes disembodied entities existing in the Spirit World.", "page": "p.6"},
+      {"name": "Chaos", "detail": "Describes beings tainted by Chaos and can combine with any other Rune.", "page": "p.6"}
+    ],
+    "condition_runes": [
+      {"name": "Mastery", "detail": "Can symbolize the mastery of mortals, magic, or elements.", "page": "p.6-7"},
+      {"name": "Magic", "detail": "Describes how a cult or individual deals with the power of another Rune.", "page": "p.7"},
+      {"name": "Infinity", "detail": "Mark of the gods, implying near total control of power flow and resistance to magic.", "page": "p.7"},
+      {"name": "Luck", "detail": "Thought to be both an expression of Chaos and the gods' approval.", "page": "p.7"},
+      {"name": "Fate", "detail": "Used to express the way of the world, often by downtrodden or dominant cultures alike.", "page": "p.7"}
+    ],
+    "classification_notes": {
+      "elements": "The Elements are what Glorantha is made of.",
+      "powers": "Power Runes are antagonistic pairs defined against their opposites.",
+      "forms": "Form Runes describe how a power or element is expressed.",
+      "conditions": "Condition Runes indicate which aspect of an Element, Form, or Power is favored.",
+      "page": "p.6"
+    }
+  }
+}

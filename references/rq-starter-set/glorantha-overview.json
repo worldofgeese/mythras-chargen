@@ -1,0 +1,104 @@
+{
+  "source": "RuneQuest Starter Set Book 2: The World of Glorantha (2021)",
+  "extracted_at": "2026-04-10",
+  "page": "p.2-15",
+  "glorantha_overview": {
+    "world_concept": {
+      "summary": "Glorantha is a world made by the gods but shaped by the deeds of mortals. Magic is part of everyday life, mythology is the basis of reality, and mortals can become heroes or even gods.",
+      "page": "p.2"
+    },
+    "core_themes": [
+      {
+        "theme": "Religion and the magical relationship between humankind and the gods is the main theme of Glorantha.",
+        "page": "p.2"
+      },
+      {
+        "theme": "People hold allegiance to tribe, city, and cult rather than abstract alignments or ideologies.",
+        "page": "p.2-3"
+      },
+      {
+        "theme": "Glorantha combines gritty realism with fantastic and mythic adventure.",
+        "page": "p.2"
+      }
+    ],
+    "bronze_age_features": {
+      "primary_metal": "Bronze is the primary metal instead of iron.",
+      "literacy": "Writing is the preserve of a narrow professional elite such as the Lhankor Mhy cult.",
+      "urbanization": "Urban civilizations flourish in places such as Nochet, Boldhome, and Furthest.",
+      "page": "p.2"
+    },
+    "social_organization": {
+      "forms": [
+        "Kinship groups",
+        "City-states",
+        "Tribes",
+        "Clan or city rings"
+      ],
+      "leadership": "Chieftains, kings, queens, or priestly rulers are the norm, often advised by rings of elders or powerful individuals.",
+      "page": "p.2-3"
+    },
+    "temples_and_cults": {
+      "importance": "Temples are usually the most powerful institutions in a community, providing training in magic, knowledge, and skills.",
+      "wyters": "Temples are often guarded by wyters, mystic spirits connected to the chief priest or priestess.",
+      "page": "p.3"
+    },
+    "notable_setting_differences": [
+      {
+        "point": "There is no alignment system; loyalties are to nations, cities, religions, and tribes.",
+        "page": "p.3"
+      },
+      {
+        "point": "Conversion is uncommon; more typical is adding a new god to an existing religious life.",
+        "page": "p.3"
+      },
+      {
+        "point": "Glorantha includes talking ducks, baboons, flying bulls, sentient fish, dragons, and immortal beings.",
+        "page": "p.3-4"
+      }
+    ],
+    "metals": {
+      "bronze": "Commonly made by mixing copper and tin, though pure bronze can also be mined from the bones of dead gods.",
+      "iron": "Highly prized, cannot be mined or made by humans, interferes with magic, and harms certain Elder Races more effectively.",
+      "rune_metal": "Pure metal items can be enchanted and may have inherent magical properties.",
+      "page": "p.4"
+    },
+    "what_makes_glorantha_distinct": {
+      "summary": "Glorantha replaces standard fantasy tropes with Bronze Age heroes, universal personal magic, myth reenactment, heroquesting, and strong mythological resonance.",
+      "page": "p.4"
+    },
+    "unique_aspects": [
+      {
+        "title": "Community matters",
+        "detail": "Individuals are defined by their kin, cult, clan, tribe, city, and temple relationships.",
+        "page": "p.12"
+      },
+      {
+        "title": "Myths are real",
+        "detail": "The mythical realm can be entered, myths can be reenacted, and the deeds of gods shape present reality.",
+        "page": "p.12-13"
+      },
+      {
+        "title": "Heroes can change the world",
+        "detail": "Exceptional mortals can engage in heroquesting and participate in the Hero Wars.",
+        "page": "p.13"
+      },
+      {
+        "title": "Motivation comes from passions and loyalties",
+        "detail": "What matters is not abstract morality but concrete ties, devotions, hates, and obligations.",
+        "page": "p.13-14"
+      }
+    ],
+    "calendar_and_time": {
+      "weeks_per_season": 8,
+      "days_per_week": 7,
+      "seasons": ["Sea", "Fire", "Earth", "Dark", "Storm", "Sacred Time"],
+      "sacred_time": "Sacred Time is outside normal time and follows Storm Season.",
+      "dating": "The current era is dated from the Dawn, with 1625 being a key contemporary year in Dragon Pass.",
+      "page": "p.14"
+    },
+    "world_regions_intro": {
+      "summary": "Dragon Pass is the central focus for the Starter Set, especially Sartar and the city of Jonstown in northern Sartar.",
+      "page": "p.15-16"
+    }
+  }
+}

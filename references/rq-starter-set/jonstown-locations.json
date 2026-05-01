@@ -1,0 +1,49 @@
+{
+  "source": "RuneQuest Starter Set Book 2: The World of Glorantha (2021)",
+  "extracted_at": "2026-04-10",
+  "page": "p.43-52",
+  "jonstown_locations": {
+    "upper_city": [
+      {"name": "Tower of the Winds", "detail": "Tallest fortification in the city, topped by a weathervane and with a visible sundial.", "page": "p.44"},
+      {"name": "Temple of Orlanth Thunderous", "detail": "Lightning-struck outcropping and major temple site restored after Lunar destruction.", "page": "p.44"},
+      {"name": "Temple of Orlanth Adventurous", "detail": "Major temple with shrines to Mastakos and Yinkin.", "page": "p.44"},
+      {"name": "Temple of Chalana Arroy", "detail": "House of Mercy, major temple-hospital and one of the largest Chalana Arroy temples in Sartar.", "page": "p.44-45"},
+      {"name": "Public Bath", "detail": "Part of the Chalana Arroy complex and open to any creature not of Chaos.", "page": "p.44"},
+      {"name": "Temple of Ernalda", "detail": "Ornate Earth Rune-shaped temple with shrines to Asrelia, Babeester Gor, Maran Gor, and Voria.", "page": "p.45"},
+      {"name": "Council House", "detail": "Meeting place of the City Ring.", "page": "p.45"},
+      {"name": "Temple of Humakt", "detail": "Minor temple and mercenary hiring house.", "page": "p.46"},
+      {"name": "Temple of Sartar and Orlanth Rex", "detail": "Major temple where Hauberk Jon, the city wyter, resides.", "page": "p.46"},
+      {"name": "Temple of Lhankor Mhy", "detail": "The Jonstown Library, a great temple, archive, and major intellectual landmark.", "page": "p.46-49"},
+      {"name": "Seven Mothers Temple Ruins", "detail": "Ruined Lunar temple burned during the city's liberation.", "page": "p.45"}
+    ],
+    "scholars_quarter": [
+      {"name": "Temple of Uleria", "detail": "Love goddess temple with public and private ceremonies and baths.", "page": "p.49"},
+      {"name": "The Red Harlot", "detail": "Anti-Lunar tavern.", "page": "p.49"},
+      {"name": "The Jellied Eel", "detail": "Gambling den favored by scribes.", "page": "p.49"},
+      {"name": "The Back Door", "detail": "Shadowy tavern suited to discreet meetings and illegal purchases.", "page": "p.49"},
+      {"name": "The Gilded Beard", "detail": "Inn favored by Free Sages and known for Jonstown ice beer.", "page": "p.49-50"},
+      {"name": "South Market", "detail": "Book Market where scrolls, parchment, and writing supplies are traded.", "page": "p.50"}
+    ],
+    "merchants_quarter": [
+      {"name": "Temple of Issaries", "detail": "Major temple overseeing trade, loans, witnessed agreements, and merchant disputes.", "page": "p.50"},
+      {"name": "Temple of Lokarnos", "detail": "Small but well-furnished trade god temple.", "page": "p.50"},
+      {"name": "The Black Alynx", "detail": "Popular inn with adventurers, traders, and Free Sages.", "page": "p.50"},
+      {"name": "Bull and Ram", "detail": "Favored inn for caravans arriving from Tarsh.", "page": "p.51"},
+      {"name": "North Market", "detail": "Also called the Meat Market, for livestock and butchers.", "page": "p.51"},
+      {"name": "Great Market", "detail": "Main caravan market for distant goods.", "page": "p.51"},
+      {"name": "Public Bath", "detail": "Most commonly used public bath in the city.", "page": "p.51"}
+    ],
+    "crafters_quarter": {
+      "summary": "The Crafter's Quarter includes workshops, bakeries, guild spaces, inns, ordinary residences, and much of the city's practical economic life.",
+      "page": "p.51-52"
+    },
+    "shopping_and_services": {
+      "summary": "Book 2 provides price guidance for common goods and services such as clothes, food, guards, heralds, horses, rooms, labor, research, sacrifice, tools, and torches.",
+      "page": "p.44"
+    },
+    "healing_for_hire": {
+      "summary": "The Chalana Arroy temple offers suggested donation rates for natural treatment and magical healing, with spell references cross-linked to Book 1: Rules.",
+      "page": "p.46"
+    }
+  }
+}

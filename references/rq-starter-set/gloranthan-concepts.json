@@ -1,0 +1,37 @@
+{
+  "source": "RuneQuest Starter Set Book 2: The World of Glorantha (2021)",
+  "extracted_at": "2026-04-10",
+  "page": "p.12-14",
+  "gloranthan_concepts": {
+    "unique_aspects": [
+      {
+        "title": "Religion is real and practical",
+        "detail": "Gods act in the world through cults, worship, and magic, and religion shapes everyday life.",
+        "page": "p.12"
+      },
+      {
+        "title": "Community defines identity",
+        "detail": "People are known through kin, cult, clan, tribe, and city rather than individualism or alignment.",
+        "page": "p.12-13"
+      },
+      {
+        "title": "Myth is participatory",
+        "detail": "Heroes can enter the God Time, reenact myths, and potentially alter them through heroquesting.",
+        "page": "p.13"
+      },
+      {
+        "title": "Passions and loyalties drive action",
+        "detail": "Concrete devotions, hates, loves, and obligations matter more than abstract moral categories.",
+        "page": "p.13-14"
+      }
+    ],
+    "hero_wars": {
+      "summary": "As Rune affinities deepen and heroes engage mythically, they become part of the looming Hero Wars, an apocalyptic struggle involving Chaos and great powers.",
+      "page": "p.6, 13"
+    },
+    "calendar": {
+      "detail": "The Gloranthan year has five seasons of eight weeks plus Sacred Time, with seven days per week.",
+      "page": "p.14"
+    }
+  }
+}

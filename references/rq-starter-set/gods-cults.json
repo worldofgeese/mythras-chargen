@@ -1,0 +1,56 @@
+{
+  "source": "RuneQuest Starter Set Book 2: The World of Glorantha (2021)",
+  "extracted_at": "2026-04-10",
+  "page": "p.7-11",
+  "gods_and_cults": {
+    "religion_and_magic": {
+      "summary": "A central theme of Glorantha is the relationship between mortals and the gods. Polytheism is the most prevalent religious practice, cult membership gives access to Rune magic and spirit magic, and cults function as both religion and community.",
+      "page": "p.7"
+    },
+    "cult_membership": {
+      "benefits": [
+        "Training in skills and magic",
+        "Guidance through Passions such as Devotion and Loyalty",
+        "Access to Rune magic through shared Rune affinities",
+        "Community support and resources"
+      ],
+      "obligations": [
+        "Sacrifices",
+        "Worship",
+        "Loyalty",
+        "Participation in ceremonies"
+      ],
+      "page": "p.7"
+    },
+    "major_deities": [
+      {"name": "Aldrya", "epithet": "Goddess of the Woods", "detail": "Rules forests and is mother of elves and dryads.", "page": "p.8"},
+      {"name": "Argan Argar", "epithet": "God of Surface Darkness", "detail": "Leader among trolls during the Darkness, messenger and translator, god of merchants.", "page": "p.8"},
+      {"name": "Babeester Gor", "epithet": "Avenging Daughter", "detail": "Earth's grim defender against kin-slayers, oath-breakers, and desecrators.", "page": "p.8"},
+      {"name": "Chalana Arroy", "epithet": "the Healer", "detail": "Heals all diseases and wounds and healed the world after the Great Darkness.", "page": "p.8"},
+      {"name": "Daka Fal", "epithet": "Judge of the Dead", "detail": "Separated the living from the dead and is invoked in worship of the dead.", "page": "p.8"},
+      {"name": "Ernalda", "epithet": "Earth Mother", "detail": "Earth Queen, life-giver, goddess of women, fertility, agriculture, and motherhood.", "page": "p.8"},
+      {"name": "Eurmal", "epithet": "the Trickster", "detail": "Dangerous and treacherous Trickster God, one of the Seven Lightbringers.", "page": "p.8"},
+      {"name": "Humakt", "epithet": "God of Death", "detail": "God of endings, Death, war, and honorable severance.", "page": "p.8-9"},
+      {"name": "Issaries", "epithet": "the Speaking God", "detail": "Lord of Trade, Guardian of Roads, Messenger of the Gods, associated with Tradetalk.", "page": "p.9"},
+      {"name": "Kyger Litor", "epithet": "Mother of Trolls", "detail": "Ancestress of all troll races.", "page": "p.9"},
+      {"name": "Lhankor Mhy", "epithet": "Knowing God", "detail": "God of scribes, sages, history, laws, and writing.", "page": "p.10-11"},
+      {"name": "Magasta", "epithet": "Lord of Waters", "detail": "King of the Sea Gods, master of life and death within the depths.", "page": "p.11"},
+      {"name": "Maran Gor", "epithet": "Earthshaker", "detail": "Goddess of destruction and feared earth power.", "page": "p.11"},
+      {"name": "Mostal", "epithet": "the Maker", "detail": "Dwarf god who tends the World Engine and governs making and building.", "page": "p.11"},
+      {"name": "Orlanth", "epithet": "Storm King", "detail": "Master of Storms, King of the Gods, chief of the Seven Lightbringers.", "page": "p.11"},
+      {"name": "The Red Goddess", "epithet": "Moon Goddess", "detail": "Goddess of the Red Moon and the Lunar Empire.", "page": "p.11"},
+      {"name": "The Seven Mothers", "epithet": "Lunar pantheon", "detail": "Primary pantheon of the Lunar Empire.", "page": "p.9 table"},
+      {"name": "Storm Bull", "epithet": "Enemy of Chaos", "detail": "Manifestation of berserk, barbaric fury against Chaos.", "page": "p.9 table"},
+      {"name": "Yelm", "epithet": "Sun God", "detail": "God of the Sun, who dies each night and returns at dawn.", "page": "p.9 table"},
+      {"name": "Yelmalio", "epithet": "Bright God", "detail": "Son of Yelm and patron of the Sun Dome Temple.", "page": "p.9 table"}
+    ],
+    "rune_cults_table": {
+      "summary": "Book 2 provides a Rune cults table pairing major deities with their Rune associations and one-line descriptions.",
+      "page": "p.9"
+    },
+    "rune_masters": {
+      "summary": "Elite cult members, including Rune Priests, Rune Lords, and God-talkers, possess greater magic and greater responsibilities.",
+      "page": "p.7"
+    }
+  }
+}

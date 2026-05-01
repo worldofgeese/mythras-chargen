@@ -1,0 +1,13 @@
+{
+  "source": "RuneQuest Starter Set Book 2: The World of Glorantha (2021)",
+  "extracted_at": "2026-04-10",
+  "page": "p.32-35",
+  "jonstown_group": {
+    "name": "City Government",
+    "members": [
+      {"name": "Orngerin Holdfast", "role": "City Rex", "page": "p.32-33"},
+      {"name": "Jorjera Latish", "role": "City Administrator and Lhankor Mhy representative", "page": "p.33-34"},
+      {"name": "Erryn Mercy", "role": "High Priestess of Chalana Arroy and City Ring member", "page": "p.34-35"}
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "source": "RuneQuest Starter Set Book 2: The World of Glorantha (2021)",
+  "extracted_at": "2026-04-10",
+  "page": "p.10",
+  "elder_races": {
+    "overview": {
+      "summary": "The Elder Races predate the appearance of humans and still possess great power in Glorantha.",
+      "page": "p.10"
+    },
+    "races": [
+      {
+        "name": "Aldryami",
+        "common_name": "elves",
+        "detail": "Plant-like beings tied to forests, descended from Aldrya. Types include green, brown, yellow, black, red, dryads, and runners.",
+        "page": "p.10"
+      },
+      {
+        "name": "Dragonewts",
+        "detail": "Ancient descendants of Dragons who reincarnate and metamorphose through several stages in pursuit of dragonhood.",
+        "page": "p.10"
+      },
+      {
+        "name": "Mostali",
+        "common_name": "dwarfs",
+        "detail": "Underground makers descended from Mostal, associated with practical sorcery, machinery, and extraordinary craftsmanship.",
+        "page": "p.10"
+      },
+      {
+        "name": "Merfolk",
+        "detail": "Water-living but air-breathing descendants of the gods, with finned lower bodies and arms and hands.",
+        "page": "p.10"
+      },
+      {
+        "name": "Trolls",
+        "detail": "Mostly subterranean matriarchal people associated with darkness, with several social types including dark trolls, great trolls, Mistress Race, trollkin, and cave trolls.",
+        "page": "p.10"
+      },
+      {
+        "name": "Broo",
+        "detail": "Chaotic, foul, brutal creatures of indistinct parentage and rampant corruption.",
+        "page": "p.10"
+      }
+    ],
+    "other_peoples": {
+      "summary": "Other lesser or more local peoples include centaurs, ducks, intelligent baboons, giants, morokanth, newtlings, scorpion men, and Wind Children.",
+      "page": "p.10"
+    }
+  }
+}
