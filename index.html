@@ -4967,24 +4967,34 @@ App.exportSinglePagePDF = async function() {
       txt(stat, x + charW/2 - 7, y - 6, { bold: true, size: 7 });
       txt(String(CharacterData.characteristics[stat] || ''), x + charW/2 - 4, y - 14, { size: 9, bold: true });
     });
-    y -= 19;
+    y -= 20;
 
     // ===== DERIVED ATTRIBUTES (compact 2-row grid) =====
+    // Recalculate if needed
+    const { STR, CON, SIZ, DEX, INT, POW, CHA } = CharacterData.characteristics;
     const attrs = CharacterData.attributes || {};
+    const ap = attrs.actionPoints ?? Calc.actionPoints(DEX, INT);
+    const dm = attrs.damageModifier ?? Calc.damageModifier(STR, SIZ);
+    const initB = attrs.initiativeBonus ?? Calc.initiativeBonus(DEX, INT);
+    const moveR = attrs.movementRate ?? 6;
+    const healR = attrs.healingRate ?? Calc.healingRate(CON);
+    const mp = attrs.magicPoints ?? POW;
+    const lp = attrs.luckPoints ?? Calc.luckPoints(POW, CHA);
+    const xpMod = attrs.experienceModifier ?? Calc.experienceModifier(CHA);
+    const sr = attrs.strikeRank || initB;
     const attrPairs = [
-      ['AP', attrs.actionPoints], ['DM', attrs.damageModifier], ['Init', '+' + attrs.initiativeBonus],
-      ['Move', attrs.movementRate + 'm'], ['Heal', attrs.healingRate], ['MP', attrs.magicPoints],
-      ['LP', attrs.luckPoints], ['XP Mod', attrs.experienceModifier],
-      ['SR', attrs.strikeRank || attrs.initiativeBonus]
+      ['AP', ap], ['DM', dm], ['Init', '+' + initB],
+      ['Move', moveR + 'm'], ['Heal', healR], ['MP', mp],
+      ['LP', lp], ['XP Mod', xpMod], ['SR', sr]
     ];
     const attrColW = W / 5;
     attrPairs.forEach((pair, i) => {
       const col = i % 5;
       const row = Math.floor(i / 5);
       const x = L + col * attrColW;
-      txt(`${pair[0]}: ${pair[1]}`, x, y - row * 8, { size: 6, bold: true });
+      txt(`${pair[0]}: ${pair[1]}`, x, y - row * 9, { size: 6.5, bold: true });
     });
-    y -= Math.ceil(attrPairs.length / 5) * 8 + 3;
+    y -= Math.ceil(attrPairs.length / 5) * 9 + 4;
 
     // ===== HIT LOCATIONS (compact horizontal) =====
     const hp = attrs.hitPoints || {};
