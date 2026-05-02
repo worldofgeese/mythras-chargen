@@ -14333,6 +14333,13 @@ App.selectCulture = function(cultureName) {
   if (culture) {
     CharacterData.culture = cultureName;
     CharacterData.culturalSkills = {};
+
+    // Auto-add native language (ADR-004) — user can allocate points in Step 5
+    const nativeLang = CULTURE_NATIVE_LANGUAGE[cultureName];
+    if (nativeLang) {
+      CharacterData.culturalSkills[nativeLang] = 0;
+    }
+
     CharacterData.folkMagicSpells = [];
     CharacterData.passions = culture.passions.map(p => {
       if (typeof p === 'string') return {name: p, value: 30};
@@ -15858,13 +15865,15 @@ App.generateRandomCharacter = function() {
   const allCulturalSkills = [...cultureStandard, ...culturePro].slice(0, 10);
   let culturalPtsLeft = 100;
 
-  // Fix 3: Auto-add native language and Tradetalk
+  // Fix 3: Auto-add native language and Tradetalk (per ADR-004)
   const nativeLang = CULTURE_NATIVE_LANGUAGE[culture.name];
   if (nativeLang) {
     CharacterData.culturalSkills[nativeLang] = 0; // Base value has +40 built into SKILLS_DATA Native Tongue
     if (!allCulturalSkills.includes(nativeLang)) allCulturalSkills.push(nativeLang);
   }
-  if (!allCulturalSkills.includes('Tradetalk')) {
+  // Only add Tradetalk for non-primitive cultures (ADR-004: Balazaring and Telmori are primitive)
+  const isPrimitive = culture.type === 'Primitive';
+  if (!isPrimitive && !allCulturalSkills.includes('Tradetalk')) {
     CharacterData.culturalSkills['Tradetalk'] = 0;
     allCulturalSkills.push('Tradetalk');
   }
