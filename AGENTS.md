@@ -168,6 +168,19 @@ playwright-cli screenshot --filename=play-mode.png
 - 6 cook runs with review gates, all passed
 - 15 original request bullets validated and remediated
 
+## Governance Pipeline
+
+Every PR/merge on this project goes through:
+
+1. **ADR gate** — verify no ADR is violated (magic system, attestable chain, casting model)
+2. **Architect Lens** — holistic fit: single-file constraint, data flow integrity, ADR compliance
+3. **Model Council** — 5-model adversarial review for substantial changes (>150 LOC, >3 files, or ADR-governed domain)
+4. **PDF export test** — mandatory when character data or export paths change
+5. **QA pass** — full end-to-end Playwright run (wizard + Play Mode)
+6. **ADR-first rule** — house rules/gameplay decisions get an ADR BEFORE implementation. Use [adr-skill](https://github.com/skillrecordings/adr-skill) format. No attestable artifact = no merge.
+
+The `autonomous-swe.md` prompt encodes these as Gate 2.7 (Architect Lens), Gate 3.5 (QA + PDF), and Gate 4 (Council with ADR-governed threshold).
+
 ## What NOT to use
 - RuneQuest Weapons & Equipment (Chaosium, RQ7) — different engine, incompatible stats
 - Any RQ7/Chaosium-era stat blocks — this is Mythras (TDM), not RuneQuest (Chaosium)

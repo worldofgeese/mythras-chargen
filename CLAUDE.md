@@ -83,6 +83,15 @@ See `docs/adr/001-magic-system-architecture.md` and `docs/adr/002-rune-affinity-
 
 Architecture Decision Records in `docs/adr/`. Read before making magic system changes.
 
+## Governance Pipeline (mandatory for all PRs)
+
+1. **ADR compliance** — every change checked against `docs/adr/` decisions. Magic system, attestable chain, and casting model ADRs are non-negotiable.
+2. **Architect Lens** — holistic fit review before merge. Does this change fit the single-file constraint? Does it respect the attestable chain? Does it violate any ADR?
+3. **Model Council** — 5-model adversarial review (Opus, GPT-5.4, GPT-5.1, Gemini 3.1 Pro, Nemotron) for any change >150 lines, >3 files, or touching ADR-governed domain (magic, cults, attestation).
+4. **PDF Export Test** — if the change touches character data or export paths, verify PDF output still works.
+5. **QA Pass** — end-to-end Playwright verification of the full chargen wizard + Play Mode.
+6. **House rules are ADRs** — any gameplay decision (magic systems, skill caps, language handling) must be recorded as an ADR using the [adr-skill](https://github.com/skillrecordings/adr-skill) format before implementation. If it's not attestable, it doesn't ship.
+
 ## Phase 2 (Not Yet Started)
 
 Pregen validation requires local assets:
