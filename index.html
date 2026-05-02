@@ -14581,15 +14581,19 @@ App.renderStep5 = function() {
       const storedKey = Object.keys(CharacterData.culturalSkills).find(k => k.startsWith(category + ' (') && !isAnySkill(k));
       const currentSelected = storedKey || '';
       const currentValue = storedKey ? (CharacterData.culturalSkills[storedKey] || 0) : 0;
-      
+      const datalistId = `cultural-${category}-${idx}`;
+
       const row = document.createElement('div');
       row.style.cssText = 'display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin: 4px 0;';
       row.innerHTML = `
         <div>
-          <select onchange="App.disambiguateAndUpdate('cultural', '${skillName}', this.value, '${category}')" style="width:100%; padding:4px;">
-            <option value="">-- Select ${category} --</option>
-            ${(options || []).map(o => `<option value="${category} (${o})" ${currentSelected === category + ' (' + o + ')' ? 'selected' : ''}>${category} (${o})</option>`).join('')}
-          </select>
+          <input type="text" list="${datalistId}" placeholder="Type or select ${category}..."
+            value="${currentSelected}"
+            onchange="App.disambiguateAndUpdateFreeText('cultural', '${skillName}', this.value, '${category}')"
+            style="width:100%; padding:4px; box-sizing: border-box;">
+          <datalist id="${datalistId}">
+            ${(options || []).map(o => `<option value="${category} (${o})">`).join('')}
+          </datalist>
         </div>
         <input type="number" min="0" max="15" value="${currentValue}"
           onchange="App.updateSkillPoints('cultural', '${currentSelected || skillName}', parseInt(this.value))">
@@ -14673,6 +14677,39 @@ App.disambiguateAndUpdate = function(category, originalSkillName, newSkillName, 
       return;
     }
   }
+  // No previous selection — just add it
+  store[newSkillName] = 0;
+  this.saveToLocalStorage();
+  this.renderCurrentStep();
+};
+
+// Handle free-text disambiguation for (any) skills with datalist suggestions
+App.disambiguateAndUpdateFreeText = function(category, originalSkillName, inputValue, skillCategory) {
+  inputValue = inputValue.trim();
+  if (!inputValue) return;
+
+  // Normalize the input: if user typed just the specialization, wrap it with category
+  let newSkillName = inputValue;
+  if (!inputValue.includes('(')) {
+    newSkillName = `${skillCategory} (${inputValue})`;
+  }
+
+  const store = category === 'cultural' ? CharacterData.culturalSkills :
+                category === 'career' ? CharacterData.careerSkills : CharacterData.bonusSkills;
+
+  // Remove any previous disambiguation for this skill category
+  for (const key of Object.keys(store)) {
+    if (key.startsWith(skillCategory + ' (') && !isAnySkill(key) && key !== newSkillName) {
+      const pts = store[key];
+      delete store[key];
+      // Transfer points to the new selection
+      store[newSkillName] = pts;
+      this.saveToLocalStorage();
+      this.renderCurrentStep();
+      return;
+    }
+  }
+
   // No previous selection — just add it
   store[newSkillName] = 0;
   this.saveToLocalStorage();
@@ -15320,6 +15357,35 @@ App.renderStep10 = function() {
       } else {
         skillName = String(skill);
       }
+
+      // Handle (any) skill disambiguation
+      if (isAnySkill(skillName)) {
+        const options = disambiguateSkill(skillName, CharacterData.culture, false);
+        const category = skillName.match(/^(Language|Lore|Art|Craft|Culture)/i)?.[1] || '';
+        const storedKey = Object.keys(CharacterData.careerSkills).find(k => k.startsWith(category + ' (') && !isAnySkill(k));
+        const currentSelected = storedKey || '';
+        const currentValue = storedKey ? (CharacterData.careerSkills[storedKey] || 0) : 0;
+        const datalistId = `career-${category}-${skill}`.replace(/[^a-zA-Z0-9-]/g, '-');
+
+        const row = document.createElement('div');
+        row.style.cssText = 'display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin: 4px 0;';
+        row.innerHTML = `
+          <div>
+            <input type="text" list="${datalistId}" placeholder="Type or select ${category}..."
+              value="${currentSelected}"
+              onchange="App.disambiguateAndUpdateFreeText('career', '${skillName}', this.value, '${category}')"
+              style="width:100%; padding:4px; box-sizing: border-box;">
+            <datalist id="${datalistId}">
+              ${(options || []).map(o => `<option value="${category} (${o})">`).join('')}
+            </datalist>
+          </div>
+          <input type="number" min="0" max="15" value="${currentValue}"
+            onchange="App.updateSkillPoints('career', '${currentSelected || skillName}', parseInt(this.value))">
+        `;
+        skillsList.appendChild(row);
+        return;
+      }
+
       const currentValue = CharacterData.careerSkills[skillName] || 0;
 
       const row = document.createElement('div');
