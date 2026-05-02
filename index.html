@@ -1243,6 +1243,27 @@ const Helpers = {
 // =============================================================================
 
 const Calc = {
+  /**
+   * Resolve a skill name to its SKILLS_DATA entry.
+   * Handles specializations: Craft (Alchemy) → Craft (any), Navigate → Navigation, etc.
+   */
+  resolveSkillDef(skillName) {
+    let def = SKILLS_DATA.find(s => s.name === skillName);
+    if (def) return def;
+    const aliases = { 'Customs': 'Customs()', 'Navigate': 'Navigation', 'Culture': 'Culture (any)' };
+    if (aliases[skillName]) {
+      def = SKILLS_DATA.find(s => s.name === aliases[skillName]);
+      if (def) return def;
+    }
+    const parenIdx = skillName.indexOf('(');
+    if (parenIdx > 0) {
+      const generic = skillName.substring(0, parenIdx).trim() + ' (any)';
+      def = SKILLS_DATA.find(s => s.name === generic);
+      if (def) return def;
+    }
+    return null;
+  },
+
   actionPoints(dex, int) {
     return Math.ceil((dex + int) / 12);
   },
@@ -3501,7 +3522,7 @@ App.renderStep11 = function() {
   sortedSkills.forEach(skillName => {
     const points = CharacterData.bonusSkills[skillName] || 0;
     // Calculate total with breakdown
-    const skillDef = SKILLS_DATA.find(s => s.name === skillName);
+    const skillDef = Calc.resolveSkillDef(skillName);
     const {STR, CON, SIZ, DEX, INT, POW, CHA} = CharacterData.characteristics;
     const statMap = {STR, CON, SIZ, DEX, INT, POW, CHA};
     const baseValue = skillDef ? Calc.skillBaseValue(statMap[skillDef.base_stats[0]], statMap[skillDef.base_stats[1]], skillDef.starting_bonus) : 0;
@@ -4609,7 +4630,7 @@ App.compileAllSkills = function() {
     if (skillName.startsWith('A ') || skillName.startsWith('An ')) continue;
 
     // Find skill definition to get base stats
-    const skillDef = SKILLS_DATA.find(s => s.name === skillName);
+    const skillDef = Calc.resolveSkillDef(skillName);
 
     let baseValue = 0;
     if (skillDef) {
@@ -4854,327 +4875,312 @@ App.exportSinglePagePDF = async function() {
   try {
     const { PDFDocument, rgb, StandardFonts } = PDFLib;
     const pdfDoc = await PDFDocument.create();
-    const page = pdfDoc.addPage([595, 842]); // A4 size
+    const page = pdfDoc.addPage([595, 842]); // A4
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
     const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
 
     const { width, height } = page.getSize();
-    let y = height - 30;
-    const leftMargin = 35;
-    const rightMargin = width - 35;
-    const pageWidth = rightMargin - leftMargin;
+    let y = height - 20;
+    const L = 30; // left margin
+    const R = width - 30; // right margin
+    const W = R - L; // usable width
 
-    // Helper to draw text
-    const drawText = (text, x, yPos, options = {}) => {
-      page.drawText(String(text), {
+    // Helpers
+    const txt = (text, x, yPos, opts = {}) => {
+      page.drawText(String(text || ''), {
         x, y: yPos,
-        size: options.size || 9,
-        font: options.bold ? boldFont : font,
+        size: opts.size || 7,
+        font: opts.bold ? boldFont : font,
         color: rgb(0, 0, 0),
-        ...options
+        ...opts
       });
     };
-
-    // Helper for drawing boxes
-    const drawBox = (x, yPos, boxWidth, boxHeight, options = {}) => {
+    const box = (x, yPos, w, h, opts = {}) => {
       page.drawRectangle({
-        x, y: yPos,
-        width: boxWidth,
-        height: boxHeight,
+        x, y: yPos, width: w, height: h,
         borderColor: rgb(0, 0, 0),
-        borderWidth: options.borderWidth || 0.5,
-        color: options.fill ? rgb(0.95, 0.95, 0.95) : undefined
+        borderWidth: opts.bw || 0.5,
+        color: opts.fill ? rgb(0.93, 0.93, 0.93) : undefined
       });
     };
-
-    // Helper for drawing table headers
-    const drawTableHeader = (headers, x, yPos, colWidths) => {
-      let currentX = x;
-      headers.forEach((header, i) => {
-        drawBox(currentX, yPos, colWidths[i], 12, { fill: true });
-        drawText(header, currentX + 2, yPos + 3, { bold: true, size: 8 });
-        currentX += colWidths[i];
+    const line = (x1, yPos, x2) => {
+      page.drawLine({
+        start: { x: x1, y: yPos }, end: { x: x2, y: yPos },
+        thickness: 0.3, color: rgb(0.7, 0.7, 0.7)
       });
-      return yPos - 12;
     };
-
-    // Helper for drawing table row
-    const drawTableRow = (values, x, yPos, colWidths, options = {}) => {
-      let currentX = x;
-      values.forEach((val, i) => {
-        drawBox(currentX, yPos, colWidths[i], options.height || 11);
-        drawText(String(val), currentX + 2, yPos + 2, { size: options.size || 8 });
-        currentX += colWidths[i];
-      });
-      return yPos - (options.height || 11);
-    };
-
-    // =========================================================================
-    // HEADER SECTION
-    // =========================================================================
-    drawText('MYTHRAS CHARACTER SHEET', leftMargin, y, { size: 14, bold: true });
-    y -= 18;
-
-    // Identity box
-    const identityHeight = 50;
-    drawBox(leftMargin, y - identityHeight, pageWidth, identityHeight);
-    drawText(`Name: ${CharacterData.name || ''}`, leftMargin + 5, y - 12, { bold: true, size: 11 });
-    const identLine2 = `Culture: ${CharacterData.culture || ''}  |  Career: ${CharacterData.career || ''}  |  Homeland: ${CharacterData.homeland || ''}`;
-    drawText(identLine2, leftMargin + 5, y - 24, { size: 8 });
-    const identLine3 = `Cult: ${CharacterData.cult || 'No Cult'}  |  Age: ${CharacterData.age || ''}  |  Gender: ${CharacterData.gender || ''}  |  Social Class: ${CharacterData.socialClass || 'N/A'}`;
-    drawText(identLine3, leftMargin + 5, y - 36, { size: 8 });
-    y -= identityHeight + 8;
-
-    // Concept/Background if present
-    if (CharacterData.concept || CharacterData.background || CharacterData.family) {
-      const noteText = CharacterData.concept || CharacterData.background || CharacterData.family || '';
-      const truncated = noteText.substring(0, 120);
-      drawText(`Concept: ${truncated}`, leftMargin + 2, y, { size: 7 });
-      y -= 10;
-    }
-
-    // =========================================================================
-    // CHARACTERISTICS
-    // =========================================================================
-    y -= 5;
-    const chars = ['STR','CON','SIZ','DEX','INT','POW','CHA'];
-    const charBoxWidth = pageWidth / 7;
-    chars.forEach((stat, i) => {
-      const x = leftMargin + (i * charBoxWidth);
-      drawBox(x, y - 24, charBoxWidth, 24, { fill: i % 2 === 0 });
-      drawText(stat, x + charBoxWidth/2 - 8, y - 8, { bold: true, size: 9 });
-      drawText(CharacterData.characteristics[stat] || '', x + charBoxWidth/2 - 6, y - 18, { size: 12, bold: true });
-    });
-    y -= 30;
-
-    // =========================================================================
-    // DERIVED ATTRIBUTES (3 columns)
-    // =========================================================================
-    const attrs = CharacterData.attributes || {};
-    const attrList = [
-      ['Action Points', attrs.actionPoints],
-      ['Damage Modifier', attrs.damageModifier],
-      ['Experience Mod', attrs.experienceModifier],
-      ['Healing Rate', attrs.healingRate],
-      ['Initiative Bonus', attrs.initiativeBonus],
-      ['Luck Points', attrs.luckPoints],
-      ['Magic Points', attrs.magicPoints],
-      ['Movement Rate', attrs.movementRate],
-      ['Strike Rank', attrs.strikeRank || attrs.initiativeBonus]
-    ];
-
-    const attrColWidth = pageWidth / 3;
-    const attrRows = Math.ceil(attrList.length / 3);
-    for (let row = 0; row < attrRows; row++) {
-      for (let col = 0; col < 3; col++) {
-        const idx = row * 3 + col;
-        if (idx < attrList.length) {
-          const x = leftMargin + (col * attrColWidth);
-          const attrY = y - (row * 12);
-          drawText(`${attrList[idx][0]}: `, x, attrY, { bold: true, size: 8 });
-          drawText(attrList[idx][1] || '', x + 75, attrY, { size: 8 });
+    // Word-wrap helper: returns array of lines
+    const wrapText = (text, maxWidth, fontSize, useFont) => {
+      useFont = useFont || font;
+      const words = String(text || '').split(/\s+/);
+      const lines = [];
+      let cur = '';
+      for (const w of words) {
+        const test = cur ? cur + ' ' + w : w;
+        if (useFont.widthOfTextAtSize(test, fontSize) > maxWidth && cur) {
+          lines.push(cur);
+          cur = w;
+        } else {
+          cur = test;
         }
       }
-    }
-    y -= (attrRows * 12) + 8;
+      if (cur) lines.push(cur);
+      return lines;
+    };
 
-    // =========================================================================
-    // HIT LOCATIONS TABLE
-    // =========================================================================
-    drawText('HIT LOCATIONS', leftMargin, y, { bold: true, size: 10 });
-    y -= 14;
+    // ===== HEADER =====
+    txt('MYTHRAS CHARACTER SHEET', L, y, { size: 11, bold: true });
+    y -= 13;
 
-    const hitPoints = attrs.hitPoints || {};
-    const armor = CharacterData.armor || {};
-    const locationData = [
-      ['Head', hitPoints.head, armor.head || 0],
-      ['Chest', hitPoints.chest, armor.chest || 0],
-      ['Abdomen', hitPoints.abdomen, armor.abdomen || 0],
-      ['Left Arm', hitPoints.leftArm, armor.leftArm || 0],
-      ['Right Arm', hitPoints.rightArm, armor.rightArm || 0],
-      ['Left Leg', hitPoints.leftLeg, armor.leftLeg || 0],
-      ['Right Leg', hitPoints.rightLeg, armor.rightLeg || 0]
+    // Identity block
+    const socialMod = CharacterData.socialClassMoneyMod && CharacterData.socialClassMoneyMod !== 1
+      ? ` (×${CharacterData.socialClassMoneyMod})` : '';
+    const idLines = [
+      `Name: ${CharacterData.name || ''}   Culture: ${CharacterData.culture || ''}   Career: ${CharacterData.career || ''}   Homeland: ${CharacterData.homeland || ''}`,
+      `Cult: ${CharacterData.cult || 'None'}   Age: ${CharacterData.age || ''}   Gender: ${CharacterData.gender || ''}   Social Class: ${CharacterData.socialClass || 'N/A'}${socialMod}`
     ];
+    box(L, y - 20, W, 20);
+    txt(idLines[0], L + 3, y - 7, { size: 7, bold: true });
+    txt(idLines[1], L + 3, y - 16, { size: 6.5 });
+    y -= 23;
 
-    const hitColWidths = [100, 40, 40];
-    y = drawTableHeader(['Location', 'HP', 'AP'], leftMargin, y, hitColWidths);
-    locationData.forEach(loc => {
-      y = drawTableRow([loc[0], loc[1] || '', loc[2] || 0], leftMargin, y, hitColWidths);
+    // Concept / Family / Background — compact, wrapped
+    const bgParts = [];
+    if (CharacterData.concept) bgParts.push('Concept: ' + CharacterData.concept);
+    if (CharacterData.family) bgParts.push('Family: ' + CharacterData.family);
+    if (CharacterData.backgroundEvents) bgParts.push('Background: ' + CharacterData.backgroundEvents);
+    if (bgParts.length > 0) {
+      const bgText = bgParts.join(' | ');
+      const bgLines = wrapText(bgText, W - 4, 5.5);
+      bgLines.slice(0, 4).forEach((ln, i) => {
+        txt(ln, L + 2, y - (i * 7), { size: 5.5 });
+      });
+      y -= Math.min(bgLines.length, 4) * 7 + 2;
+    }
+
+    // ===== CHARACTERISTICS (inline) =====
+    const chars = ['STR','CON','SIZ','DEX','INT','POW','CHA'];
+    const charW = W / 7;
+    chars.forEach((stat, i) => {
+      const x = L + (i * charW);
+      box(x, y - 16, charW, 16, { fill: i % 2 === 0 });
+      txt(stat, x + charW/2 - 7, y - 6, { bold: true, size: 7 });
+      txt(String(CharacterData.characteristics[stat] || ''), x + charW/2 - 4, y - 14, { size: 9, bold: true });
     });
-    y -= 10;
+    y -= 19;
 
-    // =========================================================================
-    // COMBAT SECTION
-    // =========================================================================
-    drawText('COMBAT', leftMargin, y, { bold: true, size: 10 });
-    y -= 14;
+    // ===== DERIVED ATTRIBUTES (compact 2-row grid) =====
+    const attrs = CharacterData.attributes || {};
+    const attrPairs = [
+      ['AP', attrs.actionPoints], ['DM', attrs.damageModifier], ['Init', '+' + attrs.initiativeBonus],
+      ['Move', attrs.movementRate + 'm'], ['Heal', attrs.healingRate], ['MP', attrs.magicPoints],
+      ['LP', attrs.luckPoints], ['XP Mod', attrs.experienceModifier],
+      ['SR', attrs.strikeRank || attrs.initiativeBonus]
+    ];
+    const attrColW = W / 5;
+    attrPairs.forEach((pair, i) => {
+      const col = i % 5;
+      const row = Math.floor(i / 5);
+      const x = L + col * attrColW;
+      txt(`${pair[0]}: ${pair[1]}`, x, y - row * 8, { size: 6, bold: true });
+    });
+    y -= Math.ceil(attrPairs.length / 5) * 8 + 3;
 
-    // Combat Styles
+    // ===== HIT LOCATIONS (compact horizontal) =====
+    const hp = attrs.hitPoints || {};
+    const armor = CharacterData.armor || {};
+    const locs = [['Head','Head'],['Chest','Chest'],['Abdo','Abdomen'],['R.Arm','Right Arm'],['L.Arm','Left Arm'],['R.Leg','Right Leg'],['L.Leg','Left Leg']];
+    const locW = W / 7;
+    // Header row
+    locs.forEach((loc, i) => {
+      const x = L + i * locW;
+      box(x, y - 9, locW, 9, { fill: true });
+      txt(loc[0], x + 2, y - 7, { bold: true, size: 5.5 });
+    });
+    y -= 9;
+    // HP row
+    locs.forEach((loc, i) => {
+      const x = L + i * locW;
+      box(x, y - 9, locW, 9);
+      const hpVal = hp[loc[1]] || 0;
+      const apVal = armor[loc[1]] || 0;
+      txt(`${hpVal} HP${apVal ? ' / ' + apVal + ' AP' : ''}`, x + 2, y - 7, { size: 6 });
+    });
+    y -= 12;
+
+    // ===== COMBAT STYLES =====
     const combatStyles = CharacterData.combatStyles || [];
     if (combatStyles.length > 0) {
-      combatStyles.slice(0, 4).forEach((style, i) => {
-        const styleText = `${style.name}: ${style.skill || 0}%`;
-        const traits = style.traits ? ` (${style.traits.join(', ')})` : '';
-        drawText(styleText + traits, leftMargin + 5, y, { size: 8, bold: true });
-        y -= 10;
-        if (style.weapons && style.weapons.length > 0) {
-          drawText('Weapons: ' + style.weapons.join(', '), leftMargin + 10, y, { size: 7 });
-          y -= 10;
-        }
+      txt('COMBAT STYLES', L, y, { bold: true, size: 7 });
+      y -= 9;
+      combatStyles.forEach(style => {
+        const traits = style.traits ? ' (' + style.traits.join(', ') + ')' : '';
+        const weapons = style.weapons ? ' — ' + style.weapons.join(', ') : '';
+        const styleStr = `${style.name}: ${style.skill || 0}%${traits}${weapons}`;
+        const lines = wrapText(styleStr, W - 4, 6);
+        lines.forEach(ln => {
+          txt(ln, L + 2, y, { size: 6 });
+          y -= 7;
+        });
+      });
+      y -= 2;
+    }
+
+    // ===== WEAPONS TABLE =====
+    const weapons = CharacterData.weapons || [];
+    if (weapons.length > 0) {
+      txt('WEAPONS', L, y, { bold: true, size: 7 });
+      y -= 8;
+      const wCols = [120, 35, 50, 28, 28, 22, 22];
+      const wHeaders = ['Weapon', 'Skill', 'Damage', 'Size', 'Reach', 'AP', 'HP'];
+      let cx = L;
+      wHeaders.forEach((h, i) => {
+        box(cx, y - 8, wCols[i], 8, { fill: true });
+        txt(h, cx + 1, y - 6, { bold: true, size: 5.5 });
+        cx += wCols[i];
+      });
+      y -= 8;
+      weapons.forEach(w => {
+        cx = L;
+        [w.name || '', w.skill || '', w.damage || '', w.size || '', w.reach || '', w.ap || '', w.hp || ''].forEach((v, i) => {
+          box(cx, y - 8, wCols[i], 8);
+          txt(String(v), cx + 1, y - 6, { size: 5.5 });
+          cx += wCols[i];
+        });
+        y -= 8;
       });
       y -= 3;
     }
 
-    // Weapons table
-    const weapons = CharacterData.weapons || [];
-    if (weapons.length > 0) {
-      const weaponColWidths = [140, 40, 50, 30, 30, 25, 25];
-      y = drawTableHeader(['Weapon', 'Skill', 'Damage', 'Size', 'Reach', 'AP', 'HP'], leftMargin, y, weaponColWidths);
-      weapons.slice(0, 6).forEach(w => {
-        const skillVal = w.skill || '';
-        y = drawTableRow([
-          (w.name || '').substring(0, 25),
-          skillVal,
-          w.damage || '',
-          w.size || '',
-          w.reach || '',
-          w.ap || '',
-          w.hp || ''
-        ], leftMargin, y, weaponColWidths, { size: 7 });
+    // ===== SKILLS (3-column dense layout) =====
+    txt('SKILLS', L, y, { bold: true, size: 7 });
+    y -= 8;
+    const allSkills = App.compileAllSkills ? App.compileAllSkills() : [];
+    const skillsToShow = allSkills
+      .filter(s => (s.base + (s.cultural || 0) + (s.career || 0) + (s.bonus || 0)) > 0)
+      .sort((a, b) => {
+        const tA = a.base + (a.cultural || 0) + (a.career || 0) + (a.bonus || 0);
+        const tB = b.base + (b.cultural || 0) + (b.career || 0) + (b.bonus || 0);
+        return tB - tA;
       });
-      y -= 8;
-    }
-
-    // =========================================================================
-    // SKILLS (dense two-column layout)
-    // =========================================================================
-    drawText('SKILLS', leftMargin, y, { bold: true, size: 10 });
-    y -= 13;
-
-    const allSkills = App.compileAllSkills ? Array.from(App.compileAllSkills().values()) : [];
-    const skillsToShow = allSkills.filter(s => {
-      const total = s.base + (s.cultural || 0) + (s.career || 0) + (s.bonus || 0);
-      return total > 0;
-    }).sort((a, b) => {
-      const totalA = a.base + (a.cultural || 0) + (a.career || 0) + (a.bonus || 0);
-      const totalB = b.base + (b.cultural || 0) + (b.career || 0) + (b.bonus || 0);
-      return totalB - totalA;
-    }).slice(0, 50);
-
-    const skillsPerColumn = Math.ceil(skillsToShow.length / 2);
-    const skillColWidth = pageWidth / 2;
+    const skillColW = W / 3;
+    const skillsPerCol = Math.ceil(skillsToShow.length / 3);
+    const skillStartY = y;
+    let maxSkillRows = 0;
     skillsToShow.forEach((skill, i) => {
-      const col = Math.floor(i / skillsPerColumn);
-      const row = i % skillsPerColumn;
-      const x = leftMargin + (col * skillColWidth);
-      const yPos = y - (row * 9);
+      const col = Math.floor(i / skillsPerCol);
+      const row = i % skillsPerCol;
+      const x = L + col * skillColW;
       const total = skill.base + (skill.cultural || 0) + (skill.career || 0) + (skill.bonus || 0);
-
-      if (yPos > 160) {
-        const skillText = `${skill.name}: ${total}%`;
-        drawText(skillText.substring(0, 38), x, yPos, { size: 7 });
+      const yPos = skillStartY - row * 7;
+      if (yPos > 35) {
+        txt(`${skill.name}: ${total}%`, x, yPos, { size: 5.5 });
       }
+      if (row + 1 > maxSkillRows) maxSkillRows = row + 1;
     });
-    y = 155;
+    y = skillStartY - maxSkillRows * 7 - 3;
 
-    // =========================================================================
-    // RUNE AFFINITIES
-    // =========================================================================
+    // ===== RUNE AFFINITIES =====
     const runes = CharacterData.runes || {};
     const runeEntries = Object.entries(runes).filter(([_, val]) => val > 0);
-    if (runeEntries.length > 0) {
-      drawText('RUNE AFFINITIES', leftMargin, y, { bold: true, size: 9 });
-      y -= 12;
-      runeEntries.slice(0, 8).forEach(([rune, val], i) => {
-        const col = i % 4;
-        const row = Math.floor(i / 4);
-        const x = leftMargin + (col * (pageWidth / 4));
-        const yPos = y - (row * 10);
-        drawText(`${rune}: ${val}%`, x, yPos, { size: 7 });
+    if (runeEntries.length > 0 && y > 50) {
+      txt('RUNE AFFINITIES', L, y, { bold: true, size: 7 });
+      y -= 8;
+      const runeColW = W / 5;
+      runeEntries.forEach((entry, i) => {
+        const col = i % 5;
+        const row = Math.floor(i / 5);
+        const x = L + col * runeColW;
+        txt(`${entry[0]}: ${entry[1]}%`, x, y - row * 7, { size: 5.5 });
       });
-      y -= 25;
+      y -= Math.ceil(runeEntries.length / 5) * 7 + 3;
     }
 
-    // =========================================================================
-    // PASSIONS
-    // =========================================================================
-    const passions = CharacterData.passions || [];
-    const namedPassions = passions.filter(p => p.name);
-    if (namedPassions.length > 0 && y > 60) {
-      drawText('PASSIONS', leftMargin, y, { bold: true, size: 9 });
-      y -= 12;
-      namedPassions.slice(0, 8).forEach((p, i) => {
+    // ===== PASSIONS =====
+    const passions = (CharacterData.passions || []).filter(p => p.name);
+    if (passions.length > 0 && y > 50) {
+      txt('PASSIONS', L, y, { bold: true, size: 7 });
+      y -= 8;
+      const passColW = W / 3;
+      passions.forEach((p, i) => {
         const col = i % 3;
         const row = Math.floor(i / 3);
-        const x = leftMargin + (col * (pageWidth / 3));
-        const yPos = y - (row * 10);
-        if (yPos > 40) {
-          drawText(`${p.name}: ${p.value || 30}%`, x, yPos, { size: 7 });
+        const x = L + col * passColW;
+        const yPos = y - row * 7;
+        if (yPos > 35) {
+          txt(`${p.name}: ${p.value || 30}%`, x, yPos, { size: 5.5 });
         }
       });
-      y -= Math.ceil(namedPassions.length / 3) * 10 + 8;
+      y -= Math.ceil(passions.length / 3) * 7 + 3;
     }
 
-    // =========================================================================
-    // MAGIC
-    // =========================================================================
+    // ===== MAGIC =====
     const allSpells = [...(CharacterData.folkMagicSpells || []), ...(CharacterData.careerFolkMagic || [])];
-    if (allSpells.length > 0) {
-      drawText('FOLK MAGIC', leftMargin, y, { bold: true, size: 9 });
-      y -= 12;
-      const spellsToShow = allSpells.slice(0, 20);
-      const spellColCount = 2;
-      spellsToShow.forEach((spell, i) => {
-        const col = i % spellColCount;
-        const row = Math.floor(i / spellColCount);
-        const x = leftMargin + (col * (pageWidth / spellColCount));
-        const yPos = y - (row * 9);
-        if (yPos > 40) {
-          drawText(spell.substring(0, 50), x, yPos, { size: 7 });
+    if (allSpells.length > 0 && y > 50) {
+      const fmBase = attrs.folkMagicBase || '';
+      txt(`FOLK MAGIC${fmBase ? ' (' + fmBase + '%)' : ''}`, L, y, { bold: true, size: 7 });
+      y -= 8;
+      const spellColW = W / 3;
+      allSpells.forEach((spell, i) => {
+        const col = i % 3;
+        const row = Math.floor(i / 3);
+        const x = L + col * spellColW;
+        const yPos = y - row * 7;
+        if (yPos > 35) {
+          txt(spell, x, yPos, { size: 5.5 });
         }
       });
-      y -= Math.ceil(spellsToShow.length / spellColCount) * 9 + 8;
+      y -= Math.ceil(allSpells.length / 3) * 7 + 3;
     }
 
-    // =========================================================================
-    // EQUIPMENT
-    // =========================================================================
+    // Cult info
+    if (CharacterData.cult && y > 45) {
+      const cult = (typeof CULTS_DATA !== 'undefined' ? CULTS_DATA : []).find(c => c.name === CharacterData.cult);
+      if (cult) {
+        if (cult.folkMagic && cult.folkMagic.length > 0) {
+          txt(`Cult (${cult.name}) spells: ${cult.folkMagic.join(', ')}`, L, y, { size: 5, bold: false });
+          y -= 7;
+        }
+      }
+    }
+
+    // ===== EQUIPMENT =====
     const equipment = CharacterData.equipment || [];
-    if (equipment.length > 0 && y > 50) {
-      drawText('EQUIPMENT', leftMargin, y, { bold: true, size: 9 });
-      y -= 12;
-      equipment.slice(0, 8).forEach((item, i) => {
-        const col = i % 2;
-        const row = Math.floor(i / 2);
-        const x = leftMargin + (col * skillColWidth);
-        const yPos = y - (row * 9);
-        if (yPos > 38) {
-          const itemText = typeof item === 'string' ? item : item.name || '';
-          drawText(itemText.substring(0, 45), x, yPos, { size: 7 });
+    if (equipment.length > 0 && y > 45) {
+      const moneyStr = CharacterData.startingMoney ? `  |  Starting Money: ${CharacterData.startingMoney} Lunars` : '';
+      txt('EQUIPMENT' + moneyStr, L, y, { bold: true, size: 7 });
+      y -= 8;
+      const eqColW = W / 3;
+      equipment.forEach((item, i) => {
+        const col = i % 3;
+        const row = Math.floor(i / 3);
+        const x = L + col * eqColW;
+        const yPos = y - row * 7;
+        if (yPos > 30) {
+          const name = typeof item === 'string' ? item : item.name || '';
+          const qty = (typeof item === 'object' && item.quantity > 1) ? ` (×${item.quantity})` : '';
+          txt(name + qty, x, yPos, { size: 5.5 });
         }
       });
-      y -= Math.ceil(equipment.length / 2) * 9 + 5;
+      y -= Math.ceil(equipment.length / 3) * 7 + 3;
     }
 
-    // =========================================================================
-    // NOTES/BACKGROUND
-    // =========================================================================
-    if (CharacterData.notes && y > 45) {
-      drawText('NOTES', leftMargin, y, { bold: true, size: 9 });
-      y -= 11;
-      const noteLines = CharacterData.notes.substring(0, 200).match(/.{1,85}/g) || [];
-      noteLines.slice(0, 2).forEach((line, i) => {
-        if (y > 35) {
-          drawText(line, leftMargin, y - (i * 9), { size: 7 });
+    // ===== NOTES =====
+    if (CharacterData.notes && y > 40) {
+      txt('NOTES', L, y, { bold: true, size: 7 });
+      y -= 8;
+      const noteLines = wrapText(CharacterData.notes, W - 4, 5.5);
+      noteLines.slice(0, 5).forEach((ln, i) => {
+        if (y - i * 7 > 25) {
+          txt(ln, L + 2, y - i * 7, { size: 5.5 });
         }
       });
+      y -= Math.min(noteLines.length, 5) * 7 + 3;
     }
 
-    // =========================================================================
-    // FOOTER
-    // =========================================================================
-    drawText('Generated with mythras-chargen', leftMargin, 28, { size: 6 });
-    drawText('Mythras is a Registered Trademark of The Design Mechanism Inc', leftMargin, 20, { size: 6 });
+    // ===== FOOTER =====
+    txt('Generated with mythras-chargen', L, 15, { size: 5 });
+    txt('Mythras is a Registered Trademark of The Design Mechanism Inc', L, 9, { size: 5 });
 
     const pdfBytes = await pdfDoc.save();
     const blob = new Blob([pdfBytes], { type: 'application/pdf' });
