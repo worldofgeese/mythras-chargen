@@ -77,6 +77,47 @@ Culture-to-cult mapping: `references/culture-cult-map.json`
 - Initiative Bonus: Math.floor((DEX+INT)/2) — rounds down
 - Folk magic list curated for Glorantha (62 spells)
 - Rune affinities: 3 elemental runes at POW×2 + 30/20/10%
+
+## Magic System Rules (ADR-001, ADR-002)
+
+**Two magic systems only:** Folk Magic + Theist Miracles via Rune Affinities.
+
+### Folk Magic (implemented)
+- Skill: Folk Magic (POW+CHA+30% at creation)
+- Spells: 3 from culture + 2 from career
+- Source: `CULTS_DATA[].folkMagic` + culture folk magic lists
+
+### Theist Miracles (implementation in progress)
+- **Casting skill: Rune Affinity replaces Exhort** (AiG p.24)
+- Intensity/Magnitude: Devotion skill
+- Resource: Devotional Pool (Initiate = POW/2, Acolyte = POW×0.75, Priest = POW)
+- Data source: Cult Spell Catalogue PDFs → `references/theism-miracles.json` → `CULTS_DATA[].miracles`
+- Each miracle tagged with required rune(s) for casting
+
+### Casting Rules (Hannu house rules, adopted as canonical)
+| Cult Access | Your Rune | Rule |
+|---|---|---|
+| Allowed for all Runes | Any | Use any Rune Affinity you possess |
+| Allowed for specific Rune | Have it | Must use that Rune Affinity |
+| Allowed for specific Rune | Don't have it | Cannot cast (cult mystery) |
+| Cult doesn't have Rune | Have it | Can cast using your Rune Affinity |
+| Cult has spell, not Rune | Don't have it | Must learn that rune |
+
+### Common Theist Spells (all cults, by rank)
+- **Initiate (Any rune):** Command Cult Spirit, Extension, Find (Specific Thing), Summon Cult Spirit, Divination
+- **Initiate (specific runes):** Multispell (Magic+Mastery), Soul Sight (Magic+Spirit), Spirit Block (Spirit), Warding (Magic+Stasis), Dismiss Magic (Magic)
+- **Priest (Any):** Excommunication, Mindlink, Sanctify, Summon Spirit of Reprisal
+- **Priest (specific):** Heal Wound (Harmony), Find Enemy (Magic)
+
+### What We Do NOT Implement
+- Sorcery (no cult data supports it for our 8 cultures)
+- Mysticism (Kralorela not in our cultures)
+- Animism as separate system (folded into Theist Miracles in one-pagers)
+
+### Source Authority for House Rules
+- Hannu (Notes from Pavis author, Cult One-Pagers creator)
+- Artifact: `docs/adr/artifacts/hannu-casting-rules-2026-03-29.md`
+- ADRs: `docs/adr/001-magic-system-architecture.md`, `docs/adr/002-rune-affinity-casting-model.md`
 - **Passions always have a specific object** — "Hate (Chaos)" not "Hate". All passion types: Loyalty, Love, Hate, Fear, Desire, Devotion, Despise. Starting value: POW+CHA+30 unless culture specifies otherwise (e.g. Esrolian Loyalty to Grandmother at POW+CHA+50).
 - **Combat styles auto-apply from culture** — the first unrestricted style is granted at STR+DEX. When multiple unrestricted styles exist, player chooses via dropdown.
 - **Careers filter by culture type** — Primitive cultures see Primitive + "all" careers only. Civilised see Civilised + "all". Etc.

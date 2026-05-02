@@ -67,6 +67,22 @@ When adding or modifying game data:
 - **Action**: Keep repo private until both permissions secured
 - **Contingency**: If licensing ever requires stripping Glorantha content, build a separate generic Mythras variant deliberately. Do not rely on runtime modular fallback.
 
+## Magic System Architecture
+
+See `docs/adr/001-magic-system-architecture.md` and `docs/adr/002-rune-affinity-casting-model.md` for full details.
+
+**TL;DR:** Two magic systems: Folk Magic (done) + Theist Miracles via Rune Affinities (in progress). Exhort replaced by Rune Affinities per AiG p.24. Hannu's house rules adopted for edge cases. All data must trace to Cult One-Pager PDFs via `references/theism-miracles.json`.
+
+**Key data fields (new):**
+- `CharacterData.runeAffinities` — `[{rune: string, value: number}]` (3 entries)
+- `CharacterData.devotionalPool` — `number` (POW/2 for Initiates)
+- `CharacterData.miracles` — `string[]` (selected miracle names)
+- `CULTS_DATA[].miracles` — `[{name: string, runes: string[], rank: string}]`
+
+## ADRs
+
+Architecture Decision Records in `docs/adr/`. Read before making magic system changes.
+
 ## Phase 2 (Not Yet Started)
 
 Pregen validation requires local assets:
