@@ -13256,6 +13256,8 @@ const CharacterData = {
   
   // Step 9: Cult Selection
   cult: null,
+  miracles: [],  // Selected theist miracles from cult
+  devotionalPool: 0,  // POW/2 for Initiates (auto-calculated)
 
   // Step 10: Career Skills
   careerSkills: {},
@@ -15010,6 +15012,8 @@ App.renderStep9 = function() {
     ${!cultMap || (!cultMap.primary && !cultMap.secondary) || (cultMap.primary.length === 0 && cultMap.secondary.length === 0) ? `
       <p style="font-style: italic; color: #666;">No cults are typically available for ${culture} culture. ${cultMap && cultMap.note ? cultMap.note : ''}</p>
     ` : ''}
+
+    <div id="miracle-picker" style="margin-top: 20px; display: none;"></div>
   `;
 
   // Render primary cult cards
@@ -15038,6 +15042,11 @@ App.renderStep9 = function() {
     }
   }
 
+  // Render miracle picker if cult is selected
+  if (CharacterData.cult) {
+    this.renderMiraclePicker(div);
+  }
+
   return div;
 };
 
@@ -15052,6 +15061,36 @@ App.renderCultCard = function(cult) {
     position: relative;
   `;
   card.onclick = () => App.selectCult(cult.name);
+
+  // Get miracles for this cult from MIRACLES_DATA
+  const cultMiracles = MIRACLES_DATA.cults[cult.name]?.miracles || [];
+  const initiateMiracles = cultMiracles.filter(m => m.rank === 'initiate').slice(0, 6);
+
+  // Get character's selected rune affinities for highlighting
+  const selectedRunes = [
+    CharacterData.runeAffinities.primary,
+    CharacterData.runeAffinities.secondary,
+    CharacterData.runeAffinities.tertiary
+  ].filter(r => r);
+
+  // Render miracle list with rune highlighting
+  let miraclesHTML = '';
+  if (initiateMiracles.length > 0) {
+    const miracleItems = initiateMiracles.map(miracle => {
+      const runeList = miracle.runes.join(', ');
+      const hasMatchingRune = miracle.runes.some(r => r === 'Any' || selectedRunes.includes(r));
+      const style = hasMatchingRune
+        ? 'color: #006400; font-weight: 600;'
+        : 'color: #999;';
+      return `<span style="${style}">${miracle.name} <span style="font-size: 10px;">[${runeList}]</span></span>`;
+    }).join(', ');
+
+    miraclesHTML = `
+      <div style="font-size: 11px; margin-top: 8px; padding-top: 6px; border-top: 1px solid #ddd;">
+        <strong>Miracles (sample):</strong> ${miracleItems}${cultMiracles.length > 6 ? '...' : ''}
+      </div>
+    `;
+  }
 
   card.innerHTML = `
     ${isSelected ? '<div style="position: absolute; top: 8px; right: 8px; font-weight: bold;">✓</div>' : ''}
@@ -15071,6 +15110,8 @@ App.renderCultCard = function(cult) {
         <strong>Folk Magic:</strong> ${cult.folkMagic.slice(0, 4).join(', ')}${cult.folkMagic.length > 4 ? '...' : ''}
       </div>
     ` : ''}
+
+    ${miraclesHTML}
   `;
 
   return card;
@@ -15078,6 +15119,14 @@ App.renderCultCard = function(cult) {
 
 App.selectCult = function(cultName) {
   CharacterData.cult = cultName;
+
+  // Calculate devotional pool for Initiates (POW/2, rounded down)
+  if (cultName) {
+    CharacterData.devotionalPool = Math.floor(CharacterData.characteristics.POW / 2);
+  } else {
+    CharacterData.devotionalPool = 0;
+    CharacterData.miracles = [];
+  }
 
   // Auto-add Devotion skill if a cult is selected and it's not already present
   if (cultName && !CharacterData.culturalSkills['Devotion']) {
