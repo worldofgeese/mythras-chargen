@@ -15164,6 +15164,120 @@ App.selectCult = function(cultName) {
   this.renderCurrentStep();
 };
 
+App.renderMiraclePicker = function(container) {
+  if (!CharacterData.cult) {
+    container.style.display = 'none';
+    return;
+  }
+
+  // Get miracles for selected cult
+  const cultMiracles = MIRACLES_DATA.cults[CharacterData.cult]?.miracles || [];
+  const initiateMiracles = cultMiracles.filter(m => m.rank === 'initiate');
+
+  if (initiateMiracles.length === 0) {
+    container.style.display = 'none';
+    return;
+  }
+
+  // Show the picker
+  container.style.display = 'block';
+
+  // Get character's rune affinities for matching
+  const selectedRunes = [
+    CharacterData.runeAffinities.primary,
+    CharacterData.runeAffinities.secondary,
+    CharacterData.runeAffinities.tertiary
+  ].filter(r => r);
+
+  // Calculate selection stats
+  const maxPicks = CharacterData.devotionalPool;
+  const currentPicks = CharacterData.miracles.length;
+  const remaining = maxPicks - currentPicks;
+
+  container.innerHTML = `
+    <h3 style="margin-top: 0;">Select Initiate Miracles</h3>
+    <div style="background: #f5f5f5; padding: 8px; margin-bottom: 12px; border-left: 3px solid #000;">
+      <strong>Devotional Pool:</strong> ${maxPicks} (POW/2)
+      <br>
+      <strong>Selected:</strong> ${currentPicks} / ${maxPicks}
+      <span style="color: ${remaining > 0 ? '#006400' : '#999'}; font-weight: 600; margin-left: 8px;">
+        ${remaining > 0 ? `${remaining} remaining` : 'Pool full'}
+      </span>
+    </div>
+    <div id="miracle-cards" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 12px;">
+      ${initiateMiracles.map(miracle => {
+        const isSelected = CharacterData.miracles.includes(miracle.name);
+        const runeList = miracle.runes.join(', ');
+        const hasMatchingRune = miracle.runes.some(r => r === 'Any' || selectedRunes.includes(r));
+
+        return `
+          <div class="miracle-card ${isSelected ? 'selected' : ''} ${hasMatchingRune ? 'matching-rune' : ''}"
+               data-miracle="${miracle.name}"
+               onclick="App.toggleMiracle('${miracle.name.replace(/'/g, "\\'")}')">
+            <div style="font-weight: 600; margin-bottom: 4px;">${miracle.name}</div>
+            <div style="font-size: 11px; color: ${hasMatchingRune ? '#006400' : '#999'}; margin-bottom: 4px;">
+              ${hasMatchingRune ? '✓ ' : ''}Runes: ${runeList}
+            </div>
+            <div style="font-size: 10px; color: #666; font-style: italic;">
+              ${miracle.source === 'common' ? 'Common' : 'Cult-specific'}
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+    <style>
+      .miracle-card {
+        border: 2px solid #ccc;
+        background: #fff;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.2s;
+      }
+      .miracle-card:hover {
+        border-color: #666;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .miracle-card.matching-rune {
+        border-color: #90EE90;
+        background: #f0fff0;
+      }
+      .miracle-card.selected {
+        border-color: #000;
+        background: #e8f4f8;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      }
+      .miracle-card.selected.matching-rune {
+        border-color: #006400;
+        background: #e0ffe0;
+      }
+    </style>
+  `;
+};
+
+App.toggleMiracle = function(miracleName) {
+  const index = CharacterData.miracles.indexOf(miracleName);
+
+  if (index > -1) {
+    // Deselect
+    CharacterData.miracles.splice(index, 1);
+  } else {
+    // Select if not at pool limit
+    if (CharacterData.miracles.length < CharacterData.devotionalPool) {
+      CharacterData.miracles.push(miracleName);
+    }
+  }
+
+  this.saveToLocalStorage();
+
+  // Re-render the picker to update selection state
+  const pickerDiv = document.getElementById('miracle-picker');
+  if (pickerDiv) {
+    this.renderMiraclePicker(pickerDiv);
+  }
+};
+
 
 App.renderStep10 = function() {
   if (!CharacterData.career) {
@@ -16635,6 +16749,7 @@ App.renderPlayMagic = function() {
 
   // Get cult info if selected
   let cultInfo = '';
+  let miraclesInfo = '';
   if (CharacterData.cult) {
     const cult = CULTS_DATA.find(c => c.name === CharacterData.cult);
     if (cult) {
@@ -16648,10 +16763,37 @@ App.renderPlayMagic = function() {
         ` : ''}
       `;
     }
+
+    // Display selected miracles
+    if (CharacterData.miracles && CharacterData.miracles.length > 0) {
+      // Get rune affinities for display
+      const runeValues = CharacterData.attributes.runeAffinities || {};
+      const runeList = [
+        CharacterData.runeAffinities.primary ? `${CharacterData.runeAffinities.primary} (${runeValues.primary || 0}%)` : null,
+        CharacterData.runeAffinities.secondary ? `${CharacterData.runeAffinities.secondary} (${runeValues.secondary || 0}%)` : null,
+        CharacterData.runeAffinities.tertiary ? `${CharacterData.runeAffinities.tertiary} (${runeValues.tertiary || 0}%)` : null
+      ].filter(r => r).join(', ');
+
+      miraclesInfo = `
+        <h3>Theist Miracles (Initiate)</h3>
+        <p style="font-size: 0.9em;"><strong>Rune Affinities:</strong> ${runeList}</p>
+        <p style="font-size: 0.9em;"><strong>Devotional Pool:</strong> ${CharacterData.devotionalPool}</p>
+        <ul data-testid="miracles-list">
+          ${CharacterData.miracles.map(miracleName => {
+            // Get miracle details from MIRACLES_DATA for rune info
+            const cultMiracles = MIRACLES_DATA.cults[CharacterData.cult]?.miracles || [];
+            const miracle = cultMiracles.find(m => m.name === miracleName);
+            const runeInfo = miracle ? ` [${miracle.runes.join(', ')}]` : '';
+            return `<li data-testid="miracle-name">${miracleName}${runeInfo}</li>`;
+          }).join('')}
+        </ul>
+      `;
+    }
   }
 
   container.innerHTML = `
     ${cultInfo}
+    ${miraclesInfo}
     <h3>Folk Magic (${folkMagicBase}%)</h3>
     <ul data-testid="folk-magic-spells">
       ${allSpells.map(spell => `<li data-testid="spell-name">${spell}</li>`).join('')}
