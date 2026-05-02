@@ -877,16 +877,19 @@ const BACKGROUND_EQUIPMENT = {
 // =============================================================================
 // FIX 2: Disambiguation Lists for (any) skills
 // =============================================================================
+// Language-to-homeland mapping per ADR-004
+// Source: Adventures in Glorantha + RQG p.391
 const DISAMBIGUATION_LISTS = {
   'Language': {
-    'Balazaring':     ['Balazaring', 'Heortling', 'Praxian', 'Tradetalk', 'Spirit Speech'],
-    'Esrolian':       ['Esrolian', 'Heortling', 'Tradetalk', 'Old Pavic', 'Stormspeech'],
-    'God Forgot':     ['God Forgotter', 'Tradetalk', 'Malkioni', 'Heortling'],
-    'Lunar Heartland': ['Pelorian', 'Tradetalk', 'New Pelorian', 'Stormspeech', 'Heortling'],
-    'Lunar Provincial': ['Local language', 'Tradetalk', 'New Pelorian', 'Heortling'],
+    'Balazaring':     ['Balazaring'], // Primitive — no Tradetalk
+    'Esrolian':       ['Esrolian', 'Tradetalk', 'Heortling', 'Old Pavic', 'Stormspeech'],
+    'God Forgot':     ['Brithini', 'Tradetalk', 'Malkioni', 'Heortling'],
+    'Lunar Heartland': ['New Pelorian', 'Tradetalk', 'Dara Happan', 'Stormspeech', 'Heortling'],
+    'Lunar Provincial': ['Local', 'Tradetalk', 'New Pelorian', 'Heortling', 'Tarshite'],
     'Praxian':        ['Praxian', 'Tradetalk', 'Spirit Speech', 'Heortling'],
     'Sartarite (Heortling)': ['Heortling', 'Tradetalk', 'Stormspeech', 'Old Pavic', 'Praxian'],
-    'Telmori Hsunchen': ['Telmori', 'Heortling', 'Tradetalk'],
+    'Tarshite':       ['Tarshite', 'Tradetalk', 'Heortling', 'New Pelorian'],
+    'Telmori Hsunchen': ['Heortling'], // Live in Sartar, no Tradetalk (primitive)
     '_default':       ['Tradetalk', 'Heortling', 'Praxian', 'Stormspeech', 'Old Pavic']
   },
   'Lore':    ['Alchemy', 'Animals', 'Astronomy', 'Cult', 'Earth', 'Farming', 'Herding', 'History', 'Human', 'Minerals', 'Military History', 'Plants', 'Regional', 'Sea', 'Strategy and Tactics', 'World'],
@@ -899,12 +902,13 @@ const DISAMBIGUATION_LISTS = {
 const CULTURE_NATIVE_LANGUAGE = {
   'Balazaring':           'Language (Balazaring)',
   'Esrolian':             'Language (Esrolian)',
-  'God Forgot':           'Language (God Forgotter)',
-  'Lunar Heartland':      'Language (Pelorian)',
-  'Lunar Provincial':     'Language (Local language)',
+  'God Forgot':           'Language (Brithini)',
+  'Lunar Heartland':      'Language (New Pelorian)',
+  'Lunar Provincial':     'Language (Local)',
   'Praxian':              'Language (Praxian)',
   'Sartarite (Heortling)':'Language (Heortling)',
-  'Telmori Hsunchen':     'Language (Telmori)'
+  'Tarshite':             'Language (Tarshite)',
+  'Telmori Hsunchen':     'Language (Heortling)'
 };
 
 /**
@@ -16853,6 +16857,47 @@ App.renderPlayMagic = function() {
             return `<li data-testid="miracle-name">${miracleName}${runeInfo}</li>`;
           }).join('')}
         </ul>
+
+        <details style="margin-top: 12px; font-size: 0.85em; border: 1px solid #ccc; padding: 8px; background: #f9f9f9;">
+          <summary style="cursor: pointer; font-weight: 600; user-select: none;">Casting Rules Reference</summary>
+          <table style="width: 100%; margin-top: 8px; font-size: 11px; border-collapse: collapse;">
+            <thead>
+              <tr style="background: #000; color: #fff;">
+                <th style="padding: 4px; text-align: left;">Cult Access</th>
+                <th style="padding: 4px; text-align: left;">Your Rune</th>
+                <th style="padding: 4px; text-align: left;">Casting Rule</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid #ddd;">
+                <td style="padding: 4px;">Allowed for all Runes</td>
+                <td style="padding: 4px;">Any</td>
+                <td style="padding: 4px;">Use any Rune Affinity you possess</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #ddd;">
+                <td style="padding: 4px;">Allowed for specific Rune</td>
+                <td style="padding: 4px;">Have it</td>
+                <td style="padding: 4px;">Must use that Rune Affinity</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #ddd;">
+                <td style="padding: 4px;">Allowed for specific Rune</td>
+                <td style="padding: 4px;">Don't have it</td>
+                <td style="padding: 4px;">Cannot cast (cult mystery)</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #ddd;">
+                <td style="padding: 4px;">Cult does not have Rune</td>
+                <td style="padding: 4px;">Have it</td>
+                <td style="padding: 4px;">Can cast using your Rune Affinity</td>
+              </tr>
+              <tr>
+                <td style="padding: 4px;">Cult has spell, not Rune</td>
+                <td style="padding: 4px;">Don't have it</td>
+                <td style="padding: 4px;">Must learn that rune</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="margin-top: 8px; font-size: 10px; color: #666; font-style: italic;">Source: ADR-002, Hannu casting rules</p>
+        </details>
       `;
     }
   }
