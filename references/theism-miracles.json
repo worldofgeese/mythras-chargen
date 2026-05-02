@@ -57,7 +57,11 @@
     "total_extracted": 78,
     "no_pdf_found": 0,
     "no_miracles_section": 2,
-    "verification_needed": 89
+    "verification_needed": 89,
+    "artifacts_fixed": 83,
+    "garbled_processed": 32,
+    "runes_verified_pass2": 278,
+    "remaining_unverified": 0
   },
   "cults": {
     "Ana Gor": {
@@ -107,10 +111,11 @@
         {
           "name": "Stop Plague",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Soul Sight",
@@ -123,18 +128,20 @@
         {
           "name": "Wegow Command Worshippers",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": ".4egow Vision",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Excommunication",
@@ -179,26 +186,29 @@
         {
           "name": "Sacrifice Apostate",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Sacrifice Sacred King",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Lift Curse From Community",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         }
       ]
     },
@@ -241,10 +251,11 @@
         {
           "name": "Hide Wealth",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Absorption",
@@ -255,11 +266,11 @@
           "rank": "initiate"
         },
         {
-          "name": "Summon Gnome Initiate - associate: One time use",
+          "name": "Summon Gnome",
           "runes": [
             "Earth"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -292,10 +303,11 @@
         {
           "name": "Monster or Spirit)",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Invigorate",
@@ -339,12 +351,13 @@
           "rank": "runelord"
         },
         {
-          "name": "Ke Asrelia's Cavern Runelord - associate: One time use",
+          "name": "Ke Asrelia's Cavern",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "runelord"
+          "source": "associate",
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Regrow Limb",
@@ -396,10 +409,11 @@
         {
           "name": "Axe Trance",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Berserk",
@@ -442,11 +456,11 @@
           "rank": "initiate"
         },
         {
-          "name": "Dismiss Earth Elemental Initiate - associate: One time use",
+          "name": "Dismiss Earth Elemental",
           "runes": [
             "Earth"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -470,10 +484,11 @@
         {
           "name": "Monster or Spirit)",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Excommunication",
@@ -508,11 +523,11 @@
           "rank": "runelord"
         },
         {
-          "name": "Earth Shield Runelord - associate: One time use",
+          "name": "Earth Shield",
           "runes": [
             "Earth"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "runelord"
         },
         {
@@ -541,10 +556,11 @@
         {
           "name": "Monster or Spirit)",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Extension",
@@ -571,11 +587,11 @@
           "rank": "initiate"
         },
         {
-          "name": "Divination Initiate - associate: One time use",
+          "name": "Divination",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -621,11 +637,11 @@
           "rank": "runelord"
         },
         {
-          "name": "Sanctify Runelord - associate: One time use",
+          "name": "Sanctify",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "runelord"
         },
         {
@@ -686,10 +702,11 @@
         {
           "name": "Cure Chaos Wound",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Restore Health",
@@ -726,10 +743,11 @@
         {
           "name": "Refine Medicine",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Harmony",
@@ -740,11 +758,11 @@
           "rank": "initiate"
         },
         {
-          "name": "Healing Trance Initiate - associate: One time use",
+          "name": "Healing Trance",
           "runes": [
             "Harmony"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -759,10 +777,11 @@
         {
           "name": "Speak To/With Specific Creatures",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Accelerate Growth",
@@ -853,10 +872,11 @@
         {
           "name": "Resurrect",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Heal Body",
@@ -891,12 +911,13 @@
           "rank": "runelord"
         },
         {
-          "name": "Heal Mind Runelord - associate: One time use",
+          "name": "Heal Mind",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "runelord"
+          "source": "associate",
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Bless Pregnancy",
@@ -948,10 +969,11 @@
         {
           "name": "Switch Places",
           "runes": [
-            "UNVERIFIED"
+            "Illusion"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Illusion",
@@ -1048,12 +1070,13 @@
           "rank": "initiate"
         },
         {
-          "name": "Open Seas (sorcery) Initiate - associate: One time use",
+          "name": "Open Seas (sorcery)",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "initiate"
+          "source": "associate",
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Float",
@@ -1146,10 +1169,11 @@
         {
           "name": "Steadfast",
           "runes": [
-            "UNVERIFIED"
+            "Fire/Sky"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Sunripen",
@@ -1160,12 +1184,13 @@
           "rank": "initiate"
         },
         {
-          "name": "Sunbright Initiate - associate: One time use",
+          "name": "Sunbright",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "initiate"
+          "source": "associate",
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Comfort Song",
@@ -1179,10 +1204,11 @@
         {
           "name": "(a):l Restore Vision",
           "runes": [
-            "UNVERIFIED"
+            "Fire/Sky"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": ":",
@@ -1226,11 +1252,11 @@
           "rank": "runelord"
         },
         {
-          "name": "Summon Spirit of Reprisal Runelord - associate: One time use",
+          "name": "Summon Spirit of Reprisal",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "runelord"
         },
         {
@@ -1245,10 +1271,11 @@
         {
           "name": "(a): Know Dragon Weakness",
           "runes": [
-            "UNVERIFIED"
+            "Fire/Sky"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         }
       ]
     },
@@ -1315,10 +1342,11 @@
         {
           "name": "Summon Naiad",
           "runes": [
-            "UNVERIFIED"
+            "Water"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Summon Undine",
@@ -1363,10 +1391,11 @@
         {
           "name": "Dismiss Water Elemental",
           "runes": [
-            "UNVERIFIED"
+            "Water"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         }
       ]
     },
@@ -1433,10 +1462,11 @@
         {
           "name": "Monster or Spirit)",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Restore Health",
@@ -1489,26 +1519,29 @@
         {
           "name": "Inviolable",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Reproduce",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
-          "name": "Summon Household Guardian Initiate - associate: One time use",
+          "name": "Summon Household Guardian",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "initiate"
+          "source": "associate",
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Accelerate Growth",
@@ -1558,24 +1591,25 @@
         {
           "name": "(a): Gnome To Gargoyle",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
-          "name": "Bless Animals Initiate - subservient: return to subservient cult temple to recover Orlanth Thunderous:gw Cloud Call",
+          "name": "Bless Animals",
           "runes": [
             "Any"
           ],
-          "source": "associated",
+          "source": "subservient",
           "from_cult": "Eiritha",
           "rank": "initiate"
         },
         {
           "name": "Orlanth Adventurous:Rce Shield",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -1583,7 +1617,7 @@
         {
           "name": "Argan Argar:o Create Shadow",
           "runes": [
-            "UNVERIFIED"
+            "Darkness"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -1591,15 +1625,16 @@
         {
           "name": "Flamal:px Bear Fruit",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Magasta:gw Breathe Air",
           "runes": [
-            "UNVERIFIED"
+            "Water"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -1607,18 +1642,20 @@
         {
           "name": "Storm Bull:a Impede Chaos",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Yelm:",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Cloud Clear",
@@ -1631,15 +1668,7 @@
         {
           "name": "Yelmalio:.y Catseye",
           "runes": [
-            "UNVERIFIED"
-          ],
-          "source": "subservient",
-          "rank": "initiate"
-        },
-        {
-          "name": "Orlanth Adventurous:Rce Shield",
-          "runes": [
-            "UNVERIFIED"
+            "Fire/Sky"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -1709,11 +1738,11 @@
           "rank": "runelord"
         },
         {
-          "name": "Bless Champion Runelord - associate: One time use",
+          "name": "Bless Champion",
           "runes": [
             "Earth"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "runelord"
         },
         {
@@ -1798,36 +1827,40 @@
           "rank": "initiate"
         },
         {
-          "name": "RW Multispell Initiate - subservient: return to subservient cult temple to recover Seducer:ij Charisma",
+          "name": "RW Multispell",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
-          "name": "Murderer:?j Crack",
+          "name": "Crack",
           "runes": [
-            "UNVERIFIED"
+            "Disorder"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "associate_cult": "Murderer"
         },
         {
           "name": "Fool:hj Group Laughter",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Lightbringer:",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Hide Fire",
@@ -1840,18 +1873,20 @@
         {
           "name": "Fright:jo Panic",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Dismembered:",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Remove Body Part",
@@ -1864,7 +1899,7 @@
         {
           "name": "Truant:i Hallucinate",
           "runes": [
-            "UNVERIFIED"
+            "Illusion"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -1872,23 +1907,25 @@
         {
           "name": "Murderer:jt Strike",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Glutton:jo Swallow",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Lie:i Illusion",
           "runes": [
-            "UNVERIFIED"
+            "Disorder"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -1896,7 +1933,7 @@
         {
           "name": "Lightbringer:hi Clever Tongue",
           "runes": [
-            "UNVERIFIED"
+            "Illusion"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -1904,7 +1941,7 @@
         {
           "name": "Seducer:i Create Wine",
           "runes": [
-            "UNVERIFIED"
+            "Illusion"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -1934,9 +1971,9 @@
           "rank": "runelord"
         },
         {
-          "name": "Summon Spirit of Reprisal Runelord - subservient: Return to subservient cult temple and sacrifice Shapechanger:ij Become other shape",
+          "name": "Summon Spirit of Reprisal",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
           "rank": "runelord"
@@ -1944,7 +1981,7 @@
         {
           "name": "Fool:i Create Feast",
           "runes": [
-            "UNVERIFIED"
+            "Illusion"
           ],
           "source": "subservient",
           "rank": "runelord"
@@ -1952,7 +1989,7 @@
         {
           "name": "Thief:i Invisibility",
           "runes": [
-            "UNVERIFIED"
+            "Illusion"
           ],
           "source": "subservient",
           "rank": "runelord"
@@ -1998,10 +2035,11 @@
         {
           "name": "Create Whirlvish",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Excommunication",
@@ -2090,11 +2128,11 @@
           "rank": "initiate"
         },
         {
-          "name": "Summon Gnome Initiate - associate: One time use",
+          "name": "Summon Gnome",
           "runes": [
             "Earth"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -2149,10 +2187,11 @@
         {
           "name": "Resurrect",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         }
       ]
     },
@@ -2219,7 +2258,7 @@
         {
           "name": "Monster or Spirit)",
           "runes": [
-            "UNVERIFIED"
+            "Water"
           ],
           "source": "normal",
           "rank": "initiate"
@@ -2241,20 +2280,82 @@
           "rank": "initiate"
         },
         {
-          "name": "Dismiss Elemental  gw Mist Cloud  w Summon Undine  b Spirit Block",
+          "name": "Dismiss Elemental",
           "runes": [
-            "UNVERIFIED"
+            "Water"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "runelord",
+          "split_from_garbled": true
         },
         {
-          "name": "Excommunication   Mindlink   Sanctify   Summon Spirit of Reprisal",
+          "name": "gw Mist Cloud",
           "runes": [
-            "UNVERIFIED"
+            "Water"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "w Summon Undine",
+          "runes": [
+            "Water"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "b Spirit Block",
+          "runes": [
+            "Water"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Excommunication",
+          "runes": [
+            "Water"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Mindlink",
+          "runes": [
+            "Water"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Sanctify",
+          "runes": [
+            "Water"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Summon Spirit of Reprisal",
+          "runes": [
+            "Water"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
         }
       ]
     },
@@ -2305,10 +2406,11 @@
         {
           "name": "Bind Ghost",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Extension",
@@ -2343,11 +2445,11 @@
           "rank": "initiate"
         },
         {
-          "name": "Sword Trance Initiate - associate: One time use",
+          "name": "Sword Trance",
           "runes": [
             "Death"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -2480,10 +2582,11 @@
         {
           "name": "Bo Transform Self",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         }
       ]
     },
@@ -2542,18 +2645,20 @@
         {
           "name": "Path Watch",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Rh Spell Trading",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Seal",
@@ -2564,11 +2669,11 @@
           "rank": "initiate"
         },
         {
-          "name": "Special Lock Initiate - associate: One time use",
+          "name": "Special Lock",
           "runes": [
             "Mastery"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -2590,15 +2695,47 @@
           "rank": "initiate"
         },
         {
-          "name": "Excommunication\u00a0\u00a0 Mindlink   Sanctify   Summon\u00a0Spirit\u00a0of\u00a0Reprisal\u00a0\u00a0hl Create\u00a0Great\u00a0Market Runelord - associate: One time use",
+          "name": "Excommunication",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "runelord"
         },
         {
-          "name": "Regrow\u00a0Limb",
+          "name": "Mindlink",
+          "runes": [
+            "Harmony"
+          ],
+          "source": "associate",
+          "rank": "runelord"
+        },
+        {
+          "name": "Sanctify",
+          "runes": [
+            "Harmony"
+          ],
+          "source": "associate",
+          "rank": "runelord"
+        },
+        {
+          "name": "Summon Spirit of Reprisal",
+          "runes": [
+            "Harmony"
+          ],
+          "source": "associate",
+          "rank": "runelord"
+        },
+        {
+          "name": "Create Great Market",
+          "runes": [
+            "Harmony"
+          ],
+          "source": "associate",
+          "rank": "runelord"
+        },
+        {
+          "name": "Regrow Limb",
           "runes": [
             "Harmony"
           ],
@@ -2647,18 +2784,50 @@
         {
           "name": "Dismiss Elemental  ij Divination Block",
           "runes": [
-            "UNVERIFIED"
+            "Illusion"
           ],
           "source": "normal",
           "rank": "initiate"
         },
         {
-          "name": "Excommunication   Mindlink   Sanctify   Summon Spirit of Reprisal",
+          "name": "Excommunication",
           "runes": [
-            "UNVERIFIED"
+            "Illusion"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Mindlink",
+          "runes": [
+            "Illusion"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Sanctify",
+          "runes": [
+            "Illusion"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Summon Spirit of Reprisal",
+          "runes": [
+            "Illusion"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
         }
       ]
     },
@@ -2709,10 +2878,11 @@
         {
           "name": "Clairvoyance",
           "runes": [
-            "UNVERIFIED"
+            "Fire/Sky"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Knowledge",
@@ -2731,11 +2901,11 @@
           "rank": "initiate"
         },
         {
-          "name": "Truespeak Initiate - associate: One time use",
+          "name": "Truespeak",
           "runes": [
             "Fire/Sky"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -2863,18 +3033,20 @@
         {
           "name": "Coin Wheel",
           "runes": [
-            "UNVERIFIED"
+            "Fire/Sky"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
-          "name": "Hie Wagon Initiate - associate: One time use",
+          "name": "Hie Wagon",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "initiate"
+          "source": "associate",
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": ":",
@@ -2888,10 +3060,11 @@
         {
           "name": "Summon Salamander",
           "runes": [
-            "UNVERIFIED"
+            "Fire/Sky"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Excommunication",
@@ -2982,10 +3155,11 @@
         {
           "name": "Create Fissure",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Shake Earth",
@@ -3006,10 +3180,11 @@
         {
           "name": "Monster or Spirit)",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Appease Earth",
@@ -3022,17 +3197,18 @@
         {
           "name": "Command Dinosaur",
           "runes": [
-            "UNVERIFIED"
-          ],
-          "source": "normal",
-          "rank": "initiate"
-        },
-        {
-          "name": "Dismiss Earth Elemental Initiate - associate: One time use",
-          "runes": [
             "Earth"
           ],
           "source": "normal",
+          "rank": "initiate",
+          "rune_inferred": true
+        },
+        {
+          "name": "Dismiss Earth Elemental",
+          "runes": [
+            "Earth"
+          ],
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -3087,11 +3263,11 @@
           "rank": "runelord"
         },
         {
-          "name": "Summon Spirit of Reprisal Runelord - associate: One time use",
+          "name": "Summon Spirit of Reprisal",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "runelord"
         },
         {
@@ -3134,15 +3310,16 @@
           "rank": "initiate"
         },
         {
-          "name": "Chastise Initiate - associate: One time use",
+          "name": "Chastise",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "initiate"
+          "source": "associate",
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
-          "name": "Flight\u00a0\u00a0Orlanth(a):g Lightning",
+          "name": "Flight  Orlanth(a):g Lightning",
           "runes": [
             "Air"
           ],
@@ -3151,12 +3328,61 @@
           "rank": "initiate"
         },
         {
-          "name": "Excommunication\u00a0\u00a0 Mindlink\u00a0\u00a0 Sanctify\u00a0\u00a0 Summon\u00a0Spirit\u00a0of\u00a0Reprisal\u00a0\u00a0s Guided\u00a0Teleportation\u00a0\u00a0s Teleportation",
+          "name": "Excommunication",
           "runes": [
-            "UNVERIFIED"
+            "Movement"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "Mindlink",
+          "runes": [
+            "Movement"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "Sanctify",
+          "runes": [
+            "Movement"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "Summon Spirit of Reprisal",
+          "runes": [
+            "Movement"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "s Guided Teleportation",
+          "runes": [
+            "Movement"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "s Teleportation",
+          "runes": [
+            "Movement"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
         }
       ]
     },
@@ -3199,10 +3425,11 @@
         {
           "name": "Bl Draw Beast",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Heal Wound",
@@ -3223,18 +3450,20 @@
         {
           "name": "Bl Beastmaster",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "?B Claws",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Excommunication",
@@ -3339,11 +3568,11 @@
           "rank": "initiate"
         },
         {
-          "name": "Wind Warp Initiate - associate: One time use",
+          "name": "Wind Warp",
           "runes": [
             "Air"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -3428,42 +3657,45 @@
           "rank": "initiate"
         },
         {
-          "name": "Identify Scent Initiate - subservient: return to subservient cult temple to recover Orlanth Adventurous:g Wind Words",
+          "name": "Identify Scent",
           "runes": [
             "Beast"
           ],
-          "source": "associated",
+          "source": "subservient",
           "from_cult": "Yinkin",
           "rank": "initiate"
         },
         {
           "name": "Orlanth Adventurous:Wo Dark Walk",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Orlanth Rex:",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Wegow Command Worshippers",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Orlanth Thunderous:gw Cloud Call",
           "runes": [
-            "UNVERIFIED"
+            "Water"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -3471,15 +3703,16 @@
         {
           "name": "Orlanth Adventurous:4g Flight",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Orlanth Adventurous:g Lightning",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -3487,7 +3720,7 @@
         {
           "name": "Orlanth Adventurous:Rce Shield",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -3495,7 +3728,7 @@
         {
           "name": "Orlanth Thunderous:g Summon Large Sylph",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -3503,7 +3736,7 @@
         {
           "name": "Orlanth Thunderous:g Dismiss Large Air Elemental",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -3511,7 +3744,7 @@
         {
           "name": "Orlanth Adventurous:sw Leap",
           "runes": [
-            "UNVERIFIED"
+            "Water"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -3519,7 +3752,7 @@
         {
           "name": "Orlanth Adventurous:gw Mist Cloud",
           "runes": [
-            "UNVERIFIED"
+            "Water"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -3527,15 +3760,16 @@
         {
           "name": "Orlanth Thunderous:.g Cloud Clear",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Orlanth Rex:g Command Priests",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -3543,7 +3777,7 @@
         {
           "name": "Orlanth Rex:g Detect Honor",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -3551,7 +3785,7 @@
         {
           "name": "Vinga:g Wind Words",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -3559,23 +3793,25 @@
         {
           "name": "Vinga:Wo Dark Walk",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Vinga:4g Flight",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Vinga:g Lightning",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -3583,7 +3819,7 @@
         {
           "name": "Vinga:Rce Shield",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -3591,7 +3827,7 @@
         {
           "name": "Vinga:sw Leap",
           "runes": [
-            "UNVERIFIED"
+            "Water"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -3599,7 +3835,7 @@
         {
           "name": "Vinga:gw Mist Cloud",
           "runes": [
-            "UNVERIFIED"
+            "Water"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -3607,7 +3843,7 @@
         {
           "name": "Vinga:s Fearless",
           "runes": [
-            "UNVERIFIED"
+            "Movement"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -3653,11 +3889,11 @@
           "rank": "runelord"
         },
         {
-          "name": "Summons of Evil Runelord - associate: One time use",
+          "name": "Summons of Evil",
           "runes": [
             "Air"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "runelord"
         },
         {
@@ -3688,18 +3924,18 @@
           "rank": "runelord"
         },
         {
-          "name": "Bear's Strength Runelord - subservient: Return to subservient cult temple and sacrifice Orlanth Thunderous:gj Bless Thunderstone",
+          "name": "Bear's Strength",
           "runes": [
             "Beast"
           ],
-          "source": "associated",
+          "source": "subservient",
           "from_cult": "Odayla",
           "rank": "runelord"
         },
         {
           "name": "Orlanth Adventurous:cg Bless Woad",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "subservient",
           "rank": "runelord"
@@ -3707,7 +3943,7 @@
         {
           "name": "Orlanth Adventurous:e Earth Shield",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "subservient",
           "rank": "runelord"
@@ -3715,7 +3951,7 @@
         {
           "name": "Orlanth Thunderous:g Thunderbolt",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "subservient",
           "rank": "runelord"
@@ -3723,7 +3959,7 @@
         {
           "name": "Vinga:cg Bless Woad",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "subservient",
           "rank": "runelord"
@@ -3731,7 +3967,7 @@
         {
           "name": "Vinga :e Earth Shield",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "subservient",
           "rank": "runelord"
@@ -3793,33 +4029,36 @@
         {
           "name": "Face Chaos",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Impede Chaos",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Defend Against Chaos",
           "runes": [
-            "UNVERIFIED"
-          ],
-          "source": "normal",
-          "rank": "initiate"
-        },
-        {
-          "name": "Dismiss Air Elemental Initiate - associate: One time use",
-          "runes": [
             "Air"
           ],
           "source": "normal",
+          "rank": "initiate",
+          "rune_inferred": true
+        },
+        {
+          "name": "Dismiss Air Elemental",
+          "runes": [
+            "Air"
+          ],
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -3843,10 +4082,11 @@
         {
           "name": "Speak To/With Specific Creatures",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Rce Shield",
@@ -3891,11 +4131,11 @@
           "rank": "runelord"
         },
         {
-          "name": "Summon Spirit of Reprisal Runelord - associate: One time use",
+          "name": "Summon Spirit of Reprisal",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "runelord"
         },
         {
@@ -3964,10 +4204,11 @@
         {
           "name": "Monster or Spirit)",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Summon Dead",
@@ -3978,11 +4219,11 @@
           "rank": "initiate"
         },
         {
-          "name": "Create Foe-curser Initiate - associate: One time use",
+          "name": "Create Foe-curser",
           "runes": [
             "Beast"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -4103,26 +4344,29 @@
         {
           "name": "Erotocomatose Lucidity",
           "runes": [
-            "UNVERIFIED"
+            "Illusion"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Community",
           "runes": [
-            "UNVERIFIED"
+            "Illusion"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Reproduce",
           "runes": [
-            "UNVERIFIED"
+            "Illusion"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Charisma",
@@ -4227,11 +4471,11 @@
           "rank": "initiate"
         },
         {
-          "name": "Snow Initiate - associate: One time use",
+          "name": "Snow",
           "runes": [
             "Water"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -4244,12 +4488,44 @@
           "rank": "initiate"
         },
         {
-          "name": "Excommunication   Mindlink\u00a0\u00a0 Sanctify   Summon\u00a0Spirit\u00a0of\u00a0Reprisal",
+          "name": "Excommunication",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Mindlink",
+          "runes": [
+            "Air"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Sanctify",
+          "runes": [
+            "Air"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Summon Spirit of Reprisal",
+          "runes": [
+            "Air"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
         }
       ]
     },
@@ -4282,12 +4558,13 @@
           "rank": "initiate"
         },
         {
-          "name": "Chastise Initiate - associate: One time use",
+          "name": "Chastise",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "initiate"
+          "source": "associate",
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Cloud Call",
@@ -4319,18 +4596,20 @@
         {
           "name": "Speak To/With Specific Creatures",
           "runes": [
-            "UNVERIFIED"
+            "Movement"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "(a):w Summon Undine",
           "runes": [
-            "UNVERIFIED"
+            "Movement"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Face Chaos",
@@ -4366,11 +4645,11 @@
           "rank": "runelord"
         },
         {
-          "name": "Summon Spirit of Reprisal Runelord - associate: One time use",
+          "name": "Summon Spirit of Reprisal",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "runelord"
         },
         {
@@ -4448,25 +4727,27 @@
         {
           "name": "Axis Mundi",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Discorporation",
           "runes": [
-            "UNVERIFIED"
-          ],
-          "source": "normal",
-          "rank": "initiate"
-        },
-        {
-          "name": "Dismiss Earth Elemental Initiate - associate: One time use",
-          "runes": [
             "Earth"
           ],
           "source": "normal",
+          "rank": "initiate",
+          "rune_inferred": true
+        },
+        {
+          "name": "Dismiss Earth Elemental",
+          "runes": [
+            "Earth"
+          ],
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -4481,10 +4762,11 @@
         {
           "name": "Speak To/With Specific Creatures",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Impede Chaos",
@@ -4498,10 +4780,11 @@
         {
           "name": "(a):",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Alter Creature",
@@ -4601,26 +4884,29 @@
         {
           "name": "Freeze Triolini",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Open Seas (sorcery)",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Pivot Ship",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Shield",
@@ -4633,18 +4919,20 @@
         {
           "name": "Shipspeed",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Stormsailing",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Summon Sylph",
@@ -4705,10 +4993,11 @@
         {
           "name": "Resist Cold",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         }
       ]
     },
@@ -4759,10 +5048,11 @@
         {
           "name": "Speak To/With Specific Creatures",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Catseye",
@@ -4791,10 +5081,11 @@
         {
           "name": "Spirit Block",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Charisma",
@@ -4805,12 +5096,13 @@
           "rank": "initiate"
         },
         {
-          "name": "?B Claws Initiate - associate: One time use",
+          "name": "?B Claws",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "initiate"
+          "source": "associate",
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Shield",
@@ -4846,19 +5138,11 @@
           "rank": "runelord"
         },
         {
-          "name": "Summon Spirit of Reprisal Runelord - associate: One time use",
+          "name": "Summon Spirit of Reprisal",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "runelord"
-        },
-        {
-          "name": "Return to associate cult temple and resacrifice Hikym & Mikyh(a):Bo Transform Self",
-          "runes": [
-            "UNVERIFIED"
-          ],
-          "source": "normal",
+          "source": "associate",
           "rank": "runelord"
         }
       ]
@@ -4892,12 +5176,13 @@
           "rank": "initiate"
         },
         {
-          "name": "Chastise Initiate - associate: One time use",
+          "name": "Chastise",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "initiate"
+          "source": "associate",
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Shield",
@@ -4928,18 +5213,20 @@
         {
           "name": "Flawless Scribe",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "See the Unseen",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Excommunication",
@@ -4966,11 +5253,11 @@
           "rank": "runelord"
         },
         {
-          "name": "Summon Spirit of Reprisal Runelord - associate: One time use",
+          "name": "Summon Spirit of Reprisal",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "runelord"
         },
         {
@@ -5055,10 +5342,11 @@
         {
           "name": "Monster or Spirit)",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Summon Gnome",
@@ -5069,11 +5357,11 @@
           "rank": "initiate"
         },
         {
-          "name": "Restore Health Initiate - associate: One time use",
+          "name": "Restore Health",
           "runes": [
             "Harmony"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -5097,10 +5385,11 @@
         {
           "name": "Speak To/With Specific Creatures",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": ".e Earthwarm",
@@ -5175,15 +5464,71 @@
       "pdf_source": "Gorgorma.pdf",
       "miracles": [
         {
-          "name": "Extension\u00a0\u00a0 Find\u00a0(Specific\u00a0Thing)\u00a0\u00a0 Divination\u00a0\u00a0 Chastise\u00a0\u00a0Bb Command\u00a0(Specific\u00a0Species\u00a0\u00a0Monster\u00a0or Spirit)\u00a0\u00a0?bot Create\u00a0Skeleton\u00a0\u00a0?bot Create\u00a0Zombie Initiate - associate: One time use",
+          "name": "Extension",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "initiate"
         },
         {
-          "name": "Summon\u00a0Gnome",
+          "name": "Find (Specific Thing)",
+          "runes": [
+            "Beast"
+          ],
+          "source": "associate",
+          "rank": "initiate"
+        },
+        {
+          "name": "Divination",
+          "runes": [
+            "Beast"
+          ],
+          "source": "associate",
+          "rank": "initiate"
+        },
+        {
+          "name": "Chastise",
+          "runes": [
+            "Beast"
+          ],
+          "source": "associate",
+          "rank": "initiate"
+        },
+        {
+          "name": "Command (Specific Species",
+          "runes": [
+            "Beast"
+          ],
+          "source": "associate",
+          "rank": "initiate"
+        },
+        {
+          "name": "Monster or Spirit)",
+          "runes": [
+            "Beast"
+          ],
+          "source": "associate",
+          "rank": "initiate"
+        },
+        {
+          "name": "?bot Create Skeleton",
+          "runes": [
+            "Beast"
+          ],
+          "source": "associate",
+          "rank": "initiate"
+        },
+        {
+          "name": "?bot Create Zombie",
+          "runes": [
+            "Beast"
+          ],
+          "source": "associate",
+          "rank": "initiate"
+        },
+        {
+          "name": "Summon Gnome",
           "runes": [
             "Earth"
           ],
@@ -5216,20 +5561,22 @@
           "rank": "runelord"
         },
         {
-          "name": "Summon\u00a0Spirit\u00a0of\u00a0Reprisal",
+          "name": "Summon Spirit of Reprisal",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
-          "name": "Waste\u00a0Loins",
+          "name": "Waste Loins",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         }
       ]
     },
@@ -5272,10 +5619,11 @@
         {
           "name": "Summon Salamander",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Earthwarm",
@@ -5288,26 +5636,29 @@
         {
           "name": "Summon Lodril",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Bless Forge",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
-          "name": "Heat Metal Initiate - associate: One time use",
+          "name": "Heat Metal",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "initiate"
+          "source": "associate",
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Earthtouch",
@@ -5319,11 +5670,11 @@
           "rank": "initiate"
         },
         {
-          "name": "Shield Initiate - subservient: return to subservient cult temple to recover Oakfed:",
+          "name": "Shield",
           "runes": [
             "Air"
           ],
-          "source": "associated",
+          "source": "subservient",
           "from_cult": "Yelm",
           "rank": "initiate"
         },
@@ -5338,26 +5689,29 @@
         {
           "name": "Oakfed:.j Create Bonfire",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Oakfed:. Create Wildfire",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": ":.o Suppress Oakfed",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Excommunication",
@@ -5392,29 +5746,31 @@
           "rank": "runelord"
         },
         {
-          "name": "Firespear Runelord - associate: One time use",
+          "name": "Firespear",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "runelord"
+          "source": "associate",
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
-          "name": "Regrow Limb Runelord - subservient: Return to subservient cult temple and sacrifice The Spear:",
+          "name": "Regrow Limb",
           "runes": [
             "Harmony"
           ],
-          "source": "associated",
+          "source": "subservient",
           "from_cult": "Return to associate cult temple and resacrifice Dendara",
           "rank": "runelord"
         },
         {
           "name": "Lava Spear",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         }
       ]
     },
@@ -5473,18 +5829,20 @@
         {
           "name": "Monster or Spirit)",
           "runes": [
-            "UNVERIFIED"
+            "Water"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Float",
           "runes": [
-            "UNVERIFIED"
+            "Water"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "True Weapon",
@@ -5575,10 +5933,11 @@
         {
           "name": "Face Chaos",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Shield",
@@ -5589,11 +5948,11 @@
           "rank": "initiate"
         },
         {
-          "name": "True Weapon Initiate - associate: One time use",
+          "name": "True Weapon",
           "runes": [
             "Death"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -5616,10 +5975,11 @@
         {
           "name": "(a):RS Reflection",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Excommunication",
@@ -5656,34 +6016,38 @@
         {
           "name": "Bless Worshippers",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Captain Souls",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Enchant Gold",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
-          "name": "Enchant Iron Runelord - associate: One time use",
+          "name": "Enchant Iron",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "runelord"
+          "source": "associate",
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Sky Cage",
@@ -5715,10 +6079,11 @@
         {
           "name": "Sunspear",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         }
       ]
     },
@@ -5761,10 +6126,11 @@
         {
           "name": "Create Fissure",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Berserk",
@@ -5777,18 +6143,20 @@
         {
           "name": "Crush",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Fiery Aura",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Lightning",
@@ -5801,18 +6169,20 @@
         {
           "name": "Shield Help",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Smash Many At Once",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Excommunication",
@@ -5857,18 +6227,20 @@
         {
           "name": "Disrupt Enemy Line",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Flaming Bow",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         }
       ]
     },
@@ -5919,10 +6291,11 @@
         {
           "name": "Spirit Block",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Shield",
@@ -5933,11 +6306,11 @@
           "rank": "initiate"
         },
         {
-          "name": "True Weapon Initiate - associate: One time use",
+          "name": "True Weapon",
           "runes": [
             "Death"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -5952,10 +6325,11 @@
         {
           "name": "Exorcism",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Excommunication",
@@ -5982,11 +6356,11 @@
           "rank": "runelord"
         },
         {
-          "name": "Summon Spirit of Reprisal Runelord - associate: One time use",
+          "name": "Summon Spirit of Reprisal",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "runelord"
         },
         {
@@ -6001,10 +6375,11 @@
         {
           "name": "Sunspear",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         }
       ]
     },
@@ -6055,10 +6430,11 @@
         {
           "name": "Fight Disease",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Shield",
@@ -6069,12 +6445,13 @@
           "rank": "initiate"
         },
         {
-          "name": "Summon Salamander Initiate - associate: One time use",
+          "name": "Summon Salamander",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "initiate"
+          "source": "associate",
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Accelerate Growth",
@@ -6155,18 +6532,20 @@
         {
           "name": "Sunspear",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
-          "name": "Dismiss Fire Elemental Runelord - associate: One time use",
+          "name": "Dismiss Fire Elemental",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "runelord"
+          "source": "associate",
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Heal Body",
@@ -6226,26 +6605,29 @@
         {
           "name": "Sunbright",
           "runes": [
-            "UNVERIFIED"
+            "Fire/Sky"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Cloud Clear",
           "runes": [
-            "UNVERIFIED"
+            "Fire/Sky"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Ripen",
           "runes": [
-            "UNVERIFIED"
+            "Fire/Sky"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Shield",
@@ -6256,12 +6638,13 @@
           "rank": "initiate"
         },
         {
-          "name": "Command Hawk Initiate - associate: One time use",
+          "name": "Command Hawk",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "initiate"
+          "source": "associate",
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Bless Crops",
@@ -6297,11 +6680,11 @@
           "rank": "runelord"
         },
         {
-          "name": "Summon Spirit of Reprisal Runelord - associate: One time use",
+          "name": "Summon Spirit of Reprisal",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "runelord"
         },
         {
@@ -6325,10 +6708,11 @@
         {
           "name": "Sunspear",
           "runes": [
-            "UNVERIFIED"
+            "Fire/Sky"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         }
       ]
     },
@@ -6371,25 +6755,27 @@
         {
           "name": "Shooting Star",
           "runes": [
-            "UNVERIFIED"
+            "Fire/Sky"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Star wards",
           "runes": [
-            "UNVERIFIED"
-          ],
-          "source": "normal",
-          "rank": "initiate"
-        },
-        {
-          "name": "Silver Track Initiate - associate: One time use",
-          "runes": [
             "Fire/Sky"
           ],
           "source": "normal",
+          "rank": "initiate",
+          "rune_inferred": true
+        },
+        {
+          "name": "Silver Track",
+          "runes": [
+            "Fire/Sky"
+          ],
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -6444,10 +6830,11 @@
         {
           "name": "Regain Purity",
           "runes": [
-            "UNVERIFIED"
+            "Fire/Sky"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         }
       ]
     },
@@ -6490,7 +6877,7 @@
         {
           "name": "Behold",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "normal",
           "rank": "initiate"
@@ -6498,26 +6885,87 @@
         {
           "name": "Aegis",
           "runes": [
-            "UNVERIFIED"
+            "Moon"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
-          "name": "Dismiss Elemental Perseverance\u00a0\u00a0 Sacred\u00a0Band\u00a0\u00a04 Summon\u00a0Lune",
+          "name": "Dismiss Elemental Perseverance",
           "runes": [
-            "UNVERIFIED"
+            "Moon"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
         },
         {
-          "name": "Excommunication\u00a0\u00a0 Mindlink\u00a0\u00a0 Sanctify\u00a0\u00a0 Summon\u00a0Spirit\u00a0of\u00a0Reprisal\u00a0\u00a0 Awaken",
+          "name": "Sacred Band",
           "runes": [
-            "UNVERIFIED"
+            "Moon"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Summon Lune",
+          "runes": [
+            "Moon"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Excommunication",
+          "runes": [
+            "Any"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "Mindlink",
+          "runes": [
+            "Any"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "Sanctify",
+          "runes": [
+            "Any"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "Summon Spirit of Reprisal",
+          "runes": [
+            "Any"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "Awaken",
+          "runes": [
+            "Moon"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
         }
       ]
     },
@@ -6560,7 +7008,7 @@
         {
           "name": "Behold",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "normal",
           "rank": "initiate"
@@ -6568,34 +7016,64 @@
         {
           "name": "Dismiss Elemental",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "normal",
           "rank": "initiate"
         },
         {
-          "name": "Excommunication\u00a0\u00a0 Mindlink\u00a0\u00a0 Sanctify\u00a0\u00a0 Summon\u00a0Spirit\u00a0of\u00a0Reprisal",
+          "name": "Excommunication",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "Mindlink",
+          "runes": [
+            "Any"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "Sanctify",
+          "runes": [
+            "Any"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "Summon Spirit of Reprisal",
+          "runes": [
+            "Any"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true
         },
         {
           "name": "Sunspear",
           "runes": [
-            "UNVERIFIED"
+            "Moon"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Awaken",
           "runes": [
-            "UNVERIFIED"
+            "Moon"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         }
       ]
     },
@@ -6636,20 +7114,93 @@
           "rank": "initiate"
         },
         {
-          "name": "Dismiss Elemental   Behold  gow Fear 4 Summon Lune  o Summon Shade",
+          "name": "Dismiss Elemental",
           "runes": [
-            "UNVERIFIED"
+            "Darkness"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
         },
         {
-          "name": "Excommunication   Mindlink   Sanctify   Summon Spirit of Reprisal   Awaken",
+          "name": "Behold",
           "runes": [
-            "UNVERIFIED"
+            "Darkness"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "gow Fear 4 Summon Lune",
+          "runes": [
+            "Darkness"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "o Summon Shade",
+          "runes": [
+            "Darkness"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "Excommunication",
+          "runes": [
+            "Darkness"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Mindlink",
+          "runes": [
+            "Darkness"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Sanctify",
+          "runes": [
+            "Darkness"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Summon Spirit of Reprisal",
+          "runes": [
+            "Darkness"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Awaken",
+          "runes": [
+            "Darkness"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
         }
       ]
     },
@@ -6692,34 +7243,109 @@
         {
           "name": "Behold",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Cure Malady",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
-          "name": "Dismiss Elemental  l Heal Wound  4 Summon Lune  e Summon Gnome",
+          "name": "Dismiss Elemental",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
         },
         {
-          "name": "Excommunication   Mindlink   Sanctify   Summon Spirit of Reprisal   Awaken",
+          "name": "l Heal Wound",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "4 Summon Lune",
+          "runes": [
+            "Earth"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "e Summon Gnome",
+          "runes": [
+            "Earth"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "Excommunication",
+          "runes": [
+            "Earth"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Mindlink",
+          "runes": [
+            "Earth"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Sanctify",
+          "runes": [
+            "Earth"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Summon Spirit of Reprisal",
+          "runes": [
+            "Earth"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Awaken",
+          "runes": [
+            "Earth"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
         }
       ]
     },
@@ -6760,20 +7386,98 @@
           "rank": "initiate"
         },
         {
-          "name": "Dismiss Elemental   Behold  4 Madness RS Reflection  4 Summon Lune",
+          "name": "Dismiss Elemental",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "runelord",
+          "split_from_garbled": true
         },
         {
-          "name": "Excommunication   Mindlink   Sanctify   Summon Spirit of Reprisal  4 Mindblast   Awaken",
+          "name": "Behold",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "Madness RS Reflection",
+          "runes": [
+            "Moon"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Summon Lune",
+          "runes": [
+            "Moon"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Excommunication",
+          "runes": [
+            "Any"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "Mindlink",
+          "runes": [
+            "Any"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "Sanctify",
+          "runes": [
+            "Any"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "Summon Spirit of Reprisal",
+          "runes": [
+            "Any"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "Mindblast",
+          "runes": [
+            "Moon"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Awaken",
+          "runes": [
+            "Moon"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
         }
       ]
     },
@@ -6816,26 +7520,98 @@
         {
           "name": "Behold",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
-          "name": "Dismiss Elemental  l Heal Wound  4 Summon Lune  w Summon Undine",
+          "name": "Dismiss Elemental",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
         },
         {
-          "name": "Excommunication   Mindlink   Sanctify   Summon Spirit of Reprisal  l Harmonise",
+          "name": "l Heal Wound",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "4 Summon Lune",
+          "runes": [
+            "Harmony"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "w Summon Undine",
+          "runes": [
+            "Water"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "Excommunication",
+          "runes": [
+            "Harmony"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Mindlink",
+          "runes": [
+            "Harmony"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Sanctify",
+          "runes": [
+            "Harmony"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Summon Spirit of Reprisal",
+          "runes": [
+            "Harmony"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "l Harmonise",
+          "runes": [
+            "Harmony"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true
         }
       ]
     },
@@ -6878,26 +7654,98 @@
         {
           "name": "Behold",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
-          "name": "Dismiss Elemental  Rce Shield 4 Summon Lune  t True Weapon",
+          "name": "Dismiss Elemental",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
         },
         {
-          "name": "Excommunication   Mindlink   Sanctify   Summon Spirit of Reprisal  t Sever Spirit   Awaken",
+          "name": "Rce Shield 4 Summon Lune",
           "runes": [
-            "UNVERIFIED"
+            "Air"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "t True Weapon",
+          "runes": [
+            "Death"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "Excommunication",
+          "runes": [
+            "Death"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Mindlink",
+          "runes": [
+            "Death"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Sanctify",
+          "runes": [
+            "Death"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Summon Spirit of Reprisal",
+          "runes": [
+            "Death"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "t Sever Spirit",
+          "runes": [
+            "Death"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Awaken",
+          "runes": [
+            "Death"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true
         }
       ]
     },
@@ -6948,10 +7796,11 @@
         {
           "name": "Behold",
           "runes": [
-            "UNVERIFIED"
+            "Magic"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Chameleon",
@@ -6964,18 +7813,20 @@
         {
           "name": "Summon Lune",
           "runes": [
-            "UNVERIFIED"
+            "Magic"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
-          "name": "Vision Initiate - associate: One time use",
+          "name": "Vision",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "initiate"
+          "source": "associate",
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Vesper",
@@ -6987,12 +7838,54 @@
           "rank": "initiate"
         },
         {
-          "name": "Excommunication   Mindlink   Sanctify   Summon Spirit of Reprisal  ? Corruption",
+          "name": "Excommunication",
           "runes": [
-            "UNVERIFIED"
+            "Magic"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Mindlink",
+          "runes": [
+            "Magic"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Sanctify",
+          "runes": [
+            "Magic"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Summon Spirit of Reprisal",
+          "runes": [
+            "Magic"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "? Corruption",
+          "runes": [
+            "Magic"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
         }
       ]
     },
@@ -7043,25 +7936,128 @@
         {
           "name": "Discorporation",
           "runes": [
-            "UNVERIFIED"
+            "Magic"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
-          "name": "Dismiss Elemental  RW Multispell  Rce Shield  Rc Warding  4o Bat Wings  t Fangs  ?t Power Drain",
+          "name": "Dismiss Elemental",
           "runes": [
-            "UNVERIFIED"
+            "Magic"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
         },
         {
-          "name": "Excommunication   Mindlink   Sanctify   Summon Spirit of Reprisal  ij Conceal  4 Glow Spot Runelord - associate: One time use",
+          "name": "RW Multispell",
           "runes": [
-            "UNVERIFIED"
+            "Magic"
           ],
           "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Rce Shield",
+          "runes": [
+            "Magic"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Rc Warding",
+          "runes": [
+            "Magic"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "4o Bat Wings",
+          "runes": [
+            "Magic"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "t Fangs",
+          "runes": [
+            "Magic"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "?t Power Drain",
+          "runes": [
+            "Magic"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Excommunication",
+          "runes": [
+            "Any"
+          ],
+          "source": "associate",
+          "rank": "runelord"
+        },
+        {
+          "name": "Mindlink",
+          "runes": [
+            "Any"
+          ],
+          "source": "associate",
+          "rank": "runelord"
+        },
+        {
+          "name": "Sanctify",
+          "runes": [
+            "Any"
+          ],
+          "source": "associate",
+          "rank": "runelord"
+        },
+        {
+          "name": "Summon Spirit of Reprisal",
+          "runes": [
+            "Any"
+          ],
+          "source": "associate",
+          "rank": "runelord"
+        },
+        {
+          "name": "Conceal",
+          "runes": [
+            "Illusion"
+          ],
+          "source": "associate",
+          "rank": "runelord"
+        },
+        {
+          "name": "4 Glow Spot",
+          "runes": [
+            "Any"
+          ],
+          "source": "associate",
           "rank": "runelord"
         },
         {
@@ -7112,20 +8108,92 @@
           "rank": "initiate"
         },
         {
-          "name": "Exchange Spells  Rc Warding  hs Path Watch RS Reflection  ch Seal  ch Special Lock",
+          "name": "Exchange Spells",
           "runes": [
-            "UNVERIFIED"
+            "Magic"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
         },
         {
-          "name": "Excommunication   Mindlink   Sanctify   Summon Spirit of Reprisal",
+          "name": "Rc Warding",
           "runes": [
-            "UNVERIFIED"
+            "Magic"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "hs Path Watch RS Reflection",
+          "runes": [
+            "Magic"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "ch Seal",
+          "runes": [
+            "Magic"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "ch Special Lock",
+          "runes": [
+            "Mastery"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true
+        },
+        {
+          "name": "Excommunication",
+          "runes": [
+            "Magic"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Mindlink",
+          "runes": [
+            "Magic"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Sanctify",
+          "runes": [
+            "Magic"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
+        },
+        {
+          "name": "Summon Spirit of Reprisal",
+          "runes": [
+            "Magic"
+          ],
+          "source": "normal",
+          "rank": "runelord",
+          "split_from_garbled": true,
+          "rune_inferred": true
         }
       ]
     },
@@ -7182,12 +8250,13 @@
           "rank": "initiate"
         },
         {
-          "name": "Monster or Spirit) Initiate - associate: One time use",
+          "name": "Monster or Spirit)",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "initiate"
+          "source": "associate",
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "True Weapon",
@@ -7233,42 +8302,47 @@
         {
           "name": "Glowspot",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Enchant Silver",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Grow Limbs",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Kill Horse",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
-          "name": "Scare Horse Runelord - associate: One time use",
+          "name": "Scare Horse",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "runelord"
+          "source": "associate",
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Moonspear",
@@ -7297,42 +8371,47 @@
         {
           "name": "Axis Mundi",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Rbh Gift Spell",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Spirit Guardian",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Spirit Melding",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Summon Ancestor",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Extension",
@@ -7369,26 +8448,29 @@
         {
           "name": "Summon Spirit Teacher",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Discorporation",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Free Ghost",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Gift Power",
@@ -7401,18 +8483,20 @@
         {
           "name": "Incarnate Ancestor",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Resurrect",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Excommunication",
@@ -7441,10 +8525,11 @@
         {
           "name": "Summon spirit of Reprisal",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         }
       ]
     },
@@ -7503,10 +8588,11 @@
         {
           "name": "Speak To/With Specific Creatures",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Excommunication",
@@ -7543,18 +8629,20 @@
         {
           "name": "?B Keenclaw",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Bo Transform Self",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         }
       ]
     },
@@ -7565,10 +8653,11 @@
         {
           "name": "Discorporation",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Divination",
@@ -7589,26 +8678,29 @@
         {
           "name": "Summon Ancestor",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Summon Specific Ancestor",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Summon Spirit Teacher",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Chastise",
@@ -7621,10 +8713,11 @@
         {
           "name": "Axis Mundi",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Restore Health",
@@ -7637,26 +8730,29 @@
         {
           "name": "Spirit Guardian",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Spirit Melding",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
-          "name": "Rc Warding Initiate - associate: One time use",
+          "name": "Rc Warding",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "initiate"
+          "source": "associate",
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Spirit Block",
@@ -7678,18 +8774,20 @@
         {
           "name": "Free Ghost",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Incarnate Ancestor",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Excommunication",
@@ -7700,11 +8798,11 @@
           "rank": "runelord"
         },
         {
-          "name": "Sanctify Runelord - associate: One time use",
+          "name": "Sanctify",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "runelord"
         },
         {
@@ -7763,11 +8861,11 @@
           "rank": "initiate"
         },
         {
-          "name": "Alter Creature Initiate - associate: One time use",
+          "name": "Alter Creature",
           "runes": [
             "Beast"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -7912,25 +9010,27 @@
         {
           "name": "Bx Bless Animals",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Speak To/With Specific Creatures",
           "runes": [
-            "UNVERIFIED"
-          ],
-          "source": "normal",
-          "rank": "initiate"
-        },
-        {
-          "name": "Dismiss Earth Elemental Initiate - associate: One time use",
-          "runes": [
             "Earth"
           ],
           "source": "normal",
+          "rank": "initiate",
+          "rune_inferred": true
+        },
+        {
+          "name": "Dismiss Earth Elemental",
+          "runes": [
+            "Earth"
+          ],
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -8002,12 +9102,13 @@
           "rank": "runelord"
         },
         {
-          "name": "Heal Mind Runelord - associate: One time use",
+          "name": "Heal Mind",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "runelord"
+          "source": "associate",
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Heal Body",
@@ -8077,18 +9178,20 @@
         {
           "name": "Bl Draw Beast",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Sureshot",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Heal Wound",
@@ -8109,10 +9212,11 @@
         {
           "name": "Bl Beastmaster",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Excommunication",
@@ -8187,18 +9291,20 @@
         {
           "name": "Feed Ghosts",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
-          "name": "? Devour(Race)",
+          "name": "Devour(Race)",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Excommunication",
@@ -8279,12 +9385,13 @@
           "rank": "initiate"
         },
         {
-          "name": "Rc Warding Initiate - associate: One time use",
+          "name": "Rc Warding",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "initiate"
+          "source": "associate",
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": ":",
@@ -8304,18 +9411,18 @@
           "rank": "initiate"
         },
         {
-          "name": "Support Initiate - subservient: return to subservient cult temple to recover Orlanth Rex:g Summon Sylph",
+          "name": "Support",
           "runes": [
             "Air"
           ],
-          "source": "associated",
+          "source": "subservient",
           "from_cult": "Flintnail",
           "rank": "initiate"
         },
         {
           "name": "Eiritha:e Summon Gnome",
           "runes": [
-            "UNVERIFIED"
+            "Earth"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -8323,7 +9430,7 @@
         {
           "name": "Zola Fel:w Summon Undine",
           "runes": [
-            "UNVERIFIED"
+            "Water"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -8331,23 +9438,25 @@
         {
           "name": "Oakfed :",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Summon Salamander",
           "runes": [
-            "UNVERIFIED"
+            "Harmony"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Kyger Litor:o Summon Shade",
           "runes": [
-            "UNVERIFIED"
+            "Darkness"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -8377,11 +9486,11 @@
           "rank": "runelord"
         },
         {
-          "name": "Summon Spirit of Reprisal Runelord - associate: One time use",
+          "name": "Summon Spirit of Reprisal",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "runelord"
         },
         {
@@ -8512,18 +9621,20 @@
         {
           "name": "Monster or Spirit)",
           "runes": [
-            "UNVERIFIED"
+            "Water"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Summon Naiad",
           "runes": [
-            "UNVERIFIED"
+            "Water"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Summon Undine",
@@ -8558,12 +9669,13 @@
           "rank": "initiate"
         },
         {
-          "name": "Ride River Horse Initiate - associate: One time use",
+          "name": "Ride River Horse",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "initiate"
+          "source": "associate",
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Float",
@@ -8655,18 +9767,20 @@
         {
           "name": "Bo Spider Bite",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Bo Webbing",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Excommunication",
@@ -8701,12 +9815,13 @@
           "rank": "runelord"
         },
         {
-          "name": "Bo Spider Limbs Runelord - associate: One time use",
+          "name": "Bo Spider Limbs",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "runelord"
+          "source": "associate",
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Transform Self",
@@ -8758,10 +9873,11 @@
         {
           "name": "Wo Dark Walk",
           "runes": [
-            "UNVERIFIED"
+            "Darkness"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Suppress Lodril",
@@ -8788,11 +9904,11 @@
           "rank": "initiate"
         },
         {
-          "name": "Dismiss Darkness Elemental Initiate - associate: One time use",
+          "name": "Dismiss Darkness Elemental",
           "runes": [
             "Darkness"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -8814,11 +9930,11 @@
           "rank": "initiate"
         },
         {
-          "name": "Restore Health Initiate - subservient: return to subservient cult temple to recover :o Resist Iron Burn",
+          "name": "Restore Health",
           "runes": [
             "Harmony"
           ],
-          "source": "associated",
+          "source": "subservient",
           "from_cult": "Ernalda",
           "rank": "initiate"
         },
@@ -8857,10 +9973,11 @@
         {
           "name": "Safe",
           "runes": [
-            "UNVERIFIED"
+            "Darkness"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         }
       ]
     },
@@ -8903,26 +10020,29 @@
         {
           "name": "Boost Elemental (sorcery)",
           "runes": [
-            "UNVERIFIED"
+            "Darkness"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Project Darksense (sorcery)",
           "runes": [
-            "UNVERIFIED"
+            "Darkness"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "See Rune Magic(sorcery)",
           "runes": [
-            "UNVERIFIED"
+            "Darkness"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Excommunication",
@@ -8997,15 +10117,16 @@
         {
           "name": "Speak To/With Specific Creatures",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
-          "name": "Dismiss Elemental Initiate - subservient: return to subservient cult temple to recover Gorakiki-Bee:Bo Bee's Head",
+          "name": "Dismiss Elemental",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -9013,66 +10134,73 @@
         {
           "name": "Gorakiki-Beetle:Bo Beetle's Head",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
-          "name": "Gorakiki-Beetle:?B Carapace",
+          "name": "Carapace",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "associate_cult": "Gorakiki-Beetle"
         },
         {
           "name": "Gorakiki-Moth:Bo Featherscales",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Gorakiki-Locust:Bo Insect Song",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Gorakiki-Locust:Bo Leaping Legs",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Gorakiki-Moth:Bo Moth's Head",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Gorakiki-Bee:B Stinger",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "subservient",
           "rank": "initiate"
         },
         {
-          "name": "Gorakiki-Locust:?B Locust's Head",
+          "name": "Locust's Head",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "associate_cult": "Gorakiki-Locust"
         },
         {
           "name": "Excommunication",
@@ -9099,11 +10227,11 @@
           "rank": "runelord"
         },
         {
-          "name": "Summon Spirit of Reprisal Runelord - associate: One time use",
+          "name": "Summon Spirit of Reprisal",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "runelord"
         },
         {
@@ -9116,18 +10244,18 @@
           "rank": "runelord"
         },
         {
-          "name": "Safe Runelord - subservient: Return to subservient cult temple and sacrifice Gorakiki-Beetle: Beetle's Limbs",
+          "name": "Safe",
           "runes": [
             "Any"
           ],
-          "source": "associated",
+          "source": "subservient",
           "from_cult": "Argan Argar",
           "rank": "runelord"
         },
         {
           "name": "Gorakiki-Bee:B Sprout wings",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "subservient",
           "rank": "runelord"
@@ -9135,10 +10263,11 @@
         {
           "name": "Gorakiki-Moth:Bo Butterflight",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         }
       ]
     },
@@ -9181,10 +10310,11 @@
         {
           "name": "Qo Chill",
           "runes": [
-            "UNVERIFIED"
+            "Darkness"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Decrease Temperature",
@@ -9197,18 +10327,20 @@
         {
           "name": "Form Ice",
           "runes": [
-            "UNVERIFIED"
+            "Darkness"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
-          "name": "Increase Temperature Initiate - associate: One time use",
+          "name": "Increase Temperature",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "initiate"
+          "source": "associate",
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Summon Shade",
@@ -9325,18 +10457,20 @@
         {
           "name": "Counterchaos",
           "runes": [
-            "UNVERIFIED"
+            "Darkness"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Darksee",
           "runes": [
-            "UNVERIFIED"
+            "Darkness"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Create Foe-curser",
@@ -9355,11 +10489,11 @@
           "rank": "initiate"
         },
         {
-          "name": "Dismiss Darkness Elemental Initiate - associate: One time use",
+          "name": "Dismiss Darkness Elemental",
           "runes": [
             "Darkness"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -9399,17 +10533,18 @@
           "rank": "initiate"
         },
         {
-          "name": "Summon Specific Ancestor Initiate - subservient: return to subservient cult temple to recover Tree Chopper:ot Tree Chopping Song",
+          "name": "Summon Specific Ancestor",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Stone-Biter:o Stone biting",
           "runes": [
-            "UNVERIFIED"
+            "Darkness"
           ],
           "source": "subservient",
           "rank": "initiate"
@@ -9457,10 +10592,11 @@
         {
           "name": "Summon Fear Spirit",
           "runes": [
-            "UNVERIFIED"
+            "Darkness"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         }
       ]
     },
@@ -9503,26 +10639,29 @@
         {
           "name": "Spirit Block",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Moulder",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "R Dismiss Magic",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Soul Sight",
@@ -9541,12 +10680,13 @@
           "rank": "initiate"
         },
         {
-          "name": "Rc Warding Initiate - associate: One time use",
+          "name": "Rc Warding",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "initiate"
+          "source": "associate",
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Bear Fruit",
@@ -9654,10 +10794,11 @@
         {
           "name": "Fear",
           "runes": [
-            "UNVERIFIED"
+            "Darkness"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Excommunication",
@@ -9748,10 +10889,11 @@
         {
           "name": "Rbo Attack Soul",
           "runes": [
-            "UNVERIFIED"
+            "Darkness"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Command (Specific Species",
@@ -9762,12 +10904,13 @@
           "rank": "initiate"
         },
         {
-          "name": "Monster or Spirit) Initiate - associate: One time use",
+          "name": "Monster or Spirit)",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "initiate"
+          "source": "associate",
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": ":",
@@ -9893,26 +11036,29 @@
         {
           "name": "Rc Warding",
           "runes": [
-            "UNVERIFIED"
+            "Magic"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "4? Chaos Gift  jo Dark Fear  io Bump In The Night",
           "runes": [
-            "UNVERIFIED"
+            "Magic"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Mindlink   Excommunication",
           "runes": [
-            "UNVERIFIED"
+            "Magic"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         }
       ]
     },
@@ -9971,10 +11117,11 @@
         {
           "name": "Summon Otherworld creature",
           "runes": [
-            "UNVERIFIED"
+            "Darkness"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Create Shadow",
@@ -10001,12 +11148,13 @@
           "rank": "initiate"
         },
         {
-          "name": "Command Passion Spirit Initiate - associate: One time use",
+          "name": "Command Passion Spirit",
           "runes": [
-            "UNVERIFIED"
+            "Any"
           ],
-          "source": "normal",
-          "rank": "initiate"
+          "source": "associate",
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Dark Walk",
@@ -10106,10 +11254,11 @@
         {
           "name": "Group Defence",
           "runes": [
-            "UNVERIFIED"
+            "Darkness"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Healing Trance",
@@ -10120,11 +11269,11 @@
           "rank": "initiate"
         },
         {
-          "name": "Shield of Darkness Initiate - associate: One time use",
+          "name": "Shield of Darkness",
           "runes": [
             "Darkness"
           ],
-          "source": "normal",
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -10197,10 +11346,11 @@
         {
           "name": "Attract Attention",
           "runes": [
-            "UNVERIFIED"
+            "Darkness"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         },
         {
           "name": "Regrow Limb",
@@ -10213,10 +11363,11 @@
         {
           "name": "Turn Blow",
           "runes": [
-            "UNVERIFIED"
+            "Darkness"
           ],
           "source": "normal",
-          "rank": "runelord"
+          "rank": "runelord",
+          "rune_inferred": true
         }
       ]
     },
@@ -10259,10 +11410,11 @@
         {
           "name": "Bl Beastmaster",
           "runes": [
-            "UNVERIFIED"
+            "Beast"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Excommunication",
@@ -10353,89 +11505,99 @@
         {
           "name": "Create Ghost",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "?bot Create Skeleton",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Crush",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Fear",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Seal wound",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "?bot Create Zombie",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Bind Ghost",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Command Ghost",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Command Skeleton",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Command Zombie",
           "runes": [
-            "UNVERIFIED"
-          ],
-          "source": "normal",
-          "rank": "initiate"
-        },
-        {
-          "name": "Create Revenant Initiate - associate: One time use",
-          "runes": [
             "Death"
           ],
           "source": "normal",
+          "rank": "initiate",
+          "rune_inferred": true
+        },
+        {
+          "name": "Create Revenant",
+          "runes": [
+            "Death"
+          ],
+          "source": "associate",
           "rank": "initiate"
         },
         {
@@ -10465,21 +11627,22 @@
           "rank": "initiate"
         },
         {
-          "name": "Healing Trance Initiate - subservient: return to subservient cult temple to recover Amanstan:",
+          "name": "Healing Trance",
           "runes": [
             "Harmony"
           ],
-          "source": "associated",
+          "source": "subservient",
           "from_cult": "Xiola Umbar",
           "rank": "initiate"
         },
         {
           "name": "Summon Salamander",
           "runes": [
-            "UNVERIFIED"
+            "Death"
           ],
           "source": "normal",
-          "rank": "initiate"
+          "rank": "initiate",
+          "rune_inferred": true
         },
         {
           "name": "Excommunication",
