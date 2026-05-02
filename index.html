@@ -17224,6 +17224,40 @@ App.exportSinglePagePDF = async function() {
     }
 
     // ===== MAGIC =====
+    // Rune Affinities (if present)
+    const runeAff = CharacterData.runeAffinities || {};
+    const runeValues = attrs.runeAffinities || {};
+    if ((runeAff.primary || runeAff.secondary || runeAff.tertiary) && y > 50) {
+      const runesList = [
+        runeAff.primary ? `${runeAff.primary} (${runeValues.primary || 0}%)` : null,
+        runeAff.secondary ? `${runeAff.secondary} (${runeValues.secondary || 0}%)` : null,
+        runeAff.tertiary ? `${runeAff.tertiary} (${runeValues.tertiary || 0}%)` : null
+      ].filter(r => r).join(', ');
+      if (runesList) {
+        txt(`RUNE AFFINITIES: ${runesList}`, L, y, { bold: true, size: 7 });
+        y -= 9;
+      }
+    }
+
+    // Theist Miracles (if cult member)
+    if (CharacterData.cult && CharacterData.miracles && CharacterData.miracles.length > 0 && y > 50) {
+      const devPool = CharacterData.devotionalPool || 0;
+      txt(`THEIST MIRACLES (${CharacterData.cult}) — Devotional Pool: ${devPool}`, L, y, { bold: true, size: 7 });
+      y -= 8;
+      const miracleColW = W / 2;
+      CharacterData.miracles.forEach((miracle, i) => {
+        const col = i % 2;
+        const row = Math.floor(i / 2);
+        const x = L + col * miracleColW;
+        const yPos = y - row * 7;
+        if (yPos > 35) {
+          txt(miracle, x, yPos, { size: 5.5 });
+        }
+      });
+      y -= Math.ceil(CharacterData.miracles.length / 2) * 7 + 3;
+    }
+
+    // Folk Magic
     const allSpells = [...(CharacterData.folkMagicSpells || []), ...(CharacterData.careerFolkMagic || [])];
     if (allSpells.length > 0 && y > 50) {
       const fmBase = attrs.folkMagicBase || '';
@@ -17240,17 +17274,6 @@ App.exportSinglePagePDF = async function() {
         }
       });
       y -= Math.ceil(allSpells.length / 3) * 7 + 3;
-    }
-
-    // Cult info
-    if (CharacterData.cult && y > 45) {
-      const cult = (typeof CULTS_DATA !== 'undefined' ? CULTS_DATA : []).find(c => c.name === CharacterData.cult);
-      if (cult) {
-        if (cult.folkMagic && cult.folkMagic.length > 0) {
-          txt(`Cult (${cult.name}) spells: ${cult.folkMagic.join(', ')}`, L, y, { size: 5, bold: false });
-          y -= 7;
-        }
-      }
     }
 
     // ===== EQUIPMENT =====
