@@ -14546,13 +14546,20 @@ App.selectCulture = function(cultureName) {
     CharacterData.passions = culture.passions.map(p => {
       if (typeof p === 'string') return {name: p, value: 30};
       if (p.choice) return {
-        name: '', 
-        value: p.formula ? this.evaluateFormula(p.formula) : 30, 
-        choice: p.choice, 
+        name: '',
+        value: p.formula ? this.evaluateFormula(p.formula) : 30,
+        choice: p.choice,
         needsSubject: p.needsSubject !== undefined ? p.needsSubject : false,
         subjectSuggestions: p.subjectSuggestions || []
       };
-      return {name: p.name, value: this.evaluateFormula(p.formula)};
+      // Auto-resolve "(City)" token with homeland
+      const resolvedName = p.name ? p.name.replace(/\(City\)/i, `(${CharacterData.homeland || 'City'})`) : p.name;
+      return {
+        name: resolvedName,
+        value: this.evaluateFormula(p.formula),
+        needsSubject: p.needsSubject || false,
+        subjectSuggestions: p.subjectSuggestions || []
+      };
     });
     // Combat style selection from culture — show dropdown if multiple unrestricted styles (B3)
     CharacterData.combatStyles = [];
@@ -14745,30 +14752,19 @@ App.renderStep5 = function() {
     <p>Select three runes. Primary: POW×2+30, Secondary: POW×2+20, Tertiary: POW×2+10</p>
     <p style="font-size: 0.85em; color: #555; margin-top: 2px;">POW (Power) represents magical potency and willpower <span class="page-ref">(Mythras Core p.9)</span>. Your POW is currently <strong>${CharacterData.characteristics.POW}</strong>.</p>
     <div class="grid-3">
-      <div class="field">
-        <label>Primary Rune</label>
-        <select onchange="CharacterData.runeAffinities.primary = this.value; App.saveToLocalStorage()">
-          <option value="">-- Select --</option>
-          ${RUNES_DATA.map(r => `<option value="${r.short_name}" ${CharacterData.runeAffinities.primary === r.short_name ? 'selected' : ''}>${r.short_name}</option>`).join('')}
-        </select>
-        <div style="font-weight: 600; margin-top: 4px;">${CharacterData.runeAffinities.primary ? CharacterData.attributes.runeAffinities.primary + '%' : ''}</div>
-      </div>
-      <div class="field">
-        <label>Secondary Rune</label>
-        <select onchange="CharacterData.runeAffinities.secondary = this.value; App.saveToLocalStorage()">
-          <option value="">-- Select --</option>
-          ${RUNES_DATA.map(r => `<option value="${r.short_name}" ${CharacterData.runeAffinities.secondary === r.short_name ? 'selected' : ''}>${r.short_name}</option>`).join('')}
-        </select>
-        <div style="font-weight: 600; margin-top: 4px;">${CharacterData.runeAffinities.secondary ? CharacterData.attributes.runeAffinities.secondary + '%' : ''}</div>
-      </div>
-      <div class="field">
-        <label>Tertiary Rune</label>
-        <select onchange="CharacterData.runeAffinities.tertiary = this.value; App.saveToLocalStorage()">
-          <option value="">-- Select --</option>
-          ${RUNES_DATA.map(r => `<option value="${r.short_name}" ${CharacterData.runeAffinities.tertiary === r.short_name ? 'selected' : ''}>${r.short_name}</option>`).join('')}
-        </select>
-        <div style="font-weight: 600; margin-top: 4px;">${CharacterData.runeAffinities.tertiary ? CharacterData.attributes.runeAffinities.tertiary + '%' : ''}</div>
-      </div>
+      ${['primary', 'secondary', 'tertiary'].map(slot => {
+        const others = ['primary','secondary','tertiary'].filter(s => s !== slot).map(s => CharacterData.runeAffinities[s]);
+        const filteredRunes = RUNES_DATA.filter(r => r.short_name === CharacterData.runeAffinities[slot] || !others.includes(r.short_name));
+        const label = slot.charAt(0).toUpperCase() + slot.slice(1);
+        return `<div class="field">
+          <label>${label} Rune</label>
+          <select onchange="CharacterData.runeAffinities.${slot} = this.value; App.saveToLocalStorage(); App.renderCurrentStep()">
+            <option value="">-- Select --</option>
+            ${filteredRunes.map(r => `<option value="${r.short_name}" ${CharacterData.runeAffinities[slot] === r.short_name ? 'selected' : ''}>${r.short_name}</option>`).join('')}
+          </select>
+          <div style="font-weight: 600; margin-top: 4px;">${CharacterData.runeAffinities[slot] ? CharacterData.attributes.runeAffinities[slot] + '%' : ''}</div>
+        </div>`;
+      }).join('')}
     </div>
     
     <h3>Folk Magic (select 3)</h3>
@@ -15007,6 +15003,19 @@ App.renderStep6 = function() {
           ${needsSubject ? `<input type="text" id="${subjectId}" placeholder="(subject)" value="${currentSubject}" list="passion-suggestions-${idx}" onchange="App.updatePassionSubject(${idx}, this.value)" onblur="App.updatePassionSubject(${idx}, this.value)">` + (passion.subjectSuggestions && passion.subjectSuggestions.length > 0 ? `<datalist id="passion-suggestions-${idx}">${passion.subjectSuggestions.map(s => `<option value="${s}">`).join('')}</datalist>` : '') : '<span></span>'}
           <input type="number" value="${passion.value}" readonly>
         `;
+      } else if (passion.needsSubject) {
+        const currentSubject = passion.name ? (passion.name.match(/\((.+)\)/) || [])[1] || '' : '';
+        const baseName = passion.name ? passion.name.replace(/\s*\(.*\)/, '') : '';
+        row.style.cssText = 'display: grid; grid-template-columns: auto 1fr 60px; gap: 6px; margin: 4px 0; align-items: center;';
+        row.innerHTML = `
+          <span style="font-weight: 600;">${baseName}</span>
+          <input type="text" value="${currentSubject}" placeholder="(to what?)"
+            list="passion-subject-ns-${idx}"
+            onchange="App.updatePassionNameSubject(${idx}, '${baseName.replace(/'/g, "\\'")}', this.value)"
+            onblur="App.updatePassionNameSubject(${idx}, '${baseName.replace(/'/g, "\\'")}', this.value)">
+          ${passion.subjectSuggestions && passion.subjectSuggestions.length ? `<datalist id="passion-subject-ns-${idx}">${passion.subjectSuggestions.map(s => `<option value="${s}">`).join('')}</datalist>` : ''}
+          <input type="number" value="${passion.value}" readonly>
+        `;
       } else {
         row.innerHTML = `
           <input type="text" value="${passion.name}" readonly>
@@ -15035,6 +15044,16 @@ App.updatePassionSubject = function(idx, subject) {
     p.name = `${type} (${subject.trim()})`;
   } else if (type) {
     p.name = type;
+  }
+  App.saveToLocalStorage();
+};
+
+App.updatePassionNameSubject = function(idx, baseName, subject) {
+  const p = CharacterData.passions[idx];
+  if (subject && subject.trim()) {
+    p.name = `${baseName} (${subject.trim()})`;
+  } else {
+    p.name = baseName;
   }
   App.saveToLocalStorage();
 };
@@ -15190,9 +15209,49 @@ App.toggleProfessionalSkill = function(skillName, checked) {
   } else {
     CharacterData.selectedProfessionalSkills = CharacterData.selectedProfessionalSkills.filter(s => s !== skillName);
     delete CharacterData.careerSkills[skillName];
+    // Also remove any resolved version
+    const category = parsePlaceholderSkill(skillName)?.category;
+    if (category) {
+      Object.keys(CharacterData.careerSkills).forEach(k => {
+        if (k.startsWith(category + ' (') && !needsDisambiguation(k)) {
+          delete CharacterData.careerSkills[k];
+        }
+      });
+    }
   }
 
   this.saveToLocalStorage();
+  this.renderCurrentStep();
+};
+
+App.resolveProfessionalSkill = function(originalName, specialization) {
+  if (!specialization || !specialization.trim()) return;
+  const parsed = parsePlaceholderSkill(originalName);
+  if (!parsed) return;
+  const resolvedName = `${parsed.category} (${specialization.trim()})`;
+
+  // Remove old placeholder key from careerSkills
+  delete CharacterData.careerSkills[originalName];
+  // Also remove any previous resolution for this placeholder
+  Object.keys(CharacterData.careerSkills).forEach(k => {
+    if (k.startsWith(parsed.category + ' (') && !needsDisambiguation(k) && k !== resolvedName) {
+      // Only remove if it was from this placeholder
+      const idx = CharacterData.selectedProfessionalSkills.indexOf(originalName);
+      if (idx !== -1) delete CharacterData.careerSkills[k];
+    }
+  });
+
+  // Store under resolved name
+  CharacterData.careerSkills[resolvedName] = 0;
+
+  // Update selectedProfessionalSkills to track the resolved name
+  const idx = CharacterData.selectedProfessionalSkills.indexOf(originalName);
+  if (idx !== -1) {
+    CharacterData.selectedProfessionalSkills[idx] = resolvedName;
+  }
+
+  this.saveToLocalStorage();
+  this.renderCurrentStep();
 };
 
 App.renderCareerDetails = function() {
@@ -15215,14 +15274,25 @@ App.renderCareerDetails = function() {
 
       ${career.professionalSkills && career.professionalSkills.length > 0 ? `
         <h4 style="margin-top: 15px;">Professional Skills (choose 3)</h4>
-        <div id="professional-skills-picker" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; margin-top: 8px;">
-          ${career.professionalSkills.map(skill => `
-            <label style="font-size: 13px;">
-              <input type="checkbox"
-                ${(CharacterData.selectedProfessionalSkills || []).includes(skill) ? 'checked' : ''}
-                onchange="App.toggleProfessionalSkill('${skill.replace(/'/g, "\\'")}', this.checked)"> ${skill}
-            </label>
-          `).join('')}
+        <div id="professional-skills-picker" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 8px; margin-top: 8px;">
+          ${career.professionalSkills.map(skill => {
+            const isChecked = (CharacterData.selectedProfessionalSkills || []).includes(skill);
+            const needsSpec = needsDisambiguation(skill);
+            // Find a resolved version if this skill was already specialized
+            const resolved = needsSpec && isChecked ? (Object.keys(CharacterData.careerSkills).find(k => {
+              const parsed = parsePlaceholderSkill(skill);
+              return parsed && k.startsWith(parsed.category + ' (') && !needsDisambiguation(k);
+            }) || '') : '';
+            const resolvedSpec = resolved ? (resolved.match(/\((.+)\)/) || [])[1] || '' : '';
+            return `<div>
+              <label style="font-size: 13px;">
+                <input type="checkbox"
+                  ${isChecked ? 'checked' : ''}
+                  onchange="App.toggleProfessionalSkill('${skill.replace(/'/g, "\\'")}', this.checked)"> ${skill}
+              </label>
+              ${isChecked && needsSpec ? `<input type="text" placeholder="Enter specialization..." value="${resolvedSpec}" style="display: block; margin: 4px 0 0 20px; font-size: 12px; padding: 3px 6px; width: calc(100% - 24px);" onchange="App.resolveProfessionalSkill('${skill.replace(/'/g, "\\'")}', this.value)">` : ''}
+            </div>`;
+          }).join('')}
         </div>
       ` : ''}
     </div>
@@ -15268,6 +15338,7 @@ App.renderStep9 = function() {
     ` : ''}
 
     <div id="cult-requirement-warning"></div>
+    <div id="cult-passion-notice" style="margin-top: 10px;"></div>
     <div id="miracle-picker" style="margin-top: 20px; display: none;"></div>
   `;
 
@@ -15297,9 +15368,21 @@ App.renderStep9 = function() {
     }
   }
 
-  // Render miracle picker if cult is selected
+  // Show cult passion notice if cult is selected
   if (CharacterData.cult) {
-    this.renderMiraclePicker(div);
+    const noticeEl = div.querySelector('#cult-passion-notice');
+    if (noticeEl) {
+      const cultPassion = CharacterData.passions.find(p => p.name && p.name.includes(CharacterData.cult));
+      if (cultPassion) {
+        noticeEl.innerHTML = `<div style="background: #e8f5e9; border: 1px solid #4caf50; padding: 10px; border-radius: 4px; font-size: 13px;">
+          <strong>Cult Passion Added:</strong> ${cultPassion.name}: ${cultPassion.value}% has been added to your passions (visible in Step 6).
+        </div>`;
+      }
+    }
+
+    // Render miracle picker
+    const pickerEl = div.querySelector('#miracle-picker');
+    if (pickerEl) this.renderMiraclePicker(pickerEl);
   }
 
   return div;
