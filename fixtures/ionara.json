@@ -1,285 +1,160 @@
 {
-  "name": "Ionara Gdtr. o/",
-  "concept": "Grazelander/Pure Horse Priestess & horse",
+  "name": "Ionara Grand-daughter of Thiralda",
+  "concept": "Grazelander priestess of Maran Gor the Earthshaker, wandering proselytiser",
   "characteristics": {
-    "STR": 8,
-    "CON": 9,
-    "SIZ": 10,
-    "DEX": 10,
-    "INT": 14,
-    "POW": 12,
-    "CHA": 12
+    "STR": 11,
+    "CON": 12,
+    "SIZ": 12,
+    "DEX": 13,
+    "INT": 18,
+    "POW": 16,
+    "CHA": 17
   },
   "charMethod": "pregen",
   "attributes": {
-    "actionPoints": 2,
-    "experienceModifier": 0,
+    "actionPoints": 3,
+    "experienceModifier": 2,
     "healingRate": 2,
-    "luckPoints": 2,
-    "magicPoints": 12,
-    "magicPointsMax": 12,
-    "initiativeBonus": 12,
-    "damageModifier": "-1d2",
+    "luckPoints": 3,
+    "magicPoints": 16,
+    "initiativeBonus": 15,
+    "damageModifier": "+0",
     "hitPoints": {
-      "Head": 4,
-      "Chest": 6,
-      "Abdomen": 5,
-      "Right Arm": 3,
-      "Left Arm": 3,
-      "Right Leg": 4,
-      "Left Leg": 4
+      "Head": 5,
+      "Chest": 7,
+      "Abdomen": 6,
+      "Right Arm": 4,
+      "Left Arm": 4,
+      "Right Leg": 5,
+      "Left Leg": 5
     },
-    "movementRate": 6,
-    "devotionPoints": 3,
-    "devotionPointsMax": 3,
     "encumbrance": {
-      "unencumbered": 8,
-      "burdened": 16,
-      "overloaded": 24
-    }
-  },
-  "culture": "Grazelander/Pure Horse",
-  "homeland": "Grazelands",
-  "age": 21,
-  "gender": "she/her",
-  "socialClass": "Priestess",
-  "physical": {
-    "hand": "Right",
-    "frame": "Average",
-    "height": "170",
-    "weight": "70"
-  },
-  "career": "Priestess & horse",
-  "standardSkills": {
-    "Athletics": 44,
-    "Boating": 17,
-    "Conceal": 22,
-    "Customs": 35,
-    "Dance": 55,
-    "Deceit": 26,
-    "Drive": 22,
-    "First Aid": 24,
-    "Influence": 50,
-    "Insight": 30,
-    "Locale": 40,
-    "Perception": 35,
-    "Ride": 70,
-    "Sing": 65,
-    "Stealth": 25,
-    "Swim": 17,
-    "Unarmed": 18,
-    "Brawn": 18,
-    "Endurance": 18,
-    "Evade": 31,
-    "Willpower": 24
-  },
-  "professionalSkills": {
-    "Bureaucracy": 30,
-    "Craft (Animal Husb.)": 50,
-    "Literacy (Theyalan)": 28,
-    "Lore (Animals)": 40,
-    "Lore (Grazelands)": 40,
-    "Lore (Maran Gor)": 60,
-    "Lore (Strat/Tact)": 30
-  },
-  "languages": {
-    "Pure Horse": 65,
-    "Earthtongue": 40,
-    "Pentan": 33
-  },
-  "magicSkills": {
-    "Devot. (M. Gor)": 70,
-    "Exhort": 65,
-    "Folk Magic": 55,
-    "Meditation": 25
-  },
-  "combatStyles": [
-    {
-      "name": "Earthshaker Horse",
-      "skill": 100,
-      "weapons": [
-        "Mace",
-        "Small Shield",
-        "Lance",
-        "Dagger"
-      ],
-      "traits": []
-    }
-  ],
-  "passions": [
-    "Devotion (Maran Gor): 70",
-    "Hate (Lunar Empire): 60",
-    "Hate (Old Tarshites): 60",
-    "Honor: 60",
-    "Loyalty (Feathered Horse Queen): 70",
-    "Loyalty (Shaker Temple): 60"
-  ],
-  "folkMagicSpells": [
-    "Bludgeon 1",
-    "Disruption 1",
-    "Heal 1",
-    "Vigor 2"
-  ],
-  "miracles": [
-    "Blast Earth 1+",
-    "Create Fissure 1+",
-    "Shake Earth 1+"
-  ],
-  "weapons": {
-    "melee": [
-      {
-        "name": "Mace",
-        "damage": "1d6+2",
-        "size": "M",
-        "reach": "M",
-        "combatEffects": "Stun Location",
-        "traits": "None",
-        "ap": 6,
-        "hp": 6,
-        "enc": 1
-      },
-      {
-        "name": "Small Shield",
-        "damage": "1d3",
-        "size": "M",
-        "reach": "S",
-        "combatEffects": "Bash",
-        "traits": "Ranged Parry",
-        "ap": 4,
-        "hp": 8,
-        "enc": 1
-      },
-      {
-        "name": "Lance",
-        "damage": "1d10+1",
-        "size": "H",
-        "reach": "VL",
-        "combatEffects": "Impale, Sunder",
-        "traits": "Mount",
-        "ap": 4,
-        "hp": 10,
-        "enc": 3
-      },
-      {
-        "name": "Dagger",
-        "damage": "1d4+2",
-        "size": "S",
-        "reach": "T",
-        "combatEffects": "Bleed",
-        "traits": "None",
-        "ap": 6,
-        "hp": 6,
-        "enc": 1
-      }
-    ],
-    "ranged": []
-  },
-  "armor": [
-    {
-      "name": "Open Helm",
-      "ap": 4,
-      "enc": 1
+      "unencumbered": 23,
+      "burdened": 34,
+      "overloaded": 46
     },
-    {
-      "name": "Cuirboilli Vambrace",
-      "ap": 3,
-      "enc": 1
+    "runeAffinities": {
+      "primary": 75,
+      "secondary": 85,
+      "tertiary": 80
     },
-    {
-      "name": "Cuirboilli Vambrace",
-      "ap": 3,
-      "enc": 1
-    },
-    {
-      "name": "Heavy Scale Hauberk",
-      "ap": 5,
-      "enc": 4
-    },
-    {
-      "name": "Cuirboilli Greave",
-      "ap": 3,
-      "enc": 1
-    },
-    {
-      "name": "Cuirboilli Greave",
-      "ap": 3,
-      "enc": 1
-    }
-  ],
-  "equipment": [
-    "Lyre",
-    "Artifacts and regalia",
-    "160 L coin",
-    "Luxury goods (450 L)"
-  ],
-  "startingMoney": 160,
-  "cult": {
-    "name": "Maran Gor Priestess",
-    "parent": "Death 85%"
+    "folkMagicBase": 63,
+    "movementRate": 6
+  },
+  "culture": "Sartarite (Heortling)",
+  "homeland": "Grazelands (Pure Horse People)",
+  "culturalSkills": {
+    "Language (Pure Horse Tongue)": 20,
+    "Language (Earthtongue)": 10,
+    "Language (Pentan)": 5,
+    "Tradetalk": 5,
+    "Athletics": 5,
+    "Endurance": 10,
+    "Ride (Horse)": 30,
+    "Locale": 10,
+    "Perception": 5
   },
   "runeAffinities": {
-    "Disorder": 80,
-    "Earth": 75,
-    "Fire": 75,
-    "Death": 85,
-    "Harmony": 80
+    "primary": "Earth",
+    "secondary": "Death",
+    "tertiary": "Disorder"
   },
-  "hitPoints": {
-    "Head": {
-      "current": 4,
-      "max": 4
-    },
-    "Chest": {
-      "current": 6,
-      "max": 6
-    },
-    "Abdomen": {
-      "current": 5,
-      "max": 5
-    },
-    "Right Arm": {
-      "current": 3,
-      "max": 3
-    },
-    "Left Arm": {
-      "current": 3,
-      "max": 3
-    },
-    "Right Leg": {
-      "current": 4,
-      "max": 4
-    },
-    "Left Leg": {
-      "current": 4,
-      "max": 4
+  "folkMagicSpells": [
+    "Bludgeon",
+    "Disruption",
+    "Heal"
+  ],
+  "passions": [
+    { "name": "Devotion (Maran Gor)", "value": 70 },
+    { "name": "Hate (Lunar Empire)", "value": 60 },
+    { "name": "Hate (Old Tarshites)", "value": 60 },
+    { "name": "Honor", "value": 60 },
+    { "name": "Loyalty (Feathered Horse Queen)", "value": 70 },
+    { "name": "Loyalty (Shaker Temple)", "value": 60 }
+  ],
+  "age": 21,
+  "gender": "Female",
+  "family": "Grandmother Thiralda was priestess of Maran Gor, famed throughout Grazelands. Mother Irneen also a priestess, died in Grazeland Campaign.",
+  "backgroundEvents": "Nearly died of plague in 1622. Injured fighting Lunars. Fought at Battle of Pennel Ford with great glory. Nearly lost mind to Lunar demons in Pavis.",
+  "career": "Priest",
+  "cult": "Maran Gor",
+  "miracles": [
+    "Blast Earth",
+    "Create Fissure",
+    "Shake Earth"
+  ],
+  "devotionalPool": 8,
+  "careerSkills": {
+    "Dance": 20,
+    "Sing": 20,
+    "Influence": 10,
+    "Devotion (Maran Gor)": 30,
+    "Lore (Maran Gor)": 20,
+    "Oratory": 10,
+    "Musicianship (Stringed)": 15
+  },
+  "careerFolkMagic": [
+    "Vigor",
+    "Coordination"
+  ],
+  "bonusSkills": {
+    "Ride (Horse)": 10,
+    "Perception": 10,
+    "Insight": 5,
+    "Survival": 10,
+    "Lore (Animals)": 10,
+    "Customs (Pony Breeders)": 5,
+    "Literacy (Theyalan)": 5
+  },
+  "selectedProfessionalSkills": [
+    "Devotion (Maran Gor)",
+    "Lore (Maran Gor)",
+    "Musicianship (Stringed)"
+  ],
+  "hobbySkillName": null,
+  "socialClass": "Gentry",
+  "socialClassMoneyMod": 1,
+  "startingMoney": 160,
+  "equipment": [
+    { "name": "Noble clothing and regalia of Maran Gor", "enc": 2, "quantity": 1, "cost": 60 },
+    { "name": "Finely made lyre (+20% to Play Instrument)", "enc": 1, "quantity": 1, "cost": 0 },
+    { "name": "Jewelry and luxury goods", "enc": 1, "quantity": 1, "cost": 450 },
+    { "name": "Backpack", "enc": 1, "quantity": 1, "cost": 5 },
+    { "name": "Waterskin", "enc": 1, "quantity": 1, "cost": 5 },
+    { "name": "Rations (1 week)", "enc": 2, "quantity": 1, "cost": 14 },
+    { "name": "Bedroll", "enc": 1, "quantity": 1, "cost": 5 }
+  ],
+  "weapons": [
+    { "name": "Mace", "damage": "1d8", "size": "M", "reach": "S", "ap": 6, "hp": 6, "skill": 100, "quantity": 1 },
+    { "name": "Small Shield", "damage": "1d3", "size": "M", "reach": "S", "ap": 4, "hp": 8, "skill": 70, "quantity": 1 },
+    { "name": "Lance", "damage": "1d10+1", "size": "H", "reach": "VL", "ap": 4, "hp": 10, "skill": 35, "quantity": 1 },
+    { "name": "Dagger", "damage": "1d4+1", "size": "S", "reach": "S", "ap": 6, "hp": 8, "skill": 40, "quantity": 1 }
+  ],
+  "armor": [
+    { "name": "Open Helm", "ap": 4, "locations": "Head", "cost": 0 },
+    { "name": "Heavy Scale Hauberk", "ap": 5, "locations": "Chest, Abdomen", "cost": 0 },
+    { "name": "Cuirboilli Vambraces", "ap": 3, "locations": "Arms", "cost": 0 },
+    { "name": "Cuirboilli Greaves", "ap": 3, "locations": "Legs", "cost": 0 }
+  ],
+  "combatStyles": [
+    {
+      "name": "Sartarite Noble",
+      "weapons": ["Mace", "Small Shield", "Lance", "Dagger"],
+      "traits": ["Intimidating Scream", "Mounted Combat", "Shield Wall"],
+      "value": 100
     }
+  ],
+  "notes": "Priestess of Maran Gor the Earthshaker. Smart, charismatic leader with destructive Earth magic. Mace 100% is primary weapon. Create Fissure and Shake Earth are devastating but expensive. High Death and Disorder Runes make her destructive. Despises lies (Truth Rune).",
+  "background": "Ionara was born one of the Pure Horse People and is a skilled rider capable of sleeping in the saddle as well as fighting. Her grandmother Thiralda was a priestess of Maran Gor, famed throughout the Grazelands. She died fighting the Lunar Empire at the Battle of Grizzly Peak. Ionara now wanders Dragon Pass, proselytizing for Maran Gor.",
+  "hitPoints": {
+    "Head": { "current": 5, "max": 5 },
+    "Chest": { "current": 7, "max": 7 },
+    "Abdomen": { "current": 6, "max": 6 },
+    "Right Arm": { "current": 4, "max": 4 },
+    "Left Arm": { "current": 4, "max": 4 },
+    "Right Leg": { "current": 5, "max": 5 },
+    "Left Leg": { "current": 5, "max": 5 }
   },
-  "background": "Runes\nRiding Horse\nElemental Affinities\nPower Affinities\n \n Death\n85\n \n Fertility\n0\n \n Movement\n0\n \n Stasis\n0\n \n Illusion\n0\n \nTruth\n0\n \n Disorder\n0\n0\n0\n \n Man\n \n Beast\n \n Harmony\n80\nFemale, age 21. Priestess of the Pure Horse People in \nthe Grazelands.\nStand proudly when you speak to me, for I am a priestess of the \nEarthshaker, Maran Gor with that authority. I was born into her \npriestesshood, my mother and grandmother—blessed be their souls, \nand renowned are their names—served Maran Gor as well. \nI have journeyed from the West to Dragon Pass, and fought \nthe Lunar Empire every step my horse took. I faced them in the \nGrazelands and at Pennel Ford. Lunar madness nearly overcame \nme, but I am still here. \nAnd now I roam the land of Orlanth, eager to see what you \ncall “civilization.” So far… I am unimpressed. Perhaps I am \nmissing something? No matter. Let me play a tune for you, a song \nof my people about life on the prairies and the legends of my people. \nPerhaps then you will understand me better. \nIonara was born one of the Pure Horse People and is a skilled \nrider capable of sleeping in the saddle as well as fighting. \nHer grandmother Thiralda was also a priestess of Maran \nGor, famed throughout the Grazelands. She died fighting the \nLunar Empire at the Battle of Grizzly Peak, and her mother \nIrneen, another priestess, died in the Grazeland Campaign. \nIn 1622, when a wave of plague swept through the Gra-\nzelands, Ionara nearly died. She had no sooner recovered than \nshe was injured fighting Lunars in the civil strife that rocked \nthe Grazelands. Soon after, she fought at the Battle of Pennel \nFord and achieved great glory, but later in Pavis, she nearly lost \nher mind battling Lunar demons unleashed by their sorcerers. \nNow she wander these strange lands, proselytizing to those \nwho will listen, exploring the territories she fought to expunge \nthe Lunars from. She has learned much, made new friends, and \nseen much of Dragon Pass. As a Grazer, though, she can barely \ndisguise her disdain for the vendref (so-called ‘civilized’) culture \nof the Orlanthi Sartarites, but she does her best.\nHow to Play Ionara\n\t\n. You are a smart, charismatic leader, and someone who \nincarnates the destructive aspects of the Earth Goddess.\n\t\n. You are a good fighter with your mace and shield, and \nhave decent armor. However, you have very average hit \npoints—if you fail a parry things can go bad very quickly.\n\t\n. Your strongest passions are your devotion to Maran Gor \nthe Earthshaker and to the Feathered Horse Queen. This \nwill require roleplaying to work into games.\n\t\n. Create Fissure and Shake Earth are both very useful in \ndesperate circumstances, but need a lot of Rune points. \n\t\n. Your Runes are filled with conflict. Your high Death and \nDisorder Runes make you destructive and more willing \nto tear things apart than build them up. Your Earth and \nFire/Sky Runes tear you in opposite directions.Your high \nTruth Rune means you despise lies and deception. \n\t\n. You are a straight shooter and would rather say nothing \nthan say something deceptive.\nIonara grand- \ndaughter of thiralda\n75\n0\n0\n75\n0\n0\n \n Fire\n \n Water\n \n Earth\n \n Air\n \n Darkness\n \n Moon",
-  "notes": [
-    "Pure Horse priestess from",
-    "Fought Lunars across Dragon",
-    "Still learning Sartarite",
-    "Carries regalia of Maran Gor",
-    "Noble clothing & valuables"
-  ],
-  "mentalTraits": [
-    "Unimpressed by",
-    "Truth makes deceit",
-    "Maran Gor drives"
-  ],
-  "wounds": [],
-  "reminders": [
-    "Rep. 18/Rans. 1000 L",
-    "Leader first, singer next",
-    "Maran Gor runes destroy",
-    "Create Fissure in crisis",
-    "Strong rider, good mace",
-    "Death & Disorder press",
-    "Truth over diplomacy"
-  ],
-  "mounts": [
-    "Etza the riding horse"
-  ],
   "companions": [
     {
       "name": "Etza",
@@ -306,10 +181,7 @@
       "hitPointsTotal": 23,
       "healingRate": 3,
       "strikeRank": 0,
-      "notes": "Riding horse. Normally only attacks if life threatened. Owner may attack OR horse attacks — not both per round. Use mount's +3D6 damage bonus for lance charges."
+      "notes": "Riding horse. Normally only attacks if life threatened (e.g., serpent). Owner attacks OR horse attacks — not both per round. Use mount's +3D6 damage bonus for lance charges."
     }
-  ],
-  "magicItems": [
-    "Lyre +20 Musicianship"
   ]
 }

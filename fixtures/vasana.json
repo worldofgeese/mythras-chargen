@@ -1,324 +1,162 @@
 {
-  "name": "Vasana Farnan's Dtr.",
-  "concept": "Sartarite / Colymar Heavy cavalrywoman",
+  "name": "Vasana Farnan's Daughter",
+  "concept": "Vengeful Orlanthi bison cavalrywoman and natural-born war leader",
   "characteristics": {
-    "STR": 12,
-    "CON": 9,
-    "SIZ": 9,
-    "DEX": 8,
-    "INT": 12,
-    "POW": 11,
-    "CHA": 14
+    "STR": 16,
+    "CON": 12,
+    "SIZ": 10,
+    "DEX": 11,
+    "INT": 15,
+    "POW": 15,
+    "CHA": 19
   },
   "charMethod": "pregen",
   "attributes": {
-    "actionPoints": 2,
-    "experienceModifier": 1,
+    "actionPoints": 3,
+    "experienceModifier": 2,
     "healingRate": 2,
-    "luckPoints": 2,
-    "magicPoints": 11,
-    "magicPointsMax": 21,
-    "initiativeBonus": 10,
-    "damageModifier": "+0",
+    "luckPoints": 3,
+    "magicPoints": 15,
+    "initiativeBonus": 13,
+    "damageModifier": "+1d2",
     "hitPoints": {
-      "Head": 4,
-      "Chest": 6,
-      "Abdomen": 5,
-      "Right Arm": 3,
-      "Left Arm": 3,
-      "Right Leg": 4,
-      "Left Leg": 4
+      "Head": 5,
+      "Chest": 7,
+      "Abdomen": 6,
+      "Right Arm": 4,
+      "Left Arm": 4,
+      "Right Leg": 5,
+      "Left Leg": 5
     },
-    "movementRate": 6,
-    "devotionPoints": 3,
-    "devotionPointsMax": 3,
     "encumbrance": {
-      "unencumbered": 12,
-      "burdened": 24,
-      "overloaded": 36
-    }
-  },
-  "culture": "Sartarite / Colymar",
-  "homeland": "Ernaldori clan, Colymar",
-  "age": 21,
-  "gender": "she/her",
-  "socialClass": "Freewoman",
-  "physical": {
-    "hand": "Right",
-    "frame": "Lithe",
-    "height": "160",
-    "weight": "45"
-  },
-  "career": "Heavy cavalrywoman",
-  "standardSkills": {
-    "Athletics": 27,
-    "Boating": 28,
-    "Conceal": 26,
-    "Customs": 30,
-    "Dance": 25,
-    "Deceit": 34,
-    "Drive": 26,
-    "First Aid": 25,
-    "Influence": 45,
-    "Insight": 30,
-    "Locale": 35,
-    "Perception": 50,
-    "Ride": 70,
-    "Sing": 50,
-    "Stealth": 20,
-    "Swim": 21,
-    "Unarmed": 27,
-    "Brawn": 26,
-    "Endurance": 24,
-    "Evade": 22,
-    "Willpower": 30
-  },
-  "professionalSkills": {
-    "Craft (Animal Husb.)": 20,
-    "Craft (Farming)": 30,
-    "Literacy (Theyalan)": 30,
-    "Lore (Orlanth)": 25,
-    "Lore (Sartar)": 35,
-    "Lore (Strat/Tact)": 65,
-    "Oratory": 45
-  },
-  "languages": {
-    "Heortling": 60,
-    "Stormspeech": 30,
-    "Tradetalk": 26
-  },
-  "magicSkills": {
-    "Devot. (Orl.)": 80,
-    "Exhort": 55,
-    "Folk Magic": 45,
-    "Meditation": 25
-  },
-  "combatStyles": [
-    {
-      "name": "Vinga Cavalry",
-      "skill": 90,
-      "weapons": [
-        "Broadsword",
-        "Lance",
-        "Battleaxe",
-        "Medium Shield",
-        "Recurve Bow"
-      ],
-      "traits": []
+      "unencumbered": 32,
+      "burdened": 48,
+      "overloaded": 64
     },
-    {
-      "name": "Sartarite Archer",
-      "skill": 45,
-      "weapons": [
-        "Broadsword",
-        "Lance",
-        "Battleaxe",
-        "Medium Shield",
-        "Recurve Bow"
-      ],
-      "traits": []
-    }
-  ],
-  "passions": [
-    "Devotion (Orlanth): 80",
-    "Hate (Lunar Empire): 90",
-    "Honor: 70",
-    "Love (family): 60",
-    "Loyalty (Argrath): 70",
-    "Loyalty (Colymar Tribe): 70",
-    "Loyalty (Ernaldori Clan): 60"
-  ],
-  "folkMagicSpells": [
-    "Demoralize 2",
-    "Heal 2",
-    "Mobility 1"
-  ],
-  "miracles": [
-    "Fearless 2",
-    "Lightning 1+",
-    "Shield 1+"
-  ],
-  "weapons": {
-    "melee": [
-      {
-        "name": "Broadsword",
-        "damage": "1d8+1+1d4",
-        "size": "M",
-        "reach": "M",
-        "combatEffects": "Bleed, Impale",
-        "traits": "None",
-        "ap": 6,
-        "hp": 10,
-        "enc": 2
-      },
-      {
-        "name": "Lance",
-        "damage": "1d10+1+3d6",
-        "size": "H",
-        "reach": "VL",
-        "combatEffects": "Impale, Sunder",
-        "traits": "Mount",
-        "ap": 4,
-        "hp": 10,
-        "enc": 3
-      },
-      {
-        "name": "Battleaxe",
-        "damage": "1d8+2+1d4",
-        "size": "L",
-        "reach": "M",
-        "combatEffects": "Bleed, Sunder",
-        "traits": "None",
-        "ap": 4,
-        "hp": 8,
-        "enc": 1
-      },
-      {
-        "name": "Medium Shield",
-        "damage": "1d4+1d4",
-        "size": "L",
-        "reach": "S",
-        "combatEffects": "Bash, Stun Location",
-        "traits": "Ranged Parry",
-        "ap": 6,
-        "hp": 12,
-        "enc": 2
-      }
-    ],
-    "ranged": [
-      {
-        "name": "Recurve Bow",
-        "damage": "1d8+1",
-        "force": "H",
-        "damageModifier": "Yes",
-        "range": "15/125/250",
-        "combatEffects": "Impale S",
-        "loadTurns": 2,
-        "ap": 4,
-        "hp": 8,
-        "enc": 1
-      }
-    ]
+    "runeAffinities": {
+      "primary": 90,
+      "secondary": 75,
+      "tertiary": 75
+    },
+    "folkMagicBase": 64,
+    "movementRate": 6
   },
-  "armor": [
-    {
-      "name": "Closed Helm",
-      "ap": 5,
-      "enc": 1
-    },
-    {
-      "name": "Bronze Vambrace",
-      "ap": 6,
-      "enc": 1
-    },
-    {
-      "name": "Bronze Vambrace",
-      "ap": 6,
-      "enc": 1
-    },
-    {
-      "name": "Disk Plate Cuirass",
-      "ap": 5,
-      "enc": 3
-    },
-    {
-      "name": "Studded Leather Skirt",
-      "ap": 3,
-      "enc": 1
-    },
-    {
-      "name": "Bronze Greave",
-      "ap": 6,
-      "enc": 1
-    },
-    {
-      "name": "Bronze Greave",
-      "ap": 6,
-      "enc": 1
-    }
-  ],
-  "equipment": [
-    "Bronze image of Orlanth",
-    "Magic storage crystal",
-    "20 L coin"
-  ],
-  "startingMoney": 20,
-  "cult": {
-    "name": "Vinga Adventurous",
-    "parent": "Parent: Orlanth"
+  "culture": "Sartarite (Heortling)",
+  "homeland": "Ernaldori clan, Colymar Tribe",
+  "culturalSkills": {
+    "Language (Heortling)": 20,
+    "Language (Stormspeech)": 10,
+    "Tradetalk": 5,
+    "Athletics": 10,
+    "Brawn": 10,
+    "Endurance": 10,
+    "Evade": 5,
+    "Locale": 10,
+    "Perception": 15,
+    "Willpower": 5
   },
   "runeAffinities": {
-    "Air": 90,
-    "Movement": 75,
-    "Death": 75
+    "primary": "Air",
+    "secondary": "Death",
+    "tertiary": "Movement"
   },
-  "hitPoints": {
-    "Head": {
-      "current": 4,
-      "max": 4
-    },
-    "Chest": {
-      "current": 6,
-      "max": 6
-    },
-    "Abdomen": {
-      "current": 5,
-      "max": 5
-    },
-    "Right Arm": {
-      "current": 3,
-      "max": 3
-    },
-    "Left Arm": {
-      "current": 3,
-      "max": 3
-    },
-    "Right Leg": {
-      "current": 4,
-      "max": 4
-    },
-    "Left Leg": {
-      "current": 4,
-      "max": 4
+  "folkMagicSpells": [
+    "Bladesharp",
+    "Mobility",
+    "Protection"
+  ],
+  "passions": [
+    { "name": "Devotion (Orlanth)", "value": 80 },
+    { "name": "Hate (Lunar Empire)", "value": 90 },
+    { "name": "Honor", "value": 70 },
+    { "name": "Love (Family)", "value": 60 },
+    { "name": "Loyalty (Argrath)", "value": 70 },
+    { "name": "Loyalty (Colymar Tribe)", "value": 70 },
+    { "name": "Loyalty (Ernaldori Clan)", "value": 60 },
+    { "name": "Loyalty (Sartar)", "value": 70 }
+  ],
+  "age": 21,
+  "gender": "Female",
+  "family": "Daughter of Farnan (slain by Crimson Bat at Whitewall 1620). Mother Vareena, priestess of Ernalda, Ernaldori clan.",
+  "backgroundEvents": "Followed Argrath after Battle of Pennel Ford. Wounded at Second Battle of Moonbroth (scar across left side of face). Returned home to recover.",
+  "career": "Warrior",
+  "cult": "Orlanth",
+  "miracles": [
+    "Shield",
+    "Lightning"
+  ],
+  "devotionalPool": 7,
+  "careerSkills": {
+    "Ride (Bison)": 30,
+    "Lore (Strategy and Tactics)": 30,
+    "Oratory": 15,
+    "First Aid": 5,
+    "Literacy (Theyalan)": 10,
+    "Craft (Farming)": 10
+  },
+  "careerFolkMagic": [
+    "Heal",
+    "Fanaticism"
+  ],
+  "bonusSkills": {
+    "Influence": 10,
+    "Sing": 10,
+    "Perception": 5,
+    "Lore (Orlanth)": 10,
+    "Ride (Bison)": 10
+  },
+  "selectedProfessionalSkills": [
+    "Lore (Strategy and Tactics)",
+    "Oratory",
+    "Literacy (Theyalan)"
+  ],
+  "hobbySkillName": null,
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "startingMoney": 20,
+  "equipment": [
+    { "name": "Two sets of good clothing", "enc": 2, "quantity": 1, "cost": 0 },
+    { "name": "Bronze image of Orlanth (+10% Worship)", "enc": 0, "quantity": 1, "cost": 0 },
+    { "name": "10-point magic point storage crystal", "enc": 0, "quantity": 1, "cost": 0 },
+    { "name": "Backpack", "enc": 1, "quantity": 1, "cost": 5 },
+    { "name": "Waterskin", "enc": 1, "quantity": 1, "cost": 5 },
+    { "name": "Rations (1 week)", "enc": 2, "quantity": 1, "cost": 14 },
+    { "name": "Bedroll", "enc": 1, "quantity": 1, "cost": 5 },
+    { "name": "Flint & Tinder", "enc": 0, "quantity": 1, "cost": 5 }
+  ],
+  "weapons": [
+    { "name": "Broadsword", "damage": "1d8", "size": "M", "reach": "M", "ap": 6, "hp": 10, "skill": 90, "quantity": 1 },
+    { "name": "Lance", "damage": "1d10+1", "size": "H", "reach": "VL", "ap": 4, "hp": 10, "skill": 70, "quantity": 1 },
+    { "name": "Battleaxe", "damage": "1d6+1", "size": "M", "reach": "M", "ap": 4, "hp": 8, "skill": 55, "quantity": 1 },
+    { "name": "Medium Shield", "damage": "1d4", "size": "L", "reach": "S", "ap": 6, "hp": 12, "skill": 55, "quantity": 1 },
+    { "name": "Composite Bow", "damage": "1d8+1", "size": "H", "reach": "-", "ap": 4, "hp": 7, "skill": 45, "quantity": 1 }
+  ],
+  "armor": [
+    { "name": "Closed Helm", "ap": 5, "locations": "Head", "cost": 0 },
+    { "name": "Bronze Disk Plate Cuirass", "ap": 5, "locations": "Chest", "cost": 0 },
+    { "name": "Studded Leather Skirt", "ap": 3, "locations": "Abdomen", "cost": 0 },
+    { "name": "Bronze Vambraces", "ap": 6, "locations": "Arms", "cost": 0 },
+    { "name": "Bronze Greaves", "ap": 6, "locations": "Legs", "cost": 0 }
+  ],
+  "combatStyles": [
+    {
+      "name": "Sartarite Noble",
+      "weapons": ["Broadsword", "Lance", "Medium Shield", "Javelin"],
+      "traits": ["Intimidating Scream", "Mounted Combat", "Shield Wall"],
+      "value": 90
     }
+  ],
+  "notes": "Natural born leader (CHA 19). Best in mounted combat — Lance does 1d10+1+3D6 (mount's DB) on charge. Use Demoralize before combat. Facial scar from Moonbroth.",
+  "background": "Vasana is a small, athletic woman with a vicious scar across one side of her face. Despite her size, she rides a bison and is more than capable of commanding warriors and priests more senior than herself. Her grandmother was a scribe in the service of the Princes of Sartar. Her father Farnan died defending Whitewall in 1620, devoured by the Crimson Bat. Vasana swore revenge and followed Argrath into Prax.",
+  "hitPoints": {
+    "Head": { "current": 5, "max": 5 },
+    "Chest": { "current": 7, "max": 7 },
+    "Abdomen": { "current": 6, "max": 6 },
+    "Right Arm": { "current": 4, "max": 4 },
+    "Left Arm": { "current": 4, "max": 4 },
+    "Right Leg": { "current": 5, "max": 5 },
+    "Left Leg": { "current": 5, "max": 5 }
   },
-  "background": "Molon, Vasana’s Bison\nFemale, age 21. Heavy cavalrywoman of the Ernaldori clan \nof the Colymar Tribe.\nI am Vasana, the daughter of Farnan, a hero of Starbrow’s Rebel-\nlion, slain and devoured by the Crimson Bat. In my war of revenge \nagainst the Lunar Empire, I gained the attention of Argrath at the \nBattle of Pennel Ford. I was sorely wounded at the Second Battle \nof Moonbroth, granting me this terrible scar across on the left half \nof my face. I returned to my mother’s farm to recover, and now I \nam ready for adventure.\nMy friends know me for a fearsome bison rider, a skilled hand \nwith a sword, and a devout worshiper of Orlanth Adventurous. \nMy honor is my greatest strength. \nVasana is a small, athletic woman with a vicious scar across \none side of her face. Despite her size, she rides a bison and is \nmore than capable of commanding warriors and priests more \nsenior than herself.\nVasana’s grandmother was a scribe in the service of the \nPrinces of Sartar, and died with great glory in the Battle of \nBoldhome. Vasana’s father was Farnan, a temple orphan who \nmarried Vareena, a priestess of Ernalda from the Ernaldori clan. \nFarnan joined Starbrow’s Rebellion and later personally aided \nKallyr Starbrow in her escape from Sartar. He died defending \nWhitewall in 1620, devoured by the Crimson Bat. Farnan’s soul \nwas annihilated and Vasana, then a teenager, swore revenge.\nAs soon as she was initiated as an adult, Vasana left her \nmother’s farm to avenge her father against the Lunar Empire. \nIn 1623, she followed King Broyan to the metropolis of Nochet, \naccompanied by her half-sister Yanioth. At the Battle of Pennel \nFord, she fought with great glory, and gained the attention of \nArgrath. Vasana followed Argrath into Prax and joined the \narmy of the White Bull in the liberation of Pavis. Pursuing \nhonor again, she fought with great glory at the Second Battle \nof Moonbroth, and was nearly killed (receiving a nasty scar \non her face) in the process of killing a Lunar priestess. After \nthe Dragonrise, she returned to her mother’s farm to recover.\nHow to Play Vasana\n\t\n. You are a natural born leader with a Charisma 19. Take charge!\n\t\n. You have strong passions—Hate (Lunar Empire), \nDevotion (Orlanth), Honor, and your Loyalties—use \nthem when appropriate to augment your skills. \n\t\n. Your high Death Rune makes you a warrior ascetic. You \nignore pain and pleasure. Your high Air Rune makes you \npassionate, proud, and violent.\n\t\n. Your Lance attack while riding your bison can do huge \namounts of damage. But you are better on the defensive \nwhen you use your sword.\n\t\n. You have a good array of Rune spells for combat, but \nyou need to choose very carefully as you don’t have any \nRune points to spare. Use Demoralize on a foe before you \nfight them!\nVASANA FARNAN’S \nDAUGHTER\nElemental Affinities\nPower Affinities\n \n Death\n75\n \n Fertility\n0\n \n Movement\n75\n \n Stasis\n0\n \n Illusion\n0\n \nTruth\n0\n \n Disorder\n0\n0\n0\n \n Man\n \n Beast\n \n Harmony\n0\n0\n0\n0\n0\n0\n90\n \n Fire\n \n Water\n \n Earth\n \n Air\n \n Darkness\n \n Moon\nRunes",
-  "notes": [
-    "Devout worshiper of Orlanth",
-    "Ernaldori clan o/t Colymar",
-    "Daughter of Farnan, slain by",
-    "Followed Argrath after Pennel",
-    "Returned home to recover after",
-    "Armor: bronze disk plate",
-    "Armor: bronze greaves &",
-    "Armor: studded leather skirt &",
-    "Weapons: broadsword, lance,",
-    "Ranged: composite bow",
-    "Treasure: 20 L in coin",
-    "High Charisma: take charge",
-    "Best in mounted combat",
-    "Keep miracles for decisive"
-  ],
-  "mentalTraits": [
-    "Honor-bound war leader",
-    "Grim under Death rune",
-    "Proud & violent under Air"
-  ],
-  "wounds": [
-    "Scar across left side of"
-  ],
-  "reminders": [
-    "Rep. 20/Rans. 500 L",
-    "Use passions to augment",
-    "Hate Lunar Empire 90",
-    "Honor 70",
-    "Ride Molon into charges",
-    "Facial scar from Moonbroth",
-    "Store cryst.: +10 MP"
-  ],
-  "mounts": [
-    "Molon the bison"
-  ],
   "companions": [
     {
       "name": "Molon",
@@ -343,14 +181,7 @@
       "hitPointsTotal": 23,
       "healingRate": 3,
       "strikeRank": 3,
-      "notes": "War-trained cavalry bison. Use mount's +3D6 damage bonus for lance charges, not rider's."
+      "notes": "War-trained cavalry bison. Use mount's +3D6 damage bonus for lance charges. Can head butt OR trample per round, not both."
     }
-  ],
-  "magicItems": [
-    "Store cryst. +10 MP",
-    "Bronze image of Orlanth"
-  ],
-  "traits": [
-    "Natural born leader"
   ]
 }
