@@ -17524,11 +17524,11 @@ App.exportSinglePagePDF = async function() {
     if (CharacterData.backgroundEvents) bgParts.push('Background: ' + CharacterData.backgroundEvents);
     if (bgParts.length > 0) {
       const bgText = bgParts.join(' | ');
-      const bgLines = wrapText(bgText, W - 4, 5.5);
-      bgLines.slice(0, 4).forEach((ln, i) => {
-        txt(ln, L + 2, y - (i * 7), { size: 5.5 });
+      const bgLines = wrapText(bgText, W - 4, 6.5);
+      bgLines.slice(0, 3).forEach((ln, i) => {
+        txt(ln, L + 2, y - (i * 8), { size: 6.5 });
       });
-      y -= Math.min(bgLines.length, 4) * 7 + 2;
+      y -= Math.min(bgLines.length, 3) * 8 + 3;
     }
 
     // ===== CHARACTERISTICS (inline) =====
@@ -17565,9 +17565,9 @@ App.exportSinglePagePDF = async function() {
       const col = i % 5;
       const row = Math.floor(i / 5);
       const x = L + col * attrColW;
-      txt(`${pair[0]}: ${pair[1]}`, x, y - row * 9, { size: 6.5, bold: true });
+      txt(`${pair[0]}: ${pair[1]}`, x, y - row * 10, { size: 6.5, bold: true });
     });
-    y -= Math.ceil(attrPairs.length / 5) * 9 + 4;
+    y -= Math.ceil(attrPairs.length / 5) * 10 + 4;
 
     // ===== HIT LOCATIONS (compact horizontal) =====
     const hp = attrs.hitPoints || {};
@@ -17596,6 +17596,7 @@ App.exportSinglePagePDF = async function() {
       txt(`${hpVal} HP${apVal ? ' / ' + apVal + ' AP' : ''}`, x + 2, y - 7, { size: 6 });
     });
     y -= 12;
+    y -= 5; // breathing room after hit locations
 
     // ===== COMBAT STYLES =====
     const combatStyles = CharacterData.combatStyles || [];
@@ -17624,6 +17625,8 @@ App.exportSinglePagePDF = async function() {
         });
       });
       y -= 2;
+      y -= 5; // breathing room after combat styles
+      line(L, y, L + W); y -= 3; // separator before weapons
     }
 
     // ===== WEAPONS TABLE =====
@@ -17658,6 +17661,8 @@ App.exportSinglePagePDF = async function() {
         y -= 8;
       });
       y -= 3;
+      y -= 5; // breathing room after weapons
+      line(L, y, L + W); y -= 3; // separator before skills
     }
 
     // ===== SKILLS (3-column dense layout) =====
@@ -17688,6 +17693,8 @@ App.exportSinglePagePDF = async function() {
       if (row + 1 > maxSkillRows) maxSkillRows = row + 1;
     });
     y = skillStartY - maxSkillRows * 7 - 3;
+    y -= 5; // breathing room after skills
+    line(L, y, L + W); y -= 3; // separator before passions
 
     // ===== PASSIONS =====
     const passions = (CharacterData.passions || []).filter(p => p.name);
@@ -17764,6 +17771,7 @@ App.exportSinglePagePDF = async function() {
     }
 
     // ===== EQUIPMENT =====
+    line(L, y, L + W); y -= 3; // separator before equipment
     const equipment = CharacterData.equipment || [];
     if (equipment.length > 0 && y > 45) {
       const moneyStr = CharacterData.startingMoney ? `  |  Starting Money: ${CharacterData.startingMoney} Lunars` : '';
