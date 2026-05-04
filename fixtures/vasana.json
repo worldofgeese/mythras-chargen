@@ -319,6 +319,33 @@
   "mounts": [
     "Molon the bison"
   ],
+  "companions": [
+    {
+      "name": "Molon",
+      "species": "Bison (War-trained cavalry)",
+      "characteristics": { "STR": 36, "CON": 17, "SIZ": 34, "DEX": 12, "POW": 10 },
+      "hitLocations": {
+        "Right Hind Leg": { "current": 8, "max": 8, "ap": 3 },
+        "Left Hind Leg": { "current": 8, "max": 8, "ap": 3 },
+        "Hindquarters": { "current": 10, "max": 10, "ap": 3 },
+        "Forequarters": { "current": 10, "max": 10, "ap": 3 },
+        "Right Foreleg": { "current": 8, "max": 8, "ap": 3 },
+        "Left Foreleg": { "current": 8, "max": 8, "ap": 3 },
+        "Head": { "current": 9, "max": 9, "ap": 3 }
+      },
+      "attacks": [
+        { "name": "Head Butt", "skill": 50, "damage": "2D10+3D6", "notes": "Cannot also Trample same round" },
+        { "name": "Trample", "skill": 50, "damage": "6D6", "notes": "Against downed foe only" }
+      ],
+      "armor": 3,
+      "movement": 12,
+      "damageModifier": "+3D6",
+      "hitPointsTotal": 23,
+      "healingRate": 3,
+      "strikeRank": 3,
+      "notes": "War-trained cavalry bison. Use mount's +3D6 damage bonus for lance charges, not rider's."
+    }
+  ],
   "magicItems": [
     "Store cryst. +10 MP",
     "Bronze image of Orlanth"

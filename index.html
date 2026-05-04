@@ -656,8 +656,10 @@ button.primary:hover { background: #333; }
         <h2>Equipment <span class="page-ref">(Mythras p.107-128)</span></h2>
         <div id="play-equipment"></div>
 
+        <div id="play-companions"></div>
+
         <h2>Notes</h2>
-        <textarea id="play-notes" data-persist="notes" rows="6" 
+        <textarea id="play-notes" data-persist="notes" rows="6"
           oninput="CharacterData.notes = this.value; App.saveToLocalStorage();"></textarea>
 
         <!-- Special Effects Reference -->
@@ -13440,6 +13442,9 @@ const CharacterData = {
   // Hit points (Play Mode tracking)
   hitPoints: {},
 
+  // Companion creatures (mounts, pets, bonded animals)
+  companions: [],
+
   /**
    * Validate character data for completeness and correctness
    * @returns {object} {valid: boolean, errors: string[]}
@@ -13543,6 +13548,7 @@ const CharacterData = {
       notes: this.notes,
       background: this.background,
       hitPoints: JSON.parse(JSON.stringify(this.hitPoints || {})),
+      companions: JSON.parse(JSON.stringify(this.companions || [])),
       cult: this.cult,
       miracles: [...this.miracles],
       devotionalPool: this.devotionalPool,
@@ -13590,6 +13596,7 @@ const CharacterData = {
       this.notes = data.notes || '';
       this.background = data.background || '';
       this.hitPoints = data.hitPoints || {};
+      this.companions = data.companions || [];
       this.cult = data.cult || null;
       this.miracles = data.miracles || [];
       this.devotionalPool = data.devotionalPool || 0;
@@ -16864,6 +16871,7 @@ App.renderPlayMode = function() {
   this.renderPlayPassions();
   this.renderPlayMagic();
   this.renderPlayEquipment();
+  this.renderPlayCompanions();
   // Special effects reference is rendered lazily when opened (perf for headless Chrome)
   const seHeader = document.querySelector('.collapsible-header');
   if (seHeader && !seHeader._lazyBound) {
@@ -17276,6 +17284,49 @@ App.renderPlayEquipment = function() {
   `;
 };
 
+App.renderPlayCompanions = function() {
+  const container = document.getElementById('play-companions');
+  if (!container) return;
+  const companions = CharacterData.companions || [];
+  if (companions.length === 0) { container.innerHTML = ''; return; }
+
+  container.innerHTML = companions.map((comp, ci) => `
+    <h2>Companion: ${comp.name} <span style="font-weight:normal;font-size:14px;">(${comp.species})</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:12px;">
+      ${Object.entries(comp.characteristics || {}).map(([k,v]) => `<div style="text-align:center;background:#f5f5f5;padding:4px;border-radius:4px;"><strong>${k}</strong><br>${v}</div>`).join('')}
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;font-size:13px;">
+      <div><strong>Movement:</strong> ${comp.movement || '—'}</div>
+      <div><strong>Armor:</strong> ${comp.armor || 0} AP</div>
+      <div><strong>Damage Mod:</strong> ${comp.damageModifier || '—'}</div>
+      <div><strong>HP Total:</strong> ${comp.hitPointsTotal || '—'}</div>
+      <div><strong>Healing Rate:</strong> ${comp.healingRate || '—'}</div>
+      <div><strong>Strike Rank:</strong> ${comp.strikeRank || '—'}</div>
+    </div>
+    <table style="width:100%;font-size:12px;border-collapse:collapse;margin-bottom:8px;">
+      <tr style="background:#333;color:#fff;"><th style="padding:4px;">Location</th><th>AP</th><th>HP</th></tr>
+      ${Object.entries(comp.hitLocations || {}).map(([loc, data]) => `
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:4px;">${loc}</td>
+          <td>${data.ap || 0}</td>
+          <td><input type="number" value="${data.current}" min="0" max="${data.max}" style="width:40px;"
+            onchange="CharacterData.companions[${ci}].hitLocations['${loc}'].current=parseInt(this.value);App.saveToLocalStorage();"> / ${data.max}</td>
+        </tr>`).join('')}
+    </table>
+    <table style="width:100%;font-size:12px;border-collapse:collapse;margin-bottom:8px;">
+      <tr style="background:#333;color:#fff;"><th style="padding:4px;">Attack</th><th>Skill</th><th>Damage</th><th>Notes</th></tr>
+      ${(comp.attacks || []).map(atk => `
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:4px;">${atk.name}</td>
+          <td>${atk.skill}%</td>
+          <td>${atk.damage}</td>
+          <td style="font-size:11px;">${atk.notes || ''}</td>
+        </tr>`).join('')}
+    </table>
+    ${comp.notes ? `<p style="font-size:12px;font-style:italic;margin-top:4px;">${comp.notes}</p>` : ''}
+  `).join('');
+};
+
 App.renderSpecialEffectsReference = function() {
   const container = document.getElementById('special-effects-ref');
   container.innerHTML = `
@@ -17640,6 +17691,29 @@ App.exportSinglePagePDF = async function() {
         }
       });
       y -= Math.min(noteLines.length, 5) * 7 + 3;
+    }
+
+    // ===== COMPANIONS =====
+    const companions = CharacterData.companions || [];
+    if (companions.length > 0 && y > 60) {
+      companions.forEach(comp => {
+        if (y < 60) return;
+        txt(`COMPANION: ${comp.name} (${comp.species})`, L, y, { bold: true, size: 7 });
+        y -= 8;
+        const stats = Object.entries(comp.characteristics || {}).map(([k,v]) => `${k} ${v}`).join('  ');
+        txt(stats, L + 2, y, { size: 5.5 });
+        y -= 7;
+        txt(`Move: ${comp.movement || '—'}  AP: ${comp.armor || 0}  DM: ${comp.damageModifier || '—'}  HP: ${comp.hitPointsTotal || '—'}`, L + 2, y, { size: 5.5 });
+        y -= 7;
+        (comp.attacks || []).forEach(atk => {
+          if (y < 30) return;
+          txt(`${atk.name}: ${atk.skill}% — ${atk.damage}${atk.notes ? ' (' + atk.notes + ')' : ''}`, L + 2, y, { size: 5.5 });
+          y -= 7;
+        });
+        const locs = Object.entries(comp.hitLocations || {}).map(([loc, d]) => `${loc}: ${d.max}/${d.ap}AP`).join(', ');
+        if (y > 30) { txt(locs, L + 2, y, { size: 5 }); y -= 7; }
+        if (comp.notes && y > 30) { txt(comp.notes, L + 2, y, { size: 5 }); y -= 8; }
+      });
     }
 
     // ===== FOOTER =====
