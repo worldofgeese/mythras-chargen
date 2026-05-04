@@ -103,7 +103,12 @@
     "Sing": 10,
     "Perception": 5,
     "Lore (Orlanth)": 10,
-    "Ride (Bison)": 10
+    "Ride (Bison)": 10,
+    "Willpower": 15,
+    "Endurance": 10,
+    "Athletics": 10,
+    "Brawn": 10,
+    "First Aid": 10
   },
   "selectedProfessionalSkills": [
     "Lore (Strategy and Tactics)",
@@ -140,8 +145,8 @@
   ],
   "combatStyles": [
     {
-      "name": "Sartarite Noble",
-      "weapons": ["Broadsword", "Lance", "Medium Shield", "Javelin"],
+      "name": "Colymar Bison Cavalry",
+      "weapons": ["Broadsword", "Lance", "Medium Shield", "Composite Bow"],
       "traits": ["Intimidating Scream", "Mounted Combat", "Shield Wall"],
       "value": 90
     }

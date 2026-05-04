@@ -1,312 +1,157 @@
 {
-  "name": "Sorala Dtr. o/ Toria",
-  "concept": "Esrolian / Nochet Scribe and scholar",
+  "name": "Sorala Daughter of Toria",
+  "concept": "Esrolian scribe, scholar, and sorcerer of Lhankor Mhy",
   "characteristics": {
-    "STR": 10,
-    "CON": 8,
-    "SIZ": 10,
-    "DEX": 12,
-    "INT": 15,
-    "POW": 9,
-    "CHA": 11
+    "STR": 13,
+    "CON": 11,
+    "SIZ": 12,
+    "DEX": 17,
+    "INT": 20,
+    "POW": 13,
+    "CHA": 15
   },
   "charMethod": "pregen",
   "attributes": {
-    "actionPoints": 3,
-    "experienceModifier": 0,
+    "actionPoints": 4,
+    "experienceModifier": 1,
     "healingRate": 2,
-    "luckPoints": 2,
-    "magicPoints": 9,
-    "magicPointsMax": 9,
-    "initiativeBonus": 14,
-    "damageModifier": "-1d2",
+    "luckPoints": 3,
+    "magicPoints": 13,
+    "initiativeBonus": 18,
+    "damageModifier": "+0",
     "hitPoints": {
-      "Head": 4,
-      "Chest": 6,
-      "Abdomen": 5,
-      "Right Arm": 3,
-      "Left Arm": 3,
-      "Right Leg": 4,
-      "Left Leg": 4
+      "Head": 5,
+      "Chest": 7,
+      "Abdomen": 6,
+      "Right Arm": 4,
+      "Left Arm": 4,
+      "Right Leg": 5,
+      "Left Leg": 5
     },
-    "movementRate": 6,
-    "devotionPoints": 3,
-    "devotionPointsMax": 3,
     "encumbrance": {
-      "unencumbered": 10,
-      "burdened": 20,
-      "overloaded": 30
-    }
+      "unencumbered": 26,
+      "burdened": 39,
+      "overloaded": 52
+    },
+    "runeAffinities": {
+      "primary": 95,
+      "secondary": 75,
+      "tertiary": 75
+    },
+    "folkMagicBase": 58,
+    "movementRate": 6
   },
-  "culture": "Esrolian / Nochet",
+  "culture": "Esrolian (Nochet)",
   "homeland": "Nochet, Esrolia",
-  "age": 21,
-  "gender": "she/her",
-  "socialClass": "Freewoman",
-  "physical": {
-    "hand": "Right",
-    "frame": "Average",
-    "height": "170",
-    "weight": "70"
-  },
-  "career": "Scribe and scholar",
-  "standardSkills": {
-    "Athletics": 22,
-    "Boating": 18,
-    "Conceal": 21,
-    "Customs": 35,
-    "Dance": 30,
-    "Deceit": 26,
-    "Drive": 21,
-    "First Aid": 27,
-    "Influence": 30,
-    "Insight": 24,
-    "Locale": 40,
-    "Perception": 35,
-    "Ride": 21,
-    "Sing": 30,
-    "Stealth": 30,
-    "Swim": 18,
-    "Unarmed": 22,
-    "Brawn": 20,
-    "Endurance": 16,
-    "Evade": 44,
-    "Willpower": 18
-  },
-  "professionalSkills": {
-    "Bureaucracy": 50,
-    "Craft (Farming)": 45,
-    "Literacy (Auld Wyrmish)": 60,
-    "Literacy (N. Pelorian)": 50,
-    "Literacy (Theyalan)": 90,
-    "Lore (EWF)": 35,
-    "Lore (Esrolia)": 40
-  },
-  "languages": {
-    "Esrolian": 60,
-    "Heortling": 50,
-    "Tradetalk": 30
-  },
-  "magicSkills": {
-    "Devotion (L. Mhy)": 80,
-    "Meditation": 35,
-    "Invocation": 55,
-    "Shaping": 55
-  },
-  "combatStyles": [
-    {
-      "name": "Nochet",
-      "skill": 70,
-      "weapons": [
-        "Broadsword",
-        "Battleaxe",
-        "Medium Shield",
-        "Throwing Axe",
-        "Sling"
-      ],
-      "traits": []
-    },
-    {
-      "name": "Sling Scout",
-      "skill": 45,
-      "weapons": [
-        "Broadsword",
-        "Battleaxe",
-        "Medium Shield",
-        "Throwing Axe",
-        "Sling"
-      ],
-      "traits": []
-    }
-  ],
-  "passions": [
-    "Devotion (L. Mhy): 80",
-    "Hate (Lunar Empire): 60",
-    "Honor: 80",
-    "Loyalty (Argrath): 80",
-    "Loyalty (Hulta Clan): 60",
-    "Loyalty (Nochet): 60",
-    "Loyalty (Queen Samastina): 70"
-  ],
-  "folkMagicSpells": [],
-  "miracles": [
-    "Analyze Magic 1",
-    "Clairvoyance 2",
-    "Knowledge 2"
-  ],
-  "weapons": {
-    "melee": [
-      {
-        "name": "Broadsword",
-        "damage": "1d8+1+1d4",
-        "size": "M",
-        "reach": "M",
-        "combatEffects": "Bleed, Impale",
-        "traits": "None",
-        "ap": 6,
-        "hp": 10,
-        "enc": 2
-      },
-      {
-        "name": "Battleaxe",
-        "damage": "1d8+2+1d4",
-        "size": "L",
-        "reach": "M",
-        "combatEffects": "Bleed, Sunder",
-        "traits": "None",
-        "ap": 4,
-        "hp": 8,
-        "enc": 1
-      },
-      {
-        "name": "Medium Shield",
-        "damage": "1d4+1d4",
-        "size": "L",
-        "reach": "S",
-        "combatEffects": "Bash, Stun Location",
-        "traits": "Ranged Parry",
-        "ap": 6,
-        "hp": 12,
-        "enc": 2
-      },
-      {
-        "name": "Throwing Axe",
-        "damage": "1d6+1d2",
-        "size": "S",
-        "reach": "M",
-        "combatEffects": "Bleed",
-        "traits": "Thrown",
-        "ap": 4,
-        "hp": 6,
-        "enc": 1
-      }
-    ],
-    "ranged": [
-      {
-        "name": "Sling",
-        "damage": "1d8+1d2",
-        "force": "M",
-        "damageModifier": "No",
-        "range": "10/30/60",
-        "combatEffects": "Stun Location",
-        "loadTurns": 1,
-        "ap": 0,
-        "hp": 0,
-        "enc": 0
-      }
-    ]
-  },
-  "armor": [
-    {
-      "name": "Full Helm",
-      "ap": 6,
-      "enc": 1
-    },
-    {
-      "name": "Cuirboilli Vambrace",
-      "ap": 3,
-      "enc": 1
-    },
-    {
-      "name": "Cuirboilli Vambrace",
-      "ap": 3,
-      "enc": 1
-    },
-    {
-      "name": "Linothorax Hauberk",
-      "ap": 3,
-      "enc": 2
-    },
-    {
-      "name": "Cuirboilli Greave",
-      "ap": 3,
-      "enc": 1
-    },
-    {
-      "name": "Cuirboilli Greave",
-      "ap": 3,
-      "enc": 1
-    }
-  ],
-  "equipment": [
-    "Find Magic matrix",
-    "500 L coin and booty",
-    "Writing materials",
-    "Calendar disk",
-    "Temple letter of introduction"
-  ],
-  "startingMoney": 500,
-  "cult": {
-    "name": "L. Mhy Initiate",
-    "parent": "Truth 95%"
+  "culturalSkills": {
+    "Language (Esrolian)": 20,
+    "Language (Old Pavic)": 10,
+    "Language (Theyalan)": 10,
+    "Tradetalk": 10,
+    "Customs (Esrolian)": 10,
+    "Influence": 10,
+    "Insight": 10,
+    "Perception": 10,
+    "Locale": 10
   },
   "runeAffinities": {
-    "Man": 75,
-    "Harmony": 75,
-    "Fire": 60,
-    "Truth": 95,
-    "Disorder": 75
+    "primary": "Truth",
+    "secondary": "Man",
+    "tertiary": "Harmony"
   },
-  "hitPoints": {
-    "Head": {
-      "current": 4,
-      "max": 4
-    },
-    "Chest": {
-      "current": 6,
-      "max": 6
-    },
-    "Abdomen": {
-      "current": 5,
-      "max": 5
-    },
-    "Right Arm": {
-      "current": 3,
-      "max": 3
-    },
-    "Left Arm": {
-      "current": 3,
-      "max": 3
-    },
-    "Right Leg": {
-      "current": 4,
-      "max": 4
-    },
-    "Left Leg": {
-      "current": 4,
-      "max": 4
+  "folkMagicSpells": [],
+  "passions": [
+    { "name": "Devotion (Lhankor Mhy)", "value": 80 },
+    { "name": "Hate (Lunar Empire)", "value": 60 },
+    { "name": "Honor", "value": 80 },
+    { "name": "Loyalty (Argrath)", "value": 80 },
+    { "name": "Loyalty (Hulta Clan)", "value": 60 },
+    { "name": "Loyalty (Nochet)", "value": 60 },
+    { "name": "Loyalty (Queen Samastina)", "value": 70 }
+  ],
+  "age": 21,
+  "gender": "Female",
+  "family": "Daughter of Toria, a sage of Lhankor Mhy. Granddaughter of a Lhankor Mhy sage at the Nochet Knowledge Temple. Father aided the House of Sartar against Lunar assassins.",
+  "backgroundEvents": "Supported usurper Samastina in the Esrolian civil war. Protected Samastina from Red Earth assassins. Blessed by the Earth Queen during the siege of Nochet. Fought at the Battle of Pennel Ford. Accompanied Argrath White Bull to Pavis.",
+  "career": "Scholar/Priest",
+  "cult": "Lhankor Mhy",
+  "miracles": [
+    "Analyze Magic",
+    "Clairvoyance",
+    "Knowledge"
+  ],
+  "devotionalPool": 3,
+  "careerSkills": {
+    "Literacy (Theyalan)": 15,
+    "Literacy (Auld Wyrmish)": 10,
+    "Literacy (New Pelorian)": 10,
+    "Lore (Lhankor Mhy)": 15,
+    "Bureaucracy": 15,
+    "Commerce": 10,
+    "Oratory": 10,
+    "Lore (Second Age)": 15
+  },
+  "careerFolkMagic": [],
+  "bonusSkills": {
+    "Perception": 10,
+    "Willpower": 10,
+    "Insight": 10,
+    "Influence": 10,
+    "Sing": 10,
+    "Dance": 10,
+    "Locale": 10,
+    "Endurance": 10,
+    "First Aid": 10,
+    "Athletics": 10
+  },
+  "selectedProfessionalSkills": [
+    "Literacy (Theyalan)",
+    "Lore (Lhankor Mhy)",
+    "Bureaucracy"
+  ],
+  "hobbySkillName": null,
+  "socialClass": "Gentry",
+  "socialClassMoneyMod": 1,
+  "startingMoney": 500,
+  "equipment": [
+    { "name": "Writing implements", "enc": 1, "quantity": 1, "cost": 0 },
+    { "name": "Tin disk carved calendar", "enc": 0, "quantity": 1, "cost": 0 },
+    { "name": "Letter of introduction from Knowledge Temple in Nochet", "enc": 0, "quantity": 1, "cost": 0 },
+    { "name": "Small stone figurine (crested dragonewt) containing Find Magic matrix", "enc": 0, "quantity": 1, "cost": 0 },
+    { "name": "500 L in coin, jewels, and booty", "enc": 1, "quantity": 1, "cost": 0 }
+  ],
+  "weapons": [
+    { "name": "Broadsword", "damage": "1d8", "size": "M", "reach": "M", "ap": 6, "hp": 10, "skill": 70, "quantity": 1 },
+    { "name": "Battle Axe", "damage": "1d6+1", "size": "M", "reach": "M", "ap": 4, "hp": 8, "skill": 35, "quantity": 1 },
+    { "name": "Medium Shield", "damage": "1d4", "size": "L", "reach": "S", "ap": 6, "hp": 12, "skill": 50, "quantity": 1 },
+    { "name": "Sling", "damage": "1d8", "size": "-", "reach": "-", "ap": 1, "hp": 2, "skill": 45, "quantity": 1 },
+    { "name": "Thrown Axe", "damage": "1d6+1d2", "size": "S", "reach": "-", "ap": 4, "hp": 6, "skill": 65, "quantity": 1 },
+    { "name": "Spirit Combat", "damage": "1d6+1", "size": "-", "reach": "-", "ap": 0, "hp": 0, "skill": 40, "quantity": 1 }
+  ],
+  "armor": [
+    { "name": "Full Helm", "ap": 6, "locations": "Head", "cost": 0 },
+    { "name": "Linothorax Hauberk", "ap": 3, "locations": "Chest, Abdomen", "cost": 0 },
+    { "name": "Cuirboilli Vambraces", "ap": 3, "locations": "Arms", "cost": 0 },
+    { "name": "Cuirboilli Greaves", "ap": 3, "locations": "Legs", "cost": 0 }
+  ],
+  "combatStyles": [
+    {
+      "name": "Nochet Scholar-Blade",
+      "weapons": ["Broadsword", "Battle Axe", "Medium Shield", "Sling", "Thrown Axe"],
+      "traits": ["Defensive Minded", "Ranged Marksman"],
+      "value": 70
     }
+  ],
+  "notes": "Sorcery Spells: Logician 55% (3 pts, +2/point), Reveal Rune 55% (2 pts, +1/point), Solace of the Logical Mind 15% (2 pts, +1/point). Find Magic matrix (small stone figurine): costs 1 Rune Point, finds magic within Rune spell range unless shielded by 3m+ of soil/stone. Noted sage specializing in the Second Age, particularly Old Pavis and Auld Wyrmish writings.",
+  "background": "Sorala is an adventurous and athletic scholar, wearing a traditional bejeweled veil concealing her lower jaw. She is the granddaughter of a Lhankor Mhy sage at the Nochet Knowledge Temple. Her father aided the House of Sartar against Lunar assassins and died with great glory when Belintar raised the Building Wall. Her mother Toria, also a sage of Lhankor Mhy, survived the Lion King's Feast but died with great glory during Greymane's Great Raid. After apprenticeship, Sorala was initiated into the Lhankor Mhy cult. In the Esrolian civil war she supported the usurper Samastina, and fought to protect her from Red Earth assassins. During the siege of Nochet, she was blessed by the Earth Queen and fought with distinction at the Battle of Pennel Ford. She accompanied Argrath White Bull to Pavis and acclaimed him as King of Pavis, befriending Vasana and Yanioth there.",
+  "hitPoints": {
+    "Head": { "current": 5, "max": 5 },
+    "Chest": { "current": 7, "max": 7 },
+    "Abdomen": { "current": 6, "max": 6 },
+    "Right Arm": { "current": 4, "max": 4 },
+    "Left Arm": { "current": 4, "max": 4 },
+    "Right Leg": { "current": 5, "max": 5 },
+    "Left Leg": { "current": 5, "max": 5 }
   },
-  "background": "Runes\nElemental Affinities\nPower Affinities\n \n Death\n0\n \n Fertility\n0\n \n Movement\n0\n \n Stasis\n0\n \n Illusion\n0\n \nTruth\n95\n \n Disorder\n75\n75\n0\n \n Man\n \n Beast\n \n Harmony\n0\nFemale, 21 years old. Scribe from Nochet in Esrolia. \nLet me be brief here, for I am in the middle of composing a treatise \nand I do not wish to lose the trail of thought. \nI am Sorala, a scholar out of the Lhankor Mhy temple in \nNochet. My mother taught me in the ways of writing and reading, \nand instilled in me a great love for the pursuit of knowledge. His-\ntory, languages, lore, rhetoric, logic, and even the paths of sorcery \nare among my specialties. My translations of Second Age Auld \nWyrmish brought me great acclaim among my peers. \nBut do not think me a mere book-mite or meek copier: I have \nfought and shed blood for Queen Samastina and King Argrath, \nand put my sword to work as readily as my stylus! \nI have joined a small group of adventurers and travel with \nthem now, wishing to explore more of my homeland of Dragon Pass. \nSorala is an adventurous and athletic scholar, wearing a \ntraditional bejeweled veil concealing her lower jaw.  \nSorala is the granddaughter of a Lhankor Mhy sage at the \nNochet Knowledge Temple. Her father aided the House of \nSartar against Lunar assassins and died with great glory when \nBelintar raised the Building Wall. Her mother was Toria, also \na sage of Lhankor Mhy. Toria survived the Lion King’s Feast \nbut died with great glory during Greymane’s Great Raid.\nAfter apprenticeship, Sorala was initiated into the Lhan-\nkor Mhy cult. In the Esrolian civil war, Sorala supported the \nusurper Samastina, and fought to protect her from Red Earth \nassassins. During the siege of Nochet, she was blessed by the \nEarth Queen and fought with distinction at the Battle of \nPennel Ford. Sorala accompanied Argrath White Bull to Pavis \nand acclaimed him as King of Pavis. There, she befriended \nVasana and Yanioth, accompanying them to Dragon Pass.\nSorala is a noted sage specializing in the Second Age, \nparticularly regarding the city of Old Pavis and with Auld \nWyrmish writings.\nHow to Play Sorala\n\t\n. You are a scholar and incredibly smart with an \nIntelligence 20. You also have a good Charisma.\n\t\n. You are a good fighter with decent armor but are \ncomparatively weak defensively and better at parrying \nwith your sword than with your shield.\n\t\n. Your Knowledge skills are broad. You can read three \ndifferent languages.\n\t\n. Your strongest passions are Loyalties to Argrath and \nthe Queen of Esrolia, and Devotion to the God of \nKnowledge. \n\t\n. Your magic is mainly about obtaining information. Take \ntime to cast your sorcery. It is rarely useful in combat. \n\t\n. You are from the biggest city of the world, and are very \ncivilized and cultured.\n\t\n. Your high Truth Rune means you make a good investigative \ndetective, seeking the truth behind every mystery.\nSORALA DAUGHTER \nOF TORIA\n0\n0\n0\n60\n0\n0\n \n Fire\n \n Water\n \n Earth\n \n Air\n \n Darkness\n \n Moon",
-  "notes": [
-    "Scribe from Nochet",
-    "Granddaughter of a L. Mhy sage",
-    "Companion to Vasana & Yanioth",
-    "Broad knowledge of old Pavis",
-    "Carries writing tools &",
-    "Introduction letter from"
-  ],
-  "mentalTraits": [
-    "Methodical investigator",
-    "Civilized and curious",
-    "Truth over comfort"
-  ],
-  "wounds": [],
-  "reminders": [
-    "Rep. 18/Rans. 1000 L",
-    "Truth rune: investig.",
-    "Sorcery: prep, not brawl",
-    "Honor 80/Loy. Argrath 80",
-    "More scholar than fighter",
-    "R/W specialist",
-    "Find Mgc mtx spots mgc"
-  ],
-  "sorcerySpells": [
-    "Logician 55 (3)",
-    "Reveal Rune 55 (2)",
-    "Solace 15 (2)"
-  ],
-  "magicItems": [
-    "Find Magic matrix"
-  ]
+  "companions": []
 }

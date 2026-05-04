@@ -42,6 +42,7 @@ design: ../designs/companion-mounts.md
 **Then** Molon the bison has STR 36, CON 17, SIZ 34, DEX 12, POW 10
 **And** attacks include Head Butt (50%, 2D10+3D6) and Trample (50%, 6D6)
 **And** movement is 12, armor is 3, damage modifier is +3D6
+**And** combat style is "Colymar Bison Cavalry" with weapons Broadsword, Lance, Medium Shield, Composite Bow
 
 ### Scenario 7: Ionara pre-gen loads with correct horse stats
 **Given** the Ionara fixture is loaded
@@ -49,6 +50,7 @@ design: ../designs/companion-mounts.md
 **Then** Etza the riding horse has STR 30, CON 17, SIZ 30, DEX 20, POW 17
 **And** attacks include Bite (25%, 1D8+3D6), Kick (25%, 1D6+3D6), Rear & Plunge (25%, 2D6+3D6), Trample (25%, 4D6)
 **And** movement is 12, armor is 1, damage modifier is +3D6
+**And** combat style is "Grazelander Noble" with weapons Mace, Small Shield, Lance, Dagger
 
 ## Constraints
 

@@ -85,13 +85,13 @@
   ],
   "devotionalPool": 8,
   "careerSkills": {
-    "Dance": 20,
-    "Sing": 20,
+    "Dance": 10,
+    "Sing": 10,
     "Influence": 10,
     "Devotion (Maran Gor)": 30,
     "Lore (Maran Gor)": 20,
     "Oratory": 10,
-    "Musicianship (Stringed)": 15
+    "Musicianship (Stringed)": 10
   },
   "careerFolkMagic": [
     "Vigor",
@@ -104,7 +104,12 @@
     "Survival": 10,
     "Lore (Animals)": 10,
     "Customs (Pony Breeders)": 5,
-    "Literacy (Theyalan)": 5
+    "Literacy (Theyalan)": 5,
+    "Endurance": 10,
+    "Willpower": 10,
+    "Athletics": 10,
+    "First Aid": 10,
+    "Locale": 5
   },
   "selectedProfessionalSkills": [
     "Devotion (Maran Gor)",
@@ -138,7 +143,7 @@
   ],
   "combatStyles": [
     {
-      "name": "Sartarite Noble",
+      "name": "Grazelander Noble",
       "weapons": ["Mace", "Small Shield", "Lance", "Dagger"],
       "traits": ["Intimidating Scream", "Mounted Combat", "Shield Wall"],
       "value": 100
@@ -157,7 +162,7 @@
   },
   "companions": [
     {
-      "name": "Etza",
+      "name": "Teza",
       "species": "Riding Horse",
       "characteristics": { "STR": 30, "CON": 17, "SIZ": 30, "DEX": 20, "POW": 17 },
       "hitLocations": {

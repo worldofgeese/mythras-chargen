@@ -1,289 +1,146 @@
 {
   "name": "Nathem Son of Nhean",
-  "concept": "Old Tarshite / Hendarli Hunter",
-  "characteristics": {
-    "STR": 10,
-    "CON": 12,
-    "SIZ": 11,
-    "DEX": 12,
-    "INT": 10,
-    "POW": 11,
-    "CHA": 9
-  },
+  "concept": "Hunter from the Hendarli Tribe in Old Tarsh, Odaylan tracker and bowman",
+  "characteristics": { "STR": 14, "CON": 18, "SIZ": 14, "DEX": 17, "INT": 12, "POW": 15, "CHA": 12 },
   "charMethod": "pregen",
   "attributes": {
-    "actionPoints": 2,
+    "actionPoints": 3,
     "experienceModifier": 0,
-    "healingRate": 2,
-    "luckPoints": 2,
-    "magicPoints": 11,
-    "magicPointsMax": 11,
-    "initiativeBonus": 11,
-    "damageModifier": "+0",
-    "hitPoints": {
-      "Head": 5,
-      "Chest": 7,
-      "Abdomen": 6,
-      "Right Arm": 4,
-      "Left Arm": 4,
-      "Right Leg": 5,
-      "Left Leg": 5
-    },
-    "movementRate": 6,
-    "devotionPoints": 3,
-    "devotionPointsMax": 3,
-    "encumbrance": {
-      "unencumbered": 10,
-      "burdened": 20,
-      "overloaded": 30
-    }
+    "healingRate": 3,
+    "luckPoints": 3,
+    "magicPoints": 15,
+    "initiativeBonus": 14,
+    "damageModifier": "+1d2",
+    "hitPoints": { "Head": 7, "Chest": 9, "Abdomen": 8, "Right Arm": 6, "Left Arm": 6, "Right Leg": 7, "Left Leg": 7 },
+    "encumbrance": { "unencumbered": 28, "burdened": 42, "overloaded": 56 },
+    "runeAffinities": { "primary": 90, "secondary": 75, "tertiary": 70 },
+    "folkMagicBase": 57,
+    "movementRate": 6
   },
-  "culture": "Old Tarshite / Hendarli",
-  "homeland": "Old Tarsh, Hendarli Tribe",
+  "culture": "Sartarite (Heortling)",
+  "homeland": "Hendarli Tribe, Old Tarsh",
+  "culturalSkills": {
+    "Language (Tarshite)": 20,
+    "Language (Heortling)": 10,
+    "Tradetalk": 5,
+    "Athletics": 10,
+    "Endurance": 15,
+    "Locale": 10,
+    "Perception": 15,
+    "Stealth": 10,
+    "Willpower": 5
+  },
+  "runeAffinities": { "primary": "Movement", "secondary": "Beast", "tertiary": "Disorder" },
+  "folkMagicSpells": ["Speedart", "Mobility", "Detect Life", "Heal"],
+  "passions": [
+    { "name": "Honor", "value": 60 },
+    { "name": "Love (Family)", "value": 70 },
+    { "name": "Love (Clan)", "value": 60 },
+    { "name": "Loyalty (Hendarli Tribe)", "value": 60 },
+    { "name": "Loyalty (Shaker Temple)", "value": 80 }
+  ],
   "age": 34,
-  "gender": "he/him",
-  "socialClass": "Free Man",
-  "physical": {
-    "hand": "Right",
-    "frame": "Average",
-    "height": "170",
-    "weight": "70"
-  },
+  "gender": "Male",
+  "family": "Born a farmer in Old Tarsh. Father taught him the huntsman's trade.",
+  "backgroundEvents": "Joined rebels at Battle of the Aurochs Hills. Saw the Dragonrise. Left home after, hiked to Nochet, joined Vasana's group.",
   "career": "Hunter",
-  "standardSkills": {
-    "Athletics": 22,
-    "Boating": 22,
-    "Conceal": 23,
-    "Customs": 25,
-    "Dance": 21,
-    "Deceit": 19,
-    "Drive": 23,
-    "First Aid": 22,
-    "Influence": 18,
-    "Insight": 21,
-    "Locale": 35,
-    "Perception": 60,
-    "Ride": 23,
-    "Sing": 30,
-    "Stealth": 45,
-    "Swim": 22,
-    "Unarmed": 22,
-    "Brawn": 21,
-    "Endurance": 24,
-    "Evade": 49,
-    "Willpower": 22
+  "cult": "Odayla",
+  "miracles": ["Bear's Skin", "Bear's Strength", "Claws"],
+  "devotionalPool": 3,
+  "careerSkills": {
+    "Survival": 20,
+    "Track": 15,
+    "Lore (Animals)": 15,
+    "Lore (Odayla)": 10,
+    "Navigate": 10,
+    "Craft (Farming)": 10,
+    "First Aid": 10,
+    "Ride": 10
   },
-  "professionalSkills": {
-    "Craft (Butchery)": 30,
-    "Craft (Farming)": 25,
-    "Lore (Animals)": 30,
-    "Lore (Odayla)": 20,
-    "Lore (Strat/Tact)": 20,
-    "Lore (Tarsh)": 35,
-    "Survival": 60
+  "careerFolkMagic": ["Strength", "Speedart"],
+  "bonusSkills": {
+    "Perception": 15,
+    "Stealth": 15,
+    "Endurance": 10,
+    "Athletics": 10,
+    "Survival": 10,
+    "Willpower": 10,
+    "Locale": 10,
+    "Insight": 10,
+    "Evade": 10
   },
-  "languages": {
-    "Tarshite": 50,
-    "Heortling": 25,
-    "Esrolian": 19
-  },
-  "magicSkills": {
-    "Devotion (Odayla)": 60,
-    "Exhort": 30,
-    "Folk Magic": 35,
-    "Meditation": 40
-  },
+  "selectedProfessionalSkills": ["Survival", "Track", "Lore (Animals)"],
+  "hobbySkillName": null,
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "startingMoney": 42,
+  "equipment": [
+    { "name": "Leather hunting garb and leather hood", "enc": 2, "quantity": 1, "cost": 0 },
+    { "name": "Cuirboilli hunter's vambrace (left arm)", "enc": 1, "quantity": 1, "cost": 0 },
+    { "name": "Finely made composite bow (+1 HP, 2-pt Multimissile matrix)", "enc": 1, "quantity": 1, "cost": 0 },
+    { "name": "Snares and traps", "enc": 1, "quantity": 1, "cost": 5 },
+    { "name": "Furs (trade goods worth 120 L)", "enc": 3, "quantity": 1, "cost": 120 },
+    { "name": "Backpack", "enc": 1, "quantity": 1, "cost": 5 },
+    { "name": "Waterskin", "enc": 1, "quantity": 1, "cost": 5 },
+    { "name": "Rations (1 week)", "enc": 2, "quantity": 1, "cost": 14 }
+  ],
+  "weapons": [
+    { "name": "Composite Bow", "damage": "1d8+1", "size": "H", "reach": "-", "ap": 4, "hp": 8, "skill": 70, "quantity": 1 },
+    { "name": "Battle Axe", "damage": "1d8+2+1d4", "size": "M", "reach": "M", "ap": 4, "hp": 8, "skill": 45, "quantity": 1 },
+    { "name": "Dagger", "damage": "1d4+2+1d4", "size": "S", "reach": "S", "ap": 6, "hp": 8, "skill": 35, "quantity": 1 },
+    { "name": "Medium Shield", "damage": "1d4+1d4", "size": "L", "reach": "S", "ap": 6, "hp": 12, "skill": 40, "quantity": 1 },
+    { "name": "Broadsword", "damage": "1d8+1+1d4", "size": "M", "reach": "M", "ap": 6, "hp": 10, "skill": 30, "quantity": 1 },
+    { "name": "Javelin", "damage": "1d6+1d4", "size": "M", "reach": "L", "ap": 3, "hp": 8, "skill": 30, "quantity": 2 }
+  ],
+  "armor": [
+    { "name": "Leather Hunting Garb", "ap": 1, "locations": "Head, Chest, Abdomen, Right Arm, Right Leg, Left Leg", "cost": 0 },
+    { "name": "Cuirboilli Vambrace", "ap": 3, "locations": "Left Arm", "cost": 0 }
+  ],
   "combatStyles": [
     {
-      "name": "Odaylan Hunter",
-      "skill": 70,
-      "weapons": [
-        "Battleaxe",
-        "Dagger",
-        "Medium Shield",
-        "Broadsword",
-        "Recurve Bow"
-      ],
-      "traits": []
+      "name": "Tarshite Bowman",
+      "weapons": ["Composite Bow", "Battle Axe", "Dagger", "Broadsword", "Medium Shield", "Javelin"],
+      "traits": ["Ranged Marksman", "Skirmishing"],
+      "value": 70
     }
   ],
-  "passions": [
-    "Honor: 60",
-    "Love (family): 70",
-    "Love (clan): 60",
-    "Loyalty (Hendarli Tribe): 60",
-    "Loyalty (Shaker Temple): 80"
-  ],
-  "folkMagicSpells": [
-    "Detect Life 1",
-    "Heal 1",
-    "Mobility 1",
-    "Speedart 1",
-    "Strength 2"
-  ],
-  "miracles": [
-    "Bear's Skin 3",
-    "Bear's Strength 2",
-    "Claws 2"
-  ],
-  "weapons": {
-    "melee": [
-      {
-        "name": "Battleaxe",
-        "damage": "1d8+2+1d4",
-        "size": "L",
-        "reach": "M",
-        "combatEffects": "Bleed, Sunder",
-        "traits": "None",
-        "ap": 4,
-        "hp": 8,
-        "enc": 1
-      },
-      {
-        "name": "Dagger",
-        "damage": "1d4+2+1d4",
-        "size": "S",
-        "reach": "T",
-        "combatEffects": "Bleed",
-        "traits": "None",
-        "ap": 6,
-        "hp": 6,
-        "enc": 1
-      },
-      {
-        "name": "Medium Shield",
-        "damage": "1d4+1d4",
-        "size": "L",
-        "reach": "S",
-        "combatEffects": "Bash, Stun Location",
-        "traits": "Ranged Parry",
-        "ap": 6,
-        "hp": 12,
-        "enc": 2
-      },
-      {
-        "name": "Broadsword",
-        "damage": "1d8+1+1d4",
-        "size": "M",
-        "reach": "M",
-        "combatEffects": "Bleed, Impale",
-        "traits": "None",
-        "ap": 6,
-        "hp": 10,
-        "enc": 2
-      }
-    ],
-    "ranged": [
-      {
-        "name": "Recurve Bow",
-        "damage": "1d8+1",
-        "force": "H",
-        "damageModifier": "Yes",
-        "range": "15/125/250",
-        "combatEffects": "Impale S",
-        "loadTurns": 2,
-        "ap": 4,
-        "hp": 9,
-        "enc": 1
-      }
-    ]
-  },
-  "armor": [
-    {
-      "name": "Leather Hood",
-      "ap": 1,
-      "enc": 1
-    },
-    {
-      "name": "Cuirboilli Vambrace",
-      "ap": 3,
-      "enc": 1
-    },
-    {
-      "name": "Leather Hauberk",
-      "ap": 1,
-      "enc": 2
-    }
-  ],
-  "equipment": [
-    "42 L coin",
-    "Snares",
-    "Furs (120 L)",
-    "Rurik's harness"
-  ],
-  "startingMoney": 42,
-  "cult": {
-    "name": "Odayla Initiate",
-    "parent": "Movement 90%"
-  },
-  "runeAffinities": {
-    "Beast": 75,
-    "Disorder": 70,
-    "Death": 65,
-    "Movement": 90,
-    "Harmony": 70
-  },
+  "notes": "Fight from range, scout ahead, and let others know what your sharp eyes catch first. In melee only fair and lightly armored, but toughness keeps him standing longer than most expect. Odayla miracles and Rurik the shadowcat can change the shape of a fight quickly. Beast and Movement suit him better than crowded talky scenes.",
+  "background": "Nathem is a sturdy, quiet man. His clothing is rough, mostly patched leather and thick linen, and he gives the impression of one who has spent long years outdoors. His skin is marked with complex patterns of Runes and scars. Born a farmer in Old Tarsh, Nathem learned the huntsman's trade from his father. He joined the rebels at the Battle of the Aurochs Hills. After the Dragonrise, he left home, hiked to Nochet, and eventually joined Vasana's group of adventurers.",
   "hitPoints": {
-    "Head": {
-      "current": 5,
-      "max": 5
-    },
-    "Chest": {
-      "current": 7,
-      "max": 7
-    },
-    "Abdomen": {
-      "current": 6,
-      "max": 6
-    },
-    "Right Arm": {
-      "current": 4,
-      "max": 4
-    },
-    "Left Arm": {
-      "current": 4,
-      "max": 4
-    },
-    "Right Leg": {
-      "current": 5,
-      "max": 5
-    },
-    "Left Leg": {
-      "current": 5,
-      "max": 5
-    }
+    "Head": { "current": 7, "max": 7 },
+    "Chest": { "current": 9, "max": 9 },
+    "Abdomen": { "current": 8, "max": 8 },
+    "Right Arm": { "current": 6, "max": 6 },
+    "Left Arm": { "current": 6, "max": 6 },
+    "Right Leg": { "current": 7, "max": 7 },
+    "Left Leg": { "current": 7, "max": 7 }
   },
-  "background": "Runes\nRurik, Shadowcat\nElemental Affinities\nPower Affinities\n \n Death\n65\n \n Fertility\n0\n \n Movement\n90\n \n Stasis\n0\n \n Illusion\n0\n \nTruth\n0\n \n Disorder\n0\n0\n75\n \n Man\n \n Beast\n \n Harmony\n70\nMale, age 34. Hunter from the Hendarli Tribe in Old Tarsh.\nIt is true that I have not seen much battle, nor have I witnessed \nmany of the great events that have shaped this land. I have instead \nspent most of my life in the heartland of Old Tarsh, hunting and \nknowing the ways of the woods and of its denizens. I threw my \nlot in with the rebels in the Battle of the Aurochs Hills, but even \nthen I was uncertain of my place in the world at large. \nThe Dragonrise changed me, and I knew the time had come \nto act. I left the quiet farm and forest that had been my whole \nworld, and went to Nochet, seeking adventure. I found it in the \nform of a group of adventurers, and I have put my woods-craft \nand bow to work alongside them. \nThey know me for my silence. I am always watching, listening, \nand waiting. When I act, it is decisively. \nNathem is a sturdy, quiet man. His clothing is rough, mostly \npatched leather and thick linen, and he gives the impression \nof one who has spent long years outdoors. His skin is marked \nwith complex patterns of Runes and scars. \nSome are born to greatness, while others are thrust into tur-\nbulent times and find their merit. For Nathem son of Nhean, \nneither is true. Born a farmer in Old Tarsh, Nathem learned \nthe huntsman’s trade from his father, protecting their steading \nagainst the occasional raiders or wolves, hunting to support the \nfamily in lean times. Aside from the tragic deaths of his sisters \nduring the second year of the Great Winter, Nathem saw little \nturmoil or strife, until he joined the rebels at the Battle of the \nAurochs Hills. He discovered within himself a taste for adventure, \nand a curiosity about the world outside of the Bush Range. \nReturning to the farm, Nathem settled back into rural \nlife, though it was now ill-fitting. The day he saw the godlike \npresence of the Dragonrise, he knew the world had changed \nforever, and he could not sit and watch. Nathem left home \nthen, hiking across the countryside, eventually throwing his lot \nin with a group of adventurers led by a fierce warrior named \nVasana. He has found fast friends among them, putting his \nbow-skill to great use alongside them.\nHow to Play Nathem\n\t\n. You fight with your bow and have good Perception skills. \nWith Multimissile or Speedart cast, you are very dangerous.\n\t\n. You are mediocre in melee combat and have little armor. \nHowever, you have a lot of hit points and very high \nConstitution so you can take quite a bit of damage.\n\t\n. Your Rune magic can make you very strong, or make you \nlarger and give you more armor. If you use Claws, it starts \nat only 35%.\n\t\n. Your shadowcat Rurik is a stealthy sidekick and \nsurprisingly dangerous against unarmored foes.\n\t\n. Your high Beast Rune means you are better with animals \nthan people, and your Movement and Disorder Runes \nlikely keep you wandering. Your passions are strongest \nabout your kin back in Old Tarsh, and may require some \nroleplaying to work into play.\nNATHEM SON OF \nNHEAN\n0\n0\n0\n0\n0\n0\n \n Fire\n \n Water\n \n Earth\n \n Air\n \n Darkness\n \n Moon",
-  "notes": [
-    "Old Tarsh hunter turned rebel",
-    "Joined Dragonrise struggle",
-    "Fast friend of Vasana's band",
-    "Carries snares and trade furs",
-    "Composite bow is finely made",
-    "Shadowcat is stealth"
-  ],
-  "mentalTraits": [
-    "Silent and watchful",
-    "Beast & Movement shape",
-    "Decisive when finally"
-  ],
-  "wounds": [],
-  "reminders": [
-    "Rep. 0/Rans. 250 L",
-    "Bow & Perception lead",
-    "Low cult skill, big CON",
-    "Bear magic shifts fights",
-    "Rurik can scout and ambush",
-    "Movement & Beast lead",
-    "Passions for quiet scenes"
-  ],
-  "magicItems": [
-    "Bow matrix: Multimissile"
-  ],
-  "otherMagic": [
+  "companions": [
     {
-      "type": "Companion",
-      "detail": "Rurik the shadowcat"
+      "name": "Rurik",
+      "species": "Shadowcat",
+      "characteristics": { "STR": 36, "CON": 17, "SIZ": 34, "DEX": 12, "POW": 10 },
+      "hitLocations": {
+        "Right Hind Leg": { "current": 4, "max": 4, "ap": 0 },
+        "Left Hind Leg": { "current": 4, "max": 4, "ap": 0 },
+        "Hindquarters": { "current": 6, "max": 6, "ap": 0 },
+        "Forequarters": { "current": 6, "max": 6, "ap": 0 },
+        "Right Foreleg": { "current": 4, "max": 4, "ap": 0 },
+        "Left Foreleg": { "current": 4, "max": 4, "ap": 0 },
+        "Head": { "current": 5, "max": 5, "ap": 0 }
+      },
+      "attacks": [
+        { "name": "Claw (x2)", "skill": 50, "damage": "1D6", "notes": "Both claws and bite simultaneously" },
+        { "name": "Bite", "skill": 40, "damage": "1D6", "notes": "" },
+        { "name": "Rip", "skill": 80, "damage": "3D6", "notes": "If both claws hit, hangs on and rips with hind claws next round" }
+      ],
+      "armor": 0,
+      "movement": 10,
+      "damageModifier": "",
+      "hitPointsTotal": 14,
+      "healingRate": 3,
+      "strikeRank": 3,
+      "notes": "Trained shadowcat companion. Skills: Dodge 50%, Hide 75%, Move Quietly 90%. First attacks with both claws and bite simultaneously. If both claws hit, Rurik hangs on and rips with hind claws on next round while continuing to bite."
     }
   ]
 }

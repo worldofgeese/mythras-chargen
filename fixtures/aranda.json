@@ -1,309 +1,174 @@
 {
   "name": "Aranda of Nochet",
-  "concept": "Esrolian / Hulta Axe maiden",
+  "concept": "Esrolian Axe Maiden of Babeester Gor, noble warrior of the Hulta clan",
   "characteristics": {
-    "STR": 12,
-    "CON": 10,
-    "SIZ": 11,
-    "DEX": 12,
-    "INT": 10,
-    "POW": 10,
-    "CHA": 10
+    "STR": 16,
+    "CON": 13,
+    "SIZ": 13,
+    "DEX": 16,
+    "INT": 13,
+    "POW": 14,
+    "CHA": 13
   },
   "charMethod": "pregen",
   "attributes": {
-    "actionPoints": 2,
-    "experienceModifier": 0,
-    "healingRate": 2,
-    "luckPoints": 2,
-    "magicPoints": 10,
-    "magicPointsMax": 22,
-    "initiativeBonus": 11,
-    "damageModifier": "+0",
+    "actionPoints": 3,
+    "experienceModifier": 1,
+    "healingRate": 3,
+    "luckPoints": 3,
+    "magicPoints": 14,
+    "initiativeBonus": 14,
+    "damageModifier": "+1d2",
     "hitPoints": {
-      "Head": 5,
-      "Chest": 7,
-      "Abdomen": 6,
-      "Right Arm": 4,
-      "Left Arm": 4,
-      "Right Leg": 5,
-      "Left Leg": 5
+      "Head": 6,
+      "Chest": 8,
+      "Abdomen": 7,
+      "Right Arm": 5,
+      "Left Arm": 5,
+      "Right Leg": 6,
+      "Left Leg": 6
     },
-    "movementRate": 6,
-    "devotionPoints": 3,
-    "devotionPointsMax": 3,
     "encumbrance": {
-      "unencumbered": 12,
-      "burdened": 24,
-      "overloaded": 36
-    }
+      "unencumbered": 32,
+      "burdened": 48,
+      "overloaded": 64
+    },
+    "runeAffinities": {
+      "primary": 95,
+      "secondary": 95,
+      "tertiary": 75
+    },
+    "folkMagicBase": 57,
+    "movementRate": 6
   },
-  "culture": "Esrolian / Hulta",
+  "culture": "Esrolian (Hulta clan)",
   "homeland": "Nochet, Esrolia",
-  "age": 21,
-  "gender": "she/her",
-  "socialClass": "Noblewoman",
-  "physical": {
-    "hand": "Right",
-    "frame": "Average",
-    "height": "170",
-    "weight": "70"
-  },
-  "career": "Axe maiden",
-  "standardSkills": {
-    "Athletics": 53,
-    "Boating": 22,
-    "Conceal": 22,
-    "Customs": 40,
-    "Dance": 35,
-    "Deceit": 25,
-    "Drive": 22,
-    "First Aid": 22,
-    "Influence": 55,
-    "Insight": 35,
-    "Locale": 35,
-    "Perception": 40,
-    "Ride": 45,
-    "Sing": 20,
-    "Stealth": 22,
-    "Swim": 22,
-    "Unarmed": 24,
-    "Brawn": 23,
-    "Endurance": 20,
-    "Evade": 62,
-    "Willpower": 20
-  },
-  "professionalSkills": {
-    "Bureaucracy": 45,
-    "Craft (Farming)": 40,
-    "Literacy (Esrolian)": 20,
-    "Lore (Animals)": 20,
-    "Lore (B. Gor)": 25,
-    "Lore (Esrolia)": 35,
-    "Lore (Strat/Tact)": 35
-  },
-  "languages": {
-    "Esrolian": 60,
-    "Heortling": 30,
-    "Tradetalk": 25
-  },
-  "magicSkills": {
-    "Devotion (B. Gor)": 60,
-    "Exhort": 45,
-    "Folk Magic": 40,
-    "Meditation": 20
-  },
-  "combatStyles": [
-    {
-      "name": "Axe Maiden",
-      "skill": 100,
-      "weapons": [
-        "Battleaxe",
-        "Great Battleaxe",
-        "Medium Shield",
-        "Short Spear",
-        "Self Bow"
-      ],
-      "traits": []
-    },
-    {
-      "name": "Great Axe Fury",
-      "skill": 60,
-      "weapons": [
-        "Battleaxe",
-        "Great Battleaxe",
-        "Medium Shield",
-        "Short Spear",
-        "Self Bow"
-      ],
-      "traits": []
-    }
-  ],
-  "passions": [
-    "Devotion (B. Gor): 60",
-    "Honor: 60",
-    "Love (family): 60",
-    "Loyalty (Hulta Clan): 60",
-    "Loyalty (Nochet): 60",
-    "Loyalty (Queen Samastina): 60"
-  ],
-  "folkMagicSpells": [
-    "Bladesharp 2",
-    "Demoralize 2",
-    "Heal 1",
-    "Vigor 2"
-  ],
-  "miracles": [
-    "Berserker 2",
-    "Earth Shield 3",
-    "Slash 1+"
-  ],
-  "weapons": {
-    "melee": [
-      {
-        "name": "Battleaxe",
-        "damage": "1d8+2+1d4",
-        "size": "L",
-        "reach": "M",
-        "combatEffects": "Bleed, Sunder",
-        "traits": "None",
-        "ap": 4,
-        "hp": 8,
-        "enc": 1
-      },
-      {
-        "name": "Great Battleaxe",
-        "damage": "1d8+2+1d4",
-        "size": "H",
-        "reach": "L",
-        "combatEffects": "Bleed, Sunder",
-        "traits": "Two-Handed",
-        "ap": 4,
-        "hp": 8,
-        "enc": 2
-      },
-      {
-        "name": "Medium Shield",
-        "damage": "1d4+1d4",
-        "size": "L",
-        "reach": "S",
-        "combatEffects": "Bash, Stun Location",
-        "traits": "Ranged Parry",
-        "ap": 6,
-        "hp": 12,
-        "enc": 2
-      },
-      {
-        "name": "Short Spear",
-        "damage": "1d6+1+1d4",
-        "size": "M",
-        "reach": "M",
-        "combatEffects": "Impale",
-        "traits": "None",
-        "ap": 4,
-        "hp": 10,
-        "enc": 1
-      }
-    ],
-    "ranged": [
-      {
-        "name": "Self Bow",
-        "damage": "1d6+1",
-        "force": "M",
-        "damageModifier": "Yes",
-        "range": "12/80/160",
-        "combatEffects": "Impale S",
-        "loadTurns": 2,
-        "ap": 4,
-        "hp": 6,
-        "enc": 1
-      }
-    ]
-  },
-  "armor": [
-    {
-      "name": "Closed Helm",
-      "ap": 5,
-      "enc": 1
-    },
-    {
-      "name": "Bronze Vambrace",
-      "ap": 6,
-      "enc": 1
-    },
-    {
-      "name": "Bronze Vambrace",
-      "ap": 6,
-      "enc": 1
-    },
-    {
-      "name": "Bronze Plate Hauberk",
-      "ap": 6,
-      "enc": 4
-    },
-    {
-      "name": "Bronze Greave",
-      "ap": 6,
-      "enc": 1
-    },
-    {
-      "name": "Bronze Greave",
-      "ap": 6,
-      "enc": 1
-    }
-  ],
-  "equipment": [
-    "Store cryst.",
-    "200 L coin",
-    "Luxury goods (450 L)",
-    "Noble clothing"
-  ],
-  "startingMoney": 200,
-  "cult": {
-    "name": "B. Gor Initiate",
-    "parent": "Earth 95%"
+  "culturalSkills": {
+    "Language (Esrolian)": 20,
+    "Language (Heortling)": 10,
+    "Language (Old Pavic)": 5,
+    "Tradetalk": 5,
+    "Athletics": 10,
+    "Endurance": 10,
+    "Influence": 10,
+    "Perception": 10,
+    "Insight": 10,
+    "Customs (Esrolian)": 10
   },
   "runeAffinities": {
-    "Death": 95,
-    "Stasis": 75
-  },
-  "hitPoints": {
-    "Head": {
-      "current": 5,
-      "max": 5
-    },
-    "Chest": {
-      "current": 7,
-      "max": 7
-    },
-    "Abdomen": {
-      "current": 6,
-      "max": 6
-    },
-    "Right Arm": {
-      "current": 4,
-      "max": 4
-    },
-    "Left Arm": {
-      "current": 4,
-      "max": 4
-    },
-    "Right Leg": {
-      "current": 5,
-      "max": 5
-    },
-    "Left Leg": {
-      "current": 5,
-      "max": 5
+    "primary": "Earth",
+    "secondary": "Death",
+    "tertiary": "Stasis",
+    "all": {
+      "Fire": 0,
+      "Air": 20,
+      "Earth": 95,
+      "Water": 45,
+      "Darkness": 0,
+      "Moon": 0,
+      "Man": 50,
+      "Fertility": 5,
+      "Death": 95,
+      "Disorder": 50,
+      "Harmony": 50,
+      "Truth": 50,
+      "Illusion": 50,
+      "Stasis": 75,
+      "Movement": 25,
+      "Beast": 50
     }
   },
-  "background": "Runes\nRiding Horse\nElemental Affinities\nPower Affinities\n \n Death\n95\n \n Fertility\n0\n \n Movement\n0\n \n Stasis\n75\n \n Illusion\n0\n \nTruth\n0\n \n Disorder\n0\n0\n0\n \n Man\n \n Beast\n \n Harmony\n0\nFemale, age 21. Axe Maiden of the Hulta clan in Esrolia.\nCall me Aranda, a citizen of Nochet, the grandest and most mag-\nnificent city in all the world. You see this axe? It has been carried \nby the women in my ancestry for many years, all in service to \nBabeester Gor, the Avenging Daughter. \nSeveral years I came north in search of battle, and here I \nfound it. In Aurochs Hills I distinguished myself, then returned \nto Nochet for its epic siege, and the battle of Pennel Ford shortly \nthereafter. I returned then to the north lands to defend the city of \nPavis against the ravaging hordes out of Prax. \nI am not to be trifled with, for my goddess calls to me from \ndeep within the earth, ever-thirsty for blood. Don’t tempt me \nto spill more. \nA noble of Esrolia, Aranda is proud and confident, her clothes \nand armor of fine make. As a devoted Axe Maiden of the \nbloodthirsty Earth goddess Babeester Gor, she is adorned \nwith Runes of Earth and Death, broken by several fierce scars \ndemonstrating that she is no dilettante. \nAranda’s grandmother Amestras was a wealthy landowner in \nNochet, the City of Queens, the greatest city of Dragon Pass, \nif not the world. Amestras fought in the Holy Country and \ndied valiantly in the Boldhome Campaign. Aranda’s mother \nLarinalla, also of the Babeester Gor cult, continued that fierce \ntradition, fighting in battles as great and far-flung as the Lion \nKing’s Feast, Greymane’s Great Raid, but eventually settling \ndown to raise Aranda during the Great Winter, then devoting \nherself entirely to the temple. \nWhen Aranda came of age and was initiated into the \nBabeester Gor cult, she sought glory and adventure, and threw \nherself into battle after battle, facing near-death on several occa-\nsions. She fought in the Battle of the Auroch Hills, returned \nhome to defend her city in the Siege of Nochet, then joined \nthe Battle of Pennel Ford. One of her most distant battles was \nat Pavis, where she fought the rampaging Praxian tribes there. \nNow she travels throughout Dragon Pass, guided by her \ngoddess, seeking worthwhile causes to wield her axe for.\nHow to Play Aranda\n\t\n. You are skilled fighter with your axe and shield, and have \nexcellent armor and good hit points. \n\t\n. You are from an ancient noble family from the biggest city \nof the world, and, despite being a sacred killer, you are \nvery civilized and cultured.\n\t\n. Earth Shield is very effective against a foe that does a very \nlarge amount damage. Slash is a good damage enhancing \nspell. Berserker dramatically increases your offensive \nabilities, but is best when you are really desperate.\n\t\n. Your best passions are your various Loyalties, your Honor, \nand your Devotion to your grim goddess.\n\t\n. Your high Death Rune means you ignore pleasure \nand plain, while your high Earth Rune means you are \npractical and worldly. Your high Status Rune means you \nvalue order and stability.\nAranda of \nnochet\n95\n0\n0\n0\n0\n0\n \n Fire\n \n Water\n \n Earth\n \n Air\n \n Darkness\n \n Moon",
-  "notes": [
-    "Hulta clan noble from Nochet",
-    "Returned north after Nochet",
-    "Fought at Pennel Ford",
-    "Carries fine clothes & luxury",
-    "Best with axe and shield"
+  "folkMagicSpells": [
+    "Bladesharp 2",
+    "Demoralize",
+    "Heal 1",
+    "Vigor"
   ],
-  "mentalTraits": [
-    "Proud and confident",
-    "Vengeful under Death",
-    "Orderly under Stasis"
+  "passions": [
+    { "name": "Devotion (Babeester Gor)", "value": 60 },
+    { "name": "Honor", "value": 60 },
+    { "name": "Love (Family)", "value": 60 },
+    { "name": "Loyalty (Hulta Clan)", "value": 60 },
+    { "name": "Loyalty (Nochet)", "value": 60 },
+    { "name": "Loyalty (Queen Samastina)", "value": 60 }
   ],
-  "wounds": [],
-  "reminders": [
-    "Rep. 10/Rans. 1000 L",
-    "Axe and shield are primary",
-    "Earth Shield anchors line",
-    "Slash for finishing blows",
-    "Honor & devotion steady",
-    "Wealthy Nochet noble",
-    "Order & revenge runes"
+  "age": 21,
+  "gender": "Female",
+  "family": "Grandmother Amestras was a wealthy landowner in Nochet. Mother Larinalla, also of Babeester Gor cult, fought in battles including the Lion King's Feast and Greymane's Great Raid.",
+  "backgroundEvents": "Fought at Battle of Aurochs Hills. Defended Nochet in Esrolian civil war. Joined Battle of Pennel Ford. Fought rampaging Praxian tribes at Pavis.",
+  "career": "Warrior",
+  "socialClass": "Gentry",
+  "cult": "Babeester Gor",
+  "miracles": [
+    "Berserk",
+    "Earth Shield",
+    "Slash"
   ],
-  "mounts": [
-    "Two riding horses"
+  "careerSkills": {
+    "Devotion (Babeester Gor)": 20,
+    "Lore (Babeester Gor)": 10,
+    "Ride (Horse)": 15,
+    "Evade": 15,
+    "First Aid": 10,
+    "Brawn": 10,
+    "Endurance": 10,
+    "Athletics": 10
+  },
+  "bonusSkills": {
+    "Willpower": 10,
+    "Influence": 10,
+    "Intimidate": 15,
+    "Sing": 10,
+    "Dance": 10,
+    "Perception": 10,
+    "Stealth": 10,
+    "Insight": 10,
+    "Locale": 15
+  },
+  "selectedProfessionalSkills": [
+    "Devotion (Babeester Gor)",
+    "Lore (Babeester Gor)",
+    "Ride (Horse)"
   ],
-  "magicItems": [
-    "Store cryst. +12 MP"
-  ]
+  "startingMoney": 200,
+  "equipment": [
+    { "name": "12-point magic point storage crystal", "enc": 0, "quantity": 1, "cost": 0 },
+    { "name": "Noble clothing (worth 60 L)", "enc": 1, "quantity": 1, "cost": 60 },
+    { "name": "Jewelry, vessels, luxury goods (worth 450 L)", "enc": 2, "quantity": 1, "cost": 450 },
+    { "name": "Two riding horses (non-combat)", "enc": 0, "quantity": 2, "cost": 0 }
+  ],
+  "weapons": [
+    { "name": "Battleaxe (1H)", "damage": "1d6+1", "size": "M", "reach": "M", "ap": 4, "hp": 8, "skill": 100, "quantity": 1 },
+    { "name": "Battleaxe (2H)", "damage": "1d8+1", "size": "L", "reach": "M", "ap": 4, "hp": 8, "skill": 60, "quantity": 1 },
+    { "name": "Medium Shield", "damage": "1d4", "size": "L", "reach": "S", "ap": 6, "hp": 12, "skill": 85, "quantity": 1 },
+    { "name": "Self Bow", "damage": "1d6", "size": "L", "reach": "-", "ap": 4, "hp": 6, "skill": 25, "quantity": 1 },
+    { "name": "Throwing Axe", "damage": "1d6", "size": "M", "reach": "-", "ap": 3, "hp": 6, "skill": 30, "quantity": 1 },
+    { "name": "Short Spear", "damage": "1d8", "size": "M", "reach": "L", "ap": 4, "hp": 10, "skill": 25, "quantity": 1 }
+  ],
+  "armor": [
+    { "name": "Closed Helm", "ap": 6, "locations": "Head", "cost": 0 },
+    { "name": "Bronze Plate Hauberk", "ap": 6, "locations": "Chest, Abdomen", "cost": 0 },
+    { "name": "Bronze Vambraces", "ap": 6, "locations": "Arms", "cost": 0 },
+    { "name": "Bronze Greaves", "ap": 6, "locations": "Legs", "cost": 0 }
+  ],
+  "combatStyles": [
+    {
+      "name": "Hulta Axe Maiden",
+      "weapons": ["Battleaxe (1H)", "Battleaxe (2H)", "Medium Shield", "Self Bow", "Throwing Axe", "Short Spear"],
+      "traits": ["Intimidating Scream", "Do or Die"],
+      "value": 100
+    }
+  ],
+  "hitPoints": {
+    "Head": { "current": 6, "max": 6 },
+    "Chest": { "current": 8, "max": 8 },
+    "Abdomen": { "current": 7, "max": 7 },
+    "Right Arm": { "current": 5, "max": 5 },
+    "Left Arm": { "current": 5, "max": 5 },
+    "Right Leg": { "current": 6, "max": 6 },
+    "Left Leg": { "current": 6, "max": 6 }
+  },
+  "background": "A noble of Esrolia, Aranda is proud and confident, her clothes and armor of fine make. As a devoted Axe Maiden of the bloodthirsty Earth goddess Babeester Gor, she is adorned with Runes of Earth and Death, broken by several fierce scars demonstrating that she is no dilettante. Now she travels throughout Dragon Pass, guided by her goddess, seeking worthwhile causes to wield her axe for.",
+  "notes": "Front-line axe fighter with strong armor and nerve to hold a line. Carries herself like a noble of Nochet even when the axe comes out. Earth Shield is her anchor against huge hits. Slash is for ending fights fast. Berserker is for crisis only. Best passions are Honor, Loyalties, and Devotion to Babeester Gor. Death and Earth define her: grim, practical, and relentless.",
+  "companions": []
 }
