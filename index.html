@@ -17095,11 +17095,14 @@ App.compileAllSkills = function() {
     const career = CharacterData.careerSkills[skillName] || 0;
     const bonus = CharacterData.bonusSkills[skillName] || 0;
 
-    // Only include standard skills or skills with points allocated
+    // Only include standard skills or skills with points allocated or selected professional skills
     const isStandardSkill = standardSkills.includes(skillName);
     const hasPoints = cultural > 0 || career > 0 || bonus > 0;
+    const isProfessionalSkill = (CharacterData.selectedProfessionalSkills || []).some(ps => {
+      return skillName === ps || skillName.startsWith(ps.split('(')[0].trim() + ' (');
+    });
 
-    if (isStandardSkill || hasPoints) {
+    if (isStandardSkill || hasPoints || isProfessionalSkill) {
       skills.push({
         name: skillName,
         base: baseValue,
@@ -17127,6 +17130,13 @@ App.compileAllSkills = function() {
         bonus: CharacterData.bonusSkills[skillName] || 0
       });
     });
+
+  // Replace Customs() with culture-specific name
+  skills.forEach(s => {
+    if (s.name === 'Customs()') {
+      s.name = `Customs (${CharacterData.culture || ''})`;
+    }
+  });
 
   return skills.filter(s => s.base > 0 || s.cultural > 0 || s.career > 0 || s.bonus > 0);
 };
@@ -17589,13 +17599,24 @@ App.exportSinglePagePDF = async function() {
 
     // ===== COMBAT STYLES =====
     const combatStyles = CharacterData.combatStyles || [];
+    // Helper to compute full combat style value
+    const computeStyleValue = (style) => {
+      const csBase = (CharacterData.characteristics.STR || 0) + (CharacterData.characteristics.DEX || 0);
+      const styleName = `Combat Style (${style.name})`;
+      const culturalStyleKey = 'Combat Style (Cultural Style)';
+      const csCultural = CharacterData.culturalSkills[styleName] || CharacterData.culturalSkills[culturalStyleKey] || 0;
+      const csCareer = CharacterData.careerSkills[styleName] || CharacterData.careerSkills[culturalStyleKey] || 0;
+      const csBonus = CharacterData.bonusSkills[styleName] || CharacterData.bonusSkills[culturalStyleKey] || 0;
+      return csBase + csCultural + csCareer + csBonus;
+    };
     if (combatStyles.length > 0) {
       txt('COMBAT STYLES', L, y, { bold: true, size: 7 });
       y -= 9;
       combatStyles.forEach(style => {
+        const fullSkill = computeStyleValue(style);
         const traits = style.traits ? ' (' + style.traits.join(', ') + ')' : '';
         const weapons = style.weapons ? ' — ' + style.weapons.join(', ') : '';
-        const styleStr = `${style.name}: ${style.skill || 0}%${traits}${weapons}`;
+        const styleStr = `${style.name}: ${fullSkill}%${traits}${weapons}`;
         const lines = wrapText(styleStr, W - 4, 6);
         lines.forEach(ln => {
           txt(ln, L + 2, y, { size: 6 });
@@ -17608,6 +17629,14 @@ App.exportSinglePagePDF = async function() {
     // ===== WEAPONS TABLE =====
     const weapons = CharacterData.weapons || [];
     if (weapons.length > 0) {
+      // Derive weapon skill from parent combat style
+      weapons.forEach(w => {
+        const parentStyle = combatStyles.find(cs => (cs.weapons || []).includes(w.name));
+        if (parentStyle) {
+          w.skill = computeStyleValue(parentStyle) + '%';
+        }
+      });
+
       txt('WEAPONS', L, y, { bold: true, size: 7 });
       y -= 8;
       const wCols = [120, 35, 50, 28, 28, 22, 22];
@@ -17636,6 +17665,7 @@ App.exportSinglePagePDF = async function() {
     y -= 8;
     const allSkills = App.compileAllSkills ? App.compileAllSkills() : [];
     const skillsToShow = allSkills
+      .filter(s => !s.name.startsWith('Combat Style'))
       .filter(s => (s.base + (s.cultural || 0) + (s.career || 0) + (s.bonus || 0)) > 0)
       .sort((a, b) => {
         const tA = a.base + (a.cultural || 0) + (a.career || 0) + (a.bonus || 0);
