@@ -1,76 +1,42 @@
 # Adventures in Glorantha Reference Extractions
 
-## Status: Partial Extraction Complete
+## Status: Full Extraction Complete
 
-This directory contains structured reference data extracted from **Adventures in Glorantha (GenCon 2015 Preview)**.
+This directory contains structured reference data extracted from **Adventures in Glorantha (GenCon 2015 Preview, GenCon 2015)**.
 
-### Completed Extractions
+### Source PDF
 
-The following text extractions have been completed and saved to `/tmp/` for manual curation:
+`AiG.pdf` (193MB, 212 pages, gitignored) — downloaded from `files.geese.party`. The PDF is a hybrid: ~87 pages have text layers, ~125 pages are scanned images.
 
-- `/tmp/aig-creation-summary.txt` - Character creation 12-step process (p.23-25)
-- `/tmp/aig-cultures.txt` - 8 cultures detailed descriptions (p.26-47)
-- `/tmp/aig-equipment.txt` - Equipment lists and prices (p.48-58)
-- `/tmp/aig-folk-magic.txt` - Folk magic rules and spells (p.63-68)
-- `/tmp/aig-rune-magic.txt` - Rune magic overview (p.69-75)
-- `/tmp/aig-monsters-index.txt` - Monsters sample (p.152-160)
+### Full OCR Extraction
 
-### Files Requiring Manual Curation
+`AiG-full-ocr.md` (14,638 lines) — complete text extraction using `claude-doc-tools` with Tesseract OCR for scanned pages. This is the authoritative text reference for page-level citations.
 
-Due to copyright considerations and complex PDF formatting, the following JSON files need to be manually created from the extracted text:
+**Extraction method:** `python3.11 /tmp/claude-doc-tools/convert.py AiG.pdf`
+- Text-layer pages: extracted via pdfplumber
+- Scanned pages: OCR'd via Tesseract 5.3.0
 
-1. **cultures.json** - 8 cultures (Balazaring, Esrolian, God Forgot, Lunar Heartland, Praxian, Provincial Lunar/Tarsh, Sartarite/Heortling, Telmori)
-   - For each: culture type, standard/professional skills, combat styles, passions, folk magic, starting money
+### Structured JSON Files
 
-2. **careers.json** - All AiG careers by culture
-   - Career name, page ref, skills, combat style, income level
+| File | Status | Content | Source Pages |
+|------|--------|---------|-------------|
+| `cultures.json` | Complete | 8 cultures (skills, type) | p.26-41 |
+| `cultures-mistral.json` | Complete | Extended culture data with passions | p.26-41 |
+| `combat-styles-aig.json` | Partial (2/8) | Named combat styles | p.26-41 |
+| `equipment-aig.json` | **Complete** | All 8 cultures' combat styles, starting money, equipment derivation | p.24-41 |
+| `creation-summary-aig.json` | Complete | 12-step creation process | p.23-25 |
+| `folk-magic-aig.json` | Partial (2/8) | Culture folk magic lists | p.26-41 |
+| `rune-affinities.json` | Complete | Rune system mechanics | p.24 |
 
-3. **rune-affinities.json** - Rune system mechanics
-   - Starting runes: 3 at POW×2+30/20/10%
-   - All runes with domains/descriptions (p.24 + rune magic chapter)
+### Key Finding: Equipment Chapter
 
-4. **folk-magic-aig.json** - AiG-specific folk magic
-   - Culture-specific spell lists
-   - Starting allocation: 3 from culture, 2 from career
+The AiG GenCon 2015 preview **does NOT contain a dedicated Equipment chapter**. The preface (p.4) lists "missing chapters" from the preview, and while "Equipment" appears in the table of contents, the chapter content was never published. The finished AiG was never released due to TDM/Chaosium separation.
 
-5. **combat-styles-aig.json** - Named combat styles
-   - Weapons per style, cultural requirements
-
-6. **equipment-aig.json** - Gloranthan equipment
-   - Weapons, armour, starting equipment by culture
-   - Prices in Lunars/Silver
-
-7. **magic-overview.json** - All magic types
-   - Folk magic (p.63-68)
-   - Rune magic spell index with page refs (p.69-122)
-   - Sorcery overview (p.123-133)
-   - Spirit magic overview (p.134-151)
-
-8. **creation-summary-aig.json** - 12-step process verbatim
-   - AiG-specific additions vs base Mythras
-   - Tradetalk rule (INT+CHA+30%)
-   - Starting money multipliers
-
-9. **monsters-index.json** - Creature index
-   - Name + page + key stats (STR/CON/SIZ ranges)
-   - From p.152-212
-
-### Format Standard
-
-All JSON files must follow the format established in `references/mythras-raw/`:
-
-```json
-{
-  "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-  "extracted_at": "2026-04-02",
-  "page": "p.XX-YY",
-  "section_name": {
-    "data": []
-  }
-}
-```
-
-Every value must cite its page number. No hallucinated data.
+**Equipment is derived from:**
+1. Starting money formula per culture (p.24-25)
+2. Combat style weapon lists per culture (p.26-41)
+3. Mythras Core equipment prices (Core p.69-72) for purchasing additional gear
+4. Cultural technology descriptions constrain available materials
 
 ### Copyright Notice
 

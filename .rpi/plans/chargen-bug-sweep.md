@@ -1,6 +1,6 @@
 # Plan: Character Generator Bug Sweep
 
-**Status:** active
+**Status:** complete
 **Design:** `../designs/chargen-bug-sweep.md`
 **Spec:** `../specs/chargen-bug-sweep.md`
 

@@ -1,100 +1,55 @@
-# CLAUDE.md — mythras-chargen
+# CLAUDE.md
 
-**Read AGENTS.md first.**
+This file provides guidance to Claude Code when working with this repository.
 
-This file provides context for AI-assisted development sessions (Claude Code, Codex, or similar).
+## Project Overview
 
-## Project Summary
+This project follows Spec-Driven Development (SDD). Behavioral specs live in `.rpi/specs/` and serve as the source of truth for expected behavior. Always consult relevant specs before implementing or modifying features.
 
-Single-file HTML character generator for the Mythras RPG with optional Glorantha support. Every data field has an attestable provenance chain to the source rulebook.
+<!-- TODO: Add brief project description -->
 
-## Key Files
+## Git Workflow 
 
-- `index.html` — the entire application (HTML + CSS + JS, ~2200 lines)
-- `templates/mythras-sheet.pdf` — PDF form template for character export
-- `references/` — JSON files with page-cited game data (the attestable chain)
-- `AGENTS.md` — source hierarchy, active rules, what NOT to use
-- `PLAN.md` — implementation plan with design decisions from the grill session
+When committing changes, always ask the user which files/directories to include before proposing commits. Never assume all unstaged/staged changes should be committed.
+Watch for uncommitted work that should be preserved. Suggest a commit (via `/rpi-commit`) when the user moves on to a different topic with completed changes still uncommitted, or when the working diff grows large enough that it risks becoming hard to review as a single commit.
 
-## Architecture
+## RPI Artifacts Directory
 
-- **Engine**: Vanilla JavaScript, no frameworks, no build step
-- **Data flow**: `SKILLS_DATA` + `CULTURES_DATA` + `WEAPONS_DATA` → wizard steps → `CharacterData` → Play Mode / PDF export
-- **Single-file delivery**: current `index.html` is the canonical fully inlined artifact. Do not reintroduce modular data dependencies.
-- **PDF export**: Two paths available via pdf-lib:
-  - **Simple**: Single-page PDF created from scratch (quick export)
-  - **Template**: Fills form fields in `templates/mythras-sheet.pdf` (required for Phase 2 pregens)
-- **Passion model**: Every passion has a specific object in parentheses — e.g. "Hate (Chaos)", never bare "Hate". Choice passions use `{"choice":[...], "needsSubject": true}` with a datalist of culture-appropriate suggestions. Starting value: POW+CHA+30 (stored as `formula` field).
-- **Combat style model**: Cultures define named combat styles with weapons, traits, and optional restrictions. Auto-applied on culture selection (dropdown if multiple unrestricted). Career combat style placeholders like "Combat Style (Cultural Style)" resolve to the actual cultural style.
-- **Career filtering**: Careers filtered by culture type (Primitive/Barbarian/Nomad/Civilised + "all").
-- **Starting money**: Dice formula strings (e.g. "4d6×2 Lunars") are parsed and rolled, not displayed as raw text.
+This project uses a `.rpi/` directory for persistent context:
 
-## Source Rules (read AGENTS.md for full details)
-
-1. **Mythras Core Rulebook** (TDM, 3rd Printing 2018) — engine of truth
-2. **Adventures in Glorantha** (TDM, GenCon 2015 Preview) — Glorantha overlay
-3. **Do NOT use** RuneQuest 7 / Chaosium-era stats — different engine, incompatible
-
-## Attestable Chain Pattern
-
-Every data constant must trace to a reference JSON with a page citation:
 ```
-Source PDF → pdftotext/Mistral OCR → references/*.json → HTML data constant
+.rpi/
+├── research/      # Codebase research notes (optional, from /rpi-research)
+├── designs/       # Solution designs (created by /rpi-propose)
+├── plans/         # Implementation plans (created by /rpi-plan)
+├── specs/         # Living behavioral specs
+├── reviews/       # Verification reports
+├── diagnoses/     # Bug diagnosis post-mortems (created by /rpi-diagnose)
+├── archive/       # Archived completed artifacts
 ```
 
-When adding or modifying game data:
-1. Check the reference JSON first
-2. If the data isn't in a reference file, extract it from the source PDF
-3. Never guess or infer — if it's not attestable, don't ship it
+### Development Pipeline
 
-## Active Constraints
+Workflow: Research → Propose → Plan → Implement → Verify
 
-- 75-point characteristic build for point-buy (Mythras Core p.9-10)
-- INT/SIZ minimum 8 for point-buy
-- Cultural/career skills: max 15 per skill, 100 total
-- 1 hobby professional skill in bonus points
-- Initiative Bonus rounds DOWN (Math.floor)
-- Native Tongue and Language = INT + CHA (Mythras Core p.12)
-- Passions always need a specific object — see AGENTS.md Active Rules
-- Combat styles auto-apply from culture; careers resolve placeholder styles
-- Careers filter by culture type
-- Both trademark statements must remain in the footer
+- **Research** (`/rpi-research`): Investigate the codebase. Optional.
+- **Propose** (`/rpi-propose`): Analyze trade-offs, write design + spec (behavioral contract). Approval gate.
+- **Plan** (`/rpi-plan`): Create phased implementation plan from approved spec.
+- **Implement** (`/rpi-implement`): Execute plan phase-by-phase with verification.
+- **Verify** (`/rpi-verify`): Validate spec conformance.
+- **Diagnose** (`/rpi-diagnose`): Iterative root-cause analysis and fix for complex bugs. Optional.
+- **Explain** (`/rpi-explain`): Diff-scoped walkthrough of an implemented solution. Optional.
 
-## Licensing Status
+Each command suggests the next step. Start with `/rpi-propose` for features, `/rpi-plan` for bug fixes, `/rpi-diagnose` for complex bugs, `/rpi-research` when exploring.
 
-- **Mythras (TDM)**: Permission pending — IP not the sticking point
-- **Glorantha (Chaosium)**: Email sent, awaiting reply
-- **Action**: Keep repo private until both permissions secured
-- **Contingency**: If licensing ever requires stripping Glorantha content, build a separate generic Mythras variant deliberately. Do not rely on runtime modular fallback.
+## Codebase Navigation
 
-## Magic System Architecture
+When exploring unfamiliar code, check what navigation tools are available before falling back to text search. Structural overviews and definition lookups are more efficient than scanning files when you need to understand how a codebase is organized or where something is defined.
 
-See `docs/adr/001-magic-system-architecture.md` and `docs/adr/002-rune-affinity-casting-model.md` for full details.
+## Development Conventions
 
-**TL;DR:** Two magic systems: Folk Magic (done) + Theist Miracles via Rune Affinities (in progress). Exhort replaced by Rune Affinities per AiG p.24. Hannu's house rules adopted for edge cases. All data must trace to Cult One-Pager PDFs via `references/theism-miracles.json`.
+Before implementing any changes, always: 1) Read the current version of each file you plan to modify, 2) Run the existing test suite to establish a baseline, 3) Implement changes incrementally — one logical unit at a time, 4) Run tests after each unit. If tests fail, fix before proceeding. Do not batch all changes and test at the end.
+<!-- TODO: Add project-specific conventions -->
 
-**Key data fields (new):**
-- `CharacterData.runeAffinities` — `[{rune: string, value: number}]` (3 entries)
-- `CharacterData.devotionalPool` — `number` (POW/2 for Initiates)
-- `CharacterData.miracles` — `string[]` (selected miracle names)
-- `CULTS_DATA[].miracles` — `[{name: string, runes: string[], rank: string}]`
+When implementing a plan from `.rpi/plans/`, present intended changes for each phase before writing code. If a phase's success criteria are fully covered by automated checks (tests, linting, etc.), run them and proceed automatically when they pass. Only pause for manual verification when the plan includes manual verification items not covered by automated tests. Update checkboxes in the plan file as items complete, and resume from the first unchecked item if checkboxes already exist.
 
-## ADRs
-
-Architecture Decision Records in `docs/adr/`. Read before making magic system changes.
-
-## Governance Pipeline (mandatory for all PRs)
-
-1. **ADR compliance** — every change checked against `docs/adr/` decisions. Magic system, attestable chain, and casting model ADRs are non-negotiable.
-2. **Architect Lens** — holistic fit review before merge. Does this change fit the single-file constraint? Does it respect the attestable chain? Does it violate any ADR?
-3. **Model Council** — 5-model adversarial review (Opus, GPT-5.4, GPT-5.1, Gemini 3.1 Pro, Nemotron) for any change >150 lines, >3 files, or touching ADR-governed domain (magic, cults, attestation).
-4. **PDF Export Test** — if the change touches character data or export paths, verify PDF output still works.
-5. **QA Pass** — end-to-end Playwright verification of the full chargen wizard + Play Mode.
-6. **House rules are ADRs** — any gameplay decision (magic systems, skill caps, language handling) must be recorded as an ADR using the [adr-skill](https://github.com/skillrecordings/adr-skill) format before implementation. If it's not attestable, it doesn't ship.
-
-## Phase 2 (Not Yet Started)
-
-Pregen validation requires local assets:
-- 10 input JSONs (one per Starter Set pregen)
-- 10 folio cover PDFs
-- See PLAN.md for full Phase 2 spec

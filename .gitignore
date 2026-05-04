@@ -8,3 +8,8 @@ TASK_*.md
 *.signal
 dist/
 .decapod/
+
+# RPI workflow
+.claude/
+references/aig-raw/AiG.pdf
+/.agent-shell/
