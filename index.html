@@ -14052,6 +14052,12 @@ const App = {
         this.showToast('You must select exactly 3 professional skills', 'error');
         return false;
       }
+      // Check that all selected skills needing specialization have been resolved
+      const unresolvedSkill = (CharacterData.selectedProfessionalSkills || []).find(s => needsDisambiguation(s));
+      if (unresolvedSkill) {
+        this.showToast(`Please enter a specialization for ${unresolvedSkill}`, 'error');
+        return false;
+      }
     }
 
     // Step 9: Cult Selection - optional, no validation needed
@@ -15621,15 +15627,18 @@ App.toggleProfessionalSkill = function(skillName, checked) {
     CharacterData.selectedProfessionalSkills.push(skillName);
     CharacterData.careerSkills[skillName] = 0;
   } else {
+    // Remove the original placeholder name from the array
     CharacterData.selectedProfessionalSkills = CharacterData.selectedProfessionalSkills.filter(s => s !== skillName);
     delete CharacterData.careerSkills[skillName];
-    // Also remove any resolved version
-    const category = parsePlaceholderSkill(skillName)?.category;
-    if (category) {
-      Object.keys(CharacterData.careerSkills).forEach(k => {
-        if (k.startsWith(category + ' (') && !needsDisambiguation(k)) {
-          delete CharacterData.careerSkills[k];
+    // Also remove any resolved version (if user unchecks a placeholder skill that was already resolved)
+    const parsed = parsePlaceholderSkill(skillName);
+    if (parsed) {
+      CharacterData.selectedProfessionalSkills = CharacterData.selectedProfessionalSkills.filter(s => {
+        if (s.startsWith(parsed.category + ' (') && !needsDisambiguation(s)) {
+          delete CharacterData.careerSkills[s];
+          return false;
         }
+        return true;
       });
     }
   }
@@ -15649,23 +15658,33 @@ App.resolveProfessionalSkill = function(originalName, specialization) {
   // Also remove any previous resolution for this placeholder
   Object.keys(CharacterData.careerSkills).forEach(k => {
     if (k.startsWith(parsed.category + ' (') && !needsDisambiguation(k) && k !== resolvedName) {
-      // Only remove if it was from this placeholder
-      const idx = CharacterData.selectedProfessionalSkills.indexOf(originalName);
-      if (idx !== -1) delete CharacterData.careerSkills[k];
+      delete CharacterData.careerSkills[k];
     }
   });
 
   // Store under resolved name
   CharacterData.careerSkills[resolvedName] = 0;
 
-  // Update selectedProfessionalSkills to track the resolved name
+  // Update selectedProfessionalSkills to the resolved name so downstream code sees the real skill.
   const idx = CharacterData.selectedProfessionalSkills.indexOf(originalName);
   if (idx !== -1) {
     CharacterData.selectedProfessionalSkills[idx] = resolvedName;
+  } else {
+    // The original might already have been resolved to a different specialization — find and update it
+    const prevResolved = CharacterData.selectedProfessionalSkills.findIndex(s =>
+      s.startsWith(parsed.category + ' (') && !needsDisambiguation(s)
+    );
+    if (prevResolved !== -1) {
+      // Remove old resolved careerSkills entry
+      delete CharacterData.careerSkills[CharacterData.selectedProfessionalSkills[prevResolved]];
+      CharacterData.selectedProfessionalSkills[prevResolved] = resolvedName;
+    }
   }
 
   this.saveToLocalStorage();
-  this.renderCurrentStep();
+  // Do NOT re-render here — the input already shows the correct value and re-rendering
+  // would destroy focus/cause jarring UX. The state is saved and will render correctly
+  // on next navigation or explicit re-render.
 };
 
 App.renderCareerDetails = function() {
@@ -15703,13 +15722,30 @@ App.renderCareerDetails = function() {
         <h4 style="margin-top: 15px;">Professional Skills (choose 3)</h4>
         <div id="professional-skills-picker" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 8px; margin-top: 8px;">
           ${career.professionalSkills.map(skill => {
-            const isChecked = (CharacterData.selectedProfessionalSkills || []).includes(skill);
             const needsSpec = needsDisambiguation(skill);
-            // Find a resolved version if this skill was already specialized
-            const resolved = needsSpec && isChecked ? (Object.keys(CharacterData.careerSkills).find(k => {
+            // Check if the original placeholder OR a resolved version is in selectedProfessionalSkills
+            let isChecked = (CharacterData.selectedProfessionalSkills || []).includes(skill);
+            let resolved = '';
+            if (needsSpec && !isChecked) {
+              // Check if a resolved version of this placeholder is in the array
               const parsed = parsePlaceholderSkill(skill);
-              return parsed && k.startsWith(parsed.category + ' (') && !needsDisambiguation(k);
-            }) || '') : '';
+              if (parsed) {
+                const resolvedEntry = (CharacterData.selectedProfessionalSkills || []).find(s =>
+                  s.startsWith(parsed.category + ' (') && !needsDisambiguation(s)
+                );
+                if (resolvedEntry) {
+                  isChecked = true;
+                  resolved = resolvedEntry;
+                }
+              }
+            }
+            if (needsSpec && isChecked && !resolved) {
+              // Find resolved version from careerSkills
+              const parsed = parsePlaceholderSkill(skill);
+              resolved = parsed ? (Object.keys(CharacterData.careerSkills).find(k =>
+                k.startsWith(parsed.category + ' (') && !needsDisambiguation(k)
+              ) || '') : '';
+            }
             const resolvedSpec = resolved ? (resolved.match(/\((.+)\)/) || [])[1] || '' : '';
             return `<div>
               <label style="font-size: 13px;">
