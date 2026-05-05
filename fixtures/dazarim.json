@@ -1,144 +1,256 @@
 {
   "name": "Dazarim Crescentblade",
-  "concept": "Bandit of the Sable Rider Tribe in Prax, Yelmalio initiate",
-  "characteristics": { "STR": 14, "CON": 12, "SIZ": 17, "DEX": 12, "INT": 15, "POW": 16, "CHA": 16 },
-  "charMethod": "pregen",
-  "attributes": {
-    "actionPoints": 3,
-    "experienceModifier": 2,
-    "healingRate": 2,
-    "luckPoints": 3,
-    "magicPoints": 16,
-    "initiativeBonus": 13,
-    "damageModifier": "+1d4",
-    "hitPoints": { "Head": 6, "Chest": 8, "Abdomen": 7, "Right Arm": 5, "Left Arm": 5, "Right Leg": 6, "Left Leg": 6 },
-    "encumbrance": { "unencumbered": 28, "burdened": 42, "overloaded": 56 },
-    "runeAffinities": { "primary": 90, "secondary": 90, "tertiary": 70 },
-    "folkMagicBase": 62,
-    "movementRate": 6
+  "concept": "Sable Rider nomad, devoted sun warrior, bandit's son",
+  "characteristics": {
+    "STR": 12,
+    "CON": 10,
+    "SIZ": 11,
+    "DEX": 14,
+    "INT": 10,
+    "POW": 9,
+    "CHA": 9
   },
+  "charMethod": "point-buy",
+  "attributes": {},
   "culture": "Praxian",
-  "homeland": "Sable Rider Tribe, Prax",
+  "homeland": "Prax",
   "culturalSkills": {
-    "Language (Praxian)": 20,
-    "Language (Firespeech)": 10,
-    "Tradetalk": 10,
-    "Endurance": 10,
-    "Ride (Sable)": 20,
-    "Perception": 10,
-    "Survival": 10,
-    "Stealth": 10
+    "Athletics": 10,
+    "Brawn": 10,
+    "Endurance": 15,
+    "Evade": 10,
+    "Locale": 5,
+    "Perception": 15,
+    "Navigate": 10,
+    "Willpower": 10,
+    "Survival": 15
   },
-  "runeAffinities": { "primary": "Truth", "secondary": "Movement", "tertiary": "Fire" },
-  "folkMagicSpells": ["Coordination", "Detect Gold", "Farsee", "Repair"],
+  "runeAffinities": {
+    "primary": "Fire/Sky",
+    "secondary": "Truth",
+    "tertiary": "Movement"
+  },
+  "folkMagicSpells": [
+    "Coordination",
+    "Farsee",
+    "Protection"
+  ],
   "passions": [
-    { "name": "Devotion (White Bull)", "value": 70 },
-    { "name": "Devotion (Yelmalio)", "value": 70 },
-    { "name": "Hate (Chaos)", "value": 60 },
-    { "name": "Hate (Authority)", "value": 60 },
-    { "name": "Hate (Lunar Empire)", "value": 60 },
-    { "name": "Hate (Tusk Riders)", "value": 60 },
-    { "name": "Love (Family)", "value": 60 },
-    { "name": "Loyalty (Sable Riders)", "value": 70 },
-    { "name": "Loyalty (White Bull)", "value": 70 }
+    {
+      "name": "Devotion (Yelmalio)",
+      "value": 48,
+      "custom": true
+    },
+    {
+      "name": "Loyalty (Sable Riders)",
+      "value": 48,
+      "custom": true
+    },
+    {
+      "name": "Hate (Tusk Riders)",
+      "value": 48,
+      "custom": true
+    },
+    {
+      "name": "Devotion (White Bull)",
+      "value": 48,
+      "custom": true
+    }
   ],
   "age": 21,
   "gender": "Male",
-  "family": "Lineage is a mix of respected and common, claiming descent from Patyan, a famous Sable Rider bandit. Mother Loram was also a bandit.",
-  "backgroundEvents": "Nearly slain by Tusk Riders, causing intense hatred. Met nomadic desert centaurs and pledged friendship. Present when Jaldon Goldentooth was summoned. Swore loyalty to Argrath. Nearly driven mad by Lunar demons at the New Lunar Temple.",
+  "family": "Sable Rider Tribe, Prax",
+  "backgroundEvents": "",
   "career": "Warrior",
-  "cult": "Yelmalio",
-  "miracles": ["Catseye", "Sunbright", "Sureshot"],
-  "devotionalPool": 3,
   "careerSkills": {
-    "Ride (Sable)": 20,
+    "Athletics": 15,
+    "Brawn": 15,
+    "Endurance": 15,
+    "Evade": 10,
+    "Unarmed": 0,
+    "Combat Style (Sable)": 15,
     "Lore (Strategy and Tactics)": 10,
-    "Lore (Yelmalio)": 10,
-    "Commerce": 10,
     "Survival": 15,
-    "First Aid": 10,
-    "Craft (Animal Husbandry)": 15,
-    "Craft (Butchery)": 10
+    "Track": 5
   },
-  "careerFolkMagic": ["Coordination", "Farsee"],
+  "careerFolkMagic": [
+    "Detect Gold",
+    "Repair"
+  ],
   "bonusSkills": {
+    "Athletics": 15,
+    "Brawn": 15,
+    "Endurance": 15,
+    "Evade": 15,
     "Perception": 15,
-    "Stealth": 10,
-    "Endurance": 10,
-    "Athletics": 10,
-    "Willpower": 10,
-    "Ride (Sable)": 15,
-    "Survival": 10,
-    "Insight": 10,
-    "Locale": 10
+    "Willpower": 15,
+    "Survival": 15,
+    "Combat Style (Sable)": 15,
+    "Lore (Strategy and Tactics)": 15,
+    "Navigate": 15
   },
-  "selectedProfessionalSkills": ["Lore (Strategy and Tactics)", "Lore (Yelmalio)", "Survival"],
   "hobbySkillName": null,
   "socialClass": "Freeman",
   "socialClassMoneyMod": 1,
-  "startingMoney": 58,
+  "startingMoney": 240,
   "equipment": [
-    { "name": "Leather skirt and heavy leather cuirass", "enc": 2, "quantity": 1, "cost": 0 },
-    { "name": "Raiding booty (58 L)", "enc": 1, "quantity": 1, "cost": 58 },
-    { "name": "Backpack", "enc": 1, "quantity": 1, "cost": 5 },
-    { "name": "Waterskin", "enc": 1, "quantity": 1, "cost": 5 },
-    { "name": "Rations (1 week)", "enc": 2, "quantity": 1, "cost": 14 }
+    {
+      "name": "Two sets of common undecorated clothes",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 0
+    },
+    {
+      "name": "Transport: Beast of Burden",
+      "enc": 0,
+      "quantity": 1,
+      "cost": 0
+    },
+    {
+      "name": "Backpack",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Waterskin",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Rations (1 week)",
+      "enc": 2,
+      "quantity": 1,
+      "cost": 14
+    },
+    {
+      "name": "Bedroll",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Flint & Tinder",
+      "enc": 0,
+      "quantity": 1,
+      "cost": 5
+    }
   ],
   "weapons": [
-    { "name": "Kopis", "damage": "1d8+1+1d4", "size": "M", "reach": "M", "ap": 6, "hp": 10, "skill": 85, "quantity": 1 },
-    { "name": "Dagger", "damage": "1d4+2+1d4", "size": "S", "reach": "S", "ap": 6, "hp": 8, "skill": 30, "quantity": 1 },
-    { "name": "Javelin", "damage": "1d8+1+1d4", "size": "M", "reach": "L", "ap": 3, "hp": 8, "skill": 35, "quantity": 2 },
-    { "name": "Medium Shield", "damage": "1d4+1d4", "size": "L", "reach": "S", "ap": 6, "hp": 12, "skill": 40, "quantity": 1 }
+    {
+      "name": "Kopis",
+      "damage": "1d6+1",
+      "size": "M",
+      "reach": "S",
+      "ap": 6,
+      "hp": 8,
+      "skill": 0,
+      "quantity": 1
+    }
   ],
   "armor": [
-    { "name": "Heavy Leather Cuirass", "ap": 2, "locations": "Chest", "cost": 0 },
-    { "name": "Leather Skirt", "ap": 1, "locations": "Abdomen", "cost": 0 }
+    {
+      "name": "Leather/Bone Basic Armour",
+      "ap": 2,
+      "locations": "3 location(s)",
+      "cost": 0
+    }
   ],
   "combatStyles": [
     {
-      "name": "Sable Rider Nomad",
-      "weapons": ["Kopis", "Dagger", "Javelin", "Medium Shield"],
-      "traits": ["Mounted Combat", "Ranged Marksman"],
-      "value": 85
+      "name": "Sable",
+      "weapons": [
+        "Kopis",
+        "Dagger",
+        "Javelin",
+        "Medium Shield"
+      ],
+      "traits": [
+        "Mounted Combat",
+        "Throw Weapons"
+      ],
+      "skill": 0,
+      "notes": ""
     }
   ],
-  "notes": "Proud Praxian Nomad, smart and a good leader but limited communication with local barbarians. Very skilled with kopis, better at parrying than with shield. Poor armor makes him weak against missiles. Fanatical devotion to White Bull and Yelmalio. Truth Rune means he despises lies. Geas: must challenge all Darkness creatures on sight to first blood or beyond. Gift: half damage from fire.",
-  "background": "Dazarim is a tall, lean desert nomad, rarely far from his mount Sevara, a beautiful crescent-horned sable antelope. His lineage claims descent from Patyan, a famous Sable Rider bandit. His mother Loram was also a bandit who fought in both invasions of Prax. He was present when Jaldon Goldentooth was summoned, swore loyalty to Argrath, and fought alongside them at the New Lunar Temple.",
-  "hitPoints": {
-    "Head": { "current": 6, "max": 6 },
-    "Chest": { "current": 8, "max": 8 },
-    "Abdomen": { "current": 7, "max": 7 },
-    "Right Arm": { "current": 5, "max": 5 },
-    "Left Arm": { "current": 5, "max": 5 },
-    "Right Leg": { "current": 6, "max": 6 },
-    "Left Leg": { "current": 6, "max": 6 }
-  },
+  "notes": "",
+  "background": "",
+  "hitPoints": {},
   "companions": [
     {
       "name": "Sevara",
-      "species": "Sable Antelope",
-      "characteristics": { "STR": 26, "CON": 12, "SIZ": 27, "DEX": 11, "POW": 15 },
+      "species": "War Sable Antelope (Praxian cavalry)",
+      "characteristics": {
+        "STR": 22,
+        "CON": 11,
+        "SIZ": 23,
+        "DEX": 11,
+        "POW": 11
+      },
       "hitLocations": {
-        "Right Hind Leg": { "current": 5, "max": 5, "ap": 1 },
-        "Left Hind Leg": { "current": 5, "max": 5, "ap": 1 },
-        "Hindquarters": { "current": 7, "max": 7, "ap": 1 },
-        "Forequarters": { "current": 7, "max": 7, "ap": 1 },
-        "Right Foreleg": { "current": 5, "max": 5, "ap": 1 },
-        "Left Foreleg": { "current": 5, "max": 5, "ap": 1 },
-        "Head": { "current": 6, "max": 6, "ap": 1 }
+        "Right Hind Leg": {
+          "max": 7,
+          "ap": 1
+        },
+        "Left Hind Leg": {
+          "max": 7,
+          "ap": 1
+        },
+        "Hindquarters": {
+          "max": 8,
+          "ap": 1
+        },
+        "Forequarters": {
+          "max": 9,
+          "ap": 1
+        },
+        "Right Foreleg": {
+          "max": 6,
+          "ap": 1
+        },
+        "Left Foreleg": {
+          "max": 6,
+          "ap": 1
+        },
+        "Head": {
+          "max": 7,
+          "ap": 1
+        }
       },
       "attacks": [
-        { "name": "Butt", "skill": 35, "damage": "2D6+2D6", "notes": "Either butt OR bite+kick per round" },
-        { "name": "Kick", "skill": 35, "damage": "1D6+2D6", "notes": "" },
-        { "name": "Bite", "skill": 25, "damage": "2D4", "notes": "" }
+        {
+          "name": "Butt",
+          "skill": 38,
+          "damage": "2d6+1d10",
+          "notes": ""
+        },
+        {
+          "name": "Kick",
+          "skill": 38,
+          "damage": "1d6+1d10",
+          "notes": ""
+        }
       ],
       "armor": 1,
       "movement": 12,
-      "damageModifier": "+2D6",
+      "damageModifier": "+1d10",
       "hitPointsTotal": 16,
       "healingRate": 2,
-      "strikeRank": 3,
-      "notes": "Sable antelope mount. Will either butt or bite and kick in a melee round. Skills: Dodge 65%."
+      "strikeRank": 0,
+      "notes": "War-trained sable antelope. Fast and agile. Use mount DM (+1d10) for lance charges."
     }
+  ],
+  "cult": "Yelmalio",
+  "miracles": [
+    "Catseye",
+    "Sunbright",
+    "Sureshot"
+  ],
+  "devotionalPool": 0,
+  "selectedProfessionalSkills": [
+    "Lore (Strategy and Tactics)",
+    "Survival",
+    "Track"
   ]
 }

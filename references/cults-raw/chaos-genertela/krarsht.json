@@ -1,0 +1,106 @@
+{
+  "name": "Krarsht",
+  "pantheon": "Chaos - Genertela",
+  "source": "CultOnePagers2019/Chaos - Pamaltela/Krarsht.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Goddess of hunger and intrigue",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Special",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Combat style with net",
+    "Conceal",
+    "Customs",
+    "Deceit",
+    "Stealth",
+    "Unarmed",
+    "Acting",
+    "Bureaucracy",
+    "Culture (named culture)",
+    "Disguise",
+    "Lore (cult)",
+    "Sleight",
+    "Streetwise",
+    "Devotion",
+    "Runic Affinity",
+    "Combat style with missile weapon"
+  ],
+  "folkMagic": [
+    "Alarm",
+    "Befuddle",
+    "Brew Pratzim⁴",
+    "Bypass",
+    "Disruption",
+    "Glue",
+    "Silence"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "?jt Chomping",
+      "? Sweat Acid",
+      "? Venom Bite",
+      "True Net",
+      "Defend Against Law",
+      "? Face Law",
+      "? Tongue"
+    ],
+    "associate": [
+      "Blackfang:Vision"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
+  "personalityTraits": [
+    "Soulless",
+    "Fiendish",
+    "Relentless",
+    "Coldu"
+  ],
+  "enemyCults": [
+    "Storm Bull"
+  ],
+  "hostileCults": [
+    "Caladra&Aurelion,",
+    "Humakt,",
+    "Orlanth,",
+    "Waha,",
+    "Yelm,",
+    "Yelmalio,",
+    "Yelorna,",
+    "Zorak Zoran"
+  ],
+  "friendlyCults": [
+    "Blackfang"
+  ],
+  "associatedCults": [
+    "Nysalor,",
+    "Primal Chaos"
+  ],
+  "areas": [
+    "Genertela,",
+    "Inland Pamaltela"
+  ],
+  "holyDays": [
+    "Sea/Stasis/Freeze",
+    "Fire/Stasis/Water",
+    "Earth/Stasis/Clay",
+    "Dark/Stasis/Winds",
+    "Storm/Stasis/Fire",
+    "Storm/Stasis/Wild"
+  ],
+  "spiritSocieties": [],
+  "oppositeRune": "",
+  "additionalPantheons": [
+    "Chaos - Pamaltela"
+  ]
+}

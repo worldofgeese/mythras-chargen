@@ -3,14 +3,14 @@
   "pantheon": "Praxian",
   "source": "CultOnePagers2019/Praxian/Hungry Ghosts.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Cult of the Cannibals",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Convince shaman",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Convince shaman",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.Convince shaman\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nLore(cult)",
+    "Lore(cult)",
     "Runic Affinity",
     "Devotion",
     "Endurance",
@@ -20,12 +20,30 @@
   "folkMagic": [
     "Varies thru cult shamans"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Feed Ghosts",
+      "? Devour(Race)"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
   "personalityTraits": [
     "Tribal",
     "Social",
-    "Relentlesst Ruthlesst",
-    "Unemotionalt Ascetict"
+    "Relentless",
+    "Ruthless",
+    "Unemotional",
+    "Ascetic"
   ],
   "enemyCults": [],
   "hostileCults": [],
@@ -37,7 +55,11 @@
     "West"
   ],
   "holyDays": [],
-  "spiritSocieties": [],
-  "runeAssociations": {},
-  "oppositeRune": "Life"
+  "spiritSocieties": [
+    "Hungry Ghosts Spirit Society"
+  ],
+  "oppositeRune": "Life",
+  "additionalPantheons": [
+    "Hsunchen"
+  ]
 }

@@ -1,16 +1,16 @@
 {
   "name": "Donandar",
   "pantheon": "Storm",
-  "source": "CultOnePagers2019/Storm/Donandar.pdf",
+  "source": "CultOnePagers2019/Yelm/Donandar.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "God of Music and Dance",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Must have\nbeen initiate for at least 5 years Bold skills are mandatory\nCult Skills (Oath is taken at initiate)\nDance",
+    "Dance",
     "Stealth",
     "Lore (cult)",
     "Musicianship",
@@ -19,13 +19,34 @@
     "Runic Affinity"
   ],
   "folkMagic": [],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Switch Places",
+      "Illusion"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Harmonise"
+    ]
+  },
   "personalityTraits": [
-    "Forgivingl Mercifull",
-    "Peacefull Generousl",
-    "Compassionatel Deceitfuli",
-    "Cowardlyi Corruptedi",
-    "Imaginativei"
+    "Forgiving",
+    "Merciful",
+    "Peaceful",
+    "Generous",
+    "Compassionate",
+    "Deceitful",
+    "Cowardly",
+    "Corrupted",
+    "Imaginative"
   ],
   "enemyCults": [
     "Cacodemon",
@@ -62,15 +83,20 @@
     "Fonrit",
     "Holy Country",
     "Inland Pamaltela",
-    "Lunar"
+    "Lunar",
+    "Oceans",
+    "West"
   ],
   "holyDays": [
     "Sea/Movement/Water",
     "Fire/Illusion/Fire",
     "Earth/Movement/Clay",
-    "Dark/Illusion/Freeze\nStorm/Harmony/Winds"
+    "Dark/Illusion/Freeze",
+    "Storm/Harmony/Winds"
   ],
   "spiritSocieties": [],
-  "runeAssociations": {},
-  "oppositeRune": "Disorder"
+  "oppositeRune": "Disorder",
+  "additionalPantheons": [
+    "Yelm"
+  ]
 }

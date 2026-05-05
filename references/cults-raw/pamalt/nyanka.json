@@ -1,0 +1,73 @@
+{
+  "name": "Nyanka",
+  "pantheon": "Pamalt",
+  "source": "CultOnePagers2019/Pamalt/Nyanka.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Goddess of Childbearing and Clear Waters",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Female",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Craft (Midwifery)",
+    "Lore(World)",
+    "Swim",
+    "Lore(Cult)",
+    "First Aid",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Calm",
+    "Cleanse",
+    "Detect Pregnancy",
+    "Find Water",
+    "Might",
+    "Vigour"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Absorption",
+      "Birthing",
+      "Reproduce",
+      "Fight Disease",
+      "Heal Wound",
+      "Perseverance",
+      "Transfer Pregnancy"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Heal Body",
+      "Rain of Substance"
+    ]
+  },
+  "personalityTraits": [
+    "Generous",
+    "Lustful",
+    "Pleasure-seeking",
+    "Forgiving",
+    "Merciful",
+    "Peaceful",
+    "Compassionate",
+    "Mercurial"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Inland Pamaltela"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "Death"
+}

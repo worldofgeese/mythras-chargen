@@ -1,0 +1,100 @@
+{
+  "name": "Blackfang",
+  "pantheon": "Independent",
+  "source": "CultOnePagers2019/Independent/Blackfang.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Spirit cult of the Assassins in Pavis",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Convince the spirit of high priest by winning a single spirit combat round. By losing spirit combat continues",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Combat style (any with assassin trait)",
+    "Conceal",
+    "Customs",
+    "Deceit",
+    "Locale",
+    "Unarmed",
+    "Willpower",
+    "Acrobatics",
+    "Acting",
+    "Lore (cult)",
+    "Sleight",
+    "Streetwise",
+    "Track",
+    "Athletics",
+    "Stealth",
+    "Binding(Shaman)",
+    "Craft (Poison)",
+    "Devotion",
+    "Disguise",
+    "Runic Affinity",
+    "Trance(Shaman)"
+  ],
+  "folkMagic": [
+    "Varies thru cult shamans"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Shattering",
+      "Shield",
+      "Multispell",
+      "Spirit Block",
+      "Vision"
+    ],
+    "associate": [
+      "Lanbril:Divination Block"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Conceal"
+    ]
+  },
+  "personalityTraits": [
+    "Destructive",
+    "Reckless",
+    "Selfish",
+    "Greedy",
+    "Ecstatic",
+    "Spiritual",
+    "Aware",
+    "Mystical"
+  ],
+  "enemyCults": [
+    "Humakt"
+  ],
+  "hostileCults": [
+    "Donandar,",
+    "__PH16__,",
+    "Yelm"
+  ],
+  "friendlyCults": [
+    "Cacodemon,",
+    "__PH5__,",
+    "__PH15__,",
+    "Daka",
+    "Fal,",
+    "Mallia,",
+    "Pavis,",
+    "__PH6__,"
+  ],
+  "associatedCults": [
+    "Krarsht, Lanbril"
+  ],
+  "areas": [
+    "Dragon Pass"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [
+    "Blackfang Spirit Society"
+  ],
+  "oppositeRune": "Harmony"
+}

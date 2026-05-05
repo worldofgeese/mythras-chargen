@@ -3,31 +3,53 @@
   "pantheon": "Yelm",
   "source": "CultOnePagers2019/Yelm/Oslira.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Goddess of the Great River",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nRunic Affinity",
+    "Runic Affinity",
     "Athletics",
     "Boating",
     "Craft(Netmaking)",
     "Lore(Water)",
     "Lore(Cult)",
     "Mechanisms",
-    "Combat Style\n(Spear)"
+    "Combat Style (Spear)"
   ],
   "folkMagic": [],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Breath water",
+      "Command (Specific Species, Monster or Spirit)",
+      "Float",
+      "True Weapon"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Purify Water"
+    ]
+  },
   "personalityTraits": [
-    "Generousx Lustfulx",
-    "Pleasureseekingx Proud",
+    "Generous",
+    "Lustful",
+    "Pleasure-seeking",
+    "Proud",
     "Just",
     "Authoritative",
-    "Adventurouss Dynamics",
-    "Impulsives"
+    "Adventurous",
+    "Dynamic",
+    "Impulsive"
   ],
   "enemyCults": [],
   "hostileCults": [],
@@ -40,6 +62,5 @@
   ],
   "holyDays": [],
   "spiritSocieties": [],
-  "runeAssociations": {},
   "oppositeRune": "Death"
 }

@@ -1,0 +1,65 @@
+{
+  "name": "Calari the Hunter",
+  "pantheon": "Ompalam",
+  "source": "CultOnePagers2019/Ompalam/Calari the Hunter.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "The Dancing Leopard Man",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Initiates must renounce wife and family, and pass a test of endurance and survival, such as fighting a wild beast barehanded.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Athletics",
+    "Locale",
+    "Perception",
+    "Lore (animal)",
+    "Lore (Escaped Slaves)",
+    "Navigation",
+    "Disguise",
+    "Stealth",
+    "Passion (Cruelty)",
+    "Dance",
+    "Deceit",
+    "Acting",
+    "Combat style with missile attack",
+    "Devotion",
+    "Runic Affinity",
+    "Track"
+  ],
+  "folkMagic": [
+    "Beastcall(Native 4leg plain herbivore) Disruption Find Life Magnify Mobility Slow Speedart"
+  ],
+  "miracles": {
+    "initiate": [
+      "Divination",
+      "Chastise",
+      "Fear"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication Mindlink Sanctify Summon Spirit of Reprisal Entangle"
+    ]
+  },
+  "personalityTraits": [
+    "Uncouth",
+    "Rough-edged",
+    "Loyal",
+    "Wild",
+    "Instinctive",
+    "Savage",
+    "Relentless",
+    "Ruthless",
+    "Unemotional"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Fonrit"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "Life"
+}

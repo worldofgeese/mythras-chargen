@@ -3,14 +3,14 @@
   "pantheon": "Storm",
   "source": "CultOnePagers2019/Storm/Valind.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Lord of Winter",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Must live in a land subject to winter",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Must live in a land subject to winter",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.Must live in a land subject to winter\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Must\nundergo a special ritual to submit oneself to Valind's Fury. Chance is HP on d100 Bold skills are\nmandatory\nCult Skills (Oath is taken at initiate)\nAthletics",
+    "Athletics",
     "Perception",
     "Combat style (any)",
     "Lore(World)",
@@ -30,12 +30,33 @@
     "Shimmer",
     "Speedart"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Cloud Call",
+      "Summon Sylph",
+      "Increase Wind",
+      "Snow"
+    ],
+    "associate": [
+      "4g Flight Storm Bull:Chaos"
+    ],
+    "runelord": [
+      "Excommunication Mindlink Sanctify Summon Spirit of Reprisal"
+    ]
+  },
   "personalityTraits": [
-    "Cruelo Coldo",
-    "Secretiveo Patiento",
-    "Passionateg Proudg",
-    "Unpredictableg Violentg"
+    "Cruel",
+    "Cold",
+    "Secretive",
+    "Patient",
+    "Passionate",
+    "Proud",
+    "Unpredictable",
+    "Violent"
   ],
   "enemyCults": [],
   "hostileCults": [],
@@ -49,7 +70,8 @@
     "Genertela",
     "Holy Country",
     "Lunar",
-    "Oceans"
+    "Oceans",
+    "West"
   ],
   "holyDays": [
     "Dark/Disorder/Clay",
@@ -57,5 +79,5 @@
     "Dark/Fertility/Winds"
   ],
   "spiritSocieties": [],
-  "runeAssociations": {}
+  "oppositeRune": ""
 }

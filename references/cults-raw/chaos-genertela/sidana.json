@@ -1,0 +1,55 @@
+{
+  "name": "Sidana",
+  "pantheon": "Chaos - Genertela",
+  "source": "CultOnePagers2019/Chaos - Pamaltela/Sidana.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Black Goat",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Devotion",
+    "Runic Affinity",
+    "Lore (cult)"
+  ],
+  "folkMagic": [
+    "Varies thru cult shamans"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "?x Sidana's Blessing"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
+  "personalityTraits": [
+    "Generous",
+    "Lustful",
+    "Pleasure-seeking"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Genertela,",
+    "Inland Pamaltela"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "Death",
+  "additionalPantheons": [
+    "Chaos - Pamaltela"
+  ]
+}

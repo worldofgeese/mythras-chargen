@@ -1,0 +1,120 @@
+{
+  "name": "Thanatar",
+  "pantheon": "Chaos - Genertela",
+  "source": "CultOnePagers2019/Chaos - Pamaltela/Thanatar.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "The Severed God",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Chaotic candidates (STR+CON+DEX)/2. Nonchaotic CHA x3 - Fail = slain. %% for each gift or service",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Combat style with shortsword",
+    "Perception",
+    "Stealth",
+    "Commerce",
+    "Language",
+    "Lore (any other)",
+    "Lore (cult)",
+    "Lore (World)",
+    "Oratory",
+    "Combat style with garrote",
+    "Binding(Shaman)",
+    "Devotion",
+    "Runic Affinity",
+    "Literacy",
+    "Trance(Shaman)"
+  ],
+  "folkMagic": [
+    "Befuddle",
+    "Bladesharp",
+    "Bludgeon",
+    "Darklight³",
+    "Darkness",
+    "Extinguish",
+    "Fanaticism",
+    "Firearrow",
+    "Fireblade",
+    "Heal",
+    "Ignite",
+    "Light",
+    "Lightwall²",
+    "Mindspeech"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Create Head",
+      "? Darklight",
+      "R Dismiss Magic",
+      "Rb Soul Sight",
+      "Summon Guardian",
+      "Create Foe-curser"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "?y Ingest Scroll",
+      "? Corruption"
+    ]
+  },
+  "personalityTraits": [
+    "Relentless",
+    "Ruthless",
+    "Unemotional",
+    "Ascetic",
+    "Truthful",
+    "Observant",
+    "Dutiful",
+    "Faithful",
+    "Fair"
+  ],
+  "enemyCults": [
+    "Donandar,",
+    "__PH16__,",
+    "Storm Bull"
+  ],
+  "hostileCults": [
+    "__PH13__,",
+    "Caladra&Aurelion,",
+    "__PH5__,",
+    "Foundchild,",
+    "Humakt,",
+    "Issaries,",
+    "__PH17__,"
+  ],
+  "friendlyCults": [
+    "Blackfang,",
+    "Cacodemon,",
+    "Krarsht,",
+    "Lanbril,",
+    "Mallia"
+  ],
+  "associatedCults": [
+    "Nysalor,",
+    "Primal Chaos"
+  ],
+  "areas": [
+    "Genertela,",
+    "Inland Pamaltela"
+  ],
+  "holyDays": [
+    "Sea/Disorder/Wild",
+    "Fire/Disorder/Wild",
+    "Earth/Disorder/Wild",
+    "Dark/Disorder/Wild",
+    "Storm/Disorder/Wild"
+  ],
+  "spiritSocieties": [],
+  "oppositeRune": "Illusion",
+  "additionalPantheons": [
+    "Chaos - Pamaltela"
+  ]
+}

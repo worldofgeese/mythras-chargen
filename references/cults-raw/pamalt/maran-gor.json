@@ -1,0 +1,123 @@
+{
+  "name": "Maran Gor",
+  "pantheon": "Pamalt",
+  "source": "CultOnePagers2019/Storm/Maran Gor.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "The Earth Shaker",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Combat style (any)",
+    "Brawn",
+    "Endurance",
+    "Locale",
+    "Perception",
+    "Willpower",
+    "Lore (cult)",
+    "Lore (earth)",
+    "Athletics",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Befuddle",
+    "Bladesharp",
+    "Bludgeon",
+    "Demoralise",
+    "Disruption",
+    "Dullblade",
+    "Heal",
+    "Ironhand",
+    "Might",
+    "Vigour"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Blast Earth",
+      "Summon Gnome",
+      "Create Fissure",
+      "Shake Earth",
+      "Command (Specific Species, Monster or Spirit)",
+      "Appease Earth",
+      "Command Dinosaur",
+      "Dismiss Earth Elemental"
+    ],
+    "associate": [
+      "Ty Kora Tek:Bless Grave(Lay to Rest)",
+      "Asrelia:Hide Wealth",
+      "Babeester Gor:Shield"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
+  "personalityTraits": [
+    "Pragmatic",
+    "Prudent",
+    "Worldly",
+    "Sensual",
+    "Relentless",
+    "Ruthless",
+    "Unemotional",
+    "Ascetic",
+    "Destructive",
+    "Reckless"
+  ],
+  "enemyCults": [
+    "Hostile",
+    "Cults:",
+    "Eurmal",
+    "Seven Mothers"
+  ],
+  "hostileCults": [
+    "Eurmal Seven Mothers"
+  ],
+  "friendlyCults": [
+    "Chalana Arroy",
+    "Eiritha",
+    "Issaries",
+    "Odayla",
+    "Orlanth",
+    "Yinkin"
+  ],
+  "associatedCults": [
+    "Babeester Gor",
+    "Ernalda"
+  ],
+  "areas": [
+    "Coastal Pamaltela",
+    "Dragon Pass",
+    "East",
+    "Fonrit",
+    "Holy Country",
+    "Inland Pamaltela",
+    "Lunar",
+    "Oceans",
+    "West"
+  ],
+  "holyDays": [
+    "Sea/Disorder/Clay",
+    "Fire/Disorder/Clay",
+    "Earth/Disorder/Clay",
+    "Earth/Fertility/Wild",
+    "Dark/Disorder/Clay",
+    "Dark/Death/Clay",
+    "Dark/Stasis/Winds",
+    "Storm/Disorder/Clay"
+  ],
+  "spiritSocieties": [],
+  "oppositeRune": "Harmony",
+  "additionalPantheons": [
+    "Storm"
+  ]
+}

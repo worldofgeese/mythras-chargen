@@ -1,0 +1,68 @@
+{
+  "name": "Jokotu the Murderer",
+  "pantheon": "Ompalam",
+  "source": "CultOnePagers2019/Ompalam/Jokotu the Murderer.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Fonritan Assassin Spirit Society",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Candidate must execute his first target alone.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Deceit",
+    "Lore (cult)",
+    "Acting",
+    "Conceal",
+    "Athletics",
+    "Craft (Poison)",
+    "Acting",
+    "Passion: Anti-Slavery",
+    "Willpower",
+    "Stealth",
+    "Combat style (knife with assassin trait)",
+    "Trance(Shaman)",
+    "Binding(Shaman)",
+    "Streetwise",
+    "Disguise"
+  ],
+  "folkMagic": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "?j Detection Blank"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Conceal"
+    ]
+  },
+  "personalityTraits": [
+    "Relentless",
+    "Ruthless",
+    "Unemotional",
+    "Ascetic",
+    "Logical",
+    "Rigorous",
+    "Materialistic"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Fonrit"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [
+    "Jokotu Spirit Society"
+  ],
+  "oppositeRune": "Life"
+}

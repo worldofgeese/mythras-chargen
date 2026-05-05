@@ -3,14 +3,14 @@
   "pantheon": "Lunar",
   "source": "CultOnePagers2019/Lunar/7 Mothers - Jakaleel.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Recreators of the Red Goddess",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nSedenyic Philosophy\u2076",
+    "Sedenyic Philosophy",
     "Willpower",
     "Devotion",
     "Runic Affinity",
@@ -24,18 +24,35 @@
     "Spiritshield",
     "Witchsight"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Dismiss Elemental",
+      "Summon Lune"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication Mindlink Sanctify Summon Spirit of Reprisal Awaken"
+    ]
+  },
   "personalityTraits": [
-    "Cruelo Coldo",
-    "Secretiveo Patiento",
+    "Cruel",
+    "Cold",
+    "Secretive",
+    "Patient",
     "Tolerant",
     "Balanced",
-    "Spiritualliberation",
-    "Open",
-    "Ecstaticb"
+    "Spiritual Liberation",
+    "Open-minded",
+    "Ecstatic"
   ],
   "enemyCults": [
-    "Hostile Cults: Blackfang",
+    "Hostile",
+    "Cults:",
+    "Blackfang",
     "Mallia",
     "Orlanth",
     "Thanatar",
@@ -55,7 +72,8 @@
     "Caladra&Aurelion",
     "Chalana Arroy",
     "Crimson Bat",
-    "Daka Fal"
+    "Daka",
+    "Fal"
   ],
   "associatedCults": [
     "Nysalor",
@@ -63,23 +81,16 @@
     "Primal Chaos"
   ],
   "areas": [
-    "Dragon Pass",
-    "Lunar"
+    "Dragon Pass Lunar"
   ],
   "holyDays": [
     "Sea/Illusion/Wild",
     "Fire/Illusion/Wild",
     "Earth/Illusion/Wild",
     "Dark/Disorder/God",
-    "Dark/Illusion/Wild\nStorm/Illusion/Wild\nRune Meanings: Darkness: Darkness",
-    "Cold",
-    "Underworld",
-    "Hunger",
-    "Insects",
-    "Moon: Illusion",
-    "Cycles",
-    "Balance"
+    "Dark/Illusion/Wild",
+    "Storm/Illusion/Wild"
   ],
   "spiritSocieties": [],
-  "runeAssociations": {}
+  "oppositeRune": ""
 }

@@ -1,0 +1,52 @@
+{
+  "name": "Hobimarong",
+  "pantheon": "East Isles",
+  "source": "CultOnePagers2019/East Isles/Hobimarong.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "The God of Mokato - never makes a mistake",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Either born on the island or pay priest and roll 1d100 if die roll is less than 1% of the sum then accepted",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Lore(cult)",
+    "Literacy",
+    "Runic Affinity",
+    "Devotion"
+  ],
+  "folkMagic": [
+    "Find Merman²"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "W Precision(specific skill)"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
+  "personalityTraits": [
+    "Proud",
+    "Just",
+    "Authoritative"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "East"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": ""
+}

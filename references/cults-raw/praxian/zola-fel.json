@@ -3,14 +3,14 @@
   "pantheon": "Praxian",
   "source": "CultOnePagers2019/Praxian/Zola Fel.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "God of River Zola Fel",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Swim at 95% or Swimmer ability",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Swim at 95% or Swimmer ability",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.Swim at 95% or Swimmer ability\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Cult member\nfor five years.  Bold skills are mandatory\nCult Skills (Oath is taken at initiate)\nCombat style with net",
+    "Combat style with net",
     "Boating",
     "Locale",
     "Language",
@@ -32,37 +32,67 @@
     "Heal(Lay)",
     "Ignite",
     "Mobility(Lay)",
-    "rivereyes\u00b9(Rune)"
+    "rivereyes¹(Rune)"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Command (Specific Species, Monster or Spirit)",
+      "Summon Naiad",
+      "Summon Undine",
+      "Breath water",
+      "Waterwalk",
+      "Fireshield",
+      "Ride River Horse"
+    ],
+    "associate": [
+      "Diros the Boatman:Float"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Purify Water"
+    ]
+  },
   "personalityTraits": [
-    "Adventurouss Dynamics",
-    "Impulsives Recklesss",
-    "Energetics Rebelliouss",
-    "Mercurialw Capriciousw",
-    "Mutablew"
+    "Adventurous",
+    "Dynamic",
+    "Impulsive",
+    "Reckless",
+    "Energetic",
+    "Rebellious",
+    "Mercurial",
+    "Capricious",
+    "Mutable"
   ],
   "enemyCults": [
-    "Mallia",
-    "Thanatar",
-    "Thed",
+    "Mallia,",
+    "Thanatar,",
+    "Thed,",
     "Vivamort"
   ],
   "hostileCults": [
-    "Cacodemon",
-    "Crimson Bat",
-    "Krarsht",
-    "Primal Chaos",
+    "Cacodemon,",
+    "__PH15__,",
+    "Krarsht,",
+    "__PH11__,",
     "Waha"
   ],
   "friendlyCults": [
-    "Aldrya",
-    "Argan Argar",
-    "Chalana Arroy",
-    "Eiritha",
-    "Frog Woman",
-    "Issaries",
-    "River Horse"
+    "Aldrya,",
+    "__PH13__,",
+    "__PH5__,",
+    "Eiritha,",
+    "Frog",
+    "Woman,",
+    "Issaries,",
+    "River",
+    "Horse"
   ],
   "associatedCults": [
     "Pavis"
@@ -71,24 +101,12 @@
     "Dragon Pass"
   ],
   "holyDays": [
-    "Sea/Movement/Water, Fire/Movement/Water, Earth/Movement/Water, Dark/Movement/Water,\nStorm/Movement/Water\nCan converse with river residents using spells Can command river residents with spells, Can summon\nNaiads with spells.\nRune Meanings: Movement: Change, Conflict, Mobility",
-    "Water: Water, Fluidity, Seas, Rivers,blood, Fish",
-    "Color:",
-    "Blue",
-    "Action:",
-    "Create",
-    "Metal:",
-    "Quicksilver",
-    "Sense:",
-    "Taste",
-    "Emotion:",
-    "Lust",
-    "Signature\nweapon:",
-    "Net",
-    "Instrument:",
-    "Reed Pipes\nThis document uses trademarks and/or copyrights owned by Chaosium Inc/Moon Design Publications\nLLC, which are used under Chaosium Inc\u2019s Fan Material Policy, We are expressly prohibited from\nws\nZola Fel\nGod of River Zola Fel\n2019 version\nAIG/RQG etc\ncharging you to use or access this content. This site is not published, endorsed, or specifically approved\nby Chaosium Inc. For more information about Chaosium Inc\u2019s products, please visit www.chaosium.com.\n\"Mythras\u201d is a Registered Trademark of The Design Mechanism Inc, and is used with permission, http:\n//notesfrompavis.blog 3/15/2019 9:13:32 PM Version: 5.2"
+    "Sea/Movement/Water",
+    "Fire/Movement/Water",
+    "Earth/Movement/Water",
+    "Dark/Movement/Water",
+    "Storm/Movement/Water"
   ],
   "spiritSocieties": [],
-  "runeAssociations": {},
   "oppositeRune": "Stasis"
 }

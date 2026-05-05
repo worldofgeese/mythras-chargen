@@ -1,0 +1,113 @@
+{
+  "name": "Vivamort",
+  "pantheon": "Chaos - Genertela",
+  "source": "CultOnePagers2019/Chaos - Pamaltela/Vivamort.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "God of the Unlife",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.((INT+CHA)+1 victim supplied)/2 * 5",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Deceit",
+    "Influence",
+    "Willpower",
+    "Acting",
+    "Lore (cult)",
+    "Combat style (any)",
+    "Perception",
+    "Stealth",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Darkness",
+    "Find Life",
+    "Firearrow",
+    "Fireblade",
+    "Ignite",
+    "Lightwall²"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "?bot Create Skeleton",
+      "Summon Shade",
+      "Create Ghost",
+      "?bot Create Zombie",
+      "?b Raise Ghoul",
+      "Bind Ghost"
+    ],
+    "associate": [
+      "Mallia:Cause Disease"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Ecstatic Communion"
+    ]
+  },
+  "personalityTraits": [
+    "Soulless",
+    "Fiendish",
+    "Relentless",
+    "Coldu"
+  ],
+  "enemyCults": [
+    "__PH5__,",
+    "Daka",
+    "Fal,",
+    "Donandar,",
+    "Humakt,",
+    "Lodril,",
+    "__PH22__,",
+    "Yelm"
+  ],
+  "hostileCults": [
+    "Caladra&Aurelion,",
+    "Foundchild,",
+    "Issaries,",
+    "__PH17__,",
+    "__PH16__,",
+    "Orlanth,",
+    "River",
+    "Horse,"
+  ],
+  "friendlyCults": [
+    "Bagog,",
+    "Blackfang,",
+    "Cacodemon,",
+    "__PH15__,",
+    "Krarsht,",
+    "Thanatar,",
+    "Thed"
+  ],
+  "associatedCults": [
+    "Nysalor,",
+    "Mallia,",
+    "Primal Chaos"
+  ],
+  "areas": [
+    "Genertela,",
+    "Inland Pamaltela"
+  ],
+  "holyDays": [
+    "Sea/Death/Freeze",
+    "Fire/Death/Freeze",
+    "Earth/Death/Freeze",
+    "Dark/Death/Freeze",
+    "Dark/Death/Wild",
+    "Storm/Death/Freeze"
+  ],
+  "spiritSocieties": [],
+  "oppositeRune": "",
+  "additionalPantheons": [
+    "Chaos - Pamaltela"
+  ]
+}

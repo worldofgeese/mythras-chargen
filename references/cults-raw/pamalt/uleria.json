@@ -1,0 +1,116 @@
+{
+  "name": "Uleria",
+  "pantheon": "Pamalt",
+  "source": "CultOnePagers2019/Yelm/Uleria.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Goddess of Love",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Must not be chaotic",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Endurance",
+    "Influence",
+    "Athletics",
+    "Devotion",
+    "Runic Affinity",
+    "Orate",
+    "Seduction"
+  ],
+  "folkMagic": [
+    "Glamour",
+    "Vigour"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Erotocomatose Lucidity",
+      "Community",
+      "Reproduce",
+      "Charisma"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
+  "personalityTraits": [
+    "Generous",
+    "Lustful",
+    "Pleasure-seeking",
+    "Adventurous",
+    "Dynamic",
+    "Impulsive",
+    "Reckless",
+    "Energetic",
+    "Rebellious"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "__A0__,",
+    "__A3__,",
+    "East,",
+    "Fonrit,",
+    "__A2__,",
+    "__A1__,",
+    "Lunar,",
+    "Oceans,",
+    "West"
+  ],
+  "holyDays": [
+    "Sea/Disorder/God",
+    "Sea/Harmony/Freeze",
+    "Sea/Harmony/Water",
+    "Sea/Harmony/Clay",
+    "Sea/Harmony/Winds",
+    "Sea/Harmony/Fire",
+    "Sea/Harmony/Wild",
+    "Sea/Harmony/God",
+    "Fire/Harmony/Freeze",
+    "Fire/Harmony/Water",
+    "Fire/Harmony/Clay",
+    "Fire/Harmony/Winds",
+    "Fire/Harmony/Fire",
+    "Earth/Harmony/Freeze",
+    "Earth/Harmony/Water",
+    "Earth/Harmony/Clay",
+    "Earth/Harmony/Winds",
+    "Earth/Harmony/Fire",
+    "Earth/Harmony/Wild",
+    "Earth/Harmony/Wild",
+    "Earth/Harmony/God",
+    "Earth/Harmony/God",
+    "Dark/Harmony/Freeze",
+    "Dark/Harmony/Water",
+    "Dark/Harmony/Clay",
+    "Dark/Harmony/Winds",
+    "Dark/Harmony/Fire",
+    "Dark/Harmony/Wild",
+    "Dark/Harmony/Wild",
+    "Dark/Harmony/God",
+    "Dark/Harmony/God",
+    "Storm/Harmony/Freeze",
+    "Storm/Harmony/Water",
+    "Storm/Harmony/Clay",
+    "Storm/Harmony/Winds",
+    "Storm/Harmony/Fire",
+    "Storm/Harmony/Wild",
+    "Storm/Harmony/God"
+  ],
+  "spiritSocieties": [],
+  "oppositeRune": "Death",
+  "additionalPantheons": [
+    "Storm",
+    "Yelm"
+  ]
+}

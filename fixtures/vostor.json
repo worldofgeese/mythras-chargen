@@ -1,58 +1,30 @@
 {
   "name": "Vostor Son of Pyjeem",
-  "concept": "Lunar Tarshite heavy infantry deserter turned reluctant ally",
+  "concept": "Scarred Lunar deserter turned mercenary",
   "characteristics": {
-    "STR": 16,
-    "CON": 15,
-    "SIZ": 13,
-    "DEX": 15,
-    "INT": 15,
-    "POW": 15,
-    "CHA": 10
+    "STR": 14,
+    "CON": 12,
+    "SIZ": 12,
+    "DEX": 9,
+    "INT": 10,
+    "POW": 11,
+    "CHA": 7
   },
-  "charMethod": "pregen",
-  "attributes": {
-    "actionPoints": 3,
-    "experienceModifier": 0,
-    "healingRate": 3,
-    "luckPoints": 3,
-    "magicPoints": 15,
-    "initiativeBonus": 15,
-    "damageModifier": "+1d2",
-    "hitPoints": {
-      "Head": 6,
-      "Chest": 8,
-      "Abdomen": 7,
-      "Right Arm": 5,
-      "Left Arm": 5,
-      "Right Leg": 6,
-      "Left Leg": 6
-    },
-    "encumbrance": {
-      "unencumbered": 32,
-      "burdened": 48,
-      "overloaded": 64
-    },
-    "runeAffinities": {
-      "primary": 80,
-      "secondary": 75,
-      "tertiary": 75
-    },
-    "folkMagicBase": 55,
-    "movementRate": 6
-  },
-  "culture": "Lunar Tarshite",
-  "homeland": "Dunstop, Lunar Tarsh",
+  "charMethod": "point-buy",
+  "attributes": {},
+  "culture": "Lunar Provincial",
+  "homeland": "Tarsh",
   "culturalSkills": {
-    "Language (New Pelorian)": 20,
-    "Language (Tarshite)": 10,
-    "Tradetalk": 5,
-    "Endurance": 5,
-    "Brawn": 10,
+    "Endurance": 15,
     "Athletics": 10,
+    "Brawn": 15,
+    "Evade": 10,
     "Perception": 10,
     "Willpower": 10,
-    "Locale": 20
+    "Locale": 5,
+    "Survival": 15,
+    "Healing": 5,
+    "Courtesy": 5
   },
   "runeAffinities": {
     "primary": "Moon",
@@ -65,98 +37,190 @@
     "Heal"
   ],
   "passions": [
-    { "name": "Devotion (Seven Mothers)", "value": 60 },
-    { "name": "Fear (Dragons)", "value": 60 },
-    { "name": "Fear (Harrek the Berserk)", "value": 60 },
-    { "name": "Hate (King Pharandros)", "value": 60 },
-    { "name": "Honor", "value": 70 },
-    { "name": "Love (Family)", "value": 60 },
-    { "name": "Loyalty (Dunstop)", "value": 60 },
-    { "name": "Loyalty (Fazzur Wideread)", "value": 80 },
-    { "name": "Loyalty (Red Emperor)", "value": 60 }
+    {
+      "name": "Loyalty (Seven Mothers)",
+      "value": 48,
+      "needsSubject": false,
+      "subjectSuggestions": []
+    },
+    {
+      "name": "Hate (Rebels)",
+      "value": 48,
+      "needsSubject": false,
+      "subjectSuggestions": []
+    },
+    {
+      "name": "Honor",
+      "value": 48,
+      "custom": true
+    },
+    {
+      "name": "Fear (Harrek the Berserk)",
+      "value": 48,
+      "custom": true
+    }
   ],
   "age": 21,
   "gender": "Male",
-  "family": "Son of Pyjeem, from a long line of Lunar Tarshite soldiers from Dunstop. Grandfather died at Battle of Grizzly Peak. Father Pyjeem died with glory in the Hendriking Campaign.",
-  "backgroundEvents": "Joined the Dunstop Foot at adulthood. Fought in the siege of Nochet. Nearly killed by Harrek the Berserk at the Battle of Pennel Ford. Survived assassination attempt by partisans of King Pharandros. Deserted and joined former enemies in Sartar.",
+  "family": "Dunstop, Lunar Tarsh",
+  "backgroundEvents": "",
   "career": "Warrior",
+  "careerSkills": {
+    "Athletics": 10,
+    "Brawn": 15,
+    "Endurance": 15,
+    "Evade": 10,
+    "Unarmed": 5,
+    "Combat Style (Colonial Survivalist)": 15,
+    "Lore (Strategy and Tactics)": 10,
+    "Gambling": 5,
+    "Survival": 15
+  },
+  "careerFolkMagic": [
+    "Fanaticism",
+    "Demoralise"
+  ],
+  "bonusSkills": {
+    "Athletics": 15,
+    "Brawn": 15,
+    "Endurance": 15,
+    "Evade": 15,
+    "Willpower": 15,
+    "Perception": 15,
+    "Survival": 15,
+    "Lore (Strategy and Tactics)": 15,
+    "Combat Style (Colonial Survivalist)": 15,
+    "Locale": 15
+  },
+  "hobbySkillName": null,
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "startingMoney": 100,
+  "equipment": [
+    {
+      "name": "Two sets of common undecorated clothes",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 0
+    },
+    {
+      "name": "Transport: Handcart",
+      "enc": 0,
+      "quantity": 1,
+      "cost": 0
+    },
+    {
+      "name": "Backpack",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Waterskin",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Rations (1 week)",
+      "enc": 2,
+      "quantity": 1,
+      "cost": 14
+    },
+    {
+      "name": "Bedroll",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Flint & Tinder",
+      "enc": 0,
+      "quantity": 1,
+      "cost": 5
+    }
+  ],
+  "weapons": [
+    {
+      "name": "Pelorian Aspis",
+      "damage": "1d4",
+      "size": "H",
+      "reach": "S",
+      "ap": 6,
+      "hp": 15,
+      "skill": 0,
+      "quantity": 1
+    }
+  ],
+  "armor": [
+    {
+      "name": "Bronze Basic Armour",
+      "ap": 1,
+      "locations": "5 location(s)",
+      "cost": 0
+    }
+  ],
+  "combatStyles": [
+    {
+      "name": "Colonial Survivalist",
+      "weapons": [
+        "Shortsword",
+        "Dagger",
+        "Sling"
+      ],
+      "traits": [
+        "Hidden Weapons"
+      ],
+      "skill": 23,
+      "notes": ""
+    },
+    {
+      "name": "Lunar Corps Hoplite",
+      "weapons": [
+        "1H Spear",
+        "Pelorian Aspis",
+        "Sickle Sword/Khopesh"
+      ],
+      "traits": [
+        "Formation Fighting",
+        "Shield Wall",
+        "Siege Warfare"
+      ],
+      "skill": 0,
+      "notes": "only available to Warrior career"
+    },
+    {
+      "name": "Pelorian Cavalry",
+      "weapons": [
+        "Composite Bow",
+        "Pelorian Aspis",
+        "Sickle Sword/Khopesh",
+        "Kontos",
+        "Pelorian Peltast Shield"
+      ],
+      "traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Mounted Skirmishing"
+      ],
+      "skill": 0,
+      "notes": "only available to Warrior career"
+    }
+  ],
+  "notes": "",
+  "background": "",
+  "hitPoints": {},
+  "companions": [],
   "cult": "Seven Mothers",
   "miracles": [
     "Madness",
     "Mindblast",
-    "Summon Fire Elemental (small)"
+    "Shield"
   ],
-  "devotionalPool": 3,
-  "careerSkills": {
-    "Lore (Strategy and Tactics)": 15,
-    "Lore (Seven Mothers)": 10,
-    "Ride": 10,
-    "First Aid": 10,
-    "Craft (Farming)": 10,
-    "Literacy (New Pelorian)": 10,
-    "Endurance": 15,
-    "Brawn": 10,
-    "Evade": 10
-  },
-  "careerFolkMagic": [
-    "Heal"
-  ],
-  "bonusSkills": {
-    "Perception": 10,
-    "Influence": 10,
-    "Insight": 10,
-    "Willpower": 10,
-    "Sing": 10,
-    "Endurance": 10,
-    "Locale": 10,
-    "Customs (Lunar Tarsh)": 15,
-    "Lore (Tarsh)": 15
-  },
+  "devotionalPool": 0,
   "selectedProfessionalSkills": [
     "Lore (Strategy and Tactics)",
-    "Lore (Seven Mothers)",
-    "Literacy (New Pelorian)"
-  ],
-  "hobbySkillName": null,
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 1,
-  "startingMoney": 125,
-  "equipment": [
-    { "name": "Spell matrix (Heal 2) in belt buckle depicting a fat, grinning dwarf", "enc": 0, "quantity": 1, "cost": 0 },
-    { "name": "125 L in coin and booty", "enc": 0, "quantity": 1, "cost": 0 }
-  ],
-  "weapons": [
-    { "name": "Kopis", "damage": "1d8+1", "size": "M", "reach": "M", "ap": 6, "hp": 12, "skill": 80, "quantity": 1 },
-    { "name": "Dagger", "damage": "1d4+1", "size": "S", "reach": "S", "ap": 6, "hp": 8, "skill": 45, "quantity": 1 },
-    { "name": "Medium Shield", "damage": "1d4", "size": "L", "reach": "S", "ap": 6, "hp": 12, "skill": 35, "quantity": 1 },
-    { "name": "Large Shield", "damage": "1d6", "size": "H", "reach": "S", "ap": 8, "hp": 16, "skill": 90, "quantity": 1 },
-    { "name": "Javelin", "damage": "1d8+1", "size": "H", "reach": "L", "ap": 3, "hp": 8, "skill": 45, "quantity": 1 },
-    { "name": "Composite Bow", "damage": "1d8+1", "size": "H", "reach": "-", "ap": 4, "hp": 7, "skill": 50, "quantity": 1 }
-  ],
-  "armor": [
-    { "name": "Closed Helmet", "ap": 5, "locations": "Head", "cost": 0 },
-    { "name": "Heavy Scale Hauberk", "ap": 5, "locations": "Chest, Abdomen", "cost": 0 },
-    { "name": "Plate Vambraces", "ap": 6, "locations": "Arms", "cost": 0 },
-    { "name": "Plate Greaves", "ap": 6, "locations": "Legs", "cost": 0 }
-  ],
-  "combatStyles": [
-    {
-      "name": "Dunstop Infantry",
-      "weapons": ["Kopis", "Dagger", "Large Shield", "Medium Shield", "Javelin", "Composite Bow"],
-      "traits": ["Formation Fighting", "Shield Wall"],
-      "value": 90
-    }
-  ],
-  "notes": "All-around tough soldier with good skills, damage, armor, and hit points. Can summon a Small Fire Elemental via miracle. Speak slowly and loudly to local barbarians. Mess of contradictory Lunar passions: loyal to Fazzur Wideread but hates King Pharandros, reflexively loyal to the Red Emperor. Ragged scars across face and arm from Harrek the Berserk.",
-  "background": "Vostor is from a long line of Lunar Tarshite soldiers from Dunstop. He has a powerful physique, but his most noticeable feature is a ragged row of fearsome scars across the side of his face and his arm, healed but still testament to the terrible injury he suffered. His grandfather fought and died for the Red Emperor at the Battle of Grizzly Peak. His father Pyjeem followed General Fazzur Wideread, but died with great glory in the Hendriking Campaign when Vostor was still a child. At adulthood, Vostor joined the Dunstop Foot and was shocked when the Red Emperor replaced Fazzur Wideread as the Governor-General of Dragon Pass. He followed his regiment to Esrolia and fought valiantly in the siege of Nochet. At the Battle of Pennel Ford he was nearly killed by Harrek the Berserk, gaining terrible scars across his face and arm. During the retreat from Sartar, partisans of King Pharandros tried to assassinate him. Rather than be murdered, Vostor deserted and sought allies amongst his former enemies in Sartar.",
-  "hitPoints": {
-    "Head": { "current": 6, "max": 6 },
-    "Chest": { "current": 8, "max": 8 },
-    "Abdomen": { "current": 7, "max": 7 },
-    "Right Arm": { "current": 5, "max": 5 },
-    "Left Arm": { "current": 5, "max": 5 },
-    "Right Leg": { "current": 6, "max": 6 },
-    "Left Leg": { "current": 6, "max": 6 }
-  },
-  "companions": []
+    "Gambling",
+    "Survival"
+  ]
 }

@@ -3,14 +3,14 @@
   "pantheon": "Storm",
   "source": "CultOnePagers2019/Storm/Barntar.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Orlanthi Ploughman God",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nFirst Aid",
+    "First Aid",
     "Lore(Farming)",
     "Lore(Cult)",
     "Combat Style(Spear)",
@@ -27,13 +27,35 @@
     "Vigour",
     "Warmth"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Command (Specific Species, Monster or Spirit)",
+      "Extension",
+      "Find (Specific Thing)",
+      "Chastise",
+      "Divination"
+    ],
+    "associate": [
+      "Ernalda:Bless Crops",
+      "Orlanth:Shield"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Summon Spirit of Reprisal",
+      "Sanctify"
+    ]
+  },
   "personalityTraits": [
-    "Adventurouss Dynamics",
-    "Impulsives Recklesss",
-    "Energetics Rebelliouss",
-    "Passionateg Proudg",
-    "Unpredictableg"
+    "Adventurous",
+    "Dynamic",
+    "Impulsive",
+    "Reckless",
+    "Energetic",
+    "Rebellious",
+    "Passionate",
+    "Proud",
+    "Unpredictable"
   ],
   "enemyCults": [],
   "hostileCults": [],
@@ -53,6 +75,5 @@
     "Sea/Harmony/Winds"
   ],
   "spiritSocieties": [],
-  "runeAssociations": {},
   "oppositeRune": "Stasis"
 }

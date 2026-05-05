@@ -1,0 +1,34 @@
+{
+  "source": "WEAPONS_DATA in index.html — strictly filtered for Gloranthan attestation",
+  "extraction_date": "2026-05-03",
+  "policy": "Only weapons attested from Mythras Core (p.62-67) or named for Gloranthan setting (AiG cultures, Dara Happan, Pelorian, Praxian, Orlanthi, etc.) are included. All non-Gloranthan supplement weapons (Japanese, Indian, firearms, Celtic-named, etc.) have been removed.",
+  "summary": {
+    "total_in_app": 84,
+    "from_mythras_core": 64,
+    "from_gloranthan_setting": 20,
+    "attestation_percentage": "100%"
+  },
+  "attested_sources": {
+    "mythras_core_melee_1h": {
+      "source": "Mythras Core Rulebook p.62-63",
+      "count": 23
+    },
+    "mythras_core_melee_2h": {
+      "source": "Mythras Core Rulebook p.63-64",
+      "count": 14
+    },
+    "mythras_core_shields": {
+      "source": "Mythras Core Rulebook p.64",
+      "count": 8
+    },
+    "mythras_core_ranged": {
+      "source": "Mythras Core Rulebook p.65-67",
+      "count": 19
+    },
+    "gloranthan_variants": {
+      "source": "Adventures in Glorantha combat styles (p.26-41) + Gloranthan setting conventions",
+      "note": "Bronze-Age variants (MB prefix = Monster Broo/primitive), setting-specific shields (Orlanthi, Praxian, Pelorian, Dara Happan), Kopis (common Gloranthan sidearm)",
+      "count": 20
+    }
+  }
+}

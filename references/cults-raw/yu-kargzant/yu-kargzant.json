@@ -1,0 +1,89 @@
+{
+  "name": "Yu-Kargzant",
+  "pantheon": "Yu-Kargzant",
+  "source": "CultOnePagers2019/Yu-Kargzant/Yu-Kargzant.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "The Imperial Sun. Grazer God",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Must be noble",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "First Aid",
+    "Perception",
+    "Lore(cult)",
+    "Combat Style with Bow",
+    "Ride",
+    "Craft Falconry",
+    "Runic Affinity",
+    "Devotion",
+    "Orate",
+    "Lore(Human)",
+    "Play(Instrument)",
+    "Speak Grazer"
+  ],
+  "folkMagic": [
+    "Befuddle",
+    "Coordination",
+    "Extinguish",
+    "Find Enemies",
+    "Firearrow",
+    "Fireblade",
+    "Glamour",
+    "Heal",
+    "Ignite",
+    "Light",
+    "Lightwall",
+    "Magnify",
+    "Mindspeech",
+    "Mobility",
+    "Speedart"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Bless Worshipers",
+      "Cloud Clear",
+      "Command (Specific Species, Monster or Spirit)",
+      "Fight Disease",
+      "Sureshot",
+      "True Weapon",
+      "Shield"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Resurrect",
+      "Sunspear"
+    ]
+  },
+  "personalityTraits": [
+    "Relentless",
+    "Ruthless",
+    "Unemotional",
+    "Ascetic",
+    "Loyal",
+    "Honest",
+    "Pure",
+    "Idealist",
+    "Chastity",
+    "Perceptive"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Dragon Pass"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "Life"
+}

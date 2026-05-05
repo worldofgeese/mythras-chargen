@@ -1,0 +1,78 @@
+{
+  "name": "Um-Oradin",
+  "pantheon": "Independent",
+  "source": "CultOnePagers2019/Independent/Um-Oradin.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Fonritan Corsair God",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Athletics",
+    "Evade",
+    "Navigation",
+    "Seamanship",
+    "Lore (Sea)",
+    "Boating",
+    "Lore (Ompalam)",
+    "Combat style with scimitar",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Bladesharp",
+    "Coordination",
+    "Dry",
+    "Find Loot",
+    "Heal",
+    "Shove"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Cloud Call",
+      "Mirage",
+      "Shield",
+      "Sureshot",
+      "Summon Sylph",
+      "R Dismiss Magic",
+      "Decrease Wind"
+    ],
+    "associate": [
+      "Magasta:Float"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Call winds"
+    ]
+  },
+  "personalityTraits": [
+    "Adventurous",
+    "Dynamic",
+    "Impulsive",
+    "Reckless",
+    "Energetic",
+    "Rebellious",
+    "Passionate",
+    "Proud",
+    "Unpredictable"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Fonrit"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "Stasis"
+}

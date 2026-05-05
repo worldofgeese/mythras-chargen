@@ -1,0 +1,61 @@
+{
+  "name": "Bloody Tusk",
+  "pantheon": "Independent",
+  "source": "CultOnePagers2019/Independent/Bloody Tusk.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "God of the Tusk Riders",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Any tusk rider may join. Non tuskriders Must wrestle and win a tusker with bare hands.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Lore (cult)",
+    "Bloody Cut0 Devotion Runic Affinity"
+  ],
+  "folkMagic": [
+    "Bladesharp Countermagic Demoralize Disruption Heal Ironhand Mobility Protection\nSlow Vigour"
+  ],
+  "miracles": {
+    "initiate": [
+      "Dismiss Magic",
+      "Appease Earth",
+      "Command Swine",
+      "Death Binding",
+      "Pain Tooth",
+      "Seal wound"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication Find Enemy Mindlink Sanctify Summon Spirit of Reprisal"
+    ]
+  },
+  "personalityTraits": [
+    "Uncouth",
+    "Rough-edged",
+    "Loyal",
+    "Wild",
+    "Instinctive",
+    "Savage",
+    "Pragmatic",
+    "Prudent",
+    "Worldly",
+    "Sensual"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Dragon Pass"
+  ],
+  "holyDays": [
+    "Sea/Death/Wild",
+    "Fire/Death/Wild",
+    "Earth/Death/Wild",
+    "Dark/Death/Wild",
+    "Storm/Death/Wild"
+  ],
+  "spiritSocieties": [],
+  "oppositeRune": "Life"
+}

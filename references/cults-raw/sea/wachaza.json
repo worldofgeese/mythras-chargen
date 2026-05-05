@@ -1,0 +1,83 @@
+{
+  "name": "Wachaza",
+  "pantheon": "Sea",
+  "source": "CultOnePagers2019/Sea/Wachaza.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "War Lord of the Ocean",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Brawn",
+    "Endurance",
+    "Evade",
+    "Perception",
+    "Swim",
+    "Lore (cult)",
+    "Lore (Sea)",
+    "Navigation",
+    "Seamanship",
+    "Combat style with net",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Bladesharp",
+    "Coordination",
+    "Demoralise",
+    "Disruption",
+    "Might",
+    "Mobility",
+    "Second Sight",
+    "Slow"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Summon Undine",
+      "Drown",
+      "Fear",
+      "Seastrength"
+    ],
+    "associate": [
+      "Magasta:Breath water"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Fang of Wachaza",
+      "Bw Create\nFlippers"
+    ]
+  },
+  "personalityTraits": [
+    "Cruel",
+    "Cold",
+    "Secretive",
+    "Patient",
+    "Relentless",
+    "Ruthless",
+    "Unemotional",
+    "Ascetic",
+    "Mercurial",
+    "Capricious"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Oceans"
+  ],
+  "holyDays": [
+    "Dark/Fertility/God"
+  ],
+  "spiritSocieties": [],
+  "oppositeRune": "Life"
+}

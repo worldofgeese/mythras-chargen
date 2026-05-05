@@ -1,0 +1,84 @@
+{
+  "name": "El-Jazuli",
+  "pantheon": "Ompalam",
+  "source": "CultOnePagers2019/Ompalam/El-Jazuli.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Sister Witch, Fonritan Earth Goddess",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Female",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Lore (cult)",
+    "Lore (Underworld)",
+    "Customs",
+    "Endurance",
+    "Lore (Ompalam)",
+    "Trance(Shaman)",
+    "Binding (Shaman)",
+    "Dance(Shaman)",
+    "Devotion",
+    "Runic Affinity",
+    "Insight(Shaman)",
+    "Perception"
+  ],
+  "folkMagic": [
+    "Avert",
+    "Find Magic",
+    "Find Shelter",
+    "Incognito",
+    "Pathway",
+    "Witchsight"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Spirit Block",
+      "Rb Soul Sight",
+      "Analyze Magic",
+      "Create Fissure",
+      "R Dismiss Magic",
+      "Foreboding",
+      "Illusion",
+      "Bless Grave(Lay to Rest)",
+      "Shake Earth",
+      "Create Foe-curser"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Exorcism",
+      "Grimoire",
+      "Leeching",
+      "Omen",
+      "Sculpt Stone (Sorcery)",
+      "Copy Magic (High Priest)"
+    ]
+  },
+  "personalityTraits": [
+    "Generous",
+    "Lustful",
+    "Pleasure-seeking",
+    "Pragmatic",
+    "Prudent",
+    "Worldly",
+    "Sensual"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Fonrit"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "Death"
+}

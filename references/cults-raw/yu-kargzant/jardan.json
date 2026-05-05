@@ -1,0 +1,80 @@
+{
+  "name": "Jardan",
+  "pantheon": "Yu-Kargzant",
+  "source": "CultOnePagers2019/Yu-Kargzant/Jardan.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "The Warrior. Grazer God",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Must be noble",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "First Aid",
+    "Perception",
+    "Craft(Battle)",
+    "Lore(cult)",
+    "Combat Style with Bow",
+    "Combat Style with Lance and Spear",
+    "Ride",
+    "Runic Affinity",
+    "Devotion"
+  ],
+  "folkMagic": [
+    "Bladesharp",
+    "Coordination",
+    "Demoralize",
+    "Disruption",
+    "Find Enemies",
+    "Firearrow",
+    "Fireblade",
+    "Heal",
+    "Ignite",
+    "Light",
+    "Lightwall",
+    "Magnify",
+    "Mobility",
+    "Protection",
+    "Speedart"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Sureshot",
+      "Shield",
+      "True Weapon"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
+  "personalityTraits": [
+    "Relentless",
+    "Ruthless",
+    "Unemotional",
+    "Ascetic",
+    "Loyal",
+    "Honest",
+    "Pure",
+    "Idealist",
+    "Chastity",
+    "Perceptive"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Dragon Pass"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "Life"
+}

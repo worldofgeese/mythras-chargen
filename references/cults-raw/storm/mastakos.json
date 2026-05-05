@@ -3,14 +3,14 @@
   "pantheon": "Storm",
   "source": "CultOnePagers2019/Storm/Mastakos.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Orlanth's Charioteer",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "DEX has to\nbe 16 or above Bold skills are mandatory\nCult Skills (Oath is taken at initiate)\nDrive",
+    "Drive",
     "Athletics",
     "Ride",
     "Devotion",
@@ -21,11 +21,27 @@
     "Coordination",
     "Mobility"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise"
+    ],
+    "associate": [
+      "4g Flight Orlanth:Lightning"
+    ],
+    "runelord": [
+      "Excommunication Mindlink Sanctify Summon Spirit of Reprisal s Guided Teleportation s\nTeleportation"
+    ]
+  },
   "personalityTraits": [
-    "Adventurouss Dynamics",
-    "Impulsives Recklesss",
-    "Energetics Rebelliouss"
+    "Adventurous",
+    "Dynamic",
+    "Impulsive",
+    "Reckless",
+    "Energetic",
+    "Rebellious"
   ],
   "enemyCults": [],
   "hostileCults": [],
@@ -42,12 +58,8 @@
     "West"
   ],
   "holyDays": [
-    "Storm/Movement/Winds\nRune Meanings: Movement: Change",
-    "Conflict",
-    "Mobility\nThis document uses trademarks and/or copyrights owned by Chaosium Inc/Moon Design Publications\nLLC",
-    "which are used under Chaosium Inc\u2019s Fan Material Policy, We are expressly prohibited from\ncharging you to use or access this content. This site is not published, endorsed, or specifically approved\nby Chaosium Inc. For more information about Chaosium Inc\u2019s products, please visit www.chaosium.com.\n\"Mythras\u201d is a Registered Trademark of The Design Mechanism Inc, and is used with permission, http:\n//notesfrompavis.blog 3/15/2019 9:13:32 PM Version: 5.2"
+    "Storm/Movement/Winds"
   ],
   "spiritSocieties": [],
-  "runeAssociations": {},
   "oppositeRune": "Stasis"
 }

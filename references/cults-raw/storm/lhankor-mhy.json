@@ -3,14 +3,14 @@
   "pantheon": "Storm",
   "source": "CultOnePagers2019/Storm/Lhankor Mhy.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "God of Knowledge and Writing",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nCustoms",
+    "Customs",
     "Insight",
     "Perception",
     "Commerce",
@@ -19,7 +19,7 @@
     "Runic Affinity",
     "Literacy",
     "Lore",
-    "Lore\n(any other)"
+    "Lore (any other)"
   ],
   "folkMagic": [
     "Appraise",
@@ -29,13 +29,43 @@
     "Mindspeech",
     "Translate"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Analyze Magic",
+      "Clairvoyance",
+      "Knowledge",
+      "Translate",
+      "Truespeak"
+    ],
+    "associate": [
+      "Issaries:Create Market",
+      "Orlanth:Wind Words",
+      "Chalana Arroy:Restore Health",
+      "Eurmal:Clever Tongue"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Mind Read",
+      "Reconstruction"
+    ]
+  },
   "personalityTraits": [
-    "Stubbornc Inflexiblec",
-    "Exactingc Conservativec",
-    "Truthfuly Observanty",
-    "Dutifuly Faithfuly",
-    "Fairy"
+    "Stubborn",
+    "Inflexible",
+    "Exacting",
+    "Conservative",
+    "Truthful",
+    "Observant",
+    "Dutiful",
+    "Faithful",
+    "Fair"
   ],
   "enemyCults": [
     "Bagog",
@@ -49,8 +79,7 @@
     "Thed"
   ],
   "hostileCults": [
-    "Blackfang",
-    "Lanbril"
+    "Blackfang Lanbril"
   ],
   "friendlyCults": [
     "Flintnail",
@@ -80,10 +109,9 @@
     "Earth/Truth/God",
     "Dark/Truth/God",
     "Storm/Truth/God",
-    "Sacred Time/Fate\nWeek/God",
+    "Sacred Time/Fate Week/God",
     "Sacred Time/God Week/God"
   ],
   "spiritSocieties": [],
-  "runeAssociations": {},
   "oppositeRune": "Illusion"
 }

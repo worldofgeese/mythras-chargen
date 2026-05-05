@@ -3,14 +3,14 @@
   "pantheon": "Storm",
   "source": "CultOnePagers2019/Storm/Heler.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Orlanthi God of Rain - Blue God",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nEvade",
+    "Evade",
     "Lore (cult)",
     "Combat Style(any)",
     "Survival",
@@ -30,13 +30,35 @@
     "Tire",
     "Vigour"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Rain",
+      "Chameleon",
+      "Command (Specific Species, Monster or Spirit)",
+      "Cloud Call",
+      "Cloud Walk",
+      "Dismiss Elemental",
+      "Spirit Block"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication Mindlink Sanctify Summon Spirit of Reprisal"
+    ]
+  },
   "personalityTraits": [
-    "Adventurouss Dynamics",
-    "Impulsives Recklesss",
-    "Energetics Rebelliouss",
-    "Mercurialw Capriciousw",
-    "Mutablew"
+    "Adventurous",
+    "Dynamic",
+    "Impulsive",
+    "Reckless",
+    "Energetic",
+    "Rebellious",
+    "Mercurial",
+    "Capricious",
+    "Mutable"
   ],
   "enemyCults": [],
   "hostileCults": [],
@@ -56,10 +78,13 @@
     "Sea/Disorder/Water",
     "Fire/Disorder/Freeze",
     "Fire/Fertility/Water",
-    "Earth/Stasis/Water\nDark/Harmony/Water",
+    "Earth/Stasis/Water",
+    "Dark/Harmony/Water",
     "Storm/Movement/Water"
   ],
   "spiritSocieties": [],
-  "runeAssociations": {},
-  "oppositeRune": "Stasis"
+  "oppositeRune": "Stasis",
+  "additionalPantheons": [
+    "Sea"
+  ]
 }

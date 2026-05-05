@@ -1,0 +1,74 @@
+{
+  "name": "Seseine",
+  "pantheon": "Chaos - Genertela",
+  "source": "CultOnePagers2019/Chaos - Pamaltela/Seseine.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Goddess of Lust, Desire and the Harem",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Seduction",
+    "Influence",
+    "Endurance",
+    "Athletics",
+    "Lore (cult)",
+    "Lore(Human)",
+    "Acrobatics",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Sleep",
+    "Vigour",
+    "Warmth"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Rbo Attack Soul",
+      "Chameleon",
+      "Erotocomatose Lucidity",
+      "Charisma",
+      "Illusion",
+      "Rapture"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "? Corruption",
+      "Heart Seizure"
+    ]
+  },
+  "personalityTraits": [
+    "Generous",
+    "Lustful",
+    "Pleasure-seeking",
+    "Deceitful",
+    "Cowardly",
+    "Corrupted",
+    "Imaginative"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Genertela,",
+    "Inland Pamaltela"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "Death",
+  "additionalPantheons": [
+    "Chaos - Pamaltela"
+  ]
+}

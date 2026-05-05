@@ -1,0 +1,53 @@
+{
+  "name": "Krjalk",
+  "pantheon": "Chaos - Genertela",
+  "source": "CultOnePagers2019/Chaos - Genertela/Krjalk.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Lord of Monsters",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Chaotic if alteration of basic nature",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Influence",
+    "Endurance",
+    "Lore(cult)",
+    "Orate",
+    "Combat style (any)",
+    "Runic Affinity"
+  ],
+  "folkMagic": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Power Drain",
+      "Madness gow Fear R Dismiss Magic Become Krjalki"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication Mindlink Sanctify Summon Spirit of Reprisal"
+    ]
+  },
+  "personalityTraits": [
+    "Adventurous",
+    "Dynamic",
+    "Impulsive",
+    "Reckless",
+    "Energetic",
+    "Rebellious"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Genertela"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "Stasis"
+}

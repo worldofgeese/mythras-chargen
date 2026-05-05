@@ -1,192 +1,332 @@
 {
   "name": "Vasana Farnan's Daughter",
-  "concept": "Vengeful Orlanthi bison cavalrywoman and natural-born war leader",
+  "concept": "Vengeful bison cavalrywoman, natural leader",
   "characteristics": {
-    "STR": 16,
-    "CON": 12,
-    "SIZ": 10,
-    "DEX": 11,
-    "INT": 15,
-    "POW": 15,
-    "CHA": 19
+    "STR": 14,
+    "CON": 10,
+    "SIZ": 8,
+    "DEX": 10,
+    "INT": 9,
+    "POW": 12,
+    "CHA": 12
   },
-  "charMethod": "pregen",
+  "charMethod": "point-buy",
   "attributes": {
-    "actionPoints": 3,
-    "experienceModifier": 2,
+    "actionPoints": 2,
+    "experienceModifier": 0,
     "healingRate": 2,
-    "luckPoints": 3,
-    "magicPoints": 15,
-    "initiativeBonus": 13,
-    "damageModifier": "+1d2",
+    "luckPoints": 2,
+    "magicPoints": 12,
+    "initiativeBonus": 9,
+    "damageModifier": "+0",
     "hitPoints": {
-      "Head": 5,
-      "Chest": 7,
-      "Abdomen": 6,
-      "Right Arm": 4,
-      "Left Arm": 4,
-      "Right Leg": 5,
-      "Left Leg": 5
+      "Head": 4,
+      "Chest": 6,
+      "Abdomen": 5,
+      "Right Arm": 3,
+      "Left Arm": 3,
+      "Right Leg": 4,
+      "Left Leg": 4
     },
     "encumbrance": {
-      "unencumbered": 32,
-      "burdened": 48,
-      "overloaded": 64
+      "unencumbered": 28,
+      "burdened": 29,
+      "overloaded": 43,
+      "noMovement": 56
     },
     "runeAffinities": {
-      "primary": 90,
-      "secondary": 75,
-      "tertiary": 75
+      "primary": 54,
+      "secondary": 44,
+      "tertiary": 34
     },
-    "folkMagicBase": 64,
+    "folkMagicBase": 54,
     "movementRate": 6
   },
   "culture": "Sartarite (Heortling)",
-  "homeland": "Ernaldori clan, Colymar Tribe",
+  "homeland": "Sartar",
   "culturalSkills": {
-    "Language (Heortling)": 20,
-    "Language (Stormspeech)": 10,
-    "Tradetalk": 5,
-    "Athletics": 10,
+    "Athletics": 15,
     "Brawn": 10,
-    "Endurance": 10,
-    "Evade": 5,
-    "Locale": 10,
-    "Perception": 15,
-    "Willpower": 5
+    "Endurance": 15,
+    "Evade": 10,
+    "Locale": 5,
+    "Perception": 10,
+    "Ride": 15,
+    "Willpower": 10,
+    "Healing": 5,
+    "Survival": 5
   },
   "runeAffinities": {
-    "primary": "Air",
-    "secondary": "Death",
-    "tertiary": "Movement"
+    "primary": "Storm",
+    "secondary": "Movement",
+    "tertiary": "Death"
   },
   "folkMagicSpells": [
     "Bladesharp",
-    "Mobility",
-    "Protection"
+    "Protection",
+    "Heal"
   ],
   "passions": [
-    { "name": "Devotion (Orlanth)", "value": 80 },
-    { "name": "Hate (Lunar Empire)", "value": 90 },
-    { "name": "Honor", "value": 70 },
-    { "name": "Love (Family)", "value": 60 },
-    { "name": "Loyalty (Argrath)", "value": 70 },
-    { "name": "Loyalty (Colymar Tribe)", "value": 70 },
-    { "name": "Loyalty (Ernaldori Clan)", "value": 60 },
-    { "name": "Loyalty (Sartar)", "value": 70 }
+    {
+      "name": "Loyalty (Clan)",
+      "value": 54,
+      "needsSubject": false,
+      "subjectSuggestions": []
+    },
+    {
+      "name": "Love (Freedom)",
+      "value": 54,
+      "needsSubject": false,
+      "subjectSuggestions": []
+    },
+    {
+      "name": "Hate (Lunar Empire)",
+      "value": 54,
+      "choice": [
+        "Hate"
+      ],
+      "needsSubject": true,
+      "subjectSuggestions": [
+        "Telmori",
+        "Lunar Tarshites",
+        "Greydogs",
+        "Delecti's Undead",
+        "Beastfolk"
+      ]
+    },
+    {
+      "name": "Hate (Lunar Oppression)",
+      "value": 54,
+      "needsSubject": false,
+      "subjectSuggestions": []
+    },
+    {
+      "name": "Devotion (Orlanth)",
+      "value": 54,
+      "custom": true
+    },
+    {
+      "name": "Honor",
+      "value": 54,
+      "custom": true
+    }
   ],
   "age": 21,
   "gender": "Female",
-  "family": "Daughter of Farnan (slain by Crimson Bat at Whitewall 1620). Mother Vareena, priestess of Ernalda, Ernaldori clan.",
-  "backgroundEvents": "Followed Argrath after Battle of Pennel Ford. Wounded at Second Battle of Moonbroth (scar across left side of face). Returned home to recover.",
+  "family": "Ernaldori clan, Colymar Tribe",
+  "backgroundEvents": "",
   "career": "Warrior",
-  "cult": "Orlanth",
-  "miracles": [
-    "Shield",
-    "Lightning"
-  ],
-  "devotionalPool": 7,
   "careerSkills": {
-    "Ride (Bison)": 30,
-    "Lore (Strategy and Tactics)": 30,
-    "Oratory": 15,
-    "First Aid": 5,
-    "Literacy (Theyalan)": 10,
-    "Craft (Farming)": 10
+    "Athletics": 15,
+    "Brawn": 10,
+    "Endurance": 15,
+    "Evade": 10,
+    "Unarmed": 0,
+    "Combat Style (Hill Clan Levy)": 15,
+    "Combat Style (Loyal Housecarl)": 15,
+    "Lore (Strategy and Tactics)": 10,
+    "Oratory": 5,
+    "Survival": 5
   },
   "careerFolkMagic": [
-    "Heal",
-    "Fanaticism"
+    "Fanaticism",
+    "Heal"
   ],
   "bonusSkills": {
-    "Influence": 10,
-    "Sing": 10,
-    "Perception": 5,
-    "Lore (Orlanth)": 10,
-    "Ride (Bison)": 10,
+    "Ride": 15,
+    "Athletics": 15,
+    "Brawn": 15,
+    "Endurance": 15,
+    "Evade": 15,
+    "Perception": 15,
     "Willpower": 15,
-    "Endurance": 10,
-    "Athletics": 10,
-    "Brawn": 10,
-    "First Aid": 10
+    "Survival": 15,
+    "Lore (Strategy and Tactics)": 15,
+    "Combat Style (Hill Clan Levy)": 15,
+    "Locale": 0,
+    "Healing": 0,
+    "Combat Style (Loyal Housecarl)": 0,
+    "Oratory": 0
   },
-  "selectedProfessionalSkills": [
-    "Lore (Strategy and Tactics)",
-    "Oratory",
-    "Literacy (Theyalan)"
-  ],
   "hobbySkillName": null,
   "socialClass": "Freeman",
   "socialClassMoneyMod": 1,
-  "startingMoney": 20,
+  "startingMoney": 170,
   "equipment": [
-    { "name": "Two sets of good clothing", "enc": 2, "quantity": 1, "cost": 0 },
-    { "name": "Bronze image of Orlanth (+10% Worship)", "enc": 0, "quantity": 1, "cost": 0 },
-    { "name": "10-point magic point storage crystal", "enc": 0, "quantity": 1, "cost": 0 },
-    { "name": "Backpack", "enc": 1, "quantity": 1, "cost": 5 },
-    { "name": "Waterskin", "enc": 1, "quantity": 1, "cost": 5 },
-    { "name": "Rations (1 week)", "enc": 2, "quantity": 1, "cost": 14 },
-    { "name": "Bedroll", "enc": 1, "quantity": 1, "cost": 5 },
-    { "name": "Flint & Tinder", "enc": 0, "quantity": 1, "cost": 5 }
+    {
+      "name": "Two sets of common undecorated clothes",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 0
+    },
+    {
+      "name": "Transport: Beast of Burden",
+      "enc": 0,
+      "quantity": 1,
+      "cost": 0
+    },
+    {
+      "name": "Backpack",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Waterskin",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Rations (1 week)",
+      "enc": 2,
+      "quantity": 1,
+      "cost": 14
+    },
+    {
+      "name": "Bedroll",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Flint & Tinder",
+      "enc": 0,
+      "quantity": 1,
+      "cost": 5
+    }
   ],
   "weapons": [
-    { "name": "Broadsword", "damage": "1d8", "size": "M", "reach": "M", "ap": 6, "hp": 10, "skill": 90, "quantity": 1 },
-    { "name": "Lance", "damage": "1d10+1", "size": "H", "reach": "VL", "ap": 4, "hp": 10, "skill": 70, "quantity": 1 },
-    { "name": "Battleaxe", "damage": "1d6+1", "size": "M", "reach": "M", "ap": 4, "hp": 8, "skill": 55, "quantity": 1 },
-    { "name": "Medium Shield", "damage": "1d4", "size": "L", "reach": "S", "ap": 6, "hp": 12, "skill": 55, "quantity": 1 },
-    { "name": "Composite Bow", "damage": "1d8+1", "size": "H", "reach": "-", "ap": 4, "hp": 7, "skill": 45, "quantity": 1 }
+    {
+      "name": "Broadsword",
+      "damage": "1d8",
+      "size": "M",
+      "reach": "M",
+      "ap": 6,
+      "hp": 10,
+      "skill": 0,
+      "quantity": 1
+    }
   ],
   "armor": [
-    { "name": "Closed Helm", "ap": 5, "locations": "Head", "cost": 0 },
-    { "name": "Bronze Disk Plate Cuirass", "ap": 5, "locations": "Chest", "cost": 0 },
-    { "name": "Studded Leather Skirt", "ap": 3, "locations": "Abdomen", "cost": 0 },
-    { "name": "Bronze Vambraces", "ap": 6, "locations": "Arms", "cost": 0 },
-    { "name": "Bronze Greaves", "ap": 6, "locations": "Legs", "cost": 0 }
+    {
+      "name": "Bronze Basic Armour",
+      "ap": 2,
+      "locations": "5 location(s)",
+      "cost": 0
+    }
   ],
   "combatStyles": [
     {
-      "name": "Colymar Bison Cavalry",
-      "weapons": ["Broadsword", "Lance", "Medium Shield", "Composite Bow"],
-      "traits": ["Intimidating Scream", "Mounted Combat", "Shield Wall"],
-      "value": 90
+      "name": "Hill Clan Levy",
+      "weapons": [
+        "1H Axe",
+        "1H Spear",
+        "Orlanthi Round Shield",
+        "Longbow",
+        "Javelin"
+      ],
+      "traits": [
+        "Intimidating Scream",
+        "Throw Weapons"
+      ],
+      "skill": 24,
+      "notes": ""
+    },
+    {
+      "name": "Loyal Housecarl",
+      "weapons": [
+        "Broadsword",
+        "1H Spear",
+        "Orlanthi Scutum",
+        "Greataxe"
+      ],
+      "traits": [
+        "Batter Aside",
+        "Intimidating Scream",
+        "Shield Wall"
+      ],
+      "skill": 0,
+      "notes": "only available to Warrior career"
     }
   ],
-  "notes": "Natural born leader (CHA 19). Best in mounted combat — Lance does 1d10+1+3D6 (mount's DB) on charge. Use Demoralize before combat. Facial scar from Moonbroth.",
-  "background": "Vasana is a small, athletic woman with a vicious scar across one side of her face. Despite her size, she rides a bison and is more than capable of commanding warriors and priests more senior than herself. Her grandmother was a scribe in the service of the Princes of Sartar. Her father Farnan died defending Whitewall in 1620, devoured by the Crimson Bat. Vasana swore revenge and followed Argrath into Prax.",
-  "hitPoints": {
-    "Head": { "current": 5, "max": 5 },
-    "Chest": { "current": 7, "max": 7 },
-    "Abdomen": { "current": 6, "max": 6 },
-    "Right Arm": { "current": 4, "max": 4 },
-    "Left Arm": { "current": 4, "max": 4 },
-    "Right Leg": { "current": 5, "max": 5 },
-    "Left Leg": { "current": 5, "max": 5 }
-  },
+  "notes": "",
+  "background": "",
+  "hitPoints": {},
   "companions": [
     {
       "name": "Molon",
-      "species": "Bison (War-trained cavalry)",
-      "characteristics": { "STR": 36, "CON": 17, "SIZ": 34, "DEX": 12, "POW": 10 },
+      "species": "War Bison (Praxian cavalry)",
+      "characteristics": {
+        "STR": 31,
+        "CON": 16,
+        "SIZ": 29,
+        "DEX": 10,
+        "POW": 9
+      },
       "hitLocations": {
-        "Right Hind Leg": { "current": 8, "max": 8, "ap": 3 },
-        "Left Hind Leg": { "current": 8, "max": 8, "ap": 3 },
-        "Hindquarters": { "current": 10, "max": 10, "ap": 3 },
-        "Forequarters": { "current": 10, "max": 10, "ap": 3 },
-        "Right Foreleg": { "current": 8, "max": 8, "ap": 3 },
-        "Left Foreleg": { "current": 8, "max": 8, "ap": 3 },
-        "Head": { "current": 9, "max": 9, "ap": 3 }
+        "Right Hind Leg": {
+          "max": 9,
+          "ap": 3
+        },
+        "Left Hind Leg": {
+          "max": 9,
+          "ap": 3
+        },
+        "Hindquarters": {
+          "max": 10,
+          "ap": 3
+        },
+        "Forequarters": {
+          "max": 11,
+          "ap": 3
+        },
+        "Right Foreleg": {
+          "max": 8,
+          "ap": 3
+        },
+        "Left Foreleg": {
+          "max": 8,
+          "ap": 3
+        },
+        "Head": {
+          "max": 9,
+          "ap": 3
+        }
       },
       "attacks": [
-        { "name": "Head Butt", "skill": 50, "damage": "2D10+3D6", "notes": "Cannot also Trample same round" },
-        { "name": "Trample", "skill": 50, "damage": "6D6", "notes": "Against downed foe only" }
+        {
+          "name": "Head Butt",
+          "skill": 50,
+          "damage": "2d10+2d6",
+          "notes": "Cannot also Trample same round"
+        },
+        {
+          "name": "Trample",
+          "skill": 50,
+          "damage": "6d6",
+          "notes": "Against downed foe only"
+        }
       ],
       "armor": 3,
-      "movement": 12,
-      "damageModifier": "+3D6",
-      "hitPointsTotal": 23,
+      "movement": 10,
+      "damageModifier": "+2d6",
+      "hitPointsTotal": 21,
       "healingRate": 3,
-      "strikeRank": 3,
-      "notes": "War-trained cavalry bison. Use mount's +3D6 damage bonus for lance charges. Can head butt OR trample per round, not both."
+      "strikeRank": 0,
+      "notes": "War-trained cavalry bison. Use mount DM (+2d6) for lance charges."
     }
+  ],
+  "cult": "Orlanth",
+  "miracles": [
+    "Fearless",
+    "Lightning",
+    "Shield"
+  ],
+  "devotionalPool": 6,
+  "selectedProfessionalSkills": [
+    "Lore (Strategy and Tactics)",
+    "Oratory",
+    "Survival"
   ]
 }

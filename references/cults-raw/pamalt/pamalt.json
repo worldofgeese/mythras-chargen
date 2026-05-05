@@ -1,0 +1,98 @@
+{
+  "name": "Pamalt",
+  "pantheon": "Pamalt",
+  "source": "CultOnePagers2019/Pamalt/Pamalt.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Earth-King of Pamaltela",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Agimori automatic.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Customs",
+    "Insight",
+    "Locale",
+    "Perception",
+    "Binding",
+    "Lore (ancestors)",
+    "Lore (cult)",
+    "Navigation",
+    "Survival",
+    "Track",
+    "Trance",
+    "Devotion",
+    "Runic Affinity",
+    "Lore (human)",
+    "Lore (World)",
+    "Oratory",
+    "Native Tongue"
+  ],
+  "folkMagic": [
+    "Comprehension²(Lay)",
+    "Cool(Lay)",
+    "Coordination(Lay)",
+    "Glamour(Lay)",
+    "Might(Lay)",
+    "Pamalt's Touch²(Lay)",
+    "Vigour(Lay)"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Gnome to Gargoyle",
+      "W Earthtouch",
+      "Summon Gnome",
+      "Bounty"
+    ],
+    "associate": [
+      "Lodril:Summon Lodril, (a): Discern Magic",
+      "Orlanth:Cloud Call",
+      "Ronance:Pathway, (a): lt Sureshot"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
+  "personalityTraits": [
+    "Pragmatic",
+    "Prudent",
+    "Worldly",
+    "Sensual",
+    "Proud",
+    "Just",
+    "Authoritative"
+  ],
+  "enemyCults": [
+    "Hostile",
+    "Cults:",
+    "Orlanth"
+  ],
+  "hostileCults": [
+    "Orlanth"
+  ],
+  "friendlyCults": [
+    "Associated Cults:"
+  ],
+  "associatedCults": [
+    "Holy Days"
+  ],
+  "areas": [
+    "Inland Pamaltela"
+  ],
+  "holyDays": [
+    "Earth/Disorder/Winds",
+    "Dark/Death/Winds",
+    "Dark/Death/Fire"
+  ],
+  "spiritSocieties": [
+    "Pamalt Spirit Society"
+  ],
+  "oppositeRune": ""
+}

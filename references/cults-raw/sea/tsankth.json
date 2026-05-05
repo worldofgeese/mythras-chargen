@@ -1,0 +1,75 @@
+{
+  "name": "Tsankth",
+  "pantheon": "Sea",
+  "source": "CultOnePagers2019/Vormain/Tsankth.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "God of Rapacity and Piracy",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Boating",
+    "Swim",
+    "Lore (cult)",
+    "Navigation",
+    "Unarmed",
+    "Lore (World)",
+    "Combat style (Sword)",
+    "Devotion",
+    "Runic Affinity",
+    "Open Seas Ritual"
+  ],
+  "folkMagic": [
+    "Bladesharp",
+    "Coordination",
+    "Disruption",
+    "Heal",
+    "Vigour"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Bind Ship",
+      "Bw Call Barracuda",
+      "Float",
+      "Waterwalk"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Living Blade"
+    ]
+  },
+  "personalityTraits": [
+    "Relentless",
+    "Ruthless",
+    "Unemotional",
+    "Ascetic",
+    "Mercurial",
+    "Capricious",
+    "Mutable"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "East Oceans"
+  ],
+  "holyDays": [
+    "Storm/Movement/Water"
+  ],
+  "spiritSocieties": [],
+  "oppositeRune": "Life",
+  "additionalPantheons": [
+    "Vormain"
+  ]
+}

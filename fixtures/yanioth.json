@@ -1,58 +1,30 @@
 {
   "name": "Yanioth Vareena's Daughter",
-  "concept": "Ernaldan priestess and healer of the Ernaldori clan, Colymar Tribe",
+  "concept": "Earth priestess, healer, half-sister to Vasana",
   "characteristics": {
-    "STR": 11,
-    "CON": 12,
-    "SIZ": 15,
-    "DEX": 15,
-    "INT": 16,
-    "POW": 15,
-    "CHA": 17
+    "STR": 7,
+    "CON": 9,
+    "SIZ": 10,
+    "DEX": 10,
+    "INT": 13,
+    "POW": 12,
+    "CHA": 14
   },
-  "charMethod": "pregen",
-  "attributes": {
-    "actionPoints": 3,
-    "experienceModifier": 2,
-    "healingRate": 2,
-    "luckPoints": 3,
-    "magicPoints": 15,
-    "initiativeBonus": 15,
-    "damageModifier": "+1d2",
-    "hitPoints": {
-      "Head": 5,
-      "Chest": 7,
-      "Abdomen": 6,
-      "Right Arm": 4,
-      "Left Arm": 4,
-      "Right Leg": 5,
-      "Left Leg": 5
-    },
-    "encumbrance": {
-      "unencumbered": 26,
-      "burdened": 39,
-      "overloaded": 52
-    },
-    "runeAffinities": {
-      "primary": 90,
-      "secondary": 85,
-      "tertiary": 50
-    },
-    "folkMagicBase": 62,
-    "movementRate": 6
-  },
+  "charMethod": "point-buy",
+  "attributes": {},
   "culture": "Sartarite (Heortling)",
-  "homeland": "Ernaldori clan, Colymar Tribe",
+  "homeland": "Sartar",
   "culturalSkills": {
-    "Language (Heortling)": 20,
-    "Language (Earthtongue)": 10,
-    "Language (Esrolian)": 10,
-    "Tradetalk": 5,
-    "Dance": 15,
+    "Athletics": 5,
+    "Brawn": 0,
     "Endurance": 10,
+    "Evade": 5,
     "Locale": 10,
-    "Perception": 10,
-    "Willpower": 10
+    "Perception": 15,
+    "Ride": 10,
+    "Willpower": 15,
+    "Healing": 15,
+    "Survival": 15
   },
   "runeAffinities": {
     "primary": "Earth",
@@ -61,101 +33,167 @@
   },
   "folkMagicSpells": [
     "Heal",
-    "Befuddle",
-    "Beastcall (Herd Animal)"
+    "Mobility",
+    "Protection"
   ],
   "passions": [
-    { "name": "Devotion (Ernalda)", "value": 80 },
-    { "name": "Hate (Lunar Empire)", "value": 60 },
-    { "name": "Love (Family)", "value": 70 },
-    { "name": "Loyalty (Argrath)", "value": 60 },
-    { "name": "Loyalty (Colymar Tribe)", "value": 70 },
-    { "name": "Loyalty (Ernaldori Clan)", "value": 70 },
-    { "name": "Loyalty (Feathered Horse Queen)", "value": 60 },
-    { "name": "Loyalty (Queen Samastina)", "value": 60 },
-    { "name": "Loyalty (Sartar)", "value": 60 }
+    {
+      "name": "Devotion (Ernalda)",
+      "value": 56,
+      "custom": true
+    },
+    {
+      "name": "Love (Family)",
+      "value": 56,
+      "custom": true
+    },
+    {
+      "name": "Loyalty (Colymar Tribe)",
+      "value": 56,
+      "custom": true
+    }
   ],
   "age": 23,
   "gender": "Female",
-  "family": "Half-sister of Vasana, daughter of Vareena (priestess of Ernalda, Ernaldori clan). Grandmother died at Grizzly Peak defending the Feathered Horse Queen.",
-  "backgroundEvents": "Accompanied Vasana to Nochet, gained blessing of Queen Samastina. Present at Battle of Pennel Ford. Accompanied Argrath to summon Jaldon, helped acclaim Kallyr Starbrow as Prince.",
+  "family": "Ernaldori clan, Colymar Tribe",
+  "backgroundEvents": "",
   "career": "Priest",
-  "cult": "Ernalda",
-  "miracles": [
-    "Charisma",
-    "Heal Body",
-    "Inviolable",
-    "Summon Gnome"
-  ],
-  "devotionalPool": 4,
   "careerSkills": {
-    "Dance": 15,
+    "Endurance": 5,
+    "Willpower": 15,
+    "Combat Style (Hill Clan Levy)": 5,
+    "Devotion (Ernalda)": 15,
+    "Exhort": 15,
     "Oratory": 15,
-    "Devotion (Ernalda)": 25,
-    "Lore (Ernalda)": 15,
-    "Craft (Farming)": 10,
-    "First Aid": 10,
-    "Literacy (Theyalan)": 10
+    "Folk Magic": 15,
+    "Literacy": 15
   },
   "careerFolkMagic": [
-    "Heal 3"
+    "Heal",
+    "Vigour"
   ],
   "bonusSkills": {
-    "Influence": 10,
-    "Insight": 10,
-    "Perception": 10,
-    "Sing": 15,
-    "Willpower": 10,
-    "Endurance": 10,
-    "Craft (Animal Husbandry)": 10,
-    "Survival": 10,
-    "Lore (Plants)": 15
+    "Perception": 15,
+    "Healing": 15,
+    "Willpower": 15,
+    "Devotion (Ernalda)": 15,
+    "Exhort": 15,
+    "Oratory": 15,
+    "Folk Magic": 15,
+    "Locale": 15,
+    "Endurance": 15,
+    "Survival": 15
   },
-  "selectedProfessionalSkills": [
-    "Devotion (Ernalda)",
-    "Lore (Ernalda)",
-    "Lore (Plants)"
-  ],
   "hobbySkillName": null,
   "socialClass": "Freeman",
   "socialClassMoneyMod": 1,
-  "startingMoney": 160,
+  "startingMoney": 150,
   "equipment": [
-    { "name": "Esrolian bodice and dress", "enc": 1, "quantity": 1, "cost": 0 },
-    { "name": "10-point magic point storage crystal", "enc": 0, "quantity": 1, "cost": 0 },
-    { "name": "Rich favors from Queen Samastina (jewelry, vessels, luxury goods)", "enc": 2, "quantity": 1, "cost": 1050 },
-    { "name": "Backpack", "enc": 1, "quantity": 1, "cost": 5 },
-    { "name": "Waterskin", "enc": 1, "quantity": 1, "cost": 5 },
-    { "name": "Rations (1 week)", "enc": 2, "quantity": 1, "cost": 14 },
-    { "name": "Bedroll", "enc": 1, "quantity": 1, "cost": 5 }
+    {
+      "name": "Two sets of common undecorated clothes",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 0
+    },
+    {
+      "name": "Transport: Raft",
+      "enc": 0,
+      "quantity": 1,
+      "cost": 0
+    },
+    {
+      "name": "Backpack",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Waterskin",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Rations (1 week)",
+      "enc": 2,
+      "quantity": 1,
+      "cost": 14
+    },
+    {
+      "name": "Bedroll",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Flint & Tinder",
+      "enc": 0,
+      "quantity": 1,
+      "cost": 5
+    }
   ],
   "weapons": [
-    { "name": "Dagger", "damage": "1d4+1", "size": "S", "reach": "S", "ap": 6, "hp": 8, "skill": 35, "quantity": 1 },
-    { "name": "Battle Axe", "damage": "1d6+1", "size": "M", "reach": "M", "ap": 4, "hp": 8, "skill": 55, "quantity": 1 },
-    { "name": "Medium Shield", "damage": "1d4", "size": "L", "reach": "S", "ap": 6, "hp": 12, "skill": 65, "quantity": 1 },
-    { "name": "Composite Bow", "damage": "1d8+1", "size": "H", "reach": "-", "ap": 4, "hp": 7, "skill": 45, "quantity": 1 }
+    {
+      "name": "1H Axe",
+      "damage": "1d6+1",
+      "size": "M",
+      "reach": "M",
+      "ap": 4,
+      "hp": 8,
+      "skill": 0,
+      "quantity": 1
+    },
+    {
+      "name": "Longbow",
+      "damage": "1d8",
+      "size": "L",
+      "reach": "-",
+      "ap": 4,
+      "hp": 7,
+      "skill": 0,
+      "quantity": 1
+    }
   ],
   "armor": [
-    { "name": "Esrolian Bodice (no armor)", "ap": 0, "locations": "Chest, Abdomen", "cost": 0 }
+    {
+      "name": "Bronze Basic Armour",
+      "ap": 3,
+      "locations": "4 location(s)",
+      "cost": 0
+    }
   ],
   "combatStyles": [
     {
-      "name": "Ernaldori Guardian",
-      "weapons": ["Dagger", "Battle Axe", "Medium Shield", "Composite Bow"],
-      "traits": ["Defensive Minded", "Shield Wall"],
-      "value": 65
+      "name": "Hill Clan Levy",
+      "weapons": [
+        "1H Axe",
+        "1H Spear",
+        "Orlanthi Round Shield",
+        "Longbow",
+        "Javelin"
+      ],
+      "traits": [
+        "Intimidating Scream",
+        "Throw Weapons"
+      ],
+      "skill": 0,
+      "notes": ""
     }
   ],
-  "notes": "Healer and priestess, not a front-line fighter. Heal 3 for minor wounds, Heal Body for critical injuries. Charisma rune spell makes her socially unstoppable for 15 minutes. Earth Elemental (summoned via rune magic, costs 1-3 rune points for small/medium/large) can be game-changing. Half-sister of Vasana.",
-  "background": "Yanioth wears the traditional vestments of an Ernaldan priestess. She is Vasana's half-sister, sharing the same mother Vareena but with a different father. Her grandmother died at Grizzly Peak defending the Feathered Horse Queen. Yanioth accompanied Vasana to Nochet where she gained the blessing and favor of Queen Samastina. She was present at the Battle of Pennel Ford, accompanied Argrath to summon Jaldon, and helped acclaim Kallyr Starbrow as Prince.",
-  "hitPoints": {
-    "Head": { "current": 5, "max": 5 },
-    "Chest": { "current": 7, "max": 7 },
-    "Abdomen": { "current": 6, "max": 6 },
-    "Right Arm": { "current": 4, "max": 4 },
-    "Left Arm": { "current": 4, "max": 4 },
-    "Right Leg": { "current": 5, "max": 5 },
-    "Left Leg": { "current": 5, "max": 5 }
-  },
-  "companions": []
+  "notes": "",
+  "background": "",
+  "hitPoints": {},
+  "companions": [],
+  "cult": "Ernalda",
+  "miracles": [
+    "Heal Body",
+    "Inviolable",
+    "Charisma"
+  ],
+  "devotionalPool": 0,
+  "selectedProfessionalSkills": [
+    "Devotion (Ernalda)",
+    "Exhort",
+    "Oratory"
+  ]
 }

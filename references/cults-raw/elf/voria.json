@@ -1,0 +1,63 @@
+{
+  "name": "Voria",
+  "pantheon": "Elf",
+  "source": "CultOnePagers2019/Elf/Voria.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Spring Virgin",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Anyone old enough to spaak that has never belonged to anohter cult or entered adolescence",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Flowers",
+      "Invigorate",
+      "4Bego Speak To/With Specific Creatures"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
+  "personalityTraits": [
+    "Generous",
+    "Lustful",
+    "Pleasure-seeking",
+    "Pragmatic",
+    "Prudent",
+    "Worldly",
+    "Sensual"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "__A0__,",
+    "__A3__,",
+    "East,",
+    "Fonrit,",
+    "Lunar,",
+    "Oceans,",
+    "West"
+  ],
+  "holyDays": [
+    "Sea/Disorder/Freeze",
+    "Sea/Harmony/Water"
+  ],
+  "spiritSocieties": [],
+  "oppositeRune": "Death"
+}

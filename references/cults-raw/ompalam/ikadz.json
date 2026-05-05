@@ -1,0 +1,82 @@
+{
+  "name": "Ikadz",
+  "pantheon": "Ompalam",
+  "source": "CultOnePagers2019/Ompalam/Ikadz.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "God of Torture",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Endurance",
+    "Influence",
+    "Lore(Human)",
+    "First Aid",
+    "Perception",
+    "Language(another)",
+    "Devotion",
+    "Runic Affinity",
+    "Lore(torture)",
+    "Craft(torture)",
+    "Combat (Knife&Whip)",
+    "Interrogate"
+  ],
+  "folkMagic": [
+    "Bladesharp",
+    "Bludgeon",
+    "Curse",
+    "Darkness",
+    "Demoralize",
+    "Disruption",
+    "Fireblade",
+    "Heat",
+    "Ironhand",
+    "Light",
+    "Pierce",
+    "Protection",
+    "Repugnance"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Pain Blow",
+      "Fear",
+      "Rb Soul Sight",
+      "Spirit Block"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Mindblast True Speak t Sever\nSpirit 4Wa Coerce"
+    ]
+  },
+  "personalityTraits": [
+    "Truthful",
+    "Observant",
+    "Dutiful",
+    "Faithful",
+    "Fair"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Fonrit",
+    "Inland Pamaltela"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "Illusion",
+  "additionalPantheons": [
+    "Chaos - Pamaltela"
+  ]
+}

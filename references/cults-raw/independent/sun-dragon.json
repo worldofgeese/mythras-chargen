@@ -1,0 +1,80 @@
+{
+  "name": "Sun Dragon",
+  "pantheon": "Independent",
+  "source": "CultOnePagers2019/Independent/Sun Dragon.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Draconic Sun",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.only 1 worshipper left. none more possible",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [],
+  "folkMagic": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Magical Arms"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Radiate"
+    ]
+  },
+  "personalityTraits": [
+    "Loyal",
+    "Honest",
+    "Pure",
+    "Idealist",
+    "Chastity",
+    "Perceptive"
+  ],
+  "enemyCults": [
+    "Mallia"
+  ],
+  "hostileCults": [
+    "Cacodemon,",
+    "Issaries,",
+    "__PH11__,",
+    "Thanatar,",
+    "Vivamort,",
+    "__PH18__,",
+    "Zorak Zoran"
+  ],
+  "friendlyCults": [
+    "Caladra&Aurelion,",
+    "Foundchild,",
+    "Yelm,",
+    "Yelmalio,",
+    "Yelorna"
+  ],
+  "associatedCults": [
+    "Rune",
+    "Meanings:",
+    "Dragon:",
+    "Dragon",
+    "Magic",
+    "Fire:",
+    "Fire,",
+    "Sky,",
+    "Purity,",
+    "Light,",
+    "Stars,",
+    "The",
+    "Sky",
+    "Dome"
+  ],
+  "areas": [
+    "Dragon Pass"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": ""
+}

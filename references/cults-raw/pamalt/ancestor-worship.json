@@ -1,0 +1,78 @@
+{
+  "name": "Ancestor Worship",
+  "pantheon": "Pamalt",
+  "source": "CultOnePagers2019/Praxian/Ancestor Worship.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Ancestor Worship",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Must not be sorcerer. Must demonstrate blood relationship",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Devotion",
+    "Runic Affinity",
+    "Lore(Ancestors)",
+    "Dance(Shaman)",
+    "Spirit Rune Affinity",
+    "Sing(Shaman)"
+  ],
+  "folkMagic": [],
+  "miracles": {
+    "initiate": [
+      "Axis Mundi",
+      "Rbh Gift Spell",
+      "Spirit Guardian",
+      "Spirit Melding",
+      "Summon Ancestor",
+      "Extension",
+      "Find (Specific Thing)",
+      "Chastise",
+      "Divination",
+      "Summon Spirit Teacher",
+      "Discorporation"
+    ],
+    "associate": [],
+    "runelord": [
+      "Free Ghost",
+      "Rb Gift Power",
+      "Incarnate Ancestor",
+      "Resurrect",
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon spirit of Reprisal"
+    ]
+  },
+  "personalityTraits": [
+    "Tribal",
+    "Social",
+    "Ecstatic",
+    "Spiritual",
+    "Aware",
+    "Mystical"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "__A0__,",
+    "__A3__,",
+    "East,",
+    "Fonrit,",
+    "Genertela,",
+    "__A1__,",
+    "Lunar,",
+    "Oceans,",
+    "West"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "",
+  "additionalPantheons": [
+    "Darkness",
+    "Praxian",
+    "Hsunchen"
+  ]
+}

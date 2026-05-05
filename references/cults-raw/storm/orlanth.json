@@ -3,14 +3,14 @@
   "pantheon": "Storm",
   "source": "CultOnePagers2019/Storm/Orlanth.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Storm god, king, warrior, and",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nCombat style (any)",
+    "Combat style (any)",
     "Athletics",
     "Evade",
     "Native tongue",
@@ -36,14 +36,47 @@
     "Mobility",
     "Protection"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Decrease Wind",
+      "Summon Sylph",
+      "Increase Wind",
+      "Wind Warp"
+    ],
+    "associate": [
+      "Lhankhor Mhy:Analyze Magic",
+      "Eurmal:Charisma",
+      "Storm Bull:Chaos",
+      "Valind:Snow",
+      "Issaries:Seal",
+      "Barntar:Tame Bull",
+      "Chalana Arroy:Restore Health",
+      "Heler:Rain",
+      "Voriof:Command Sheep",
+      "Yinkin:Identify Scent"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Call winds",
+      "Summons of Evil"
+    ]
+  },
   "personalityTraits": [
     "Proud",
     "Just",
     "Authoritative",
-    "Adventurouss Dynamics",
-    "Impulsives Recklesss",
-    "Energetics Rebelliouss"
+    "Adventurous",
+    "Dynamic",
+    "Impulsive",
+    "Reckless",
+    "Energetic",
+    "Rebellious"
   ],
   "enemyCults": [
     "Bagog",
@@ -97,12 +130,13 @@
     "Sea/Stasis/Winds",
     "Sea/Movement/Winds",
     "Fire/Disorder/Freeze",
-    "Fire/Movement/Winds\nFire/Movement/God",
+    "Fire/Movement/Winds",
+    "Fire/Movement/God",
     "Earth/Movement/Winds",
     "Dark/Movement/Winds",
-    "Storm/Movement/Winds\nSacred Time/Fate Week/Winds"
+    "Storm/Movement/Winds",
+    "Sacred Time/Fate Week/Winds"
   ],
   "spiritSocieties": [],
-  "runeAssociations": {},
   "oppositeRune": "Stasis"
 }

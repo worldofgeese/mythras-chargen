@@ -1,174 +1,233 @@
 {
   "name": "Aranda of Nochet",
-  "concept": "Esrolian Axe Maiden of Babeester Gor, noble warrior of the Hulta clan",
+  "concept": "Fearless axe maiden of the death goddess",
   "characteristics": {
-    "STR": 16,
-    "CON": 13,
-    "SIZ": 13,
-    "DEX": 16,
-    "INT": 13,
-    "POW": 14,
-    "CHA": 13
+    "STR": 14,
+    "CON": 12,
+    "SIZ": 11,
+    "DEX": 13,
+    "INT": 8,
+    "POW": 9,
+    "CHA": 8
   },
-  "charMethod": "pregen",
-  "attributes": {
-    "actionPoints": 3,
-    "experienceModifier": 1,
-    "healingRate": 3,
-    "luckPoints": 3,
-    "magicPoints": 14,
-    "initiativeBonus": 14,
-    "damageModifier": "+1d2",
-    "hitPoints": {
-      "Head": 6,
-      "Chest": 8,
-      "Abdomen": 7,
-      "Right Arm": 5,
-      "Left Arm": 5,
-      "Right Leg": 6,
-      "Left Leg": 6
-    },
-    "encumbrance": {
-      "unencumbered": 32,
-      "burdened": 48,
-      "overloaded": 64
-    },
-    "runeAffinities": {
-      "primary": 95,
-      "secondary": 95,
-      "tertiary": 75
-    },
-    "folkMagicBase": 57,
-    "movementRate": 6
-  },
-  "culture": "Esrolian (Hulta clan)",
-  "homeland": "Nochet, Esrolia",
+  "charMethod": "point-buy",
+  "attributes": {},
+  "culture": "Esrolian",
+  "homeland": "Nochet",
   "culturalSkills": {
-    "Language (Esrolian)": 20,
-    "Language (Heortling)": 10,
-    "Language (Old Pavic)": 5,
-    "Tradetalk": 5,
-    "Athletics": 10,
-    "Endurance": 10,
-    "Influence": 10,
+    "Athletics": 15,
+    "Brawn": 10,
+    "Endurance": 15,
+    "Evade": 15,
+    "Locale": 5,
     "Perception": 10,
-    "Insight": 10,
-    "Customs (Esrolian)": 10
+    "Willpower": 15,
+    "Courtesy": 5,
+    "Healing": 10
   },
   "runeAffinities": {
     "primary": "Earth",
     "secondary": "Death",
-    "tertiary": "Stasis",
-    "all": {
-      "Fire": 0,
-      "Air": 20,
-      "Earth": 95,
-      "Water": 45,
-      "Darkness": 0,
-      "Moon": 0,
-      "Man": 50,
-      "Fertility": 5,
-      "Death": 95,
-      "Disorder": 50,
-      "Harmony": 50,
-      "Truth": 50,
-      "Illusion": 50,
-      "Stasis": 75,
-      "Movement": 25,
-      "Beast": 50
-    }
+    "tertiary": "Stasis"
   },
   "folkMagicSpells": [
-    "Bladesharp 2",
-    "Demoralize",
-    "Heal 1",
-    "Vigor"
+    "Bladesharp",
+    "Fanaticism",
+    "Protection"
   ],
   "passions": [
-    { "name": "Devotion (Babeester Gor)", "value": 60 },
-    { "name": "Honor", "value": 60 },
-    { "name": "Love (Family)", "value": 60 },
-    { "name": "Loyalty (Hulta Clan)", "value": 60 },
-    { "name": "Loyalty (Nochet)", "value": 60 },
-    { "name": "Loyalty (Queen Samastina)", "value": 60 }
+    {
+      "name": "Devotion (Babeester Gor)",
+      "value": 47,
+      "custom": true
+    },
+    {
+      "name": "Honor",
+      "value": 47,
+      "custom": true
+    },
+    {
+      "name": "Loyalty (Nochet)",
+      "value": 47,
+      "custom": true
+    },
+    {
+      "name": "Loyalty (Queen Samastina)",
+      "value": 47,
+      "custom": true
+    }
   ],
   "age": 21,
   "gender": "Female",
-  "family": "Grandmother Amestras was a wealthy landowner in Nochet. Mother Larinalla, also of Babeester Gor cult, fought in battles including the Lion King's Feast and Greymane's Great Raid.",
-  "backgroundEvents": "Fought at Battle of Aurochs Hills. Defended Nochet in Esrolian civil war. Joined Battle of Pennel Ford. Fought rampaging Praxian tribes at Pavis.",
+  "family": "Hulta clan, Nochet",
+  "backgroundEvents": "",
   "career": "Warrior",
-  "socialClass": "Gentry",
+  "careerSkills": {
+    "Athletics": 15,
+    "Brawn": 15,
+    "Endurance": 15,
+    "Evade": 15,
+    "Unarmed": 5,
+    "Combat Style (Citizen Legionary)": 15,
+    "Lore (Strategy and Tactics)": 10,
+    "Survival": 10
+  },
+  "careerFolkMagic": [
+    "Demoralise",
+    "Heal"
+  ],
+  "bonusSkills": {
+    "Athletics": 15,
+    "Brawn": 15,
+    "Endurance": 15,
+    "Evade": 15,
+    "Willpower": 15,
+    "Perception": 15,
+    "Combat Style (Citizen Legionary)": 15,
+    "Lore (Strategy and Tactics)": 15,
+    "Survival": 15,
+    "Healing": 15
+  },
+  "hobbySkillName": null,
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "startingMoney": 270,
+  "equipment": [
+    {
+      "name": "Two sets of common undecorated clothes",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 0
+    },
+    {
+      "name": "Transport: Own back",
+      "enc": 0,
+      "quantity": 1,
+      "cost": 0
+    },
+    {
+      "name": "Backpack",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Waterskin",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Rations (1 week)",
+      "enc": 2,
+      "quantity": 1,
+      "cost": 14
+    },
+    {
+      "name": "Bedroll",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Flint & Tinder",
+      "enc": 0,
+      "quantity": 1,
+      "cost": 5
+    }
+  ],
+  "weapons": [
+    {
+      "name": "Dagger",
+      "damage": "1d4+1",
+      "size": "S",
+      "reach": "S",
+      "ap": 6,
+      "hp": 8,
+      "skill": 0,
+      "quantity": 1
+    }
+  ],
+  "armor": [
+    {
+      "name": "Bronze Basic Armour",
+      "ap": 2,
+      "locations": "4 location(s)",
+      "cost": 0
+    }
+  ],
+  "combatStyles": [],
+  "notes": "",
+  "background": "",
+  "hitPoints": {},
+  "companions": [
+    {
+      "name": "Riding Horse",
+      "species": "Riding Horse",
+      "characteristics": {
+        "STR": 22,
+        "CON": 13,
+        "SIZ": 31,
+        "DEX": 10,
+        "POW": 7
+      },
+      "hitLocations": {
+        "Right Hind Leg": {
+          "max": 9,
+          "ap": 1
+        },
+        "Left Hind Leg": {
+          "max": 9,
+          "ap": 1
+        },
+        "Hindquarters": {
+          "max": 10,
+          "ap": 1
+        },
+        "Forequarters": {
+          "max": 11,
+          "ap": 1
+        },
+        "Right Front Leg": {
+          "max": 8,
+          "ap": 1
+        },
+        "Left Front Leg": {
+          "max": 8,
+          "ap": 1
+        },
+        "Head": {
+          "max": 9,
+          "ap": 1
+        }
+      },
+      "attacks": [
+        {
+          "name": "Hoof",
+          "skill": 42,
+          "damage": "1d6+1d12",
+          "notes": "Rear and Plunge"
+        }
+      ],
+      "armor": 1,
+      "movement": 12,
+      "damageModifier": "+1d12",
+      "hitPointsTotal": 20,
+      "healingRate": 2,
+      "strikeRank": 0,
+      "notes": "Riding horse. Not trained for combat — will flee unless cornered."
+    }
+  ],
   "cult": "Babeester Gor",
   "miracles": [
-    "Berserk",
+    "Berserker",
     "Earth Shield",
     "Slash"
   ],
-  "careerSkills": {
-    "Devotion (Babeester Gor)": 20,
-    "Lore (Babeester Gor)": 10,
-    "Ride (Horse)": 15,
-    "Evade": 15,
-    "First Aid": 10,
-    "Brawn": 10,
-    "Endurance": 10,
-    "Athletics": 10
-  },
-  "bonusSkills": {
-    "Willpower": 10,
-    "Influence": 10,
-    "Intimidate": 15,
-    "Sing": 10,
-    "Dance": 10,
-    "Perception": 10,
-    "Stealth": 10,
-    "Insight": 10,
-    "Locale": 15
-  },
+  "devotionalPool": 0,
   "selectedProfessionalSkills": [
-    "Devotion (Babeester Gor)",
-    "Lore (Babeester Gor)",
-    "Ride (Horse)"
-  ],
-  "startingMoney": 200,
-  "equipment": [
-    { "name": "12-point magic point storage crystal", "enc": 0, "quantity": 1, "cost": 0 },
-    { "name": "Noble clothing (worth 60 L)", "enc": 1, "quantity": 1, "cost": 60 },
-    { "name": "Jewelry, vessels, luxury goods (worth 450 L)", "enc": 2, "quantity": 1, "cost": 450 },
-    { "name": "Two riding horses (non-combat)", "enc": 0, "quantity": 2, "cost": 0 }
-  ],
-  "weapons": [
-    { "name": "Battleaxe (1H)", "damage": "1d6+1", "size": "M", "reach": "M", "ap": 4, "hp": 8, "skill": 100, "quantity": 1 },
-    { "name": "Battleaxe (2H)", "damage": "1d8+1", "size": "L", "reach": "M", "ap": 4, "hp": 8, "skill": 60, "quantity": 1 },
-    { "name": "Medium Shield", "damage": "1d4", "size": "L", "reach": "S", "ap": 6, "hp": 12, "skill": 85, "quantity": 1 },
-    { "name": "Self Bow", "damage": "1d6", "size": "L", "reach": "-", "ap": 4, "hp": 6, "skill": 25, "quantity": 1 },
-    { "name": "Throwing Axe", "damage": "1d6", "size": "M", "reach": "-", "ap": 3, "hp": 6, "skill": 30, "quantity": 1 },
-    { "name": "Short Spear", "damage": "1d8", "size": "M", "reach": "L", "ap": 4, "hp": 10, "skill": 25, "quantity": 1 }
-  ],
-  "armor": [
-    { "name": "Closed Helm", "ap": 6, "locations": "Head", "cost": 0 },
-    { "name": "Bronze Plate Hauberk", "ap": 6, "locations": "Chest, Abdomen", "cost": 0 },
-    { "name": "Bronze Vambraces", "ap": 6, "locations": "Arms", "cost": 0 },
-    { "name": "Bronze Greaves", "ap": 6, "locations": "Legs", "cost": 0 }
-  ],
-  "combatStyles": [
-    {
-      "name": "Hulta Axe Maiden",
-      "weapons": ["Battleaxe (1H)", "Battleaxe (2H)", "Medium Shield", "Self Bow", "Throwing Axe", "Short Spear"],
-      "traits": ["Intimidating Scream", "Do or Die"],
-      "value": 100
-    }
-  ],
-  "hitPoints": {
-    "Head": { "current": 6, "max": 6 },
-    "Chest": { "current": 8, "max": 8 },
-    "Abdomen": { "current": 7, "max": 7 },
-    "Right Arm": { "current": 5, "max": 5 },
-    "Left Arm": { "current": 5, "max": 5 },
-    "Right Leg": { "current": 6, "max": 6 },
-    "Left Leg": { "current": 6, "max": 6 }
-  },
-  "background": "A noble of Esrolia, Aranda is proud and confident, her clothes and armor of fine make. As a devoted Axe Maiden of the bloodthirsty Earth goddess Babeester Gor, she is adorned with Runes of Earth and Death, broken by several fierce scars demonstrating that she is no dilettante. Now she travels throughout Dragon Pass, guided by her goddess, seeking worthwhile causes to wield her axe for.",
-  "notes": "Front-line axe fighter with strong armor and nerve to hold a line. Carries herself like a noble of Nochet even when the axe comes out. Earth Shield is her anchor against huge hits. Slash is for ending fights fast. Berserker is for crisis only. Best passions are Honor, Loyalties, and Devotion to Babeester Gor. Death and Earth define her: grim, practical, and relentless.",
-  "companions": []
+    "Lore (Strategy and Tactics)",
+    "Gambling",
+    "Survival"
+  ]
 }

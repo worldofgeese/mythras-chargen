@@ -1,0 +1,87 @@
+{
+  "name": "Hiia Swordsman",
+  "pantheon": "Yu-Kargzant",
+  "source": "CultOnePagers2019/Yu-Kargzant/Hiia Swordsman.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Protector of the Feathered Horse Queen",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Succeed in sword attack",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Lore(cult)",
+    "Evade",
+    "Lore(Tactics)",
+    "Runic Affinity",
+    "Devotion",
+    "First Aid",
+    "Orate",
+    "Ride",
+    "Perception",
+    "Sense Assassin",
+    "Combat Style with Sword and Dagger",
+    "Craft Armoring",
+    "Conceal"
+  ],
+  "folkMagic": [
+    "Bladesharp",
+    "Coordination",
+    "Demoralize",
+    "Disruption",
+    "Dullblade",
+    "Find Enemies",
+    "Find Undead",
+    "Fireblade",
+    "Heal",
+    "Might",
+    "Protection",
+    "Repair",
+    "Vigour"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Berserk",
+      "Detect Truth",
+      "Shield",
+      "True Weapon",
+      "Turn Undead",
+      "Strongblade"
+    ],
+    "associate": [
+      "Humakt:Oath"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Morale"
+    ]
+  },
+  "personalityTraits": [
+    "Relentless",
+    "Ruthless",
+    "Unemotional",
+    "Ascetic",
+    "Truthful",
+    "Observant",
+    "Dutiful",
+    "Faithful",
+    "Fair"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Dragon Pass"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "Illusion"
+}

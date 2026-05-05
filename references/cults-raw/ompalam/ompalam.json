@@ -1,0 +1,135 @@
+{
+  "name": "Ompalam",
+  "pantheon": "Ompalam",
+  "source": "CultOnePagers2019/Ompalam/Ompalam.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "God of coercion and slavery",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Lore (Ompalam)",
+    "Influence",
+    "Craft(Torture)",
+    "Endurance",
+    "Combat Style with Whip",
+    "Culture(Own)",
+    "Bureaucracy",
+    "Lore (Slavery)",
+    "Lore (Torture)",
+    "Lore (Administration)",
+    "Invocation",
+    "Shaping",
+    "Runic Affinity",
+    "Devotion",
+    "Lore (Law)",
+    "Commerce"
+  ],
+  "folkMagic": [
+    "Bearing Witness⁴⁸",
+    "Calm",
+    "Curse",
+    "Demoralize",
+    "Dishevel",
+    "Find (Slave)",
+    "Find Enemy",
+    "Glamour",
+    "Mindspeech",
+    "Placate Master⁴⁷",
+    "Punish Slave⁴⁷",
+    "Repugnance",
+    "Slow",
+    "Spiritshield",
+    "Tire",
+    "Vigour",
+    "Voice",
+    "Witchsight"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "R Backlash",
+      "Behold",
+      "Perseverance",
+      "Slave Wall (Sacred Band)",
+      "Fear",
+      "True Whip"
+    ],
+    "associate": [
+      "Ikadz:Flay",
+      "Calari Jumping Leopard:Bind Slave",
+      "Tentacule the Slave God:Blissful Sufferance"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Pacify",
+      "Harmonise",
+      "Forlorn\nHope",
+      "Sorcery: Enslave Humans",
+      "4Wa Coerce W Drain Slave's Soul W Subjugate Will"
+    ]
+  },
+  "personalityTraits": [
+    "Proud",
+    "Just",
+    "Authoritative",
+    "Logical",
+    "Rigorous",
+    "Materialistic"
+  ],
+  "enemyCults": [
+    "Hostile",
+    "Cults:",
+    "Orlanth,",
+    "Selarn,",
+    "Jokotu"
+  ],
+  "hostileCults": [
+    "Orlanth,",
+    "Selarn,",
+    "Jokotu"
+  ],
+  "friendlyCults": [
+    "Gark,",
+    "Seseine,",
+    "Pocharngo,",
+    "Ikadz,",
+    "El-Jazuli,",
+    "Evukindu,",
+    "Ennung,",
+    "Karkisso,",
+    "Fida'ls,"
+  ],
+  "associatedCults": [
+    "Garangordos",
+    "the",
+    "Cruel,",
+    "Calari",
+    "the",
+    "Hunter,",
+    "Darleestor",
+    "the",
+    "Noose,",
+    "Tentacule",
+    "the",
+    "Slave"
+  ],
+  "areas": [
+    "Fonrit,",
+    "Inland Pamaltela"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "",
+  "additionalPantheons": [
+    "Chaos - Pamaltela"
+  ]
+}

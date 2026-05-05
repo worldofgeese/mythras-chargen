@@ -1,0 +1,59 @@
+{
+  "name": "Ragnaglar",
+  "pantheon": "Chaos - Genertela",
+  "source": "CultOnePagers2019/Chaos - Genertela/Ragnaglar.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "The Mad God",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Combat style (any)",
+    "Influence",
+    "Any(selected by priest)",
+    "Lore (cult)",
+    "Runic Affinity",
+    "Devotion",
+    "Orate"
+  ],
+  "folkMagic": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Berserk",
+      "Carry Disease",
+      "Fear",
+      "Madness B Summon(Specific Species) Ragnaglar's Hand"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication Mindlink Sanctify Summon Spirit of Reprisal Foul Wind Rut 4 Mindblast ?\nChaos Feature Ragnaglar's Head"
+    ]
+  },
+  "personalityTraits": [
+    "Relentless",
+    "Ruthless",
+    "Unemotional",
+    "Ascetic",
+    "Passionate",
+    "Proud",
+    "Unpredictable",
+    "Violent"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "__A3__,",
+    "Genertela"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "Life"
+}

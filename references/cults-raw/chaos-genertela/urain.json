@@ -1,0 +1,73 @@
+{
+  "name": "Urain",
+  "pantheon": "Chaos - Genertela",
+  "source": "CultOnePagers2019/Chaos - Pamaltela/Urain.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Evil Wind",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Must survive a single blow unparried/evaded",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Survival",
+    "Lore (cult)",
+    "Brawn",
+    "Combat style (any)",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Bladesharp",
+    "Demoralize",
+    "Fanaticism",
+    "Might",
+    "Protection",
+    "Vigour"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Create Ghost",
+      "Berserk",
+      "Fear",
+      "Shield"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Create Wight",
+      "Foul Wind"
+    ]
+  },
+  "personalityTraits": [
+    "Destructive",
+    "Reckless",
+    "Selfish",
+    "Greedy",
+    "Passionate",
+    "Proud",
+    "Unpredictable",
+    "Violent"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Genertela,",
+    "Inland Pamaltela"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "Harmony",
+  "additionalPantheons": [
+    "Chaos - Pamaltela"
+  ]
+}

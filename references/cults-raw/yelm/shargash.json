@@ -3,14 +3,14 @@
   "pantheon": "Yelm",
   "source": "CultOnePagers2019/Yelm/Shargash.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "God of War, God of Alkoth",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nDance",
+    "Dance",
     "Combat Style(Mace & Shield)",
     "Musicianship(Drums)",
     "Lore(Cult)",
@@ -24,12 +24,40 @@
     "Might",
     "Witchsight"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Create Fissure",
+      "Berserk",
+      "Crush",
+      "Fiery Aura",
+      "Lightning",
+      "Shield Help",
+      "Smash Many At Once"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Call winds",
+      "Disrupt Enemy Line",
+      "Flaming Bow"
+    ]
+  },
   "personalityTraits": [
-    "Relentlesst Ruthlesst",
-    "Unemotionalt Ascetict",
-    "Destructivej Recklessj",
-    "Selfishj Greedyj",
+    "Relentless",
+    "Ruthless",
+    "Unemotional",
+    "Ascetic",
+    "Destructive",
+    "Reckless",
+    "Selfish",
+    "Greedy",
     "Loyal",
     "Honest",
     "Pure"
@@ -39,10 +67,11 @@
   "friendlyCults": [],
   "associatedCults": [],
   "areas": [
-    "Dragon Pass, Inland Pamaltela, Lunar"
+    "__A3__,",
+    "__A1__,",
+    "Lunar"
   ],
   "holyDays": [],
   "spiritSocieties": [],
-  "runeAssociations": {},
   "oppositeRune": "Harmony"
 }

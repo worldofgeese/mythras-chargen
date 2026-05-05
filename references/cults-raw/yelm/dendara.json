@@ -3,14 +3,14 @@
   "pantheon": "Yelm",
   "source": "CultOnePagers2019/Yelm/Dendara.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "The Good Wife",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Must be a\nwoman and have given birth to at least one healthy child Bold skills are mandatory\nCult Skills (Oath is taken at initiate)\nLore(cult)",
+    "Lore(cult)",
     "Lore(Animals)",
     "Lore(Plants)",
     "Lore(World)",
@@ -25,11 +25,41 @@
     "Shimmer",
     "Vigour"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Bless Home",
+      "Absorption",
+      "Bless Crops",
+      "Command (Specific Species, Monster or Spirit)",
+      "Summon Gnome",
+      "Restore Health"
+    ],
+    "associate": [
+      "Aldrya:Accelerate Growth",
+      "Eiritha:4Bego Speak To/With Specific Creatures",
+      "Lodril:Earthwarm",
+      "Yelm:Cloud Clear"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Heal Body",
+      "Regrow Limb"
+    ]
+  },
   "personalityTraits": [
-    "Forgivingl Mercifull",
-    "Peacefull Generousl",
-    "Compassionatel Loyal",
+    "Forgiving",
+    "Merciful",
+    "Peaceful",
+    "Generous",
+    "Compassionate",
+    "Loyal",
     "Honest",
     "Purity"
   ],
@@ -48,13 +78,15 @@
     "Fire/Fertility/Clay",
     "Earth/Fertility/Freeze",
     "Earth/Fertility/Water",
-    "Earth/Fertility/Clay\nEarth/Fertility/Winds",
+    "Earth/Fertility/Clay",
+    "Earth/Fertility/Winds",
     "Earth/Fertility/Fire",
     "Earth/Fertility/Wild",
-    "Earth/Fertility/God\nCan converse with herd beasts using spells Can command domestic animals with spells,\nRune Meanings: Harmony: Harmony, Co-operation, Healing",
-    "Light: The Sky Dome\nThis document uses trademarks and/or copyrights owned by Chaosium Inc/Moon Design Publications\nLLC, which are used under Chaosium Inc\u2019s Fan Material Policy, We are expressly prohibited from\ncharging you to use or access this content. This site is not published, endorsed, or specifically approved\nby Chaosium Inc. For more information about Chaosium Inc\u2019s products, please visit www.chaosium.com.\n\"Mythras\u201d is a Registered Trademark of The Design Mechanism Inc, and is used with permission, http:\n//notesfrompavis.blog 3/15/2019 9:13:32 PM Version: 5.2"
+    "Earth/Fertility/God"
   ],
   "spiritSocieties": [],
-  "runeAssociations": {},
-  "oppositeRune": "Disorder"
+  "oppositeRune": "Disorder",
+  "additionalPantheons": [
+    "Kralorela"
+  ]
 }

@@ -3,43 +3,76 @@
   "pantheon": "Storm",
   "source": "CultOnePagers2019/Storm/Ana Gor.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Goddess of Death and Human Sacrifice.",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nLore(Cult)",
+    "Lore(Cult)",
     "Prepare Human Sacrifice",
     "Dance",
     "Combat Style(Knife)",
     "Passion: Merciless",
     "Devotion",
-    "Runic\nAffinity"
+    "Runic Affinity"
   ],
   "folkMagic": [
     "Bladesharp",
     "Vigour"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Appease Earth",
+      "Stop Plague",
+      "Rb Soul Sight",
+      "Command Worshippers",
+      "Vision"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Fertilize",
+      "Sacrifice Apostate",
+      "Sacrifice Sacred King",
+      "Lift Curse From Community"
+    ]
+  },
   "personalityTraits": [
     "Tribal",
     "Social",
-    "Pragmatice Prudente",
-    "Worldlye Sensuale",
-    "Relentlesst Ruthlesst",
-    "Unemotionalt Ascetict"
+    "Pragmatic",
+    "Prudent",
+    "Worldly",
+    "Sensual",
+    "Relentless",
+    "Ruthless",
+    "Unemotional",
+    "Ascetic"
   ],
   "enemyCults": [],
   "hostileCults": [],
   "friendlyCults": [],
   "associatedCults": [],
   "areas": [
-    "Coastal Pamaltela, Dragon Pass, East, Fonrit, Holy Country, Lunar, Oceans, West"
+    "__A0__,",
+    "__A3__,",
+    "East,",
+    "Fonrit,",
+    "__A2__,",
+    "Lunar,",
+    "Oceans,",
+    "West"
   ],
   "holyDays": [],
   "spiritSocieties": [],
-  "runeAssociations": {},
   "oppositeRune": "Life"
 }

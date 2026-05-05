@@ -3,21 +3,21 @@
   "pantheon": "Darkness",
   "source": "CultOnePagers2019/Darkness/Kyger Litor.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Mother of Trolls",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.All full trolls - automatic. Non trolls - long list of requirements",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.All full trolls - automatic. Non trolls - long list of requirements",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.All full trolls - automatic. Non trolls - long list of requirements\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nAthletics",
+    "Athletics",
     "Conceal",
     "Perception",
     "Literacy",
     "Lore (cult)",
     "Combat style (any)",
     "Dance(Shaman)",
-    "Sing\n(Shaman)",
+    "Sing (Shaman)",
     "Binding(Shaman)",
     "Devotion",
     "Runic Affinity",
@@ -36,18 +36,49 @@
     "Fireblade",
     "Heal",
     "Ignite",
-    "Lantern\u00b2",
+    "Lantern²",
     "Light",
-    "Lightwall\u00b2",
+    "Lightwall²",
     "Protection",
     "Second Sight",
     "Slow",
     "Spiritshield"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Absorption",
+      "Blinding",
+      "Summon Shade",
+      "Counterchaos",
+      "Darksee",
+      "Create Foe-curser",
+      "Command Fear Spirit",
+      "Dismiss Darkness Elemental"
+    ],
+    "associate": [
+      "Subere:Attack Soul",
+      "Xiola Umbar:Healing Trance",
+      "Zorak Zoran:Crush",
+      "Daka Fal:Summon Specific Ancestor"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Skin Broo",
+      "Summon Fear Spirit"
+    ]
+  },
   "personalityTraits": [
-    "Cruelo Coldo",
-    "Secretiveo Patiento",
+    "Cruel",
+    "Cold",
+    "Secretive",
+    "Patient",
     "Tribal",
     "Social"
   ],
@@ -80,7 +111,8 @@
     "Storm Bull"
   ],
   "associatedCults": [
-    "Daka Fal",
+    "Daka",
+    "Fal",
     "Xiola Umbar",
     "Zorak Zoran"
   ],
@@ -98,10 +130,13 @@
     "Sea/Harmony/Freeze",
     "Fire/Harmony/Freeze",
     "Earth/Harmony/Freeze",
-    "Dark/Disorder/God\nDark/Harmony/Freeze",
+    "Dark/Disorder/God",
+    "Dark/Harmony/Freeze",
     "Dark/Harmony/Freeze",
     "Storm/Harmony/Freeze"
   ],
-  "spiritSocieties": [],
-  "runeAssociations": {}
+  "spiritSocieties": [
+    "Kyger Litor Spirit Society"
+  ],
+  "oppositeRune": ""
 }

@@ -1,0 +1,108 @@
+{
+  "name": "Flintnail",
+  "pantheon": "Independent",
+  "source": "CultOnePagers2019/Independent/Flintnail.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Mason God of the Pavis Dwarves",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Must be dwarf or human",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Combat style with axe",
+    "Perception",
+    "Craft (armoring)",
+    "Craft (masonry)",
+    "Engineering",
+    "Lore (cult)",
+    "Mechanisms",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Extinguish",
+    "Glue(Lay)",
+    "Ignite",
+    "Repair"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Support",
+      "Warrior of Stone",
+      "Dismiss Elemental e Summon Gnome",
+      "Bless Forge"
+    ],
+    "associate": [
+      "City God:City Harmony",
+      "Issaries:Warding",
+      "Lodril:Heat Metal"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Mold Rock",
+      "Shape Metal"
+    ]
+  },
+  "personalityTraits": [
+    "Stubborn",
+    "Inflexible",
+    "Exacting",
+    "Conservative"
+  ],
+  "enemyCults": [
+    "Krarsht,",
+    "__PH17__,",
+    "Primal Chaos"
+  ],
+  "hostileCults": [
+    "Bagog,",
+    "Cacodemon,",
+    "__PH15__,",
+    "Lanbril,",
+    "Mallia,",
+    "__PH22__,",
+    "Thanatar,",
+    "Thed,",
+    "Vivamort,"
+  ],
+  "friendlyCults": [
+    "Caladra&Aurelion,",
+    "__PH5__,",
+    "Geo,",
+    "Issaries,",
+    "__PH16__,",
+    "Zola Fel"
+  ],
+  "associatedCults": [
+    "Pavis"
+  ],
+  "areas": [
+    "Dragon Pass"
+  ],
+  "holyDays": [
+    "Sea/Harmony/Clay",
+    "Sea/Stasis/Clay",
+    "Fire/Harmony/Clay",
+    "Fire/Stasis/Clay",
+    "Earth/Harmony/Clay",
+    "Earth/Stasis/Clay",
+    "Dark/Harmony/Clay",
+    "Dark/Stasis/Clay",
+    "Storm/Harmony/Clay",
+    "Storm/Stasis/Clay",
+    "Sacred Time/Fate Week/Clay",
+    "Sacred Time/Fate Week/Clay",
+    "Sacred Time/God Week/Clay",
+    "Sacred Time/God Week/Clay"
+  ],
+  "spiritSocieties": [],
+  "oppositeRune": "Movement"
+}

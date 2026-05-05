@@ -3,14 +3,14 @@
   "pantheon": "Praxian",
   "source": "CultOnePagers2019/Praxian/Pavis.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "City God of Pavis",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Born in Pavis.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Born in Pavis.",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.Born in Pavis.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Rune levels\nmust stay within city. Bold skills are mandatory\nCult Skills (Oath is taken at initiate)\nCombat style with axe",
+    "Combat style with axe",
     "Combat style with hammer",
     "Customs",
     "Locale",
@@ -23,56 +23,75 @@
     "Shaping",
     "Devotion",
     "Runic Affinity",
-    "Language (old\nwyrmish)"
+    "Language (old wyrmish)"
   ],
   "folkMagic": [
     "Glue(Lay)",
     "Heal",
     "Might"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "City Harmony",
+      "Warding"
+    ],
+    "associate": [
+      "Aldrya:Sunripen",
+      "Flintnail:Support"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
   "personalityTraits": [
     "Tribal",
     "Social"
   ],
   "enemyCults": [
-    "Bagog",
-    "Cacodemon",
-    "Mallia",
-    "Thanatar",
+    "Bagog,",
+    "Cacodemon,",
+    "Mallia,",
+    "Thanatar,",
     "Vivamort"
   ],
   "hostileCults": [
-    "Blackfang",
-    "Krarsht",
-    "Lanbril",
-    "Primal Chaos",
-    "Storm Bull",
-    "Thed",
+    "Blackfang,",
+    "Krarsht,",
+    "Lanbril,",
+    "__PH11__,",
+    "__PH22__,",
+    "Thed,",
     "Zorak Zoran"
   ],
   "friendlyCults": [
-    "Argan Argar",
-    "Chalana Arroy",
-    "Eiritha",
-    "Geo",
-    "Issaries",
-    "Lhankor Mhy",
-    "Lodril",
-    "Orlanth",
-    "Yelm"
+    "__PH13__,",
+    "__PH5__,",
+    "Eiritha,",
+    "Geo,",
+    "Issaries,",
+    "__PH16__,",
+    "Lodril,",
+    "Orlanth,",
+    "Yelm,"
   ],
   "associatedCults": [
-    "Aldrya",
-    "Flintnail",
+    "Aldrya,",
+    "Flintnail,",
     "Zola Fel"
   ],
   "areas": [
     "Dragon Pass"
   ],
   "holyDays": [
-    "Earth/Fertility/God\nRune Meanings: Man: Mortal Humanoids, Slave\nThis document uses trademarks and/or copyrights owned by Chaosium Inc/Moon Design Publications\nLLC, which are used under Chaosium Inc\u2019s Fan Material Policy, We are expressly prohibited from\ncharging you to use or access this content. This site is not published, endorsed, or specifically approved\nby Chaosium Inc. For more information about Chaosium Inc\u2019s products, please visit www.chaosium.com.\n\"Mythras\u201d is a Registered Trademark of The Design Mechanism Inc, and is used with permission, http:\n,\nPavis\nCity God of Pavis\n2019 version\nAIG/RQG etc\n//notesfrompavis.blog 3/15/2019 9:13:32 PM Version: 5.2"
+    "Earth/Fertility/God"
   ],
   "spiritSocieties": [],
-  "runeAssociations": {}
+  "oppositeRune": ""
 }

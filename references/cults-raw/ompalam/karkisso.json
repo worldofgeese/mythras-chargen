@@ -1,0 +1,77 @@
+{
+  "name": "Karkisso",
+  "pantheon": "Ompalam",
+  "source": "CultOnePagers2019/Ompalam/Karkisso.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "The Star Seer. Fonritan God of Knowledge",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Lore (cult)",
+    "Lore (Mathematics)",
+    "Perception",
+    "Insight",
+    "Navigation",
+    "Willpower",
+    "Lore (Astrology)",
+    "Literacy",
+    "Runic Affinity",
+    "Devotion"
+  ],
+  "folkMagic": [
+    "Calculate",
+    "Coordination",
+    "Find(Star)",
+    "Magnify",
+    "Polish",
+    "Translate"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Clairvoyance",
+      "Analyze Magic",
+      "Behold"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Mind Read",
+      "Omen",
+      "Sagacity",
+      "True\nSpeak"
+    ]
+  },
+  "personalityTraits": [
+    "Loyal",
+    "Honest",
+    "Pure",
+    "Idealist",
+    "Chastity",
+    "Perceptive",
+    "Truthful",
+    "Observant",
+    "Dutiful",
+    "Faithful",
+    "Fair"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Fonrit"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "Illusion"
+}

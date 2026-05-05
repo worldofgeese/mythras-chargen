@@ -3,32 +3,58 @@
   "pantheon": "Darkness",
   "source": "CultOnePagers2019/Darkness/Gorakiki.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Troll God of the Insects",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.A prospective initiate must have been a lay member for one complete year",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.A prospective initiate must have been a lay member for one complete year",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.A prospective initiate must have been a lay member for one complete year\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Must have\nbeen initiate for two years.  Bold skills are mandatory\nCult Skills (Oath is taken at initiate)\nCombat style (Tribal)",
+    "Combat style (Tribal)",
     "Ride",
     "Lore (cult)",
     "Lore (insect care)",
     "Survival",
     "Devotion",
     "Runic Affinity",
-    "Literacy\n(Darktongue)"
+    "Literacy (Darktongue)"
   ],
   "folkMagic": [
     "Ironhand",
     "Light"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "4Bego Speak To/With Specific Creatures",
+      "Dismiss Elemental Initiate - subservient: return to subservient cult temple to recover Gorakiki-Bee(s):Bo Bee's Head",
+      "Gorakiki-Beetle(s):Bo Beetle's Head",
+      "Gorakiki-Beetle(s):?B Carapace",
+      "Gorakiki-Moth(s):Bo Featherscales",
+      "Gorakiki-Locust(s):Bo Insect Song",
+      "Gorakiki-Locust(s):Bo Leaping Legs",
+      "Gorakiki-Moth(s):Bo Moth's Head",
+      "Gorakiki-Bee(s):B Stinger",
+      "Gorakiki-Locust(s):?B Locust's Head"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
   "personalityTraits": [
-    "Cruelo Coldo",
-    "Secretiveo Patiento",
+    "Cruel",
+    "Cold",
+    "Secretive",
+    "Patient",
     "Uncouth",
-    "Rough",
+    "Rough-edged",
     "Loyal",
     "Wild",
     "Instinctive",
@@ -38,40 +64,38 @@
     "Primal Chaos"
   ],
   "hostileCults": [
-    "Cacodemon",
-    "Frog Woman"
+    "Cacodemon,",
+    "Frog",
+    "Woman"
   ],
   "friendlyCults": [
-    "Aldrya",
-    "Daka Fal",
-    "Eiritha",
-    "Kyger Litor",
+    "Aldrya,",
+    "Daka",
+    "Fal,",
+    "Eiritha,",
+    "__PH17__,",
     "Mallia"
   ],
   "associatedCults": [
     "Argan Argar"
   ],
   "areas": [
-    "Coastal Pamaltela, Dragon Pass, East, Genertela, Inland Pamaltela, Lunar, Oceans, West"
+    "__A0__,",
+    "__A3__,",
+    "East,",
+    "Genertela,",
+    "__A1__,",
+    "Lunar,",
+    "Oceans,",
+    "West"
   ],
   "holyDays": [
-    "Sea/Fertility/Freeze, Fire/Fertility/Freeze, Earth/Fertility/Freeze, Dark/Fertility/Freeze,\nStorm/Fertility/Freeze\nRune Meanings: Darkness: Darkness, Cold, Underworld, Hunger, Insects",
-    "Beast: Animal Life",
-    "Color:",
-    "Purple",
-    "Action:",
-    "Conceal",
-    "Metal:",
-    "Lead",
-    "Sense:",
-    "Hearing",
-    "Emotion:",
-    "Fear",
-    "Signature\nweapon:",
-    "Club",
-    "Instrument:",
-    "Drum\nThis document uses trademarks and/or copyrights owned by Chaosium Inc/Moon Design Publications\nLLC, which are used under Chaosium Inc\u2019s Fan Material Policy, We are expressly prohibited from\nBo\nGorakiki\nTroll God of the Insects\n2019 version\nAIG/RQG etc\ncharging you to use or access this content. This site is not published, endorsed, or specifically approved\nby Chaosium Inc. For more information about Chaosium Inc\u2019s products, please visit www.chaosium.com.\n\"Mythras\u201d is a Registered Trademark of The Design Mechanism Inc, and is used with permission, http:\n//notesfrompavis.blog 3/15/2019 9:13:32 PM Version: 5.2"
+    "Sea/Fertility/Freeze",
+    "Fire/Fertility/Freeze",
+    "Earth/Fertility/Freeze",
+    "Dark/Fertility/Freeze",
+    "Storm/Fertility/Freeze"
   ],
   "spiritSocieties": [],
-  "runeAssociations": {}
+  "oppositeRune": ""
 }

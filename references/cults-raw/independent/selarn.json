@@ -1,0 +1,104 @@
+{
+  "name": "Selarn",
+  "pantheon": "Independent",
+  "source": "CultOnePagers2019/Independent/Selarn.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Thief God of Thieves of Afadjann",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Athletics",
+    "Conceal",
+    "Deceit",
+    "Locale",
+    "Perception",
+    "Stealth",
+    "Acrobatics",
+    "Acting",
+    "Disguise",
+    "Lockpicking",
+    "Streetwise",
+    "Sleight",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Appraise",
+    "Bypass",
+    "Calm",
+    "Darkness",
+    "Dishevel",
+    "Find Gems",
+    "Glue",
+    "Incognito",
+    "Knock",
+    "Mimic",
+    "Shove",
+    "Tire"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Divination Block",
+      "Chameleon"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
+  "personalityTraits": [
+    "Destructive",
+    "Reckless",
+    "Selfish",
+    "Greedy",
+    "Deceitful",
+    "Cowardly",
+    "Corrupted",
+    "Imaginative",
+    "Subjective"
+  ],
+  "enemyCults": [
+    "Calari the Hunter"
+  ],
+  "hostileCults": [
+    "Ompalam,",
+    "Hanjethulut,",
+    "Garangordos,",
+    "Um-Oradin,",
+    "El-Jazuli,",
+    "Ennung,",
+    "Evukindu,",
+    "Fida'ls,"
+  ],
+  "friendlyCults": [
+    "Jokotu, Lamsabi"
+  ],
+  "associatedCults": [
+    "Rune",
+    "Meanings:",
+    "Disorder:",
+    "Disorder,",
+    "Trickelry,",
+    "Trouble",
+    "Illusion:",
+    "Falsehood,",
+    "Concealment,",
+    "Tricks"
+  ],
+  "areas": [
+    "Fonrit"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "Harmony"
+}

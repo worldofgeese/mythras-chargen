@@ -1,0 +1,62 @@
+{
+  "name": "Rasout",
+  "pantheon": "Pamalt",
+  "source": "CultOnePagers2019/Pamalt/Rasout.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Pamaltelan Hunter God",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Must hunt and kill at least one prey beast per season to donate to their poeple. They must always use the peaceful cut on any animal killed for food",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Athletics",
+    "Locale",
+    "Perception",
+    "Lore (animal)",
+    "Navigation",
+    "Disguise",
+    "Stealth",
+    "Butchering",
+    "Combat style with missile attack",
+    "Devotion",
+    "Track",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Beastcall(Native 4leg plain herbivore) Beastcall(Plains Herbivore Reptile) Disruption Find Life\nMagnify Mobility Slow Speedart"
+  ],
+  "miracles": {
+    "initiate": [
+      "Divination",
+      "Heal Wound"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication Mindlink Sanctify Summon Spirit of Reprisal"
+    ]
+  },
+  "personalityTraits": [
+    "Relentless",
+    "Ruthless",
+    "Unemotional",
+    "Ascetic",
+    "Forgiving",
+    "Merciful",
+    "Peaceful",
+    "Generous",
+    "Compassionate"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Inland Pamaltela"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [
+    "Rasout Spirit Society Pamalt Spirit Society Horned Man Spirit Society"
+  ],
+  "oppositeRune": "Disorder"
+}

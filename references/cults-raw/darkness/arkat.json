@@ -1,33 +1,65 @@
 {
   "name": "Arkat",
   "pantheon": "Darkness",
-  "source": "CultOnePagers2019/Darkness/Arkat.pdf",
+  "source": "CultOnePagers2019/Malkion/Arkat.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Arkat Kingtroll",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nLore(cult)",
+    "Lore(cult)",
     "Invocation",
     "Shaping"
   ],
   "folkMagic": [],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Boost Elemental (sorcery)",
+      "Project Darksense (sorcery)",
+      "See Rune Magic(sorcery)"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
   "personalityTraits": [
-    "Cruelo Coldo",
-    "Secretiveo Patiento"
+    "Cruel",
+    "Cold",
+    "Secretive",
+    "Patient"
   ],
   "enemyCults": [],
   "hostileCults": [],
   "friendlyCults": [],
   "associatedCults": [],
   "areas": [
-    "Coastal Pamaltela, Dragon Pass, East, Fonrit, Genertela, Holy Country, Inland Pamaltela,"
+    "__A0__,",
+    "__A3__,",
+    "East,",
+    "Fonrit,",
+    "Genertela,",
+    "__A2__,",
+    "__A1__,",
+    "Lunar,",
+    "Oceans,",
+    "West"
   ],
   "holyDays": [],
   "spiritSocieties": [],
-  "runeAssociations": {}
+  "oppositeRune": "",
+  "additionalPantheons": [
+    "Malkion",
+    "Arkat"
+  ]
 }

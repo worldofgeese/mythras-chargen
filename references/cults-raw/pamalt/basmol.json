@@ -1,0 +1,75 @@
+{
+  "name": "Basmol",
+  "pantheon": "Pamalt",
+  "source": "CultOnePagers2019/Praxian/Basmol.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Lion God",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Born to Basmoli parents. Adoption requires convincing the examiners plus having a Basmoli woman agreed to marry him",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Lore(animal)",
+    "Combat Style(any)",
+    "Lore(Cult)",
+    "First Aid",
+    "Runic Affinity",
+    "Devotion",
+    "Combat Style(Natural Weapon)"
+  ],
+  "folkMagic": [
+    "Varies thru cult shamans"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "B Lion's Head",
+      "B Strength of Basmol",
+      "4Bego Speak To/With Specific Creatures"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "?B Keenclaw",
+      "Bo Transform Self"
+    ]
+  },
+  "personalityTraits": [
+    "Uncouth",
+    "Rough-edged",
+    "Loyal",
+    "Wild",
+    "Instinctive",
+    "Savage",
+    "Proud",
+    "Just",
+    "Authoritative"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "__A3__,",
+    "Fonrit,",
+    "__A1__,",
+    "West"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [
+    "Basmol Spirit Society",
+    "Horned Man Spirit Society"
+  ],
+  "oppositeRune": "",
+  "additionalPantheons": [
+    "Praxian",
+    "Hsunchen"
+  ]
+}

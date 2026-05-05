@@ -1,0 +1,58 @@
+{
+  "name": "City God",
+  "pantheon": "Independent",
+  "source": "CultOnePagers2019/Independent/City God.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Requirements to join",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Must be a citizen",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Customs",
+    "Locale",
+    "Bureaucracy",
+    "Lore (cult)",
+    "Combat style (local)",
+    "Devotion",
+    "Runic Affinity",
+    "Language (City)"
+  ],
+  "folkMagic": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "City Harmony",
+      "Warding"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
+  "personalityTraits": [
+    "Pragmatic",
+    "Prudent",
+    "Worldly",
+    "Sensual",
+    "Stubborn",
+    "Inflexible",
+    "Exacting",
+    "Conservative"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "Movement"
+}

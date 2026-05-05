@@ -3,14 +3,14 @@
   "pantheon": "Storm",
   "source": "CultOnePagers2019/Storm/Yinkin.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Father of Shadowcats",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Must have an alynx raised from kitten and be acceptable to local acolyte",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Must have an alynx raised from kitten and be acceptable to local acolyte",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.Must have an alynx raised from kitten and be acceptable to local acolyte\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nLore (cult)",
+    "Lore (cult)",
     "Lore(Animal)",
     "Perception",
     "Track",
@@ -31,19 +31,46 @@
     "Silence",
     "Slow"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Absorption",
+      "4Bego Speak To/With Specific Creatures",
+      "Catseye",
+      "Bg Identify Scent",
+      "Rb Soul Sight",
+      "Spirit Block",
+      "Charisma",
+      "?B Claws"
+    ],
+    "associate": [
+      "Orlanth:Shield"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
   "personalityTraits": [
     "Uncouth",
-    "Rough",
+    "Rough-edged",
     "Loyal",
     "Wild",
     "Instinctive",
     "Savage",
-    "Passionateg Proudg",
-    "Unpredictableg"
+    "Passionate",
+    "Proud",
+    "Unpredictable"
   ],
   "enemyCults": [
-    "Hostile Cults: Seven Mothers"
+    "Hostile",
+    "Cults:",
+    "Seven Mothers"
   ],
   "hostileCults": [
     "Seven Mothers"
@@ -59,7 +86,8 @@
     "Lhankor Mhy"
   ],
   "associatedCults": [
-    "Daka Fal",
+    "Daka",
+    "Fal",
     "Foundchild",
     "Odayla",
     "Orlanth"
@@ -79,8 +107,9 @@
     "Fire/Harmony/Fire",
     "Earth/Harmony/Wild",
     "Dark/Disorder/Freeze",
-    "Storm/Harmony/Fire\nSacred Time/God Week/Winds"
+    "Storm/Harmony/Fire",
+    "Sacred Time/God Week/Winds"
   ],
   "spiritSocieties": [],
-  "runeAssociations": {}
+  "oppositeRune": ""
 }

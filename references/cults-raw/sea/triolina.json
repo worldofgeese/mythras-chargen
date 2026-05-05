@@ -1,0 +1,78 @@
+{
+  "name": "Triolina",
+  "pantheon": "Sea",
+  "source": "CultOnePagers2019/Sea/Triolina.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Mother of Life",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Must be an intelligent sea dweller",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Endurance",
+    "Healing",
+    "Lore (animal)",
+    "Lore (cult)",
+    "Lore (plant)",
+    "Lore (Sea)",
+    "Lore (World)",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Coordination",
+    "Dispel Magic",
+    "Find Magic",
+    "Heal",
+    "Light",
+    "Mindspeech",
+    "Mobility",
+    "Protection",
+    "Second\nSight",
+    "Shimmer",
+    "Vigour"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Summon Undine",
+      "Proteus",
+      "Restore Health"
+    ],
+    "associate": [
+      "Magasta:Breath water"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Heal Body",
+      "Meld Form"
+    ]
+  },
+  "personalityTraits": [
+    "Generous",
+    "Lustful",
+    "Pleasure-seeking",
+    "Mercurial",
+    "Capricious",
+    "Mutable"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Oceans"
+  ],
+  "holyDays": [
+    "Sea/Fertility/God"
+  ],
+  "spiritSocieties": [],
+  "oppositeRune": "Death"
+}

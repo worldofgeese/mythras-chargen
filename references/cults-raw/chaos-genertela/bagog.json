@@ -1,0 +1,97 @@
+{
+  "name": "Bagog",
+  "pantheon": "Chaos - Genertela",
+  "source": "CultOnePagers2019/Chaos - Genertela/Bagog.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "The Scorpion Queen",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Scorpion Men automatic. Nonscorpion men: ritual of rebirth.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Combat style (any)",
+    "Brawn",
+    "Sing",
+    "Lore (cult)",
+    "Survival",
+    "Binding(Shaman)",
+    "Devotion",
+    "Runic Affinity",
+    "Trance(Shaman)"
+  ],
+  "folkMagic": [
+    "Varies thru cult shamans"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "?B Carapace",
+      "?B Claws",
+      "B Sprout Legs",
+      "? Venom Boosting",
+      "? Ritual of Devouring",
+      "4Bego Speak To/With Specific Creatures"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "?B Jabbers",
+      "?B Ritual of Rebirth"
+    ]
+  },
+  "personalityTraits": [
+    "Uncouth",
+    "Rough-edged",
+    "Loyal",
+    "Wild",
+    "Instinctive",
+    "Savage"
+  ],
+  "enemyCults": [
+    "Donandar,",
+    "__PH22__,",
+    "Yelm,",
+    "Zorak Zoran"
+  ],
+  "hostileCults": [
+    "__PH13__,",
+    "__PH17__,",
+    "Lodril,",
+    "Orlanth,",
+    "Waha,",
+    "Yelmalio,",
+    "Yelorna"
+  ],
+  "friendlyCults": [
+    "Aranea,",
+    "Daka",
+    "Fal,",
+    "Gorakiki,",
+    "Thed"
+  ],
+  "associatedCults": [
+    "Nysalor,",
+    "Primal Chaos"
+  ],
+  "areas": [
+    "Genertela"
+  ],
+  "holyDays": [
+    "Sea/Illusion/Freeze",
+    "Fire/Illusion/Freeze",
+    "Earth/Illusion/Freeze",
+    "Dark/Illusion/Freeze",
+    "Storm/Illusion/Freeze"
+  ],
+  "spiritSocieties": [
+    "Bagog Spirit Society"
+  ],
+  "oppositeRune": ""
+}

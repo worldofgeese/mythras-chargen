@@ -1,0 +1,59 @@
+{
+  "name": "Gloomshark",
+  "pantheon": "Chaos - Pamaltela",
+  "source": "CultOnePagers2019/Chaos - Pamaltela/Gloomshark.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Chaotic Source of Hunger",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need Very special. to be convinced at 3 of them.POWx4 or be eaten by the priest.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Swim",
+    "Combat style (Net)",
+    "Lore (cult)",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Drown",
+      "B Summon(Specific Species)",
+      "?jt Chomping"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "? Chaos Feature",
+      "Devour"
+    ]
+  },
+  "personalityTraits": [
+    "Soulless",
+    "Fiendish",
+    "Relentless",
+    "Coldu",
+    "Mercurial",
+    "Capricious",
+    "Mutable"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Inland Pamaltela"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": ""
+}

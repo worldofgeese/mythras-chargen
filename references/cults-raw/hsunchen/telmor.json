@@ -1,0 +1,107 @@
+{
+  "name": "Telmor",
+  "pantheon": "Hsunchen",
+  "source": "CultOnePagers2019/Hsunchen/Telmor.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Father of Wolves",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Telmori parents. Adoption see cult description",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Lore(animal)",
+    "Combat style (any)",
+    "Combat style(wolf attack)",
+    "Evade",
+    "Lore(world)",
+    "Athletics"
+  ],
+  "folkMagic": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "?B Wolf's Head",
+      "?B Wolfrunning",
+      "?B Wolfhide",
+      "4Bego Speak To/With Specific Creatures"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Bo Transform Self"
+    ]
+  },
+  "personalityTraits": [
+    "Uncouth",
+    "Rough-edged",
+    "Loyal",
+    "Wild",
+    "Instinctive",
+    "Savage",
+    "Adventurous",
+    "Dynamic"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "__A3__,",
+    "Fonrit,",
+    "West"
+  ],
+  "holyDays": [
+    "Sea/Disorder/Wild",
+    "Sea/Harmony/Wild",
+    "Sea/Death/Wild",
+    "Sea/Fertility/Wild",
+    "Sea/Stasis/Wild",
+    "Sea/Movement/Wild",
+    "Sea/Illusion/Wild",
+    "Sea/Truth/Wild",
+    "Fire/Disorder/Wild",
+    "Fire/Harmony/Wild",
+    "Fire/Death/Wild",
+    "Fire/Fertility/Wild",
+    "Fire/Stasis/Wild",
+    "Fire/Movement/Wild",
+    "Fire/Illusion/Wild",
+    "Fire/Truth/Wild",
+    "Earth/Disorder/Wild",
+    "Earth/Harmony/Wild",
+    "Earth/Death/Wild",
+    "Earth/Fertility/Wild",
+    "Earth/Stasis/Wild",
+    "Earth/Movement/Wild",
+    "Earth/Illusion/Wild",
+    "Earth/Truth/Wild",
+    "Dark/Disorder/Wild",
+    "Dark/Harmony/Wild",
+    "Dark/Death/Wild",
+    "Dark/Fertility/Wild",
+    "Dark/Stasis/Wild",
+    "Dark/Movement/Wild",
+    "Dark/Illusion/Wild",
+    "Dark/Truth/Wild",
+    "Storm/Disorder/Wild",
+    "Storm/Harmony/Wild",
+    "Storm/Death/Wild",
+    "Storm/Fertility/Wild",
+    "Storm/Stasis/Wild",
+    "Storm/Movement/Wild",
+    "Storm/Illusion/Wild",
+    "Storm/Truth/Wild"
+  ],
+  "spiritSocieties": [
+    "Telmor Spirit Society",
+    "Horned Man Spirit Society"
+  ],
+  "oppositeRune": "Stasis"
+}

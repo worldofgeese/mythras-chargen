@@ -1,0 +1,19 @@
+{
+  "source": "COMBAT_TRAITS_DATA in index.html — strictly filtered for Gloranthan attestation",
+  "extraction_date": "2026-05-03",
+  "policy": "Only combat style traits from Mythras Core (p.135-137) or referenced by AiG combat styles are included. Non-Gloranthan supplement traits (Mythic Constantinople, Monster Island, etc.) have been removed.",
+  "summary": {
+    "total_traits": 34,
+    "from_mythras_core": 20,
+    "from_aig_gloranthan": 14,
+    "attestation_percentage": "100%"
+  },
+  "mythras_core_traits": {
+    "source": "Mythras Core Rulebook p.135-137",
+    "traits": ["Batter Aside", "Batter Down", "Beast-back Lancer", "Blind Fighting", "Cautious Fighter", "Daredevil", "Defensive Minded", "Do or Die", "Formation Fighting*", "Intimidating Scream", "Lancer", "Mounted Combat", "Mounted Skirmisher", "Ranged Marksman", "Shield Wall*", "Skirmisher", "Swashbuckling", "Throw Weapons", "Trained Beast", "Unarmed Prowess"]
+  },
+  "gloranthan_traits": {
+    "source": "Adventures in Glorantha / Gloranthan setting conventions",
+    "traits": ["Antelope Lancer", "Assassination", "Berserker", "Bison Tribe Combat Style", "Chariot Fighting", "Grappler", "Hawkeye", "Horse Archery", "Longshot", "Marksmanship", "Mounted Lancer", "Pelorian Cavalry", "Prancing", "Shield Splitter"]
+  }
+}

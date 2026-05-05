@@ -1607,7 +1607,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Orlanth Adventurous:Rce Shield",
+          "name": "Orlanth Adventurous:Shield",
           "runes": [
             "Air"
           ],
@@ -2289,7 +2289,7 @@
           "split_from_garbled": true
         },
         {
-          "name": "gw Mist Cloud",
+          "name": "Mist Cloud",
           "runes": [
             "Water"
           ],
@@ -2298,7 +2298,7 @@
           "split_from_garbled": true
         },
         {
-          "name": "w Summon Undine",
+          "name": "Summon Undine",
           "runes": [
             "Water"
           ],
@@ -2308,7 +2308,7 @@
           "rune_inferred": true
         },
         {
-          "name": "b Spirit Block",
+          "name": "Spirit Block",
           "runes": [
             "Water"
           ],
@@ -2936,7 +2936,7 @@
           "rank": "initiate"
         },
         {
-          "name": "hi Clever Tongue",
+          "name": "Clever Tongue",
           "runes": [
             "Any"
           ],
@@ -3365,7 +3365,7 @@
           "rune_inferred": true
         },
         {
-          "name": "s Guided Teleportation",
+          "name": "Guided Teleportation",
           "runes": [
             "Movement"
           ],
@@ -3375,7 +3375,7 @@
           "rune_inferred": true
         },
         {
-          "name": "s Teleportation",
+          "name": "Teleportation",
           "runes": [
             "Movement"
           ],
@@ -3718,7 +3718,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Orlanth Adventurous:Rce Shield",
+          "name": "Orlanth Adventurous:Shield",
           "runes": [
             "Air"
           ],
@@ -3817,7 +3817,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Vinga:Rce Shield",
+          "name": "Vinga:Shield",
           "runes": [
             "Air"
           ],
@@ -4089,7 +4089,7 @@
           "rune_inferred": true
         },
         {
-          "name": "Rce Shield",
+          "name": "Shield",
           "runes": [
             "Any"
           ],
@@ -7134,7 +7134,7 @@
           "rune_inferred": true
         },
         {
-          "name": "gow Fear 4 Summon Lune",
+          "name": "Fear",
           "runes": [
             "Darkness"
           ],
@@ -7144,7 +7144,7 @@
           "rune_inferred": true
         },
         {
-          "name": "o Summon Shade",
+          "name": "Summon Shade",
           "runes": [
             "Darkness"
           ],
@@ -7269,7 +7269,7 @@
           "rune_inferred": true
         },
         {
-          "name": "l Heal Wound",
+          "name": "Heal Wound",
           "runes": [
             "Earth"
           ],
@@ -7289,7 +7289,7 @@
           "rune_inferred": true
         },
         {
-          "name": "e Summon Gnome",
+          "name": "Summon Gnome",
           "runes": [
             "Earth"
           ],
@@ -7537,7 +7537,7 @@
           "rune_inferred": true
         },
         {
-          "name": "l Heal Wound",
+          "name": "Heal Wound",
           "runes": [
             "Harmony"
           ],
@@ -7556,7 +7556,7 @@
           "rune_inferred": true
         },
         {
-          "name": "w Summon Undine",
+          "name": "Summon Undine",
           "runes": [
             "Water"
           ],
@@ -7605,7 +7605,7 @@
           "rune_inferred": true
         },
         {
-          "name": "l Harmonise",
+          "name": "Harmonise",
           "runes": [
             "Harmony"
           ],
@@ -7671,7 +7671,7 @@
           "rune_inferred": true
         },
         {
-          "name": "Rce Shield 4 Summon Lune",
+          "name": "Shield",
           "runes": [
             "Air"
           ],
@@ -7680,7 +7680,7 @@
           "split_from_garbled": true
         },
         {
-          "name": "t True Weapon",
+          "name": "True Weapon",
           "runes": [
             "Death"
           ],
@@ -7729,7 +7729,7 @@
           "rune_inferred": true
         },
         {
-          "name": "t Sever Spirit",
+          "name": "Sever Spirit",
           "runes": [
             "Death"
           ],
@@ -7963,7 +7963,7 @@
           "rune_inferred": true
         },
         {
-          "name": "Rce Shield",
+          "name": "Shield",
           "runes": [
             "Magic"
           ],
@@ -7993,7 +7993,7 @@
           "rune_inferred": true
         },
         {
-          "name": "t Fangs",
+          "name": "Fangs",
           "runes": [
             "Magic"
           ],
@@ -8128,7 +8128,7 @@
           "rune_inferred": true
         },
         {
-          "name": "hs Path Watch RS Reflection",
+          "name": "Path Watch RS Reflection",
           "runes": [
             "Magic"
           ],
@@ -8138,7 +8138,7 @@
           "rune_inferred": true
         },
         {
-          "name": "ch Seal",
+          "name": "Seal",
           "runes": [
             "Magic"
           ],
@@ -8147,7 +8147,7 @@
           "split_from_garbled": true
         },
         {
-          "name": "ch Special Lock",
+          "name": "Special Lock",
           "runes": [
             "Mastery"
           ],
@@ -11742,13 +11742,13 @@
     "Yelm: 4 unverified",
     "Yelmalio: 6 unverified",
     "Yelorna: 3 unverified",
-    "7 Mothers - Danfive Xaron: 4 unverified",
-    "7 Mothers - Irrippi Ontor: 5 unverified",
-    "7 Mothers - Jakaleel: 2 unverified",
-    "7 Mothers - Queen Deezola: 4 unverified",
-    "7 Mothers - She Who Waits: 2 unverified",
-    "7 Mothers - Teelo Norri: 3 unverified",
-    "7 Mothers - Yanafal Tarnils: 3 unverified",
+    "7 Mothers - Danfive Xaron:",
+    "7 Mothers - Irrippi Ontor:",
+    "7 Mothers - Jakaleel:",
+    "7 Mothers - Queen Deezola:",
+    "7 Mothers - She Who Waits:",
+    "7 Mothers - Teelo Norri:",
+    "7 Mothers - Yanafal Tarnils:",
     "Annilla: 4 unverified",
     "Crimson Bat: 3 unverified",
     "Etyries: 2 unverified",

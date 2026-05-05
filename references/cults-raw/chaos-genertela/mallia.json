@@ -1,0 +1,102 @@
+{
+  "name": "Mallia",
+  "pantheon": "Chaos - Genertela",
+  "source": "CultOnePagers2019/Chaos - Pamaltela/Mallia.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Goddess of Disease",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Dance",
+    "Endurance",
+    "Influence",
+    "Sing",
+    "Willpower",
+    "Lore (cult)",
+    "Lore (human)",
+    "Survival",
+    "Binding(Shaman)",
+    "Devotion",
+    "Runic Affinity",
+    "Trance(Shaman)"
+  ],
+  "folkMagic": [
+    "Sneeze"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Carry Disease",
+      "Cause Disease",
+      "Command Disease Spirit",
+      "Summon Shade",
+      "Minor Infection",
+      "Cure Disease",
+      "Summon Disease Spirit"
+    ],
+    "associate": [
+      "Thed:? Chaos Spawn"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Cause Plague"
+    ]
+  },
+  "personalityTraits": [
+    "Cruel",
+    "Cold",
+    "Secretive",
+    "Patient",
+    "Relentless",
+    "Ruthless",
+    "Unemotional",
+    "Ascetic"
+  ],
+  "enemyCults": [
+    "__PH5__,",
+    "Donandar,",
+    "Yelm"
+  ],
+  "hostileCults": [
+    "Humakt, Xiola Umbar"
+  ],
+  "friendlyCults": [
+    "Aldrya,",
+    "Aranea,",
+    "__PH13__,",
+    "Bagog,",
+    "Blackfang,",
+    "Cacodemon,",
+    "Caladra&Aurelion,",
+    "Daka"
+  ],
+  "associatedCults": [
+    "Nysalor,",
+    "__PH11__,",
+    "Thed"
+  ],
+  "areas": [
+    "Genertela,",
+    "Inland Pamaltela"
+  ],
+  "holyDays": [
+    "Sea/Fertility/Wild",
+    "Sacred Time/Fate Week/Freeze"
+  ],
+  "spiritSocieties": [
+    "Mallia Spirit Society\nMallia\not?\n2019 version\nAIG/RQG etc\nGoddess of Disease\nCan command Disease Spirit with spells"
+  ],
+  "oppositeRune": "Life",
+  "additionalPantheons": [
+    "Chaos - Pamaltela"
+  ]
+}

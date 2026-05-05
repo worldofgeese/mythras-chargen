@@ -3,14 +3,14 @@
   "pantheon": "Storm",
   "source": "CultOnePagers2019/Storm/Odayla.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Orlanth Hunter God",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Must hunt and kill at least one prey beast per season to donate to their\npoeple.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Must hunt and kill at least one prey beast per season to donate to their poeple. They must always use the peaceful cut on any animal killed for food",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.Must hunt and kill at least one prey beast per season to donate to their\npoeple. They must always use the peaceful cut on any animal killed for food\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Most\nimpressive animal brought in in the the Great Hunt Bold skills are mandatory\nCult Skills (Oath is taken at initiate)\nCombat style with missile attack",
+    "Combat style with missile attack",
     "Athletics",
     "Locale",
     "Perception",
@@ -36,19 +36,43 @@
     "Speedart",
     "Spiritshield"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Bl Draw Beast",
+      "Heal Wound",
+      "Rb Soul Sight",
+      "Bl Beastmaster",
+      "?B Claws"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "B Bear's Skin",
+      "B Bear's Strength"
+    ]
+  },
   "personalityTraits": [
     "Uncouth",
-    "Rough",
+    "Rough-edged",
     "Loyal",
     "Wild",
     "Instinctive",
     "Savage",
-    "Passionateg Proudg",
-    "Unpredictableg"
+    "Passionate",
+    "Proud",
+    "Unpredictable"
   ],
   "enemyCults": [
-    "Hostile Cults: Seven Mothers"
+    "Hostile",
+    "Cults:",
+    "Seven Mothers"
   ],
   "hostileCults": [
     "Seven Mothers"
@@ -63,7 +87,8 @@
     "Lhankor Mhy"
   ],
   "associatedCults": [
-    "Daka Fal",
+    "Daka",
+    "Fal",
     "Foundchild",
     "Orlanth",
     "Yinkin"
@@ -83,11 +108,15 @@
     "Sea/Fertility/Water",
     "Fire/Harmony/Fire",
     "Fire/Illusion/Wild",
-    "Earth/Disorder/Wild\nEarth/Movement/Wild",
+    "Earth/Disorder/Wild",
+    "Earth/Movement/Wild",
     "Dark/Disorder/Freeze",
     "Dark/Death/Clay",
-    "Storm/Harmony/Wild\nStorm/Harmony/God"
+    "Storm/Harmony/Wild",
+    "Storm/Harmony/God"
   ],
-  "spiritSocieties": [],
-  "runeAssociations": {}
+  "spiritSocieties": [
+    "Odayla Spirit Society\nOdayla\nB\ng 2019 version\nAIG/RQG etc\nOrlanth Hunter God"
+  ],
+  "oppositeRune": ""
 }

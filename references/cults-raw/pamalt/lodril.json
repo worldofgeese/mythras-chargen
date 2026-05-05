@@ -1,0 +1,123 @@
+{
+  "name": "Lodril",
+  "pantheon": "Pamalt",
+  "source": "CultOnePagers2019/Yelm/Lodril.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Father of Volcanoes and Peasants",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Combat style with spear",
+    "Athletics",
+    "Endurance",
+    "Locale",
+    "Craft",
+    "Lore (cult)",
+    "Lore (earth)",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Disruption",
+    "Extinguish",
+    "Heal",
+    "Heat metal",
+    "Ignite",
+    "Vigour"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Summon Salamander",
+      "Earthwarm",
+      "Summon Lodril",
+      "Bless Forge",
+      "Heat Metal"
+    ],
+    "associate": [
+      "Pamalt:Earthtouch",
+      "Yelm:Shield"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Firespear"
+    ]
+  },
+  "personalityTraits": [
+    "Generous",
+    "Lustful",
+    "Pleasure-seeking",
+    "Destructive",
+    "Reckless",
+    "Selfish",
+    "Greedy",
+    "Loyal",
+    "Honest",
+    "Pure"
+  ],
+  "enemyCults": [
+    "Bagog,",
+    "Cacodemon,",
+    "__PH15__,",
+    "Krarsht,",
+    "Mallia,",
+    "__PH11__,",
+    "Thanatar,",
+    "Thed,"
+  ],
+  "hostileCults": [
+    "Aranea,",
+    "__PH13__,",
+    "Blackfang,",
+    "Gorakiki,",
+    "__PH17__,",
+    "Lanbril,",
+    "__PH18__,",
+    "Zorak Zoran"
+  ],
+  "friendlyCults": [
+    "__PH5__,",
+    "Eiritha,",
+    "Nysalor,",
+    "Issaries,",
+    "__PH16__,",
+    "Orlanth,",
+    "Waha,",
+    "Yelmalio,"
+  ],
+  "associatedCults": [
+    "Caladra&Aurelion,",
+    "__PH6__,",
+    "Yelm"
+  ],
+  "areas": [
+    "__A0__,",
+    "__A3__,",
+    "__A2__,",
+    "__A1__,",
+    "Lunar"
+  ],
+  "holyDays": [
+    "Sea/Fertility/Clay",
+    "Fire/Harmony/Clay",
+    "Earth/Fertility/Fire",
+    "Earth/Fertility/Wild",
+    "Dark/Death/Winds",
+    "Dark/Death/Fire",
+    "Storm/Fertility/Wild"
+  ],
+  "spiritSocieties": [],
+  "oppositeRune": "Death",
+  "additionalPantheons": [
+    "Yelm"
+  ]
+}

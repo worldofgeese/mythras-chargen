@@ -3,27 +3,47 @@
   "pantheon": "Yelm",
   "source": "CultOnePagers2019/Yelm/Gorgorma.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Mother of Nightmares",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nAthletics",
+    "Athletics",
     "Lore(cult)",
     "Perception",
-    "Combat Style(1h/2h Axe\u00a0 Spear\u00a0 Unarmed))\u00a0 Stealth\u00a0 Runic Affinity"
+    "Combat Style(1h/2h Axe Spear Unarmed)) Stealth Runic Affinity"
   ],
   "folkMagic": [
-    "Bladesharp\u00a0 Demoralise\u00a0 Disruption\u00a0 Slow"
+    "Bladesharp Demoralise Disruption Slow"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Divination",
+      "Chastise",
+      "Command"
+    ],
+    "associate": [
+      "Ernalda:Summon Gnome"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Waste Loins"
+    ]
+  },
   "personalityTraits": [
-    "Cruelo Coldo",
-    "Secretiveo Patiento",
-    "Pragmatice Prudente",
-    "Worldlye Sensuale"
+    "Cruel",
+    "Cold",
+    "Secretive",
+    "Patient",
+    "Pragmatic",
+    "Prudent",
+    "Worldly",
+    "Sensual"
   ],
   "enemyCults": [],
   "hostileCults": [],
@@ -35,9 +55,8 @@
     "Lunar"
   ],
   "holyDays": [
-    "Sea/Disorder/Clay",
-    "Can command Boar\u00a0Dog\u00a0Ghost\u00a0Gnome\u00a0Pain"
+    "Sea/Disorder/Clay"
   ],
   "spiritSocieties": [],
-  "runeAssociations": {}
+  "oppositeRune": ""
 }

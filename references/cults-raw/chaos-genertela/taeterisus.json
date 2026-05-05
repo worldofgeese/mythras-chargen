@@ -1,0 +1,54 @@
+{
+  "name": "Taeterisus",
+  "pantheon": "Chaos - Genertela",
+  "source": "CultOnePagers2019/Chaos - Genertela/Taeterisus.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Chaos Trickster",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Any test by local trickster priest",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Deceit",
+    "Acrobatics",
+    "Acting",
+    "Disguise",
+    "Runic Affinity",
+    "Devotion"
+  ],
+  "folkMagic": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "4? Chaos Gift i Illusion j Lie gow Fear RS Reflection jo Swallow"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication Mindlink Sanctify Summon Spirit of Reprisal Create Dung Heap"
+    ]
+  },
+  "personalityTraits": [
+    "Uncouth",
+    "Rough-edged",
+    "Loyal",
+    "Wild",
+    "Instinctive",
+    "Savage",
+    "Deceitful",
+    "Cowardly"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Genertela"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "Truth"
+}

@@ -1,0 +1,48 @@
+{
+  "name": "Tyram",
+  "pantheon": "Chaos - Genertela",
+  "source": "CultOnePagers2019/Chaos - Genertela/Tyram.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Sky Terror",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [],
+  "folkMagic": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "? Hate Sky"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
+  "personalityTraits": [
+    "Loyal",
+    "Honest",
+    "Pure",
+    "Idealist",
+    "Chastity",
+    "Perceptive"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Genertela"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": ""
+}

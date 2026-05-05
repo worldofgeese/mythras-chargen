@@ -3,14 +3,14 @@
   "pantheon": "Storm",
   "source": "CultOnePagers2019/Storm/Engizi.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Sky River Titan",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nCombat style with net",
+    "Combat style with net",
     "Boating",
     "Lore (cult)",
     "Lore (river)",
@@ -28,13 +28,37 @@
     "River Eyes",
     "Shimmer"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Breathe Air",
+      "Fireshield",
+      "Strongnet",
+      "Summon Naiad",
+      "Summon Undine"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Dismiss Water Elemental"
+    ]
+  },
   "personalityTraits": [
-    "Adventurouss Dynamics",
-    "Impulsives Recklesss",
-    "Energetics Rebelliouss",
-    "Mercurialw Capriciousw",
-    "Mutablew"
+    "Adventurous",
+    "Dynamic",
+    "Impulsive",
+    "Reckless",
+    "Energetic",
+    "Rebellious",
+    "Mercurial",
+    "Capricious",
+    "Mutable"
   ],
   "enemyCults": [
     "In Essence All Chaos Cults"
@@ -66,6 +90,5 @@
     "Dark/Death/Water"
   ],
   "spiritSocieties": [],
-  "runeAssociations": {},
   "oppositeRune": "Stasis"
 }

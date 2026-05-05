@@ -3,22 +3,22 @@
   "pantheon": "Storm",
   "source": "CultOnePagers2019/Storm/Storm Bull.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Berserker God, Chaos Killer",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nAthletics",
+    "Athletics",
     "Brawn",
     "Endurance",
     "Willpower",
     "Lore (cult)",
     "Navigation",
-    "Sense chaos\u00b9",
+    "Sense chaos",
     "Survival",
-    "Combat style\n(any)",
+    "Combat style (any)",
     "Dance(Shaman)",
     "Insight(Shaman)",
     "Perception",
@@ -37,16 +37,42 @@
     "Heal",
     "Protection"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Berserk",
+      "Summon Sylph",
+      "Face Chaos",
+      "Impede Chaos",
+      "Defend Against Chaos",
+      "Dismiss Air Elemental"
+    ],
+    "associate": [
+      "Chalana Arroy:Chaos Wound",
+      "Eiritha:4Bego Speak To/With Specific Creatures",
+      "Orlanth:Shield",
+      "Zorak Zoran:Fear"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
   "personalityTraits": [
     "Uncouth",
-    "Rough",
+    "Rough-edged",
     "Loyal",
     "Wild",
     "Instinctive",
     "Savage",
-    "Relentlesst Ruthlesst",
-    "Unemotionalt"
+    "Relentless",
+    "Ruthless",
+    "Unemotional"
   ],
   "enemyCults": [
     "Bagog",
@@ -67,8 +93,7 @@
     "Eurmal"
   ],
   "friendlyCults": [
-    "Odayla",
-    "Yinkin"
+    "Odayla Yinkin"
   ],
   "associatedCults": [
     "Chalana Arroy",
@@ -93,9 +118,17 @@
     "Fire/Stasis/Water",
     "Earth/Stasis/Clay",
     "Dark/Stasis/Winds",
-    "Storm/Stasis/Fire\nStorm/Stasis/Wild"
+    "Storm/Stasis/Fire",
+    "Storm/Stasis/Wild"
   ],
-  "spiritSocieties": [],
-  "runeAssociations": {},
-  "oppositeRune": "Life"
+  "spiritSocieties": [
+    "Stormbull Spirit Society",
+    "Waha Spirit Society",
+    "Horned Man Spirit Society",
+    "Oakfed Spirit Society"
+  ],
+  "oppositeRune": "Life",
+  "additionalPantheons": [
+    "Praxian"
+  ]
 }

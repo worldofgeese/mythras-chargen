@@ -1,0 +1,73 @@
+{
+  "name": "Bolongo",
+  "pantheon": "Pamalt",
+  "source": "CultOnePagers2019/Pamalt/Bolongo.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "The Trickster",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Any test by local trickster priest",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Conceal",
+    "Customs",
+    "Deceit",
+    "Acrobatics",
+    "Acting",
+    "Disguise",
+    "Lore (cult)",
+    "Seduction",
+    "Sleight",
+    "Streetwise",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Hotfoot²"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Hide Fire",
+      "Panic",
+      "Remove Body Part",
+      "? j Crack",
+      "Charisma",
+      "Group Laughter",
+      "Hallucinate",
+      "Hysteria",
+      "Illusion",
+      "Mirth",
+      "Strike",
+      "Clever Tongue"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Become other shape"
+    ]
+  },
+  "personalityTraits": [
+    "Destructive",
+    "Reckless",
+    "Selfish",
+    "Greedy"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Inland Pamaltela"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "Harmony"
+}

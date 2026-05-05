@@ -1,0 +1,128 @@
+{
+  "name": "Caladra&Aurelion",
+  "pantheon": "Independent",
+  "source": "CultOnePagers2019/Independent/Caladra&Aurelion.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Volcano Twins",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Two years as lay member",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Dance",
+    "Endurance",
+    "Stealth",
+    "Lore (cult)",
+    "Lore (earth)",
+    "Survival",
+    "Language (diamondspeech)",
+    "Combat style with bow",
+    "Combat style with spear",
+    "Devotion",
+    "Runic Affinity",
+    "Lore (Mineral)",
+    "Oratory"
+  ],
+  "folkMagic": [
+    "Bludgeon",
+    "Darkness",
+    "Disruption",
+    "Extinguish",
+    "Fanaticism",
+    "Find Diamond¹",
+    "Find Earthblood¹",
+    "Find\nFirebone¹",
+    "Find Gems",
+    "Find Gold",
+    "Ignite",
+    "Mindspeech"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Earthwarm",
+      "Unisonance",
+      "Firedwell",
+      "Summon Gnome"
+    ],
+    "associate": [
+      "Gata:Gnome to Gargoyle",
+      "Mostal:Diamondedge"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Fertilize",
+      "Harmonise"
+    ]
+  },
+  "personalityTraits": [
+    "Generous",
+    "Lustful",
+    "Pleasure-seeking",
+    "Loyal",
+    "Honest",
+    "Pure",
+    "Idealist",
+    "Chastity",
+    "Perceptive",
+    "Forgiving"
+  ],
+  "enemyCults": [
+    "Cacodemon,",
+    "Krarsht,",
+    "Vivamort"
+  ],
+  "hostileCults": [
+    "__PH13__,",
+    "Bagog,",
+    "Blackfang,",
+    "__PH15__,",
+    "Frog",
+    "Woman,",
+    "__PH17__,",
+    "Lanbril,",
+    "Mallia,"
+  ],
+  "friendlyCults": [
+    "__PH5__,",
+    "Flintnail,",
+    "Geo,",
+    "Yelm,",
+    "Yelmalio,",
+    "Yelorna"
+  ],
+  "associatedCults": [
+    "Lodril"
+  ],
+  "areas": [
+    "__A0__,",
+    "Holy Country"
+  ],
+  "holyDays": [
+    "Sea/Fertility/Clay",
+    "Sea/Fertility/Winds",
+    "Sea/Fertility/Fire",
+    "Fire/Fertility/Clay",
+    "Fire/Fertility/Winds",
+    "Earth/Fertility/Clay",
+    "Earth/Fertility/Winds",
+    "Earth/Fertility/Fire",
+    "Earth/Fertility/Wild",
+    "Dark/Fertility/Clay",
+    "Dark/Fertility/Winds",
+    "Storm/Harmony/God",
+    "Storm/Fertility/Clay",
+    "Storm/Fertility/Winds",
+    "Storm/Fertility/Winds",
+    "Storm/Fertility/Fire"
+  ],
+  "spiritSocieties": [],
+  "oppositeRune": "Death"
+}

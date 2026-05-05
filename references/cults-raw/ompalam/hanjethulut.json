@@ -1,0 +1,85 @@
+{
+  "name": "Hanjethulut",
+  "pantheon": "Ompalam",
+  "source": "CultOnePagers2019/Ompalam/Hanjethulut.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Fonrita: Angry Warrior",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Brawn",
+    "Willpower",
+    "Lore (cult)",
+    "Conceal",
+    "Influence(Intimidate)",
+    "Passion: Hate Orjethulut",
+    "Lore (Ompalam)",
+    "Combat style with blunt weapons",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Bludgeon",
+    "Darkness",
+    "Demoralise",
+    "Dullblade",
+    "Fanaticism",
+    "Might"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Berserk",
+      "Darksee",
+      "Dismiss Elemental",
+      "Seal wound",
+      "Summon Shade",
+      "Crush",
+      "Fear",
+      "Summon Dead"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "?b Raise Undead"
+    ]
+  },
+  "personalityTraits": [
+    "Cruel",
+    "Cold",
+    "Secretive",
+    "Patient",
+    "Relentless",
+    "Ruthless",
+    "Unemotional",
+    "Ascetic",
+    "Destructive",
+    "Reckless"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Fonrit"
+  ],
+  "holyDays": [
+    "Sea/Death/Freeze",
+    "Sea/Death/Wild",
+    "Fire/Death/Freeze",
+    "Earth/Death/Freeze",
+    "Dark/Death/Freeze",
+    "Storm/Death/Freeze"
+  ],
+  "spiritSocieties": [],
+  "oppositeRune": "Harmony"
+}

@@ -3,14 +3,14 @@
   "pantheon": "Storm",
   "source": "CultOnePagers2019/Storm/Elmal.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Loyal Thane",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nAthletics",
+    "Athletics",
     "Lore(Cult)",
     "Perception",
     "Combat style (Spear",
@@ -26,7 +26,27 @@
     "Light",
     "Protection"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Divination",
+      "Extension",
+      "Find (Specific Thing)",
+      "Chastise",
+      "Steadfast",
+      "Sunripen",
+      "Sunbright"
+    ],
+    "associate": [
+      "Xiola Umbar:Comfort Song, (a):l Restore Vision",
+      "Ernalda:Earthwarm"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Sanctify",
+      "Mindlink",
+      "Summon Spirit of Reprisal"
+    ]
+  },
   "personalityTraits": [
     "Loyal",
     "Honest",
@@ -34,9 +54,11 @@
     "Idealist",
     "Chastity",
     "Perceptive",
-    "Truthfuly Observanty",
-    "Dutifuly Faithfuly",
-    "Fairy"
+    "Truthful",
+    "Observant",
+    "Dutiful",
+    "Faithful",
+    "Fair"
   ],
   "enemyCults": [],
   "hostileCults": [],
@@ -53,9 +75,13 @@
     "West"
   ],
   "holyDays": [
-    "Fire/Fertility/Fire, Earth/Movement/Fire, Dark/Truth/Fire, Storm/Harmony/Fire, Sacred Time/Fate\nWeek/Freeze, Sacred Time/Fate Week/Fire"
+    "Fire/Fertility/Fire",
+    "Earth/Movement/Fire",
+    "Dark/Truth/Fire",
+    "Storm/Harmony/Fire",
+    "Sacred Time/Fate Week/Freeze",
+    "Sacred Time/Fate Week/Fire"
   ],
   "spiritSocieties": [],
-  "runeAssociations": {},
   "oppositeRune": "Illusion"
 }

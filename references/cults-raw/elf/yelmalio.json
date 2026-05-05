@@ -1,0 +1,126 @@
+{
+  "name": "Yelmalio",
+  "pantheon": "Elf",
+  "source": "CultOnePagers2019/Yelm/Yelmalio.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Light In The Darkness",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Born to a Yelmalio initiate can automatically join. Serving two years as temple mercenary must join or leave",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Endurance",
+    "Influence",
+    "Insight",
+    "Perception",
+    "Stealth",
+    "Lore (cult)",
+    "Oratory",
+    "Combat style with bow / javelin / spear",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Bludgeon",
+    "Coordination",
+    "Darkness",
+    "Find Gold",
+    "Firearrow",
+    "Fireblade",
+    "Lantern²",
+    "Light",
+    "Lightwall²",
+    "Magnify",
+    "Repair"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Catseye",
+      "Sunbright",
+      "Cloud Clear",
+      "Ripen",
+      "Shield",
+      "Command Hawk"
+    ],
+    "associate": [
+      "Ernalda:Bless Crops"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
+  "personalityTraits": [
+    "Loyal",
+    "Honest",
+    "Pure",
+    "Idealist",
+    "Chastity",
+    "Perceptive",
+    "Truthful",
+    "Observant",
+    "Dutiful",
+    "Faithful",
+    "Fair"
+  ],
+  "enemyCults": [
+    "Bagog,",
+    "Cacodemon,",
+    "Krarsht,",
+    "Mallia,",
+    "__PH11__,",
+    "Thanatar,",
+    "Thed,",
+    "Vivamort,",
+    "Zorak"
+  ],
+  "hostileCults": [
+    "__PH13__,",
+    "__PH17__,",
+    "__PH18__,",
+    "Eurmal"
+  ],
+  "friendlyCults": [
+    "Caladra&Aurelion,",
+    "__PH5__,",
+    "Donandar,",
+    "Lodril,",
+    "Pavis,",
+    "__PH24__,",
+    "Yelorna"
+  ],
+  "associatedCults": [
+    "Aldrya,",
+    "Yelm,",
+    "Ernalda"
+  ],
+  "areas": [
+    "Coastal Pamaltela",
+    "Dragon Pass",
+    "East",
+    "Fonrit",
+    "Inland Pamaltela",
+    "Lunar",
+    "Oceans",
+    "West"
+  ],
+  "holyDays": [
+    "Sea/Truth/Fire",
+    "Fire/Truth/Fire",
+    "Earth/Truth/Fire",
+    "Dark/Truth/Fire",
+    "Storm/Truth/Fire"
+  ],
+  "spiritSocieties": [],
+  "oppositeRune": "Illusion",
+  "additionalPantheons": [
+    "Yelm"
+  ]
+}

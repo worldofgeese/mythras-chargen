@@ -1,157 +1,198 @@
 {
   "name": "Sorala Daughter of Toria",
-  "concept": "Esrolian scribe, scholar, and sorcerer of Lhankor Mhy",
+  "concept": "Esrolian scholar-warrior, multilingual sage, sorcerer",
   "characteristics": {
-    "STR": 13,
-    "CON": 11,
-    "SIZ": 12,
-    "DEX": 17,
-    "INT": 20,
-    "POW": 13,
-    "CHA": 15
+    "STR": 8,
+    "CON": 10,
+    "SIZ": 8,
+    "DEX": 13,
+    "INT": 14,
+    "POW": 11,
+    "CHA": 11
   },
-  "charMethod": "pregen",
-  "attributes": {
-    "actionPoints": 4,
-    "experienceModifier": 1,
-    "healingRate": 2,
-    "luckPoints": 3,
-    "magicPoints": 13,
-    "initiativeBonus": 18,
-    "damageModifier": "+0",
-    "hitPoints": {
-      "Head": 5,
-      "Chest": 7,
-      "Abdomen": 6,
-      "Right Arm": 4,
-      "Left Arm": 4,
-      "Right Leg": 5,
-      "Left Leg": 5
-    },
-    "encumbrance": {
-      "unencumbered": 26,
-      "burdened": 39,
-      "overloaded": 52
-    },
-    "runeAffinities": {
-      "primary": 95,
-      "secondary": 75,
-      "tertiary": 75
-    },
-    "folkMagicBase": 58,
-    "movementRate": 6
-  },
-  "culture": "Esrolian (Nochet)",
-  "homeland": "Nochet, Esrolia",
+  "charMethod": "point-buy",
+  "attributes": {},
+  "culture": "Esrolian",
+  "homeland": "Nochet",
   "culturalSkills": {
-    "Language (Esrolian)": 20,
-    "Language (Old Pavic)": 10,
-    "Language (Theyalan)": 10,
-    "Tradetalk": 10,
-    "Customs (Esrolian)": 10,
-    "Influence": 10,
-    "Insight": 10,
-    "Perception": 10,
-    "Locale": 10
+    "Athletics": 5,
+    "Brawn": 0,
+    "Endurance": 5,
+    "Evade": 10,
+    "Locale": 15,
+    "Perception": 15,
+    "Willpower": 15,
+    "Courtesy": 15,
+    "Commerce": 10,
+    "Healing": 10
   },
   "runeAffinities": {
-    "primary": "Truth",
-    "secondary": "Man",
-    "tertiary": "Harmony"
+    "primary": "Fire/Sky",
+    "secondary": "Storm",
+    "tertiary": "Earth"
   },
-  "folkMagicSpells": [],
+  "folkMagicSpells": [
+    "Bladesharp",
+    "Heal",
+    "Protection"
+  ],
   "passions": [
-    { "name": "Devotion (Lhankor Mhy)", "value": 80 },
-    { "name": "Hate (Lunar Empire)", "value": 60 },
-    { "name": "Honor", "value": 80 },
-    { "name": "Loyalty (Argrath)", "value": 80 },
-    { "name": "Loyalty (Hulta Clan)", "value": 60 },
-    { "name": "Loyalty (Nochet)", "value": 60 },
-    { "name": "Loyalty (Queen Samastina)", "value": 70 }
+    {
+      "name": "Devotion (Lhankor Mhy)",
+      "value": 52,
+      "custom": true
+    },
+    {
+      "name": "Loyalty (Argrath)",
+      "value": 52,
+      "custom": true
+    },
+    {
+      "name": "Honor",
+      "value": 52,
+      "custom": true
+    }
   ],
   "age": 21,
   "gender": "Female",
-  "family": "Daughter of Toria, a sage of Lhankor Mhy. Granddaughter of a Lhankor Mhy sage at the Nochet Knowledge Temple. Father aided the House of Sartar against Lunar assassins.",
-  "backgroundEvents": "Supported usurper Samastina in the Esrolian civil war. Protected Samastina from Red Earth assassins. Blessed by the Earth Queen during the siege of Nochet. Fought at the Battle of Pennel Ford. Accompanied Argrath White Bull to Pavis.",
-  "career": "Scholar/Priest",
+  "family": "Hulta clan, Nochet",
+  "backgroundEvents": "",
+  "career": "Scholar",
+  "careerSkills": {
+    "Willpower": 10,
+    "Perception": 5,
+    "Combat Style (Citizen Legionary)": 10,
+    "Literacy": 15,
+    "Lore (History)": 15,
+    "Language (Old Pavic)": 15,
+    "Language (Esrolian)": 15,
+    "Bureaucracy": 15
+  },
+  "careerFolkMagic": [
+    "Calculate",
+    "Vigour"
+  ],
+  "bonusSkills": {
+    "Locale": 15,
+    "Perception": 15,
+    "Willpower": 15,
+    "Courtesy": 15,
+    "Literacy": 15,
+    "Lore (History)": 15,
+    "Language (Old Pavic)": 15,
+    "Bureaucracy": 15,
+    "Combat Style (Citizen Legionary)": 15,
+    "Evade": 15
+  },
+  "hobbySkillName": null,
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "startingMoney": 135,
+  "equipment": [
+    {
+      "name": "Two sets of common undecorated clothes",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 0
+    },
+    {
+      "name": "Transport: Beast of Burden",
+      "enc": 0,
+      "quantity": 1,
+      "cost": 0
+    },
+    {
+      "name": "Backpack",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Waterskin",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Rations (1 week)",
+      "enc": 2,
+      "quantity": 1,
+      "cost": 14
+    },
+    {
+      "name": "Bedroll",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Flint & Tinder",
+      "enc": 0,
+      "quantity": 1,
+      "cost": 5
+    }
+  ],
+  "weapons": [
+    {
+      "name": "Peltast Shield",
+      "damage": "1d4",
+      "size": "L",
+      "reach": "S",
+      "ap": 4,
+      "hp": 12,
+      "skill": 0,
+      "quantity": 1
+    },
+    {
+      "name": "Javelin",
+      "damage": "1d8+1",
+      "size": "M",
+      "reach": "H",
+      "ap": 3,
+      "hp": 8,
+      "skill": 0,
+      "quantity": 1
+    }
+  ],
+  "armor": [
+    {
+      "name": "Bronze Basic Armour",
+      "ap": 1,
+      "locations": "4 location(s)",
+      "cost": 0
+    }
+  ],
+  "combatStyles": [
+    {
+      "name": "Citizen Legionary",
+      "weapons": [
+        "Shortsword",
+        "1H Spear",
+        "Peltast Shield",
+        "Javelin"
+      ],
+      "traits": [
+        "Formation Fighting",
+        "Shield Wall"
+      ],
+      "skill": 0,
+      "notes": ""
+    }
+  ],
+  "notes": "",
+  "background": "",
+  "hitPoints": {},
+  "companions": [],
   "cult": "Lhankor Mhy",
   "miracles": [
     "Analyze Magic",
     "Clairvoyance",
     "Knowledge"
   ],
-  "devotionalPool": 3,
-  "careerSkills": {
-    "Literacy (Theyalan)": 15,
-    "Literacy (Auld Wyrmish)": 10,
-    "Literacy (New Pelorian)": 10,
-    "Lore (Lhankor Mhy)": 15,
-    "Bureaucracy": 15,
-    "Commerce": 10,
-    "Oratory": 10,
-    "Lore (Second Age)": 15
-  },
-  "careerFolkMagic": [],
-  "bonusSkills": {
-    "Perception": 10,
-    "Willpower": 10,
-    "Insight": 10,
-    "Influence": 10,
-    "Sing": 10,
-    "Dance": 10,
-    "Locale": 10,
-    "Endurance": 10,
-    "First Aid": 10,
-    "Athletics": 10
-  },
+  "devotionalPool": 0,
   "selectedProfessionalSkills": [
-    "Literacy (Theyalan)",
-    "Lore (Lhankor Mhy)",
-    "Bureaucracy"
-  ],
-  "hobbySkillName": null,
-  "socialClass": "Gentry",
-  "socialClassMoneyMod": 1,
-  "startingMoney": 500,
-  "equipment": [
-    { "name": "Writing implements", "enc": 1, "quantity": 1, "cost": 0 },
-    { "name": "Tin disk carved calendar", "enc": 0, "quantity": 1, "cost": 0 },
-    { "name": "Letter of introduction from Knowledge Temple in Nochet", "enc": 0, "quantity": 1, "cost": 0 },
-    { "name": "Small stone figurine (crested dragonewt) containing Find Magic matrix", "enc": 0, "quantity": 1, "cost": 0 },
-    { "name": "500 L in coin, jewels, and booty", "enc": 1, "quantity": 1, "cost": 0 }
-  ],
-  "weapons": [
-    { "name": "Broadsword", "damage": "1d8", "size": "M", "reach": "M", "ap": 6, "hp": 10, "skill": 70, "quantity": 1 },
-    { "name": "Battle Axe", "damage": "1d6+1", "size": "M", "reach": "M", "ap": 4, "hp": 8, "skill": 35, "quantity": 1 },
-    { "name": "Medium Shield", "damage": "1d4", "size": "L", "reach": "S", "ap": 6, "hp": 12, "skill": 50, "quantity": 1 },
-    { "name": "Sling", "damage": "1d8", "size": "-", "reach": "-", "ap": 1, "hp": 2, "skill": 45, "quantity": 1 },
-    { "name": "Thrown Axe", "damage": "1d6+1d2", "size": "S", "reach": "-", "ap": 4, "hp": 6, "skill": 65, "quantity": 1 },
-    { "name": "Spirit Combat", "damage": "1d6+1", "size": "-", "reach": "-", "ap": 0, "hp": 0, "skill": 40, "quantity": 1 }
-  ],
-  "armor": [
-    { "name": "Full Helm", "ap": 6, "locations": "Head", "cost": 0 },
-    { "name": "Linothorax Hauberk", "ap": 3, "locations": "Chest, Abdomen", "cost": 0 },
-    { "name": "Cuirboilli Vambraces", "ap": 3, "locations": "Arms", "cost": 0 },
-    { "name": "Cuirboilli Greaves", "ap": 3, "locations": "Legs", "cost": 0 }
-  ],
-  "combatStyles": [
-    {
-      "name": "Nochet Scholar-Blade",
-      "weapons": ["Broadsword", "Battle Axe", "Medium Shield", "Sling", "Thrown Axe"],
-      "traits": ["Defensive Minded", "Ranged Marksman"],
-      "value": 70
-    }
-  ],
-  "notes": "Sorcery Spells: Logician 55% (3 pts, +2/point), Reveal Rune 55% (2 pts, +1/point), Solace of the Logical Mind 15% (2 pts, +1/point). Find Magic matrix (small stone figurine): costs 1 Rune Point, finds magic within Rune spell range unless shielded by 3m+ of soil/stone. Noted sage specializing in the Second Age, particularly Old Pavis and Auld Wyrmish writings.",
-  "background": "Sorala is an adventurous and athletic scholar, wearing a traditional bejeweled veil concealing her lower jaw. She is the granddaughter of a Lhankor Mhy sage at the Nochet Knowledge Temple. Her father aided the House of Sartar against Lunar assassins and died with great glory when Belintar raised the Building Wall. Her mother Toria, also a sage of Lhankor Mhy, survived the Lion King's Feast but died with great glory during Greymane's Great Raid. After apprenticeship, Sorala was initiated into the Lhankor Mhy cult. In the Esrolian civil war she supported the usurper Samastina, and fought to protect her from Red Earth assassins. During the siege of Nochet, she was blessed by the Earth Queen and fought with distinction at the Battle of Pennel Ford. She accompanied Argrath White Bull to Pavis and acclaimed him as King of Pavis, befriending Vasana and Yanioth there.",
-  "hitPoints": {
-    "Head": { "current": 5, "max": 5 },
-    "Chest": { "current": 7, "max": 7 },
-    "Abdomen": { "current": 6, "max": 6 },
-    "Right Arm": { "current": 4, "max": 4 },
-    "Left Arm": { "current": 4, "max": 4 },
-    "Right Leg": { "current": 5, "max": 5 },
-    "Left Leg": { "current": 5, "max": 5 }
-  },
-  "companions": []
+    "Literacy",
+    "Lore (History)",
+    "Language (Old Pavic)"
+  ]
 }

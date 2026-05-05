@@ -1,0 +1,68 @@
+{
+  "source": "ADR-004 (Language-to-Homeland Mapping) + ADR-005 (Placeholder Skill Disambiguation)",
+  "extraction_date": "2026-05-03",
+  "note": "Documents the disambiguation option lists and native language mappings used when resolving (any)/(local)/(any other) and descriptive placeholder skills. Language options are Glorantha-specific from Adventures in Glorantha cultures. Craft/Lore/Art options are from Mythras Core professional skills descriptions p.45-54.",
+  "disambiguation_lists": {
+    "Language": {
+      "description": "Culture-specific language options for Language (any) resolution",
+      "source": "Adventures in Glorantha p.26-41 culture descriptions",
+      "options_by_culture": {
+        "Balazaring": ["Balazaring"],
+        "Esrolian": ["Esrolian", "Tradetalk", "Heortling", "Old Pavic", "Stormspeech"],
+        "God Forgot": ["Brithini", "Tradetalk", "Malkioni", "Heortling"],
+        "Lunar Heartland": ["New Pelorian", "Tradetalk", "Dara Happan", "Stormspeech", "Heortling"],
+        "Lunar Provincial": ["Local", "Tradetalk", "New Pelorian", "Heortling", "Tarshite"],
+        "Praxian": ["Praxian", "Tradetalk", "Spirit Speech", "Heortling"],
+        "Sartarite (Heortling)": ["Heortling", "Tradetalk", "Stormspeech", "Old Pavic", "Praxian"],
+        "Tarshite": ["Tarshite", "Tradetalk", "Heortling", "New Pelorian"],
+        "Telmori Hsunchen": ["Heortling"],
+        "_default": ["Tradetalk", "Heortling", "Praxian", "Stormspeech", "Old Pavic"]
+      }
+    },
+    "Lore": {
+      "description": "Common Lore specializations for Lore (any) resolution",
+      "source": "Mythras Core p.49 + Adventures in Glorantha cultural context",
+      "options": ["Alchemy", "Animals", "Astronomy", "Cult", "Earth", "Farming", "Herding", "History", "Human", "Minerals", "Military History", "Plants", "Regional", "Sea", "Strategy and Tactics", "World"]
+    },
+    "Art": {
+      "description": "Common Art specializations for Art (any) resolution",
+      "source": "Mythras Core p.45",
+      "options": ["Calligraphy", "Cartography", "Drawing", "Painting", "Pottery", "Sculpting", "Weaving"]
+    },
+    "Craft": {
+      "description": "Common Craft specializations for Craft (any)/(Primary)/(Secondary) resolution",
+      "source": "Mythras Core p.47 + supplements",
+      "options": ["Alchemy", "Armouring", "Basketry", "Blacksmithing", "Brewing", "Butchery", "Carpentry", "Cooking", "Dyeing", "Farming", "Fletching", "Hunting", "Leatherworking", "Mining", "Netmaking", "Pottery", "Shipbuilding", "Smelting", "Smithing", "Stonemasonry", "Tanning", "Weaving", "Woodcarving"]
+    },
+    "Culture": {
+      "description": "Culture specializations — dynamically populated from available cultures",
+      "source": "Adventures in Glorantha p.26-41",
+      "options": "Populated at runtime from CULTURES_DATA names"
+    },
+    "Healing": {
+      "description": "Species specializations for Healing (Specific Species) in Beast Handler/Herder careers",
+      "source": "Adventures in Glorantha Praxian culture (herd beasts) + Mythras Core p.48",
+      "options": ["Horses", "Cattle", "Dogs", "Hawks", "Bison", "Llamas", "Impala", "Sable"]
+    },
+    "Teach": {
+      "description": "Species specializations for Teach (Specific Species) in Beast Handler career",
+      "source": "Same as Healing — training specific animal species",
+      "options": ["Horses", "Cattle", "Dogs", "Hawks", "Bison", "Llamas", "Impala", "Sable"]
+    }
+  },
+  "native_language_mapping": {
+    "description": "Maps each AiG culture to its native tongue (the language automatically assigned at cultural skill base value)",
+    "source": "Adventures in Glorantha p.26-41 culture descriptions + ADR-004",
+    "mappings": {
+      "Balazaring": "Language (Balazaring)",
+      "Esrolian": "Language (Esrolian)",
+      "God Forgot": "Language (Brithini)",
+      "Lunar Heartland": "Language (New Pelorian)",
+      "Lunar Provincial": "Language (Local)",
+      "Praxian": "Language (Praxian)",
+      "Sartarite (Heortling)": "Language (Heortling)",
+      "Tarshite": "Language (Tarshite)",
+      "Telmori Hsunchen": "Language (Heortling)"
+    }
+  }
+}

@@ -3,14 +3,14 @@
   "pantheon": "Storm",
   "source": "CultOnePagers2019/Storm/Vinga.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "The Adventuress",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Female.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Female.",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.Female.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nFirst Aid",
+    "First Aid",
     "Stealth",
     "Ride",
     "Lore(cult)",
@@ -23,25 +23,47 @@
   "folkMagic": [
     "Befuddle",
     "Bladesharp",
-    "Borrow Harm\u00b9\u2079",
+    "Borrow Harm¹⁹",
     "Detect Enemies",
     "Disruption",
-    "Droop\u00b9\u2079",
+    "Droop¹⁹",
     "Mindspeech",
     "Mobility",
     "Mobility",
-    "Read Foe\u00b9\u2079",
-    "Reflexes\u00b9\u2079",
-    "Stability\u00b9\u2079"
+    "Read Foe¹⁹",
+    "Reflexes¹⁹",
+    "Stability¹⁹"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise"
+    ],
+    "associate": [
+      "Orlanth:Cloud Call",
+      "Voria:Invigorate",
+      "Eiritha:4Bego Speak To/With Specific Creatures, (a):w Summon Undine",
+      "Storm Bull:Chaos"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
   "personalityTraits": [
     "Proud",
     "Just",
     "Authoritative",
-    "Adventurouss Dynamics",
-    "Impulsives Recklesss",
-    "Energetics Rebelliouss"
+    "Adventurous",
+    "Dynamic",
+    "Impulsive",
+    "Reckless",
+    "Energetic",
+    "Rebellious"
   ],
   "enemyCults": [],
   "hostileCults": [],
@@ -62,12 +84,12 @@
     "Fire/Fertility/Clay",
     "Fire/Movement/Winds",
     "Earth/Truth/Freeze",
-    "Dark/Disorder/Wild\nDark/Death/Clay",
+    "Dark/Disorder/Wild",
+    "Dark/Death/Clay",
     "Dark/Fertility/Clay",
     "Dark/Movement/Winds",
     "Storm/Movement/Winds"
   ],
   "spiritSocieties": [],
-  "runeAssociations": {},
   "oppositeRune": "Stasis"
 }

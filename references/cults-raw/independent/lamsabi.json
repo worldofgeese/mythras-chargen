@@ -1,0 +1,63 @@
+{
+  "name": "Lamsabi",
+  "pantheon": "Independent",
+  "source": "CultOnePagers2019/Independent/Lamsabi.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Thief God of Eastern Coast of Pamaltela",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Acrobatics",
+    "Mechanisms",
+    "Gambling",
+    "Passion: Renewed Faction",
+    "Meditation",
+    "Mysticism",
+    "Stealth",
+    "Sleight",
+    "Oath(Cult)"
+  ],
+  "folkMagic": [
+    "Bypass"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Seal Tongue"
+    ]
+  },
+  "personalityTraits": [
+    "Destructive",
+    "Reckless",
+    "Selfish",
+    "Greedy",
+    "Deceitful",
+    "Cowardly",
+    "Corrupted",
+    "Imaginative",
+    "Subjective"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Fonrit"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "Harmony"
+}

@@ -1,0 +1,118 @@
+{
+  "name": "Aldrya - Wood Lord",
+  "pantheon": "Elf",
+  "source": "CultOnePagers2019/Elf/Aldrya - Wood Lord.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Goddess of the Woods - Wood Lord",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them. Elves automatically accepted",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Athletics",
+    "Lore (cult)",
+    "Lore (plant)",
+    "Stealth",
+    "Combat style with bow",
+    "Conceal",
+    "Perception",
+    "Runic Affinity",
+    "Devotion"
+  ],
+  "folkMagic": [
+    "Avert",
+    "Befuddle",
+    "Extinguish",
+    "Food Song²(Lay)",
+    "Heal(Lay)",
+    "Light",
+    "Mindspeech",
+    "Mobility",
+    "Repair",
+    "Speedart(Lay)",
+    "Spiritshield",
+    "Vigour",
+    "Witchsight"
+  ],
+  "miracles": {
+    "initiate": [
+      "Silence Sphere",
+      "Reflection",
+      "Shield",
+      "Arrow Trance",
+      "Accelerate Growth",
+      "Extension",
+      "Divination",
+      "Chastise"
+    ],
+    "associate": [
+      "Ernalda:Dismiss Earth Elemental",
+      "Yelmalio:Catseye"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
+  "personalityTraits": [
+    "Unstoppable Growth",
+    "Nurturing",
+    "Pragmatic",
+    "Prudent",
+    "Worldly",
+    "Sensual"
+  ],
+  "enemyCults": [
+    "__PH11__,",
+    "Thanatar,",
+    "Vivamort,",
+    "Zorak Zoran"
+  ],
+  "hostileCults": [
+    "Bagog,",
+    "Cacodemon,",
+    "__PH15__,",
+    "Gorakiki,",
+    "Krarsht,",
+    "__PH17__,",
+    "Mallia,",
+    "Thed"
+  ],
+  "friendlyCults": [
+    "Nysalor,",
+    "Pavis,",
+    "Yelorna"
+  ],
+  "associatedCults": [
+    "__PH5__,",
+    "Daka",
+    "Fal,",
+    "Eiritha,",
+    "__PH18__,",
+    "Yelm,",
+    "Yelmalio"
+  ],
+  "areas": [
+    "__A0__,",
+    "__A3__,",
+    "East,",
+    "Fonrit,",
+    "Lunar,",
+    "Oceans,",
+    "West"
+  ],
+  "holyDays": [
+    "Sea/Fertility/Water",
+    "Fire/Harmony/Fire",
+    "Fire/Fertility/Clay",
+    "Earth/Fertility/Clay",
+    "Earth/Stasis/Water",
+    "Dark/Movement/Clay",
+    "Storm/Truth/Wild"
+  ],
+  "spiritSocieties": [],
+  "oppositeRune": ""
+}

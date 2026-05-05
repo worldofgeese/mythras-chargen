@@ -1,16 +1,16 @@
 {
   "name": "Annilla",
   "pantheon": "Darkness",
-  "source": "CultOnePagers2019/Darkness/Annilla.pdf",
+  "source": "CultOnePagers2019/Sea/Annilla.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Goddess of the Blue Moon",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Will be invited by a member. Requires knowing the person for 10 years",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Will be invited by a member. Requires knowing the person for 10 years",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.Will be invited by a member. Requires knowing the person for 10 years\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Must be an\nopening for a priest. Bold skills are mandatory\nCult Skills (Oath is taken at initiate)\nConceal",
+    "Conceal",
     "Mechanisms",
     "Stealth",
     "Combat skill (any)",
@@ -31,15 +31,35 @@
     "Second Sight",
     "Slow"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Absorption",
+      "Behold",
+      "Chameleon",
+      "Summon Lune",
+      "Vision"
+    ],
+    "associate": [
+      "Artmal:Vesper"
+    ],
+    "runelord": [
+      "Excommunication Mindlink Sanctify Summon Spirit of Reprisal ? Corruption"
+    ]
+  },
   "personalityTraits": [
-    "Cruelo Coldo",
-    "Secretiveo Patiento",
+    "Cruel",
+    "Cold",
+    "Secretive",
+    "Patient",
     "Tolerant",
     "Balanced",
-    "Spiritualliberation",
-    "Open",
-    "Mercurialw"
+    "Spiritual Liberation",
+    "Open-minded",
+    "Mercurial"
   ],
   "enemyCults": [],
   "hostileCults": [],
@@ -53,9 +73,14 @@
     "Genertela",
     "Inland Pamaltela",
     "Lunar",
-    "Oceans"
+    "Oceans",
+    "West"
   ],
   "holyDays": [],
   "spiritSocieties": [],
-  "runeAssociations": {}
+  "oppositeRune": "",
+  "additionalPantheons": [
+    "Lunar",
+    "Sea"
+  ]
 }

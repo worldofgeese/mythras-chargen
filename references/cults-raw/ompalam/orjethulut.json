@@ -1,0 +1,80 @@
+{
+  "name": "Orjethulut",
+  "pantheon": "Ompalam",
+  "source": "CultOnePagers2019/Ompalam/Orjethulut.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Fonritan God of Death & War",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.One of the shown skills must be a sword combat s",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Passion: Hate Hanjethulut",
+    "Lore (cult)",
+    "Willpower",
+    "Endurance",
+    "Lore (Ompalam)",
+    "Runic Affinity",
+    "Devotion",
+    "Combat style with sword"
+  ],
+  "folkMagic": [
+    "Bladesharp",
+    "Coordination",
+    "Find Enemies",
+    "Fireblade",
+    "Protection"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Berserk",
+      "Detect Truth",
+      "Oath",
+      "Sacred Band",
+      "Shield",
+      "True Weapon",
+      "Foreboding"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Morale",
+      "Sever Spirit"
+    ]
+  },
+  "personalityTraits": [
+    "Relentless",
+    "Ruthless",
+    "Unemotional",
+    "Ascetic",
+    "Truthful",
+    "Observant",
+    "Dutiful",
+    "Faithful",
+    "Fair"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Fonrit"
+  ],
+  "holyDays": [
+    "Sea/Death/Water",
+    "Fire/Death/Fire",
+    "Earth/Death/Clay",
+    "Dark/Death/Freeze",
+    "Storm/Death/Winds"
+  ],
+  "spiritSocieties": [],
+  "oppositeRune": "Illusion"
+}

@@ -1,0 +1,58 @@
+{
+  "name": "Shaman Spirit Society",
+  "pantheon": "Pamalt, Darkness, Praxian, Hsunchen",
+  "source": "CultOnePagers2019/Praxian/Shaman Spirit Society.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Any Shamans AIG/RQG etc",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity. Examiners need to be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [],
+  "folkMagic": [
+    "Any - varies(l)"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
+  "personalityTraits": [],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "__A0__,",
+    "__A3__,",
+    "East,",
+    "Fonrit,",
+    "Genertela,",
+    "__A1__,",
+    "Lunar,",
+    "Oceans,",
+    "West"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "",
+  "additionalPantheons": [
+    "Areas",
+    "Continents:Genertela, Oceans, Pamaltela",
+    "Main Areas: Coastal Pamaltela, Dragon Pass, East, Fonrit, Genertela, Inland Pamaltela, Lunar,",
+    "Oceans, West",
+    "Localities: Blue Moon Plateau, Dagori Inkarth, Elder Wilds, Errinoru Jungle, Fronela, Halikiv, Jrusteli",
+    "Isles, Keniryan Sea, Koromondol, Pavis, Tarmo Mountains, Valinds Glacier, Yolp Mountains,Elder"
+  ]
+}

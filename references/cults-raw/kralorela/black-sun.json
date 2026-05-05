@@ -1,0 +1,68 @@
+{
+  "name": "Black Sun",
+  "pantheon": "Kralorela",
+  "source": "CultOnePagers2019/Kralorela/Black Sun.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Shadow of the Sun",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Sacrifice so much blood that loses permanently 1 that lsoes permanently 1 STR",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Runic Affinity",
+    "Devotion"
+  ],
+  "folkMagic": [
+    "Bypass",
+    "Countermagic",
+    "Darkwall",
+    "Extinguish",
+    "False Healing¹⁰",
+    "Find Enemy"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Blood Feast"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
+  "personalityTraits": [
+    "Cruel",
+    "Cold",
+    "Secretive",
+    "Patient",
+    "Deceitful",
+    "Cowardly",
+    "Corrupted",
+    "Imaginative",
+    "Subjective"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "East"
+  ],
+  "holyDays": [
+    "Sea/Stasis/Wild",
+    "Sea/Truth/Wild",
+    "Earth/Fertility/Wild",
+    "Dark/Fertility/Wild",
+    "Dark/Stasis/Wild",
+    "Storm/Stasis/Wild"
+  ],
+  "spiritSocieties": [],
+  "oppositeRune": "Truth"
+}

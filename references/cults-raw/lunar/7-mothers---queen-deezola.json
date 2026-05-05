@@ -3,17 +3,17 @@
   "pantheon": "Lunar",
   "source": "CultOnePagers2019/Lunar/7 Mothers - Queen Deezola.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Recreators of the Red Goddess",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nDevotion",
+    "Devotion",
     "Runic Affinity",
     "Willpower",
-    "Sedenyic Philosophy\u2076",
+    "Sedenyic Philosophy",
     "Customs",
     "Dance",
     "First Aid",
@@ -25,16 +25,35 @@
     "Heal",
     "Voice"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Behold",
+      "Cure Malady",
+      "Dismiss Elemental",
+      "Summon Lune"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication Mindlink Sanctify Summon Spirit of Reprisal Awaken"
+    ]
+  },
   "personalityTraits": [
-    "Generousx Lustfulx",
-    "Pleasureseekingx Tolerant",
+    "Generous",
+    "Lustful",
+    "Pleasure-seeking",
+    "Tolerant",
     "Balanced",
-    "Spiritualliberation",
-    "Open"
+    "Spiritual Liberation",
+    "Open-minded"
   ],
   "enemyCults": [
-    "Hostile Cults: Blackfang",
+    "Hostile",
+    "Cults:",
+    "Blackfang",
     "Mallia",
     "Orlanth",
     "Thanatar",
@@ -54,7 +73,8 @@
     "Caladra&Aurelion",
     "Chalana Arroy",
     "Crimson Bat",
-    "Daka Fal"
+    "Daka",
+    "Fal"
   ],
   "associatedCults": [
     "Nysalor",
@@ -62,24 +82,16 @@
     "Primal Chaos"
   ],
   "areas": [
-    "Dragon Pass",
-    "Lunar"
+    "Dragon Pass Lunar"
   ],
   "holyDays": [
     "Sea/Illusion/Wild",
     "Fire/Illusion/Wild",
     "Earth/Illusion/Wild",
     "Dark/Disorder/God",
-    "Dark/Illusion/Wild\nStorm/Illusion/Wild\nRune Meanings: Fertility\u00a0life:",
-    "Love",
-    "Plenty",
-    "Sex",
-    "Moon: Illusion",
-    "Cycles",
-    "Balance\nThis document uses trademarks and/or copyrights owned by Chaosium Inc/Moon Design Publications\nLLC",
-    "which are used under Chaosium Inc\u2019s Fan Material Policy, We are expressly prohibited from\ncharging you to use or access this content. This site is not published, endorsed, or specifically approved\nby Chaosium Inc. For more information about Chaosium Inc\u2019s products, please visit www.chaosium.com.\n\"Mythras\u201d is a Registered Trademark of The Design Mechanism Inc, and is used with permission, http:\n//notesfrompavis.blog 3/15/2019 9:13:32 PM Version: 5.2\n2x\n7 Mothers - Queen Deezola\nRecreators of the Red Goddess\n2019 version\nAIG/RQG etc"
+    "Dark/Illusion/Wild",
+    "Storm/Illusion/Wild"
   ],
   "spiritSocieties": [],
-  "runeAssociations": {},
   "oppositeRune": "Death"
 }

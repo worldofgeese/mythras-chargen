@@ -1,0 +1,54 @@
+{
+  "name": "Vakalta",
+  "pantheon": "Chaos - Genertela",
+  "source": "CultOnePagers2019/Chaos - Genertela/Vakalta.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Haunter of Hell",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Binding",
+    "Trance",
+    "Runic Affinity",
+    "Devotion",
+    "Lore(Ancestors)"
+  ],
+  "folkMagic": [
+    "Varies thru cult shamans"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "? Devour(Race)"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
+  "personalityTraits": [
+    "Cruel",
+    "Cold",
+    "Secretive",
+    "Patient"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Genertela"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": ""
+}

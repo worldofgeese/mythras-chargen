@@ -3,14 +3,14 @@
   "pantheon": "Storm",
   "source": "CultOnePagers2019/Storm/Asrelia.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Goddess of Wealth",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Must be a\nwoman. Bold skills are mandatory\nCult Skills (Oath is taken at initiate)\nConceal",
+    "Conceal",
     "Customs",
     "Locale",
     "Commerce",
@@ -32,12 +32,39 @@
     "Second Sight",
     "Vigour"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Hide Wealth",
+      "Absorption",
+      "Summon Gnome"
+    ],
+    "associate": [
+      "Babeester Gor:Great Parry",
+      "Maran Gor:Blast Earth",
+      "Ty Kora Tek:Command (Specific Species, Monster or Spirit)",
+      "Voria:Invigorate"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Ke Asrelia's Cavern"
+    ]
+  },
   "personalityTraits": [
-    "Generousx Lustfulx",
-    "Pleasureseekingx Pragmatice",
-    "Prudente Worldlye",
-    "Sensuale Reckless",
+    "Generous",
+    "Lustful",
+    "Pleasure-seeking",
+    "Pragmatic",
+    "Prudent",
+    "Worldly",
+    "Sensual",
+    "Reckless",
     "Fatalistic"
   ],
   "enemyCults": [],
@@ -51,7 +78,10 @@
     "Fonrit",
     "Genertela",
     "Holy Country",
-    "Inland Pamaltela"
+    "Inland Pamaltela",
+    "Lunar",
+    "Oceans",
+    "West"
   ],
   "holyDays": [
     "Earth/Disorder/Freeze",
@@ -60,6 +90,8 @@
     "Dark/Death/Fire"
   ],
   "spiritSocieties": [],
-  "runeAssociations": {},
-  "oppositeRune": "Death"
+  "oppositeRune": "Death",
+  "additionalPantheons": [
+    "Darkness"
+  ]
 }

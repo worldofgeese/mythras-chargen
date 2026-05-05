@@ -1,0 +1,107 @@
+{
+  "name": "Thed",
+  "pantheon": "Chaos - Genertela",
+  "source": "CultOnePagers2019/Chaos - Pamaltela/Thed.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Mother of the Broos",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Must be a broo. Special.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Brawn",
+    "Endurance",
+    "Lore (cult)",
+    "Survival",
+    "Combat style (any)",
+    "Conceal",
+    "Stealth",
+    "Binding(Shaman)",
+    "Devotion",
+    "Runic Affinity",
+    "Track",
+    "Trance(Shaman)"
+  ],
+  "folkMagic": [
+    "Varies thru cult shamans"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Spirit Block",
+      "? Chaos Spawn",
+      "? Reverse Chaos",
+      "?j Crack",
+      "Dismiss Elemental RW Multispell",
+      "Vision",
+      "?j Fumble",
+      "Bind Ghost",
+      "Create Foe-curser",
+      "? Curse of Thed",
+      "?b Devour Spirit"
+    ],
+    "associate": [
+      "Mallia:Cause Disease",
+      "Cacodemon:Create Ghost",
+      "Ragnaglar:Summon Ancestor"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "? Rebirth of Chaos"
+    ]
+  },
+  "personalityTraits": [
+    "Ecstatic",
+    "Spiritual",
+    "Aware",
+    "Mystical"
+  ],
+  "enemyCults": [
+    "Donandar,",
+    "__PH22__,",
+    "Zorak Zoran"
+  ],
+  "hostileCults": [
+    "Aldrya,",
+    "Aranea,",
+    "__PH13__,",
+    "Caladra&Aurelion,",
+    "Flintnail,",
+    "Frog",
+    "Woman,",
+    "Geo,",
+    "Gorakiki,"
+  ],
+  "friendlyCults": [
+    "Bagog"
+  ],
+  "associatedCults": [
+    "Cacodemon,",
+    "Daka",
+    "Fal,",
+    "Nysalor,",
+    "Mallia,",
+    "Primal Chaos"
+  ],
+  "areas": [
+    "Genertela,",
+    "Inland Pamaltela"
+  ],
+  "holyDays": [
+    "Sacred Time/Fate Week/Freeze"
+  ],
+  "spiritSocieties": [
+    "Thed Spirit Society"
+  ],
+  "oppositeRune": "",
+  "additionalPantheons": [
+    "Chaos - Pamaltela"
+  ]
+}

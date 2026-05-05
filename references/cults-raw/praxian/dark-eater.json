@@ -3,21 +3,21 @@
   "pantheon": "Praxian",
   "source": "CultOnePagers2019/Praxian/Dark Eater.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Lord of Shades And Slavery - Morocanth",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Morocanth who has at least one parent who is an initiate of Dark Eater",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Morocanth who has at least one parent who is an initiate of Dark Eater",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.Morocanth who has at least one parent who is an initiate of Dark Eater\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nCombat Style(Natural)",
+    "Combat Style(Natural)",
     "Unarmed",
     "Evade",
     "Runic Affinity",
     "Devotion"
   ],
   "folkMagic": [
-    "Beslave\u2079",
+    "Beslave⁹",
     "Bladesharp",
     "Bludgeon",
     "Darkness",
@@ -26,13 +26,42 @@
     "Ironhand",
     "Light"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Summon Shade",
+      "B Alter Creature"
+    ],
+    "associate": [
+      "Xentha:Create Shadow",
+      "Kyger Litor:Darksee",
+      "Zorak Zoran:Seal wound",
+      "Zorak Zoran:Fear",
+      "Storm Bull:Chaos"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "B Fix Intelligence",
+      "B Release\nIntelligence"
+    ]
+  },
   "personalityTraits": [
-    "Cruelo Coldo",
-    "Secretiveo Patiento",
-    "Destructivej Recklessj",
-    "Selfishj Greedyj",
-    "Soullessu Fiendishu"
+    "Cruel",
+    "Cold",
+    "Secretive",
+    "Patient",
+    "Destructive",
+    "Reckless",
+    "Selfish",
+    "Greedy",
+    "Soulless",
+    "Fiendish"
   ],
   "enemyCults": [],
   "hostileCults": [],
@@ -42,7 +71,9 @@
     "Dragon Pass"
   ],
   "holyDays": [],
-  "spiritSocieties": [],
-  "runeAssociations": {},
+  "spiritSocieties": [
+    "Dark Eater Spirit Society",
+    "Horned Man Spirit Society"
+  ],
   "oppositeRune": "Harmony"
 }

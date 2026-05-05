@@ -1,0 +1,327 @@
+{
+  "_source": "Mythras Core Rulebook (3rd Printing, 2018), pp.251-252, adapted for Gloranthan mounts",
+  "_notes": "Horse stats are directly from Mythras Core p.252. Other mounts derived from RQG Starter Set pregen folios, adapted to Mythras mechanics. War variants add +4 STR and +4 SIZ to base stats.",
+  "horse": {
+    "name": "Horse (Riding)",
+    "description": "Standard riding mount available to most adventurers. For a War Horse, add +4 to STR and SIZ.",
+    "characteristics": {
+      "STR": {"dice": "2d6+15", "average": 22},
+      "CON": {"dice": "2d6+6", "average": 13},
+      "SIZ": {"dice": "2d6+24", "average": 31},
+      "DEX": {"dice": "2d6+3", "average": 10},
+      "INS": {"dice": "2d6+4", "average": 11},
+      "POW": {"dice": "2d6", "average": 7}
+    },
+    "attributes": {
+      "actionPoints": 2,
+      "damageModifier": "+1d12",
+      "magicPoints": 7,
+      "movement": "12m",
+      "initiativeBonus": 11,
+      "armour": "Hide"
+    },
+    "hitLocations": [
+      {"range": "1-3", "location": "Right Hind Leg", "ap": 1, "hp": 9},
+      {"range": "4-6", "location": "Left Hind Leg", "ap": 1, "hp": 9},
+      {"range": "7-9", "location": "Hindquarters", "ap": 1, "hp": 10},
+      {"range": "10-12", "location": "Forequarters", "ap": 1, "hp": 11},
+      {"range": "13-14", "location": "Right Front Leg", "ap": 1, "hp": 8},
+      {"range": "15-16", "location": "Left Front Leg", "ap": 1, "hp": 8},
+      {"range": "17-20", "location": "Head", "ap": 1, "hp": 9}
+    ],
+    "skills": "Athletics 52%, Brawn 83%, Endurance 66%, Evade 40%, Perception 48%, Willpower 34%",
+    "combatStyle": {
+      "name": "Rear and Plunge",
+      "weapons": ["Hoofs"],
+      "skill": 62
+    },
+    "weapons": [
+      {"name": "Hoof", "sizeForce": "H", "reach": "L", "damage": "1d6+1d12", "apHp": "As for Leg"}
+    ],
+    "abilities": "None",
+    "magic": "None",
+    "notes": "A riding horse will only attack once per melee round on its own, or its owner may attack. Normally, a riding horse will only attack if its life is threatened."
+  },
+  "warHorse": {
+    "name": "Horse (War-trained)",
+    "description": "Specially trained to fight against foot troops. Requires a competent rider to initiate battle.",
+    "characteristics": {
+      "STR": {"dice": "2d6+19", "average": 26},
+      "CON": {"dice": "2d6+6", "average": 13},
+      "SIZ": {"dice": "2d6+28", "average": 35},
+      "DEX": {"dice": "2d6+3", "average": 10},
+      "INS": {"dice": "2d6+4", "average": 11},
+      "POW": {"dice": "2d6", "average": 7}
+    },
+    "attributes": {
+      "actionPoints": 2,
+      "damageModifier": "+1d12",
+      "magicPoints": 7,
+      "movement": "12m",
+      "initiativeBonus": 11,
+      "armour": "Hide"
+    },
+    "hitLocations": [
+      {"range": "1-3", "location": "Right Hind Leg", "ap": 1, "hp": 10},
+      {"range": "4-6", "location": "Left Hind Leg", "ap": 1, "hp": 10},
+      {"range": "7-9", "location": "Hindquarters", "ap": 1, "hp": 11},
+      {"range": "10-12", "location": "Forequarters", "ap": 1, "hp": 12},
+      {"range": "13-14", "location": "Right Front Leg", "ap": 1, "hp": 9},
+      {"range": "15-16", "location": "Left Front Leg", "ap": 1, "hp": 9},
+      {"range": "17-20", "location": "Head", "ap": 1, "hp": 10}
+    ],
+    "skills": "Athletics 52%, Brawn 91%, Endurance 66%, Evade 40%, Perception 48%, Willpower 34%",
+    "combatStyle": {
+      "name": "Rear and Plunge",
+      "weapons": ["Hoofs"],
+      "skill": 62
+    },
+    "weapons": [
+      {"name": "Hoof", "sizeForce": "H", "reach": "L", "damage": "1d6+1d12", "apHp": "As for Leg"},
+      {"name": "Bite", "sizeForce": "M", "reach": "T", "damage": "1d8+3d6", "apHp": "-"},
+      {"name": "Rear and Plunge", "sizeForce": "H", "reach": "L", "damage": "2d6+3d6", "apHp": "-"},
+      {"name": "Trample", "sizeForce": "H", "reach": "M", "damage": "4d6", "apHp": "to downed foe"}
+    ],
+    "abilities": "None",
+    "magic": "None",
+    "notes": "War horses attack on their own initiative. Can bite and kick one or two foes, or rear and plunge against one foe."
+  },
+  "bison": {
+    "name": "Bison (War-trained cavalry)",
+    "description": "Praxian war mount. Larger and stronger than a horse but less agile. Used by the Bison Rider tribe.",
+    "characteristics": {
+      "STR": {"dice": "2d6+24", "average": 31},
+      "CON": {"dice": "2d6+9", "average": 16},
+      "SIZ": {"dice": "2d6+22", "average": 29},
+      "DEX": {"dice": "2d6+3", "average": 10},
+      "INS": {"dice": "2d6+4", "average": 11},
+      "POW": {"dice": "2d6+2", "average": 9}
+    },
+    "attributes": {
+      "actionPoints": 2,
+      "damageModifier": "+2d6",
+      "magicPoints": 9,
+      "movement": "10m",
+      "initiativeBonus": 11,
+      "armour": "Thick Hide (AP 3)"
+    },
+    "hitLocations": [
+      {"range": "1-3", "location": "Right Hind Leg", "ap": 3, "hp": 9},
+      {"range": "4-6", "location": "Left Hind Leg", "ap": 3, "hp": 9},
+      {"range": "7-9", "location": "Hindquarters", "ap": 3, "hp": 10},
+      {"range": "10-12", "location": "Forequarters", "ap": 3, "hp": 11},
+      {"range": "13-14", "location": "Right Foreleg", "ap": 3, "hp": 8},
+      {"range": "15-16", "location": "Left Foreleg", "ap": 3, "hp": 8},
+      {"range": "17-20", "location": "Head", "ap": 3, "hp": 9}
+    ],
+    "skills": "Athletics 42%, Brawn 90%, Endurance 72%, Evade 30%, Perception 44%, Willpower 38%",
+    "combatStyle": {
+      "name": "Gore and Trample",
+      "weapons": ["Head Butt", "Trample"],
+      "skill": 50
+    },
+    "weapons": [
+      {"name": "Head Butt", "sizeForce": "H", "reach": "M", "damage": "2d10+2d6", "apHp": "As for Head"},
+      {"name": "Trample", "sizeForce": "H", "reach": "M", "damage": "4d6+2d6", "apHp": "to downed foe"}
+    ],
+    "abilities": "Trample",
+    "magic": "None",
+    "notes": "A bison can head butt or trample in the same melee round, but not both. When a rider uses their lance while charging, use the bison's damage modifier (+2d6) instead of the rider's."
+  },
+  "highLlama": {
+    "name": "High Llama (War-trained)",
+    "description": "Praxian war mount. Tall and fast, used by the High Llama Rider tribe. Larger than a horse.",
+    "characteristics": {
+      "STR": {"dice": "2d6+24", "average": 31},
+      "CON": {"dice": "2d6+6", "average": 13},
+      "SIZ": {"dice": "3d6+24", "average": 35},
+      "DEX": {"dice": "2d6+2", "average": 9},
+      "INS": {"dice": "2d6+4", "average": 11},
+      "POW": {"dice": "2d6+2", "average": 9}
+    },
+    "attributes": {
+      "actionPoints": 2,
+      "damageModifier": "+2d6",
+      "magicPoints": 9,
+      "movement": "12m",
+      "initiativeBonus": 10,
+      "armour": "Hide (AP 2)"
+    },
+    "hitLocations": [
+      {"range": "1-2", "location": "Right Hind Leg", "ap": 2, "hp": 9},
+      {"range": "3-4", "location": "Left Hind Leg", "ap": 2, "hp": 9},
+      {"range": "5-7", "location": "Hindquarters", "ap": 2, "hp": 10},
+      {"range": "8-10", "location": "Forequarters", "ap": 2, "hp": 11},
+      {"range": "11-13", "location": "Right Foreleg", "ap": 2, "hp": 8},
+      {"range": "14-16", "location": "Left Foreleg", "ap": 2, "hp": 8},
+      {"range": "17-20", "location": "Head", "ap": 2, "hp": 9}
+    ],
+    "skills": "Athletics 40%, Brawn 86%, Endurance 66%, Evade 28%, Perception 44%, Willpower 38%",
+    "combatStyle": {
+      "name": "Kick and Bite",
+      "weapons": ["Bite", "Kick", "Rear and Plunge"],
+      "skill": 42
+    },
+    "weapons": [
+      {"name": "Bite", "sizeForce": "M", "reach": "T", "damage": "1d8", "apHp": "-"},
+      {"name": "Kick", "sizeForce": "H", "reach": "M", "damage": "1d8+2d6", "apHp": "-"},
+      {"name": "Rear and Plunge", "sizeForce": "H", "reach": "L", "damage": "2d8+2d6", "apHp": "-"}
+    ],
+    "abilities": "None",
+    "magic": "None",
+    "notes": "A high llama can bite and kick one or two foes at the same time, or can rear and plunge against one foe. Due to its height, riders are difficult to reach from the ground (-1 grade to melee attacks from below)."
+  },
+  "sableAntelope": {
+    "name": "Sable Antelope (War-trained)",
+    "description": "Praxian war mount. Smaller than a horse but very agile. Used by the Sable Rider tribe.",
+    "characteristics": {
+      "STR": {"dice": "2d6+15", "average": 22},
+      "CON": {"dice": "2d6+4", "average": 11},
+      "SIZ": {"dice": "2d6+16", "average": 23},
+      "DEX": {"dice": "2d6+4", "average": 11},
+      "INS": {"dice": "2d6+4", "average": 11},
+      "POW": {"dice": "2d6+4", "average": 11}
+    },
+    "attributes": {
+      "actionPoints": 2,
+      "damageModifier": "+1d10",
+      "magicPoints": 11,
+      "movement": "12m",
+      "initiativeBonus": 11,
+      "armour": "Hide (AP 1)"
+    },
+    "hitLocations": [
+      {"range": "1-3", "location": "Right Hind Leg", "ap": 1, "hp": 7},
+      {"range": "4-6", "location": "Left Hind Leg", "ap": 1, "hp": 7},
+      {"range": "7-9", "location": "Hindquarters", "ap": 1, "hp": 8},
+      {"range": "10-12", "location": "Forequarters", "ap": 1, "hp": 9},
+      {"range": "13-14", "location": "Right Foreleg", "ap": 1, "hp": 6},
+      {"range": "15-16", "location": "Left Foreleg", "ap": 1, "hp": 6},
+      {"range": "17-20", "location": "Head", "ap": 1, "hp": 7}
+    ],
+    "skills": "Athletics 56%, Brawn 65%, Endurance 62%, Evade 52%, Perception 48%, Willpower 42%",
+    "combatStyle": {
+      "name": "Butt and Kick",
+      "weapons": ["Butt", "Kick", "Bite"],
+      "skill": 38
+    },
+    "weapons": [
+      {"name": "Butt", "sizeForce": "M", "reach": "S", "damage": "2d6+1d10", "apHp": "-"},
+      {"name": "Kick", "sizeForce": "M", "reach": "M", "damage": "1d6+1d10", "apHp": "-"},
+      {"name": "Bite", "sizeForce": "S", "reach": "T", "damage": "2d4", "apHp": "-"}
+    ],
+    "abilities": "None",
+    "magic": "None",
+    "notes": "A sable antelope will either butt or bite and kick in a melee round. Fast and agile, better at evasion than raw power."
+  },
+  "shadowcat": {
+    "name": "Shadowcat",
+    "description": "A large wildcat sacred to Yinkin, brother of Orlanth. Intelligent enough to form bonds with humans. Size of a lynx or small panther.",
+    "characteristics": {
+      "STR": {"dice": "2d6+6", "average": 13},
+      "CON": {"dice": "2d6+3", "average": 10},
+      "SIZ": {"dice": "1d6+6", "average": 10},
+      "DEX": {"dice": "3d6+6", "average": 17},
+      "INS": {"dice": "2d6+6", "average": 13},
+      "POW": {"dice": "2d6+3", "average": 10}
+    },
+    "attributes": {
+      "actionPoints": 3,
+      "damageModifier": "+0",
+      "magicPoints": 10,
+      "movement": "10m",
+      "initiativeBonus": 15,
+      "armour": "Fur (AP 0)"
+    },
+    "hitLocations": [
+      {"range": "1-2", "location": "Right Hind Leg", "ap": 0, "hp": 4},
+      {"range": "3-4", "location": "Left Hind Leg", "ap": 0, "hp": 4},
+      {"range": "5-7", "location": "Hindquarters", "ap": 0, "hp": 5},
+      {"range": "8-10", "location": "Forequarters", "ap": 0, "hp": 6},
+      {"range": "11-13", "location": "Right Front Leg", "ap": 0, "hp": 4},
+      {"range": "14-16", "location": "Left Front Leg", "ap": 0, "hp": 4},
+      {"range": "17-20", "location": "Head", "ap": 0, "hp": 4}
+    ],
+    "skills": "Athletics 70%, Brawn 43%, Endurance 50%, Evade 74%, Perception 66%, Stealth 80%, Survival 60%, Track 55%, Willpower 50%",
+    "combatStyle": {
+      "name": "Feline Pounce",
+      "weapons": ["Claw", "Bite"],
+      "skill": 55
+    },
+    "weapons": [
+      {"name": "Claw (x2)", "sizeForce": "S", "reach": "T", "damage": "1d6", "apHp": "-"},
+      {"name": "Bite", "sizeForce": "S", "reach": "T", "damage": "1d6", "apHp": "-"},
+      {"name": "Rip", "sizeForce": "M", "reach": "T", "damage": "2d6", "apHp": "-"}
+    ],
+    "abilities": "Night Vision, Leaper",
+    "magic": "None (though bonded shadowcats share Spirit Magic with their companion)",
+    "notes": "First attacks with both claws and bite simultaneously. If both claws hit, Rurik hangs on and rips with its hind claws on the next round while continuing to bite. Sacred to Yinkin; hunters and Odayla worshippers sometimes bond with them."
+  },
+  "baboon": {
+    "name": "Baboon (Companion)",
+    "description": "Intelligent Gloranthan baboons are fully sapient. They can be companions, allies, or even cult members. Cousin Monkey-type baboons are smaller and less combat-focused.",
+    "characteristics": {
+      "STR": {"dice": "3d6+3", "average": 14},
+      "CON": {"dice": "2d6+3", "average": 10},
+      "SIZ": {"dice": "2d6+2", "average": 9},
+      "DEX": {"dice": "2d6+6", "average": 13},
+      "INT": {"dice": "2d6+6", "average": 13},
+      "POW": {"dice": "2d6+4", "average": 11},
+      "CHA": {"dice": "2d6+2", "average": 9}
+    },
+    "attributes": {
+      "actionPoints": 3,
+      "damageModifier": "+0",
+      "magicPoints": 11,
+      "movement": "10m",
+      "initiativeBonus": 13,
+      "armour": "Fur (AP 1)"
+    },
+    "hitLocations": [
+      {"range": "1-4", "location": "Right Leg", "ap": 1, "hp": 4},
+      {"range": "5-8", "location": "Left Leg", "ap": 1, "hp": 4},
+      {"range": "9-11", "location": "Abdomen", "ap": 1, "hp": 5},
+      {"range": "12", "location": "Chest", "ap": 1, "hp": 6},
+      {"range": "13-15", "location": "Right Arm", "ap": 1, "hp": 3},
+      {"range": "16-18", "location": "Left Arm", "ap": 1, "hp": 3},
+      {"range": "19-20", "location": "Head", "ap": 1, "hp": 4}
+    ],
+    "skills": "Athletics 57%, Brawn 43%, Climb 90%, Endurance 50%, Evade 56%, Perception 54%, Stealth 46%, Willpower 52%",
+    "combatStyle": {
+      "name": "Baboon Warrior",
+      "weapons": ["Claw", "Bite", "Short Spear", "Sling"],
+      "skill": 47
+    },
+    "weapons": [
+      {"name": "Claw", "sizeForce": "M", "reach": "T", "damage": "1d6+1d4", "apHp": "-"},
+      {"name": "Bite", "sizeForce": "M", "reach": "T", "damage": "1d8+1d4", "apHp": "-"},
+      {"name": "Short Spear", "sizeForce": "M", "reach": "S", "damage": "1d6+1d4", "apHp": "4/5"},
+      {"name": "Sling", "sizeForce": "L", "reach": "-", "damage": "1d8+1d2", "apHp": "S/MR"}
+    ],
+    "abilities": "Climbing, Tool Use",
+    "magic": "Spirit Magic (varies): Countermagic 2, Heal 2, Mobility 1, Spirit Screen 2",
+    "notes": "Gloranthan baboons are sapient. They can speak (poorly) in human tongues and practice spirit magic. They worship ancestor spirits and can serve as companions to shamans and Waha worshippers."
+  },
+  "_companionRules": {
+    "source": "Mythras Core p.251+ (Creatures chapter), adapted for AiG character creation",
+    "whoGetsCompanions": [
+      "Praxian culture characters: All Praxian warriors and nomads have a tribal mount (Bison, High Llama, Sable, Impala, or Rhino depending on tribe)",
+      "Characters with Ride skill and appropriate social class: May own a riding horse or war horse",
+      "Shamans (Waha cult): Often have spirit-bonded animal companions",
+      "Odayla worshippers: May bond with shadowcats or other forest creatures",
+      "Grazelanders: Horse-riding culture, all get riding horses"
+    ],
+    "attributeCalculation": {
+      "hitPoints": "CON + SIZ, distributed per hit location table (same as player characters)",
+      "damageModifier": "STR + SIZ lookup on standard table",
+      "healingRate": "CON-based (1-6: 1, 7-12: 2, 13-18: 3, 19-24: 4)",
+      "strikeRank": "DEX + INS / 2 (or DEX + INT for sapients)",
+      "movement": "Species-specific"
+    },
+    "combatNotes": {
+      "mountedCombat": "When charging with a lance, use the mount's damage modifier instead of the rider's",
+      "hitLocationRoll": "Attacks vs mounted rider: 1d10+10 targets rider; unmodified d20 targets mount",
+      "mountActions": "Mounts act on their own initiative unless directly controlled by rider (requires Ride skill roll)"
+    }
+  }
+}

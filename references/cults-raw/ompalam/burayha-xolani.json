@@ -1,0 +1,125 @@
+{
+  "name": "Burayha Xolani",
+  "pantheon": "Ompalam",
+  "source": "CultOnePagers2019/Ompalam/Burayha Xolani.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Chirurgeon. Fonritan Healer Cult",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.If cannot convince - quarantined",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "First aid",
+    "Lore (Human)",
+    "Lore(Enbalming)",
+    "Lore (cult)",
+    "Lore (Ompalam)",
+    "Insight",
+    "Influence",
+    "Mechanisms",
+    "Devotion",
+    "Runic Affinity",
+    "Healing",
+    "Lore(Torture)",
+    "Craft(Torture)",
+    "Deceit",
+    "Lore(Alchemy)",
+    "Willpower"
+  ],
+  "folkMagic": [
+    "Befuddle",
+    "Calm",
+    "Cool",
+    "Coordination",
+    "Curse",
+    "False Healing¹⁰",
+    "Glamour",
+    "Heal",
+    "Heat",
+    "Mindspeech",
+    "Perfume",
+    "Preserve",
+    "Repugnance",
+    "Vigour"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Sorcery: Transfer Wound",
+      "Summon Dead",
+      "Transfer Malady"
+    ],
+    "associate": [
+      "Mallia:Cause Disease",
+      "Zorak Zoran:?bot Create Zombie",
+      "Ikadz:Flay",
+      "Ikadz:Pain Blow"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Exorcism",
+      "Grimoire",
+      "Heal Mind",
+      "Leeching",
+      "?b Raise Undead",
+      "Sorcery: Renegerate",
+      "Sorcery: Sculpt(Flesh)",
+      "Sorcery: Tap (POW)",
+      "Resurrect"
+    ]
+  },
+  "personalityTraits": [
+    "Tribal",
+    "Social",
+    "Relentless",
+    "Ruthless",
+    "Unemotional",
+    "Ascetic",
+    "Ecstatic",
+    "Spiritual",
+    "Aware",
+    "Mystical"
+  ],
+  "enemyCults": [
+    "Hostile",
+    "Cults:",
+    "Jokotu"
+  ],
+  "hostileCults": [
+    "Jokotu"
+  ],
+  "friendlyCults": [
+    "Garangordos",
+    "Evukindu",
+    "Fida'ls",
+    "Orjethulut",
+    "Hanjethulut",
+    "El-Jazuli"
+  ],
+  "associatedCults": [
+    "Ompalam",
+    "Ikadz",
+    "Calari",
+    "the",
+    "Hunter"
+  ],
+  "areas": [
+    "Fonrit"
+  ],
+  "holyDays": [
+    "Sea/Death/Clay",
+    "Fire/Death/Clay",
+    "Earth/Death/Clay",
+    "Dark/Death/Clay",
+    "Storm/Death/Clay"
+  ],
+  "spiritSocieties": [],
+  "oppositeRune": "Life"
+}

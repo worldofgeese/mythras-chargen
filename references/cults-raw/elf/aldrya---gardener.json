@@ -1,0 +1,127 @@
+{
+  "name": "Aldrya - Gardener",
+  "pantheon": "Elf",
+  "source": "CultOnePagers2019/Elf/Aldrya - Gardener.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Goddess of the Woods - Gardener",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Elves are automatically accepted",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Athletics",
+    "Stealth",
+    "Lore (plant)",
+    "Devotion",
+    "Runic Affinity",
+    "Lore (cult)"
+  ],
+  "folkMagic": [
+    "Avert",
+    "Befuddle",
+    "Extinguish",
+    "Food Song²(Lay)",
+    "Heal(Lay)",
+    "Light",
+    "Mindspeech",
+    "Mobility",
+    "Repair",
+    "Speedart(Lay)",
+    "Spiritshield",
+    "Vigour",
+    "Witchsight"
+  ],
+  "miracles": {
+    "initiate": [
+      "Silence Sphere",
+      "Reflection",
+      "Shield",
+      "Arrow Trance",
+      "Absorption",
+      "Extension",
+      "Divination",
+      "Chastise",
+      "Accelerate Growth",
+      "Animate War Tree",
+      "Chameleon",
+      "Plant Eye",
+      "Tanglethicket"
+    ],
+    "associate": [
+      "Chalana Arroy:Cure Disease",
+      "Ernalda:Dismiss Earth Elemental",
+      "Flamal:Bear Fruit",
+      "Yelmalio:Catseye, (a):px Create War Tree",
+      "Yelm:Sunripen"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Heal Body",
+      "Resurrect"
+    ]
+  },
+  "personalityTraits": [
+    "Unstoppable Growth",
+    "Nurturing",
+    "Pragmatic",
+    "Prudent",
+    "Worldly",
+    "Sensual"
+  ],
+  "enemyCults": [
+    "Primal Chaos",
+    "Thanatar",
+    "Vivamort",
+    "Zorak Zoran"
+  ],
+  "hostileCults": [
+    "Bagog",
+    "Cacodemon",
+    "Crimson Bat",
+    "Gorakiki",
+    "Krarsht",
+    "Kyger Litor",
+    "Mallia",
+    "Thed"
+  ],
+  "friendlyCults": [
+    "Nysalor",
+    "Pavis",
+    "Yelorna"
+  ],
+  "associatedCults": [
+    "Chalana Arroy",
+    "Daka",
+    "Fal",
+    "Eiritha",
+    "Xiola Umbar",
+    "Yelm",
+    "Yelmalio"
+  ],
+  "areas": [
+    "Coastal Pamaltela",
+    "Dragon Pass",
+    "East",
+    "Fonrit",
+    "Lunar",
+    "Oceans",
+    "West"
+  ],
+  "holyDays": [
+    "Sea/Fertility/Water",
+    "Fire/Harmony/Fire",
+    "Fire/Fertility/Clay",
+    "Earth/Fertility/Clay",
+    "Earth/Stasis/Water",
+    "Dark/Movement/Clay",
+    "Storm/Truth/Wild"
+  ],
+  "spiritSocieties": [
+    "Aldrya Spirit Society"
+  ],
+  "oppositeRune": ""
+}

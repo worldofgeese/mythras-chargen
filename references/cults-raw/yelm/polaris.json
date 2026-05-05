@@ -3,14 +3,14 @@
   "pantheon": "Yelm",
   "source": "CultOnePagers2019/Yelm/Polaris.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Celestial General, God of Battle",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Officer in the army for two years. Must be recommended\nby a fellow worshipper or",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need Officer in the army for two years. Must be recommended to be convinced at 3 of them. by a fellow worshipper or a Yelm Imperator/LightServant. No other requirements are needed.",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.Officer in the army for two years. Must be recommended\nby a fellow worshipper or a Yelm Imperator/LightServant. No other\nrequirements are needed.\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Command military unit. Bold skills are mandatory\nCult Skills (Oath is taken at initiate)\nLore(Strategy & Tactics)",
+    "Lore(Strategy & Tactics)",
     "Perception",
     "Orate",
     "Combat Style(Any Weapon)",
@@ -34,7 +34,30 @@
     "Repair",
     "Vigour"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Face Chaos",
+      "Shield",
+      "True Weapon"
+    ],
+    "associate": [
+      "Yelmalio:Catseye, (a):RS Reflection"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Bless Worshippers",
+      "Captain Souls",
+      "Enchant Gold",
+      "Enchant Iron"
+    ]
+  },
   "personalityTraits": [
     "Loyal",
     "Honest",
@@ -42,34 +65,27 @@
     "Idealist",
     "Chastity",
     "Perceptive",
-    "Forgivingl Mercifull",
-    "Peacefull Generousl"
+    "Forgiving",
+    "Merciful",
+    "Peaceful",
+    "Generous"
   ],
   "enemyCults": [],
   "hostileCults": [],
   "friendlyCults": [],
   "associatedCults": [],
   "areas": [
-    "Dragon Pass, Inland Pamaltela, Lunar"
+    "__A3__,",
+    "__A1__,",
+    "Lunar"
   ],
   "holyDays": [
-    "Sea/Truth/Fire, Fire/Truth/Fire, Earth/Truth/Fire, Dark/Truth/Fire, Storm/Truth/Fire\nRune Meanings: Fire: Fire, Sky, Purity, Light, Stars, The Sky Dome Harmony: Harmony, Co-operation,\nHealing",
-    "Color:",
-    "Yellow",
-    "Action:",
-    "Command",
-    "Metal:",
-    "Gold",
-    "Sense:",
-    "Sight",
-    "Emotion:",
-    "Pride",
-    "Signature\nweapon:",
-    "Spear",
-    "Instrument:",
-    "Harp\nThis document uses trademarks and/or copyrights owned by Chaosium Inc/Moon Design Publications\nLLC, which are used under Chaosium Inc\u2019s Fan Material Policy, We are expressly prohibited from\ncharging you to use or access this content. This site is not published, endorsed, or specifically approved\nby Chaosium Inc. For more information about Chaosium Inc\u2019s products, please visit www.chaosium.com.\n\"Mythras\u201d is a Registered Trademark of The Design Mechanism Inc, and is used with permission, http:\n//notesfrompavis.blog 3/15/2019 9:13:32 PM Version: 5.2\n.l\nPolaris\nCelestial General, God of Battle\n2019 version\nAIG/RQG etc"
+    "Sea/Truth/Fire",
+    "Fire/Truth/Fire",
+    "Earth/Truth/Fire",
+    "Dark/Truth/Fire",
+    "Storm/Truth/Fire"
   ],
   "spiritSocieties": [],
-  "runeAssociations": {},
   "oppositeRune": "Disorder"
 }

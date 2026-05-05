@@ -3,14 +3,14 @@
   "pantheon": "Praxian",
   "source": "CultOnePagers2019/Praxian/Hearth Mother.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Raiser of Foundchild",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.needs to have 5 cult skills at 50% one of which needs to be Cult Runic\nAffinity.",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.needs to have 5 cult skills at 50% one of which needs to be Cult Runic Affinity. Examiners need to be convinced at 3 of them. Femaile only",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.needs to have 5 cult skills at 50% one of which needs to be Cult Runic\nAffinity. Examiners need to be convinced at 3 of them. Femaile only\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Bold skills\nare mandatory\nCult Skills (Oath is taken at initiate)\nCraft (Build Shelter)",
+    "Craft (Build Shelter)",
     "Craft (Cook)",
     "Locale",
     "Lore(Herbs)",
@@ -31,23 +31,29 @@
     "Prax\nPersonality Traits\nGenerousx Lustfulx Pleasureseekingx UnstoppableGrowthp Nurturingp Tribal",
     "Social",
     "Opposing Runes:\nOpposite:Death\nSpirit Societies\nHearth Mother Spirit Society\nRune Meanings: Fertility",
-    "life:  Love",
+    "life: Love",
     "Plenty",
-    "Sex   Plant: Plant Life   Man: Mortal Humanoids",
+    "Sex Plant: Plant Life Man: Mortal Humanoids",
     "Slave\nThis document uses trademarks and/or copyrights owned by Chaosium Inc/Moon Design Publications\nLLC",
-    "which are used under Chaosium Inc\u2019s Fan Material Policy",
+    "which are used under Chaosium Inc’s Fan Material Policy",
     "We are expressly prohibited from\ncharging you to use or access this content. This site is not published",
     "endorsed",
-    "or specifically approved\nby Chaosium Inc. For more information about Chaosium Inc\u2019s products",
-    "please visit www.chaosium.com.\n\"Mythras\u201d is a Registered Trademark of The Design Mechanism Inc",
+    "or specifically approved\nby Chaosium Inc. For more information about Chaosium Inc’s products",
+    "please visit www.chaosium.com.\n\"Mythras” is a Registered Trademark of The Design Mechanism Inc",
     "and is used with permission",
     "http:\n//notesfrompavis.blog 3/15/2019 9:13:32 PM Version: 5.2"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [],
+    "associate": [],
+    "runelord": []
+  },
   "personalityTraits": [
-    "Generousx Lustfulx",
-    "Pleasureseekingx Unstoppable",
-    "Growthp Nurturingp",
+    "Generous",
+    "Lustful",
+    "Pleasure-seeking",
+    "Unstoppable Growth",
+    "Nurturing",
     "Tribal",
     "Social"
   ],
@@ -59,7 +65,8 @@
     "Dragon Pass"
   ],
   "holyDays": [],
-  "spiritSocieties": [],
-  "runeAssociations": {},
+  "spiritSocieties": [
+    "Hearth Mother Spirit Society"
+  ],
   "oppositeRune": "Death"
 }

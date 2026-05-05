@@ -1,0 +1,80 @@
+{
+  "name": "Henird",
+  "pantheon": "Yu-Kargzant",
+  "source": "CultOnePagers2019/Yu-Kargzant/Henird.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "The Leader. Grazer God",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Must be noble",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Bureaucracy",
+    "Lore(cult)",
+    "Runic Affinity",
+    "Devotion",
+    "Craft Falconry",
+    "First Aid",
+    "Orate",
+    "Lore(Human)",
+    "Play(Instrument)",
+    "Sing",
+    "Ride",
+    "Speak Grazer"
+  ],
+  "folkMagic": [
+    "Befuddle",
+    "Bladesharp",
+    "Coordination",
+    "Demoralize",
+    "Disruption",
+    "Find Enemies",
+    "Firearrow",
+    "Fireblade",
+    "Glamour",
+    "Heal",
+    "Ignite",
+    "Lightwall",
+    "Mindspeech",
+    "Repair",
+    "Speedart"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Truetune",
+      "R Dismiss Magic"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
+  "personalityTraits": [
+    "Tribal",
+    "Social",
+    "Loyal",
+    "Honest",
+    "Pure",
+    "Idealist",
+    "Chastity",
+    "Perceptive"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Dragon Pass"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": ""
+}

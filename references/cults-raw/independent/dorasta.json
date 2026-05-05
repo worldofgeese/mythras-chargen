@@ -1,0 +1,78 @@
+{
+  "name": "Dorasta",
+  "pantheon": "Independent",
+  "source": "CultOnePagers2019/Independent/Dorasta.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Dorastor Earth Goddess",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Lore (cult)",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Heal",
+    "Vigour"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Heal Wound",
+      "Command (Specific Species, Monster or Spirit)",
+      "Rb Soul Sight",
+      "Summon Gnome",
+      "Bless Crops"
+    ],
+    "associate": [
+      "Flamal:Bear Fruit",
+      "Orlanth:Cloud Call",
+      "Storm Bull:Impede Chaos"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Regrow Limb"
+    ]
+  },
+  "personalityTraits": [
+    "Unstoppable Growth",
+    "Nurturing",
+    "Pragmatic",
+    "Prudent",
+    "Worldly",
+    "Sensual",
+    "Forgiving",
+    "Merciful",
+    "Peaceful"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Lunar"
+  ],
+  "holyDays": [
+    "Sea/Fertility/Clay",
+    "Sea/Fertility/Clay",
+    "Fire/Fertility/Clay",
+    "Fire/Fertility/Clay",
+    "Earth/Fertility/Clay",
+    "Earth/Fertility/Clay",
+    "Dark/Fertility/Clay",
+    "Dark/Fertility/Clay",
+    "Storm/Fertility/Clay",
+    "Storm/Fertility/Clay"
+  ],
+  "spiritSocieties": [],
+  "oppositeRune": "Disorder"
+}

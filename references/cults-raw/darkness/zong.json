@@ -3,14 +3,14 @@
   "pantheon": "Darkness",
   "source": "CultOnePagers2019/Darkness/Zong.pdf",
   "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Troll Hunter God",
   "runes": [],
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Must bring in an appropriate creature in 3 Great Hunts",
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Must bring in an appropriate creature in 3 Great Hunts",
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "to be convinced at 3 of them.Must bring in an appropriate creature in 3 Great Hunts\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Must\nparticipate in master hunt and bring impressive trophy. Only one master hunter per year Bold skills are\nmandatory\nCult Skills (Oath is taken at initiate)\nAthletics",
+    "Athletics",
     "Locale",
     "Perception",
     "Lore (animal)",
@@ -18,7 +18,7 @@
     "Disguise",
     "Stealth",
     "Butchering",
-    "Combat style\nwith missile attack",
+    "Combat style with missile attack",
     "Devotion",
     "Runic Affinity",
     "Track",
@@ -34,23 +34,50 @@
     "Slow",
     "Speedart"
   ],
-  "miracles": [],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Bl Beastmaster"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
+    ]
+  },
   "personalityTraits": [
-    "Relentlesst Ruthlesst",
-    "Unemotionalt Ascetict",
-    "Forgivingl Mercifull",
-    "Peacefull Generousl",
-    "Compassionatel"
+    "Relentless",
+    "Ruthless",
+    "Unemotional",
+    "Ascetic",
+    "Forgiving",
+    "Merciful",
+    "Peaceful",
+    "Generous",
+    "Compassionate"
   ],
   "enemyCults": [],
   "hostileCults": [],
   "friendlyCults": [],
   "associatedCults": [],
   "areas": [
-    "Coastal Pamaltela, Dragon Pass, East, Genertela, Inland Pamaltela, Lunar, Oceans, West"
+    "__A0__,",
+    "__A3__,",
+    "East,",
+    "Genertela,",
+    "__A1__,",
+    "Lunar,",
+    "Oceans,",
+    "West"
   ],
   "holyDays": [],
-  "spiritSocieties": [],
-  "runeAssociations": {},
+  "spiritSocieties": [
+    "Zong Spirit Society"
+  ],
   "oppositeRune": "Disorder"
 }

@@ -1,0 +1,86 @@
+{
+  "name": "Magasta",
+  "pantheon": "Sea",
+  "source": "CultOnePagers2019/Sea/Magasta.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Lord of All Sea Gods",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.Must either live in the ocean or belong to one of Magasta's associate cults",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Combat style (any)",
+    "Endurance",
+    "Swim",
+    "Willpower",
+    "Craft",
+    "Lore (cult)",
+    "Lore (Sea)",
+    "Navigation",
+    "Devotion",
+    "Runic Affinity"
+  ],
+  "folkMagic": [
+    "Bladesharp",
+    "Coordination",
+    "Demoralise",
+    "Might",
+    "Mobility",
+    "Protection"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Breath water",
+      "Bw Call Monster",
+      "Summon Undine",
+      "Fear",
+      "Float",
+      "Reflection",
+      "Submerge",
+      "Whirlpool"
+    ],
+    "associate": [
+      "Triolina:Restore Health",
+      "Wachaza:Drown",
+      "Manthi:Shield",
+      "Brastalos:Waterspout",
+      "Natea:Absorption",
+      "Dormal:Predict Weather"
+    ],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "BWw Magnify Command"
+    ]
+  },
+  "personalityTraits": [
+    "Relentless",
+    "Ruthless",
+    "Unemotional",
+    "Ascetic",
+    "Adventurous",
+    "Dynamic",
+    "Impulsive",
+    "Reckless",
+    "Energetic"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Oceans"
+  ],
+  "holyDays": [
+    "Dark/Fertility/God"
+  ],
+  "spiritSocieties": [],
+  "oppositeRune": "Life"
+}

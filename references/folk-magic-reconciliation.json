@@ -1,0 +1,27 @@
+{
+  "source": "FOLK_MAGIC_SPELLS in index.html — reconciled with Mythras Core + AiG + Cult One-Pagers",
+  "extraction_date": "2026-05-03",
+  "policy": "Only spells attested from Mythras Core (p.122-130), AiG culture lists, or cult folk magic data are included in the general picker. Cult-specific spells remain accessible via CULTS_DATA.folkMagic arrays.",
+  "summary": {
+    "total_in_general_picker": 57,
+    "from_mythras_core": 54,
+    "from_aig_cultures": 1,
+    "from_cult_folk_magic": 2,
+    "attestation_percentage": "100%"
+  },
+  "removed_unattested": {
+    "count": 5,
+    "spells": ["Babel", "Clearpath", "Handfire", "Heatwave", "Lucky"],
+    "reason": "Not found in Mythras Core, AiG culture lists, or any cult folkMagic array. No source could be identified."
+  },
+  "retained_from_non_core_sources": [
+    {"name": "Find Game", "source": "Adventures in Glorantha p.26 (Balazaring culture folk magic)"},
+    {"name": "Detect Magic", "source": "Notes from Pavis Cult One-Pagers (Buserian cult folk magic)"},
+    {"name": "Endurance", "source": "Notes from Pavis Cult One-Pagers (Polaris cult folk magic)"}
+  ],
+  "in_reference_not_in_general_picker": {
+    "count": 16,
+    "spells": ["Bypass", "Cool", "Curse", "Demoralise", "Dishevel", "Find", "Frostbite", "Heat", "Incognito", "Mimic", "Phantasm", "Preserve", "Shove", "Sleep", "Tune", "Ventriloquism"],
+    "reason": "These Mythras Core spells are not in the general picker but ARE available to characters through cult-specific folk magic (CULTS_DATA.folkMagic). They are primarily cult-access spells in a Gloranthan context (e.g., Frostbite for Himile/Valind, Curse for Asrelia/Ty Kora Tek). Characters in those cults can still access them."
+  }
+}

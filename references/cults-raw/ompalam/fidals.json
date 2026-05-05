@@ -1,0 +1,73 @@
+{
+  "name": "Fida'ls",
+  "pantheon": "Ompalam",
+  "source": "CultOnePagers2019/Ompalam/Fida'ls.pdf",
+  "sourceVersion": "2019 edition v5.2",
+  "subtitle": "Sunbird - Fonritan Sun God",
+  "runes": [],
+  "requirements": {
+    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need to be convinced at 3 of them.",
+    "runelord": "to have 3"
+  },
+  "cultSkills": [
+    "Lore (cult)",
+    "Perception",
+    "Insight",
+    "Navigation",
+    "Devotion",
+    "Runic Affinity",
+    "Ride(Bird)"
+  ],
+  "folkMagic": [
+    "Coordination",
+    "Firearrow",
+    "Heat",
+    "Ignite",
+    "Light",
+    "Magnify",
+    "Pathway"
+  ],
+  "miracles": {
+    "initiate": [
+      "Extension",
+      "Find (Specific Thing)",
+      "Divination",
+      "Chastise",
+      "Cloud Clear",
+      "4Bego Speak To/With Specific Creatures",
+      "Summon Salamander",
+      "Flight"
+    ],
+    "associate": [],
+    "runelord": [
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Beastform (Fiery Sunbird)",
+      "Slave\nFire"
+    ]
+  },
+  "personalityTraits": [
+    "Relentless",
+    "Ruthless",
+    "Unemotional",
+    "Ascetic",
+    "Loyal",
+    "Honest",
+    "Pure",
+    "Idealist",
+    "Chastity",
+    "Perceptive"
+  ],
+  "enemyCults": [],
+  "hostileCults": [],
+  "friendlyCults": [],
+  "associatedCults": [],
+  "areas": [
+    "Fonrit"
+  ],
+  "holyDays": [],
+  "spiritSocieties": [],
+  "oppositeRune": "Life"
+}
