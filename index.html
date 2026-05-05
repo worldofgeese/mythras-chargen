@@ -13619,7 +13619,9 @@ const CharacterData = {
 
     // Weapon references
     const weapons = this.weapons || [];
-    weapons.forEach(weaponName => {
+    weapons.forEach(weaponEntry => {
+      const weaponName = typeof weaponEntry === 'string' ? weaponEntry : (weaponEntry && weaponEntry.name);
+      if (!weaponName) return;
       const resolved = Helpers.resolveWeapon(weaponName);
       if (!resolved) {
         errors.push(`Weapon "${weaponName}" not found in WEAPONS_DATA`);
@@ -18683,6 +18685,706 @@ App.exportSinglePagePDF = async function() {
     App.showToast('PDF export failed: ' + err.message, 'error');
   }
 };
+// =============================================================================
+// AGENT API — Programmatic character creation for playwright-cli agents
+// =============================================================================
+
+App.agent = {};
+
+/**
+ * App.agent.getState() — Returns the full compiled character state as plain JSON.
+ * Never throws; returns an object with all character fields.
+ */
+App.agent.getState = function() {
+  try {
+    const skills = App.compileAllSkills ? App.compileAllSkills() : [];
+    const compiledSkills = skills.map(s => ({
+      name: s.name,
+      total: s.base + s.cultural + s.career + s.bonus,
+      base: s.base,
+      cultural: s.cultural,
+      career: s.career,
+      bonus: s.bonus
+    }));
+
+    return {
+      step: App.currentStep || 1,
+      name: CharacterData.name || '',
+      concept: CharacterData.concept || '',
+      culture: CharacterData.culture || null,
+      homeland: CharacterData.homeland || '',
+      characteristics: {...CharacterData.characteristics},
+      attributes: {...(CharacterData.attributes || {})},
+      career: CharacterData.career || null,
+      cult: CharacterData.cult || null,
+      miracles: [...(CharacterData.miracles || [])],
+      devotionalPool: CharacterData.devotionalPool || 0,
+      socialClass: CharacterData.socialClass || null,
+      skills: compiledSkills,
+      passions: [...(CharacterData.passions || [])],
+      folkMagicSpells: [...(CharacterData.folkMagicSpells || [])],
+      careerFolkMagic: [...(CharacterData.careerFolkMagic || [])],
+      runeAffinities: {...(CharacterData.runeAffinities || {primary: null, secondary: null, tertiary: null})},
+      culturalSkills: {...(CharacterData.culturalSkills || {})},
+      careerSkills: {...(CharacterData.careerSkills || {})},
+      bonusSkills: {...(CharacterData.bonusSkills || {})},
+      selectedProfessionalSkills: [...(CharacterData.selectedProfessionalSkills || [])],
+      combatStyles: [...(CharacterData.combatStyles || [])],
+      age: CharacterData.age || 21,
+      gender: CharacterData.gender || '',
+      startingMoney: CharacterData.startingMoney || 0,
+      equipment: [...(CharacterData.equipment || [])],
+      weapons: [...(CharacterData.weapons || [])],
+      armor: [...(CharacterData.armor || [])]
+    };
+  } catch (e) {
+    return {error: e.message};
+  }
+};
+
+/**
+ * App.agent.getOptions(step) — Returns valid choices for a given step.
+ * Filters based on current character state (culture type, etc).
+ */
+App.agent.getOptions = function(step) {
+  try {
+    step = Number(step);
+    switch (step) {
+      case 4: {
+        // Cultures with types and homelands
+        const cultures = CULTURES_DATA.map(c => ({
+          name: c.name,
+          type: c.type,
+          homelands: App.getHomelandSuggestions(c.name),
+          startingMoney: c.startingMoney
+        }));
+        return {cultures};
+      }
+      case 5: {
+        // Culture's standard/professional skills, folk magic, rune list
+        const culture = CULTURES_DATA.find(c => c.name === CharacterData.culture);
+        if (!culture) return {error: 'No culture selected'};
+        const standardSkills = culture.standardSkills.map(s =>
+          typeof s === 'string' ? s : {choice: s.choice}
+        );
+        const professionalSkills = culture.professionalSkills.map(s =>
+          typeof s === 'string' ? s : {choice: s.choice || s}
+        );
+        const folkMagicOptions = culture.folkMagic || [];
+        const runes = ['Air', 'Darkness', 'Earth', 'Fire/Sky', 'Water', 'Moon',
+                       'Beast', 'Chaos', 'Death', 'Disorder', 'Fertility', 'Harmony',
+                       'Illusion', 'Law', 'Life', 'Man', 'Movement', 'Plant',
+                       'Spirit', 'Stasis', 'Truth', 'Undeath'];
+        return {standardSkills, professionalSkills, folkMagicOptions, runes, combatStyles: culture.combatStyles || []};
+      }
+      case 6: {
+        // Passions from culture
+        const culture = CULTURES_DATA.find(c => c.name === CharacterData.culture);
+        if (!culture) return {error: 'No culture selected'};
+        return {passions: culture.passions || []};
+      }
+      case 7: {
+        // Age table
+        return {ageTable: AGE_TABLE};
+      }
+      case 8: {
+        // Careers filtered by current culture type
+        const cultureType = App.getCultureType(CharacterData.culture);
+        const capitalizedType = cultureType.charAt(0).toUpperCase() + cultureType.slice(1);
+        const allCareers = CAREERS_DATA.map(c => ({
+          name: c.name,
+          description: c.description,
+          cultureTypes: c.cultureTypes,
+          standardSkills: c.standardSkills,
+          professionalSkills: c.professionalSkills,
+          combatStyles: c.combatStyles || []
+        }));
+        const filteredForCulture = CAREERS_DATA
+          .filter(c => c.cultureTypes && c.cultureTypes.includes(capitalizedType))
+          .map(c => c.name);
+        return {careers: allCareers, filteredForCulture};
+      }
+      case 9: {
+        // Cults filtered by CULTURE_CULT_MAP
+        const culture = CharacterData.culture;
+        const cultMap = CULTURE_CULT_MAP[culture];
+        if (!cultMap) return {primaryCults: [], secondaryCults: [], note: 'No cult map for culture'};
+        const mapCult = (name) => {
+          const cult = CULTS_DATA.find(c => c.name === name);
+          if (!cult) return {name, notFound: true};
+          return {
+            name: cult.name,
+            pantheon: cult.pantheon,
+            cultSkills: cult.cultSkills || [],
+            folkMagic: cult.folkMagic || [],
+            miracles: cult.miracles || []
+          };
+        };
+        const primaryCults = (cultMap.primary || []).map(mapCult);
+        const secondaryCults = (cultMap.secondary || []).map(mapCult);
+        return {primaryCults, secondaryCults, note: cultMap.note || null};
+      }
+      case 10: {
+        // Career skill list for point distribution
+        const career = CAREERS_DATA.find(c => c.name === CharacterData.career);
+        if (!career) return {error: 'No career selected'};
+        const culture = CULTURES_DATA.find(c => c.name === CharacterData.culture);
+        // Standard skills from career + professional skills selected + combat styles
+        const careerStandard = career.standardSkills || [];
+        const careerProfessional = CharacterData.selectedProfessionalSkills || [];
+        const combatStyles = (culture ? culture.combatStyles : []).map(cs => cs.name ? `Combat Style (${cs.name})` : cs);
+        const allCareerSkills = [...careerStandard, ...careerProfessional, ...combatStyles];
+        const folkMagicOptions = typeof FOLK_MAGIC_SPELLS !== 'undefined' ? FOLK_MAGIC_SPELLS : [];
+        return {careerSkills: allCareerSkills, folkMagicOptions};
+      }
+      case 11: {
+        // Bonus points info
+        const ageCategory = Calc.getAgeCategory ? Calc.getAgeCategory(CharacterData.age) : null;
+        const totalPoints = ageCategory ? ageCategory.bonusPoints : 150;
+        const maxPerSkill = ageCategory ? ageCategory.maxPerSkill : 15;
+        return {totalPoints, maxPerSkill};
+      }
+      case 12: {
+        // Social class table for current culture type
+        const cultureType = App.getCultureType(CharacterData.culture);
+        const table = SOCIAL_CLASS_TABLES[cultureType] || [];
+        return {socialClassTable: table, cultureType};
+      }
+      default:
+        return {error: 'No options available for step ' + step};
+    }
+  } catch (e) {
+    return {error: e.message};
+  }
+};
+
+/**
+ * App.agent.getValidation() — Returns current validation state.
+ * Wraps App.getValidationState().
+ */
+App.agent.getValidation = function() {
+  try {
+    return App.getValidationState();
+  } catch (e) {
+    return {valid: false, errors: [e.message], step: App.currentStep || 1};
+  }
+};
+
+/**
+ * App.agent.setStep(step, data) — Set character data for a given step.
+ * Validates before applying. On failure, state is unchanged.
+ * Returns {success: bool, errors: string[], state: object}
+ */
+App.agent.setStep = function(step, data) {
+  try {
+    step = Number(step);
+    data = data || {};
+    const errors = [];
+
+    switch (step) {
+      // ─── Step 1: Name and Concept ───
+      case 1: {
+        if (!data.name || typeof data.name !== 'string' || data.name.trim() === '') {
+          errors.push('Character name is required');
+        }
+        if (errors.length > 0) return {success: false, errors, state: App.agent.getState()};
+        CharacterData.name = data.name.trim();
+        CharacterData.concept = (data.concept || '').trim();
+        App.currentStep = 1;
+        App.renderCurrentStep();
+        App.saveToLocalStorage();
+        return {success: true, errors: [], state: App.agent.getState()};
+      }
+
+      // ─── Step 2: Characteristics ───
+      case 2: {
+        const chars = data.characteristics;
+        if (!chars || typeof chars !== 'object') {
+          errors.push('Characteristics object is required');
+          return {success: false, errors, state: App.agent.getState()};
+        }
+        const statNames = ['STR', 'CON', 'SIZ', 'DEX', 'INT', 'POW', 'CHA'];
+        let total = 0;
+        for (const stat of statNames) {
+          const val = chars[stat];
+          if (val === undefined || val === null || typeof val !== 'number') {
+            errors.push(`${stat} is required and must be a number`);
+            continue;
+          }
+          if (val < 3 || val > 21) {
+            errors.push(`${stat} must be between 3 and 21 (got ${val})`);
+          }
+          if ((stat === 'INT' || stat === 'SIZ') && val < 8) {
+            errors.push(`${stat} minimum is 8 for point-buy (got ${val})`);
+          }
+          total += val;
+        }
+        if (total !== 75) {
+          errors.push(`Point total must equal 75 (got ${total})`);
+        }
+        if (errors.length > 0) return {success: false, errors, state: App.agent.getState()};
+        CharacterData.characteristics = {...chars};
+        CharacterData.charMethod = 'point-buy';
+        CharacterData.attributes = Calc.calculateAllAttributes(CharacterData.characteristics);
+        App.currentStep = 2;
+        App.renderCurrentStep();
+        App.saveToLocalStorage();
+        return {success: true, errors: [], state: App.agent.getState()};
+      }
+
+      // ─── Step 3: Attributes (auto-calculated, no-op) ───
+      case 3: {
+        CharacterData.attributes = Calc.calculateAllAttributes(CharacterData.characteristics);
+        App.currentStep = 3;
+        return {success: true, errors: [], state: App.agent.getState()};
+      }
+
+      // ─── Step 4: Culture and Homeland ───
+      case 4: {
+        if (!data.culture || typeof data.culture !== 'string') {
+          errors.push('Culture is required');
+          return {success: false, errors, state: App.agent.getState()};
+        }
+        const culture = CULTURES_DATA.find(c => c.name === data.culture);
+        if (!culture) {
+          errors.push(`Culture "${data.culture}" not found. Valid: ${CULTURES_DATA.map(c => c.name).join(', ')}`);
+          return {success: false, errors, state: App.agent.getState()};
+        }
+        const homelands = App.getHomelandSuggestions(culture.name);
+        if (data.homeland && homelands.length > 0 && !homelands.includes(data.homeland)) {
+          errors.push(`Homeland "${data.homeland}" not valid for ${culture.name}. Valid: ${homelands.join(', ')}`);
+          return {success: false, errors, state: App.agent.getState()};
+        }
+        // Apply
+        CharacterData.culture = culture.name;
+        CharacterData.homeland = data.homeland || (homelands.length > 0 ? homelands[0] : '');
+        // Roll starting money if not already set
+        if (!CharacterData.startingMoney || data.rollMoney) {
+          const match = (culture.startingMoney || '').match(/(\d+)d(\d+)×(\d+)/);
+          if (match) {
+            const numDice = parseInt(match[1]);
+            const diceSize = parseInt(match[2]);
+            const multiplier = parseInt(match[3]);
+            let moneyTotal = 0;
+            for (let i = 0; i < numDice; i++) {
+              moneyTotal += Math.floor(Math.random() * diceSize) + 1;
+            }
+            CharacterData.startingMoney = moneyTotal * multiplier;
+          }
+        }
+        App.currentStep = 4;
+        App.renderCurrentStep();
+        App.saveToLocalStorage();
+        return {success: true, errors: [], state: App.agent.getState()};
+      }
+
+      // ─── Step 5: Cultural Skills, Runes, Folk Magic ───
+      case 5: {
+        if (!CharacterData.culture) {
+          errors.push('Culture must be set before Step 5 (use setStep(4) first)');
+          return {success: false, errors, state: App.agent.getState()};
+        }
+        const culture = CULTURES_DATA.find(c => c.name === CharacterData.culture);
+        if (!culture) {
+          errors.push('Invalid culture in CharacterData');
+          return {success: false, errors, state: App.agent.getState()};
+        }
+
+        // Validate cultural skills
+        const skills = data.culturalSkills;
+        if (!skills || typeof skills !== 'object') {
+          errors.push('culturalSkills object is required');
+        } else {
+          const total = Object.values(skills).reduce((a, b) => a + b, 0);
+          if (total !== 100) errors.push(`Cultural skills must total 100 (got ${total})`);
+          for (const [name, val] of Object.entries(skills)) {
+            if (val > 15) errors.push(`Cultural skill "${name}" exceeds max 15 (got ${val})`);
+            if (val < 0) errors.push(`Cultural skill "${name}" cannot be negative`);
+          }
+        }
+
+        // Validate rune affinities
+        const runes = data.runeAffinities;
+        if (!runes || !runes.primary || !runes.secondary || !runes.tertiary) {
+          errors.push('runeAffinities with primary, secondary, tertiary is required');
+        } else {
+          const runeSet = new Set([runes.primary, runes.secondary, runes.tertiary]);
+          if (runeSet.size !== 3) errors.push('All three rune affinities must be unique');
+        }
+
+        // Validate folk magic spells
+        const spells = data.folkMagicSpells;
+        if (!spells || !Array.isArray(spells) || spells.length !== 3) {
+          errors.push('Exactly 3 folk magic spells are required');
+        }
+
+        if (errors.length > 0) return {success: false, errors, state: App.agent.getState()};
+
+        // Apply
+        CharacterData.culturalSkills = {...skills};
+        CharacterData.runeAffinities = {primary: runes.primary, secondary: runes.secondary, tertiary: runes.tertiary};
+        CharacterData.folkMagicSpells = [...spells];
+        // Handle choiceSkill (e.g., "Ride or Swim" → "Ride")
+        if (data.choiceSkill) {
+          CharacterData.culturalSkills[data.choiceSkill] = CharacterData.culturalSkills[data.choiceSkill] || 0;
+        }
+        App.currentStep = 5;
+        App.renderCurrentStep();
+        App.saveToLocalStorage();
+        return {success: true, errors: [], state: App.agent.getState()};
+      }
+
+      // ─── Step 6: Passions ───
+      case 6: {
+        const passions = data.passions;
+        if (!passions || !Array.isArray(passions)) {
+          errors.push('passions array is required');
+          return {success: false, errors, state: App.agent.getState()};
+        }
+        for (const p of passions) {
+          if (!p.name && !p.type) errors.push('Each passion must have a name or type');
+        }
+        if (errors.length > 0) return {success: false, errors, state: App.agent.getState()};
+
+        // Normalize: accept {type, subject, value} or {name, value}
+        CharacterData.passions = passions.map(p => {
+          if (p.name) return {name: p.name, value: p.value || 47, custom: p.custom !== undefined ? p.custom : true};
+          const name = p.subject ? `${p.type} (${p.subject})` : p.type;
+          return {name, value: p.value || 47, custom: true};
+        });
+        App.currentStep = 6;
+        App.renderCurrentStep();
+        App.saveToLocalStorage();
+        return {success: true, errors: [], state: App.agent.getState()};
+      }
+
+      // ─── Step 7: Background ───
+      case 7: {
+        CharacterData.age = data.age || 21;
+        CharacterData.gender = data.gender || '';
+        CharacterData.family = data.family || '';
+        CharacterData.backgroundEvents = data.backgroundEvents || '';
+        App.currentStep = 7;
+        App.renderCurrentStep();
+        App.saveToLocalStorage();
+        return {success: true, errors: [], state: App.agent.getState()};
+      }
+
+      // ─── Step 8: Career and Professional Skills ───
+      case 8: {
+        if (!data.career || typeof data.career !== 'string') {
+          errors.push('career is required');
+          return {success: false, errors, state: App.agent.getState()};
+        }
+        const career = CAREERS_DATA.find(c => c.name === data.career);
+        if (!career) {
+          errors.push(`Career "${data.career}" not found`);
+          return {success: false, errors, state: App.agent.getState()};
+        }
+        // Validate career is available for current culture type
+        const cultureType = App.getCultureType(CharacterData.culture);
+        const capitalizedType = cultureType.charAt(0).toUpperCase() + cultureType.slice(1);
+        if (career.cultureTypes && !career.cultureTypes.includes(capitalizedType)) {
+          errors.push(`Career "${data.career}" not available for culture type "${capitalizedType}"`);
+          return {success: false, errors, state: App.agent.getState()};
+        }
+        // Validate professional skills
+        const proSkills = data.professionalSkills;
+        if (!proSkills || !Array.isArray(proSkills) || proSkills.length !== 3) {
+          errors.push('Exactly 3 professionalSkills are required');
+          return {success: false, errors, state: App.agent.getState()};
+        }
+
+        // Resolve professional skills (handle disambiguation)
+        const resolvedPro = [];
+        for (const ps of proSkills) {
+          const skillName = typeof ps === 'string' ? ps : ps.name;
+          if (!skillName) {
+            errors.push('Each professional skill must have a name');
+            continue;
+          }
+          const parsed = parsePlaceholderSkill(skillName);
+          if (parsed && (typeof ps === 'object' && ps.specialization)) {
+            // Resolve placeholder: "Lore (Regional or Specific Species)" + "Plants" → "Lore (Plants)"
+            resolvedPro.push(`${parsed.category} (${ps.specialization})`);
+          } else if (parsed && !ps.specialization) {
+            // Placeholder without specialization — error
+            errors.push(`Skill "${skillName}" requires a specialization`);
+          } else {
+            resolvedPro.push(skillName);
+          }
+        }
+        if (errors.length > 0) return {success: false, errors, state: App.agent.getState()};
+
+        // Apply career (mirrors App.selectCareer logic)
+        CharacterData.career = data.career;
+        CharacterData.careerSkills = {};
+        CharacterData.careerFolkMagic = [];
+        // Add standard skills
+        if (career.standardSkills) {
+          career.standardSkills.forEach(skill => { CharacterData.careerSkills[skill] = 0; });
+        }
+        // Add combat styles (resolved)
+        if (career.combatStyles) {
+          career.combatStyles.forEach(style => {
+            const resolvedStyle = App.resolveCareerCombatStyle(style);
+            CharacterData.careerSkills[resolvedStyle] = 0;
+          });
+        }
+        // Add career-restricted combat styles from culture
+        const cultureForCareer = CULTURES_DATA.find(c => c.name === CharacterData.culture);
+        if (cultureForCareer && cultureForCareer.combatStyles) {
+          cultureForCareer.combatStyles.forEach(cs => {
+            if (cs.restrictions && cs.restrictions.toLowerCase().includes(data.career.toLowerCase())) {
+              const styleName = `Combat Style (${cs.name})`;
+              if (!CharacterData.careerSkills[styleName]) {
+                CharacterData.careerSkills[styleName] = 0;
+              }
+            }
+          });
+        }
+        // Set professional skills
+        CharacterData.selectedProfessionalSkills = resolvedPro;
+        resolvedPro.forEach(skill => { CharacterData.careerSkills[skill] = 0; });
+
+        App.currentStep = 8;
+        App.renderCurrentStep();
+        App.saveToLocalStorage();
+        return {success: true, errors: [], state: App.agent.getState()};
+      }
+
+      // ─── Step 9: Cult and Miracles ───
+      case 9: {
+        const cultName = data.cult;
+        if (cultName === null || cultName === undefined) {
+          // No-cult path
+          CharacterData.cult = null;
+          CharacterData.devotionalPool = 0;
+          CharacterData.miracles = [];
+          App.currentStep = 9;
+          App.renderCurrentStep();
+          App.saveToLocalStorage();
+          return {success: true, errors: [], state: App.agent.getState()};
+        }
+        if (typeof cultName !== 'string') {
+          errors.push('cult must be a string or null');
+          return {success: false, errors, state: App.agent.getState()};
+        }
+        const cult = CULTS_DATA.find(c => c.name === cultName);
+        if (!cult) {
+          errors.push(`Cult "${cultName}" not found in CULTS_DATA`);
+          return {success: false, errors, state: App.agent.getState()};
+        }
+        // Calculate devotional pool
+        const devPool = Math.floor(CharacterData.characteristics.POW / 2);
+
+        // Validate miracles
+        const miracles = data.miracles || [];
+        if (miracles.length !== devPool) {
+          errors.push(`Must select exactly ${devPool} miracles (got ${miracles.length})`);
+          return {success: false, errors, state: App.agent.getState()};
+        }
+
+        // Apply
+        CharacterData.cult = cultName;
+        CharacterData.devotionalPool = devPool;
+        CharacterData.miracles = [...miracles];
+
+        // Resolve cult-bound placeholder skills
+        const cultPlaceholders = {
+          'Devotion (Pantheon, Cult or God)': `Devotion (${cultName})`,
+          'Binding (Cult, Totem or Tradition)': `Binding (${cultName})`,
+          'Invocation (Cult, School or Grimoire)': `Invocation (${cultName})`
+        };
+        for (const skillMap of ['culturalSkills', 'careerSkills', 'bonusSkills']) {
+          if (CharacterData[skillMap]) {
+            for (const [placeholder, resolved] of Object.entries(cultPlaceholders)) {
+              if (CharacterData[skillMap][placeholder] !== undefined) {
+                CharacterData[skillMap][resolved] = CharacterData[skillMap][placeholder];
+                delete CharacterData[skillMap][placeholder];
+              }
+            }
+          }
+        }
+        // Also resolve in selectedProfessionalSkills array
+        CharacterData.selectedProfessionalSkills = (CharacterData.selectedProfessionalSkills || []).map(s => cultPlaceholders[s] || s);
+
+        App.currentStep = 9;
+        App.renderCurrentStep();
+        App.saveToLocalStorage();
+        return {success: true, errors: [], state: App.agent.getState()};
+      }
+
+      // ─── Step 10: Career Skill Points ───
+      case 10: {
+        const careerSkills = data.careerSkills;
+        if (!careerSkills || typeof careerSkills !== 'object') {
+          errors.push('careerSkills object is required');
+          return {success: false, errors, state: App.agent.getState()};
+        }
+        const total10 = Object.values(careerSkills).reduce((a, b) => a + b, 0);
+        if (total10 !== 100) errors.push(`Career skills must total 100 (got ${total10})`);
+        for (const [name, val] of Object.entries(careerSkills)) {
+          if (val > 15) errors.push(`Career skill "${name}" exceeds max 15 (got ${val})`);
+          if (val < 0) errors.push(`Career skill "${name}" cannot be negative`);
+        }
+        // Validate folk magic (2 spells)
+        const careerFM = data.careerFolkMagic || [];
+        if (careerFM.length !== 2) errors.push(`Exactly 2 career folk magic spells required (got ${careerFM.length})`);
+
+        if (errors.length > 0) return {success: false, errors, state: App.agent.getState()};
+
+        // Apply — merge points into existing careerSkills (which has 0-value keys from Step 8)
+        for (const [name, val] of Object.entries(careerSkills)) {
+          CharacterData.careerSkills[name] = val;
+        }
+        CharacterData.careerFolkMagic = [...careerFM];
+        App.currentStep = 10;
+        App.renderCurrentStep();
+        App.saveToLocalStorage();
+        return {success: true, errors: [], state: App.agent.getState()};
+      }
+
+      // ─── Step 11: Bonus Points ───
+      case 11: {
+        const bonusSkills = data.bonusSkills;
+        if (!bonusSkills || typeof bonusSkills !== 'object') {
+          errors.push('bonusSkills object is required');
+          return {success: false, errors, state: App.agent.getState()};
+        }
+        const ageCategory = Calc.getAgeCategory ? Calc.getAgeCategory(CharacterData.age) : null;
+        const expectedTotal = ageCategory ? ageCategory.bonusPoints : 150;
+        const maxPerSkill = ageCategory ? ageCategory.maxPerSkill : 15;
+        const total11 = Object.values(bonusSkills).reduce((a, b) => a + b, 0);
+        if (total11 !== expectedTotal) errors.push(`Bonus points must total ${expectedTotal} (got ${total11})`);
+        for (const [name, val] of Object.entries(bonusSkills)) {
+          if (val > maxPerSkill) errors.push(`Bonus skill "${name}" exceeds max ${maxPerSkill} (got ${val})`);
+          if (val < 0) errors.push(`Bonus skill "${name}" cannot be negative`);
+        }
+        if (errors.length > 0) return {success: false, errors, state: App.agent.getState()};
+
+        CharacterData.bonusSkills = {...bonusSkills};
+        App.currentStep = 11;
+        App.renderCurrentStep();
+        App.saveToLocalStorage();
+        return {success: true, errors: [], state: App.agent.getState()};
+      }
+
+      // ─── Step 12: Social Class ───
+      case 12: {
+        if (data.rollSocialClass) {
+          // Roll social class
+          const ct = App.getCultureType(CharacterData.culture);
+          const table = SOCIAL_CLASS_TABLES[ct];
+          if (!table) {
+            errors.push(`No social class table for culture type "${ct}"`);
+            return {success: false, errors, state: App.agent.getState()};
+          }
+          const roll = Math.floor(Math.random() * 100) + 1;
+          const entry = table.find(e => roll >= e.d100_min && roll <= e.d100_max);
+          if (entry) {
+            CharacterData.socialClass = entry.class;
+            CharacterData.socialClassMoneyMod = entry.money_modifier || 1;
+          }
+        } else if (data.socialClass) {
+          CharacterData.socialClass = data.socialClass;
+          // Look up money modifier
+          const ct = App.getCultureType(CharacterData.culture);
+          const table = SOCIAL_CLASS_TABLES[ct] || [];
+          const entry = table.find(e => e.class === data.socialClass);
+          CharacterData.socialClassMoneyMod = entry ? (entry.money_modifier || 1) : 1;
+        } else {
+          errors.push('Either socialClass or rollSocialClass: true is required');
+          return {success: false, errors, state: App.agent.getState()};
+        }
+        App.currentStep = 12;
+        App.renderCurrentStep();
+        App.saveToLocalStorage();
+        return {success: true, errors: [], state: App.agent.getState()};
+      }
+
+      default:
+        return {success: false, errors: [`setStep not implemented for step ${step}`], state: App.agent.getState()};
+    }
+  } catch (e) {
+    return {success: false, errors: [e.message], state: null};
+  }
+};
+
+/**
+ * App.agent.next() — Validate current step and advance.
+ */
+App.agent.next = function() {
+  try {
+    const currentStep = App.currentStep || 1;
+    const validation = App.getValidationState();
+    if (!validation.valid) {
+      return {success: false, errors: validation.errors, newStep: currentStep};
+    }
+    // Step 9 miracle validation
+    if (currentStep === 9 && CharacterData.cult) {
+      const devPool = CharacterData.devotionalPool || Math.floor(CharacterData.characteristics.POW / 2);
+      const miracleCount = (CharacterData.miracles || []).length;
+      if (miracleCount !== devPool) {
+        return {success: false, errors: [`Please select all your initiate miracles (${miracleCount}/${devPool} chosen)`], newStep: currentStep};
+      }
+    }
+    const newStep = currentStep + 1;
+    App.currentStep = newStep;
+    App.renderCurrentStep();
+    return {success: true, errors: [], newStep};
+  } catch (e) {
+    return {success: false, errors: [e.message], newStep: App.currentStep || 1};
+  }
+};
+
+/**
+ * App.agent.prev() — Go back one step (no validation needed).
+ */
+App.agent.prev = function() {
+  try {
+    const currentStep = App.currentStep || 1;
+    const newStep = Math.max(1, currentStep - 1);
+    App.currentStep = newStep;
+    App.renderCurrentStep();
+    return {success: true, errors: [], newStep};
+  } catch (e) {
+    return {success: false, errors: [e.message], newStep: App.currentStep || 1};
+  }
+};
+
+/**
+ * App.agent.buildCharacter(spec) — Build a complete character in one call.
+ * spec format: {step1: {...}, step2: {...}, ..., step12: {...}}
+ * On any failure: returns immediately with the error and which step failed.
+ * On success: switches to Play Mode and returns the final state.
+ */
+App.agent.buildCharacter = function(spec) {
+  try {
+    if (!spec || typeof spec !== 'object') {
+      return {success: false, errors: ['spec object is required'], failedStep: null};
+    }
+    // Iterate steps 1 through 12
+    for (let step = 1; step <= 12; step++) {
+      const stepKey = `step${step}`;
+      const stepData = spec[stepKey];
+      if (!stepData && step === 3) continue; // Step 3 is auto-calculated
+      if (!stepData) continue; // Skip steps with no data (optional steps like 6, 7)
+      const result = App.agent.setStep(step, stepData);
+      if (!result.success) {
+        return {success: false, errors: result.errors, failedStep: step};
+      }
+    }
+    // Switch to Play Mode
+    if (App.switchMode) {
+      App.switchMode('play');
+    }
+    return {success: true, errors: [], character: App.agent.getState()};
+  } catch (e) {
+    return {success: false, errors: [e.message], failedStep: null};
+  }
+};
+
 // =============================================================================
 // INITIALIZATION
 // =============================================================================
