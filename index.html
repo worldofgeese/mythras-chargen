@@ -14060,7 +14060,17 @@ const App = {
       }
     }
 
-    // Step 9: Cult Selection - optional, no validation needed
+    // Step 9: Cult Selection - validate miracle selection if cult chosen
+    if (step === 9) {
+      if (CharacterData.cult) {
+        const maxMiracles = CharacterData.devotionalPool || 0;
+        const selectedMiracles = (CharacterData.miracles || []).length;
+        if (maxMiracles > 0 && selectedMiracles < maxMiracles) {
+          this.showToast(`Please select all your initiate miracles (${selectedMiracles}/${maxMiracles} chosen)`, 'error');
+          return false;
+        }
+      }
+    }
 
     if (step === 10) {
       // ADR-005: Block unresolved placeholder/any skills in career skills (moved from step 8 — UX-011 fix)
@@ -15276,17 +15286,31 @@ App.disambiguateAndUpdateFreeText = function(category, originalSkillName, inputV
   const store = category === 'cultural' ? CharacterData.culturalSkills :
                 category === 'career' ? CharacterData.careerSkills : CharacterData.bonusSkills;
 
-  // Remove any previous disambiguation for this skill category
+  // Remove any previous disambiguation for this skill category (resolved keys)
   for (const key of Object.keys(store)) {
     if (key.startsWith(skillCategory + ' (') && !needsDisambiguation(key) && key !== newSkillName) {
       const pts = store[key];
       delete store[key];
       // Transfer points to the new selection
       store[newSkillName] = pts;
+      // Also remove the original placeholder key if it exists
+      if (store.hasOwnProperty(originalSkillName) && originalSkillName !== newSkillName) {
+        delete store[originalSkillName];
+      }
       this.saveToLocalStorage();
       this.renderCurrentStep();
       return;
     }
+  }
+
+  // Remove the original placeholder key if it exists and transfer its points
+  if (store.hasOwnProperty(originalSkillName) && originalSkillName !== newSkillName) {
+    const pts = store[originalSkillName];
+    delete store[originalSkillName];
+    store[newSkillName] = pts;
+    this.saveToLocalStorage();
+    this.renderCurrentStep();
+    return;
   }
 
   // No previous selection — just add it
@@ -15940,23 +15964,38 @@ App.selectCult = function(cultName) {
     // Soft validation: check if character has 5 cult skills at 50%+
     const cult = CULTS_DATA.find(c => c.name === cultName);
     if (cult && cult.cultSkills) {
-      const allSkills = App.compileAllSkills ? App.compileAllSkills() : {};
-      const qualifyingSkills = cult.cultSkills.filter(cs => {
+      const allSkillsArr = App.compileAllSkills ? App.compileAllSkills() : [];
+      // compileAllSkills returns [{name, base, cultural, career, bonus}, ...] — compute totals
+      const skillDetails = cult.cultSkills.map(cs => {
         const cleanName = cs.replace(/\(.*\)/, '').trim();
-        return Object.entries(allSkills).some(([k, v]) => {
-          return (k === cs || k.startsWith(cleanName)) && v >= 50;
+        const match = allSkillsArr.find(s => {
+          return (s.name === cs || s.name.startsWith(cleanName + ' (') || s.name.startsWith(cleanName + '('));
         });
+        const currentValue = match ? (match.base + match.cultural + match.career + match.bonus) : 0;
+        return { name: cs, value: currentValue, qualifies: currentValue >= 50 };
       });
+      const qualifyingSkills = skillDetails.filter(s => s.qualifies);
       if (qualifyingSkills.length < 5) {
         console.warn(`Cult requirement: ${cultName} requires 5 cult skills at 50%+, character has ${qualifyingSkills.length}. GM may override.`);
-        // Show non-blocking warning in UI
+        // Show non-blocking warning in UI with skill breakdown
         setTimeout(() => {
           const warning = document.getElementById('cult-requirement-warning');
           if (warning) {
-            warning.innerHTML = `<div style="background: #fff3cd; border: 1px solid #ffc107; padding: 8px; margin: 8px 0; font-size: 11px; border-radius: 4px;">
-              <strong>Note:</strong> Initiation normally requires 5 cult skills at 50%+. Character currently qualifies with ${qualifyingSkills.length}. GM may override this requirement.
+            const skillList = skillDetails.map(s =>
+              `<span style="color: ${s.qualifies ? '#155724' : '#856404'};">${s.name}: ${s.value}%${s.qualifies ? ' ✓' : ''}</span>`
+            ).join(', ');
+            warning.innerHTML = `<div style="background: #fff3cd; border: 1px solid #ffc107; padding: 10px; margin: 8px 0; font-size: 12px; border-radius: 4px;">
+              <strong>Note:</strong> Initiation normally requires 5 cult skills at 50%+. Character currently qualifies with ${qualifyingSkills.length}/5.
+              You can still select this cult — the GM may override, or you can raise these skills with bonus points in the next step.
+              <div style="margin-top: 6px; line-height: 1.6;"><strong>Cult skills:</strong> ${skillList}</div>
             </div>`;
           }
+        }, 0);
+      } else {
+        // Clear warning if requirements are met
+        setTimeout(() => {
+          const warning = document.getElementById('cult-requirement-warning');
+          if (warning) warning.innerHTML = '';
         }, 0);
       }
     }
@@ -16210,9 +16249,12 @@ App.renderStep10 = function() {
         const category = parsed ? parsed.category : (skillName.match(/^(Language|Lore|Art|Craft|Culture)/i)?.[1] || '');
         const hintText = parsed && !isAnySkill(skillName) ? parsed.hint : '';
         const options = isAnySkill(skillName) ? disambiguateSkill(skillName, CharacterData.culture, false) : (DISAMBIGUATION_LISTS[category] || []);
-        const storedKey = Object.keys(CharacterData.careerSkills).find(k => k.startsWith(category + ' (') && !needsDisambiguation(k));
+        let storedKey = Object.keys(CharacterData.careerSkills).find(k => k.startsWith(category + ' (') && !needsDisambiguation(k));
+        // If no resolved key found, check if the placeholder key itself is in careerSkills
+        // (can happen if user allocated points before resolving the specialization)
+        const placeholderInStore = !storedKey && CharacterData.careerSkills.hasOwnProperty(skillName);
         const currentSelected = storedKey || '';
-        const currentValue = storedKey ? (CharacterData.careerSkills[storedKey] || 0) : 0;
+        const currentValue = storedKey ? (CharacterData.careerSkills[storedKey] || 0) : (placeholderInStore ? (CharacterData.careerSkills[skillName] || 0) : 0);
         const datalistId = `career-${category}-${skillName}`.replace(/[^a-zA-Z0-9-]/g, '-');
         const pointsDisabled = !currentSelected ? 'disabled' : '';
 
