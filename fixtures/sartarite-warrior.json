@@ -1,0 +1,181 @@
+{
+  "name": "Korlmar Blackspear",
+  "concept": "Vengeful warrior of the Colymar tribe",
+  "characteristics": {
+    "STR": 15,
+    "CON": 13,
+    "SIZ": 12,
+    "DEX": 11,
+    "INT": 9,
+    "POW": 8,
+    "CHA": 7
+  },
+  "charMethod": "point-buy",
+  "attributes": {"actionPoints":2,"experienceModifier":0,"healingRate":3,"luckPoints":2,"magicPoints":8,"initiativeBonus":10,"damageModifier":"+1d2","hitPoints":{"Head":5,"Chest":7,"Abdomen":6,"Right Arm":4,"Left Arm":4,"Right Leg":5,"Left Leg":5},"encumbrance":{"unencumbered":30,"burdened":31,"overloaded":46,"noMovement":60},"runeAffinities":{"primary":46,"secondary":36,"tertiary":26},"folkMagicBase":45,"movementRate":6},
+  "culture": "Sartarite (Heortling)",
+  "homeland": "Boldhome",
+  "culturalSkills": {
+    "Athletics": 15,
+    "Brawn": 15,
+    "Endurance": 15,
+    "Evade": 10,
+    "Locale": 10,
+    "Perception": 10,
+    "Willpower": 15,
+    "Ride": 10
+  },
+  "runeAffinities": {
+    "primary": "Air",
+    "secondary": "Movement",
+    "tertiary": "Death"
+  },
+  "folkMagicSpells": [
+    "Bladesharp",
+    "Fanaticism",
+    "Protection"
+  ],
+  "passions": [
+    {
+      "name": "Loyalty (Colymar Tribe)",
+      "value": 47,
+      "custom": true
+    },
+    {
+      "name": "Hate (Lunars)",
+      "value": 47,
+      "custom": true
+    },
+    {
+      "name": "Honor",
+      "value": 47,
+      "custom": true
+    }
+  ],
+  "age": 21,
+  "gender": "Male",
+  "family": "Blackspear clan, Colymar tribe",
+  "backgroundEvents": "",
+  "career": "Warrior",
+  "careerSkills": {
+    "Athletics": 15,
+    "Brawn": 15,
+    "Endurance": 15,
+    "Evade": 10,
+    "Unarmed": 10,
+    "Combat Style (Hill Clan Levy)": 15,
+    "Lore (Strategy and Tactics)": 10,
+    "Survival": 10
+  },
+  "careerFolkMagic": [
+    "Disruption",
+    "Vigour"
+  ],
+  "bonusSkills": {
+    "Athletics": 15,
+    "Brawn": 15,
+    "Endurance": 15,
+    "Evade": 15,
+    "Willpower": 15,
+    "Unarmed": 15,
+    "Combat Style (Hill Clan Levy)": 15,
+    "Lore (Strategy and Tactics)": 15,
+    "Survival": 15,
+    "Perception": 15
+  },
+  "hobbySkillName": null,
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "startingMoney": 140,
+  "equipment": [
+    {
+      "name": "Two sets of common undecorated clothes",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 0
+    },
+    {
+      "name": "Transport: Own back",
+      "enc": 0,
+      "quantity": 1,
+      "cost": 0
+    },
+    {
+      "name": "Backpack",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Waterskin",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Rations (1 week)",
+      "enc": 2,
+      "quantity": 1,
+      "cost": 14
+    },
+    {
+      "name": "Bedroll",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Flint & Tinder",
+      "enc": 0,
+      "quantity": 1,
+      "cost": 5
+    }
+  ],
+  "weapons": [
+    {
+      "name": "Broadsword",
+      "damage": "1d8",
+      "size": "M",
+      "reach": "M",
+      "ap": 6,
+      "hp": 10,
+      "skill": 0,
+      "quantity": 1
+    },
+    {
+      "name": "Viking Shield",
+      "damage": "1d4",
+      "size": "L",
+      "reach": "S",
+      "ap": 6,
+      "hp": 12,
+      "skill": 0,
+      "quantity": 1
+    }
+  ],
+  "armor": [
+    {
+      "name": "Leather/Fur Full Armour Set",
+      "ap": 1,
+      "locations": "7 location(s)",
+      "cost": 0
+    }
+  ],
+  "combatStyles": [],
+  "notes": "",
+  "background": "",
+  "hitPoints": {"Head":{"current":5,"max":5},"Chest":{"current":7,"max":7},"Abdomen":{"current":6,"max":6},"Right Arm":{"current":4,"max":4},"Left Arm":{"current":4,"max":4},"Right Leg":{"current":5,"max":5},"Left Leg":{"current":5,"max":5}},
+  "companions": [],
+  "cult": "Orlanth",
+  "miracles": [
+    "Shield",
+    "Lightning",
+    "Wind Words",
+    "Leap"
+  ],
+  "devotionalPool": 4,
+  "selectedProfessionalSkills": [
+    "Lore (Strategy and Tactics)",
+    "Survival",
+    "Gambling"
+  ]
+}

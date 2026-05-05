@@ -1,0 +1,177 @@
+{
+  "name": "Torath of Dykene",
+  "concept": "Hawk-bonded hunter of the Elder Wilds",
+  "characteristics": {
+    "STR": 13,
+    "CON": 12,
+    "SIZ": 10,
+    "DEX": 14,
+    "INT": 9,
+    "POW": 10,
+    "CHA": 7
+  },
+  "charMethod": "point-buy",
+  "attributes": {"actionPoints":2,"experienceModifier":0,"healingRate":2,"luckPoints":2,"magicPoints":10,"initiativeBonus":11,"damageModifier":"+0","hitPoints":{"Head":5,"Chest":7,"Abdomen":6,"Right Arm":4,"Left Arm":4,"Right Leg":5,"Left Leg":5},"encumbrance":{"unencumbered":26,"burdened":27,"overloaded":40,"noMovement":52},"runeAffinities":{"primary":50,"secondary":40,"tertiary":30},"folkMagicBase":47,"movementRate":6},
+  "culture": "Balazaring",
+  "homeland": "Dykene",
+  "culturalSkills": {
+    "Athletics": 15,
+    "Brawn": 10,
+    "Endurance": 15,
+    "Evade": 10,
+    "Locale": 10,
+    "Perception": 15,
+    "Stealth": 15,
+    "Survival": 10
+  },
+  "runeAffinities": {
+    "primary": "Air",
+    "secondary": "Beast",
+    "tertiary": "Movement"
+  },
+  "folkMagicSpells": [
+    "Find Game",
+    "Speedart",
+    "Mobility"
+  ],
+  "passions": [
+    {
+      "name": "Loyalty (Dykene Citadel)",
+      "value": 47,
+      "custom": true
+    },
+    {
+      "name": "Love (Giant Hawks)",
+      "value": 47,
+      "custom": true
+    }
+  ],
+  "age": 21,
+  "gender": "Male",
+  "family": "Hawk Clan, Dykene",
+  "backgroundEvents": "",
+  "career": "Hunter",
+  "careerSkills": {
+    "Athletics": 15,
+    "Endurance": 10,
+    "Locale": 10,
+    "Perception": 15,
+    "Stealth": 15,
+    "Combat Style (Hunter Raider)": 15,
+    "Survival": 10,
+    "Track": 10
+  },
+  "careerFolkMagic": [
+    "Bladesharp",
+    "Beastcall (Dog, Pig or Giant Hawk)"
+  ],
+  "bonusSkills": {
+    "Athletics": 15,
+    "Endurance": 15,
+    "Perception": 15,
+    "Stealth": 15,
+    "Evade": 15,
+    "Combat Style (Hunter Raider)": 15,
+    "Survival": 15,
+    "Track": 15,
+    "Navigate": 15,
+    "Lore (Elder Wilds)": 15
+  },
+  "hobbySkillName": null,
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "startingMoney": 32,
+  "equipment": [
+    {
+      "name": "Two sets of common undecorated clothes",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 0
+    },
+    {
+      "name": "Transport: Own back",
+      "enc": 0,
+      "quantity": 1,
+      "cost": 0
+    },
+    {
+      "name": "Backpack",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Waterskin",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Rations (1 week)",
+      "enc": 2,
+      "quantity": 1,
+      "cost": 14
+    },
+    {
+      "name": "Bedroll",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Flint & Tinder",
+      "enc": 0,
+      "quantity": 1,
+      "cost": 5
+    }
+  ],
+  "weapons": [
+    {
+      "name": "Shortspear",
+      "damage": "1d8+1",
+      "size": "M",
+      "reach": "L",
+      "ap": 4,
+      "hp": 5,
+      "skill": 0,
+      "quantity": 1
+    },
+    {
+      "name": "Short Bow",
+      "damage": "1d6",
+      "size": "L",
+      "reach": "-",
+      "ap": 4,
+      "hp": 4,
+      "skill": 0,
+      "quantity": 1
+    }
+  ],
+  "armor": [
+    {
+      "name": "Leather/Fur Basic Armour",
+      "ap": 1,
+      "locations": "3 location(s)",
+      "cost": 0
+    }
+  ],
+  "combatStyles": [],
+  "notes": "",
+  "background": "",
+  "hitPoints": {"Head":{"current":5,"max":5},"Chest":{"current":7,"max":7},"Abdomen":{"current":6,"max":6},"Right Arm":{"current":4,"max":4},"Left Arm":{"current":4,"max":4},"Right Leg":{"current":5,"max":5},"Left Leg":{"current":5,"max":5}},
+  "companions": [],
+  "cult": "Foundchild",
+  "miracles": [
+    "Sureshot",
+    "Track Prey",
+    "Beastfriend",
+    "Speak with Beasts",
+    "Speedart"
+  ],
+  "devotionalPool": 5,
+  "selectedProfessionalSkills": [
+    "Survival",
+    "Track",
+    "Navigate"
+  ]
+}

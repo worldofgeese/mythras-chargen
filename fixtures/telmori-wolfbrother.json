@@ -1,0 +1,182 @@
+{
+  "name": "Greywind Wolfkin",
+  "concept": "Shapeshifting wolf warrior of the wilds",
+  "characteristics": {
+    "STR": 14,
+    "CON": 14,
+    "SIZ": 10,
+    "DEX": 13,
+    "INT": 8,
+    "POW": 10,
+    "CHA": 6
+  },
+  "charMethod": "point-buy",
+  "attributes": {"actionPoints":2,"experienceModifier":-1,"healingRate":3,"luckPoints":2,"magicPoints":10,"initiativeBonus":10,"damageModifier":"+0","hitPoints":{"Head":5,"Chest":7,"Abdomen":6,"Right Arm":4,"Left Arm":4,"Right Leg":5,"Left Leg":5},"encumbrance":{"unencumbered":28,"burdened":29,"overloaded":43,"noMovement":56},"runeAffinities":{"primary":50,"secondary":40,"tertiary":30},"folkMagicBase":46,"movementRate":6},
+  "culture": "Telmori Hsunchen",
+  "homeland": "Telmori Wilds",
+  "culturalSkills": {
+    "Athletics": 15,
+    "Brawn": 10,
+    "Endurance": 15,
+    "Evade": 15,
+    "Locale": 10,
+    "Perception": 15,
+    "Stealth": 15,
+    "Track": 5
+  },
+  "runeAffinities": {
+    "primary": "Beast",
+    "secondary": "Movement",
+    "tertiary": "Man"
+  },
+  "folkMagicSpells": [
+    "Beastcall",
+    "Mobility",
+    "Coordination"
+  ],
+  "passions": [
+    {
+      "name": "Loyalty (Wolf Pack)",
+      "value": 47,
+      "custom": true
+    },
+    {
+      "name": "Devotion (Telmor)",
+      "value": 47,
+      "custom": true
+    },
+    {
+      "name": "Hate (Chaos)",
+      "value": 47,
+      "custom": true
+    }
+  ],
+  "age": 21,
+  "gender": "Male",
+  "family": "Greywind Pack",
+  "backgroundEvents": "",
+  "career": "Scout",
+  "careerSkills": {
+    "Athletics": 15,
+    "Endurance": 15,
+    "First Aid": 10,
+    "Perception": 15,
+    "Stealth": 15,
+    "Combat Style (Wolf Runner)": 15,
+    "Survival": 10,
+    "Track": 5
+  },
+  "careerFolkMagic": [
+    "Find Game",
+    "Speedart"
+  ],
+  "bonusSkills": {
+    "Athletics": 15,
+    "Endurance": 15,
+    "Evade": 15,
+    "Perception": 15,
+    "Stealth": 15,
+    "Combat Style (Wolf Runner)": 15,
+    "Survival": 15,
+    "Track": 15,
+    "Navigate": 15,
+    "Willpower": 15
+  },
+  "hobbySkillName": null,
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "startingMoney": 24,
+  "equipment": [
+    {
+      "name": "Two sets of common undecorated clothes",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 0
+    },
+    {
+      "name": "Transport: Own back",
+      "enc": 0,
+      "quantity": 1,
+      "cost": 0
+    },
+    {
+      "name": "Backpack",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Waterskin",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Rations (1 week)",
+      "enc": 2,
+      "quantity": 1,
+      "cost": 14
+    },
+    {
+      "name": "Bedroll",
+      "enc": 1,
+      "quantity": 1,
+      "cost": 5
+    },
+    {
+      "name": "Flint & Tinder",
+      "enc": 0,
+      "quantity": 1,
+      "cost": 5
+    }
+  ],
+  "weapons": [
+    {
+      "name": "Teeth and Claws",
+      "damage": "1d4",
+      "size": "S",
+      "reach": "T",
+      "ap": 0,
+      "hp": 0,
+      "skill": 0,
+      "quantity": 1
+    },
+    {
+      "name": "Shortspear",
+      "damage": "1d8+1",
+      "size": "M",
+      "reach": "L",
+      "ap": 4,
+      "hp": 5,
+      "skill": 0,
+      "quantity": 1
+    }
+  ],
+  "armor": [
+    {
+      "name": "Leather/Fur Basic Armour",
+      "ap": 1,
+      "locations": "3 location(s)",
+      "cost": 0
+    }
+  ],
+  "combatStyles": [],
+  "notes": "",
+  "background": "",
+  "hitPoints": {"Head":{"current":5,"max":5},"Chest":{"current":7,"max":7},"Abdomen":{"current":6,"max":6},"Right Arm":{"current":4,"max":4},"Left Arm":{"current":4,"max":4},"Right Leg":{"current":5,"max":5},"Left Leg":{"current":5,"max":5}},
+  "companions": [],
+  "cult": "Telmor",
+  "miracles": [
+    "Wolf Shape",
+    "Pack Bond",
+    "Howl of Terror",
+    "Scent Prey",
+    "Spirit Sight"
+  ],
+  "devotionalPool": 5,
+  "selectedProfessionalSkills": [
+    "Survival",
+    "Track",
+    "Navigate"
+  ]
+}

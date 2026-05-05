@@ -201,6 +201,7 @@ function loadApp() {
     process.exit(1);
   }
 
+  sandbox._exports._sandbox = sandbox;
   return sandbox._exports;
 }
 
@@ -1850,19 +1851,19 @@ section('ADR-005: Placeholder Skill Disambiguation');
 // Test E.2: CharacterData.saveToLocalStorage() includes version
 {
   if (App.CharacterData && App.CharacterData.saveToLocalStorage && App.CharacterData.getSchemaVersion) {
-    // Mock localStorage
+    // Mock localStorage inside the sandbox to capture saved data
+    const vm = require('vm');
+    const sandbox = App._sandbox;
     let savedData = null;
-    const mockStorage = {
-      setItem: (key, value) => { savedData = value; },
-      getItem: (key) => savedData,
-      removeItem: (key) => { savedData = null; }
-    };
 
-    // Save with mock - replace localStorage in the sandbox context
-    const origLS = localStorage;
-    localStorage = mockStorage;
+    // Install a capturing mock into the sandbox's localStorage
+    const origSetItem = sandbox.localStorage.setItem;
+    sandbox.localStorage.setItem = (key, value) => { savedData = value; };
+
     App.CharacterData.saveToLocalStorage();
-    localStorage = origLS;
+
+    // Restore original
+    sandbox.localStorage.setItem = origSetItem;
 
     if (savedData) {
       try {
@@ -1880,6 +1881,8 @@ section('ADR-005: Placeholder Skill Disambiguation');
       } catch (e) {
         fail('Saved payload is not valid JSON');
       }
+    } else {
+      fail('saveToLocalStorage() did not write any data');
     }
   }
 }
@@ -3030,7 +3033,7 @@ section('Cult Data Tests');
 // Test: CULTURE_CULT_MAP exists and has entries for all 8 cultures
 {
   const CULT_MAP = App.CULTURE_CULT_MAP;
-  const expectedCultures = ['Sartarite', 'Esrolian', 'Lunar Heartland', 'Lunar Provincial', 'Praxian', 'Balazaring', 'God Forgot', 'Telmori Hsunchen'];
+  const expectedCultures = ['Sartarite (Heortling)', 'Esrolian', 'Lunar Heartland', 'Lunar Provincial', 'Praxian', 'Balazaring', 'God Forgot', 'Telmori Hsunchen'];
 
   if (!CULT_MAP) {
     fail('CULTURE_CULT_MAP is not defined');
@@ -3074,13 +3077,13 @@ section('Cult Data Tests');
 
     for (let i = 0; i < 10; i++) {
       AppObj.generateRandomCharacter();
-      // Force culture to Sartarite
-      CD.culture = 'Sartarite';
+      // Force culture to Sartarite (Heortling)
+      CD.culture = 'Sartarite (Heortling)';
       // Generate cult selection
       const CULT_MAP = App.CULTURE_CULT_MAP;
       const pick = arr => arr[Math.floor(Math.random() * arr.length)];
-      if (CULT_MAP && CULT_MAP['Sartarite'] && CULT_MAP['Sartarite'].primary) {
-        CD.cult = pick(CULT_MAP['Sartarite'].primary);
+      if (CULT_MAP && CULT_MAP['Sartarite (Heortling)'] && CULT_MAP['Sartarite (Heortling)'].primary) {
+        CD.cult = pick(CULT_MAP['Sartarite (Heortling)'].primary);
       }
 
       if (CD.cult) {
