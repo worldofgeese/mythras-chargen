@@ -1,5 +1,5 @@
 ---
-status: active
+status: completed
 design: .rpi/designs/agent-api.md
 spec: .rpi/specs/agent-api.md
 adr: docs/decisions/0005-playwright-cli-first-agent-api.md

@@ -132,19 +132,89 @@ Both statements are in the HTML footer:
 ## Key File
 - `index.html` — single self-contained file (HTML + CSS + JS)
 
+## Agent API (ADR-0005)
+
+The primary programmatic interface for character creation. Agents pass semantic data and receive structured JSON responses — zero DOM interaction required.
+
+### Methods
+
+| Method | Input | Output | Side Effects |
+|--------|-------|--------|--------------|
+| `App.agent.getState()` | none | Full compiled character state | None (read-only) |
+| `App.agent.getOptions(step)` | step number | Valid choices for that step | None (read-only) |
+| `App.agent.getValidation()` | none | `{valid, errors, step}` | None (read-only) |
+| `App.agent.setStep(step, data)` | step + data object | `{success, errors, state}` | Writes CharacterData, renders |
+| `App.agent.next()` | none | `{success, errors, newStep}` | Advances step if valid |
+| `App.agent.prev()` | none | `{success, newStep}` | Retreats step |
+| `App.agent.buildCharacter(spec)` | Full character spec | `{success, errors, character}` | Builds entire character |
+
+### Key Behaviors
+
+- **Synchronous** — all methods return plain objects, no Promises
+- **Never throws** — errors are always in the response envelope
+- **Validate-then-apply** — failed calls leave state unchanged
+- **Disambiguation is transparent** — pass `{name: 'Lore (any)', specialization: 'Plants'}` and it resolves internally
+
+### Usage via playwright-cli
+
+```bash
+# Build a character in one call
+playwright-cli eval "(() => {
+  var spec = {
+    step1: {name: 'Korlmar', concept: 'Warrior'},
+    step2: {characteristics: {STR:15, CON:13, SIZ:12, DEX:11, INT:9, POW:8, CHA:7}},
+    step4: {culture: 'Sartarite (Heortling)', homeland: 'Boldhome'},
+    step5: {culturalSkills: {Athletics:15, Brawn:15, Endurance:15, Evade:10, Locale:10, Perception:10, Willpower:15, Ride:10}, runeAffinities: {primary:'Air', secondary:'Movement', tertiary:'Death'}, folkMagicSpells: ['Bladesharp','Fanaticism','Protection']},
+    step6: {passions: [{type:'Loyalty', subject:'Clan', value:47}]},
+    step7: {age: 21, gender: 'Male'},
+    step8: {career: 'Warrior', professionalSkills: [{name:'Lore (any)', specialization:'Strategy'}, {name:'Craft (any)', specialization:'Weaponsmithing'}, {name:'Survival'}]},
+    step9: {cult: 'Orlanth', miracles: ['Shield','Lightning','Wind Words','Leap']},
+    step10: {careerSkills: {Athletics:15, Brawn:15, Endurance:15, Evade:10, Unarmed:10, 'Combat Style (Hill Clan Levy)':15, 'Lore (Strategy)':10, Survival:10}, careerFolkMagic: ['Disruption','Vigour']},
+    step11: {bonusSkills: {Athletics:15, Brawn:15, Endurance:15, Evade:15, Willpower:15, Unarmed:15, 'Combat Style (Hill Clan Levy)':15, 'Lore (Strategy)':15, Survival:15, Perception:15}},
+    step12: {socialClass: 'Freeman'}
+  };
+  return JSON.stringify(App.agent.buildCharacter(spec));
+})()"
+
+# Query available options
+playwright-cli eval "JSON.stringify(App.agent.getOptions(4))"  # 8 cultures
+playwright-cli eval "JSON.stringify(App.agent.getOptions(8))"  # careers for current culture
+playwright-cli eval "JSON.stringify(App.agent.getOptions(9))"  # cults for current culture
+```
+
+### setStep Data Schemas
+
+```javascript
+// Step 1: {name: "Korlmar", concept: "Warrior"}
+// Step 2: {characteristics: {STR:15, CON:13, SIZ:12, DEX:11, INT:9, POW:8, CHA:7}}
+// Step 4: {culture: "Sartarite (Heortling)", homeland: "Boldhome"}
+// Step 5: {culturalSkills: {...}, runeAffinities: {primary, secondary, tertiary}, folkMagicSpells: [...]}
+// Step 6: {passions: [{type: "Loyalty", subject: "Clan", value: 47}]}
+// Step 7: {age: 21, gender: "Male", family: "...", backgroundEvents: "..."}
+// Step 8: {career: "Warrior", professionalSkills: [{name: "Lore (any)", specialization: "Strategy"}]}
+// Step 9: {cult: "Orlanth", miracles: [...]} OR {cult: null}
+// Step 10: {careerSkills: {...}, careerFolkMagic: [...]}
+// Step 11: {bonusSkills: {...}}
+// Step 12: {socialClass: "Freeman"} OR {rollSocialClass: true}
+```
+
 ## Playwright Testing
 The HTML is fully testable with playwright-cli. Mode switching uses CSS `display:none` (no offscreen positioning tricks that break automation).
+
+**Preferred approach: Use `App.agent.*` for all programmatic character creation** (see Agent API above). The legacy DOM-based approach below still works for UI testing.
 
 ```bash
 # Start server + open browser
 python3 -m http.server 8765 &
 playwright-cli open http://localhost:8765/index.html
 
-# Generate character and verify
+# Preferred: Agent API (zero DOM interaction)
+playwright-cli eval "JSON.stringify(App.agent.buildCharacter({step1: {name: 'Test'}}))"
+
+# Legacy: DOM-based approach (for UI testing only)
 playwright-cli eval "void(App.generateRandomCharacter())"
 playwright-cli eval "''+CharacterData.cult+'/'+CharacterData.culture"
 playwright-cli eval "void(App.switchMode('play'))"
-playwright-cli eval "document.querySelector('#play-cult').value"
 playwright-cli screenshot --filename=play-mode.png
 ```
 

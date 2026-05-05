@@ -1,6 +1,6 @@
 ---
 feature: agent-api
-status: proposed
+status: accepted
 design: docs/decisions/0005-playwright-cli-first-agent-api.md
 ---
 
