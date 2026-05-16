@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "mythras_chargen",
+  "project_id": "da96f931-4d47-4277-a953-b71e730d283b"
+}

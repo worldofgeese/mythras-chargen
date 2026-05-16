@@ -13,3 +13,42 @@ dist/
 .claude/
 references/aig-raw/AiG.pdf
 /.agent-shell/
+
+# BEGIN swamp managed section - DO NOT EDIT
+
+# Runtime data (not needed in version control)
+.swamp/
+
+# Local extension sources (developer-specific, not shared)
+.swamp-sources.yaml
+
+# Claude Code configuration (managed by swamp)
+.claude/worktrees/
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
+.claude/scheduled_tasks.json
+# END swamp managed section
+.decapod/data
+.decapod/data/*
+.decapod/.stfolder
+.decapod/workspaces
+.decapod/generated/*
+!.decapod/data/
+!.decapod/data/knowledge.promotions.jsonl
+!.decapod/generated/Dockerfile
+!.decapod/generated/context/
+!.decapod/generated/context/*.json
+!.decapod/generated/policy/
+!.decapod/generated/policy/context_capsule_policy.json
+!.decapod/generated/artifacts/
+!.decapod/generated/artifacts/provenance/
+!.decapod/generated/artifacts/provenance/*.json
+!.decapod/generated/artifacts/provenance/kcr_trend.jsonl
+!.decapod/generated/specs/
+!.decapod/generated/specs/*.md
+!.decapod/generated/specs/.manifest.json
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key
