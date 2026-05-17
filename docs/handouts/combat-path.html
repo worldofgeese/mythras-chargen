@@ -65,44 +65,76 @@
       font-style: italic;
     }
 
-    /* Progress path visualization */
-    .path {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      justify-content: center;
-      margin: 2rem 0;
-      padding: 1rem;
-      background: var(--panel);
-      border-radius: 8px;
+    /* Winding path visualization (Shamatha-inspired) */
+    .winding-path {
+      position: relative;
+      margin: 2rem auto;
+      padding: 1.5rem 0;
+      max-width: 600px;
     }
 
-    .path-node {
-      width: 2.2rem;
-      height: 2.2rem;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 600;
-      font-size: 0.8rem;
-      background: var(--panel-strong);
-      color: var(--ink-soft);
-      border: 2px solid var(--rule);
-      transition: all 0.2s;
+    .winding-path svg {
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
-    .path-node.active {
-      background: var(--rust);
-      color: white;
-      border-color: var(--rust);
+    .winding-path .path-line {
+      fill: none;
+      stroke: var(--panel-strong);
+      stroke-width: 28;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .winding-path .path-line-inner {
+      fill: none;
+      stroke: var(--panel);
+      stroke-width: 22;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .winding-path .node {
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .winding-path .node:hover {
       transform: scale(1.15);
     }
 
-    .path-node.complete {
-      background: var(--sage);
-      color: white;
-      border-color: var(--sage);
+    .winding-path .node circle {
+      fill: var(--panel-strong);
+      stroke: var(--rule);
+      stroke-width: 2;
+    }
+
+    .winding-path .node text {
+      fill: var(--ink-soft);
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      text-anchor: middle;
+      dominant-baseline: central;
+    }
+
+    .winding-path .node.start circle {
+      fill: var(--rust);
+      stroke: var(--rust);
+    }
+
+    .winding-path .node.start text {
+      fill: white;
+    }
+
+    .winding-path .node.end circle {
+      fill: var(--sage);
+      stroke: var(--sage);
+    }
+
+    .winding-path .node.end text {
+      fill: white;
     }
 
     /* Stage cards */
@@ -224,19 +256,28 @@
       <p class="subtitle">A progressive guide to Mythras combat — learn one layer at a time</p>
     </header>
 
-    <nav class="path" aria-label="Progress through 12 stages">
-      <div class="path-node">1</div>
-      <div class="path-node">2</div>
-      <div class="path-node">3</div>
-      <div class="path-node">4</div>
-      <div class="path-node">5</div>
-      <div class="path-node">6</div>
-      <div class="path-node">7</div>
-      <div class="path-node">8</div>
-      <div class="path-node">9</div>
-      <div class="path-node">10</div>
-      <div class="path-node">11</div>
-      <div class="path-node">12</div>
+    <nav class="winding-path" aria-label="Progress through 12 stages">
+      <svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+        <!-- Winding path (S-curves going upward) -->
+        <path class="path-line" d="M 50,290 C 150,290 200,290 300,270 S 500,250 550,230 C 550,210 450,200 300,190 S 100,180 50,160 C 50,140 150,130 300,120 S 500,110 550,90 C 550,70 450,60 300,45 S 150,35 100,30"/>
+        <path class="path-line-inner" d="M 50,290 C 150,290 200,290 300,270 S 500,250 550,230 C 550,210 450,200 300,190 S 100,180 50,160 C 50,140 150,130 300,120 S 500,110 550,90 C 550,70 450,60 300,45 S 150,35 100,30"/>
+        <!-- Stage nodes along the path -->
+        <a href="#stage-1" class="node start"><circle cx="50" cy="290" r="16"/><text x="50" y="290">1</text></a>
+        <a href="#stage-2" class="node"><circle cx="175" cy="280" r="16"/><text x="175" y="280">2</text></a>
+        <a href="#stage-3" class="node"><circle cx="330" cy="265" r="16"/><text x="330" y="265">3</text></a>
+        <a href="#stage-4" class="node"><circle cx="500" cy="245" r="16"/><text x="500" y="245">4</text></a>
+        <a href="#stage-5" class="node"><circle cx="440" cy="210" r="16"/><text x="440" y="210">5</text></a>
+        <a href="#stage-6" class="node"><circle cx="250" cy="190" r="16"/><text x="250" y="190">6</text></a>
+        <a href="#stage-7" class="node"><circle cx="90" cy="165" r="16"/><text x="90" y="165">7</text></a>
+        <a href="#stage-8" class="node"><circle cx="180" cy="135" r="16"/><text x="180" y="135">8</text></a>
+        <a href="#stage-9" class="node"><circle cx="350" cy="115" r="16"/><text x="350" y="115">9</text></a>
+        <a href="#stage-10" class="node"><circle cx="510" cy="95" r="16"/><text x="510" y="95">10</text></a>
+        <a href="#stage-11" class="node"><circle cx="400" cy="60" r="16"/><text x="400" y="60">11</text></a>
+        <a href="#stage-12" class="node end"><circle cx="200" cy="35" r="16"/><text x="200" y="35">12</text></a>
+        <!-- Start/End labels -->
+        <text x="50" y="312" font-family="var(--font-body)" font-size="9" fill="var(--ink-soft)" text-anchor="middle">Begin</text>
+        <text x="200" y="18" font-family="var(--font-body)" font-size="9" fill="var(--sage)" text-anchor="middle">Mastery</text>
+      </svg>
     </nav>
 
     <article class="stage" id="stage-1">

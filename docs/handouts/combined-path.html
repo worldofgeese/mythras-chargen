@@ -33,8 +33,18 @@
     header h1 { font-family: var(--font-display); font-size: clamp(1.8rem, 5vw, 2.6rem); color: var(--gold); margin: 0 0 0.5rem; line-height: 1.2; }
     header .subtitle { font-size: 1rem; color: var(--ink-soft); font-style: italic; }
 
-    .path { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin: 2rem 0; padding: 1rem; background: var(--panel); border-radius: 8px; }
-    .path-node { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.8rem; background: var(--panel-strong); color: var(--ink-soft); border: 2px solid var(--rule); }
+    .winding-path { position: relative; margin: 2rem auto; padding: 1.5rem 0; max-width: 500px; }
+    .winding-path svg { width: 100%; height: auto; display: block; }
+    .winding-path .path-line { fill: none; stroke: var(--panel-strong); stroke-width: 28; stroke-linecap: round; stroke-linejoin: round; }
+    .winding-path .path-line-inner { fill: none; stroke: var(--panel); stroke-width: 22; stroke-linecap: round; stroke-linejoin: round; }
+    .winding-path .node { cursor: pointer; transition: transform 0.2s; }
+    .winding-path .node:hover { transform: scale(1.15); }
+    .winding-path .node circle { fill: var(--panel-strong); stroke: var(--rule); stroke-width: 2; }
+    .winding-path .node text { fill: var(--ink-soft); font-family: var(--font-display); font-size: 12px; font-weight: 700; text-anchor: middle; dominant-baseline: central; }
+    .winding-path .node.start circle { fill: var(--gold); stroke: var(--gold); }
+    .winding-path .node.start text { fill: white; }
+    .winding-path .node.end circle { fill: var(--gold); stroke: var(--gold); }
+    .winding-path .node.end text { fill: white; }
 
     .stage { background: var(--paper); border-radius: 10px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
     .stage-header { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 0.75rem; }
@@ -66,14 +76,20 @@
 
     <p style="text-align:center; color:var(--ink-soft); margin-bottom:2rem;"><em>Prerequisites: Complete at least Stages 1–5 of both the <a href="combat-path.html">Combat Path</a> and <a href="magic-path.html">Magic Path</a>.</em></p>
 
-    <nav class="path" aria-label="Progress through 7 stages">
-      <div class="path-node">1</div>
-      <div class="path-node">2</div>
-      <div class="path-node">3</div>
-      <div class="path-node">4</div>
-      <div class="path-node">5</div>
-      <div class="path-node">6</div>
-      <div class="path-node">7</div>
+    <nav class="winding-path" aria-label="Progress through 7 stages">
+      <svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+        <path class="path-line" d="M 50,170 C 150,170 250,160 350,145 S 460,120 470,100 C 470,80 380,70 270,60 S 130,45 80,30"/>
+        <path class="path-line-inner" d="M 50,170 C 150,170 250,160 350,145 S 460,120 470,100 C 470,80 380,70 270,60 S 130,45 80,30"/>
+        <a href="#stage-1" class="node start"><circle cx="50" cy="170" r="16"/><text x="50" y="170">1</text></a>
+        <a href="#stage-2" class="node"><circle cx="170" cy="162" r="16"/><text x="170" y="162">2</text></a>
+        <a href="#stage-3" class="node"><circle cx="310" cy="148" r="16"/><text x="310" y="148">3</text></a>
+        <a href="#stage-4" class="node"><circle cx="440" cy="115" r="16"/><text x="440" y="115">4</text></a>
+        <a href="#stage-5" class="node"><circle cx="370" cy="78" r="16"/><text x="370" y="78">5</text></a>
+        <a href="#stage-6" class="node"><circle cx="230" cy="55" r="16"/><text x="230" y="55">6</text></a>
+        <a href="#stage-7" class="node end"><circle cx="100" cy="35" r="16"/><text x="100" y="35">7</text></a>
+        <text x="50" y="192" font-family="var(--font-body)" font-size="9" fill="var(--ink-soft)" text-anchor="middle">Begin</text>
+        <text x="100" y="18" font-family="var(--font-body)" font-size="9" fill="var(--gold)" text-anchor="middle">Mastery</text>
+      </svg>
     </nav>
 
     <article class="stage" id="stage-1">
