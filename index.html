@@ -13209,56 +13209,64 @@ const FOLK_MAGIC_DESCRIPTIONS = {
 // Sorcery spells from Mythras Core p.167-178 (34 spells)
 // Format: [name, resist] — resist is empty string if none
 const SORCERY_SPELLS = [
-  ["Abjure (Substance/Process)", "Special"],
-  ["Animate (Substance)", ""],
-  ["Attract (Threat)", "Willpower"],
-  ["Castback", ""],
-  ["Damage Enhancement", ""],
-  ["Damage Resistance", ""],
-  ["Diminish (Characteristic)", "Willpower/Endurance"],
-  ["Dominate (Species)", "Willpower"],
-  ["Enchant (Object)", "Willpower"],
-  ["Enhance (Characteristic)", "Willpower/Endurance"],
-  ["Enslave (Creatures)", "Willpower"],
-  ["Fly", ""],
-  ["Haste", ""],
-  ["Holdfast", ""],
-  ["Intuition", ""],
-  ["Mystic (Sense)", ""],
-  ["Neutralize Magic", ""],
-  ["Palsy", "Endurance"],
-  ["Phantom (Sense)", ""],
-  ["Portal", ""],
-  ["Project (Sense)", ""],
-  ["Regenerate", ""],
-  ["Repulse (Substance)", ""],
-  ["Sculpt (Substance)", ""],
-  ["Shapechange (Species to Species)", "Willpower"],
-  ["Smother", "Endurance"],
-  ["Spirit Resistance", ""],
-  ["Store Manna", ""],
-  ["Summon (Entity)", "Evade"],
-  ["Tap (Characteristic)", "Special"],
-  ["Teleport", ""],
-  ["Transmogrify (to Substance)", "Endurance"],
-  ["Undeath", "Endurance"],
-  ["Wrack (Species)", "Endurance"]
+  ["Abjure (Substance/Process)", "Special", "Wards an area against a specified substance or process, preventing it from entering or occurring within"],
+  ["Animate (Substance)", "", "Brings an inanimate substance to life, allowing it to move and act under the caster's direction"],
+  ["Attract (Threat)", "Willpower", "Draws a specified threat toward the caster or a designated point, compelling approach"],
+  ["Castback", "", "Reflects incoming spells back at their caster if the attacking spell fails to overcome this one"],
+  ["Damage Enhancement", "", "Increases weapon damage by adding extra dice per intensity to a single weapon"],
+  ["Damage Resistance", "", "Provides magical armor protection, reducing incoming damage by intensity per location"],
+  ["Diminish (Characteristic)", "Willpower/Endurance", "Temporarily reduces a target's characteristic by 2 per intensity"],
+  ["Dominate (Species)", "Willpower", "Compels a creature of the named species to obey the caster's commands"],
+  ["Enchant (Object)", "Willpower", "Imbues an object with a stored spell that activates under specified conditions"],
+  ["Enhance (Characteristic)", "Willpower/Endurance", "Temporarily increases a characteristic by 2 per intensity"],
+  ["Enslave (Creatures)", "Willpower", "Permanently binds creatures to the caster's will; they serve until freed or the spell ends"],
+  ["Fly", "", "Grants the ability to fly at the caster's Movement Rate; maneuverability improves with intensity"],
+  ["Haste", "", "Doubles the target's Movement Rate and grants additional Action Points per intensity"],
+  ["Holdfast", "", "Bonds two surfaces together with unbreakable magical adhesion; strength scales with intensity"],
+  ["Intuition", "", "Grants supernatural awareness of danger, lies, or hidden things within range"],
+  ["Mystic (Sense)", "", "Grants a magical sense (sight, hearing, etc.) that perceives through barriers or at distance"],
+  ["Neutralize Magic", "", "Eliminates magical effects on a target; each intensity counters one magnitude of active magic"],
+  ["Palsy", "Endurance", "Paralyzes hit locations, rendering them useless; affects 1 location per 2 intensity"],
+  ["Phantom (Sense)", "", "Creates a convincing illusion affecting one sense per intensity (sight, sound, smell, etc.)"],
+  ["Portal", "", "Opens a gateway between two known locations; size and duration scale with intensity"],
+  ["Project (Sense)", "", "Projects one of the caster's senses to a remote location within range"],
+  ["Regenerate", "", "Heals 1 Hit Point per round per intensity to a single location; can regrow severed limbs"],
+  ["Repulse (Substance)", "", "Forces a specified substance away from the caster or target area"],
+  ["Sculpt (Substance)", "", "Reshapes a specified substance into any form the caster desires; permanence scales with intensity"],
+  ["Shapechange (Species to Species)", "Willpower", "Transforms the target from one species into another; gains physical stats of new form"],
+  ["Smother", "Endurance", "Extinguishes fire or suffocates air-breathers by removing oxygen from the area"],
+  ["Spirit Resistance", "", "Provides magical protection against spirit attacks and discorporate entities"],
+  ["Store Manna", "", "Creates a reservoir of Magic Points in an object; stores 1 MP per intensity for later use"],
+  ["Summon (Entity)", "Evade", "Calls a specified entity to the caster's location; entity is not automatically controlled"],
+  ["Tap (Characteristic)", "Special", "Drains a target's characteristic, transferring the points to the caster temporarily"],
+  ["Teleport", "", "Instantly transports the caster to a known location within range; range scales with intensity"],
+  ["Transmogrify (to Substance)", "Endurance", "Transforms the target's body into a specified substance (stone, iron, wood, etc.)"],
+  ["Undeath", "Endurance", "Reanimates a corpse as an undead servant under the caster's control"],
+  ["Wrack (Species)", "Endurance", "Inflicts agonizing pain on a creature of the named species; incapacitates without damage"]
 ];
 
-// Starting spirits for animist characters
+// Starting spirits for animist characters (Monster Island + Bird in the Hand)
 const STARTING_SPIRITS = [
-  {name: 'Healing Spirit (Int 1)', type: 'Nature', ability: 'Heal 1d3 HP to one location'},
-  {name: 'Healing Spirit (Int 2)', type: 'Nature', ability: 'Heal 1d6 HP to one location'},
-  {name: 'Protection Spirit (Int 1)', type: 'Nature', ability: '+1 AP to all locations'},
-  {name: 'Protection Spirit (Int 2)', type: 'Nature', ability: '+2 AP to all locations'},
-  {name: 'Strength Spirit (Int 1)', type: 'Nature', ability: '+1d2 to STR for POW minutes'},
-  {name: 'Magic Spirit (Int 1)', type: 'Nature', ability: 'Stores 3 extra Magic Points'},
-  {name: 'Magic Spirit (Int 2)', type: 'Nature', ability: 'Stores 6 extra Magic Points'},
-  {name: 'Ancestor Spirit (Int 1)', type: 'Ancestor', ability: 'Augment one skill by +20% once per day'},
-  {name: 'Ancestor Spirit (Int 2)', type: 'Ancestor', ability: 'Augment one skill by +30% once per day'},
-  {name: 'Ward Spirit (Int 1)', type: 'Guardian', ability: 'Alerts to spirit intrusion within 10m'},
-  {name: 'Fire Spirit (Int 1)', type: 'Elemental', ability: 'Ignite/extinguish small fires'},
-  {name: 'Air Spirit (Int 1)', type: 'Elemental', ability: 'Create gusts, clear air'}
+  // Nature Spirits — Trait (Endowment): grants physical trait of totem animal
+  {name: 'Trait Spirit — Swiftness (Int 1)', type: 'Nature (Trait)', intensity: 1, pow: 9, cha: 7, ability: 'Endowment: grants limbs greater alacrity (+1 Action Point for 1 scene)', source: 'Bird in the Hand p.12'},
+  {name: 'Trait Spirit — Toughness (Int 2)', type: 'Nature (Trait)', intensity: 2, pow: 13, cha: 9, ability: 'Endowment: grants hide-like skin (+2 AP to all locations for 1 scene)', source: 'Monster Island p.108'},
+  {name: 'Trait Spirit — Keen Senses (Int 1)', type: 'Nature (Trait)', intensity: 1, pow: 10, cha: 8, ability: 'Endowment: grants animal-sharp senses (+20% Perception for 1 scene)', source: 'Monster Island p.108'},
+  // Nature Spirits — Boost (Bless): boosts one Attribute or Skill
+  {name: 'Boost Spirit — Vigor (Int 1)', type: 'Nature (Boost)', intensity: 1, pow: 10, cha: 8, ability: 'Bless: +1d3 temporary Hit Points to one location', source: 'Monster Island p.108'},
+  {name: 'Boost Spirit — Might (Int 2)', type: 'Nature (Boost)', intensity: 2, pow: 14, cha: 10, ability: 'Bless: +2 STR for POW minutes', source: 'Monster Island p.108'},
+  {name: 'Boost Spirit — Healing (Int 1)', type: 'Nature (Boost)', intensity: 1, pow: 9, cha: 7, ability: 'Bless: heal 1d3 HP to one location', source: 'Monster Island p.108'},
+  {name: 'Boost Spirit — Healing (Int 2)', type: 'Nature (Boost)', intensity: 2, pow: 13, cha: 9, ability: 'Bless: heal 1d6 HP to one location', source: 'Monster Island p.108'},
+  // Ancestor Spirits — Sagacity: augment skills
+  {name: 'Ancestor Spirit — Sagacity (Int 1)', type: 'Ancestor', intensity: 1, pow: 11, cha: 9, ability: 'Sagacity: augment one skill by +20% for 1 scene', source: 'Monster Island p.109'},
+  {name: 'Ancestor Spirit — Sagacity (Int 2)', type: 'Ancestor', intensity: 2, pow: 14, cha: 11, ability: 'Sagacity: augment one skill by +30% for 1 scene', source: 'Monster Island p.109'},
+  // Guardian/Ward Spirits
+  {name: 'Guardian Spirit (Int 1)', type: 'Guardian', intensity: 1, pow: 10, cha: 8, ability: 'Alerts owner to spirit intrusion or magical attack within 10m', source: 'Mythras Core p.142'},
+  // Magic Point Storage
+  {name: 'Magic Spirit (Int 1)', type: 'Nature', intensity: 1, pow: 9, cha: 7, ability: 'Stores 3 extra Magic Points in fetish for owner\'s use', source: 'Mythras Core p.140'},
+  {name: 'Magic Spirit (Int 2)', type: 'Nature', intensity: 2, pow: 13, cha: 9, ability: 'Stores 6 extra Magic Points in fetish for owner\'s use', source: 'Mythras Core p.140'},
+  // Tiki Spirits (one-use-per-scene, from Bird in the Hand)
+  {name: 'Tiki Spirit — Courage (Int 1)', type: 'Tiki', intensity: 1, pow: 8, cha: 6, ability: 'One scene: +10% Willpower vs fear; fetish empties after use', source: 'Bird in the Hand p.14'},
+  {name: 'Tiki Spirit — War (Int 2)', type: 'Tiki', intensity: 2, pow: 12, cha: 8, ability: 'One scene: +2 damage with one weapon; fetish empties after use', source: 'Bird in the Hand p.14'}
 ];
 
 const CULTURE_BUILDS = {
@@ -16099,7 +16107,9 @@ App.renderStep9 = function() {
 
         const spiritListHTML = STARTING_SPIRITS.map(spirit => {
           const checked = CharacterData.boundSpirits.some(s => s.name === spirit.name);
-          return `<label><input type="checkbox" ${checked ? 'checked' : ''} onchange="App.toggleBoundSpirit('${spirit.name.replace(/'/g, "\\'")}')"> <strong>${spirit.name}</strong> <span class="spirit-ability">[${spirit.type}] ${spirit.ability}</span></label>`;
+          const stats = spirit.pow ? ` POW ${spirit.pow}, CHA ${spirit.cha}` : '';
+          const srcRef = spirit.source ? ` <span class="skill-tooltip" title="${spirit.source}">📚</span>` : '';
+          return `<label><input type="checkbox" ${checked ? 'checked' : ''} data-spirit="${spirit.name.replace(/"/g, '&quot;')}" onchange="App.toggleBoundSpirit(this.dataset.spirit)"> <strong>${spirit.name}</strong>${srcRef}<br><span class="spirit-ability">[${spirit.type}]${stats} — ${spirit.ability}</span></label>`;
         }).join('');
 
         pickerEl.insertAdjacentHTML('beforeend', `
@@ -16125,10 +16135,11 @@ App.renderStep9 = function() {
         if (!CharacterData.sorcerySpells) CharacterData.sorcerySpells = [];
         const selectedCount = CharacterData.sorcerySpells.length;
 
-        const spellListHTML = SORCERY_SPELLS.map(([name, resist]) => {
+        const spellListHTML = SORCERY_SPELLS.map(([name, resist, desc]) => {
           const checked = CharacterData.sorcerySpells.includes(name);
           const resistTag = resist ? ` <span class="spirit-ability">[Resist: ${resist}]</span>` : '';
-          return `<label><input type="checkbox" ${checked ? 'checked' : ''} onchange="App.toggleSorcerySpell('${name.replace(/'/g, "\\'")}')"> ${name}${resistTag}</label>`;
+          const tooltip = desc ? ` <span class="skill-tooltip" title="${desc}">ℹ️</span>` : '';
+          return `<label><input type="checkbox" ${checked ? 'checked' : ''} data-spell="${name.replace(/"/g, '&quot;')}" onchange="App.toggleSorcerySpell(this.dataset.spell)"> ${name}${resistTag}${tooltip}</label>`;
         }).join('');
 
         pickerEl.insertAdjacentHTML('beforeend', `
@@ -18952,12 +18963,27 @@ App.exportSinglePagePDF = async function() {
       // Animist Spirit Magic
       if (pdfCultType.types.includes('animist') && y > 50) {
         const spiritSlots = CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2);
-        txt(`SPIRIT MAGIC (${CharacterData.cult}) — Bound Spirit Slots: ${spiritSlots}`, L, y, { bold: true, size: 7 });
+        const spirits = CharacterData.boundSpirits || [];
+        txt(`SPIRIT MAGIC (${CharacterData.cult}) — Bound Spirit Slots: ${spirits.length}/${spiritSlots}`, L, y, { bold: true, size: 7 });
         y -= 8;
         txt('Casting: Spirit Rune affinity | Rank: Spirit Worshipper | Slots = CHA/2', L, y, { size: 5.5 });
-        y -= 7;
-        txt('Starting spirits: consult GM (typical: 2-3 intensity 1-2 nature spirits in fetishes)', L, y, { size: 5.5 });
-        y -= 10;
+        y -= 8;
+        if (spirits.length > 0) {
+          txt('Bound Spirits:', L, y, { bold: true, size: 6 });
+          y -= 7;
+          spirits.forEach(spirit => {
+            if (y < 30) return;
+            const data = STARTING_SPIRITS.find(s => s.name === spirit.name);
+            const ability = data ? ` — ${data.ability.slice(0, 55)}` : '';
+            const stats = data && data.pow ? ` (POW ${data.pow})` : '';
+            txt(`• ${spirit.name}${stats}${ability}`, L + 4, y, { size: 5.5 });
+            y -= 6;
+          });
+        } else {
+          txt('No spirits bound (select in wizard Step 9)', L, y, { size: 5.5 });
+          y -= 7;
+        }
+        y -= 4;
       }
 
       // Sorcery
@@ -18966,7 +18992,22 @@ App.exportSinglePagePDF = async function() {
         txt(`SORCERY (${CharacterData.cult}) — Magic Points: ${mp}`, L, y, { bold: true, size: 7 });
         y -= 8;
         txt('Casting: Rune Affinity of spell | Shaping: Law Rune affinity | Intensity = Rune/10', L, y, { size: 5.5 });
-        y -= 10;
+        y -= 8;
+        // List selected sorcery spells with effects
+        const spells = CharacterData.sorcerySpells || [];
+        if (spells.length > 0) {
+          txt('Spells:', L, y, { bold: true, size: 6 });
+          y -= 7;
+          spells.forEach(spellName => {
+            if (y < 30) return;
+            const spellData = SORCERY_SPELLS.find(s => s[0] === spellName);
+            const desc = spellData && spellData[2] ? ` — ${spellData[2].slice(0, 60)}` : '';
+            const resist = spellData && spellData[1] ? ` [${spellData[1]}]` : '';
+            txt(`• ${spellName}${resist}${desc}`, L + 4, y, { size: 5.5 });
+            y -= 6;
+          });
+        }
+        y -= 4;
       }
 
       // Mysticism

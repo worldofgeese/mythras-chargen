@@ -73,7 +73,7 @@
         {"type": "Nature Spirit (Trait)", "intensity": 2, "ins": "9-13", "pow": "13", "cha": "9-13"},
         {"type": "Nature Spirit (Boost)", "intensity": 3, "ins": "14", "pow": "24", "cha": "14"},
         {"type": "Nature Spirit (Dominate)", "intensity": 4, "ins": "10-11", "pow": "26-27", "cha": "10-11"},
-        {"type": "Shape-shifting Spirit", "intensity": 3-4, "ins": "13", "pow": "24-28", "cha": "13"},
+        {"type": "Shape-shifting Spirit", "intensity": "3-4", "ins": "13", "pow": "24-28", "cha": "13"},
         {"type": "Neutral Spirit", "intensity": 3, "int": "9-10", "pow": "19-23", "cha": "6-11"}
       ],
       "total_spirits": "4-6 for a full Shaman"

@@ -46,7 +46,11 @@ function evalPage(expr) {
 
 function evalPageJSON(expr) {
   const raw = evalPage(expr);
-  return JSON.parse(raw);
+  try {
+    return JSON.parse(raw);
+  } catch (e) {
+    throw new Error(`JSON parse failed. Raw output: ${raw.slice(0, 200)}\nParse error: ${e.message}`);
+  }
 }
 
 function assert(condition, msg) {
@@ -73,6 +77,7 @@ function reload() {
 console.log('\n\x1b[36m═══ E2E Acceptance Tests (AE1-AE4) ═══\x1b[0m\n');
 console.log('Opening browser...');
 openBrowser();
+try {
 
 // ═══════════════════════════════════════════════════════════════
 console.log('\n\x1b[36m═══ AE1: Orlanth (Theist) ═══\x1b[0m\n');
@@ -208,7 +213,9 @@ assert(ae4.miracles === 6, 'AE4: 6 miracles selected (theist path)');
 // Teardown
 // ═══════════════════════════════════════════════════════════════
 
-closeBrowser();
+} finally {
+  closeBrowser();
+}
 
 console.log(`\n\x1b[36m═══ Test Summary ═══\x1b[0m\n`);
 console.log(`Total tests: ${passed + failed}`);
