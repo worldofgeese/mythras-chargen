@@ -827,6 +827,34 @@ const CULTS_DATA = [{"name":"Ana Gor","pantheon":"Storm","cultSkills":["Prepare 
   }
 })();
 
+// --- Cult Type Detection (ADR-0006) ---
+// Automatically determines which magic system(s) a cult uses based on its cultSkills array.
+// Source: docs/adr/ADR-0006-full-magic-system-coverage.md
+function detectCultType(cult) {
+  const skills = (cult && cult.cultSkills) || [];
+  const skillsJoined = skills.join('|').toLowerCase();
+
+  const hasDevotionLike = skills.some(s => /^Devotion/i.test(s));
+  const hasTranceLike = skills.some(s => /^Trance/i.test(s) || /^Binding/i.test(s));
+  const hasInvocationLike = skills.some(s => /^Invocation/i.test(s) || /^Shaping/i.test(s));
+  const hasMysticism = skills.some(s => /^Mysticism/i.test(s) || /^Meditation/i.test(s));
+
+  const types = [];
+  if (hasDevotionLike) types.push('theist');
+  if (hasTranceLike) types.push('animist');
+  if (hasInvocationLike) types.push('sorcery');
+  if (hasMysticism) types.push('mysticism');
+
+  // Fallback: if no recognized magic skills, treat as theist (most common)
+  if (types.length === 0) types.push('theist');
+
+  return {
+    primary: types[0],
+    types: types,
+    isHybrid: types.length > 1
+  };
+}
+
 const CULTURE_CULT_MAP = {"Sartarite (Heortling)":{"primary":["Orlanth","Ernalda","Humakt","Issaries","Lhankor Mhy","Chalana Arroy"],"secondary":["Storm Bull","Eurmal","Odayla","Babeester Gor","Maran Gor","Vinga","Barntar","Heler","Yinkin","Elmal","Ty Kora Tek","Engizi","Asrelia","Donandar","Lanbril","Foundchild"]},"Esrolian":{"primary":["Ernalda","Babeester Gor","Chalana Arroy","Issaries","Lhankor Mhy","Ty Kora Tek"],"secondary":["Orlanth","Humakt","Asrelia","Maran Gor","Donandar","Eurmal","Lanbril","Grain Goddesses","Uleria","Argan Argar"]},"Lunar Heartland":{"primary":["7 Mothers - Yanafal Tarnils","7 Mothers - Irrippi Ontor","7 Mothers - Jakaleel","7 Mothers - Danfive Xaron","7 Mothers - Teelo Norri","7 Mothers - Queen Deezola","7 Mothers - She Who Waits","Etyries"],"secondary":["Yelm","Lodril","Dendara","Buserian","Shargash","Polaris","Lanbril","Uleria","Chalana Arroy","Lokarnos"]},"Lunar Provincial":{"primary":["7 Mothers - Yanafal Tarnils","7 Mothers - Irrippi Ontor","Etyries"],"secondary":["Orlanth","Ernalda","Humakt","Issaries","Yelmalio","Chalana Arroy","Lhankor Mhy","Lanbril","7 Mothers - Jakaleel","7 Mothers - Danfive Xaron","7 Mothers - Teelo Norri","7 Mothers - Queen Deezola"]},"Praxian":{"primary":["Waha","Eiritha","Storm Bull","Foundchild","Daka Fal"],"secondary":["Chalana Arroy","Issaries","Humakt","Lanbril","Zorak Zoran","Pavis","Zola Fel","Basmol","Gagarth"]},"Balazaring":{"primary":["Foundchild","Yelmalio","Daka Fal"],"secondary":["Storm Bull","Chalana Arroy","Orlanth","Waha","Eiritha","Odayla"]},"God Forgot":{"primary":[],"secondary":["Lhankor Mhy","Issaries","Chalana Arroy","Dormal"],"note":"God Forgot is explicitly atheistic/secularist. Cults are rare — 'No cult' is the expected default here."},"Telmori Hsunchen":{"primary":["Telmor"],"secondary":["Storm Bull","Foundchild","Odayla","Orlanth"],"note":"Telmori primarily worship their wolf ancestor Telmor. Telmor cult data is in Hsunchen pantheon."}};
 
 // =============================================================================
@@ -13544,8 +13572,11 @@ const CharacterData = {
   
   // Step 9: Cult Selection
   cult: null,
+  cultType: null,  // ADR-0006: detected magic system type(s)
   miracles: [],  // Selected theist miracles from cult
-  devotionalPool: 0,  // POW/2 for Initiates (auto-calculated)
+  devotionalPool: 0,  // POW/2 for Theist Initiates (auto-calculated)
+  boundSpiritSlots: 0,  // CHA/2 for Animist Spirit Worshippers (ADR-0006)
+  sorceryResource: 0,  // Magic Points (= POW) for Sorcery cults (ADR-0006)
 
   // Step 10: Career Skills
   careerSkills: {},
@@ -15869,9 +15900,63 @@ App.renderStep9 = function() {
       }
     }
 
-    // Render miracle picker
+    // ADR-0006: Render magic system UI based on cult type
     const pickerEl = div.querySelector('#miracle-picker');
-    if (pickerEl) this.renderMiraclePicker(pickerEl);
+    if (pickerEl) {
+      const cult = CULTS_DATA.find(c => c.name === CharacterData.cult);
+      const cultType = CharacterData.cultType || detectCultType(cult);
+
+      // Show miracle picker for theist cults
+      if (cultType.types.includes('theist')) {
+        this.renderMiraclePicker(pickerEl);
+      }
+
+      // Show animist info for animist cults
+      if (cultType.types.includes('animist')) {
+        const spiritSlots = CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2);
+        const animistHTML = `
+          <div style="background: #e8f5e9; border: 1px solid #4caf50; padding: 12px; margin-top: 12px; border-radius: 4px;">
+            <h3 style="margin: 0 0 8px 0; font-size: 14px;">Spirit Magic (Animist${cultType.isHybrid ? ' \u2014 Shaman Path' : ''})</h3>
+            <p style="font-size: 0.9em; margin: 4px 0;"><strong>Bound Spirit Slots:</strong> ${spiritSlots} (CHA/2 for Spirit Worshipper rank)</p>
+            <p style="font-size: 0.9em; margin: 4px 0;"><strong>Casting Skill:</strong> Spirit Rune affinity</p>
+            <p style="font-size: 0.85em; color: #555; margin: 8px 0 0 0; font-style: italic;">Spirit selection: consult GM for available spirits from cult tradition. Typical starting spirits: 2-3 intensity 1-2 nature spirits in fetishes.</p>
+          </div>
+        `;
+        pickerEl.insertAdjacentHTML('beforeend', animistHTML);
+        pickerEl.style.display = 'block';
+      }
+
+      // Show sorcery info for sorcery cults
+      if (cultType.types.includes('sorcery')) {
+        const magicPoints = CharacterData.sorceryResource || CharacterData.characteristics.POW || 0;
+        const sorceryHTML = `
+          <div style="background: #e3f2fd; border: 1px solid #2196f3; padding: 12px; margin-top: 12px; border-radius: 4px;">
+            <h3 style="margin: 0 0 8px 0; font-size: 14px;">Sorcery${cultType.isHybrid ? ' \u2014 Sorcerer Path' : ''}</h3>
+            <p style="font-size: 0.9em; margin: 4px 0;"><strong>Resource:</strong> Magic Points (${magicPoints})</p>
+            <p style="font-size: 0.9em; margin: 4px 0;"><strong>Casting:</strong> Rune Affinity of spell (replaces Invocation)</p>
+            <p style="font-size: 0.9em; margin: 4px 0;"><strong>Shaping:</strong> Law Rune affinity (replaces Shaping skill)</p>
+            <p style="font-size: 0.9em; margin: 4px 0;"><strong>Intensity:</strong> Rune Affinity / 10 | <strong>Shaping Points:</strong> Law Rune / 10</p>
+            <p style="font-size: 0.8em; color: #666; margin: 8px 0 0 0;">Source: Mythras Core p.162-178, AiG p.60</p>
+          </div>
+        `;
+        pickerEl.insertAdjacentHTML('beforeend', sorceryHTML);
+        pickerEl.style.display = 'block';
+      }
+
+      // Show mysticism stub
+      if (cultType.types.includes('mysticism')) {
+        const mysticismHTML = `
+          <div style="background: #f3e5f5; border: 1px solid #9c27b0; padding: 12px; margin-top: 12px; border-radius: 4px;">
+            <h3 style="margin: 0 0 8px 0; font-size: 14px;">Mysticism</h3>
+            <p style="font-size: 0.9em; margin: 4px 0;"><strong>System:</strong> Meditation + Path talents (Mythras Core p.155-161)</p>
+            <p style="font-size: 0.9em; margin: 4px 0;"><strong>Resource:</strong> Concentration (no external resource consumed)</p>
+            <p style="font-size: 0.85em; color: #555; margin: 8px 0 0 0; font-style: italic;">Max active talent Intensity = Meditation skill / 10</p>
+          </div>
+        `;
+        pickerEl.insertAdjacentHTML('beforeend', mysticismHTML);
+        pickerEl.style.display = 'block';
+      }
+    }
   }
 
   return div;
@@ -15959,12 +16044,34 @@ App.selectCult = function(cultName) {
   }
   CharacterData.cult = cultName;
 
-  // Calculate devotional pool for Initiates (POW/2, rounded down)
+  // ADR-0006: Calculate magic resources based on detected cult type
   if (cultName) {
-    CharacterData.devotionalPool = Math.floor(CharacterData.characteristics.POW / 2);
+    const cult = CULTS_DATA.find(c => c.name === cultName);
+    const cultType = detectCultType(cult);
+    CharacterData.cultType = cultType;
+
+    // Only theist cults get a Devotional Pool (POW/2)
+    if (cultType.types.includes('theist')) {
+      CharacterData.devotionalPool = Math.floor(CharacterData.characteristics.POW / 2);
+    } else {
+      CharacterData.devotionalPool = 0;
+    }
+
+    // Animist cults get bound spirit slots (CHA/2 for Spirit Worshipper rank)
+    if (cultType.types.includes('animist')) {
+      CharacterData.boundSpiritSlots = Math.floor(CharacterData.characteristics.CHA / 2);
+    } else {
+      CharacterData.boundSpiritSlots = 0;
+    }
+
+    // Sorcery cults use Magic Points as resource
+    if (cultType.types.includes('sorcery')) {
+      CharacterData.sorceryResource = CharacterData.characteristics.POW; // Magic Points = POW
+    } else {
+      CharacterData.sorceryResource = 0;
+    }
 
     // Soft validation: check if character has 5 cult skills at 50%+
-    const cult = CULTS_DATA.find(c => c.name === cultName);
     if (cult && cult.cultSkills) {
       const allSkillsArr = App.compileAllSkills ? App.compileAllSkills() : [];
       // compileAllSkills returns [{name, base, cultural, career, bonus}, ...] — compute totals
@@ -16003,6 +16110,9 @@ App.selectCult = function(cultName) {
     }
   } else {
     CharacterData.devotionalPool = 0;
+    CharacterData.boundSpiritSlots = 0;
+    CharacterData.sorceryResource = 0;
+    CharacterData.cultType = null;
     CharacterData.miracles = [];
   }
 
@@ -18103,8 +18213,11 @@ App.renderPlayMagic = function() {
       `;
     }
 
-    // Display selected miracles
-    if (CharacterData.miracles && CharacterData.miracles.length > 0) {
+    // ADR-0006: Display magic system info based on cult type
+    const cultType = CharacterData.cultType || detectCultType(cult);
+
+    // Theist miracles display
+    if (cultType.types.includes('theist') && CharacterData.miracles && CharacterData.miracles.length > 0) {
       // Get rune affinities for display
       const runeValues = CharacterData.attributes.runeAffinities || {};
       const runeList = [
@@ -18113,7 +18226,7 @@ App.renderPlayMagic = function() {
         CharacterData.runeAffinities.tertiary ? `${CharacterData.runeAffinities.tertiary} (${runeValues.tertiary || 0}%)` : null
       ].filter(r => r).join(', ');
 
-      miraclesInfo = `
+      miraclesInfo += `
         <h3>Theist Miracles (Initiate)</h3>
         <p style="font-size: 0.9em;"><strong>Rune Affinities:</strong> ${runeList}</p>
         <p style="font-size: 0.9em;"><strong>Devotional Pool:</strong> ${CharacterData.devotionalPool || Math.floor((CharacterData.characteristics.POW || 0) / 2)}</p>
@@ -18167,6 +18280,41 @@ App.renderPlayMagic = function() {
           </table>
           <p style="margin-top: 8px; font-size: 10px; color: #666; font-style: italic;">Source: ADR-002, Hannu casting rules</p>
         </details>
+      `;
+    }
+
+    // Animist spirit magic display (ADR-0006)
+    if (cultType.types.includes('animist')) {
+      const spiritSlots = CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2);
+      miraclesInfo += `
+        <h3>Spirit Magic (Animist${cultType.isHybrid ? ' — Shaman Path' : ''})</h3>
+        <p style="font-size: 0.9em;"><strong>Bound Spirit Slots:</strong> ${spiritSlots} (CHA/2 for Spirit Worshipper rank)</p>
+        <p style="font-size: 0.9em;"><strong>Casting:</strong> Spirit Rune affinity (replaces Binding per AiG/Hannu)</p>
+        <p style="font-size: 0.85em; color: #555; font-style: italic;">Spirit selection at chargen: consult GM for available spirits from cult tradition. Typical starting spirits: 2-3 intensity 1-2 nature spirits in fetishes.</p>
+        <p style="font-size: 0.8em; color: #666;">Source: Mythras Core p.131-154, Monster Island spirit cult template, Hannu adaptation</p>
+      `;
+    }
+
+    // Sorcery display (ADR-0006)
+    if (cultType.types.includes('sorcery')) {
+      const magicPoints = CharacterData.sorceryResource || CharacterData.characteristics.POW || 0;
+      miraclesInfo += `
+        <h3>Sorcery${cultType.isHybrid ? ' — Sorcerer Path' : ''}</h3>
+        <p style="font-size: 0.9em;"><strong>Resource:</strong> Magic Points (${magicPoints})</p>
+        <p style="font-size: 0.9em;"><strong>Casting:</strong> Rune Affinity of spell (replaces Invocation per AiG)</p>
+        <p style="font-size: 0.9em;"><strong>Shaping:</strong> Law Rune affinity (replaces Shaping skill per AiG)</p>
+        <p style="font-size: 0.9em;"><strong>Intensity:</strong> Rune Affinity / 10 &nbsp;|&nbsp; <strong>Shaping Points:</strong> Law Rune / 10</p>
+        <p style="font-size: 0.8em; color: #666;">Source: Mythras Core p.162-178, AiG p.60 adaptation</p>
+      `;
+    }
+
+    // Mysticism stub (ADR-0006)
+    if (cultType.types.includes('mysticism')) {
+      miraclesInfo += `
+        <h3>Mysticism</h3>
+        <p style="font-size: 0.9em;"><strong>System:</strong> Meditation + Path talents (Mythras Core p.155-161)</p>
+        <p style="font-size: 0.9em;"><strong>Resource:</strong> Concentration (no external resource consumed)</p>
+        <p style="font-size: 0.85em; color: #555; font-style: italic;">Mysticism uses raw Mythras Core rules. Max active talent Intensity = Meditation skill / 10.</p>
       `;
     }
   }
@@ -18568,25 +18716,59 @@ App.exportSinglePagePDF = async function() {
       }
     }
 
-    // Theist Miracles (if cult member)
-    if (CharacterData.cult && CharacterData.miracles && CharacterData.miracles.length > 0 && y > 50) {
-      const devPool = CharacterData.devotionalPool || Math.floor((CharacterData.characteristics.POW || 0) / 2);
-      txt(`THEIST MIRACLES (${CharacterData.cult}) — Devotional Pool: ${devPool}`, L, y, { bold: true, size: 7 });
-      y -= 8;
-      const miracleColW = W / 2;
-      const cultMiraclesRef = MIRACLES_DATA.cults[CharacterData.cult]?.miracles || [];
-      CharacterData.miracles.forEach((miracle, i) => {
-        const col = i % 2;
-        const row = Math.floor(i / 2);
-        const x = L + col * miracleColW;
-        const yPos = y - row * 7;
-        if (yPos > 35) {
-          const mData = cultMiraclesRef.find(m => m.name === miracle);
-          const runeTag = mData ? ` [${mData.runes.join(', ')}]` : '';
-          txt(miracle + runeTag, x, yPos, { size: 5.5 });
-        }
-      });
-      y -= Math.ceil(CharacterData.miracles.length / 2) * 7 + 3;
+    // ADR-0006: Magic system display based on cult type
+    if (CharacterData.cult && y > 50) {
+      const pdfCult = CULTS_DATA.find(c => c.name === CharacterData.cult);
+      const pdfCultType = CharacterData.cultType || detectCultType(pdfCult);
+
+      // Theist Miracles
+      if (pdfCultType.types.includes('theist') && CharacterData.miracles && CharacterData.miracles.length > 0) {
+        const devPool = CharacterData.devotionalPool || Math.floor((CharacterData.characteristics.POW || 0) / 2);
+        txt(`THEIST MIRACLES (${CharacterData.cult}) — Devotional Pool: ${devPool}`, L, y, { bold: true, size: 7 });
+        y -= 8;
+        const miracleColW = W / 2;
+        const cultMiraclesRef = MIRACLES_DATA.cults[CharacterData.cult]?.miracles || [];
+        CharacterData.miracles.forEach((miracle, i) => {
+          const col = i % 2;
+          const row = Math.floor(i / 2);
+          const x = L + col * miracleColW;
+          const yPos = y - row * 7;
+          if (yPos > 35) {
+            const mData = cultMiraclesRef.find(m => m.name === miracle);
+            const runeTag = mData ? ` [${mData.runes.join(', ')}]` : '';
+            txt(miracle + runeTag, x, yPos, { size: 5.5 });
+          }
+        });
+        y -= Math.ceil(CharacterData.miracles.length / 2) * 7 + 3;
+      }
+
+      // Animist Spirit Magic
+      if (pdfCultType.types.includes('animist') && y > 50) {
+        const spiritSlots = CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2);
+        txt(`SPIRIT MAGIC (${CharacterData.cult}) — Bound Spirit Slots: ${spiritSlots}`, L, y, { bold: true, size: 7 });
+        y -= 8;
+        txt('Casting: Spirit Rune affinity | Rank: Spirit Worshipper | Slots = CHA/2', L, y, { size: 5.5 });
+        y -= 7;
+        txt('Starting spirits: consult GM (typical: 2-3 intensity 1-2 nature spirits in fetishes)', L, y, { size: 5.5 });
+        y -= 10;
+      }
+
+      // Sorcery
+      if (pdfCultType.types.includes('sorcery') && y > 50) {
+        const mp = CharacterData.sorceryResource || CharacterData.characteristics.POW || 0;
+        txt(`SORCERY (${CharacterData.cult}) — Magic Points: ${mp}`, L, y, { bold: true, size: 7 });
+        y -= 8;
+        txt('Casting: Rune Affinity of spell | Shaping: Law Rune affinity | Intensity = Rune/10', L, y, { size: 5.5 });
+        y -= 10;
+      }
+
+      // Mysticism
+      if (pdfCultType.types.includes('mysticism') && y > 50) {
+        txt(`MYSTICISM (${CharacterData.cult}) — Meditation + Path`, L, y, { bold: true, size: 7 });
+        y -= 8;
+        txt('Resource: Concentration (no MP cost) | Max Intensity = Meditation/10', L, y, { size: 5.5 });
+        y -= 10;
+      }
     }
 
     // Folk Magic
@@ -19175,19 +19357,23 @@ App.agent.setStep = function(step, data) {
           errors.push(`Cult "${cultName}" not found in CULTS_DATA`);
           return {success: false, errors, state: App.agent.getState()};
         }
-        // Calculate devotional pool
-        const devPool = Math.floor(CharacterData.characteristics.POW / 2);
+        // ADR-0006: Calculate resources based on cult type
+        const agentCultType = detectCultType(cult);
+        const devPool = agentCultType.types.includes('theist') ? Math.floor(CharacterData.characteristics.POW / 2) : 0;
 
-        // Validate miracles
+        // Validate miracles (only required for theist cults)
         const miracles = data.miracles || [];
-        if (miracles.length !== devPool) {
+        if (devPool > 0 && miracles.length !== devPool) {
           errors.push(`Must select exactly ${devPool} miracles (got ${miracles.length})`);
           return {success: false, errors, state: App.agent.getState()};
         }
 
         // Apply
         CharacterData.cult = cultName;
+        CharacterData.cultType = agentCultType;
         CharacterData.devotionalPool = devPool;
+        CharacterData.boundSpiritSlots = agentCultType.types.includes('animist') ? Math.floor(CharacterData.characteristics.CHA / 2) : 0;
+        CharacterData.sorceryResource = agentCultType.types.includes('sorcery') ? CharacterData.characteristics.POW : 0;
         CharacterData.miracles = [...miracles];
 
         // Resolve cult-bound placeholder skills
@@ -19321,12 +19507,15 @@ App.agent.next = function() {
     if (!validation.valid) {
       return {success: false, errors: validation.errors, newStep: currentStep};
     }
-    // Step 9 miracle validation
+    // Step 9 miracle validation (ADR-0006: only for theist cults)
     if (currentStep === 9 && CharacterData.cult) {
-      const devPool = CharacterData.devotionalPool || Math.floor(CharacterData.characteristics.POW / 2);
-      const miracleCount = (CharacterData.miracles || []).length;
-      if (miracleCount !== devPool) {
-        return {success: false, errors: [`Please select all your initiate miracles (${miracleCount}/${devPool} chosen)`], newStep: currentStep};
+      const navCultType = CharacterData.cultType || detectCultType(CULTS_DATA.find(c => c.name === CharacterData.cult));
+      if (navCultType.types.includes('theist')) {
+        const devPool = CharacterData.devotionalPool || Math.floor(CharacterData.characteristics.POW / 2);
+        const miracleCount = (CharacterData.miracles || []).length;
+        if (miracleCount !== devPool) {
+          return {success: false, errors: [`Please select all your initiate miracles (${miracleCount}/${devPool} chosen)`], newStep: currentStep};
+        }
       }
     }
     const newStep = currentStep + 1;

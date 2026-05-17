@@ -1,0 +1,148 @@
+{
+  "source": "Monster Island (The Design Mechanism, 2013)",
+  "chapter": "Chapter 6: Magic",
+  "pages": "UNVERIFIED - extracted from full PDF via pdftotext",
+  "extracted_at": "2026-05-16",
+  "verified": false,
+  "verification_notes": "Extracted via pdftotext from full book. Page numbers need verification against physical book.",
+  "spirit_cult_template": {
+    "description": "All of Monster Island's totemic cults follow an identical structure. This template is the Monster Island approach Hannu recommended for spirit cults.",
+    "structure": {
+      "core_skills": ["Binding", "Dance", "Influence", "Insight", "Sing", "Trance", "Willpower"],
+      "note": "Healing is not a primary role of kahunas (shamans); that skill is left to dowager-matriarchs.",
+      "ranks": {
+        "follower": {
+          "description": "Every adult member of the tribe. Can observe spirits within range.",
+          "spirit_access": "None — followers cannot locate, summon, or bind spirits on their own",
+          "bound_spirit_limit": "CHA / 4"
+        },
+        "worshipper": {
+          "description": "2-5 per settlement, undertaking shamanic training. Collectively known as Kahuna.",
+          "spirit_access": "Can locate, summon from afar, and bind spirits FRIENDLY to their cult",
+          "bound_spirit_limit": "CHA / 2",
+          "note": "Based on reaffirming ancient pacts between the cult and that spirit type"
+        },
+        "shaman": {
+          "description": "At least one per settlement. Attends to the needs of the village.",
+          "spirit_access": "Can summon from afar and bind spirits NEUTRAL to their cult (requires questing or stumbling upon them, then forming a personal pact)",
+          "bound_spirit_limit": "CHA * 3/4",
+          "fetch": "Gained during initiation quest. Fetch has same INT, POW, CHA as the shaman. Gains 1d3 + (weeks wandered) fetch abilities."
+        },
+        "high_shaman": {
+          "description": "1-2 per tribe. Political role, keeping balance between tribes.",
+          "spirit_access": "Can bind HOSTILE spirits (but cannot summon them from afar — must encounter them). Also learns cult secrets: where tribal gods are bound, how to awaken them, and how to re-bind them.",
+          "bound_spirit_limit": "CHA",
+          "gifts": "May learn cult's secret totem Gift. May also select a second Gift from any other cult."
+        },
+        "spirit_lord": {
+          "description": "One per island (inter-tribal role). Guides all tribal shamans with rigorous neutrality.",
+          "spirit_access": "Treats all non-friendly spirits as Neutral. Learns secret locations of all tribal gods.",
+          "gifts": "May master a second cult Gift of his choice."
+        }
+      }
+    },
+    "spirit_attitude_system": {
+      "description": "Each cult has its own stable of spirit types categorized by attitude. Anything not listed as friendly or neutral defaults to hostile. Elemental spirits are hostile to ALL totemic cults.",
+      "friendly": "Worshipper rank+ can locate, summon, and bind",
+      "neutral": "Shaman rank+ can summon and bind (requires personal pact)",
+      "hostile": "High Shaman rank+ can bind (cannot summon from afar)"
+    }
+  },
+  "chargen_spirit_generation": {
+    "description": "How to generate spirits for starting animist characters, based on Monster Island NPC stat blocks.",
+    "approach": "Each kahuna possesses a number of fetishes as part of their status. Every tribe has its own selection of friendly and neutral spirits.",
+    "spirit_stat_format": {
+      "fields": ["Type", "Ability", "Intensity", "INS_or_INT", "POW", "CHA", "Spectral_Combat", "Willpower", "Optional_Skills"],
+      "derived_formulas": {
+        "spectral_combat": "50% + POW + CHA",
+        "willpower": "50% + (POW × 2)",
+        "discorporate": "50% + POW + CHA (same as spectral combat, for spirits with INT)"
+      }
+    },
+    "example_spirit_worshipper_loadout": {
+      "note": "Based on Monster Island NPC stat blocks for Spirit Worshippers (Assistant Shamans)",
+      "typical_spirits": [
+        {"type": "Nature Spirit (Trait)", "intensity": 2, "ins": "9-15", "pow": "13-14", "cha": "9-15"},
+        {"type": "Nature Spirit (Boost)", "intensity": 2, "ins": "10", "pow": "14", "cha": "10"}
+      ],
+      "total_spirits": "2-3 for a starting Spirit Worshipper"
+    },
+    "example_shaman_loadout": {
+      "note": "Based on Monster Island NPC stat blocks for full Shamans",
+      "typical_spirits": [
+        {"type": "Nature Spirit (Trait)", "intensity": 2, "ins": "9-13", "pow": "13", "cha": "9-13"},
+        {"type": "Nature Spirit (Boost)", "intensity": 3, "ins": "14", "pow": "24", "cha": "14"},
+        {"type": "Nature Spirit (Dominate)", "intensity": 4, "ins": "10-11", "pow": "26-27", "cha": "10-11"},
+        {"type": "Shape-shifting Spirit", "intensity": 3-4, "ins": "13", "pow": "24-28", "cha": "13"},
+        {"type": "Neutral Spirit", "intensity": 3, "int": "9-10", "pow": "19-23", "cha": "6-11"}
+      ],
+      "total_spirits": "4-6 for a full Shaman"
+    },
+    "example_high_shaman_loadout": {
+      "note": "Based on Monster Island NPC stat blocks for High Shamans",
+      "typical_spirits": [
+        {"type": "Nature Spirit (Trait)", "intensity": 2, "ins": "9", "pow": "13", "cha": "9"},
+        {"type": "Nature Spirit (Boost)", "intensity": 4, "ins": "11", "pow": "30", "cha": "11"},
+        {"type": "Nature Spirit (Dominate)", "intensity": "4-5", "ins": "10-13", "pow": "27-32", "cha": "10-13"},
+        {"type": "Shape-shifting Spirit", "intensity": 5, "ins": "17", "pow": "34", "cha": "17"},
+        {"type": "Neutral Spirit", "intensity": "4-5", "int": "8-12", "pow": "25-33", "cha": "8-12"},
+        {"type": "Hostile Spirit", "intensity": "4-5", "int": "9-10", "pow": "26-36", "cha": "7-8"}
+      ],
+      "total_spirits": "8-12 for a High Shaman",
+      "fetch_abilities_example": ["Binding", "Comprehension", "Covert", "Deadly", "Elemental", "Perception"]
+    }
+  },
+  "spirit_types_available": {
+    "description": "Spirit types that appear in Monster Island cult stat blocks",
+    "friendly_types": [
+      {
+        "type": "Nature Spirit (Trait)",
+        "ability": "Endowment — grants a physical trait of the totem animal",
+        "typical_intensity": "2-3"
+      },
+      {
+        "type": "Nature Spirit (Boost)",
+        "ability": "Bless — boosts one Attribute or Skill",
+        "typical_intensity": "2-4"
+      },
+      {
+        "type": "Nature Spirit (Dominate)",
+        "ability": "Domination — commands creatures of the totem species",
+        "typical_intensity": "3-5"
+      },
+      {
+        "type": "Shape-shifting Spirit",
+        "ability": "Grants ability to take totem animal form",
+        "typical_intensity": "3-5"
+      },
+      {
+        "type": "Ancestor Spirit",
+        "ability": "Eternal + Sagacity/Spellcasting/Subjugate",
+        "typical_intensity": "varies"
+      }
+    ],
+    "neutral_types": [
+      {
+        "type": "Neutral Spirit (generic)",
+        "description": "Spirits not aligned with any particular cult. Have INT instead of INS, plus Discorporate and Stealth skills.",
+        "typical_intensity": "2-5"
+      }
+    ],
+    "hostile_types": [
+      {
+        "type": "Hostile Spirit",
+        "description": "Spirits actively opposed to the cult. Same stat format as neutral but with hostile attitude.",
+        "typical_intensity": "3-5"
+      }
+    ]
+  },
+  "glorantha_applicability": {
+    "note": "Hannu recommended Monster Island approach for spirit cults. The template maps to Gloranthan animist cults as follows:",
+    "mapping": {
+      "totemic_cult": "Gloranthan spirit cult (e.g., Daka Fal, Waha's shamanic aspect)",
+      "friendly_spirits": "Spirits listed in the one-pager's spell/miracle section",
+      "cult_skills": "Replace Monster Island's Dance/Sing with cult-specific skills from one-pager",
+      "spirit_rune_adaptation": "Per Hannu: Binding → Spirit Rune affinity"
+    }
+  }
+}

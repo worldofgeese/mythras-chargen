@@ -1,6 +1,6 @@
 # ADR-001: Magic System Architecture
 
-**Status:** accepted  
+**Status:** superseded by ADR-0006  
 **Date:** 2026-05-02  
 **Deciders:** Tao Hansen, Kypris  
 

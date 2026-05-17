@@ -1,0 +1,239 @@
+{
+  "source": "Mythras Core Rulebook (3rd Printing, 2018)",
+  "chapter": "Chapter 10: Animism",
+  "pages": "131-154",
+  "extracted_at": "2026-05-16",
+  "verified": false,
+  "verification_notes": "Extracted via pdftotext. Requires human verification against source PDF.",
+  "chargen_rules": {
+    "skills": {
+      "trance": {
+        "base": "POW+CON",
+        "description": "Represents the animist's awareness of the Spirit World and ability to move between it and the material world. Range equals POW in metres.",
+        "page": "p.131-132",
+        "rank_abilities": {
+          "follower": "Can observe and identify spirits within range, using natural senses",
+          "spirit_worshipper": "Can converse with spirits within range, via empathic communication",
+          "shaman": "Can project their own soul onto the Spirit Plane. Can draw a spirit into the material world or expel a spirit possessing someone",
+          "high_shaman": "Can drag the soul of another person into the Spirit World"
+        },
+        "preparation_time": {
+          "follower": {"observe": "1 Hour", "converse": null, "project_or_draw": null, "drag_souls": null},
+          "spirit_worshipper": {"observe": "1 Minute", "converse": "1 Hour", "project_or_draw": null, "drag_souls": null},
+          "shaman": {"observe": "1 Round", "converse": "1 Minute", "project_or_draw": "1 Hour", "drag_souls": null},
+          "high_shaman": {"observe": "1 Action", "converse": "1 Round", "project_or_draw": "1 Minute", "drag_souls": "1 Hour"}
+        }
+      },
+      "binding": {
+        "base": "POW+CHA",
+        "description": "The skill used by animists to induce or force a spirit to perform to his will. Used to summon, dominate, and bind spirits in spirit combat.",
+        "page": "p.132"
+      }
+    },
+    "aig_adaptation": {
+      "note": "Per Hannu (2026-05-16): 'For animism replaced binding with spirit rune affinity'. In AiG/Glorantha, the Spirit Rune affinity replaces both Trance and Binding. Spirit Rune allows seeing/communicating with spirits (replaces Trance) and commanding spirits uses the Rune Affinity shared with the spirit (replaces Binding).",
+      "binding_replacement": "Spirit Rune affinity (for commanding spirits, use the Rune Affinity shared with the spirit)",
+      "trance_replacement": "Spirit Rune affinity (for perceiving and entering the Spirit World)",
+      "source": "AiG p.134 (Spirit Magic chapter), Hannu Discord 2026-05-16"
+    },
+    "ranks": {
+      "page": "p.131-132, p.196 (Cults chapter)",
+      "follower": {
+        "bound_spirit_limit": "CHA / 4",
+        "trance_ability": "observe",
+        "description": "Pays lip service to the tradition's spirits to propitiate them"
+      },
+      "spirit_worshipper": {
+        "bound_spirit_limit": "CHA / 2",
+        "trance_ability": "converse",
+        "description": "Undertakes the dangerous path of directly interacting with spirits"
+      },
+      "shaman": {
+        "bound_spirit_limit": "CHA * 3/4",
+        "trance_ability": "project_or_draw",
+        "description": "Can project soul onto Spirit Plane, draw spirits into material world"
+      },
+      "high_shaman": {
+        "bound_spirit_limit": "CHA",
+        "trance_ability": "drag_souls",
+        "description": "Can drag souls of others into the Spirit World"
+      }
+    },
+    "starting_rank_at_chargen": {
+      "note": "Per Mythras Core p.34: 'No higher than Common Member at character creation'. For animism, this maps to Spirit Worshipper (equivalent to Initiate in theist cults).",
+      "default_rank": "spirit_worshipper",
+      "bound_spirit_limit_at_creation": "CHA / 2"
+    }
+  },
+  "spirit_intensity_table": {
+    "page": "p.133",
+    "description": "Spirit Intensity determines POW range. Intensity 6+ spirits are beyond the control of a lone animist.",
+    "table": [
+      {"intensity": 0, "pow_roll": "1d6", "pow_range": "1-6"},
+      {"intensity": 1, "pow_roll": "1d6+6", "pow_range": "7-12"},
+      {"intensity": 2, "pow_roll": "1d6+12", "pow_range": "13-18"},
+      {"intensity": 3, "pow_roll": "1d6+18", "pow_range": "19-24"},
+      {"intensity": 4, "pow_roll": "1d6+24", "pow_range": "25-30"},
+      {"intensity": 5, "pow_roll": "1d6+30", "pow_range": "31-36"}
+    ],
+    "scaling": "+1 intensity = +6 POW"
+  },
+  "spirit_characteristics": {
+    "page": "p.133",
+    "pow": "Determined by Intensity (see table)",
+    "int_or_ins": "Reflects level of intellect when alive or corresponding physical creature",
+    "cha": "Force of the spirit's personality, varies by type",
+    "derived": {
+      "spectral_combat": "50% + POW + CHA",
+      "willpower": "50% + (POW × 2)",
+      "magic_points": "Equal to POW"
+    }
+  },
+  "fetish_rules": {
+    "page": "p.137",
+    "description": "A ceremonial object that embodies magical power. Any item can become a fetish.",
+    "creation_cost": "1 Experience Roll per point of Intensity of the spirit",
+    "creation_time": "1 week",
+    "protection": "Whilst confined within its fetish a spirit cannot be harmed by hostile magic or other spirits; it remains in stasis",
+    "activation": "Spirit must be called from the fetish to serve the holder. Spirit can travel up to its POW in metres from the fetish.",
+    "upgrade_cost": "Difference in Experience Rolls between old and new Intensity"
+  },
+  "spirit_types": {
+    "page": "p.144-154",
+    "types": [
+      {
+        "name": "Nature Spirits (Animal)",
+        "characteristics": {"ins": "As the species", "pow": "As per Intensity", "cha": "Equal to INS"},
+        "abilities": ["One or more of: Bless, Demesne, Domination, Endowment"],
+        "description": "Entities of the world's natural flora and fauna. Frequently the subject of totemic veneration.",
+        "page": "p.144"
+      },
+      {
+        "name": "Nature Spirits (Regional)",
+        "characteristics": {"ins": "1d6", "pow": "As per Intensity", "cha": "3d6"},
+        "abilities": ["One or more of: Bless, Demesne, Domination, Endowment"],
+        "description": "Spirits of places - groves, springs, mountains.",
+        "page": "p.144"
+      },
+      {
+        "name": "Ancestor Spirits",
+        "characteristics": {"int": "3d6", "pow": "As per Intensity", "cha": "3d6"},
+        "abilities": ["Eternal", "plus one or more of: Discorporate, Sagacity, Spellcasting, Subjugate"],
+        "description": "Souls of family members who reside in the Spirit World after death.",
+        "page": "p.145"
+      },
+      {
+        "name": "Bane Spirits",
+        "abilities": ["Curse-related abilities"],
+        "description": "Spirits that inflict curses and misfortune.",
+        "page": "p.148"
+      },
+      {
+        "name": "Death Spirits",
+        "abilities": ["Life-draining abilities"],
+        "description": "Spirits that can kill or drain life force.",
+        "page": "p.149"
+      },
+      {
+        "name": "Disease Spirits",
+        "abilities": ["Disease-inflicting abilities"],
+        "description": "Spirits that carry and inflict diseases.",
+        "page": "p.148-149"
+      },
+      {
+        "name": "Elemental Spirits",
+        "abilities": ["Animate (specific element)", "Manifest as elemental"],
+        "description": "Spirits of the classical elements that can manifest physically.",
+        "page": "p.144"
+      },
+      {
+        "name": "Fetches",
+        "abilities": ["Personal guardian spirit bonded to a shaman"],
+        "description": "A shaman's personal spirit companion, gained during initiation.",
+        "page": "p.150"
+      },
+      {
+        "name": "Guardian Spirits",
+        "abilities": ["Protective abilities"],
+        "description": "Spirits that guard and protect their binder.",
+        "page": "p.150-151"
+      },
+      {
+        "name": "Healing/Medicine Spirits",
+        "characteristics": {"ins": "1d6+6", "pow": "As per Intensity", "cha": "1d6+6"},
+        "abilities": ["Healing abilities"],
+        "description": "Spirits that can cure disease and heal wounds.",
+        "page": "p.152"
+      },
+      {
+        "name": "Passion Spirits",
+        "abilities": ["Invoke overwhelming passions or mental states"],
+        "description": "Spirits that can induce love, fear, hate, madness, violence, etc.",
+        "page": "p.146"
+      },
+      {
+        "name": "Predator Spirits",
+        "abilities": ["Physical attack abilities"],
+        "description": "Aggressive spirits that can physically harm targets.",
+        "page": "p.153"
+      },
+      {
+        "name": "Shape-shifting Spirits",
+        "abilities": ["Grant ability to change form into cult totem animal"],
+        "description": "Spirits that allow the animist to take animal form.",
+        "page": "p.153-154"
+      },
+      {
+        "name": "Sickness Spirits",
+        "abilities": ["Inflict specific sicknesses and conditions"],
+        "description": "Spirits that cause ongoing illness rather than acute disease.",
+        "page": "p.154"
+      }
+    ]
+  },
+  "spirit_abilities_list": {
+    "page": "p.142-144",
+    "note": "Each spirit has one or more abilities based on its type and Intensity. Abilities requiring possession need the spirit to first win Spirit Combat.",
+    "abilities": [
+      "Animate (Specific Substance)",
+      "Autonomy",
+      "Bless",
+      "Cannibalistic",
+      "Comprehension",
+      "Conjugate",
+      "Covert",
+      "Death",
+      "Demesne",
+      "Discorporate",
+      "Disease",
+      "Domination (Specific Species)",
+      "Endowment",
+      "Eternal",
+      "Glamour",
+      "Healing",
+      "Knowledge",
+      "Mana",
+      "Manifestation",
+      "Miasma",
+      "Neutralise",
+      "Pain",
+      "Passion",
+      "Perceptive",
+      "Persistent",
+      "Puppeteer",
+      "Recurring",
+      "Sagacity",
+      "Shape-shifting",
+      "Spellcasting",
+      "Steadfast",
+      "Subjugate",
+      "Telekinesis",
+      "Warding"
+    ]
+  },
+  "spirit_combat": {
+    "page": "p.138-141",
+    "description": "Resolved similarly to physical combat but uses Spectral Combat skill (50%+POW+CHA). Damage reduces Magic Points. At 0 MP, the loser is at the mercy of the victor.",
+    "special_effects": ["Bypass Charm", "Dominate", "Evade", "Flee", "Overpower", "Possess", "Sap"]
+  }
+}

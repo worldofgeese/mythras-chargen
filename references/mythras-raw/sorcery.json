@@ -1,0 +1,113 @@
+{
+  "source": "Mythras Core Rulebook (3rd Printing, 2018)",
+  "chapter": "Chapter 12: Sorcery",
+  "pages": "162-178",
+  "extracted_at": "2026-05-16",
+  "verified": false,
+  "verification_notes": "Extracted via pdftotext. Requires human verification against source PDF.",
+  "chargen_rules": {
+    "skills": {
+      "invocation": {
+        "base": "INT x 2",
+        "description": "Represents a sorcerer's ability to successfully cast spells learned from a particular source. Each incidence of Invocation must be assigned to a specific type or wellspring of sorcery (school, grimoire, mentor, etc.).",
+        "intensity_formula": "Spell Intensity = Invocation skill / 10 (rounded up)",
+        "page": "p.162"
+      },
+      "shaping": {
+        "base": "INT + POW",
+        "description": "The method used to change the parameters of a sorcery spell. Never rolled against when casting — acts as a governor to limit the degree of modification. Only one Shaping skill needed regardless of how many schools known.",
+        "shaping_points_formula": "Shaping Points = Shaping skill / 10 (rounded up)",
+        "page": "p.163"
+      }
+    },
+    "aig_adaptation": {
+      "note": "Per AiG p.60 overview: Invocation is replaced with whichever Rune Affinity is linked to that spell, further modified by the Four Principles (Combine/Separate, Command, Summon/Dismiss, Tap). Shaping is replaced by the sorcerer's Law Rune affinity.",
+      "invocation_replacement": "Rune Affinity of the spell",
+      "shaping_replacement": "Law Rune affinity",
+      "source": "AiG p.60"
+    },
+    "starting_spells": {
+      "note": "A character starting the game as a sorcerer should choose a single school of sorcery to study. The number of starting spells is determined by the Cults and Brotherhoods chapter (p.196) based on cult/school membership rank.",
+      "school_choice": "One school chosen at character creation; others can be discovered during play",
+      "source_types": ["grimoire", "mentor", "school/cult", "extra-planar entity", "ancient artefact"],
+      "page": "p.162, p.196"
+    },
+    "casting_cost": {
+      "resource": "Magic Points",
+      "description": "Sorcerer's Magic Point Attribute is temporarily reduced by the number of Magic Points used to cast that spell until the magic is dropped or expires.",
+      "base_cost": "1 Magic Point per spell (before shaping additions)",
+      "page": "p.165"
+    },
+    "shaping_parameters": {
+      "page": "p.163-164",
+      "description": "Shaping Points may be divided amongst the following components to optimise the spell. Each point allocated increases that parameter by one step.",
+      "components": [
+        {
+          "name": "Combine",
+          "description": "Permits combining multiple sorcery spells into a single casting. All conjoined spells share the same shaping components."
+        },
+        {
+          "name": "Duration",
+          "description": "Default duration = POW of caster in minutes. Each shaping point extends duration (minutes → hours → days → etc.)"
+        },
+        {
+          "name": "Magnitude",
+          "description": "Used to penetrate magical defences or resist magical attacks"
+        },
+        {
+          "name": "Range",
+          "description": "Used to increase the distance a spell can be cast over"
+        },
+        {
+          "name": "Targets",
+          "description": "Used to increase the number of targets affected by the spell"
+        }
+      ]
+    }
+  },
+  "spell_list": {
+    "page": "p.167-178",
+    "note": "Each spell has a specific (Substance), (Creature), (Characteristic), or (Sense) type that must be specified when learned.",
+    "spells": [
+      {"name": "Abjure (Substance/Process)", "resist": "Special", "page": "p.167"},
+      {"name": "Animate (Substance)", "resist": null, "page": "p.167-168"},
+      {"name": "Attract (Threat)", "resist": "Willpower", "page": "p.168"},
+      {"name": "Castback", "resist": null, "page": "p.168"},
+      {"name": "Damage Enhancement", "resist": null, "page": "p.168"},
+      {"name": "Damage Resistance", "resist": null, "page": "p.168-169"},
+      {"name": "Diminish (Characteristic)", "resist": "Willpower/Endurance", "page": "p.169"},
+      {"name": "Dominate (Species)", "resist": "Willpower", "page": "p.169"},
+      {"name": "Enchant (Object)", "resist": "Willpower", "page": "p.170"},
+      {"name": "Enhance (Characteristic)", "resist": "Willpower/Endurance", "page": "p.170"},
+      {"name": "Enslave (Creatures)", "resist": "Willpower", "page": "p.170"},
+      {"name": "Fly", "resist": null, "page": "p.171"},
+      {"name": "Haste", "resist": null, "page": "p.171"},
+      {"name": "Holdfast", "resist": null, "page": "p.171"},
+      {"name": "Intuition", "resist": null, "page": "p.171-172"},
+      {"name": "Mystic (Sense)", "resist": null, "page": "p.172"},
+      {"name": "Neutralize Magic", "resist": null, "page": "p.172"},
+      {"name": "Palsy", "resist": "Endurance", "page": "p.172-173"},
+      {"name": "Phantom (Sense)", "resist": null, "page": "p.173"},
+      {"name": "Portal", "resist": null, "page": "p.173"},
+      {"name": "Project (Sense)", "resist": null, "page": "p.174"},
+      {"name": "Regenerate", "resist": null, "page": "p.174"},
+      {"name": "Repulse (Substance)", "resist": null, "page": "p.174-175"},
+      {"name": "Sculpt (Substance)", "resist": null, "page": "p.175"},
+      {"name": "Shapechange (Species to Species)", "resist": "Willpower", "page": "p.175"},
+      {"name": "Smother", "resist": "Endurance", "page": "p.175-176"},
+      {"name": "Spirit Resistance", "resist": null, "page": "p.176"},
+      {"name": "Store Manna", "resist": null, "page": "p.176"},
+      {"name": "Summon (Entity)", "resist": "Evade", "page": "p.176-177"},
+      {"name": "Tap (Characteristic)", "resist": "Special", "page": "p.177"},
+      {"name": "Teleport", "resist": null, "page": "p.177"},
+      {"name": "Transmogrify (to Substance)", "resist": "Endurance", "page": "p.177-178"},
+      {"name": "Undeath", "resist": "Endurance", "page": "p.178"},
+      {"name": "Wrack (Species)", "resist": "Endurance", "page": "p.178"}
+    ]
+  },
+  "schools_of_sorcery": {
+    "page": "p.162, p.169",
+    "description": "Sorcery schools define which spells are available. Each school is themed around a concept or element. Example: Masters of Shadow may learn Dominate (Reptiles), Palsy, Sculpt Darkness, Smother, Teleport (via Shadows), and Wrack (Darkness). Masters of Metamorphosis may learn spells controlling the changing of things: Abjure, Diminish, Enhance, Sculpt, Shapechange, Transmogrify.",
+    "note_for_glorantha": "In Glorantha, sorcery schools map to cults. Arkat's cult lists Invocation and Shaping as cult skills. The cult's spell list (from one-pager) defines which sorcery spells are available."
+  }
+}

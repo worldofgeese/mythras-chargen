@@ -1,0 +1,149 @@
+{
+  "source": "A Bird in the Hand (The Design Mechanism, Monster Island adventure)",
+  "author": "John Holmes",
+  "extracted_at": "2026-05-16",
+  "verified": false,
+  "verification_notes": "Extracted via pdftotext. Provides detailed named spirit stat blocks with narrative descriptions. Hannu specifically recommended this for 'excellent description of spirits'.",
+  "purpose": "Demonstrates how spirits are statted, described, and used in play. Provides concrete examples of spirit stat blocks at various intensities for use as templates in chargen.",
+  "spirit_stat_block_format": {
+    "description": "Each spirit has a name, type, intensity, characteristics, derived skills, and abilities. Also includes a narrative description of how the spirit manifests.",
+    "fields": {
+      "name": "Unique spirit name (e.g., Whulla, Jked, Ghu)",
+      "type": "Nature Spirit, Guardian Spirit, etc.",
+      "intensity": "1-5 typically",
+      "characteristics": {
+        "INS_or_INT": "INS for nature/animal spirits, INT for ancestor/sapient spirits",
+        "POW": "Determined by intensity per Mythras Core table",
+        "CHA": "Varies by spirit type"
+      },
+      "derived": {
+        "action_points": "Typically 2-3",
+        "spirit_damage": "1d6 to 1d10 based on intensity",
+        "magic_points": "Equal to POW",
+        "initiative_bonus": "Varies",
+        "spectral_combat": "50% + POW + CHA",
+        "willpower": "50% + (POW × 2)"
+      },
+      "abilities": "One or more spirit abilities from Mythras Core list",
+      "narrative": "Description of how the spirit manifests and behaves"
+    }
+  },
+  "example_spirits": [
+    {
+      "name": "Whulla",
+      "type": "Nature Spirit",
+      "intensity": 1,
+      "animal": "Wahoin rodent",
+      "characteristics": {"INS": 9, "POW": 9, "CHA": 7},
+      "magic_points": 9,
+      "abilities": ["Endowment (grants limbs greater alacrity)"],
+      "fetish": "Wahoin skull",
+      "narrative": "Respected by the Oodaki for the speed with which it snares Huku spiders. When manifest it appears as if dozens of grey rodents scurry across the owner's body, granting limbs greater alacrity.",
+      "owner_rank": "Spirit Worshipper (starting kahuna)"
+    },
+    {
+      "name": "Jked",
+      "type": "Nature Spirit",
+      "intensity": 2,
+      "animal": "Monkey",
+      "characteristics": {"INS": 9, "POW": 13, "CHA": 9},
+      "magic_points": 13,
+      "spirit_damage": "1d8",
+      "action_points": 2,
+      "abilities": ["Endowment (grants simian dexterity)"],
+      "fetish": "Dried monkey-dung",
+      "narrative": "Must be coaxed from its fetish with a hooting cry, seemingly answered in echo as Jked grants simian dexterity. Spirit opponents are pelted with a hail of foul excrement.",
+      "owner_rank": "Shaman"
+    },
+    {
+      "name": "Ghu",
+      "type": "Guardian Spirit",
+      "intensity": 3,
+      "characteristics": {"INS": 9, "POW": 21, "CHA": 9},
+      "magic_points": 21,
+      "action_points": 3,
+      "skills": {"willpower": "78%", "spectral_combat": "75%"},
+      "abilities": ["Endowment (Venomous – POT 72, Resist Endurance, Onset 1 Combat Round, Duration 2d10 minutes, Condition Paralysis; may use Inject Venom Special Effect)"],
+      "owner_rank": "Shaman"
+    },
+    {
+      "name": "Kugkowcs",
+      "type": "Nature Spirit",
+      "intensity": 2,
+      "characteristics": {"INS": "UNVERIFIED", "POW": 13, "CHA": 9},
+      "magic_points": 13,
+      "abilities": ["Endowment"],
+      "owner_rank": "Shaman"
+    },
+    {
+      "name": "Eous",
+      "type": "Nature Spirit",
+      "intensity": 2,
+      "characteristics": {"INS": "UNVERIFIED", "POW": "UNVERIFIED", "CHA": "UNVERIFIED"},
+      "abilities": ["UNVERIFIED"],
+      "owner_rank": "UNVERIFIED"
+    },
+    {
+      "name": "Anylil",
+      "type": "Nature Spirit",
+      "intensity": 1,
+      "characteristics": {"INS": "UNVERIFIED", "POW": "UNVERIFIED", "CHA": "UNVERIFIED"},
+      "abilities": ["UNVERIFIED"],
+      "owner_rank": "UNVERIFIED"
+    },
+    {
+      "name": "Woeyff",
+      "type": "Nature Spirit",
+      "intensity": 2,
+      "characteristics": {"INS": "UNVERIFIED", "POW": "UNVERIFIED", "CHA": "UNVERIFIED"},
+      "abilities": ["UNVERIFIED"],
+      "owner_rank": "UNVERIFIED"
+    },
+    {
+      "name": "Hoja",
+      "type": "Nature Spirit",
+      "intensity": 2,
+      "characteristics": {"INS": "UNVERIFIED", "POW": "UNVERIFIED", "CHA": "UNVERIFIED"},
+      "abilities": ["UNVERIFIED"],
+      "owner_rank": "UNVERIFIED"
+    }
+  ],
+  "tiki_spirits": {
+    "description": "Tiki Masks are fetishes carved to present a fearsome visage. They hold Intensity 1 or 2 nature spirits. Activation requires a Binding or Hard Willpower check as an action at the cost of 1 MP; the aid lasts for a single scene and the spirit departs, the fetish empty.",
+    "example_names": ["Ustafi", "Waynd", "Vlnon", "Lamn", "Cyrnyn", "Totli"],
+    "intensity": "1-2",
+    "typical_blessing": "+2 to a specific skill or attribute",
+    "note": "These are one-use-per-scene spirits offered to adventurers — a good model for starting character spirits."
+  },
+  "iz_unique_spirit": {
+    "name": "Iz",
+    "type": "Unique Spirit",
+    "intensity": 5,
+    "description": "An alien entity, partly in the Spirit World and wholly inimical to life. The adventure's antagonist.",
+    "note": "Not relevant for chargen but shows how high-intensity spirits are statted."
+  },
+  "chargen_implications": {
+    "starting_spirit_worshipper": {
+      "description": "Based on the NPC Kaia (Spirit Worshipper rank), a starting animist character would have:",
+      "binding_skill": "~69%",
+      "trance_skill": "~69%",
+      "spirits": [
+        "1 Intensity 1 Nature Spirit (friendly, in fetish)",
+        "1 Intensity 2 Nature Spirit (friendly, in fetish)"
+      ],
+      "total_spirits": 2,
+      "note": "Matches community precedent (LLv34_Temuri: 'I gave the starting animist two intensity 2 healing spirits')"
+    },
+    "spirit_generation_for_chargen": {
+      "approach": "For a starting Spirit Worshipper in Glorantha:",
+      "steps": [
+        "1. Determine bound spirit limit: CHA / 2",
+        "2. Assign 2-3 spirits from the cult's friendly spirit list",
+        "3. Typical starting spirits are Intensity 1-2",
+        "4. Roll or assign characteristics per Mythras Core intensity table",
+        "5. Each spirit occupies 1 slot regardless of intensity (per Mythras Core)",
+        "6. Create fetish for each spirit (narrative description)"
+      ]
+    }
+  }
+}

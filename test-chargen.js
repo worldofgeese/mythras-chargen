@@ -193,6 +193,7 @@ function loadApp() {
         parsePlaceholderSkill: typeof parsePlaceholderSkill !== 'undefined' ? parsePlaceholderSkill : null,
         disambiguateSkill: typeof disambiguateSkill !== 'undefined' ? disambiguateSkill : null,
         DISAMBIGUATION_LISTS: typeof DISAMBIGUATION_LISTS !== 'undefined' ? DISAMBIGUATION_LISTS : null,
+        detectCultType: typeof detectCultType !== 'undefined' ? detectCultType : null,
       };
     `, sandbox);
   } catch(e) {
@@ -3103,6 +3104,162 @@ section('Cult Data Tests');
     } else {
       fail(`Only ${stormCount}/10 Sartarite characters got Storm pantheon cults`);
     }
+  }
+}
+
+// ============================================================
+section('Cult Type Detection (ADR-0006)');
+// ============================================================
+
+{
+  const detectCultType = App.detectCultType;
+  const CULTS_DATA = App.CULTS_DATA;
+
+  if (typeof detectCultType === 'function' && CULTS_DATA) {
+    // Pure Theist: Orlanth has Devotion + Runic Affinity, no Trance/Binding
+    const orlanth = CULTS_DATA.find(c => c.name === 'Orlanth');
+    if (orlanth) {
+      const ot = detectCultType(orlanth);
+      if (ot.primary === 'theist' && !ot.isHybrid) pass('Orlanth detected as pure theist');
+      else fail('Orlanth should be pure theist', `Got: ${JSON.stringify(ot)}`);
+    } else {
+      fail('Orlanth not found in CULTS_DATA');
+    }
+
+    // Pure Animist: Daka Fal has Trance/Binding, no Devotion
+    const dakaFal = CULTS_DATA.find(c => c.name === 'Daka Fal');
+    if (dakaFal) {
+      const dt = detectCultType(dakaFal);
+      if (dt.primary === 'animist' && !dt.isHybrid) pass('Daka Fal detected as pure animist');
+      else fail('Daka Fal should be pure animist', `Got: ${JSON.stringify(dt)}`);
+    } else {
+      fail('Daka Fal not found in CULTS_DATA');
+    }
+
+    // Pure Sorcery: Arkat has Invocation/Shaping, no Devotion
+    const arkat = CULTS_DATA.find(c => c.name === 'Arkat');
+    if (arkat) {
+      const at = detectCultType(arkat);
+      if (at.primary === 'sorcery' && !at.isHybrid) pass('Arkat detected as pure sorcery');
+      else fail('Arkat should be pure sorcery', `Got: ${JSON.stringify(at)}`);
+    } else {
+      fail('Arkat not found in CULTS_DATA');
+    }
+
+    // Hybrid Theist+Animist: Waha has Devotion AND Trance/Binding
+    const waha = CULTS_DATA.find(c => c.name === 'Waha');
+    if (waha) {
+      const wt = detectCultType(waha);
+      if (wt.isHybrid && wt.types.includes('theist') && wt.types.includes('animist')) {
+        pass('Waha detected as theist+animist hybrid');
+      } else {
+        fail('Waha should be theist+animist hybrid', `Got: ${JSON.stringify(wt)}`);
+      }
+    } else {
+      fail('Waha not found in CULTS_DATA');
+    }
+
+    // Verify no cult gets devotionalPool when it lacks Devotion
+    // Only test cults that actually exist in CULTS_DATA
+    const pureAnimistCultNames = ['Daka Fal', 'Aldrya Shaman', 'Hearth Mother', 'Jokotu the Murderer'];
+    const existingAnimistCults = pureAnimistCultNames.filter(name => CULTS_DATA.find(c => c.name === name));
+    let animistCorrect = 0;
+    for (const name of existingAnimistCults) {
+      const cult = CULTS_DATA.find(c => c.name === name);
+      const ct = detectCultType(cult);
+      if (!ct.types.includes('theist')) animistCorrect++;
+    }
+    if (animistCorrect === existingAnimistCults.length) {
+      pass(`All ${existingAnimistCults.length} pure animist cults in data correctly lack theist type (${existingAnimistCults.join(', ')})`);
+    } else {
+      fail(`Only ${animistCorrect}/${existingAnimistCults.length} pure animist cults correctly classified`);
+    }
+
+    // Verify all 94 cults get a valid type
+    let validCount = 0;
+    let invalidCults = [];
+    for (const cult of CULTS_DATA) {
+      const ct = detectCultType(cult);
+      if (ct.primary && ct.types.length > 0) {
+        validCount++;
+      } else {
+        invalidCults.push(cult.name);
+      }
+    }
+    if (validCount === CULTS_DATA.length) {
+      pass(`All ${CULTS_DATA.length} cults get a valid magic type classification`);
+    } else {
+      fail(`${invalidCults.length} cults failed classification: ${invalidCults.join(', ')}`);
+    }
+
+    // Phase 2: Verify selectCult correctly assigns resources per cult type
+    const CharacterData = App.CharacterData;
+    const AppObj = App.App;
+    if (AppObj && AppObj.selectCult && CharacterData) {
+      // Set up characteristics for testing
+      CharacterData.characteristics = { STR: 14, CON: 12, SIZ: 11, DEX: 12, INT: 10, POW: 14, CHA: 12 };
+
+      // Clear cult first to avoid confirmation dialog
+      CharacterData.cult = null;
+      CharacterData.miracles = [];
+
+      // Test: Orlanth (theist) should get devotionalPool = POW/2 = 7
+      AppObj.selectCult('Orlanth');
+      if (CharacterData.devotionalPool === 7) {
+        pass('Orlanth (theist): devotionalPool = POW/2 = 7');
+      } else {
+        fail('Orlanth devotionalPool', `Expected 7, got ${CharacterData.devotionalPool}`);
+      }
+
+      // Test: Daka Fal (animist) should get devotionalPool = 0, boundSpiritSlots = CHA/2 = 6
+      CharacterData.cult = null;
+      CharacterData.miracles = [];
+      AppObj.selectCult('Daka Fal');
+      if (CharacterData.devotionalPool === 0) {
+        pass('Daka Fal (animist): devotionalPool = 0 (no Devotion)');
+      } else {
+        fail('Daka Fal devotionalPool', `Expected 0, got ${CharacterData.devotionalPool}`);
+      }
+      if (CharacterData.boundSpiritSlots === 6) {
+        pass('Daka Fal (animist): boundSpiritSlots = CHA/2 = 6');
+      } else {
+        fail('Daka Fal boundSpiritSlots', `Expected 6, got ${CharacterData.boundSpiritSlots}`);
+      }
+
+      // Test: Arkat (sorcery) should get devotionalPool = 0, sorceryResource = POW = 14
+      CharacterData.cult = null;
+      CharacterData.miracles = [];
+      AppObj.selectCult('Arkat');
+      if (CharacterData.devotionalPool === 0) {
+        pass('Arkat (sorcery): devotionalPool = 0 (no Devotion)');
+      } else {
+        fail('Arkat devotionalPool', `Expected 0, got ${CharacterData.devotionalPool}`);
+      }
+      if (CharacterData.sorceryResource === 14) {
+        pass('Arkat (sorcery): sorceryResource = POW = 14');
+      } else {
+        fail('Arkat sorceryResource', `Expected 14, got ${CharacterData.sorceryResource}`);
+      }
+
+      // Test: Waha (hybrid) should get BOTH devotionalPool AND boundSpiritSlots
+      CharacterData.cult = null;
+      CharacterData.miracles = [];
+      AppObj.selectCult('Waha');
+      if (CharacterData.devotionalPool === 7 && CharacterData.boundSpiritSlots === 6) {
+        pass('Waha (hybrid): devotionalPool = 7 AND boundSpiritSlots = 6');
+      } else {
+        fail('Waha hybrid resources', `Expected DP=7, BSS=6, got DP=${CharacterData.devotionalPool}, BSS=${CharacterData.boundSpiritSlots}`);
+      }
+
+      // Clean up
+      CharacterData.cult = null;
+      CharacterData.miracles = [];
+      AppObj.selectCult(null);
+    } else {
+      info('Skipping selectCult resource tests (App.selectCult not available in test env)');
+    }
+  } else {
+    fail('detectCultType function not found - Phase 1 not yet implemented');
   }
 }
 

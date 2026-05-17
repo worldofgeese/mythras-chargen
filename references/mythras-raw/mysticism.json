@@ -1,0 +1,81 @@
+{
+  "source": "Mythras Core Rulebook (3rd Printing, 2018)",
+  "chapter": "Chapter 11: Mysticism",
+  "pages": "155-161",
+  "extracted_at": "2026-05-16",
+  "verified": false,
+  "verification_notes": "Extracted via pdftotext. Requires human verification against source PDF.",
+  "chargen_rules": {
+    "skills": {
+      "mysticism": {
+        "base": "UNVERIFIED - likely POW+CON or INT+POW",
+        "description": "Represents the depth of knowledge concerning a particular mystical path. Each incidence must be tied to a specific path (foundation of mystical knowledge). Paths are the mystical equivalent of Combat Styles: diverse talents and abilities folded into the umbrella skill.",
+        "intensity_formula": "Talent Intensity available = Mysticism skill / 10",
+        "page": "p.155-156"
+      },
+      "meditation": {
+        "base": "UNVERIFIED - likely INT+CON",
+        "description": "The ability to reach a state of concentration by removing all extraneous distractions. Governs how many talents can be maintained simultaneously.",
+        "concentration_formula": "Maximum cumulative Intensity of active talents = Meditation skill / 10",
+        "page": "p.155-156",
+        "example": "Meditation 66% = max Intensity 7, split across multiple talents (e.g., Augment X at 2, Invoke Y at 1, Enhance Z at 4)"
+      }
+    },
+    "aig_adaptation": {
+      "note": "AiG's Mysticism chapter was never published. Per Hannu (2026-05-16): 'Mysticism raw' — uses Mythras Core rules without adaptation. No Rune Affinity overlay specified for Mysticism.",
+      "source": "Hannu Discord 2026-05-16"
+    },
+    "paths": {
+      "page": "p.156",
+      "description": "A path contains knowledge of multiple mental disciplines called talents: skill augmentations, trait invocations, and attribute enhancements. Paths are often based on ancient hermetic teachings, passed down in sacred books or by esoteric gurus or secret mountain-top schools.",
+      "structure": "Each path is tied to a profession or philosophy. Rare for an adept to learn more than one.",
+      "examples": [
+        {
+          "name": "Path of Abjuration",
+          "talents": ["Augment Endurance", "Augment Survival", "Invoke Denial (Food)", "Invoke Denial (Water)", "Invoke Denial (Sleep)", "Enhance Fatigue", "Enhance Hit Points"]
+        },
+        {
+          "name": "Path of Shadows",
+          "talents": ["Augment Perception", "Augment Stealth", "Augment Ranged Combat Style", "Invoke Adhesion", "Invoke Astral Projection", "Invoke Dark Sight", "Enhance Fatigue"]
+        }
+      ]
+    },
+    "talent_types": {
+      "page": "p.157-161",
+      "types": [
+        {
+          "name": "Augment",
+          "description": "Skill augmentations — boost a specific skill by a number of grades equal to the Intensity applied",
+          "examples": ["Augment Endurance", "Augment Perception", "Augment Stealth", "Augment Combat Style"]
+        },
+        {
+          "name": "Invoke",
+          "description": "Trait invocations — grant supernatural abilities or creature traits",
+          "examples": ["Invoke Adhesion", "Invoke Astral Projection", "Invoke Dark Sight", "Invoke Denial (Substance)"]
+        },
+        {
+          "name": "Enhance",
+          "description": "Attribute enhancements — boost attributes like Hit Points, Fatigue, Action Points",
+          "examples": ["Enhance Hit Points", "Enhance Fatigue", "Enhance Action Points"]
+        }
+      ]
+    },
+    "casting_mechanics": {
+      "page": "p.157-158",
+      "resource": "No external resource consumed — talents are powered by concentration (Meditation skill)",
+      "activation": "Requires a successful Mysticism skill roll to activate a talent",
+      "duration": "Talents remain active as long as the mystic concentrates. Multiple talents can be maintained simultaneously up to the Meditation limit.",
+      "limitation": "Effects do not extend beyond the mystic themselves — they become a tool to manipulate the world, but magic does not project outward"
+    },
+    "starting_at_chargen": {
+      "note": "A starting mystic chooses one path and learns talents from it. The number of starting talents is determined by cult/school membership (see Cults chapter p.196). Typically a mystic knows several talents from their path at creation.",
+      "path_choice": "One path chosen at character creation",
+      "page": "p.155-156, p.196"
+    }
+  },
+  "glorantha_notes": {
+    "applicability": "Per AiG overview (p.60): 'The study of mysticism in Glorantha is limited to only those of Draconic blood or those deluded enough to become subservient to them.' Primarily Kralori and Draconic traditions.",
+    "current_cult_data": "No cults in the current 94 one-pagers use Mysticism skills. Zero cults would use this system with current data.",
+    "future_use": "Would become relevant if Kralori cultures or Draconic cults are added to the chargen."
+  }
+}
