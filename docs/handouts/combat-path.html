@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Combat Path: Mythras Progressive Combat Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #efe4d1;
+      --bg-deep: #e5d3b5;
+      --paper: #f9f2e7;
+      --panel: #f3e6d2;
+      --panel-strong: #ead4b4;
+      --ink: #20170f;
+      --ink-soft: #5a4633;
+      --rule: rgba(58, 38, 21, 0.2);
+      --rust: #8f4023;
+      --sage: #556d43;
+      --gold: #af7d2d;
+      --shadow: 0 18px 42px rgba(49, 30, 16, 0.14);
+      --font-display: "Fraunces", Georgia, serif;
+      --font-body: "IBM Plex Sans", "Segoe UI", sans-serif;
+      --font-mono: "IBM Plex Mono", "Cascadia Code", monospace;
+    }
+
+    * { box-sizing: border-box; min-width: 0; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.55;
+      background:
+        radial-gradient(circle at top left, rgba(143, 64, 35, 0.16), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(85, 109, 67, 0.12), transparent 26%),
+        linear-gradient(180deg, var(--bg), var(--bg-deep));
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    header h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      color: var(--rust);
+      margin: 0 0 0.5rem;
+      line-height: 1.2;
+    }
+
+    header .subtitle {
+      font-size: 1rem;
+      color: var(--ink-soft);
+      font-style: italic;
+    }
+
+    /* Progress path visualization */
+    .path {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin: 2rem 0;
+      padding: 1rem;
+      background: var(--panel);
+      border-radius: 8px;
+    }
+
+    .path-node {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.8rem;
+      background: var(--panel-strong);
+      color: var(--ink-soft);
+      border: 2px solid var(--rule);
+      transition: all 0.2s;
+    }
+
+    .path-node.active {
+      background: var(--rust);
+      color: white;
+      border-color: var(--rust);
+      transform: scale(1.15);
+    }
+
+    .path-node.complete {
+      background: var(--sage);
+      color: white;
+      border-color: var(--sage);
+    }
+
+    /* Stage cards */
+    .stage {
+      background: var(--paper);
+      border-radius: 10px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--rust);
+    }
+
+    .stage-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .stage-number {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--rust);
+      min-width: 2rem;
+    }
+
+    .stage h2 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .stage-ref {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--gold);
+      margin-left: auto;
+      white-space: nowrap;
+    }
+
+    .stage p {
+      margin: 0.5rem 0;
+    }
+
+    .stage .key-concept {
+      background: var(--panel);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin: 0.75rem 0;
+      border-left: 3px solid var(--sage);
+    }
+
+    .stage .key-concept strong {
+      color: var(--sage);
+    }
+
+    .stage .example {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      background: var(--panel-strong);
+      border-radius: 4px;
+      padding: 0.6rem 0.8rem;
+      margin: 0.5rem 0;
+      white-space: pre-wrap;
+    }
+
+    .stage ul {
+      padding-left: 1.2rem;
+      margin: 0.5rem 0;
+    }
+
+    .stage li {
+      margin: 0.3rem 0;
+    }
+
+    .stage .when-ready {
+      font-style: italic;
+      color: var(--ink-soft);
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .tip {
+      background: rgba(175, 125, 45, 0.1);
+      border: 1px solid rgba(175, 125, 45, 0.3);
+      border-radius: 6px;
+      padding: 0.6rem 0.8rem;
+      margin: 0.75rem 0;
+      font-size: 0.9rem;
+    }
+
+    .tip::before {
+      content: "💡 ";
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--rule);
+      color: var(--ink-soft);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 1rem; }
+      .stage { padding: 1rem 1.2rem; }
+      .stage-header { flex-wrap: wrap; }
+      .stage-ref { margin-left: 0; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>The Combat Path</h1>
+      <p class="subtitle">A progressive guide to Mythras combat — learn one layer at a time</p>
+    </header>
+
+    <nav class="path" aria-label="Progress through 12 stages">
+      <div class="path-node">1</div>
+      <div class="path-node">2</div>
+      <div class="path-node">3</div>
+      <div class="path-node">4</div>
+      <div class="path-node">5</div>
+      <div class="path-node">6</div>
+      <div class="path-node">7</div>
+      <div class="path-node">8</div>
+      <div class="path-node">9</div>
+      <div class="path-node">10</div>
+      <div class="path-node">11</div>
+      <div class="path-node">12</div>
+    </nav>
+
+    <article class="stage" id="stage-1">
+      <div class="stage-header">
+        <span class="stage-number">1</span>
+        <h2>The Action Economy</h2>
+        <span class="stage-ref">Core p.91–92</span>
+      </div>
+      <p>Combat runs in <strong>Cycles</strong>. Each Cycle, everyone spends <strong>Action Points</strong> (AP) one at a time in Initiative order. When all AP are spent, a new Cycle begins.</p>
+      <div class="key-concept">
+        <strong>Action Points</strong> = (INT + DEX) ÷ 12, rounded up. Most characters have 2–3 AP per Cycle.
+      </div>
+      <ul>
+        <li><strong>Initiative</strong> = INT + DEX bonus (+ modifiers). Highest goes first.</li>
+        <li>Each AP spent = one <em>Proactive</em> action (Attack, Cast, Move) or one <em>Reactive</em> action (Parry, Evade).</li>
+        <li>Reactive actions happen on someone else's turn but still cost your AP.</li>
+      </ul>
+      <div class="tip">Start here. Run your first fight with just "roll to attack, roll to parry, compare results." Add layers as you go.</div>
+    </article>
+
+    <article class="stage" id="stage-2">
+      <div class="stage-header">
+        <span class="stage-number">2</span>
+        <h2>Attack & Parry</h2>
+        <span class="stage-ref">Core p.95–96</span>
+      </div>
+      <p>The core mechanic: attacker rolls Combat Style vs. defender's Parry (also Combat Style). Compare <strong>success levels</strong>:</p>
+      <div class="example">Attacker Success vs Defender Failure → Attacker gets 1 Special Effect
+Attacker Critical vs Defender Success → Attacker gets 1 Special Effect
+Attacker Critical vs Defender Failure → Attacker gets 2 Special Effects</div>
+      <div class="key-concept">
+        <strong>The Differential</strong>: Whoever wins by more success levels chooses Special Effects. A Critical vs. a Failure = 2 effects. This is where Mythras combat gets tactical.
+      </div>
+      <p class="when-ready">Once comfortable: add Special Effects (Stage 4).</p>
+    </article>
+
+    <article class="stage" id="stage-3">
+      <div class="stage-header">
+        <span class="stage-number">3</span>
+        <h2>Weapon Stats</h2>
+        <span class="stage-ref">Core p.95</span>
+      </div>
+      <p>Every weapon has three key properties:</p>
+      <ul>
+        <li><strong>Size</strong> (S/M/L/H/E) — determines if you can parry it and how much damage is blocked</li>
+        <li><strong>Reach</strong> (T/S/M/L/VL) — determines engagement distance and who strikes first</li>
+        <li><strong>Damage</strong> — dice + Damage Modifier</li>
+      </ul>
+      <div class="key-concept">
+        <strong>Damage Reduction</strong>: When you parry, compare weapon sizes. Same size = full block. One size smaller = half damage gets through. Two+ sizes smaller = no reduction (the blow overwhelms your parry).
+      </div>
+      <div class="tip">A dagger (Small) can't fully parry a greatsword (Large). Shields exist to solve this problem.</div>
+    </article>
+
+    <article class="stage" id="stage-4">
+      <div class="stage-header">
+        <span class="stage-number">4</span>
+        <h2>Special Effects</h2>
+        <span class="stage-ref">Core p.97–101</span>
+      </div>
+      <p>The heart of Mythras tactics. When you win an opposed roll, you choose effects from a menu. Start with these five:</p>
+      <ul>
+        <li><strong>Choose Location</strong> — pick where you hit instead of rolling randomly</li>
+        <li><strong>Bleed</strong> — wound causes ongoing blood loss (1 HP/round until treated)</li>
+        <li><strong>Bash</strong> — knock opponent back or prone (shields/bludgeons only)</li>
+        <li><strong>Disarm</strong> — force opponent to drop their weapon</li>
+        <li><strong>Trip</strong> — knock opponent prone (costs them AP to stand)</li>
+      </ul>
+      <div class="key-concept">
+        <strong>Defensive Effects</strong> exist too! If the <em>defender</em> wins the differential (e.g., defender Criticals vs. attacker's Success), the defender picks effects like <strong>Overextend</strong> or <strong>Damage Weapon</strong>.
+      </div>
+      <p class="when-ready">Add 2–3 new effects per session until the full list feels natural.</p>
+    </article>
+
+    <article class="stage" id="stage-5">
+      <div class="stage-header">
+        <span class="stage-number">5</span>
+        <h2>Hit Locations & Wounds</h2>
+        <span class="stage-ref">Core p.110–112</span>
+      </div>
+      <p>Damage applies to a specific <strong>Hit Location</strong> (roll d20 or use Choose Location). Each location has its own HP pool.</p>
+      <ul>
+        <li><strong>Minor Wound</strong> (HP reduced but above 0) — no mechanical penalty</li>
+        <li><strong>Serious Wound</strong> (HP at 0) — location is useless. Arm drops weapon, leg = fall prone, abdomen/chest = Endurance roll or fall unconscious</li>
+        <li><strong>Major Wound</strong> (HP goes negative) — location is destroyed/severed. Endurance roll or die.</li>
+      </ul>
+      <div class="key-concept">
+        <strong>Armour</strong> reduces damage per location. Chainmail on your chest (AP 5) absorbs 5 points of every hit there. Armour doesn't cover everywhere equally — helmets protect the head, not your legs.
+      </div>
+    </article>
+
+    <article class="stage" id="stage-6">
+      <div class="stage-header">
+        <span class="stage-number">6</span>
+        <h2>The Full Action Menu</h2>
+        <span class="stage-ref">Core p.92–94</span>
+      </div>
+      <p>Beyond Attack and Parry, your AP can buy:</p>
+      <ul>
+        <li><strong>Proactive</strong>: Attack, Brace (set weapon vs. charge), Cast Magic, Change Range, Move, Mount, Struggle (escape grapple)</li>
+        <li><strong>Reactive</strong>: Parry, Evade (full dodge, end up prone), Counter Spell, Outmanoeuvre (reposition without provoking)</li>
+        <li><strong>Free</strong> (no AP cost): Assess Situation, Drop Weapon, Signal, Speak, Use Luck Point, Ward Location</li>
+      </ul>
+      <div class="tip"><strong>Delay</strong> lets you hold your action to interrupt later. Powerful for setting up coordinated attacks or waiting for an opening.</div>
+    </article>
+
+    <article class="stage" id="stage-7">
+      <div class="stage-header">
+        <span class="stage-number">7</span>
+        <h2>Close Combat Tactics</h2>
+        <span class="stage-ref">Core p.102–107</span>
+      </div>
+      <p>Situational modifiers that change the battlefield:</p>
+      <ul>
+        <li><strong>Charging</strong> — +1d2 damage but one grade harder to hit. Devastating with lances.</li>
+        <li><strong>Surprise</strong> — surprised characters can't act for 1d3 turns. Ambushes are lethal.</li>
+        <li><strong>Multiple Opponents</strong> — each additional attacker beyond the first makes defence one grade harder.</li>
+        <li><strong>Knockback</strong> — if your Damage Modifier exceeds opponent's by 2+ steps, you can shove them.</li>
+        <li><strong>Outmanoeuvre</strong> — opposed Athletics/Evade to gain positional advantage.</li>
+      </ul>
+      <div class="key-concept">
+        <strong>Engagement</strong>: Once in melee range, you can't just walk away. Disengaging requires an action and may provoke a free attack.
+      </div>
+    </article>
+
+    <article class="stage" id="stage-8">
+      <div class="stage-header">
+        <span class="stage-number">8</span>
+        <h2>Ranged Combat</h2>
+        <span class="stage-ref">Core p.108–110</span>
+      </div>
+      <p>Ranged attacks use the same opposed roll framework but with different modifiers:</p>
+      <ul>
+        <li><strong>Aiming</strong> — spend AP to aim: +1 grade per AP spent (max +3)</li>
+        <li><strong>Distance</strong> — beyond effective range, each increment = -1 grade</li>
+        <li><strong>Target Size</strong> — smaller targets are harder to hit</li>
+        <li><strong>Wind</strong> — light/moderate/strong wind penalizes shots</li>
+        <li><strong>Cover</strong> — partial cover = harder to hit, full cover = impossible</li>
+      </ul>
+      <div class="key-concept">
+        <strong>Loading</strong>: Bows take 1 turn to reload. Crossbows take 2+. Javelins are throw-and-done. This makes weapon choice matter tactically.
+      </div>
+    </article>
+
+    <article class="stage" id="stage-9">
+      <div class="stage-header">
+        <span class="stage-number">9</span>
+        <h2>Unarmed & Grappling</h2>
+        <span class="stage-ref">Core p.106–107</span>
+      </div>
+      <p>Unarmed combat uses the same system but with unique options:</p>
+      <ul>
+        <li><strong>Striking</strong> — fists/kicks deal 1d3 + Damage Modifier. Can use Special Effects normally.</li>
+        <li><strong>Grappling</strong> — opposed Brawn to grab. Once grappled: Immobilise, Throw, Choke, or Take Weapon.</li>
+        <li><strong>Parrying weapons unarmed</strong> — possible but risky. Parrying a blade unarmed = your arm takes the damage.</li>
+      </ul>
+      <div class="tip">The <strong>Unarmed Prowess</strong> combat style trait lets you parry weapons without taking damage. Essential for martial artists.</div>
+    </article>
+
+    <article class="stage" id="stage-10">
+      <div class="stage-header">
+        <span class="stage-number">10</span>
+        <h2>Combat Styles & Traits</h2>
+        <span class="stage-ref">Core p.88–91</span>
+      </div>
+      <p>Combat Styles bundle weapons + a special <strong>Trait</strong> that gives a tactical edge:</p>
+      <ul>
+        <li><strong>Formation Fighting</strong> — bonus when fighting alongside allies with the same style</li>
+        <li><strong>Mounted Combat</strong> — no penalty for fighting from horseback</li>
+        <li><strong>Daredevil</strong> — may use Evade to dodge without ending up prone</li>
+        <li><strong>Defensive Minded</strong> — bonus AP usable only for Parry</li>
+        <li><strong>Do or Die</strong> — trade defence for devastating offence (no parries, +1 grade to attacks)</li>
+      </ul>
+      <div class="key-concept">
+        <strong>One skill, many weapons</strong>: "Hill Clan Levy" might include spear, shield, javelin, and dagger. You roll the same skill for all of them — the style represents your training tradition.
+      </div>
+    </article>
+
+    <article class="stage" id="stage-11">
+      <div class="stage-header">
+        <span class="stage-number">11</span>
+        <h2>Unusual Conditions</h2>
+        <span class="stage-ref">Core p.103–107</span>
+      </div>
+      <p>Combat doesn't always happen on flat ground:</p>
+      <ul>
+        <li><strong>Mounted</strong> — height advantage (+1 grade), but falling off hurts. Lances devastating on charge.</li>
+        <li><strong>Swimming</strong> — only Short weapons usable. All attacks one grade harder.</li>
+        <li><strong>Climbing</strong> — one hand occupied. Can't parry with two-handed weapons.</li>
+        <li><strong>Flying</strong> — aerial combat uses different engagement rules. Diving attacks = charging equivalent.</li>
+        <li><strong>Darkness</strong> — attacks one grade harder per visibility step. Blind Fighting trait negates this.</li>
+      </ul>
+    </article>
+
+    <article class="stage" id="stage-12">
+      <div class="stage-header">
+        <span class="stage-number">12</span>
+        <h2>Putting It All Together</h2>
+        <span class="stage-ref">Core p.112</span>
+      </div>
+      <p>With all layers active, a single combat exchange involves:</p>
+      <div class="example">1. Initiative (INT+DEX) → who acts first
+2. Spend AP → Attack (roll Combat Style)
+3. Defender spends AP → Parry (roll Combat Style)
+4. Compare success levels → winner picks Special Effects
+5. Apply damage to Hit Location (minus armour)
+6. Check wound severity → apply consequences
+7. Next AP spend...</div>
+      <div class="key-concept">
+        <strong>Underlings & Rabble</strong>: Not every foe needs the full system. <em>Underlings</em> have simplified stats. <em>Rabble</em> drop in one hit. Use these for mook fights to keep the pace fast.
+      </div>
+      <div class="tip">Mythras combat is lethal and tactical. A single well-placed blow can end a fight. Encourage players to think before charging in — negotiation, ambush, and retreat are valid strategies.</div>
+    </article>
+
+    <footer>
+      <p>Sources: Mythras Core Rulebook (3rd Printing, 2018) p.87–112 · Adventures in Glorantha p.178–220</p>
+      <p>For the Mythras character generator: <a href="../index.html">Back to Chargen</a></p>
+    </footer>
+  </div>
+</body>
+</html>

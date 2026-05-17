@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Magic Path: Mythras Progressive Magic Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #efe4d1;
+      --bg-deep: #e5d3b5;
+      --paper: #f9f2e7;
+      --panel: #f3e6d2;
+      --panel-strong: #ead4b4;
+      --ink: #20170f;
+      --ink-soft: #5a4633;
+      --rule: rgba(58, 38, 21, 0.2);
+      --rust: #8f4023;
+      --sage: #556d43;
+      --gold: #af7d2d;
+      --shadow: 0 18px 42px rgba(49, 30, 16, 0.14);
+      --font-display: "Fraunces", Georgia, serif;
+      --font-body: "IBM Plex Sans", "Segoe UI", sans-serif;
+      --font-mono: "IBM Plex Mono", "Cascadia Code", monospace;
+    }
+
+    * { box-sizing: border-box; min-width: 0; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.55;
+      background:
+        radial-gradient(circle at top left, rgba(143, 64, 35, 0.16), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(85, 109, 67, 0.12), transparent 26%),
+        linear-gradient(180deg, var(--bg), var(--bg-deep));
+      min-height: 100vh;
+    }
+
+    .container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+    header { text-align: center; margin-bottom: 3rem; }
+    header h1 { font-family: var(--font-display); font-size: clamp(1.8rem, 5vw, 2.6rem); color: var(--rust); margin: 0 0 0.5rem; line-height: 1.2; }
+    header .subtitle { font-size: 1rem; color: var(--ink-soft); font-style: italic; }
+
+    .path { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin: 2rem 0; padding: 1rem; background: var(--panel); border-radius: 8px; }
+    .path-node { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.8rem; background: var(--panel-strong); color: var(--ink-soft); border: 2px solid var(--rule); }
+
+    .stage { background: var(--paper); border-radius: 10px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; box-shadow: var(--shadow); border-left: 4px solid var(--sage); }
+    .stage-header { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 0.75rem; }
+    .stage-number { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--sage); min-width: 2rem; }
+    .stage h2 { font-family: var(--font-display); font-size: 1.2rem; color: var(--ink); margin: 0; }
+    .stage-ref { font-family: var(--font-mono); font-size: 0.75rem; color: var(--gold); margin-left: auto; white-space: nowrap; }
+    .stage p { margin: 0.5rem 0; }
+    .stage .key-concept { background: var(--panel); border-radius: 6px; padding: 0.75rem 1rem; margin: 0.75rem 0; border-left: 3px solid var(--sage); }
+    .stage .key-concept strong { color: var(--sage); }
+    .stage .example { font-family: var(--font-mono); font-size: 0.85rem; background: var(--panel-strong); border-radius: 4px; padding: 0.6rem 0.8rem; margin: 0.5rem 0; white-space: pre-wrap; }
+    .stage ul { padding-left: 1.2rem; margin: 0.5rem 0; }
+    .stage li { margin: 0.3rem 0; }
+    .stage .when-ready { font-style: italic; color: var(--ink-soft); margin-top: 0.75rem; font-size: 0.9rem; }
+    .tip { background: rgba(175, 125, 45, 0.1); border: 1px solid rgba(175, 125, 45, 0.3); border-radius: 6px; padding: 0.6rem 0.8rem; margin: 0.75rem 0; font-size: 0.9rem; }
+    .tip::before { content: "💡 "; }
+
+    .system-tag { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.03em; margin-right: 0.3rem; }
+    .system-tag.folk { background: #e8dcc8; color: #6b5a3e; }
+    .system-tag.theist { background: #f0d9d0; color: var(--rust); }
+    .system-tag.animist { background: #d4e6d0; color: #3a5c32; }
+    .system-tag.sorcery { background: #d6dce8; color: #3a4a6b; }
+    .system-tag.mysticism { background: #e8d6f0; color: #5a3a6b; }
+
+    footer { text-align: center; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 0.85rem; }
+
+    @media (max-width: 600px) {
+      .container { padding: 1rem; }
+      .stage { padding: 1rem 1.2rem; }
+      .stage-header { flex-wrap: wrap; }
+      .stage-ref { margin-left: 0; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>The Magic Path</h1>
+      <p class="subtitle">All five Mythras magic systems — learn the foundations, then branch into your tradition</p>
+    </header>
+
+    <nav class="path" aria-label="Progress through 11 stages">
+      <div class="path-node">1</div>
+      <div class="path-node">2</div>
+      <div class="path-node">3</div>
+      <div class="path-node">4</div>
+      <div class="path-node">5</div>
+      <div class="path-node">6</div>
+      <div class="path-node">7</div>
+      <div class="path-node">8</div>
+      <div class="path-node">9</div>
+      <div class="path-node">10</div>
+      <div class="path-node">11</div>
+    </nav>
+
+    <article class="stage" id="stage-1">
+      <div class="stage-header">
+        <span class="stage-number">1</span>
+        <h2>Magic Points & Casting Basics</h2>
+        <span class="stage-ref">Core p.116–121 · AiG p.59–62</span>
+      </div>
+      <p><span class="system-tag folk">All Systems</span> Every character has <strong>Magic Points</strong> = POW. These fuel all magic. They regenerate naturally.</p>
+      <div class="key-concept">
+        <strong>Universal Casting Rules</strong>:
+        <ul>
+          <li>Casting takes 1 Turn (your action for the round) unless stated otherwise</li>
+          <li>Casting costs Magic Points (varies by system)</li>
+          <li>A Critical success = zero MP cost. A Fumble = lose 1d3 MP, spell fails.</li>
+          <li>You can be interrupted mid-cast (Spoil Spell special effect)</li>
+        </ul>
+      </div>
+      <div class="tip">In AiG, all casting skills are replaced by <strong>Rune Affinities</strong>. You don't roll "Folk Magic" — you roll your relevant Rune (e.g., Fire Rune to cast Ignite).</div>
+    </article>
+
+    <article class="stage" id="stage-2">
+      <div class="stage-header">
+        <span class="stage-number">2</span>
+        <h2>Folk Magic</h2>
+        <span class="stage-ref">Core p.122–130 · AiG p.63–68</span>
+      </div>
+      <p><span class="system-tag folk">Folk Magic</span> Simple, universal magic available to everyone. The "cantrips" of Glorantha.</p>
+      <div class="key-concept">
+        <strong>How it works</strong>: Roll your Folk Magic skill (or Rune Affinity in AiG). Costs 1 MP. Duration = your POW in minutes. Intensity = 1 (fixed).
+      </div>
+      <ul>
+        <li><strong>Bladesharp</strong> — +1 damage to a weapon for POW minutes</li>
+        <li><strong>Heal</strong> — restore 1d3 HP to one location</li>
+        <li><strong>Protection</strong> — +1 AP to all locations</li>
+        <li><strong>Fanaticism</strong> — ignore wound penalties for the duration</li>
+        <li><strong>Disruption</strong> — deal 1d3 damage to a random location (ranged)</li>
+      </ul>
+      <p class="when-ready">Everyone should master Folk Magic before moving to their cult's system.</p>
+    </article>
+
+    <article class="stage" id="stage-3">
+      <div class="stage-header">
+        <span class="stage-number">3</span>
+        <h2>Rune Affinities (AiG)</h2>
+        <span class="stage-ref">AiG p.59–60 · ADR-002</span>
+      </div>
+      <p><span class="system-tag folk">All Systems</span> In Adventures in Glorantha, individual casting skills are replaced by <strong>Rune Affinities</strong>.</p>
+      <div class="key-concept">
+        <strong>Three Runes per character</strong>: Primary (POW+CHA+10), Secondary (POW+CHA), Tertiary (POW+CHA-10). These are your casting skills for everything.
+      </div>
+      <div class="example">Casting "Bladesharp" (a Death-aspected spell):
+  → Roll your Death Rune affinity
+  → If Death is your Primary: base 54%
+  → If Death is your Tertiary: base 34%</div>
+      <ul>
+        <li>Each spell/miracle is associated with one or more Runes</li>
+        <li>You roll the highest applicable Rune you possess</li>
+        <li>Spells with "Any" rune = use your best Rune affinity</li>
+      </ul>
+      <div class="tip">Choose your three Runes to match your cult's magic. An Orlanth worshipper wants Air, Movement, and one of Storm/Death/Truth.</div>
+    </article>
+
+    <article class="stage" id="stage-4">
+      <div class="stage-header">
+        <span class="stage-number">4</span>
+        <h2>Theism / Rune Magic</h2>
+        <span class="stage-ref">Core p.179–196 · AiG p.69–122</span>
+      </div>
+      <p><span class="system-tag theist">Theism</span> The most common system in Glorantha. Worshippers channel their god's power through <strong>miracles</strong>.</p>
+      <div class="key-concept">
+        <strong>Devotional Pool</strong> = POW ÷ 2. This is how many miracles you can have "prepared" at once. You choose which miracles to fill your pool with during worship.
+      </div>
+      <ul>
+        <li><strong>Casting</strong>: Roll Rune Affinity. Cost = 1+ MP depending on miracle.</li>
+        <li><strong>Intensity</strong>: Rune Affinity ÷ 10 (round down). Higher affinity = more powerful miracles.</li>
+        <li><strong>Miracles are gifts from your god</strong> — you can only use miracles your cult grants.</li>
+        <li><strong>Exhort</strong>: Spend extra MP to boost a miracle beyond normal intensity.</li>
+      </ul>
+      <div class="example">Orlanth initiate with Air 54%, Devotional Pool 6:
+  → Can prepare 6 miracles (from Orlanth's list of 53)
+  → Casts "Lightning" at Intensity 5 (54÷10)
+  → Rolls Air Rune to cast</div>
+    </article>
+
+    <article class="stage" id="stage-5">
+      <div class="stage-header">
+        <span class="stage-number">5</span>
+        <h2>Animism / Spirit Magic</h2>
+        <span class="stage-ref">Core p.131–154 · AiG p.134–151</span>
+      </div>
+      <p><span class="system-tag animist">Animism</span> Spirit worshippers bind spirits into fetishes and command them to produce magical effects.</p>
+      <div class="key-concept">
+        <strong>Bound Spirit Slots</strong> = CHA ÷ 2. Each slot holds one spirit in a fetish (a physical object housing the spirit).
+      </div>
+      <ul>
+        <li><strong>Casting</strong>: Roll Spirit Rune affinity to command a bound spirit. The spirit does the magic.</li>
+        <li><strong>Spirits have abilities</strong> — a Healing Spirit can heal, a Fire Spirit can burn, etc.</li>
+        <li><strong>Spirit Combat</strong>: To bind a spirit, you must defeat it in spirit combat (opposed Willpower).</li>
+        <li><strong>Fetishes</strong>: Physical objects (bones, carved stones, pouches) that house bound spirits.</li>
+      </ul>
+      <div class="example">Daka Fal shaman with CHA 12, Spirit Rune 58%:
+  → 6 bound spirit slots
+  → Starts with 2-3 intensity 1-2 spirits in fetishes
+  → Commands "Ancestor Spirit" by rolling Spirit Rune
+  → Spirit provides guidance, healing, or protection</div>
+      <div class="tip">Hannu's house rule: Binding skill is replaced by Spirit Rune affinity. You don't need a separate Binding skill.</div>
+    </article>
+
+    <article class="stage" id="stage-6">
+      <div class="stage-header">
+        <span class="stage-number">6</span>
+        <h2>Spirit Combat</h2>
+        <span class="stage-ref">Core p.134–136</span>
+      </div>
+      <p><span class="system-tag animist">Animism</span> When you encounter hostile spirits or try to bind new ones, you enter spirit combat.</p>
+      <div class="key-concept">
+        <strong>Spirit Combat</strong>: Opposed rolls of Willpower vs. Spirit's Combat skill. Damage reduces Magic Points (not HP). At 0 MP, you lose — the spirit can possess you or flee.
+      </div>
+      <ul>
+        <li><strong>Discorporation</strong>: Shamans can leave their body to enter the Spirit World and seek spirits.</li>
+        <li><strong>Spirit Abilities</strong>: Bound spirits can use Covert, Manifest, Possess, or their specific powers.</li>
+        <li><strong>Intensity</strong>: A spirit's power level. Higher intensity = more MP, stronger abilities.</li>
+      </ul>
+    </article>
+
+    <article class="stage" id="stage-7">
+      <div class="stage-header">
+        <span class="stage-number">7</span>
+        <h2>Sorcery</h2>
+        <span class="stage-ref">Core p.162–178</span>
+      </div>
+      <p><span class="system-tag sorcery">Sorcery</span> Intellectual magic. Sorcerers manipulate reality through formulae and willpower, shaping spells with four principles.</p>
+      <div class="key-concept">
+        <strong>Two skills</strong>: <em>Invocation</em> (Rune Affinity of the spell) to cast, <em>Shaping</em> (Law Rune) to modify. Each Shaping point adjusts Duration, Range, Targets, or Magnitude.
+      </div>
+      <ul>
+        <li><strong>Casting</strong>: Roll Rune Affinity of the spell. Cost = 1 MP per Shaping point used.</li>
+        <li><strong>Shaping</strong>: Spend points to extend duration, increase range, add targets, or boost magnitude.</li>
+        <li><strong>No prepared slots</strong> — sorcerers can cast any spell they know, but shaping costs MP.</li>
+        <li><strong>Grimoires</strong>: Spell books. You learn spells from your school's grimoire.</li>
+      </ul>
+      <div class="example">Arkat sorcerer with Law Rune 46%:
+  → Shaping capacity = 4 (46÷10)
+  → Casts "Damage Resistance" shaped for:
+    Duration +2, Range +1, Magnitude +1 = 4 shaping points, 4 MP</div>
+    </article>
+
+    <article class="stage" id="stage-8">
+      <div class="stage-header">
+        <span class="stage-number">8</span>
+        <h2>Mysticism</h2>
+        <span class="stage-ref">Core p.155–161</span>
+      </div>
+      <p><span class="system-tag mysticism">Mysticism</span> Internal magic. Mystics enhance themselves through meditation and self-discipline. No external power source.</p>
+      <div class="key-concept">
+        <strong>No MP cost</strong>. Mystic talents are powered by Concentration — maintaining focus. You can sustain talents = Meditation skill ÷ 10.
+      </div>
+      <ul>
+        <li><strong>Paths</strong>: Each mystic follows a Path (e.g., Path of the Warrior, Path of the Sage) that grants specific Talents.</li>
+        <li><strong>Talents</strong>: Self-enhancement abilities — boost attributes, gain supernatural senses, resist magic.</li>
+        <li><strong>Limitation</strong>: Talents only affect the mystic themselves. No healing others, no offensive magic at range.</li>
+        <li><strong>Consequence</strong>: Using mysticism while emotionally agitated causes it to fail.</li>
+      </ul>
+      <div class="tip">Mysticism is rare in Glorantha — primarily found in Kralori and some Eastern traditions. Your campaign may not use it.</div>
+    </article>
+
+    <article class="stage" id="stage-9">
+      <div class="stage-header">
+        <span class="stage-number">9</span>
+        <h2>Combining Systems</h2>
+        <span class="stage-ref">Core p.121 · AiG p.59–62</span>
+      </div>
+      <p><span class="system-tag folk">All Systems</span> Many cults are <strong>hybrid</strong> — combining two magic systems. This is common in Glorantha.</p>
+      <div class="key-concept">
+        <strong>Hybrid cults</strong>: Waha and Storm Bull are theist+animist. Their members get both a Devotional Pool AND Bound Spirit Slots. They can use miracles AND command spirits.
+      </div>
+      <ul>
+        <li><strong>Stacking</strong>: You can have Folk Magic + your cult's system active simultaneously.</li>
+        <li><strong>No mixing within a round</strong>: You can only cast from one system per action (can't invoke a miracle and command a spirit in the same turn).</li>
+        <li><strong>Folk Magic is always available</strong> — every character has it regardless of cult system.</li>
+      </ul>
+      <div class="example">Waha khan (theist+animist):
+  → Turn 1: Cast "Bladesharp" (Folk Magic, 1 MP)
+  → Turn 2: Invoke "Command Herd Beast" (Miracle, Devotional Pool)
+  → Turn 3: Command bound Healing Spirit (Animism, Spirit Rune)</div>
+    </article>
+
+    <article class="stage" id="stage-10">
+      <div class="stage-header">
+        <span class="stage-number">10</span>
+        <h2>Magic in Combat</h2>
+        <span class="stage-ref">Core p.92–93</span>
+      </div>
+      <p><span class="system-tag folk">All Systems</span> Using magic in combat costs Action Points and follows specific rules:</p>
+      <ul>
+        <li><strong>Cast Magic</strong> (Proactive, 1 AP): Cast a spell on your turn. Takes 1 Turn to complete.</li>
+        <li><strong>Hold Magic</strong> (Free): Prepare a spell to release later as a Reactive action.</li>
+        <li><strong>Counter Spell</strong> (Reactive, 1 AP): Attempt to neutralize an incoming spell.</li>
+        <li><strong>Spoil Spell</strong> (Special Effect): If you hit a caster mid-cast, their spell fails.</li>
+      </ul>
+      <div class="key-concept">
+        <strong>Concentration spells</strong> require ongoing focus. If you take damage while concentrating, roll Willpower or lose the spell.
+      </div>
+      <div class="tip">Pre-buff before combat! Cast Bladesharp, Protection, and Fanaticism before initiative is rolled. In-combat casting costs precious AP.</div>
+    </article>
+
+    <article class="stage" id="stage-11">
+      <div class="stage-header">
+        <span class="stage-number">11</span>
+        <h2>Enchantments & Permanent Magic</h2>
+        <span class="stage-ref">Core p.121</span>
+      </div>
+      <p><span class="system-tag folk">All Systems</span> Creating lasting magical effects requires sacrifice:</p>
+      <ul>
+        <li><strong>Enchantments</strong>: Permanently imbue an object with a spell. Costs permanent POW sacrifice.</li>
+        <li><strong>Matrices</strong>: Store a spell in an object for later one-use activation. Cheaper than enchantments.</li>
+        <li><strong>Bound spirits in items</strong>: Animists bind spirits into weapons/armour for permanent magical properties.</li>
+        <li><strong>Temple enchantments</strong>: Theist temples can create sacred items through ritual worship.</li>
+      </ul>
+      <div class="key-concept">
+        <strong>POW sacrifice</strong>: Creating permanent magic costs permanent POW (reducing your Magic Points maximum). This is why magical items are rare and precious.
+      </div>
+    </article>
+
+    <footer>
+      <p>Sources: Mythras Core Rulebook (3rd Printing, 2018) p.113–196 · Adventures in Glorantha p.59–151</p>
+      <p>House Rules: Hannu's Rune Affinity casting (ADR-002) · Spirit Rune replaces Binding</p>
+      <p>For the Mythras character generator: <a href="../index.html">Back to Chargen</a></p>
+    </footer>
+  </div>
+</body>
+</html>
