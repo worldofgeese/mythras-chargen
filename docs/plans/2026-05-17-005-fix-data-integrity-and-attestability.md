@@ -290,6 +290,27 @@ U1, U2, U3, U4, U7 can all run in parallel. U5 depends on U1-U3. U6 depends on U
 
 ---
 
+## Post-Fix Skill Passes
+
+After U1-U7 and manual testing, execute these skill passes in order:
+
+| Bead | Skill | Purpose |
+|------|-------|---------|
+| mythras-chargen-hgm | `/ce-code-review` | Structured review of corrected magic system code |
+| mythras-chargen-7w8 | `/ce-simplify-code` | Simplification pass on index.html magic code |
+| mythras-chargen-984 | `/ce-compound` | Document learnings (attestability failures, vision-mode, pickers) |
+| mythras-chargen-59q | `/validate` | Formally validate Plan 005 against working tree |
+| mythras-chargen-19r | `/changelog` | Update CHANGELOG.md for this release |
+| mythras-chargen-69b | `/annotate-guidance` | Update architecture docs for magic system |
+| mythras-chargen-k6q | `/outline-test-cases` | QA test case specs for sorcery/spirit pickers, PDF export |
+| mythras-chargen-qwf | `/explore` | Investigate Kralori mysticism and next-phase approaches |
+| mythras-chargen-021 | `/ce-clean-gone-branches` | Housekeeping for stale branches |
+| mythras-chargen-ckt | `/ce-demo-reel` | Screenshots of corrected pickers and PDF export |
+| mythras-chargen-dvc | `/ce-commit-push-pr` | PR description summarizing full sprint |
+| mythras-chargen-4g7 | `/ce-docs-review` + README | **LAST** — review and update README |
+
+---
+
 ## Success Criteria
 
 - [ ] All ~52 sorcery spells have PDF-verified descriptions
@@ -297,8 +318,16 @@ U1, U2, U3, U4, U7 can all run in parallel. U5 depends on U1-U3. U6 depends on U
 - [ ] Spirit stats match Bird in Hand PDF pages 43-46 exactly
 - [ ] Spell limit formula cites actual Mythras Core page
 - [ ] Spirit slot formula either cites source or is documented as house rule
-- [ ] Hannu house rules documented in ADR with citations
+- [ ] Hannu house rules documented in ADR-007 with citations (via pi-specdocs /adr skill)
 - [ ] Reference JSONs have no UNVERIFIED values for data we have PDFs for
 - [ ] Handouts contain no hallucinated mechanics
 - [ ] All tests pass
 - [ ] Notesfrompavis searched for mysticism data (result documented)
+- [ ] Code review pass completed
+- [ ] Simplification pass completed
+- [ ] Learnings documented in docs/solutions/
+- [ ] Architecture guidance updated
+- [ ] QA test cases outlined
+- [ ] CHANGELOG.md updated
+- [ ] Demo screenshots captured
+- [ ] README reviewed and updated (LAST)
