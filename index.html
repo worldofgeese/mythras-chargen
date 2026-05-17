@@ -13167,6 +13167,44 @@ const FOLK_MAGIC_DESCRIPTIONS = {
   "Xenohealing": "[Touch] Heals non-human species that normal Heal cannot affect."
 };
 
+// Sorcery spells from Mythras Core p.167-178 (34 spells)
+const SORCERY_SPELLS = [
+  {name: "Abjure (Substance/Process)", resist: "Special", page: "p.167"},
+  {name: "Animate (Substance)", resist: "", page: "p.167-168"},
+  {name: "Attract (Threat)", resist: "Willpower", page: "p.168"},
+  {name: "Castback", resist: "", page: "p.168"},
+  {name: "Damage Enhancement", resist: "", page: "p.168"},
+  {name: "Damage Resistance", resist: "", page: "p.168-169"},
+  {name: "Diminish (Characteristic)", resist: "Willpower/Endurance", page: "p.169"},
+  {name: "Dominate (Species)", resist: "Willpower", page: "p.169"},
+  {name: "Enchant (Object)", resist: "Willpower", page: "p.170"},
+  {name: "Enhance (Characteristic)", resist: "Willpower/Endurance", page: "p.170"},
+  {name: "Enslave (Creatures)", resist: "Willpower", page: "p.170"},
+  {name: "Fly", resist: "", page: "p.171"},
+  {name: "Haste", resist: "", page: "p.171"},
+  {name: "Holdfast", resist: "", page: "p.171"},
+  {name: "Intuition", resist: "", page: "p.171-172"},
+  {name: "Mystic (Sense)", resist: "", page: "p.172"},
+  {name: "Neutralize Magic", resist: "", page: "p.172"},
+  {name: "Palsy", resist: "Endurance", page: "p.172-173"},
+  {name: "Phantom (Sense)", resist: "", page: "p.173"},
+  {name: "Portal", resist: "", page: "p.173"},
+  {name: "Project (Sense)", resist: "", page: "p.174"},
+  {name: "Regenerate", resist: "", page: "p.174"},
+  {name: "Repulse (Substance)", resist: "", page: "p.174-175"},
+  {name: "Sculpt (Substance)", resist: "", page: "p.175"},
+  {name: "Shapechange (Species to Species)", resist: "Willpower", page: "p.175"},
+  {name: "Smother", resist: "Endurance", page: "p.175-176"},
+  {name: "Spirit Resistance", resist: "", page: "p.176"},
+  {name: "Store Manna", resist: "", page: "p.176"},
+  {name: "Summon (Entity)", resist: "Evade", page: "p.176-177"},
+  {name: "Tap (Characteristic)", resist: "Special", page: "p.177"},
+  {name: "Teleport", resist: "", page: "p.177"},
+  {name: "Transmogrify (to Substance)", resist: "Endurance", page: "p.177-178"},
+  {name: "Undeath", resist: "Endurance", page: "p.178"},
+  {name: "Wrack (Species)", resist: "Endurance", page: "p.178"}
+];
+
 const CULTURE_BUILDS = {
   "Praxian": [
     { name: "Beast Rider Warrior", stats: "High STR, CON", career: "Warrior", style: "Beast Rider Warrior", tip: "Mounted combat specialist. Lance charges and archery from the saddle." },
@@ -15419,6 +15457,44 @@ App.toggleFolkMagicSpell = function(spell, checked, maxCount) {
   this.saveToLocalStorage();
 };
 
+App.toggleSorcerySpell = function(spellName) {
+  if (!CharacterData.sorcerySpells) CharacterData.sorcerySpells = [];
+  const idx = CharacterData.sorcerySpells.indexOf(spellName);
+  const intStat = CharacterData.characteristics.INT || 10;
+  const maxSpells = Math.ceil(intStat / 4);
+
+  if (idx > -1) {
+    CharacterData.sorcerySpells.splice(idx, 1);
+  } else {
+    if (CharacterData.sorcerySpells.length >= maxSpells) {
+      this.showToast(`Maximum ${maxSpells} sorcery spells (INT/4)`, 'error');
+      return;
+    }
+    CharacterData.sorcerySpells.push(spellName);
+  }
+  this.saveToLocalStorage();
+  this.renderCurrentStep();
+};
+
+App.toggleBoundSpirit = function(spiritName) {
+  if (!CharacterData.boundSpirits) CharacterData.boundSpirits = [];
+  const idx = CharacterData.boundSpirits.findIndex(s => s.name === spiritName);
+  const spiritSlots = CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2);
+  const maxStarting = Math.min(3, spiritSlots);
+
+  if (idx > -1) {
+    CharacterData.boundSpirits.splice(idx, 1);
+  } else {
+    if (CharacterData.boundSpirits.length >= maxStarting) {
+      this.showToast(`Maximum ${maxStarting} starting spirits`, 'error');
+      return;
+    }
+    CharacterData.boundSpirits.push({name: spiritName});
+  }
+  this.saveToLocalStorage();
+  this.renderCurrentStep();
+};
+
 App.toggleCareerFolkMagicSpell = function(spell, checked) {
   if (checked) {
     if (!CharacterData.careerFolkMagic.includes(spell)) {
@@ -15962,24 +16038,68 @@ App.renderStep9 = function() {
         this.renderMiraclePicker(pickerEl);
       }
 
-      // Show animist info for animist cults
+      // Show animist info + spirit picker for animist cults
       if (cultType.types.includes('animist')) {
         const spiritSlots = CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2);
+        const maxStarting = Math.min(3, spiritSlots); // Start with up to 3 spirits
+        if (!CharacterData.boundSpirits) CharacterData.boundSpirits = [];
+        const selectedCount = CharacterData.boundSpirits.length;
+
+        // Spirit types available for starting characters
+        const STARTING_SPIRITS = [
+          {name: 'Healing Spirit (Int 1)', type: 'Nature', intensity: 1, ability: 'Heal 1d3 HP to one location'},
+          {name: 'Healing Spirit (Int 2)', type: 'Nature', intensity: 2, ability: 'Heal 1d6 HP to one location'},
+          {name: 'Protection Spirit (Int 1)', type: 'Nature', intensity: 1, ability: '+1 AP to all locations'},
+          {name: 'Protection Spirit (Int 2)', type: 'Nature', intensity: 2, ability: '+2 AP to all locations'},
+          {name: 'Strength Spirit (Int 1)', type: 'Nature', intensity: 1, ability: '+1d2 to STR for POW minutes'},
+          {name: 'Magic Spirit (Int 1)', type: 'Nature', intensity: 1, ability: 'Stores 3 extra Magic Points'},
+          {name: 'Magic Spirit (Int 2)', type: 'Nature', intensity: 2, ability: 'Stores 6 extra Magic Points'},
+          {name: 'Ancestor Spirit (Int 1)', type: 'Ancestor', intensity: 1, ability: 'Augment one skill by +20% once per day'},
+          {name: 'Ancestor Spirit (Int 2)', type: 'Ancestor', intensity: 2, ability: 'Augment one skill by +30% once per day'},
+          {name: 'Ward Spirit (Int 1)', type: 'Guardian', intensity: 1, ability: 'Alerts to spirit intrusion within 10m'},
+          {name: 'Fire Spirit (Int 1)', type: 'Elemental', intensity: 1, ability: 'Ignite/extinguish small fires'},
+          {name: 'Air Spirit (Int 1)', type: 'Elemental', intensity: 1, ability: 'Create gusts, clear air'}
+        ];
+
+        let spiritListHTML = STARTING_SPIRITS.map(spirit => {
+          const checked = CharacterData.boundSpirits.some(s => s.name === spirit.name);
+          return `<label style="display:block;margin:4px 0;font-size:0.9em;"><input type="checkbox" ${checked ? 'checked' : ''} onchange="App.toggleBoundSpirit('${spirit.name.replace(/'/g, "\\'")}')"> <strong>${spirit.name}</strong> <span style="font-size:0.8em;color:#555;">[${spirit.type}] ${spirit.ability}</span></label>`;
+        }).join('');
+
         const animistHTML = `
           <div style="background: #e8f5e9; border: 1px solid #4caf50; padding: 12px; margin-top: 12px; border-radius: 4px;">
             <h3 style="margin: 0 0 8px 0; font-size: 14px;">Spirit Magic (Animist${cultType.isHybrid ? ' \u2014 Shaman Path' : ''})</h3>
             <p style="font-size: 0.9em; margin: 4px 0;"><strong>Bound Spirit Slots:</strong> ${spiritSlots} (CHA/2 for Spirit Worshipper rank)</p>
-            <p style="font-size: 0.9em; margin: 4px 0;"><strong>Casting Skill:</strong> Spirit Rune affinity</p>
-            <p style="font-size: 0.85em; color: #555; margin: 8px 0 0 0; font-style: italic;">Spirit selection: consult GM for available spirits from cult tradition. Typical starting spirits: 2-3 intensity 1-2 nature spirits in fetishes.</p>
+            <p style="font-size: 0.9em; margin: 4px 0;"><strong>Casting Skill:</strong> Spirit Rune affinity (replaces Binding per AiG/Hannu)</p>
+          </div>
+          <div style="background: #f5f5f5; border: 1px solid #ddd; padding: 12px; margin-top: 8px; border-radius: 4px;">
+            <h4 style="margin: 0 0 8px 0; font-size: 13px;">Starting Bound Spirits <span style="font-weight:normal;">(${selectedCount} / ${maxStarting})</span></h4>
+            <p style="font-size: 0.8em; color: #666; margin: 0 0 8px 0;">Select up to ${maxStarting} starting spirits (intensity 1-2). Consult GM for cult-specific options.</p>
+            <div style="max-height: 240px; overflow-y: auto; padding-right: 8px;">
+              ${spiritListHTML}
+            </div>
+            <p style="font-size: 0.75em; color: #888; margin: 8px 0 0 0;">Source: Monster Island spirit template, Mythras Core p.131-154, Bird in the Hand</p>
           </div>
         `;
         pickerEl.insertAdjacentHTML('beforeend', animistHTML);
         pickerEl.style.display = 'block';
       }
 
-      // Show sorcery info for sorcery cults
+      // Show sorcery info + spell picker for sorcery cults
       if (cultType.types.includes('sorcery')) {
         const magicPoints = CharacterData.sorceryResource || CharacterData.characteristics.POW || 0;
+        const intStat = CharacterData.characteristics.INT || 10;
+        const maxSpells = Math.ceil(intStat / 4); // Starting sorcerers know INT/4 spells (rounded up)
+        if (!CharacterData.sorcerySpells) CharacterData.sorcerySpells = [];
+        const selectedCount = CharacterData.sorcerySpells.length;
+        const remaining = maxSpells - selectedCount;
+
+        let spellListHTML = SORCERY_SPELLS.map(spell => {
+          const checked = CharacterData.sorcerySpells.includes(spell.name);
+          const resistTag = spell.resist ? ` <span style="font-size:0.75em;color:#666;">[Resist: ${spell.resist}]</span>` : '';
+          return `<label style="display:block;margin:3px 0;font-size:0.9em;"><input type="checkbox" ${checked ? 'checked' : ''} onchange="App.toggleSorcerySpell('${spell.name.replace(/'/g, "\\'")}')"> ${spell.name}${resistTag}</label>`;
+        }).join('');
+
         const sorceryHTML = `
           <div style="background: #e3f2fd; border: 1px solid #2196f3; padding: 12px; margin-top: 12px; border-radius: 4px;">
             <h3 style="margin: 0 0 8px 0; font-size: 14px;">Sorcery${cultType.isHybrid ? ' \u2014 Sorcerer Path' : ''}</h3>
@@ -15987,7 +16107,14 @@ App.renderStep9 = function() {
             <p style="font-size: 0.9em; margin: 4px 0;"><strong>Casting:</strong> Rune Affinity of spell (replaces Invocation)</p>
             <p style="font-size: 0.9em; margin: 4px 0;"><strong>Shaping:</strong> Law Rune affinity (replaces Shaping skill)</p>
             <p style="font-size: 0.9em; margin: 4px 0;"><strong>Intensity:</strong> Rune Affinity / 10 | <strong>Shaping Points:</strong> Law Rune / 10</p>
-            <p style="font-size: 0.8em; color: #666; margin: 8px 0 0 0;">Source: Mythras Core p.162-178, AiG p.60</p>
+            <p style="font-size: 0.8em; color: #666; margin: 4px 0 0 0;">Source: Mythras Core p.162-178, AiG p.60</p>
+          </div>
+          <div style="background: #f5f5f5; border: 1px solid #ddd; padding: 12px; margin-top: 8px; border-radius: 4px;">
+            <h4 style="margin: 0 0 8px 0; font-size: 13px;">Starting Spells <span style="font-weight:normal;">(${selectedCount} / ${maxSpells} — INT/4)</span></h4>
+            <div style="max-height: 240px; overflow-y: auto; padding-right: 8px;">
+              ${spellListHTML}
+            </div>
+            <p style="font-size: 0.8em; color: #666; margin: 8px 0 0 0;">Select up to ${maxSpells} spells from your school's grimoire. Spells with (Substance/Species) require specialization at the table.</p>
           </div>
         `;
         pickerEl.insertAdjacentHTML('beforeend', sorceryHTML);
