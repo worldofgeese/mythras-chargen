@@ -1,0 +1,125 @@
+{
+  "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+  "extracted_at": "2026-05-17",
+  "verified": false,
+  "chapter": "Combat (Chapter 8)",
+  "page_range": "p.87-112",
+  "note": "Page numbers are PDF page numbers. Book page numbers may differ by offset.",
+  "sections": {
+    "chapter_overview": { "page": 87, "title": "Combat Components Overview" },
+    "combat_styles": { "page": 88, "title": "Combat Styles", "end_page": 89 },
+    "combat_style_traits": { "page": 90, "title": "Combat Style Traits", "end_page": 91 },
+    "initiative": { "page": 91, "title": "Initiative & Calculating Initiative" },
+    "proactive_actions": { "page": 92, "title": "Proactive Actions (Attack, Brace, Cast Magic, etc.)" },
+    "reactive_actions": { "page": 93, "title": "Reactive Actions (Counter Spell, Evade, Parry, etc.)" },
+    "free_actions": { "page": 94, "title": "Free Actions (Assess Situation, Drop Weapon, Signal, etc.)" },
+    "how_combat_works": { "page": 95, "title": "How Combat Works — Attacks and Parries" },
+    "weapon_size_reach": { "page": 95, "title": "Weapon Size & Reach Categories" },
+    "damage_reduction": { "page": 95, "title": "Damage Reduction Table" },
+    "special_effects_descriptions": { "page": 97, "title": "Special Effect Descriptions", "end_page": 100 },
+    "special_effects_summary": { "page": 101, "title": "Special Effects Summary Table" },
+    "situational_modifiers": { "page": 102, "title": "Close Combat Situational Modifiers" },
+    "charging": { "page": 103, "title": "Charging" },
+    "evading": { "page": 104, "title": "Evading" },
+    "knockback": { "page": 105, "title": "Knockback" },
+    "leaping_attacks": { "page": 105, "title": "Leaping Attacks" },
+    "multiple_opponents": { "page": 105, "title": "Multiple Opponents" },
+    "outmanoeuvring": { "page": 105, "title": "Outmanoeuvring" },
+    "surprise": { "page": 106, "title": "Surprise" },
+    "unarmed_combat": { "page": 106, "title": "Unarmed Combat" },
+    "grappling": { "page": 107, "title": "Grappling" },
+    "ranged_combat": { "page": 108, "title": "Ranged Combat", "end_page": 109 },
+    "aiming": { "page": 109, "title": "Aiming & Distance Penalties" },
+    "loading_ranged": { "page": 110, "title": "Loading Ranged Weapons" },
+    "hit_locations": { "page": 110, "title": "Hit Locations" },
+    "damage_wound_levels": { "page": 111, "title": "Damage and Wound Levels" },
+    "heroic_last_actions": { "page": 112, "title": "Heroic Last Actions" },
+    "underlings_rabble": { "page": 112, "title": "Underlings & Rabble" }
+  },
+  "progressive_stages": [
+    {
+      "stage": 1,
+      "title": "The Action Economy",
+      "summary": "Action Points, Initiative, Combat Rounds & Cycles",
+      "pages": "p.91-92",
+      "sections_ref": ["initiative", "proactive_actions"]
+    },
+    {
+      "stage": 2,
+      "title": "Attack & Parry Basics",
+      "summary": "How opposed rolls work, success levels, differential rolls",
+      "pages": "p.95-96",
+      "sections_ref": ["how_combat_works"]
+    },
+    {
+      "stage": 3,
+      "title": "Weapon Stats",
+      "summary": "Size, Reach, Damage, and the Damage Reduction table",
+      "pages": "p.95",
+      "sections_ref": ["weapon_size_reach", "damage_reduction"]
+    },
+    {
+      "stage": 4,
+      "title": "Special Effects",
+      "summary": "The core tactical layer — choosing effects on critical/success differentials",
+      "pages": "p.97-101",
+      "sections_ref": ["special_effects_descriptions", "special_effects_summary"]
+    },
+    {
+      "stage": 5,
+      "title": "Hit Locations & Wounds",
+      "summary": "Where you hit, wound severity, and what happens at 0 HP",
+      "pages": "p.110-112",
+      "sections_ref": ["hit_locations", "damage_wound_levels", "heroic_last_actions"]
+    },
+    {
+      "stage": 6,
+      "title": "Proactive & Reactive Actions",
+      "summary": "Full action menu: Attack, Brace, Cast, Evade, Parry, Outmanoeuvre",
+      "pages": "p.92-94",
+      "sections_ref": ["proactive_actions", "reactive_actions", "free_actions"]
+    },
+    {
+      "stage": 7,
+      "title": "Close Combat Tactics",
+      "summary": "Charging, knockback, multiple opponents, surprise, engagement",
+      "pages": "p.102-107",
+      "sections_ref": ["situational_modifiers", "charging", "knockback", "multiple_opponents", "surprise"]
+    },
+    {
+      "stage": 8,
+      "title": "Ranged Combat",
+      "summary": "Aiming, distance penalties, loading, cover, ranged special effects",
+      "pages": "p.108-110",
+      "sections_ref": ["ranged_combat", "aiming", "loading_ranged"]
+    },
+    {
+      "stage": 9,
+      "title": "Unarmed & Grappling",
+      "summary": "Striking, grappling, parrying weapons unarmed",
+      "pages": "p.106-107",
+      "sections_ref": ["unarmed_combat", "grappling"]
+    },
+    {
+      "stage": 10,
+      "title": "Combat Styles & Traits",
+      "summary": "Style benefits, trait effects, weapon groupings",
+      "pages": "p.88-91",
+      "sections_ref": ["combat_styles", "combat_style_traits"]
+    },
+    {
+      "stage": 11,
+      "title": "Unusual Conditions",
+      "summary": "Swimming, climbing, flying, mounted combat",
+      "pages": "p.103-107",
+      "sections_ref": ["evading", "outmanoeuvring", "leaping_attacks"]
+    },
+    {
+      "stage": 12,
+      "title": "Putting It All Together",
+      "summary": "Full combat flow, underlings/rabble, heroic last actions",
+      "pages": "p.112",
+      "sections_ref": ["underlings_rabble", "heroic_last_actions"]
+    }
+  ]
+}

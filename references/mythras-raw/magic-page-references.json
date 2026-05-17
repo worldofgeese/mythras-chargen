@@ -1,0 +1,180 @@
+{
+  "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+  "extracted_at": "2026-05-17",
+  "verified": false,
+  "chapters": {
+    "magic_overview": {
+      "title": "Magic (General Rules & Folk Magic)",
+      "page_range": "p.113-130",
+      "sections": {
+        "magic_overview": { "page": 113, "title": "Magic — Tailoring Magic, Magical Disciplines" },
+        "magical_traditions": { "page": 114, "title": "Magical Traditions (Cults, Guilds, etc.)" },
+        "how_many_abilities": { "page": 115, "title": "How Many Abilities?" },
+        "casting_time": { "page": 116, "title": "Casting Time" },
+        "magic_points": { "page": 117, "title": "Magic Points" },
+        "spell_traits": { "page": 118, "title": "Spell Traits" },
+        "magnitude_intensity": { "page": 121, "title": "Magnitude and Intensity" },
+        "stacking_magic": { "page": 121, "title": "Stacking Magic" },
+        "folk_magic_access": { "page": 122, "title": "Access to Folk Magic / Starting Folk Magic" },
+        "folk_magic_spells": { "page": 124, "title": "Folk Magic Spell Descriptions", "end_page": 130 }
+      }
+    },
+    "animism": {
+      "title": "Animism",
+      "page_range": "p.131-154",
+      "sections": {
+        "overview": { "page": 131, "title": "What Are Spirits? / What is the Spirit World?" },
+        "spirit_characteristics": { "page": 132, "title": "Spirit Characteristics" },
+        "spirit_combat": { "page": 134, "title": "Spirit Combat" },
+        "shamans": { "page": 136, "title": "Shamans" },
+        "spirit_traditions": { "page": 138, "title": "Spirit Traditions" },
+        "spirit_worshipper": { "page": 139, "title": "Spirit Worshipper (rank)" },
+        "shaman_rank": { "page": 140, "title": "Shaman (rank)" },
+        "high_shaman": { "page": 141, "title": "High Shaman (rank)" },
+        "fetishes": { "page": 142, "title": "Fetishes & Binding" },
+        "spirit_abilities": { "page": 144, "title": "Spirit Abilities", "end_page": 148 },
+        "spirit_types": { "page": 149, "title": "Spirit Types (Ancestor, Elemental, Nature, etc.)", "end_page": 154 }
+      }
+    },
+    "mysticism": {
+      "title": "Mysticism",
+      "page_range": "p.155-161",
+      "sections": {
+        "overview": { "page": 155, "title": "Seeking the Truth Within" },
+        "paths_talents": { "page": 156, "title": "Paths and Talents / Starting Mystics" },
+        "using_mysticism": { "page": 157, "title": "Using Mysticism / Implementation" },
+        "magnitude_intensity": { "page": 157, "title": "Magnitude and Intensity" },
+        "talent_descriptions": { "page": 158, "title": "Talent Descriptions", "end_page": 161 }
+      }
+    },
+    "sorcery": {
+      "title": "Sorcery",
+      "page_range": "p.162-178",
+      "sections": {
+        "overview": { "page": 162, "title": "Manipulating Reality" },
+        "shaping": { "page": 163, "title": "Shaping (Duration, Range, Targets, etc.)" },
+        "schools_spells": { "page": 164, "title": "Sources of Knowledge / Schools and Spells" },
+        "starting_sorcerers": { "page": 164, "title": "Starting Sorcerers" },
+        "using_sorcery": { "page": 165, "title": "Using Sorcery / Invoking a Spell" },
+        "invocation_costs": { "page": 166, "title": "Invocation Costs & Time" },
+        "spell_descriptions": { "page": 166, "title": "Spell Descriptions", "end_page": 178 }
+      }
+    },
+    "theism": {
+      "title": "Theism",
+      "page_range": "p.179-196",
+      "sections": {
+        "overview": { "page": 179, "title": "Calling on the Gods" },
+        "cults_miracles": { "page": 180, "title": "Cults and Miracles / Starting Theists" },
+        "using_theism": { "page": 181, "title": "Using Theism" },
+        "devotional_pools": { "page": 181, "title": "Devotional Pools" },
+        "donating_magic_points": { "page": 181, "title": "Donating Magic Points" },
+        "miracle_descriptions": { "page": 183, "title": "Miracle Descriptions", "end_page": 196 }
+      }
+    }
+  },
+  "aig_references": {
+    "source": "Adventures in Glorantha (GenCon Preview, 2016)",
+    "folk_magic": { "page_range": "p.63-68", "title": "Progressive Folk Magic (45 Glorantha-specific spells)" },
+    "rune_magic": { "page_range": "p.69-122", "title": "Rune Magic (367 spells, Rune Affinity casting)" },
+    "spirit_magic": { "page_range": "p.134-151", "title": "Spirit Magic (4 traditions, 33 spirits)" },
+    "magic_overview": { "page_range": "p.59-62", "title": "Magic Systems Overview (6 systems, general rules)" }
+  },
+  "progressive_stages": [
+    {
+      "stage": 1,
+      "title": "Magic Points & Casting Basics",
+      "summary": "How magic points work, casting time, spell traits",
+      "sources": [
+        { "book": "Mythras Core", "pages": "p.116-121" },
+        { "book": "AiG", "pages": "p.59-62" }
+      ]
+    },
+    {
+      "stage": 2,
+      "title": "Folk Magic",
+      "summary": "The universal magic system — 1 MP, 1 Turn, simple effects",
+      "sources": [
+        { "book": "Mythras Core", "pages": "p.122-130" },
+        { "book": "AiG", "pages": "p.63-68" }
+      ]
+    },
+    {
+      "stage": 3,
+      "title": "Rune Affinities",
+      "summary": "How Rune Affinities replace individual casting skills in AiG",
+      "sources": [
+        { "book": "AiG", "pages": "p.59-60" },
+        { "book": "Hannu house rules", "pages": "docs/adr/002-rune-affinity-casting-model.md" }
+      ]
+    },
+    {
+      "stage": 4,
+      "title": "Theism / Rune Magic",
+      "summary": "Devotional Pool, miracles, exhorting gods via Rune Affinity",
+      "sources": [
+        { "book": "Mythras Core", "pages": "p.179-196" },
+        { "book": "AiG", "pages": "p.69-122" }
+      ]
+    },
+    {
+      "stage": 5,
+      "title": "Animism / Spirit Magic",
+      "summary": "Spirit World, binding spirits, fetishes, Spirit Rune affinity",
+      "sources": [
+        { "book": "Mythras Core", "pages": "p.131-154" },
+        { "book": "AiG", "pages": "p.134-151" }
+      ]
+    },
+    {
+      "stage": 6,
+      "title": "Spirit Combat",
+      "summary": "How spirit combat works, discorporation, spirit abilities",
+      "sources": [
+        { "book": "Mythras Core", "pages": "p.134-136" }
+      ]
+    },
+    {
+      "stage": 7,
+      "title": "Sorcery",
+      "summary": "Invocation, Shaping (4 principles), spell manipulation",
+      "sources": [
+        { "book": "Mythras Core", "pages": "p.162-178" }
+      ]
+    },
+    {
+      "stage": 8,
+      "title": "Mysticism",
+      "summary": "Meditation, Paths, Talents, concentration-based casting",
+      "sources": [
+        { "book": "Mythras Core", "pages": "p.155-161" }
+      ]
+    },
+    {
+      "stage": 9,
+      "title": "Combining Magic Systems",
+      "summary": "How hybrid cults work, stacking magic, cross-system interactions",
+      "sources": [
+        { "book": "Mythras Core", "pages": "p.121" },
+        { "book": "AiG", "pages": "p.59-62" }
+      ]
+    },
+    {
+      "stage": 10,
+      "title": "Enchantments & Permanent Magic",
+      "summary": "Creating magical items, permanent effects",
+      "sources": [
+        { "book": "Mythras Core", "pages": "p.121" }
+      ]
+    },
+    {
+      "stage": 11,
+      "title": "Magic in Combat",
+      "summary": "Cast Magic action, Hold Magic, Counter Spell, Spoil Spell",
+      "sources": [
+        { "book": "Mythras Core", "pages": "p.92-93 (combat actions)" },
+        { "book": "AiG", "pages": "p.59-62 (general casting rules)" }
+      ]
+    }
+  ]
+}
