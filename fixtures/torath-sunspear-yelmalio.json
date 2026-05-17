@@ -88,14 +88,14 @@
     "Evade": 0,
     "Unarmed": 0,
     "Combat Style (Hunter Raider)": 0,
-    "Combat Style (any)": 0,
     "Lore (Yelmalio)": 0,
     "Survival": 15,
     "Perception": 15,
     "Willpower": 10,
     "Combat Style (Cultural Weapon)": 15,
     "First Aid": 10,
-    "Locale": 5
+    "Locale": 5,
+    "Combat Style (Tribal)": 0
   },
   "careerFolkMagic": [
     "Protection",
@@ -135,7 +135,7 @@
   ],
   "devotionalPool": 5,
   "selectedProfessionalSkills": [
-    "Combat Style (any)",
+    "Combat Style (Tribal)",
     "Lore (Yelmalio)",
     "Survival"
   ]

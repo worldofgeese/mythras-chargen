@@ -88,14 +88,14 @@
     "Evade": 0,
     "Unarmed": 0,
     "Combat Style (Agimori)": 0,
-    "Combat Style (any)": 0,
     "Lore (Chaos)": 0,
     "Survival": 15,
     "Perception": 10,
     "Willpower": 15,
     "Ride": 10,
     "First Aid": 10,
-    "Locale": 10
+    "Locale": 10,
+    "Combat Style (Tribal)": 0
   },
   "careerFolkMagic": [
     "Disruption",
@@ -135,7 +135,7 @@
   ],
   "devotionalPool": 5,
   "selectedProfessionalSkills": [
-    "Combat Style (any)",
+    "Combat Style (Tribal)",
     "Lore (Chaos)",
     "Survival"
   ]

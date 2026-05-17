@@ -3,7 +3,7 @@
 **Source:** `docs/brainstorms/full-magic-system-coverage-requirements.md`  
 **ADR:** `docs/adr/ADR-0006-full-magic-system-coverage.md`  
 **Created:** 2026-05-16  
-**Status:** Draft
+**Status:** Complete
 
 ---
 
@@ -161,7 +161,7 @@ if (cultType.types.includes('animist')) {
 - [x] Daka Fal → shows "Bound Spirit Slots: [CHA/2]" on character sheet
 - [x] Waha (hybrid) → shows BOTH Devotional Pool AND Bound Spirit Slots
 - [x] Spirit slots correctly calculated from CHA
-- [ ] Character sheet PDF includes spirit slot information (Phase 7)
+- [x] Character sheet PDF includes spirit slot information (Phase 7)
 
 ### Files Modified
 - `index.html` (add animist resource calculation + UI)
@@ -202,7 +202,7 @@ if (cultType.types.includes('sorcery')) {
 - [x] Arkat → shows "Resource: Magic Points" and sorcery casting info
 - [x] Arkat → does NOT show Devotional Pool
 - [x] Sorcery spells listed from Arkat's one-pager data (uses existing miracle picker pattern)
-- [ ] Character sheet PDF includes sorcery information (Phase 7)
+- [x] Character sheet PDF includes sorcery information (Phase 7)
 
 ### Files Modified
 - `index.html` (add sorcery resource calculation + UI)
@@ -234,10 +234,10 @@ if (cultType.types.includes('sorcery')) {
 Per Hannu: "You could do either way" — treat as GM-configurable. The chargen shows both paths; the player picks which to emphasize.
 
 ### Success Criteria
-- [ ] Waha → shows both Devotional Pool AND spirit slots
-- [ ] Storm Bull → shows both systems
-- [ ] UI clearly labels which path each resource belongs to
-- [ ] Existing miracle selection still works for hybrid cults' theist path
+- [x] Waha → shows both Devotional Pool AND spirit slots
+- [x] Storm Bull → shows both systems
+- [x] UI clearly labels which path each resource belongs to
+- [x] Existing miracle selection still works for hybrid cults' theist path
 
 ### Files Modified
 - `index.html` (modify magic section rendering for hybrids)
@@ -276,10 +276,10 @@ Per Hannu: "You could do either way" — treat as GM-configurable. The chargen s
 - Mysticism: Path + Meditation info
 
 ### Success Criteria
-- [ ] PDF for Daka Fal character shows animist info, not theist
-- [ ] PDF for Arkat character shows sorcery info
-- [ ] PDF for Waha character shows both systems
-- [ ] Existing theist PDF output unchanged
+- [x] PDF for Daka Fal character shows animist info, not theist
+- [x] PDF for Arkat character shows sorcery info
+- [x] PDF for Waha character shows both systems
+- [x] Existing theist PDF output unchanged
 
 ### Files Modified
 - `index.html` (PDF generation section)
@@ -297,12 +297,12 @@ Per Hannu: "You could do either way" — treat as GM-configurable. The chargen s
 - Verify acceptance examples AE1-AE4 from requirements doc
 
 ### Success Criteria
-- [ ] All existing tests pass
-- [ ] AE1: Orlanth → Devotional Pool + Rune Affinity casting ✓
-- [ ] AE2: Daka Fal → Bound Spirit Slots + Spirit Rune casting ✓
-- [ ] AE3: Arkat → Magic Points + Rune Affinity + Law Rune ✓
-- [ ] AE4: Waha → Both Devotional Pool + Spirit Slots ✓
-- [ ] No cult incorrectly displays a Devotional Pool when it lacks Devotion
+- [x] All existing tests pass
+- [x] AE1: Orlanth → Devotional Pool + Rune Affinity casting ✓
+- [x] AE2: Daka Fal → Bound Spirit Slots + Spirit Rune casting ✓
+- [x] AE3: Arkat → Magic Points + Rune Affinity + Law Rune ✓
+- [x] AE4: Waha → Both Devotional Pool + Spirit Slots ✓
+- [x] No cult incorrectly displays a Devotional Pool when it lacks Devotion
 
 ---
 

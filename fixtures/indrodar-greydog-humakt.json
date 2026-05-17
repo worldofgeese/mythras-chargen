@@ -89,14 +89,14 @@
     "Unarmed": 0,
     "Combat Style (Hill Clan Levy)": 0,
     "Combat Style (Loyal Housecarl)": 0,
-    "Combat Style (any)": 0,
     "Lore (Humakt)": 0,
     "Survival": 0,
     "Perception": 15,
     "Willpower": 15,
     "Combat Style (Cultural Weapon)": 15,
     "First Aid": 10,
-    "Locale": 5
+    "Locale": 5,
+    "Combat Style (Tribal)": 0
   },
   "careerFolkMagic": [
     "Demoralise",
@@ -136,7 +136,7 @@
   ],
   "devotionalPool": 4,
   "selectedProfessionalSkills": [
-    "Combat Style (any)",
+    "Combat Style (Tribal)",
     "Lore (Humakt)",
     "Survival"
   ]

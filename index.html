@@ -547,6 +547,46 @@ button.primary:hover { background: #333; }
 .toast.success { background: #155724; }
 .toast.error { background: #721c24; }
 
+/* Magic system panels */
+.magic-panel {
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
+}
+.magic-panel h3 { margin: 0 0 8px; font-size: 14px; }
+.magic-panel p { font-size: 0.9em; margin: 4px 0; }
+.magic-panel--animist { background: #e8f5e9; border-color: #4caf50; }
+.magic-panel--sorcery { background: #e3f2fd; border-color: #2196f3; }
+.magic-panel--mysticism { background: #f3e5f5; border-color: #9c27b0; }
+.magic-panel--notice { background: #e8f5e9; border-color: #4caf50; padding: 10px; font-size: 13px; }
+
+.spell-picker {
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  padding: 12px;
+  margin-top: 8px;
+  border-radius: 4px;
+}
+.spell-picker h4 { margin: 0 0 8px; font-size: 13px; }
+.spell-picker .spell-picker__hint { font-size: 0.8em; color: #666; margin: 0 0 8px; }
+.spell-picker .spell-picker__source { font-size: 0.75em; color: #888; margin: 8px 0 0; }
+.spell-picker__list {
+  max-height: 240px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+.spell-picker__list label {
+  display: block;
+  margin: 3px 0;
+  font-size: 0.9em;
+}
+.spell-picker__list .spirit-ability {
+  font-size: 0.8em;
+  color: #555;
+}
+
 </style>
 </head>
 <body>
@@ -832,7 +872,6 @@ const CULTS_DATA = [{"name":"Ana Gor","pantheon":"Storm","cultSkills":["Prepare 
 // Source: docs/adr/ADR-0006-full-magic-system-coverage.md
 function detectCultType(cult) {
   const skills = (cult && cult.cultSkills) || [];
-  const skillsJoined = skills.join('|').toLowerCase();
 
   const hasDevotionLike = skills.some(s => /^Devotion/i.test(s));
   const hasTranceLike = skills.some(s => /^Trance/i.test(s) || /^Binding/i.test(s));
@@ -13168,41 +13207,58 @@ const FOLK_MAGIC_DESCRIPTIONS = {
 };
 
 // Sorcery spells from Mythras Core p.167-178 (34 spells)
+// Format: [name, resist] — resist is empty string if none
 const SORCERY_SPELLS = [
-  {name: "Abjure (Substance/Process)", resist: "Special", page: "p.167"},
-  {name: "Animate (Substance)", resist: "", page: "p.167-168"},
-  {name: "Attract (Threat)", resist: "Willpower", page: "p.168"},
-  {name: "Castback", resist: "", page: "p.168"},
-  {name: "Damage Enhancement", resist: "", page: "p.168"},
-  {name: "Damage Resistance", resist: "", page: "p.168-169"},
-  {name: "Diminish (Characteristic)", resist: "Willpower/Endurance", page: "p.169"},
-  {name: "Dominate (Species)", resist: "Willpower", page: "p.169"},
-  {name: "Enchant (Object)", resist: "Willpower", page: "p.170"},
-  {name: "Enhance (Characteristic)", resist: "Willpower/Endurance", page: "p.170"},
-  {name: "Enslave (Creatures)", resist: "Willpower", page: "p.170"},
-  {name: "Fly", resist: "", page: "p.171"},
-  {name: "Haste", resist: "", page: "p.171"},
-  {name: "Holdfast", resist: "", page: "p.171"},
-  {name: "Intuition", resist: "", page: "p.171-172"},
-  {name: "Mystic (Sense)", resist: "", page: "p.172"},
-  {name: "Neutralize Magic", resist: "", page: "p.172"},
-  {name: "Palsy", resist: "Endurance", page: "p.172-173"},
-  {name: "Phantom (Sense)", resist: "", page: "p.173"},
-  {name: "Portal", resist: "", page: "p.173"},
-  {name: "Project (Sense)", resist: "", page: "p.174"},
-  {name: "Regenerate", resist: "", page: "p.174"},
-  {name: "Repulse (Substance)", resist: "", page: "p.174-175"},
-  {name: "Sculpt (Substance)", resist: "", page: "p.175"},
-  {name: "Shapechange (Species to Species)", resist: "Willpower", page: "p.175"},
-  {name: "Smother", resist: "Endurance", page: "p.175-176"},
-  {name: "Spirit Resistance", resist: "", page: "p.176"},
-  {name: "Store Manna", resist: "", page: "p.176"},
-  {name: "Summon (Entity)", resist: "Evade", page: "p.176-177"},
-  {name: "Tap (Characteristic)", resist: "Special", page: "p.177"},
-  {name: "Teleport", resist: "", page: "p.177"},
-  {name: "Transmogrify (to Substance)", resist: "Endurance", page: "p.177-178"},
-  {name: "Undeath", resist: "Endurance", page: "p.178"},
-  {name: "Wrack (Species)", resist: "Endurance", page: "p.178"}
+  ["Abjure (Substance/Process)", "Special"],
+  ["Animate (Substance)", ""],
+  ["Attract (Threat)", "Willpower"],
+  ["Castback", ""],
+  ["Damage Enhancement", ""],
+  ["Damage Resistance", ""],
+  ["Diminish (Characteristic)", "Willpower/Endurance"],
+  ["Dominate (Species)", "Willpower"],
+  ["Enchant (Object)", "Willpower"],
+  ["Enhance (Characteristic)", "Willpower/Endurance"],
+  ["Enslave (Creatures)", "Willpower"],
+  ["Fly", ""],
+  ["Haste", ""],
+  ["Holdfast", ""],
+  ["Intuition", ""],
+  ["Mystic (Sense)", ""],
+  ["Neutralize Magic", ""],
+  ["Palsy", "Endurance"],
+  ["Phantom (Sense)", ""],
+  ["Portal", ""],
+  ["Project (Sense)", ""],
+  ["Regenerate", ""],
+  ["Repulse (Substance)", ""],
+  ["Sculpt (Substance)", ""],
+  ["Shapechange (Species to Species)", "Willpower"],
+  ["Smother", "Endurance"],
+  ["Spirit Resistance", ""],
+  ["Store Manna", ""],
+  ["Summon (Entity)", "Evade"],
+  ["Tap (Characteristic)", "Special"],
+  ["Teleport", ""],
+  ["Transmogrify (to Substance)", "Endurance"],
+  ["Undeath", "Endurance"],
+  ["Wrack (Species)", "Endurance"]
+];
+
+// Starting spirits for animist characters
+const STARTING_SPIRITS = [
+  {name: 'Healing Spirit (Int 1)', type: 'Nature', ability: 'Heal 1d3 HP to one location'},
+  {name: 'Healing Spirit (Int 2)', type: 'Nature', ability: 'Heal 1d6 HP to one location'},
+  {name: 'Protection Spirit (Int 1)', type: 'Nature', ability: '+1 AP to all locations'},
+  {name: 'Protection Spirit (Int 2)', type: 'Nature', ability: '+2 AP to all locations'},
+  {name: 'Strength Spirit (Int 1)', type: 'Nature', ability: '+1d2 to STR for POW minutes'},
+  {name: 'Magic Spirit (Int 1)', type: 'Nature', ability: 'Stores 3 extra Magic Points'},
+  {name: 'Magic Spirit (Int 2)', type: 'Nature', ability: 'Stores 6 extra Magic Points'},
+  {name: 'Ancestor Spirit (Int 1)', type: 'Ancestor', ability: 'Augment one skill by +20% once per day'},
+  {name: 'Ancestor Spirit (Int 2)', type: 'Ancestor', ability: 'Augment one skill by +30% once per day'},
+  {name: 'Ward Spirit (Int 1)', type: 'Guardian', ability: 'Alerts to spirit intrusion within 10m'},
+  {name: 'Fire Spirit (Int 1)', type: 'Elemental', ability: 'Ignite/extinguish small fires'},
+  {name: 'Air Spirit (Int 1)', type: 'Elemental', ability: 'Create gusts, clear air'}
 ];
 
 const CULTURE_BUILDS = {
@@ -15441,14 +15497,21 @@ App.disambiguateAndUpdateFreeText = function(category, originalSkillName, inputV
   this.renderCurrentStep();
 };
 
+// Generic toggle helper: add/remove item from a list with a max cap.
+// Returns false if at cap (caller can show toast). Handles checkbox-style (checked param) or toggle-style.
+App._toggleInList = function(list, item, max) {
+  const idx = list.indexOf(item);
+  if (idx > -1) { list.splice(idx, 1); return true; }
+  if (list.length >= max) return false;
+  list.push(item);
+  return true;
+};
+
 App.toggleFolkMagicSpell = function(spell, checked, maxCount) {
   if (checked) {
-    if (!CharacterData.folkMagicSpells.includes(spell)) {
-      if (CharacterData.folkMagicSpells.length >= maxCount) {
-        this.showToast(`You can only select ${maxCount} spells at this step`, 'error');
-        return;
-      }
-      CharacterData.folkMagicSpells.push(spell);
+    if (!this._toggleInList(CharacterData.folkMagicSpells, spell, maxCount)) {
+      this.showToast(`You can only select ${maxCount} spells at this step`, 'error');
+      return;
     }
   } else {
     const idx = CharacterData.folkMagicSpells.indexOf(spell);
@@ -15459,18 +15522,10 @@ App.toggleFolkMagicSpell = function(spell, checked, maxCount) {
 
 App.toggleSorcerySpell = function(spellName) {
   if (!CharacterData.sorcerySpells) CharacterData.sorcerySpells = [];
-  const idx = CharacterData.sorcerySpells.indexOf(spellName);
-  const intStat = CharacterData.characteristics.INT || 10;
-  const maxSpells = Math.ceil(intStat / 4);
-
-  if (idx > -1) {
-    CharacterData.sorcerySpells.splice(idx, 1);
-  } else {
-    if (CharacterData.sorcerySpells.length >= maxSpells) {
-      this.showToast(`Maximum ${maxSpells} sorcery spells (INT/4)`, 'error');
-      return;
-    }
-    CharacterData.sorcerySpells.push(spellName);
+  const maxSpells = Math.ceil((CharacterData.characteristics.INT || 10) / 4);
+  if (!this._toggleInList(CharacterData.sorcerySpells, spellName, maxSpells)) {
+    this.showToast(`Maximum ${maxSpells} sorcery spells (INT/4)`, 'error');
+    return;
   }
   this.saveToLocalStorage();
   this.renderCurrentStep();
@@ -15497,12 +15552,9 @@ App.toggleBoundSpirit = function(spiritName) {
 
 App.toggleCareerFolkMagicSpell = function(spell, checked) {
   if (checked) {
-    if (!CharacterData.careerFolkMagic.includes(spell)) {
-      if (CharacterData.careerFolkMagic.length >= 2) {
-        this.showToast('You can only select 2 additional spells at this step', 'error');
-        return;
-      }
-      CharacterData.careerFolkMagic.push(spell);
+    if (!this._toggleInList(CharacterData.careerFolkMagic, spell, 2)) {
+      this.showToast('You can only select 2 additional spells at this step', 'error');
+      return;
     }
   } else {
     const idx = CharacterData.careerFolkMagic.indexOf(spell);
@@ -16021,7 +16073,7 @@ App.renderStep9 = function() {
     if (noticeEl) {
       const cultPassion = CharacterData.passions.find(p => p.name && p.name.includes(CharacterData.cult));
       if (cultPassion) {
-        noticeEl.innerHTML = `<div style="background: #e8f5e9; border: 1px solid #4caf50; padding: 10px; border-radius: 4px; font-size: 13px;">
+        noticeEl.innerHTML = `<div class="magic-panel magic-panel--notice">
           <strong>Cult Passion Added:</strong> ${cultPassion.name}: ${cultPassion.value}% has been added to your passions (visible in Step 6).
         </div>`;
       }
@@ -16041,97 +16093,72 @@ App.renderStep9 = function() {
       // Show animist info + spirit picker for animist cults
       if (cultType.types.includes('animist')) {
         const spiritSlots = CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2);
-        const maxStarting = Math.min(3, spiritSlots); // Start with up to 3 spirits
+        const maxStarting = Math.min(3, spiritSlots);
         if (!CharacterData.boundSpirits) CharacterData.boundSpirits = [];
         const selectedCount = CharacterData.boundSpirits.length;
 
-        // Spirit types available for starting characters
-        const STARTING_SPIRITS = [
-          {name: 'Healing Spirit (Int 1)', type: 'Nature', intensity: 1, ability: 'Heal 1d3 HP to one location'},
-          {name: 'Healing Spirit (Int 2)', type: 'Nature', intensity: 2, ability: 'Heal 1d6 HP to one location'},
-          {name: 'Protection Spirit (Int 1)', type: 'Nature', intensity: 1, ability: '+1 AP to all locations'},
-          {name: 'Protection Spirit (Int 2)', type: 'Nature', intensity: 2, ability: '+2 AP to all locations'},
-          {name: 'Strength Spirit (Int 1)', type: 'Nature', intensity: 1, ability: '+1d2 to STR for POW minutes'},
-          {name: 'Magic Spirit (Int 1)', type: 'Nature', intensity: 1, ability: 'Stores 3 extra Magic Points'},
-          {name: 'Magic Spirit (Int 2)', type: 'Nature', intensity: 2, ability: 'Stores 6 extra Magic Points'},
-          {name: 'Ancestor Spirit (Int 1)', type: 'Ancestor', intensity: 1, ability: 'Augment one skill by +20% once per day'},
-          {name: 'Ancestor Spirit (Int 2)', type: 'Ancestor', intensity: 2, ability: 'Augment one skill by +30% once per day'},
-          {name: 'Ward Spirit (Int 1)', type: 'Guardian', intensity: 1, ability: 'Alerts to spirit intrusion within 10m'},
-          {name: 'Fire Spirit (Int 1)', type: 'Elemental', intensity: 1, ability: 'Ignite/extinguish small fires'},
-          {name: 'Air Spirit (Int 1)', type: 'Elemental', intensity: 1, ability: 'Create gusts, clear air'}
-        ];
-
-        let spiritListHTML = STARTING_SPIRITS.map(spirit => {
+        const spiritListHTML = STARTING_SPIRITS.map(spirit => {
           const checked = CharacterData.boundSpirits.some(s => s.name === spirit.name);
-          return `<label style="display:block;margin:4px 0;font-size:0.9em;"><input type="checkbox" ${checked ? 'checked' : ''} onchange="App.toggleBoundSpirit('${spirit.name.replace(/'/g, "\\'")}')"> <strong>${spirit.name}</strong> <span style="font-size:0.8em;color:#555;">[${spirit.type}] ${spirit.ability}</span></label>`;
+          return `<label><input type="checkbox" ${checked ? 'checked' : ''} onchange="App.toggleBoundSpirit('${spirit.name.replace(/'/g, "\\'")}')"> <strong>${spirit.name}</strong> <span class="spirit-ability">[${spirit.type}] ${spirit.ability}</span></label>`;
         }).join('');
 
-        const animistHTML = `
-          <div style="background: #e8f5e9; border: 1px solid #4caf50; padding: 12px; margin-top: 12px; border-radius: 4px;">
-            <h3 style="margin: 0 0 8px 0; font-size: 14px;">Spirit Magic (Animist${cultType.isHybrid ? ' \u2014 Shaman Path' : ''})</h3>
-            <p style="font-size: 0.9em; margin: 4px 0;"><strong>Bound Spirit Slots:</strong> ${spiritSlots} (CHA/2 for Spirit Worshipper rank)</p>
-            <p style="font-size: 0.9em; margin: 4px 0;"><strong>Casting Skill:</strong> Spirit Rune affinity (replaces Binding per AiG/Hannu)</p>
+        pickerEl.insertAdjacentHTML('beforeend', `
+          <div class="magic-panel magic-panel--animist">
+            <h3>Spirit Magic (Animist${cultType.isHybrid ? ' \u2014 Shaman Path' : ''})</h3>
+            <p><strong>Bound Spirit Slots:</strong> ${spiritSlots} (CHA/2 for Spirit Worshipper rank)</p>
+            <p><strong>Casting Skill:</strong> Spirit Rune affinity (replaces Binding per AiG/Hannu)</p>
           </div>
-          <div style="background: #f5f5f5; border: 1px solid #ddd; padding: 12px; margin-top: 8px; border-radius: 4px;">
-            <h4 style="margin: 0 0 8px 0; font-size: 13px;">Starting Bound Spirits <span style="font-weight:normal;">(${selectedCount} / ${maxStarting})</span></h4>
-            <p style="font-size: 0.8em; color: #666; margin: 0 0 8px 0;">Select up to ${maxStarting} starting spirits (intensity 1-2). Consult GM for cult-specific options.</p>
-            <div style="max-height: 240px; overflow-y: auto; padding-right: 8px;">
-              ${spiritListHTML}
-            </div>
-            <p style="font-size: 0.75em; color: #888; margin: 8px 0 0 0;">Source: Monster Island spirit template, Mythras Core p.131-154, Bird in the Hand</p>
+          <div class="spell-picker">
+            <h4>Starting Bound Spirits <span style="font-weight:normal">(${selectedCount} / ${maxStarting})</span></h4>
+            <p class="spell-picker__hint">Select up to ${maxStarting} starting spirits (intensity 1-2). Consult GM for cult-specific options.</p>
+            <div class="spell-picker__list">${spiritListHTML}</div>
+            <p class="spell-picker__source">Source: Monster Island spirit template, Mythras Core p.131-154, Bird in the Hand</p>
           </div>
-        `;
-        pickerEl.insertAdjacentHTML('beforeend', animistHTML);
+        `);
         pickerEl.style.display = 'block';
       }
 
       // Show sorcery info + spell picker for sorcery cults
       if (cultType.types.includes('sorcery')) {
         const magicPoints = CharacterData.sorceryResource || CharacterData.characteristics.POW || 0;
-        const intStat = CharacterData.characteristics.INT || 10;
-        const maxSpells = Math.ceil(intStat / 4); // Starting sorcerers know INT/4 spells (rounded up)
+        const maxSpells = Math.ceil((CharacterData.characteristics.INT || 10) / 4);
         if (!CharacterData.sorcerySpells) CharacterData.sorcerySpells = [];
         const selectedCount = CharacterData.sorcerySpells.length;
-        const remaining = maxSpells - selectedCount;
 
-        let spellListHTML = SORCERY_SPELLS.map(spell => {
-          const checked = CharacterData.sorcerySpells.includes(spell.name);
-          const resistTag = spell.resist ? ` <span style="font-size:0.75em;color:#666;">[Resist: ${spell.resist}]</span>` : '';
-          return `<label style="display:block;margin:3px 0;font-size:0.9em;"><input type="checkbox" ${checked ? 'checked' : ''} onchange="App.toggleSorcerySpell('${spell.name.replace(/'/g, "\\'")}')"> ${spell.name}${resistTag}</label>`;
+        const spellListHTML = SORCERY_SPELLS.map(([name, resist]) => {
+          const checked = CharacterData.sorcerySpells.includes(name);
+          const resistTag = resist ? ` <span class="spirit-ability">[Resist: ${resist}]</span>` : '';
+          return `<label><input type="checkbox" ${checked ? 'checked' : ''} onchange="App.toggleSorcerySpell('${name.replace(/'/g, "\\'")}')"> ${name}${resistTag}</label>`;
         }).join('');
 
-        const sorceryHTML = `
-          <div style="background: #e3f2fd; border: 1px solid #2196f3; padding: 12px; margin-top: 12px; border-radius: 4px;">
-            <h3 style="margin: 0 0 8px 0; font-size: 14px;">Sorcery${cultType.isHybrid ? ' \u2014 Sorcerer Path' : ''}</h3>
-            <p style="font-size: 0.9em; margin: 4px 0;"><strong>Resource:</strong> Magic Points (${magicPoints})</p>
-            <p style="font-size: 0.9em; margin: 4px 0;"><strong>Casting:</strong> Rune Affinity of spell (replaces Invocation)</p>
-            <p style="font-size: 0.9em; margin: 4px 0;"><strong>Shaping:</strong> Law Rune affinity (replaces Shaping skill)</p>
-            <p style="font-size: 0.9em; margin: 4px 0;"><strong>Intensity:</strong> Rune Affinity / 10 | <strong>Shaping Points:</strong> Law Rune / 10</p>
-            <p style="font-size: 0.8em; color: #666; margin: 4px 0 0 0;">Source: Mythras Core p.162-178, AiG p.60</p>
+        pickerEl.insertAdjacentHTML('beforeend', `
+          <div class="magic-panel magic-panel--sorcery">
+            <h3>Sorcery${cultType.isHybrid ? ' \u2014 Sorcerer Path' : ''}</h3>
+            <p><strong>Resource:</strong> Magic Points (${magicPoints})</p>
+            <p><strong>Casting:</strong> Rune Affinity of spell (replaces Invocation)</p>
+            <p><strong>Shaping:</strong> Law Rune affinity (replaces Shaping skill)</p>
+            <p><strong>Intensity:</strong> Rune Affinity / 10 | <strong>Shaping Points:</strong> Law Rune / 10</p>
+            <p class="spell-picker__source">Source: Mythras Core p.162-178, AiG p.60</p>
           </div>
-          <div style="background: #f5f5f5; border: 1px solid #ddd; padding: 12px; margin-top: 8px; border-radius: 4px;">
-            <h4 style="margin: 0 0 8px 0; font-size: 13px;">Starting Spells <span style="font-weight:normal;">(${selectedCount} / ${maxSpells} — INT/4)</span></h4>
-            <div style="max-height: 240px; overflow-y: auto; padding-right: 8px;">
-              ${spellListHTML}
-            </div>
-            <p style="font-size: 0.8em; color: #666; margin: 8px 0 0 0;">Select up to ${maxSpells} spells from your school's grimoire. Spells with (Substance/Species) require specialization at the table.</p>
+          <div class="spell-picker">
+            <h4>Starting Spells <span style="font-weight:normal">(${selectedCount} / ${maxSpells} \u2014 INT/4)</span></h4>
+            <div class="spell-picker__list">${spellListHTML}</div>
+            <p class="spell-picker__hint">Select up to ${maxSpells} spells from your school's grimoire. Spells with (Substance/Species) require specialization at the table.</p>
           </div>
-        `;
-        pickerEl.insertAdjacentHTML('beforeend', sorceryHTML);
+        `);
         pickerEl.style.display = 'block';
       }
 
       // Show mysticism stub
       if (cultType.types.includes('mysticism')) {
-        const mysticismHTML = `
-          <div style="background: #f3e5f5; border: 1px solid #9c27b0; padding: 12px; margin-top: 12px; border-radius: 4px;">
-            <h3 style="margin: 0 0 8px 0; font-size: 14px;">Mysticism</h3>
-            <p style="font-size: 0.9em; margin: 4px 0;"><strong>System:</strong> Meditation + Path talents (Mythras Core p.155-161)</p>
-            <p style="font-size: 0.9em; margin: 4px 0;"><strong>Resource:</strong> Concentration (no external resource consumed)</p>
-            <p style="font-size: 0.85em; color: #555; margin: 8px 0 0 0; font-style: italic;">Max active talent Intensity = Meditation skill / 10</p>
+        pickerEl.insertAdjacentHTML('beforeend', `
+          <div class="magic-panel magic-panel--mysticism">
+            <h3>Mysticism</h3>
+            <p><strong>System:</strong> Meditation + Path talents (Mythras Core p.155-161)</p>
+            <p><strong>Resource:</strong> Concentration (no external resource consumed)</p>
+            <p style="font-size:0.85em;color:#555;font-style:italic;margin-top:8px">Max active talent Intensity = Meditation skill / 10</p>
           </div>
-        `;
-        pickerEl.insertAdjacentHTML('beforeend', mysticismHTML);
+        `);
         pickerEl.style.display = 'block';
       }
     }
@@ -16292,6 +16319,8 @@ App.selectCult = function(cultName) {
     CharacterData.sorceryResource = 0;
     CharacterData.cultType = null;
     CharacterData.miracles = [];
+    CharacterData.boundSpirits = [];
+    CharacterData.sorcerySpells = [];
   }
 
   // Resolve cult-bound placeholder skills (ADR-005)

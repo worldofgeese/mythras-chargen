@@ -88,14 +88,14 @@
     "Evade": 0,
     "Unarmed": 0,
     "Combat Style (Agimori)": 0,
-    "Combat Style (any)": 0,
     "Lore (Waha)": 0,
     "Survival": 15,
     "Perception": 10,
     "Willpower": 10,
     "Ride": 15,
     "First Aid": 10,
-    "Locale": 10
+    "Locale": 10,
+    "Combat Style (Lance and Shield)": 0
   },
   "careerFolkMagic": [
     "Countermagic",
@@ -136,7 +136,7 @@
   ],
   "devotionalPool": 6,
   "selectedProfessionalSkills": [
-    "Combat Style (any)",
+    "Combat Style (Lance and Shield)",
     "Lore (Waha)",
     "Survival"
   ]
