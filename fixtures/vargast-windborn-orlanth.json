@@ -1,0 +1,143 @@
+{
+  "name": "Vargast Windborn",
+  "concept": "Orlanth warrior-thane seeking to prove himself in Dragon Pass",
+  "characteristics": {
+    "STR": 13,
+    "CON": 12,
+    "SIZ": 11,
+    "DEX": 10,
+    "INT": 12,
+    "POW": 10,
+    "CHA": 7
+  },
+  "charMethod": "point-buy",
+  "attributes": {
+    "actionPoints": 2,
+    "experienceModifier": 0,
+    "healingRate": 2,
+    "luckPoints": 2,
+    "magicPoints": 10,
+    "initiativeBonus": 11,
+    "damageModifier": "+0",
+    "hitPoints": {
+      "Head": 5,
+      "Chest": 7,
+      "Abdomen": 6,
+      "Right Arm": 4,
+      "Left Arm": 4,
+      "Right Leg": 5,
+      "Left Leg": 5
+    },
+    "encumbrance": {
+      "unencumbered": 26,
+      "burdened": 27,
+      "overloaded": 40,
+      "noMovement": 52
+    },
+    "runeAffinities": {
+      "primary": 50,
+      "secondary": 40,
+      "tertiary": 30
+    },
+    "folkMagicBase": 47,
+    "movementRate": 6
+  },
+  "culture": "Sartarite (Heortling)",
+  "homeland": "Sartar",
+  "culturalSkills": {
+    "Athletics": 15,
+    "Endurance": 15,
+    "First Aid": 10,
+    "Locale": 10,
+    "Perception": 15,
+    "Willpower": 15,
+    "Ride": 10,
+    "Combat Style (Cultural Weapon)": 10
+  },
+  "runeAffinities": {
+    "primary": "Air",
+    "secondary": "Movement",
+    "tertiary": "Mastery"
+  },
+  "folkMagicSpells": [
+    "Bladesharp",
+    "Heal",
+    "Mobility"
+  ],
+  "passions": [
+    {
+      "name": "Loyalty (Clan)",
+      "value": 60,
+      "custom": true
+    },
+    {
+      "name": "Love (Freedom)",
+      "value": 55,
+      "custom": true
+    }
+  ],
+  "age": 23,
+  "gender": "Male",
+  "family": "Thane household",
+  "backgroundEvents": "",
+  "career": "Warrior",
+  "careerSkills": {
+    "Athletics": 15,
+    "Brawn": 0,
+    "Endurance": 15,
+    "Evade": 15,
+    "Unarmed": 0,
+    "Combat Style (Hill Clan Levy)": 0,
+    "Combat Style (Loyal Housecarl)": 0,
+    "Combat Style (any)": 0,
+    "Lore (Strategy)": 0,
+    "Survival": 0,
+    "Perception": 10,
+    "Willpower": 10,
+    "Ride": 10,
+    "Combat Style (Cultural Weapon)": 15,
+    "First Aid": 10
+  },
+  "careerFolkMagic": [
+    "Demoralise",
+    "Protection"
+  ],
+  "bonusSkills": {
+    "Athletics": 15,
+    "Endurance": 15,
+    "Perception": 15,
+    "Willpower": 15,
+    "Ride": 15,
+    "Combat Style (Cultural Weapon)": 15,
+    "Evade": 15,
+    "First Aid": 15,
+    "Locale": 15,
+    "Lore (Strategy)": 15
+  },
+  "hobbySkillName": null,
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "startingMoney": 70,
+  "equipment": [],
+  "weapons": [],
+  "armor": [],
+  "combatStyles": [],
+  "notes": "",
+  "background": "",
+  "hitPoints": {},
+  "companions": [],
+  "cult": "Orlanth",
+  "miracles": [
+    "Extension",
+    "Find (Specific Thing)",
+    "Divination",
+    "Summon Sylph",
+    "Wind Warp"
+  ],
+  "devotionalPool": 5,
+  "selectedProfessionalSkills": [
+    "Combat Style (any)",
+    "Lore (Strategy)",
+    "Survival"
+  ]
+}

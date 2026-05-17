@@ -1,94 +1,107 @@
 {
   "name": "Waha",
   "pantheon": "Praxian",
-  "source": "CultOnePagers2019/Praxian/Waha.pdf",
-  "sourceVersion": "2019 edition v5.2",
-  "runes": [],
+  "runes": ["Death", "Man"],
+  "epithet": "The Butcher, Khan of the Praxian Gods",
+  "version": "6.0.1",
+  "versionDate": "2026-05-17",
+  "source": "Notes from Pavis - Glorantha One Pager",
+  "verified": true,
+  "verificationNote": "Verified against Waha.pdf provided by Hannu 2026-05-17",
   "requirements": {
-    "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity, Examiners need\nto be convinced at 3 of them.Must be a male tribal member. Must know one spell",
-    "runelord": "to have 3"
+    "initiate": "Cult is closed to women. Human initiates need Ride and a tribal weapon at 50%+, one spirit magic spell, and knowledge of all tribal herds. Must prove warrior abilities to tribal elders or at a seasonal festival.",
+    "runeLord": "Must be an initiate of noble descent from Waha. Or agree with GM to use RQG pp. 274-276."
   },
   "cultSkills": [
-    "to be convinced at 3 of them.Must be a male tribal member. Must know one spell\nRune levels  need to have 3 cult skills at 100% one of which needs to be Cult Runic Affinity",
-    "Must be of\nnoble blood.  Bold skills are mandatory\nCult Skills (Oath is taken at initiate)\nLocale",
-    "Lore (cult)",
+    "Combat Style (Tribal)",
+    "Craft (Butchery)",
+    "Dance",
+    "Devotion",
+    "Locale",
+    "Lore (Cult)",
     "Navigation",
     "Oratory",
-    "Survival",
-    "Track",
-    "Combat style (Tribal)",
-    "Dance(Shaman)",
-    "Perception(Shaman)",
+    "Peaceful Cut",
+    "Perception",
     "Ride",
-    "Sing(Shaman)",
-    "Binding(Shaman)",
-    "Craft (butchery)",
-    "Devotion",
-    "Runic\nAffinity",
-    "Trance(Shaman)"
+    "Runic Affinity",
+    "Sing",
+    "Survival",
+    "Tracking",
+    "Trance",
+    "Understand Herd Beast"
   ],
   "folkMagic": [
-    "Countermagic",
-    "Dispel Magic",
+    "Avert",
+    "Countermagic (n)",
     "Distraction",
     "Find Spirit",
     "Heal",
-    "Protection",
+    "Protection (n)",
     "Second Sight",
-    "Slow",
+    "Slow (n)",
     "Speedart",
-    "Spiritshield",
+    "Spiritshield (n)",
     "Vigour"
   ],
-  "miracles": [],
-  "personalityTraits": [
-    "Tribal",
-    "Social",
-    "Relentlesst Ruthlesst",
-    "Unemotionalt Ascetict"
-  ],
-  "enemyCults": [
-    "Bagog",
-    "Cacodemon",
-    "Crimson Bat",
-    "Nysalor",
-    "Krarsht",
-    "Mallia",
-    "Primal Chaos",
-    "Thanatar",
-    "Thed"
-  ],
-  "hostileCults": [
-    "Seven Mothers",
-    "Eurmal"
-  ],
-  "friendlyCults": [
-    "Chalana Arroy",
-    "Ernalda"
-  ],
-  "associatedCults": [
-    "Eiritha",
-    "Foundchild",
-    "Storm Bull"
-  ],
-  "areas": [
-    "Coastal Pamaltela",
-    "Dragon Pass",
-    "East",
-    "Fonrit",
-    "Holy Country",
-    "Lunar",
-    "Oceans",
-    "West"
-  ],
-  "holyDays": [
-    "Sea/Death/God",
-    "Fire/Death/God",
-    "Earth/Death/God",
-    "Earth/Fertility/God",
-    "Dark/Death/God\nStorm/Death/Wild"
-  ],
-  "spiritSocieties": [],
-  "runeAssociations": {},
-  "oppositeRune": "Life"
+  "folkMagicNote": "(n) = progressive spell",
+  "miracles": {
+    "initiate": [
+      "Find (Specific Thing)",
+      "Axis Mundi",
+      "Command Cult Spirit",
+      "Discorporation",
+      "Dismiss Gnome",
+      "Dismiss Magic",
+      "Divination",
+      "Multispell",
+      "Shield",
+      "Soul Sight",
+      "Spirit Block",
+      "Summon Cult Spirit",
+      "Summon Gnome",
+      "Warding"
+    ],
+    "initiateNote": "Return to holy place and sacrifice",
+    "associate": {
+      "Eiritha": ["Speak With Herd Beasts"],
+      "Oakfed": ["Cremate Dead"],
+      "Storm Bull": ["Impede Chaos (Eternal)"]
+    },
+    "associateNote": "One time use, Return to associate cult temple and resacrifice",
+    "runeLord": [
+      "Awaken",
+      "Chastise",
+      "Alter Creature (One use)",
+      "Excommunication",
+      "Extension",
+      "Find Enemy",
+      "Heal Wound",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit Of Law"
+    ],
+    "runeLordNote": "Return to holy place and sacrifice",
+    "highPriest": ["Summon Spirit Of Reprisal"],
+    "highPriestNote": "Return to holy place and sacrifice"
+  },
+  "pantheons": ["Storm", "Praxian"],
+  "personalityTraits": ["Relentless", "Ruthless", "Unemotional", "Ascetic", "Tribal", "Social"],
+  "opposingRunes": ["Life"],
+  "associations": {
+    "enemy": ["Chaos", "foreign men", "predators"],
+    "hostile": ["Herd harmers", "Lightbringers", "Yelm", "horses", "non-Peaceful Cut users"],
+    "friendly": ["Anti-Chaos allies"],
+    "associated": ["Eiritha", "Foundchild", "Oakfed", "Storm Bull"]
+  },
+  "holyDays": {
+    "highHolyDay": "Dark Season, Death Week, Godsday to Dark Season, Fertility Week, Freezeday",
+    "holyDays": "All Seasons, Death Week, Godsday"
+  },
+  "areas": {
+    "continents": ["Genertela", "Oceans", "Pamaltela"],
+    "mainAreas": ["Coastal", "Pamaltela", "Dragon Pass", "East", "Fonrit", "Holy Country", "Lunar", "Oceans", "West"],
+    "localities": ["Dragon Pass", "East", "Elder Wilds", "Holy Country", "Janube River States", "Jonatela", "Jrusteli Isles", "Lunar Provinces", "Maniria", "Northern Fronela", "Pent", "Prax", "Ralios", "Safelster", "Tarsh", "Umathela", "Vesmonstran"]
+  },
+  "sources": ["Book Of Doom", "Cult Compendium", "Cults of Runequest - The Lightbringers", "Gods Of Glorantha", "Guide to Glorantha", "Red Book of Magic", "RQG"]
 }

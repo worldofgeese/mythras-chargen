@@ -1,0 +1,135 @@
+{
+  "name": "Malkion the Grey",
+  "concept": "Arkat sorcerer-philosopher from the Invisible God tradition",
+  "characteristics": {
+    "STR": 8,
+    "CON": 10,
+    "SIZ": 10,
+    "DEX": 9,
+    "INT": 16,
+    "POW": 13,
+    "CHA": 9
+  },
+  "charMethod": "point-buy",
+  "attributes": {
+    "actionPoints": 3,
+    "experienceModifier": 0,
+    "healingRate": 2,
+    "luckPoints": 3,
+    "magicPoints": 13,
+    "initiativeBonus": 12,
+    "damageModifier": "-1d2",
+    "hitPoints": {
+      "Head": 4,
+      "Chest": 6,
+      "Abdomen": 5,
+      "Right Arm": 3,
+      "Left Arm": 3,
+      "Right Leg": 4,
+      "Left Leg": 4
+    },
+    "encumbrance": {
+      "unencumbered": 16,
+      "burdened": 17,
+      "overloaded": 25,
+      "noMovement": 32
+    },
+    "runeAffinities": {
+      "primary": 56,
+      "secondary": 46,
+      "tertiary": 36
+    },
+    "folkMagicBase": 52,
+    "movementRate": 6
+  },
+  "culture": "God Forgot",
+  "homeland": "God Forgot",
+  "culturalSkills": {
+    "Athletics": 5,
+    "Endurance": 10,
+    "First Aid": 15,
+    "Locale": 15,
+    "Perception": 15,
+    "Willpower": 15,
+    "Influence": 15,
+    "Insight": 10
+  },
+  "runeAffinities": {
+    "primary": "Law",
+    "secondary": "Truth",
+    "tertiary": "Stasis"
+  },
+  "folkMagicSpells": [
+    "Avert",
+    "Calculate",
+    "Calm"
+  ],
+  "passions": [
+    {
+      "name": "Loyalty (Invisible God)",
+      "value": 65,
+      "custom": true
+    },
+    {
+      "name": "Hate (Chaos)",
+      "value": 60,
+      "custom": true
+    }
+  ],
+  "age": 25,
+  "gender": "Male",
+  "family": "Scholastic order",
+  "backgroundEvents": "",
+  "career": "Scholar",
+  "careerSkills": {
+    "Customs": 0,
+    "Influence": 15,
+    "Insight": 15,
+    "Locale": 15,
+    "Native Tongue": 0,
+    "Perception": 15,
+    "Willpower": 15,
+    "Lore (Sorcery)": 0,
+    "Lore (Philosophy)": 0,
+    "Language (Brithini)": 0,
+    "First Aid": 10,
+    "Endurance": 10,
+    "Athletics": 5
+  },
+  "careerFolkMagic": [
+    "Appraise",
+    "Befuddle"
+  ],
+  "bonusSkills": {
+    "Willpower": 15,
+    "Perception": 15,
+    "Locale": 15,
+    "Influence": 15,
+    "Insight": 15,
+    "First Aid": 15,
+    "Endurance": 15,
+    "Athletics": 15,
+    "Lore (Sorcery)": 15,
+    "Lore (Philosophy)": 15
+  },
+  "hobbySkillName": null,
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "startingMoney": 70,
+  "equipment": [],
+  "weapons": [],
+  "armor": [],
+  "combatStyles": [],
+  "notes": "",
+  "background": "",
+  "hitPoints": {},
+  "companions": [],
+  "cult": "Arkat",
+  "miracles": [],
+  "devotionalPool": 0,
+  "selectedProfessionalSkills": [
+    "Lore (Sorcery)",
+    "Lore (Philosophy)",
+    "Language (Brithini)"
+  ]
+}

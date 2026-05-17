@@ -1,0 +1,142 @@
+{
+  "name": "Krogar Deathwind",
+  "concept": "Storm Bull berserker, chaos-slayer of the High Llama tribe",
+  "characteristics": {
+    "STR": 15,
+    "CON": 13,
+    "SIZ": 12,
+    "DEX": 9,
+    "INT": 9,
+    "POW": 11,
+    "CHA": 6
+  },
+  "charMethod": "point-buy",
+  "attributes": {
+    "actionPoints": 2,
+    "experienceModifier": -1,
+    "healingRate": 3,
+    "luckPoints": 2,
+    "magicPoints": 11,
+    "initiativeBonus": 9,
+    "damageModifier": "+1d2",
+    "hitPoints": {
+      "Head": 5,
+      "Chest": 7,
+      "Abdomen": 6,
+      "Right Arm": 4,
+      "Left Arm": 4,
+      "Right Leg": 5,
+      "Left Leg": 5
+    },
+    "encumbrance": {
+      "unencumbered": 30,
+      "burdened": 31,
+      "overloaded": 46,
+      "noMovement": 60
+    },
+    "runeAffinities": {
+      "primary": 52,
+      "secondary": 42,
+      "tertiary": 32
+    },
+    "folkMagicBase": 47,
+    "movementRate": 6
+  },
+  "culture": "Praxian",
+  "homeland": "Prax",
+  "culturalSkills": {
+    "Athletics": 15,
+    "Endurance": 15,
+    "First Aid": 5,
+    "Locale": 10,
+    "Perception": 15,
+    "Willpower": 15,
+    "Ride": 15,
+    "Survival": 10
+  },
+  "runeAffinities": {
+    "primary": "Storm",
+    "secondary": "Death",
+    "tertiary": "Beast"
+  },
+  "folkMagicSpells": [
+    "Fanaticism",
+    "Heal",
+    "Might"
+  ],
+  "passions": [
+    {
+      "name": "Hate (Chaos)",
+      "value": 75,
+      "custom": true
+    },
+    {
+      "name": "Loyalty (High Llama Tribe)",
+      "value": 55,
+      "custom": true
+    }
+  ],
+  "age": 22,
+  "gender": "Male",
+  "family": "Warrior caste",
+  "backgroundEvents": "",
+  "career": "Warrior",
+  "careerSkills": {
+    "Athletics": 15,
+    "Brawn": 0,
+    "Endurance": 15,
+    "Evade": 0,
+    "Unarmed": 0,
+    "Combat Style (Agimori)": 0,
+    "Combat Style (any)": 0,
+    "Lore (Chaos)": 0,
+    "Survival": 15,
+    "Perception": 10,
+    "Willpower": 15,
+    "Ride": 10,
+    "First Aid": 10,
+    "Locale": 10
+  },
+  "careerFolkMagic": [
+    "Disruption",
+    "Protection"
+  ],
+  "bonusSkills": {
+    "Athletics": 15,
+    "Endurance": 15,
+    "Perception": 15,
+    "Willpower": 15,
+    "Ride": 15,
+    "Survival": 15,
+    "First Aid": 15,
+    "Locale": 15,
+    "Lore (Chaos)": 15,
+    "Combat Style (Great Axe)": 15
+  },
+  "hobbySkillName": null,
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "startingMoney": 70,
+  "equipment": [],
+  "weapons": [],
+  "armor": [],
+  "combatStyles": [],
+  "notes": "",
+  "background": "",
+  "hitPoints": {},
+  "companions": [],
+  "cult": "Storm Bull",
+  "miracles": [
+    "Berserk",
+    "Face Chaos",
+    "Impede Chaos",
+    "Chastise",
+    "Find (Specific Thing)"
+  ],
+  "devotionalPool": 5,
+  "selectedProfessionalSkills": [
+    "Combat Style (any)",
+    "Lore (Chaos)",
+    "Survival"
+  ]
+}

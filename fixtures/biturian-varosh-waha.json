@@ -1,0 +1,143 @@
+{
+  "name": "Biturian Varosh",
+  "concept": "Waha Khan of the Bison Tribe, spirit-warrior and butcher-priest",
+  "characteristics": {
+    "STR": 14,
+    "CON": 12,
+    "SIZ": 12,
+    "DEX": 10,
+    "INT": 10,
+    "POW": 12,
+    "CHA": 5
+  },
+  "charMethod": "point-buy",
+  "attributes": {
+    "actionPoints": 2,
+    "experienceModifier": -1,
+    "healingRate": 2,
+    "luckPoints": 2,
+    "magicPoints": 12,
+    "initiativeBonus": 10,
+    "damageModifier": "+1d2",
+    "hitPoints": {
+      "Head": 5,
+      "Chest": 7,
+      "Abdomen": 6,
+      "Right Arm": 4,
+      "Left Arm": 4,
+      "Right Leg": 5,
+      "Left Leg": 5
+    },
+    "encumbrance": {
+      "unencumbered": 28,
+      "burdened": 29,
+      "overloaded": 43,
+      "noMovement": 56
+    },
+    "runeAffinities": {
+      "primary": 54,
+      "secondary": 44,
+      "tertiary": 34
+    },
+    "folkMagicBase": 47,
+    "movementRate": 6
+  },
+  "culture": "Praxian",
+  "homeland": "Prax",
+  "culturalSkills": {
+    "Athletics": 15,
+    "Endurance": 15,
+    "First Aid": 10,
+    "Locale": 10,
+    "Perception": 10,
+    "Willpower": 15,
+    "Ride": 15,
+    "Survival": 10
+  },
+  "runeAffinities": {
+    "primary": "Death",
+    "secondary": "Man",
+    "tertiary": "Beast"
+  },
+  "folkMagicSpells": [
+    "Bladesharp",
+    "Heal",
+    "Speedart"
+  ],
+  "passions": [
+    {
+      "name": "Loyalty (Bison Tribe)",
+      "value": 65,
+      "custom": true
+    },
+    {
+      "name": "Hate (Chaos)",
+      "value": 60,
+      "custom": true
+    }
+  ],
+  "age": 25,
+  "gender": "Male",
+  "family": "Khan bloodline",
+  "backgroundEvents": "",
+  "career": "Warrior",
+  "careerSkills": {
+    "Athletics": 15,
+    "Brawn": 0,
+    "Endurance": 15,
+    "Evade": 0,
+    "Unarmed": 0,
+    "Combat Style (Agimori)": 0,
+    "Combat Style (any)": 0,
+    "Lore (Waha)": 0,
+    "Survival": 15,
+    "Perception": 10,
+    "Willpower": 10,
+    "Ride": 15,
+    "First Aid": 10,
+    "Locale": 10
+  },
+  "careerFolkMagic": [
+    "Countermagic",
+    "Protection"
+  ],
+  "bonusSkills": {
+    "Athletics": 15,
+    "Endurance": 15,
+    "Perception": 15,
+    "Willpower": 15,
+    "Ride": 15,
+    "Survival": 15,
+    "First Aid": 15,
+    "Locale": 15,
+    "Lore (Waha)": 15,
+    "Combat Style (Lance and Shield)": 15
+  },
+  "hobbySkillName": null,
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "startingMoney": 70,
+  "equipment": [],
+  "weapons": [],
+  "armor": [],
+  "combatStyles": [],
+  "notes": "",
+  "background": "",
+  "hitPoints": {},
+  "companions": [],
+  "cult": "Waha",
+  "miracles": [
+    "Extension",
+    "Find (Specific Thing)",
+    "Divination",
+    "Chastise",
+    "Summon Gnome",
+    "Warding"
+  ],
+  "devotionalPool": 6,
+  "selectedProfessionalSkills": [
+    "Combat Style (any)",
+    "Lore (Waha)",
+    "Survival"
+  ]
+}

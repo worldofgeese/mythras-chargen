@@ -1,0 +1,142 @@
+{
+  "name": "Torath Sunspear",
+  "concept": "Yelmalio Light Son of Dykene citadel, phalanx warrior and sun-worshipper",
+  "characteristics": {
+    "STR": 13,
+    "CON": 13,
+    "SIZ": 12,
+    "DEX": 11,
+    "INT": 9,
+    "POW": 10,
+    "CHA": 7
+  },
+  "charMethod": "point-buy",
+  "attributes": {
+    "actionPoints": 2,
+    "experienceModifier": 0,
+    "healingRate": 3,
+    "luckPoints": 2,
+    "magicPoints": 10,
+    "initiativeBonus": 10,
+    "damageModifier": "+0",
+    "hitPoints": {
+      "Head": 5,
+      "Chest": 7,
+      "Abdomen": 6,
+      "Right Arm": 4,
+      "Left Arm": 4,
+      "Right Leg": 5,
+      "Left Leg": 5
+    },
+    "encumbrance": {
+      "unencumbered": 26,
+      "burdened": 27,
+      "overloaded": 40,
+      "noMovement": 52
+    },
+    "runeAffinities": {
+      "primary": 50,
+      "secondary": 40,
+      "tertiary": 30
+    },
+    "folkMagicBase": 47,
+    "movementRate": 6
+  },
+  "culture": "Balazaring",
+  "homeland": "Balazar",
+  "culturalSkills": {
+    "Athletics": 15,
+    "Endurance": 15,
+    "First Aid": 10,
+    "Locale": 10,
+    "Perception": 15,
+    "Willpower": 15,
+    "Survival": 10,
+    "Combat Style (Cultural Weapon)": 10
+  },
+  "runeAffinities": {
+    "primary": "Fire",
+    "secondary": "Truth",
+    "tertiary": "Stasis"
+  },
+  "folkMagicSpells": [
+    "Bladesharp",
+    "Heal",
+    "Light"
+  ],
+  "passions": [
+    {
+      "name": "Loyalty (Dykene Citadel)",
+      "value": 60,
+      "custom": true
+    },
+    {
+      "name": "Devotion (Yelmalio)",
+      "value": 65,
+      "custom": true
+    }
+  ],
+  "age": 21,
+  "gender": "Male",
+  "family": "Citadel warrior caste",
+  "backgroundEvents": "",
+  "career": "Warrior",
+  "careerSkills": {
+    "Athletics": 15,
+    "Brawn": 0,
+    "Endurance": 15,
+    "Evade": 0,
+    "Unarmed": 0,
+    "Combat Style (Hunter Raider)": 0,
+    "Combat Style (any)": 0,
+    "Lore (Yelmalio)": 0,
+    "Survival": 15,
+    "Perception": 15,
+    "Willpower": 10,
+    "Combat Style (Cultural Weapon)": 15,
+    "First Aid": 10,
+    "Locale": 5
+  },
+  "careerFolkMagic": [
+    "Protection",
+    "Fireblade"
+  ],
+  "bonusSkills": {
+    "Athletics": 15,
+    "Endurance": 15,
+    "Perception": 15,
+    "Willpower": 15,
+    "Combat Style (Cultural Weapon)": 15,
+    "Survival": 15,
+    "First Aid": 15,
+    "Locale": 15,
+    "Lore (Yelmalio)": 15,
+    "Combat Style (Pike and Shield)": 15
+  },
+  "hobbySkillName": null,
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "startingMoney": 70,
+  "equipment": [],
+  "weapons": [],
+  "armor": [],
+  "combatStyles": [],
+  "notes": "",
+  "background": "",
+  "hitPoints": {},
+  "companions": [],
+  "cult": "Yelmalio",
+  "miracles": [
+    "Catseye",
+    "Sunbright",
+    "Shield",
+    "True Weapon",
+    "Extension"
+  ],
+  "devotionalPool": 5,
+  "selectedProfessionalSkills": [
+    "Combat Style (any)",
+    "Lore (Yelmalio)",
+    "Survival"
+  ]
+}

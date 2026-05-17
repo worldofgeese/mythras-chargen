@@ -1,0 +1,138 @@
+{
+  "name": "Norana Hearthkeeper",
+  "concept": "Hearth Mother spirit-healer and protector of the Impala clan",
+  "characteristics": {
+    "STR": 8,
+    "CON": 12,
+    "SIZ": 9,
+    "DEX": 11,
+    "INT": 13,
+    "POW": 15,
+    "CHA": 7
+  },
+  "charMethod": "point-buy",
+  "attributes": {
+    "actionPoints": 2,
+    "experienceModifier": 0,
+    "healingRate": 2,
+    "luckPoints": 3,
+    "magicPoints": 15,
+    "initiativeBonus": 12,
+    "damageModifier": "-1d2",
+    "hitPoints": {
+      "Head": 5,
+      "Chest": 7,
+      "Abdomen": 6,
+      "Right Arm": 4,
+      "Left Arm": 4,
+      "Right Leg": 5,
+      "Left Leg": 5
+    },
+    "encumbrance": {
+      "unencumbered": 16,
+      "burdened": 17,
+      "overloaded": 25,
+      "noMovement": 32
+    },
+    "runeAffinities": {
+      "primary": 60,
+      "secondary": 50,
+      "tertiary": 40
+    },
+    "folkMagicBase": 52,
+    "movementRate": 6
+  },
+  "culture": "Praxian",
+  "homeland": "Prax",
+  "culturalSkills": {
+    "Athletics": 10,
+    "Endurance": 10,
+    "First Aid": 15,
+    "Locale": 15,
+    "Perception": 15,
+    "Willpower": 15,
+    "Ride": 10,
+    "Survival": 10
+  },
+  "runeAffinities": {
+    "primary": "Fertility",
+    "secondary": "Spirit",
+    "tertiary": "Earth"
+  },
+  "folkMagicSpells": [
+    "Heal",
+    "Calm",
+    "Ignite"
+  ],
+  "passions": [
+    {
+      "name": "Love (Impala Clan)",
+      "value": 65,
+      "custom": true
+    },
+    {
+      "name": "Devotion (Hearth Mother)",
+      "value": 60,
+      "custom": true
+    }
+  ],
+  "age": 30,
+  "gender": "Female",
+  "family": "Healer lineage",
+  "backgroundEvents": "",
+  "career": "Shaman",
+  "careerSkills": {
+    "Customs": 0,
+    "Dance": 0,
+    "Deceit": 0,
+    "Influence": 0,
+    "Insight": 0,
+    "Locale": 15,
+    "Willpower": 15,
+    "Lore (Herbs)": 0,
+    "Healing": 0,
+    "Lore (Spirit World)": 0,
+    "Perception": 15,
+    "First Aid": 15,
+    "Endurance": 15,
+    "Survival": 10,
+    "Athletics": 10,
+    "Ride": 5
+  },
+  "careerFolkMagic": [
+    "Bladesharp",
+    "Find Enemy"
+  ],
+  "bonusSkills": {
+    "Willpower": 20,
+    "Perception": 20,
+    "First Aid": 20,
+    "Locale": 20,
+    "Endurance": 20,
+    "Survival": 20,
+    "Athletics": 20,
+    "Ride": 20,
+    "Lore (Herbs)": 20,
+    "Healing": 20
+  },
+  "hobbySkillName": null,
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "startingMoney": 70,
+  "equipment": [],
+  "weapons": [],
+  "armor": [],
+  "combatStyles": [],
+  "notes": "",
+  "background": "",
+  "hitPoints": {},
+  "companions": [],
+  "cult": "Hearth Mother",
+  "miracles": [],
+  "devotionalPool": 0,
+  "selectedProfessionalSkills": [
+    "Lore (Herbs)",
+    "Healing",
+    "Lore (Spirit World)"
+  ]
+}

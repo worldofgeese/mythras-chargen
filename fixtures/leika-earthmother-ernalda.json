@@ -1,0 +1,143 @@
+{
+  "name": "Leika Earthmother",
+  "concept": "Ernalda priestess and healer of the Clearwine Earth Temple",
+  "characteristics": {
+    "STR": 9,
+    "CON": 12,
+    "SIZ": 10,
+    "DEX": 11,
+    "INT": 13,
+    "POW": 13,
+    "CHA": 7
+  },
+  "charMethod": "point-buy",
+  "attributes": {
+    "actionPoints": 2,
+    "experienceModifier": 0,
+    "healingRate": 2,
+    "luckPoints": 3,
+    "magicPoints": 13,
+    "initiativeBonus": 12,
+    "damageModifier": "-1d2",
+    "hitPoints": {
+      "Head": 5,
+      "Chest": 7,
+      "Abdomen": 6,
+      "Right Arm": 4,
+      "Left Arm": 4,
+      "Right Leg": 5,
+      "Left Leg": 5
+    },
+    "encumbrance": {
+      "unencumbered": 18,
+      "burdened": 19,
+      "overloaded": 28,
+      "noMovement": 36
+    },
+    "runeAffinities": {
+      "primary": 56,
+      "secondary": 46,
+      "tertiary": 36
+    },
+    "folkMagicBase": 50,
+    "movementRate": 6
+  },
+  "culture": "Esrolian",
+  "homeland": "Nochet",
+  "culturalSkills": {
+    "Athletics": 10,
+    "Endurance": 10,
+    "First Aid": 15,
+    "Locale": 15,
+    "Perception": 15,
+    "Willpower": 15,
+    "Influence": 10,
+    "Insight": 10
+  },
+  "runeAffinities": {
+    "primary": "Earth",
+    "secondary": "Fertility",
+    "tertiary": "Harmony"
+  },
+  "folkMagicSpells": [
+    "Heal",
+    "Calm",
+    "Vigour"
+  ],
+  "passions": [
+    {
+      "name": "Loyalty (Earth Temple)",
+      "value": 65,
+      "custom": true
+    },
+    {
+      "name": "Love (Family)",
+      "value": 60,
+      "custom": true
+    }
+  ],
+  "age": 24,
+  "gender": "Female",
+  "family": "Temple household",
+  "backgroundEvents": "",
+  "career": "Priest",
+  "careerSkills": {
+    "Customs": 0,
+    "Dance": 0,
+    "Deceit": 0,
+    "Influence": 15,
+    "Insight": 15,
+    "Locale": 10,
+    "Willpower": 15,
+    "Lore (Ernalda)": 0,
+    "Healing": 0,
+    "Lore (Herbs)": 0,
+    "Perception": 15,
+    "First Aid": 15,
+    "Endurance": 10,
+    "Athletics": 5
+  },
+  "careerFolkMagic": [
+    "Befuddle",
+    "Protection"
+  ],
+  "bonusSkills": {
+    "Willpower": 15,
+    "Perception": 15,
+    "Influence": 15,
+    "Insight": 15,
+    "First Aid": 15,
+    "Locale": 15,
+    "Endurance": 15,
+    "Athletics": 15,
+    "Lore (Ernalda)": 15,
+    "Healing": 15
+  },
+  "hobbySkillName": null,
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "startingMoney": 70,
+  "equipment": [],
+  "weapons": [],
+  "armor": [],
+  "combatStyles": [],
+  "notes": "",
+  "background": "",
+  "hitPoints": {},
+  "companions": [],
+  "cult": "Ernalda",
+  "miracles": [
+    "Bless Crops",
+    "Heal Body",
+    "Heal Mind",
+    "Summon Gnome",
+    "Extension",
+    "Divination"
+  ],
+  "devotionalPool": 6,
+  "selectedProfessionalSkills": [
+    "Lore (Ernalda)",
+    "Healing",
+    "Lore (Herbs)"
+  ]
+}
