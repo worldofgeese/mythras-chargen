@@ -1,9 +1,384 @@
 {
   "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-  "extracted_at": "2026-04-02",
-  "page": "p.26-41",
-  "note": "Folk magic spells mentioned in culture lists. Only Balazaring and Esrolian had complete spell lists in the OCR source. Other 6 cultures' spell lists were not captured.",
+  "extracted_at": "2026-05-17",
+  "page": "p.63-68",
+  "note": "AiG Folk Magic chapter (p.63-68) lists 45 Glorantha-specific/modified spells. Standard Mythras Core spells (Bladesharp, Heal, Alarm, etc.) are referenced by name in culture spell lists but not redefined here — see references/mythras-raw/folk-magic-spells.json for the core spell definitions. Culture-specific assignments from AiG culture chapters (p.26-41) preserved in spells_from_cultures.",
   "core_reference": "Mythras/RuneQuest 6th Edition Folk Magic spell list",
+  "verified": false,
+  "spells": [
+    {
+      "name": "Binding",
+      "page": "p.64",
+      "description": "See Slow (RuneQuest page 193)."
+    },
+    {
+      "name": "Brew Pratzim",
+      "page": "p.64",
+      "description": "This is now a cult skill, not a Folk Magic spell (see page XX)."
+    },
+    {
+      "name": "Comprehension",
+      "page": "p.64",
+      "description": "This spell increases the target's mental capacity, so that the next INT-based skill check made by the recipient is one difficulty grade easier (provided they know that skill). INT-based skills are those which use INT to calculate their base value, such as Deceit, Perception or Seamanship.",
+      "traits": [
+        "Touch"
+      ]
+    },
+    {
+      "name": "Conceal Item",
+      "page": "p.64",
+      "description": "This spell renders invisible one or more items with a combined ENC value no greater than 3. Thus the caster could conceal a backpack full of tools, or that they are carrying around a forbidden weapon. The only time such objects become visible is if the caster openly interacts with it, for example if a concealed weapon is drawn and used to attack. In such cases, the object returns to obscurement once the interaction ceases.",
+      "traits": [
+        "Touch"
+      ]
+    },
+    {
+      "name": "Control (Species)",
+      "page": "p.64",
+      "description": "As per Pet (RuneQuest page 192), except that it can control a creature of SIZ up to twice the caster's CHA Characteristic.",
+      "traits": [
+        "Ranged",
+        "Resist Willpower"
+      ]
+    },
+    {
+      "name": "Countermagic",
+      "page": "p.64",
+      "description": "This defensive spell creates an enduring magical shield, which blocks any Folk Magic spell cast at the recipient. It has no effect against Mysticism, Rune Magic, Sorcery or Spirit Magic.",
+      "traits": [
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Darkwall",
+      "page": "p.64",
+      "description": "Darkwall creates an area of shadow equal to the caster's POW in square metres (and a default height of one third of their POW), which suppresses all light within it. This is enough volume to fill a modest room, a length of corridor or form a small cloud if cast outside. All non-magical light, including sunlight, passing into or present within the boundary is reduced to the equivalent of a dim glow, so that it can be seen, but provides no illumination to see by. Other senses, such as sound, are unaffected by the shadow. A Darkwall can be moved or shaped into the depth or width desired, so long as the total area is equal to the caster's POW in square metres.",
+      "traits": [
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Delayed Ignite",
+      "page": "p.64",
+      "description": "Developed for some nefarious purpose by the Mostali, this spell works exactly like Ignite (RuneQuest page 191) except that it can only be cast on objects the user is touching. The object will then burst into flames anywhere from 1 Turn to five minutes later, at the caster's discretion. The spell can be cast upon an object someone is carrying or wearing, provided the user can touch the item.",
+      "traits": [
+        "Touch"
+      ]
+    },
+    {
+      "name": "Detect",
+      "page": "p.64",
+      "description": "See Find (RuneQuest page 190)."
+    },
+    {
+      "name": "Detection Blank",
+      "page": "p.66",
+      "description": "Casting this spell on an object, another person or oneself, temporarily renders the recipient undetectable by a Detect or Find spell. For example, a sorcerer carrying an iron dagger and wearing a gold ring would be immune to the spells Detect Sorcery, Detect Iron and Detect Gold."
+    },
+    {
+      "name": "Dispel Magic",
+      "page": "p.66",
+      "description": "See Avert (RuneQuest page 186)."
+    },
+    {
+      "name": "Endurance",
+      "page": "p.66",
+      "description": "See Vigour (RuneQuest page 195)."
+    },
+    {
+      "name": "Face of Lanbril",
+      "page": "p.66",
+      "description": "See Incognito (RuneQuest page 191)."
+    },
+    {
+      "name": "False Healing",
+      "page": "p.66",
+      "description": "False Healing heals one Hit Location of choice, seemingly repairing all damage, stopping any bleeding and allowing it to return to functionality unless it was dismembered. However, the healing is merely illusory. Once the spell concludes, all the original damage returns, adding to any further damage it may have taken since — likely resulting in a Major Wound.",
+      "traits": [
+        "Touch",
+        "Instant"
+      ]
+    },
+    {
+      "name": "Farsee",
+      "page": "p.66",
+      "description": "See Magnify (RuneQuest page 192)."
+    },
+    {
+      "name": "Food Song",
+      "page": "p.66",
+      "description": "Food Song ensures that plant and fertility deities such as Aldrya or Flamal are completely placated whenever the caster harvests vegetation for any reason (food, shelter, fire, weapons, and so on). It is more a courtesy spell than anything else, and is generally not used outside of elf forests.",
+      "traits": [
+        "Touch",
+        "Instant"
+      ]
+    },
+    {
+      "name": "Forget",
+      "page": "p.66",
+      "description": "This spell causes the target's memory to lapse for the spell's duration. The spell does not cause complete amnesia or permanent memory loss; rather it makes it difficult for the target to recall things of relative importance. Anyone affected by Forget must make a Formidable Insight roll to recall the details of any skill reliant on INT as one of its base characteristics, or to recall some important name, face, place, event or other fact.",
+      "traits": [
+        "Ranged",
+        "Instant"
+      ]
+    },
+    {
+      "name": "Harmonize",
+      "page": "p.66",
+      "description": "A much weaker version of the lack of bear ability of the same name. Instead of being reduced to a complete puppet, the Harmonize spell causes the target to merely replicate the physical and verbal motions of the caster. The spell is broken if any action would cause physical harm to the target. While under the spell's effect, the target is aware that their actions are not their own, but is powerless to resist until the spell ceases.",
+      "traits": [
+        "Ranged",
+        "Instant",
+        "Resist Willpower"
+      ]
+    },
+    {
+      "name": "Healing",
+      "page": "p.66",
+      "description": "See Heal (RuneQuest page 191). The spell is only effective on recipients linked to the Man Rune, such as humans, Aldryami, Mostali and Uz. It has no effect on other species."
+    },
+    {
+      "name": "Heat Metal",
+      "page": "p.66",
+      "description": "This spell causes one ENC of metal to heat up and become malleable. It takes several minutes for the metal to become red-hot, bringing it to the point where it can be smithed without need for a roaring fire or special fuel such as charcoal.",
+      "traits": [
+        "Touch"
+      ]
+    },
+    {
+      "name": "Hotfoot",
+      "page": "p.66",
+      "description": "If the target fails to resist this spell, he or she receives a burning pain in one foot (chosen by the caster), and cannot stand on that foot for the rest of the melee round. Assuming that they are bipedal this will result in them falling over, unless the target succeeds in an Athletics roll, allowing them to hop around on their other foot until the heat subsides.",
+      "traits": [
+        "Ranged",
+        "Instant",
+        "Resist Willpower"
+      ]
+    },
+    {
+      "name": "Ignite Flesh",
+      "page": "p.66",
+      "description": "If the target of this spell fails to resist, a small Intensity 1 fire will be ignited on the flesh of a random Hit Location. The flames can be extinguished normally by taking a full round to smother them. Creatures naturally resistant to fire are immune to this spell.",
+      "traits": [
+        "Ranged",
+        "Instant"
+      ]
+    },
+    {
+      "name": "Invisibility",
+      "page": "p.66",
+      "description": "See Incognito (RuneQuest page 191). However, instead of becoming bland and unmemorable, Invisibility draws observers' attention away from the recipient. The spell immediately ceases if the recipient causes some sort of ruckus, or launches an attack on another with either spells or weapons."
+    },
+    {
+      "name": "Jumping",
+      "page": "p.67",
+      "description": "The Jump spell increases the range one can jump when using an Athletics roll (see RuneQuest page 58). With the Jump spell cast, one can leap up to five times one's own height horizontally, or up to three times one's own height vertically. When using the Jump spell, a run-up is not needed; the same distances can be accomplished from a standing start.",
+      "traits": [
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Lantern",
+      "page": "p.67",
+      "description": "See Light (RuneQuest page 191), but lasts until the following dawn."
+    },
+    {
+      "name": "Lightwall",
+      "page": "p.67",
+      "description": "This spell creates a wall of light which has a surface area (length times height) equal to the caster's POW in metres. The wall presents a blinding glare on one side which is visually impenetrable, while from the other side it is transparent and can be seen through. Furthermore, the glow illuminates both sides like a Light spell. It may be moved by the caster at a rate of one metre per strike rank, and it can be specified to take any form, provided it does not exceed its maximum dimensions.",
+      "traits": [
+        "Ranged",
+        "Concentration"
+      ],
+      "notes": [
+        "This spell should only be used if Progressive magic is allowed. Each point of the spell cast upon a ranged weapon projectile creates a duplicate magical missile the instant that the original is loosed or thrown. All missiles, original and magical, do the same amount of damage; however, each of the missile attacks is rolled separately and flies towards a separate target. For example, a caster who knows Multimissile 3 could launch a volley of arrows from his bow against four broo: 1 original plus 3 magical missiles, each of which must strike a different target. Note that this spell only works on personal weapons, not siege engines."
+      ]
+    },
+    {
+      "name": "Pamalt's Touch",
+      "page": "p.67",
+      "description": "This spell increases the recipient's resistance to other Folk Magic spells by one grade.",
+      "traits": [
+        "Touch"
+      ]
+    },
+    {
+      "name": "Parry",
+      "page": "p.67",
+      "description": "The Parry spell is cast on a particular weapon and it increases that weapon's size, for parrying purposes, by one step. Thus, a dagger with size Small (S) becomes size Medium (M), and a shield with size Huge (H) would become size Colossal (C). Weapons of size C and above are unaffected by the spell.",
+      "traits": [
+        "Touch"
+      ]
+    },
+    {
+      "name": "Peaceful Cut",
+      "page": "p.67",
+      "description": "This is now a cult skill, not a Folk Magic spell (see Waha page XX)."
+    },
+    {
+      "name": "Preserve Herbs",
+      "page": "p.67",
+      "description": "See Preserve (RuneQuest page 193), save that it only affects plant matter."
+    },
+    {
+      "name": "Protection",
+      "page": "p.67",
+      "description": "Protection adds a layer of physical protection worth 2 Armour Points over the recipient's entire body. This does not stack atop worn armour, but may supersede it if the spell's protective value is greater.",
+      "traits": [
+        "Touch"
+      ]
+    },
+    {
+      "name": "River Eyes",
+      "page": "p.67",
+      "description": "This spell permits the recipient to see clearly through the murky waters of lakes and rivers for a distance equal to the caster's POW as if gazing through air. It also removes all refractions and reflection when looking out of the water at objects or creatures above the surface.",
+      "traits": [
+        "Touch"
+      ]
+    },
+    {
+      "name": "Second Sight",
+      "page": "p.67",
+      "description": "As per Witchsight (RuneQuest page 195), but only allows the caster to see active magic, enchanted items and the magical aura (POW) of those visible to the caster's normal sight. The strength of an aura should be described in relative terms rather than hard numbers, using the accompanying table."
+    },
+    {
+      "name": "Seek Sun Dome Temple",
+      "page": "p.68",
+      "description": "This spell causes a gleam of golden light to flash on the horizon in the exact direction of the nearest Sun Dome Temple. The gleam is visible only to the caster.",
+      "traits": [
+        "Instant"
+      ]
+    },
+    {
+      "name": "Shimmer",
+      "page": "p.68",
+      "description": "This spell blurs and distorts the target's visual image, making it harder to hit. Anyone attempting to strike the subject of a Shimmer spell must make a successful Perception roll directly before the attack in order to discern the underlying shape. If the Perception roll is either not made or failed, then attacks are one grade more difficult. Note that the Perception roll does not count as a separate action during a combat round; it is assumed to form part of the attack itself.",
+      "traits": [
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Silence",
+      "page": "p.68",
+      "description": "Silence muffles incidental noises of movement made by the recipient (the brush of clothing, soft footsteps, etc.), allowing them to make Stealth attempts one grade easier. It will not stop someone from chanting a spell, issuing commands, or raising the alarm if you are detected.",
+      "traits": [
+        "Touch"
+      ]
+    },
+    {
+      "name": "Sneeze",
+      "page": "p.68",
+      "description": "The caster must overcome the Willpower of the target. If successful, the target begins sneezing the strike rank following casting, and continues sneezing for their next 1d3 Turns. During the time spent sneezing the target is nearly incapacitated, and can only parry or evade at a Hard difficulty. If the target was casting a spell and fails to resist, the spell is immediately disrupted.",
+      "traits": [
+        "Ranged",
+        "Instant",
+        "Resist Willpower"
+      ]
+    },
+    {
+      "name": "Solace",
+      "page": "p.68",
+      "description": "This spell is cast upon a sufferer. It acts to cancel mental distress, whether from grief over the loss of a loved one, from fear of death, or whatever. The effect is to relieve stress on the victim and enable him or her to go about normal actions. It does not relieve pain, such as from injury or disease, but it does enable him to face the prospect of death bravely.",
+      "traits": [
+        "Ranged",
+        "Special Duration"
+      ]
+    },
+    {
+      "name": "Speedart",
+      "page": "p.68",
+      "description": "Speedart boosts the velocity of thrown or fired missiles so that they gain a +2 damage bonus and increase both Close and Effective Range by 50%.",
+      "traits": [
+        "Touch",
+        "Instant",
+        "Trigger"
+      ]
+    },
+    {
+      "name": "Spirit Binding",
+      "page": "p.68",
+      "description": "This spell is now superseded by the inherent abilities of Shamans (page 134) and Gifts given by Rune Cults (page XX)."
+    },
+    {
+      "name": "Spiritshield",
+      "page": "p.68",
+      "description": "This spell creates a defence for a recipient engaged in Spirit Combat. Every time the character takes spirit damage, they may reduce the number of Magic Points lost by 2 points.",
+      "traits": [
+        "Concentration (on others)",
+        "Touch"
+      ]
+    },
+    {
+      "name": "Strength",
+      "page": "p.68",
+      "description": "See Might (RuneQuest page 192)."
+    },
+    {
+      "name": "Strong Hammer",
+      "page": "p.68",
+      "description": "This spell temporarily makes a crafting tool capable of working materials that ordinarily it would not affect or that would irreparably damage it. For example, a smith might use the spell on a small hammer to cold-work bronze, or crack stone. The spell has no effect on the damage inflicted by the tool, nor the skill of its user. It merely prevents the item from suffering breakage (see RuneQuest page 123).",
+      "traits": [
+        "Touch"
+      ]
+    },
+    {
+      "name": "Visibility",
+      "page": "p.68",
+      "description": "As per Witchsight (RuneQuest page 195), but only allows the caster to see discorporated spirits, shapeshifted creatures and penetrate illusions."
+    },
+    {
+      "name": "Xenohealing",
+      "page": "p.68",
+      "description": "See Heal (RuneQuest page 191), but applies to creatures not linked to the Man Rune."
+    }
+  ],
+  "spells_alphabetical": [
+    "Binding",
+    "Brew Pratzim",
+    "Comprehension",
+    "Conceal Item",
+    "Control (Species)",
+    "Countermagic",
+    "Darkwall",
+    "Delayed Ignite",
+    "Detect",
+    "Detection Blank",
+    "Dispel Magic",
+    "Endurance",
+    "Face of Lanbril",
+    "False Healing",
+    "Farsee",
+    "Food Song",
+    "Forget",
+    "Harmonize",
+    "Healing",
+    "Heat Metal",
+    "Hotfoot",
+    "Ignite Flesh",
+    "Invisibility",
+    "Jumping",
+    "Lantern",
+    "Lightwall",
+    "Pamalt's Touch",
+    "Parry",
+    "Peaceful Cut",
+    "Preserve Herbs",
+    "Protection",
+    "River Eyes",
+    "Second Sight",
+    "Seek Sun Dome Temple",
+    "Shimmer",
+    "Silence",
+    "Sneeze",
+    "Solace",
+    "Speedart",
+    "Spirit Binding",
+    "Spiritshield",
+    "Strength",
+    "Strong Hammer",
+    "Visibility",
+    "Xenohealing"
+  ],
   "spells_from_cultures": {
     "Balazaring": [
       "Beastcall (Dog, Pig or Giant Hawk)",
@@ -30,27 +405,6 @@
       "Repair"
     ]
   },
-  "unique_spells_alphabetical": [
-    "Alarm",
-    "Appraise",
-    "Beastcall",
-    "Bladesharp",
-    "Calculate",
-    "Calm",
-    "Cleanse",
-    "Coordination",
-    "Deflect",
-    "Dry",
-    "Find Game",
-    "Glamour",
-    "Heal",
-    "Ignite",
-    "Lock",
-    "Mobility",
-    "Perfume",
-    "Repair",
-    "Speedart"
-  ],
   "missing_cultures": [
     "God Forgot",
     "Lunar Heartland",

@@ -1,0 +1,112 @@
+{
+  "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+  "extracted_at": "2026-05-17",
+  "page": "p.59-62",
+  "note": "AiG Magic overview chapter. Contains system descriptions (how each magic type works in Glorantha) and general casting rules that modify Mythras Core mechanics. The 'Changes to Casting Skills' section is critical — it defines how Rune Affinities replace standard Mythras casting skills.",
+  "verified": false,
+  "introduction": "Magic\n\nGlorantha's magic is introduced in this chapter, with the chapters following it describing the specific magical approaches in greater detail.\n\nGloranthans practise many different types of magic which anyone can learn, provided they are of the correct species, ethnic culture or members of a cult which teaches it. These arts are called Folk Magic, Spirit Magic, Rune Magic, Sorcery and Lunar Magic. The incomprehensible art of Mysticism is primarily reserved for the Draconic races.\n\nAs described in chapter XX, all magic is drawn from the Runes; the fundamental building blocks of Gloranthan reality. Certain cultures and species possess inherent bonds to certain Runes, called Rune Affinities, which often limit the cults, traditions and schools which they may join — and in turn restrict the particular spells or spirits which they can then master.",
+  "system_descriptions": {
+    "Folk Magic": {
+      "heading": "Folk Magic",
+      "parenthetical": "RQ2 Battle Magic, RQ3 Spirit Magic, RQ6 Folk Magic",
+      "text": "Folk Magic is the simplest form of magic in Glorantha, commonly available to all cultures. It is taught from an early age, but in terms of power offers only limited effect. Particular spells reflect the everyday necessities of a community, profession or cult which provides them. This means that Folk Magic taught to a barbarian goat herd will often differ to that taught to a civilized sailor. Due to its petty nature, Folk Magic spells are not overtly supernatural, instead tending to augment natural processes, the surrounding environment or the capabilities of the caster.",
+      "page": "p.59"
+    },
+    "Rune Magic": {
+      "heading": "Rune Magic",
+      "parenthetical": "RQ2 Rune Magic, RQ3 Divine Magic, RQ6 Theism",
+      "text": "Rune Magic is drawn from the gods, demi-gods and heroes of Glorantha, provided the worshipper performs the correct rituals to invoke the deity and perform regular sacrifices to honour or propitiate them. In effect, the god intercedes directly on behalf of the worshipper; either locally manifesting their power through a Rune they are linked with, or incarnating directly within the body of the worshipper to perform an epic feat. Due to the ubiquity of religious cults across the world, Rune Magic is the most frequently encountered higher magic in Glorantha.",
+      "page": "p.59"
+    },
+    "Sorcery": {
+      "heading": "Sorcery",
+      "parenthetical": "RQ3 Sorcery, RQ6 Sorcery",
+      "text": "A less well regarded form of magic by many, sorcery uses immutable laws to exploit the Runes directly, without needing to call upon the gods or bargain with spirits. Such spells are impersonal and formulaic, normally controlling only the material aspects of the world. Yet sorcery is feared by those practicing Spirit and Rune Magic, since sorcerers are capable of briefly changing the nature of local reality or even draining its energies at the cost of destroying whatever is tapped. Fortunately however, although very potent, sorcery spells are usually limited in application.",
+      "page": "p.59"
+    },
+    "Spirit Magic": {
+      "heading": "Spirit Magic",
+      "parenthetical": "RQ6 Animism",
+      "text": "A higher magical discipline, Spirit Magic is the practice of dealing with the spirit world and those spirits that are bound to the mortal realm in some form. Spirit magicians, or Animists, form relationships with particular spirits which work their supernatural effects on behalf of the magician or the community which they serve. Each spirit controls one or more specific effect(s), based upon natural processes of the world. All things, be they animate or inanimate, are possessed of a spirit — from the smallest of flowers to an entire mountain. The spirits of sapient creatures still bound to a mortal body are called souls.",
+      "page": "p.60"
+    },
+    "Lunar Magic": {
+      "heading": "Lunar Magic",
+      "text": "Last, but by no means least, is the odd and disturbing higher art of Lunar Magic. This type of magic gains its esoteric power from the Moon Rune, itself a strange facet of both Glamour and Chaos. In practice, those following the Lunar path are able to cheat the Great Compromise to call upon a wide array of powers, albeit at slightly less strength than other magical practitioners, depending on the phase of the Red Moon. However, those who dabble in Lunar Magic are prone to Illumination, and this often draws the hatred of other less open-minded cultures.",
+      "page": "p.60"
+    },
+    "Mysticism": {
+      "heading": "Mysticism",
+      "parenthetical": "RQ6 Mysticism",
+      "text": "The study of mysticism in Glorantha is limited to only those of Draconic blood or those deluded enough to become subservient to them. This however is a blessing in disguise, as Mysticism is perhaps the most potent of the magical arts, quite capable of radically and irrevocably altering the entire universe at the whim of the mystic, usually to the detriment of everyone else, since most practitioners believe all existence is merely an illusion that must be cast off before they can transcend to a higher state.",
+      "page": "p.60"
+    }
+  },
+  "general_rules": {
+    "Converting Older Source Material": {
+      "heading": "Converting Older Source Material",
+      "text": "Earlier editions of RuneQuest produced a great many different spells and spirits which no longer quite conform to the RuneQuest 6th Edition rules. Despite extensive work revising material from previous editions, converting cults and characters still requires some effort from the Games Master in order to redress both mechanical changes to the rules and conceptual changes to Glorantha itself.\n\nTo ease this process, the magic chapters either offer a reference to the revised spell in the RuneQuest 6th Edition Core Rules, or provide an entirely brand new version. It must be noted that in a few cases the changes are radical in nature, due to the prior reasons offered.",
+      "page": "p.60"
+    },
+    "General Rules for Gloranthan Magic": {
+      "heading": "General Rules for Gloranthan Magic",
+      "text": "The following mechanics are offered merely as guidelines, and should not be treated as hard and fast rules if a Games Master wishes to retain an earlier play style in their game. For ease of description, the following section uses the word 'spells' by default, meaning spells, spirits or techniques, according to the type of magic utilised.",
+      "page": "p.60"
+    },
+    "Changes to Casting Skills": {
+      "heading": "Changes to Casting Skills",
+      "text": "Since access to magic in Glorantha is via the Runes, the skills required to cast and manipulate some forms of magic have been revised to take into account the importance of Rune Affinities (see Chapter XX).\n\nCareful study of these new rules will be required to avoid confusion.",
+      "page": "p.60"
+    },
+    "Spells Available per Temple or Teacher": {
+      "heading": "Spells Available per Temple or Teacher",
+      "text": "Generally most cults, traditions or schools offer between 1d3+4 Folk Magic spells and another 1d3+4 advanced spells (Spirit Magic, Rune Magic, Sorcery, Lunar Magic or Mysticism) to their members.\n\nNot all cults are the same, however. Minor deities or hero cults might offer only a single additional spell or skill for those who desire to learn it, whereas the greatest gods or schools can offer a dozen or more.",
+      "page": "p.60"
+    },
+    "Availability of Spells": {
+      "heading": "Availability of Spells",
+      "text": "Generally only members of a cult, tradition or school are permitted to learn a spell belonging to that organisation. In addition, some spells are not available to members until a certain cult rank is achieved, to ensure they are not misused, or that cult secrets are not revealed to those uninitiated in the traditions of that organisation. There are always exceptions to the rules, however; for instance the cult of a trading deity might offer to exchange spell knowledge for other benefits.",
+      "page": "p.61"
+    },
+    "Price of Spells": {
+      "heading": "Price of Spells",
+      "text": "Most Gloranthans must pay for the acquisition of new spells, despite their cult membership. Such knowledge is expensive, and can cost the equivalent of many months income to purchase. Folk Magic spells cost 50 Lunars (or 25 Lunars per point if using progressive Folk Magic), whilst higher magic such as Rune Magic or Sorcery costs 500 Lunars to learn each spell. Yet this financial value is only an abstraction, since the price might actually be paid for with a private gift, a votive sacrifice, or even as personal time offered in service to the organisation. Only rarely does it take the form of hard coinage.",
+      "page": "p.61"
+    },
+    "Learning Spells": {
+      "heading": "Learning Spells",
+      "text": "Learning a spell in Glorantha is rarely just a case of being taught a simple magical formula which can be invoked ad hoc. Instead it is a matter of ritual and adherence to the tenets of that particular cult, tradition or school. However, just because a spell is available to the cult they belong to, it does not mean a character is permitted to learn it. Such tuition takes considerable time, not only the practice of the actual magic, but also the indoctrination of the student via stringent tasks or Heroquests.\n\nAgain, this can be abstracted to a mere investment of time and Experience Rolls for games in which learning is brushed over. On the other hand, the time requirement can be utilised to provide a period of adventure wherein the character performs objectives as part of discovering and mastering elements of the new spell.",
+      "page": "p.61"
+    },
+    "Casting Time": {
+      "heading": "Casting Time",
+      "text": "The casting time for all magic in Glorantha is one Action Point per Magic Point invested in the spell. A non-progressive Folk Magic spell for example will only take a single Action Point to cast, whereas a Rune Spell with a Magic Point cost of 3 will take three Action Points to complete.",
+      "page": "p.61"
+    },
+    "Running Out of Magic Points": {
+      "heading": "Running Out of Magic Points",
+      "text": "When a character reduces their Magic Points to zero, they must succeed in a Willpower test or collapse insensate. If the cost of the spell is more than the caster's remaining Magic Points, the magic automatically fails. Whatever the specifics, until further Magic Points are recovered, no more magic can be cast.",
+      "page": "p.61"
+    },
+    "Recovering Magic Points": {
+      "heading": "Recovering Magic Points",
+      "text": "Glorantha is rich with magical energies, but when that energy recovers is dependent upon the mythic caveats of the God Time and personal runic affinities. Characters with an affinity to the Chaos, Darkness, Death or Disorder Runes replenish their full Magic Points with the setting of the sun. All others who lack those particular Runes replenish the entirety of their Magic Points at dawn.",
+      "page": "p.61"
+    },
+    "Restrictions on Casting": {
+      "heading": "Restrictions on Casting",
+      "text": "Magic requires freedom of movement and mind to be able to cast a spell. A caster suffers one additional difficulty grade to their casting skill for each of the following:\n\nA spell automatically fails if the caster:\n\nThere are no penalties for casting in close combat, as many spells are intended for battle. Games Masters may need to apply the above restrictions on a case by case basis according to the species or abilities of the caster.",
+      "page": "p.61"
+    },
+    "Stacking Magic": {
+      "heading": "Stacking Magic",
+      "text": "Magic of differing disciplines can be stacked together, provided that they are both available as part of the same cult, tradition or school the caster belongs to. In such a case the normal restriction, that only the magic with the greater Intensity take effect, is over-ruled. For example, an initiate of Humakt could combine a Bladesharp spell (Folk Magic) with a Truesword (Rune Magic) spell to both increase the default damage of his weapon and allow him to roll it twice.\n\nAlthough stacking is permitted, it only applies to a single spell of each discipline. Thus the Folk Magic spells of Bladesharp and Fireblade couldn't be combined together with the Truesword spell.\n\nIn all other circumstances, the default rules concerning stacking takes precedence (see RuneQuest page 181).",
+      "page": "p.62"
+    },
+    "General Advice": {
+      "heading": "General Advice",
+      "text": "The new magical rules presented in Adventures in Glorantha are intended for starting fresh campaigns using the RuneQuest 6th Edition rules as base. Game Masters converting over legacy games may find themselves more comfortable simply converting over effects of existing spells from previous versions of RuneQuest and avoid the mechanical changes necessary to readjust to the current view of Gloranthan practice.\n\nIn other words, if you are unhappy with the new way of doing things, then feel free to ignore the new rules as you wish. Your Glorantha Will Vary!",
+      "page": "p.62"
+    }
+  }
+}

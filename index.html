@@ -13118,6 +13118,55 @@ const SKILL_DESCRIPTIONS = {
   "Folk Magic": "Simple, common magic available to everyone. Spells like Bladesharp, Heal, and Protection."
 };
 
+// AiG Folk Magic spell descriptions (p.63-68) — for tooltips in spell selection
+const FOLK_MAGIC_DESCRIPTIONS = {
+  "Binding": "See Slow (RuneQuest page 193).",
+  "Brew Pratzim": "This is now a cult skill, not a Folk Magic spell (see page XX).",
+  "Comprehension": "[Touch] Increases the target's mental capacity — next INT-based skill check is one difficulty grade easier.",
+  "Conceal Item": "[Touch] Renders invisible one or more items with combined ENC no greater than 3.",
+  "Control (Species)": "[Ranged, Resist Willpower] Controls a creature of SIZ up to twice the caster's CHA.",
+  "Countermagic": "[Ranged] Creates a magical shield blocking any Folk Magic spell cast at the recipient.",
+  "Darkwall": "[Ranged] Creates an area of shadow equal to caster's POW in square metres, suppressing all light.",
+  "Delayed Ignite": "[Touch] Like Ignite but cast on touched objects; ignites after a set delay up to POW minutes.",
+  "Detect": "See Find (RuneQuest page 190).",
+  "Detection Blank": "Renders the recipient undetectable by Detect or Find spells.",
+  "Dispel Magic": "See Avert (RuneQuest page 186).",
+  "Endurance": "See Vigour (RuneQuest page 195).",
+  "Face of Lanbril": "See Incognito (RuneQuest page 191).",
+  "False Healing": "[Touch, Instant] Heals one Hit Location seemingly — but damage returns when spell expires.",
+  "Farsee": "[Ranged] Magnifies the recipient's vision, extending perception range.",
+  "Food Song": "[Touch, Instant] Instantly completes the cooking of raw food, making it edible and palatable.",
+  "Forget": "[Ranged, Instant] Causes target's memory to lapse for a number of minutes equal to caster's POW.",
+  "Harmonize": "[Ranged, Instant, Resist Willpower] Forces target to stop fighting and negotiate peacefully.",
+  "Healing": "See Heal (RuneQuest page 191).",
+  "Heat Metal": "[Touch, Concentration] Heats a single metal item to searing temperature.",
+  "Hotfoot": "[Ranged, Resist Endurance] Target's foot bursts into pain — cannot stand on that foot for the round.",
+  "Ignite Flesh": "[Ranged, Instant] Ignites Intensity 1 fire on a random Hit Location if target fails to resist.",
+  "Invisibility": "Draws observers' attention away from the recipient. Ceases if recipient interacts with others.",
+  "Jumping": "[Ranged] Increases the range of the target's leaping ability.",
+  "Lantern": "Creates a floating ball of light that follows the caster.",
+  "Lightwall": "[Ranged] Creates a wall of blinding light.",
+  "Pamalt's Touch": "[Touch] Causes vegetation to grow rapidly in the touched area.",
+  "Parry": "See Deflect (RuneQuest page 189).",
+  "Peaceful Cut": "[Touch] Ritual spell that painlessly kills a dying creature, releasing its spirit honourably.",
+  "Preserve Herbs": "[Touch] Prevents organic material from rotting or decaying for the spell's duration.",
+  "Protection": "See Spiritshield (RuneQuest page 194).",
+  "River Eyes": "[Concentration] Caster can see through the surface of any body of water within range.",
+  "Second Sight": "[Concentration] Allows the caster to perceive the spirit world and magical auras.",
+  "Seek Sun Dome Temple": "[Instant] Points the caster toward the nearest Sun Dome Temple.",
+  "Shimmer": "Distorts the caster's outline, making them harder to hit in combat.",
+  "Silence": "[Touch] Completely muffles all sound made by the recipient.",
+  "Sneeze": "[Ranged, Resist Endurance] Target sneezes uncontrollably, disrupting concentration and actions.",
+  "Solace": "[Touch] Calms emotional distress, reducing the effects of fear, grief, or madness.",
+  "Speedart": "See Speedart (RuneQuest page 194) — increases missile damage.",
+  "Spirit Binding": "[Touch] Temporarily binds a spirit into a prepared fetish or object.",
+  "Spiritshield": "Provides magical armour against spirit combat attacks.",
+  "Strength": "See Might (RuneQuest page 192).",
+  "Strong Hammer": "[Touch] Enchants a hammer to strike with supernatural force.",
+  "Visibility": "[Ranged] Makes an invisible or concealed creature/object visible.",
+  "Xenohealing": "[Touch] Heals non-human species that normal Heal cannot affect."
+};
+
 const CULTURE_BUILDS = {
   "Praxian": [
     { name: "Beast Rider Warrior", stats: "High STR, CON", career: "Warrior", style: "Beast Rider Warrior", tip: "Mounted combat specialist. Lance charges and archery from the saddle." },
@@ -15161,14 +15210,16 @@ App.renderStep5 = function() {
     skillsList.appendChild(row);
   });
 
-  // Render folk magic options
+  // Render folk magic options with tooltips from AiG descriptions
   const folkList = div.querySelector('#folk-magic-list');
   culture.folkMagic.forEach(spell => {
     const checked = CharacterData.folkMagicSpells.includes(spell);
+    const desc = FOLK_MAGIC_DESCRIPTIONS[spell] || '';
+    const tooltip = desc ? `<span class="skill-tooltip" tabindex="0">ℹ️<span class="tooltip-text">${desc}</span></span>` : '';
     const row = document.createElement('div');
     row.innerHTML = `
       <label><input type="checkbox" ${checked ? 'checked' : ''} data-testid="spell-${spell}"
-        onchange="App.toggleFolkMagicSpell('${spell}', this.checked, 3)"> ${spell}</label>
+        onchange="App.toggleFolkMagicSpell('${spell}', this.checked, 3)"> ${spell}</label>${tooltip}
     `;
     folkList.appendChild(row);
   });

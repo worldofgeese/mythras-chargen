@@ -1,0 +1,2296 @@
+{
+  "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+  "extracted_at": "2026-05-17",
+  "page": "p.69-122",
+  "note": "Complete Rune Magic chapter from AiG. Contains cult structure rules (p.69-74) and 367 Rune spells (p.75-122). Spells are Glorantha-specific miracles granted by cults. Each spell's cult availability is defined in the individual cult one-pagers, not here.",
+  "verified": false,
+  "cult_structure": {
+    "rune_cults": {
+      "heading": "Rune Cults",
+      "page": "p.69",
+      "text": "A Rune Cult is an association of individuals who gather together, providing worship or propitiation to a particular deity. The cult maintains the ritual and responsibilities for its god, offering up sacrifices and caring for its shrine. Each cult possesses a priesthood that officiates at sacred rituals and acts as the intermediaries between the cult members and the god."
+    },
+    "temples": {
+      "heading": "Temples",
+      "page": "p.69",
+      "text": "A temple is a holy place, consecrated and protected by a god or gods. They typically have their own guardian entity and sacred objects. Temples are supported by the local community, being an important source of specialised magical resources. Not all temples require a building; many Orlanthi temples for example are natural places that provide access to"
+    },
+    "priests": {
+      "heading": "Priests",
+      "page": "p.70",
+      "text": "Priests are people with the full-time occupation of leading magical activities. In Glorantha, the title of Priest is a profession, rather than a cult rank. They are responsible for maintaining cult holy places and regalia, performing sacrifices and key rituals, requesting divinations and organizing the support of the cult."
+    },
+    "rune_cult_structure": {
+      "heading": "Rune Cult Structure",
+      "page": "p.70",
+      "text": "Gloranthan cults possess a universal hierarchy which divides their worshippers into three broad groups, as described in the following sections: Lay Members, Initiates and Devotees. Despite this apparent ubiquity, cults have their own rank titles, membership requirements and duties which can vary wildly."
+    },
+    "lay_members": {
+      "heading": "Lay Members",
+      "page": "p.71",
+      "text": "Most cults allow people to worship without pledging themselves to the god or learning its inner secrets. Such worshipers are referred to as Lay Members. There are no restrictions to joining as a Lay Member provided the character is in good standing within the community and none of their Rune Affinities are in direct opposition to those of the god. Thus it is not unusual to be a Lay Member of several cults. For example, even the most devout Humakti might take the opportunity to attend an Mastakos charioteer festival if it offers itself. But the warrior will be forbidden to join the cult of Chalana Arroy as a Lay Member, because the goddess's Life Rune is the antithesis of Humakt's Death Rune."
+    },
+    "initiates": {
+      "heading": "Initiates",
+      "page": "p.71",
+      "text": "A character who shares at least one Rune with a god, and meets any other cult requirements, can become an initiate of that god's cult. Initiation into a cult is a serious step, for initiates pledge themselves to the focus of a divine entity. They must swear to follow the commands of the god as expressed by the priests of the cult, participate in the cult Holy Day ceremonies, and are expected to commit a significant proportion of their time and attention to that god alone. Characters can start out as an initiate if they possess at least five of the cult skills at 50% or better; one of which must be a Rune Affinity of the deity."
+    },
+    "limitations_on_cult_rune_magic": {
+      "heading": "Limitations on Cult Rune Magic",
+      "page": "p.72",
+      "text": "As a cult initiate, a character may directly use a Rune Affinity shared with his god to cast Rune Spells, relying upon the power of that god to create the magic. However, the spells available to the cult are limited to those utilised by the god in its myths, and are subject to any restrictions that the god himself has."
+    },
+    "acting_like_your_god": {
+      "heading": "Acting Like Your God",
+      "page": "p.72",
+      "text": "An initiate's fidelity to his or her god has a great impact on personality. Game Masters are encouraged to permit characters to augment skills with their Devotion (see RuneQuest, page 76), in situations where they act in a manner in keeping with the god's personality. Similarly, the Game Master should freely assign penalties against skill checks when a character has not been acting like their deity."
+    },
+    "devotees": {
+      "heading": "Devotees",
+      "page": "p.72",
+      "text": "A character who wishes to be a devotee must be willing to dedicate their life solely to the service of the chosen deity, abandoning all other magic that does not come from that god, its subservient cult heroes or gifted by associated cults. To become a devotee is not easy; the character must pass difficult tests given not just by the temple hierarchy, but also by the deity itself. They are tested on their piety, knowledge of the deity's myths and their personal virtues. Characters only qualify for the chance to undertake these stringent challenges if they possess at least three of the cult skills at 100% or better, one of which must be a Rune Affinity they share with the deity."
+    },
+    "feats": {
+      "heading": "Feats",
+      "page": "p.72",
+      "text": "A feat is a magical cult gift which emulates one of the worshipped god's mythic deeds, whose scope is beyond even that of the most potent Rune Spells. When a character becomes a devotee, they are granted one feat automatically as part of their inauguration, and can learn additional feats by performing significant Heroquests (see page XX for more information on Heroquests), and spending a suitable number of Experience Rolls to master that ability, providing the deity in question exhibited said power during the time of myths."
+    },
+    "creating_new_feats": {
+      "heading": "Creating New Feats",
+      "page": "p.73",
+      "text": "New feats can be 'discovered' by Heroquesting and uncovering truths long forgotten since the Great Compromise. Such quests are incredibly dangerous, but the rewards of finding new feats are invaluable, not only expanding the myths of a cult but also making the successful devotee the focus of a new sub-cult. Examples include heroes such as Gore & Gash, or Kalikos."
+    },
+    "leaving_a_rune_cult": {
+      "heading": "Leaving a Rune Cult",
+      "page": "p.73",
+      "text": "Leaving a cult as an initiate or devotee is not easy and requires permission from the priesthood. If not granted or, worse still, they are cast out for transgressing cult tenets, this results in a magical attack from the cult's spirit(s) of reprisal. Even if the apostate survives the attack, he remains the enemy of that god and often of its cult worshippers."
+    },
+    "cult_holy_days_and_high_holy_days": {
+      "heading": "Cult Holy Days and High Holy Days",
+      "page": "p.73",
+      "text": "Gloranthan cults draw together their worshippers on seasonal Holy Days and yearly High Holy Days, to make sacrifices of both material goods and Magic Points to their god. This worship has several benefits. First and foremost it allows worshippers to re-enact the myths of the god, potentially allowing HeroQuests to occur. Secondly, the deity grants some of the power gathered from its worshippers towards 'free' castings of any Rune Spell an initiate or devotee knows."
+    },
+    "subservient_cults": {
+      "heading": "Subservient Cults",
+      "page": "p.73",
+      "text": "Many cults include the worship of minor spirits and dead heroes linked to its god, who would not otherwise be venerated or even remembered. Subservient spirits are those subdued or befriended by the god before time began and now serve out of obligation. Examples of this are Spirits of Reprisal who punish those that dare to abandon the cult, or transgress its rules. Cult heroes on the other hand were once mortals who developed new powers or skills in devotion to their deity."
+    },
+    "associated_cults": {
+      "heading": "Associated Cults",
+      "page": "p.74",
+      "text": "Associated cults are those which have formed an alliance or relationship with the main cult. Within a pantheon gods often lend their aid to each other's worshippers, in gratitude or recompense for deeds performed during the God Time. Like subservient cults, this help can take myriad form, from knowledge of a skill to an alliance with a species of animal. In most cases however, the associated cult provides a Rune Spell that the worshipper can only utilise if they share the same Rune Affinity."
+    },
+    "rune_spells": {
+      "heading": "Rune Spells",
+      "page": "p.74",
+      "text": "The following section provides updated and sometimes heavily modified versions of Rune Spells originally found in RuneQuest 2nd and 3rd edition publications such as Cults of Prax, Cults of Terror and Gods of Glorantha. During the course of RuneQuest history, innumerable Rune Spells have been created to grant individuality to literally hundreds of divine cults."
+    }
+  },
+  "spells_count": 367,
+  "spells_alphabetical": [
+    "Absorption",
+    "Accelerate Growth",
+    "Affix Darkness",
+    "Alter Creature",
+    "Alter Spirit of Disease",
+    "Analyze Magic",
+    "Animate War Tree",
+    "Appease (Deity)",
+    "Arrow Trance",
+    "Asrelia's Cavern",
+    "Attack Soul",
+    "Attain Perfection Of",
+    "Attract Attention",
+    "Aurora",
+    "Axe Trance",
+    "Axis Mundi",
+    "Bat Wings",
+    "Bear Fruit",
+    "Beastmaster",
+    "Become (Specific Other Shape)",
+    "Bee's Head",
+    "Beetle's Head",
+    "Beetle's Limbs",
+    "Berserk/Berserker",
+    "Bind Ghost",
+    "Bind Ship",
+    "Black Breath",
+    "Blast Earth",
+    "Bless Animals",
+    "Bless Crops",
+    "Bless Forge",
+    "Bless Grave (Lay to Rest)",
+    "Bless Home",
+    "Bless Thunderstone",
+    "Bless Woad",
+    "Bless Worshippers",
+    "Blinding",
+    "Blood Feast",
+    "Blood Red",
+    "Breathe Air",
+    "Breathe Water",
+    "Bump in the Night",
+    "Buoyancy",
+    "Butterflight",
+    "Call Barracuda",
+    "Call Founder",
+    "Call Monster",
+    "Cancel Light",
+    "Carapace",
+    "Carry (Specific Disease)",
+    "Catseye",
+    "Cause (Specific Disease)",
+    "Cause Plague",
+    "Chameleon",
+    "Chaos Feature",
+    "Chaos Gift",
+    "Chaos Spawn",
+    "Charisma",
+    "Chastise",
+    "Chill",
+    "Chomping",
+    "City Harmony",
+    "Clairvoyance/Clairaudience",
+    "Claws",
+    "Clever Tongue",
+    "Cloud Call",
+    "Cloud Clear",
+    "Coerce",
+    "Coin Wheel",
+    "Comfort Song",
+    "Command (Specific Species, Monster or Spirit)",
+    "Command Worshippers",
+    "Community",
+    "Conceal/Concealment",
+    "Consume",
+    "Consume Mind",
+    "Conversion",
+    "Corruption",
+    "Counter Chaos",
+    "Couvade",
+    "Crack",
+    "Create Bonfire",
+    "Create Fissure",
+    "Create Flippers",
+    "Create Foe-Curser",
+    "Create Ghost",
+    "Create Gorp",
+    "Create Great Market",
+    "Create Head",
+    "Create Market",
+    "Create Neutral Ground",
+    "Create Shadow",
+    "Create Skeleton",
+    "Create Warrior of Wood",
+    "Create Whirvlish",
+    "Create Wildfire",
+    "Create Zombie",
+    "Cremate Dead",
+    "Crush",
+    "Cure Chaos Wound",
+    "Cure Disease",
+    "Cure Iron Burn",
+    "Cure Poison",
+    "Curse of Thed",
+    "Dark Fear",
+    "Dark Walk",
+    "Darklight",
+    "Darksee",
+    "Decrease Temperature",
+    "Decrease Wind",
+    "Defend Against Chaos",
+    "Defend Against Law",
+    "Detect Truth",
+    "Detection Blank",
+    "Devour (Race)",
+    "Devour (Substance)",
+    "Devour Book",
+    "Devour Spirit",
+    "Diamond Edge",
+    "Discorporation",
+    "Dismiss Elemental",
+    "Dismiss Magic",
+    "Divination",
+    "Divination Block",
+    "Divine Intervention",
+    "Draw Beast",
+    "Draw Human",
+    "Drown",
+    "Earthmight",
+    "Earthpower",
+    "Earthtouch",
+    "Earthwarm",
+    "Ecstatic Communion",
+    "Enchant (Metal or Object)",
+    "Enhance Gustbran",
+    "Enhance Mahome",
+    "Erotocomatose Lucidity",
+    "Exchange Spells",
+    "Excommunication",
+    "Extension",
+    "Face Chaos",
+    "Face Law",
+    "False Form",
+    "Fang of Wachaza",
+    "Fangs",
+    "Fear",
+    "Featherscales",
+    "Fertilize",
+    "Fight Disease",
+    "Find (Specific Thing)",
+    "Firedwell",
+    "Fireshield",
+    "Firespear",
+    "Fix Intelligence",
+    "Flaming Bow",
+    "Flay",
+    "Flight",
+    "Float",
+    "Flowers",
+    "Forlorn Hope",
+    "Form Ice",
+    "Free Ghost",
+    "Fumble",
+    "Gift Power",
+    "Gift Spell",
+    "Glow Spot",
+    "Gnome to Gargoyle",
+    "Great Parry",
+    "Group Defense",
+    "Group Laughter",
+    "Guided Teleportation",
+    "Hallucinate",
+    "Hate Sky",
+    "Heal Area",
+    "Heal Body",
+    "Heal Constitution",
+    "Heal Wound",
+    "Healing Trance",
+    "Heat Metal",
+    "Heatblast",
+    "Hide Fire",
+    "Hide Wealth",
+    "Hie Wagon",
+    "Hold Course",
+    "Hurling",
+    "Identify Scent",
+    "Impede Chaos",
+    "Incarnate Ancestor",
+    "Increase Temperature",
+    "Increase Wind",
+    "Induce Uzdo",
+    "Ingest Scroll",
+    "Insect Song",
+    "Invigorate",
+    "Jabbers",
+    "Keenclaw",
+    "Knowledge",
+    "Lava Spear",
+    "Leap",
+    "Leaping Legs",
+    "Lie",
+    "Lightning",
+    "Lion's Head",
+    "Living Blade",
+    "Lock",
+    "Locust's Head",
+    "Madness",
+    "Magical Arms",
+    "Magnify Command",
+    "Mating Ritual",
+    "Matrix Creation",
+    "Meld Form",
+    "Mind Blast",
+    "Mind-Read",
+    "Mindlink",
+    "Minor Infection",
+    "Mist Cloud",
+    "Mold Rock",
+    "Morale",
+    "Moth's Head",
+    "Moulder",
+    "Multispell",
+    "Oath",
+    "Pain Blow",
+    "Pain Tooth",
+    "Panic",
+    "Passage",
+    "Path Watch",
+    "Pathway",
+    "Peace",
+    "Plant Eye/Plant Spy",
+    "Plastron",
+    "Power Drain",
+    "Precision (Specific Skill)",
+    "Predict Weather",
+    "Proteus",
+    "Purification Ritual",
+    "Purify Water",
+    "Radiate",
+    "Rain",
+    "Raise Ghoul",
+    "Rebirth of Chaos",
+    "Reconstruction",
+    "Recover Spirit",
+    "Reduce Flame",
+    "Refine Medicine",
+    "Reflection",
+    "Regrow Limb",
+    "Regrow Organ",
+    "Release Intelligence",
+    "Remove (Specific Body Part)",
+    "Reproduce",
+    "Resist Iron Burn",
+    "Restore Health",
+    "Restore Vision",
+    "Resurrect/Resurrection",
+    "Reverse Chaos",
+    "Ride River Horse",
+    "Ritual of Devouring",
+    "Ritual of Rebirth",
+    "Safe",
+    "Sanctify",
+    "Sapience",
+    "Seal",
+    "Seal Spirit",
+    "Seal Tongue",
+    "Seal Wound",
+    "Seastrength",
+    "Second Mouth",
+    "Sever Spirit",
+    "Shadows Dance",
+    "Shake Earth",
+    "Shape Metal",
+    "Shattering",
+    "Shield",
+    "Shield of Darkness",
+    "Shooting Star",
+    "Sidana's Blessing",
+    "Silence/Silence Sphere",
+    "Silver Track",
+    "Skin Broo",
+    "Sky Crater Fury",
+    "Slash",
+    "Smoldering Rebellion",
+    "Snow",
+    "Solace",
+    "Soul Sight",
+    "Soulfire",
+    "Spawn Crawling Hand",
+    "Speak to/with (Specific Creatures)",
+    "Special Lock",
+    "Spell Teaching",
+    "Spell Trading",
+    "Spider Bite",
+    "Spider Limbs",
+    "Spider's Head",
+    "Spirit Block",
+    "Spirit Guardian",
+    "Spirit Melding",
+    "Sprout",
+    "Sprout Arms",
+    "Sprout Legs",
+    "Sprout Tail",
+    "Sprout Wings",
+    "Star Ward",
+    "Stinger",
+    "Stone-Biting",
+    "Stones to Kill",
+    "Strength of Basmol",
+    "Strike",
+    "Strongblade",
+    "Strongnet",
+    "Submerge",
+    "Summon (Specific Species)",
+    "Summon Ancestor",
+    "Summon Dead",
+    "Summon Elemental",
+    "Summon Founder",
+    "Summon Guardian",
+    "Summon Lodril",
+    "Summon Minion of the Snake Eater",
+    "Summon River Horse",
+    "Sunspear",
+    "Support",
+    "Suppress Aether",
+    "Suppress Lodril",
+    "Suppress Oakfed",
+    "Sureshot",
+    "Swallow",
+    "Sweat Acid",
+    "Switch Places",
+    "Tambour",
+    "Tanglethicket",
+    "Telekinesis",
+    "Teleportation",
+    "Thunderbolt",
+    "Tongue",
+    "Transform Self",
+    "Translate",
+    "Tree Chopping Song",
+    "Truespeak",
+    "Truetune",
+    "Turn Blow",
+    "Turn Undead",
+    "Turtle's Head",
+    "Unisonance",
+    "Venom Bite",
+    "Venom Boosting",
+    "Vesper",
+    "Vision",
+    "Vomit Acid",
+    "Warding",
+    "Warrior of Stone",
+    "Waste Loins",
+    "Water Skating",
+    "Waterwalk",
+    "Webbing",
+    "Whirlpool",
+    "Wind Walking",
+    "Wind Warp",
+    "Wind Words",
+    "Wither",
+    "Wolf Hide",
+    "Wolf Running",
+    "Wolf's Head",
+    "Worm's Head",
+    "Worship"
+  ],
+  "spells": [
+    {
+      "name": "Absorption",
+      "page": "p.75",
+      "description": "Use the default Absorption miracle (RuneQuest page 264)."
+    },
+    {
+      "name": "Accelerate Growth",
+      "page": "p.75",
+      "description": "Accelerate Growth accelerates the growth of vegetation, ageing it by a number of years equal to the Intensity of the spell. Under its effects, all plants in the area increase in size and verdure dramatically, although they cannot grow beyond their normal maximum size. The growth occurs over the course of several minutes, but remains permanent once the spell ends. The spell is normally used to establish orchards or rapidly spread forests, at the cost of the sprawling, tangled proliferation within the area of effect. Repeated use of this miracle can potentially grow a thick forest over what had been open fields a few days previously."
+    },
+    {
+      "name": "Affix Darkness",
+      "page": "p.75",
+      "description": "Affix Darkness must be cast at night, and lasts until the following sunset. It preserves the darkness in a volume up to the full area of the spell, depending on the location and desires of the caster. For instance, in the open the spell usually occupies a hemisphere with a radius equal to the Intensity in metres; whereas if cast inside a building, the caster could limit its extent to within the walls and no further. The affixed darkness remains exactly as dark as when the spell was first cast. Bringing a torch or other light source inside the area illuminates it as normal."
+    },
+    {
+      "name": "Alter Creature",
+      "page": "p.75",
+      "description": "When cast upon a creature or person subject to the Survival Covenant of Waha, it reverses their status: herd beasts become people and people become herd beasts. They do not change physically. A beast which becomes a person may convert their INS to INT and may roll 3d6 for CHA. They become omnivorous, preserve their previous skills and start with a Native Tongue skill of INT+CHA. On the other hand, when a person is reduced to the status of a beast, their INT is transformed to INS, they lose their CHA characteristic and all skills other than Athletics, Brawn, Endurance, Evade, Perception, Stealth, Swim, Unarmed and Willpower. No language remains to them, but they can graze upon vegetation and survive. Normally this spell is used to temporarily awaken a favoured herd beast to aid in a task, or to chastise people who have transgressed cult tenets. If the spell endures long enough, from application of a Feat or via the Rune Spell of Extension for instance, an awakened beast may learn other skills."
+    },
+    {
+      "name": "Alter Spirit of Disease",
+      "page": "p.75",
+      "description": "Alter Spirit of Disease must be cast upon a disease spirit prior to its infestation of a victim. It permits the caster to permanently change the disease conditions according to the Intensity of the spell (see Disease Condition table page 81). Note that this spell can be used to strengthen or mediate a disease spirit's conditions, potentially weakening such spirits if faced as guardians, or ruining a spirit combat prior to a victim succumbing. If the spirit is hostile to the caster, it gains a chance to resist the magic."
+    },
+    {
+      "name": "Analyze Magic",
+      "page": "p.75",
+      "description": "This spell reveals one or more truths concerning the function of a single magical item, entity or substance. The number of questions the caster may ask is equal to the Intensity of the spell, but must be used before the spell expires."
+    },
+    {
+      "name": "Animate War Tree",
+      "page": "p.75",
+      "description": "See Create Warrior of Wood, page 88."
+    },
+    {
+      "name": "Appease (Deity)",
+      "page": "p.75",
+      "description": "Appease is a ritual utilised to perform sacrifices to dangerous gods or spirits to placate them, as per the Propitiate spell (RuneQuest page 273). There are a myriad of different versions of this spell, and the required sacrifices depend upon the particular cult. For example, the Cult of the Bloody Tusk accepts copious amounts of grain, freshly spilled blood or magical items as valid sacrifices, to ensure that their giant boars remain tame and under tusk rider control. If the caster rolls a critical success on his casting roll, whoever provided the sacrifice is granted a temporary bonus to their lands, beasts or personal safety, provided they are within the area of the spell. In the case of Bloody Tusk, a bonus of half the spell's Intensity can be applied to a single characteristic, up to the species maximum."
+    },
+    {
+      "name": "Arrow Trance",
+      "page": "p.76",
+      "description": "This spell merges the caster's consciousness with their bow, augmenting their ranged Combat Style to unprecedented levels by boosting the Level of Success of any bow attack by one step. Thus a Fumble upgrades to a Fail, a Fail to a Success and a Success to a Critical; rolled Critical Successes cannot be boosted higher. Whilst under its influence, the user enters a trance in which only the bow and targets exist; only moving to establish a clear shot or find another enemy. They cannot wield any other weapon, parry, evade, use their bow as a club or even cast other magic, including healing. If the battle ends before the spell expires, the caster will stand at rest and wait for new targets."
+    },
+    {
+      "name": "Asrelia's Cavern",
+      "page": "p.76",
+      "description": "Asrelia's Cavern creates an invisible barrier, forming a sphere centring about the point of casting. Wind cannot blow through the barrier, rain and snow cannot penetrate it, and it blocks flames. Even a flood washes up against the barrier harmlessly. Spells can be cast through the invisible boundary, and creatures can cross it freely. Only non-living natural forces are barred entrance. Elementals can still breach it."
+    },
+    {
+      "name": "Attack Soul",
+      "page": "p.76",
+      "description": "This spell enables the caster to attack a single chosen target as if they were engaged in spirit combat. If the caster overcomes the target's Willpower, the target loses a number of Magic Points according to the caster's Devotion skill (see Spirit Damage table, RuneQuest page 201). Just as in normal spirit combat, the target can resist and attack back, reducing the caster's Magic Points. Unless one of the participants discorporates or is capable of discorporating, neither can possess the other's body. The target may not resist this spell's effect on him, though Absorption, Spell Resistance or similar magic might block it. Other magics such as Spirit Block or Spirit Screen (Spirit Shield) work normally to protect their users. Unlike spirit combat, the caster can break off or resume this attack at any time during the spell's duration."
+    },
+    {
+      "name": "Attain Perfection Of",
+      "page": "p.76",
+      "description": "All of the Attain Perfection spells are now Mysticism Talents (see Mysticism chapter, page XX)."
+    },
+    {
+      "name": "Attract Attention",
+      "page": "p.76",
+      "description": "Attract Attention forces everyone within the area of effect to resist the spell or direct their attention towards the caster. Affected enemies are forced to redirect attacks towards the caster, whilst neutral or friendly victims merely pay rapt attention to whatever the caster does. If out of reach of their new target, enemies will attempt to close the distance or use some other form of ranged attack or magic instead - however this does not prevent them from defending themselves if attacked by a third party. Members of the same cult as the caster are immune to the spell's effect."
+    },
+    {
+      "name": "Aurora",
+      "page": "p.76",
+      "description": "This spell can only be cast whilst the Dawn Star is visible in the sky. Within the area shimmers pale, ephemeral sheets of light which infuse those inside its boundaries with a sense of hope and confidence. Those standing under the aurora are granted protection against the forces of Darkness and Chaos, reducing the Intensity of magic associated with either Rune, by half the Intensity of the spell. The spell ends when the sun rises, no matter how long the Aurora spell has left to go."
+    },
+    {
+      "name": "Axe Trance",
+      "page": "p.76",
+      "description": "Akin to Arrow Trance, this spell turns the caster into a near unstoppable warrior, provided they are armed with an axe. Any attack roll has its Level of Success boosted by one step. Thus a Fumble upgrades to a Fail, a Fail to a Success and a Success to a Critical, whilst rolled Critical Successes cannot be increased any higher. Under its influence, the caster is unable to utilise any other weapon, save for their Unarmed skill (although a shield could used to passively block), nor cast spells until the magic ends. Note that Axe Trance does not boost the Level of Success when parrying."
+    },
+    {
+      "name": "Axis Mundi",
+      "page": "p.77",
+      "description": "Axis Mundi creates a holy sanctuary which enables free passage of ancestral spirits to the mundane plane, without the benefit of a Visibility spell or application of the shamanic Trance skill. In addition, the manifested ancestor can freely converse, cast magic and even engage in spirit combat whilst inside the sanctuary. It takes time for the desired ancestors to show up, however. Games Masters should roll 5d6 to determine how many minutes of singing, dancing or other ritual invocation is required before they manifest."
+    },
+    {
+      "name": "Bat Wings",
+      "page": "p.77",
+      "description": "This spell causes a pair of large bat wings to sprout from the back of the caster, enabling them to fly at a Movement Rate of 12. The wings have an inherent Armour Point value equal to half the Intensity of the spell, Hit Points equal to the caster's arms, and if damaged they use the Winged Biped Hit Location table (RuneQuest page 443). Bat wings are tinted a particular colour relevant to the providing cult."
+    },
+    {
+      "name": "Bear Fruit",
+      "page": "p.77",
+      "description": "Use the Ripen miracle (RuneQuest page 275)."
+    },
+    {
+      "name": "Beastmaster",
+      "page": "p.77",
+      "description": "This spell may be cast upon one or more non-intelligent animals. If the targets fail to resist then they will do whatever the caster directs for the duration, though they will refuse to obey obviously suicidal commands, and neither can they be commanded to fight on his behalf (but might do so instinctively). On the other hand, the beasts will not attack the caster. Beastmaster affects a number of creatures equal to the Intensity of the spell."
+    },
+    {
+      "name": "Become (Specific Other Shape)",
+      "page": "p.77",
+      "description": "This spell comes in many forms. It turns the caster's shape into that specified by the spell. They retain all their old characteristics and skills, except for SIZ, which the caster chooses. The new SIZ cannot be larger than usual, but it can be smaller. In return the caster gains all the abilities (or lack of same) of the new shape. There are multiple versions of this spell, each permitting only one type of shape, anything from an animal, tree, rock, a dirty shirt or even a pile of dung!"
+    },
+    {
+      "name": "Bee's Head",
+      "page": "p.77",
+      "description": "This spell turns the recipient's head into that of a gigantic bee. This allows them the ability to gain nourishment feeding from flowers. In addition, fluids (including beer, honey, water, etc.) can be drunk by the recipient and stored internally without harming the liquid, up to a total volume equal to the Intensity of the spell in litres. The liquid can be stored safely past the spell's duration, but must be regurgitated before the user can ingest any other substances."
+    },
+    {
+      "name": "Beetle's Head",
+      "page": "p.77",
+      "description": "This spell turns the recipient's head into that of a giant beetle, with spiked mandibles. He gains natural armour on the head equal to half the Intensity of the spell. He also gains a Bite attack as per a karg beetle (page 182), Size L, Reach M, doing 1d8 damage plus his Damage Modifier. This bite attack can be used in addition to normal weapon attacks and parries, provided the opponent is within reach."
+    },
+    {
+      "name": "Beetle's Limbs",
+      "page": "p.77",
+      "description": "See Sprout Arms (page 113), with the addition that the new limbs possess natural Armour Points equal to half the Intensity of the spell."
+    },
+    {
+      "name": "Berserk/Berserker",
+      "page": "p.77",
+      "description": "Use the default Berserk miracle (RuneQuest page 266). Note that worshipers of pacifistic cults such as Chalana Arroy have the ability to bring a warrior out of a berserk rage. The chances for success are equal to an Easy Harmony Rune affinity roll for a pacifist of Devotee rank, and Standard roll for a pacifist of Initiate rank."
+    },
+    {
+      "name": "Bind Ghost",
+      "page": "p.78",
+      "description": "Other than the above changes, use the default Bind Ghost miracle (RuneQuest page 266)."
+    },
+    {
+      "name": "Bind Ship",
+      "page": "p.78",
+      "description": "When cast upon a boat or ship, this spell slows the Movement Rate of the vessel at the rate of 1 knot per minute until it is completely stopped. When the spell expires, the ship may begin moving normally, though it must accelerate from a stop. The maximum size of the vessels which can be affected depends on the Intensity of the spell as indicated by the Bind Ship table. If the ship has sails, they are strained by this deceleration. The chance of breaking or damaging the ship's rigging is equal to the Wind STR or less on 1D100 (see RuneQuest, page 130), rolled when the ship comes to a complete halt. Bind Ship is resisted by the Seamanship skill of whoever is captaining the vessel."
+    },
+    {
+      "name": "Black Breath",
+      "page": "p.78",
+      "description": "Under the effects of this spell, the caster breathes out a shadowy mist of writhing tendrils which will poison anyone who inhales them. Those that fail to hold their breath are subject to a poison with a Potency equal to 10 times the spell's Intensity. The caster is immune to the poison's effects."
+    },
+    {
+      "name": "Blast Earth",
+      "page": "p.78",
+      "description": "When cast upon an area of land, Blast Earth scours and disrupts the soil, so that no plants within the area blasted may flower or bear fruit until the spell ends."
+    },
+    {
+      "name": "Bless Animals",
+      "page": "p.78",
+      "description": "This fertility spell increases the calving potential for each beast within the initial area of effect. Each birth produces a healthy calf or, rarely, twins. Nine of ten calves born to a beast influenced by this spell are female. This spell is usually cast only on the cult's High Holy Day of the year, so that it aligns with the mating period of the cult's animals. Thus it affects the offspring produced in the following calving season."
+    },
+    {
+      "name": "Bless Crops",
+      "page": "p.78",
+      "description": "Use the default Bless Crops (RuneQuest page 266), with the above changes."
+    },
+    {
+      "name": "Bless Forge",
+      "page": "p.79",
+      "description": "Bless Forge allows a smith to imbue tools, weapons and armour with greater than usual properties. Only a single project can be worked on whilst the magic lasts, but it increases the Task Rounds (RuneQuest page 100) invested to a number equal to the Intensity of the spell. Thus an Intensity 7 Bless Forge spell would permit the smith seven Task Rounds to fashion the item; which in all probability, will allow it to receive several Enhancements (RuneQuest page 101)."
+    },
+    {
+      "name": "Bless Grave (Lay to Rest)",
+      "page": "p.79",
+      "description": "Once this ritual has been completed, it ensures the soul of a dead person passes into the afterlife smoothly and does not return as a bad ghost. Neither can their soul be summoned for questioning, bound as a sapient undead or brought back to life, unless the magic is performed by a worshipper of the same cult that cast the Bless Grave spell."
+    },
+    {
+      "name": "Bless Home",
+      "page": "p.79",
+      "description": "This ritual is performed over a home and affects it and the family who dwells therein. Family members within the blessed home are warded against malicious spells and hostile spirits which cross its walls, as if protected by a combined Countermagic and Spirit Shield of equal Intensity. The enchantment ends if ever the family hearth is shattered."
+    },
+    {
+      "name": "Bless Thunderstone",
+      "page": "p.79",
+      "description": "Thunderstones are potent magical weapons formed from palm sized flints or similar stones. Once enchanted, the thunderstone remains quiescent until thrown, slung or struck against a target, at which point it shatters in a shower of sparks. For each two full points of Intensity, the stone does 1d6 Hit Points damage and destroys 1d6 Magic Points of a struck target. Armour protects normally against the Hit Point damage done by the stone, and likewise the Magic Point drain is reduced by the Magnitude of magic protective spells. The caster may only regain the Magic Points invested in the stone once it has shattered or the spell ends naturally."
+    },
+    {
+      "name": "Bless Woad",
+      "page": "p.79",
+      "description": "Enchants a pot of woad sufficient to coat the skin of a single user, granting them protection against wounds and magic. The woad grants its wearer Countermagic and Armour Points equal to its Intensity. Each day that the woad is worn, it declines in potency by 1 point. If the user ever puts on armour or clothing, the woad immediately loses all its magic power. Magic Points invested into a pot of blessed woad do not return until the woad is used or the enchantment expires."
+    },
+    {
+      "name": "Bless Worshippers",
+      "page": "p.79",
+      "description": "This spell must be stacked with another theistic spell known by the caster. For each point of Intensity in Bless Worshippers, the other spell takes effect on an additional target, who must be a worshipper of the same cult. The spell stacked with Bless Worshippers is thereafter lost until the priest returns to a cult shrine or temple to pray for its return."
+    },
+    {
+      "name": "Blinding",
+      "page": "p.79",
+      "description": "This spell blinds the target entity if they fail to resist. Unless they possess other senses to compensate, any skill requiring sight becomes Herculean difficulty."
+    },
+    {
+      "name": "Blood Feast",
+      "page": "p.79",
+      "description": "Blood Feast requires the caster to ritually prepare a meat stew in a cauldron, using the body organs of several creatures. After the cooking has been completed, all cult members participating in the feast consume the stew and may donate a Magic Point to the ritual. The result is a spectre, an artificial undead spirit, its appearance conjoined from the hellish mix of the species and body parts in the stew. Use the base characteristics of a Haunt, but limit its abilities according to the organs included in the stew. Once created, the POW and subsequent Intensity of the spectre is based on the total number of Magic Points invested into its creation. The spectre does not recover Magic Points naturally, but must have them donated by the caster, or drained from victims if guts were included in its creation. The spectre persists for as long as the caster continues to maintain the Blood Feast from their Devotional Pool. In addition, every cult member who donated a Magic Point into the Blood Feast has their total Magic Points reduced by 1 until the spell ends."
+    },
+    {
+      "name": "Blood Red",
+      "page": "p.80",
+      "description": "This spell is no longer supported."
+    },
+    {
+      "name": "Breathe Air",
+      "page": "p.80",
+      "description": "As per the Breathe Water spell, but instead allows aquatic water breathers to emerge above the surface and survive."
+    },
+    {
+      "name": "Breathe Water",
+      "page": "p.80",
+      "description": "Use the default Breathe Water spell (RuneQuest page 266)."
+    },
+    {
+      "name": "Bump in the Night",
+      "page": "p.80",
+      "description": "Creates disconcerting sounds capable of unsettling listeners, but only if cast at night or underground. Anyone who fails to resist becomes subject to the effects of a Demoralise spell."
+    },
+    {
+      "name": "Buoyancy",
+      "page": "p.80",
+      "description": "Each point of Intensity lifts 5 SIZ of creature, or if an inanimate object, its totalled corresponding mass on the Creature Size Equivalency table (RuneQuest page 327), to just below the surface of the water. Heavier objects will not float, though they will sink more slowly than if the spell had not been cast. Lighter objects will be raised to be about halfway out of the water, bobbing about. Unwilling creatures targeted by the spell may attempt a Swim roll to resist."
+    },
+    {
+      "name": "Butterflight",
+      "page": "p.80",
+      "description": "Butterflight grows huge colourful wings from the caster's back, enabling them to fly at a Movement Rate of 8. The wings have no inherent Armour Points, but the fluttering imposes a penalty of Formidable on attempts to hit the user when aloft. Hit Points are equal to the caster's arms, and if damaged they use the Winged Biped Hit Location table (RuneQuest page 443)."
+    },
+    {
+      "name": "Call Barracuda",
+      "page": "p.80",
+      "description": "This spell causes giant barracuda within range to cease whatever they are doing and race to the aid of the caster. Assuming any are present, the number of barracuda summoned equals the Intensity of the spell. Treat the monstrous fish as average sharks (RuneQuest page 384)."
+    },
+    {
+      "name": "Call Founder",
+      "page": "p.80",
+      "description": "See Summon Founder (page 115)."
+    },
+    {
+      "name": "Call Monster",
+      "page": "p.80",
+      "description": "This ceremonial spell summons a deep-sea creature or group of creatures. It is cast by a group of worshipers, led by a priest. If the casting is successful, each participant in the ritual may expend as many Magic Points from their Devotional Pool as desired towards the spell; or a single Magic Point if they are only lay members. The total of these accumulated Magic Points must exceed the combined Characteristic scores (STR, CON, SIZ, INT, POW and DEX), of the monster or monsters being summoned, otherwise the ritual fails. Once completed, the creatures take 1d100 hours to arrive and are not under the control of the summoners, unless a separate Command spell is cast to do so. Sapient monsters may need to be bargained with for their services. Magic Points dedicated to this spell only begin to return once the duration ends or the monsters are slain."
+    },
+    {
+      "name": "Cancel Light",
+      "page": "p.81",
+      "description": "Creates a hemispherical zone within which all magical light is dismissed if the Intensity of the Cancel Light is equal or greater than the light spell."
+    },
+    {
+      "name": "Carapace",
+      "page": "p.81",
+      "description": "This spell changes the recipient's skin to hard chitin, replacing the natural Armour Points of his torso to a value equal to the Intensity of the spell."
+    },
+    {
+      "name": "Carry (Specific Disease)",
+      "page": "p.81",
+      "description": "This spell makes the target a carrier of one specific disease, exposing anyone they physically contact to the disease. It also causes the target to become permanently immune to the effects of that specified disease."
+    },
+    {
+      "name": "Catseye",
+      "page": "p.81",
+      "description": "This spell affects the eyes of the recipient so that they can see by any amount of available light. If there is a complete absence of illumination, vision is impossible; however, if light from a single dim spark exists, they see normally, up to the maximum range of the magic. Eyes under this spell reflect light as do a cat's."
+    },
+    {
+      "name": "Cause (Specific Disease)",
+      "page": "p.81",
+      "description": "If the target fails to resist, they contract a dangerous disease of a type known to the caster. The Intensity of the spell limits which disease condition it inflicts. Use the Disease Condition Cost table to reflect the spell's effect. Multiple conditions may be purchased if enough Intensity is available. Onset time and frequency of attacks is based upon the victim's resistance roll: on a Critical, the disease takes a day before manifesting, on a Success an hour, on a Failure a minute and on a Fumble it starts instantly. The inflicted disease continues until cured or the target eventually passes away."
+    },
+    {
+      "name": "Cause Plague",
+      "page": "p.81",
+      "description": "At the expense of their own life, the caster collapses into a putrid puddle of highly contagious, disease riddled slime. Anyone within the immediate area of effect is splattered by transformation and must resist the magic, but their Endurance roll is at a Hard penalty. Those that fail are both infected with the chosen disease (see Cause Disease) and also transmit it to anyone they approach within arm's reach whether physical contact is made or not. New victims must resist the disease at a Potency equal to the deceased caster's Devotion skill, or also become infected and carry it onwards. Even if the plague is contained or kills off the entire local population, the original spot the caster died remains a source for the disease until purified in some manner."
+    },
+    {
+      "name": "Chameleon",
+      "page": "p.81",
+      "description": "Use the default Chameleon spell (RuneQuest page 266)."
+    },
+    {
+      "name": "Chaos Feature",
+      "page": "p.81",
+      "description": "This ritual takes 12 hours and permanently gives the target a chaos feature. If unwilling, the recipient must try to resist the gift. If affected by the foul magic roll on the Chaotic Feature table (see Appendix C starting on page 209). For each chaotic feature an individual accepts, there is a 10% cumulative chance of turning into a broo. This transformation may either be resisted nor altered, and is permanent once it takes effect. The probability for the transformation is rolled immediately upon the assumption of each chaotic feature."
+    },
+    {
+      "name": "Chaos Gift",
+      "page": "p.82",
+      "description": "For the duration of the spell, the caster gains a random chaos feature from the Chaotic Features table. If gained via the Moon Rune, this spell is subject to cyclical effects. Once this spell has been used, the recipient always registers as chaos-tainted by appropriate detection magics, abilities or spirits. On a critical casting success, the user can choose which chaotic feature they wish to obtain."
+    },
+    {
+      "name": "Chaos Spawn",
+      "page": "p.82",
+      "description": "This spell summons a wailing, moaning void appearing in mid-air. That flung into or otherwise entering this void is irrevocably lost, but 1d3 Turns later, the void leaves a random chaos creature in its stead. Roll 1D10 to determine what it is. All creatures have a chance to hit equal to the Devotion skill of the caster. Neither the POW nor SIZ of the arrival may be greater than the respective POW or SIZ of the sacrifice, unless no sacrifice is made, when a random gorp appears. At the end of the spell, the wailing void reappears, envelopes the summoned creature, then vanishes for good after another 1d3 Turns."
+    },
+    {
+      "name": "Charisma",
+      "page": "p.82",
+      "description": "Use the Enthrall spell (RuneQuest page 269)."
+    },
+    {
+      "name": "Chastise",
+      "page": "p.82",
+      "description": "This spell punishes enemies or those that transgress cult tenets, as per the default Corruption miracle (RuneQuest page 267)."
+    },
+    {
+      "name": "Chill",
+      "page": "p.82",
+      "description": "Chill causes the target of the spell to suffer the effects of freezing cold in their very bones. If not resisted, at the end of each Round the spell inflicts 1d3 internal damage to every Hit Location of the victim, ignoring natural and worn armour. Creatures with the Cold Blooded ability who succumb to this spell immediately become torpid."
+    },
+    {
+      "name": "Chomping",
+      "page": "p.82",
+      "description": "Chomping causes the recipient's jaws and teeth enlarge and sharpen. For each two full points of Intensity, the damage dice and weapon size of the target's bite attack are raised by one step."
+    },
+    {
+      "name": "City Harmony",
+      "page": "p.82",
+      "description": "This spell affects everyone in the area of effect and keeps them from getting excited or violent if they fail to resist. It counteracts emotion-affecting spells (such as Demoralize and Fanaticism) with a Magnitude weaker than that of the City Harmony spell."
+    },
+    {
+      "name": "Clairvoyance/Clairaudience",
+      "page": "p.82",
+      "description": "Clairvoyance gives the caster the ability to know what is happening in an area which has been previously studied for at least 15 minutes. Depending on their runic association, the user has full audio or visual perception (or both), as if physically present in the area. Until the spell ends, the caster is in full trance, completely insensible to their surroundings."
+    },
+    {
+      "name": "Claws",
+      "page": "p.83",
+      "description": "This spell turns one of the caster's arms, or tail if possessing one, into a large scorpion-like pincer. The claw does 1d8 damage plus any damage modifier, and has a weapon size upon the Intensity of the spell: 1-2 Small, 3-4 Medium, 5-6 Large, 7-8 Huge, 9-10 Enormous. If the caster lacks claw as part of their known Weapon Styles, they can use the Unarmed skill instead."
+    },
+    {
+      "name": "Clever Tongue",
+      "page": "p.83",
+      "description": "Clever Tongue increases the eloquence of the recipient so that they are a delight to listen to. Any failed roll of a verbal skill, such as Commerce, Influence, Oratory and so on, is treated as a success instead. Fumbles, normal successes and critical successes remain unaffected."
+    },
+    {
+      "name": "Cloud Call",
+      "page": "p.83",
+      "description": "Use the default Cloud Call miracle (RuneQuest page 267)."
+    },
+    {
+      "name": "Cloud Clear",
+      "page": "p.83",
+      "description": "Use the default Clear Skies miracle (RuneQuest page 267)."
+    },
+    {
+      "name": "Coerce",
+      "page": "p.83",
+      "description": "This spell allows the caster to force a number of individuals equal to the spell's Intensity to obey his will. It automatically succeeds against targets wearing enchanted slave shackles, but other victims' Willpower must be overcome. It takes a full round of concentration to issue new commands; this is done through a form of Mindlink, and does not require the caster to speak aloud or the victim to share a common language. The caster cannot make victims take any action that will directly cause injury; doing so immediately ends the spell's effect. The spell does not function against cult members who hold superior or equal status to the caster."
+    },
+    {
+      "name": "Coin Wheel",
+      "page": "p.83",
+      "description": "This spell must be cast upon a block of gold, causing a coin to separate from the rest of the mass. Called a wheel in common Gloranthan parlance, these coins are commonly worth twice their weight of raw metal, each being worth 20 Lunars in lands where their legality is recognised. One ENC of pure gold provides the raw material for about 60 wheels."
+    },
+    {
+      "name": "Comfort Song",
+      "page": "p.83",
+      "description": "All those within range of the caster feel the magic of this Song of Power, which keeps all hearers from feeling pain, effectively anesthetizing the body while still permitting consciousness. It is often used during childbirth and after battles. Characters that would normally be incapacitated from the pain of injuries up to Serious Wounds are not, though damage is unhealed."
+    },
+    {
+      "name": "Command (Specific Species, Monster or Spirit)",
+      "page": "p.83",
+      "description": "Command allows the caster to take over the actions and will of the specified creature, which fails to resist. If successful then whilst within range the creature will be in a special form of telepathic communication with the caster. The caster must form a mental image of the actions that he wishes the creature to perform. Commanding a creature requires a full round of concentration."
+    },
+    {
+      "name": "Command Worshippers",
+      "page": "p.83",
+      "description": "Casting this spell causes all initiates and priests of the cult to hastily finish immediate business, gather equipment and report to the caster as soon as possible. Command Worshipper must be cast at a shrine or temple to work, and during this time the caster must remain in the same spot or else the spell disperses. It is generally used only for emergencies or for joyous celebrations."
+    },
+    {
+      "name": "Community",
+      "page": "p.85",
+      "description": "This spell guarantees easy communication of ideas, facilitating the sharing of new or troubled thoughts. It affects every individual within range who belongs to one of the same communities as the caster. All INT related skill rolls, providing the user knows that skill, are automatically successful when utilised to advance the common interests of that community. A \"community\" is assumed to be a group no larger than several hundred members, such as a family, clan, village, town district, cult, school, guild or even mercenary company."
+    },
+    {
+      "name": "Conceal/Concealment",
+      "page": "p.85",
+      "description": "Conceal renders the recipient both invisible and inaudible for the duration of the spell, provided they perform no offensive or destructive action. If so, the concealment temporarily fades, revealing them to observers until they cease whatever action revealed them, at which point they fade back into invisibility at the end of the round. For the purposes of combat, the recipient must first disengage from their opponent before they can disappear again."
+    },
+    {
+      "name": "Consume",
+      "page": "p.85",
+      "description": "If the target fails to resist, Consume inflicts 1d3 damage to a random Hit Location, ignoring all armour. On each subsequent turn of the caster, the target takes another 1d3 damage to the same place, continuing until the location reaches a Major Wound. At this point it is utterly destroyed, turned into grey slime, possibly killing the target if it was a vital location. If the spell ends prematurely before turning to slime, any damage done can be healed normally."
+    },
+    {
+      "name": "Consume Mind",
+      "page": "p.85",
+      "description": "This spell drains the entirety of the victim's memory, transferring it to the caster's mind and leaving the victim a mental vegetable. It can be cast only during the cult's holy day and takes a week to prepare for the ritual. Such diabolical efforts come at severe risk however, since whether the spell succeeds or not, the caster automatically takes 1d6+4 damage to their head. In addition they must also pass an unopposed Endurance check, else roll on the Consume Mind Backlash table. If the spell succeeds, the caster may learn any or all of the victim's magic and knowledge-based skills. Divine spells so obtained are reusable, provided they were also reusable to the victim. In such cases the caster can power stolen Rune Spells with Magic Points from their own Devotional Pool. Knowledge and Magic-related skills known by the victim at a level higher than the priest's own ability may also be gained. For each such skill already known, the caster may attempt a single improvement roll as if learning by experience, whereas new skills hitherto unknown simply start off at base value. None of skills or improvements gained in this manner can exceed the value of the victim's former skill level."
+    },
+    {
+      "name": "Conversion",
+      "page": "p.85",
+      "description": "This spell is no longer supported, as permanent Chaos gifts now always taint those who are not Illuminates."
+    },
+    {
+      "name": "Corruption",
+      "page": "p.85",
+      "description": "If not resisted, this spell transforms the victim into a gruesome chaos horror. At the start of each Round, roll 2d6 for each of the target's characteristics. If the 2d6 result is odd, subtract it from the characteristic. If the result is even, add it to the characteristic. The 2d6 roll is always subtracted from CHA. If any characteristic except CHA is reduced to 0 or less, the being becomes incapable of survival and dies immediately. At the conclusion of the spell, whatever values the characteristics reached become permanent, as are the physical deformities. Note: This spell takes over from the miracle described in the RuneQuest core rules, which itself has been renamed to 'Chastise'."
+    },
+    {
+      "name": "Counter Chaos",
+      "page": "p.86",
+      "description": "Shields the recipient against the effects of any special ability a monster or being may get from its connections with chaos. Thus if a chaotic creature has a Chaos Feature increasing its natural Armour Points from 3 to 9, it is reduced back to 3 for attacks made by the protected character. A chaotic monster with Regeneration cannot regenerate from wounds made by the protected character, and so on. Note that this effect occurs no matter whether the Chaos Feature is advantageous or disadvantageous."
+    },
+    {
+      "name": "Couvade",
+      "page": "p.86",
+      "description": "A spell for midwifery, Couvade is cast upon a pregnant female and the father, or suitable proxy, of the unborn child, both of whom must consent to be included in this spell and be present at its casting. If cast within the first season of pregnancy, all the pains and sickness of pregnancy will affect him instead of her. The spell's duration lasts until the child is born. During delivery, the woman suffers only minimal pangs, but the husband is prostrate with pain; ensuring the safety of both mother and child. This spell is especially important for trolls, as they have much difficulty in childbearing, especially with the large great troll births and with trollkin. This spell does not, unfortunately, enable the mother to be safe from birthing trollkin, but they are born alive and healthy."
+    },
+    {
+      "name": "Crack",
+      "page": "p.86",
+      "description": "This spell must be cast at a non-living, non-magical object, which can anything from a piece of armour or a weapon, up to a roof beam or statue. Fetishes containing spirits and objects with temporal spells cast upon them do not count as 'magical' in this circumstance, only items made from magical substances or those that are permanently enchanted, such as spell matrices. The targeted object immediately breaks into pieces, provided its SIZ is no larger than the Intensity of the magic. A Repair spell can fix the broken object."
+    },
+    {
+      "name": "Create Bonfire",
+      "page": "p.86",
+      "description": "Create Bonfire must be cast on an existing flame or fire, increasing its diameter to the value of the spell's Intensity in metres. Although the flames can spread and hence illuminate, the actual temperature of the flames does not increase. If no substance is available for the expanded fire to burn, it rapidly dwindles back to its former status. This spell has no effect on magical flames such as Fireblade or similar spells. It will however increase a salamander's size by one cubic metre per two full points of Create Bonfire, augmenting its Hit Points and protection, but not its damage or other characteristics."
+    },
+    {
+      "name": "Create Fissure",
+      "page": "p.86",
+      "description": "Create Fissure opens up a massive crack in the ground, parting the soil to either undermine a structure such as a wall or creating a physical obstacle difficult to cross. The dimensions of the chasm depend upon the strength of the magic, having a length equal to Intensity in metres, a depth of half that, and a width equal to one third of the length. Thus an Intensity 6 Create Fissure spell would form a crevasse 6m long, 3m deep and 2m wide. If the crack is cast to undermine a wall or similar construction, the structure loses 1d10 Hit Points per point of Intensity, ignoring structural armour (RuneQuest page 12). If reduced to 0 Hit Points, it collapses where it has been undermined. If the chasm is formed directly underneath a target who fails to Evade, they fall into it, taking appropriate falling damage (RuneQuest page 118)."
+    },
+    {
+      "name": "Create Flippers",
+      "page": "p.86",
+      "description": "This turns the recipient's arms and legs into armoured flippers incapable of performing any manipulation skill. Any Swim skill checks are made one difficulty grade easier. His swimming Movement Rate becomes 6 and his speed on land is reduced to 1. The recipient's skin on his limbs becomes leathery, granting a number of natural Armour Points equal to half the spell's Intensity."
+    },
+    {
+      "name": "Create Foe-Curser",
+      "page": "p.87",
+      "description": "This spell must be cast upon a totem involving the skull of some person or creature, often set into an alcove, crevasse or atop a post. After it is created, the foe-curser will trigger its magic on trespassers entering the area who register as hostile to the caster, community or cult the spell was cast to protect. The type of curse depends on the skull being used, and lasts until dispelled or the next Sacred Time."
+    },
+    {
+      "name": "Create Ghost",
+      "page": "p.87",
+      "description": "The Create Ghost ritual must be performed over the body of a recently slain victim and takes several hours to complete. The ritual tears the soul of the person from the path that the soul naturally follows after death, and causes it to appear at the location of its old body and attack the caster in spirit combat. If the soul's Magic Points are brought to zero, it is turned into a haunt (RuneQuest page 406), permanently bound at that place. If on the other hand the soul wins, it either possesses the caster's body to wreak havoc, or possibly forces them to commit suicide, depending on the whim of soul before it departs once more for its afterlife."
+    },
+    {
+      "name": "Create Gorp",
+      "page": "p.87",
+      "description": "Another ritual spell which is performed over the earth itself, it transforms a portion of the ground into a live gorp with a SIZ equal to three times the spell's Intensity. It does not however, provide any control over the chaos monstrosity."
+    },
+    {
+      "name": "Create Great Market",
+      "page": "p.87",
+      "description": "This spell enables members of the same cult to combine and overlap their Create Market spells so that its collective Area and Duration are based upon the combined Intensity of the participants. A modestly sized Create Great Market cast with seven Create Market spells of Intensity 6, 6, 7, 7, 8 and 9 would grant it an Area of 49m radius and a Duration of five days."
+    },
+    {
+      "name": "Create Head",
+      "page": "p.87",
+      "description": "This spell must be cast on the cult's Holy Day or High Holy Day. In this ritual, a living victim is decapitated with a silver garrotte and their soul trapped within the severed, living head. The head is placed in a mental connection with the caster, and its magic points become available for casting spells. All Folk, Rune, Spirit and Sorcery magic the victim knew are usable by the caster, who must use victim's own skills to cast and manipulate them. Any Rune Spells known by a head can be used until the head's Devotional Pool is drained, at which point the caster will lose access to its Rune Magic. In addition, heads whose souls have not yet descended into gibbering madness may be questioned by the caster, who must succeed in an unopposed Influence roll to gain a truthful answer. The duration of Create Head continues until the caster drops the spell, the head suffers a Major Wound or it is drained to zero Magic Points. Heads cannot recover Hit Points naturally, but must be healed using magic. Neither can a head regain Magic Points, unless the caster ritually recharges it with their own points at a cult shrine or temple. Depending on the personality and strength of will of the victim, each month the soul remains trapped in its own head it must succeed in an unopposed Willpower roll, else go insane; at which point the caster loses access to the head's magic and its knowledge. When the spell ends for whatever reason, the head decays into a stinking mass of corruption, and trapped souls which still possess Magic Points become Mad Head Ghosts, tied to the putrid remnants. Treat as Haunts (RuneQuest page 406)."
+    },
+    {
+      "name": "Create Market",
+      "page": "p.87",
+      "description": "Create Market creates an invisible protected zone identical to Warding in most respects. The priest must use staffs one or more metres in height, carved with cult iconography to define the boundaries of the zone; this area may be of any shape, provided it lies within the limits of the spell. Unlike Warding it does not trigger on just anyone crossing the boundary, but only on those who enter the area with hostile intent, whether violence or theft."
+    },
+    {
+      "name": "Create Neutral Ground",
+      "page": "p.88",
+      "description": "As per Create Market."
+    },
+    {
+      "name": "Create Shadow",
+      "page": "p.88",
+      "description": "See Summon Shadow (page 116)."
+    },
+    {
+      "name": "Create Skeleton",
+      "page": "p.88",
+      "description": "Using the bones of a long dead or deliberately excarnated body, the caster animates the skeleton at the victim's old level of competence, with an upper limit of the caster's Devotion skill percentage. It works in a similar manner to the Raise Undead miracle (RuneQuest page 274), except that it only quickens a single skeleton. In return the skeleton endures indefinitely, until the caster eventually allows the Rune Spell to lapse. The raised skeleton is calculated as per the main rules (RuneQuest page 384), but gains the usual bonus to its STR and CON equal to the Intensity of the spell."
+    },
+    {
+      "name": "Create Warrior of Wood",
+      "page": "p.88",
+      "description": "Causes a tree, which has previously been ritually dedicated on the cult's High Holy Day, to awaken and serve the commands of the caster, so that it becomes capable of motion and combat. Use the Awaken miracle (RuneQuest page 264), treating its Armour Points as 6."
+    },
+    {
+      "name": "Create Whirvlish",
+      "page": "p.88",
+      "description": "This ritual creates a Whirvlish from the soul of a person slain by the enchanter. The ritual must be performed under the desert sky and takes an entire night to finish. The person whose soul is to be transformed into the accursed spirit is murdered at the completion of the ceremony. See Whirvlish page 145."
+    },
+    {
+      "name": "Create Wildfire",
+      "page": "p.88",
+      "description": "This spell must be cast on an existing fire, whether merely a candle flame or a bonfire, increasing its temperature. The Fire Intensity (RuneQuest page 120) is raised by 1 for each two full points of spell Intensity. Although heat is increased, the size of the original fire is not. However, fires augmented beyond Intensity 5 explode from the rapid thermal release, scattering flaming fragments of whatever was burning to a distance equal to the spell's Range; this effect can spread the fire further if they land on readily combustible material. At the conclusion of the spell the original fire burns itself out, having consumed all its fuel and leaving nothing behind but ashes."
+    },
+    {
+      "name": "Create Zombie",
+      "page": "p.88",
+      "description": "As per the Create Skeleton spell, except that it raises a zombie from a corpse instead."
+    },
+    {
+      "name": "Cremate Dead",
+      "page": "p.88",
+      "description": "This spell allows the caster to fully destroy the bodily remains of one or more cult members after death, guaranteeing that the soul will not return to haunt the family as a ghost or worse. It also burns all goods sent along with a corpse, allowing the deceased to carry some weapons and other supplies into the land of the dead. Cremate Dead can affect as many targets as the Intensity of the spell. It can also be used on the animated skeleton, zombie, mummified, or even vampire forms of former cult members, though the target may attempt to resist the magic in this case. Failure causes the undead target to spontaneously burst into flame and collapse as they are consumed."
+    },
+    {
+      "name": "Crush",
+      "page": "p.88",
+      "description": "Crush infuses the recipient's blunt weapon strikes with overwhelming force. For each five full points of Intensity, the size of the opponent's weapon is reduced one step when parrying. Thus an Intensity 6 Crush spell would decrease the size of a Hoplite shield or Greatsword from Huge to Large, whereas an Intensity 10 Crush would reduce the same parrying weapons to merely Medium, making this spell exceptionally dangerous."
+    },
+    {
+      "name": "Cure Chaos Wound",
+      "page": "p.89",
+      "description": "Cure Chaos Wound is used to remove an affliction received from a chaotic creature or spell, for example reversing permanent changes caused by spells such as Chaos Feature or Corruption. It does not heal any damage per se, but can be combined with other healing spells to cure chaos-induced festering wounds, diseases or in the case of Broo, impregnations."
+    },
+    {
+      "name": "Cure Disease",
+      "page": "p.89",
+      "description": "This spell cures any disease currently afflicting the recipient, removing any conditions which are not considered permanent, such as Hit Point reduction due to Maiming or Characteristic loss. Note however that Cure Disease has no effect on disease bearing spirits which might be possessing the recipient."
+    },
+    {
+      "name": "Cure Iron Burn",
+      "page": "p.89",
+      "description": "This spell has been renamed to Resist Iron Burn (page 107)."
+    },
+    {
+      "name": "Cure Poison",
+      "page": "p.89",
+      "description": "This spell is the same as Cure Disease except that it affects victims of poisoning."
+    },
+    {
+      "name": "Curse of Thed",
+      "page": "p.89",
+      "description": "As per Reverse Chaos (page 107), save that the spell may only be used against creatures of Chaos or those tainted by Chaos in some way. Provided the spell is maintained, the victim suffers the enduring effects of the curse."
+    },
+    {
+      "name": "Dark Fear",
+      "page": "p.89",
+      "description": "This spell operates much like Bump in the Night (page 80), but Dark Fear can be used in daylight to create a small area of demoralising shadow around the caster."
+    },
+    {
+      "name": "Dark Walk",
+      "page": "p.89",
+      "description": "This spell allows the caster to be totally invisible and soundless in darkness and shadow. The blend in is total, but launching an attack reveals the caster until the end of the Round. For the purposes of close combat, the recipient must first disengage from their opponent before they can disappear again."
+    },
+    {
+      "name": "Darklight",
+      "page": "p.89",
+      "description": "Darklight creates an invisible illumination which can only be seen by cult members. It must be cast on any item which is capable of burning and giving off non-magical light, such as torches, lanterns, braziers, campfires and so on. Non-cultists can see the dim violet flames, but the fire illuminates nothing to them. The spell ends when the fuel is naturally expended."
+    },
+    {
+      "name": "Darksee",
+      "page": "p.89",
+      "description": "Allows the recipient to see an environment alien to their senses. Diurnal creatures can see in the dark as if it were full daylight, and vice versa for nocturnal creatures. Darksee also cancels the effects of sunlight on trollkin and cave trolls, as well as negating the effects of the Blinding spell as well."
+    },
+    {
+      "name": "Decrease Temperature",
+      "page": "p.89",
+      "description": "Decrease Temperature lowers the temperature by 1d30 Centigrade per point of Intensity, with the possible result of inducing exposure to those within the area (RuneQuest page 129). If the temperature drops below freezing point, any precipitation will turn to snow and standing water will slowly freeze over."
+    },
+    {
+      "name": "Decrease Wind",
+      "page": "p.89",
+      "description": "This spell decreases the average wind STR by 1d10 per point of Intensity for the duration of the spell (RuneQuest page 130). This spell has no effect upon temperature or wind direction."
+    },
+    {
+      "name": "Defend Against Chaos",
+      "page": "p.90",
+      "description": "Defend Against Chaos helps the caster to avoid being overwhelmed by chaotic creatures or enemies possessing an affinity to the Chaos Rune. Any Evade roll used to outmanoeuvre chaos foes in combat has its Level of Success boosted by one step. Thus a Fumble upgrades to a Fail, a Fail to a Success and a Success to a Critical, whilst rolled Critical Successes cannot be increased any higher. Under its influence, the caster is usually able to stay out of reach whilst whittling down the opposition one by one."
+    },
+    {
+      "name": "Defend Against Law",
+      "page": "p.90",
+      "description": "As per Defend Against Chaos, but works on foes without a Chaos Aura, Chaos Feature or a link to the Chaos Rune."
+    },
+    {
+      "name": "Detect Truth",
+      "page": "p.90",
+      "description": "This spell allows the caster to tell whether anyone within the radius of the spell is lying. If lies are spoken, the speaker emits a dark, smoky glow visible to members of the cult."
+    },
+    {
+      "name": "Detection Blank",
+      "page": "p.90",
+      "description": "Detection Blank is cast to screen any object, spell or person from detection by Sense, Detect, or Find magic of equal or lower Intensity. Unlike other anti-magic protections like Countermagic and similar spells, it does not let the person doing the detection know that his spell has been blocked."
+    },
+    {
+      "name": "Devour (Race)",
+      "page": "p.90",
+      "description": "This spell allows the caster to ritually consume a still-living person according to the specific race or species defined. Common versions include Devour Elf, Devour Human and Devour Troll. Over the course of the gruesome feast, the caster absorbs Magic Points from the suffering victim. The amount gained cannot exceed either the Intensity of the spell or the victim's CON, whichever is lower. These Magic Points replenish the caster's own, and any surplus can temporarily exceed the caster's maximum, but dissipate once the spell ends."
+    },
+    {
+      "name": "Devour (Substance)",
+      "page": "p.90",
+      "description": "The caster may eat any amount of the indicated substance without harm. Thus someone who casts Devour Chaos could eat a gorp, and would take no damage from its acidic nature nor gain any chaotic taint; whereas Devour Plant would protect against thorns and plant-based poisons; Devour Fire would allow the quaffing of flaming oil without burns; and so on. In addition to any nutritional benefits, the spell ensures that all of the ingested substance is fully digested and out of the caster's system by the time it expires. Thus it is an invaluable way of dealing with regenerating monsters or substances which are harmful to the caster such as iron."
+    },
+    {
+      "name": "Devour Book",
+      "page": "p.90",
+      "description": "See Ingest Scroll page 99."
+    },
+    {
+      "name": "Devour Spirit",
+      "page": "p.90",
+      "description": "Devour Spirit allows the caster to consume the Magic Points of spirits engaged in Spirit Combat. Any damage roll inflicted upon the spirit is absorbed by the caster instead. Thus a caster currently at 7 MP facing a Haunt at 11 MP, who inflicted a 3 points of damage on the spirit, would steal those Magic Points, restoring them to 10 MP whilst the spirit is decreased to 8 MP. A spirit reduced to zero Magic Points under the effects of this spell is utterly destroyed."
+    },
+    {
+      "name": "Diamond Edge",
+      "page": "p.90",
+      "description": "When cast on stone cutting tools such as pickaxes or mallets, this spell increases the damage inflicted by an amount equal to the Intensity of the spell, but only when used against creatures or objects made of earth and stone. Thus an Intensity 8 Diamond Edge cast on a pickaxe (1d6) would allow the weapon to inflict 1d6+8 damage against gnomes, gargoyles or a stone fortification."
+    },
+    {
+      "name": "Discorporation",
+      "page": "p.90",
+      "description": "The caster temporarily detaches the spirit of the touched recipient, allowing it to become a spirit and travel from their body up to the spell's range. Awareness of the recipient resides in their spirit form, so that their body remains comatose until the spell ends. Unwilling recipients may resist. A discorporated character is treated in all respects as an ordinary disembodied spirit, thus they are not only visible but also recognisable. The discorporated recipient may travel through physical objects without harm and can swiftly travel to known locations within range. In addition they are still able to cast magic, although their spirit is also vulnerable to magical attacks. Any fumble rolled during their discorporate sojourn immediately withdraws them back to their body. If their body is killed whilst still under the effects of this spell, the dead recipient may attempt one task before being drawn into whatever afterlife awaits them."
+    },
+    {
+      "name": "Dismiss Elemental",
+      "page": "p.91",
+      "description": "Use the default Dismiss Elemental miracle (RuneQuest page 268)."
+    },
+    {
+      "name": "Dismiss Magic",
+      "page": "p.91",
+      "description": "Use the default Dismiss Magic miracle (RuneQuest page 268)."
+    },
+    {
+      "name": "Divination",
+      "page": "p.91",
+      "description": "Divination allows the caster to communicate with their deity, but must be cast within a temple or shrine to that god in a ritual lasting one hour per two points of Intensity. At the conclusion of the ritual, the caster may ask one simple question per hour invested in the ceremony. In return he or she either will receive an answer of up to seven words or a brief vision or dream. However, the Game Master should privately roll against the caster's Devotion skill for each question. A failure implies that the caster unsuccessfully interpreted the answer or dream properly, resulting in a misleading or puzzling answer. Note: Deities are incapable of revealing what they do not know. The only areas over which they have any familiarity are their personal experiences during the God Time; the last known location and activities of their initiates and devotees, as reported during that worshipper's most recent prayers; and general information concerning events within the god's sphere of control of their Runes."
+    },
+    {
+      "name": "Divination Block",
+      "page": "p.91",
+      "description": "Divination Block must be cast on either a single person or object. During the period of the spell, the presence of the recipient or any activities it is involved with, are obscured from magical observation. This obscurement affects history itself, so that Divination or any other knowledge spells cast after the fact cannot recall any details of what occurred during the period of the Divination Block. However, the existence of a Divination Block having been used is not concealed."
+    },
+    {
+      "name": "Divine Intervention",
+      "page": "p.91",
+      "description": "Divine Intervention is no longer used in RuneQuest 6th Edition. Devotees instead receive the ability to channel their god directly via Feats."
+    },
+    {
+      "name": "Draw Beast",
+      "page": "p.91",
+      "description": "When this spell is cast upon one or more beasts possessing INS instead of INT, up to a number equal to the spell's Intensity. Those creatures which fail to resist move toward the caster at walking speed."
+    },
+    {
+      "name": "Draw Human",
+      "page": "p.91",
+      "description": "As per the Draw Beast spell, except that it attracts INT-based races descended from the Man Rune."
+    },
+    {
+      "name": "Drown",
+      "page": "p.91",
+      "description": "Drown is only effective on air breathing targets, filling the target's lungs with water if they fail to resist. At the end of that Round and every Round thereafter, the victim must make an Endurance roll as per the Asphyxiation rules (RuneQuest page 108). Breathe Water or similar spells renders the target immune to Drown, but does not heal any Fatigue damage already taken."
+    },
+    {
+      "name": "Earthmight",
+      "page": "p.91",
+      "description": "The recipient of Earthmight will gain 1d6 STR and 1d6 SIZ per two full points of Intensity, which may exceed its species maximums. It takes a full round to grow to full stature. The magic is only effective as long as the recipient remains in physical contact with unworked earth or stone. If this contact is ever lost, the spell ends."
+    },
+    {
+      "name": "Earthpower",
+      "page": "p.92",
+      "description": "Once cast this spell endures until it is activated. It is triggered when the caster's Magic Points drop to zero, providing they are in contact with the earth; whereupon they recover a number of Magic Points equal to a dice roll of a size commensurate to the Intensity of the spell, and recharge their Devotional Pool by a dice roll of half that size (see the Earthpower Effect table)."
+    },
+    {
+      "name": "Earthtouch",
+      "page": "p.92",
+      "description": "Earthtouch permits the caster to learn the exact STR, CON, SIZ, DEX, INT, POW and CHA of any entity within range, providing that both the target being observed and the caster are touching the ground. It also informs the caster of the target's current Hit Points, Magic Points and Fatigue level. Only a single entity can be investigated at a time and it requires a Combat Action to change to a new target."
+    },
+    {
+      "name": "Earthwarm",
+      "page": "p.92",
+      "description": "Causes an area of soil or rock to increase in temperature, by a number of °C equal to twice the Intensity of the spell. Earthwarm is normally used to protect fields and orchards against frosts, but can also be used to protect travellers in frigid climes when no other heat is available or even melt snow and ice to unblock mountain passes."
+    },
+    {
+      "name": "Ecstatic Communion",
+      "page": "p.92",
+      "description": "Ecstatic Communion must be cast on the cult Holy Day or High Holy Day. It is normally performed as part of a specific ritual embracing an aspect of that deity within the cult temple or shrine. All participants within the area experience sensual bliss unless they try to resist. Otherwise everyone involved, including the caster, are overwhelmed by the sensations of whatever ritual activity they are performing. Those under the effects of Ecstatic Communion feel no pain or discomfort, nor may they react to physical harm against them, but must continue the ritual to its climax. Only the caster may attempt to break free of the spell, requiring them to succeed in an unopposed roll against their Willpower. The pleasures granted by Ecstatic Communion are so addictive that anyone who succumbs to its power, whether willingly or not, will thereafter cooperate fully with the cult to experience the bliss again."
+    },
+    {
+      "name": "Enchant (Metal or Object)",
+      "page": "p.92",
+      "description": "All enchantments are now cult specific Feats which require a Heroquest to the other world to perform."
+    },
+    {
+      "name": "Enhance Gustbran",
+      "page": "p.92",
+      "description": "See Create Wildfire (page 88)."
+    },
+    {
+      "name": "Enhance Mahome",
+      "page": "p.92",
+      "description": "See Create Bonfire (page 86)."
+    },
+    {
+      "name": "Erotocomatose Lucidity",
+      "page": "p.92",
+      "description": "The spell affects both the caster and one intended recipient, who does not usually try to resist. Both the recipient and caster experience the ecstatic Oneness felt during the moment of sexual climax. The experience lasts for the entire duration of the spell. The experience is so strong that after it expires, both participants' Fatigue is increased by one level per two points of Intensity."
+    },
+    {
+      "name": "Exchange Spells",
+      "page": "p.92",
+      "description": "This allows the user to trade knowledge of one Folk Magic spell. It cannot be used with Spirit Magic, Rune Spells or Sorcery. The user must set up a Mindlink connection between himself and his customer. The participants agree upon the spells they will attempt to trade, one spell each. If the Exchange Spells succeeds, each participant loses knowledge of the spell they chose and gains knowledge of the spell their partner chose. A fumble indicates that both participants lose knowledge of their own spell, and do not gain their partner's spell."
+    },
+    {
+      "name": "Excommunication",
+      "page": "p.93",
+      "description": "Use the default Excommunication miracle (RuneQuest page 270). The spell requires a preparatory ceremony of at least an hour at a cult temple or shrine before it may be cast. The target of the Excommunication need not be physically present, since the caster is requesting the god to perform the act of severance. Neither does the target gain a chance to resist, since the deity will not comply with the request unless the victim is truly guilty of the crimes they are accused of. In addition to losing their Devotional Pool, the victim will be pursued by the cult's Spirits of Retribution."
+    },
+    {
+      "name": "Extension",
+      "page": "p.93",
+      "description": "Other than the reduced cost, use the default Extension miracle (RuneQuest page 270)."
+    },
+    {
+      "name": "Face Chaos",
+      "page": "p.93",
+      "description": "When cast upon the recipient, that person stands their ground and fights any chaotic foe they face, even if ordinarily they would have run. If desired the spell may be resisted, but might lead to future accusations of cowardliness. This spell does not render the recipient immune to the effects of such spells as Demoralize or Panic, though they still will not flee."
+    },
+    {
+      "name": "Face Law",
+      "page": "p.93",
+      "description": "As per Face Chaos, but works against enemies without a Chaos Aura, Chaos Feature or a link to the Chaos Rune."
+    },
+    {
+      "name": "False Form",
+      "page": "p.93",
+      "description": "This spell gives the recipient the semblance of a normal human to all senses, including non-human senses such as Darksense. This spell also hides any cult mark the recipient may possess. It is used by members of the cult to pass as normal humans. The spell is usually recast each seasonal cult Holy Day."
+    },
+    {
+      "name": "Fang of Wachaza",
+      "page": "p.93",
+      "description": "This spell must be cast upon a spear, javelin, dart or trident. The weapon's point(s) take on the appearance of old ivory while under the influence of this spell. Anyone struck and damaged by the weapon must resist, or they instantly die. Otherwise the victim simply takes the damage rolled."
+    },
+    {
+      "name": "Fangs",
+      "page": "p.93",
+      "description": "Fangs causes the growth of huge red teeth from the mouth of the recipient. Attacking with these fangs utilises the Unarmed skill of the user, and does the base damage of a bite attack (see Natural Weapon Damage table RuneQuest page 324), plus any damage modifier. Furthermore, the fangs secrete an acid, the strength of which depends on the Intensity of the spell: 1-5 Weak acid; 6-10 Strong acid; 11+ Concentrated acid."
+    },
+    {
+      "name": "Fear",
+      "page": "p.93",
+      "description": "As per the default Fear miracle (RuneQuest page 270), save that the result of the opposed roll is nuanced. If the target is overcome, refer to the Fear table to judge the results of their Willpower roll:"
+    },
+    {
+      "name": "Featherscales",
+      "page": "p.94",
+      "description": "Causes feathery clouds of loose, sticky scales to coat the caster's body, increasing their natural Armour Points by half the value of the spell's Intensity. Additionally, when the character is hit by any weapon, that weapon becomes gummed up and covered with scales, making it blunt and padded. Such weapons henceforth do only half damage till cleaned off. Featherscales does not work if the caster is wearing armour."
+    },
+    {
+      "name": "Fertilize",
+      "page": "p.94",
+      "description": "This spell must be cast as a daylong ritual. Whilst maintained by the caster it restores to the soil the necessary organic and mineral vitality to support plant life, whilst neutralising salts and other poisons. It is often used in regions which have been over-farmed, or are unnaturally desolate such as the Wastelands. Each point of Intensity fertilises an area of one hectare enough to feed a large family."
+    },
+    {
+      "name": "Fight Disease",
+      "page": "p.94",
+      "description": "When cast upon a sick individual, this spell helps to fight off the effects of a disease, mundane or magical, or Disease Spirit they are suffering from. Whilst the spell is in effect, all attempts to resist the disease or possession are doubled, as if the difficulty modifier of the roll was Very Easy."
+    },
+    {
+      "name": "Find (Specific Thing)",
+      "page": "p.94",
+      "description": "This spell informs the caster of the presence of the specific substance, object or creature sought — illuminating it with a slight glow that can be seen only by the caster. This spell can detect all incidences within range, unless they are shielded behind a metre of solid material. The caster remains aware of the sought after presence for the duration of the spell. Each cult Find spell is specific to a single Rune-related thing such as fresh water, horses, enchanted objects and the like."
+    },
+    {
+      "name": "Firedwell",
+      "page": "p.94",
+      "description": "Allows the recipient to live midst volcanic conditions, so that no magical fire or heat will affect them. Additionally the spell permits them to see clearly through smoke or fumes, and breathe any noxious mephitic vapour. On the other hand, the recipient will feel chilled at normal room temperature and be susceptible to cold, taking double damage from magic of the Darkness Rune."
+    },
+    {
+      "name": "Fireshield",
+      "page": "p.94",
+      "description": "Fireshield reduces the damage of all fire-based attacks by half the Intensity of the spell. Thus an initiate casting the spell at an Intensity 7 would reduce the damage taken from a bonfire by 4 points, and be immune to the flames of a Firebladed weapon (+1d3 damage) entirely."
+    },
+    {
+      "name": "Firespear",
+      "page": "p.94",
+      "description": "This is cast upon a short spear, causing its point to burst into flame. The normal damage done by the weapon is replaced by 1d6 damage per two points of Intensity. The wielder of the weapon still adds his damage bonus when he strikes, and once the spell concludes the weapon emerges unharmed by the magical fire."
+    },
+    {
+      "name": "Fix Intelligence",
+      "page": "p.94",
+      "description": "This spell only affects members of the Elder Races linked with the Man Rune. If the target fails to resist the spell, his INT is permanently transformed into INS. The victim is now ruled by instinct, rather than reason. He remembers his former life and knows his friends and enemies. Essentially, he becomes a very cunning animal in humanoid form. The victim becomes totally incapable of using any knowledge or language skills, or using any magic except magic items which automatically function. He still has full use of his weapons, and those Standard skills whose default value is not based on INT. If this spell takes effect on a shaman, the shaman's fetch takes over control of the body, but remains limited to those skills and spells it itself knows."
+    },
+    {
+      "name": "Flaming Bow",
+      "page": "p.95",
+      "description": "As per the Firespear spell, save that each arrow shot from the bow is consumed by flames as it travels towards a foe, inflicting the burning damage but preventing the impale special effect."
+    },
+    {
+      "name": "Flay",
+      "page": "p.95",
+      "description": "This spell must be cast on a whip, flail or knout. Each two points of Intensity increases the base damage dice of the weapon by one step. For instance, a barbed whip does 1d3 base damage. Under the effects of an Intensity 5 Flay spell however, its damage would be incremented by 3 steps, to 1d8 damage instead. Note that bonuses to the base dice remain unaffected. Thus if the whip in the previous example had the effective enhancement it would start with a damage of 1d3+1, and be boosted to 1d8+1."
+    },
+    {
+      "name": "Flight",
+      "page": "p.95",
+      "description": "The caster may transport one person, or a thing, up to SIZ 20 through the air for the duration of the spell. An unwilling target may attempt to Evade the grasp of the magic in an opposed roll, and if successful the spell fails. The maximum Movement Rate of the recipient is equal to the Intensity of the spell, though running or sprinting increases this as normal (RuneQuest page 105). However the ambient wind does affect the recipient, blowing them along at a Movement Rate equal to the STR of the breeze, or slowing them by that much if they are heading into the wind. The source of the spell limits how and where the recipient may fly. The Air Rune allows freedom to travel anywhere, but at the expense of never stopping, else they will waft gently to the ground. The Moon Rune only allows recipients to travel to and from the moon in question, but permits them to hang motionless in the sky if desired."
+    },
+    {
+      "name": "Float",
+      "page": "p.95",
+      "description": "See Buoyancy (page 80)."
+    },
+    {
+      "name": "Flowers",
+      "page": "p.95",
+      "description": "This spell allows the user to create flowers at will until the magic ends. During concentration, the ground and existing plants around the caster erupt with pretty flowers and sprays of unfurling leaves. If the site is suitable for a small plant's continued growth, it takes root and sprouts. If the site is not suitable, such as the chinks in stone walls or a tiled floor, the flowers wither when the spell concludes."
+    },
+    {
+      "name": "Forlorn Hope",
+      "page": "p.95",
+      "description": "All cult members within range who fail to resist are compelled to fight fanatically for the cult. Any sense of fear or self preservation is lost, replaced with a desire to spend their lives dearly for their god. In order to maintain this devotion however, the caster must remain with the affected group of lay members and initiates, exposing themselves to the same danger. Cult members wearing enchanted slave collars or shackles (page XX) automatically fail to resist this spell."
+    },
+    {
+      "name": "Form Ice",
+      "page": "p.95",
+      "description": "Form Ice transforms all open liquids into solid ice within its area of effect, down to a thickness equal to twice the Intensity in centimetres. The ice so formed can bear creatures with a SIZ up to three times the Intensity. The mobility of the fluid limits whether it can be frozen, with initiates only able to freeze the surface of static water such as pools or lakes, whilst devotees can freeze flowing rivers or the surface of the restless sea. Unless the ambient temperature is below 0°C, the ice will melt naturally of its own accord."
+    },
+    {
+      "name": "Free Ghost",
+      "page": "p.96",
+      "description": "This spell can only be cast upon the Haunt or Wraith of a deceased mortal. If it fails to resist, the ghost is unbound from its haunting spot and returns to the Land of the Dead."
+    },
+    {
+      "name": "Fumble",
+      "page": "p.96",
+      "description": "This spell is usually targeted against an opponent in combat. If the target fails to resist, then their next skill roll, provided it takes place within the spell's duration, will automatically become a fumble. The results of the fumble depend entirely on the skill being used."
+    },
+    {
+      "name": "Gift Power",
+      "page": "p.96",
+      "description": "Gift Power temporarily links the caster with a spirit, allowing him to transfer part of his Devotional Pool to augment the spirit's POW. The increase not only adds to the spirit's available Magic Points, but may also boost its Spirit Intensity. The maximum number of points the caster can transfer from his pool to the spirit is equal to the Intensity of the spell. Obviously the caster cannot access the gifted points of his pool until the spell ends, and even then he must recharge them first."
+    },
+    {
+      "name": "Gift Spell",
+      "page": "p.96",
+      "description": "This spell allows the caster to transfer the knowledge of any one Folk Magic spell to another person, or a spirit with the Spellcasting ability. The caster loses knowledge of the spell whilst it is transferred, but reclaims it once the duration of the spell ends, or he ceases to maintain it."
+    },
+    {
+      "name": "Glow Spot",
+      "page": "p.96",
+      "description": "This spell causes a beam of crimson light to descend from the Red Moon, illuminating the area around the recipient. This acts as a Glowspot, allowing all Lunar magic cast within its radius to function as it does on the day of the full moon. For this effect to work on ranged spells, both the caster and target must be within the radius of this or another Glowspot."
+    },
+    {
+      "name": "Gnome to Gargoyle",
+      "page": "p.96",
+      "description": "This spell must be cast upon a gnome. It turns the earth elemental into a humanoid monster. The Characteristics and Attributes of the gargoyle remain those of the original gnome; however, it loses its ability to magically manipulate earth and rock. In exchange, the gargoyle gains Armour Points equal to the Intensity of the spell, plus the Hit Locations of its namesake (page 168). The damage each location can take is calculated by applying the gnome's total Hit Points on the Hit Points per Location table (RuneQuest page 14), noting that the gargoyle's arms have the same HP as its legs, whereas its wings have 1 HP less. When the spell expires, the monster turns back into earth."
+    },
+    {
+      "name": "Great Parry",
+      "page": "p.96",
+      "description": "Great Parry must be cast upon a shield. It grants the shield an infinitely large Size in terms of blocking damage from attacks, although Knockback still affects the holder of the shield. So the wielder of the shield, providing they succeed in parrying, could use a buckler to stop all damage from the nose horn of a charging rhino, but would still be knocked flying."
+    },
+    {
+      "name": "Group Defense",
+      "page": "p.96",
+      "description": "Creates a shadowy sphere centred on the caster, with a radius up to half the Intensity of the spell. All those contained within are protected within its veil-like barrier. Any creature attempting to pass this barrier is automatically struck in a random Hit Location, ignoring armour, with damage equal to the Intensity of the spell. If two or more casters link their Group Defense spells, the amount of damage inflicted by the conjoined barrier becomes the sum of the Intensities. Whilst the spell is active, the caster cannot perform any aggressive act."
+    },
+    {
+      "name": "Group Laughter",
+      "page": "p.97",
+      "description": "This spell ensures that everyone within the area sees the humour of every joke told, and old jokes that everyone knows seem funny again. Indeed those under its effects are even capable of enjoying practical jokes played on themselves. Due to its harmless nature, the spell's effects cannot be resisted."
+    },
+    {
+      "name": "Guided Teleportation",
+      "page": "p.97",
+      "description": "Guided Teleportation returns the caster to a specific spot sacred to the god who provides the magic, usually a shrine or temple. This spell has no range limitation, but its destinations are obviously limited."
+    },
+    {
+      "name": "Hallucinate",
+      "page": "p.97",
+      "description": "Use Illusion (RuneQuest page 271), save that the spell only affects the caster and those in Mindlink with him. The hallucinations are completely undetectable to anyone else."
+    },
+    {
+      "name": "Hate Sky",
+      "page": "p.97",
+      "description": "This spell causes all non-magical flames within the area of an Intensity equal or less than half the Intensity of the spell to be extinguished. Thus an initiate who cast this spell at an Intensity of 5 would instantly smother all flames up to and including campfires (Intensity 3 fires). Hate Sky also affects magical fires with lesser Magnitude, so a sufficiently potent casting would extinguish a Firespear or Elemental Summoning used to summon a salamander."
+    },
+    {
+      "name": "Heal Area",
+      "page": "p.97",
+      "description": "This spell heals any wound in a single hit location, including attaching a severed limb, provided it is cast within a number of minutes not exceeding the Intensity of the spell."
+    },
+    {
+      "name": "Heal Body",
+      "page": "p.97",
+      "description": "Use Heal Body (RuneQuest page 271)."
+    },
+    {
+      "name": "Heal Constitution",
+      "page": "p.97",
+      "description": "See Cure Poison (page 89)."
+    },
+    {
+      "name": "Heal Wound",
+      "page": "p.97",
+      "description": "See Heal Area (above)."
+    },
+    {
+      "name": "Healing Trance",
+      "page": "p.97",
+      "description": "The recipient of this spell will fall into a deep trance, during which his bodily processes will be sped up by a multiple equal to the Intensity of the spell. Casting the spell with an Intensity of 8 on an injured warrior would speed up his natural Healing Rate by a factor of 8:1, resulting in the restoration of Hit Points in one eighth the time: so Minor Wounds would recover every 3 hours, Serious Wounds every 21 hours and Major Wounds every four days. Both the caster and the recipient remain in an unwakeable trance state until all healing is done. They must be fed and cared for as if they were catatonics during this period."
+    },
+    {
+      "name": "Heat Metal",
+      "page": "p.97",
+      "description": "As per Create Wildfire (page 88), save that it can only be used on a forge fire and does not explode."
+    },
+    {
+      "name": "Heatblast",
+      "page": "p.97",
+      "description": "Heatblast can only be used on earth which is at a minimum of 40 degrees C, either naturally via geothermal activity, or through the Divine spell Earthwarm. It concentrates this ambient heat, then releases it in a burst, affecting everyone in the area who fails to resist. The blast inflicts 1d6 damage per 2 points of Intensity to every Hit Location, although natural and worn armour will help reduce the burns. Casting this spell drains the surrounding ground of warmth, preventing further castings of Heatblast until several days have passed to recuperate its thermal capacity."
+    },
+    {
+      "name": "Hide Fire",
+      "page": "p.97",
+      "description": "This spell is cast upon a container of any type or size, for instance a man's hand, a burlap sack or a pail. It permits the container to hold an appropriately sized fire without being burnt or putting the fire out. Thus the caster could pick a candle flame off its wick and hold in his palm for the duration of the fire; or he could also close his fist and hide the flame — then when he opened it, the fire would still be there."
+    },
+    {
+      "name": "Hide Wealth",
+      "page": "p.98",
+      "description": "This spell must be cast upon an inanimate bundle of goods, with an ENC no greater than its Intensity. It causes the target to become invisible to everyone except the caster or to anyone watching as the spell is cast. Objects and magics hidden with this spell cannot be sensed, even with detection spells, but the presence of the spell of Hide Wealth itself could be. If the hidden goods are moved, the spell dissipates."
+    },
+    {
+      "name": "Hie Wagon",
+      "page": "p.98",
+      "description": "Hie Wagon must be cast on a moving wheeled vehicle, such as a cart, wagon or chariot in which the caster is travelling. It increases the entire vehicle's Movement Rate, including that of its draft animals, by the Intensity of the spell. Animals drawing the wagon return to normal speed if cut loose."
+    },
+    {
+      "name": "Hold Course",
+      "page": "p.98",
+      "description": "This spell must be cast upon a ship upon which the caster is travelling. For the duration of the spell the ship continues on the exact same course in which it was set when the spell was cast. No directional changes can be made to the ship's course unless Hold Course is allowed to lapse or is dispelled. Likewise natural ocean going events cannot alter its course, although magic of a higher Magnitude can temporarily overwhelm it."
+    },
+    {
+      "name": "Hurling",
+      "page": "p.98",
+      "description": "All objects thrown by the caster have their range multiplied by the Intensity of the spell. The multiple affects all aspects of range, so a thrown javelin under the influence of an Intensity 5 Hurling would have a Close Range of 50m, Effective Range of 100m and Long Range of 250m. The spell does not increase range for purely projectile weapons such as bows and crossbows, but has a partial effect on blowguns and slings, halving its effect."
+    },
+    {
+      "name": "Identify Scent",
+      "page": "p.98",
+      "description": "This spell enables the caster to perfectly identify the nature of any familiar scent he encounters while under the spell's influence. It does not give range or direction, just nature. If the scent is of a substance or entity that the caster has never before encountered, he only knows that an unknown scent has been encountered."
+    },
+    {
+      "name": "Impede Chaos",
+      "page": "p.98",
+      "description": "Impede Chaos protects against the attacks and spells of chaotic beings. The spell imposes one additional difficulty grade against any attempt a chaos creature makes to harm the recipient. It has no effect on non-chaotic opponents."
+    },
+    {
+      "name": "Incarnate Ancestor",
+      "page": "p.98",
+      "description": "This spell summons the spirit of an ancestor to occupy the body of one of its descendants. The family member must be willing, and may be the caster. The summoned spirit will know all spells, knowledge and possible skills which it knew while still living. The spirit of the host body is temporarily suspended in the Spirit Plane and will return when the ancestor decides to leave or is exorcised. Friendly spirits leave when the job at hand is complete; neutral spirits must be bribed to do so using something like Gift Power or Gift Spell, whilst malign ancestors do not leave voluntarily, tying up points of the caster's Devotional Pool until it can be gotten rid of. This spell can summon a specific ancestor back a number of generations up to half the Intensity of the spell. Or it can be cast without naming the specific ancestor desired, in which case a random ancestor comes — a dangerous procedure. Note that powerful ancestors often have a POW Characteristic in excess of normal species maximums."
+    },
+    {
+      "name": "Increase Temperature",
+      "page": "p.99",
+      "description": "Increase Temperature raises the temperature by 1d30 Centigrade per point of Intensity, with the possible result of inducing heat exposure to those within the area (RuneQuest page 129). If the temperature rises above freezing point, any ice or snow in the area of effect will begin to melt."
+    },
+    {
+      "name": "Increase Wind",
+      "page": "p.99",
+      "description": "This spell increases the average wind STR by 1d10 per point of Intensity for the duration of the spell (RuneQuest page 130). This spell has no effect upon temperature or wind direction."
+    },
+    {
+      "name": "Induce Uzdo",
+      "page": "p.99",
+      "description": "This spell is used when a troll woman wishes to give birth to a Great Troll. It summons one of Karrg's followers, an Intensity 4 darkness spirit with a POW of 1d6+24, INT of 2d6+6, CHA of 2d6+6 and Darkness Rune affinity of 100%. The female troll then steps forward and the spirit envelopes her in its form, initiating Spirit Combat. If she manages to inflict damage on the spirit it ceases its attack out of respect for her strength and joins with her. Several hours later, she emerges from the darkness and the spirit returns to the underworld. The troll woman is now pregnant, and gives birth a year later to an uzdo infant. Those that fail to overcome Karrg's follower even once in Spirit Combat before running out of Magic Points have their soul Sundered from their body and die (RuneQuest page 212)."
+    },
+    {
+      "name": "Ingest Scroll",
+      "page": "p.99",
+      "description": "This spell is cast on text that the caster holds in his hands or is touching. This could be a scroll, the open pages of a book, an inscription carved in wood or stone and so on. It causes the information to be translated and transferred to the caster's mind, destroying any trace of it on the page or scroll, or crumbling the surface if carved into more permanent material. The wash of knowledge is so overwhelming that the caster must succeed in a roll against his Willpower or go into shock for 1d6 rounds; after which the caster must make and pass a second roll to prevent losing all the information gained."
+    },
+    {
+      "name": "Insect Song",
+      "page": "p.99",
+      "description": "The recipient can, at will, create a loud chirping, rasping noise, which is deafening close at hand and clearly audible up to its range in km away. This noise can be used to transmit messages to all cult initiates within earshot. The message is not understandable to anyone else."
+    },
+    {
+      "name": "Invigorate",
+      "page": "p.100",
+      "description": "Invigorate restores the Fatigue Level of the target, up one level per 2 points of Intensity in the spell. This only has an effect upon Fatigue lost to tiredness or effort, not levels lost to blood loss or the like."
+    },
+    {
+      "name": "Jabbers",
+      "page": "p.100",
+      "description": "This spell turns one of the recipient's arms, or optionally tail, in which case the tail cannot use its normal attack such as inject poison, into a jabber, a long bony point used for fighting. It has a weapon Size of Medium, Reach of Long, can impale, Armour Points equal to the spell's Intensity and does 1d10 damage plus any Damage Modifier. The recipient can attack and parry with the jabber using their Unarmed skill."
+    },
+    {
+      "name": "Keenclaw",
+      "page": "p.100",
+      "description": "Both the recipient's hands become paws as per a lion (RuneQuest page 369), doing 1d8 damage plus his Damage Modifier and using his normal Unarmed skill to strike. The magically hard claws are not only capable of inflicting the Bleed and Flurry special effects, but the recipient can use Sunder to tear away hide or armour. The claws are clumsy and cannot hold weapons or tools."
+    },
+    {
+      "name": "Knowledge",
+      "page": "p.100",
+      "description": "This spell allows the user to read the past history of an item. If the information cannot be assimilated fully within the duration of the spell, parts may be lost. If the item has a long history, the spell starts at the beginning unless the user dictates a particular time at which to start."
+    },
+    {
+      "name": "Lava Spear",
+      "page": "p.100",
+      "description": "This spell must be cast upon a spear. It permits the wielder to fire splatters of molten rock from the tip of the spear by expending magic points. For every Magic Point spent, a gout of lava flies out, inflicting 5d6 damage on impact. Armour protects, but shields which parry the lava are subject to its burning damage. The lava has a range of 100 metres, and uses the wielder's spear combat style to hit."
+    },
+    {
+      "name": "Leap",
+      "page": "p.100",
+      "description": "Leap allows the caster to travel up to 10 times the Intensity in kilometres, by leaping in an arc through the Otherworld to any destination he or she desires. Multiple castings can be combined together to allow additional followers touching the caster to be brought along. The landing place must be known in advance and the trip, no matter its distance, takes a full day."
+    },
+    {
+      "name": "Leaping Legs",
+      "page": "p.100",
+      "description": "When cast upon a leaping insect this increases its leaping ability by 10m per point of Intensity either horizontally or vertically. When cast upon a non-insect, it turns his hind legs into enormous, jointed, bug-like limbs, allowing the recipient to leap half the same distance."
+    },
+    {
+      "name": "Lie",
+      "page": "p.100",
+      "description": "This spell is undetectably cast at the same time that the caster tells a lie. Anyone hearing the lie who fails to resist automatically believes it to be true, no matter how outrageous, and continues to believe it until they have incontrovertible evidence of its falsehood. For instance, a trickster used this spell to tell his friends that the Sun wasn't going to rise tomorrow; it would elicit a great deal of panic until next morning or until a Yelm priest performed Divination and asked his deity what had happened."
+    },
+    {
+      "name": "Lightning",
+      "page": "p.100",
+      "description": "Use the default Lightning miracle (RuneQuest page 272)."
+    },
+    {
+      "name": "Lion's Head",
+      "page": "p.100",
+      "description": "This spell begins at the bottom of the page and continues on the next page. This spell turns the recipient's head into that of a lion. He gains a Bite attack as per a lion (RuneQuest page 369), doing 1d10 damage plus his Damage Modifier. This bite attack can be used in addition to normal weapon attacks and parries, provided the opponent is within reach."
+    },
+    {
+      "name": "Living Blade",
+      "page": "p.101",
+      "description": "A recipient under the influence of this spell move with lightning speed in combat, gaining 1 additional Action Point per Round."
+    },
+    {
+      "name": "Lock",
+      "page": "p.101",
+      "description": "This spell has been renamed to Seal (page 109) to avoid confusion with the Folk Magic spell of the same name."
+    },
+    {
+      "name": "Locust's Head",
+      "page": "p.101",
+      "description": "The recipient's head transforms into that of a giant locust, gaining a number of points of natural armour equal to half the Intensity of the spell, replacing any previous natural armour if greater. This transmogrification usually displaces any helmet not designed for an insectile head of that size. In addition, the recipient gains the ability to chew up and digest almost anything, providing it is not immediately destructive, such as molten metal or glass."
+    },
+    {
+      "name": "Madness",
+      "page": "p.101",
+      "description": "As per the default Madness miracle (RuneQuest page 272), save that the result of the opposed roll has a more significant effect. If the target is overcome, refer to the Madness table to judge the results of their Willpower roll."
+    },
+    {
+      "name": "Magical Arms",
+      "page": "p.101",
+      "description": "Each use of the spell creates a magical limb, usually an arm, attached to the torso of the caster. The formed limb is fully capable as per a normal humanoid arm or leg in terms of supporting weight or manipulating objects. This spell can be used to temporarily replace a missing limb or add additional ones beyond the norm. However, the extra limbs do not grant any bonus Action Points; nor, being magical creations, do they count as physical Hit Locations and therefore have no Hit Points."
+    },
+    {
+      "name": "Magnify Command",
+      "page": "p.101",
+      "description": "Magnify Command must be stacked with a Command spell (page 83). It boosts the duration and range beyond those of the base spell, and forces the commanded creature to suffer a penalty of one Difficulty Grade when resisting the spell."
+    },
+    {
+      "name": "Mating Ritual",
+      "page": "p.101",
+      "description": "This spell is normally cast by a female creature of Chaos upon a single male of any humanoid species. The spell allows the two to mate, although the fertility of the union is not guaranteed. The ritual need only last a single hour to achieve its purpose, but the 'wife' of the captive usually makes full use of the entire duration. The ritual inevitably ends in the painful death of the 'husband', whether through wounds, terror or raw exhaustion. When the 'husband' is a human, the viability of the union is almost assured, resulting in pregnancy if the caster can roll equal or less than the man's Endurance. With other races the chances are poorer, a roll suffering one Difficulty Grade, dwarves two grades and three grades for an elf. A successful pregnancy results in a birth or laying of a single egg. The emerging offspring is always female and bears some resemblance to her father, but does not deviate far from the form of her mother."
+    },
+    {
+      "name": "Matrix Creation",
+      "page": "p.101",
+      "description": "All spell matrix enchantments are now created by performing cult specific Heroquests to the other world."
+    },
+    {
+      "name": "Meld Form",
+      "page": "p.102",
+      "description": "This day-long ritual must be undergone to make the spell Proteus effectual (see page 105). A living physical creature of the type desired by the supplicant must be provided, although its SIZ cannot exceed three times the Intensity of the spell. When the ritual ends, the creature vanishes completely, and the supplicant forever-after gains the ability to turn into that creature by use of the Proteus spell. If the sacrificed creature is sapient, it gains a chance to resist the magic using its Willpower. If this fails, the creature's soul is not destroyed, and goes to whatever afterlife it deserves when its body vanishes. Non-sapient creatures, those with INS, cannot resist."
+    },
+    {
+      "name": "Mind Blast",
+      "page": "p.102",
+      "description": "Use the default Mindblast miracle (RuneQuest page 272)."
+    },
+    {
+      "name": "Mind-Read",
+      "page": "p.102",
+      "description": "If not resisted, this spell gives the caster the ability to read the conscious thoughts of a target without his consent, although he will know his mind is being read. It cannot be used to trawl through the victim's memories - only their current surface thoughts."
+    },
+    {
+      "name": "Mindlink",
+      "page": "p.102",
+      "description": "Use the default Mindlink miracle (RuneQuest page 272). Shared spells require both users to possess the required Rune Affinity."
+    },
+    {
+      "name": "Minor Infection",
+      "page": "p.102",
+      "description": "The caster can infect a target with one of the many minor diseases known to the cult. Those that fail to resist the magic must compare the result of their Endurance roll on the Infection Severity table to judge how serious their infection is, then roll on the Minor Infection table if a random disease is required. All the diseases are described in the boxed text on page 143."
+    },
+    {
+      "name": "Mist Cloud",
+      "page": "p.102",
+      "description": "This spell creates a small area of natural-looking mist around a target, which if hostile, may try to resist. Failure means that the cloud will follow the target. Visibility in or through the mist is limited to arm's length, effectively blinding the recipient if they possess no other senses to help."
+    },
+    {
+      "name": "Mold Rock",
+      "page": "p.102",
+      "description": "This spell allows the caster to use his or her hands like hammers, chisels and files, to shape rock. Mold Rock can also be used to dig tunnels or undermine foundations. Shaping Truestone or Adamant is impossible, unless the caster has some form of cult gift or Feat which permits him to do this."
+    },
+    {
+      "name": "Morale",
+      "page": "p.102",
+      "description": "Establishes a field around the caster which will affect the entire military regiment or members of the same cult with an unbreakable esprit de corps. Not only are the recipients immune to fear of any kind, automatically winning any Morale Test if using the battle rules from Ships and Shield Walls, but they may also augment their Combat Style by raising it by one Difficulty Grade. Thus a regiment of Humakti swordsmen unaffected by any situational penalties raise their combat skills from Standard to Easy."
+    },
+    {
+      "name": "Moth's Head",
+      "page": "p.103",
+      "description": "Whenever this spell is cast, the recipient's head becomes identical to that of a large furry moth, with long feathery antennae. Using these sensitive receptors he gains a Track skill equal to the value of the Rune Affinity used to cast the spell. In addition the recipient may automatically pinpoint the exact direction, number and distance of living organisms when within a distance of 10 times the Intensity of the spell."
+    },
+    {
+      "name": "Moulder",
+      "page": "p.103",
+      "description": "This spell causes a mushroom, mildew, mould, slime, or other fungus infection to infest everything within the area. The mould affects inanimate material such as wood, brick, stone, plants and even cloth, by reducing its Hit Points by an amount equal to the Intensity of the spell, crumbling it away. Thus a rope could be eaten through entirely, or a wooden door weakened by rot. Living creatures caught within the area suffer no ill effects from being infested, although their clothes and equipment might."
+    },
+    {
+      "name": "Multispell",
+      "page": "p.103",
+      "description": "This magic allows multiple Folk Magic spells to be cast simultaneously with the Multispell, saving the caster vital actions during times of combat. One Folk Magic spell can be cast for each four points of the Multispell's Intensity. It does not reduce the Magic Point costs of the spells, merely allows them to all be cast at the same moment as the Multispell, costing 1 Action Point, whether or not they are progressive. The only restriction is that duplicate Folk Magic spells cannot be cast multiple times on the same target. For example an initiate who cast Multispell at Intensity 9 could on the same Turn decide to simultaneously cast a Bladesharp 2 on himself and fire off two Disruption 3 spells, the latter of which must strike separate targets. This would cost a punitive 8 Magic Points, but might well take his foes by surprise!"
+    },
+    {
+      "name": "Oath",
+      "page": "p.103",
+      "description": "Binds two or more people in physical contact into a mutually sworn pact, backed up by the threat of divine retribution. The maximum number of participants is equal to the Intensity of the spell, of whom the caster may or may not include himself. Oath is always cast in concert with a second spell, whose effect is held in check by the cult deity. If thereafter anyone breaks the oath, they are immediately subject to the spell at double the caster's relevant Rune Affinity. For example, an Oath spell cast by an Initiate of Humakt would be combined with Sever Spirit, promising a swift death for oath breakers. If the caster had a Death Rune affinity of 75%, then whoever broke his word would be subject to a Sever Spirit spell cast at 150% (double the Rune Affinity for the embedded retributive spell). Although the duration of the oath depends on the terms sworn, the Devotional Pool cost of both the Oath and its additional spell are not considered enduring and can be recovered normally."
+    },
+    {
+      "name": "Pain Blow",
+      "page": "p.103",
+      "description": "This spell must be cast on a weapon. It causes any hit that penetrates armour to potentially incapacitate the location struck in addition to normal damage. The effect can be resisted by the victim, provided they win an opposed test of their Endurance against the attack roll of the wielder. If the damage resulted in a Serious Wound or worse, that Hit Location is automatically incapacitated."
+    },
+    {
+      "name": "Pain Tooth",
+      "page": "p.103",
+      "description": "Use Pain Blow above, but natural weapons can be affected also."
+    },
+    {
+      "name": "Panic",
+      "page": "p.103",
+      "description": "If the target fails to resist, they are seized with an overpowering terror and cannot cast any spells or attack in melee, though he can parry or evade normally. Usually, the victim runs away."
+    },
+    {
+      "name": "Passage",
+      "page": "p.104",
+      "description": "This spell must be stacked with Lock, or with Seal (page 109). Each point of Intensity allows one additional person to pass through or open the magically sealed aperture besides the caster. It is cast on the object or portal whilst the additional persons are present, laying their hands on the opening as the spell is intoned. These additional persons cannot boost the priest's Lock spell with their magic points unless in Mindlink with him."
+    },
+    {
+      "name": "Path Watch",
+      "page": "p.104",
+      "description": "Used when passing through dangerous or questionable territory, it must be laid upon a known path or a visible road which will be travelled by the caster. Whilst the caster remains on that path, the spell will alert him of the presence of all traps and enemies, though not their type, within the radius of effect."
+    },
+    {
+      "name": "Pathway",
+      "page": "p.104",
+      "description": "This spell allows the caster to determine the direction of the nearest oasis. For every two points of Intensity the next nearest oasis can be sensed. Thus if Pathway was cast at Intensity 6, directions to the nearest three oases are known. The spell tells only direction and order of closeness, not the actual distance."
+    },
+    {
+      "name": "Peace",
+      "page": "p.104",
+      "description": "This spell causes all persons not of Devotee status within the area to lay down their weapons and forget all violence and war. For the length of the spell they prefer rather to listen to the wonders of peace and love which the caster sends ringing through their minds."
+    },
+    {
+      "name": "Plant Eye/Plant Spy",
+      "page": "p.104",
+      "description": "A specially chosen plant may be used as a spy by converting the leaves to sound and touch transmission devices without altering their appearance. Additional plants can be prepared for use with this spell, up to a number equal to the Intensity of the spell. Whilst in use the caster may swap between the chosen plants, but only spy out of one at a time. If any of the specially prepared plants are cut or uprooted, they cease transmitting information."
+    },
+    {
+      "name": "Plastron",
+      "page": "p.104",
+      "description": "This spell gives the recipient's body a carapace or shell over his chest and abdomen. This natural armour has no effect on Strike Rank or the user's Swim skill, but it does prevent him from wearing any other armour over the torso. In return it grants a number of Armour Points equal to one and a half times the Intensity of the spell."
+    },
+    {
+      "name": "Power Drain",
+      "page": "p.104",
+      "description": "Power Drain grants the caster the ability to drain Magic Points in hand to hand combat. The caster's touch will reach through an opponent's armour forcing them to resist in an opposed test of Willpower. If the caster wins, they drain a rolled amount of Magic Points equal to the Intensity of the spell, as per the Earthpower Effect table (page 92). The caster receives none of the drained power however, with all of the Magic Points flowing through them directly to the cult deity instead."
+    },
+    {
+      "name": "Precision (Specific Skill)",
+      "page": "p.104",
+      "description": "There are many variants of this spell, each one only usable with a specific skill. Thus, there exists Precision Boating, Precision Evade, Precision Stealth and so forth. When the recipient succeeds in the appropriate skill roll, a 1d100 result that would normally be a simple success becomes a critical success. Criticals, failures and fumbles are unchanged."
+    },
+    {
+      "name": "Predict Weather",
+      "page": "p.104",
+      "description": "When this spell is cast, the user knows what the natural weather will be like for the following 3 x Intensity hours in the region covered by the magic. Predict Weather cannot account for the actions of gods, demons or the use of weather-affecting spells."
+    },
+    {
+      "name": "Proteus",
+      "page": "p.105",
+      "description": "This spell allows the caster to change his shape into that of one creature with which he has undergone the Meld Form ritual (page 102). The user's INT and POW do not change, but all other characteristics become identical to those of the creature used in the Meld Form ritual. The user can also use special innate powers of the creature he has become. For the duration of the spell, the user can transform back and forth between his usual shape and the chosen creature's. Each transformation takes one melee round, during which the caster can do nothing else. If the caster stacks more than one point, he can alternate between his available shapes. Bremildaker has used the Meld Form ritual to gain the ability to turn into a sardine, an octopus and a small sea serpent. If he casts three concurrent incidences of the Proteus spell, he can switch back and forth between his own shape, the sardine's, the octopus' and the sea serpent's. Thus, he could become a sardine, then an octopus, then himself, then the sea serpent, then the octopus again, if he wished, for the spell's duration."
+    },
+    {
+      "name": "Purification Ritual",
+      "page": "p.105",
+      "description": "This night-long ritual is used to cleanse female trolls who have birthed a litter of trollkin. Normally, any female troll who gives birth to trollkin will henceforth give birth to trollkin in all future pregnancies. A female undergoing this ritual and avoiding pregnancy for a full year following the ritual is cleansed and can once again give birth to normal troll children, though there is no guarantee that she will do so."
+    },
+    {
+      "name": "Purify Water",
+      "page": "p.105",
+      "description": "This spell causes all particulate matter and contaminants in a 10 m3 per point of Intensity volume of water to settle. It will work on foreign minerals dissolved in the water, such as salt, including poisons, making the water perfectly transparent and otherwise safe to drink. The spell is often used to make tainted oases or chaos infested swamp water drinkable for men and beasts alike."
+    },
+    {
+      "name": "Radiate",
+      "page": "p.105",
+      "description": "This allows the caster's body to radiate intense heat, capable of burning anything which is touching it with 1d6 damage per two points of Intensity in the spell. This radiant heat reduces by 1d6 per metre distance from the body and armour counts against it. Weapons striking the caster must first suffer the burning damage to see if they survive long enough to inflict their own harm. Thus a javelin (3AP/8HP) thrown at someone under the aegis of an Intensity 11 Radiate would have to survive 6d6 damage before it struck, likely causing it to burst into fire and turn to ash before touching the caster."
+    },
+    {
+      "name": "Rain",
+      "page": "p.105",
+      "description": "This spell can only be cast when the sky is overcast or at least 50% clouds. Torrential rain, 1mm per minute, will then fall within the area, reducing visibility, soaking clothes and bowstrings, and potentially turning the ground into a slippery morass. When the spell ends, the rainfall stops."
+    },
+    {
+      "name": "Raise Ghoul",
+      "page": "p.105",
+      "description": "Raise Ghoul may be used on any 'fresh' corpse which has lain dead no longer than a number of days equal to half the Intensity of the spell. It recalls the original spirit before it can be judged and sent to the afterlife, binding it back into its own rotted body. The transformed ghoul claws out of the grave or mausoleum the following night, adopting its original Characteristics when still alive, but adjusted as described in the RuneQuest Core Rules (RuneQuest page 355). Despite creating the ghoul, this spell grants the caster no control over the undead creature."
+    },
+    {
+      "name": "Rebirth of Chaos",
+      "page": "p.105",
+      "description": "When cast on someone who lacks any chaos features, it permits them to roll twice on the Chaotic Features table (page 209) and choose which one they will take. If, on the other hand, the spell is cast on somebody who already has one or more features, it causes the recipient to re-roll all their chaotic features on the table, permanently changing them, plus receive the bonus of gaining an additional feature of their choice. There is a danger in this. The recipient has a percentage chance of dying equal to 5% plus 5% more per chaotic feature he already has. For example, a broo already with two chaos features stands a 15% chance of death if the spell is cast upon him. Unwilling recipients are allowed to resist using Endurance."
+    },
+    {
+      "name": "Reconstruction",
+      "page": "p.106",
+      "description": "This spell causes a sequence from the past, equal in length to the spell's duration, to replay for the caster's senses, as long as he or she is in the immediate area in which it took place, or is in Mindlink with someone who is currently there. Whilst the spell lasts, the caster is in a trance state and no one else can observe what they sense. The user must state the time and date of starting the vision."
+    },
+    {
+      "name": "Recover Spirit",
+      "page": "p.106",
+      "description": "This spell must be used within one day of death, and requires the caster to meet the victim's spirit on the spirit plane and force it back to its body by succeeding in one round of Spirit Combat with the departing spirit. However, after one day the spirit will have departed on the journey to the halls of the dead to await judgement, and the spell will not work. The body must first be healed of any Major Wounds. A fumble results in the caster finding the wrong spirit to put back in the body. Use the Ancestral Summons table on page 99 to determine the replacement spirit found."
+    },
+    {
+      "name": "Reduce Flame",
+      "page": "p.106",
+      "description": "See Suppress Oakfed (page 117)."
+    },
+    {
+      "name": "Refine Medicine",
+      "page": "p.106",
+      "description": "This Rune spell is usually utilised in concert with the Find Healing Plants skill, to create an enduring herbal cure for a particular disease, thus saving the recipient of the medicinal powder, paste or whatever from needing to know the Cure Disease spell; however, the Healing skill is still necessary to apply it to an ill victim. Despite the instantaneous nature of the spell, the refined medicine so created lasts for a number of weeks equal to the Intensity it is cast at."
+    },
+    {
+      "name": "Reflection",
+      "page": "p.106",
+      "description": "Use the default Reflection miracle (RuneQuest page 274)."
+    },
+    {
+      "name": "Regrow Limb",
+      "page": "p.106",
+      "description": "This spell regenerates a severed or maimed limb or appendage, taking one week per missing Hit Point to grow back (see Permanent Injuries, RuneQuest page 122). The spell must be maintained until completion, otherwise the partially regenerated limb will shrivel away."
+    },
+    {
+      "name": "Regrow Organ",
+      "page": "p.106",
+      "description": "As per Regrow Limb, save that it affects an organ such as an eye or tongue instead. Due to the smaller size of the area affected, Regrow Organ only takes a week to complete."
+    },
+    {
+      "name": "Release Intelligence",
+      "page": "p.106",
+      "description": "This spell only affects creatures which possess INS. It is the opposite of the spell Fix Intelligence (page 94), directly converting its INS characteristic to INT. The personality and memories of the creature remain as before, but it gains the ability to reason, learn knowledge and communication skills and use magic. Creatures unwilling to be awakened to sapience may attempt to resist using Willpower. This spell completely cancels the effects of the Fix Intelligence spell."
+    },
+    {
+      "name": "Remove (Specific Body Part)",
+      "page": "p.106",
+      "description": "This spell allows the caster to pull off the specified limb or organ without damage or pain. The detached limb can still be moved and the caster receives normal sensory input from it. Someone with Remove Hand could take off their hand and send it crawling away. Even if the user cannot see his limb, he can still control it and feel what it feels, though he may not be able to tell where or how far away it is. If the separated limb is damaged, all normal rules ensue as if it were not detached, thus the owner can become incapacitated, or even be poisoned. Replacing the missing part with a spell such as Regrow Limb automatically fails, unless the old part is destroyed. The user can reaffix the detached part if he brings it back within the spell's duration. If the spell ends before it is restored, it must remain separated until he casts the spell again."
+    },
+    {
+      "name": "Reproduce",
+      "page": "p.107",
+      "description": "Use the default Fecundity miracle (RuneQuest page 270), save that the spell can also affect a plant, for example an apple tree."
+    },
+    {
+      "name": "Resist Iron Burn",
+      "page": "p.107",
+      "description": "When cast upon a member of the Aldryami or Uz race, this spell grants the recipient a brief respite from their vulnerability to Iron weapons. In effect it negates the increased damage of iron weapons against those Elder Races. Resist Iron Burn replaces the original spell of Cure Iron Burn for ease of play and added survivability."
+    },
+    {
+      "name": "Restore Health",
+      "page": "p.107",
+      "description": "This spell restores Characteristic points that have been lost to disease or to the effects of Tapping (see XX). It does not however cure any disease(s) that may be present. The number of Characteristic Points recovered is equal to the Intensity of the spell. Unlike previous versions of this spell, Restore Health is not restricted to a specific Characteristic, but it is recommended that availability is limited to cults possessing the Harmony Rune."
+    },
+    {
+      "name": "Restore Vision",
+      "page": "p.107",
+      "description": "This spell restores normal sight to the target, whether it was lost permanently or simply through the temporary use of a spell such as Blinding. If the eyes themselves were destroyed, a Regrow Organ must be cast on each eye prior to casting Restore Vision."
+    },
+    {
+      "name": "Resurrect/Resurrection",
+      "page": "p.107",
+      "description": "Use the default Resurrect miracle (RuneQuest page 274)."
+    },
+    {
+      "name": "Reverse Chaos",
+      "page": "p.107",
+      "description": "A target who fails to resist must roll on the detrimental Reverse Chaos table, and suffer the listed effect. Once the spell concludes however, it does not taint its target permanently with Chaos."
+    },
+    {
+      "name": "Ride River Horse",
+      "page": "p.108",
+      "description": "When cast at the banks of a watercourse, this spell summons a River Horse, which can be mounted and ridden on a trip from one headwater to anywhere else on that river, journeying through the watery realms of the Otherworld. The caster must have a clear image of where he wishes to travel to, or it will deposit him at some random place. The River Horse may bear as many passengers as the Intensity of the spell."
+    },
+    {
+      "name": "Ritual of Devouring",
+      "page": "p.108",
+      "description": "This spell is ritually cast before killing and devouring a sapient victim. Properly done, this spell enables whoever devours the victim to gain knowledge. Each participant in the grisly feast must eat 1d3 SIZ points of the victim to gain benefits. The eater gains 1d6 percentiles in any skill in which the victim was at least 25 percentiles better than the eater. For each Folk Magic spell the victim knew, the eater may roll his Willpower or less on 1D100. Success allows the eater to gain knowledge of that spell. No higher magic can be obtained through this ritual, unless both the victim and eater share the same cult. The maximum number of participants in the feast cannot exceed the Intensity of the spell."
+    },
+    {
+      "name": "Ritual of Rebirth",
+      "page": "p.108",
+      "description": "During the spell's duration, any victim eaten by the caster will, a few days later, be laid in an egg. One season after the devouring, the eggs will hatch and the being or beings devoured under the spell will be reborn as a scorpion man, scorpion elf, scorpion baboon, etc., depending on the species originally eaten. The upper torso and head will remain identical to the one devoured, whilst the lower body will now be that of a scorpion. The victim recalls all previous skills, and uses his Unarmed skill to attack with his new tail."
+    },
+    {
+      "name": "Safe",
+      "page": "p.108",
+      "description": "This spell is cast on a container or opening to bar unwanted passage. When anyone other than the caster, or someone in Mindlink with the caster, tries to open the secured container or cross a doorway with this spell, he is magically attacked. If the victim fails to resist, he takes as much damage as indicated by the spell's Intensity on the Rune Damage table (worn armour does not protect) to a random Hit Location, and is forced back. If, on the other hand, the target is not overcome, the spell is broken and he may enter freely, as may anyone following. If he fails to overcome the spell on his first try, he can try again and again until he either succeeds or is slain."
+    },
+    {
+      "name": "Sanctify",
+      "page": "p.109",
+      "description": "Use the default Consecrate miracle (RuneQuest page 267)."
+    },
+    {
+      "name": "Sapience",
+      "page": "p.109",
+      "description": "Sapience grants a bonus to all INT-based skills, raising their chance by one difficulty grade for the duration of the spell. In addition, if progressive Folk Magic is used, it raises its Intensity cap as if the caster's INT had been increased by the Magnitude of the Sapience."
+    },
+    {
+      "name": "Seal",
+      "page": "p.109",
+      "description": "A more powerful version of the Lock Folk Magic spell, which works on any object or item which can be 'closed'; i.e. a door, box, chest and even a book! Seal provides the shut object with a number of Armour Points equal to the Intensity of the spell. Any tool or weapon used to break it is subject to the rules for Using Weapons Against Inanimate Objects (RuneQuest page 122). Additionally, the caster may open and close the sealed object at will without needing to recast the magic."
+    },
+    {
+      "name": "Seal Spirit",
+      "page": "p.109",
+      "description": "Use Recover Spirit (page 106), save that the spirit of the deceased must be defeated in the first round of Spirit Combat."
+    },
+    {
+      "name": "Seal Tongue",
+      "page": "p.109",
+      "description": "This night-long ritual must be performed over a willing recipient and lasts many months. It helps during interrogations when resisting any truth-detecting or truth-enforcing spell of equal or less Magnitude. Any time the recipient becomes the focus of such magic, they may attempt to resist the magic using their Willpower, whether or not the truth spell normally grants a resistance roll. If the recipient successfully resists, the spell has no effect on him. If he fails however, he dies revealing nothing."
+    },
+    {
+      "name": "Seal Wound",
+      "page": "p.109",
+      "description": "This spell is cast upon a weapon. Damage inflicted by the weapon cannot be cured with magic or chaotically regenerate, but may only recover naturally, using the victim's Healing Rate (RuneQuest page 121). A Heal or stronger spells will still stop blood loss, but do not restore any damage. The skills of First Aid and Healing are not affected by this spell."
+    },
+    {
+      "name": "Seastrength",
+      "page": "p.109",
+      "description": "This spell doubles the recipient's base STR for the purpose of boosting their Damage Modifier. It has no effect on the value of STR based skills. Thus someone with STR 15 and SIZ 16 would recalculate their Damage Modifier with STR 30 and SIZ 16, increasing it from +1d4 to +1d10. The target must be in contact with seawater when the spell is cast."
+    },
+    {
+      "name": "Second Mouth",
+      "page": "p.109",
+      "description": "This spell may only be cast upon a woman. It renders her practically immune to rape, by permitting her to take immediate revenge upon the assailant; incidentally inflicting damage to the rapist's abdomen as indicated by the spell's Intensity on the Rune Damage table. If this results in a Serious Wound or worse, the member is bitten clean off."
+    },
+    {
+      "name": "Sever Spirit",
+      "page": "p.109",
+      "description": "Use the Sever Spirit miracle (RuneQuest page 275)."
+    },
+    {
+      "name": "Shadows Dance",
+      "page": "p.109",
+      "description": "This spell requires the recipients to dance in a great ceremony for at least an hour prior to receiving its effect. All participants in the dance receive a special benefit increasing the damage they inflict in Spirit Combat to that indicated by referencing each individual's Darkness Rune affinity on the Spirit Damage table (RuneQuest page 201)."
+    },
+    {
+      "name": "Shake Earth",
+      "page": "p.110",
+      "description": "Use the Earthquake miracle (RuneQuest page 268)."
+    },
+    {
+      "name": "Shape Metal",
+      "page": "p.110",
+      "description": "This spell allows the user to use his hands like hammers, files and drills to shape metal. It is equally usable with any and all Rune metals. If the metal is hot, the user will take no damage."
+    },
+    {
+      "name": "Shattering",
+      "page": "p.110",
+      "description": "This spell acts as a powerfully augmented Disruption spell. If the target fails to resist, it inflicts 1d3 damage plus an additional bonus equal to the Intensity of the spell. Thus a Shattering cast at Intensity 8 would inflict 1d3+8 damage to a single Hit Location."
+    },
+    {
+      "name": "Shield",
+      "page": "p.110",
+      "description": "Each point of this spell serves as either 1 point of physical or magical protection, as desired by the caster. Physical defence counts as Armour Points, whilst the magical defence blocks spells of an equivalent numerical Magnitude and lower. Thus a Shield spell cast at Intensity 7 could provide 7AP, or 7 points of magical defence, or a combination thereof. The physical protection provided does not stack atop worn armour, rather it supplants it in those areas less protected, although it will work against certain spells, those that normally bypass natural and worn armour, such as Lightning."
+    },
+    {
+      "name": "Shield of Darkness",
+      "page": "p.110",
+      "description": "As per Shield, but adds the darkening effect of the Folk Magic spell Darkwall (page 64)."
+    },
+    {
+      "name": "Shooting Star",
+      "page": "p.110",
+      "description": "This spell must be cast upon a single arrow. When fired it starts to burn, leaving a glowing trail behind, and splits into as many arrows as the Intensity of the spell, each one targeting a different victim. The caster makes a single attack roll using their relevant Combat Style, applying the result to all the victims simultaneously. The Hit Location however is rolled separately for each target. The arrows are treated as if under the effects of a Firearrow spell, but cannot provide a lingering penalty if used to impale, as they are consumed by the flames."
+    },
+    {
+      "name": "Sidana's Blessing",
+      "page": "p.110",
+      "description": "Similar to Reproduce, this spell when cast on a single living creature of any race, permits the caster to ensure it will bear or sire offspring through sexual congress. If the union is incestuous, the spell will succeed to the greatest degree possible, either producing twins or permitting the Characteristics of a sole offspring to be increased. In the latter case, one die per Characteristic may be exchanged for its maximum value. For example a human offspring would replace the 3d6 roll for STR with 2d6+6, and so on with the other Characteristics. To be successful, Sidana's Blessing must be maintained for the entire pregnancy. The spell does not protect a female broo from the usual consequences of broo birth."
+    },
+    {
+      "name": "Silence/Silence Sphere",
+      "page": "p.110",
+      "description": "This spell creates a barrier to sound around the perimeter of its area, which is centred upon the target. No sound can pass this barrier. Characters inside can hear each other, but can hear nothing from outside, and vice versa. If the spell is cast at an unwilling or unknowing enemy, they may resist."
+    },
+    {
+      "name": "Silver Track",
+      "page": "p.110",
+      "description": "This spell calls upon the stars to illuminate a path or set of tracks the caster wishes to follow. Providing at least one star is visible in the sky, the path shows up in the caster's vision with a faint silvery glitter, doubling her Track skill and permitting her to move at full speed if the night sky is clear, or half speed if somewhat overcast."
+    },
+    {
+      "name": "Skin Broo",
+      "page": "p.111",
+      "description": "This two-stage magic spell begins with a ritual that may only be cast on a cult holy night and lasts up to a number of hours equal to the spell's Intensity. A broo captive is brought before the caster, who must torture, slay and skin it, then use its skin to make a drum. This magical instrument can only be activated once per night, anytime after sunset. Whilst the drum is playing, any broo within spell range who can hear it will be Demoralized as the Folk Magic spell, towards whatever the caster decided when fashioning the drum: darkness, trolls, etc. The broo can resist by winning an opposed test of their Willpower against the Musicianship skill of the playing caster. The spell must be maintained by the caster to preserve the drum's enchantment, but once the duration expires, the skin rots away to a putrid mess and the captive soul of the sacrificed broo will be released as a disease spirit."
+    },
+    {
+      "name": "Sky Crater Fury",
+      "page": "p.111",
+      "description": "This spell increases the caster's chance to attack with weapons by one Difficulty Grade. Thus a Lunar warrior unfettered by any other Situational Modifiers would normally have an attack chance of Standard, but under this spell it would be raised to Easy. Conversely the caster suffers a penalty of one Difficulty Grade to any parry or evade he attempts. Additionally the user cannot cast magic other than attack spells: Disruption, Smother, Mindblast and so on."
+    },
+    {
+      "name": "Slash",
+      "page": "p.111",
+      "description": "This spell must be cast upon an axe. It provides a bonus to the axe damage as indicated by the spell's Intensity on the Rune Damage table (page 109)."
+    },
+    {
+      "name": "Smoldering Rebellion",
+      "page": "p.111",
+      "description": "This spell has not been converted due to its abstraction and difficulty of use in play."
+    },
+    {
+      "name": "Snow",
+      "page": "p.111",
+      "description": "This spell must be cast when precipitation is present. If it is raining, the spell changes all the rain within the spell's radius of effect to snow, sleet or hail as decided by the Gamemaster. If it is already snowing, the spell doubles the amount of snow falling."
+    },
+    {
+      "name": "Solace",
+      "page": "p.111",
+      "description": "When this spell is cast, it acts to cancel mental distress from everyone within the area of effect, whether from grief over the loss of a loved one, from fear of death or whatever. The effect is to relieve stress on the victim and enable him or her to go about normal actions. It does not relieve pain or incapacitation, such as from wounds, but it does enable them to face the prospect of death bravely."
+    },
+    {
+      "name": "Soul Sight",
+      "page": "p.111",
+      "description": "Use the Soul Sight miracle (RuneQuest page 275)."
+    },
+    {
+      "name": "Soulfire",
+      "page": "p.111",
+      "description": "Soulfire augments any Disruption spells cast by the recipient, adding +1 to damage for every two points of Intensity. So under an Intensity 7 Soulfire, the damage of Disruption spell is increased to 1d3+4."
+    },
+    {
+      "name": "Spawn Crawling Hand",
+      "page": "p.111",
+      "description": "This ritual must be performed upon a deceased humanoid creature tied to the Man Rune. It detaches and animates one of the hands of the victim, irrevocably tainting it with Chaos. The hand gains a fanged mouth at the wrist and the ability to scuttle along on its fingers at a Movement Rate of 2. Until the spell expires, it can survive indefinitely if provided proper food, usually gorp and other spawn. The hand responds to spoken commands of its creator only, allowing it to be used as a messenger, spy or crawling assassin. The hand has STR of 1d3, SIZ of 1d2, 1 Hit Point and uses the Athletics, Brawn, Endurance, Evade and Unarmed skills of the deceased corpse. It is capable of leaping up to its STR in metres, and if it manages to grab the throat of someone it is sent to kill, it strangles with whatever Damage Modifier it had before the hand was detached."
+    },
+    {
+      "name": "Speak to/with (Specific Creatures)",
+      "page": "p.112",
+      "description": "This spell has many different cult specific variations such as Speak to Birds, Speak to Herd Beast, Speak with Insects, Speak to Scorpion, Speak with Wolves, etc. It allows the recipient to talk with one type of creature for the length of the spell. Deceit or Influence can be used if the creature needs convincing. The spell does not instill any intelligence to the creature, so it can speak only from its natural awareness."
+    },
+    {
+      "name": "Special Lock",
+      "page": "p.112",
+      "description": "This spell must be combined with Seal. When cast on a specific person, it allows the recipient to freely open the object or portal affected by the Seal spell."
+    },
+    {
+      "name": "Spell Teaching",
+      "page": "p.112",
+      "description": "This spell has been made superfluous by the normal process of learning Folk Magic from a cult or mentor (RuneQuest page 177). However, this still requires a week of ritual and training in a cult holy place during which time nothing else may be done except for eating and sleeping."
+    },
+    {
+      "name": "Spell Trading",
+      "page": "p.112",
+      "description": "This spell allows the caster the ability to trade one use of any Rune spell which they currently know, even spells that did not originate from their cult, in exchange for one use of any Rune spell known by an initiate or devotee of another cult. The trade must be voluntarily and mutually agreeable. Trading counts the same as casting the spell and the originator loses the requisite number of Magic Points from their Devotional Pool, which remain out of use until the person the spell was traded to eventually casts it. This spell cannot be used to trade another instance of Spell Trading. The Intensity and Magnitude of proffered Rune spells remain those of the original donator, however the values cannot exceed the Intensity of the Spell Trading used to exchange them. Spell Trading may only be used within the boundaries of a Create Market spell (page 87) and requires the symbolic passing of a token representing the magic. Thus a Shield spell would use a shield, a Humakt spell a knife, and a Summon Sylph a bag of air; whether someone will trade a particular Rune spell depends on the relationship of his cult to the trader, trust of that merchant and possible conflict of Runic associations."
+    },
+    {
+      "name": "Spider Bite",
+      "page": "p.112",
+      "description": "This spell turns the recipient's head into that of a gigantic arachnid. He gains Armour Points equal to half the Intensity of the spell on his head and a bite attack capable of inflicting 1d6 damage, plus any Damage Bonus. Bite attacks are Size M, Range S, and use the recipient's Unarmed skill to strike. If this was not bad enough, the bite injects venom with a Potency equal to the caster's Rune Affinity used to cast the spell, but otherwise has the same properties as Giant Spider venom (RuneQuest page 388)."
+    },
+    {
+      "name": "Spider Limbs",
+      "page": "p.112",
+      "description": "This spell sprouts four extra limbs from the user's sides. One pair are extra legs, used to double the user's Movement Rate and granting the Adhering creature ability (RuneQuest page 312). The other pair are arms, with tiny claws, too small to hold any weapon but a net, which may be wielded at the user's normal skill if part of one of their Combat Styles, or may grapple instead. The user may simultaneously use other weapons in his 'real' arms. In effect, the recipient receives one free grapple or net attack per round, in addition to their normal combat actions. When a hit is scored against one of the recipient's limbs, a second dice roll should be made to see if it is their normal limb (high), or his additional spider one (low). The spider limbs have the same Hit Points as their contemporary one, but have natural chitin armour equal to half the Intensity of the spell."
+    },
+    {
+      "name": "Spider's Head",
+      "page": "p.112",
+      "description": "See Spider Bite (page 112)."
+    },
+    {
+      "name": "Spirit Block",
+      "page": "p.112",
+      "description": "Use the Spirit Block miracle (RuneQuest page 276), with the proviso that this spell does not block the Spirits of Reprisal of the cult that provides it."
+    },
+    {
+      "name": "Spirit Guardian",
+      "page": "p.113",
+      "description": "This spell must be cast upon a friendly and willing ancestral spirit. It sets up a mental connection, identical to Mindlink, between spirit and caster, allowing them to share magic and communicate freely. Until the spell ends, the spirit guardian will follow the caster about, protecting him from malicious spirit attacks in the Otherworld, or manifesting in the physical world when necessary. The largest Intensity of spirit which can be requested to act as a guardian is equal to half the Intensity of the spell."
+    },
+    {
+      "name": "Spirit Melding",
+      "page": "p.113",
+      "description": "This spell must be cast upon a friendly spirit, requesting it to envelop the caster. Whilst melded, the spirit suffers any Magic Point loss the caster should have taken due to Spirit Combat. If this reduces the spirit to zero, it suffers the consequences of defeat, although the caster may release it from the spell before it reaches that stage. The largest Intensity of spirit which can be melded with is equal to half the Intensity of the spell."
+    },
+    {
+      "name": "Sprout",
+      "page": "p.113",
+      "description": "This causes a seed to immediately quicken and send forth roots. Over the course of the duration, the infant plant grows and expands as if one year had passed for every minute the spell lasts. This usually results in a mature sapling or bush with fully developed foliage. This spell affects any mostly intact seed, even those hundreds of years old, provided it has been protected against insects, fungus and extremes of temperature."
+    },
+    {
+      "name": "Sprout Arms",
+      "page": "p.113",
+      "description": "This spell causes two additional arms to sprout from the recipient's sides. This grants them 1 additional Action Point and permits the carrying of additional weapons or shields. The new arms have the same Hit Points as the user's normal ones, but lack any armour save what the recipient naturally possesses due to the thickness of hide, scales and so on. Any hit on an arm location should roll again to see if the blow lands on the original arm (high) or the additional one (low)."
+    },
+    {
+      "name": "Sprout Legs",
+      "page": "p.113",
+      "description": "This spell causes an additional pair of legs to sprout from the sides of the recipient. The leg is usable as a normal appendage, and has the same Hit Points and natural armour as the other legs. Each additional pair adds 2m to the Movement Rate of the recipient, and provides additional stability if one or more of the original limbs have been rendered inoperable due to Serious Wounds."
+    },
+    {
+      "name": "Sprout Tail",
+      "page": "p.113",
+      "description": "This spell adds an additional tail alongside the original, if the recipient has one. Depending on its form, the tail usable as a normal appendage, and has the same Hit Points and natural armour as the other tail, or leg if no tail exists. The tail can be utilised in combat using the recipient's Unarmed skill, but unless it is a creature with a naturally dangerous tail, like a scorpionman, it will be limited to 1d3 damage and special effects such as Trip Opponent or Bash."
+    },
+    {
+      "name": "Sprout Wings",
+      "page": "p.113",
+      "description": "This spell grows a pair of very fast beating membranous wings from the recipient's back, allowing him to fly at a Movement Rate of 12m. Treat the wings as having the same Hit Points as the recipient's legs, but no Armour Points. Becoming over encumbered when flying will accumulate fatigue and slow down this speed as normal (RuneQuest page 116)."
+    },
+    {
+      "name": "Star Ward",
+      "page": "p.113",
+      "description": "This spell resembles Warding, but instead of wands or totems, it uses pieces of smooth silver. It does 1d3 damage per two points of Intensity to incoming enemies who cross the perimeter. In addition, it acts as a Shimmer spell against incoming missiles. Unlike Warding, Star Ward provides no magic protection. The area inside the ward is bathed in a soft silver glow, so the area affected is always illuminated as if by a Light spell."
+    },
+    {
+      "name": "Stinger",
+      "page": "p.114",
+      "description": "This spell transforms the abdomen or hind-quarters of the recipient into that of a giant bee, complete with sting and natural armour to half the Intensity of the spell. The stinger can be used in combat using the Unarmed skill, has Size M, Reach M, does 1d8 damage and injects venom with a Potency equal to the caster's Rune Affinity used to cast the spell. This causes the Agony condition in the Hit Location stung."
+    },
+    {
+      "name": "Stone-Biting",
+      "page": "p.114",
+      "description": "This spell strengthens the teeth of the recipient, permitting them to chew through inanimate objects without breaking their dentition (RuneQuest page 123). It allows any bite attack to ignore a number of Armour Points equal to the Intensity of the spell and has several practical uses. Firstly it allows the user to chew through bonds, or even slowly excavate stone tunnels. It can also be used in combat against heavily armoured foes, providing the user has suitable bite damage."
+    },
+    {
+      "name": "Stones to Kill",
+      "page": "p.114",
+      "description": "This night-long ritual enchants a number of black rocks equal to the Intensity of the spell. When thrown at a Chaotic target that is hit, they take effect. The stones need not penetrate armour, and the target cannot resist the effect. Each stone is one-use and will cancel out a single chaos feature of the struck target for 1d6 hours. If the target has more than one chaos feature, the one affected is determined randomly. As part of the ritual, the caster must eat the heart of a dead troll."
+    },
+    {
+      "name": "Strength of Basmol",
+      "page": "p.114",
+      "description": "This spell swells the recipient's sinews and muscles, granting a leonine physique. His current Damage Modifier is increased by one step for each two points of Intensity."
+    },
+    {
+      "name": "Strike",
+      "page": "p.114",
+      "description": "This spell is cast upon a weapon. The next blow by that weapon, provided it is not parried, ignores all armour, both natural and worn."
+    },
+    {
+      "name": "Strongblade",
+      "page": "p.114",
+      "description": "This spell increases the Armour Points of a sword or dagger blade to a value equal to the Intensity of the spell. In addition it suffers no damage when striking inanimate objects (RuneQuest page 123)."
+    },
+    {
+      "name": "Strongnet",
+      "page": "p.114",
+      "description": "This spell must be cast upon a net, making it nigh unbreakable by normal means, including fire, effectively increasing its Armour Points to a value equal to the Intensity of the spell. Someone trapped in the net must escape by unwrapping itself, unless they are immensely strong enough to tear it."
+    },
+    {
+      "name": "Submerge",
+      "page": "p.114",
+      "description": "Each point of Intensity drags 10 SIZ of a floating creature, or its totalled corresponding mass on the Creature Size Equivalency table (RuneQuest page 327) if an inanimate object, under the surface of the water. If swamped, naturally non-buoyant objects will sink to the bottom. Unwilling creatures targeted by the spell may attempt a Swim roll to resist."
+    },
+    {
+      "name": "Summon (Specific Species)",
+      "page": "p.114",
+      "description": "Summons a particular species of creature deemed sacred to the cult to the presence of the caster. The total SIZ of creatures so affected must be equal or less than 20 times the Intensity of the spell. Thus an initiate of Basmol who casts Summon Lion at Intensity 7 would draw 140 SIZ worth of lions; about six of the beasts if average sized. The creatures must travel to the caster under their own steam, resulting in their arrival part way through the spell's duration. Neither are they under the caster's control once they do arrive, which may result in unpleasantness, depending on their nature. Creatures under control of others may attempt to resist the summoning, but in this case it is the rider, herder and so on, who must use an appropriate skill in the opposed test. A rider of a summoned beast would use their Ride skill against the casting roll for instance."
+    },
+    {
+      "name": "Summon Ancestor",
+      "page": "p.115",
+      "description": "This spell summons a randomly determined spirit from the Land of the Dead, as rolled on the Ancestral Summons table (page 99). Providing it is friendly, the caster can request a brief service from it as long as can be attempted before the summoning concludes. This usually entails entering Spirit Combat with a foe, or casting its magic in support. Neutral ancestors may need to be convinced by overcoming it in an opposed test of the caster's Customs or Influence against the spirit's Willpower. Hostile ancestors generally make a nuisance of themselves and provide sarcastic commentary about the ineptitude of the caster."
+    },
+    {
+      "name": "Summon Dead",
+      "page": "p.115",
+      "description": "This ritual must be performed over the corpse, grave or other remains of the individual being summoned. The name of the individual must also be known. If the person being contacted presently resides within Ty Kora Tek's vast Caverns of the Dead, his ghost rises from the earth at the end of the summoning, patiently waiting to speak with the summoner or be given a task to perform. In the latter case the ghost is treated as a haunt (RuneQuest page 406)."
+    },
+    {
+      "name": "Summon Elemental",
+      "page": "p.115",
+      "description": "The spells of Summon Small, Medium and Large Elemental have been supplanted. Use the Elemental Summoning miracle (RuneQuest page 269)."
+    },
+    {
+      "name": "Summon Founder",
+      "page": "p.115",
+      "description": "The Founders are now treated as greater spirits and can only be summoned via Spirit Magic. See Cult of Waha (page XX)."
+    },
+    {
+      "name": "Summon Guardian",
+      "page": "p.115",
+      "description": "As per Summon Ancestor, but brings back the spirit of a dead member of that cult. The spirit so summoned possesses the spirit ability of Animate. Hostile spirits actively try to kill the caster, whether by Spirit Combat or using the dead body it is bound to."
+    },
+    {
+      "name": "Summon Lodril",
+      "page": "p.115",
+      "description": "This ritual spell must be cast at the lip of an active volcanic fissure or caldera. It takes an entire day to cast. Each point of Intensity in the spell gives a cumulative 1% chance of starting an eruption. Several casters can add their spells together to increase the total chance of success. Onset is delayed for several hours, allowing participants to escape the area, but once started the eruption lasts a number of days equal to the highest Intensity used in the ceremony, and the immediate effects extend for a like number of kilometres in a specific direction as decided by the leader of the ritual. Anything in this path is affected by a pyroclastic flow, causing damage as described for the Earthquake miracle of similar Intensity (RuneQuest page 269). After this, ash will fall over a region double that affected by the pyroclastic flow, precipitating at a rate of half a metre depth per day until the spell ends. This has the effect of reducing visibility to mere metres and potentially burying everything unable to leave the region."
+    },
+    {
+      "name": "Summon Minion of the Snake Eater",
+      "page": "p.115",
+      "description": "This summons a snake eater with a spirit Intensity equal to half that of the spell. It has an INT of 2d6+6, CHA of 3d6, the spirit ability of Spellcasting and the unique ability of Venom as per the Disease ability, but treated as a poison instead. These spirits always know their full INT worth of Folk Magic. Snake eaters have the heads of women and beautifully scaled shapeless sacs for a body."
+    },
+    {
+      "name": "Summon River Horse",
+      "page": "p.115",
+      "description": "See Ride River Horse (page XX)."
+    },
+    {
+      "name": "Sunspear",
+      "page": "p.117",
+      "description": "Use the Sunspear miracle (RuneQuest page 276)."
+    },
+    {
+      "name": "Support",
+      "page": "p.117",
+      "description": "Support will hold up a section of earthen or stone wall with a volume of 64 cubic Metres or less per point of Intensity, whether it is part of a fortification, building or subterranean cave system. This allows work to be done on the wall, protects against earthquakes or temporarily prevents it from subsiding due to the actions of sappers. This spell can be cast in an emergency upon a wall that has already started to topple or collapse. However in this circumstance, the duration is reduced to Rounds, permitting those in the immediate area to flee before being engulfed in the resulting rubble."
+    },
+    {
+      "name": "Suppress Aether",
+      "page": "p.117",
+      "description": "This spell creates a sphere centred on the target. Inside the area is darkness equivalent to a Summon Shadow spell. Anyone with a Fire Rune affinity who tries to cross the borders of the spell and fails to resist will automatically take damage to a single Hit Location, as indicated by the spell's Intensity on the Rune Damage table (page 109), ignoring all armour. The sphere's boundary also acts as magical protection against Fire Rune spells crossing it, as a Shield spell (page 110) of equivalent Intensity."
+    },
+    {
+      "name": "Suppress Lodril",
+      "page": "p.117",
+      "description": "See Suppress Aether."
+    },
+    {
+      "name": "Suppress Oakfed",
+      "page": "p.117",
+      "description": "This spell is cast on flames of various sorts. If cast on a normal fire, it decreases the fire's Intensity by 1 for every two points of Intensity in the spell; if cast on Fire Rune magic such as Fireblade or Firespear, it immediately dismisses any spell of equal or less Intensity. It can even be utilised upon salamanders, reducing them in size by one cubic metre for each point of spell Intensity. However in this case, the salamander can resist with its own Willpower."
+    },
+    {
+      "name": "Sureshot",
+      "page": "p.117",
+      "description": "Use the Sureshot miracle (RuneQuest page 276)."
+    },
+    {
+      "name": "Swallow",
+      "page": "p.117",
+      "description": "This spell allows the caster to swallow whole any object of a SIZ up to half the Intensity of the spell. Thus, an Intensity 7 spell would let the user swallow a small dog in one gulp. Anything may be consumed, from a boulder to a cactus, yet the caster remains unharmed even if he swallows actively dangerous substances such as fire, acid or poison. Any living being so consumed will die, but the caster must first grapple the victim successfully before they may be swallowed."
+    },
+    {
+      "name": "Sweat Acid",
+      "page": "p.117",
+      "description": "The recipient's skin secretes an acid which inflicts damage as indicated by the spell's Intensity on the Rune Damage table (page 109). The recipient is not affected by his own acid, but anything he touches or wears treats damage against armour as if using the Sunder special effect. If struck by a weapon, he takes normal damage, but the weapon then suffers acid damage. Unwilling recipients may attempt to resist."
+    },
+    {
+      "name": "Switch Places",
+      "page": "p.117",
+      "description": "This spell allows the caster to trade places with a person, or an illusory apparition of a person, within line of sight. Living targets who do not wish to be affected by this spell may attempt to resist."
+    },
+    {
+      "name": "Tambour",
+      "page": "p.117",
+      "description": "This ritual spell is cast upon a drum, and requires the caster to play it ceaselessly for the entire duration. All those within the area become invested with a limitless endurance, provided they begin to dance and don't cease moving to the beat of the drum. In practical terms this means that the dancers never lose any Fatigue due to physical effort, permitting them to fight, run or work without tiring, provided they cap any skill being used by the value of their Dance skill."
+    },
+    {
+      "name": "Tanglethicket",
+      "page": "p.118",
+      "description": "Use the Entangle miracle (RuneQuest page 269)."
+    },
+    {
+      "name": "Telekinesis",
+      "page": "p.118",
+      "description": "See Flight (page 95)."
+    },
+    {
+      "name": "Teleportation",
+      "page": "p.118",
+      "description": "The caster may teleport to any spot within range that he can see, either on his own, through the eyes of a familiar or through a Mind Link spell. Teleportation carries the caster and his personal gear, up to an ENC equal to twice the Intensity, but multiple castings of the spell can be stacked to bring along others in physical contact with him. An unwilling victim can resist with Willpower."
+    },
+    {
+      "name": "Thunderbolt",
+      "page": "p.118",
+      "description": "This spell has been conflated into the now more effective Lightning (page 100)."
+    },
+    {
+      "name": "Tongue",
+      "page": "p.118",
+      "description": "This spell allows the recipient's tongue to be used as a weapon. The tongue has a Size of S, Reach of VL, and has an attack chance equal to the recipient's Unarmed skill. If it strikes it inflicts 1d3 damage, plus an additional bonus equal to the Intensity of the spell."
+    },
+    {
+      "name": "Transform Self",
+      "page": "p.118",
+      "description": "This spell must be stacked with all three of a cult's Transform spells, for example for a follower of Telmor it must be cast with Wolfhide, Wolfrunning, and Wolf's Head. When these spells are combined with Transform Self, the user bodily transforms into a semi-divine beast or insect relevant to that cult. All of the spells have full effect and, additionally, last for hours instead of minutes. All of the normal abilities of the creature become usable by the caster for the duration of the spell, thus in the case of Gorakiki-beetle, the caster might gain the abilities of a Karrg Beetle: Dark Sense, Formidable Natural Weapons, Grappler and Savage."
+    },
+    {
+      "name": "Translate",
+      "page": "p.118",
+      "description": "This spell translates all words touched by the user's index finger whether cursive script, carved glyphs or knotted strings at a fast reading speed, about 500 written words per minute, while the spell operates, and leaves a lasting memory of the meaning afterwards. Untranslatable words are not translated, though the user receives an idea of the word's meaning."
+    },
+    {
+      "name": "Tree Chopping Song",
+      "page": "p.118",
+      "description": "This ritual, which is performed as a group song, influences every lay member or higher in the caster's cult that chants along with the spell caster. All those affected may use any type of axe against Aldryami at the same percentage chance as whichever of their Combat Styles includes mace or maul. No other weapon types are included. The caster must beat on dead logs with his or her maul or maces as part of the ritual. If not already expired, the spell ends at daybreak."
+    },
+    {
+      "name": "Truespeak",
+      "page": "p.118",
+      "description": "This spell compels the recipient to speak nothing but the truth for the duration and answer all questions in a literal manner. The caster must overcome the recipient in a new opposed roll to compel the truth-telling for each question. The target can refuse to speak at all, but if he does speak, and fails to resist, he must tell the truth. If combined with Mind-Read, this spell makes the caster a potent inquisitor."
+    },
+    {
+      "name": "Truetune",
+      "page": "p.118",
+      "description": "This spell must be cast upon a stringed instrument, which glows with a golden radiance under its effect. Whilst played, the caster boosts the Level of Success of any Musicianship skill roll by one step. Thus a Fumble upgrades to a Fail, Fail to a Success and a Success to a Critical - whilst rolled Critical Success cannot be boosted higher. Under its influence, the caster enters a trance in which only the music exists, making them oblivious to all else."
+    },
+    {
+      "name": "Turn Blow",
+      "page": "p.119",
+      "description": "Whilst under this spell, any blow from a melee or ranged weapon that strikes the caster gives her attacker an equal amount of hit point damage to a randomly rolled Hit Location. Even the damage from weapon augmenting spells like Bladesharp is reflected. Although armour reduces damage of the original blow upon the caster, it does not help against the damage reflected back against the attacker. Example: Ramba the priestess casts this spell in a fight against an elf. The elf impales with his Bladesharp enchanted spear, doing 11 total points of damage: 7 from the spear, 3 from the Bladesharp, and 1 from his Damage Modifier, to Ramba's abdomen, where she has 5 points of armour. Ramba takes 6 points of damage to her abdomen. In return the elf takes the full 11 points of damage to a random location, which turns out to be his head. His 6 Armour Point helmet plus Protection spell do not count, and he dies from the resulting Major Wound."
+    },
+    {
+      "name": "Turn Undead",
+      "page": "p.119",
+      "description": "This spell affects one undead creature, skeleton, zombie, mummy, ghoul or vampire, for each point of Intensity. Any targeted undead creature which fails to resist must match their roll on the Turn Undead table to determine the effect."
+    },
+    {
+      "name": "Turtle's Head",
+      "page": "p.119",
+      "description": "This spell gives the recipient the head of a great turtle. The main advantage is that he is granted the creature ability of Hold Breath, and his head gains a number of natural Armour Points equal to half the spell's Intensity. Under the effect of this spell the user loses the power of speech."
+    },
+    {
+      "name": "Unisonance",
+      "page": "p.119",
+      "description": "This spell requires a pair of stringed instruments, usually harps, specially enchanted as part of a cult-specific Heroquest. When Unisonance is cast upon one of the instruments, it will resonate with the other with which it is paired. The caster and whoever plays the other instrument can then communicate back and forth musically."
+    },
+    {
+      "name": "Venom Bite",
+      "page": "p.119",
+      "description": "This spell adds venom to the recipient's bite attack, which takes effect should they either inflict damage on the victim or use the Inject Venom special effect (RuneQuest page 317). The effects of venom are cult specific, and should be created by the Games Master. The Potency of the venom is equal to the Rune Affinity used to cast the spell. The Intensity of the spell limits which conditions it inflicts. Use the Poison Condition Cost table to reflect the spell's effect. Multiple conditions may be purchased if enough Intensity is available. Onset time is based upon the victim's resistance roll: on a Critical the disease takes an hour before manifesting, on a Success a minute, on a Failure the start of the next Round and on a Fumble it starts on the victim's next Turn. The venom's effect continues until cured or the victim eventually passes away. In cases such as Sapping or Maiming the incremental loss occurs at the same rate as onset time."
+    },
+    {
+      "name": "Venom Boosting",
+      "page": "p.120",
+      "description": "This simple but deadly spell supplants the Potency of the recipient's own venom with the value of the caster's Devotion skill, if it is higher than that of the venom. For example, Kerarch a devotee of Bagog has a Devotion skill of 108%. When she casts Venom Boosting upon one of her tribe, it boosts the natural Potency of the scorpionman's venom to 108%, making it exceptionally difficult to overcome in an opposed roll."
+    },
+    {
+      "name": "Vesper",
+      "page": "p.120",
+      "description": "This spell causes the area to glow with a dull bloody red colour. Friends and allies of the caster within the glow may substitute the caster's Willpower for their own whilst engaged in Spirit Combat. In addition, the glow prevents characters from falling unconscious if all their Magic Points are expended, although it does not prevent any other effects of being defeated by a spirit."
+    },
+    {
+      "name": "Vision",
+      "page": "p.120",
+      "description": "Vision gives the caster a projected viewpoint, through using their own primary sense, usually sight. The viewpoint can travel anywhere within range, at a Movement Rate equal to the Intensity of the spell. However, the material through which the projected viewpoint can travel depends on the Rune Affinity used to cast the spell. Thus Vision cast via the Water Rune may only move and see from bodies of water such as streams or pools. Whilst using Vision the caster cannot use his own senses, but may switch back and forth between the spell's viewpoint and his own from one round to the next."
+    },
+    {
+      "name": "Vomit Acid",
+      "page": "p.120",
+      "description": "The recipient user immediately vomits forth a quantity of steaming acid, which inflicts damage as indicated by the spell's Intensity on the Rune Damage table (page 109). The caster is not affected by his own acid, but anything it touches is. The amount of magical acid produced is enough to cover all of a human sized target, affecting every Hit Location, fewer if the target is larger than human size, as decided by the Games Master. The target may resist using Evade to throw themselves clear. Shields may block damage to a number of locations as indicated in their traits, either page 57 or RuneQuest page 95, and will itself suffer the acid damage."
+    },
+    {
+      "name": "Warding",
+      "page": "p.120",
+      "description": "This ritual spell creates a place of safety for those inside. It requires at least three staves, totems or similar cult specific objects to mark out its perimeter - which need not be circular, provided each marker maps out the corners of the protected area lay within the maximum possible region. The volume extends up to half the spell's Intensity in metres above the ground. Once cast, the Warding is undetectable save for magical means. Any enemy, physical or spiritual, which attempts to enter this region from above, below or through the walls, triggers a loud noise, a keening, whistling, booming, etc., which may only be suppressed by the caster. In addition, unless the foe resists, it suffers 1d3 damage per two points of Intensity to a single Hit Location, or its total Hit Points if a spirit, ignoring armour. Lastly the Warding will block all spells of equal or lower Magnitude which cross its border."
+    },
+    {
+      "name": "Warrior of Stone",
+      "page": "p.120",
+      "description": "Causes a ritually prepared statue of stone and metal to awaken and serve the commands of the caster, so that it becomes capable of motion and combat. Use the Awaken miracle (RuneQuest page 264), treating its Armour Points as 10."
+    },
+    {
+      "name": "Waste Loins",
+      "page": "p.120",
+      "description": "If this spell is not successfully resisted, the target becomes forever sterile or barren - he or she can never again have any children."
+    },
+    {
+      "name": "Water Skating",
+      "page": "p.120",
+      "description": "See Waterwalk."
+    },
+    {
+      "name": "Waterwalk",
+      "page": "p.121",
+      "description": "This spell allows the recipient to move upon the surface of the water as if it were solid ground."
+    },
+    {
+      "name": "Webbing",
+      "page": "p.121",
+      "description": "This spell changes the recipient's abdomen into that of an arachnid. The posterior of this transformed location is a spinneret which, once per round, can hurl a mass of silver webbing towards a foe. This attack utilises the recipient's Unarmed skill in an opposed roll against the target's Evade skill. If the foe fails to throw himself clear, he is enveloped and held fast until he can escape or is cut free. Bursting the strands requires winning an opposed roll of the captive's Brawn against the caster's Devotion skill. The webs remain for several days after the spell concludes, permitting their use as a method of imprisonment, or as a cunningly laid trap if sprayed liberally across a floor."
+    },
+    {
+      "name": "Whirlpool",
+      "page": "p.121",
+      "description": "This spell creates a fearsome whirlpool spanning the area of effect. Anything caught in the whirlpool must successfully resist the spell using their Swim skill, or Brawn if still able to maintain footing or holding onto a branch or rope, else be sucked under. A victim caught in the whirlpool will be tumbled about until the spell ends, imprisoning them in the current and potentially drowning them as a result. If a boat or ship whose length is less than the diameter of the spell enters the whirlpool, its captain must resist the magic with a Boating or Seamanship test instead. If he does not win the opposed roll, the vessel is caught in the current and is whirled about. Worse still, if the Boating or Seamanship roll was a failure, the vessel suffers 1d6 damage to its Hit Points each minute. On a fumble it simply founders, sucked under the surface with the entire crew."
+    },
+    {
+      "name": "Wind Walking",
+      "page": "p.121",
+      "description": "This spell has been replaced by Spirit Magic. See Wild Hunter (page 146)."
+    },
+    {
+      "name": "Wind Warp",
+      "page": "p.121",
+      "description": "This spell allows the caster to change the direction the wind blows, diverting it by up to 10 degrees per point of Intensity of the spell. Thus an Intensity 9 Wind Warp could divert the wind by 90 degrees. Small whirlwinds often form where the wind is forced to clash with itself. Assuming the ambient wind strength is a moderate breeze or stronger, these vortices can be used as a defence against ranged weapons, providing its area is reduced to the point where the boundary lies between the caster and any attackers. In this case Wind Warp will make the difficulty grade of ranged attacks one step harder."
+    },
+    {
+      "name": "Wind Words",
+      "page": "p.121",
+      "description": "Assuming there is a calm, this spell allows the caster to send his words on a zephyr to the ears of his target. If the ambient wind is a moderate breeze or stronger, his conversation can only be carried downwind. However, no matter how severe the winds are, the recipient still hears the caster as if standing next to him."
+    },
+    {
+      "name": "Wither",
+      "page": "p.121",
+      "description": "If this spell is not resisted it affects a randomly rolled Hit Location, which becomes permanently withered, deformed and useless. The location loses all Hit Points. If this is a vital location, such as the head, chest or abdomen, the victim dies. A withered limb cannot be healed, but it can be amputated and then Regrow Limb used to restore it properly."
+    },
+    {
+      "name": "Wolf Hide",
+      "page": "p.122",
+      "description": "This spell causes the recipient to grow a tail, to sprout a coat of grey fur and to gain partial immunity to damage, like a werewolf. Only magic, fire or iron will harm him. If an ordinary bronze sword with a Bladesharp spell is used against him, for example, only the Bladesharp would do damage. If the whole blade were enchanted, such as with a Truesword, the entire damage rolled, except for any damage bonus, would count. Poison still affects him if his skin is penetrated. The recipient still needs oxygen and thus can be asphyxiated or drowned."
+    },
+    {
+      "name": "Wolf Running",
+      "page": "p.122",
+      "description": "This spell turns the recipient's limbs into those of a wolf, and permits him to run on all fours. Attempts to Sneak and Evade are one difficulty grade easier, with the additional advantage as described under Evading Creatures (RuneQuest page 152). His running speed increases to 8. He loses his hands, and so cannot perform any manual manipulation."
+    },
+    {
+      "name": "Wolf's Head",
+      "page": "p.121",
+      "description": "This spell turns the recipient's head into that of a large wolf. He gains a Bite Attack of Size M and Reach T, which inflicts 1d6 damage. This Bite Attack can be used in combination to normal attacks and parries, assuming that the foe is within range. The recipient uses his Unarmed skill to attack. Attempts to Track are one difficulty grade easier, unless the recipient lacks the skill in which case they temporarily gain the skill at base Characteristic value."
+    },
+    {
+      "name": "Worm's Head",
+      "page": "p.122",
+      "description": "This spell turns the recipient's head into that of a worm. The exact effects of the spell depend upon whether the caster is standing on soil or in water when the spell is cast. If he is standing on solid rock or an artificial surface, the spell does not take effect."
+    },
+    {
+      "name": "Worship",
+      "page": "p.122",
+      "description": "This spell is no longer necessary to give worship to a divine being. Such things are performed as part of mundane ritual and ceremony which are performed daily by the priests of a cult."
+    }
+  ]
+}

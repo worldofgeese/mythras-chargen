@@ -40,6 +40,14 @@
   "rune_magic_note": "Rune Affinities replace Exhort skill for casting Rune Spells. An initiate must roll against the Rune Affinity that controls the spell being cast. Devotion skill judges Intensity and Magnitude.",
   "source_quotes": {
     "casting": "the skill of Exhort is now replaced by whatever Rune Affinity controls the particular spell being cast",
-    "example": "an initiate of Yelmalio who wished to cast a Sun Spear would need to roll against their Fire Rune affinity"
-  }
+    "example": "an initiate of Yelmalio who wished to cast a Sun Spear would need to roll against their Fire Rune affinity",
+    "limitations_p72": "a character may directly use a Rune Affinity shared with his god to cast Rune Spells, relying upon the power of that god to create the magic"
+  },
+  "cross_references": {
+    "magic_overview": "references/aig-raw/magic-overview-aig.json (general_rules.Changes to Casting Skills)",
+    "cult_structure": "references/aig-raw/rune-magic-aig.json (cult_structure.limitations_on_cult_rune_magic)",
+    "adr": "docs/adr/002-rune-affinity-casting-model.md"
+  },
+  "reconciled": "2026-05-17",
+  "reconciliation_note": "Verified against new AiG magic extraction (p.59-151). No contradictions found. This file (from p.24 chargen chapter) has the concrete formulas; the Rune Magic chapter (p.72) confirms the mechanic narratively."
 }

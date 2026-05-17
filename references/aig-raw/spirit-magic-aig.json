@@ -1,0 +1,697 @@
+{
+  "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+  "extracted_at": "2026-05-17",
+  "page": "p.134-151",
+  "note": "Complete Spirit Magic chapter from AiG. Contains spirit traditions (p.134-135), society structure (p.135-137), binding rules (p.137-138), 29 spirit abilities (p.139-143), 10 passion spirit types (p.142), and 33 named Gloranthan spirits (p.144-151).",
+  "verified": false,
+  "traditions": [
+    {
+      "heading": "Golden Bow Tradition",
+      "text": "The Golden Bow Tradition is followed by the Pure Horse People of the Grazelands. Its shamans can summon powerful spirits of Fire and Sky to aid them in their deeds, so long as their people ride upon horses as brothers and herd no other animals.",
+      "page": "p.134"
+    },
+    {
+      "heading": "Hsunchen Tradition",
+      "text": "The Hsunchen tradition differs from folk to folk in detail and philosophy, but is consistent in its origin and spirit connections. They believe that their particular tribe is descended from an ancestral animal. Worshiping their totemic beasts allows these spirit magicians to shapechange into animal form. Hsunchen are usually called Skin-walkers by the Theyalans. The Telmori Wolfrunners are the largest Hsunchen tribe in Dragon Pass.",
+      "page": "p.134"
+    },
+    {
+      "heading": "Kolating Tradition",
+      "text": "The Kolating tradition is the most important source of spirits for the Orlanthi of Dragon Pass and the Holy Country. Whilst sparsely followed, it is an ancient tradition which attracts many elders who give up their previous faiths to focus upon interacting with the spirits of storm, undeath and other strangeness in Dragon Pass.",
+      "page": "p.134"
+    },
+    {
+      "heading": "Praxian Tradition",
+      "text": "The Praxian tradition is the most important religious practice for the nomad tribes of the Wastelands. The three main societies are: Waha, Eiritha and Storm Bull, with a scattering of minor societies. All reflect the dangers and hardships faced by the nomadic peoples of the Wastes.",
+      "page": "p.135"
+    }
+  ],
+  "society_structure": [
+    {
+      "heading": "Spirit Societies",
+      "text": "A Spirit Society is the animist equivalent of a Rune Cult or Sorcery School, whose members form special relationships to spirits that grant powers in return. Each society jealously guards a body of secret knowledge concerning where certain spirits might be found, how they are summoned, and what taboos are required to negotiate or control them. In return for this power, the members of a Spirit Society are expected to perform the traditions and rituals to placate the spirits, and to assure the lands, beasts and peoples they watch over are not abused.",
+      "page": "p.135"
+    },
+    {
+      "heading": "Sacred Places",
+      "text": "Each society knows of various sacred places where particular spirits may be found. Unlike the temples of Rune Cults, the majority of these sacred sites are natural, isolated places, sheltered from the contamination brought about by permanent settlement. They can be pools of water, strangely shaped rocks or even a hole in the ground from which malefic odours arise. Worshippers and shamans journey to these places to establish a relationship with the spirits that reside there, but need not necessarily return to summon them to their aid.",
+      "page": "p.135"
+    },
+    {
+      "heading": "Spirit Society Structure",
+      "text": "As with Rune Cults, every Gloranthan Spirit Society follows a standard hierarchy dividing their members into three broad groups: Followers, Worshippers and Shamans. Of course, individual societies have their own rank titles, membership requirements and duties.",
+      "page": "p.136"
+    },
+    {
+      "heading": "Lay Members",
+      "text": "Cultures which practise Spirit Magic permit their people to pay respect to all the major spirits within their Spirit Tradition. There are no restrictions on joining a society as a lay member, provided the character is in good standing within the community, and none of their Rune Affinities are in direct opposition to those of the spirit or spirits. Thus a character can be a lay member in many societies, as such propitiation helps to foster good relations with the Otherworld, ensuring that the entities inhabiting it continue to help, or at least ignore, their supplicants.",
+      "page": "p.136"
+    },
+    {
+      "heading": "Initiate",
+      "text": "Becoming an initiate of a Spirit Society is a serious commitment, for it requires pledging oneself to the support of a single, albeit great, spirit. The initiate must swear to follow the will of the spirit as expressed by the shamans of the society, rigorously participate in Holy Day rituals, and are expected to sacrifice a large proportion of their time to that spirit alone. Characters can start out as an initiate if they possess at least five of the society's important skills at 50% or better, one of which must be the Spirit Rune affinity.",
+      "page": "p.136"
+    },
+    {
+      "heading": "Shamans",
+      "text": "A shaman is a powerful spirit magician capable of creating charms, summoning major spirits, and travelling into the Otherworld. To become a shaman, the character must succeed in a dangerous quest given to them by the major spirit or spirits of their society. Qualifying for recognition as a shaman requires that the character possess at least three of the society's skills at 100% or better, one of which must be a Spirit Rune Affinity. In addition, they must complete tests of their determination, cunning and loyalty to the Spirit Society, with failure usually resulting in death.",
+      "page": "p.137"
+    },
+    {
+      "heading": "The Fetch",
+      "text": "A fetch is a special spirit that is an incorporeal 'second self' of the shaman. It stays behind to stand guard over the physical body the shaman leaves behind to journey in the Otherworld. The fetch remains manifested in the mortal realm until the shaman returns and vice versa. With its aid, the shaman can immediately escape from the Otherworld with a successful roll against their Spirit Rune affinity. For fetches, use the standard fetch characteristics and abilities (RuneQuest page 403), save that Gloranthan fetches only possess a number of abilities equal to half their Spirit Intensity.",
+      "page": "p.137"
+    },
+    {
+      "heading": "Leaving a Spirit Society",
+      "text": "Members who leave a Spirit Society may be attacked by its spirits of reprisal. If they survive, they are considered outcast and may be persecuted with impunity by others of that tradition.",
+      "page": "p.137"
+    }
+  ],
+  "binding_rules": [
+    {
+      "heading": "Summoning and Binding Gloranthan Spirits",
+      "text": "Most Gloranthan spirits reside within the Otherworld, which is their natural environment. Within the Otherworld they recover Magic Points without special effort, provided they are not subjugated to the will of another, and may travel freely. Spirits can also exist in the mundane world when summoned or bound to it, clearly visible as insubstantial phantasms. However, whilst in the physical realm, the spirit can no longer regenerate its Magic Points, requiring them to be replenished by donation from a spirit magician or from a sacrificed creature.",
+      "page": "p.137"
+    },
+    {
+      "heading": "Charm Bindings",
+      "text": "Charms are the Gloranthan equivalent of RuneQuest 6th Edition fetishes; specially prepared objects that house a spirit. They provide a way for initiates to own and command useful spirits, whilst acting as a time saving convenience for shamans. The portable nature of a charm means that its bound spirit is always accessible, no matter where the magician travels. The downside of charms is that the spirit within can only affect its owner, who must be in direct contact with the binding object.",
+      "page": "p.138"
+    },
+    {
+      "heading": "Location Bindings",
+      "text": "Spirits can also be bound to specific locations, usually in order to protect the area. Unlike charms, the spirit is able to roam an area as specified by the shaman when it was bound, but not beyond a radius of ten times the spirit's POW in metres from the location where the binding occurred.",
+      "page": "p.138"
+    },
+    {
+      "heading": "Creature Bindings",
+      "text": "The last method of binding spirits is to emplace them in the body of a living creature. This provides tremendous advantages, in that the spirit may recover Magic Points naturally, move freely as allowed by its host body, and gain immunity from direct magical assault as per a charm. An example of such binding are Traskars.",
+      "page": "p.138"
+    },
+    {
+      "heading": "Taboos",
+      "text": "Whatever the source or power of a bound spirit, there are always special restrictions called taboos that originate from either the negotiation with the occupying spirit when first summoned, or the enforcement of the punitive compulsion which entraps it. Taboos enforce the link between the spirit and its binding, and may not always make sense to the magician who is responsible for it. An Oakfed spirit bound",
+      "page": "p.138"
+    }
+  ],
+  "spirit_abilities": [
+    {
+      "name": "Animate",
+      "description": "The spirit can invest itself into non-living matter, allowing it to shape or move the substance as if an actual body. If the material is a pure element such as earth or fire, the spirit may manifest itself physically as per an Elemental spirit of equal Intensity (RuneQuest page 402). If on the other hand the material is flesh of a dead creature, it instead provides the power of an Undead spirit (RuneQuest page 411). Note that in Glorantha an Elemental spirit cannot be embodied within a living body.",
+      "page": "p.139"
+    },
+    {
+      "name": "Bless",
+      "description": "The spirit can boost one Attribute, Skill or Runic Affinity of the summoner or holder of its charm. The amount it is increased depends on the Intensity of the spirit and the specific type of blessing, but no Attribute or Skill may be boosted beyond double its original value.",
+      "page": "p.139"
+    },
+    {
+      "name": "Curse",
+      "description": "The spirit can lower one Attribute, Skill or Runic Affinity of a victim it possesses. The amount is reduced depends on",
+      "page": "p.139"
+    },
+    {
+      "name": "Cannibalistic",
+      "description": "The spirit gains the ability to regenerate its own Magic Points by absorbing the essence of spirits it is battling in Spirit Combat. Every successful attack the spirit makes transfers that many Magic Points to its own total. If this exceeds the spirit's own POW, any surplus energy is wasted.",
+      "page": "p.140"
+    },
+    {
+      "name": "Comprehension",
+      "description": "Grants the ability to understand and speak with creatures of that spirit's runic association or animal totem. For example, a Fire Rune spirit would enable communication in Fire Speech, whilst a Telmori spirit would allow its user to speak with wolves.",
+      "page": "p.140"
+    },
+    {
+      "name": "Covert",
+      "description": "The spirit has a Stealth skill at 50%+INT+CHA, with which it can hide from active magical or spiritual observation by opposing the Perception skill of the observer.",
+      "page": "p.140"
+    },
+    {
+      "name": "Deadly",
+      "description": "Gains the ability to either Dissipate or Sunder a spirit it has beaten in Spirit Combat (see RuneQuest page 212).",
+      "page": "p.140"
+    },
+    {
+      "name": "Demesne",
+      "description": "A potent ability, the spirit gains dominion over aspects of its Rune within a range of ten times its POW in metres. Normally the limits of its influence are specified in the spirit's description. For example, a Plant spirit could control the growth, flowering and fruiting of vegetation within its area of effect, whilst a Truth spirit might prevent falsehoods being uttered. If the demesne of the spirit is challenged by a character, they may attempt to overcome its power by winning an opposed roll of relevant Runic Affinity skills. For example, to lie within the demesne of the Truth spirit would require opposing the spirit's Truth Rune with the character's Disorder Rune.",
+      "page": "p.140"
+    },
+    {
+      "name": "Discorporate",
+      "description": "May move between the mundane and Otherworld at will. Whilst in the Otherworld the spirit is immune from all attacks, magical or physical, from corporeal opponents.",
+      "page": "p.140"
+    },
+    {
+      "name": "Disease",
+      "description": "The spirit carries one or more diseases. Instead of possessing a victim, it instead infects them via Spirit Combat, providing it succeeds in an attack and gains one or more levels of success over the foe. Once infected, the victim must roll against their Endurance skill to determine the severity of the disease, suffering a reduction if the spirit's Rune affinity is higher and over 100%.",
+      "page": "p.140"
+    },
+    {
+      "name": "Endowment",
+      "description": "The spirit grants the magician a special capability, sense, movement or resistance as owned by the spirit's totem. Usually these take the form of a Creature Ability (RuneQuest page 312 and Adventures in Glorantha pages 152-154), or combat Special Effect. The minimum required spirit Intensity varies, depending on the capability endowed and nature of the spirit society.",
+      "page": "p.141"
+    },
+    {
+      "name": "Eternal",
+      "description": "The spirit has Recurring trait (RuneQuest page 212), which enables it to return after being dissipated.",
+      "page": "p.141"
+    },
+    {
+      "name": "Glamour",
+      "description": "Enables the spirit to create illusions within a range equal to its POW in metres, similar to the ability used by Haunts (RuneQuest page 407).",
+      "page": "p.141"
+    },
+    {
+      "name": "Healing",
+      "description": "The spirit is able to cure the effects of disease, if its Intensity is sufficient to counter the condition. Healing spirits also permit recovery of Serious and Major Wounds, although they are unable to replace lost limbs, boosting the magician's Healing Rate by its Intensity if they remain under its ministrations for the entire period of recovery.",
+      "page": "p.141"
+    },
+    {
+      "name": "Knowledge",
+      "description": "Possesses a skill at a value equal to the spirit's INT+POW+50%. There is no limit to the type of skill imparted, provided it is relevant to the Rune concerned. So a spirit bound to the Death Rune might know weapon skills, whereas one linked to the Man Rune may provide genealogical knowledge instead.",
+      "page": "p.141"
+    },
+    {
+      "name": "Mana",
+      "description": "Permits the spirit to donate its Magic Points to the summoner or holder of their charm, for use in casting magic or aiding in Spirit Combat.",
+      "page": "p.141"
+    },
+    {
+      "name": "Manifestation",
+      "description": "Spirit gains the ability to partially manifest itself in the physical world as if they were a wraith (RuneQuest page 412), without first needing to be bound or summoned.",
+      "page": "p.141"
+    },
+    {
+      "name": "Miasma",
+      "description": "Enables the spirit to induce feelings of despair, dread and terror within a radius of its POW in metres, as per the haunt's Miasma ability (RuneQuest page 407).",
+      "page": "p.141"
+    },
+    {
+      "name": "Neutralise",
+      "description": "Allows the spirit to completely counteract the magic or supernatural ability of an attacking creature or spirit tied to a specified Rune, providing the POW of the neutralising spirit is equal or greater than that of the attacker.",
+      "page": "p.141"
+    },
+    {
+      "name": "Pain",
+      "description": "Inflicts a possessed victim with grinding aches in their body, which flare into shooting pains whenever he or she moves quickly or tries to concentrate. Any skill roll attempted by the host must also be equal to or below their Willpower value, else it fails due to the distraction.",
+      "page": "p.141"
+    },
+    {
+      "name": "Passion",
+      "description": "The spirit can invoke an overwhelmingly strong passion or state of mind in those it possesses. Although in a few cases they can be used beneficently, most passion spirits are used in a hostile manner. The following passions and mental disorders provide mechanical effects of how they should be used in play. As with Disease Spirits, each has an associated number in parentheses, showing the minimum Intensity of spirit required to inflict that state of mind, assuming it manages to possess the target.",
+      "page": "p.141"
+    },
+    {
+      "name": "Perceptive",
+      "description": "Grants the ability to see discorporated spirits, shapeshifted creatures and penetrate illusions (see Visibility on page 68) in the immediate vicinity.",
+      "page": "p.142"
+    },
+    {
+      "name": "Puppeteer",
+      "description": "The possessing spirit can control the physical body of others. It can be used benevolently to control totem animals or protect a spirit magician's body whilst he is discorporate. Hostile spirits on the other hand, use this ability to steal the body of a foe to achieve the spirit's strongest desire.",
+      "page": "p.142"
+    },
+    {
+      "name": "Shapechange",
+      "description": "Grants the ability to shape change the spirit magician into his cult's totem animal, as per Shape-shifting spirits (RuneQuest page 410).",
+      "page": "p.142"
+    },
+    {
+      "name": "Spellcasting",
+      "description": "Allows the spirit to either cast magic on behalf of its summoner with a skill of 50%+POW+CHA, or share knowledge of the spells it knows with the holder of its charm.",
+      "page": "p.142"
+    },
+    {
+      "name": "Steadfast",
+      "description": "The spirit gains immunity to magical dismissal of any form. This does not mean it is immune to magical damage or Spirit Combat, only that spells such as Banish or Exorcism do not affect it.",
+      "page": "p.142"
+    },
+    {
+      "name": "Subjugate",
+      "description": "Allows the spirit the ability to bind one or more other spirits of lesser Intensity, holding them as vassals without the necessity of a charm. For spirits of the same runic affinity, this is usually a willing servitude — a mountain spirit holding several lesser earth elemental spirits for instance. If the spirits are not associated, the subjugation is more one of forced enslavement. Each lesser spirit held in subjugation reduces the holding spirit's Magic Points by a value equal to its Intensity as an enduring cost. Subjugation ends if the holding spirit is ever reduced to zero Magic Points.",
+      "page": "p.142"
+    },
+    {
+      "name": "Telekinesis",
+      "description": "This ability grants the spirit the ability to move objects in the physical world despite its nominally intangible form. It gains a STR equal to its Intensity and can shift items up to its POW in metres distant.",
+      "page": "p.144"
+    },
+    {
+      "name": "Warding",
+      "description": "Gains the ability to ward off hostile magic from something the spirit guards, automatically blocking magic with a Magnitude less than or equal to twice the spirit's Intensity. Although magic is blocked, it is not dismissed by contact with the spirit. For instance, weapon enhancement spells do not vanish when the magician is hit, nor is the enchanted weapon prevented from striking them; only any magical boosting to damage does not occur.",
+      "page": "p.144"
+    }
+  ],
+  "passion_spirits": [
+    {
+      "name": "Amnesia Spirits",
+      "page": "p.142",
+      "description": "An amnesia spirit makes the victim chronically forgetful. Although it has no effect on skills, it does prevent them from remembering anything that happens during the period of their possession. This doesn't stop the host from behaving normally, assuming they do not act on knowledge revealed since the amnesia started, only that they have no recollection of it, even after the spirit is expelled.",
+      "category": "passion_spirit"
+    },
+    {
+      "name": "Confusion Spirits",
+      "page": "p.142",
+      "description": "Causes confusion during times of stress, or at the malicious whim of the possessing spirit. During a confusion attack, any skill attempt made by the host is resisted by spirit's Rune affinity in an opposed test. If the victim loses, they do the incorrect thing, possibly striking the wrong target in combat, casting a different spell to what was intended, answering a question which wasn't asked and so on.",
+      "category": "passion_spirit"
+    },
+    {
+      "name": "Deceit Spirits",
+      "page": "p.142",
+      "description": "Induces the possessed victim to lie, cheat and steal, no matter the consequences. They simply cannot help themselves, although they can attempt to disguise their subterfuge through use of the Deceit and Conceal skills.",
+      "category": "passion_spirit"
+    },
+    {
+      "name": "Fear Spirits",
+      "page": "p.142",
+      "description": "The possessed host suffers foreboding and timidity, as if they were under the effect of the Demoralise spell (RuneQuest page 188). The subject of the fear must be related to the Rune Affinity of the spirit, thus a Fire spirit could inflict a fear of flames, sunlight or even the open sky.",
+      "category": "passion_spirit"
+    },
+    {
+      "name": "Greed Spirits",
+      "page": "p.142",
+      "description": "Also known as Gluttony Spirits, possession causes the host to become enamoured of a specific item, substance or stimulus. Whenever the victim comes into contact with the object of their greed, they will attempt to horde, secrete, covet, consume or immerse themselves, to their detriment, for the next 1d3 hours. Examples might be a specific sword, alcohol, gold, sex, or even pain.",
+      "category": "passion_spirit"
+    },
+    {
+      "name": "Grief Spirits",
+      "page": "p.142",
+      "description": "Instils a sense of loss so great that the host becomes passively suicidal. They do not actively seek dangerous situations, but will only half-heartedly protect themselves if one occurs. Whenever asked to parry, evade or make an opposed test to resist hostile magic for instance, the victim must reverse the number rolled on the dice if it would generate a worse result.",
+      "category": "passion_spirit"
+    },
+    {
+      "name": "Hate Spirits",
+      "page": "p.142",
+      "description": "These spirits exaggerate the possessed host's natural inclinations towards a particular individual, race, cult or culture, making them irritable and surly. Whenever the opportunity presents itself, usually when unobserved, the victim will succumb to overwhelming hatred; leading them to quarrel with, brutalise, torture, or rarely to even murder the object of their hate.",
+      "category": "passion_spirit"
+    },
+    {
+      "name": "Love Spirits",
+      "page": "p.142",
+      "description": "The newly possessed host falls in love with the first compatible partner he or she sees. Once a love object is found, the host is utterly infatuated, gaining a Love (Individual) passion equal to the Rune Affinity value of the spirit. This is thereafter used as an opposing motivation whenever the host is called to leave their beloved or work against his or her interests.",
+      "category": "passion_spirit"
+    },
+    {
+      "name": "Madness Spirits",
+      "page": "p.142",
+      "description": "Akin to having a demon whispering into your ear, madness spirits force the host at times of stress into acts of irrational or gibbering behaviour. Depending on the spirit's Rune Affinity, this is done by changing the perceptions of the victim, sadistically torturing them, or instilling a degree of increasing paranoia. Madness attacks last 1d3x10 minutes, occurring whenever a skill check is made by the host and the spirit overcomes that roll in an opposed test using its Rune Affinity.",
+      "category": "passion_spirit"
+    },
+    {
+      "name": "Violence Spirits",
+      "page": "p.142",
+      "description": "Removes all ethical and moral restraints towards using combat to solve problems. Any hint of dissent or outright threat will trigger a violent outburst. Worse still, the host glories in violence so much that they will joyously brutalise all living things within reach, be they friend, foe or even innocent. Violent outbursts can be resisted if the host can overcome the Rune Affinity of the spirit with their Willpower, but once triggered, the violence only stops when the host is incapacitated by exhaustion or a lack of responding victims. Note that violence does not necessarily equate to death — more often utilising their natural weapons or drawing a weapon, unless directly threatened by one first.",
+      "category": "passion_spirit"
+    }
+  ],
+  "named_spirits": [
+    {
+      "name": "Hungry Ghosts",
+      "page": "p.144",
+      "description": "These are Praxian spirits of the dead tied to the world of the living because of unfinished business. They lurk about old places, trying to devour the souls of the living to appease their never-ending anguish. Most are lone Haunts, Wraiths, or Death Spirits. Shamans can satiate the hunger of these ghosts, briefly diverting their attention from the tribe by means of a human sacrifice. In most cases, the shaman uses only volunteers or captured prisoners, but some shamans are corrupted by the terror the hungry ghosts instil and will offer up innocents to turn the spirits against their enemies.",
+      "category": "named_spirit",
+      "runes": [
+        "Death-like glyph"
+      ]
+    },
+    {
+      "name": "Lune and Selene",
+      "page": "p.144",
+      "description": "Elemental spirits of the Red and Blue Moons respectively, lunes and selenes may only be drawn from fragments brought back from the surfaces of those inaccessible places. Summoning a moon elemental requires a solid chunk of rock of at least 6 ENC per cubic metre. Lunes and selenes share the same base Characteristics as other elementals, but have slightly different abilities.",
+      "category": "named_spirit",
+      "runes": [
+        "Moon glyph"
+      ],
+      "subtypes": [
+        {
+          "name": "Lunes",
+          "text": "Away from the Red Moon, lunes are insubstantial pools of pulsating red light, unable to cause physical damage. Instead, they inflict madness upon those they touch as per the Rune Magic spell, if the victim fails to resist the elemental's attack roll with their Willpower."
+        },
+        {
+          "name": "Selenes",
+          "text": "Elementals of the Blue Moon, a selene is invisible and undetectable to natural senses, making it especially dangerous to those without some form of magical perception. Like lunes, a selene cannot inflict physical harm, instead applying its Damage roll against the Magic Points of those it strikes."
+        }
+      ]
+    },
+    {
+      "name": "Succubus",
+      "page": "p.144",
+      "description": "A succubus is an insubstantial spirit capable of creating a temporary body to satisfy carnal desire and create trouble. They appear to solitary people, such as watchmen or night wanderers, and try to seduce the victim. They assume the form of either sex as appropriate. If the target fails to resist the succubus in an opposed test of their Willpower versus the spirit's Seduction skill, he will suffer the loss of 1d3 Fatigue Levels, which may only be recovered as per Blood Loss. The succubus will return each night thereafter, until the victim is dead or manages to rebuff her seduction attempts — the latter suffering an incrementing Difficulty Grade every evening after the first. Succubae are Intensity 2 spirits with an INT and POW of 1d6+12, and the spirit abilities of Knowledge (Seduction) and Manifestation.",
+      "category": "named_spirit",
+      "runes": [
+        "Chaos-like glyph"
+      ]
+    },
+    {
+      "name": "Traskar",
+      "page": "p.144",
+      "description": "Traskars are spirit followers of the Frog Woman, one of the major water divinities of Prax. They are granted to her most faithful shamans, the spirit being sent to inhabit the body of a giant frog selected by Frog Woman herself. The traskar then serves as the shaman's bodyguard and ally, but is somewhat restricted in movement from beyond the River of Cradles or oasis which is its home. For Characteristics, use those of a Cliff Toad except they are intelligent, INT instead of INS, have a POW of 1d6+6, and possess the spirit abilities of Puppeteer and Spellcasting, Folk Magic only.",
+      "category": "named_spirit",
+      "runes": [
+        "Water-like glyph"
+      ]
+    },
+    {
+      "name": "Whirvlish",
+      "page": "p.145",
+      "description": "A whirvlish is the sacrificed spirit of a man cursed to embody a dust devil, mindlessly attacking any creature it encounters. Its physical form is made of cycling dust and sand that abrades those it engulfs. In addition to engaging in Spirit Combat, at the start of each Combat Round the whirvlish automatically inflicts 1d3 damage to every Hit Location of its victim, scouring away magical protection first, armour second, and eventually flesh and bone. Whirvlishes are usually Intensity 2 or 3 spirits with the following statistics: INT, POW and CHA as per the original sacrifice or species; a Movement Rate equal to POW; and the spirit abilities of Animate and Steadfast. A whirvlish only takes damage from magical spells or weapons, as per Elementals. If destroyed physically, it departs to the Otherworld to recover and will reform after 24 hours. A whirvlish must be beaten in Spirit Combat and dissipated to finally lay it to rest.",
+      "category": "named_spirit",
+      "runes": [
+        "Movement-like glyph"
+      ]
+    },
+    {
+      "name": "Dark Eater",
+      "page": "p.145",
+      "description": "Dark Eater is occasionally propitiated by the Morocanth and several other Praxian tribes. Although a powerful spirit of war and taking captives, his appetite for living things exceeds even that of Oakfed, making his summoning an expensive proposition. Contacted at the Pairing Stones, where he first emerged into the surface world, a relationship can be formed with Dark Eater in exchange for accepting the taboo of Never Bind a Fire or Light Spirit, and an offering of at least a dozen slaves, or double that in herd animals, whose spirits are utterly consumed. Thereafter when summoned, Dark Eater expects a lesser offering, but will grant the shaman his direct aid by either:",
+      "category": "named_spirit",
+      "runes": [
+        "Darkness glyph",
+        "Death-like glyph"
+      ],
+      "boons": [
+        "Flowing forth from the Otherworld for the period of dawn till dusk, creating a shadowy darkness equal to a starry night over that geographical region of Prax or the Wastelands. Within this shadow the shaman and his tribe may move unseen and unheard until Dark Eater returns to the Underworld.",
+        "Emerging at the shaman's request any time during the following day, to swiftly flow over the combatants of a battle and consume every lesser spirit, summoned or currently released from their charms, even those belonging to the shaman and his allies. Spirits so eaten are dissipated, and Dark Eater returns to the Underworld the following minute."
+      ]
+    },
+    {
+      "name": "Mallia",
+      "page": "p.145",
+      "description": "The Mistress of Disease, Mother of Plagues, Mallia manifests to Praxian spirit magicians as a headless, pox-ridden hag spouting many arms, with a gaping maw in place of her belly. It is from this horrific orifice that she vomits out countless spirits of disease, which are her children. A shaman may enter a formal relationship with Mallia in exchange for accepting the taboo of Never Heal a Disease. Once a season, the shaman is permitted to summon Mallia and request one of two boons:",
+      "category": "named_spirit",
+      "runes": [
+        "Darkness-like glyph",
+        "Death-like glyph"
+      ],
+      "boons": [
+        "The shaman may ask for any number of disease spirits of a type he is familiar with. Mallia however, does not grant her summoner control over the spirits she spews forth; the shaman and ritual participants must fight and bind each and every spirit, else become the target of their ministrations.",
+        "The shaman may request that Mallia transfer any disease spirits bound to an area or possessing living beings, into a like number of herd beasts, which must be present and part of the summoning ritual."
+      ]
+    },
+    {
+      "name": "Oakfed",
+      "page": "p.146",
+      "description": "Oakfed is the most potent Fire spirit of Prax and the Wastelands, normally contacted at his shrine beyond the outskirts of Monkey Ruins, which is avoided by the resident baboons. His role is to carry messages and sacrifices to the gods of Air and Sky, but Oakfed's rebellious nature often leads him to spread uncontrollably. As such, his summoning is treated with wary caution, often in a place bare of vegetation save for what has been stacked as an offering to his eternal hunger. Shamans who form a relationship with Oakfed must accept the taboo of Never Extinguish a Flame. As well as being a source of small Fire elementals used for cooking and light, Oakfed also offers the following to his summoners:",
+      "category": "named_spirit",
+      "runes": [
+        "Fire/Sun-like glyph",
+        "Death-like glyph"
+      ],
+      "boons": [
+        "Oakfed will fully destroy the bodily remains of the dead, ensuring that they will not return as haunts or wraiths. It also burns all goods sent with a corpse, allowing the deceased to carry weapons and other supplies into the afterlife. He can also immolate physical undead such as skeletons, zombies, or even vampires, assuming that they can be restrained within the area he is to be summoned into.",
+        "Oakfed can let loose his unquenchable Wildfires, which once consumed the forests that covered Prax. The flames burn everything they touch over a wide area, as if an Intensity 4 fire. Save for running out of anything to burn, the fire cannot be naturally extinguished. The shaman has no control over the Wildfire, which will spread where the wind takes it, potentially placing its summoner at risk."
+      ]
+    },
+    {
+      "name": "Wild Hunter",
+      "page": "p.146",
+      "description": "Wild Hunter is a destructive spirit who rages across the land of Prax, blasting its peoples with savage dust and sand storms. He is not worshipped by Waha shamans, but rather by renegade spirit magicians and outlaws, who seek vengeance against their former tribes. Those who wish to form a relationship with him must agree to the taboo of Never Obey the Laws of Waha, and dedicate their souls after death to ride with the Wild Hunt, chasing lost souls and Star Bears. Each time he is summoned, he must be placated with human sacrifices before granting one of his boons, which are either:",
+      "category": "named_spirit",
+      "runes": [
+        "Air/Storm-like glyph",
+        "Death-like glyph"
+      ],
+      "boons": [
+        "Bear up the shaman or his mount, so that they may ride upon the winds. Each additional sacrifice made during the summoning permits an additional target to be carried aloft. The winds triple the target's Movement Rate, provided they maintain at least a running or cantering gait. If they slow down to a walk or stop entirely, Wild Hunter no longer supports them and they plummet to the ground.",
+        "Create a whirvlish from the soul of a person murdered as part of the summoning. The ritual must be performed under the desert sky and takes an entire night to complete."
+      ]
+    },
+    {
+      "name": "Zola Fel",
+      "page": "p.146",
+      "description": "Zola Fel is the great spirit of the River of Cradles. Friendly to those who treat his waters with respect, he is the strongest of the water spirits left in Prax, though his power never ranges far from his bed. Without proper worship, Zola Fel can cut off trade to the city of Pavis, or withhold his life-giving waters to the herds that drink from him. He can be summoned anywhere along his banks, but a relationship requires accepting the taboo of Never Permit the River of Cradles to be Fouled. As well as loaning Undines to those he considers worthy, Zola Fel offers two gifts, but at the expense of further taboos:",
+      "category": "named_spirit",
+      "runes": [
+        "Water-like glyph",
+        "Movement-like glyph"
+      ],
+      "boons": [
+        "He will briefly lower his waters, permitting the shaman and his tribe to ford the river without loss of man or beast. In exchange, the shaman must swear to Aid Any Giant's Cradle So that it Reaches the Sea.",
+        "He will flood a region of land to the sunrise or sunset of his banks, sweeping it clear in a torrent of boiling waters. Everything and everyone so engulfed is lost to the waters unless constructed of stone, or succeeds in a Swim roll. This however requires the oath of Never Summon Zola Fel Again, else the second time the shaman will be taken by the waters himself."
+      ]
+    },
+    {
+      "name": "Brother Dog",
+      "page": "p.147",
+      "description": "Predominately contacted in the Elder Wilds, Brother Dog is noted for his friendship towards humans. Loyal and a great aid to the hunter-gatherers of the region, the spirit can be summoned at any campfire in Balazar with an offering of half a creature of at least SIZ 10 personally slain by the shaman. Brother Dog will appear and offer his services to either personally guard the shaman's camp, or infallibly track down prey or a specific individual if something which carries his scent is provided. Forming a relationship with Brother Dog requires accepting the taboo of Never Harm a Dog. In return, no dog will ever harm the shaman, who, in addition, will thereafter be able to understand and speak to canines freely.",
+      "category": "named_spirit",
+      "runes": [
+        "Beast-like glyph"
+      ]
+    },
+    {
+      "name": "Condor",
+      "page": "p.147",
+      "description": "Originally the steed of a Sky God who was slain by Chaos during the Greater Darkness, mighty Condor lost his eminent rank and was driven into the Wastes by the Three Feathered Rivals. He can now only be contacted in Vulture's Country. Summoning Condor requires the sacrifice of a herd-beast at noon, which must be then protected against scavengers until dusk, when he arrives in all his dishevelled glory. In exchange for the taboo Never Harm a Vulture, Condor or their Eggs, he will command his smaller offspring to aid the summoner until dusk the following day by acting as scouts, gatherers of carrion, or attacking as a flock. Forming a relationship with Condor allows the shaman to summon a King Condor instead, but comes with the additional taboo Never Summon Any of the Three Feathered Rivals.",
+      "category": "named_spirit",
+      "runes": [
+        "Fire/Sun-like glyph",
+        "Beast-like glyph"
+      ]
+    },
+    {
+      "name": "Dew Maid",
+      "page": "p.147",
+      "description": "Once offered the hand of a now dead god, the kind and gentle Dew Maid refused his advances, and now roams the wastes weeping regretfully to herself. It is her tears which help the sparse vegetation of the chaparral cling onto life, despite the lack of running water. Due to her wandering, she may only be summoned to each specific region within Prax and the Wastelands but once in a year, unless she has a relationship with the summoner. Nevertheless she never answers a summons whilst the sun is above the horizon. Indeed the shaman and those in attendance at the summoning, both men and beasts, must block their ears and avert their eyes so as to never catch sight of Dew Maid or hear her weeping, else forever be spurned of her ministrations. In return for this respect, Dew Maid will leave the ground and vegetation covered with fine droplets of water, enough to support local plants for a season, or each creature present for a single day. Those shamans willing to enter a relationship with her must accept the taboo of Never Marry.",
+      "category": "named_spirit",
+      "runes": [
+        "Water-like glyph",
+        "Fertility-like glyph"
+      ]
+    },
+    {
+      "name": "Evening Star",
+      "page": "p.147",
+      "description": "The lover of the sun god Yelm, Evening Star tried to follow him down into the Underworld but was refused at the Gates of Dusk. Thus she waited at the edge of the world, fighting off the monsters that swarmed over its rim, and eventually guided the Lightbringers into Hell. In reward, she now resides in a palace built for her in the sky where she stood vigil. Due to her nature, Evening Star can only be summoned once per season, at dusk under a clear sky, coinciding with the defeat of a creature of darkness during the ritual. In return, she will step down from her house and shine her illumination directly upon the shaman and his tribe, preserving daylight in the area until night ends at dawn. Forming a relationship with Evening Star permits the shaman to summon her once per week, by adopting the taboo of Never Make Deals with a Being of Darkness.",
+      "category": "named_spirit",
+      "runes": [
+        "Fire/Sun-like glyph",
+        "Movement-like glyph"
+      ]
+    },
+    {
+      "name": "Father of Independents",
+      "page": "p.147",
+      "description": "Named from sarcasm rather than status, the Father of Independents is a snivelling spirit who claims to have been enslaved during the Lesser Darkness and forced to become the ferryman of the gods. Although he fled during the battle against Chaos, he could not escape his crippled nature and became slave to whoever summoned him. Now the Father of Independents serves as a wretched guide across the Dead Place in Prax, deceiving his wards with entertaining lies if not kept tightly checked. The spirit is so pathetic he answers any summons without need of additional sacrifice, but can somehow cross the Dead Place, where all other magic fails to function. No shaman dares form a relationship with him, in fear of being corrupted by his constant falsehoods.",
+      "category": "named_spirit",
+      "runes": [
+        "Truth-like glyph",
+        "Communication-like glyph"
+      ]
+    },
+    {
+      "name": "Frog Woman",
+      "page": "p.147",
+      "description": "An innocent spirit who survived the Greater Darkness, Frog Woman hid in the rushes of her home, leaping away whenever Chaos found her. Despite this her power is not inconsiderable. Frog Woman can be summoned at any oasis in Prax and the Wastelands, and along the banks of the River of Cradles. In return for baskets of small insects, one SIZ of collected grasshoppers, beetles and centipedes per person or beast partaking in the ceremony, and the promise of those present to use Peaceful Cut on her brethren, Frog Woman will shapeshift the entire tribe, its herd beasts, or both, into amphibians for the period of a day and a night. Although a potent magic, she does not guarantee their safety from other predators during their transformation. Forming a relationship with Frog Woman requires the shaman adopt the taboo of Never Eat an Amphibian, which she compensates for by providing warning in advance of danger via her croaking children, and when summoned, carries the shaman in a tremendous leap to any other wet place in Prax or the Wastelands.",
+      "category": "named_spirit",
+      "runes": [
+        "Water-like glyph",
+        "Movement-like glyph"
+      ]
+    },
+    {
+      "name": "Good Shepherd",
+      "page": "p.148",
+      "description": "Once a mortal hero, Good Shepherd saw the deaths of many tribes during the Great Darkness. He fought against the despair this brought, gathering together the few herds that remained at the Paps, and there led their final defence. Good Shepherd now acts as a protector and guide for dead herd beasts, escorting them to Eiritha so that they may be reborn anew. He may be summoned wherever a flock of herd beasts are gathered. In exchange for agreeing to undertake a pilgrimage to the Paps where Good Shepherd fell in battle, he will cleanse the entire herd of sickness; any displaced Disease Spirits are then free to enter Spirit Combat with the attendees at the ceremony. If desired, the shaman can form a relationship with Good Shepherd at the Paps, freeing him from ever undertaking the pilgrimage again. Good Shepherd can also be called upon to return a favoured or beloved herd beast to life, providing it has not lain dead for more than three days. This requires the owner of the beast to accept the stringent taboo of Never Harm a Herd Beast, the breaking of which will cause the resurrected beast to die, and its spirit to plague the oath breaker as a Wraith.",
+      "category": "named_spirit",
+      "runes": [
+        "Beast-like glyph",
+        "Stasis-like glyph"
+      ]
+    },
+    {
+      "name": "Grandmother of Spiders",
+      "page": "p.148",
+      "description": "The Grandmother of Spiders first came to Prax when she descended from Shadows Dance to wrap the armies of Chaos in her webs. All those she caught were devoured by her children, but her offspring were so proliferate that they ate all the other insects too, forging an enmity which has never been forgiven. To summon the Grandmother of Spiders requires that the shaman first find one of her children, the now rare giant spiders, and perform a literal dance of death — for if Grandmother finds the performance lacking, the spider will eat the shaman. Success allows the shaman to call upon the tiny children of Grandmother, harmless spiders palm sized or smaller, who will swarm together and create some temporary edifice made of spider silk. This might be a sea of fine threads which captures all the nesting birds on a plain, or a tent to ward the shaman from the sun. Forming a relationship with the Grandmother of Spiders grants the shaman authority to call upon her tiny children at will, but at the expense of being attacked on sight by all other insects, large or small.",
+      "category": "named_spirit",
+      "runes": [
+        "Darkness glyph",
+        "Beast-like glyph"
+      ]
+    },
+    {
+      "name": "Hyena",
+      "page": "p.148",
+      "description": "Hyena is an odd creature. Supposedly when Genert learned of his upcoming death, he created Hyena to devour his immortal body so it would not fall into the maws of Chaos. This strange and somewhat disgusting fate is held responsible for Hyena's odd behaviour: sitting about telling lewd jokes all day, and his humourless, hideous laughs each night. To summon Hyena requires a sacrifice of the shaman's last herd-beast or slave at any oasis in the Wastes. In return for this gift, Hyena promises to come to the aid of the summoner once in the future, embodying himself within the shaman to give forth an unending succession of jokes, rendering friend and foe alike helpless with raucous laughter. This allows the shaman to temporarily stop a fight, escape from captors, or merely entertain his tribe for an evening. For the promise Always Leave the Meat of any Meal or Kill, Hyena will form a relationship, permitting the shaman to embody the spirit once per season, plus the ability to chew bone to gain nourishment.",
+      "category": "named_spirit",
+      "runes": [
+        "Death-like glyph",
+        "Beast-like glyph"
+      ]
+    },
+    {
+      "name": "Lightning Boy",
+      "page": "p.148",
+      "description": "Originally a herdsman for the Fire Gods, the spirit called Lightning Boy was captured by wind demons during the Lesser Darkness, and finding himself delighted by their destructive nature, became initiated into the tribe of Air. Lightning Boy can only be summoned during a lightning storm, under which the shaman must dance to gain the spirit's attention. If successful, the shaman will be gifted with part of Lightning Boy's power, allowing them to release a single lightning bolt at a future time, with effects similar to the divine miracle Lightning, inflicting damage equal to 1d6 times the maximum Air or Sky Spirit Intensity the shaman can handle. Forming a relationship with Lightning Boy requires the shaman adopt the taboo Never Seek Cover During a Storm, and pass a test of surviving a 5d6 lightning strike directly upon their person. This allows the shaman to automatically recharge themselves if struck by lightning, something which will happen naturally on Windsday every week during Storm Season.",
+      "category": "named_spirit",
+      "runes": [
+        "Air/Storm-like glyph",
+        "Fire/Sun-like glyph"
+      ]
+    },
+    {
+      "name": "Mistress Calm",
+      "page": "p.149",
+      "description": "A female spirit who appears garbed in wisps of shadowy mist, her benign influence calms the dust laden airs of the dry chaparral. She may only be summoned on days of no wind, which normally occur only during Fire Season. In return for gifts of flowers and song, she promises to come forth one time when called and ward the shaman and his tribe from any storm — even the deadly scouring simooms of Gagarth, though not from the taste of his bitter, coppery sands. Entering a relationship with Mistress Calm requires swearing the taboo of Never Raise Your Voice in Anger, and maintains the protection all year round.",
+      "category": "named_spirit",
+      "runes": [
+        "Storm/Air-like glyph",
+        "Stasis-like glyph"
+      ]
+    },
+    {
+      "name": "Monkey King",
+      "page": "p.149",
+      "description": "Almost unknown today, this obscure spirit is kept alive by the worship of the Baboons of the Wastes. They claim the Monkey King once ruled a large empire centred on the Monkey Ruins, destroyed in the Darkness. He is jealous of the supremacy of humans over his kin, and gladly emerges from exile to strangle interlopers with his immense strength. Monkey King may only be summoned within Monkey Ruins. For a baboon shaman the only cost is the taboo Never Disobey the Monkey King, but a human shaman is forced to accept the taboo Never Walk Upright. In return, for each fist full of hair the shaman plucks from scalp or skin, Monkey King sends a baboon spirit, equivalent to an Intensity 2 Wraith, to aid him against his foes. These remain until the following dawn, but never stray beyond sight of Monkey Ruins. The hair only regrows a year and a day later. A shaman who forms a relationship with Monkey King may once in their life summon his physical manifestation, a gigantic ape headed man wielding a staff or mace, far beyond mortal ability to defeat.",
+      "category": "named_spirit",
+      "runes": [
+        "Beast-like glyph",
+        "Mastery-like glyph"
+      ]
+    },
+    {
+      "name": "Morning Star",
+      "page": "p.149",
+      "description": "The younger sister of Evening Star, Morning Star brought back the triumphant news of Yelm's release from the Underworld. As such, she ushered in the Dawning and thereby is a spirit of renewal and hope. Morning Star may only be summoned on the last night of Sacred Time, just prior to sunrise. She asks nothing of the shaman, merely granting the summoner the right to call upon her once during the following year, as her light shines over the eastern horizon. At that time, if facing foes of Darkness or Chaos, Morning Star will reinvigorate the shaman and his tribe, restoring their Magic Points back to full, returning their Fatigue levels to Fresh and granting them courage enough to stand their ground. She gives no method of establishing a deeper relationship, as her open generosity is offered to all.",
+      "category": "named_spirit",
+      "runes": [
+        "Fire/Sun-like glyph",
+        "Movement-like glyph"
+      ]
+    },
+    {
+      "name": "Night Woman",
+      "page": "p.149",
+      "description": "Night Woman brought the Darkness to Prax when she fled up from the Underworld. The peoples of the surface fought against her, but armed with death and winter, she was victorious, guarding those who submitted to her rule from the Chaos that swept the lands. Since the return of the sun, her influence has weakened, but she still covers the world half of the time, under the folds of her velvet cloak. She can be summoned anywhere, provided it is night-time, with no need for a sacrifice. There is no benefit to this, save she freely gives Shades to those who will accept the taboo of Never Create a Light. Those who would form a relationship with her are granted the ability to summon her during the day, producing a freezing patch of impenetrable pitch darkness across the area whilst she remains — but the cost of this bond is high, as the shaman must put out his own eyes.",
+      "category": "named_spirit",
+      "runes": [
+        "Darkness glyph",
+        "Stasis-like glyph"
+      ]
+    },
+    {
+      "name": "Pole Star",
+      "page": "p.149",
+      "description": "A famous hero, first to win back his house upon the Sky Dome, Pole Star is the greatest and most powerful of all the Star Captains. He sits at the unmoving apex of the sky watching over those who earn his friendship. He can be summoned on Fireday of Stasis Week of any season, in return for the gift of an entire herd of animals, whose bodies must be burned so that their spirits rise up to him. In exchange for so great a gift, Pole Star will, when called upon, briefly grant the shaman the ability to act as a magical conduit for his entire tribe, allowing them to use his Runic Affinities and spells in place of their own if they so desire. For accepting the taboo of Never Permit Your Lands or Chattel Remain Stolen, Pole Star will grant his friendship, allowing the shaman to summon and draw upon his power once per season, without need of further sacrifice.",
+      "category": "named_spirit",
+      "runes": [
+        "Fire/Sun-like glyph",
+        "Stasis-like glyph"
+      ]
+    },
+    {
+      "name": "Rainbow Girl",
+      "page": "p.149",
+      "description": "Rainbow Girl is the carrier of messages between the gods of the earth, sea, air and sky. She promotes peaceful communication, and to those ends she may be summoned at a place of falling water, where sunlight glints through the droplets. The cost of calling upon her aid is that the shaman forever put aside or foreswears one disagreement he has with another. In return, she will arch herself across the sky until she reaches a person or spirit the shaman wishes to speak with. The two can then communicate, transferring conscious thought in perfect synchronicity. The range of this is open to anywhere under the open skies of Prax or the Wastelands, but communication lasts only whilst Yelm is above the horizon, or until one or the other of the participants wishes to end the link. Establishing a relationship with Rainbow Girl permits the shaman to call upon her aid once per week, but forces upon him the taboo of Never Attack a Foe Before Speaking With Them First.",
+      "category": "named_spirit",
+      "runes": [
+        "Harmony-like glyph",
+        "Water-like glyph"
+      ]
+    },
+    {
+      "name": "Raven",
+      "page": "p.150",
+      "description": "The first of the Three Feathered Rivals, Raven uses his wit to trick Thunder Bird, yet is always overcome by Sun Hawk who sees through his ruses. Summoning Raven can only be performed at dusk during Illusion Week. Upon arrival he expects to be gifted with shiny things such as precious metals, glass trinkets or crystals equal in value to 1d3+3 herd beasts. In return he will conceal an object or small area for an entire season, until the following Illusion Week, so that it cannot be found or magically detected save by Sun Hawk himself. Entering a relationship with Raven comes at the cost of the taboo Never Speak an Untwisted Truth, but in return the shaman may summon Raven at any time to hide either himself or his tracks.",
+      "category": "named_spirit",
+      "runes": [
+        "Darkness glyph",
+        "Illusion-like glyph"
+      ]
+    },
+    {
+      "name": "River Horse",
+      "page": "p.150",
+      "description": "River Horse may only be contacted at the very edges of Prax, where the tributary headwaters of the River of Cradles are located. When summoned, River Horse takes the form of a watery creature with the fore-body of a horse and hindquarters of a fish. In exchange for swearing to the taboo of Never Drink From or Bathe in Stagnant Waters, and a day travelling the depths for detritus, River Horse will carry the shaman and up to a dozen riders to any other point along the waterway from its many sources to the sea. If the shaman does not have a clear visualisation of where he wishes to go, River Horse will deposit them at a random location. Forming a relationship with River Horse permits the shaman to summon River Horse anywhere along the length of the watercourse, in return each time the shaman is beholden to River Horse to deal with some problem affecting the river.",
+      "category": "named_spirit",
+      "runes": [
+        "Water-like glyph",
+        "Movement-like glyph"
+      ]
+    },
+    {
+      "name": "Ronance",
+      "page": "p.150",
+      "description": "A once potent fertility spirit, Ronance rides across the land in a chariot which never touches the earth, yet wherever it travels, the ground below sprouts with new growth. He never remains in one place, ever travelling an ancient and forgotten road system made magical by the runnels of his wheels. Since the death of Genert, the powers of Ronance have faded, but he can still be summoned in the Wastelands during Movement Week in Earth Season. In exchange for the consecration of two perfect and unblemished herd beasts, which he himself selects, Ronance agrees at a future date to appear at their sacrifice — the spirits of the beasts then drawing his chariot and guiding the shaman to the nearest oasis or area of good grazing. A relationship can be formed with Ronance with the associated taboo of Never Ride Save in a Wheeled Vehicle. In return he can be summoned at any time of the year.",
+      "category": "named_spirit",
+      "runes": [
+        "Movement-like glyph",
+        "Fertility-like glyph"
+      ]
+    },
+    {
+      "name": "Sun Hawk",
+      "page": "p.150",
+      "description": "Sun Hawk is the second of the Three Feathered Rivals. He always defeats Raven, but is ever-conquered by Thunder Bird. Summoning Sun Hawk can be performed at any time when the sun is up and sky is clear of clouds. In return for an offering of serpents with a combined SIZ of at least 10 — which Sun Hawk consumes on the spot — the shaman may ask him to find any one thing or person within Prax or the Wastelands. Sun Hawk will find the target and report its location, no matter its concealment, provided they are directly touched by sunlight before the end of the day. Adopting the taboo of Never Lie permits the shaman to form a relationship with Sun Hawk, who gifts his ally with the ability to see through illusion, as per the Visibility Folk Magic spell.",
+      "category": "named_spirit",
+      "runes": [
+        "Fire/Sun-like glyph",
+        "Truth-like glyph"
+      ]
+    },
+    {
+      "name": "Three-Bean Circus",
+      "page": "p.150",
+      "description": "The Three Bean Circus is a collection of peaceful spirits who have achieved harmony with the cosmos and its Runes. Though their presence is understated, the powers at their command are unfathomable. All tribes riding to war are said to give the Circus wide berth out of respect for their spiritual perfection — though in truth from fear of being rendered impotent. Before the Three-Bean Circus can be summoned, the shaman must first travel to Agape in the Eiritha Hills and spend a year in contemplation to establish a relationship with the spirits there. In return for adopting the taboo of Never Use Violence, he gains the ability, usable once per year, to summon them for the duration of a day and a night. During this time all those within line of sight of the shaman, no matter their race, rank or cult, are compelled to travel to his camp in peace, sit and listen to the tales and wisdom the spirits impart. The following dawn, all participants depart amicably, before the harmony of the Three-Bean Circus fades from them.",
+      "category": "named_spirit",
+      "runes": [
+        "Harmony-like glyph"
+      ]
+    },
+    {
+      "name": "Thunder Bird",
+      "page": "p.151",
+      "description": "The last of the Three Feathered Rivals, Thunder Bird is always beaten in any contest with Raven, yet always emerges victorious over Sun Hawk. He appears as a titanic avian with dark clouds as wings, and his scream is a thunderclap. Summoning Thunder Bird requires an overcast sky and the beating of a drum as wide as the span of the shaman's reach. If mollified with the sacrifice of a bull herd beast, Thunder Bird will temporarily roost within the drum for a day and a night, amplifying its beat to that of a thunderclap which is audible over kilometres, automatically deafening anyone within sight the shaman so chooses. Establishing a relationship with Thunder Bird requires the taboo of Never Take Shelter, but permits the shaman the ability to summon him no matter how few clouds are in the sky.",
+      "category": "named_spirit",
+      "runes": [
+        "Air/Storm-like glyph",
+        "Beast-like glyph"
+      ]
+    },
+    {
+      "name": "White Princess Inora",
+      "page": "p.151",
+      "description": "Tales tell of the most beautiful woman in Prax, tall and pale of skin, wearing a scintillating white cloak of winter cold. She is welcomed by the tribes for bringing a little moisture and temporary relief from the blazing heat of the barren chaparral. She can only be summoned once per year on any Freezeday and requires the sacrifice of an unblemished girl, whose spirit will join Inora's retinue as a handmaiden. In return, the White Princess will cause it to gently snow for a day, making the immediate region temporarily impossible to traverse, but watering it so that grass and flowers will flourish for the remainder of the week, thus providing lush fodder to herd animals. Establishing a relationship with Inora requires that the shaman pleasure her in lovemaking. This requires a successful test of either his Darkness Rune or Seduction skill, and in addition that he survive an Endurance test or die from her frigid embrace. Passing both permits the shaman to summon the White Princess once per season, but at the expense of never again finding joy in another's bed.",
+      "category": "named_spirit",
+      "runes": [
+        "Darkness glyph",
+        "Stasis-like glyph"
+      ]
+    }
+  ],
+  "spirits_alphabetical": [
+    "Brother Dog",
+    "Condor",
+    "Dark Eater",
+    "Dew Maid",
+    "Evening Star",
+    "Father of Independents",
+    "Frog Woman",
+    "Good Shepherd",
+    "Grandmother of Spiders",
+    "Hungry Ghosts",
+    "Hyena",
+    "Lightning Boy",
+    "Lune and Selene",
+    "Mallia",
+    "Mistress Calm",
+    "Monkey King",
+    "Morning Star",
+    "Night Woman",
+    "Oakfed",
+    "Pole Star",
+    "Rainbow Girl",
+    "Raven",
+    "River Horse",
+    "Ronance",
+    "Succubus",
+    "Sun Hawk",
+    "Three-Bean Circus",
+    "Thunder Bird",
+    "Traskar",
+    "Whirvlish",
+    "White Princess Inora",
+    "Wild Hunter",
+    "Zola Fel"
+  ]
+}
