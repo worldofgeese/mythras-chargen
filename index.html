@@ -6847,9 +6847,16 @@ App.renderPlayEquipment = function() {
   const unencumbered = enc.unencumbered || 0;
   const overloaded = enc.overloaded || 0;
 
+  const armorHtml = CharacterData.armor && CharacterData.armor.length > 0 ? `
+    <p><strong>Armour:</strong></p>
+    <ul style="margin-top: 0;">
+      ${CharacterData.armor.map(a => `<li>${a.name || 'Armour'} — AP ${a.ap || 0}${a.locations ? ' (' + a.locations + ')' : ''}</li>`).join('')}
+    </ul>` : '';
+
   container.innerHTML = `
     ${CharacterData.startingMoney ? `<p><strong>Starting Money:</strong> ${CharacterData.startingMoney} Lunars</p>` : ''}
     <p data-testid="equipment-enc"><strong>Total ENC:</strong> ${totalEnc} / ${unencumbered} (${totalEnc > overloaded ? 'Overloaded!' : totalEnc > unencumbered ? 'Burdened' : 'Unencumbered'})</p>
+    ${armorHtml}
     <ul data-testid="equipment-list">
       ${CharacterData.equipment.map(item => `<li>${item.name} (${item.quantity || 1}× ENC ${item.enc || 0})</li>`).join('')}
     </ul>
