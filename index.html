@@ -13265,28 +13265,31 @@ const SORCERY_SPELLS = [
   ["Wrack (Substance or Harm)", "Evade", "Enables a sorcerer to harm opponents with deadly bolts or waves of sorcerous energy. Damage scales with Intensity. (p.177)"]
 ];
 
-// Starting spirits for animist characters (Monster Island + Bird in the Hand)
+// Starting spirits for animist characters
+// Abilities verified from Bird in the Hand PDF (named spirits) and Mythras Core p.144-154 (ability types)
+// POW/CHA from verified Bird in Hand stat blocks where applicable
 const STARTING_SPIRITS = [
-  // Nature Spirits — Trait (Endowment): grants physical trait of totem animal
-  {name: 'Trait Spirit — Swiftness (Int 1)', type: 'Nature (Trait)', intensity: 1, pow: 9, cha: 7, ability: 'Endowment: grants limbs greater alacrity (+1 Action Point for 1 scene)', source: 'Bird in the Hand p.12'},
-  {name: 'Trait Spirit — Toughness (Int 2)', type: 'Nature (Trait)', intensity: 2, pow: 13, cha: 9, ability: 'Endowment: grants hide-like skin (+2 AP to all locations for 1 scene)', source: 'Monster Island p.108'},
-  {name: 'Trait Spirit — Keen Senses (Int 1)', type: 'Nature (Trait)', intensity: 1, pow: 10, cha: 8, ability: 'Endowment: grants animal-sharp senses (+20% Perception for 1 scene)', source: 'Monster Island p.108'},
-  // Nature Spirits — Boost (Bless): boosts one Attribute or Skill
-  {name: 'Boost Spirit — Vigor (Int 1)', type: 'Nature (Boost)', intensity: 1, pow: 10, cha: 8, ability: 'Bless: +1d3 temporary Hit Points to one location', source: 'Monster Island p.108'},
-  {name: 'Boost Spirit — Might (Int 2)', type: 'Nature (Boost)', intensity: 2, pow: 14, cha: 10, ability: 'Bless: +2 STR for POW minutes', source: 'Monster Island p.108'},
-  {name: 'Boost Spirit — Healing (Int 1)', type: 'Nature (Boost)', intensity: 1, pow: 9, cha: 7, ability: 'Bless: heal 1d3 HP to one location', source: 'Monster Island p.108'},
-  {name: 'Boost Spirit — Healing (Int 2)', type: 'Nature (Boost)', intensity: 2, pow: 13, cha: 9, ability: 'Bless: heal 1d6 HP to one location', source: 'Monster Island p.108'},
-  // Ancestor Spirits — Sagacity: augment skills
-  {name: 'Ancestor Spirit — Sagacity (Int 1)', type: 'Ancestor', intensity: 1, pow: 11, cha: 9, ability: 'Sagacity: augment one skill by +20% for 1 scene', source: 'Monster Island p.109'},
-  {name: 'Ancestor Spirit — Sagacity (Int 2)', type: 'Ancestor', intensity: 2, pow: 14, cha: 11, ability: 'Sagacity: augment one skill by +30% for 1 scene', source: 'Monster Island p.109'},
-  // Guardian/Ward Spirits
-  {name: 'Guardian Spirit (Int 1)', type: 'Guardian', intensity: 1, pow: 10, cha: 8, ability: 'Alerts owner to spirit intrusion or magical attack within 10m', source: 'Mythras Core p.142'},
-  // Magic Point Storage
-  {name: 'Magic Spirit (Int 1)', type: 'Nature', intensity: 1, pow: 9, cha: 7, ability: 'Stores 3 extra Magic Points in fetish for owner\'s use', source: 'Mythras Core p.140'},
-  {name: 'Magic Spirit (Int 2)', type: 'Nature', intensity: 2, pow: 13, cha: 9, ability: 'Stores 6 extra Magic Points in fetish for owner\'s use', source: 'Mythras Core p.140'},
-  // Tiki Spirits (one-use-per-scene, from Bird in the Hand)
-  {name: 'Tiki Spirit — Courage (Int 1)', type: 'Tiki', intensity: 1, pow: 8, cha: 6, ability: 'One scene: +10% Willpower vs fear; fetish empties after use', source: 'Bird in the Hand p.14'},
-  {name: 'Tiki Spirit — War (Int 2)', type: 'Tiki', intensity: 2, pow: 12, cha: 8, ability: 'One scene: +2 damage with one weapon; fetish empties after use', source: 'Bird in the Hand p.14'}
+  // Nature Spirits — Endowment: grants a creature ability (Bird in Hand p.43-46 examples)
+  {name: 'Nature Spirit — Camouflage (Int 2)', type: 'Nature (Trait)', intensity: 2, pow: 17, cha: 9, ability: 'Endowment (Camouflage — two difficulty grades penalty to spot the spirit worshipper)', source: 'Bird in the Hand p.44 (Eous)'},
+  {name: 'Nature Spirit — Grappler (Int 2)', type: 'Nature (Trait)', intensity: 2, pow: 11, cha: 7, ability: 'Endowment (Grappler — successful strike allows immediate Grapple in addition to damage)', source: 'Bird in the Hand p.45 (Hoja)'},
+  {name: 'Nature Spirit — Venomous (Int 2)', type: 'Nature (Trait)', intensity: 2, pow: 13, cha: 9, ability: 'Endowment (Venomous — POT 72, Onset 1 round, Duration 2d10 min, Condition: Paralysis)', source: 'Bird in the Hand p.45 (Fylue)'},
+  // Nature Spirits — Bless: boosts one Attribute or Skill
+  {name: 'Bless Spirit — Initiative (Int 1)', type: 'Nature (Bless)', intensity: 1, pow: 11, cha: 9, ability: 'Bless (Initiative, +2)', source: 'Bird in the Hand p.44 (Whulla)'},
+  {name: 'Bless Spirit — Stealth (Int 2)', type: 'Nature (Bless)', intensity: 2, pow: 14, cha: 11, ability: 'Bless (Stealth — improves by one difficulty grade)', source: 'Bird in the Hand p.45 (Kugkowcs)'},
+  {name: 'Bless Spirit — Healing (Int 1)', type: 'Nature (Bless)', intensity: 1, pow: 9, cha: 7, ability: 'Healing (cures 1 wound per day at cost of 1 MP per HP healed)', source: 'Mythras Core p.148'},
+  {name: 'Bless Spirit — Healing (Int 2)', type: 'Nature (Bless)', intensity: 2, pow: 13, cha: 9, ability: 'Healing (cures disease and poison; heals 1d6 HP per use at cost of 1 MP per HP)', source: 'Mythras Core p.148'},
+  // Ancestor Spirits — Sagacity: augments a skill
+  {name: 'Ancestor Spirit — Sagacity (Int 1)', type: 'Ancestor', intensity: 1, pow: 11, cha: 9, ability: 'Sagacity (augments one skill by +20% for the scene)', source: 'Mythras Core p.150'},
+  {name: 'Ancestor Spirit — Sagacity (Int 2)', type: 'Ancestor', intensity: 2, pow: 14, cha: 11, ability: 'Sagacity (augments one skill by +40% for the scene)', source: 'Mythras Core p.150'},
+  // Guardian Spirits — protects against spirit intrusion
+  {name: 'Guardian Spirit (Int 1)', type: 'Guardian', intensity: 1, pow: 10, cha: 8, ability: 'Guardian (alerts owner to spirit intrusion; engages hostile spirits in combat)', source: 'Mythras Core p.142'},
+  // Magic Spirits — store extra Magic Points
+  {name: 'Magic Spirit (Int 1)', type: 'Nature', intensity: 1, pow: 9, cha: 7, ability: 'Stores Magic Points equal to its POW (9 MP) in fetish for owner\'s use', source: 'Mythras Core p.140'},
+  {name: 'Magic Spirit (Int 2)', type: 'Nature', intensity: 2, pow: 13, cha: 9, ability: 'Stores Magic Points equal to its POW (13 MP) in fetish for owner\'s use', source: 'Mythras Core p.140'},
+  // Special — Absorb Magic (from Bird in Hand p.46 — Ghu)
+  {name: 'Guardian Spirit — Absorb Magic (Int 3)', type: 'Guardian', intensity: 3, pow: 21, cha: 9, ability: 'Absorb Magic (any magic cast at owner causes spirit to appear and absorb it)', source: 'Bird in the Hand p.46 (Ghu)'},
+  // Domination Spirit — commands one species
+  {name: 'Domination Spirit — Insects (Int 1)', type: 'Nature (Command)', intensity: 1, pow: 10, cha: 8, ability: 'Domination (commands creatures of the specified species within range)', source: 'Mythras Core p.146'}
 ];
 
 const CULTURE_BUILDS = {
