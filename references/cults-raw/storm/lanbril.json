@@ -71,11 +71,15 @@
       "Find (Specific Thing)",
       "Divination",
       "Chastise",
-      "Dismiss Elemental ij Divination Block"
+      "Dismiss Elemental",
+      "Divination Block"
     ],
     "associate": [],
     "runelord": [
-      "Excommunication Mindlink Sanctify Summon Spirit of Reprisal"
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
     ]
   },
   "personalityTraits": [

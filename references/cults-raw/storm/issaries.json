@@ -44,16 +44,21 @@
       "Create Market",
       "Passage",
       "Path Watch",
-      "Rh Spell Trading",
+      "Spell Trading",
       "Seal",
       "Special Lock"
     ],
     "associate": [
-      "Lhankhor Mhy:Analyze Magic",
-      "4g Flight Eurmal:Clever Tongue"
+      "Lhankhor Mhy(a):Analyze Magic",
+      "Orlanth(a):Flight",
+      "Eurmal(a):Clever Tongue"
     ],
     "runelord": [
-      "Excommunication Mindlink Sanctify Summon Spirit of Reprisal hl Create Great Market"
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Create Great Market"
     ]
   },
   "personalityTraits": [

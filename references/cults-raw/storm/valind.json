@@ -42,10 +42,13 @@
       "Snow"
     ],
     "associate": [
-      "4g Flight Storm Bull:Chaos"
+      "Flight Storm Bull:Chaos"
     ],
     "runelord": [
-      "Excommunication Mindlink Sanctify Summon Spirit of Reprisal"
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal"
     ]
   },
   "personalityTraits": [

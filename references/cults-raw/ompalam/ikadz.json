@@ -46,7 +46,7 @@
       "Chastise",
       "Pain Blow",
       "Fear",
-      "Rb Soul Sight",
+      "Soul Sight",
       "Spirit Block"
     ],
     "associate": [],
@@ -55,7 +55,8 @@
       "Mindlink",
       "Sanctify",
       "Summon Spirit of Reprisal",
-      "Mindblast True Speak t Sever\nSpirit 4Wa Coerce"
+      "Mindblast True Speak",
+      "Sever Spirit 4Wa Coerce"
     ]
   },
   "personalityTraits": [

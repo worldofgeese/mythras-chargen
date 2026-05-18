@@ -27,7 +27,11 @@
     ],
     "associate": [],
     "runelord": [
-      "Excommunication Find Enemy Mindlink Sanctify Summon Spirit of Reprisal"
+      "Summon Spirit of Reprisal",
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Find Enemy"
     ]
   },
   "personalityTraits": [

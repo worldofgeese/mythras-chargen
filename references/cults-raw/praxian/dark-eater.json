@@ -33,7 +33,7 @@
       "Divination",
       "Chastise",
       "Summon Shade",
-      "B Alter Creature"
+      "Alter Creature"
     ],
     "associate": [
       "Xentha:Create Shadow",
@@ -47,8 +47,8 @@
       "Mindlink",
       "Sanctify",
       "Summon Spirit of Reprisal",
-      "B Fix Intelligence",
-      "B Release\nIntelligence"
+      "Fix Intelligence",
+      "Release Intelligence"
     ]
   },
   "personalityTraits": [

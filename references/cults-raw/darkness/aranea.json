@@ -26,8 +26,8 @@
       "Find (Specific Thing)",
       "Divination",
       "Chastise",
-      "Bo Spider Bite",
-      "Bo Webbing"
+      "Spider Bite",
+      "Webbing"
     ],
     "associate": [],
     "runelord": [
@@ -35,7 +35,7 @@
       "Mindlink",
       "Sanctify",
       "Summon Spirit of Reprisal",
-      "Bo Spider Limbs"
+      "Spider Limbs"
     ]
   },
   "personalityTraits": [

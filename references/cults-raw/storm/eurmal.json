@@ -26,7 +26,7 @@
   "folkMagic": [
     "Disruption",
     "Glamour",
-    "Hotfoot²",
+    "Hotfoot\u00b2",
     "Ignite",
     "Shimmer",
     "Silence"
@@ -40,29 +40,28 @@
       "Lie",
       "Reflection",
       "Multispell",
-      "Charisma",
-      "Murderer(s):?j Crack",
-      "Fool(s):hj Group Laughter",
-      "Lightbringer(s):",
-      "Hide Fire",
-      "Fright(s):jo Panic",
-      "Dismembered(s):",
-      "Remove Body Part",
-      "Truant(s):i Hallucinate",
-      "Murderer(s):jt Strike",
-      "Glutton(s):jo Swallow",
-      "Lie(s):i Illusion",
-      "Lightbringer(s):hi Clever Tongue",
-      "Seducer(s):i Create Wine"
+      "Seducer(s):Charisma",
+      "Murderer(s):Crack",
+      "Fool(s):Group Laughter",
+      "Lightbringer(s):Hide Fire",
+      "Fright(s):Panic",
+      "Dismembered(s):Remove Body Part",
+      "Truant(s):Hallucinate",
+      "Murderer(s):Strike",
+      "Glutton(s):Swallow",
+      "Lie(s):Illusion",
+      "Lightbringer(s):Clever Tongue",
+      "Seducer(s):Create Wine"
     ],
     "associate": [],
     "runelord": [
       "Excommunication",
       "Mindlink",
       "Sanctify",
-      "Summon Spirit of Reprisal\nRunelord - subservient: Return to subservient cult temple and sacrifice\nShapechanger(s):ij Become other shape",
-      "Fool(s):i Create Feast",
-      "Thief(s):i Invisibility"
+      "Summon Spirit of Reprisal",
+      "Shapechanger(s):Become other shape",
+      "Fool(s):Create Feast",
+      "Thief(s):Invisibility"
     ]
   },
   "personalityTraits": [

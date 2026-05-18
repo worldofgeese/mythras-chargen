@@ -29,10 +29,15 @@
       "Chastise"
     ],
     "associate": [
-      "4g Flight Orlanth:Lightning"
+      "Flight Orlanth:Lightning"
     ],
     "runelord": [
-      "Excommunication Mindlink Sanctify Summon Spirit of Reprisal s Guided Teleportation s\nTeleportation"
+      "Excommunication",
+      "Mindlink",
+      "Sanctify",
+      "Summon Spirit of Reprisal",
+      "Guided Teleportation",
+      "Teleportation"
     ]
   },
   "personalityTraits": [
