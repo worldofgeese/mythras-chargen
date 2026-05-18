@@ -173,58 +173,135 @@ All game data MUST trace to a source PDF with page citation. Flow: `PDF → refe
 
 ### Mandatory Browser Acceptance Testing
 
-**After ANY code change to index.html**, you MUST manually test in the browser using `agent-browser`:
+**After ANY code change to index.html**, you MUST test using `agent-browser` with visual verification.
+
+#### Setup
 
 ```bash
-# Start server if not running
 python3 -m http.server 8765 &
-
-# Open the app
-agent-browser open http://localhost:8765/index.html
+agent-browser open http://127.0.0.1:8765/index.html
 ```
 
-**Full manual test procedure (every change):**
+#### Step 1: Build Character via Agent API
 
-1. **Create a character from scratch** — click through all 12 wizard steps:
-   - Step 1: Enter name and concept
-   - Step 2: Set or randomize characteristics
-   - Step 4: Select culture and homeland
-   - Step 5: Allocate cultural skills, select rune affinities, choose folk magic
-   - Step 6: Add passions
-   - Step 7: Set age/gender/family
-   - Step 8: Select career and professional skills
-   - Step 9: Select cult — **verify the correct magic picker appears** (miracle picker for theists, sorcery picker for sorcerers, spirit picker for animists, both for hybrids)
-   - Step 10: Allocate career skills, select career folk magic
-   - Step 11: Allocate bonus skills
-   - Step 12: Set social class
+Use `App.agent.buildCharacter()` to create a full character in one call:
 
-2. **Verify Play Mode** — switch to Play Mode, screenshot it, verify:
-   - Identity section (name, culture, cult, career)
-   - Characteristics and derived attributes
-   - Skill table with correct breakdown columns
-   - Magic section (miracles/spells/spirits depending on cult type)
-   - Combat styles with weapons
+```bash
+agent-browser eval "JSON.stringify(App.agent.buildCharacter({step1:{name:'Test',concept:'...'}, step2:{characteristics:{STR:14,CON:12,...}}, ...}))"
+```
 
-3. **Verify PDF Export** — click Export PDF, confirm no JS errors
+Verify the response has `{"success":true, "errors":[]}`.
 
-4. **Screenshot and verify** — take screenshots at key points:
-   ```bash
-   agent-browser screenshot /tmp/step9-cult.png
-   agent-browser screenshot /tmp/play-mode.png
-   ```
-   Then view the screenshots and verify correctness visually.
+For granular testing, use individual methods:
+```bash
+agent-browser eval "JSON.stringify(App.agent.selectCult('Orlanth'))"
+agent-browser eval "JSON.stringify(App.agent.getMagicState())"
+agent-browser eval "JSON.stringify(App.agent.assertMiracles())"
+```
 
-5. **Fix bugs immediately** — if anything crashes, shows wrong data, or looks broken:
-   - Create a bead: `bd create "bug: <description>"`
-   - Fix the bug
-   - Re-test from scratch
-   - Close the bead: `bd close <id>`
+#### Step 2: Verify Play Mode (Visual)
 
-**Minimum test matrix (at least one character per cult type):**
-- Theist cult (e.g., Orlanth) → miracle picker
-- Animist cult (e.g., Daka Fal) → spirit picker
-- Sorcery cult (e.g., Arkat) → sorcery spell picker
-- Hybrid cult (e.g., Waha) → both miracle + spirit pickers
+Switch to Play Mode and screenshot each section:
+
+```bash
+# Switch to Play Mode
+agent-browser eval "App.switchMode('play'); window.scrollTo(0,0); 'play'"
+
+# Screenshot top (identity + skills)
+agent-browser screenshot /tmp/play-top.png
+
+# Scroll to magic section
+agent-browser eval "(function(){let t=null; document.querySelectorAll('h3').forEach(h=>{if(h.textContent.includes('Theist')||h.textContent.includes('Spirit Magic')||h.textContent.includes('Sorcery'))t=h}); t&&t.scrollIntoView({block:'start'}); return 'ok'})()"
+agent-browser screenshot /tmp/play-magic.png
+
+# Scroll to bottom (folk magic, equipment, notes)
+agent-browser eval "window.scrollTo(0, document.body.scrollHeight); 'bottom'"
+agent-browser screenshot /tmp/play-bottom.png
+```
+
+Then **read each screenshot** with the `read` tool (vision mode) and verify:
+- Identity section: name, culture, cult, career, social class correct
+- Characteristics: all 7 stats, derived attributes (AP, LP, MP, Init, SR)
+- Skills table: Base + Culture + Career + Bonus = Total (columns align)
+- Magic section: correct miracles/spells/spirits for cult type, correct pool values
+- Folk Magic: spell list matches selections
+
+#### Step 3: PDF Export (Visual Verification)
+
+Capture the PDF bytes and render to PNG for vision-mode verification:
+
+```bash
+# Generate PDF and capture bytes (blob interception)
+agent-browser eval "
+(async () => {
+  const origCreate = URL.createObjectURL;
+  let capturedBlob = null;
+  URL.createObjectURL = function(blob) { capturedBlob = blob; return 'blob:captured'; };
+  const origClick = HTMLAnchorElement.prototype.click;
+  HTMLAnchorElement.prototype.click = function() {};
+  await App.exportSinglePagePDF();
+  URL.createObjectURL = origCreate;
+  HTMLAnchorElement.prototype.click = origClick;
+  if (capturedBlob) {
+    const buf = await capturedBlob.arrayBuffer();
+    const bytes = new Uint8Array(buf);
+    let binary = '';
+    for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+    window.__pdfB64 = btoa(binary);
+    return 'PDF: ' + bytes.length + ' bytes';
+  }
+  return 'No blob';
+})().then(r => window.__pdfResult = r);
+'generating...'
+"
+
+# Wait then retrieve
+sleep 2
+agent-browser eval "window.__pdfResult"
+```
+
+Decode and render to image:
+```bash
+B64=$(agent-browser eval "window.__pdfB64" | tr -d '"')
+echo "$B64" | base64 -d > /tmp/character.pdf
+mkdir -p /tmp/pdf-pages
+python3 -c "from pdf2image import convert_from_path; imgs = convert_from_path('/tmp/character.pdf', dpi=150); [img.save(f'/tmp/pdf-pages/page_{i+1}.png') for i, img in enumerate(imgs)]"
+```
+
+Then **read** `/tmp/pdf-pages/page_1.png` with vision mode and verify:
+- Header block: name, culture, career, cult, homeland, social class
+- Characteristics row with correct derived attributes
+- Hit locations table
+- Skills in 3-column layout with correct percentages
+- Passions with values
+- Rune affinities with percentages
+- Magic section: cult name, devotional pool/spell count/spirit slots, miracle/spell list
+- Folk magic list
+
+#### Step 4: Fix Bugs Immediately
+
+If anything crashes, shows wrong data, or looks broken:
+```bash
+bd create "bug: <description>"
+# Fix the bug
+# Re-test from scratch
+bd close <id>
+```
+
+#### Minimum Test Matrix
+
+At least one character per cult type:
+- **Theist** (e.g., Orlanth, Foundchild) → miracle picker, devotional pool = POW/2
+- **Animist** (e.g., Daka Fal) → spirit picker, spirit slots = CHA/2
+- **Sorcery** (e.g., Arkat) → sorcery spell picker, limit = 3
+- **Hybrid** (e.g., Waha) → both miracle + spirit pickers
+
+#### Cleanup
+
+```bash
+agent-browser close
+pkill -f "python3 -m http.server 8765"
+```
 
 ### Push Protocol
 
