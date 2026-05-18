@@ -2511,7 +2511,7 @@ const App = {
         const cultType = detectCultType(cultObj || CharacterData.cult);
         
         // Theist: must select miracles up to devotional pool
-        if (cultType.includes('theist')) {
+        if (cultType.types.includes('theist')) {
           const maxMiracles = CharacterData.devotionalPool || 0;
           const selectedMiracles = (CharacterData.miracles || []).length;
           if (maxMiracles > 0 && selectedMiracles < maxMiracles) {
@@ -2521,7 +2521,7 @@ const App = {
         }
         
         // Animist: must select at least 1 bound spirit
-        if (cultType.includes('animist')) {
+        if (cultType.types.includes('animist')) {
           const selectedSpirits = (CharacterData.boundSpirits || []).length;
           if (selectedSpirits === 0) {
             this.showToast('Please select at least one bound spirit', 'error');
@@ -2530,7 +2530,7 @@ const App = {
         }
         
         // Sorcery: must select at least 1 spell (max 3)
-        if (cultType.includes('sorcery')) {
+        if (cultType.types.includes('sorcery')) {
           const selectedSpells = (CharacterData.sorcerySpells || []).length;
           if (selectedSpells === 0) {
             this.showToast('Please select at least one sorcery spell', 'error');
@@ -3756,32 +3756,36 @@ App.disambiguateAndUpdateFreeText = function(category, originalSkillName, inputV
   const store = category === 'cultural' ? CharacterData.culturalSkills :
                 category === 'career' ? CharacterData.careerSkills : CharacterData.bonusSkills;
 
-  // Remove any previous disambiguation for this skill category (resolved keys)
-  for (const key of Object.keys(store)) {
-    if (key.startsWith(skillCategory + ' (') && !needsDisambiguation(key) && key !== newSkillName) {
-      const pts = store[key];
-      delete store[key];
-      // Transfer points to the new selection
-      store[newSkillName] = pts;
-      // Also remove the original placeholder key if it exists
-      if (store.hasOwnProperty(originalSkillName) && originalSkillName !== newSkillName) {
-        delete store[originalSkillName];
-      }
-      this.saveToLocalStorage();
-      this.renderCurrentStep();
-      return;
-    }
-  }
+  // Track which placeholder resolved to which concrete name
+  if (!CharacterData._disambiguationMap) CharacterData._disambiguationMap = {};
+  const mapKey = `${category}:${originalSkillName}`;
+  const previousResolution = CharacterData._disambiguationMap[mapKey];
 
-  // Remove the original placeholder key if it exists and transfer its points
-  if (store.hasOwnProperty(originalSkillName) && originalSkillName !== newSkillName) {
+  // Remove ONLY this placeholder's previous resolution (not other placeholders in same category)
+  if (previousResolution && previousResolution !== newSkillName && store.hasOwnProperty(previousResolution)) {
+    const pts = store[previousResolution];
+    delete store[previousResolution];
+    store[newSkillName] = pts;
+  } else if (store.hasOwnProperty(originalSkillName) && originalSkillName !== newSkillName) {
+    // Remove the original placeholder key if it exists and transfer its points
     const pts = store[originalSkillName];
     delete store[originalSkillName];
     store[newSkillName] = pts;
-    this.saveToLocalStorage();
-    this.renderCurrentStep();
-    return;
+  } else if (!store.hasOwnProperty(newSkillName)) {
+    store[newSkillName] = 0;
   }
+
+  // Also remove the original placeholder key if still present
+  if (store.hasOwnProperty(originalSkillName) && originalSkillName !== newSkillName) {
+    delete store[originalSkillName];
+  }
+
+  // Record the mapping
+  CharacterData._disambiguationMap[mapKey] = newSkillName;
+
+  this.saveToLocalStorage();
+  this.renderCurrentStep();
+  return;
 
   // No previous selection — just add it
   store[newSkillName] = 0;
@@ -4263,24 +4267,39 @@ App.renderCareerDetails = function() {
             let isChecked = (CharacterData.selectedProfessionalSkills || []).includes(skill);
             let resolved = '';
             if (needsSpec && !isChecked) {
-              // Check if a resolved version of this placeholder is in the array
-              const parsed = parsePlaceholderSkill(skill);
-              if (parsed) {
-                const resolvedEntry = (CharacterData.selectedProfessionalSkills || []).find(s =>
-                  s.startsWith(parsed.category + ' (') && !needsDisambiguation(s)
-                );
-                if (resolvedEntry) {
-                  isChecked = true;
-                  resolved = resolvedEntry;
+              // Check disambiguation map for THIS specific placeholder's resolution
+              const dMap = CharacterData._disambiguationMap || {};
+              const step8MapKey = `career:${skill}`;
+              if (dMap[step8MapKey] && (CharacterData.selectedProfessionalSkills || []).includes(dMap[step8MapKey])) {
+                isChecked = true;
+                resolved = dMap[step8MapKey];
+              } else {
+                // Fallback: check if a resolved version is in the array (only for unclaimed entries)
+                const parsed = parsePlaceholderSkill(skill);
+                if (parsed) {
+                  const claimed = new Set(Object.values(dMap));
+                  const resolvedEntry = (CharacterData.selectedProfessionalSkills || []).find(s =>
+                    s.startsWith(parsed.category + ' (') && !needsDisambiguation(s) && !claimed.has(s)
+                  );
+                  if (resolvedEntry) {
+                    isChecked = true;
+                    resolved = resolvedEntry;
+                  }
                 }
               }
             }
             if (needsSpec && isChecked && !resolved) {
-              // Find resolved version from careerSkills
-              const parsed = parsePlaceholderSkill(skill);
-              resolved = parsed ? (Object.keys(CharacterData.careerSkills).find(k =>
-                k.startsWith(parsed.category + ' (') && !needsDisambiguation(k)
-              ) || '') : '';
+              // Find resolved version from disambiguation map or careerSkills
+              const dMap = CharacterData._disambiguationMap || {};
+              const step8MapKey = `career:${skill}`;
+              resolved = dMap[step8MapKey] || '';
+              if (!resolved) {
+                const parsed = parsePlaceholderSkill(skill);
+                const claimed = new Set(Object.values(dMap));
+                resolved = parsed ? (Object.keys(CharacterData.careerSkills).find(k =>
+                  k.startsWith(parsed.category + ' (') && !needsDisambiguation(k) && !claimed.has(k)
+                ) || '') : '';
+              }
             }
             const resolvedSpec = resolved ? (resolved.match(/\((.+)\)/) || [])[1] || '' : '';
             return `<div>
@@ -4852,7 +4871,9 @@ App.renderStep10 = function() {
   const skillsList = div.querySelector('#career-skills-list');
   if (career) {
     // BUG-019: Use resolved careerSkills keys instead of template names for combat styles
-    const templateSkills = [...(career.standardSkills || []), ...(career.professionalSkills || [])];
+    // Only show standard skills + the 3 professional skills selected in Step 8 (not all available)
+    const selectedPro = CharacterData.selectedProfessionalSkills || [];
+    const templateSkills = [...(career.standardSkills || []), ...selectedPro];
     // Add actual combat style keys from careerSkills (already resolved by renderStep10's placeholder resolution)
     const combatStyleKeys = Object.keys(CharacterData.careerSkills).filter(k => k.startsWith('Combat Style ('));
     const careerSkills = [...templateSkills, ...combatStyleKeys];
@@ -4872,7 +4893,19 @@ App.renderStep10 = function() {
         const category = parsed ? parsed.category : (skillName.match(/^(Language|Lore|Art|Craft|Culture)/i)?.[1] || '');
         const hintText = parsed && !isAnySkill(skillName) ? parsed.hint : '';
         const options = isAnySkill(skillName) ? disambiguateSkill(skillName, CharacterData.culture, false) : (DISAMBIGUATION_LISTS[category] || []);
-        let storedKey = Object.keys(CharacterData.careerSkills).find(k => k.startsWith(category + ' (') && !needsDisambiguation(k));
+        // Use disambiguation map to find THIS placeholder's specific resolved key
+        const disambigMap = CharacterData._disambiguationMap || {};
+        const mapKey = `career:${skillName}`;
+        let storedKey = null;
+        if (disambigMap[mapKey] && CharacterData.careerSkills.hasOwnProperty(disambigMap[mapKey])) {
+          storedKey = disambigMap[mapKey];
+        } else {
+          // Fallback: find an unambiguous resolved key not claimed by another placeholder
+          const claimed = new Set(Object.values(disambigMap));
+          storedKey = Object.keys(CharacterData.careerSkills).find(k =>
+            k.startsWith(category + ' (') && !needsDisambiguation(k) && !claimed.has(k)
+          ) || null;
+        }
         // If no resolved key found, check if the placeholder key itself is in careerSkills
         // (can happen if user allocated points before resolving the specialization)
         const placeholderInStore = !storedKey && CharacterData.careerSkills.hasOwnProperty(skillName);
