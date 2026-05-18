@@ -106,6 +106,11 @@ def extract_tokens(page) -> list[dict]:
     if current_text.strip():
         tokens.append({"type": "text", "value": current_text.strip()})
     
+    # Normalize non-breaking spaces in text tokens
+    for token in tokens:
+        if token["type"] == "text":
+            token["value"] = token["value"].replace("\xa0", " ")
+    
     return tokens
 
 
@@ -136,23 +141,27 @@ def find_section_boundaries(tokens: list[dict]) -> dict:
         lines.append({"text": text, "start": current_line_start, "end": len(tokens), "tokens": current_line_tokens})
     
     # Find section headers
-    section_markers = {
-        "initiate": r"Theist Miracles\s*[-\u2013\u2014]\s*Initiate",
-        "runelord": r"^Runelord:?",
-        "initiate_sub": r"Initiate\s*[-\u2013\u2014]\s*(?:subservient|associate)",
-        "runelord_sub": r"Runelord\s*[-\u2013\u2014]\s*(?:subservient|associate)",
-    }
+    # Order matters: more specific patterns must come first to avoid
+    # "Runelord - subservient" matching the generic "Runelord" pattern
+    section_markers = [
+        ("initiate_sub", r"Initiate\s*[-\u2013\u2014]\s*(?:subservient|associate)"),
+        ("runelord_sub", r"Runelord\s*[-\u2013\u2014]\s*(?:subservient|associate)"),
+        ("initiate", r"Theist Miracles\s*[-\u2013\u2014]\s*Initiate"),
+        ("runelord", r"^Runelord:\s*Return"),
+    ]
     
     # End markers (sections after miracles)
     end_markers = r"(?:Pantheons|Source\s*[-–—]|Areas|Spirit\s*Societ|Enemy\s*Cult|Hostile|Friendly|Associated\s*Cult|Personality|Holy\s*Days|Sacrifices|Rune\s*Meanings)"
     
     found_sections = []
     for line in lines:
-        for section_name, pattern in section_markers.items():
+        matched = False
+        for section_name, pattern in section_markers:
             if re.search(pattern, line["text"], re.IGNORECASE):
                 found_sections.append((section_name, line["end"] + 1))  # Content starts after the header line
+                matched = True
                 break
-        if re.match(end_markers, line["text"], re.IGNORECASE):
+        if not matched and re.match(end_markers, line["text"], re.IGNORECASE):
             found_sections.append(("_end", line["start"]))
     
     # Build boundaries: each section runs from its start to the next section's start
@@ -212,19 +221,61 @@ def parse_miracles_from_tokens(tokens: list[dict], start: int, end: int,
     current_runes = []
     current_text = ""
     
+    saw_rune_since_last_text = False
+    pending_subcult_prefix = ""  # Holds "SubcultName(s):" while we wait for the miracle name
+    
     for token in section_tokens:
         if token["type"] == "rune":
             # If we have accumulated text, it means this rune starts a new entry
             if current_text.strip() and current_text.strip() not in (",", ""):
-                # Save previous entry
-                entry = _build_entry(current_text.strip(), current_runes, rank, is_subservient)
-                if entry:
-                    miracles.extend(entry if isinstance(entry, list) else [entry])
-                current_runes = []
-                current_text = ""
+                stripped = current_text.strip()
+                # Check if this text is a subcult prefix (ends with "(s):" or "(a):")
+                if re.search(r'\([sa]\):$', stripped):
+                    # Don't emit — hold as prefix for the next miracle name
+                    pending_subcult_prefix = stripped
+                    current_text = ""
+                    current_runes = []
+                else:
+                    # Save previous entry
+                    entry = _build_entry(stripped, current_runes, rank, is_subservient)
+                    if entry:
+                        miracles.extend(entry if isinstance(entry, list) else [entry])
+                    current_runes = []
+                    current_text = ""
             current_runes.append(token)
+            saw_rune_since_last_text = True
         elif token["type"] == "text":
             text = token["value"]
+            
+            # Prepend any pending subcult prefix
+            if pending_subcult_prefix:
+                text = pending_subcult_prefix + text
+                pending_subcult_prefix = ""
+            
+            # If no rune token preceded this text and we already have text,
+            # this is a line-wrap continuation (e.g., "Create" + "Wine")
+            if not saw_rune_since_last_text and current_text.strip() and not text.startswith(("Initiate", "Runelord", "Pantheon", "Source")):
+                # Continuation — append to current entry
+                # But still split on commas within this continuation
+                parts = text.split(",")
+                for pi, part in enumerate(parts):
+                    part = part.strip()
+                    if pi > 0 and current_text.strip():
+                        open_parens = current_text.count("(") - current_text.count(")")
+                        if open_parens > 0:
+                            current_text += ", " + part
+                            continue
+                        entry = _build_entry(current_text.strip(), current_runes, rank, is_subservient)
+                        if entry:
+                            miracles.extend(entry if isinstance(entry, list) else [entry])
+                        current_runes = []
+                        current_text = ""
+                    if part:
+                        current_text += (" " if current_text else "") + part
+                saw_rune_since_last_text = False
+                continue
+            
+            saw_rune_since_last_text = False
             # Split on commas — each comma-separated piece is a potential entry
             parts = text.split(",")
             for pi, part in enumerate(parts):
@@ -245,8 +296,10 @@ def parse_miracles_from_tokens(tokens: list[dict], start: int, end: int,
                 if part:
                     current_text += (" " if current_text else "") + part
         elif token["type"] == "newline":
-            # Newlines within a section don't necessarily delimit entries
-            # (miracle lists wrap across lines)
+            # Newlines within a section don't delimit entries — miracle lists
+            # wrap across lines. But if the next non-newline token is a rune,
+            # it starts a new entry. We handle that via the rune-token branch above.
+            # For text continuation (e.g., "Create" / "Wine"), we just keep going.
             pass
     
     # Save final entry
@@ -260,8 +313,13 @@ def parse_miracles_from_tokens(tokens: list[dict], start: int, end: int,
 
 def _build_entry(text: str, rune_tokens: list, rank: str, is_subservient: bool) -> Optional[dict | list]:
     """Build a miracle entry from accumulated text and rune tokens."""
-    text = text.strip().rstrip(",").strip()
+    # Normalize non-breaking spaces
+    text = text.replace("\xa0", " ").strip().rstrip(",").strip()
     if not text or len(text) < 2:
+        return None
+    
+    # Filter known OCR noise
+    if text.strip() in ("Behold", "behold"):
         return None
     
     # Skip section header remnants
@@ -269,12 +327,26 @@ def _build_entry(text: str, rune_tokens: list, rank: str, is_subservient: bool) 
         return None
     
     # Strip trailing section header text that leaked in
-    for header in ["Runelord:", "Runelord :", "Initiate -", "Pantheons"]:
+    for header in ["Runelord:", "Runelord :", "Runelord -", "Initiate -", "Initiate:", "Pantheons", "Source"]:
         idx = text.find(header)
         if idx > 0:
             text = text[:idx].strip().rstrip(",").strip()
             if not text or len(text) < 2:
                 return None
+            # Re-check noise filter after stripping
+            if text.strip() in ("Behold", "behold"):
+                return None
+    
+    # Handle double-space-separated entries (PDF line wraps without commas)
+    if "  " in text and ":" not in text:
+        parts = [p.strip() for p in re.split(r'\s{2,}', text) if p.strip() and len(p.strip()) > 2]
+        if len(parts) > 1:
+            entries = []
+            for part in parts:
+                entry = _build_entry(part, rune_tokens, rank, is_subservient)
+                if entry:
+                    entries.extend(entry if isinstance(entry, list) else [entry])
+            return entries if entries else None
     
     # Handle concatenated standard runelord miracles (space-separated in PDFs)
     if rank == "runelord" and not is_subservient:
@@ -424,8 +496,8 @@ def validate_entries(miracles: list[dict], cult_name: str) -> list[str]:
         # Name starts with lowercase (possible leaked rune code)
         if name[0].islower() and not name.startswith("de") and ":" not in name:
             warnings.append(f'  ⚠️  "{name}" starts with lowercase (garbled?)')
-        # Very short name
-        if len(name) < 4 and name not in ("Lie",):
+        # Very short name (allow known short miracles: Lie, Rut, Omen)
+        if len(name) < 3 and name not in ("Lie", "Rut"):
             warnings.append(f'  ⚠️  "{name}" very short (noise?)')
         # Contains UNKNOWN rune
         if any("UNKNOWN" in r for r in m["runes"]):
