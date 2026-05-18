@@ -173,7 +173,9 @@ All game data MUST trace to a source PDF with page citation. Flow: `PDF → refe
 
 ### Mandatory Browser Acceptance Testing
 
-**After ANY code change to index.html**, you MUST test using `agent-browser` with visual verification.
+**After ANY code change to index.html**, you MUST perform full manual visual verification.
+Every screenshot MUST be read with the `read` tool (vision mode) and every element verified.
+Do NOT skip screenshots. Do NOT summarize without looking.
 
 #### Setup
 
@@ -182,56 +184,81 @@ python3 -m http.server 8765 &
 agent-browser open http://127.0.0.1:8765/index.html
 ```
 
-#### Step 1: Build Character via Agent API
+#### Step 1: Build Character
 
-Use `App.agent.buildCharacter()` to create a full character in one call:
-
+Clear previous state and build via Agent API:
 ```bash
-agent-browser eval "JSON.stringify(App.agent.buildCharacter({step1:{name:'Test',concept:'...'}, step2:{characteristics:{STR:14,CON:12,...}}, ...}))"
+agent-browser eval "localStorage.clear(); 'cleared'"
+agent-browser open http://127.0.0.1:8765/index.html
+agent-browser eval "JSON.stringify(App.agent.buildCharacter({...}))"
 ```
 
-Verify the response has `{"success":true, "errors":[]}`.
+Verify the response: `{"success":true, "errors":[]}`.
+If errors, fix the spec and rebuild.
 
-For granular testing, use individual methods:
+Then verify magic state:
 ```bash
-agent-browser eval "JSON.stringify(App.agent.selectCult('Orlanth'))"
 agent-browser eval "JSON.stringify(App.agent.getMagicState())"
-agent-browser eval "JSON.stringify(App.agent.assertMiracles())"
 ```
+Confirm: cultType, devotionalPool, boundSpiritSlots, sorceryResource, selectedMiracles/spells/spirits all match expectations.
 
-#### Step 2: Verify Play Mode (Visual)
+#### Step 2: Play Mode — Screenshot EVERY Section (Vision Mode)
 
-Switch to Play Mode and screenshot each section:
+Switch to Play Mode and scroll through the ENTIRE page, screenshotting and visually verifying each viewport:
 
 ```bash
-# Switch to Play Mode
 agent-browser eval "App.switchMode('play'); window.scrollTo(0,0); 'play'"
-
-# Screenshot top (identity + skills)
-agent-browser screenshot /tmp/play-top.png
-
-# Scroll to magic section
-agent-browser eval "(function(){let t=null; document.querySelectorAll('h3').forEach(h=>{if(h.textContent.includes('Theist')||h.textContent.includes('Spirit Magic')||h.textContent.includes('Sorcery'))t=h}); t&&t.scrollIntoView({block:'start'}); return 'ok'})()"
-agent-browser screenshot /tmp/play-magic.png
-
-# Scroll to bottom (folk magic, equipment, notes)
-agent-browser eval "window.scrollTo(0, document.body.scrollHeight); 'bottom'"
-agent-browser screenshot /tmp/play-bottom.png
 ```
 
-Then **read each screenshot** with the `read` tool (vision mode) and verify:
-- Identity section: name, culture, cult, career, social class correct
-- Characteristics: all 7 stats, derived attributes (AP, LP, MP, Init, SR)
-- Skills table: Base + Culture + Career + Bonus = Total (columns align)
-- Magic section: correct miracles/spells/spirits for cult type, correct pool values
-- Folk Magic: spell list matches selections
-
-#### Step 3: PDF Export (Visual Verification)
-
-Capture the PDF bytes and render to PNG for vision-mode verification:
-
+**Screenshot 1: Identity + Skills (top)**
 ```bash
-# Generate PDF and capture bytes (blob interception)
+agent-browser screenshot /tmp/play-01-top.png
+```
+→ `read /tmp/play-01-top.png` — Verify: Name, Culture, Homeland, Career, Cult, Age, Gender, Social Class. Skills table header row. First ~15 skills with Base/Culture/Career/Bonus/Total columns.
+
+**Screenshot 2: Skills (continued) + Attributes**
+```bash
+agent-browser eval "window.scrollBy(0, 800); 'scroll'"
+agent-browser screenshot /tmp/play-02-skills.png
+```
+→ `read /tmp/play-02-skills.png` — Verify: Remaining skills. Hit Locations table (HP per location). Attributes (AP, LP, MP, Init, Move, Heal, DM, SR).
+
+**Screenshot 3: Combat + Rune Affinities + Passions**
+```bash
+agent-browser eval "window.scrollBy(0, 800); 'scroll'"
+agent-browser screenshot /tmp/play-03-combat.png
+```
+→ `read /tmp/play-03-combat.png` — Verify: Weapons table. Combat styles. Rune Affinities (Primary/Secondary/Tertiary with %). Passions with values.
+
+**Screenshot 4: Magic Section (cult info + miracles/spells/spirits)**
+```bash
+agent-browser eval "(function(){let t=null; document.querySelectorAll('h3').forEach(h=>{if(h.textContent.includes('Theist')||h.textContent.includes('Spirit Magic')||h.textContent.includes('Sorcery Spells'))t=h}); t&&t.scrollIntoView({block:'start'}); return 'ok'})()"
+agent-browser screenshot /tmp/play-04-magic.png
+```
+→ `read /tmp/play-04-magic.png` — Verify:
+  - **Theist**: "Theist Miracles (Initiate)" heading, Rune Affinities line, Devotional Pool number, miracle list with [Rune] tags
+  - **Animist**: "Spirit Magic (Animist — Shaman Path)" heading, Bound Spirit Slots: N, casting method
+  - **Sorcery**: "Sorcery Spells" heading, sorcery resource, spell list
+  - **Hybrid**: BOTH theist AND animist/sorcery sections present
+
+**Screenshot 5: Folk Magic + Equipment + Notes**
+```bash
+agent-browser eval "window.scrollBy(0, 800); 'scroll'"
+agent-browser screenshot /tmp/play-05-folk.png
+```
+→ `read /tmp/play-05-folk.png` — Verify: Folk Magic (XX%) with spell list. Equipment section with Starting Money. Notes section with Concept and Family.
+
+**Screenshot 6: Bottom (Special Effects reference, footer)**
+```bash
+agent-browser eval "window.scrollTo(0, document.body.scrollHeight); 'bottom'"
+agent-browser screenshot /tmp/play-06-bottom.png
+```
+→ `read /tmp/play-06-bottom.png` — Verify: Page renders completely. No broken elements. Footer with trademark text visible.
+
+#### Step 3: PDF Export — Generate, Render to Image, Verify with Vision Mode
+
+**Generate PDF and intercept the blob:**
+```bash
 agent-browser eval "
 (async () => {
   const origCreate = URL.createObjectURL;
@@ -254,13 +281,11 @@ agent-browser eval "
 })().then(r => window.__pdfResult = r);
 'generating...'
 "
-
-# Wait then retrieve
 sleep 2
 agent-browser eval "window.__pdfResult"
 ```
 
-Decode and render to image:
+**Decode and render to PNG:**
 ```bash
 B64=$(agent-browser eval "window.__pdfB64" | tr -d '"')
 echo "$B64" | base64 -d > /tmp/character.pdf
@@ -268,29 +293,37 @@ mkdir -p /tmp/pdf-pages
 python3 -c "from pdf2image import convert_from_path; imgs = convert_from_path('/tmp/character.pdf', dpi=150); [img.save(f'/tmp/pdf-pages/page_{i+1}.png') for i, img in enumerate(imgs)]"
 ```
 
-Then **read** `/tmp/pdf-pages/page_1.png` with vision mode and verify:
-- Header block: name, culture, career, cult, homeland, social class
-- Characteristics row with correct derived attributes
-- Hit locations table
-- Skills in 3-column layout with correct percentages
-- Passions with values
-- Rune affinities with percentages
-- Magic section: cult name, devotional pool/spell count/spirit slots, miracle/spell list
-- Folk magic list
+**Read the PDF image with vision mode:**
+```bash
+read /tmp/pdf-pages/page_1.png
+```
+→ Verify ALL of the following in the rendered PDF:
+  - Header: Name, Culture, Career, Cult, Homeland, Age, Gender, Social Class, Concept, Family
+  - Characteristics row: STR, CON, SIZ, DEX, INT, POW, CHA with correct values
+  - Derived attributes: AP, DM, Init, MP, LP, XP Mod, Move, Heal, SR
+  - Hit Locations: Head, Chest, Abdo, R.Arm, L.Arm, R.Leg, L.Leg with correct HP
+  - Skills: 3-column layout, correct percentages matching Play Mode
+  - Passions: correct values
+  - Rune Affinities: Primary/Secondary/Tertiary with correct %
+  - Magic: cult name, pool value, miracle/spell/spirit list matching Play Mode
+  - Folk Magic: spell list with correct casting %
+  - Footer: "Generated with mythras-chargen" + trademark
 
 #### Step 4: Fix Bugs Immediately
 
-If anything crashes, shows wrong data, or looks broken:
+If ANYTHING is wrong — crashes, wrong data, misaligned layout, missing sections:
 ```bash
 bd create "bug: <description>"
-# Fix the bug
-# Re-test from scratch
+```
+Fix the bug, then **re-run the entire acceptance test from Step 1**.
+Do not commit until the full flow passes. Close the bead when fixed:
+```bash
 bd close <id>
 ```
 
 #### Minimum Test Matrix
 
-At least one character per cult type:
+At least one character per cult type. EACH must go through all steps above:
 - **Theist** (e.g., Orlanth, Foundchild) → miracle picker, devotional pool = POW/2
 - **Animist** (e.g., Daka Fal) → spirit picker, spirit slots = CHA/2
 - **Sorcery** (e.g., Arkat) → sorcery spell picker, limit = 3
