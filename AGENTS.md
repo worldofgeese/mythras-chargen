@@ -145,3 +145,125 @@ bd close <id>         # Complete work
 - NEVER say "ready to push when you are" - YOU must push
 - If push fails, resolve and retry until it succeeds
 <!-- END BEADS INTEGRATION -->
+
+---
+
+## Project-Specific Rules
+
+### Architecture
+
+Single-file HTML application (`index.html`, ~19800 lines). No framework, no build step. Vanilla JS with inline data constants. See `.rpiv/guidance/architecture.md` for full module map.
+
+### Data Attestability (ADR-003)
+
+All game data MUST trace to a source PDF with page citation. Flow: `PDF → references/*.json → inline constant → UI`. Never edit inline constants without updating the reference JSON. Vision-mode verification required for any data that might be LLM-interpreted.
+
+### Source Hierarchy
+
+1. Adventures in Glorantha (AiG) — Folk Magic, Rune Magic, cultures, combat styles
+2. Mythras Core Rulebook (3rd Printing 2018) — Sorcery, Animism, Mysticism, base rules
+3. Notes from Pavis Cult One-Pagers (2019) — 94 cult definitions
+4. Bird in Hand / Monster Island — Spirit stat blocks
+5. Hannu house rules (ADR-0007) — Rune casting, devotional pool, rank progression
+
+### Testing Requirements
+
+1. `node test-chargen.js` — 235 unit tests. MUST pass before any commit.
+2. `node test-agent-api.mjs` — 30 E2E assertions via agent-browser. Run after magic system changes.
+
+### Mandatory Browser Acceptance Testing
+
+**After ANY code change to index.html**, you MUST manually test in the browser using `agent-browser`:
+
+```bash
+# Start server if not running
+python3 -m http.server 8765 &
+
+# Open the app
+agent-browser open http://localhost:8765/index.html
+```
+
+**Full manual test procedure (every change):**
+
+1. **Create a character from scratch** — click through all 12 wizard steps:
+   - Step 1: Enter name and concept
+   - Step 2: Set or randomize characteristics
+   - Step 4: Select culture and homeland
+   - Step 5: Allocate cultural skills, select rune affinities, choose folk magic
+   - Step 6: Add passions
+   - Step 7: Set age/gender/family
+   - Step 8: Select career and professional skills
+   - Step 9: Select cult — **verify the correct magic picker appears** (miracle picker for theists, sorcery picker for sorcerers, spirit picker for animists, both for hybrids)
+   - Step 10: Allocate career skills, select career folk magic
+   - Step 11: Allocate bonus skills
+   - Step 12: Set social class
+
+2. **Verify Play Mode** — switch to Play Mode, screenshot it, verify:
+   - Identity section (name, culture, cult, career)
+   - Characteristics and derived attributes
+   - Skill table with correct breakdown columns
+   - Magic section (miracles/spells/spirits depending on cult type)
+   - Combat styles with weapons
+
+3. **Verify PDF Export** — click Export PDF, confirm no JS errors
+
+4. **Screenshot and verify** — take screenshots at key points:
+   ```bash
+   agent-browser screenshot /tmp/step9-cult.png
+   agent-browser screenshot /tmp/play-mode.png
+   ```
+   Then view the screenshots and verify correctness visually.
+
+5. **Fix bugs immediately** — if anything crashes, shows wrong data, or looks broken:
+   - Create a bead: `bd create "bug: <description>"`
+   - Fix the bug
+   - Re-test from scratch
+   - Close the bead: `bd close <id>`
+
+**Minimum test matrix (at least one character per cult type):**
+- Theist cult (e.g., Orlanth) → miracle picker
+- Animist cult (e.g., Daka Fal) → spirit picker
+- Sorcery cult (e.g., Arkat) → sorcery spell picker
+- Hybrid cult (e.g., Waha) → both miracle + spirit pickers
+
+### Push Protocol
+
+Always push to BOTH remotes:
+```bash
+git push origin main && git push paphos main
+```
+
+### Magic Systems
+
+All 5 Mythras magic systems are implemented. See `.rpiv/guidance/magic-system.md` for:
+- `detectCultType()` — regex-based classification from skill patterns
+- Spell limits: Sorcery = 3 (Dedicated rank), Spirits = CHA/2 (Spirit Worshipper)
+- Resource pools: Theist = POW/2 devotional, Sorcery = POW, Animist = CHA/2 slots
+
+### Recommended Skills for This Project
+
+The following skills have been validated as useful for this codebase:
+
+| Skill | When to Use |
+|-------|-------------|
+| `ce-plan` | Breaking down multi-step features |
+| `ce-work` | Executing implementation efficiently |
+| `ce-code-review` | Before committing major changes |
+| `ce-simplify-code` | After implementation, reduce complexity |
+| `ce-compound` | Document learnings in `docs/solutions/` |
+| `ce-commit-push-pr` | Commit with good messages, push |
+| `ce-debug` | When tests fail or browser shows errors |
+| `research` | Deep codebase investigation |
+| `explore` | Weighing implementation approaches |
+| `design` | Architecture for complex features |
+| `validate` | Verify plan execution completeness |
+| `outline-test-cases` | Generate QA specs for features |
+| `ce-code-review` | Structured multi-persona code review |
+| `ce-adversarial-reviewer` | Large/risky diffs |
+| `ce-correctness-reviewer` | Logic errors, edge cases |
+| `ce-reliability-reviewer` | Error handling, failure modes |
+| `ce-performance-oracle` | Performance bottlenecks |
+| `ce-code-simplicity-reviewer` | YAGNI violations, over-engineering |
+| `ce-architecture-strategist` | Pattern compliance |
+| `codebase-analyzer` | Deep component investigation |
+| `scope-tracer` | Trace investigation boundaries |
