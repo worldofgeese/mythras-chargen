@@ -2,48 +2,54 @@
 
 ## Summary
 
-UI for selecting bound spirits from 12 spirit templates. Limited by min(3, CHA/2) spirit slots.
+UI for selecting bound spirits for animist characters. Limited by CHA/2 slots (Spirit Worshipper rank, Mythras Core p.136). Displays 14 spirit templates from Monster Island and Bird in Hand sources.
 
 ## Source Files
 
-- `index.html` (spirit picker UI)
-- `references/spirits-raw/` (spirit template definitions)
-- `references/mythras-raw/animism.json` (animism rules)
+- `index.html` (STARTING_SPIRITS constant + spirit picker UI in renderStep9)
+- `references/spirits-raw/bird-in-hand.json` (Bird in Hand spirits)
+- `references/spirits-raw/monster-island.json` (Monster Island spirits)
 
 ## Key Behaviors
 
-1. Display 12 spirit templates with descriptions
-2. Enforce min(3, CHA/2) slot limit
-3. Show remaining slots counter
-4. Each spirit has a type, intensity, and abilities
-5. Selected spirits persist to CharacterData
-6. Selected spirits render in Play Mode magic section
-7. Spirit abilities shown in Play Mode
+1. Display all 14 spirit templates with type, POW, CHA, and ability text
+2. Enforce CHA/2 selection limit (Spirit Worshipper rank, Core p.136)
+3. Show remaining slots counter "(N / limit)"
+4. Prevent over-selection with toast error
+5. Show spirit icon (🌀) for each entry
+6. Selected spirits persist to CharacterData.boundSpirits[]
+7. Selected spirits render in Play Mode magic section
+8. Selected spirits appear in PDF export with ability descriptions
+9. Deselecting a cult clears boundSpirits[] (orphan cleanup)
+10. Spirit info box shows: Bound Spirit Slots formula, Casting Skill
 
 ## Boundary Conditions
 
-- CHA = 3 → min(3, 1) = 1 spirit slot
-- CHA = 6 → min(3, 3) = 3 spirit slots
-- CHA = 10 → min(3, 5) = 3 spirit slots (capped at 3)
-- CHA = 4 → min(3, 2) = 2 spirit slots
+- CHA 7 → 3 slots (floor(7/2) = 3)
+- CHA 14 → 7 slots
+- CHA 6 → 3 slots (minimum meaningful)
+- Selecting beyond limit → toast error, no change
 - Deselecting a spirit frees a slot
-- Cult change to non-animist clears spirit selections
+- Cult change from animist to non-animist clears selections
+- Hybrid cult (Waha) shows spirit picker alongside miracle picker
 
 ## Existing Coverage
 
-- None
+- Unit test: STARTING_SPIRITS has 14 entries
+- E2E: Daka Fal and Waha characters build with spirits selected
 
 ## Test Types Needed
 
-- Unit: min(3, CHA/2) limit calculation
-- Unit: All 12 spirit templates present in reference data
-- Integration: Spirit list renders (12 templates)
-- Integration: Selection limit enforcement
+- Unit: All spirits have POW, CHA, ability fields
+- Unit: Spirit abilities use book-format text (Bless/Endowment/Sagacity)
+- Integration: Spirit list renders completely (14 items)
+- Integration: CHA/2 limit enforcement
+- Integration: Hybrid cult shows both miracle and spirit pickers
 - Integration: Persistence through wizard steps
-- E2E: Select spirits → visible in Play Mode
+- E2E: Select spirits → visible in Play Mode → visible in PDF
+- E2E: Cult switch from animist → theist clears bound spirits
 
 ## Fixtures to Use
 
-- `garrath-spiritwalker-daka-fal.json` (animist, Daka Fal)
-- `telmori-wolfbrother.json` (animist, Telmor)
-- `biturian-varosh-waha.json` (Waha, has spirit magic)
+- `daka-fal-shaman.json` (animist cult)
+- `waha-beast-rider.json` (hybrid theist+animist)
