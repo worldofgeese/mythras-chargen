@@ -200,147 +200,181 @@ After ingesting new data, propagate to `index.html`:
 ### Mandatory Browser Acceptance Testing
 
 **After ANY code change to index.html**, you MUST perform full manual visual verification.
-Every screenshot MUST be read with the `read` tool (vision mode) and every element verified.
-Do NOT skip screenshots. Do NOT summarize without looking.
+
+**CRITICAL RULES:**
+- Do NOT use `App.agent.*` API calls — test as a real human player would
+- Click buttons, type in fields, select from dropdowns one action at a time
+- After each action, get fresh DOM references (re-renders invalidate old elements)
+- Every screenshot MUST be read with the `read` tool (vision mode) and every element verified
+- Do NOT skip screenshots. Do NOT summarize without looking.
+- Change your mind mid-flow: deselect skills, re-pick, try duplicates — humans do this
 
 #### Setup
 
 ```bash
 python3 -m http.server 8765 &
 agent-browser open http://127.0.0.1:8765/index.html
+agent-browser eval "localStorage.clear(); location.reload(); 'cleared'"
 ```
 
-#### Step 1: Build Character Step-by-Step (Wizard Mode — Visual Verification)
+#### Full Manual Walkthrough (Wizard Mode)
 
-Clear previous state:
-```bash
-agent-browser eval "localStorage.clear(); 'cleared'"
-agent-browser open http://127.0.0.1:8765/index.html
-```
-
-Set each step via the Agent API, render the wizard step, screenshot, and verify with vision mode:
+Navigate each step by clicking "Next →" and interacting with the UI elements directly.
+Never call `App.agent.*`, `App.nextStep()`, or set `CharacterData` properties to skip steps.
 
 **Step 1 (Concept):**
 ```bash
-agent-browser eval "JSON.stringify(App.agent.setStep(1, {name:'...', concept:'...'}))"
-agent-browser eval "App.renderCurrentStep(); 'rendered'"
+agent-browser type "input[type='text']" "Character Name Here"
+agent-browser type "textarea" "A brief character concept"
+agent-browser click "#btn-next"
 agent-browser screenshot /tmp/wizard-step1.png
 ```
-→ `read /tmp/wizard-step1.png` — Verify: Name and concept fields populated. "Step 1 of 13" visible.
+→ `read /tmp/wizard-step1.png` — Verify: Advanced to Step 2.
 
 **Step 2 (Characteristics):**
 ```bash
-agent-browser eval "JSON.stringify(App.agent.setStep(2, {characteristics:{STR:14,CON:12,...}}))"
-agent-browser eval "App.renderCurrentStep(); 'rendered'"
-agent-browser screenshot /tmp/wizard-step2.png
+# Use native value setter since input handlers require it:
+agent-browser eval "(function() {
+  const ns = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set;
+  const inputs = [...document.querySelectorAll('input[type=\"number\"]')];
+  [11,12,13,14,15,5,5].forEach((v,i) => { ns.call(inputs[i], v); inputs[i].dispatchEvent(new Event('input', {bubbles:true})); });
+  return document.querySelector('.budget-tracker').textContent.trim();
+})()"
+agent-browser click "#btn-next"
 ```
-→ `read /tmp/wizard-step2.png` — Verify: All 7 stats shown in input fields. "Points Remaining: 0 / 75" (green).
+→ Verify: "Points Remaining: 0 / 75" before advancing.
+
+**Step 3 (Attributes):** Read-only. Click Next.
+```bash
+agent-browser click "#btn-next"
+```
 
 **Step 4 (Culture + Homeland):**
 ```bash
-agent-browser eval "JSON.stringify(App.agent.setStep(4, {culture:'...', homeland:'...'}))"
-agent-browser eval "App.renderCurrentStep(); 'rendered'"
+agent-browser select "select" "Telmori Hsunchen"   # or any culture
+# Click a homeland button:
+agent-browser eval "[...document.querySelectorAll('button')].find(b => b.textContent.includes('Telmori Wilds')).click(); 'clicked'"
+agent-browser click "#btn-next"
 agent-browser screenshot /tmp/wizard-step4.png
 ```
-→ `read /tmp/wizard-step4.png` — Verify: Culture selected/highlighted. Homeland dropdown shows correct value.
+→ `read /tmp/wizard-step4.png` — Verify: Culture info panel shown, homeland selected.
 
 **Step 5 (Cultural Skills + Rune Affinities + Folk Magic):**
 ```bash
-agent-browser eval "JSON.stringify(App.agent.setStep(5, {culturalSkills:{...}, runeAffinities:{primary:'...',secondary:'...',tertiary:'...'}, folkMagicSpells:[...]}))"
-agent-browser eval "App.renderCurrentStep(); 'rendered'"
+# Distribute 100 points across skill inputs (max 15 each)
+# Select 3 rune affinities from dropdowns
+# Check 3 folk magic checkboxes
 agent-browser screenshot /tmp/wizard-step5.png
+agent-browser click "#btn-next"
 ```
-→ `read /tmp/wizard-step5.png` — Verify: Skill allocation table with points. Rune affinity dropdowns. Folk magic spells checked.
+→ `read /tmp/wizard-step5.png` — Verify: Budget at 0/100. Runes selected. 3 folk magic checked.
 
-**Step 8 (Career + Professional Skills):**
+**Step 6 (Passions):** Cultural passions pre-filled. Click Next.
+**Step 7 (Background):** Optional. Click Next.
+
+**Step 8 (Career + Professional Skills) — CRITICAL DESELECT TEST:**
 ```bash
-agent-browser eval "JSON.stringify(App.agent.setStep(8, {career:'...', professionalSkills:[...]}))"
-agent-browser eval "App.renderCurrentStep(); 'rendered'"
-agent-browser screenshot /tmp/wizard-step8.png
+agent-browser select "select" "Crafter"   # or any career with disambiguated skills
 ```
-→ `read /tmp/wizard-step8.png` — Verify: Career selected. Professional skills listed/checked.
 
-**Step 9 (Cult + Magic Picker) — CRITICAL:**
+Select 3 professional skills one at a time (get fresh DOM refs after each click):
 ```bash
-agent-browser eval "JSON.stringify(App.agent.setStep(9, {cult:'...', miracles:[...]}))"
-agent-browser eval "App.renderCurrentStep(); 'rendered'"
+agent-browser eval "[...document.querySelectorAll('#professional-skills-picker input[type=\"checkbox\"]')].find(cb => cb.parentElement.textContent.includes('Art (any)')).click(); 'checked Art'"
+agent-browser eval "[...document.querySelectorAll('#professional-skills-picker input[type=\"checkbox\"]')].find(cb => cb.parentElement.textContent.includes('Craft (Primary)')).click(); 'checked Craft Primary'"
+agent-browser eval "[...document.querySelectorAll('#professional-skills-picker input[type=\"checkbox\"]')].find(cb => cb.parentElement.textContent.includes('Craft (Secondary)')).click(); 'checked Craft Secondary'"
+```
+
+Type specializations (calling `resolveProfessionalSkill` directly since the DOM input flow requires sequential focus):
+```bash
+agent-browser eval "App.resolveProfessionalSkill('Art (any)', 'Wolfmaking'); 'resolved Art'"
+agent-browser eval "App.resolveProfessionalSkill('Craft (Primary)', 'Basketry'); 'resolved Craft Primary'"
+agent-browser eval "App.resolveProfessionalSkill('Craft (Secondary)', 'Leatherwork'); 'resolved Craft Secondary'"
+```
+
+**Test changing your mind** — uncheck one Craft and verify the other stays:
+```bash
+agent-browser eval "(function() {
+  App.renderCurrentStep();
+  const cbs = [...document.querySelectorAll('#professional-skills-picker input[type=\"checkbox\"]')];
+  cbs.find(cb => cb.parentElement.textContent.includes('Craft (Secondary)')).click();
+  return 'Selected: ' + JSON.stringify(CharacterData.selectedProfessionalSkills);
+})()"
+```
+→ Verify: Array still contains `"Craft (Basketry)"` — only Leatherwork was removed.
+
+Select a replacement skill and advance:
+```bash
+agent-browser eval "[...document.querySelectorAll('#professional-skills-picker input[type=\"checkbox\"]')].find(cb => cb.parentElement.textContent.includes('Commerce')).click(); 'checked Commerce'"
+agent-browser click "#btn-next"
+```
+→ Verify: Advances to Step 9 (no "must select 3" error).
+
+**Step 9 (Cult Selection + Miracles) — CRITICAL VALIDATION TEST:**
+```bash
+# Click a cult card
+agent-browser eval "[...document.querySelectorAll('h3,h4,strong')].find(h => h.textContent.trim() === 'Telmor').click(); 'selected Telmor'"
 agent-browser screenshot /tmp/wizard-step9.png
 ```
-→ `read /tmp/wizard-step9.png` — Verify the CORRECT picker appears:
-  - **Theist cult**: Miracle picker with checkboxes, devotional pool counter, rune tags on miracles
-  - **Animist cult**: Spirit picker with spirit names/types/abilities, slot counter (CHA/2)
-  - **Sorcery cult**: Sorcery spell picker with 53 spells, 3-spell limit counter
-  - **Hybrid cult**: BOTH pickers visible (scroll down if needed, take second screenshot)
 
-**Step 9 — scroll to bottom of picker (if hybrid or long list):**
+Test validation — try advancing WITHOUT selecting miracles:
 ```bash
-agent-browser eval "window.scrollBy(0, 600); 'scroll'"
-agent-browser screenshot /tmp/wizard-step9-bottom.png
+agent-browser eval "App.nextStep(); const t = document.querySelector('.toast'); t ? 'Toast: ' + t.textContent : 'No toast at step ' + App.currentStep"
 ```
-→ `read /tmp/wizard-step9-bottom.png` — Verify: Full picker rendered. Selection count matches expected.
+→ Verify: Toast says "Please select all your initiate miracles (0/N chosen)" and stays on Step 9.
 
-After all steps, verify the build completed:
+Test the Quick Boost panel (if cult skills below 50%):
 ```bash
-agent-browser eval "JSON.stringify(App.agent.getMagicState())"
+agent-browser eval "window.scrollTo(0, 900); 'scroll'"
+agent-browser screenshot /tmp/wizard-step9-boost.png
 ```
-Confirm: cultType, devotionalPool, boundSpiritSlots, sorceryResource, selectedMiracles/spells/spirits all match expectations.
+→ `read /tmp/wizard-step9-boost.png` — Verify: Blue "Quick Boost" panel visible with cult skills, +/- buttons, bonus pool counter.
 
-#### Step 2: Play Mode — Screenshot EVERY Section (Vision Mode)
-
-Switch to Play Mode and scroll through the ENTIRE page, screenshotting and visually verifying each viewport:
-
+Select miracles up to devotional pool:
 ```bash
-agent-browser eval "App.switchMode('play'); window.scrollTo(0,0); 'play'"
+agent-browser eval "(function() {
+  const cards = [...document.querySelectorAll('[data-miracle]')];
+  cards.slice(0, CharacterData.devotionalPool).forEach(c => c.click());
+  return 'Selected ' + CharacterData.miracles.length + ' miracles';
+})()"
+agent-browser click "#btn-next"
 ```
+→ Verify: Advances to Step 10.
 
-**Screenshot 1: Identity + Skills (top)**
+**Step 10 (Career Skills + Folk Magic):**
 ```bash
+agent-browser screenshot /tmp/wizard-step10.png
+```
+→ `read /tmp/wizard-step10.png` — Verify:
+  - Only the 3 selected professional skills appear (NOT all 7 career options)
+  - Standard skills (Brawn, Drive, etc.) are listed
+  - If Craft (Primary) was kept, "Craft (Basketry)" appears as its own row
+  - If Craft (Secondary) was swapped for Commerce, "Commerce" appears instead
+  - Datalist inputs show chevron (˅) indicating they're clickable dropdowns
+
+**Steps 11-13:** Distribute bonus points, review, finish.
+
+#### Play Mode Verification
+
+Switch to Play Mode and scroll through the ENTIRE page:
+```bash
+agent-browser eval "document.getElementById('btn-play').click(); window.scrollTo(0,0); 'play mode'"
 agent-browser screenshot /tmp/play-01-top.png
 ```
-→ `read /tmp/play-01-top.png` — Verify: Name, Culture, Homeland, Career, Cult, Age, Gender, Social Class. Skills table header row. First ~15 skills with Base/Culture/Career/Bonus/Total columns.
+→ `read /tmp/play-01-top.png` — Verify: Name, Culture, Homeland, Career, Cult visible.
 
-**Screenshot 2: Skills (continued) + Attributes**
-```bash
-agent-browser eval "window.scrollBy(0, 800); 'scroll'"
-agent-browser screenshot /tmp/play-02-skills.png
-```
-→ `read /tmp/play-02-skills.png` — Verify: Remaining skills. Hit Locations table (HP per location). Attributes (AP, LP, MP, Init, Move, Heal, DM, SR).
+Scroll and screenshot every viewport (800px increments) verifying:
+- Skills table with correct totals
+- Hit Locations with HP
+- Combat styles and weapons
+- Rune Affinities with %
+- Passions including cult loyalty
+- Magic section (correct picker type for cult)
+- Folk magic spells
+- Equipment and starting money
+- Footer with trademark
 
-**Screenshot 3: Combat + Rune Affinities + Passions**
-```bash
-agent-browser eval "window.scrollBy(0, 800); 'scroll'"
-agent-browser screenshot /tmp/play-03-combat.png
-```
-→ `read /tmp/play-03-combat.png` — Verify: Weapons table. Combat styles. Rune Affinities (Primary/Secondary/Tertiary with %). Passions with values.
+#### PDF Export Verification
 
-**Screenshot 4: Magic Section (cult info + miracles/spells/spirits)**
-```bash
-agent-browser eval "(function(){let t=null; document.querySelectorAll('h3').forEach(h=>{if(h.textContent.includes('Theist')||h.textContent.includes('Spirit Magic')||h.textContent.includes('Sorcery Spells'))t=h}); t&&t.scrollIntoView({block:'start'}); return 'ok'})()"
-agent-browser screenshot /tmp/play-04-magic.png
-```
-→ `read /tmp/play-04-magic.png` — Verify:
-  - **Theist**: "Theist Miracles (Initiate)" heading, Rune Affinities line, Devotional Pool number, miracle list with [Rune] tags
-  - **Animist**: "Spirit Magic (Animist — Shaman Path)" heading, Bound Spirit Slots: N, casting method
-  - **Sorcery**: "Sorcery Spells" heading, sorcery resource, spell list
-  - **Hybrid**: BOTH theist AND animist/sorcery sections present
-
-**Screenshot 5: Folk Magic + Equipment + Notes**
-```bash
-agent-browser eval "window.scrollBy(0, 800); 'scroll'"
-agent-browser screenshot /tmp/play-05-folk.png
-```
-→ `read /tmp/play-05-folk.png` — Verify: Folk Magic (XX%) with spell list. Equipment section with Starting Money. Notes section with Concept and Family.
-
-**Screenshot 6: Bottom (Special Effects reference, footer)**
-```bash
-agent-browser eval "window.scrollTo(0, document.body.scrollHeight); 'bottom'"
-agent-browser screenshot /tmp/play-06-bottom.png
-```
-→ `read /tmp/play-06-bottom.png` — Verify: Page renders completely. No broken elements. Footer with trademark text visible.
-
-#### Step 3: PDF Export — Generate, Render to Image, Verify with Vision Mode
-
-**Generate PDF and intercept the blob:**
 ```bash
 agent-browser eval "
 (async () => {
@@ -368,49 +402,40 @@ sleep 2
 agent-browser eval "window.__pdfResult"
 ```
 
-**Decode and render to PNG:**
+Decode and render to PNG, then verify with vision mode:
 ```bash
 B64=$(agent-browser eval "window.__pdfB64" | tr -d '"')
 echo "$B64" | base64 -d > /tmp/character.pdf
 mkdir -p /tmp/pdf-pages
 python3 -c "from pdf2image import convert_from_path; imgs = convert_from_path('/tmp/character.pdf', dpi=150); [img.save(f'/tmp/pdf-pages/page_{i+1}.png') for i, img in enumerate(imgs)]"
-```
-
-**Read the PDF image with vision mode:**
-```bash
 read /tmp/pdf-pages/page_1.png
 ```
-→ Verify ALL of the following in the rendered PDF:
-  - Header: Name, Culture, Career, Cult, Homeland, Age, Gender, Social Class, Concept, Family
-  - Characteristics row: STR, CON, SIZ, DEX, INT, POW, CHA with correct values
-  - Derived attributes: AP, DM, Init, MP, LP, XP Mod, Move, Heal, SR
-  - Hit Locations: Head, Chest, Abdo, R.Arm, L.Arm, R.Leg, L.Leg with correct HP
-  - Skills: 3-column layout, correct percentages matching Play Mode
-  - Passions: correct values
-  - Rune Affinities: Primary/Secondary/Tertiary with correct %
-  - Magic: cult name, pool value, miracle/spell/spirit list matching Play Mode
-  - Folk Magic: spell list with correct casting %
-  - Footer: "Generated with mythras-chargen" + trademark
+→ Verify: All sections render correctly, skills match Play Mode, magic section present.
 
-#### Step 4: Fix Bugs Immediately
+#### Fix Bugs Immediately
 
 If ANYTHING is wrong — crashes, wrong data, misaligned layout, missing sections:
 ```bash
 bd create "bug: <description>"
 ```
 Fix the bug, then **re-run the entire acceptance test from Step 1**.
-Do not commit until the full flow passes. Close the bead when fixed:
-```bash
-bd close <id>
-```
+Do not commit until the full flow passes. Close the bead when fixed.
 
 #### Minimum Test Matrix
 
 At least one character per cult type. EACH must go through all steps above:
-- **Theist** (e.g., Orlanth, Foundchild) → miracle picker, devotional pool = POW/2
+- **Theist** (e.g., Orlanth, Telmor) → miracle picker, devotional pool = POW/2
 - **Animist** (e.g., Daka Fal) → spirit picker, spirit slots = CHA/2
 - **Sorcery** (e.g., Arkat) → sorcery spell picker, limit = 3
 - **Hybrid** (e.g., Waha) → both miracle + spirit pickers
+
+#### Key Gotchas for Manual Testing
+
+1. **DOM references go stale after re-render** — always get fresh `querySelectorAll` after any click that triggers `renderCurrentStep()`
+2. **Native value setter required for number inputs** — `Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set` + dispatch `input` event
+3. **Disambiguated skills (Craft Primary/Secondary)** — each tracks independently via `_disambiguationMap`; deselecting one must NOT remove the other
+4. **Toast messages disappear after 3s** — check immediately after `App.nextStep()`, don't wait for screenshot
+5. **Step 5 validation** — requires both 0/100 budget AND 3 folk magic AND 3 runes selected
 
 #### Cleanup
 
