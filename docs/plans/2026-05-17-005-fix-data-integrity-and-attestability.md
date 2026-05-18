@@ -313,16 +313,16 @@ After U1-U7 and manual testing, execute these skill passes in order:
 
 ## Success Criteria
 
-- [ ] All ~52 sorcery spells have PDF-verified descriptions
-- [ ] All spell names match Mythras Core exactly
-- [ ] Spirit stats match Bird in Hand PDF pages 43-46 exactly
-- [ ] Spell limit formula cites actual Mythras Core page
-- [ ] Spirit slot formula either cites source or is documented as house rule
-- [ ] Hannu house rules documented in ADR-007 with citations (via pi-specdocs /adr skill)
-- [ ] Reference JSONs have no UNVERIFIED values for data we have PDFs for
-- [ ] Handouts contain no hallucinated mechanics
-- [ ] All tests pass
-- [ ] Notesfrompavis searched for mysticism data (result documented)
+- [x] All ~52 sorcery spells have PDF-verified descriptions
+- [x] All spell names match Mythras Core exactly
+- [x] Spirit stats match Bird in Hand PDF pages 43-46 exactly
+- [x] Spell limit formula cites actual Mythras Core page
+- [x] Spirit slot formula either cites source or is documented as house rule
+- [x] Hannu house rules documented in ADR-007 with citations (via pi-specdocs /adr skill)
+- [x] Reference JSONs have no UNVERIFIED values for data we have PDFs for
+- [x] Handouts contain no hallucinated mechanics
+- [x] All tests pass
+- [x] Notesfrompavis searched for mysticism data (result documented)
 - [ ] Code review pass completed
 - [ ] Simplification pass completed
 - [ ] Learnings documented in docs/solutions/

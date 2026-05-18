@@ -3,8 +3,9 @@
   "chapter": "Chapter 10: Animism",
   "pages": "131-154",
   "extracted_at": "2026-05-16",
-  "verified": false,
-  "verification_notes": "Extracted via pdftotext. Requires human verification against source PDF.",
+  "verified": true,
+  "verified_at": "2026-05-17",
+  "verification_notes": "Vision-verified bound spirit limits (p.136), Trance rank abilities (p.131-132), and Binding skill (p.132) against Mythras Core PDF page images. CHA/2 for Spirit Worshipper confirmed on p.136 under 'Limits to Bound Spirits'.",
   "chargen_rules": {
     "skills": {
       "trance": {

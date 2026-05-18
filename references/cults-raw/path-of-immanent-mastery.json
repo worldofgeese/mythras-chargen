@@ -1,0 +1,51 @@
+{
+  "source": "Notes from Pavis cult one-pager (notesfrompavis.blog, 2014)",
+  "url": "https://notesfrompavis.blog/wp-content/uploads/2014/04/path-of-immanent-mastery.pdf",
+  "extracted_at": "2026-05-17",
+  "verified": true,
+  "verified_at": "2026-05-17",
+  "verification_notes": "Vision-verified against PDF page image. Single-page cult one-pager.",
+  "cult": {
+    "name": "Path of Immanent Mastery",
+    "subtitle": "Mystery Cult of Dragon Worship",
+    "pantheon": "Kralorela",
+    "magic_system": "theist",
+    "magic_system_notes": "Uses Theist Miracles heading and Exhort/Devotion skills. Thematically mystical (dragon worship) but mechanically theist in current one-pager. Note at bottom: 'This cult will change when AiG is released.'",
+    "areas": {
+      "continents": "Genertela",
+      "main_areas": "East",
+      "localities": "Kralorela"
+    },
+    "requirements": {
+      "initiate": "50% in five of the cult skills. Succeed in 3 of the rolls to convince the examiners.",
+      "acolyte": "No acolytes",
+      "rune_lord": "90% in cult skills. Bold are mandatory. Succeed in charismatic wisdom test"
+    },
+    "cult_skills": ["Lore(cult)", "Charismatic Wisdom", "Exhort", "Devotion"],
+    "cult_skills_notes": "Oath is taken at initiate. Divine intervention learned at rune level.",
+    "theist_miracles": {
+      "initiate": [
+        "Attain Perfection of Flame",
+        "Consecrate",
+        "Extension"
+      ],
+      "rune_lord": [
+        "Attain Perfection of Tail",
+        "Attain Perfection of Armor",
+        "Attain Perfection of Head",
+        "Attain Perfection of Limb",
+        "Attain Perfection of Size",
+        "Attain Perfection of Viscera",
+        "Attain Perfection of Wing",
+        "Dragon Life",
+        "Excommunication"
+      ],
+      "note": "italic = acolyte (none), bold = rune level. Superscript 2 indicates rune-level spells."
+    },
+    "sources": ["Gods Of Glorantha", "Guide to Glorantha"]
+  },
+  "chargen_implications": {
+    "note": "This cult is from Kralorela (East Genertela) and is not part of the 8 AiG cultures currently supported. It would only be relevant if Kralorelan cultures are added. The cult uses theist mechanics despite its mystical theme.",
+    "mysticism_status": "NOT a mysticism cult mechanically. Hannu (Discord 2026-05-17) said it 'might' use mysticism in future but current data uses theist miracles."
+  }
+}

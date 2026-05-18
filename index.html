@@ -13209,40 +13209,60 @@ const FOLK_MAGIC_DESCRIPTIONS = {
 // Sorcery spells from Mythras Core p.167-178 (34 spells)
 // Format: [name, resist] — resist is empty string if none
 const SORCERY_SPELLS = [
-  ["Abjure (Substance/Process)", "Special", "Wards an area against a specified substance or process, preventing it from entering or occurring within"],
-  ["Animate (Substance)", "", "Brings an inanimate substance to life, allowing it to move and act under the caster's direction"],
-  ["Attract (Threat)", "Willpower", "Draws a specified threat toward the caster or a designated point, compelling approach"],
-  ["Castback", "", "Reflects incoming spells back at their caster if the attacking spell fails to overcome this one"],
-  ["Damage Enhancement", "", "Increases weapon damage by adding extra dice per intensity to a single weapon"],
-  ["Damage Resistance", "", "Provides magical armor protection, reducing incoming damage by intensity per location"],
-  ["Diminish (Characteristic)", "Willpower/Endurance", "Temporarily reduces a target's characteristic by 2 per intensity"],
-  ["Dominate (Species)", "Willpower", "Compels a creature of the named species to obey the caster's commands"],
-  ["Enchant (Object)", "Willpower", "Imbues an object with a stored spell that activates under specified conditions"],
-  ["Enhance (Characteristic)", "Willpower/Endurance", "Temporarily increases a characteristic by 2 per intensity"],
-  ["Enslave (Creatures)", "Willpower", "Permanently binds creatures to the caster's will; they serve until freed or the spell ends"],
-  ["Fly", "", "Grants the ability to fly at the caster's Movement Rate; maneuverability improves with intensity"],
-  ["Haste", "", "Doubles the target's Movement Rate and grants additional Action Points per intensity"],
-  ["Holdfast", "", "Bonds two surfaces together with unbreakable magical adhesion; strength scales with intensity"],
-  ["Intuition", "", "Grants supernatural awareness of danger, lies, or hidden things within range"],
-  ["Mystic (Sense)", "", "Grants a magical sense (sight, hearing, etc.) that perceives through barriers or at distance"],
-  ["Neutralize Magic", "", "Eliminates magical effects on a target; each intensity counters one magnitude of active magic"],
-  ["Palsy", "Endurance", "Paralyzes hit locations, rendering them useless; affects 1 location per 2 intensity"],
-  ["Phantom (Sense)", "", "Creates a convincing illusion affecting one sense per intensity (sight, sound, smell, etc.)"],
-  ["Portal", "", "Opens a gateway between two known locations; size and duration scale with intensity"],
-  ["Project (Sense)", "", "Projects one of the caster's senses to a remote location within range"],
-  ["Regenerate", "", "Heals 1 Hit Point per round per intensity to a single location; can regrow severed limbs"],
-  ["Repulse (Substance)", "", "Forces a specified substance away from the caster or target area"],
-  ["Sculpt (Substance)", "", "Reshapes a specified substance into any form the caster desires; permanence scales with intensity"],
-  ["Shapechange (Species to Species)", "Willpower", "Transforms the target from one species into another; gains physical stats of new form"],
-  ["Smother", "Endurance", "Extinguishes fire or suffocates air-breathers by removing oxygen from the area"],
-  ["Spirit Resistance", "", "Provides magical protection against spirit attacks and discorporate entities"],
-  ["Store Manna", "", "Creates a reservoir of Magic Points in an object; stores 1 MP per intensity for later use"],
-  ["Summon (Entity)", "Evade", "Calls a specified entity to the caster's location; entity is not automatically controlled"],
-  ["Tap (Characteristic)", "Special", "Drains a target's characteristic, transferring the points to the caster temporarily"],
-  ["Teleport", "", "Instantly transports the caster to a known location within range; range scales with intensity"],
-  ["Transmogrify (to Substance)", "Endurance", "Transforms the target's body into a specified substance (stone, iron, wood, etc.)"],
-  ["Undeath", "Endurance", "Reanimates a corpse as an undead servant under the caster's control"],
-  ["Wrack (Species)", "Endurance", "Inflicts agonizing pain on a creature of the named species; incapacitates without damage"]
+  // All 53 spells from Mythras Core Rulebook p.166-177. Descriptions are first-sentence summaries verified against PDF.
+  ["Abjure (Substance/Process)", "Special", "Allows the recipient to abstain from something usually required for life, utterly removing its need (or effect) until the spell ends. (p.166)"],
+  ["Animate (Substance)", "Special", "Invests an inanimate object with a semblance of life, permitting it to move under its own power. (p.166)"],
+  ["Attract (Threat)", "Willpower", "Makes the recipient a scapegoat for certain harmful occurrences, drawing all incidences of its particular threat within range towards them. (p.167)"],
+  ["Banish", "Willpower", "Enables a sorcerer to dismiss a spiritual or demonic entity back to the Plane from whence it was summoned. (p.167)"],
+  ["Bypass Armour", "None", "Affects objects, armaments or natural weapons so that they pass through armour, ignoring Armour Points equal to the spell's Intensity. (p.167)"],
+  ["Castback", "None", "Shields the recipient from magic in a haphazard manner, with the chance that any spell cast at them may be reflected back at its caster. (p.167)"],
+  ["Damage Enhancement", "None", "Augments the physical damage inflicted by an object or creature, increasing the minimum damage of a successful attack. (p.167)"],
+  ["Damage Resistance", "None", "Protects an object or person against physical damage, providing Armour Points equal to the spell's Intensity. (p.167)"],
+  ["Diminish (Characteristic)", "Willpower/Endurance", "Reduces a physical or mental trait of a living target, diminishing it by 2 points per Intensity of the spell. (p.167)"],
+  ["Dominate (Creatures)", "Willpower", "Grants the sorcerer psychic control over a creature of the specific species the spell affects. (p.167)"],
+  ["Draw (Creatures)", "Willpower", "Summons creatures of a specific type within range towards a target, affecting creatures up to a maximum SIZ of three times the spell's Intensity. (p.168)"],
+  ["Enchant (Object)", "Special", "Enables a caster to make one of their sorcery spells everlasting, at the cost of seriously reducing their magical strength. (p.168)"],
+  ["Enhance (Characteristic)", "Willpower/Endurance", "Increases a physical or mental trait of a target, enhancing it by 2 points per Intensity of the spell. (p.169)"],
+  ["Enlarge", "Special", "Expands non-living or inanimate objects, multiplying dimensions and weight by a factor equal to the Intensity. (p.169)"],
+  ["Enslave (Creatures)", "Willpower", "Grants the sorcerer power to manipulate large numbers of targets of the same species, turning them into helpless automatons. (p.169)"],
+  ["Evoke", "Willpower", "Brings an extra-planar being to the presence of the caster; which can be anything from a demon or genie to an intangible spirit. (p.169)"],
+  ["Fly", "None", "Enables the recipient to move freely through the air, granting a base Movement Rate of 6. (p.170)"],
+  ["Haste", "None", "Augments the Movement Rate of whatever it is cast on, increasing it by an amount equal to the Intensity. (p.170)"],
+  ["Hide Life", "None", "Conceals the recipient's soul in a specially prepared soul jar, preventing death in exchange for losing a Hit Point from every location. (p.170)"],
+  ["Hinder", "Endurance", "Reduces the Movement Rate of whatever it is cast on, slowing it by a number of metres equal to the Intensity. (p.170)"],
+  ["Holdfast", "Endurance", "Magically adheres an object to another surface. The bonding is unbreakable by normal means. (p.170)"],
+  ["Imprison", "Willpower", "Creates an invisible barrier around a person or creature, blocking it from leaving the area. (p.170)"],
+  ["Intuition", "Willpower", "Permits the sorcerer to discern the true emotions and motives of the target, as if he had made a successful Insight roll. (p.170)"],
+  ["Mark", "Willpower", "Magically tags an object with a mystical sigil so that it may be located, summoned or targeted by another spell. (p.170)"],
+  ["Mystic (Sense)", "None", "Enables the caster to perceive magic using the sense of perception specified by the spell. (p.171)"],
+  ["Neutralise Magic", "None", "Suppresses a single spell or miracle on a target with a Magnitude equal or less than its own. (p.171)"],
+  ["Palsy", "Endurance", "Renders a single random Hit Location completely useless, the affected area twitching and unresponsive. (p.171)"],
+  ["Perceive (Sense)", "Endurance", "Grants the recipient a new and unusual sensory perception, from Echolocation to X-Ray Vision. (p.171)"],
+  ["Phantom (Sense)", "Special", "Produces an illusory effect on a target, tailored to fool a specific sense. (p.172)"],
+  ["Portal", "None", "Creates a magical gateway connecting two places, allowing instantaneous transportation between them. (p.172)"],
+  ["Project (Sense)", "None", "Allows the recipient to send one of his senses beyond his body in the form of an astral projection. (p.172)"],
+  ["Protective Ward", "None", "An augmenting spell which must be cast in association with other sorcery spells to form an extended wall of protection. (p.173)"],
+  ["Regenerate", "None", "Allows the sorcerer to slowly heal injuries by accelerating natural healing, regenerating Hit Points per hour equal to the Intensity. (p.173)"],
+  ["Repulse (Creatures)", "Willpower", "The exact opposite of Draw, driving off creatures of a specific type within range of the target. (p.173)"],
+  ["Revivify", "None", "Animates a dead body, creating a mindless undead automaton such as a skeleton or zombie. (p.173)"],
+  ["Sculpt (Substance)", "Special", "Enables a sorcerer to mould the form of a particular substance, shaping it to his will. (p.173)"],
+  ["Sense (Object, State or Substance)", "None", "Utilised as a means to detect valuables, lost possessions or hidden objects from afar. (p.174)"],
+  ["Shapechange (to Creature)", "Endurance", "Morphs the physical body of the target into that of another species. (p.174)"],
+  ["Shrink", "Special", "Miniaturises non-living or inanimate objects, reducing dimensions and weight by a factor equal to the Intensity. (p.174)"],
+  ["Smother", "Endurance", "Slowly asphyxiates a target, starving it of air so that it collapses choking and gasping. (p.174)"],
+  ["Spell Resistance", "None", "Provides protection against magic, blocking incoming spells with a Magnitude equal to or less than its own. (p.174)"],
+  ["Spirit Resistance", "None", "Blocks spirits and intangible entities from coming into contact with the recipient. (p.175)"],
+  ["Store Manna", "None", "Creates a temporary storage vessel for Magic Points, which can be charged and later called on to power spells. (p.175)"],
+  ["Summon", "Evade", "Brings a non-living, inanimate object to the sorcerer, teleporting it from wherever it previously rested. (p.175)"],
+  ["Switch Body", "Willpower", "Enables a sorcerer to switch his consciousness with that of another, so that they exchange bodies. (p.175)"],
+  ["Tap (Characteristic)", "Special", "Drains Characteristic points from victims in order to boost the sorcerer's own levels. (p.175)"],
+  ["Telepathy", "Willpower", "Allows a sorcerer to establish mental two-way communication with a target, without the need for shared language. (p.175)"],
+  ["Teleport", "Evade", "Enables a sorcerer to instantaneously move the recipient anywhere within the Range of the spell. (p.176)"],
+  ["Transfer Wound", "Endurance", "Allows a sorcerer to transfer physical damage from himself to the target or vice versa. (p.176)"],
+  ["Transmogrify (to Substance)", "Endurance", "Converts the base substance of a creature or object to some other material. (p.176)"],
+  ["Trap Soul", "Willpower", "Snares the spirit of a corporeal creature so that at the moment of its death, it can be trapped within a specially prepared object. (p.176)"],
+  ["Undeath", "Endurance", "Enables the sorcerer to turn the recipient into an undead monster, gaining immunity to disease, poison, fatigue and ageing. (p.177)"],
+  ["Wrack (Substance or Harm)", "Evade", "Enables a sorcerer to harm opponents with deadly bolts or waves of sorcerous energy. Damage scales with Intensity. (p.177)"]
 ];
 
 // Starting spirits for animist characters (Monster Island + Bird in the Hand)
@@ -13726,7 +13746,7 @@ const CharacterData = {
   cultType: null,  // ADR-0006: detected magic system type(s)
   miracles: [],  // Selected theist miracles from cult
   devotionalPool: 0,  // POW/2 for Theist Initiates (auto-calculated)
-  boundSpiritSlots: 0,  // CHA/2 for Animist Spirit Worshippers (ADR-0006)
+  boundSpiritSlots: 0,  // CHA/2 for Spirit Worshipper rank (Mythras Core p.136)
   sorceryResource: 0,  // Magic Points (= POW) for Sorcery cults (ADR-0006)
 
   // Step 10: Career Skills
@@ -15530,9 +15550,10 @@ App.toggleFolkMagicSpell = function(spell, checked, maxCount) {
 
 App.toggleSorcerySpell = function(spellName) {
   if (!CharacterData.sorcerySpells) CharacterData.sorcerySpells = [];
-  const maxSpells = Math.ceil((CharacterData.characteristics.INT || 10) / 4);
+  // Starting spells = 3 for Dedicated rank (Rune Affinity ~50% / 20 ≈ 3). Mythras Core p.165: memorisation limit = INT.
+  const maxSpells = 3;
   if (!this._toggleInList(CharacterData.sorcerySpells, spellName, maxSpells)) {
-    this.showToast(`Maximum ${maxSpells} sorcery spells (INT/4)`, 'error');
+    this.showToast(`Maximum ${maxSpells} starting sorcery spells (Dedicated rank)`, 'error');
     return;
   }
   this.saveToLocalStorage();
@@ -16131,7 +16152,8 @@ App.renderStep9 = function() {
       // Show sorcery info + spell picker for sorcery cults
       if (cultType.types.includes('sorcery')) {
         const magicPoints = CharacterData.sorceryResource || CharacterData.characteristics.POW || 0;
-        const maxSpells = Math.ceil((CharacterData.characteristics.INT || 10) / 4);
+        // Starting spells = 3 for Dedicated rank (Rune Affinity ~50% / 20 ≈ 3). Mythras Core p.165: memorisation limit = INT.
+        const maxSpells = 3;
         if (!CharacterData.sorcerySpells) CharacterData.sorcerySpells = [];
         const selectedCount = CharacterData.sorcerySpells.length;
 
@@ -16152,7 +16174,7 @@ App.renderStep9 = function() {
             <p class="spell-picker__source">Source: Mythras Core p.162-178, AiG p.60</p>
           </div>
           <div class="spell-picker">
-            <h4>Starting Spells <span style="font-weight:normal">(${selectedCount} / ${maxSpells} \u2014 INT/4)</span></h4>
+            <h4>Starting Spells <span style="font-weight:normal">(${selectedCount} / ${maxSpells} \u2014 Dedicated rank, Core p.165)</span></h4>
             <div class="spell-picker__list">${spellListHTML}</div>
             <p class="spell-picker__hint">Select up to ${maxSpells} spells from your school's grimoire. Spells with (Substance/Species) require specialization at the table.</p>
           </div>
