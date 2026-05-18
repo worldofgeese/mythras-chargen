@@ -2507,7 +2507,8 @@ const App = {
     // Step 9: Cult Selection - validate miracle selection if cult chosen
     if (step === 9) {
       if (CharacterData.cult) {
-        const cultType = detectCultType(CharacterData.cult);
+        const cultObj = CULTS_DATA.find(c => c.name === CharacterData.cult);
+        const cultType = detectCultType(cultObj || CharacterData.cult);
         
         // Theist: must select miracles up to devotional pool
         if (cultType.includes('theist')) {
