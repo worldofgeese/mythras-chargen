@@ -11,12 +11,11 @@ cargo install decapod
 
 decapod validate
 decapod docs ingest
-decapod session acquire
-decapod rpc --op agent.init
 decapod workspace status
 decapod todo add "<task>"
 decapod todo claim --id <task-id>
-decapod workspace ensure
+decapod workspace ensure              # Creates git worktree (default)
+# OR: decapod workspace ensure --container  # Uses podman for full isolation
 cd .decapod/workspaces/<your-worktree>
 decapod rpc --op context.resolve
 ```
@@ -26,16 +25,10 @@ decapod rpc --op context.resolve
 ```bash
 # Discover what this binary actually supports in this repo
 decapod capabilities --format json
-decapod data schema --deterministic
 
 # Resolve scoped governance context before implementation
-decapod docs search --query "<problem>" --op <op> --path <path> --tag <tag>
+decapod docs search --query "<problem>"
 decapod rpc --op context.scope --params '{"query":"<problem>","limit":8}'
-
-# Convergence/proof surfaces (call when relevant)
-decapod workunit init --task-id <task-id> --intent-ref <intent>
-decapod govern capsule query --topic "<topic>" --scope interfaces --task-id <task-id>
-decapod eval plan --task-set-id <id> --task-ref <task-id> --model-id <model> --prompt-hash <hash> --judge-model-id <judge> --judge-prompt-hash <hash>
 ```
 
 ## Golden Rules (Non-Negotiable)
@@ -65,9 +58,7 @@ These invariants are directly enforced by tests. Violations will cause CI failur
 - ✅ Constitution ingestion gate: `decapod docs ingest`
 - ✅ Workspace status gate: `decapod workspace status`
 - ✅ Claim-before-work gate: `decapod todo claim --id <task-id>`
-- ✅ Session auth gate: `DECAPOD_SESSION_PASSWORD`
-- ✅ Workspace gate: Docker git workspaces
-- ✅ Privilege gate: request elevated permissions before Docker/container workspace commands
+- ✅ Workspace gate: git worktrees (default) or podman containers (`--container`)
 
 ## Universal Agent Operating Contract
 
@@ -126,17 +117,24 @@ bd close <id>         # Complete work
 **MANDATORY WORKFLOW:**
 
 1. **File issues for remaining work** - Create beads for anything that needs follow-up
-2. **Run quality gates** (if code changed) - `node test-chargen.js` must pass
+2. **Run quality gates** (if code changed):
+   - `node test-chargen.js` must pass (235 tests)
+   - `decapod validate` must pass (from worktree branch, NOT main)
 3. **Update issue status** - `bd close <id>` finished work, `bd update <id>` in-progress items
-4. **PUSH TO REMOTE** - This is MANDATORY:
+4. **Merge and push** - This is MANDATORY:
    ```bash
-   git pull --rebase
-   bd dolt commit   # Commit beads database changes
-   bd dolt push     # Push beads to Dolt remote (if configured)
+   # If working in a decapod worktree:
+   decapod workspace publish          # Creates merge-ready patch
+   cd /home/worldofgeese/Downloads/projects/mythras-chargen  # Back to main repo
+   git merge <worktree-branch>        # Merge the feature
+   
+   # Always:
+   bd dolt commit                     # Commit beads database changes
+   bd dolt push                       # Push beads to Dolt remote (if configured)
    git push origin main && git push paphos main  # BOTH remotes
-   git status  # MUST show "up to date with origin"
+   git status                         # MUST show "up to date with origin"
    ```
-5. **Clean up** - Clear stashes, prune remote branches
+5. **Clean up** - Clear stashes, prune remote branches, remove finished worktrees
 6. **Verify** - All changes committed AND pushed to BOTH remotes
 7. **Hand off** - Provide context for next session
 
@@ -145,6 +143,7 @@ bd close <id>         # Complete work
 - NEVER stop before pushing - that leaves work stranded locally
 - NEVER say "ready to push when you are" - YOU must push
 - If push fails, resolve and retry until it succeeds
+- All implementation work happens in decapod worktrees, NOT on main directly
 <!-- END BEADS INTEGRATION -->
 
 ---
