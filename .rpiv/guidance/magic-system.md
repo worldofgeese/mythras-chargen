@@ -25,7 +25,7 @@ Auto-classifies 94 cults into magic system types by inspecting their `cultSkills
 
 ### Fallback Behavior
 
-If no recognized magic skills are found in `cultSkills[]`, the function defaults to `theist` — this is the most common cult type in Glorantha and a safe assumption for cults whose data may be incomplete.
+If no recognized magic skills are found in `cultSkills[]`, the function defaults to `theist` — the most common cult type in Glorantha and a safe assumption for cults with incomplete data.
 
 ### Hybrid Cults
 
@@ -39,9 +39,9 @@ CULTS_DATA (94 cults, each with cultSkills[])
     → {primary, types[], isHybrid}
       → selectCult() branches on primary type
         → theist: miracle picker (MIRACLES_DATA)
-        → animist: spirit picker (spirits-raw/)
+        → animist: spirit picker (STARTING_SPIRITS)
         → sorcery: sorcery spell picker (SORCERY_SPELLS)
-        → mysticism: mysticism abilities
+        → mysticism: (blocked — no cult data uses these signals yet)
 ```
 
 ## Picker Pattern (Miracle/Sorcery/Spirit Selection)
@@ -55,13 +55,17 @@ All magic pickers share the same structural pattern:
 
 ### Limits by Magic Type
 
-| Type | Limit Formula | State Field |
-|------|--------------|-------------|
-| Theist (miracles) | POW / 2 (rounded up) | `CharacterData.miracles[]` |
-| Sorcery (spells) | INT / 4 (rounded up) | `CharacterData.sorcerySpells[]` |
-| Animist (spirits) | min(3, CHA / 2) | `CharacterData.boundSpirits[]` |
-| Folk Magic | 3 (cultural step) | `CharacterData.folkMagicSpells[]` |
-| Career Folk Magic | 2 (career step) | `CharacterData.careerFolkMagic[]` |
+| Type | Limit | Source | State Field |
+|------|-------|--------|-------------|
+| Theist (miracles) | POW / 2 (Initiate devotional pool) | ADR-0007, Hannu house rule | `CharacterData.miracles[]` |
+| Sorcery (spells) | 3 (Dedicated rank starting spells) | Mythras Core p.165: starting = Invocation/20 ≈ 3 | `CharacterData.sorcerySpells[]` |
+| Animist (spirits) | CHA / 2 (Spirit Worshipper rank) | Mythras Core p.136: "Limits to Bound Spirits" table | `CharacterData.boundSpirits[]` |
+| Folk Magic | 3 (cultural step) | AiG chargen rules | `CharacterData.folkMagicSpells[]` |
+| Career Folk Magic | 2 (career step) | AiG chargen rules | `CharacterData.careerFolkMagic[]` |
+
+**Important notes on formulas:**
+- Sorcery limit: Mythras Core p.165 says memorisation max = INT, starting spells = Invocation/20. In AiG adaptation, Invocation → Rune Affinity. Starting Rune Affinity ≈ 60%, so 60/20 = 3.
+- Spirit slots: Mythras Core p.136 table gives CHA/4 (Follower), CHA/2 (Spirit Worshipper), CHA×3/4 (Shaman), CHA (High Shaman). Chargen uses CHA/2 for Spirit Worshipper rank.
 
 ### Toggle Functions
 
@@ -78,19 +82,38 @@ Each function:
 3. Calls `App.saveToLocalStorage()`
 4. Optionally calls `App.renderCurrentStep()` for UI refresh
 
+## Orphan Cleanup on Cult Change
+
+When a user deselects a cult or switches cults, `selectCult()` clears magic arrays that don't apply to the new cult type:
+- `CharacterData.boundSpirits = []` if new cult isn't animist
+- `CharacterData.sorcerySpells = []` if new cult isn't sorcery
+
+This prevents stale magic selections from persisting across cult changes.
+
 ## Data Sources
 
 | Data Constant | Source | Content |
 |---------------|--------|---------|
 | `MIRACLES_DATA` | `references/theism-miracles.json` | Per-cult miracle lists with rune tags |
-| `SORCERY_SPELLS` | `references/mythras-raw/sorcery.json` | 34 spells from Mythras Core |
-| `FOLK_MAGIC_DESCRIPTIONS` | `references/aig-raw/folk-magic-aig.json` | 45 AiG folk magic spells |
-| Spirit data | `references/spirits-raw/` | Spirit types from Monster Island, Bird in Hand |
+| `SORCERY_SPELLS` | `references/mythras-raw/sorcery.json` | 53 spells from Mythras Core p.166-177 |
+| `FOLK_MAGIC_DESCRIPTIONS` | `references/aig-raw/folk-magic-aig.json` | 45 AiG folk magic spell descriptions |
+| `STARTING_SPIRITS` | `references/spirits-raw/bird-in-hand.json`, `monster-island.json` | 14 spirit templates with POW/CHA/abilities |
 
-## House Rules (ADR-002)
+## House Rules (ADR-002 + ADR-0007)
 
-The rune affinity casting model is a house rule from Hannu (GM). Key points:
-- Devotional pool size = POW/2
-- Rune affinities (primary/secondary/tertiary) affect casting difficulty
-- Documented in `docs/adr/002-rune-affinity-casting-model.md`
-- Source artifact: Discord conversation screenshots in `docs/adr/artifacts/`
+### ADR-002: Rune Affinity Casting Model
+- Rune affinities replace Exhort skill for casting
+- Devotional pool size = POW/2 (Initiate), POW×0.75 (Acolyte), POW (Priest)
+- Source: `docs/adr/002-rune-affinity-casting-model.md`
+
+### ADR-0007: Hannu House Rules (comprehensive)
+- Full casting rules table (5 situations for rune access)
+- Spell learning: 5 XP rolls + 500L + 1 week training
+- Spell categories: Any Rune / Normal Cult / Subservient Cult / Associated Cult
+- Sorcery adaptation: Invocation → Rune Affinity, Shaping → Law Rune (AiG p.60)
+- Rank progression: Proven 1yr, Overseer 1yr, Leader 2yr
+- Source: `docs/adr/ADR-0007-hannu-house-rules.md`
+
+## Mysticism Status
+
+Path of Immanent Mastery is the only candidate for mysticism mechanics. Its current published one-pager (notesfrompavis.blog, 2014) uses **theist mechanics** (Exhort, Devotion, Theist Miracles heading). Hannu confirmed (Discord 2026-05-17) it "might" use mysticism in future but hasn't published updated mechanics. The `detectCultType()` mysticism regex is implemented but no cult currently triggers it.

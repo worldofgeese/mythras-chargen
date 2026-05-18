@@ -18,6 +18,7 @@ Source PDF/Book
 3. **House rules are artifacts.** Screenshots, conversation logs stored in `docs/adr/artifacts/`.
 4. **OCR must be human-verified.** Noisy output needs manual review. Rune prefix codes are error-prone.
 5. **No LLM hallucination.** Uncertain values → `null` or `"UNVERIFIED"`, never a guess.
+6. **Vision-mode verification.** Use PDF→image→vision to verify data, especially stats, formulas, and descriptions. pdftotext misses table formatting.
 
 ## Directory Structure
 
@@ -40,7 +41,7 @@ references/
 │   └── ...                     # ~15 pantheon directories
 ├── cults-upstream/             # Original PDF sources (Notes from Pavis)
 ├── mythras-raw/                # Mythras Core rulebook extractions
-│   ├── sorcery.json            # 34 sorcery spells
+│   ├── sorcery.json            # 53 sorcery spells (verified against Core p.166-177)
 │   ├── animism.json            # Animism rules
 │   ├── mysticism.json          # Mysticism rules
 │   ├── careers-detail.json     # Career definitions
@@ -69,7 +70,13 @@ references/
 
 ## Verification Status
 
-Reference files may contain a `verified: false` field indicating the data has not yet been human-checked against the source PDF. Unverified data should be treated as potentially containing OCR errors.
+Reference files contain verification metadata:
+- `verified: true` — data human-checked against source PDF via vision mode
+- `verified: false` — data not yet verified, may contain OCR or LLM errors
+- `verified_at` — date of verification
+- `verification_notes` — method used (e.g., "Vision-verified against PDF pages 166-177")
+
+Unverified data should be treated as potentially wrong. The Phase 2 sprint found 12/34 sorcery descriptions were hallucinated by the LLM — always verify against the actual book.
 
 ## Adding New Data
 
