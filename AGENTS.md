@@ -184,19 +184,76 @@ python3 -m http.server 8765 &
 agent-browser open http://127.0.0.1:8765/index.html
 ```
 
-#### Step 1: Build Character
+#### Step 1: Build Character Step-by-Step (Wizard Mode — Visual Verification)
 
-Clear previous state and build via Agent API:
+Clear previous state:
 ```bash
 agent-browser eval "localStorage.clear(); 'cleared'"
 agent-browser open http://127.0.0.1:8765/index.html
-agent-browser eval "JSON.stringify(App.agent.buildCharacter({...}))"
 ```
 
-Verify the response: `{"success":true, "errors":[]}`.
-If errors, fix the spec and rebuild.
+Set each step via the Agent API, render the wizard step, screenshot, and verify with vision mode:
 
-Then verify magic state:
+**Step 1 (Concept):**
+```bash
+agent-browser eval "JSON.stringify(App.agent.setStep(1, {name:'...', concept:'...'}))"
+agent-browser eval "App.renderCurrentStep(); 'rendered'"
+agent-browser screenshot /tmp/wizard-step1.png
+```
+→ `read /tmp/wizard-step1.png` — Verify: Name and concept fields populated. "Step 1 of 13" visible.
+
+**Step 2 (Characteristics):**
+```bash
+agent-browser eval "JSON.stringify(App.agent.setStep(2, {characteristics:{STR:14,CON:12,...}}))"
+agent-browser eval "App.renderCurrentStep(); 'rendered'"
+agent-browser screenshot /tmp/wizard-step2.png
+```
+→ `read /tmp/wizard-step2.png` — Verify: All 7 stats shown in input fields. "Points Remaining: 0 / 75" (green).
+
+**Step 4 (Culture + Homeland):**
+```bash
+agent-browser eval "JSON.stringify(App.agent.setStep(4, {culture:'...', homeland:'...'}))"
+agent-browser eval "App.renderCurrentStep(); 'rendered'"
+agent-browser screenshot /tmp/wizard-step4.png
+```
+→ `read /tmp/wizard-step4.png` — Verify: Culture selected/highlighted. Homeland dropdown shows correct value.
+
+**Step 5 (Cultural Skills + Rune Affinities + Folk Magic):**
+```bash
+agent-browser eval "JSON.stringify(App.agent.setStep(5, {culturalSkills:{...}, runeAffinities:{primary:'...',secondary:'...',tertiary:'...'}, folkMagicSpells:[...]}))"
+agent-browser eval "App.renderCurrentStep(); 'rendered'"
+agent-browser screenshot /tmp/wizard-step5.png
+```
+→ `read /tmp/wizard-step5.png` — Verify: Skill allocation table with points. Rune affinity dropdowns. Folk magic spells checked.
+
+**Step 8 (Career + Professional Skills):**
+```bash
+agent-browser eval "JSON.stringify(App.agent.setStep(8, {career:'...', professionalSkills:[...]}))"
+agent-browser eval "App.renderCurrentStep(); 'rendered'"
+agent-browser screenshot /tmp/wizard-step8.png
+```
+→ `read /tmp/wizard-step8.png` — Verify: Career selected. Professional skills listed/checked.
+
+**Step 9 (Cult + Magic Picker) — CRITICAL:**
+```bash
+agent-browser eval "JSON.stringify(App.agent.setStep(9, {cult:'...', miracles:[...]}))"
+agent-browser eval "App.renderCurrentStep(); 'rendered'"
+agent-browser screenshot /tmp/wizard-step9.png
+```
+→ `read /tmp/wizard-step9.png` — Verify the CORRECT picker appears:
+  - **Theist cult**: Miracle picker with checkboxes, devotional pool counter, rune tags on miracles
+  - **Animist cult**: Spirit picker with spirit names/types/abilities, slot counter (CHA/2)
+  - **Sorcery cult**: Sorcery spell picker with 53 spells, 3-spell limit counter
+  - **Hybrid cult**: BOTH pickers visible (scroll down if needed, take second screenshot)
+
+**Step 9 — scroll to bottom of picker (if hybrid or long list):**
+```bash
+agent-browser eval "window.scrollBy(0, 600); 'scroll'"
+agent-browser screenshot /tmp/wizard-step9-bottom.png
+```
+→ `read /tmp/wizard-step9-bottom.png` — Verify: Full picker rendered. Selection count matches expected.
+
+After all steps, verify the build completed:
 ```bash
 agent-browser eval "JSON.stringify(App.agent.getMagicState())"
 ```
