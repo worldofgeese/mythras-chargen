@@ -166,10 +166,36 @@ All game data MUST trace to a source PDF with page citation. Flow: `PDF → refe
 4. Bird in Hand / Monster Island — Spirit stat blocks
 5. Hannu house rules (ADR-0007) — Rune casting, devotional pool, rank progression
 
+### Data Ingestion Pipeline
+
+When processing new/updated cult PDFs from Hannu:
+
+```bash
+# Self-contained scripts (PEP 723 + uv — no pip install needed)
+./scripts/ingest-cults.py path/to/cult.pdf     # Test single PDF
+./scripts/ingest-cults.py --diff               # Show changes vs existing
+./scripts/ingest-cults.py --write              # Update reference JSONs
+./scripts/ingest-cults.py --validate           # Verify no garbled entries
+./scripts/build-rune-map.py                    # Rebuild glyph mapping
+```
+
+Pipeline architecture:
+- `pdfplumber` detects `GloranthaCoreRunes` font at character level
+- Rune glyphs separated from body text deterministically (no regex heuristics)
+- `references/rune-glyph-map.json` maps 41 font glyphs → rune names
+- Subcult format (`SubcultName(s):MiracleName`) handled correctly
+- Comma-within-parentheses preserved (`Command (Specific Species, Monster or Spirit)`)
+
+After ingesting new data, propagate to `index.html`:
+1. Update `MIRACLES_DATA` inline constant from reference JSONs
+2. Run `node test-chargen.js` — all 235 tests must pass
+3. Browser-verify the affected cult's miracle picker
+
 ### Testing Requirements
 
 1. `node test-chargen.js` — 235 unit tests. MUST pass before any commit.
 2. `node test-agent-api.mjs` — 30 E2E assertions via agent-browser. Run after magic system changes.
+3. `./scripts/ingest-cults.py --validate` — reference data integrity check.
 
 ### Mandatory Browser Acceptance Testing
 
