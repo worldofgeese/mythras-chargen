@@ -1285,7 +1285,20 @@ const PLACEHOLDER_PATTERNS = [
 function isPlaceholderSkill(skillName) {
   if (!skillName) return false;
   if (KNOWN_CONCRETE_SPECIALIZATIONS.has(skillName)) return false;
-  return PLACEHOLDER_PATTERNS.some(p => p.test(skillName));
+  // Check if it matches a placeholder pattern
+  if (!PLACEHOLDER_PATTERNS.some(p => p.test(skillName))) return false;
+  // Also check isAnySkill in case it's "Lore (any)" etc
+  if (isAnySkill(skillName)) return true;
+  // Extract the specialization text — if it's a short concrete name
+  // (not a descriptive phrase), it's already resolved
+  const match = skillName.match(/\((.+)\)$/);
+  if (match) {
+    const spec = match[1];
+    // Descriptive placeholders tend to be long or contain certain words
+    const isDescriptive = /\b(any|specific|primary|secondary|regional|pantheon|cult|totem|tradition|school|grimoire|physiological|alchemical|hunting|shipboard|catch)\b/i.test(spec);
+    if (!isDescriptive) return false; // Already resolved to a concrete name
+  }
+  return true;
 }
 
 /** Unified check: does this skill need disambiguation? (ADR-004 + ADR-005) */
@@ -7812,11 +7825,12 @@ App.agent.setStep = function(step, data) {
             errors.push('Each professional skill must have a name');
             continue;
           }
-          const parsed = parsePlaceholderSkill(skillName);
-          if (parsed && (typeof ps === 'object' && ps.specialization)) {
+          const needsResolving = needsDisambiguation(skillName);
+          if (needsResolving && (typeof ps === 'object' && ps.specialization)) {
             // Resolve placeholder: "Lore (Regional or Specific Species)" + "Plants" → "Lore (Plants)"
+            const parsed = parsePlaceholderSkill(skillName);
             resolvedPro.push(`${parsed.category} (${ps.specialization})`);
-          } else if (parsed && !ps.specialization) {
+          } else if (needsResolving && !(typeof ps === 'object' && ps.specialization)) {
             // Placeholder without specialization — error
             errors.push(`Skill "${skillName}" requires a specialization`);
           } else {
