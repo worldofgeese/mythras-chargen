@@ -19848,6 +19848,398 @@ App.agent.buildCharacter = function(spec) {
 };
 
 // =============================================================================
+// AGENT API — Phase 1: State Query (getUIState, getMagicState)
+// =============================================================================
+
+/**
+ * App.agent.getUIState() — Returns current UI state as structured JSON.
+ * Useful for agent-browser tests to verify which step/mode is active.
+ */
+App.agent.getUIState = function() {
+  try {
+    return {
+      currentStep: App.currentStep || 1,
+      mode: App.mode || 'wizard',
+      cultPickerVisible: !!document.querySelector('.miracle-picker, .spirit-picker, .sorcery-picker'),
+      miraclePickerVisible: !!document.querySelector('.miracle-picker'),
+      spiritPickerVisible: !!document.querySelector('.spirit-picker'),
+      sorceryPickerVisible: !!document.querySelector('.sorcery-picker'),
+      errors: Array.from(document.querySelectorAll('.error, .validation-error')).map(el => el.textContent.trim()),
+      toasts: Array.from(document.querySelectorAll('.toast, .notification')).map(el => el.textContent.trim())
+    };
+  } catch (e) {
+    return {error: e.message};
+  }
+};
+
+/**
+ * App.agent.getMagicState() — Returns all magic-system state in one call.
+ * Replaces manual CharacterData access in eval expressions.
+ */
+App.agent.getMagicState = function() {
+  try {
+    const cult = CULTS_DATA.find(c => c.name === CharacterData.cult);
+    const cultType = cult ? detectCultType(cult) : {primary: null, types: [], isHybrid: false};
+    const cultMiracles = (CharacterData.cult && MIRACLES_DATA.cults[CharacterData.cult])
+      ? MIRACLES_DATA.cults[CharacterData.cult].miracles || []
+      : [];
+
+    return {
+      cultType: cultType,
+      cultName: CharacterData.cult || null,
+      devotionalPool: CharacterData.devotionalPool || 0,
+      boundSpiritSlots: CharacterData.boundSpiritSlots || 0,
+      sorceryResource: CharacterData.sorceryResource || 0,
+      selectedMiracles: [...(CharacterData.miracles || [])],
+      selectedSpells: [...(CharacterData.sorcerySpells || [])],
+      selectedSpirits: [...(CharacterData.boundSpirits || [])],
+      availableMiracles: cultMiracles,
+      availableSpells: SORCERY_SPELLS.map(s => s[0]),
+      availableSpirits: STARTING_SPIRITS.map(s => s.name),
+      limits: {
+        miracles: CharacterData.devotionalPool || 0,
+        sorcerySpells: 3,
+        spirits: CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2)
+      }
+    };
+  } catch (e) {
+    return {error: e.message};
+  }
+};
+
+// =============================================================================
+// AGENT API — Phase 2: Granular Action API
+// =============================================================================
+
+/**
+ * App.agent.selectCult(name) — Select a cult, triggering resource pool calculation.
+ * Returns the resulting magic state.
+ */
+App.agent.selectCult = function(name) {
+  try {
+    const cult = CULTS_DATA.find(c => c.name === name);
+    if (!cult) return {success: false, error: `Cult '${name}' not found`};
+    CharacterData.cult = name;
+    const cultType = detectCultType(cult);
+    CharacterData.cultType = cultType;
+    // Calculate resource pools
+    if (cultType.types.includes('theist')) {
+      CharacterData.devotionalPool = Math.floor(CharacterData.characteristics.POW / 2);
+    } else {
+      CharacterData.devotionalPool = 0;
+    }
+    if (cultType.types.includes('animist')) {
+      CharacterData.boundSpiritSlots = Math.floor(CharacterData.characteristics.CHA / 2);
+    } else {
+      CharacterData.boundSpiritSlots = 0;
+    }
+    if (cultType.types.includes('sorcery')) {
+      CharacterData.sorceryResource = CharacterData.characteristics.POW || 0;
+    } else {
+      CharacterData.sorceryResource = 0;
+    }
+    // Clear previous selections on cult change
+    CharacterData.miracles = [];
+    CharacterData.sorcerySpells = [];
+    CharacterData.boundSpirits = [];
+    App.saveToLocalStorage();
+    return {success: true, magicState: App.agent.getMagicState()};
+  } catch (e) {
+    return {success: false, error: e.message};
+  }
+};
+
+/**
+ * App.agent.toggleSpell(name) — Toggle a sorcery spell on/off.
+ * Enforces the 3-spell limit for Dedicated rank.
+ */
+App.agent.toggleSpell = function(name) {
+  try {
+    const spells = CharacterData.sorcerySpells || [];
+    const idx = spells.indexOf(name);
+    if (idx >= 0) {
+      spells.splice(idx, 1);
+    } else {
+      const limit = 3;
+      if (spells.length >= limit) {
+        return {success: false, error: `Spell limit reached (${limit}). Deselect one first.`, selected: spells.length, limit};
+      }
+      // Verify spell exists
+      if (!SORCERY_SPELLS.find(s => s[0] === name)) {
+        return {success: false, error: `Spell '${name}' not found in SORCERY_SPELLS`};
+      }
+      spells.push(name);
+    }
+    CharacterData.sorcerySpells = spells;
+    App.saveToLocalStorage();
+    return {success: true, selected: spells.length, limit: 3, spells: [...spells]};
+  } catch (e) {
+    return {success: false, error: e.message};
+  }
+};
+
+/**
+ * App.agent.toggleSpirit(name) — Toggle a bound spirit on/off.
+ * Enforces the CHA/2 slot limit.
+ */
+App.agent.toggleSpirit = function(name) {
+  try {
+    const spirits = CharacterData.boundSpirits || [];
+    const idx = spirits.findIndex(s => (typeof s === 'string' ? s : s.name) === name);
+    if (idx >= 0) {
+      spirits.splice(idx, 1);
+    } else {
+      const limit = CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2);
+      if (spirits.length >= limit) {
+        return {success: false, error: `Spirit slot limit reached (${limit}). Unbind one first.`, used: spirits.length, limit};
+      }
+      // Verify spirit exists
+      const spiritData = STARTING_SPIRITS.find(s => s.name === name);
+      if (!spiritData) {
+        return {success: false, error: `Spirit '${name}' not found in STARTING_SPIRITS`};
+      }
+      spirits.push({name: spiritData.name, type: spiritData.type, ability: spiritData.ability});
+    }
+    CharacterData.boundSpirits = spirits;
+    App.saveToLocalStorage();
+    const limit = CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2);
+    return {success: true, used: spirits.length, limit, spirits: spirits.map(s => typeof s === 'string' ? s : s.name)};
+  } catch (e) {
+    return {success: false, error: e.message};
+  }
+};
+
+/**
+ * App.agent.selectMiracle(name) — Toggle a miracle on/off.
+ * Enforces the devotionalPool limit.
+ */
+App.agent.selectMiracle = function(name) {
+  try {
+    const miracles = CharacterData.miracles || [];
+    const idx = miracles.indexOf(name);
+    if (idx >= 0) {
+      miracles.splice(idx, 1);
+    } else {
+      const limit = CharacterData.devotionalPool || 0;
+      if (miracles.length >= limit) {
+        return {success: false, error: `Miracle limit reached (${limit}). Deselect one first.`, selected: miracles.length, limit};
+      }
+      // Verify miracle is available for this cult
+      const cultMiracles = (CharacterData.cult && MIRACLES_DATA.cults[CharacterData.cult])
+        ? MIRACLES_DATA.cults[CharacterData.cult].miracles || []
+        : [];
+      if (cultMiracles.length > 0 && !cultMiracles.includes(name)) {
+        return {success: false, error: `Miracle '${name}' not available for cult '${CharacterData.cult}'`};
+      }
+      miracles.push(name);
+    }
+    CharacterData.miracles = miracles;
+    App.saveToLocalStorage();
+    return {success: true, selected: miracles.length, limit: CharacterData.devotionalPool || 0, miracles: [...miracles]};
+  } catch (e) {
+    return {success: false, error: e.message};
+  }
+};
+
+/**
+ * App.agent.allocateSkill(skillMap, pool) — Allocate points to skills.
+ * pool: 'cultural' | 'career' | 'bonus'
+ * skillMap: {skillName: points, ...}
+ */
+App.agent.allocateSkill = function(skillMap, pool) {
+  try {
+    if (!['cultural', 'career', 'bonus'].includes(pool)) {
+      return {success: false, error: `Invalid pool '${pool}'. Must be 'cultural', 'career', or 'bonus'.`};
+    }
+    const target = pool === 'cultural' ? 'culturalSkills'
+                 : pool === 'career' ? 'careerSkills'
+                 : 'bonusSkills';
+    CharacterData[target] = {...(CharacterData[target] || {}), ...skillMap};
+    App.saveToLocalStorage();
+    return {success: true, pool, allocated: CharacterData[target]};
+  } catch (e) {
+    return {success: false, error: e.message};
+  }
+};
+
+/**
+ * App.agent.setCharacteristic(name, value) — Set a single characteristic.
+ */
+App.agent.setCharacteristic = function(name, value) {
+  try {
+    const valid = ['STR', 'CON', 'SIZ', 'DEX', 'INT', 'POW', 'CHA'];
+    if (!valid.includes(name)) {
+      return {success: false, error: `Invalid characteristic '${name}'. Must be one of: ${valid.join(', ')}`};
+    }
+    value = Number(value);
+    if (isNaN(value) || value < 3 || value > 18) {
+      return {success: false, error: `Value must be 3-18, got: ${value}`};
+    }
+    CharacterData.characteristics[name] = value;
+    App.saveToLocalStorage();
+    return {success: true, characteristics: {...CharacterData.characteristics}};
+  } catch (e) {
+    return {success: false, error: e.message};
+  }
+};
+
+// =============================================================================
+// AGENT API — Phase 3: Assertion Helpers
+// =============================================================================
+
+/**
+ * App.agent.assertSpellCount() — Returns spell selection state for assertions.
+ */
+App.agent.assertSpellCount = function() {
+  const spells = CharacterData.sorcerySpells || [];
+  return {
+    selected: spells.length,
+    limit: 3,
+    spells: [...spells],
+    withinLimit: spells.length <= 3
+  };
+};
+
+/**
+ * App.agent.assertSpiritSlots() — Returns spirit binding state for assertions.
+ */
+App.agent.assertSpiritSlots = function() {
+  const spirits = CharacterData.boundSpirits || [];
+  const limit = CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2);
+  return {
+    used: spirits.length,
+    limit: limit,
+    spirits: spirits.map(s => typeof s === 'string' ? s : s.name),
+    withinLimit: spirits.length <= limit
+  };
+};
+
+/**
+ * App.agent.assertMiracles() — Returns miracle selection state for assertions.
+ */
+App.agent.assertMiracles = function() {
+  const miracles = CharacterData.miracles || [];
+  const limit = CharacterData.devotionalPool || 0;
+  const cultMiracles = (CharacterData.cult && MIRACLES_DATA.cults[CharacterData.cult])
+    ? MIRACLES_DATA.cults[CharacterData.cult].miracles || []
+    : [];
+  return {
+    selected: miracles.length,
+    limit: limit,
+    miracles: [...miracles],
+    available: cultMiracles.length,
+    withinLimit: miracles.length <= limit,
+    allValid: miracles.every(m => cultMiracles.length === 0 || cultMiracles.includes(m))
+  };
+};
+
+/**
+ * App.agent.assertPlayMode() — Returns Play Mode state for assertions.
+ * Checks that key sections render correctly.
+ */
+App.agent.assertPlayMode = function() {
+  try {
+    const sections = [];
+    const errors = [];
+    const missing = [];
+
+    // Check identity
+    if (CharacterData.name) sections.push('identity');
+    else missing.push('identity (no name set)');
+
+    // Check characteristics
+    const chars = CharacterData.characteristics || {};
+    const charSum = Object.values(chars).reduce((a, b) => a + b, 0);
+    if (charSum > 0) sections.push('characteristics');
+    else missing.push('characteristics (all zero)');
+
+    // Check skills
+    const skills = App.compileAllSkills ? App.compileAllSkills() : [];
+    if (skills.length > 0) sections.push('skills');
+    else missing.push('skills (none compiled)');
+
+    // Check magic
+    const magicState = App.agent.getMagicState();
+    if (magicState.cultName) {
+      sections.push('magic');
+      if (magicState.cultType.types.includes('theist') && magicState.selectedMiracles.length === 0) {
+        errors.push('Theist cult but no miracles selected');
+      }
+      if (magicState.cultType.types.includes('animist') && magicState.selectedSpirits.length === 0) {
+        errors.push('Animist cult but no spirits bound');
+      }
+      if (magicState.cultType.types.includes('sorcery') && magicState.selectedSpells.length === 0) {
+        errors.push('Sorcery cult but no spells selected');
+      }
+    } else {
+      missing.push('magic (no cult selected)');
+    }
+
+    // Check combat
+    if ((CharacterData.combatStyles || []).length > 0) sections.push('combat');
+    else missing.push('combat (no combat styles)');
+
+    // Check culture/career
+    if (CharacterData.culture) sections.push('culture');
+    else missing.push('culture');
+    if (CharacterData.career) sections.push('career');
+    else missing.push('career');
+
+    return {
+      ready: missing.length === 0 && errors.length === 0,
+      sections,
+      errors,
+      missing
+    };
+  } catch (e) {
+    return {ready: false, sections: [], errors: [e.message], missing: ['unknown (exception)']};
+  }
+};
+
+// =============================================================================
+// AGENT API — Phase 4: Event Log
+// =============================================================================
+
+App.agent._eventLog = [];
+
+/**
+ * App.agent.getEventLog() — Returns the agent action event log.
+ * Each entry: {action, args, timestamp, result}
+ */
+App.agent.getEventLog = function() {
+  return [...App.agent._eventLog];
+};
+
+/**
+ * App.agent.clearEventLog() — Clear the event log.
+ */
+App.agent.clearEventLog = function() {
+  App.agent._eventLog = [];
+  return {cleared: true};
+};
+
+// Wrap existing agent methods to auto-log
+(function() {
+  const methodsToLog = ['selectCult', 'toggleSpell', 'toggleSpirit', 'selectMiracle',
+                        'allocateSkill', 'setCharacteristic', 'setStep', 'next', 'prev', 'buildCharacter'];
+  methodsToLog.forEach(function(method) {
+    const original = App.agent[method];
+    if (!original) return;
+    App.agent[method] = function() {
+      const args = Array.from(arguments);
+      const result = original.apply(this, args);
+      App.agent._eventLog.push({
+        action: method,
+        args: args.length <= 2 ? args : [args[0], '...'],
+        timestamp: new Date().toISOString(),
+        success: result && result.success !== undefined ? result.success : true
+      });
+      return result;
+    };
+  });
+})();
+
+// =============================================================================
 // INITIALIZATION
 // =============================================================================
 

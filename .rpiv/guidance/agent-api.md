@@ -1,79 +1,150 @@
-# Agent API (`App.agent.*`)
+# Agent API Reference
 
-## Purpose
+## Overview
 
-Programmatic interface for AI agents (and tests) to build characters without DOM interaction. Located at index.html lines 19050–19770.
+`App.agent` provides a programmatic interface for AI agents (via `agent-browser eval`) to build characters, query state, and verify correctness — without DOM scraping or fragile CSS selectors.
 
-## API Surface
+## State Query API
 
-### `App.agent.getState()` → object
-
+### `App.agent.getState()`
 Returns the full compiled character state as plain JSON. Never throws.
 
-Fields include: `step`, `name`, `concept`, `culture`, `homeland`, `characteristics`, `attributes`, `career`, `cult`, `miracles`, `devotionalPool`, `socialClass`, `skills` (compiled with totals), `passions`, `folkMagicSpells`, `careerFolkMagic`, `runeAffinities`, `culturalSkills`, `careerSkills`, `bonusSkills`, `selectedProfessionalSkills`, `combatStyles`, `age`, `gender`, `startingMoney`, `equipment`, `weapons`, `armor`.
-
-### `App.agent.getOptions(step)` → object
-
-Returns valid choices for a given step, filtered by current character state.
-
-| Step | Returns |
-|------|---------|
-| 4 | `{cultures: [{name, type, homelands, startingMoney}]}` |
-| 5 | `{standardSkills, professionalSkills, folkMagicOptions, runes, combatStyles}` |
-| 6 | `{passions}` |
-| 7 | `{ageTable}` |
-| 8 | `{careers, filteredForCulture}` |
-| 9 | `{primaryCults, secondaryCults, note}` |
-| 10 | `{careerSkills, folkMagicOptions}` |
-| 11 | `{totalPoints, maxPerSkill}` |
-| 12 | `{socialClassTable, cultureType}` |
-
-### `App.agent.getValidation()` → object
-
-Returns `{valid, errors[], step}` — wraps `App.getValidationState()`.
-
-### `App.agent.setStep(step, data)` → `{success, errors[], state}`
-
-Sets character data for a single step. Validates before applying — on failure, state is unchanged.
-
-**Validation constraints by step:**
-- Step 2 (Characteristics): Sum must equal 75
-- Step 5 (Cultural Skills): Must allocate exactly 100 points
-- Step 10 (Career Skills): Must allocate exactly 100 points
-- Step 11 (Bonus Skills): Must allocate exactly 150 or 200 points (age-dependent)
-
-### `App.agent.buildCharacter(spec)` → `{success, errors[], character?, failedStep?}`
-
-Builds a complete character in one call. The `spec` object has keys `step1` through `step12`, each containing the data for that step.
-
 ```js
-const result = App.agent.buildCharacter({
-  step1: { name: "Vargast", concept: "Storm warrior" },
-  step2: { STR: 14, CON: 12, SIZ: 13, DEX: 11, INT: 10, POW: 8, CHA: 7 },
-  step4: { culture: "Sartarite (Heortling)", homeland: "Boldhome" },
-  step5: { culturalSkills: {...}, folkMagic: [...], runes: {...} },
-  step8: { career: "Warrior" },
-  step9: { cult: "Orlanth" },
-  step10: { careerSkills: {...} },
-  step11: { bonusSkills: {...} },
-  step12: { /* social class */ }
-});
+const state = App.agent.getState();
+// → {step, name, concept, culture, homeland, characteristics, attributes,
+//    career, cult, miracles, devotionalPool, skills, passions, folkMagicSpells,
+//    runeAffinities, culturalSkills, careerSkills, bonusSkills, combatStyles, ...}
 ```
 
-**Behavior:**
-- Iterates steps 1–12 sequentially
-- Calls `App.agent.setStep()` for each step with data
-- Step 3 is auto-calculated (skipped)
-- Steps without data in spec are skipped (optional steps like 6, 7)
-- On first failure: returns immediately with error and `failedStep`
-- On success: switches to Play Mode, returns final state
+### `App.agent.getUIState()`
+Returns current UI state — which step/mode is active, what pickers are visible.
 
-**Error format:** Errors are human-readable strings (e.g., "Character name is required", "Characteristics must sum to 75").
+```js
+const ui = App.agent.getUIState();
+// → {currentStep, mode, cultPickerVisible, miraclePickerVisible,
+//    spiritPickerVisible, sorceryPickerVisible, errors[], toasts[]}
+```
 
-## Testing
+### `App.agent.getMagicState()`
+Returns all magic-system state in one call. Replaces manual `CharacterData` access.
 
-- `test-agent-api.mjs` — 30 E2E assertions using playwright-cli
-  - Opens browser, navigates to app, calls `App.agent.buildCharacter()` with 4 different character specs
-  - Verifies magic system mechanics (miracles, sorcery, spirits)
-  - Self-manages browser lifecycle (open/close)
-  - Requires: `python3 -m http.server 8765 --directory .`
+```js
+const magic = App.agent.getMagicState();
+// → {cultType, cultName, devotionalPool, boundSpiritSlots, sorceryResource,
+//    selectedMiracles[], selectedSpells[], selectedSpirits[],
+//    availableMiracles[], availableSpells[], availableSpirits[],
+//    limits: {miracles, sorcerySpells, spirits}}
+```
+
+### `App.agent.getValidation()`
+Returns current validation state from `App.getValidationState()`.
+
+### `App.agent.getOptions(step)`
+Returns valid choices for a given step, filtered by current character state.
+
+## Granular Action API
+
+### `App.agent.selectCult(name)`
+Select a cult, triggering resource pool calculation. Clears previous magic selections.
+
+```js
+App.agent.selectCult('Orlanth');
+// → {success: true, magicState: {...}}
+```
+
+### `App.agent.toggleSpell(name)`
+Toggle a sorcery spell on/off. Enforces the 3-spell limit.
+
+```js
+App.agent.toggleSpell('Animate');
+// → {success: true, selected: 1, limit: 3, spells: ['Animate']}
+```
+
+### `App.agent.toggleSpirit(name)`
+Toggle a bound spirit on/off. Enforces the CHA/2 slot limit.
+
+```js
+App.agent.toggleSpirit('Whulla');
+// → {success: true, used: 1, limit: 4, spirits: ['Whulla']}
+```
+
+### `App.agent.selectMiracle(name)`
+Toggle a miracle on/off. Enforces the devotionalPool limit.
+
+```js
+App.agent.selectMiracle('Shield');
+// → {success: true, selected: 1, limit: 6, miracles: ['Shield']}
+```
+
+### `App.agent.allocateSkill(skillMap, pool)`
+Allocate points to skills. `pool`: 'cultural' | 'career' | 'bonus'.
+
+```js
+App.agent.allocateSkill({Athletics: 15, Brawn: 10}, 'cultural');
+// → {success: true, pool: 'cultural', allocated: {Athletics: 15, Brawn: 10}}
+```
+
+### `App.agent.setCharacteristic(name, value)`
+Set a single characteristic (STR/CON/SIZ/DEX/INT/POW/CHA). Value must be 3-18.
+
+```js
+App.agent.setCharacteristic('STR', 14);
+// → {success: true, characteristics: {STR: 14, ...}}
+```
+
+## Bulk Operations
+
+### `App.agent.setStep(step, data)`
+Set character data for a given step. Validates before applying.
+
+### `App.agent.buildCharacter(spec)`
+Build a complete character in one call. Spec is `{step1: {...}, step2: {...}, ...}`.
+
+### `App.agent.next()` / `App.agent.prev()`
+Navigate wizard steps forward/backward.
+
+## Assertion Helpers
+
+### `App.agent.assertSpellCount()`
+```js
+// → {selected: 3, limit: 3, spells: [...], withinLimit: true}
+```
+
+### `App.agent.assertSpiritSlots()`
+```js
+// → {used: 2, limit: 4, spirits: [...], withinLimit: true}
+```
+
+### `App.agent.assertMiracles()`
+```js
+// → {selected: 6, limit: 6, miracles: [...], available: 12, withinLimit: true, allValid: true}
+```
+
+### `App.agent.assertPlayMode()`
+```js
+// → {ready: true, sections: ['identity','characteristics','skills','magic','combat','culture','career'],
+//    errors: [], missing: []}
+```
+
+## Event Log
+
+### `App.agent.getEventLog()`
+Returns all agent API calls with timestamps and success status.
+
+```js
+// → [{action: 'selectCult', args: ['Orlanth'], timestamp: '...', success: true}, ...]
+```
+
+### `App.agent.clearEventLog()`
+Clear the event log.
+
+## Usage from agent-browser
+
+```bash
+# One-liner: query magic state after building a character
+agent-browser eval "JSON.stringify(App.agent.getMagicState())"
+
+# Granular actions (no IIFE needed)
+agent-browser eval "JSON.stringify(App.agent.selectCult('Orlanth'))"
+agent-browser eval "JSON.stringify(App.agent.assertMiracles())"
+```
