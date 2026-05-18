@@ -1,0 +1,62 @@
+{
+  "_meta": {
+    "description": "Definitive mapping of GloranthaCoreRunes font glyphs to Gloranthan rune names",
+    "source": "Font analysis of 213 cult one-pager PDFs (Notes from Pavis 2019 v5.2)",
+    "created": "2026-05-18",
+    "method": "pdfplumber character-level font detection + cross-reference with MIRACLES_DATA rune_code_legend"
+  },
+  "glyphs": {
+    "t": { "rune": "Death", "count": 404 },
+    "o": { "rune": "Darkness", "count": 368 },
+    "e": { "rune": "Earth", "count": 361 },
+    "l": { "rune": "Harmony", "count": 307 },
+    "b": { "rune": "Beast", "count": 277 },
+    "B": { "rune": "Beast", "count": 268, "note": "Alternate Beast glyph" },
+    "g": { "rune": "Air", "count": 264 },
+    "s": { "rune": "Movement", "count": 238 },
+    "j": { "rune": "Disorder", "count": 236 },
+    "w": { "rune": "Water", "count": 214 },
+    "x": { "rune": "Stasis", "count": 209, "note": "Opposing rune indicator" },
+    "y": { "rune": "Fire/Sky", "count": 182 },
+    "i": { "rune": "Illusion", "count": 157 },
+    "R": { "rune": "Magic", "count": 147, "note": "Magic/Rune symbol" },
+    "c": { "rune": "Communication", "count": 146, "note": "Also used as part of Air compound" },
+    "4": { "rune": "Element-All", "count": 139, "note": "Multi-element/Any indicator" },
+    "W": { "rune": "Magic", "count": 107, "note": "Alternate Magic/Rune Power glyph" },
+    "p": { "rune": "Fire/Sky", "count": 90, "note": "Alternate Fire/Sky glyph" },
+    "a": { "rune": "Spirit", "count": 41, "note": "Spirit/Animism rune" },
+    "u": { "rune": "Undead", "count": 40, "note": "Undead/Hunger rune" },
+    "h": { "rune": "Harmony", "count": 40, "note": "Alternate Harmony glyph" },
+    "S": { "rune": "Magic", "count": 28, "note": "Spell/Sorcery rune" },
+    "O": { "rune": "Darkness", "count": 16, "note": "Alternate Darkness glyph" },
+    "X": { "rune": "Stasis", "count": 12, "note": "Alternate Stasis glyph" },
+    "K": { "rune": "Earth", "count": 10, "note": "Alternate Earth glyph" },
+    "L": { "rune": "Harmony", "count": 5, "note": "Alternate Harmony" },
+    "P": { "rune": "Fire/Sky", "count": 4, "note": "Alternate Fire/Sky" },
+    "d": { "rune": "Darkness", "count": 3, "note": "Alternate Darkness" },
+    "Q": { "rune": "Cold", "count": 1, "note": "Cold/Ice rune (Himile)" }
+  },
+  "ignored_in_rune_font": {
+    " ": "Space character rendered in rune font — formatting artifact, ignore",
+    ",": "Comma rendered in rune font — formatting artifact, ignore",
+    ".": "Period rendered in rune font — formatting artifact or separator, ignore",
+    "?": "Unknown glyph — appears before cult names, likely a formatting artifact or ligature indicator",
+    "/": "Separator rendered in rune font — ignore",
+    "*": "Wildcard/special indicator — rare",
+    "(cid:0)": "Missing glyph placeholder — ignore",
+    "1": "Numeric in rune font — likely Moon phase indicator",
+    "2": "Numeric in rune font — likely Moon phase indicator",
+    "3": "Numeric in rune font — likely Moon phase indicator",
+    "5": "Numeric in rune font — likely Moon phase indicator",
+    "7": "Numeric in rune font — likely special indicator"
+  },
+  "compound_rules": {
+    "description": "Multiple consecutive rune glyphs indicate the miracle uses multiple/any runes",
+    "rules": [
+      "Single glyph → that specific rune",
+      "2 glyphs → both runes (dual-rune miracle)",
+      "3+ glyphs → 'Any' rune (available to all affinities)",
+      "If all 5+ element runes present → 'Any'"
+    ]
+  }
+}
