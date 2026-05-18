@@ -2494,11 +2494,34 @@ const App = {
     // Step 9: Cult Selection - validate miracle selection if cult chosen
     if (step === 9) {
       if (CharacterData.cult) {
-        const maxMiracles = CharacterData.devotionalPool || 0;
-        const selectedMiracles = (CharacterData.miracles || []).length;
-        if (maxMiracles > 0 && selectedMiracles < maxMiracles) {
-          this.showToast(`Please select all your initiate miracles (${selectedMiracles}/${maxMiracles} chosen)`, 'error');
-          return false;
+        const cultType = detectCultType(CharacterData.cult);
+        
+        // Theist: must select miracles up to devotional pool
+        if (cultType.includes('theist')) {
+          const maxMiracles = CharacterData.devotionalPool || 0;
+          const selectedMiracles = (CharacterData.miracles || []).length;
+          if (maxMiracles > 0 && selectedMiracles < maxMiracles) {
+            this.showToast(`Please select all your initiate miracles (${selectedMiracles}/${maxMiracles} chosen)`, 'error');
+            return false;
+          }
+        }
+        
+        // Animist: must select at least 1 bound spirit
+        if (cultType.includes('animist')) {
+          const selectedSpirits = (CharacterData.boundSpirits || []).length;
+          if (selectedSpirits === 0) {
+            this.showToast('Please select at least one bound spirit', 'error');
+            return false;
+          }
+        }
+        
+        // Sorcery: must select at least 1 spell (max 3)
+        if (cultType.includes('sorcery')) {
+          const selectedSpells = (CharacterData.sorcerySpells || []).length;
+          if (selectedSpells === 0) {
+            this.showToast('Please select at least one sorcery spell', 'error');
+            return false;
+          }
         }
       }
     }
@@ -4053,6 +4076,13 @@ App.resolveCareerCombatStyle = function(styleString) {
 App.selectCareer = function(careerName) {
   const career = CAREERS_DATA.find(c => c.name === careerName);
   if (career) {
+    // Warn if changing career after allocating skill points
+    const hasAllocatedPoints = Object.values(CharacterData.careerSkills || {}).some(v => v > 0);
+    if (hasAllocatedPoints && CharacterData.career && CharacterData.career !== careerName) {
+      if (!confirm(`Changing career will reset your career skill allocation. Continue?`)) {
+        return;
+      }
+    }
     CharacterData.career = careerName;
     CharacterData.careerSkills = {};
     CharacterData.careerFolkMagic = [];
