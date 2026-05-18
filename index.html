@@ -4396,6 +4396,7 @@ App.renderStep9 = function() {
     ` : ''}
 
     <div id="cult-requirement-warning"></div>
+    <div id="cult-skill-boost-panel"></div>
     <div id="cult-passion-notice" style="margin-top: 10px;"></div>
     <div id="miracle-picker" style="margin-top: 20px; display: none;"></div>
   `;
@@ -4667,12 +4668,16 @@ App.selectCult = function(cultName) {
               <div style="margin-top: 6px; line-height: 1.6;"><strong>Cult skills:</strong> ${skillList}</div>
             </div>`;
           }
+          // Render the skill boost panel for skills below 50%
+          App.renderCultSkillBoostPanel(skillDetails);
         }, 0);
       } else {
         // Clear warning if requirements are met
         setTimeout(() => {
           const warning = document.getElementById('cult-requirement-warning');
           if (warning) warning.innerHTML = '';
+          const boostPanel = document.getElementById('cult-skill-boost-panel');
+          if (boostPanel) boostPanel.innerHTML = '';
         }, 0);
       }
     }
@@ -4739,6 +4744,82 @@ App.selectCult = function(cultName) {
 
   this.saveToLocalStorage();
   this.renderCurrentStep();
+};
+
+App.renderCultSkillBoostPanel = function(skillDetails) {
+  const panel = document.getElementById('cult-skill-boost-panel');
+  if (!panel) return;
+
+  // Only show skills below 50% that could be boosted
+  const boostableSkills = skillDetails.filter(s => !s.qualifies);
+  if (boostableSkills.length === 0) {
+    panel.innerHTML = '';
+    return;
+  }
+
+  // Calculate bonus budget
+  const ageCategory = Calc.getAgeCategory(CharacterData.age);
+  const totalBonusPool = ageCategory ? ageCategory.bonusPoints : 150;
+  const spentBonus = Object.values(CharacterData.bonusSkills || {}).reduce((a, b) => a + b, 0);
+  const remainingBonus = totalBonusPool - spentBonus;
+  const maxPerSkill = ageCategory ? ageCategory.maxPerSkill : 15;
+
+  panel.innerHTML = `
+    <div style="background: #e8f4fd; border: 1px solid #b8daff; padding: 12px; margin: 8px 0; border-radius: 4px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <strong style="font-size: 13px;">⬆ Quick Boost — Raise Cult Skills (from bonus pool)</strong>
+        <span style="font-size: 12px; color: #004085;">Bonus points remaining: <strong>${remainingBonus}</strong> / ${totalBonusPool}</span>
+      </div>
+      <p style="font-size: 11px; color: #555; margin: 0 0 10px 0;">Allocate bonus points here to meet initiation requirements. These count toward your Step 11 budget (max ${maxPerSkill} per skill).</p>
+      <div id="cult-boost-skills" style="display: grid; gap: 6px;"></div>
+    </div>
+  `;
+
+  const boostContainer = panel.querySelector('#cult-boost-skills');
+  if (!boostContainer) return;
+  boostableSkills.forEach(skill => {
+    const currentBonus = (CharacterData.bonusSkills || {})[skill.name] || 0;
+    const needed = 50 - skill.value;
+    const maxForThis = Math.min(maxPerSkill - currentBonus, remainingBonus + currentBonus, needed + 5); // allow going slightly above 50
+
+    const row = document.createElement('div');
+    row.style.cssText = 'display: grid; grid-template-columns: 1fr auto auto auto; gap: 8px; align-items: center; padding: 4px 0; border-bottom: 1px solid #d4edfa;';
+    row.innerHTML = `
+      <div style="font-size: 12px;">
+        <strong>${skill.name}</strong>
+        <span style="color: #666; margin-left: 4px;">${skill.value}% → needs ${needed > 0 ? needed : 0} more</span>
+      </div>
+      <button onclick="App.adjustCultBoost('${skill.name.replace(/'/g, "\\'")}', -1)" 
+        style="width:26px; height:26px; border:1px solid #ccc; background:#fff; border-radius:3px; cursor:pointer; font-size:14px;"
+        ${currentBonus <= 0 ? 'disabled' : ''}>−</button>
+      <span style="font-size: 13px; font-weight: 600; min-width: 20px; text-align: center;">${currentBonus}</span>
+      <button onclick="App.adjustCultBoost('${skill.name.replace(/'/g, "\\'")}', 1)"
+        style="width:26px; height:26px; border:1px solid #ccc; background:#fff; border-radius:3px; cursor:pointer; font-size:14px;"
+        ${currentBonus >= maxPerSkill || remainingBonus <= 0 ? 'disabled' : ''}>+</button>
+    `;
+    boostContainer.appendChild(row);
+  });
+};
+
+App.adjustCultBoost = function(skillName, delta) {
+  if (!CharacterData.bonusSkills) CharacterData.bonusSkills = {};
+  const current = CharacterData.bonusSkills[skillName] || 0;
+  const ageCategory = Calc.getAgeCategory(CharacterData.age);
+  const maxPerSkill = ageCategory ? ageCategory.maxPerSkill : 15;
+  const totalBonusPool = ageCategory ? ageCategory.bonusPoints : 150;
+  const spentBonus = Object.values(CharacterData.bonusSkills).reduce((a, b) => a + b, 0);
+  const remainingBonus = totalBonusPool - spentBonus;
+
+  const newValue = current + delta;
+  if (newValue < 0 || newValue > maxPerSkill) return;
+  if (delta > 0 && remainingBonus <= 0) return;
+
+  CharacterData.bonusSkills[skillName] = newValue;
+  if (newValue === 0) delete CharacterData.bonusSkills[skillName];
+
+  this.saveToLocalStorage();
+  // Re-trigger the cult selection to refresh the warning and boost panel
+  this.selectCult(CharacterData.cult);
 };
 
 App.renderMiraclePicker = function(container) {
