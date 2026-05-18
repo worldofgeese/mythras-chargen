@@ -18357,8 +18357,8 @@ App.renderPlayCombat = function() {
     stylesHtml = '<h3>Combat Styles</h3>' + combatStyles.map(cs => `
       <div class="combat-style-card">
         <div class="style-name">${cs.name} (${computeFullStyleSkill(cs)}%)</div>
-        <div class="style-detail"><strong>Weapons:</strong> ${(cs.weapons || []).join(', ')}</div>
-        <div class="style-detail"><strong>Traits:</strong> ${(cs.traits || []).join(', ')}</div>
+        <div class="style-detail"><strong>Weapons:</strong> ${Array.isArray(cs.weapons) ? cs.weapons.join(', ') : (cs.weapons || 'None')}</div>
+        <div class="style-detail"><strong>Traits:</strong> ${Array.isArray(cs.traits) ? cs.traits.join(', ') : (cs.traits || 'None')}</div>
         ${cs.notes ? `<div class="style-detail"><em>${cs.notes}</em></div>` : ''}
       </div>
     `).join('');
