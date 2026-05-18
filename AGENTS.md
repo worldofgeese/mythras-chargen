@@ -125,18 +125,19 @@ bd close <id>         # Complete work
 
 **MANDATORY WORKFLOW:**
 
-1. **File issues for remaining work** - Create issues for anything that needs follow-up
-2. **Run quality gates** (if code changed) - Tests, linters, builds
-3. **Update issue status** - Close finished work, update in-progress items
+1. **File issues for remaining work** - Create beads for anything that needs follow-up
+2. **Run quality gates** (if code changed) - `node test-chargen.js` must pass
+3. **Update issue status** - `bd close <id>` finished work, `bd update <id>` in-progress items
 4. **PUSH TO REMOTE** - This is MANDATORY:
    ```bash
    git pull --rebase
-   bd dolt push
-   git push
+   bd dolt commit   # Commit beads database changes
+   bd dolt push     # Push beads to Dolt remote (if configured)
+   git push origin main && git push paphos main  # BOTH remotes
    git status  # MUST show "up to date with origin"
    ```
 5. **Clean up** - Clear stashes, prune remote branches
-6. **Verify** - All changes committed AND pushed
+6. **Verify** - All changes committed AND pushed to BOTH remotes
 7. **Hand off** - Provide context for next session
 
 **CRITICAL RULES:**
