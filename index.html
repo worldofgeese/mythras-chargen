@@ -4170,16 +4170,14 @@ App.toggleProfessionalSkill = function(skillName, checked) {
     // Remove the original placeholder name from the array
     CharacterData.selectedProfessionalSkills = CharacterData.selectedProfessionalSkills.filter(s => s !== skillName);
     delete CharacterData.careerSkills[skillName];
-    // Also remove any resolved version (if user unchecks a placeholder skill that was already resolved)
-    const parsed = parsePlaceholderSkill(skillName);
-    if (parsed) {
-      CharacterData.selectedProfessionalSkills = CharacterData.selectedProfessionalSkills.filter(s => {
-        if (s.startsWith(parsed.category + ' (') && !needsDisambiguation(s)) {
-          delete CharacterData.careerSkills[s];
-          return false;
-        }
-        return true;
-      });
+    // Also remove THIS placeholder's resolved version using the disambiguation map
+    const disambigMap = CharacterData._disambiguationMap || {};
+    const mapKey = `career:${skillName}`;
+    const resolvedForThis = disambigMap[mapKey];
+    if (resolvedForThis) {
+      CharacterData.selectedProfessionalSkills = CharacterData.selectedProfessionalSkills.filter(s => s !== resolvedForThis);
+      delete CharacterData.careerSkills[resolvedForThis];
+      delete disambigMap[mapKey];
     }
   }
 
@@ -4193,14 +4191,17 @@ App.resolveProfessionalSkill = function(originalName, specialization) {
   if (!parsed) return;
   const resolvedName = `${parsed.category} (${specialization.trim()})`;
 
+  // Track disambiguation mapping
+  if (!CharacterData._disambiguationMap) CharacterData._disambiguationMap = {};
+  const mapKey = `career:${originalName}`;
+  const previousResolution = CharacterData._disambiguationMap[mapKey];
+
   // Remove old placeholder key from careerSkills
   delete CharacterData.careerSkills[originalName];
-  // Also remove any previous resolution for this placeholder
-  Object.keys(CharacterData.careerSkills).forEach(k => {
-    if (k.startsWith(parsed.category + ' (') && !needsDisambiguation(k) && k !== resolvedName) {
-      delete CharacterData.careerSkills[k];
-    }
-  });
+  // Remove ONLY this placeholder's previous resolution (not other Craft entries)
+  if (previousResolution && previousResolution !== resolvedName) {
+    delete CharacterData.careerSkills[previousResolution];
+  }
 
   // Store under resolved name
   CharacterData.careerSkills[resolvedName] = 0;
@@ -4209,17 +4210,16 @@ App.resolveProfessionalSkill = function(originalName, specialization) {
   const idx = CharacterData.selectedProfessionalSkills.indexOf(originalName);
   if (idx !== -1) {
     CharacterData.selectedProfessionalSkills[idx] = resolvedName;
-  } else {
-    // The original might already have been resolved to a different specialization — find and update it
-    const prevResolved = CharacterData.selectedProfessionalSkills.findIndex(s =>
-      s.startsWith(parsed.category + ' (') && !needsDisambiguation(s)
-    );
-    if (prevResolved !== -1) {
-      // Remove old resolved careerSkills entry
-      delete CharacterData.careerSkills[CharacterData.selectedProfessionalSkills[prevResolved]];
-      CharacterData.selectedProfessionalSkills[prevResolved] = resolvedName;
+  } else if (previousResolution) {
+    // Find the previous resolution in the array and update it
+    const prevIdx = CharacterData.selectedProfessionalSkills.indexOf(previousResolution);
+    if (prevIdx !== -1) {
+      CharacterData.selectedProfessionalSkills[prevIdx] = resolvedName;
     }
   }
+
+  // Record in disambiguation map
+  CharacterData._disambiguationMap[mapKey] = resolvedName;
 
   this.saveToLocalStorage();
   // Do NOT re-render here — the input already shows the correct value and re-rendering
