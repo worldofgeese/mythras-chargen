@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 /**
- * E2E Test: Agent API via Playwright-CLI
+ * E2E Test: Agent API via agent-browser
  * Builds 4 characters (AE1-AE4) using App.agent.buildCharacter(), verifies magic system mechanics.
  *
  * Prerequisites:
  *   python3 -m http.server 8765 --directory . &
+ *   agent-browser (installed globally via: npm i -g agent-browser && agent-browser install)
  *
  * Run:
  *   node test-agent-api.mjs
  *
- * The script opens/closes its own browser session via playwright-cli.
+ * The script opens/closes its own browser session via agent-browser.
  */
 
 import { execSync } from 'child_process';
@@ -20,7 +21,7 @@ let passed = 0;
 let failed = 0;
 
 function openBrowser() {
-  execSync('playwright-cli open http://127.0.0.1:8765/index.html', {
+  execSync('agent-browser open http://127.0.0.1:8765/index.html', {
     encoding: 'utf8',
     timeout: 30000
   });
@@ -28,12 +29,12 @@ function openBrowser() {
 
 function closeBrowser() {
   try {
-    execSync('playwright-cli close', { encoding: 'utf8', timeout: 10000 });
+    execSync('agent-browser close', { encoding: 'utf8', timeout: 10000 });
   } catch (e) { /* ignore */ }
 }
 
 function evalPage(expr) {
-  const result = execSync(`playwright-cli --raw eval "${expr.replace(/"/g, '\\"')}"`, {
+  const result = execSync(`agent-browser eval "${expr.replace(/"/g, '\\"')}"`, {
     encoding: 'utf8',
     timeout: 15000
   }).trim();
@@ -64,7 +65,7 @@ function assert(condition, msg) {
 }
 
 function reload() {
-  execSync('playwright-cli goto http://127.0.0.1:8765/index.html', {
+  execSync('agent-browser open http://127.0.0.1:8765/index.html', {
     encoding: 'utf8',
     timeout: 15000
   });
