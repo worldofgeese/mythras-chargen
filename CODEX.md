@@ -1,5 +1,12 @@
 # Codex Agent Entrypoint
 
+<!-- decapod-validator-entrypoint
+includes .decapod CLI-only jail rule
+includes Docker workspace mandate
+includes elevated-permissions mandate
+includes per-agent session password mandate
+-->
+
 Router pointer: `core/DECAPOD.md`. Read it with `decapod docs show core/DECAPOD.md`; use `decapod docs show docs/...` for embedded docs.
 
 Jail rule: .decapod access is CLI-only; never mutate `.decapod/*` directly.
@@ -17,10 +24,3 @@ Core constitution ingestion mandate: run `decapod docs ingest`.
 Version update step: `cargo install decapod`.
 
 Follow `AGENTS.md` for the repository operating contract.
-
-<!-- decapod-validator-entrypoint
-includes .decapod CLI-only jail rule
-includes Docker workspace mandate
-includes elevated-permissions mandate
-includes per-agent session password mandate
--->
