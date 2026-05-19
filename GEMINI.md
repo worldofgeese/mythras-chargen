@@ -9,13 +9,13 @@ includes per-agent session password mandate
 
 Router pointer: `core/DECAPOD.md`. Read it with `decapod docs show core/DECAPOD.md`; use `decapod docs show docs/...` for embedded docs.
 
-Jail rule: .decapod access is CLI-only; never mutate `.decapod/*` directly.
+Jail rule: .decapod access is CLI-only; .decapod files are accessed only via decapod CLI.
 
-Docker workspace mandate: docker git workspaces live under `.decapod/workspaces` through `decapod workspace ensure --container`.
+Docker workspace mandate: Docker git workspaces live under `.decapod/workspaces` through `decapod workspace ensure --container`.
 
-Elevated-permissions mandate: request elevated permissions before docker/container workspace commands.
+Elevated-permissions mandate: request elevated permissions before Docker/container workspace commands.
 
-Per-agent session password mandate: use a dedicated `decapod_session_password`.
+Per-agent session password mandate: use a dedicated `DECAPOD_SESSION_PASSWORD`.
 
 Claim-before-work mandate and task creation mandate: run `decapod todo add "<task>"` and `decapod todo claim --id <task-id>`.
 
