@@ -1,6 +1,6 @@
 # Adventures in Glorantha — Character Generator
 
-Single-file HTML character generator for [Adventures in Glorantha](https://www.thedesignmechanism.com/) (Mythras engine). Covers the full 12-step creation process with all 5 magic systems, provides Play Mode for at-the-table use, and exports single-page PDF character sheets.
+Single-file HTML character generator for [Adventures in Glorantha](https://www.thedesignmechanism.com/) (Mythras engine). Covers the full 13-step creation process with all 5 magic systems, provides Play Mode for at-the-table use, and exports single-page PDF character sheets.
 
 ## Quick Start
 
@@ -9,7 +9,7 @@ Open `index.html` in any browser. No server, no build step, no dependencies.
 ## Features
 
 ### Character Creation
-- **12-step wizard** — characteristics, culture, career, skills, combat, cult, magic, equipment
+- **13-step wizard** — characteristics, culture, career, skills, combat, cult, magic, equipment, review
 - **94 Gloranthan cults** — Storm, Yelm, Lunar, Praxian, Darkness, Chaos, Independent pantheons from [Notes from Pavis](https://notesfrompavis.blog/) one-pagers
 - **8 cultures** — Sartarite, Praxian, Esrolian, Lunar Heartland, Lunar Provincial, Balazaring, Telmori, God Forgot
 - **Auto-detection** — cult type detected from skill patterns (theist, animist, sorcery, hybrid)

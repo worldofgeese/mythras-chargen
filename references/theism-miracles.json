@@ -2,6 +2,15 @@
   "source": "Notes from Pavis Cult One-Pagers (2019 v5.2)",
   "extracted_at": "2026-05-02",
   "extraction_method": "pdfminer.six from individual cult PDFs",
+  "page_citations": {
+    "miracle_lists": "Notes from Pavis Cult One-Pagers (2019 v5.2), individual cult PDF miracle lists, p.1 unless the source PDF spans p.1-2",
+    "reviewed_corrections": {
+      "Orlanth": "CultOnePagers2019/Storm/Orlanth.pdf, p.1",
+      "Blackfang": "CultOnePagers2019/Independent/Blackfang.pdf, p.1",
+      "Yelmalio": "CultOnePagers2019/Yelm/Yelmalio.pdf, p.1-2",
+      "Arkat": "CultOnePagers2019/Arkat/Arkat.pdf, p.1"
+    }
+  },
   "rune_code_legend": {
     "y": "Fire/Sky",
     ".y": "Fire/Sky",
@@ -135,7 +144,7 @@
           "rune_inferred": true
         },
         {
-          "name": ".4egow Vision",
+          "name": "Vision",
           "runes": [
             "Earth"
           ],
@@ -351,7 +360,7 @@
           "rank": "runelord"
         },
         {
-          "name": "Ke Asrelia's Cavern",
+          "name": "Asrelia's Cavern",
           "runes": [
             "Any"
           ],
@@ -763,15 +772,6 @@
             "Harmony"
           ],
           "source": "associate",
-          "rank": "initiate"
-        },
-        {
-          "name": ":",
-          "runes": [
-            "Any"
-          ],
-          "source": "associated",
-          "from_cult": "Return to associate cult temple and resacrifice Eiritha",
           "rank": "initiate"
         },
         {
@@ -1202,22 +1202,13 @@
           "rank": "initiate"
         },
         {
-          "name": "(a):l Restore Vision",
+          "name": "Restore Vision",
           "runes": [
             "Fire/Sky"
           ],
           "source": "normal",
           "rank": "initiate",
           "rune_inferred": true
-        },
-        {
-          "name": ":",
-          "runes": [
-            "Any"
-          ],
-          "source": "associated",
-          "from_cult": "Ernalda",
-          "rank": "initiate"
         },
         {
           "name": "Earthwarm",
@@ -1269,7 +1260,7 @@
           "rank": "runelord"
         },
         {
-          "name": "(a): Know Dragon Weakness",
+          "name": "Know Dragon Weakness",
           "runes": [
             "Fire/Sky"
           ],
@@ -1571,7 +1562,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Bless Grave(Lay to Rest)",
+          "name": "Bless Grave (Lay to Rest)",
           "runes": [
             "Death"
           ],
@@ -1589,7 +1580,7 @@
           "rank": "initiate"
         },
         {
-          "name": "(a): Gnome To Gargoyle",
+          "name": "Gnome To Gargoyle",
           "runes": [
             "Earth"
           ],
@@ -1607,7 +1598,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Orlanth Adventurous:Shield",
+          "name": "Shield",
           "runes": [
             "Air"
           ],
@@ -1623,7 +1614,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Flamal:px Bear Fruit",
+          "name": "Bear Fruit",
           "runes": [
             "Any"
           ],
@@ -1632,7 +1623,7 @@
           "rune_inferred": true
         },
         {
-          "name": "Magasta:gw Breathe Air",
+          "name": "Breathe Air",
           "runes": [
             "Water"
           ],
@@ -1649,15 +1640,6 @@
           "rune_inferred": true
         },
         {
-          "name": "Yelm:",
-          "runes": [
-            "Any"
-          ],
-          "source": "subservient",
-          "rank": "initiate",
-          "rune_inferred": true
-        },
-        {
           "name": "Cloud Clear",
           "runes": [
             "Air"
@@ -1666,7 +1648,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Yelmalio:.y Catseye",
+          "name": "Catseye",
           "runes": [
             "Fire/Sky"
           ],
@@ -1827,7 +1809,7 @@
           "rank": "initiate"
         },
         {
-          "name": "RW Multispell",
+          "name": "Multispell",
           "runes": [
             "Any"
           ],
@@ -1845,16 +1827,7 @@
           "associate_cult": "Murderer"
         },
         {
-          "name": "Fool:hj Group Laughter",
-          "runes": [
-            "Any"
-          ],
-          "source": "subservient",
-          "rank": "initiate",
-          "rune_inferred": true
-        },
-        {
-          "name": "Lightbringer:",
+          "name": "Group Laughter",
           "runes": [
             "Any"
           ],
@@ -1871,16 +1844,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Fright:jo Panic",
-          "runes": [
-            "Any"
-          ],
-          "source": "subservient",
-          "rank": "initiate",
-          "rune_inferred": true
-        },
-        {
-          "name": "Dismembered:",
+          "name": "Panic",
           "runes": [
             "Any"
           ],
@@ -1897,7 +1861,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Truant:i Hallucinate",
+          "name": "Hallucinate",
           "runes": [
             "Illusion"
           ],
@@ -1905,7 +1869,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Murderer:jt Strike",
+          "name": "Strike",
           "runes": [
             "Any"
           ],
@@ -1914,7 +1878,7 @@
           "rune_inferred": true
         },
         {
-          "name": "Glutton:jo Swallow",
+          "name": "Swallow",
           "runes": [
             "Any"
           ],
@@ -1923,7 +1887,7 @@
           "rune_inferred": true
         },
         {
-          "name": "Lie:i Illusion",
+          "name": "Illusion",
           "runes": [
             "Disorder"
           ],
@@ -1931,7 +1895,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Lightbringer:hi Clever Tongue",
+          "name": "Clever Tongue",
           "runes": [
             "Illusion"
           ],
@@ -1939,7 +1903,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Seducer:i Create Wine",
+          "name": "Create Wine",
           "runes": [
             "Illusion"
           ],
@@ -1979,7 +1943,7 @@
           "rank": "runelord"
         },
         {
-          "name": "Fool:i Create Feast",
+          "name": "Create Feast",
           "runes": [
             "Illusion"
           ],
@@ -1987,7 +1951,7 @@
           "rank": "runelord"
         },
         {
-          "name": "Thief:i Invisibility",
+          "name": "Invisibility",
           "runes": [
             "Illusion"
           ],
@@ -2580,7 +2544,7 @@
           "rank": "runelord"
         },
         {
-          "name": "Bo Transform Self",
+          "name": "Transform Self",
           "runes": [
             "Beast"
           ],
@@ -2686,15 +2650,6 @@
           "rank": "initiate"
         },
         {
-          "name": "Flight  Eurmal(a):hi Clever Tongue",
-          "runes": [
-            "Air"
-          ],
-          "source": "associated",
-          "from_cult": "Orlanth",
-          "rank": "initiate"
-        },
-        {
           "name": "Excommunication",
           "runes": [
             "Harmony"
@@ -2782,7 +2737,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Dismiss Elemental  ij Divination Block",
+          "name": "Dismiss Elemental / Divination Block",
           "runes": [
             "Illusion"
           ],
@@ -3049,15 +3004,6 @@
           "rune_inferred": true
         },
         {
-          "name": ":",
-          "runes": [
-            "Any"
-          ],
-          "source": "associated",
-          "from_cult": "Return to associate cult temple and resacrifice Yelm",
-          "rank": "initiate"
-        },
-        {
           "name": "Summon Salamander",
           "runes": [
             "Fire/Sky"
@@ -3212,7 +3158,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Bless Grave(Lay to Rest)",
+          "name": "Bless Grave (Lay to Rest)",
           "runes": [
             "Death"
           ],
@@ -3319,15 +3265,6 @@
           "rune_inferred": true
         },
         {
-          "name": "Flight  Orlanth(a):g Lightning",
-          "runes": [
-            "Air"
-          ],
-          "source": "associated",
-          "from_cult": "Return to associate cult temple and resacrifice Orlanth",
-          "rank": "initiate"
-        },
-        {
           "name": "Excommunication",
           "runes": [
             "Movement"
@@ -3423,7 +3360,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Bl Draw Beast",
+          "name": "Draw Beast",
           "runes": [
             "Beast"
           ],
@@ -3448,7 +3385,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Bl Beastmaster",
+          "name": "Beastmaster",
           "runes": [
             "Beast"
           ],
@@ -3457,7 +3394,7 @@
           "rune_inferred": true
         },
         {
-          "name": "?B Claws",
+          "name": "B Claws",
           "runes": [
             "Beast"
           ],
@@ -3666,22 +3603,14 @@
           "rank": "initiate"
         },
         {
-          "name": "Orlanth Adventurous:Wo Dark Walk",
+          "name": "Dark Walk",
           "runes": [
             "Any"
           ],
           "source": "subservient",
           "rank": "initiate",
-          "rune_inferred": true
-        },
-        {
-          "name": "Orlanth Rex:",
-          "runes": [
-            "Any"
-          ],
-          "source": "subservient",
-          "rank": "initiate",
-          "rune_inferred": true
+          "rune_inferred": true,
+          "reviewed_correction": true
         },
         {
           "name": "Wegow Command Worshippers",
@@ -3693,15 +3622,79 @@
           "rune_inferred": true
         },
         {
-          "name": "Orlanth Thunderous:gw Cloud Call",
+          "name": "Cloud Call",
           "runes": [
             "Water"
+          ],
+          "source": "subservient",
+          "rank": "initiate",
+          "reviewed_correction": true
+        },
+        {
+          "name": "Flight",
+          "runes": [
+            "Any"
+          ],
+          "source": "subservient",
+          "rank": "initiate",
+          "rune_inferred": true,
+          "reviewed_correction": true
+        },
+        {
+          "name": "Lightning",
+          "runes": [
+            "Air"
+          ],
+          "source": "subservient",
+          "rank": "initiate",
+          "reviewed_correction": true
+        },
+        {
+          "name": "Shield",
+          "runes": [
+            "Air"
           ],
           "source": "subservient",
           "rank": "initiate"
         },
         {
-          "name": "Orlanth Adventurous:4g Flight",
+          "name": "Summon Large Sylph",
+          "runes": [
+            "Air"
+          ],
+          "source": "subservient",
+          "rank": "initiate",
+          "reviewed_correction": true
+        },
+        {
+          "name": "Dismiss Large Air Elemental",
+          "runes": [
+            "Air"
+          ],
+          "source": "subservient",
+          "rank": "initiate",
+          "reviewed_correction": true
+        },
+        {
+          "name": "Leap",
+          "runes": [
+            "Water"
+          ],
+          "source": "subservient",
+          "rank": "initiate",
+          "reviewed_correction": true
+        },
+        {
+          "name": "Mist Cloud",
+          "runes": [
+            "Water"
+          ],
+          "source": "subservient",
+          "rank": "initiate",
+          "reviewed_correction": true
+        },
+        {
+          "name": "Cloud Clear",
           "runes": [
             "Any"
           ],
@@ -3710,106 +3703,63 @@
           "rune_inferred": true
         },
         {
-          "name": "Orlanth Adventurous:g Lightning",
+          "name": "Command Priests",
           "runes": [
             "Air"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "reviewed_correction": true
         },
         {
-          "name": "Orlanth Adventurous:Shield",
+          "name": "Detect Honor",
           "runes": [
             "Air"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "reviewed_correction": true
         },
         {
-          "name": "Orlanth Thunderous:g Summon Large Sylph",
+          "name": "Wind Words",
           "runes": [
             "Air"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "reviewed_correction": true
         },
         {
-          "name": "Orlanth Thunderous:g Dismiss Large Air Elemental",
-          "runes": [
-            "Air"
-          ],
-          "source": "subservient",
-          "rank": "initiate"
-        },
-        {
-          "name": "Orlanth Adventurous:sw Leap",
-          "runes": [
-            "Water"
-          ],
-          "source": "subservient",
-          "rank": "initiate"
-        },
-        {
-          "name": "Orlanth Adventurous:gw Mist Cloud",
-          "runes": [
-            "Water"
-          ],
-          "source": "subservient",
-          "rank": "initiate"
-        },
-        {
-          "name": "Orlanth Thunderous:.g Cloud Clear",
+          "name": "Dark Walk",
           "runes": [
             "Any"
           ],
           "source": "subservient",
           "rank": "initiate",
-          "rune_inferred": true
+          "rune_inferred": true,
+          "reviewed_correction": true
         },
         {
-          "name": "Orlanth Rex:g Command Priests",
-          "runes": [
-            "Air"
-          ],
-          "source": "subservient",
-          "rank": "initiate"
-        },
-        {
-          "name": "Orlanth Rex:g Detect Honor",
-          "runes": [
-            "Air"
-          ],
-          "source": "subservient",
-          "rank": "initiate"
-        },
-        {
-          "name": "Vinga:g Wind Words",
-          "runes": [
-            "Air"
-          ],
-          "source": "subservient",
-          "rank": "initiate"
-        },
-        {
-          "name": "Vinga:Wo Dark Walk",
+          "name": "Flight",
           "runes": [
             "Any"
           ],
           "source": "subservient",
           "rank": "initiate",
-          "rune_inferred": true
+          "rune_inferred": true,
+          "reviewed_correction": true
         },
         {
-          "name": "Vinga:4g Flight",
+          "name": "Lightning",
           "runes": [
-            "Any"
+            "Air"
           ],
           "source": "subservient",
           "rank": "initiate",
-          "rune_inferred": true
+          "reviewed_correction": true
         },
         {
-          "name": "Vinga:g Lightning",
+          "name": "Shield",
           "runes": [
             "Air"
           ],
@@ -3817,36 +3767,31 @@
           "rank": "initiate"
         },
         {
-          "name": "Vinga:Shield",
-          "runes": [
-            "Air"
-          ],
-          "source": "subservient",
-          "rank": "initiate"
-        },
-        {
-          "name": "Vinga:sw Leap",
+          "name": "Leap",
           "runes": [
             "Water"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "reviewed_correction": true
         },
         {
-          "name": "Vinga:gw Mist Cloud",
+          "name": "Mist Cloud",
           "runes": [
             "Water"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "reviewed_correction": true
         },
         {
-          "name": "Vinga:s Fearless",
+          "name": "Fearless",
           "runes": [
             "Movement"
           ],
           "source": "subservient",
-          "rank": "initiate"
+          "rank": "initiate",
+          "reviewed_correction": true
         },
         {
           "name": "Excommunication",
@@ -3933,39 +3878,43 @@
           "rank": "runelord"
         },
         {
-          "name": "Orlanth Adventurous:cg Bless Woad",
+          "name": "Bless Woad",
           "runes": [
             "Air"
           ],
           "source": "subservient",
-          "rank": "runelord"
+          "rank": "runelord",
+          "reviewed_correction": true
         },
         {
-          "name": "Orlanth Adventurous:e Earth Shield",
+          "name": "Earth Shield",
           "runes": [
             "Air"
           ],
           "source": "subservient",
-          "rank": "runelord"
+          "rank": "runelord",
+          "reviewed_correction": true
         },
         {
-          "name": "Orlanth Thunderous:g Thunderbolt",
+          "name": "Thunderbolt",
           "runes": [
             "Air"
           ],
           "source": "subservient",
-          "rank": "runelord"
+          "rank": "runelord",
+          "reviewed_correction": true
         },
         {
-          "name": "Vinga:cg Bless Woad",
+          "name": "Bless Woad",
           "runes": [
             "Air"
           ],
           "source": "subservient",
-          "rank": "runelord"
+          "rank": "runelord",
+          "reviewed_correction": true
         },
         {
-          "name": "Vinga :e Earth Shield",
+          "name": "Earth Shield",
           "runes": [
             "Air"
           ],
@@ -4068,15 +4017,6 @@
           ],
           "source": "associated",
           "from_cult": "Return to associate cult temple and resacrifice Chalana Arroy",
-          "rank": "initiate"
-        },
-        {
-          "name": ":",
-          "runes": [
-            "Any"
-          ],
-          "source": "associated",
-          "from_cult": "Eiritha",
           "rank": "initiate"
         },
         {
@@ -4186,7 +4126,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Bless Grave(Lay to Rest)",
+          "name": "Bless Grave (Lay to Rest)",
           "runes": [
             "Death"
           ],
@@ -4479,15 +4419,6 @@
           "rank": "initiate"
         },
         {
-          "name": "Flight  Storm Bull(a): Face Chaos",
-          "runes": [
-            "Air"
-          ],
-          "source": "associated",
-          "from_cult": "Return to associate cult temple and resacrifice Orlanth",
-          "rank": "initiate"
-        },
-        {
           "name": "Excommunication",
           "runes": [
             "Air"
@@ -4585,15 +4516,6 @@
           "rank": "initiate"
         },
         {
-          "name": ":",
-          "runes": [
-            "Any"
-          ],
-          "source": "associated",
-          "from_cult": "Eiritha",
-          "rank": "initiate"
-        },
-        {
           "name": "Speak To/With Specific Creatures",
           "runes": [
             "Movement"
@@ -4603,7 +4525,7 @@
           "rune_inferred": true
         },
         {
-          "name": "(a):w Summon Undine",
+          "name": "Summon Undine",
           "runes": [
             "Movement"
           ],
@@ -4751,15 +4673,6 @@
           "rank": "initiate"
         },
         {
-          "name": ":",
-          "runes": [
-            "Any"
-          ],
-          "source": "associated",
-          "from_cult": "Return to associate cult temple and resacrifice Eiritha",
-          "rank": "initiate"
-        },
-        {
           "name": "Speak To/With Specific Creatures",
           "runes": [
             "Earth"
@@ -4778,15 +4691,6 @@
           "rank": "initiate"
         },
         {
-          "name": "(a):",
-          "runes": [
-            "Earth"
-          ],
-          "source": "normal",
-          "rank": "initiate",
-          "rune_inferred": true
-        },
-        {
           "name": "Alter Creature",
           "runes": [
             "Beast"
@@ -4795,7 +4699,7 @@
           "rank": "initiate"
         },
         {
-          "name": ".t Cremate Dead",
+          "name": "Cremate Dead",
           "runes": [
             "Any"
           ],
@@ -5096,7 +5000,7 @@
           "rank": "initiate"
         },
         {
-          "name": "?B Claws",
+          "name": "B Claws",
           "runes": [
             "Any"
           ],
@@ -5191,15 +5095,6 @@
           ],
           "source": "associated",
           "from_cult": "Return to associate cult temple and resacrifice Yelm",
-          "rank": "initiate"
-        },
-        {
-          "name": ":",
-          "runes": [
-            "Any"
-          ],
-          "source": "associated",
-          "from_cult": "Yelmalio",
           "rank": "initiate"
         },
         {
@@ -5374,15 +5269,6 @@
           "rank": "initiate"
         },
         {
-          "name": ":",
-          "runes": [
-            "Any"
-          ],
-          "source": "associated",
-          "from_cult": "Eiritha",
-          "rank": "initiate"
-        },
-        {
           "name": "Speak To/With Specific Creatures",
           "runes": [
             "Harmony"
@@ -5392,7 +5278,7 @@
           "rune_inferred": true
         },
         {
-          "name": ".e Earthwarm",
+          "name": "Earthwarm",
           "runes": [
             "Any"
           ],
@@ -5401,7 +5287,7 @@
           "rank": "initiate"
         },
         {
-          "name": ".g Cloud Clear",
+          "name": "Cloud Clear",
           "runes": [
             "Any"
           ],
@@ -5512,7 +5398,7 @@
           "rank": "initiate"
         },
         {
-          "name": "?bot Create Skeleton",
+          "name": "Create Skeleton",
           "runes": [
             "Beast"
           ],
@@ -5520,7 +5406,7 @@
           "rank": "initiate"
         },
         {
-          "name": "?bot Create Zombie",
+          "name": "Create Zombie",
           "runes": [
             "Beast"
           ],
@@ -5687,7 +5573,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Oakfed:.j Create Bonfire",
+          "name": "Create Bonfire",
           "runes": [
             "Any"
           ],
@@ -5696,7 +5582,7 @@
           "rune_inferred": true
         },
         {
-          "name": "Oakfed:. Create Wildfire",
+          "name": "Create Wildfire",
           "runes": [
             "Any"
           ],
@@ -5705,7 +5591,7 @@
           "rune_inferred": true
         },
         {
-          "name": ":.o Suppress Oakfed",
+          "name": "Suppress Oakfed",
           "runes": [
             "Any"
           ],
@@ -5956,15 +5842,6 @@
           "rank": "initiate"
         },
         {
-          "name": ":",
-          "runes": [
-            "Any"
-          ],
-          "source": "associated",
-          "from_cult": "Return to associate cult temple and resacrifice Yelmalio",
-          "rank": "initiate"
-        },
-        {
           "name": "Catseye",
           "runes": [
             "Fire/Sky"
@@ -5973,7 +5850,7 @@
           "rank": "initiate"
         },
         {
-          "name": "(a):RS Reflection",
+          "name": "Reflection",
           "runes": [
             "Death"
           ],
@@ -6065,15 +5942,6 @@
           ],
           "source": "associated",
           "from_cult": "Humakt",
-          "rank": "runelord"
-        },
-        {
-          "name": ":",
-          "runes": [
-            "Any"
-          ],
-          "source": "associated",
-          "from_cult": "Yelm",
           "rank": "runelord"
         },
         {
@@ -6364,15 +6232,6 @@
           "rank": "runelord"
         },
         {
-          "name": ":",
-          "runes": [
-            "Any"
-          ],
-          "source": "associated",
-          "from_cult": "Return to associate cult temple and resacrifice Yelm",
-          "rank": "runelord"
-        },
-        {
           "name": "Sunspear",
           "runes": [
             "Harmony"
@@ -6469,15 +6328,6 @@
           ],
           "source": "associated",
           "from_cult": "Chalana Arroy",
-          "rank": "initiate"
-        },
-        {
-          "name": ":",
-          "runes": [
-            "Any"
-          ],
-          "source": "associated",
-          "from_cult": "Yelmalio",
           "rank": "initiate"
         },
         {
@@ -6697,15 +6547,6 @@
           "rank": "runelord"
         },
         {
-          "name": ":",
-          "runes": [
-            "Any"
-          ],
-          "source": "associated",
-          "from_cult": "Yelm",
-          "rank": "runelord"
-        },
-        {
           "name": "Sunspear",
           "runes": [
             "Fire/Sky"
@@ -6776,15 +6617,6 @@
             "Fire/Sky"
           ],
           "source": "associate",
-          "rank": "initiate"
-        },
-        {
-          "name": ":",
-          "runes": [
-            "Any"
-          ],
-          "source": "associated",
-          "from_cult": "Return to associate cult temple and resacrifice Yelmalio",
           "rank": "initiate"
         },
         {
@@ -7279,7 +7111,7 @@
           "rune_inferred": true
         },
         {
-          "name": "4 Summon Lune",
+          "name": "Summon Lune",
           "runes": [
             "Earth"
           ],
@@ -7546,7 +7378,7 @@
           "split_from_garbled": true
         },
         {
-          "name": "4 Summon Lune",
+          "name": "Summon Lune",
           "runes": [
             "Harmony"
           ],
@@ -7878,7 +7710,7 @@
           "rune_inferred": true
         },
         {
-          "name": "? Corruption",
+          "name": "Corruption",
           "runes": [
             "Magic"
           ],
@@ -7953,7 +7785,7 @@
           "rune_inferred": true
         },
         {
-          "name": "RW Multispell",
+          "name": "Multispell",
           "runes": [
             "Magic"
           ],
@@ -7973,7 +7805,7 @@
           "rune_inferred": true
         },
         {
-          "name": "Rc Warding",
+          "name": "Warding",
           "runes": [
             "Magic"
           ],
@@ -7983,7 +7815,7 @@
           "rune_inferred": true
         },
         {
-          "name": "4o Bat Wings",
+          "name": "Bat Wings",
           "runes": [
             "Magic"
           ],
@@ -8003,7 +7835,7 @@
           "rune_inferred": true
         },
         {
-          "name": "?t Power Drain",
+          "name": "Power Drain",
           "runes": [
             "Magic"
           ],
@@ -8053,20 +7885,11 @@
           "rank": "runelord"
         },
         {
-          "name": "4 Glow Spot",
+          "name": "Glow Spot",
           "runes": [
             "Any"
           ],
           "source": "associate",
-          "rank": "runelord"
-        },
-        {
-          "name": "Mindblast  Primal Chaos(a):? Chaos Feature",
-          "runes": [
-            "Any"
-          ],
-          "source": "associated",
-          "from_cult": "Return to associate cult temple and resacrifice Seven Mothers",
           "rank": "runelord"
         }
       ]
@@ -8118,7 +7941,7 @@
           "rune_inferred": true
         },
         {
-          "name": "Rc Warding",
+          "name": "Warding",
           "runes": [
             "Magic"
           ],
@@ -8627,7 +8450,7 @@
           "rank": "runelord"
         },
         {
-          "name": "?B Keenclaw",
+          "name": "B Keenclaw",
           "runes": [
             "Beast"
           ],
@@ -8636,7 +8459,7 @@
           "rune_inferred": true
         },
         {
-          "name": "Bo Transform Self",
+          "name": "Transform Self",
           "runes": [
             "Beast"
           ],
@@ -8746,7 +8569,7 @@
           "rune_inferred": true
         },
         {
-          "name": "Rc Warding",
+          "name": "Warding",
           "runes": [
             "Any"
           ],
@@ -8878,15 +8701,6 @@
           "rank": "initiate"
         },
         {
-          "name": ":",
-          "runes": [
-            "Any"
-          ],
-          "source": "associated",
-          "from_cult": "Kyger Litor",
-          "rank": "initiate"
-        },
-        {
           "name": "Darksee",
           "runes": [
             "Darkness"
@@ -9008,7 +8822,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Bx Bless Animals",
+          "name": "Bless Animals",
           "runes": [
             "Earth"
           ],
@@ -9061,7 +8875,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Bw Pathway",
+          "name": "Pathway",
           "runes": [
             "Any"
           ],
@@ -9176,7 +8990,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Bl Draw Beast",
+          "name": "Draw Beast",
           "runes": [
             "Harmony"
           ],
@@ -9210,7 +9024,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Bl Beastmaster",
+          "name": "Beastmaster",
           "runes": [
             "Harmony"
           ],
@@ -9385,22 +9199,13 @@
           "rank": "initiate"
         },
         {
-          "name": "Rc Warding",
+          "name": "Warding",
           "runes": [
             "Any"
           ],
           "source": "associate",
           "rank": "initiate",
           "rune_inferred": true
-        },
-        {
-          "name": ":",
-          "runes": [
-            "Any"
-          ],
-          "source": "associated",
-          "from_cult": "Return to associate cult temple and resacrifice Aldrya",
-          "rank": "initiate"
         },
         {
           "name": "Sunripen",
@@ -9420,7 +9225,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Eiritha:e Summon Gnome",
+          "name": "Summon Gnome",
           "runes": [
             "Earth"
           ],
@@ -9434,15 +9239,6 @@
           ],
           "source": "subservient",
           "rank": "initiate"
-        },
-        {
-          "name": "Oakfed :",
-          "runes": [
-            "Any"
-          ],
-          "source": "subservient",
-          "rank": "initiate",
-          "rune_inferred": true
         },
         {
           "name": "Summon Salamander",
@@ -9765,7 +9561,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Bo Spider Bite",
+          "name": "Spider Bite",
           "runes": [
             "Beast"
           ],
@@ -9774,7 +9570,7 @@
           "rune_inferred": true
         },
         {
-          "name": "Bo Webbing",
+          "name": "Webbing",
           "runes": [
             "Beast"
           ],
@@ -9815,7 +9611,7 @@
           "rank": "runelord"
         },
         {
-          "name": "Bo Spider Limbs",
+          "name": "Spider Limbs",
           "runes": [
             "Any"
           ],
@@ -9871,7 +9667,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Wo Dark Walk",
+          "name": "Dark Walk",
           "runes": [
             "Darkness"
           ],
@@ -10308,7 +10104,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Qo Chill",
+          "name": "Chill",
           "runes": [
             "Darkness"
           ],
@@ -10524,15 +10320,6 @@
           "rank": "initiate"
         },
         {
-          "name": ":",
-          "runes": [
-            "Any"
-          ],
-          "source": "associated",
-          "from_cult": "Daka Fal",
-          "rank": "initiate"
-        },
-        {
           "name": "Summon Specific Ancestor",
           "runes": [
             "Any"
@@ -10672,7 +10459,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Summon(Specific Species)",
+          "name": "Summon (Specific Species)",
           "runes": [
             "Beast"
           ],
@@ -10680,7 +10467,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Rc Warding",
+          "name": "Warding",
           "runes": [
             "Any"
           ],
@@ -10871,7 +10658,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Summon(Specific Species)",
+          "name": "Summon (Specific Species)",
           "runes": [
             "Beast"
           ],
@@ -10911,15 +10698,6 @@
           "source": "associate",
           "rank": "initiate",
           "rune_inferred": true
-        },
-        {
-          "name": ":",
-          "runes": [
-            "Any"
-          ],
-          "source": "associated",
-          "from_cult": "Return to associate cult temple and resacrifice Kyger Litor",
-          "rank": "initiate"
         },
         {
           "name": "Darksee",
@@ -11034,16 +10812,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Rc Warding",
-          "runes": [
-            "Magic"
-          ],
-          "source": "normal",
-          "rank": "initiate",
-          "rune_inferred": true
-        },
-        {
-          "name": "4? Chaos Gift  jo Dark Fear  io Bump In The Night",
+          "name": "Warding",
           "runes": [
             "Magic"
           ],
@@ -11277,15 +11046,6 @@
           "rank": "initiate"
         },
         {
-          "name": ":",
-          "runes": [
-            "Any"
-          ],
-          "source": "associated",
-          "from_cult": "Return to associate cult temple and resacrifice Kyger Litor",
-          "rank": "initiate"
-        },
-        {
           "name": "Darksee",
           "runes": [
             "Darkness"
@@ -11408,7 +11168,7 @@
           "rank": "initiate"
         },
         {
-          "name": "Bl Beastmaster",
+          "name": "Beastmaster",
           "runes": [
             "Beast"
           ],
@@ -11512,7 +11272,7 @@
           "rune_inferred": true
         },
         {
-          "name": "?bot Create Skeleton",
+          "name": "Create Skeleton",
           "runes": [
             "Death"
           ],
@@ -11548,7 +11308,7 @@
           "rune_inferred": true
         },
         {
-          "name": "?bot Create Zombie",
+          "name": "Create Zombie",
           "runes": [
             "Death"
           ],
@@ -11598,15 +11358,6 @@
             "Death"
           ],
           "source": "associate",
-          "rank": "initiate"
-        },
-        {
-          "name": ":",
-          "runes": [
-            "Any"
-          ],
-          "source": "associated",
-          "from_cult": "Return to associate cult temple and resacrifice Kyger Litor",
           "rank": "initiate"
         },
         {

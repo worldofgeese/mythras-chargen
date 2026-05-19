@@ -43,6 +43,14 @@ function info(msg) {
   console.log(`${colors.gray}${msg}${colors.reset}`);
 }
 
+const pendingTests = [];
+
+function asyncTest(msg, fn) {
+  pendingTests.push(Promise.resolve()
+    .then(fn)
+    .catch(err => fail(msg, err && err.stack ? err.stack : String(err))));
+}
+
 // Extract JS from HTML
 function extractScripts(html) {
   const scripts = [];
@@ -69,7 +77,7 @@ function createMockEnv() {
     querySelector: () => null, querySelectorAll: () => [],
     setAttribute: () => {}, removeAttribute: () => {}, getAttribute: () => null,
     appendChild: () => {}, remove: () => {}, disabled: false,
-    addEventListener: () => {}, firstChild: null, removeChild: () => {},
+    addEventListener: () => {}, click: () => {}, firstChild: null, removeChild: () => {},
     get children() { return []; }
   });
 
@@ -85,14 +93,15 @@ function createMockEnv() {
   };
 
   return { document: doc, elements,
+    _pdf: { texts: [], rectangles: [], lines: [], saved: false },
     localStorage: { getItem: () => null, setItem: () => {} },
     location: { hash: '', href: '' },
     window: {}, navigator: { userAgent: '' },
     CSS: { escape: (s) => s.replace(/([\[\]"'\\#.:>+~=|^${}()/!])/g, '\\$1') },
-    setTimeout: (fn) => fn(), requestAnimationFrame: (fn) => fn(),
+    setTimeout: (fn) => fn(), clearTimeout: () => {}, requestAnimationFrame: (fn) => fn(),
     console: { log: () => {}, warn: () => {}, error: () => {} },
     URL: { createObjectURL: () => 'blob:', revokeObjectURL: () => {} },
-    Blob: function() {},
+    Blob: function(parts, opts = {}) { this.parts = parts; this.type = opts.type || ''; },
     Uint8Array: globalThis.Uint8Array,
     Map: globalThis.Map, Set: globalThis.Set, Array: globalThis.Array,
     Object: globalThis.Object, JSON: globalThis.JSON, Math: globalThis.Math,
@@ -131,13 +140,18 @@ function loadApp() {
         addPage: () => ({
           getWidth: () => 595,
           getHeight: () => 842,
-          drawText: () => {},
-          drawRectangle: () => {},
-        }),
-        embedFont: async () => ({
-          widthOfTextAtSize: () => 100,
-        }),
-        save: async () => new Uint8Array(100),
+          getSize: () => ({ width: 595, height: 842 }),
+          drawText: (text, opts = {}) => { env._pdf.texts.push({ text: String(text || ''), ...opts }); },
+          drawRectangle: (opts = {}) => { env._pdf.rectangles.push({ ...opts }); },
+          drawLine: (opts = {}) => { env._pdf.lines.push({ ...opts }); },
+	        }),
+	        embedFont: async () => ({
+	          widthOfTextAtSize: (text, size) => String(text || '').length * size * 0.5,
+	        }),
+        save: async () => {
+          env._pdf.saved = true;
+          return new Uint8Array(100);
+        },
       })
     },
     StandardFonts: { Helvetica: 'Helvetica', HelveticaBold: 'Helvetica-Bold' },
@@ -147,7 +161,7 @@ function loadApp() {
 
   const sandbox = vm.createContext({
     ...env, document: env.document, window: env.window, localStorage: env.localStorage,
-    location: env.location, console: env.console, setTimeout: env.setTimeout,
+    location: env.location, console: env.console, setTimeout: env.setTimeout, clearTimeout: env.clearTimeout,
     requestAnimationFrame: env.requestAnimationFrame,
     URL: env.URL, Blob: env.Blob,
     Uint8Array: globalThis.Uint8Array, Int32Array: globalThis.Int32Array,
@@ -180,6 +194,7 @@ function loadApp() {
         CULTURES_DATA,
         WEAPONS_DATA,
         WEAPON_ALIASES: typeof WEAPON_ALIASES !== 'undefined' ? WEAPON_ALIASES : null,
+        DATA_INDEXES: typeof DATA_INDEXES !== 'undefined' ? DATA_INDEXES : null,
         SKILLS_DATA,
         HIT_LOCATIONS,
         GLORANTHA_CULTURES_DATA: typeof GLORANTHA_CULTURES_DATA !== 'undefined' ? GLORANTHA_CULTURES_DATA : null,
@@ -251,123 +266,113 @@ function createTestCharacter(culture = 'Generic') {
   };
 }
 
+function createPdfTestCharacter(overrides = {}) {
+  const characteristics = { STR: 14, CON: 12, SIZ: 11, DEX: 12, INT: 10, POW: 9, CHA: 8 };
+  return {
+    name: 'PDF Test Hero',
+    culture: 'Sartarite (Heortling)',
+    career: 'Warrior',
+    homeland: 'Pimper\'s Block',
+    cult: 'Orlanth',
+    age: 25,
+    gender: 'Nonbinary',
+    characteristics,
+    attributes: App.Calc.calculateAllAttributes(characteristics),
+    culturalSkills: { 'Athletics': 40, 'Ride': 30 },
+    careerSkills: { 'Combat Style (Sword & Shield)': 50, 'Endurance': 20 },
+    bonusSkills: { 'Lore (Strategy)': 15 },
+    folkMagicSpells: ['Bladesharp', 'Protection'],
+    careerFolkMagic: ['Heal'],
+    runeAffinities: { primary: 'Air', secondary: 'Movement', tertiary: 'Mastery' },
+    weapons: [
+      { name: 'Broadsword', damage: '1d8', size: 'M', reach: 'M', ap: 6, hp: 10, skill: '76%', quantity: 1 },
+      { name: 'Viking Shield', damage: '1d4', size: 'L', reach: 'S', ap: 6, hp: 12, skill: '76%', quantity: 1 }
+    ],
+    equipment: [{ name: 'Backpack', quantity: 1, enc: 1 }, { name: 'Waterskin', quantity: 1, enc: 1 }],
+    armor: [{ name: 'Leather Hauberk', ap: 2, locations: 'Chest, Abdomen, Arms' }],
+    passions: [{ name: 'Loyalty (Clan)', value: 60 }, { name: 'Honor', value: 55 }],
+    combatStyles: [{ name: 'Sword & Shield', traits: ['Defensive'], weapons: ['Broadsword', 'Viking Shield'], skill: 50 }],
+    notes: 'PDF note field',
+    concept: 'PDF concept field',
+    family: 'PDF family field',
+    backgroundEvents: 'PDF background field',
+    startingMoney: 42,
+    miracles: ['Shield'],
+    devotionalPool: 1,
+    ...overrides
+  };
+}
+
+function applyCharacterForPdf(app, character) {
+  const clone = JSON.parse(JSON.stringify(character));
+  if (app.CharacterData.fromJSON) {
+    app.CharacterData.fromJSON(JSON.stringify(clone));
+  }
+  Object.assign(app.CharacterData, clone);
+  app.CharacterData.attributes = clone.attributes || app.Calc.calculateAllAttributes(clone.characteristics);
+}
+
+async function captureSinglePagePdf(character) {
+  const app = loadApp();
+  applyCharacterForPdf(app, character);
+  await app.App.exportSinglePagePDF();
+  return {
+    app,
+    text: app._sandbox._pdf.texts.map(op => op.text).join('\n'),
+    texts: app._sandbox._pdf.texts,
+    saved: app._sandbox._pdf.saved
+  };
+}
+
 // ============================================================
 section('Risk 1: PDF Semantic Validation (Sub-era Keywords)');
 // ============================================================
 
-// Test 1.1: PDF export includes character name
-{
-  const char = createTestCharacter();
-  App.CharacterData.name = char.name;
-  App.CharacterData.characteristics = char.characteristics;
-  App.CharacterData.attributes = char.attributes;
-
-  if (App.App && App.App.exportSinglePagePDF) {
-    const pdfCode = App.App.exportSinglePagePDF.toString();
-    const hasNameReference = pdfCode.includes('CharacterData.name') ||
-                            pdfCode.includes('.name');
-    if (hasNameReference) {
-      pass('exportSinglePagePDF() references CharacterData.name');
-    } else {
-      fail('exportSinglePagePDF() does not reference character name field');
-    }
-  } else {
+// Test 1.1: PDF export draws critical character fields
+asyncTest('exportSinglePagePDF() behavior output capture failed', async () => {
+  if (!App.App || !App.App.exportSinglePagePDF) {
     fail('exportSinglePagePDF() function not found');
+    return;
   }
-}
 
-// Test 1.2: PDF export includes characteristics
-{
-  if (App.App && App.App.exportSinglePagePDF) {
-    const pdfCode = App.App.exportSinglePagePDF.toString();
-    const characteristics = ['STR', 'CON', 'SIZ', 'DEX', 'INT', 'POW', 'CHA'];
-    let foundChars = 0;
-    characteristics.forEach(char => {
-      if (pdfCode.includes(char)) foundChars++;
-    });
-    if (foundChars >= 6) {
-      pass(`exportSinglePagePDF() references ${foundChars}/7 characteristics`);
-    } else {
-      fail(`exportSinglePagePDF() only references ${foundChars}/7 characteristics`);
-    }
-  }
-}
+  const character = createPdfTestCharacter();
+  const { text, saved } = await captureSinglePagePdf(character);
 
-// Test 1.3: PDF export includes skills
-{
-  if (App.App && App.App.exportSinglePagePDF) {
-    const pdfCode = App.App.exportSinglePagePDF.toString();
-    const hasSkillsReference = pdfCode.includes('Skills') ||
-                               pdfCode.includes('skills') ||
-                               pdfCode.includes('compileAllSkills') ||
-                               pdfCode.includes('culturalSkills');
-    if (hasSkillsReference) {
-      pass('exportSinglePagePDF() references skills data');
-    } else {
-      fail('exportSinglePagePDF() does not reference skills');
-    }
+  if (saved) {
+    pass('exportSinglePagePDF() saves a PDF blob');
+  } else {
+    fail('exportSinglePagePDF() did not save a PDF blob');
   }
-}
 
-// Test 1.4: PDF export includes combat styles
-{
-  if (App.App && App.App.exportSinglePagePDF) {
-    const pdfCode = App.App.exportSinglePagePDF.toString();
-    const hasCombatStyles = pdfCode.includes('combatStyles') ||
-                           pdfCode.includes('Combat Style');
-    if (hasCombatStyles) {
-      pass('exportSinglePagePDF() references combat styles');
-    } else {
-      fail('exportSinglePagePDF() does not reference combat styles');
-    }
-  }
-}
+  const requiredText = [
+    character.name,
+    character.culture,
+    character.career,
+    character.homeland,
+    'STR',
+    'CON',
+    'SIZ',
+    'DEX',
+    'INT',
+    'POW',
+    'CHA',
+    'COMBAT STYLES',
+    'Broadsword',
+    'Viking Shield',
+    'Head',
+    'Chest',
+    'PDF concept field',
+    'PDF background field',
+    'PDF note field'
+  ];
+  const missing = requiredText.filter(value => !text.includes(value));
 
-// Test 1.5: PDF export includes hit locations with HP
-{
-  if (App.App && App.App.exportSinglePagePDF) {
-    const pdfCode = App.App.exportSinglePagePDF.toString();
-    const hasHitLocations = pdfCode.includes('hitPoints') ||
-                           pdfCode.includes('Hit Location') ||
-                           pdfCode.includes('HIT_LOCATIONS');
-    if (hasHitLocations) {
-      pass('exportSinglePagePDF() references hit locations and HP');
-    } else {
-      fail('exportSinglePagePDF() does not reference hit locations');
-    }
+  if (missing.length === 0) {
+    pass('exportSinglePagePDF() draws identity, stats, combat, equipment, and notes');
+  } else {
+    fail('exportSinglePagePDF() omitted expected drawn text', missing.join(', '));
   }
-}
-
-// Test 1.6: PDF export includes weapons
-{
-  if (App.App && App.App.exportSinglePagePDF) {
-    const pdfCode = App.App.exportSinglePagePDF.toString();
-    const hasWeapons = pdfCode.includes('weapons') ||
-                      pdfCode.includes('WEAPONS_DATA');
-    if (hasWeapons) {
-      pass('exportSinglePagePDF() references weapons');
-    } else {
-      fail('exportSinglePagePDF() does not reference weapons');
-    }
-  }
-}
-
-// Test 1.7: PDF export includes notes/concept/background
-{
-  if (App.App && App.App.exportSinglePagePDF) {
-    const pdfCode = App.App.exportSinglePagePDF.toString();
-    const textFields = ['notes', 'concept', 'background'];
-    let foundFields = 0;
-    textFields.forEach(field => {
-      if (pdfCode.includes(field)) foundFields++;
-    });
-    if (foundFields >= 2) {
-      pass(`exportSinglePagePDF() references ${foundFields}/3 text fields (notes/concept/background)`);
-    } else {
-      fail(`exportSinglePagePDF() only references ${foundFields}/3 text fields`);
-    }
-  }
-}
+});
 
 // Test 1.8: Culture-specific keywords for Glorantha cultures
 {
@@ -432,20 +437,155 @@ section('Risk 1: PDF Semantic Validation (Sub-era Keywords)');
 
 // Test 1.10: Bonus skill controls also avoid raw single-quoted names
 {
-  const AppObj = App.App;
+  const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
 
-  if (AppObj && AppObj.renderStep11) {
-    const renderSource = AppObj.renderStep11.toString();
+  if (AppObj && AppObj.renderStep11 && CD && _sandbox) {
+    const renderedRows = [];
+    const makeElement = tag => ({
+      tag,
+      innerHTML: '',
+      className: '',
+      style: {},
+      setAttribute: () => {},
+      appendChild: child => { renderedRows.push(child); },
+      querySelector: selector => selector === '#bonus-skills-list'
+        ? { appendChild: child => { renderedRows.push(child); } }
+        : null,
+      querySelectorAll: () => [],
+      classList: { add: () => {}, remove: () => {}, toggle: () => {}, contains: () => false }
+    });
+    _sandbox.document.createElement = makeElement;
 
-    if (renderSource.includes("App.updateSkillPoints('bonus', this.dataset.skill") &&
-        renderSource.includes('App.removeBonusSkill(this.dataset.skill)') &&
-        !renderSource.includes("App.removeBonusSkill('${skillName}')")) {
-      pass('Bonus skill controls use data attributes for apostrophe-safe skill names');
+    const trickySkill = "A person, in a romantic or familial context (Loved one's pow+cha)";
+    CD.age = 21;
+    CD.characteristics = { STR: 11, CON: 12, SIZ: 13, DEX: 14, INT: 15, POW: 5, CHA: 5 };
+    CD.culturalSkills = {};
+    CD.careerSkills = {};
+    CD.combatStyles = [];
+    CD.bonusSkills = { [trickySkill]: 0 };
+
+    AppObj.renderStep11();
+    const rowHtml = renderedRows.map(row => row.innerHTML).join('\n');
+
+    if (rowHtml.includes(`data-skill="${trickySkill}"`) &&
+        rowHtml.includes("App.updateSkillPoints('bonus', this.dataset.skill") &&
+        rowHtml.includes('App.removeBonusSkill(this.dataset.skill)') &&
+        !rowHtml.includes(`App.removeBonusSkill('${trickySkill}')`)) {
+      pass('Bonus skill controls render data attributes for apostrophe-safe skill names');
     } else {
-      fail('Bonus skill controls still interpolate raw skill names into inline handlers');
+      fail('Bonus skill controls still render raw skill names into inline handlers');
     }
   } else {
     fail('App.renderStep11 not available for bonus skill handler test');
+  }
+}
+
+// Test 1.11: Professional skill limit handling does not depend on the global event object
+{
+  const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
+  if (AppObj && AppObj.toggleProfessionalSkill && CD && _sandbox) {
+    CD.selectedProfessionalSkills = ['Art (Wolfmaking)', 'Craft (Basketry)', 'Commerce'];
+    CD.careerSkills = {
+      'Art (Wolfmaking)': 0,
+      'Craft (Basketry)': 0,
+      'Commerce': 0
+    };
+    _sandbox.alert = () => {};
+    let threw = false;
+
+    try {
+      AppObj.toggleProfessionalSkill('Healing', true);
+    } catch (err) {
+      threw = true;
+    }
+
+    if (!threw && CD.selectedProfessionalSkills.length === 3 && !CD.selectedProfessionalSkills.includes('Healing')) {
+      pass('Professional skill limit handler works without global event');
+    } else {
+      fail('Professional skill limit handler depends on global event or mutates selection');
+    }
+  } else {
+    fail('App.toggleProfessionalSkill not available for event-free handler test');
+  }
+}
+
+// Test 1.12: Professional skill picker renders dataset-based handlers
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj && AppObj.renderCareerDetails && CD) {
+    CD.culture = 'Sartarite';
+    CD.career = 'Crafter';
+    CD.selectedProfessionalSkills = ['Craft (Primary)'];
+    CD.careerSkills = { 'Craft (Primary)': 0 };
+    const html = AppObj.renderCareerDetails();
+
+    if (html.includes('data-skill="Craft (Primary)"') &&
+        html.includes('App.toggleProfessionalSkill(this.dataset.skill, this.checked, this)') &&
+        html.includes('App.resolveProfessionalSkill(this.dataset.skill, this.value)') &&
+        !html.includes("App.toggleProfessionalSkill('Craft")) {
+      pass('Professional skill picker uses dataset-based handlers');
+    } else {
+      fail('Professional skill picker still interpolates skill names into inline handlers');
+    }
+  } else {
+    fail('App.renderCareerDetails not available for dataset handler test');
+  }
+}
+
+// Test 1.13: Skill point clamps also sync the visible input value
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj && AppObj.updateSkillPoints && CD) {
+    CD.careerSkills = { Drive: 10 };
+    const highInput = { value: '999' };
+    AppObj.updateSkillPoints('career', 'Drive', 999, highInput);
+
+    CD.careerSkills = { Drive: 10 };
+    const lowInput = { value: '-5' };
+    AppObj.updateSkillPoints('career', 'Drive', -5, lowInput);
+
+    if (highInput.value === '15' && lowInput.value === '0') {
+      pass('Skill point clamp updates visible input values');
+    } else {
+      fail('Skill point clamp leaves visible input values stale', `high=${highInput.value}, low=${lowInput.value}`);
+    }
+  } else {
+    fail('App.updateSkillPoints not available for visible clamp test');
+  }
+}
+
+// Test 1.14: Rejected capped checkbox selections roll back visually
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj && AppObj.toggleCareerFolkMagicSpell && AppObj.toggleFolkMagicSpell &&
+      AppObj.toggleSorcerySpell && AppObj.toggleBoundSpirit && CD) {
+    CD.careerFolkMagic = ['Alarm', 'Avert'];
+    const careerSpellBox = { checked: true };
+    AppObj.toggleCareerFolkMagicSpell('Babble', true, careerSpellBox);
+
+    CD.folkMagicSpells = ['Alarm', 'Avert', 'Babble'];
+    const cultureSpellBox = { checked: true };
+    AppObj.toggleFolkMagicSpell('Beastcall', true, 3, cultureSpellBox);
+
+    CD.sorcerySpells = ['Abjure', 'Animate (Substance)', 'Dominate (Human)'];
+    const sorceryBox = { checked: true };
+    AppObj.toggleSorcerySpell('Enchant (Object)', sorceryBox);
+
+    CD.characteristics = { STR: 11, CON: 12, SIZ: 13, DEX: 14, INT: 15, POW: 8, CHA: 6 };
+    CD.boundSpiritSlots = 3;
+    CD.boundSpirits = [{ name: 'Ancestor' }, { name: 'Guardian' }, { name: 'Nature' }];
+    const spiritBox = { checked: true };
+    AppObj.toggleBoundSpirit('Magic Spirit', spiritBox);
+
+    if (!careerSpellBox.checked && !cultureSpellBox.checked && !sorceryBox.checked && !spiritBox.checked &&
+        CD.careerFolkMagic.length === 2 && CD.folkMagicSpells.length === 3 &&
+        CD.sorcerySpells.length === 3 && CD.boundSpirits.length === 3) {
+      pass('Capped checkbox handlers roll back rejected visual checks');
+    } else {
+      fail('Capped checkbox handler leaves rejected checkbox checked');
+    }
+  } else {
+    fail('Magic checkbox handlers not available for rollback test');
   }
 }
 
@@ -586,30 +726,76 @@ section('Risk 3: Multi-page PDF Scaling Artifacts');
   }
 }
 
-// Test 3.2: PDF Y-coordinate bounds checking
-{
-  if (App.App && App.App.exportSinglePagePDF) {
-    const pdfCode = App.App.exportSinglePagePDF.toString();
+// Test 3.2: PDF draw operations remain within page bounds
+asyncTest('exportSinglePagePDF() coordinate capture failed', async () => {
+  if (!App.App || !App.App.exportSinglePagePDF) return;
 
-    // Check if there are any Y-coordinate calculations
-    const hasYCoords = pdfCode.match(/\by\s*=|\by\s*-=|\by\s*\+=|yPos|yOffset/g);
-    if (hasYCoords && hasYCoords.length > 0) {
-      pass(`exportSinglePagePDF() has ${hasYCoords.length} Y-coordinate operations`);
+  const longText = Array.from({ length: 80 }, (_, i) => `overflow-check-${i}`).join(' ');
+  const { texts } = await captureSinglePagePdf(createPdfTestCharacter({
+    notes: longText,
+    concept: longText,
+    backgroundEvents: longText
+  }));
+  const outOfBounds = texts.find(op => typeof op.y === 'number' && (op.y < 0 || op.y > 842));
 
-      // Check for bounds checking
-      const hasBoundsCheck = pdfCode.includes('> 0') || pdfCode.includes('< height') ||
-                            pdfCode.includes('Math.max') || pdfCode.includes('Math.min');
-      if (hasBoundsCheck) {
-        pass('exportSinglePagePDF() includes bounds checking logic');
-      } else {
-        fail('exportSinglePagePDF() missing Y-coordinate bounds checking',
-             'Risk: content may overflow page boundaries');
-      }
-    } else {
-      info('exportSinglePagePDF() may use static Y-coordinates (verify manually)');
-    }
+  if (texts.length > 0 && !outOfBounds) {
+    pass('exportSinglePagePDF() draws captured text within page bounds');
+  } else {
+    fail('exportSinglePagePDF() drew text outside page bounds', outOfBounds ? JSON.stringify(outOfBounds) : 'no text drawn');
   }
-}
+});
+
+// Test 3.3: long magic lines are wrapped inside the PDF page width
+asyncTest('exportSinglePagePDF() magic wrapping capture failed', async () => {
+  if (!App.App || !App.App.exportSinglePagePDF) return;
+
+  const { texts } = await captureSinglePagePdf(createPdfTestCharacter({
+    culture: 'Praxian',
+    homeland: 'Pavis County',
+    cult: 'Waha',
+    cultType: { primary: 'animist', types: ['animist'], isHybrid: false },
+    concept: '',
+    backgroundEvents: '',
+    notes: '',
+    culturalSkills: {},
+    careerSkills: {},
+    bonusSkills: {},
+    weapons: [],
+    equipment: [],
+    armor: [],
+    passions: [],
+    combatStyles: [],
+    miracles: [],
+    folkMagicSpells: [],
+    careerFolkMagic: [],
+    boundSpiritSlots: 4,
+    boundSpirits: [
+      { name: 'Nature Spirit — Camouflage (Int 2)' },
+      { name: 'Nature Spirit — Grappler (Int 2)' },
+      { name: 'Nature Spirit — Venomous (Int 2)' }
+    ],
+    companions: []
+  }));
+  const rightMargin = 565;
+  const widthOf = op => String(op.text || '').length * (op.size || 7) * 0.5;
+  const spiritText = texts.filter(op =>
+    String(op.text).includes('Nature Spirit') ||
+    String(op.text).includes('Endowment') ||
+    String(op.text).includes('successful strike')
+  );
+  const overflowing = spiritText.find(op => (op.x || 0) + widthOf(op) > rightMargin);
+  const combinedSpiritText = spiritText.map(op => op.text).join(' ');
+
+  if (combinedSpiritText.includes('spirit worshipper') &&
+      combinedSpiritText.includes('immediate Grapple') &&
+      combinedSpiritText.includes('Condition: Paralysis') &&
+      !overflowing) {
+    pass('exportSinglePagePDF() draws complete bound spirit lines within page width');
+  } else {
+    fail('exportSinglePagePDF() clips long bound spirit lines',
+      overflowing ? JSON.stringify({ text: overflowing.text, x: overflowing.x, size: overflowing.size }) : combinedSpiritText || 'no spirit text drawn');
+  }
+});
 
 // ============================================================
 section('Risk 4: Normalized Character Model (Helpers Module)');
@@ -626,6 +812,31 @@ section('Risk 4: Normalized Character Model (Helpers Module)');
     }
   } else {
     fail('WEAPON_ALIASES not yet implemented (TDD: create for Helpers.resolveWeapon())');
+  }
+}
+
+// Test 4.1a: DATA_INDEXES precomputes exact lookup maps
+{
+  if (App.DATA_INDEXES &&
+      App.DATA_INDEXES.weaponsByName instanceof Map &&
+      App.DATA_INDEXES.skillsByName instanceof Map &&
+      App.DATA_INDEXES.culturesByName instanceof Map &&
+      App.DATA_INDEXES.careersByName instanceof Map &&
+      App.DATA_INDEXES.cultsByName instanceof Map) {
+    const representativeLookups =
+      App.DATA_INDEXES.weaponsByName.get('broadsword')?.name === 'Broadsword' &&
+      App.DATA_INDEXES.skillsByName.get('athletics')?.name === 'Athletics' &&
+      App.DATA_INDEXES.culturesByName.get('praxian')?.name === 'Praxian' &&
+      App.DATA_INDEXES.careersByName.get('warrior')?.name === 'Warrior' &&
+      App.DATA_INDEXES.cultsByName.get('orlanth')?.name === 'Orlanth';
+
+    if (representativeLookups) {
+      pass('DATA_INDEXES precomputes weapons, skills, cultures, careers, and cults');
+    } else {
+      fail('DATA_INDEXES representative lookups failed');
+    }
+  } else {
+    fail('DATA_INDEXES lookup maps not available');
   }
 }
 
@@ -655,8 +866,39 @@ section('Risk 4: Normalized Character Model (Helpers Module)');
     } else {
       fail('Helpers.resolveWeapon() does not handle null correctly');
     }
+
+    const fuzzyWeapon = App.Helpers.resolveWeapon('Broad');
+    if (fuzzyWeapon === null) {
+      pass('Helpers.resolveWeapon() rejects fuzzy partial matches');
+    } else {
+      fail('Helpers.resolveWeapon() returned a fuzzy partial match', fuzzyWeapon.name);
+    }
   } else {
     fail('Helpers.resolveWeapon() not yet implemented');
+  }
+}
+
+// Test 4.2a: weapon aliases never point at missing canonical weapons or mask exact names
+{
+  if (App.Helpers && App.Helpers.resolveWeapon && App.WEAPON_ALIASES) {
+    const weaponNames = new Set(App.WEAPONS_DATA.map(w => w.name));
+    const brokenAlias = Object.entries(App.WEAPON_ALIASES).find(([, canonical]) => !weaponNames.has(canonical));
+    const brokenExact = App.WEAPONS_DATA.find(weapon => {
+      const resolved = App.Helpers.resolveWeapon(weapon.name);
+      return !resolved;
+    });
+
+    if (!brokenAlias && !brokenExact) {
+      pass('Weapon aliases target existing weapons and exact weapon names remain resolvable');
+    } else {
+      fail('Weapon alias integrity failed',
+        JSON.stringify({
+          brokenAlias: brokenAlias ? `${brokenAlias[0]} -> ${brokenAlias[1]}` : null,
+          brokenExact: brokenExact ? brokenExact.name : null
+        }));
+    }
+  } else {
+    fail('Weapon alias integrity prerequisites missing');
   }
 }
 
@@ -877,10 +1119,10 @@ section('Risk 5: Data Attestation & Validation Layer');
 
     // Serialize
     const json = App.CharacterData.toJSON();
-    if (json && typeof json === 'string' && json.length > 100) {
-      pass(`CharacterData.toJSON() generates JSON (${json.length} bytes)`);
+    if (json && typeof json === 'object' && json.name === 'JSON Test Character') {
+      pass('CharacterData.toJSON() generates a character object');
     } else {
-      fail('CharacterData.toJSON() failed to generate valid JSON');
+      fail('CharacterData.toJSON() failed to generate a character object');
     }
 
     // Modify data
@@ -2088,17 +2330,17 @@ section('Wave 2 Goal F: Eliminate eval() for Formula Evaluation');
   }
 }
 
-// Test F.5: Calc.calculateFormula() uses safe evaluator (no eval)
+// Test F.5: safeEvalDiceFormula() rejects executable formula syntax
 {
-  if (App.Calc && App.Calc.calculateFormula) {
-    const funcCode = App.Calc.calculateFormula.toString();
-    if (!funcCode.includes('eval(')) {
-      pass('Calc.calculateFormula() does not use eval()');
+  if (App.Calc && App.Calc.safeEvalDiceFormula) {
+    const result = App.Calc.safeEvalDiceFormula('1+process.exit()', {});
+    if (result === 0) {
+      pass('safeEvalDiceFormula() rejects executable syntax');
     } else {
-      fail('Calc.calculateFormula() still uses eval() (Goal F)');
+      fail('safeEvalDiceFormula() accepted executable syntax', `Got ${result}`);
     }
   } else {
-    info('Calc.calculateFormula() not found - skipping eval check');
+    fail('safeEvalDiceFormula() not found for executable syntax test');
   }
 }
 
@@ -2363,128 +2605,37 @@ fixtures.forEach(fixtureInfo => {
 section('Wave 3 Goal 3: PDF Content Regression Tests');
 // ============================================================
 
-// Test that exportSinglePagePDF() references all critical fields from golden fixtures
+// Test that exportSinglePagePDF() draws all critical fields from golden fixtures
 fixtures.forEach(fixtureInfo => {
-  const fixture = loadFixture(fixtureInfo.file);
-  if (!fixture) return;
-
-  // Test 3.1: PDF function references character name
-  {
-    if (App.App && App.App.exportSinglePagePDF) {
-      const pdfCode = App.App.exportSinglePagePDF.toString();
-      if (pdfCode.includes('CharacterData.name')) {
-        pass(`${fixtureInfo.name} PDF: references character name`);
-      } else {
-        fail(`${fixtureInfo.name} PDF: missing character name reference`);
-      }
+  asyncTest(`${fixtureInfo.name} PDF behavior capture failed`, async () => {
+    const fixture = loadFixture(fixtureInfo.file);
+    if (!fixture) {
+      fail(`${fixtureInfo.name}: fixture file not found or invalid JSON`);
+      return;
     }
-  }
-
-  // Test 3.2: PDF function references all 7 characteristics
-  {
-    if (App.App && App.App.exportSinglePagePDF) {
-      const pdfCode = App.App.exportSinglePagePDF.toString();
-      const chars = ['STR', 'CON', 'SIZ', 'DEX', 'INT', 'POW', 'CHA'];
-      let allPresent = true;
-      chars.forEach(char => {
-        if (!pdfCode.includes(`'${char}'`) && !pdfCode.includes(`"${char}"`)) {
-          allPresent = false;
-        }
-      });
-      if (allPresent) {
-        pass(`${fixtureInfo.name} PDF: references all 7 characteristics`);
-      } else {
-        fail(`${fixtureInfo.name} PDF: missing characteristic references`);
-      }
+    if (!App.App || !App.App.exportSinglePagePDF) {
+      fail('exportSinglePagePDF() function not found');
+      return;
     }
-  }
 
-  // Test 3.3: PDF function references derived attributes
-  {
-    if (App.App && App.App.exportSinglePagePDF) {
-      const pdfCode = App.App.exportSinglePagePDF.toString();
-      const derivedAttrs = ['actionPoints', 'initiativeBonus', 'damageModifier',
-                           'healingRate', 'movementRate', 'luckPoints'];
-      let allPresent = true;
-      derivedAttrs.forEach(attr => {
-        if (!pdfCode.includes(attr)) {
-          allPresent = false;
-        }
-      });
-      if (allPresent) {
-        pass(`${fixtureInfo.name} PDF: references all derived attributes`);
-      } else {
-        fail(`${fixtureInfo.name} PDF: missing derived attribute references`);
-      }
-    }
-  }
+    const { text, saved } = await captureSinglePagePdf(fixture);
+    const expected = [
+      fixture.name,
+      fixture.culture,
+      fixture.career,
+      ...Object.keys(fixture.characteristics || {}),
+      ...(fixture.weapons || []).map(w => typeof w === 'string' ? w : w.name).filter(Boolean),
+      ...(fixture.folkMagicSpells || []),
+      ...(fixture.passions || []).map(p => typeof p === 'string' ? p.split(':')[0] : p.name).filter(Boolean)
+    ];
+    const missing = expected.filter(value => value && !text.includes(value));
 
-  // Test 3.4: PDF function references combat styles
-  {
-    if (App.App && App.App.exportSinglePagePDF) {
-      const pdfCode = App.App.exportSinglePagePDF.toString();
-      if (pdfCode.includes('combatStyles')) {
-        pass(`${fixtureInfo.name} PDF: references combat styles`);
-      } else {
-        fail(`${fixtureInfo.name} PDF: missing combat styles reference`);
-      }
+    if (saved && missing.length === 0) {
+      pass(`${fixtureInfo.name} PDF: draws fixture identity, stats, weapons, magic, and passions`);
+    } else {
+      fail(`${fixtureInfo.name} PDF: missing drawn fixture content`, missing.join(', ') || 'PDF was not saved');
     }
-  }
-
-  // Test 3.5: PDF function references hit locations
-  {
-    if (App.App && App.App.exportSinglePagePDF) {
-      const pdfCode = App.App.exportSinglePagePDF.toString();
-      if (pdfCode.includes('hitPoints') || pdfCode.includes('Hit Locations')) {
-        pass(`${fixtureInfo.name} PDF: references hit locations`);
-      } else {
-        fail(`${fixtureInfo.name} PDF: missing hit locations reference`);
-      }
-    }
-  }
-
-  // Test 3.6: PDF function references weapons
-  {
-    if (App.App && App.App.exportSinglePagePDF) {
-      const pdfCode = App.App.exportSinglePagePDF.toString();
-      if (pdfCode.includes('CharacterData.weapons')) {
-        pass(`${fixtureInfo.name} PDF: references weapons`);
-      } else {
-        fail(`${fixtureInfo.name} PDF: missing weapons reference`);
-      }
-    }
-  }
-
-  // Test 3.7: PDF function references folk magic
-  {
-    if (App.App && App.App.exportSinglePagePDF) {
-      const pdfCode = App.App.exportSinglePagePDF.toString();
-      if (pdfCode.includes('folkMagicSpells') || pdfCode.includes('careerFolkMagic')) {
-        pass(`${fixtureInfo.name} PDF: references folk magic`);
-      } else {
-        fail(`${fixtureInfo.name} PDF: missing folk magic reference`);
-      }
-    }
-  }
-
-  // Test 3.8: PDF function references notes/concept/background
-  {
-    if (App.App && App.App.exportSinglePagePDF) {
-      const pdfCode = App.App.exportSinglePagePDF.toString();
-      const textFields = ['concept', 'background', 'notes'];
-      let fieldCount = 0;
-      textFields.forEach(field => {
-        if (pdfCode.includes(`CharacterData.${field}`)) {
-          fieldCount++;
-        }
-      });
-      if (fieldCount >= 2) {
-        pass(`${fixtureInfo.name} PDF: references ${fieldCount}/3 text fields`);
-      } else {
-        fail(`${fixtureInfo.name} PDF: only references ${fieldCount}/3 text fields`);
-      }
-    }
-  }
+  });
 });
 
 // ============================================================
@@ -2507,133 +2658,34 @@ section('Wave 3 Goal 4: Template PDF Field Coverage');
   }
 }
 
-// Test 4.2: exportTemplatePDF() fills character name
+// Test 4.2: normalizeCharacter() exposes all data a template PDF renderer needs
 {
-  if (App.App && App.App.exportTemplatePDF) {
-    const pdfCode = App.App.exportTemplatePDF.toString();
-    if (pdfCode.includes('CharacterData.name')) {
-      pass('Template PDF: fills character name field');
-    } else {
-      fail('Template PDF: missing character name mapping');
-    }
-  }
-}
-
-// Test 4.3: exportTemplatePDF() fills all 7 characteristics
-{
-  if (App.App && App.App.exportTemplatePDF) {
-    const pdfCode = App.App.exportTemplatePDF.toString();
+  if (App.App && App.App.normalizeCharacter) {
+    const normalized = App.App.normalizeCharacter(createPdfTestCharacter());
     const chars = ['STR', 'CON', 'SIZ', 'DEX', 'INT', 'POW', 'CHA'];
-    let allMapped = true;
-    chars.forEach(char => {
-      if (!pdfCode.includes(`'${char}'`) && !pdfCode.includes(`"${char}"`)) {
-        allMapped = false;
-      }
-    });
-    if (allMapped) {
-      pass('Template PDF: fills all 7 characteristics');
-    } else {
-      fail('Template PDF: missing characteristic mapping');
-    }
-  }
-}
-
-// Test 4.4: exportTemplatePDF() fills derived attributes
-{
-  if (App.App && App.App.exportTemplatePDF) {
-    const pdfCode = App.App.exportTemplatePDF.toString();
     const attrs = ['actionPoints', 'damageModifier', 'healingRate',
-                   'movementRate', 'initiativeBonus', 'luckPoints'];
-    let allMapped = true;
-    attrs.forEach(attr => {
-      if (!pdfCode.includes(attr)) {
-        allMapped = false;
-      }
-    });
-    if (allMapped) {
-      pass('Template PDF: fills all derived attributes');
-    } else {
-      fail('Template PDF: missing derived attribute mapping');
-    }
-  }
-}
+                   'initiativeBonus', 'luckPoints', 'magicPoints'];
+    const missing = [];
 
-// Test 4.5: exportTemplatePDF() fills hit locations
-{
-  if (App.App && App.App.exportTemplatePDF) {
-    const pdfCode = App.App.exportTemplatePDF.toString();
-    const locations = ['head', 'chest', 'abdomen', 'leftArm', 'rightArm', 'leftLeg', 'rightLeg'];
-    let allMapped = true;
-    locations.forEach(loc => {
-      if (!pdfCode.includes(loc)) {
-        allMapped = false;
-      }
-    });
-    if (allMapped) {
-      pass('Template PDF: fills all 7 hit locations');
-    } else {
-      fail('Template PDF: missing hit location mapping');
-    }
-  }
-}
+    if (normalized.name !== 'PDF Test Hero') missing.push('name');
+    if (normalized.culture !== 'Sartarite (Heortling)') missing.push('culture');
+    if (normalized.profession !== 'Warrior') missing.push('profession');
+    chars.forEach(char => { if (typeof normalized.characteristics[char] !== 'number') missing.push(char); });
+    attrs.forEach(attr => { if (typeof normalized.attributes[attr] === 'undefined') missing.push(attr); });
+    if (!Array.isArray(normalized.hitLocations) || normalized.hitLocations.length !== 7) missing.push('hitLocations');
+    if (!normalized.skills || typeof normalized.skills.Athletics !== 'number') missing.push('skills');
+    if (!normalized.combatStyles || normalized.combatStyles[0]?.name !== 'Sword & Shield') missing.push('combatStyles');
+    if (!normalized.equipment.weapons.some(w => w.name === 'Broadsword')) missing.push('weapons');
+    if (!normalized.folkMagic.includes('Bladesharp')) missing.push('folkMagic');
+    if (!normalized.passions.some(p => p.name === 'Loyalty (Clan)')) missing.push('passions');
 
-// Test 4.6: exportTemplatePDF() fills skills
-{
-  if (App.App && App.App.exportTemplatePDF) {
-    const pdfCode = App.App.exportTemplatePDF.toString();
-    if (pdfCode.includes('compileAllSkills')) {
-      pass('Template PDF: fills skills from compileAllSkills()');
+    if (missing.length === 0) {
+      pass('normalizeCharacter() exposes identity, stats, skills, combat, equipment, magic, and passions');
     } else {
-      fail('Template PDF: missing skills mapping');
+      fail('normalizeCharacter() missing template PDF data', missing.join(', '));
     }
-  }
-}
-
-// Test 4.7: exportTemplatePDF() fills combat styles
-{
-  if (App.App && App.App.exportTemplatePDF) {
-    const pdfCode = App.App.exportTemplatePDF.toString();
-    if (pdfCode.includes('CharacterData.combatStyles')) {
-      pass('Template PDF: fills combat styles');
-    } else {
-      fail('Template PDF: missing combat styles mapping');
-    }
-  }
-}
-
-// Test 4.8: exportTemplatePDF() fills weapons
-{
-  if (App.App && App.App.exportTemplatePDF) {
-    const pdfCode = App.App.exportTemplatePDF.toString();
-    if (pdfCode.includes('CharacterData.weapons')) {
-      pass('Template PDF: fills weapons');
-    } else {
-      fail('Template PDF: missing weapons mapping');
-    }
-  }
-}
-
-// Test 4.9: exportTemplatePDF() fills folk magic
-{
-  if (App.App && App.App.exportTemplatePDF) {
-    const pdfCode = App.App.exportTemplatePDF.toString();
-    if (pdfCode.includes('folkMagicSpells') || pdfCode.includes('careerFolkMagic')) {
-      pass('Template PDF: fills folk magic spells');
-    } else {
-      fail('Template PDF: missing folk magic mapping');
-    }
-  }
-}
-
-// Test 4.10: exportTemplatePDF() fills passions
-{
-  if (App.App && App.App.exportTemplatePDF) {
-    const pdfCode = App.App.exportTemplatePDF.toString();
-    if (pdfCode.includes('CharacterData.passions')) {
-      pass('Template PDF: fills passions');
-    } else {
-      fail('Template PDF: missing passions mapping');
-    }
+  } else {
+    fail('normalizeCharacter() not available for template PDF data test');
   }
 }
 
@@ -2690,18 +2742,51 @@ section('Wave 3 Goal 5: Vendor pdf-lib Locally');
   }
 }
 
-// Test 5.2: index.html has pdf-lib available (inlined or local reference)
+// Test 5.2: index.html does not inline parse-heavy pdf-lib at startup
 {
   const htmlPath = path.join(__dirname, 'index.html');
   const html = fs.readFileSync(htmlPath, 'utf8');
-  if (html.includes('src="lib/pdf-lib.min.js"') || html.includes('PDFLib')) {
-    pass('index.html has pdf-lib available (inlined or local reference)');
+  const scripts = extractScripts(html);
+  const inlinePdfLib = scripts.find(script => script.length > 400000 && script.includes('PDFLib') && !script.includes('CharacterData'));
+  if (!inlinePdfLib && html.includes('App.ensurePDFLib')) {
+    pass('index.html lazy-loads pdf-lib instead of inlining it at startup');
   } else {
-    fail('index.html does not have pdf-lib available');
+    fail('index.html still inlines parse-heavy pdf-lib at startup');
   }
 }
 
-// Test 5.3: index.html does NOT reference CDN
+// Test 5.3: ensurePDFLib loads and caches the local library
+asyncTest('ensurePDFLib lazy-load test failed', async () => {
+  const { App: AppObj, _sandbox } = loadApp();
+  if (!AppObj || !AppObj.ensurePDFLib || !_sandbox) {
+    fail('App.ensurePDFLib not available');
+    return;
+  }
+
+  const mockPdfLib = _sandbox.PDFLib;
+  let appended = 0;
+  let loadedSrc = null;
+  _sandbox.PDFLib = undefined;
+  AppObj._pdfLibPromise = null;
+  _sandbox.document.createElement = tag => ({ tagName: tag, onload: null, onerror: null, src: '' });
+  _sandbox.document.head.appendChild = script => {
+    appended++;
+    loadedSrc = script.src;
+    _sandbox.PDFLib = mockPdfLib;
+    script.onload();
+  };
+
+  const first = await AppObj.ensurePDFLib();
+  const second = await AppObj.ensurePDFLib();
+
+  if (first === mockPdfLib && second === mockPdfLib && appended === 1 && loadedSrc === 'lib/pdf-lib.min.js') {
+    pass('ensurePDFLib lazy-loads and caches local pdf-lib');
+  } else {
+    fail('ensurePDFLib did not lazy-load/cache local pdf-lib', JSON.stringify({ appended, loadedSrc, loaded: first === mockPdfLib }));
+  }
+});
+
+// Test 5.4: index.html does NOT reference CDN
 {
   const htmlPath = path.join(__dirname, 'index.html');
   const html = fs.readFileSync(htmlPath, 'utf8');
@@ -2713,7 +2798,7 @@ section('Wave 3 Goal 5: Vendor pdf-lib Locally');
   }
 }
 
-// Test 5.4: CDN URL preserved in comment
+// Test 5.5: CDN URL preserved in comment
 {
   const htmlPath = path.join(__dirname, 'index.html');
   const html = fs.readFileSync(htmlPath, 'utf8');
@@ -2724,13 +2809,13 @@ section('Wave 3 Goal 5: Vendor pdf-lib Locally');
   }
 }
 
-// Test 5.5: No external script references (single-file design rule)
+// Test 5.6: No startup external script references
 {
   const htmlPath = path.join(__dirname, 'index.html');
   const html = fs.readFileSync(htmlPath, 'utf8');
   const externalScripts = html.match(/<script[^>]+src=["'][^"']+["']/g) || [];
   if (externalScripts.length === 0) {
-    pass('index.html has no external script references (self-contained)');
+    pass('index.html has no startup external script references');
   } else {
     fail(`index.html has ${externalScripts.length} external script reference(s): ${externalScripts[0]}`);
   }
@@ -2745,7 +2830,7 @@ fixtures.forEach(fixtureInfo => {
   const fixture = loadFixture(fixtureInfo.file);
   if (!fixture) return;
 
-  // Test 6.1: toJSON produces valid JSON
+  // Test 6.1: toJSON produces a JSON-serializable character object
   {
     if (App.CharacterData && App.CharacterData.toJSON) {
       try {
@@ -2756,11 +2841,11 @@ fixtures.forEach(fixtureInfo => {
         // Serialize
         const output = App.CharacterData.toJSON();
 
-        // Parse to verify it's valid JSON
-        const parsed = JSON.parse(output);
+        // Stringify/parse to verify the plain object is JSON-safe
+        const parsed = JSON.parse(JSON.stringify(output));
 
         if (parsed && parsed.name === fixture.name) {
-          pass(`${fixtureInfo.name}: toJSON() produces valid JSON`);
+          pass(`${fixtureInfo.name}: toJSON() produces JSON-safe object`);
         } else {
           fail(`${fixtureInfo.name}: toJSON() output invalid`);
         }
@@ -2876,6 +2961,749 @@ fixtures.forEach(fixtureInfo => {
     } catch (err) {
       fail('CharacterData.getSchemaVersion() threw error', err.message);
     }
+  }
+}
+
+// Test 6.7: Save button payload is a character object, not a JSON string literal
+{
+  const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
+  if (AppObj && AppObj.saveCharacter && CD && _sandbox) {
+    const originalBlob = _sandbox.Blob;
+    const originalURL = _sandbox.URL;
+    const originalCreateElement = _sandbox.document.createElement;
+    const originalShowToast = AppObj.showToast;
+    let blobParts = null;
+
+    _sandbox.Blob = function(parts) {
+      blobParts = parts;
+      return { parts };
+    };
+    _sandbox.URL = {
+      createObjectURL: () => 'blob:test-character',
+      revokeObjectURL: () => {}
+    };
+    _sandbox.document.createElement = tag => ({
+      href: '',
+      download: '',
+      click: () => {},
+      tagName: tag
+    });
+    AppObj.showToast = () => {};
+
+    try {
+      CD.fromJSON(JSON.stringify(createTestCharacter()));
+      CD.name = 'Save Round Trip';
+      AppObj.saveCharacter();
+
+      const savedText = blobParts && blobParts[0];
+      const parsed = savedText ? JSON.parse(savedText) : null;
+      if (parsed && typeof parsed === 'object' && !Array.isArray(parsed) && parsed.name === 'Save Round Trip') {
+        pass('App.saveCharacter exports a character object payload');
+      } else {
+        fail('App.saveCharacter exports a JSON string literal instead of an object');
+      }
+    } catch (err) {
+      fail('App.saveCharacter payload test threw error', err.message);
+    } finally {
+      _sandbox.Blob = originalBlob;
+      _sandbox.URL = originalURL;
+      _sandbox.document.createElement = originalCreateElement;
+      AppObj.showToast = originalShowToast;
+    }
+  } else {
+    fail('App.saveCharacter not available for payload test');
+  }
+}
+
+// Test 6.8: Character JSON round-trip preserves magic-system and companion state
+{
+  const { CharacterData: CD } = loadApp();
+  if (CD && CD.toJSON && CD.fromJSON) {
+    CD.fromJSON(JSON.stringify(createTestCharacter()));
+    CD.cult = 'Daka Fal';
+    CD.cultType = { primary: 'animist', types: ['animist'], isHybrid: false };
+    CD.boundSpiritSlots = 5;
+    CD.boundSpirits = [{ name: 'Ancestor Spirit' }];
+    CD.sorceryResource = 14;
+    CD.sorcerySpells = ['Animate (Substance)'];
+    CD.companions = [{ name: 'Greywind', species: 'Bison' }];
+
+    const serialized = CD.toJSON();
+    CD.boundSpiritSlots = 0;
+    CD.boundSpirits = [];
+    CD.sorceryResource = 0;
+    CD.sorcerySpells = [];
+    CD.companions = [];
+    CD.fromJSON(serialized);
+
+    const preserved =
+      CD.cultType && CD.cultType.primary === 'animist' &&
+      CD.boundSpiritSlots === 5 &&
+      CD.boundSpirits && CD.boundSpirits[0] && CD.boundSpirits[0].name === 'Ancestor Spirit' &&
+      CD.sorceryResource === 14 &&
+      CD.sorcerySpells && CD.sorcerySpells[0] === 'Animate (Substance)' &&
+      CD.companions && CD.companions[0] && CD.companions[0].name === 'Greywind';
+
+    if (preserved) {
+      pass('Character JSON round-trip preserves magic and companion state');
+    } else {
+      fail('Character JSON round-trip drops magic or companion state');
+    }
+  } else {
+    fail('CharacterData JSON methods not available for magic persistence test');
+  }
+}
+
+// Test 6.9: localStorage round-trip uses the same complete character snapshot
+{
+  const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
+  if (AppObj && CD && _sandbox) {
+    const storage = {};
+    _sandbox.localStorage = {
+      getItem: key => storage[key] || null,
+      setItem: (key, value) => { storage[key] = value; },
+      removeItem: key => { delete storage[key]; }
+    };
+
+    CD.fromJSON(JSON.stringify(createTestCharacter()));
+    CD.name = 'Storage Round Trip';
+    CD.cultType = { primary: 'sorcery', types: ['sorcery'], isHybrid: false };
+    CD.boundSpiritSlots = 4;
+    CD.boundSpirits = [{ name: 'Disease Spirit' }];
+    CD.sorceryResource = 13;
+    CD.sorcerySpells = ['Dominate (Human)'];
+    CD.companions = [{ name: 'Hoofbeat', species: 'Horse' }];
+    CD.saveToLocalStorage();
+
+    CD.name = '';
+    CD.cultType = null;
+    CD.boundSpiritSlots = 0;
+    CD.boundSpirits = [];
+    CD.sorceryResource = 0;
+    CD.sorcerySpells = [];
+    CD.companions = [];
+    AppObj.loadFromLocalStorage();
+
+    const preserved =
+      CD.name === 'Storage Round Trip' &&
+      CD.cultType && CD.cultType.primary === 'sorcery' &&
+      CD.boundSpiritSlots === 4 &&
+      CD.boundSpirits && CD.boundSpirits[0] && CD.boundSpirits[0].name === 'Disease Spirit' &&
+      CD.sorceryResource === 13 &&
+      CD.sorcerySpells && CD.sorcerySpells[0] === 'Dominate (Human)' &&
+      CD.companions && CD.companions[0] && CD.companions[0].name === 'Hoofbeat';
+
+    if (preserved) {
+      pass('localStorage round-trip preserves complete character state');
+    } else {
+      fail('localStorage round-trip drops magic or companion state');
+    }
+  } else {
+    fail('App/CharacterData not available for localStorage persistence test');
+  }
+}
+
+// Test 6.10: Versioned save envelopes import through CharacterData.fromJSON()
+{
+  const { CharacterData: CD } = loadApp();
+  if (CD && CD.fromJSON) {
+    const payload = {
+      version: 1,
+      data: {
+        ...createTestCharacter(),
+        name: 'Versioned Envelope',
+        boundSpirits: [{ name: 'Healing Spirit' }],
+        sorcerySpells: ['Project (Sight)'],
+        companions: [{ name: 'Red Mane', species: 'Horse' }]
+      }
+    };
+
+    const success = CD.fromJSON(JSON.stringify(payload));
+    if (success && CD.name === 'Versioned Envelope' &&
+        CD.boundSpirits && CD.boundSpirits[0].name === 'Healing Spirit' &&
+        CD.sorcerySpells && CD.sorcerySpells[0] === 'Project (Sight)' &&
+        CD.companions && CD.companions[0].name === 'Red Mane') {
+      pass('CharacterData.fromJSON accepts versioned save envelopes');
+    } else {
+      fail('CharacterData.fromJSON does not import versioned save envelopes');
+    }
+  } else {
+    fail('CharacterData.fromJSON not available for versioned envelope test');
+  }
+}
+
+// Test 6.11: localStorage write failures do not crash the app
+{
+  const { App: AppObj, _sandbox } = loadApp();
+  if (AppObj && AppObj.saveToLocalStorage && _sandbox) {
+    let toast = null;
+    let threw = false;
+    AppObj.showToast = (message, type) => { toast = { message, type }; };
+    _sandbox.localStorage = {
+      setItem: () => { throw new Error('QuotaExceededError'); },
+      getItem: () => null,
+      removeItem: () => {}
+    };
+
+    try {
+      AppObj.saveToLocalStorage();
+    } catch (err) {
+      threw = true;
+    }
+
+    if (!threw && toast && toast.type === 'error') {
+      pass('localStorage write failure is surfaced without crashing');
+    } else {
+      fail('localStorage write failure crashes or is not surfaced');
+    }
+  } else {
+    fail('App.saveToLocalStorage not available for write-failure test');
+  }
+}
+
+// Test 6.12: localStorage read failures preserve the current character
+{
+  const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
+  if (AppObj && AppObj.loadFromLocalStorage && CD && _sandbox) {
+    let toast = null;
+    let threw = false;
+    CD.name = 'Existing Character';
+    AppObj.showToast = (message, type) => { toast = { message, type }; };
+    _sandbox.localStorage = {
+      getItem: () => { throw new Error('SecurityError'); },
+      setItem: () => {},
+      removeItem: () => {}
+    };
+
+    try {
+      AppObj.loadFromLocalStorage();
+    } catch (err) {
+      threw = true;
+    }
+
+    if (!threw && CD.name === 'Existing Character' && toast && toast.type === 'error') {
+      pass('localStorage read failure preserves character and is surfaced');
+    } else {
+      fail('localStorage read failure crashes or mutates character');
+    }
+  } else {
+    fail('App.loadFromLocalStorage not available for read-failure test');
+  }
+}
+
+// Test 6.13: malformed character snapshots are rejected atomically
+{
+  const { CharacterData: CD } = loadApp();
+  if (CD && CD.fromJSON) {
+    CD.fromJSON(JSON.stringify(createTestCharacter()));
+    CD.name = 'Atomic Original';
+    const originalSTR = CD.characteristics.STR;
+    const success = CD.fromJSON(JSON.stringify({
+      name: 'Corrupt Character',
+      characteristics: 'not a characteristics object',
+      culturalSkills: []
+    }));
+
+    if (!success && CD.name === 'Atomic Original' && CD.characteristics.STR === originalSTR && !Array.isArray(CD.culturalSkills)) {
+      pass('CharacterData.fromJSON rejects malformed snapshots atomically');
+    } else {
+      fail('CharacterData.fromJSON mutates state for malformed snapshots');
+    }
+
+    const arbitrarySuccess = CD.fromJSON(JSON.stringify({ bad: true }));
+    if (!arbitrarySuccess && CD.name === 'Atomic Original' && CD.characteristics.STR === originalSTR) {
+      pass('CharacterData.fromJSON rejects arbitrary non-character objects atomically');
+    } else {
+      fail('CharacterData.fromJSON accepts arbitrary non-character objects');
+    }
+  } else {
+    fail('CharacterData.fromJSON not available for atomic rejection test');
+  }
+}
+
+// Test 6.14: file-import helper validates before mutating live CharacterData
+{
+  const { App: AppObj, CharacterData: CD, Calc } = loadApp();
+  if (AppObj && CD) {
+    CD.fromJSON(JSON.stringify(createTestCharacter()));
+    CD.name = 'Import Original';
+
+    if (typeof AppObj.importCharacterData !== 'function') {
+      fail('App.importCharacterData helper missing for atomic imports');
+    } else {
+      const arbitrarySuccess = AppObj.importCharacterData({ bad: true });
+      if (!arbitrarySuccess && CD.name === 'Import Original') {
+        pass('App.importCharacterData rejects arbitrary non-character objects before mutation');
+      } else {
+        fail('App.importCharacterData accepts arbitrary non-character objects');
+      }
+
+      const success = AppObj.importCharacterData({
+        name: 'Invalid Import',
+        characteristics: { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 10, POW: 10, CHA: 10 },
+        culturalSkills: { 'Art (any)': 15 }
+      });
+
+      if (!success && CD.name === 'Import Original') {
+        pass('App.importCharacterData rejects invalid imports before mutation');
+      } else {
+        fail('App.importCharacterData mutates state for invalid imports');
+      }
+
+      const companionSuccess = AppObj.importCharacterData({
+        ...createTestCharacter(),
+        name: 'Companion Attack Import',
+        companions: [{
+          name: 'Bad Mount',
+          characteristics: { STR: '<img src=x onerror="window.__xss=1">' },
+          hitLocations: { Head: { max: '"><img src=x onerror="window.__xss=1">', ap: 0 } },
+          attacks: [{ name: 'Kick', skill: '<script>window.__xss=1</script>', damage: '1d6' }]
+        }]
+      });
+
+      if (!companionSuccess && CD.name === 'Import Original') {
+        pass('App.importCharacterData rejects malicious nested companion numeric fields before mutation');
+      } else {
+        fail('App.importCharacterData accepts unsafe nested companion import data');
+      }
+
+      let saved = false;
+      let rendered = false;
+      let toastMessage = '';
+      AppObj.saveToLocalStorage = () => { saved = true; };
+      AppObj.renderCurrentStep = () => { rendered = true; };
+      AppObj.showToast = msg => { toastMessage = msg; };
+
+      const validPayload = {
+        version: 1,
+        data: {
+          ...createTestCharacter(),
+          name: 'Valid Import',
+          characteristics: { STR: 11, CON: 12, SIZ: 13, DEX: 14, INT: 15, POW: 5, CHA: 5 },
+          attributes: {}
+        }
+      };
+      const validSuccess = AppObj.importCharacterData(validPayload);
+      const expectedAttributes = Calc.calculateAllAttributes(validPayload.data.characteristics);
+      if (validSuccess &&
+          CD.name === 'Valid Import' &&
+          CD.attributes.actionPoints === expectedAttributes.actionPoints &&
+          saved && rendered && toastMessage === 'Character loaded') {
+        pass('App.importCharacterData applies valid imports atomically and refreshes UI');
+      } else {
+        fail('App.importCharacterData valid import path failed',
+          JSON.stringify({ validSuccess, name: CD.name, saved, rendered, toastMessage }));
+      }
+    }
+  } else {
+    fail('App/CharacterData not available for import atomicity test');
+  }
+}
+
+// Test 6.15: wizard text fields escape imported user text before rendering
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj && AppObj.renderStep1 && CD) {
+    CD.name = '" autofocus onfocus="window.__xss=1';
+    CD.concept = '</textarea><img src=x onerror="window.__xss=1">';
+    const html = AppObj.renderStep1().innerHTML;
+
+    if (!html.includes('value="" autofocus') && !html.includes('</textarea><img') &&
+        html.includes('&quot;') && html.includes('&lt;/textarea&gt;')) {
+      pass('Wizard Step 1 escapes imported user text');
+    } else {
+      fail('Wizard Step 1 renders imported user text as executable markup');
+    }
+  } else {
+    fail('App.renderStep1 not available for XSS test');
+  }
+}
+
+// Test 6.15a: Step 7 escapes imported background fields before rendering
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj && AppObj.renderStep7 && CD) {
+    CD.age = '"><img src=x onerror="window.__xss=1">';
+    CD.gender = '" autofocus onfocus="window.__xss=1';
+    CD.family = '</textarea><img src=x onerror="window.__xss=1">';
+    CD.backgroundEvents = '</textarea><script>window.__xss=1</script>';
+    const html = AppObj.renderStep7().innerHTML;
+
+    if (!html.includes('value="" autofocus') &&
+        !html.includes('</textarea><img') &&
+        !html.includes('</textarea><script>') &&
+        html.includes('&quot;') &&
+        html.includes('&lt;/textarea&gt;')) {
+      pass('Wizard Step 7 escapes imported background fields');
+    } else {
+      fail('Wizard Step 7 renders imported background fields as executable markup');
+    }
+  } else {
+    fail('App.renderStep7 not available for XSS test');
+  }
+}
+
+// Test 6.16: review screen escapes imported character and equipment labels
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj && AppObj.renderStep13 && CD) {
+    CD.fromJSON(JSON.stringify(createTestCharacter()));
+    CD.name = '<img src=x onerror="window.__xss=1">';
+    CD.concept = '<svg onload="window.__xss=1">';
+    CD.homeland = '<script>window.__xss=1</script>';
+    CD.equipment = [{ name: '<img src=x onerror="window.__xss=1">', quantity: 1, enc: 0 }];
+    CD.weapons = [];
+    CD.armor = [];
+    CD.companions = [{
+      name: '<img src=x onerror="window.__xss=1">',
+      species: '<svg onload="window.__xss=1">',
+      characteristics: { STR: '<img src=x onerror="window.__xss=1">' },
+      armor: '<script>window.__xss=1</script>',
+      movement: '<img src=x onerror="window.__xss=1">',
+      damageModifier: '<svg onload="window.__xss=1">',
+      hitPointsTotal: '<img src=x onerror="window.__xss=1">',
+      healingRate: '<script>window.__xss=1</script>'
+    }];
+    const html = AppObj.renderStep13().innerHTML;
+
+    if (!html.includes('<img src=x') && !html.includes('<svg') && !html.includes('<script>') &&
+        html.includes('&lt;img') && html.includes('&lt;svg') && html.includes('&lt;script&gt;')) {
+      pass('Review screen escapes imported character labels');
+    } else {
+      fail('Review screen renders imported character labels as executable markup');
+    }
+  } else {
+    fail('App.renderStep13 not available for XSS test');
+  }
+}
+
+// Test 6.17a: review screen render does not mutate character equipment
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj && AppObj.renderStep13 && CD && CD.toJSONString) {
+    CD.fromJSON(JSON.stringify(createTestCharacter()));
+    CD.equipment = [];
+    CD.weapons = [];
+    CD.armor = [];
+    CD.companions = [];
+    CD.startingMoney = 0;
+    let populated = false;
+    AppObj.autoPopulateStartingEquipment = () => {
+      populated = true;
+      CD.equipment.push({ name: 'Render Mutation', quantity: 1, enc: 0 });
+    };
+
+    const before = CD.toJSONString();
+    AppObj.renderStep13();
+    const after = CD.toJSONString();
+
+    if (!populated && before === after) {
+      pass('Review screen render is pure and does not initialize equipment');
+    } else {
+      fail('Review screen render mutates character equipment');
+    }
+  } else {
+    fail('App.renderStep13 or CharacterData.toJSONString not available for render purity test');
+  }
+}
+
+// Test 6.17b: advancing into Step 13 prepares starting equipment before render
+{
+  const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
+  if (AppObj && AppObj.nextStep && CD && _sandbox) {
+    let populated = false;
+    let rendered = false;
+    CD.fromJSON(JSON.stringify(createTestCharacter()));
+    CD.equipment = [];
+    AppObj.currentStep = 12;
+    AppObj.totalSteps = 13;
+    AppObj.validateCurrentStep = () => true;
+    AppObj.autoPopulateStartingEquipment = () => {
+      populated = true;
+      CD.equipment.push({ name: 'Prepared Equipment', quantity: 1, enc: 0 });
+    };
+    AppObj.renderCurrentStep = () => { rendered = true; };
+    AppObj.updateStepIndicator = () => {};
+    _sandbox.window.scrollTo = () => {};
+
+    AppObj.nextStep();
+
+    if (AppObj.currentStep === 13 && populated && rendered && CD.equipment.length === 1) {
+      pass('Advancing into Step 13 initializes equipment before rendering review');
+    } else {
+      fail('Advancing into Step 13 does not initialize equipment before rendering review');
+    }
+  } else {
+    fail('App.nextStep not available for Step 13 preparation test');
+  }
+}
+
+// Test 6.17c: direct agent setStep(13) prepares and renders the final step
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj && AppObj.agent && AppObj.agent.setStep && CD) {
+    let preparedStep = null;
+    let rendered = false;
+    let saved = false;
+    CD.fromJSON(JSON.stringify(createTestCharacter()));
+    AppObj.currentStep = 12;
+    AppObj.totalSteps = 13;
+    AppObj.prepareStep = step => {
+      preparedStep = step;
+      CD.equipment = [{ name: 'Prepared By Agent', quantity: 1, enc: 0 }];
+    };
+    AppObj.renderCurrentStep = () => { rendered = true; };
+    AppObj.saveToLocalStorage = () => { saved = true; };
+
+    const result = AppObj.agent.setStep(13, {});
+
+    if (result.success &&
+        AppObj.currentStep === 13 &&
+        preparedStep === 13 &&
+        rendered && saved &&
+        result.state.step === 13 &&
+        result.state.totalSteps === 13 &&
+        CD.equipment.length === 1) {
+      pass('App.agent.setStep(13) prepares, renders, saves, and returns final state');
+    } else {
+      fail('App.agent.setStep(13) did not perform final-step preparation',
+        JSON.stringify({ result, currentStep: AppObj.currentStep, preparedStep, rendered, saved }));
+    }
+  } else {
+    fail('App.agent.setStep not available for Step 13 direct transition test');
+  }
+}
+
+// Test 6.17: companion hit-location keys cannot inject inline handlers
+{
+  const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
+  if (AppObj && AppObj.renderPlayCompanions && CD && _sandbox) {
+    CD.companions = [{
+      name: '<img src=x onerror="window.__xss=1">',
+      species: '<svg onload="window.__xss=1">',
+      characteristics: { STR: '<img src=x onerror="window.__xss=1">' },
+      armor: '<script>window.__xss=1</script>',
+      movement: '<img src=x onerror="window.__xss=1">',
+      damageModifier: '<svg onload="window.__xss=1">',
+      hitPointsTotal: '<img src=x onerror="window.__xss=1">',
+      healingRate: '<script>window.__xss=1</script>',
+      strikeRank: '<img src=x onerror="window.__xss=1">',
+      hitLocations: {
+        "Head'];window.__xss=1;//": {
+          current: '"><img src=x onerror="window.__xss=1">',
+          max: '"><svg onload="window.__xss=1">',
+          ap: '<script>window.__xss=1</script>'
+        }
+      },
+      attacks: [{
+        name: '<img src=x onerror="window.__xss=1">',
+        skill: '<svg onload="window.__xss=1">',
+        damage: '1d6',
+        notes: '<script>window.__xss=1</script>'
+      }],
+      notes: '<img src=x onerror="window.__xss=1">'
+    }];
+
+    AppObj.renderPlayCompanions();
+    const html = _sandbox.elements['play-companions'].innerHTML;
+
+    if (!html.includes('<img src=x') && !html.includes('<svg') && !html.includes('<script>') &&
+        !html.includes("hitLocations['Head'];window.__xss=1;//']") &&
+        html.includes('data-location=')) {
+      pass('Companion play rendering escapes labels and avoids handler injection');
+    } else {
+      fail('Companion play rendering allows markup or handler injection');
+    }
+  } else {
+    fail('App.renderPlayCompanions not available for companion XSS test');
+  }
+}
+
+// Test 6.18: Play Mode renders selected bound spirits for animist cults
+{
+  const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
+  if (AppObj && AppObj.renderPlayMagic && CD && _sandbox) {
+    CD.fromJSON(JSON.stringify(createTestCharacter()));
+    CD.attributes = { folkMagicBase: 30, runeAffinities: {} };
+    CD.cult = 'Daka Fal';
+    CD.cultType = { primary: 'animist', types: ['animist'], isHybrid: false };
+    CD.boundSpiritSlots = 3;
+    CD.boundSpirits = [{ name: 'Ancestor Spirit' }, { name: 'Healing Spirit' }];
+    CD.folkMagicSpells = [];
+    CD.careerFolkMagic = [];
+
+    AppObj.renderPlayMagic();
+    const html = _sandbox.elements['play-magic'].innerHTML;
+
+    if (html.includes('data-testid="bound-spirits-list"') &&
+        html.includes('Ancestor Spirit') &&
+        html.includes('Healing Spirit')) {
+      pass('Play Mode renders selected bound spirits');
+    } else {
+      fail('Play Mode does not render selected bound spirits');
+    }
+  } else {
+    fail('App.renderPlayMagic not available for bound spirits Play Mode test');
+  }
+}
+
+// Test 6.19: Play Mode renders selected sorcery spells for sorcery cults
+{
+  const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
+  if (AppObj && AppObj.renderPlayMagic && CD && _sandbox) {
+    CD.fromJSON(JSON.stringify(createTestCharacter()));
+    CD.attributes = { folkMagicBase: 30, runeAffinities: {} };
+    CD.cult = 'Arkat';
+    CD.cultType = { primary: 'sorcery', types: ['sorcery'], isHybrid: false };
+    CD.sorceryResource = 14;
+    CD.sorcerySpells = ['Animate (Substance)', 'Dominate (Human)'];
+    CD.folkMagicSpells = [];
+    CD.careerFolkMagic = [];
+
+    AppObj.renderPlayMagic();
+    const html = _sandbox.elements['play-magic'].innerHTML;
+
+    if (html.includes('data-testid="sorcery-spells-list"') &&
+        html.includes('Animate (Substance)') &&
+        html.includes('Dominate (Human)')) {
+      pass('Play Mode renders selected sorcery spells');
+    } else {
+      fail('Play Mode does not render selected sorcery spells');
+    }
+  } else {
+    fail('App.renderPlayMagic not available for sorcery Play Mode test');
+  }
+}
+
+// Test 6.20: data-persist input handling updates CharacterData before saving
+{
+  const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
+  if (AppObj && AppObj.attachPersistHandlers && CD && _sandbox) {
+    let inputHandler = null;
+    let savedName = null;
+    _sandbox.document.addEventListener = (eventName, handler) => {
+      if (eventName === 'input') inputHandler = handler;
+    };
+    _sandbox.localStorage = {
+      getItem: () => null,
+      setItem: (key, value) => {
+        const parsed = JSON.parse(value);
+        savedName = parsed.data.name;
+      },
+      removeItem: () => {}
+    };
+
+    CD.name = 'Old Play Name';
+    AppObj.attachPersistHandlers();
+    inputHandler({
+      target: {
+        hasAttribute: attr => attr === 'data-persist',
+        getAttribute: attr => attr === 'data-persist' ? 'name' : null,
+        dataset: { persist: 'name' },
+        type: 'text',
+        value: 'New Play Name'
+      }
+    });
+
+    if (CD.name === 'New Play Name' && savedName === 'New Play Name') {
+      pass('data-persist input handler updates CharacterData before saving');
+    } else {
+      fail('data-persist input handler saves stale CharacterData');
+    }
+  } else {
+    fail('App.attachPersistHandlers not available for Play Mode persist test');
+  }
+}
+
+// Test 6.21: rapid data-persist input autosaves are debounced
+{
+  const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
+  if (AppObj && AppObj.requestSaveToLocalStorage && AppObj.attachPersistHandlers && CD && _sandbox) {
+    let inputHandler = null;
+    let writeCount = 0;
+    const timers = [];
+
+    _sandbox.document.addEventListener = (eventName, handler) => {
+      if (eventName === 'input') inputHandler = handler;
+    };
+    _sandbox.localStorage = {
+      getItem: () => null,
+      setItem: () => { writeCount++; },
+      removeItem: () => {}
+    };
+    _sandbox.setTimeout = (fn, delay) => {
+      const timer = { fn, delay, active: true };
+      timers.push(timer);
+      return timer;
+    };
+    _sandbox.clearTimeout = timer => {
+      if (timer) timer.active = false;
+    };
+
+    AppObj.attachPersistHandlers();
+    for (const name of ['First', 'Second', 'Final']) {
+      inputHandler({
+        target: {
+          hasAttribute: attr => attr === 'data-persist',
+          getAttribute: attr => attr === 'data-persist' ? 'name' : null,
+          dataset: { persist: 'name' },
+          type: 'text',
+          value: name
+        }
+      });
+    }
+
+    const activeTimers = timers.filter(timer => timer.active);
+    if (CD.name === 'Final' && writeCount === 0 && activeTimers.length === 1) {
+      pass('rapid data-persist inputs schedule one autosave after updating CharacterData');
+    } else {
+      fail('rapid data-persist inputs are not debounced before localStorage writes');
+    }
+
+    activeTimers.forEach(timer => timer.fn());
+    if (writeCount === 1) {
+      pass('debounced autosave writes once after rapid input burst');
+    } else {
+      fail('debounced autosave writes more than once after rapid input burst');
+    }
+  } else {
+    fail('App.requestSaveToLocalStorage not available for autosave debounce test');
+  }
+}
+
+// Test 6.22: Agent state APIs expose the 13-step wizard contract
+{
+  const { App: AppObj } = loadApp();
+  if (AppObj && AppObj.agent && AppObj.agent.getState && AppObj.agent.getUIState) {
+    const state = AppObj.agent.getState();
+    const ui = AppObj.agent.getUIState();
+    if (state.totalSteps === 13 && ui.totalSteps === 13) {
+      pass('Agent state APIs expose totalSteps = 13');
+    } else {
+      fail('Agent state APIs do not expose totalSteps = 13');
+    }
+  } else {
+    fail('Agent state APIs not available for wizard contract test');
+  }
+}
+
+// Test 6.23: Agent next() completes at Step 13 instead of advancing to Step 14
+{
+  const { App: AppObj } = loadApp();
+  if (AppObj && AppObj.agent && AppObj.agent.next) {
+    AppObj.currentStep = 13;
+    AppObj.mode = 'wizard';
+    AppObj.renderCurrentStep = () => {};
+    AppObj.switchMode = mode => { AppObj.mode = mode; };
+
+    const result = AppObj.agent.next();
+    if (result.success && result.completed && result.newStep === 13 && AppObj.mode === 'play') {
+      pass('Agent next() completes the 13-step wizard into Play Mode');
+    } else {
+      fail('Agent next() does not complete correctly from Step 13');
+    }
+  } else {
+    fail('App.agent.next not available for wizard completion test');
   }
 }
 
@@ -3047,12 +3875,27 @@ section('Random Character Generator');
     if (CD.armor.length > 0) pass('Random: armor populated (' + CD.armor[0].name + ')');
     else fail('Random: armor is empty');
 
-    if (!CD.folkMagicSpells.includes('Old Spell')) pass('Random: old folkMagic cleared');
-    else fail('Random: old spell "Old Spell" still present');
+	    if (!CD.folkMagicSpells.includes('Old Spell')) pass('Random: old folkMagic cleared');
+	    else fail('Random: old spell "Old Spell" still present');
 
-    // Validate ALL steps would pass
-    // Step 5: cultural=100, folkMagic=3, all runes set (tested above)
-    // Step 8: career set, 3 pro skills (tested above)
+	    AppObj.mode = 'play';
+	    let renderedPlayMode = false;
+	    const origPlayRender = AppObj.renderPlayMode;
+	    AppObj.renderPlayMode = function() {
+	      renderedPlayMode = true;
+	    };
+	    AppObj.generateRandomCharacter();
+	    if (renderedPlayMode) {
+	      pass('Random: Play Mode regenerates the visible character sheet');
+	    } else {
+	      fail('Random: Play Mode leaves the visible character sheet stale');
+	    }
+	    AppObj.renderPlayMode = origPlayRender;
+	    AppObj.mode = 'wizard';
+
+	    // Validate ALL steps would pass
+	    // Step 5: cultural=100, folkMagic=3, all runes set (tested above)
+	    // Step 8: career set, 3 pro skills (tested above)
     // Step 9: career=100, careerFolkMagic=2 (tested above)
     // Step 10: bonus=exact (tested above)
     // If any of these are wrong, the wizard would block advancement.
@@ -3096,6 +3939,198 @@ section('Cult Data Tests');
     } else {
       pass('CULTURE_CULT_MAP has entries for all 8 cultures');
     }
+  }
+}
+
+// Test: Inline cult data is clean without load-time mutation
+{
+  const badTraits = ['Savag', 'Instinctiv', 'Asceti', 'Dynami', 'Energeti', 'Hones', 'Pruden', 'Adventurou', 'Chao', 'Jus', 'Toleran'];
+  const dirtyCult = (App.CULTS_DATA || []).find(cult => {
+    const traits = cult.personalityTraits || [];
+    return traits.some(t => badTraits.includes(t)) ||
+      traits.some((t, i) => t === 'Spiritual' && traits[i + 1] === 'Liberation');
+  });
+
+  if (dirtyCult) {
+    fail('CULTS_DATA still contains runtime-cleaned personality trait artifacts', dirtyCult.name);
+  } else {
+    pass('CULTS_DATA personality traits are pre-cleaned');
+  }
+}
+
+// Test: Inline cult skill data is clean without load-time mutation
+{
+  const badSkill = (App.CULTS_DATA || []).flatMap(cult =>
+    (cult.cultSkills || []).map(skill => ({ cult: cult.name, skill }))
+  ).find(({ skill }) =>
+    /\n|\u00a0/.test(skill) ||
+    skill.length >= 80 ||
+    ['Runic Affinityion', 'Runic Affinitiy', 'Spirit Rune Runic Affinitiy', 'Lore'].includes(skill) ||
+    /[A-Za-z]\(/.test(skill) ||
+    /\([a-z]/.test(skill)
+  );
+
+  if (badSkill) {
+    fail('CULTS_DATA still contains runtime-cleaned cult skill artifacts', `${badSkill.cult}: ${badSkill.skill}`);
+  } else {
+    pass('CULTS_DATA cult skills are pre-cleaned');
+  }
+}
+
+// Test: Inline miracle data is clean without load-time mutation
+{
+  const ocrPrefixPattern = /^[?.:!]+[a-z]*\s*|^[a-z]{1,4}\s(?=[A-Z])|^\(a\):[a-z]*\s*|^\d[a-z?]*\s+/;
+  const garbageEntryPattern = /^:$|Eurmal\(a\):|Primal Chaos\(a\):|Orlanth\(a\):|Storm Bull\(a\):|  .+  /;
+  let dirtyMiracle = null;
+  for (const [cultName, cult] of Object.entries((App.MIRACLES_DATA && App.MIRACLES_DATA.cults) || {})) {
+    dirtyMiracle = (cult.miracles || []).find(m =>
+      m.name === ':' ||
+      garbageEntryPattern.test(m.name) ||
+      ocrPrefixPattern.test(m.name) ||
+      /^B[olxw]\s|^Wo\s|^Qo\s|^Rc\s|^RW\s|^RS\s|^Ke\s/.test(m.name) ||
+      /Summon\(/.test(m.name) ||
+      /\s+ij\s+/.test(m.name)
+    );
+    if (dirtyMiracle) {
+      dirtyMiracle = `${cultName}: ${dirtyMiracle.name}`;
+      break;
+    }
+  }
+
+  if (dirtyMiracle) {
+    fail('MIRACLES_DATA still contains runtime-cleaned OCR artifacts', dirtyMiracle);
+  } else {
+    pass('MIRACLES_DATA miracle names are pre-cleaned');
+  }
+}
+
+// Test: Praxian cult access comes from data, not runtime patching
+{
+  const praxianSecondary = App.CULTURE_CULT_MAP?.Praxian?.secondary || [];
+  if (praxianSecondary.includes('Yelmalio')) {
+    pass('Praxian cult map includes Yelmalio in source data');
+  } else {
+    fail('Praxian cult map is missing Yelmalio');
+  }
+}
+
+// Test: pure sorcery cult access comes from data for manual selection
+{
+  const godForgotSecondary = App.CULTURE_CULT_MAP?.['God Forgot']?.secondary || [];
+  const arkat = App.CULTS_DATA.find(cult => cult.name === 'Arkat');
+  const arkatType = arkat ? App.detectCultType(arkat) : null;
+  if (godForgotSecondary.includes('Arkat') && arkatType?.types?.includes('sorcery') && arkatType.types.length === 1) {
+    pass('God Forgot cult map includes pure sorcery Arkat in source data');
+  } else {
+    fail('God Forgot cult map is missing pure sorcery Arkat access');
+  }
+}
+
+// Test: culture-cult-map reference matches inline app data
+{
+  const refPath = path.join(__dirname, 'references', 'culture-cult-map.json');
+  const ref = JSON.parse(fs.readFileSync(refPath, 'utf8'));
+  const refMap = ref.cultures || {};
+  const inlineMap = App.CULTURE_CULT_MAP || {};
+  const missing = Object.keys(inlineMap).filter(k => !refMap[k]);
+  const extra = Object.keys(refMap).filter(k => !inlineMap[k]);
+  const diffs = Object.keys(inlineMap).filter(k => refMap[k] && JSON.stringify(refMap[k]) !== JSON.stringify(inlineMap[k]));
+
+  if (missing.length === 0 && extra.length === 0 && diffs.length === 0 &&
+      ref.page_citations?.culture_descriptions &&
+      ref.page_citations?.cult_area_data &&
+      ref.page_citations?.praxian_yelmalio &&
+      ref.page_citations?.god_forgot_arkat) {
+    pass('culture-cult-map reference keys, values, and citations match inline data');
+  } else {
+    fail('culture-cult-map reference is out of sync with inline data',
+      JSON.stringify({
+        missing,
+        extra,
+        diffs,
+        hasCultureCitations: Boolean(ref.page_citations?.culture_descriptions),
+        hasCultAreaCitations: Boolean(ref.page_citations?.cult_area_data),
+        hasPraxianYelmalioCitation: Boolean(ref.page_citations?.praxian_yelmalio),
+        hasGodForgotArkatCitation: Boolean(ref.page_citations?.god_forgot_arkat)
+      }));
+  }
+}
+
+// Test: miracle reference data matches inline app data
+{
+  const refPath = path.join(__dirname, 'references', 'theism-miracles.json');
+  const ref = JSON.parse(fs.readFileSync(refPath, 'utf8'));
+  const inline = App.MIRACLES_DATA || {};
+  const refCultNames = Object.keys(ref.cults || {});
+  const inlineCultNames = Object.keys(inline.cults || {});
+  const missing = refCultNames.filter(name => !inline.cults?.[name]);
+  const extra = inlineCultNames.filter(name => !ref.cults?.[name]);
+  const diffs = refCultNames.filter(name =>
+    inline.cults?.[name] &&
+    JSON.stringify(inline.cults[name]) !== JSON.stringify(ref.cults[name])
+  );
+
+  if (missing.length === 0 && extra.length === 0 && diffs.length === 0) {
+    pass('theism miracle reference data matches inline MIRACLES_DATA');
+  } else {
+    fail('theism miracle reference data is out of sync with inline MIRACLES_DATA',
+      JSON.stringify({ missing, extra, diffs: diffs.slice(0, 5) }));
+  }
+}
+
+// Test: changed reference data has explicit page citations
+{
+  const miraclesRef = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'theism-miracles.json'), 'utf8'));
+  const cultsRaw = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'cults-raw', 'cults.json'), 'utf8'));
+  const missingCultCitation = cultsRaw.find(cult =>
+    !Array.isArray(cult.sourcePages) ||
+    cult.sourcePages.length === 0 ||
+    !cult.sourceCitation ||
+    !/p\.\d/.test(cult.sourceCitation)
+  );
+  const reviewedCorrections = miraclesRef.page_citations?.reviewed_corrections || {};
+
+  if (miraclesRef.page_citations?.miracle_lists &&
+      reviewedCorrections.Orlanth &&
+      reviewedCorrections.Yelmalio &&
+      !missingCultCitation) {
+    pass('Reference miracle and cult raw data include page citations');
+  } else {
+    fail('Reference data page citations are incomplete',
+      JSON.stringify({
+        hasMiracleListCitation: Boolean(miraclesRef.page_citations?.miracle_lists),
+        reviewedCorrectionKeys: Object.keys(reviewedCorrections),
+        missingCultCitation: missingCultCitation ? missingCultCitation.name : null
+      }));
+  }
+}
+
+// Test: documented solutions are categorized and agent-readable
+{
+  const solutionsRoot = path.join(__dirname, 'docs', 'solutions');
+  const files = [];
+  const walk = dir => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) walk(full);
+      else if (entry.name.endsWith('.md')) files.push(full);
+    }
+  };
+  walk(solutionsRoot);
+  const bad = files.find(file => {
+    const rel = path.relative(solutionsRoot, file);
+    const text = fs.readFileSync(file, 'utf8');
+    return !rel.includes(path.sep) ||
+      !text.startsWith('---\n') ||
+      !/\nmodule:\s*.+/.test(text) ||
+      !/\ntags:\s*/.test(text) ||
+      !/\nproblem_type:\s*.+/.test(text);
+  });
+
+  if (!bad) {
+    pass(`All ${files.length} docs/solutions files are categorized with agent-readable frontmatter`);
+  } else {
+    fail('docs/solutions file missing category path or required frontmatter', path.relative(solutionsRoot, bad));
   }
 }
 
@@ -3600,6 +4635,38 @@ section('Miracle Pool Capping (pool > available qualified)');
   }
 }
 
+{
+  const { App: AppRef, CharacterData: CD, MIRACLES_DATA: MiraclesRef } = loadApp();
+
+  if (AppRef && AppRef.agent && AppRef.agent.next && MiraclesRef) {
+    const cultMiracles = MiraclesRef.cults && MiraclesRef.cults['Chalana Arroy'];
+    if (!cultMiracles) {
+      pass('Agent Step 9 honors effective miracle cap (skipped - no MIRACLES_DATA)');
+    } else {
+      CD.cult = 'Chalana Arroy';
+      CD.cultType = { types: ['theist'], label: 'Theist' };
+      CD.characteristics = { STR: 11, CON: 11, SIZ: 11, DEX: 11, INT: 18, POW: 16, CHA: 11 };
+      CD.devotionalPool = 8;
+      CD.runeAffinities = { primary: 'Fire', secondary: 'Death', tertiary: 'Disorder' };
+      CD.miracles = ['Extension', 'Find (Specific Thing)', 'Divination', 'Chastise'];
+      AppRef.currentStep = 9;
+      AppRef.totalSteps = 13;
+      AppRef.prepareStep = () => {};
+      AppRef.renderCurrentStep = () => {};
+
+      const result = AppRef.agent.next();
+      if (result.success && result.newStep === 10 && AppRef.currentStep === 10) {
+        pass('App.agent.next honors capped qualified miracle count on Step 9');
+      } else {
+        fail('App.agent.next blocks Step 9 despite all available qualified miracles selected',
+          JSON.stringify(result));
+      }
+    }
+  } else {
+    fail('App.agent.next or MIRACLES_DATA not found for miracle cap test');
+  }
+}
+
 // ============================================================
 section('Add Hobby Skill Dropdown (U3)');
 // ============================================================
@@ -3614,33 +4681,24 @@ section('Add Hobby Skill Dropdown (U3)');
     CD.careerSkills = {};
     CD.hobbySkillName = null;
 
-    // Test 1: Adding a new professional skill sets it in bonusSkills
+    // Test 1: Adding a new professional skill sets it in bonusSkills and marks it as the hobby pick
     AppRef.addBonusSkillByName('Commerce');
-    if (CD.bonusSkills['Commerce'] === 0) {
-      pass('addBonusSkillByName adds skill with 0 points');
+    if (CD.bonusSkills['Commerce'] === 0 && CD.hobbySkillName === 'Commerce') {
+      pass('addBonusSkillByName adds new hobby skill with 0 points');
     } else {
-      fail('addBonusSkillByName adds skill with 0 points', `Got ${CD.bonusSkills['Commerce']}`);
+      fail('addBonusSkillByName adds new hobby skill with 0 points', `Got Commerce=${CD.bonusSkills['Commerce']}, hobby=${CD.hobbySkillName}`);
     }
 
     // Test 2: Hobby skill limit enforced (only 1 new professional skill)
-    // Use a skill that's NOT in SKILLS_DATA so it qualifies as a true hobby
     CD.hobbySkillName = null;
-    AppRef.addBonusSkillByName('Acrobatics'); // Acrobatics is a professional skill not in standard SKILLS_DATA
-    // Now hobbySkillName should be set if Acrobatics is truly a new professional
-    // If Acrobatics IS in SKILLS_DATA, we need a different approach:
-    // Force the scenario directly
-    CD.hobbySkillName = 'Acrobatics';
-    AppRef.addBonusSkillByName('Gambling');
-    // Gambling IS in SKILLS_DATA so it won't trigger the hobby check.
-    // We need to test with two skills not in SKILLS_DATA.
-    // Let's test the logic directly: set hobbySkillName and try adding a non-standard skill
-    delete CD.bonusSkills['Gambling']; // clean up
-    CD.hobbySkillName = 'Some Custom Skill';
-    AppRef.addBonusSkillByName('Another Custom Skill');
-    if (!CD.bonusSkills.hasOwnProperty('Another Custom Skill')) {
-      pass('addBonusSkillByName enforces 1 hobby skill limit');
+    delete CD.bonusSkills['Commerce'];
+    AppRef.addBonusSkillByName('Art (Painting)');
+    AppRef.addBonusSkillByName('Lockpicking');
+    if (CD.bonusSkills.hasOwnProperty('Art (Painting)') && !CD.bonusSkills.hasOwnProperty('Lockpicking')) {
+      pass('addBonusSkillByName enforces 1 hobby skill limit for professional skills in SKILLS_DATA');
     } else {
-      fail('addBonusSkillByName enforces 1 hobby skill limit', 'Another Custom Skill was added despite limit');
+      fail('addBonusSkillByName enforces 1 hobby skill limit for professional skills in SKILLS_DATA',
+        `Art=${CD.bonusSkills.hasOwnProperty('Art (Painting)')}, Lockpicking=${CD.bonusSkills.hasOwnProperty('Lockpicking')}`);
     }
 
     // Test 3: Adding an already-present skill is a no-op
@@ -3660,17 +4718,19 @@ section('Add Hobby Skill Dropdown (U3)');
 section('Test Summary');
 // ============================================================
 
-console.log(`\nTotal tests: ${totalTests}`);
-console.log(`${colors.green}Passed: ${passedTests}${colors.reset}`);
-console.log(`${colors.red}Failed: ${failedTests}${colors.reset}`);
+Promise.all(pendingTests).then(() => {
+  console.log(`\nTotal tests: ${totalTests}`);
+  console.log(`${colors.green}Passed: ${passedTests}${colors.reset}`);
+  console.log(`${colors.red}Failed: ${failedTests}${colors.reset}`);
 
-const successRate = totalTests > 0 ? ((passedTests / totalTests) * 100).toFixed(1) : 0;
-console.log(`Success rate: ${successRate}%\n`);
+  const successRate = totalTests > 0 ? ((passedTests / totalTests) * 100).toFixed(1) : 0;
+  console.log(`Success rate: ${successRate}%\n`);
 
-if (failedTests === 0) {
-  console.log(`${colors.green}✓ All tests passed!${colors.reset}\n`);
-  process.exit(0);
-} else {
-  console.log(`${colors.yellow}⚠ ${failedTests} tests failing - these are implementation targets${colors.reset}\n`);
-  process.exit(0); // Exit with 0 for now since we're in TDD mode
-}
+	  if (failedTests === 0) {
+	    console.log(`${colors.green}✓ All tests passed!${colors.reset}\n`);
+	    process.exit(0);
+	  } else {
+	    console.log(`${colors.red}✗ ${failedTests} tests failed${colors.reset}\n`);
+	    process.exit(1);
+	  }
+	});

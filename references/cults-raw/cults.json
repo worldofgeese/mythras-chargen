@@ -3,6 +3,10 @@
     "name": "Arkat",
     "pantheon": "Darkness",
     "source": "CultOnePagers2019/Arkat/Arkat.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Arkat/Arkat.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Arkat Kingtroll",
     "runes": [],
@@ -11,7 +15,7 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore(cult)",
+      "Lore (Cult)",
       "Invocation",
       "Shaping"
     ],
@@ -68,6 +72,11 @@
     "name": "Atyar",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Atyar.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Atyar.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Severed God",
     "runes": [],
@@ -81,27 +90,27 @@
       "Stealth",
       "Commerce",
       "Language",
-      "Lore (any other)",
-      "Lore (cult)",
+      "Lore (Any other)",
+      "Lore (Cult)",
       "Lore (World)",
       "Oratory",
       "Combat style with garrote",
-      "Binding(Shaman)",
+      "Binding (Shaman)",
       "Devotion",
       "Runic Affinity",
       "Literacy",
-      "Trance(Shaman)"
+      "Trance (Shaman)"
     ],
     "folkMagic": [
       "Befuddle",
-      "Darklight³",
+      "Darklight",
       "Demoralise",
       "Fanaticism",
       "Firearrow",
       "Fireblade",
       "Ignite",
       "Light",
-      "Lightwall²",
+      "Lightwall",
       "Mindspeech",
       "Witchsight"
     ],
@@ -176,6 +185,11 @@
     "name": "Bagog",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Bagog.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Bagog.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Scorpion Queen",
     "runes": [],
@@ -184,15 +198,15 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Combat style (any)",
+      "Combat style (Any)",
       "Brawn",
       "Sing",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Survival",
-      "Binding(Shaman)",
+      "Binding (Shaman)",
       "Devotion",
       "Runic Affinity",
-      "Trance(Shaman)"
+      "Trance (Shaman)"
     ],
     "folkMagic": [
       "Varies thru cult shamans"
@@ -273,6 +287,11 @@
     "name": "Cacodemon",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Cacodemon.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Cacodemon.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of lawlessness and ogres",
     "runes": [],
@@ -281,11 +300,11 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Combat style (any)",
+      "Combat style (Any)",
       "Stealth",
       "Acting",
       "Disguise",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Track",
       "Devotion",
       "Runic Affinity"
@@ -369,6 +388,10 @@
     "name": "Devil's Hand",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Devil's Hand.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Devil's Hand.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Requirements to join",
     "runes": [],
@@ -410,6 +433,10 @@
     "name": "Gark the Calm",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Gark the Calm.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Gark the Calm.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of Eternal Peace and Zombies",
     "runes": [],
@@ -419,15 +446,15 @@
     },
     "cultSkills": [
       "Orate",
-      "Language(Tradetalk)",
-      "Language(other)",
+      "Language (Tradetalk)",
+      "Language (Other)",
       "Mechanisms"
     ],
     "folkMagic": [
       "Befuddle",
-      "Dominate Zombie²¹(R)",
+      "Dominate Zombie(R)",
       "Glamour",
-      "Instruct Zombie²¹(A)",
+      "Instruct Zombie(A)",
       "Repair"
     ],
     "miracles": {
@@ -473,6 +500,10 @@
     "name": "Hungry Jack",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Hungry Jack.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Hungry Jack.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Hungry Eater",
     "runes": [],
@@ -482,14 +513,14 @@
     },
     "cultSkills": [
       "Influence",
-      "Combat style(any)",
-      "Lore(cult)",
-      "Lore(world)",
+      "Combat style (Any)",
+      "Lore (Cult)",
+      "Lore (World)",
       "Devotion",
       "Runic Affinity",
       "Binding",
       "Trance",
-      "Lore (plant)"
+      "Lore (Plant)"
     ],
     "folkMagic": [],
     "miracles": {
@@ -530,6 +561,11 @@
     "name": "Krarsht",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Krarsht.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Krarsht.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of hunger and intrigue",
     "runes": [],
@@ -546,9 +582,9 @@
       "Unarmed",
       "Acting",
       "Bureaucracy",
-      "Culture (named culture)",
+      "Culture (Named culture)",
       "Disguise",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Sleight",
       "Streetwise",
       "Devotion",
@@ -558,7 +594,7 @@
     "folkMagic": [
       "Alarm",
       "Befuddle",
-      "Brew Pratzim⁴",
+      "Brew Pratzim",
       "Bypass",
       "Disruption",
       "Glue",
@@ -636,6 +672,10 @@
     "name": "Krjalk",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Krjalk.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Krjalk.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Lord of Monsters",
     "runes": [],
@@ -646,9 +686,9 @@
     "cultSkills": [
       "Influence",
       "Endurance",
-      "Lore(cult)",
+      "Lore (Cult)",
       "Orate",
-      "Combat style (any)",
+      "Combat style (Any)",
       "Runic Affinity"
     ],
     "folkMagic": [],
@@ -689,6 +729,10 @@
     "name": "Lemure",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Lemure.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Lemure.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Source of Passions",
     "runes": [],
@@ -698,7 +742,7 @@
     },
     "cultSkills": [
       "Influence",
-      "Lore(cult)",
+      "Lore (Cult)",
       "Binding",
       "Trance",
       "Devotion",
@@ -762,6 +806,11 @@
     "name": "Mallia",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Mallia.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Mallia.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of Disease",
     "runes": [],
@@ -775,13 +824,13 @@
       "Influence",
       "Sing",
       "Willpower",
-      "Lore (cult)",
-      "Lore (human)",
+      "Lore (Cult)",
+      "Lore (Human)",
       "Survival",
-      "Binding(Shaman)",
+      "Binding (Shaman)",
       "Devotion",
       "Runic Affinity",
-      "Trance(Shaman)"
+      "Trance (Shaman)"
     ],
     "folkMagic": [
       "Sneeze"
@@ -864,6 +913,10 @@
     "name": "Path of Infinite Mutations",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Path of Infinite Mutations.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Path of Infinite Mutations.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Chaotic Dorastor Kralorelan cult/order AIG/RQG etc",
     "runes": [],
@@ -872,7 +925,7 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore(cult)",
+      "Lore (Cult)",
       "Runic Affinity",
       "Devotion"
     ],
@@ -908,6 +961,10 @@
     "name": "Pocharngo",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Pocharngo.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Pocharngo.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Cosmic Cancer",
     "runes": [],
@@ -916,11 +973,11 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Combat style (any)",
+      "Combat style (Any)",
       "Brawn",
       "Stealth",
       "Willpower",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Survival",
       "Devotion",
       "Runic Affinity"
@@ -971,6 +1028,10 @@
     "name": "Primal Chaos",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Primal Chaos.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Primal Chaos.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Chaos Ooze",
     "runes": [],
@@ -979,7 +1040,7 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore (cult)",
+      "Lore (Cult)",
       "Devotion",
       "Runic Affinity"
     ],
@@ -1050,6 +1111,10 @@
     "name": "Ragnaglar",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Ragnaglar.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Ragnaglar.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Mad God",
     "runes": [],
@@ -1058,10 +1123,10 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Combat style (any)",
+      "Combat style (Any)",
       "Influence",
-      "Any(selected by priest)",
-      "Lore (cult)",
+      "Any (Selected by priest)",
+      "Lore (Cult)",
       "Runic Affinity",
       "Devotion",
       "Orate"
@@ -1109,6 +1174,10 @@
     "name": "Seseine",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Seseine.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Seseine.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of Lust, Desire and the Harem",
     "runes": [],
@@ -1121,8 +1190,8 @@
       "Influence",
       "Endurance",
       "Athletics",
-      "Lore (cult)",
-      "Lore(Human)",
+      "Lore (Cult)",
+      "Lore (Human)",
       "Acrobatics",
       "Devotion",
       "Runic Affinity"
@@ -1183,6 +1252,10 @@
     "name": "Sidana",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Sidana.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Sidana.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Black Goat",
     "runes": [],
@@ -1193,7 +1266,7 @@
     "cultSkills": [
       "Devotion",
       "Runic Affinity",
-      "Lore (cult)"
+      "Lore (Cult)"
     ],
     "folkMagic": [
       "Varies thru cult shamans"
@@ -1238,6 +1311,10 @@
     "name": "Taeterisus",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Taeterisus.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Taeterisus.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Chaos Trickster",
     "runes": [],
@@ -1292,6 +1369,11 @@
     "name": "Than",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Than.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Than.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Severed God",
     "runes": [],
@@ -1305,21 +1387,21 @@
       "Stealth",
       "Commerce",
       "Language",
-      "Lore (any other)",
-      "Lore (cult)",
+      "Lore (Any other)",
+      "Lore (Cult)",
       "Lore (World)",
       "Oratory",
       "Combat style with garrote",
-      "Binding(Shaman)",
+      "Binding (Shaman)",
       "Devotion",
       "Runic Affinity",
       "Literacy",
-      "Trance(Shaman)"
+      "Trance (Shaman)"
     ],
     "folkMagic": [
       "Bladesharp",
       "Bludgeon",
-      "Darklight³",
+      "Darklight",
       "Darkness",
       "Disruption",
       "Extinguish",
@@ -1327,7 +1409,7 @@
       "Fireblade",
       "Ignite",
       "Light",
-      "Lightwall²"
+      "Lightwall"
     ],
     "miracles": {
       "initiate": [
@@ -1401,6 +1483,11 @@
     "name": "Thanatar",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Thanatar.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Thanatar.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Severed God",
     "runes": [],
@@ -1414,22 +1501,22 @@
       "Stealth",
       "Commerce",
       "Language",
-      "Lore (any other)",
-      "Lore (cult)",
+      "Lore (Any other)",
+      "Lore (Cult)",
       "Lore (World)",
       "Oratory",
       "Combat style with garrote",
-      "Binding(Shaman)",
+      "Binding (Shaman)",
       "Devotion",
       "Runic Affinity",
       "Literacy",
-      "Trance(Shaman)"
+      "Trance (Shaman)"
     ],
     "folkMagic": [
       "Befuddle",
       "Bladesharp",
       "Bludgeon",
-      "Darklight³",
+      "Darklight",
       "Darkness",
       "Extinguish",
       "Fanaticism",
@@ -1438,7 +1525,7 @@
       "Heal",
       "Ignite",
       "Light",
-      "Lightwall²",
+      "Lightwall",
       "Mindspeech"
     ],
     "miracles": {
@@ -1521,6 +1608,11 @@
     "name": "Thed",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Thed.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Thed.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Mother of the Broos",
     "runes": [],
@@ -1531,16 +1623,16 @@
     "cultSkills": [
       "Brawn",
       "Endurance",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Survival",
-      "Combat style (any)",
+      "Combat style (Any)",
       "Conceal",
       "Stealth",
-      "Binding(Shaman)",
+      "Binding (Shaman)",
       "Devotion",
       "Runic Affinity",
       "Track",
-      "Trance(Shaman)"
+      "Trance (Shaman)"
     ],
     "folkMagic": [
       "Varies thru cult shamans"
@@ -1628,6 +1720,10 @@
     "name": "Tyram",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Tyram.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Tyram.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Sky Terror",
     "runes": [],
@@ -1676,6 +1772,10 @@
     "name": "Ulforg",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Ulforg.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Ulforg.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Chaotic Herocult",
     "runes": [],
@@ -1725,6 +1825,10 @@
     "name": "Urain",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Urain.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Urain.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Evil Wind",
     "runes": [],
@@ -1734,9 +1838,9 @@
     },
     "cultSkills": [
       "Survival",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Brawn",
-      "Combat style (any)",
+      "Combat style (Any)",
       "Devotion",
       "Runic Affinity"
     ],
@@ -1798,6 +1902,10 @@
     "name": "Vakalta",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Vakalta.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Vakalta.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Haunter of Hell",
     "runes": [],
@@ -1810,7 +1918,7 @@
       "Trance",
       "Runic Affinity",
       "Devotion",
-      "Lore(Ancestors)"
+      "Lore (Ancestors)"
     ],
     "folkMagic": [
       "Varies thru cult shamans"
@@ -1852,6 +1960,10 @@
     "name": "Vivamort",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Genertela/Vivamort.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Genertela/Vivamort.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of the Unlife",
     "runes": [],
@@ -1864,8 +1976,8 @@
       "Influence",
       "Willpower",
       "Acting",
-      "Lore (cult)",
-      "Combat style (any)",
+      "Lore (Cult)",
+      "Combat style (Any)",
       "Perception",
       "Stealth",
       "Devotion",
@@ -1877,7 +1989,7 @@
       "Firearrow",
       "Fireblade",
       "Ignite",
-      "Lightwall²"
+      "Lightwall"
     ],
     "miracles": {
       "initiate": [
@@ -1965,6 +2077,11 @@
     "name": "Atyar",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Pamaltela/Atyar.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Pamaltela/Atyar.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Severed God",
     "runes": [],
@@ -1978,27 +2095,27 @@
       "Stealth",
       "Commerce",
       "Language",
-      "Lore (any other)",
-      "Lore (cult)",
+      "Lore (Any other)",
+      "Lore (Cult)",
       "Lore (World)",
       "Oratory",
       "Combat style with garrote",
-      "Binding(Shaman)",
+      "Binding (Shaman)",
       "Devotion",
       "Runic Affinity",
       "Literacy",
-      "Trance(Shaman)"
+      "Trance (Shaman)"
     ],
     "folkMagic": [
       "Befuddle",
-      "Darklight³",
+      "Darklight",
       "Demoralise",
       "Fanaticism",
       "Firearrow",
       "Fireblade",
       "Ignite",
       "Light",
-      "Lightwall²",
+      "Lightwall",
       "Mindspeech",
       "Witchsight"
     ],
@@ -2073,6 +2190,11 @@
     "name": "Cacodemon",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Pamaltela/Cacodemon.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Pamaltela/Cacodemon.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of lawlessness and ogres",
     "runes": [],
@@ -2081,11 +2203,11 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Combat style (any)",
+      "Combat style (Any)",
       "Stealth",
       "Acting",
       "Disguise",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Track",
       "Devotion",
       "Runic Affinity"
@@ -2169,6 +2291,10 @@
     "name": "Gark the Calm",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Pamaltela/Gark the Calm.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Pamaltela/Gark the Calm.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of Eternal Peace and Zombies",
     "runes": [],
@@ -2178,15 +2304,15 @@
     },
     "cultSkills": [
       "Orate",
-      "Language(Tradetalk)",
-      "Language(other)",
+      "Language (Tradetalk)",
+      "Language (Other)",
       "Mechanisms"
     ],
     "folkMagic": [
       "Befuddle",
-      "Dominate Zombie²¹(R)",
+      "Dominate Zombie(R)",
       "Glamour",
-      "Instruct Zombie²¹(A)",
+      "Instruct Zombie(A)",
       "Repair"
     ],
     "miracles": {
@@ -2232,6 +2358,10 @@
     "name": "Gloomshark",
     "pantheon": "Chaos - Pamaltela",
     "source": "CultOnePagers2019/Chaos - Pamaltela/Gloomshark.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Pamaltela/Gloomshark.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Chaotic Source of Hunger",
     "runes": [],
@@ -2242,7 +2372,7 @@
     "cultSkills": [
       "Swim",
       "Combat style (Net)",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Devotion",
       "Runic Affinity"
     ],
@@ -2291,6 +2421,10 @@
     "name": "Ikadz",
     "pantheon": "Ompalam",
     "source": "CultOnePagers2019/Chaos - Pamaltela/Ikadz.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Pamaltela/Ikadz.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of Torture",
     "runes": [],
@@ -2301,14 +2435,14 @@
     "cultSkills": [
       "Endurance",
       "Influence",
-      "Lore(Human)",
+      "Lore (Human)",
       "First Aid",
       "Perception",
-      "Language(another)",
+      "Language (Another)",
       "Devotion",
       "Runic Affinity",
-      "Lore(torture)",
-      "Craft(torture)",
+      "Lore (Torture)",
+      "Craft (Torture)",
       "Combat (Knife&Whip)",
       "Interrogate"
     ],
@@ -2373,6 +2507,11 @@
     "name": "Krarsht",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Pamaltela/Krarsht.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Pamaltela/Krarsht.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of hunger and intrigue",
     "runes": [],
@@ -2389,9 +2528,9 @@
       "Unarmed",
       "Acting",
       "Bureaucracy",
-      "Culture (named culture)",
+      "Culture (Named culture)",
       "Disguise",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Sleight",
       "Streetwise",
       "Devotion",
@@ -2401,7 +2540,7 @@
     "folkMagic": [
       "Alarm",
       "Befuddle",
-      "Brew Pratzim⁴",
+      "Brew Pratzim",
       "Bypass",
       "Disruption",
       "Glue",
@@ -2479,6 +2618,10 @@
     "name": "Lemure",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Pamaltela/Lemure.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Pamaltela/Lemure.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Source of Passions",
     "runes": [],
@@ -2488,7 +2631,7 @@
     },
     "cultSkills": [
       "Influence",
-      "Lore(cult)",
+      "Lore (Cult)",
       "Binding",
       "Trance",
       "Devotion",
@@ -2552,6 +2695,11 @@
     "name": "Mallia",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Pamaltela/Mallia.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Pamaltela/Mallia.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of Disease",
     "runes": [],
@@ -2565,13 +2713,13 @@
       "Influence",
       "Sing",
       "Willpower",
-      "Lore (cult)",
-      "Lore (human)",
+      "Lore (Cult)",
+      "Lore (Human)",
       "Survival",
-      "Binding(Shaman)",
+      "Binding (Shaman)",
       "Devotion",
       "Runic Affinity",
-      "Trance(Shaman)"
+      "Trance (Shaman)"
     ],
     "folkMagic": [
       "Sneeze"
@@ -2654,6 +2802,11 @@
     "name": "Ompalam",
     "pantheon": "Ompalam",
     "source": "CultOnePagers2019/Chaos - Pamaltela/Ompalam.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Pamaltela/Ompalam.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of coercion and slavery",
     "runes": [],
@@ -2664,10 +2817,10 @@
     "cultSkills": [
       "Lore (Ompalam)",
       "Influence",
-      "Craft(Torture)",
+      "Craft (Torture)",
       "Endurance",
       "Combat Style with Whip",
-      "Culture(Own)",
+      "Culture (Own)",
       "Bureaucracy",
       "Lore (Slavery)",
       "Lore (Torture)",
@@ -2680,7 +2833,7 @@
       "Commerce"
     ],
     "folkMagic": [
-      "Bearing Witness⁴⁸",
+      "Bearing Witness",
       "Calm",
       "Curse",
       "Demoralize",
@@ -2689,8 +2842,8 @@
       "Find Enemy",
       "Glamour",
       "Mindspeech",
-      "Placate Master⁴⁷",
-      "Punish Slave⁴⁷",
+      "Placate Master",
+      "Punish Slave",
       "Repugnance",
       "Slow",
       "Spiritshield",
@@ -2789,6 +2942,10 @@
     "name": "Primal Chaos",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Pamaltela/Primal Chaos.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Pamaltela/Primal Chaos.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Chaos Ooze",
     "runes": [],
@@ -2797,7 +2954,7 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore (cult)",
+      "Lore (Cult)",
       "Devotion",
       "Runic Affinity"
     ],
@@ -2868,6 +3025,10 @@
     "name": "Seseine",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Pamaltela/Seseine.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Pamaltela/Seseine.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of Lust, Desire and the Harem",
     "runes": [],
@@ -2880,8 +3041,8 @@
       "Influence",
       "Endurance",
       "Athletics",
-      "Lore (cult)",
-      "Lore(Human)",
+      "Lore (Cult)",
+      "Lore (Human)",
       "Acrobatics",
       "Devotion",
       "Runic Affinity"
@@ -2942,6 +3103,10 @@
     "name": "Sidana",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Pamaltela/Sidana.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Pamaltela/Sidana.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Black Goat",
     "runes": [],
@@ -2952,7 +3117,7 @@
     "cultSkills": [
       "Devotion",
       "Runic Affinity",
-      "Lore (cult)"
+      "Lore (Cult)"
     ],
     "folkMagic": [
       "Varies thru cult shamans"
@@ -2997,6 +3162,11 @@
     "name": "Than",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Pamaltela/Than.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Pamaltela/Than.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Severed God",
     "runes": [],
@@ -3010,21 +3180,21 @@
       "Stealth",
       "Commerce",
       "Language",
-      "Lore (any other)",
-      "Lore (cult)",
+      "Lore (Any other)",
+      "Lore (Cult)",
       "Lore (World)",
       "Oratory",
       "Combat style with garrote",
-      "Binding(Shaman)",
+      "Binding (Shaman)",
       "Devotion",
       "Runic Affinity",
       "Literacy",
-      "Trance(Shaman)"
+      "Trance (Shaman)"
     ],
     "folkMagic": [
       "Bladesharp",
       "Bludgeon",
-      "Darklight³",
+      "Darklight",
       "Darkness",
       "Disruption",
       "Extinguish",
@@ -3032,7 +3202,7 @@
       "Fireblade",
       "Ignite",
       "Light",
-      "Lightwall²"
+      "Lightwall"
     ],
     "miracles": {
       "initiate": [
@@ -3106,6 +3276,11 @@
     "name": "Thanatar",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Pamaltela/Thanatar.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Pamaltela/Thanatar.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Severed God",
     "runes": [],
@@ -3119,22 +3294,22 @@
       "Stealth",
       "Commerce",
       "Language",
-      "Lore (any other)",
-      "Lore (cult)",
+      "Lore (Any other)",
+      "Lore (Cult)",
       "Lore (World)",
       "Oratory",
       "Combat style with garrote",
-      "Binding(Shaman)",
+      "Binding (Shaman)",
       "Devotion",
       "Runic Affinity",
       "Literacy",
-      "Trance(Shaman)"
+      "Trance (Shaman)"
     ],
     "folkMagic": [
       "Befuddle",
       "Bladesharp",
       "Bludgeon",
-      "Darklight³",
+      "Darklight",
       "Darkness",
       "Extinguish",
       "Fanaticism",
@@ -3143,7 +3318,7 @@
       "Heal",
       "Ignite",
       "Light",
-      "Lightwall²",
+      "Lightwall",
       "Mindspeech"
     ],
     "miracles": {
@@ -3226,6 +3401,11 @@
     "name": "Thed",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Pamaltela/Thed.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Pamaltela/Thed.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Mother of the Broos",
     "runes": [],
@@ -3236,16 +3416,16 @@
     "cultSkills": [
       "Brawn",
       "Endurance",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Survival",
-      "Combat style (any)",
+      "Combat style (Any)",
       "Conceal",
       "Stealth",
-      "Binding(Shaman)",
+      "Binding (Shaman)",
       "Devotion",
       "Runic Affinity",
       "Track",
-      "Trance(Shaman)"
+      "Trance (Shaman)"
     ],
     "folkMagic": [
       "Varies thru cult shamans"
@@ -3333,6 +3513,10 @@
     "name": "Urain",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Pamaltela/Urain.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Pamaltela/Urain.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Evil Wind",
     "runes": [],
@@ -3342,9 +3526,9 @@
     },
     "cultSkills": [
       "Survival",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Brawn",
-      "Combat style (any)",
+      "Combat style (Any)",
       "Devotion",
       "Runic Affinity"
     ],
@@ -3406,6 +3590,10 @@
     "name": "Vivamort",
     "pantheon": "Chaos - Genertela",
     "source": "CultOnePagers2019/Chaos - Pamaltela/Vivamort.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Chaos - Pamaltela/Vivamort.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of the Unlife",
     "runes": [],
@@ -3418,8 +3606,8 @@
       "Influence",
       "Willpower",
       "Acting",
-      "Lore (cult)",
-      "Combat style (any)",
+      "Lore (Cult)",
+      "Combat style (Any)",
       "Perception",
       "Stealth",
       "Devotion",
@@ -3431,7 +3619,7 @@
       "Firearrow",
       "Fireblade",
       "Ignite",
-      "Lightwall²"
+      "Lightwall"
     ],
     "miracles": {
       "initiate": [
@@ -3519,6 +3707,10 @@
     "name": "Ancestor Worship",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Darkness/Ancestor Worship.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Darkness/Ancestor Worship.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Ancestor Worship",
     "runes": [],
@@ -3529,10 +3721,10 @@
     "cultSkills": [
       "Devotion",
       "Runic Affinity",
-      "Lore(Ancestors)",
-      "Dance(Shaman)",
+      "Lore (Ancestors)",
+      "Dance (Shaman)",
       "Spirit Rune Affinity",
-      "Sing(Shaman)"
+      "Sing (Shaman)"
     ],
     "folkMagic": [],
     "miracles": {
@@ -3597,6 +3789,10 @@
     "name": "Annilla",
     "pantheon": "Darkness",
     "source": "CultOnePagers2019/Darkness/Annilla.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Darkness/Annilla.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of the Blue Moon",
     "runes": [],
@@ -3608,7 +3804,7 @@
       "Conceal",
       "Mechanisms",
       "Stealth",
-      "Combat skill (any)",
+      "Combat skill (Any)",
       "Devotion",
       "Runic Affinity"
     ],
@@ -3683,6 +3879,10 @@
     "name": "Aranea",
     "pantheon": "Darkness",
     "source": "CultOnePagers2019/Darkness/Aranea.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Darkness/Aranea.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of Spiders",
     "runes": [],
@@ -3693,8 +3893,8 @@
     "cultSkills": [
       "Combat style with net",
       "Athletics",
-      "Lore (animal)",
-      "Lore (cult)",
+      "Lore (Animal)",
+      "Lore (Cult)",
       "Devotion",
       "Runic Affinity"
     ],
@@ -3780,6 +3980,11 @@
     "name": "Argan Argar",
     "pantheon": "Darkness",
     "source": "CultOnePagers2019/Darkness/Argan Argar.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Darkness/Argan Argar.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of Surface Darkness",
     "runes": [],
@@ -3792,10 +3997,10 @@
       "Influence",
       "Insight",
       "Commerce",
-      "Culture(named culture)",
+      "Culture (Named culture)",
       "Literacy",
-      "Lore (cult)",
-      "Lore (human)",
+      "Lore (Cult)",
+      "Lore (Human)",
       "Navigation",
       "Devotion",
       "Runic Affinity"
@@ -3804,9 +4009,9 @@
       "Darkwall",
       "Find Magic",
       "Glamour",
-      "Lantern²",
+      "Lantern",
       "Light",
-      "Lightwall²",
+      "Lightwall",
       "Protection",
       "Vigour"
     ],
@@ -3904,6 +4109,10 @@
     "name": "Arkat",
     "pantheon": "Darkness",
     "source": "CultOnePagers2019/Darkness/Arkat.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Darkness/Arkat.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Arkat Kingtroll",
     "runes": [],
@@ -3912,7 +4121,7 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore(cult)",
+      "Lore (Cult)",
       "Invocation",
       "Shaping"
     ],
@@ -3969,6 +4178,11 @@
     "name": "Asrelia",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Darkness/Asrelia.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Darkness/Asrelia.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of Wealth",
     "runes": [],
@@ -3981,8 +4195,8 @@
       "Customs",
       "Locale",
       "Commerce",
-      "Lore (cult)",
-      "Lore (earth)",
+      "Lore (Cult)",
+      "Lore (Earth)",
       "Mechanisms",
       "Devotion",
       "Runic Affinity"
@@ -4066,6 +4280,10 @@
     "name": "Gerak Kag",
     "pantheon": "Darkness",
     "source": "CultOnePagers2019/Darkness/Gerak Kag.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Darkness/Gerak Kag.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Requirements to Join",
     "runes": [],
@@ -4074,30 +4292,8 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore (cult)",
       "Devotion",
-      "Runic Affinity Pantheons Darkness Source - see for detailed info Gods Of Glorantha Areas Continents:Genertela",
-      "Oceans",
-      "Pamaltela Main Areas: Coastal Pamaltela",
-      "Dragon Pass",
-      "East",
-      "Genertela",
-      "Inland Pamaltela",
-      "Lunar",
-      "Oceans",
-      "West Localities: Blue Moon Plateau",
-      "Dagori Inkarth",
-      "Elder Wilds",
-      "Errinoru Jungle",
-      "Fronela",
-      "Halikiv",
-      "Jrusteli Isles",
-      "Keniryan Sea",
-      "Koromondol",
-      "Pavis",
-      "Tarmo Mountains",
-      "Valinds Glacier",
-      "Yolp Mountains PersonalityTraits Cruelo Coldo Secretiveo Patiento Adventurouss Dynamics Impulsives Recklesss Energetics Rebelliouss Opposite:Stasis"
+      "Runic Affinity"
     ],
     "folkMagic": [],
     "miracles": {
@@ -4128,6 +4324,11 @@
     "name": "Gorakiki",
     "pantheon": "Darkness",
     "source": "CultOnePagers2019/Darkness/Gorakiki.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Darkness/Gorakiki.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Troll God of the Insects",
     "runes": [],
@@ -4138,8 +4339,8 @@
     "cultSkills": [
       "Combat style (Tribal)",
       "Ride",
-      "Lore (cult)",
-      "Lore (insect care)",
+      "Lore (Cult)",
+      "Lore (Insect care)",
       "Survival",
       "Devotion",
       "Runic Affinity",
@@ -4229,6 +4430,10 @@
     "name": "Himile",
     "pantheon": "Darkness",
     "source": "CultOnePagers2019/Darkness/Himile.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Darkness/Himile.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Troll Cult of cold and ice",
     "runes": [],
@@ -4237,10 +4442,10 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Combat Style(any)",
+      "Combat Style (Any)",
       "Runic Affinity",
       "Devotion",
-      "Lore(cult)"
+      "Lore (Cult)"
     ],
     "folkMagic": [
       "Chill",
@@ -4315,6 +4520,11 @@
     "name": "Kyger Litor",
     "pantheon": "Darkness",
     "source": "CultOnePagers2019/Darkness/Kyger Litor.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Darkness/Kyger Litor.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Mother of Trolls",
     "runes": [],
@@ -4327,14 +4537,14 @@
       "Conceal",
       "Perception",
       "Literacy",
-      "Lore (cult)",
-      "Combat style (any)",
-      "Dance(Shaman)",
+      "Lore (Cult)",
+      "Combat style (Any)",
+      "Dance (Shaman)",
       "Sing (Shaman)",
-      "Binding(Shaman)",
+      "Binding (Shaman)",
       "Devotion",
       "Runic Affinity",
-      "Trance(Shaman)"
+      "Trance (Shaman)"
     ],
     "folkMagic": [
       "Befuddle",
@@ -4349,9 +4559,9 @@
       "Fireblade",
       "Heal",
       "Ignite",
-      "Lantern²",
+      "Lantern",
       "Light",
-      "Lightwall²",
+      "Lightwall",
       "Protection",
       "Second Sight",
       "Slow",
@@ -4457,6 +4667,10 @@
     "name": "Mee Vorala",
     "pantheon": "Darkness",
     "source": "CultOnePagers2019/Darkness/Mee Vorala.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Darkness/Mee Vorala.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Troll Cult of fungi",
     "runes": [],
@@ -4465,9 +4679,9 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore (cult)",
+      "Lore (Cult)",
       "Lore (Plant)",
-      "Craft(Brew Drugs)",
+      "Craft (Brew Drugs)",
       "Devotion",
       "Runic Affinity"
     ],
@@ -4541,6 +4755,10 @@
     "name": "Moorgarki",
     "pantheon": "Darkness",
     "source": "CultOnePagers2019/Darkness/Moorgarki.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Darkness/Moorgarki.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Cult of Hot Trolls",
     "runes": [],
@@ -4553,7 +4771,7 @@
       "Stealth",
       "Track",
       "Runic Affinity",
-      "Combat Style(any)",
+      "Combat Style (Any)",
       "Devotion"
     ],
     "folkMagic": [
@@ -4624,6 +4842,10 @@
     "name": "Shaman Spirit Society",
     "pantheon": "Pamalt, Darkness, Praxian, Hsunchen",
     "source": "CultOnePagers2019/Darkness/Shaman Spirit Society.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Darkness/Shaman Spirit Society.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Any Shamans AIG/RQG etc",
     "runes": [],
@@ -4631,7 +4853,10 @@
       "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity. Examiners need to be convinced at 3 of them.",
       "runelord": "to have 3"
     },
-    "cultSkills": [],
+    "cultSkills": [
+      "Devotion",
+      "Runic Affinity"
+    ],
     "folkMagic": [
       "Any - varies(l)"
     ],
@@ -4682,6 +4907,10 @@
     "name": "Subere",
     "pantheon": "Darkness",
     "source": "CultOnePagers2019/Darkness/Subere.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Darkness/Subere.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of the Dark Deep Within",
     "runes": [],
@@ -4692,9 +4921,9 @@
     "cultSkills": [
       "Runic Affinity",
       "Devotion",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Stealth",
-      "Combat Style(any)"
+      "Combat Style (Any)"
     ],
     "folkMagic": [
       "Cool",
@@ -4757,6 +4986,10 @@
     "name": "Tokaz Varaz",
     "pantheon": "Darkness",
     "source": "CultOnePagers2019/Darkness/Tokaz Varaz.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Darkness/Tokaz Varaz.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Wild Dark",
     "runes": [],
@@ -4822,6 +5055,10 @@
     "name": "Xentha",
     "pantheon": "Darkness",
     "source": "CultOnePagers2019/Darkness/Xentha.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Darkness/Xentha.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Protective goddess of the night",
     "runes": [],
@@ -4833,7 +5070,7 @@
       "Endurance",
       "Runic Affinity",
       "Devotion",
-      "Lore(cult)"
+      "Lore (Cult)"
     ],
     "folkMagic": [
       "Darkness",
@@ -4896,6 +5133,11 @@
     "name": "Xiola Umbar",
     "pantheon": "Darkness",
     "source": "CultOnePagers2019/Darkness/Xiola Umbar.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Darkness/Xiola Umbar.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Solace of the Dark Deep Within",
     "runes": [],
@@ -4907,8 +5149,8 @@
       "Endurance",
       "First aid",
       "Healing",
-      "Lore (cult)",
-      "Lore (plant)",
+      "Lore (Cult)",
+      "Lore (Plant)",
       "Locale",
       "Devotion",
       "Runic Affinity"
@@ -4919,9 +5161,9 @@
       "Firearrow",
       "Fireblade",
       "Heal",
-      "Lantern²",
+      "Lantern",
       "Light",
-      "Lightwall²",
+      "Lightwall",
       "Protection",
       "Shimmer",
       "Spiritshield"
@@ -5024,6 +5266,10 @@
     "name": "Zong",
     "pantheon": "Darkness",
     "source": "CultOnePagers2019/Darkness/Zong.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Darkness/Zong.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Troll Hunter God",
     "runes": [],
@@ -5035,7 +5281,7 @@
       "Athletics",
       "Locale",
       "Perception",
-      "Lore (animal)",
+      "Lore (Animal)",
       "Navigation",
       "Disguise",
       "Stealth",
@@ -5107,6 +5353,11 @@
     "name": "Zorak Zoran",
     "pantheon": "Darkness",
     "source": "CultOnePagers2019/Darkness/Zorak Zoran.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Darkness/Zorak Zoran.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of Hate and Vengeance",
     "runes": [],
@@ -5118,7 +5369,7 @@
       "Brawn",
       "Endurance",
       "Willpower",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Combat style with blunt weapons",
       "Combat style with sling or thrown rock",
       "Conceal",
@@ -5235,6 +5486,10 @@
     "name": "Hobimarong",
     "pantheon": "East Isles",
     "source": "CultOnePagers2019/East Isles/Hobimarong.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/East Isles/Hobimarong.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The God of Mokato - never makes a mistake",
     "runes": [],
@@ -5243,13 +5498,13 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore(cult)",
+      "Lore (Cult)",
       "Literacy",
       "Runic Affinity",
       "Devotion"
     ],
     "folkMagic": [
-      "Find Merman²"
+      "Find Merman"
     ],
     "miracles": {
       "initiate": [
@@ -5287,6 +5542,10 @@
     "name": "Lumavoxoran",
     "pantheon": "East Isles",
     "source": "CultOnePagers2019/East Isles/Lumavoxoran.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/East Isles/Lumavoxoran.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of Haragala",
     "runes": [],
@@ -5295,15 +5554,15 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore(cult)",
+      "Lore (Cult)",
       "Literacy",
       "Runic Affinity",
       "Devotion"
     ],
     "folkMagic": [
-      "Find Enchanted Object²",
-      "Find Fresh Water²",
-      "Find Shark²"
+      "Find Enchanted Object",
+      "Find Fresh Water",
+      "Find Shark"
     ],
     "miracles": {
       "initiate": [
@@ -5344,6 +5603,10 @@
     "name": "Saliligor",
     "pantheon": "East Isles",
     "source": "CultOnePagers2019/East Isles/Saliligor.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/East Isles/Saliligor.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of Homago",
     "runes": [],
@@ -5352,15 +5615,15 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore(cult)",
+      "Lore (Cult)",
       "Literacy",
       "Devotion",
       "Runic Affinity"
     ],
     "folkMagic": [
-      "Find Octopus²",
-      "Find Saliligor Cultist²",
-      "Find Shark²"
+      "Find Octopus",
+      "Find Saliligor Cultist",
+      "Find Shark"
     ],
     "miracles": {
       "initiate": [
@@ -5396,6 +5659,11 @@
     "name": "Aldrya - Gardener",
     "pantheon": "Elf",
     "source": "CultOnePagers2019/Elf/Aldrya - Gardener.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Elf/Aldrya - Gardener.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of the Woods - Gardener",
     "runes": [],
@@ -5406,16 +5674,16 @@
     "cultSkills": [
       "Athletics",
       "Stealth",
-      "Lore (plant)",
+      "Lore (Plant)",
       "Devotion",
       "Runic Affinity",
-      "Lore (cult)"
+      "Lore (Cult)"
     ],
     "folkMagic": [
       "Avert",
       "Befuddle",
       "Extinguish",
-      "Food Song²(Lay)",
+      "Food Song(Lay)",
       "Heal(Lay)",
       "Light",
       "Mindspeech",
@@ -5523,6 +5791,11 @@
     "name": "Aldrya - Shaman",
     "pantheon": "Elf",
     "source": "CultOnePagers2019/Elf/Aldrya - Shaman.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Elf/Aldrya - Shaman.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of the Woods - Wood Lord",
     "runes": [],
@@ -5534,17 +5807,17 @@
       "Stealth",
       "Athletics",
       "Binding",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Trance",
-      "Lore (animal)",
+      "Lore (Animal)",
       "Lore (World)",
-      "Lore (plant)"
+      "Lore (Plant)"
     ],
     "folkMagic": [
       "Avert",
       "Befuddle",
       "Extinguish",
-      "Food Song²(Lay)",
+      "Food Song(Lay)",
       "Heal(Lay)",
       "Light",
       "Mindspeech",
@@ -5648,6 +5921,11 @@
     "name": "Aldrya - Wood Lord",
     "pantheon": "Elf",
     "source": "CultOnePagers2019/Elf/Aldrya - Wood Lord.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Elf/Aldrya - Wood Lord.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of the Woods - Wood Lord",
     "runes": [],
@@ -5657,8 +5935,8 @@
     },
     "cultSkills": [
       "Athletics",
-      "Lore (cult)",
-      "Lore (plant)",
+      "Lore (Cult)",
+      "Lore (Plant)",
       "Stealth",
       "Combat style with bow",
       "Conceal",
@@ -5670,7 +5948,7 @@
       "Avert",
       "Befuddle",
       "Extinguish",
-      "Food Song²(Lay)",
+      "Food Song(Lay)",
       "Heal(Lay)",
       "Light",
       "Mindspeech",
@@ -5766,6 +6044,11 @@
     "name": "Babeester Gor",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Elf/Babeester Gor.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Elf/Babeester Gor.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Earth Avenger",
     "runes": [],
@@ -5779,7 +6062,7 @@
       "Endurance",
       "Perception",
       "Willpower",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Track",
       "Devotion",
       "Runic Affinity"
@@ -5876,6 +6159,10 @@
     "name": "Flamal",
     "pantheon": "Elf",
     "source": "CultOnePagers2019/Elf/Flamal.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Elf/Flamal.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Father of Seeds",
     "runes": [],
@@ -5886,7 +6173,7 @@
     "cultSkills": [
       "Devotion",
       "Runic Affinity",
-      "Lore(Plant)"
+      "Lore (Plant)"
     ],
     "folkMagic": [],
     "miracles": {
@@ -5939,6 +6226,11 @@
     "name": "Grain Goddesses",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Elf/Grain Goddesses.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Elf/Grain Goddesses.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Good Goddess",
     "runes": [],
@@ -5948,8 +6240,8 @@
     },
     "cultSkills": [
       "Craft (Natural Substance)",
-      "Lore(Plants)",
-      "Lore(World)",
+      "Lore (Plants)",
+      "Lore (World)",
       "Perception",
       "Devotion",
       "Runic Affinity"
@@ -6023,6 +6315,10 @@
     "name": "Mee Vorala",
     "pantheon": "Darkness",
     "source": "CultOnePagers2019/Elf/Mee Vorala.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Elf/Mee Vorala.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Troll Cult of fungi",
     "runes": [],
@@ -6031,9 +6327,9 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore (cult)",
+      "Lore (Cult)",
       "Lore (Plant)",
-      "Craft(Brew Drugs)",
+      "Craft (Brew Drugs)",
       "Devotion",
       "Runic Affinity"
     ],
@@ -6107,6 +6403,10 @@
     "name": "Voria",
     "pantheon": "Elf",
     "source": "CultOnePagers2019/Elf/Voria.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Elf/Voria.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Spring Virgin",
     "runes": [],
@@ -6170,6 +6470,11 @@
     "name": "Yelmalio",
     "pantheon": "Elf",
     "source": "CultOnePagers2019/Elf/Yelmalio.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Elf/Yelmalio.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Light In The Darkness",
     "runes": [],
@@ -6183,7 +6488,7 @@
       "Insight",
       "Perception",
       "Stealth",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Oratory",
       "Combat style with bow / javelin / spear",
       "Devotion",
@@ -6196,9 +6501,9 @@
       "Find Gold",
       "Firearrow",
       "Fireblade",
-      "Lantern²",
+      "Lantern",
       "Light",
-      "Lightwall²",
+      "Lightwall",
       "Magnify",
       "Repair"
     ],
@@ -6296,6 +6601,10 @@
     "name": "Ancestor Worship",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Hsunchen/Ancestor Worship.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Hsunchen/Ancestor Worship.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Ancestor Worship",
     "runes": [],
@@ -6306,10 +6615,10 @@
     "cultSkills": [
       "Devotion",
       "Runic Affinity",
-      "Lore(Ancestors)",
-      "Dance(Shaman)",
+      "Lore (Ancestors)",
+      "Dance (Shaman)",
       "Spirit Rune Affinity",
-      "Sing(Shaman)"
+      "Sing (Shaman)"
     ],
     "folkMagic": [],
     "miracles": {
@@ -6374,6 +6683,10 @@
     "name": "Basmol",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Hsunchen/Basmol.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Hsunchen/Basmol.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Lion God",
     "runes": [],
@@ -6382,13 +6695,13 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore(animal)",
-      "Combat Style(any)",
-      "Lore(Cult)",
+      "Lore (Animal)",
+      "Combat Style (Any)",
+      "Lore (Cult)",
       "First Aid",
       "Runic Affinity",
       "Devotion",
-      "Combat Style(Natural Weapon)"
+      "Combat Style (Natural Weapon)"
     ],
     "folkMagic": [
       "Varies thru cult shamans"
@@ -6449,6 +6762,10 @@
     "name": "Horned Man Spirit Society",
     "pantheon": "Hsunchen",
     "source": "CultOnePagers2019/Hsunchen/Horned Man Spirit Society.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Hsunchen/Horned Man Spirit Society.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Great Shaman",
     "runes": [],
@@ -6457,7 +6774,7 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore (ancestors)",
+      "Lore (Ancestors)",
       "Insight",
       "Spirit Society Specific Runic Affinity",
       "Customs",
@@ -6467,20 +6784,15 @@
       "Willpower"
     ],
     "folkMagic": [
-      "Pantheons\nHsunchen\nSource - see for detailed info\nGods Of Glorantha²\nAreas\nContinents:Genertela",
-      "Pamaltela\nMain Areas: Dragon Pass",
+      "Pamaltela Main Areas: Dragon Pass",
       "Fonrit",
-      "West\nLocalities: Elder Wilds",
+      "West Localities: Elder Wilds",
       "Fonrit",
       "Northern Fronela",
-      "Ralios\nPersonality Traits\nEcstaticb Spiritualb Awareb Mysticalb\nRune Meanings: Magic: Communication Between Worlds Spirit: Discorporate Beings\nThis document uses trademarks and/or copyrights owned by Chaosium Inc/Moon Design Publications\nLLC",
       "which are used under Chaosium Inc’s Fan Material Policy",
-      "We are expressly prohibited from\ncharging you to use or access this content. This site is not published",
       "endorsed",
-      "or specifically approved\nby Chaosium Inc. For more information about Chaosium Inc’s products",
-      "please visit www.chaosium.com.\n\"Mythras” is a Registered Trademark of The Design Mechanism Inc",
       "and is used with permission",
-      "http:\n//notesfrompavis.blog 3/15/2019 9:13:32 PM Version: 5.2"
+      "http: //notesfrompavis.blog 3/15/2019 9:13:32 PM Version: 5.2"
     ],
     "miracles": {
       "initiate": [],
@@ -6510,6 +6822,10 @@
     "name": "Hungry Ghosts",
     "pantheon": "Praxian",
     "source": "CultOnePagers2019/Hsunchen/Hungry Ghosts.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Hsunchen/Hungry Ghosts.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Cult of the Cannibals",
     "runes": [],
@@ -6518,7 +6834,7 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore(cult)",
+      "Lore (Cult)",
       "Runic Affinity",
       "Devotion",
       "Endurance",
@@ -6575,6 +6891,10 @@
     "name": "Hykim & Mikyh",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Hsunchen/Hykim & Mikyh.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Hsunchen/Hykim & Mikyh.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Beast Parents",
     "runes": [],
@@ -6585,9 +6905,9 @@
     "cultSkills": [
       "Devotion",
       "Runic Affinity",
-      "Lore(Animal)",
-      "Lore(Plant)",
-      "Lore(World)",
+      "Lore (Animal)",
+      "Lore (Plant)",
+      "Lore (World)",
       "First Aid"
     ],
     "folkMagic": [],
@@ -6645,6 +6965,10 @@
     "name": "Shaman Spirit Society",
     "pantheon": "Pamalt, Darkness, Praxian, Hsunchen",
     "source": "CultOnePagers2019/Hsunchen/Shaman Spirit Society.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Hsunchen/Shaman Spirit Society.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Any Shamans AIG/RQG etc",
     "runes": [],
@@ -6652,7 +6976,10 @@
       "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity. Examiners need to be convinced at 3 of them.",
       "runelord": "to have 3"
     },
-    "cultSkills": [],
+    "cultSkills": [
+      "Devotion",
+      "Runic Affinity"
+    ],
     "folkMagic": [
       "Any - varies(l)"
     ],
@@ -6703,6 +7030,11 @@
     "name": "Telmor",
     "pantheon": "Hsunchen",
     "source": "CultOnePagers2019/Hsunchen/Telmor.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Hsunchen/Telmor.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Father of Wolves",
     "runes": [],
@@ -6711,11 +7043,11 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore(animal)",
-      "Combat style (any)",
-      "Combat style(wolf attack)",
+      "Lore (Animal)",
+      "Combat style (Any)",
+      "Combat style (Wolf attack)",
       "Evade",
-      "Lore(world)",
+      "Lore (World)",
       "Athletics"
     ],
     "folkMagic": [],
@@ -6810,6 +7142,11 @@
     "name": "Baraku",
     "pantheon": "Independent",
     "source": "CultOnePagers2019/Independent/Baraku.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Independent/Baraku.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Pamaltelan God of Storm",
     "runes": [],
@@ -6818,16 +7155,14 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Combat style (any)",
+      "Combat style (Any)",
       "Athletics",
       "Evade",
       "Native tongue",
       "Perception",
       "Stealth",
-      "Stealth",
-      "Language (stormspeech)",
-      "Lore (cult)",
-      "Navigation",
+      "Language (Stormspeech)",
+      "Lore (Cult)",
       "Navigation",
       "Oratory",
       "Combat style with sword",
@@ -6908,6 +7243,11 @@
     "name": "Blackfang",
     "pantheon": "Independent",
     "source": "CultOnePagers2019/Independent/Blackfang.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Independent/Blackfang.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Spirit cult of the Assassins in Pavis",
     "runes": [],
@@ -6916,7 +7256,7 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Combat style (any with assassin trait)",
+      "Combat style (Any with assassin trait)",
       "Conceal",
       "Customs",
       "Deceit",
@@ -6925,18 +7265,18 @@
       "Willpower",
       "Acrobatics",
       "Acting",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Sleight",
       "Streetwise",
       "Track",
       "Athletics",
       "Stealth",
-      "Binding(Shaman)",
+      "Binding (Shaman)",
       "Craft (Poison)",
       "Devotion",
       "Disguise",
       "Runic Affinity",
-      "Trance(Shaman)"
+      "Trance (Shaman)"
     ],
     "folkMagic": [
       "Varies thru cult shamans"
@@ -7008,6 +7348,11 @@
     "name": "Bloody Tusk",
     "pantheon": "Independent",
     "source": "CultOnePagers2019/Independent/Bloody Tusk.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Independent/Bloody Tusk.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of the Tusk Riders",
     "runes": [],
@@ -7016,12 +7361,10 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore (cult)",
+      "Lore (Cult)",
       "Bloody Cut0 Devotion Runic Affinity"
     ],
-    "folkMagic": [
-      "Bladesharp Countermagic Demoralize Disruption Heal Ironhand Mobility Protection\nSlow Vigour"
-    ],
+    "folkMagic": [],
     "miracles": {
       "initiate": [
         "Dismiss Magic",
@@ -7069,6 +7412,11 @@
     "name": "Caladra&Aurelion",
     "pantheon": "Independent",
     "source": "CultOnePagers2019/Independent/Caladra&Aurelion.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Independent/Caladra&Aurelion.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Volcano Twins",
     "runes": [],
@@ -7080,10 +7428,10 @@
       "Dance",
       "Endurance",
       "Stealth",
-      "Lore (cult)",
-      "Lore (earth)",
+      "Lore (Cult)",
+      "Lore (Earth)",
       "Survival",
-      "Language (diamondspeech)",
+      "Language (Diamondspeech)",
       "Combat style with bow",
       "Combat style with spear",
       "Devotion",
@@ -7097,9 +7445,9 @@
       "Disruption",
       "Extinguish",
       "Fanaticism",
-      "Find Diamond¹",
-      "Find Earthblood¹",
-      "Find\nFirebone¹",
+      "Find Diamond",
+      "Find Earthblood",
+      "Find Firebone",
       "Find Gems",
       "Find Gold",
       "Ignite",
@@ -7197,6 +7545,10 @@
     "name": "City God",
     "pantheon": "Independent",
     "source": "CultOnePagers2019/Independent/City God.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Independent/City God.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Requirements to join",
     "runes": [],
@@ -7208,8 +7560,8 @@
       "Customs",
       "Locale",
       "Bureaucracy",
-      "Lore (cult)",
-      "Combat style (local)",
+      "Lore (Cult)",
+      "Combat style (Local)",
       "Devotion",
       "Runic Affinity",
       "Language (City)"
@@ -7255,6 +7607,10 @@
     "name": "Dorasta",
     "pantheon": "Independent",
     "source": "CultOnePagers2019/Independent/Dorasta.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Independent/Dorasta.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Dorastor Earth Goddess",
     "runes": [],
@@ -7263,7 +7619,7 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore (cult)",
+      "Lore (Cult)",
       "Devotion",
       "Runic Affinity"
     ],
@@ -7333,6 +7689,11 @@
     "name": "Flintnail",
     "pantheon": "Independent",
     "source": "CultOnePagers2019/Independent/Flintnail.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Independent/Flintnail.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Mason God of the Pavis Dwarves",
     "runes": [],
@@ -7343,10 +7704,10 @@
     "cultSkills": [
       "Combat style with axe",
       "Perception",
-      "Craft (armoring)",
-      "Craft (masonry)",
+      "Craft (Armoring)",
+      "Craft (Masonry)",
       "Engineering",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Mechanisms",
       "Devotion",
       "Runic Affinity"
@@ -7441,6 +7802,10 @@
     "name": "Lamsabi",
     "pantheon": "Independent",
     "source": "CultOnePagers2019/Independent/Lamsabi.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Independent/Lamsabi.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Thief God of Eastern Coast of Pamaltela",
     "runes": [],
@@ -7457,7 +7822,7 @@
       "Mysticism",
       "Stealth",
       "Sleight",
-      "Oath(Cult)"
+      "Oath (Cult)"
     ],
     "folkMagic": [
       "Bypass"
@@ -7504,6 +7869,10 @@
     "name": "Selarn",
     "pantheon": "Independent",
     "source": "CultOnePagers2019/Independent/Selarn.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Independent/Selarn.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Thief God of Thieves of Afadjann",
     "runes": [],
@@ -7608,6 +7977,10 @@
     "name": "Sun Dragon",
     "pantheon": "Independent",
     "source": "CultOnePagers2019/Independent/Sun Dragon.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Independent/Sun Dragon.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Draconic Sun",
     "runes": [],
@@ -7688,6 +8061,10 @@
     "name": "Um-Oradin",
     "pantheon": "Independent",
     "source": "CultOnePagers2019/Independent/Um-Oradin.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Independent/Um-Oradin.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Fonritan Corsair God",
     "runes": [],
@@ -7766,6 +8143,10 @@
     "name": "Black Sun",
     "pantheon": "Kralorela",
     "source": "CultOnePagers2019/Kralorela/Black Sun.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Kralorela/Black Sun.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Shadow of the Sun",
     "runes": [],
@@ -7782,7 +8163,7 @@
       "Countermagic",
       "Darkwall",
       "Extinguish",
-      "False Healing¹⁰",
+      "False Healing",
       "Find Enemy"
     ],
     "miracles": {
@@ -7834,6 +8215,10 @@
     "name": "Dendara",
     "pantheon": "Yelm",
     "source": "CultOnePagers2019/Kralorela/Dendara.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Kralorela/Dendara.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Good Wife",
     "runes": [],
@@ -7842,10 +8227,10 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore(cult)",
-      "Lore(Animals)",
-      "Lore(Plants)",
-      "Lore(World)",
+      "Lore (Cult)",
+      "Lore (Animals)",
+      "Lore (Plants)",
+      "Lore (World)",
       "First Aid",
       "Devotion",
       "Runic Affinity"
@@ -7926,6 +8311,11 @@
     "name": "Grain Goddesses",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Kralorela/Grain Goddesses.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Kralorela/Grain Goddesses.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Good Goddess",
     "runes": [],
@@ -7935,8 +8325,8 @@
     },
     "cultSkills": [
       "Craft (Natural Substance)",
-      "Lore(Plants)",
-      "Lore(World)",
+      "Lore (Plants)",
+      "Lore (World)",
       "Perception",
       "Devotion",
       "Runic Affinity"
@@ -8010,6 +8400,10 @@
     "name": "Hykim & Mikyh",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Kralorela/Hykim & Mikyh.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Kralorela/Hykim & Mikyh.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Beast Parents",
     "runes": [],
@@ -8020,9 +8414,9 @@
     "cultSkills": [
       "Devotion",
       "Runic Affinity",
-      "Lore(Animal)",
-      "Lore(Plant)",
-      "Lore(World)",
+      "Lore (Animal)",
+      "Lore (Plant)",
+      "Lore (World)",
       "First Aid"
     ],
     "folkMagic": [],
@@ -8080,6 +8474,10 @@
     "name": "Path of Immanent Mastery",
     "pantheon": "Kralorela",
     "source": "CultOnePagers2019/Kralorela/Path of Immanent Mastery.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Kralorela/Path of Immanent Mastery.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Mystery Cult of Dragon Worship AIG/RQG etc",
     "runes": [],
@@ -8088,7 +8486,7 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore(cult)",
+      "Lore (Cult)",
       "Charismatic Wisdom",
       "Runic Affinity",
       "Devotion"
@@ -8125,6 +8523,10 @@
     "name": "7 Mothers - Danfive Xaron",
     "pantheon": "Lunar",
     "source": "CultOnePagers2019/Lunar/7 Mothers - Danfive Xaron.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Lunar/7 Mothers - Danfive Xaron.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Recreators of the Red Goddess",
     "runes": [],
@@ -8221,6 +8623,10 @@
     "name": "7 Mothers - Irrippi Ontor",
     "pantheon": "Lunar",
     "source": "CultOnePagers2019/Lunar/7 Mothers - Irrippi Ontor.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Lunar/7 Mothers - Irrippi Ontor.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Recreators of the Red Goddess",
     "runes": [],
@@ -8319,6 +8725,10 @@
     "name": "7 Mothers - Jakaleel",
     "pantheon": "Lunar",
     "source": "CultOnePagers2019/Lunar/7 Mothers - Jakaleel.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Lunar/7 Mothers - Jakaleel.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Recreators of the Red Goddess",
     "runes": [],
@@ -8415,6 +8825,11 @@
     "name": "7 Mothers - Queen Deezola",
     "pantheon": "Lunar",
     "source": "CultOnePagers2019/Lunar/7 Mothers - Queen Deezola.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Lunar/7 Mothers - Queen Deezola.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Recreators of the Red Goddess",
     "runes": [],
@@ -8512,6 +8927,10 @@
     "name": "7 Mothers - She Who Waits",
     "pantheon": "Lunar",
     "source": "CultOnePagers2019/Lunar/7 Mothers - She Who Waits.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Lunar/7 Mothers - She Who Waits.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Recreators of the Red Goddess",
     "runes": [],
@@ -8606,6 +9025,11 @@
     "name": "7 Mothers - Teelo Norri",
     "pantheon": "Lunar",
     "source": "CultOnePagers2019/Lunar/7 Mothers - Teelo Norri.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Lunar/7 Mothers - Teelo Norri.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Recreators of the Red Goddess",
     "runes": [],
@@ -8703,6 +9127,11 @@
     "name": "7 Mothers - Yanafal Tarnils",
     "pantheon": "Lunar",
     "source": "CultOnePagers2019/Lunar/7 Mothers - Yanafal Tarnils.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Lunar/7 Mothers - Yanafal Tarnils.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Recreators of the Red Goddess",
     "runes": [],
@@ -8711,7 +9140,7 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Combat Style(any)",
+      "Combat Style (Any)",
       "Evade",
       "Influence",
       "Athletics",
@@ -8801,6 +9230,10 @@
     "name": "Annilla",
     "pantheon": "Darkness",
     "source": "CultOnePagers2019/Lunar/Annilla.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Lunar/Annilla.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of the Blue Moon",
     "runes": [],
@@ -8812,7 +9245,7 @@
       "Conceal",
       "Mechanisms",
       "Stealth",
-      "Combat skill (any)",
+      "Combat skill (Any)",
       "Devotion",
       "Runic Affinity"
     ],
@@ -8887,6 +9320,11 @@
     "name": "Crimson Bat",
     "pantheon": "Lunar",
     "source": "CultOnePagers2019/Lunar/Crimson Bat.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Lunar/Crimson Bat.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Chaos Demon of the Lunars",
     "runes": [],
@@ -8896,10 +9334,10 @@
     },
     "cultSkills": [
       "Bat Mastery",
-      "Lore(cult)",
-      "Combat Style(Scimitar)",
+      "Lore (Cult)",
+      "Combat Style (Scimitar)",
       "Any",
-      "Literacy(New Pelorian)",
+      "Literacy (New Pelorian)",
       "Runic Affinity",
       "Devotion"
     ],
@@ -8994,6 +9432,10 @@
     "name": "Etyries",
     "pantheon": "Lunar",
     "source": "CultOnePagers2019/Lunar/Etyries.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Lunar/Etyries.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Lunar Goddess of Trade",
     "runes": [],
@@ -9007,7 +9449,7 @@
       "Native tongue",
       "Commerce",
       "Language",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Devotion",
       "Runic Affinity"
     ],
@@ -9060,6 +9502,11 @@
     "name": "Lanbril",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Lunar/Lanbril.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Lunar/Lanbril.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Master Thief",
     "runes": [],
@@ -9068,7 +9515,7 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Combat style (any)",
+      "Combat style (Any)",
       "Athletics",
       "Conceal",
       "Deceit",
@@ -9082,7 +9529,7 @@
       "Commerce",
       "Disguise",
       "Lockpicking",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Mechanisms",
       "Sleight",
       "Streetwise",
@@ -9097,9 +9544,9 @@
       "Bypass",
       "Calculate",
       "Calm",
-      "Conceal Item¹",
+      "Conceal Item",
       "Coordination",
-      "Dispel\nMagic",
+      "Dispel Magic",
       "Disruption",
       "Find Gems",
       "Find Gold",
@@ -9200,6 +9647,10 @@
     "name": "Yara Aranis",
     "pantheon": "Lunar",
     "source": "CultOnePagers2019/Lunar/Yara Aranis.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Lunar/Yara Aranis.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Horse Eater",
     "runes": [],
@@ -9208,12 +9659,12 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Combat Style(any)",
+      "Combat Style (Any)",
       "Ride",
       "Perception",
       "Track",
       "Runic Affinity",
-      "Language(New Pelorian)"
+      "Language (New Pelorian)"
     ],
     "folkMagic": [
       "Avert",
@@ -9224,7 +9675,7 @@
       "Disruption",
       "Dullblade",
       "Fanaticism",
-      "Find\nEnemy",
+      "Find Enemy",
       "Ironhand",
       "Might",
       "Mobility",
@@ -9282,6 +9733,10 @@
     "name": "Arkat",
     "pantheon": "Darkness",
     "source": "CultOnePagers2019/Malkion/Arkat.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Malkion/Arkat.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Arkat Kingtroll",
     "runes": [],
@@ -9290,7 +9745,7 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore(cult)",
+      "Lore (Cult)",
       "Invocation",
       "Shaping"
     ],
@@ -9347,6 +9802,10 @@
     "name": "Dormal",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Malkion/Dormal.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Malkion/Dormal.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Craftsman, Sailore & Explorer",
     "runes": [],
@@ -9358,8 +9817,8 @@
       "Athletics",
       "Swim",
       "Unarmed",
-      "Craft (wood)",
-      "Lore (cult)",
+      "Craft (Wood)",
+      "Lore (Cult)",
       "Lore (Sea)",
       "Lore (World)",
       "Navigation",
@@ -9426,6 +9885,11 @@
     "name": "Burayha Xolani",
     "pantheon": "Ompalam",
     "source": "CultOnePagers2019/Ompalam/Burayha Xolani.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Ompalam/Burayha Xolani.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Chirurgeon. Fonritan Healer Cult",
     "runes": [],
@@ -9436,8 +9900,8 @@
     "cultSkills": [
       "First aid",
       "Lore (Human)",
-      "Lore(Enbalming)",
-      "Lore (cult)",
+      "Lore (Enbalming)",
+      "Lore (Cult)",
       "Lore (Ompalam)",
       "Insight",
       "Influence",
@@ -9445,10 +9909,10 @@
       "Devotion",
       "Runic Affinity",
       "Healing",
-      "Lore(Torture)",
-      "Craft(Torture)",
+      "Lore (Torture)",
+      "Craft (Torture)",
       "Deceit",
-      "Lore(Alchemy)",
+      "Lore (Alchemy)",
       "Willpower"
     ],
     "folkMagic": [
@@ -9457,7 +9921,7 @@
       "Cool",
       "Coordination",
       "Curse",
-      "False Healing¹⁰",
+      "False Healing",
       "Glamour",
       "Heal",
       "Heat",
@@ -9551,6 +10015,10 @@
     "name": "Calari the Hunter",
     "pantheon": "Ompalam",
     "source": "CultOnePagers2019/Ompalam/Calari the Hunter.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Ompalam/Calari the Hunter.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Dancing Leopard Man",
     "runes": [],
@@ -9562,7 +10030,7 @@
       "Athletics",
       "Locale",
       "Perception",
-      "Lore (animal)",
+      "Lore (Animal)",
       "Lore (Escaped Slaves)",
       "Navigation",
       "Disguise",
@@ -9576,9 +10044,7 @@
       "Runic Affinity",
       "Track"
     ],
-    "folkMagic": [
-      "Beastcall(Native 4leg plain herbivore) Disruption Find Life Magnify Mobility Slow Speedart"
-    ],
+    "folkMagic": [],
     "miracles": {
       "initiate": [
         "Divination",
@@ -9616,6 +10082,10 @@
     "name": "El-Jazuli",
     "pantheon": "Ompalam",
     "source": "CultOnePagers2019/Ompalam/El-Jazuli.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Ompalam/El-Jazuli.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Sister Witch, Fonritan Earth Goddess",
     "runes": [],
@@ -9624,17 +10094,17 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore (cult)",
+      "Lore (Cult)",
       "Lore (Underworld)",
       "Customs",
       "Endurance",
       "Lore (Ompalam)",
-      "Trance(Shaman)",
+      "Trance (Shaman)",
       "Binding (Shaman)",
-      "Dance(Shaman)",
+      "Dance (Shaman)",
       "Devotion",
       "Runic Affinity",
-      "Insight(Shaman)",
+      "Insight (Shaman)",
       "Perception"
     ],
     "folkMagic": [
@@ -9700,6 +10170,10 @@
     "name": "Ennung",
     "pantheon": "Ompalam",
     "source": "CultOnePagers2019/Ompalam/Ennung.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Ompalam/Ennung.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Digger and Toiler, Pamaltelan",
     "runes": [],
@@ -9708,9 +10182,9 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Craft (wood)",
+      "Craft (Wood)",
       "Endurance",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Sing",
       "Lore (Ompalam)",
       "Devotion",
@@ -9770,6 +10244,10 @@
     "name": "Ernamola",
     "pantheon": "Ompalam",
     "source": "CultOnePagers2019/Ompalam/Ernamola.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Ompalam/Ernamola.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Fonritan Grain goddess",
     "runes": [],
@@ -9779,8 +10257,8 @@
     },
     "cultSkills": [
       "Craft (Natural Substance)",
-      "Lore(Plants)",
-      "Lore(World)",
+      "Lore (Plants)",
+      "Lore (World)",
       "Perception",
       "Devotion",
       "Runic Affinity"
@@ -9838,6 +10316,10 @@
     "name": "Evukindu",
     "pantheon": "Ompalam",
     "source": "CultOnePagers2019/Ompalam/Evukindu.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Ompalam/Evukindu.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Fonritan God of War, Severance, and",
     "runes": [],
@@ -9847,7 +10329,7 @@
     },
     "cultSkills": [
       "Combat style (Local)",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Lore (Ompalam)",
       "Endurance",
       "Willpower",
@@ -9904,6 +10386,10 @@
     "name": "Fida'ls",
     "pantheon": "Ompalam",
     "source": "CultOnePagers2019/Ompalam/Fida'ls.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Ompalam/Fida'ls.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Sunbird - Fonritan Sun God",
     "runes": [],
@@ -9912,13 +10398,13 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore (cult)",
+      "Lore (Cult)",
       "Perception",
       "Insight",
       "Navigation",
       "Devotion",
       "Runic Affinity",
-      "Ride(Bird)"
+      "Ride (Bird)"
     ],
     "folkMagic": [
       "Coordination",
@@ -9977,6 +10463,10 @@
     "name": "Garangordos the Cruel",
     "pantheon": "Ompalam",
     "source": "CultOnePagers2019/Ompalam/Garangordos the Cruel.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Ompalam/Garangordos the Cruel.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Fonritan Founder - Prophet of Ompalam",
     "runes": [],
@@ -9985,7 +10475,7 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore (cult)",
+      "Lore (Cult)",
       "Bureaucracy",
       "Customs",
       "Deceit",
@@ -9996,7 +10486,7 @@
       "Devotion",
       "Runic Affinity",
       "Orate",
-      "Passion(Wrath of Ompalam)",
+      "Passion (Wrath of Ompalam)",
       "Literacy"
     ],
     "folkMagic": [],
@@ -10043,6 +10533,10 @@
     "name": "Hanjethulut",
     "pantheon": "Ompalam",
     "source": "CultOnePagers2019/Ompalam/Hanjethulut.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Ompalam/Hanjethulut.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Fonrita: Angry Warrior",
     "runes": [],
@@ -10053,9 +10547,9 @@
     "cultSkills": [
       "Brawn",
       "Willpower",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Conceal",
-      "Influence(Intimidate)",
+      "Influence (Intimidate)",
       "Passion: Hate Orjethulut",
       "Lore (Ompalam)",
       "Combat style with blunt weapons",
@@ -10128,6 +10622,10 @@
     "name": "Ikadz",
     "pantheon": "Ompalam",
     "source": "CultOnePagers2019/Ompalam/Ikadz.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Ompalam/Ikadz.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of Torture",
     "runes": [],
@@ -10138,14 +10636,14 @@
     "cultSkills": [
       "Endurance",
       "Influence",
-      "Lore(Human)",
+      "Lore (Human)",
       "First Aid",
       "Perception",
-      "Language(another)",
+      "Language (Another)",
       "Devotion",
       "Runic Affinity",
-      "Lore(torture)",
-      "Craft(torture)",
+      "Lore (Torture)",
+      "Craft (Torture)",
       "Combat (Knife&Whip)",
       "Interrogate"
     ],
@@ -10210,6 +10708,10 @@
     "name": "Jokotu the Murderer",
     "pantheon": "Ompalam",
     "source": "CultOnePagers2019/Ompalam/Jokotu the Murderer.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Ompalam/Jokotu the Murderer.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Fonritan Assassin Spirit Society",
     "runes": [],
@@ -10219,18 +10721,17 @@
     },
     "cultSkills": [
       "Deceit",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Acting",
       "Conceal",
       "Athletics",
       "Craft (Poison)",
-      "Acting",
       "Passion: Anti-Slavery",
       "Willpower",
       "Stealth",
-      "Combat style (knife with assassin trait)",
-      "Trance(Shaman)",
-      "Binding(Shaman)",
+      "Combat style (Knife with assassin trait)",
+      "Trance (Shaman)",
+      "Binding (Shaman)",
       "Streetwise",
       "Disguise"
     ],
@@ -10278,6 +10779,10 @@
     "name": "Karkisso",
     "pantheon": "Ompalam",
     "source": "CultOnePagers2019/Ompalam/Karkisso.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Ompalam/Karkisso.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Star Seer. Fonritan God of Knowledge",
     "runes": [],
@@ -10286,7 +10791,7 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore (cult)",
+      "Lore (Cult)",
       "Lore (Mathematics)",
       "Perception",
       "Insight",
@@ -10355,6 +10860,10 @@
     "name": "Kokef Ados",
     "pantheon": "Ompalam",
     "source": "CultOnePagers2019/Ompalam/Kokef Ados.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Ompalam/Kokef Ados.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Lord of the Bazaar AIG/RQG etc",
     "runes": [],
@@ -10364,7 +10873,7 @@
     },
     "cultSkills": [
       "Influence",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Courtesy",
       "Customs",
       "Lore (Ompalam)",
@@ -10381,8 +10890,7 @@
       "Polish",
       "Preserve",
       "Repair",
-      "Translate\nPantheons\nOmpalam\nSource - see for detailed info\nCult Compendium¹",
-      "Inspired by private discussions₂₉\nAreas\nContinents:Pamaltela\nMain Areas: Fonrit\nLocalities: Fonrit",
+      "Translate Pantheons Ompalam Source - see for detailed info Cult Compendium",
       "Loral"
     ],
     "miracles": {
@@ -10406,6 +10914,11 @@
     "name": "Ompalam",
     "pantheon": "Ompalam",
     "source": "CultOnePagers2019/Ompalam/Ompalam.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Ompalam/Ompalam.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of coercion and slavery",
     "runes": [],
@@ -10416,10 +10929,10 @@
     "cultSkills": [
       "Lore (Ompalam)",
       "Influence",
-      "Craft(Torture)",
+      "Craft (Torture)",
       "Endurance",
       "Combat Style with Whip",
-      "Culture(Own)",
+      "Culture (Own)",
       "Bureaucracy",
       "Lore (Slavery)",
       "Lore (Torture)",
@@ -10432,7 +10945,7 @@
       "Commerce"
     ],
     "folkMagic": [
-      "Bearing Witness⁴⁸",
+      "Bearing Witness",
       "Calm",
       "Curse",
       "Demoralize",
@@ -10441,8 +10954,8 @@
       "Find Enemy",
       "Glamour",
       "Mindspeech",
-      "Placate Master⁴⁷",
-      "Punish Slave⁴⁷",
+      "Placate Master",
+      "Punish Slave",
       "Repugnance",
       "Slow",
       "Spiritshield",
@@ -10541,6 +11054,10 @@
     "name": "Orjethulut",
     "pantheon": "Ompalam",
     "source": "CultOnePagers2019/Ompalam/Orjethulut.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Ompalam/Orjethulut.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Fonritan God of Death & War",
     "runes": [],
@@ -10550,7 +11067,7 @@
     },
     "cultSkills": [
       "Passion: Hate Hanjethulut",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Willpower",
       "Endurance",
       "Lore (Ompalam)",
@@ -10621,6 +11138,10 @@
     "name": "Ancestor Worship",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Pamalt/Ancestor Worship.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Pamalt/Ancestor Worship.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Ancestor Worship",
     "runes": [],
@@ -10631,10 +11152,10 @@
     "cultSkills": [
       "Devotion",
       "Runic Affinity",
-      "Lore(Ancestors)",
-      "Dance(Shaman)",
+      "Lore (Ancestors)",
+      "Dance (Shaman)",
       "Spirit Rune Affinity",
-      "Sing(Shaman)"
+      "Sing (Shaman)"
     ],
     "folkMagic": [],
     "miracles": {
@@ -10699,6 +11220,11 @@
     "name": "Babeester Gor",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Pamalt/Babeester Gor.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Pamalt/Babeester Gor.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Earth Avenger",
     "runes": [],
@@ -10712,7 +11238,7 @@
       "Endurance",
       "Perception",
       "Willpower",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Track",
       "Devotion",
       "Runic Affinity"
@@ -10809,6 +11335,10 @@
     "name": "Basmol",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Pamalt/Basmol.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Pamalt/Basmol.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Lion God",
     "runes": [],
@@ -10817,13 +11347,13 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore(animal)",
-      "Combat Style(any)",
-      "Lore(Cult)",
+      "Lore (Animal)",
+      "Combat Style (Any)",
+      "Lore (Cult)",
       "First Aid",
       "Runic Affinity",
       "Devotion",
-      "Combat Style(Natural Weapon)"
+      "Combat Style (Natural Weapon)"
     ],
     "folkMagic": [
       "Varies thru cult shamans"
@@ -10884,6 +11414,10 @@
     "name": "Bolongo",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Pamalt/Bolongo.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Pamalt/Bolongo.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Trickster",
     "runes": [],
@@ -10898,7 +11432,7 @@
       "Acrobatics",
       "Acting",
       "Disguise",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Seduction",
       "Sleight",
       "Streetwise",
@@ -10906,7 +11440,7 @@
       "Runic Affinity"
     ],
     "folkMagic": [
-      "Hotfoot²"
+      "Hotfoot"
     ],
     "miracles": {
       "initiate": [
@@ -10957,6 +11491,11 @@
     "name": "Lodril",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Pamalt/Lodril.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Pamalt/Lodril.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Father of Volcanoes and Peasants",
     "runes": [],
@@ -10970,8 +11509,8 @@
       "Endurance",
       "Locale",
       "Craft",
-      "Lore (cult)",
-      "Lore (earth)",
+      "Lore (Cult)",
+      "Lore (Earth)",
       "Devotion",
       "Runic Affinity"
     ],
@@ -11080,6 +11619,11 @@
     "name": "Maran Gor",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Pamalt/Maran Gor.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Pamalt/Maran Gor.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Earth Shaker",
     "runes": [],
@@ -11088,14 +11632,14 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Combat style (any)",
+      "Combat style (Any)",
       "Brawn",
       "Endurance",
       "Locale",
       "Perception",
       "Willpower",
-      "Lore (cult)",
-      "Lore (earth)",
+      "Lore (Cult)",
+      "Lore (Earth)",
       "Athletics",
       "Devotion",
       "Runic Affinity"
@@ -11203,6 +11747,10 @@
     "name": "Nyanka",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Pamalt/Nyanka.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Pamalt/Nyanka.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of Childbearing and Clear Waters",
     "runes": [],
@@ -11212,9 +11760,9 @@
     },
     "cultSkills": [
       "Craft (Midwifery)",
-      "Lore(World)",
+      "Lore (World)",
       "Swim",
-      "Lore(Cult)",
+      "Lore (Cult)",
       "First Aid",
       "Devotion",
       "Runic Affinity"
@@ -11276,6 +11824,11 @@
     "name": "Pamalt",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Pamalt/Pamalt.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Pamalt/Pamalt.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Earth-King of Pamaltela",
     "runes": [],
@@ -11289,26 +11842,26 @@
       "Locale",
       "Perception",
       "Binding",
-      "Lore (ancestors)",
-      "Lore (cult)",
+      "Lore (Ancestors)",
+      "Lore (Cult)",
       "Navigation",
       "Survival",
       "Track",
       "Trance",
       "Devotion",
       "Runic Affinity",
-      "Lore (human)",
+      "Lore (Human)",
       "Lore (World)",
       "Oratory",
       "Native Tongue"
     ],
     "folkMagic": [
-      "Comprehension²(Lay)",
+      "Comprehension(Lay)",
       "Cool(Lay)",
       "Coordination(Lay)",
       "Glamour(Lay)",
       "Might(Lay)",
-      "Pamalt's Touch²(Lay)",
+      "Pamalt's Touch(Lay)",
       "Vigour(Lay)"
     ],
     "miracles": {
@@ -11374,6 +11927,10 @@
     "name": "Rasout",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Pamalt/Rasout.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Pamalt/Rasout.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Pamaltelan Hunter God",
     "runes": [],
@@ -11385,7 +11942,7 @@
       "Athletics",
       "Locale",
       "Perception",
-      "Lore (animal)",
+      "Lore (Animal)",
       "Navigation",
       "Disguise",
       "Stealth",
@@ -11395,9 +11952,7 @@
       "Track",
       "Runic Affinity"
     ],
-    "folkMagic": [
-      "Beastcall(Native 4leg plain herbivore) Beastcall(Plains Herbivore Reptile) Disruption Find Life\nMagnify Mobility Slow Speedart"
-    ],
+    "folkMagic": [],
     "miracles": {
       "initiate": [
         "Divination",
@@ -11436,6 +11991,10 @@
     "name": "Shaman Spirit Society",
     "pantheon": "Pamalt, Darkness, Praxian, Hsunchen",
     "source": "CultOnePagers2019/Pamalt/Shaman Spirit Society.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Pamalt/Shaman Spirit Society.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Any Shamans AIG/RQG etc",
     "runes": [],
@@ -11443,7 +12002,10 @@
       "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity. Examiners need to be convinced at 3 of them.",
       "runelord": "to have 3"
     },
-    "cultSkills": [],
+    "cultSkills": [
+      "Devotion",
+      "Runic Affinity"
+    ],
     "folkMagic": [
       "Any - varies(l)"
     ],
@@ -11494,6 +12056,11 @@
     "name": "Ty Kora Tek",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Pamalt/Ty Kora Tek.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Pamalt/Ty Kora Tek.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Underworld Goddess",
     "runes": [],
@@ -11506,8 +12073,7 @@
       "Endurance",
       "Influence",
       "Willpower",
-      "Lore",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Devotion",
       "Runic Affinity",
       "Literacy",
@@ -11584,6 +12150,11 @@
     "name": "Uleria",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Pamalt/Uleria.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Pamalt/Uleria.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of Love",
     "runes": [],
@@ -11700,6 +12271,10 @@
     "name": "Ancestor Worship",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Praxian/Ancestor Worship.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Praxian/Ancestor Worship.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Ancestor Worship",
     "runes": [],
@@ -11710,10 +12285,10 @@
     "cultSkills": [
       "Devotion",
       "Runic Affinity",
-      "Lore(Ancestors)",
-      "Dance(Shaman)",
+      "Lore (Ancestors)",
+      "Dance (Shaman)",
       "Spirit Rune Affinity",
-      "Sing(Shaman)"
+      "Sing (Shaman)"
     ],
     "folkMagic": [],
     "miracles": {
@@ -11778,6 +12353,10 @@
     "name": "Basmol",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Praxian/Basmol.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Praxian/Basmol.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Lion God",
     "runes": [],
@@ -11786,13 +12365,13 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore(animal)",
-      "Combat Style(any)",
-      "Lore(Cult)",
+      "Lore (Animal)",
+      "Combat Style (Any)",
+      "Lore (Cult)",
       "First Aid",
       "Runic Affinity",
       "Devotion",
-      "Combat Style(Natural Weapon)"
+      "Combat Style (Natural Weapon)"
     ],
     "folkMagic": [
       "Varies thru cult shamans"
@@ -11853,6 +12432,11 @@
     "name": "Daka Fal",
     "pantheon": "Praxian",
     "source": "CultOnePagers2019/Praxian/Daka Fal.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Praxian/Daka Fal.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Judge of the Dead",
     "runes": [],
@@ -11861,16 +12445,16 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore (cult)",
+      "Lore (Cult)",
       "Survival",
       "Track",
       "Any skill",
-      "Lore(Ancestors)",
-      "Runic Affinitiy",
-      "Binding(Shaman)",
+      "Lore (Ancestors)",
+      "Runic Affinity",
+      "Binding (Shaman)",
       "Trance (Shaman)",
       "Spirit Speech",
-      "Spirit Rune Runic Affinitiy"
+      "Spirit Rune Affinity"
     ],
     "folkMagic": [],
     "miracles": {
@@ -11959,6 +12543,10 @@
     "name": "Dark Eater",
     "pantheon": "Praxian",
     "source": "CultOnePagers2019/Praxian/Dark Eater.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Praxian/Dark Eater.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Lord of Shades And Slavery - Morocanth",
     "runes": [],
@@ -11967,14 +12555,14 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Combat Style(Natural)",
+      "Combat Style (Natural)",
       "Unarmed",
       "Evade",
       "Runic Affinity",
       "Devotion"
     ],
     "folkMagic": [
-      "Beslave⁹",
+      "Beslave",
       "Bladesharp",
       "Bludgeon",
       "Darkness",
@@ -12038,6 +12626,11 @@
     "name": "Eiritha",
     "pantheon": "Praxian",
     "source": "CultOnePagers2019/Praxian/Eiritha.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Praxian/Eiritha.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Mother of Herds",
     "runes": [],
@@ -12050,20 +12643,20 @@
       "Influence",
       "Locale",
       "Willpower",
-      "Lore (animal)",
-      "Lore (cult)",
-      "Lore (earth)",
-      "Lore (plant)",
+      "Lore (Animal)",
+      "Lore (Cult)",
+      "Lore (Earth)",
+      "Lore (Plant)",
       "Lore (World)",
       "Survival",
       "Understand Herd Beasts",
-      "Dance(Shaman)",
-      "Sing(Shaman)",
-      "Binding(Shaman)",
+      "Dance (Shaman)",
+      "Sing (Shaman)",
+      "Binding (Shaman)",
       "Devotion",
       "Runic Affinity",
       "Literacy",
-      "Trance(Shaman)"
+      "Trance (Shaman)"
     ],
     "folkMagic": [
       "Bladesharp",
@@ -12166,6 +12759,11 @@
     "name": "Foundchild",
     "pantheon": "Praxian",
     "source": "CultOnePagers2019/Praxian/Foundchild.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Praxian/Foundchild.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Hunter God",
     "runes": [],
@@ -12177,7 +12775,7 @@
       "Athletics",
       "Locale",
       "Perception",
-      "Lore (animal)",
+      "Lore (Animal)",
       "Navigation",
       "Disguise",
       "Stealth",
@@ -12275,6 +12873,10 @@
     "name": "Gagarth",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Praxian/Gagarth.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Praxian/Gagarth.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Wild Hunter",
     "runes": [],
@@ -12283,13 +12885,13 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore (cult)",
+      "Lore (Cult)",
       "Navigation",
       "Survival",
-      "Binding(Shaman)",
+      "Binding (Shaman)",
       "Devotion",
       "Runic Affinity",
-      "Trance(Shaman)",
+      "Trance (Shaman)",
       "Combat Style (Any)",
       "Ride",
       "Track"
@@ -12352,6 +12954,10 @@
     "name": "Hearth Mother",
     "pantheon": "Praxian",
     "source": "CultOnePagers2019/Praxian/Hearth Mother.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Praxian/Hearth Mother.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Raiser of Foundchild",
     "runes": [],
@@ -12363,7 +12969,7 @@
       "Craft (Build Shelter)",
       "Craft (Cook)",
       "Locale",
-      "Lore(Herbs)",
+      "Lore (Herbs)",
       "First Aid",
       "Healing",
       "Binding",
@@ -12377,21 +12983,14 @@
       "Heal",
       "Ignite",
       "Mobility",
-      "Spiritshield\nPantheons\nPraxian\nSource - see for detailed info\nAreas\nContinents:Genertela\nMain Areas: Dragon Pass\nLocalities: Balazar",
-      "Prax\nPersonality Traits\nGenerousx Lustfulx Pleasureseekingx UnstoppableGrowthp Nurturingp Tribal",
       "Social",
-      "Opposing Runes:\nOpposite:Death\nSpirit Societies\nHearth Mother Spirit Society\nRune Meanings: Fertility",
       "life: Love",
       "Plenty",
       "Sex Plant: Plant Life Man: Mortal Humanoids",
-      "Slave\nThis document uses trademarks and/or copyrights owned by Chaosium Inc/Moon Design Publications\nLLC",
       "which are used under Chaosium Inc’s Fan Material Policy",
-      "We are expressly prohibited from\ncharging you to use or access this content. This site is not published",
       "endorsed",
-      "or specifically approved\nby Chaosium Inc. For more information about Chaosium Inc’s products",
-      "please visit www.chaosium.com.\n\"Mythras” is a Registered Trademark of The Design Mechanism Inc",
       "and is used with permission",
-      "http:\n//notesfrompavis.blog 3/15/2019 9:13:32 PM Version: 5.2"
+      "http: //notesfrompavis.blog 3/15/2019 9:13:32 PM Version: 5.2"
     ],
     "miracles": {
       "initiate": [],
@@ -12424,6 +13023,10 @@
     "name": "Hungry Ghosts",
     "pantheon": "Praxian",
     "source": "CultOnePagers2019/Praxian/Hungry Ghosts.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Praxian/Hungry Ghosts.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Cult of the Cannibals",
     "runes": [],
@@ -12432,7 +13035,7 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore(cult)",
+      "Lore (Cult)",
       "Runic Affinity",
       "Devotion",
       "Endurance",
@@ -12489,6 +13092,11 @@
     "name": "Pavis",
     "pantheon": "Praxian",
     "source": "CultOnePagers2019/Praxian/Pavis.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Praxian/Pavis.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "City God of Pavis",
     "runes": [],
@@ -12502,15 +13110,15 @@
       "Customs",
       "Locale",
       "Bureaucracy",
-      "Craft (masonry)",
+      "Craft (Masonry)",
       "Engineering",
       "Invocation",
       "Literacy",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Shaping",
       "Devotion",
       "Runic Affinity",
-      "Language (old wyrmish)"
+      "Language (Old wyrmish)"
     ],
     "folkMagic": [
       "Glue(Lay)",
@@ -12586,6 +13194,10 @@
     "name": "Shaman Spirit Society",
     "pantheon": "Pamalt, Darkness, Praxian, Hsunchen",
     "source": "CultOnePagers2019/Praxian/Shaman Spirit Society.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Praxian/Shaman Spirit Society.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Any Shamans AIG/RQG etc",
     "runes": [],
@@ -12593,7 +13205,10 @@
       "initiate": "to have 5 cult skills at 50%+ one of which needs to be Cult Runic Affinity. Examiners need to be convinced at 3 of them.",
       "runelord": "to have 3"
     },
-    "cultSkills": [],
+    "cultSkills": [
+      "Devotion",
+      "Runic Affinity"
+    ],
     "folkMagic": [
       "Any - varies(l)"
     ],
@@ -12644,6 +13259,11 @@
     "name": "Storm Bull",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Praxian/Storm Bull.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Praxian/Storm Bull.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Berserker God, Chaos Killer",
     "runes": [],
@@ -12656,20 +13276,20 @@
       "Brawn",
       "Endurance",
       "Willpower",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Navigation",
       "Sense chaos",
       "Survival",
-      "Combat style (any)",
-      "Dance(Shaman)",
-      "Insight(Shaman)",
+      "Combat style (Any)",
+      "Dance (Shaman)",
+      "Insight (Shaman)",
       "Perception",
-      "Sing(Shaman)",
-      "Binding(Shaman)",
+      "Sing (Shaman)",
+      "Binding (Shaman)",
       "Devotion",
       "Runic Affinity",
-      "Lore (ancestors)(Shaman)",
-      "Trance(Shaman)"
+      "Lore (Ancestors)(Shaman)",
+      "Trance (Shaman)"
     ],
     "folkMagic": [
       "Demoralize",
@@ -12778,6 +13398,11 @@
     "name": "Waha",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Praxian/Waha.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Praxian/Waha.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Khan of the Praxian Gods",
     "runes": [],
@@ -12787,21 +13412,21 @@
     },
     "cultSkills": [
       "Locale",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Navigation",
       "Oratory",
       "Survival",
       "Track",
       "Combat style (Tribal)",
-      "Dance(Shaman)",
-      "Perception(Shaman)",
+      "Dance (Shaman)",
+      "Perception (Shaman)",
       "Ride",
-      "Sing(Shaman)",
-      "Binding(Shaman)",
-      "Craft (butchery)",
+      "Sing (Shaman)",
+      "Binding (Shaman)",
+      "Craft (Butchery)",
       "Devotion",
       "Runic Affinity",
-      "Trance(Shaman)"
+      "Trance (Shaman)"
     ],
     "folkMagic": [
       "Countermagic",
@@ -12901,6 +13526,11 @@
     "name": "Zola Fel",
     "pantheon": "Praxian",
     "source": "CultOnePagers2019/Praxian/Zola Fel.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Praxian/Zola Fel.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of River Zola Fel",
     "runes": [],
@@ -12913,14 +13543,14 @@
       "Boating",
       "Locale",
       "Language",
-      "Lore (cult)",
-      "Lore (river)",
+      "Lore (Cult)",
+      "Lore (River)",
       "Customs",
       "Swim",
       "Commerce",
       "Devotion",
       "Runic Affinity",
-      "Language(riverspeech)"
+      "Language (Riverspeech)"
     ],
     "folkMagic": [
       "Extinguish",
@@ -12931,7 +13561,7 @@
       "Heal(Lay)",
       "Ignite",
       "Mobility(Lay)",
-      "rivereyes¹(Rune)"
+      "rivereyes(Rune)"
     ],
     "miracles": {
       "initiate": [
@@ -13013,6 +13643,10 @@
     "name": "Annilla",
     "pantheon": "Darkness",
     "source": "CultOnePagers2019/Sea/Annilla.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Sea/Annilla.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of the Blue Moon",
     "runes": [],
@@ -13024,7 +13658,7 @@
       "Conceal",
       "Mechanisms",
       "Stealth",
-      "Combat skill (any)",
+      "Combat skill (Any)",
       "Devotion",
       "Runic Affinity"
     ],
@@ -13099,6 +13733,10 @@
     "name": "Dormal",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Sea/Dormal.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Sea/Dormal.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Craftsman, Sailore & Explorer",
     "runes": [],
@@ -13110,8 +13748,8 @@
       "Athletics",
       "Swim",
       "Unarmed",
-      "Craft (wood)",
-      "Lore (cult)",
+      "Craft (Wood)",
+      "Lore (Cult)",
       "Lore (Sea)",
       "Lore (World)",
       "Navigation",
@@ -13178,6 +13816,11 @@
     "name": "Heler",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Sea/Heler.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Sea/Heler.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Orlanthi God of Rain - Blue God",
     "runes": [],
@@ -13187,8 +13830,8 @@
     },
     "cultSkills": [
       "Evade",
-      "Lore (cult)",
-      "Combat Style(any)",
+      "Lore (Cult)",
+      "Combat Style (Any)",
       "Survival",
       "Healing",
       "Lore (World)",
@@ -13268,6 +13911,10 @@
     "name": "Magasta",
     "pantheon": "Sea",
     "source": "CultOnePagers2019/Sea/Magasta.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Sea/Magasta.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Lord of All Sea Gods",
     "runes": [],
@@ -13276,12 +13923,12 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Combat style (any)",
+      "Combat style (Any)",
       "Endurance",
       "Swim",
       "Willpower",
       "Craft",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Lore (Sea)",
       "Navigation",
       "Devotion",
@@ -13354,6 +14001,10 @@
     "name": "Triolina",
     "pantheon": "Sea",
     "source": "CultOnePagers2019/Sea/Triolina.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Sea/Triolina.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Mother of Life",
     "runes": [],
@@ -13364,9 +14015,9 @@
     "cultSkills": [
       "Endurance",
       "Healing",
-      "Lore (animal)",
-      "Lore (cult)",
-      "Lore (plant)",
+      "Lore (Animal)",
+      "Lore (Cult)",
+      "Lore (Plant)",
       "Lore (Sea)",
       "Lore (World)",
       "Devotion",
@@ -13381,7 +14032,7 @@
       "Mindspeech",
       "Mobility",
       "Protection",
-      "Second\nSight",
+      "Second Sight",
       "Shimmer",
       "Vigour"
     ],
@@ -13432,6 +14083,10 @@
     "name": "Tsankth",
     "pantheon": "Sea",
     "source": "CultOnePagers2019/Sea/Tsankth.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Sea/Tsankth.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of Rapacity and Piracy",
     "runes": [],
@@ -13442,7 +14097,7 @@
     "cultSkills": [
       "Boating",
       "Swim",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Navigation",
       "Unarmed",
       "Lore (World)",
@@ -13507,6 +14162,10 @@
     "name": "Wachaza",
     "pantheon": "Sea",
     "source": "CultOnePagers2019/Sea/Wachaza.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Sea/Wachaza.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "War Lord of the Ocean",
     "runes": [],
@@ -13520,7 +14179,7 @@
       "Evade",
       "Perception",
       "Swim",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Lore (Sea)",
       "Navigation",
       "Seamanship",
@@ -13590,6 +14249,10 @@
     "name": "Ana Gor",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Ana Gor.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Ana Gor.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of Death and Human Sacrifice.",
     "runes": [],
@@ -13598,10 +14261,10 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore(Cult)",
+      "Lore (Cult)",
       "Prepare Human Sacrifice",
       "Dance",
-      "Combat Style(Knife)",
+      "Combat Style (Knife)",
       "Passion: Merciless",
       "Devotion",
       "Runic Affinity"
@@ -13668,6 +14331,11 @@
     "name": "Asrelia",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Asrelia.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Asrelia.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of Wealth",
     "runes": [],
@@ -13680,8 +14348,8 @@
       "Customs",
       "Locale",
       "Commerce",
-      "Lore (cult)",
-      "Lore (earth)",
+      "Lore (Cult)",
+      "Lore (Earth)",
       "Mechanisms",
       "Devotion",
       "Runic Affinity"
@@ -13765,6 +14433,11 @@
     "name": "Babeester Gor",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Storm/Babeester Gor.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Babeester Gor.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Earth Avenger",
     "runes": [],
@@ -13778,7 +14451,7 @@
       "Endurance",
       "Perception",
       "Willpower",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Track",
       "Devotion",
       "Runic Affinity"
@@ -13875,6 +14548,11 @@
     "name": "Barntar",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Barntar.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Barntar.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Orlanthi Ploughman God",
     "runes": [],
@@ -13884,12 +14562,12 @@
     },
     "cultSkills": [
       "First Aid",
-      "Lore(Farming)",
-      "Lore(Cult)",
-      "Combat Style(Spear)",
+      "Lore (Farming)",
+      "Lore (Cult)",
+      "Combat Style (Spear)",
       "Drive",
       "Runic Affinity",
-      "Craft(Farming)"
+      "Craft (Farming)"
     ],
     "folkMagic": [
       "Bladesharp",
@@ -13954,6 +14632,11 @@
     "name": "Chalana Arroy",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Chalana Arroy.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Chalana Arroy.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of Healing",
     "runes": [],
@@ -13964,8 +14647,8 @@
     "cultSkills": [
       "Endurance",
       "Willpower",
-      "Lore (cult)",
-      "Lore (human)",
+      "Lore (Cult)",
+      "Lore (Human)",
       "First aid",
       "Devotion",
       "Runic Affinity",
@@ -14107,6 +14790,11 @@
     "name": "Donandar",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Donandar.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Donandar.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of Music and Dance",
     "runes": [],
@@ -14117,7 +14805,7 @@
     "cultSkills": [
       "Dance",
       "Stealth",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Musicianship",
       "Oratory",
       "Devotion",
@@ -14209,6 +14897,10 @@
     "name": "Dormal",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Dormal.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Dormal.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Craftsman, Sailore & Explorer",
     "runes": [],
@@ -14220,8 +14912,8 @@
       "Athletics",
       "Swim",
       "Unarmed",
-      "Craft (wood)",
-      "Lore (cult)",
+      "Craft (Wood)",
+      "Lore (Cult)",
       "Lore (Sea)",
       "Lore (World)",
       "Navigation",
@@ -14288,6 +14980,11 @@
     "name": "Elmal",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Elmal.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Elmal.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Loyal Thane",
     "runes": [],
@@ -14297,7 +14994,7 @@
     },
     "cultSkills": [
       "Athletics",
-      "Lore(Cult)",
+      "Lore (Cult)",
       "Perception",
       "Combat style (Spear",
       "shield",
@@ -14375,6 +15072,11 @@
     "name": "Engizi",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Engizi.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Engizi.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Sky River Titan",
     "runes": [],
@@ -14385,13 +15087,13 @@
     "cultSkills": [
       "Combat style with net",
       "Boating",
-      "Lore (cult)",
-      "Lore (river)",
+      "Lore (Cult)",
+      "Lore (River)",
       "Locale",
       "Swim",
       "Devotion",
       "Runic Affinity",
-      "Language(riverspeech)"
+      "Language (Riverspeech)"
     ],
     "folkMagic": [
       "Coordination",
@@ -14469,6 +15171,11 @@
     "name": "Ernalda",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Ernalda.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Ernalda.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Earth Queen and Source of Life",
     "runes": [],
@@ -14483,10 +15190,10 @@
       "Locale",
       "Willpower",
       "Courtesy",
-      "Lore (animal)",
-      "Lore (cult)",
-      "Lore (earth)",
-      "Lore (plant)",
+      "Lore (Animal)",
+      "Lore (Cult)",
+      "Lore (Earth)",
+      "Lore (Plant)",
       "Devotion",
       "Runic Affinity"
     ],
@@ -14606,6 +15313,11 @@
     "name": "Eurmal",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Eurmal.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Eurmal.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Trickster",
     "runes": [],
@@ -14620,7 +15332,7 @@
       "Acrobatics",
       "Acting",
       "Disguise",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Seduction",
       "Sleight",
       "Streetwise",
@@ -14630,7 +15342,7 @@
     "folkMagic": [
       "Disruption",
       "Glamour",
-      "Hotfoot²",
+      "Hotfoot",
       "Ignite",
       "Shimmer",
       "Silence"
@@ -14729,6 +15441,10 @@
     "name": "Gagarth",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Gagarth.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Gagarth.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Wild Hunter",
     "runes": [],
@@ -14737,13 +15453,13 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore (cult)",
+      "Lore (Cult)",
       "Navigation",
       "Survival",
-      "Binding(Shaman)",
+      "Binding (Shaman)",
       "Devotion",
       "Runic Affinity",
-      "Trance(Shaman)",
+      "Trance (Shaman)",
       "Combat Style (Any)",
       "Ride",
       "Track"
@@ -14806,6 +15522,11 @@
     "name": "Grain Goddesses",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Grain Goddesses.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Grain Goddesses.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Good Goddess",
     "runes": [],
@@ -14815,8 +15536,8 @@
     },
     "cultSkills": [
       "Craft (Natural Substance)",
-      "Lore(Plants)",
-      "Lore(World)",
+      "Lore (Plants)",
+      "Lore (World)",
       "Perception",
       "Devotion",
       "Runic Affinity"
@@ -14890,6 +15611,11 @@
     "name": "Heler",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Heler.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Heler.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Orlanthi God of Rain - Blue God",
     "runes": [],
@@ -14899,8 +15625,8 @@
     },
     "cultSkills": [
       "Evade",
-      "Lore (cult)",
-      "Combat Style(any)",
+      "Lore (Cult)",
+      "Combat Style (Any)",
       "Survival",
       "Healing",
       "Lore (World)",
@@ -14980,6 +15706,11 @@
     "name": "Humakt",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Humakt.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Humakt.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of Death & War",
     "runes": [],
@@ -14988,15 +15719,15 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Combat style (any)",
+      "Combat style (Any)",
       "Conceal",
       "Endurance",
       "Evade",
       "First aid",
       "Ride",
       "Willpower",
-      "Craft (armoring)",
-      "Lore (cult)",
+      "Craft (Armoring)",
+      "Lore (Cult)",
       "Oratory",
       "Sense assassin",
       "Combat style with sword",
@@ -15099,6 +15830,10 @@
     "name": "Hykim & Mikyh",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Hykim & Mikyh.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Hykim & Mikyh.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Beast Parents",
     "runes": [],
@@ -15109,9 +15844,9 @@
     "cultSkills": [
       "Devotion",
       "Runic Affinity",
-      "Lore(Animal)",
-      "Lore(Plant)",
-      "Lore(World)",
+      "Lore (Animal)",
+      "Lore (Plant)",
+      "Lore (World)",
       "First Aid"
     ],
     "folkMagic": [],
@@ -15169,6 +15904,11 @@
     "name": "Issaries",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Issaries.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Issaries.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of Trade",
     "runes": [],
@@ -15181,9 +15921,9 @@
       "Influence",
       "Insight",
       "Courtesy",
-      "Culture(named culture)",
+      "Culture (Named culture)",
       "Literacy",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Navigation",
       "Commerce",
       "Devotion",
@@ -15292,6 +16032,11 @@
     "name": "Lanbril",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Lanbril.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Lanbril.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Master Thief",
     "runes": [],
@@ -15300,7 +16045,7 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Combat style (any)",
+      "Combat style (Any)",
       "Athletics",
       "Conceal",
       "Deceit",
@@ -15314,7 +16059,7 @@
       "Commerce",
       "Disguise",
       "Lockpicking",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Mechanisms",
       "Sleight",
       "Streetwise",
@@ -15329,9 +16074,9 @@
       "Bypass",
       "Calculate",
       "Calm",
-      "Conceal Item¹",
+      "Conceal Item",
       "Coordination",
-      "Dispel\nMagic",
+      "Dispel Magic",
       "Disruption",
       "Find Gems",
       "Find Gold",
@@ -15432,6 +16177,11 @@
     "name": "Lhankor Mhy",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Lhankor Mhy.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Lhankor Mhy.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of Knowledge and Writing",
     "runes": [],
@@ -15444,12 +16194,11 @@
       "Insight",
       "Perception",
       "Commerce",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Devotion",
       "Runic Affinity",
       "Literacy",
-      "Lore",
-      "Lore (any other)"
+      "Lore (Any other)"
     ],
     "folkMagic": [
       "Appraise",
@@ -15549,6 +16298,10 @@
     "name": "Lokarnos",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Lokarnos.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Lokarnos.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of Wagons and Trade",
     "runes": [],
@@ -15559,7 +16312,7 @@
     "cultSkills": [
       "Drive",
       "Commerce",
-      "Lore(Human)",
+      "Lore (Human)",
       "Orate",
       "Devotion",
       "Runic Affinity"
@@ -15635,6 +16388,11 @@
     "name": "Maran Gor",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Storm/Maran Gor.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Maran Gor.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Earth Shaker",
     "runes": [],
@@ -15643,14 +16401,14 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Combat style (any)",
+      "Combat style (Any)",
       "Brawn",
       "Endurance",
       "Locale",
       "Perception",
       "Willpower",
-      "Lore (cult)",
-      "Lore (earth)",
+      "Lore (Cult)",
+      "Lore (Earth)",
       "Athletics",
       "Devotion",
       "Runic Affinity"
@@ -15758,6 +16516,10 @@
     "name": "Mastakos",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Mastakos.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Mastakos.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Orlanth's Charioteer",
     "runes": [],
@@ -15823,6 +16585,11 @@
     "name": "Odayla",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Odayla.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Odayla.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Orlanth Hunter God",
     "runes": [],
@@ -15836,8 +16603,8 @@
       "Locale",
       "Perception",
       "Stealth",
-      "Lore (animal)",
-      "Lore (cult)",
+      "Lore (Animal)",
+      "Lore (Cult)",
       "Navigation",
       "Track",
       "Butchering",
@@ -15945,6 +16712,11 @@
     "name": "Orlanth",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Orlanth.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Orlanth.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Storm god, king, warrior, and",
     "runes": [],
@@ -15953,15 +16725,15 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Combat style (any)",
+      "Combat style (Any)",
       "Athletics",
       "Evade",
       "Native tongue",
       "Perception",
       "Ride",
       "Stealth",
-      "Language(stormspeech)",
-      "Lore (cult)",
+      "Language (Stormspeech)",
+      "Lore (Cult)",
       "Navigation",
       "Oratory",
       "Combat style with sword",
@@ -16087,6 +16859,11 @@
     "name": "Storm Bull",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Storm Bull.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Storm Bull.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Berserker God, Chaos Killer",
     "runes": [],
@@ -16099,20 +16876,20 @@
       "Brawn",
       "Endurance",
       "Willpower",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Navigation",
       "Sense chaos",
       "Survival",
-      "Combat style (any)",
-      "Dance(Shaman)",
-      "Insight(Shaman)",
+      "Combat style (Any)",
+      "Dance (Shaman)",
+      "Insight (Shaman)",
       "Perception",
-      "Sing(Shaman)",
-      "Binding(Shaman)",
+      "Sing (Shaman)",
+      "Binding (Shaman)",
       "Devotion",
       "Runic Affinity",
-      "Lore (ancestors)(Shaman)",
-      "Trance(Shaman)"
+      "Lore (Ancestors)(Shaman)",
+      "Trance (Shaman)"
     ],
     "folkMagic": [
       "Demoralize",
@@ -16221,6 +16998,11 @@
     "name": "Ty Kora Tek",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Storm/Ty Kora Tek.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Ty Kora Tek.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Underworld Goddess",
     "runes": [],
@@ -16233,8 +17015,7 @@
       "Endurance",
       "Influence",
       "Willpower",
-      "Lore",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Devotion",
       "Runic Affinity",
       "Literacy",
@@ -16311,6 +17092,11 @@
     "name": "Uleria",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Storm/Uleria.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Uleria.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of Love",
     "runes": [],
@@ -16427,6 +17213,11 @@
     "name": "Valind",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Valind.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Valind.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Lord of Winter",
     "runes": [],
@@ -16437,8 +17228,8 @@
     "cultSkills": [
       "Athletics",
       "Perception",
-      "Combat style (any)",
-      "Lore(World)",
+      "Combat style (Any)",
+      "Lore (World)",
       "Runic Affinity",
       "Devotion"
     ],
@@ -16451,7 +17242,7 @@
       "Frostbite",
       "Might",
       "Mobility",
-      "Second\nSight",
+      "Second Sight",
       "Shimmer",
       "Speedart"
     ],
@@ -16510,6 +17301,11 @@
     "name": "Vinga",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Vinga.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Vinga.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Adventuress",
     "runes": [],
@@ -16521,8 +17317,8 @@
       "First Aid",
       "Stealth",
       "Ride",
-      "Lore(cult)",
-      "Combat Style(any)",
+      "Lore (Cult)",
+      "Combat Style (Any)",
       "Evade",
       "Runic Affinity",
       "Devotion",
@@ -16531,16 +17327,16 @@
     "folkMagic": [
       "Befuddle",
       "Bladesharp",
-      "Borrow Harm¹⁹",
+      "Borrow Harm",
       "Detect Enemies",
       "Disruption",
-      "Droop¹⁹",
+      "Droop",
       "Mindspeech",
       "Mobility",
       "Mobility",
-      "Read Foe¹⁹",
-      "Reflexes¹⁹",
-      "Stability¹⁹"
+      "Read Foe",
+      "Reflexes",
+      "Stability"
     ],
     "miracles": {
       "initiate": [
@@ -16605,6 +17401,11 @@
     "name": "Waha",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Waha.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Waha.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Khan of the Praxian Gods",
     "runes": [],
@@ -16614,21 +17415,21 @@
     },
     "cultSkills": [
       "Locale",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Navigation",
       "Oratory",
       "Survival",
       "Track",
       "Combat style (Tribal)",
-      "Dance(Shaman)",
-      "Perception(Shaman)",
+      "Dance (Shaman)",
+      "Perception (Shaman)",
       "Ride",
-      "Sing(Shaman)",
-      "Binding(Shaman)",
-      "Craft (butchery)",
+      "Sing (Shaman)",
+      "Binding (Shaman)",
+      "Craft (Butchery)",
       "Devotion",
       "Runic Affinity",
-      "Trance(Shaman)"
+      "Trance (Shaman)"
     ],
     "folkMagic": [
       "Countermagic",
@@ -16728,6 +17529,10 @@
     "name": "Ygg of Threestep",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Ygg of Threestep.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Ygg of Threestep.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of the Wolf Pirates",
     "runes": [],
@@ -16738,14 +17543,14 @@
     "cultSkills": [
       "Endurance",
       "Combat style (Edged Weapons)",
-      "Lore(Seas)",
-      "Lore(Cult)",
+      "Lore (Seas)",
+      "Lore (Cult)",
       "Seamanship",
       "Navigate",
       "Brawn",
       "Boating",
       "Devotion",
-      "Runic Affinityion"
+      "Runic Affinity"
     ],
     "folkMagic": [
       "Bladesharp",
@@ -16813,6 +17618,11 @@
     "name": "Yinkin",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Storm/Yinkin.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Storm/Yinkin.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Father of Shadowcats",
     "runes": [],
@@ -16821,8 +17631,8 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore (cult)",
-      "Lore(Animal)",
+      "Lore (Cult)",
+      "Lore (Animal)",
       "Perception",
       "Track",
       "Stealth",
@@ -16928,6 +17738,10 @@
     "name": "Tsankth",
     "pantheon": "Sea",
     "source": "CultOnePagers2019/Vormain/Tsankth.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Vormain/Tsankth.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of Rapacity and Piracy",
     "runes": [],
@@ -16938,7 +17752,7 @@
     "cultSkills": [
       "Boating",
       "Swim",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Navigation",
       "Unarmed",
       "Lore (World)",
@@ -17003,6 +17817,10 @@
     "name": "Buserian",
     "pantheon": "Yelm",
     "source": "CultOnePagers2019/Yelm/Buserian.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Yelm/Buserian.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Scribe and Sky Writer",
     "runes": [],
@@ -17012,9 +17830,9 @@
     },
     "cultSkills": [
       "Influence",
-      "Language(any)",
-      "Lore(Any)",
-      "Lore(Cult)",
+      "Language (Any)",
+      "Lore (Any)",
+      "Lore (Cult)",
       "Perception",
       "Runic Affinity"
     ],
@@ -17070,6 +17888,11 @@
     "name": "Chalana Arroy",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Yelm/Chalana Arroy.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Yelm/Chalana Arroy.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of Healing",
     "runes": [],
@@ -17080,8 +17903,8 @@
     "cultSkills": [
       "Endurance",
       "Willpower",
-      "Lore (cult)",
-      "Lore (human)",
+      "Lore (Cult)",
+      "Lore (Human)",
       "First aid",
       "Devotion",
       "Runic Affinity",
@@ -17223,6 +18046,10 @@
     "name": "Dendara",
     "pantheon": "Yelm",
     "source": "CultOnePagers2019/Yelm/Dendara.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Yelm/Dendara.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Good Wife",
     "runes": [],
@@ -17231,10 +18058,10 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore(cult)",
-      "Lore(Animals)",
-      "Lore(Plants)",
-      "Lore(World)",
+      "Lore (Cult)",
+      "Lore (Animals)",
+      "Lore (Plants)",
+      "Lore (World)",
       "First Aid",
       "Devotion",
       "Runic Affinity"
@@ -17315,6 +18142,11 @@
     "name": "Donandar",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Yelm/Donandar.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Yelm/Donandar.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of Music and Dance",
     "runes": [],
@@ -17325,7 +18157,7 @@
     "cultSkills": [
       "Dance",
       "Stealth",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Musicianship",
       "Oratory",
       "Devotion",
@@ -17417,6 +18249,10 @@
     "name": "Gorgorma",
     "pantheon": "Yelm",
     "source": "CultOnePagers2019/Yelm/Gorgorma.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Yelm/Gorgorma.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Mother of Nightmares",
     "runes": [],
@@ -17426,9 +18262,9 @@
     },
     "cultSkills": [
       "Athletics",
-      "Lore(cult)",
+      "Lore (Cult)",
       "Perception",
-      "Combat Style(1h/2h Axe Spear Unarmed)) Stealth Runic Affinity"
+      "Combat Style (1h/2h Axe Spear Unarmed)) Stealth Runic Affinity"
     ],
     "folkMagic": [
       "Bladesharp Demoralise Disruption Slow"
@@ -17479,6 +18315,11 @@
     "name": "Grain Goddesses",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Yelm/Grain Goddesses.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Yelm/Grain Goddesses.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Good Goddess",
     "runes": [],
@@ -17488,8 +18329,8 @@
     },
     "cultSkills": [
       "Craft (Natural Substance)",
-      "Lore(Plants)",
-      "Lore(World)",
+      "Lore (Plants)",
+      "Lore (World)",
       "Perception",
       "Devotion",
       "Runic Affinity"
@@ -17563,6 +18404,11 @@
     "name": "Lanbril",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Yelm/Lanbril.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Yelm/Lanbril.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Master Thief",
     "runes": [],
@@ -17571,7 +18417,7 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Combat style (any)",
+      "Combat style (Any)",
       "Athletics",
       "Conceal",
       "Deceit",
@@ -17585,7 +18431,7 @@
       "Commerce",
       "Disguise",
       "Lockpicking",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Mechanisms",
       "Sleight",
       "Streetwise",
@@ -17600,9 +18446,9 @@
       "Bypass",
       "Calculate",
       "Calm",
-      "Conceal Item¹",
+      "Conceal Item",
       "Coordination",
-      "Dispel\nMagic",
+      "Dispel Magic",
       "Disruption",
       "Find Gems",
       "Find Gold",
@@ -17703,6 +18549,11 @@
     "name": "Lodril",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Yelm/Lodril.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Yelm/Lodril.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Father of Volcanoes and Peasants",
     "runes": [],
@@ -17716,8 +18567,8 @@
       "Endurance",
       "Locale",
       "Craft",
-      "Lore (cult)",
-      "Lore (earth)",
+      "Lore (Cult)",
+      "Lore (Earth)",
       "Devotion",
       "Runic Affinity"
     ],
@@ -17826,6 +18677,10 @@
     "name": "Lokarnos",
     "pantheon": "Storm",
     "source": "CultOnePagers2019/Yelm/Lokarnos.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Yelm/Lokarnos.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of Wagons and Trade",
     "runes": [],
@@ -17836,7 +18691,7 @@
     "cultSkills": [
       "Drive",
       "Commerce",
-      "Lore(Human)",
+      "Lore (Human)",
       "Orate",
       "Devotion",
       "Runic Affinity"
@@ -17912,6 +18767,10 @@
     "name": "Oslira",
     "pantheon": "Yelm",
     "source": "CultOnePagers2019/Yelm/Oslira.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Yelm/Oslira.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of the Great River",
     "runes": [],
@@ -17923,9 +18782,9 @@
       "Runic Affinity",
       "Athletics",
       "Boating",
-      "Craft(Netmaking)",
-      "Lore(Water)",
-      "Lore(Cult)",
+      "Craft (Netmaking)",
+      "Lore (Water)",
+      "Lore (Cult)",
       "Mechanisms",
       "Combat Style (Spear)"
     ],
@@ -17978,6 +18837,11 @@
     "name": "Polaris",
     "pantheon": "Yelm",
     "source": "CultOnePagers2019/Yelm/Polaris.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Yelm/Polaris.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Celestial General, God of Battle",
     "runes": [],
@@ -17986,10 +18850,10 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore(Strategy & Tactics)",
+      "Lore (Strategy & Tactics)",
       "Perception",
       "Orate",
-      "Combat Style(Any Weapon)",
+      "Combat Style (Any Weapon)",
       "Dance",
       "Musicianship"
     ],
@@ -18069,6 +18933,10 @@
     "name": "Shargash",
     "pantheon": "Yelm",
     "source": "CultOnePagers2019/Yelm/Shargash.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Yelm/Shargash.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "God of War, God of Alkoth",
     "runes": [],
@@ -18078,9 +18946,9 @@
     },
     "cultSkills": [
       "Dance",
-      "Combat Style(Mace & Shield)",
-      "Musicianship(Drums)",
-      "Lore(Cult)",
+      "Combat Style (Mace & Shield)",
+      "Musicianship (Drums)",
+      "Lore (Cult)",
       "Devotion",
       "Runic Affinity"
     ],
@@ -18146,6 +19014,11 @@
     "name": "Uleria",
     "pantheon": "Pamalt",
     "source": "CultOnePagers2019/Yelm/Uleria.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Yelm/Uleria.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Goddess of Love",
     "runes": [],
@@ -18262,6 +19135,10 @@
     "name": "Urvairinus",
     "pantheon": "Yelm",
     "source": "CultOnePagers2019/Yelm/Urvairinus.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Yelm/Urvairinus.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Shield of Purity, Army Builder",
     "runes": [],
@@ -18273,9 +19150,9 @@
       "Athletics",
       "Evade",
       "Oratory",
-      "Lore(Military Tactics)",
-      "Lore(Cult)",
-      "Combat Style(Spear",
+      "Lore (Military Tactics)",
+      "Lore (Cult)",
+      "Combat Style (Spear",
       "Shield",
       "Javelin)",
       "Runic Affinity"
@@ -18338,6 +19215,11 @@
     "name": "Yelm",
     "pantheon": "Yelm",
     "source": "CultOnePagers2019/Yelm/Yelm.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Yelm/Yelm.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Sun God and Emperor",
     "runes": [],
@@ -18350,8 +19232,7 @@
       "Insight",
       "Native tongue",
       "Bureaucracy",
-      "Lore",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Musicianship",
       "Oratory",
       "Falconry",
@@ -18359,7 +19240,7 @@
       "Drive Chariot",
       "Commerce",
       "Healing",
-      "Lore(Human)",
+      "Lore (Human)",
       "Perception",
       "First Aid",
       "Combat style with bow",
@@ -18378,7 +19259,7 @@
       "Heal",
       "Ignite",
       "Light()",
-      "Lightwall²()",
+      "Lightwall()",
       "Magnify()",
       "Mobility",
       "Multimissile",
@@ -18480,6 +19361,11 @@
     "name": "Yelmalio",
     "pantheon": "Elf",
     "source": "CultOnePagers2019/Yelm/Yelmalio.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Yelm/Yelmalio.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Light In The Darkness",
     "runes": [],
@@ -18493,7 +19379,7 @@
       "Insight",
       "Perception",
       "Stealth",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Oratory",
       "Combat style with bow / javelin / spear",
       "Devotion",
@@ -18506,9 +19392,9 @@
       "Find Gold",
       "Firearrow",
       "Fireblade",
-      "Lantern²",
+      "Lantern",
       "Light",
-      "Lightwall²",
+      "Lightwall",
       "Magnify",
       "Repair"
     ],
@@ -18606,6 +19492,11 @@
     "name": "Yelorna",
     "pantheon": "Yelm",
     "source": "CultOnePagers2019/Yelm/Yelorna.pdf",
+    "sourcePages": [
+      1,
+      2
+    ],
+    "sourceCitation": "CultOnePagers2019/Yelm/Yelorna.pdf, p.1-2",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Yelmic God for Female Warriors",
     "runes": [],
@@ -18617,7 +19508,7 @@
       "Combat style with spear",
       "Ride",
       "Unarmed",
-      "Lore (cult)",
+      "Lore (Cult)",
       "Oratory",
       "Track",
       "Devotion",
@@ -18633,7 +19524,7 @@
       "Firearrow(Rune)",
       "Ignite",
       "Light",
-      "Lightwall²(Rune)",
+      "Lightwall(Rune)",
       "Speedart"
     ],
     "miracles": {
@@ -18721,6 +19612,10 @@
     "name": "Henird",
     "pantheon": "Yu-Kargzant",
     "source": "CultOnePagers2019/Yu-Kargzant/Henird.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Yu-Kargzant/Henird.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Leader. Grazer God",
     "runes": [],
@@ -18730,14 +19625,14 @@
     },
     "cultSkills": [
       "Bureaucracy",
-      "Lore(cult)",
+      "Lore (Cult)",
       "Runic Affinity",
       "Devotion",
       "Craft Falconry",
       "First Aid",
       "Orate",
-      "Lore(Human)",
-      "Play(Instrument)",
+      "Lore (Human)",
+      "Play (Instrument)",
       "Sing",
       "Ride",
       "Speak Grazer"
@@ -18801,6 +19696,10 @@
     "name": "Hiia Swordsman",
     "pantheon": "Yu-Kargzant",
     "source": "CultOnePagers2019/Yu-Kargzant/Hiia Swordsman.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Yu-Kargzant/Hiia Swordsman.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "Protector of the Feathered Horse Queen",
     "runes": [],
@@ -18809,9 +19708,9 @@
       "runelord": "to have 3"
     },
     "cultSkills": [
-      "Lore(cult)",
+      "Lore (Cult)",
       "Evade",
-      "Lore(Tactics)",
+      "Lore (Tactics)",
       "Runic Affinity",
       "Devotion",
       "First Aid",
@@ -18888,6 +19787,10 @@
     "name": "Jardan",
     "pantheon": "Yu-Kargzant",
     "source": "CultOnePagers2019/Yu-Kargzant/Jardan.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Yu-Kargzant/Jardan.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Warrior. Grazer God",
     "runes": [],
@@ -18898,8 +19801,8 @@
     "cultSkills": [
       "First Aid",
       "Perception",
-      "Craft(Battle)",
-      "Lore(cult)",
+      "Craft (Battle)",
+      "Lore (Cult)",
       "Combat Style with Bow",
       "Combat Style with Lance and Spear",
       "Ride",
@@ -18968,6 +19871,10 @@
     "name": "Yu-Kargzant",
     "pantheon": "Yu-Kargzant",
     "source": "CultOnePagers2019/Yu-Kargzant/Yu-Kargzant.pdf",
+    "sourcePages": [
+      1
+    ],
+    "sourceCitation": "CultOnePagers2019/Yu-Kargzant/Yu-Kargzant.pdf, p.1",
     "sourceVersion": "2019 edition v5.2",
     "subtitle": "The Imperial Sun. Grazer God",
     "runes": [],
@@ -18978,15 +19885,15 @@
     "cultSkills": [
       "First Aid",
       "Perception",
-      "Lore(cult)",
+      "Lore (Cult)",
       "Combat Style with Bow",
       "Ride",
       "Craft Falconry",
       "Runic Affinity",
       "Devotion",
       "Orate",
-      "Lore(Human)",
-      "Play(Instrument)",
+      "Lore (Human)",
+      "Play (Instrument)",
       "Speak Grazer"
     ],
     "folkMagic": [
