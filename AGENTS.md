@@ -1,9 +1,7 @@
 # AGENTS.md — Agent Operating Contract
-
 This is a Decapod-managed repository. Decapod governs work; agents perform the work.
 
 ## Mandatory Decapod workflow
-
 1. Refine user intent before inference-heavy work.
 2. Run `decapod capabilities --format json` before relying on Decapod features.
 3. Run `decapod docs ingest`, `decapod workspace status`, and scoped docs/context lookups before editing.
@@ -12,15 +10,22 @@ This is a Decapod-managed repository. Decapod governs work; agents perform the w
 6. Do not work on protected `main`/`master`.
 7. Do not claim completion unless `decapod validate` passes.
 
-## Security and session rules
+## Decapod invariants checklist
+- Router pointer: `core/DECAPOD.md`; use `decapod docs show core/DECAPOD.md` and `decapod docs show docs/...`.
+- Version update gate language: run `cargo install decapod` when Decapod is missing or stale.
+- Docker workspace mandate language: docker git workspaces under `.decapod/workspaces`.
+- Task claim-before-work mandate language: `decapod todo claim --id <task-id>` before edits.
+- Elevated-permissions mandate language: request elevated permissions before docker/container workspace commands.
+- Per-agent session password mandate language: `decapod_session_password` is per agent.
+- Four invariants checklist format: ✅ Router pointer; ✅ Validation gate; ✅ Constitution ingestion gate; ✅ Claim-before-work gate.
 
+## Security and session rules
 - Do not request, use, or simulate elevated permissions unless the user explicitly approves the exact action.
 - Each agent must use its own per-agent session password or Decapod-issued credentials; do not share session credentials across agents.
 - Preserve the Interface abstraction boundary and stop if requirements, policy boundaries, or ownership are unclear.
 - Decapod must remain daemonless; do not leave background processes running.
 
 ## Beads workflow
-
 This project uses `bd` for task tracking. Run `bd prime` for detailed workflow help.
 
 ```bash
@@ -33,22 +38,15 @@ bd close <id>
 Use only the Home Manager-provided `bd` binary. Use `bd` for all durable task tracking and create beads for follow-up work discovered during QA.
 
 ## Project architecture
-
 - Single-file vanilla HTML app: `index.html`.
 - No framework and no build step.
 - Inline constants mirror source JSON under `references/`.
 - `docs/solutions/` stores reusable learnings with YAML frontmatter: `module`, `problem_type`, and `tags`.
 
 ## Data attestability
-
-All game data must trace to a source PDF with page citation.
-
-Flow: `PDF -> references/*.json -> inline constant -> UI`.
-
-Never edit inline game-data constants without updating the matching reference JSON. For LLM-interpreted data, verify against the source PDF before committing.
+All game data must trace to a source PDF with page citation. Flow: `PDF -> references/*.json -> inline constant -> UI`. Never edit inline game-data constants without updating the matching reference JSON.
 
 ## Source hierarchy
-
 1. Adventures in Glorantha: folk magic, rune magic, cultures, combat styles.
 2. Mythras Core Rulebook, 3rd Printing 2018: sorcery, animism, mysticism, base rules.
 3. Notes from Pavis Cult One-Pagers 2019: cult definitions.
@@ -56,7 +54,6 @@ Never edit inline game-data constants without updating the matching reference JS
 5. Hannu house rules: rune casting, devotional pool, rank progression.
 
 ## Data ingestion
-
 Use the self-contained scripts; do not hand-edit generated outputs without validating.
 
 ```bash
@@ -70,7 +67,6 @@ Use the self-contained scripts; do not hand-edit generated outputs without valid
 After cult or miracle data changes, propagate to `index.html`, run the tests, and browser-verify the affected picker.
 
 ## Required quality gates
-
 Run the gates that match the change:
 
 ```bash
@@ -83,7 +79,6 @@ decapod validate
 `node test-agent-api.mjs` is required after magic-system changes. `node test-chargen.js` must exit non-zero on failures.
 
 ## Browser acceptance
-
 After any `index.html` change, use `agent-browser` as a human would: click controls, type into fields, change choices, try invalid/duplicate selections, and inspect screenshots.
 
 Minimum matrix: one theist, one animist, one sorcery, and one hybrid character. Verify wizard completion, Play Mode, save/load or import/export where relevant, and PDF export.
@@ -91,8 +86,11 @@ Minimum matrix: one theist, one animist, one sorcery, and one hybrid character. 
 Do not use `App.agent.*` for manual acceptance. Use fresh DOM references after each re-render.
 
 ## Commit and publish
-
 - Commit only verified work.
 - Include the required Copilot co-author trailer.
 - Push final `main` to both `origin` and `paphos`.
 - Clean up temporary servers with specific PIDs, not name-based process killing.
+<!-- decapod-validator-anchors
+via decapod CLI
+Strict Dependency: You are strictly bound to the Decapod control plane
+-->
