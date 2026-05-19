@@ -88,6 +88,7 @@ function createMockEnv() {
     localStorage: { getItem: () => null, setItem: () => {} },
     location: { hash: '', href: '' },
     window: {}, navigator: { userAgent: '' },
+    CSS: { escape: (s) => s.replace(/([\[\]"'\\#.:>+~=|^${}()/!])/g, '\\$1') },
     setTimeout: (fn) => fn(), requestAnimationFrame: (fn) => fn(),
     console: { log: () => {}, warn: () => {}, error: () => {} },
     URL: { createObjectURL: () => 'blob:', revokeObjectURL: () => {} },

@@ -627,6 +627,45 @@ select:focus {
   color: #555;
 }
 
+/* Miracle cards (Step 9 cult picker) */
+.miracle-card {
+  border: 2px solid #ccc;
+  background: #fff;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.miracle-card:hover {
+  border-color: #666;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.miracle-card.matching-rune {
+  border-color: #90EE90;
+  background: #f0fff0;
+}
+.miracle-card.selected {
+  border-color: #000;
+  background: #e8f4f8;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.miracle-card.selected.matching-rune {
+  border-color: #006400;
+  background: #e0ffe0;
+}
+.miracle-card.locked {
+  opacity: 0.45;
+  cursor: not-allowed;
+  border-color: #ddd;
+  background: #f8f8f8;
+}
+.miracle-card.locked:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: #ddd;
+}
+
 </style>
 </head>
 <body>
@@ -3901,6 +3940,18 @@ App.toggleFolkMagicSpell = function(spell, checked, maxCount) {
   this.saveToLocalStorage();
 };
 
+/**
+ * Re-render current step while preserving scroll position.
+ * Use instead of bare this.renderCurrentStep() for in-page interactions.
+ */
+App.rerenderPreservingScroll = function() {
+  const scrollY = (typeof window !== 'undefined' && window.scrollY) || 0;
+  this.renderCurrentStep();
+  if (typeof window !== 'undefined' && window.scrollTo) {
+    requestAnimationFrame(() => window.scrollTo(0, scrollY));
+  }
+};
+
 App.toggleSorcerySpell = function(spellName) {
   if (!CharacterData.sorcerySpells) CharacterData.sorcerySpells = [];
   // Starting spells = 3 for Dedicated rank (Rune Affinity ~50% / 20 ≈ 3). Mythras Core p.165: memorisation limit = INT.
@@ -3910,9 +3961,7 @@ App.toggleSorcerySpell = function(spellName) {
     return;
   }
   this.saveToLocalStorage();
-  const scrollY = (typeof window !== 'undefined' && window.scrollY) || 0;
-  this.renderCurrentStep();
-  if (typeof window !== 'undefined' && window.scrollTo) requestAnimationFrame(() => window.scrollTo(0, scrollY));
+  this.rerenderPreservingScroll();
 };
 
 App.toggleBoundSpirit = function(spiritName) {
@@ -3931,9 +3980,7 @@ App.toggleBoundSpirit = function(spiritName) {
     CharacterData.boundSpirits.push({name: spiritName});
   }
   this.saveToLocalStorage();
-  const scrollY = (typeof window !== 'undefined' && window.scrollY) || 0;
-  this.renderCurrentStep();
-  if (typeof window !== 'undefined' && window.scrollTo) requestAnimationFrame(() => window.scrollTo(0, scrollY));
+  this.rerenderPreservingScroll();
 };
 
 App.toggleCareerFolkMagicSpell = function(spell, checked) {
@@ -4766,11 +4813,7 @@ App.selectCult = function(cultName) {
   this.saveToLocalStorage();
   // Preserve scroll position across re-render (selectCult is triggered by in-page clicks)
   if (typeof document !== 'undefined' && this.renderCurrentStep) {
-    const scrollY = (typeof window !== 'undefined' && window.scrollY) || 0;
-    this.renderCurrentStep();
-    if (typeof window !== 'undefined' && window.scrollTo) {
-      requestAnimationFrame(() => window.scrollTo(0, scrollY));
-    }
+    this.rerenderPreservingScroll();
   }
 };
 
@@ -4901,14 +4944,23 @@ App.adjustCultBoost = function(skillName, newValue) {
   this.saveToLocalStorage();
 
   // Targeted DOM update — no full re-render
+  const spent = Object.values(CharacterData.bonusSkills).reduce((a, b) => a + b, 0);
+  const remaining = totalBonusPool - spent;
   const budgetEl = document.getElementById('cult-boost-budget');
   if (budgetEl) {
-    const spent = Object.values(CharacterData.bonusSkills).reduce((a, b) => a + b, 0);
-    const remaining = totalBonusPool - spent;
     budgetEl.innerHTML = `Bonus points remaining: <strong>${remaining}</strong> / ${totalBonusPool}`;
   }
+  // Refresh all sibling inputs' max attribute to prevent exceeding remaining budget
+  const allRows = document.querySelectorAll('.cult-boost-row input[type="number"]');
+  allRows.forEach(input => {
+    const siblingSkill = input.closest('.cult-boost-row')?.getAttribute('data-skill');
+    if (siblingSkill) {
+      const siblingCurrent = CharacterData.bonusSkills[siblingSkill] || 0;
+      input.max = Math.min(maxPerSkill, siblingCurrent + remaining);
+    }
+  });
   // Update the input value and display text
-  const row = document.querySelector(`.cult-boost-row[data-skill="${skillName}"]`);
+  const row = document.querySelector(`.cult-boost-row[data-skill="${CSS.escape(skillName)}"]`);
   if (row) {
     const input = row.querySelector('input[type="number"]');
     if (input && parseInt(input.value) !== clamped) input.value = clamped;
@@ -4954,6 +5006,22 @@ App.autoBoostCultSkills = function() {
   const ageCategory = Calc.getAgeCategory(CharacterData.age);
   const maxPerSkill = ageCategory ? ageCategory.maxPerSkill : 15;
   const totalBonusPool = ageCategory ? ageCategory.bonusPoints : 150;
+
+  // Idempotency guard: if all concrete cult skills already >= 50%, nothing to do
+  const concreteSkills = (cult.cultSkills || []).filter(name => !needsDisambiguation(name));
+  const allSkillTotals = concreteSkills.map(name => {
+    const skillDef = Calc.resolveSkillDef(name);
+    const {STR, CON, SIZ, DEX, INT, POW, CHA} = CharacterData.characteristics;
+    const statMap = {STR, CON, SIZ, DEX, INT, POW, CHA};
+    const baseValue = skillDef ? Calc.skillBaseValue(statMap[skillDef.base_stats[0]], statMap[skillDef.base_stats[1]], skillDef.starting_bonus || 0) : 0;
+    return baseValue + (CharacterData.culturalSkills[name] || 0) + (CharacterData.careerSkills[name] || 0) + (CharacterData.bonusSkills[name] || 0);
+  });
+  const requiredCount = Math.min(5, concreteSkills.length);
+  const alreadyQualified = allSkillTotals.filter(t => t >= 50).length;
+  if (alreadyQualified >= requiredCount && allSkillTotals.every(t => t >= 50)) {
+    this.showToast('All cult skills already at 50%+', 'success');
+    return;
+  }
 
   // Build list of cult skills with their current totals (skip ambiguous/unresolved skills)
   const cultSkills = (cult.cultSkills || [])
@@ -5150,45 +5218,6 @@ App.renderMiraclePicker = function(container) {
         `;
       }).join('')}
     </div>
-    <style>
-      .miracle-card {
-        border: 2px solid #ccc;
-        background: #fff;
-        padding: 10px;
-        cursor: pointer;
-        border-radius: 4px;
-        transition: all 0.2s;
-      }
-      .miracle-card:hover {
-        border-color: #666;
-        transform: translateY(-2px);
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      }
-      .miracle-card.matching-rune {
-        border-color: #90EE90;
-        background: #f0fff0;
-      }
-      .miracle-card.selected {
-        border-color: #000;
-        background: #e8f4f8;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      }
-      .miracle-card.selected.matching-rune {
-        border-color: #006400;
-        background: #e0ffe0;
-      }
-      .miracle-card.locked {
-        opacity: 0.45;
-        cursor: not-allowed;
-        border-color: #ddd;
-        background: #f8f8f8;
-      }
-      .miracle-card.locked:hover {
-        transform: none;
-        box-shadow: none;
-        border-color: #ddd;
-      }
-    </style>
   `;
 };
 
