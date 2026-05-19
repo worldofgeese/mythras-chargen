@@ -19,18 +19,18 @@
     "Willpower",
     "Acrobatics",
     "Acting",
-    "Lore (cult)",
+    "Lore (Cult)",
     "Sleight",
     "Streetwise",
     "Track",
     "Athletics",
     "Stealth",
-    "Binding(Shaman)",
+    "Binding (Shaman)",
     "Craft (Poison)",
     "Devotion",
     "Disguise",
     "Runic Affinity",
-    "Trance(Shaman)"
+    "Trance (Shaman)"
   ],
   "folkMagic": [
     "Varies thru cult shamans"

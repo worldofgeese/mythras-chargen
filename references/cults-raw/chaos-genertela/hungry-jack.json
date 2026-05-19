@@ -11,14 +11,14 @@
   },
   "cultSkills": [
     "Influence",
-    "Combat style(any)",
-    "Lore(cult)",
-    "Lore(world)",
+    "Combat style (any)",
+    "Lore (Cult)",
+    "Lore (world)",
     "Devotion",
     "Runic Affinity",
     "Binding",
     "Trance",
-    "Lore (plant)"
+    "Lore (Plant)"
   ],
   "folkMagic": [],
   "miracles": {

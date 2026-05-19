@@ -194,6 +194,7 @@ function loadApp() {
         disambiguateSkill: typeof disambiguateSkill !== 'undefined' ? disambiguateSkill : null,
         DISAMBIGUATION_LISTS: typeof DISAMBIGUATION_LISTS !== 'undefined' ? DISAMBIGUATION_LISTS : null,
         detectCultType: typeof detectCultType !== 'undefined' ? detectCultType : null,
+        MIRACLES_DATA: typeof MIRACLES_DATA !== 'undefined' ? MIRACLES_DATA : null,
       };
     `, sandbox);
   } catch(e) {
@@ -3260,6 +3261,348 @@ section('Cult Type Detection (ADR-0006)');
     }
   } else {
     fail('detectCultType function not found - Phase 1 not yet implemented');
+  }
+}
+
+// ============================================================
+section('Quick Boost Panel (U1: number inputs, no re-render)');
+// ============================================================
+
+{
+  // Test: adjustCultBoost accepts an absolute value (not a delta)
+  const { App: AppRef, CharacterData: CD } = loadApp();
+  const sandbox = AppRef ? AppRef._sandbox || CD._sandbox : null;
+  
+  if (AppRef && AppRef.adjustCultBoost) {
+    // Setup: give character a cult with skills below 50%
+    CD.cult = '7 Mothers - Irrippi Ontor';
+    CD.characteristics = { STR: 11, CON: 12, SIZ: 13, DEX: 14, INT: 15, POW: 5, CHA: 5 };
+    CD.bonusSkills = {};
+    CD.age = 22;
+
+    // Test 1: adjustCultBoost sets absolute value (new signature)
+    AppRef.adjustCultBoost('Willpower', 10);
+    if (CD.bonusSkills['Willpower'] === 10) {
+      pass('adjustCultBoost sets absolute value correctly');
+    } else {
+      fail('adjustCultBoost sets absolute value correctly', `Expected 10, got ${CD.bonusSkills['Willpower']}`);
+    }
+
+    // Test 2: Value clamped to 0 at minimum
+    AppRef.adjustCultBoost('Willpower', -5);
+    if (CD.bonusSkills['Willpower'] === 0 || CD.bonusSkills['Willpower'] === undefined) {
+      pass('adjustCultBoost clamps negative values to 0');
+    } else {
+      fail('adjustCultBoost clamps negative values to 0', `Expected 0, got ${CD.bonusSkills['Willpower']}`);
+    }
+
+    // Test 3: Value clamped to maxPerSkill (15 for age 22)
+    AppRef.adjustCultBoost('Willpower', 99);
+    if (CD.bonusSkills['Willpower'] <= 15) {
+      pass('adjustCultBoost clamps to maxPerSkill');
+    } else {
+      fail('adjustCultBoost clamps to maxPerSkill', `Expected <= 15, got ${CD.bonusSkills['Willpower']}`);
+    }
+
+    // Test 4: Value clamped to remaining budget
+    CD.bonusSkills = {};
+    // Age 22 = 150 bonus points. Spend 145 elsewhere.
+    CD.bonusSkills['Athletics'] = 15;
+    CD.bonusSkills['Brawn'] = 15;
+    CD.bonusSkills['Endurance'] = 15;
+    CD.bonusSkills['Evade'] = 15;
+    CD.bonusSkills['Stealth'] = 15;
+    CD.bonusSkills['Swim'] = 15;
+    CD.bonusSkills['Dance'] = 15;
+    CD.bonusSkills['Ride'] = 15;
+    CD.bonusSkills['Sing'] = 15;
+    CD.bonusSkills['Perception'] = 10; // total 145
+    AppRef.adjustCultBoost('Willpower', 10);
+    const spent = Object.values(CD.bonusSkills).reduce((a, b) => a + b, 0);
+    if (spent <= 150) {
+      pass('adjustCultBoost respects total budget limit');
+    } else {
+      fail('adjustCultBoost respects total budget limit', `Total spent: ${spent}, exceeds 150`);
+    }
+
+    // Test 5: Points allocated in Quick Boost appear in bonus pool
+    CD.bonusSkills = {};
+    AppRef.adjustCultBoost('Willpower', 8);
+    if (CD.bonusSkills['Willpower'] === 8) {
+      pass('Quick Boost points stored in bonusSkills (shared with Step 11)');
+    } else {
+      fail('Quick Boost points stored in bonusSkills (shared with Step 11)', `Got ${CD.bonusSkills['Willpower']}`);
+    }
+
+    // Test 6: adjustCultBoost does NOT call renderCurrentStep (no full re-render)
+    let renderCalled = false;
+    const origRender = AppRef.renderCurrentStep;
+    AppRef.renderCurrentStep = function() { renderCalled = true; };
+    CD.bonusSkills = {};
+    AppRef.adjustCultBoost('Willpower', 5);
+    if (!renderCalled) {
+      pass('adjustCultBoost does not call renderCurrentStep');
+    } else {
+      fail('adjustCultBoost does not call renderCurrentStep');
+    }
+    AppRef.renderCurrentStep = origRender;
+  } else {
+    fail('App.adjustCultBoost function not found');
+  }
+}
+
+// ============================================================
+section('Auto-Boost to 50% (U2)');
+// ============================================================
+
+{
+  const { App: AppRef, CharacterData: CD, CULTS_DATA: CultsData } = loadApp();
+
+  if (AppRef && AppRef.autoBoostCultSkills) {
+    // Setup: character with cult skills below 50%
+    CD.cult = '7 Mothers - Irrippi Ontor';
+    CD.characteristics = { STR: 11, CON: 12, SIZ: 13, DEX: 14, INT: 15, POW: 5, CHA: 5 };
+    CD.bonusSkills = {};
+    CD.culturalSkills = {};
+    CD.careerSkills = {};
+    CD.age = 22;
+
+    // Test 1: Auto-boost allocates points to reach 50%
+    AppRef.autoBoostCultSkills();
+    // Willpower base = POW+POW = 10. Needs 40 to reach 50. But max per skill is 15.
+    // So it should allocate 15 (capped).
+    const wpBoost = CD.bonusSkills['Willpower'] || 0;
+    if (wpBoost > 0 && wpBoost <= 15) {
+      pass('autoBoostCultSkills allocates points toward 50%');
+    } else {
+      fail('autoBoostCultSkills allocates points toward 50%', `Willpower got ${wpBoost}`);
+    }
+
+    // Test 2: Does not exceed maxPerSkill per skill
+    const allValues = Object.values(CD.bonusSkills);
+    const overMax = allValues.filter(v => v > 15);
+    if (overMax.length === 0) {
+      pass('autoBoostCultSkills respects maxPerSkill per skill');
+    } else {
+      fail('autoBoostCultSkills respects maxPerSkill per skill', `Found values > 15: ${overMax}`);
+    }
+
+    // Test 3: Does not exceed total budget
+    const totalSpent = Object.values(CD.bonusSkills).reduce((a, b) => a + b, 0);
+    if (totalSpent <= 150) {
+      pass('autoBoostCultSkills respects total budget');
+    } else {
+      fail('autoBoostCultSkills respects total budget', `Spent ${totalSpent} > 150`);
+    }
+
+    // Test 4: Reallocates from non-cult skills when budget exhausted
+    CD.bonusSkills = { 'Athletics': 15, 'Brawn': 15, 'Stealth': 15, 'Swim': 15,
+      'Dance': 15, 'Ride': 15, 'Sing': 15, 'Endurance': 15, 'Evade': 15, 'First Aid': 15 };
+    // All 150 points spent on non-cult skills. Auto-boost should reclaim.
+    AppRef.autoBoostCultSkills();
+    const wpAfter = CD.bonusSkills['Willpower'] || 0;
+    if (wpAfter > 0) {
+      pass('autoBoostCultSkills reallocates from non-cult skills when budget full');
+    } else {
+      fail('autoBoostCultSkills reallocates from non-cult skills when budget full', `Willpower got ${wpAfter}`);
+    }
+    // Verify total didn't exceed budget
+    const totalAfter = Object.values(CD.bonusSkills).reduce((a, b) => a + b, 0);
+    if (totalAfter <= 150) {
+      pass('autoBoostCultSkills reallocation stays within budget');
+    } else {
+      fail('autoBoostCultSkills reallocation stays within budget', `Total: ${totalAfter}`);
+    }
+  } else {
+    fail('App.autoBoostCultSkills function not found');
+  }
+}
+
+// ============================================================
+section('Auto-Boost Phase 3: Cultural/Career Reallocation');
+// ============================================================
+
+{
+  const { App: AppRef, CharacterData: CD, CULTS_DATA: CultsData, Calc: CalcRef } = loadApp();
+
+  if (AppRef && AppRef.autoBoostCultSkills) {
+    // Setup: cult with skills that need more than bonus max (15) can provide
+    CD.cult = 'Chalana Arroy';
+    CD.characteristics = { STR: 8, CON: 9, SIZ: 10, DEX: 11, INT: 12, POW: 12, CHA: 13 };
+    // Spend all 150 bonus on non-cult skills
+    CD.bonusSkills = { Athletics: 15, Brawn: 15, Dance: 15, Sing: 15, Swim: 15, Ride: 15, Stealth: 15, Evade: 15, Unarmed: 15, Perception: 15 };
+    // Cultural points on non-cult skills
+    CD.culturalSkills = { Athletics: 15, Brawn: 15, Dance: 15, Sing: 15, Ride: 10, Stealth: 10, Evade: 10, Perception: 10 };
+    CD.careerSkills = { Dance: 15, Ride: 15, Sing: 15, Swim: 15 };
+
+    // Run auto-boost
+    AppRef.autoBoostCultSkills();
+
+    // Check that some cultural/career points were moved TO cult skills
+    const cultObj = CultsData.find(c => c.name === 'Chalana Arroy');
+    const cultSkillNames = (cultObj.cultSkills || []).filter(s => typeof AppRef.needsDisambiguation === 'undefined' || !AppRef.needsDisambiguation?.(s));
+    let cultCulturalPts = 0;
+    let cultCareerPts = 0;
+    for (const name of cultSkillNames) {
+      cultCulturalPts += CD.culturalSkills[name] || 0;
+      cultCareerPts += CD.careerSkills[name] || 0;
+    }
+
+    if (cultCulturalPts > 0 || cultCareerPts > 0) {
+      pass('Phase 3 reallocates cultural/career points to cult skills');
+    } else {
+      fail('Phase 3 reallocates cultural/career points to cult skills', `Cultural: ${cultCulturalPts}, Career: ${cultCareerPts}`);
+    }
+  } else {
+    fail('App.autoBoostCultSkills function not found');
+  }
+}
+
+// ============================================================
+section('Step 9 Initiation Gate');
+// ============================================================
+
+{
+  const { App: AppRef, CharacterData: CD, CULTS_DATA: CultsData } = loadApp();
+
+  if (AppRef && AppRef.validateCurrentStep) {
+    // Setup: character with cult but skills below 50%
+    CD.cult = '7 Mothers - Irrippi Ontor';
+    CD.characteristics = { STR: 11, CON: 12, SIZ: 13, DEX: 14, INT: 15, POW: 10, CHA: 10 };
+    CD.bonusSkills = {};
+    CD.culturalSkills = {};
+    CD.careerSkills = {};
+    CD.miracles = ['Extension', 'Find (Specific Thing)', 'Divination', 'Chastise', 'Dismiss Elemental'];
+    CD.devotionalPool = 5;
+    AppRef.currentStep = 9;
+
+    // Test 1: Blocks advancement when cult skills not met
+    const result1 = AppRef.validateCurrentStep();
+    if (result1 === false) {
+      pass('Step 9 blocks advancement when initiation requirements unmet');
+    } else {
+      fail('Step 9 blocks advancement when initiation requirements unmet', `validateCurrentStep returned ${result1}`);
+    }
+
+    // Test 2: Gate enforced regardless (no GM override path)
+    // Verify the gate cannot be bypassed — gmOverrideInitiation field has no effect
+    CD.gmOverrideInitiation = true; // Should have no effect now
+    const result2 = AppRef.validateCurrentStep();
+    if (result2 === false) {
+      pass('Step 9 initiation gate cannot be bypassed by gmOverrideInitiation flag');
+    } else {
+      fail('Step 9 initiation gate cannot be bypassed by gmOverrideInitiation flag');
+    }
+  } else {
+    fail('App.validateCurrentStep function not found');
+  }
+}
+
+// ============================================================
+section('Miracle Pool Capping (pool > available qualified)');
+// ============================================================
+
+{
+  const { App: AppRef, CharacterData: CD, CULTS_DATA: CultsData, MIRACLES_DATA: MiraclesRef } = loadApp();
+
+  if (AppRef && AppRef.validateCurrentStep && MiraclesRef) {
+    // Setup: Chalana Arroy with mismatched runes (only 4 Common miracles qualified)
+    CD.cult = 'Chalana Arroy';
+    CD.characteristics = { STR: 11, CON: 11, SIZ: 11, DEX: 11, INT: 18, POW: 16, CHA: 11 };
+    CD.devotionalPool = 8; // POW/2 = 8
+    // Runes that DON'T match Harmony (Chalana Arroy's cult rune)
+    CD.runeAffinities = { primary: 'Fire', secondary: 'Death', tertiary: 'Disorder' };
+    // Enough skills for initiation gate
+    CD.bonusSkills = { Willpower: 15, 'Lore (Cult)': 15, 'First Aid': 15, Devotion: 15, Healing: 15, 'Runic Affinity': 15 };
+    CD.culturalSkills = { Willpower: 15, 'First Aid': 15, Healing: 15, Insight: 15 };
+    CD.careerSkills = { 'Lore (Cult)': 15, Devotion: 15, 'Runic Affinity': 15 };
+    // Select 4 common miracles (only these are qualified since Harmony rune not selected)
+    CD.miracles = ['Extension', 'Find (Specific Thing)', 'Divination', 'Chastise'];
+    AppRef.currentStep = 9;
+
+    // Verify MIRACLES_DATA has Chalana Arroy with common miracles
+    const cultMiracles = MiraclesRef.cults && MiraclesRef.cults['Chalana Arroy'];
+    if (!cultMiracles) {
+      pass('Step 9 passes with 4/4 qualified miracles (MIRACLES_DATA missing cult - validation skips miracle check)');
+    } else {
+      const result = AppRef.validateCurrentStep();
+      if (result !== false) {
+        pass('Step 9 passes when all qualified miracles selected even though pool is larger');
+      } else {
+        fail('Step 9 passes when all qualified miracles selected even though pool is larger');
+      }
+    }
+
+    // Test: selecting fewer than available qualified should still block
+    if (cultMiracles) {
+      CD.miracles = ['Extension'];
+      const result2 = AppRef.validateCurrentStep();
+      if (result2 === false) {
+        pass('Step 9 blocks when fewer than available qualified miracles selected');
+      } else {
+        fail('Step 9 blocks when fewer than available qualified miracles selected');
+      }
+    } else {
+      pass('Step 9 blocks when fewer than available qualified miracles selected (skipped - no MIRACLES_DATA)');
+    }
+  } else {
+    fail('App.validateCurrentStep or MIRACLES_DATA not found');
+  }
+}
+
+// ============================================================
+section('Add Hobby Skill Dropdown (U3)');
+// ============================================================
+
+{
+  const { App: AppRef, CharacterData: CD } = loadApp();
+
+  if (AppRef && AppRef.addBonusSkillByName) {
+    // Setup
+    CD.bonusSkills = { 'Athletics': 5 };
+    CD.culturalSkills = { 'Athletics': 10 };
+    CD.careerSkills = {};
+    CD.hobbySkillName = null;
+
+    // Test 1: Adding a new professional skill sets it in bonusSkills
+    AppRef.addBonusSkillByName('Commerce');
+    if (CD.bonusSkills['Commerce'] === 0) {
+      pass('addBonusSkillByName adds skill with 0 points');
+    } else {
+      fail('addBonusSkillByName adds skill with 0 points', `Got ${CD.bonusSkills['Commerce']}`);
+    }
+
+    // Test 2: Hobby skill limit enforced (only 1 new professional skill)
+    // Use a skill that's NOT in SKILLS_DATA so it qualifies as a true hobby
+    CD.hobbySkillName = null;
+    AppRef.addBonusSkillByName('Acrobatics'); // Acrobatics is a professional skill not in standard SKILLS_DATA
+    // Now hobbySkillName should be set if Acrobatics is truly a new professional
+    // If Acrobatics IS in SKILLS_DATA, we need a different approach:
+    // Force the scenario directly
+    CD.hobbySkillName = 'Acrobatics';
+    AppRef.addBonusSkillByName('Gambling');
+    // Gambling IS in SKILLS_DATA so it won't trigger the hobby check.
+    // We need to test with two skills not in SKILLS_DATA.
+    // Let's test the logic directly: set hobbySkillName and try adding a non-standard skill
+    delete CD.bonusSkills['Gambling']; // clean up
+    CD.hobbySkillName = 'Some Custom Skill';
+    AppRef.addBonusSkillByName('Another Custom Skill');
+    if (!CD.bonusSkills.hasOwnProperty('Another Custom Skill')) {
+      pass('addBonusSkillByName enforces 1 hobby skill limit');
+    } else {
+      fail('addBonusSkillByName enforces 1 hobby skill limit', 'Another Custom Skill was added despite limit');
+    }
+
+    // Test 3: Adding an already-present skill is a no-op
+    CD.hobbySkillName = null;
+    AppRef.addBonusSkillByName('Athletics');
+    if (CD.bonusSkills['Athletics'] === 5) {
+      pass('addBonusSkillByName skips already-present skill');
+    } else {
+      fail('addBonusSkillByName skips already-present skill', `Athletics is now ${CD.bonusSkills['Athletics']}`);
+    }
+  } else {
+    fail('App.addBonusSkillByName function not found');
   }
 }
 

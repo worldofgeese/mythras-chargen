@@ -15,13 +15,13 @@
     "Influence",
     "Sing",
     "Willpower",
-    "Lore (cult)",
-    "Lore (human)",
+    "Lore (Cult)",
+    "Lore (Human)",
     "Survival",
-    "Binding(Shaman)",
+    "Binding (Shaman)",
     "Devotion",
     "Runic Affinity",
-    "Trance(Shaman)"
+    "Trance (Shaman)"
   ],
   "folkMagic": [
     "Sneeze"

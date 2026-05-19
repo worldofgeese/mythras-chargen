@@ -13,12 +13,12 @@
     "Combat style (any)",
     "Brawn",
     "Sing",
-    "Lore (cult)",
+    "Lore (Cult)",
     "Survival",
-    "Binding(Shaman)",
+    "Binding (Shaman)",
     "Devotion",
     "Runic Affinity",
-    "Trance(Shaman)"
+    "Trance (Shaman)"
   ],
   "folkMagic": [
     "Varies thru cult shamans"

@@ -676,6 +676,11 @@ def main():
     print(f"With changes vs existing: {with_changes}")
     if write:
         print(f"✅ Reference JSONs updated")
+        # Post-process: normalize skill names in updated JSONs
+        import subprocess
+        norm_script = Path(__file__).parent / "normalize-cult-skills.py"
+        if norm_script.exists():
+            subprocess.run([sys.executable, str(norm_script), "--write"], check=False)
     else:
         print(f"(dry run — use --write to update JSONs)")
 

@@ -11,21 +11,21 @@
   },
   "cultSkills": [
     "Locale",
-    "Lore (cult)",
+    "Lore (Cult)",
     "Navigation",
     "Oratory",
     "Survival",
     "Track",
     "Combat style (Tribal)",
-    "Dance(Shaman)",
-    "Perception(Shaman)",
+    "Dance (Shaman)",
+    "Perception (Shaman)",
     "Ride",
-    "Sing(Shaman)",
-    "Binding(Shaman)",
+    "Sing (Shaman)",
+    "Binding (Shaman)",
     "Craft (butchery)",
     "Devotion",
     "Runic Affinity",
-    "Trance(Shaman)"
+    "Trance (Shaman)"
   ],
   "folkMagic": [
     "Countermagic",

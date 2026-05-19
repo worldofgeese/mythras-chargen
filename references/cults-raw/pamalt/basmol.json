@@ -10,13 +10,13 @@
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "Lore(animal)",
-    "Combat Style(any)",
-    "Lore(Cult)",
+    "Lore (Animal)",
+    "Combat Style (any)",
+    "Lore (Cult)",
     "First Aid",
     "Runic Affinity",
     "Devotion",
-    "Combat Style(Natural Weapon)"
+    "Combat Style (Natural Weapon)"
   ],
   "folkMagic": [
     "Varies thru cult shamans"

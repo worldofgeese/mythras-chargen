@@ -154,6 +154,10 @@ bd close <id>         # Complete work
 
 Single-file HTML application (`index.html`, ~19800 lines). No framework, no build step. Vanilla JS with inline data constants. See `.rpiv/guidance/architecture.md` for full module map.
 
+### Documented Solutions
+
+`docs/solutions/` contains documented solutions to past problems and design patterns, organized by category (`design-patterns/`, `ui-bugs/`, `runtime-errors/`, etc.) with YAML frontmatter (`module`, `tags`, `problem_type`). Relevant when implementing or debugging in areas covered by existing learnings.
+
 ### Data Attestability (ADR-003)
 
 All game data MUST trace to a source PDF with page citation. Flow: `PDF → references/*.json → inline constant → UI`. Never edit inline constants without updating the reference JSON. Vision-mode verification required for any data that might be LLM-interpreted.

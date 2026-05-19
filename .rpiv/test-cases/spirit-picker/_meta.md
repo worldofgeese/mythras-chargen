@@ -22,6 +22,9 @@ UI for selecting bound spirits for animist characters. Limited by CHA/2 slots (S
 8. Selected spirits appear in PDF export with ability descriptions
 9. Deselecting a cult clears boundSpirits[] (orphan cleanup)
 10. Spirit info box shows: Bound Spirit Slots formula, Casting Skill
+11. `toggleBoundSpirit()` preserves scroll position (no page jump)
+12. Separate #spirit-picker container (hidden for non-animist cults)
+13. In-place DOM update pattern (no full re-render on toggle)
 
 ## Boundary Conditions
 

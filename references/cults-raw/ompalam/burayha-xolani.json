@@ -10,10 +10,10 @@
     "runelord": "to have 3"
   },
   "cultSkills": [
-    "First aid",
+    "First Aid",
     "Lore (Human)",
-    "Lore(Enbalming)",
-    "Lore (cult)",
+    "Lore (Enbalming)",
+    "Lore (Cult)",
     "Lore (Ompalam)",
     "Insight",
     "Influence",
@@ -21,10 +21,10 @@
     "Devotion",
     "Runic Affinity",
     "Healing",
-    "Lore(Torture)",
-    "Craft(Torture)",
+    "Lore (Torture)",
+    "Craft (Torture)",
     "Deceit",
-    "Lore(Alchemy)",
+    "Lore (Alchemy)",
     "Willpower"
   ],
   "folkMagic": [
