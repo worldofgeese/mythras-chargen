@@ -147,11 +147,11 @@ Use this when you want a new Gloranthan character built directly on the Mythras 
 10. Fill the PDF and validate the result.
 
 ```powershell
-uv run python C:\Users\taoha\.codex\skills\mythras-glorantha-conversion\scripts\mythras_glorantha_tools.py compute `
+uv run python C:\Users\taoha\<agent-skills>\mythras-glorantha-conversion\scripts\mythras_glorantha_tools.py compute `
   --input <input.json> `
   --output <computed.json>
 
-uv run python C:\Users\taoha\.codex\skills\mythras-glorantha-conversion\scripts\mythras_glorantha_tools.py fill-sheet `
+uv run python C:\Users\taoha\<agent-skills>\mythras-glorantha-conversion\scripts\mythras_glorantha_tools.py fill-sheet `
   --input <input.json> `
   --template "C:\Users\taoha\OneDrive\Documents\Playground\templates\Mythras Sheet - RuneQuest-in-Mythras v1.2.pdf" `
   --output <sheet.pdf> `
