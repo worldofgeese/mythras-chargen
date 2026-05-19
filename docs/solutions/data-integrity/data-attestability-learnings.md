@@ -1,6 +1,8 @@
 ---
 title: Data Attestability & Vision-Mode Verification
 category: architecture
+module: reference-data
+problem_type: data_integrity
 tags: [data-integrity, pdf-verification, vision-mode, spirit-picker, sorcery-picker]
 date: 2026-05-17
 ---

@@ -1,3 +1,15 @@
+---
+title: Progressive Handout Design
+category: design-patterns
+module: handout-ui
+problem_type: design_pattern
+tags:
+  - handout
+  - svg
+  - progressive-disclosure
+  - navigation
+---
+
 # Progressive Handout Design
 
 ## Problem

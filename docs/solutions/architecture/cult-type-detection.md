@@ -1,3 +1,15 @@
+---
+title: Cult Type Detection from Skill Patterns
+category: architecture
+module: magic-system
+problem_type: classification_pattern
+tags:
+  - cults
+  - magic-types
+  - detection
+  - skill-patterns
+---
+
 # Cult Type Detection from Skill Patterns
 
 ## Problem

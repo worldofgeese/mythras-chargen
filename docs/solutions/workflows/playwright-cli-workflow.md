@@ -1,3 +1,15 @@
+---
+title: Browser Automation Workflow
+category: workflows
+module: browser-testing
+problem_type: workflow
+tags:
+  - browser-testing
+  - playwright-cli
+  - agent-browser
+  - fixtures
+---
+
 # Playwright-CLI Workflow
 
 ## Problem

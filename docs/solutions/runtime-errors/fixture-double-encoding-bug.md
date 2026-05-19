@@ -1,3 +1,15 @@
+---
+title: Fixture Double-Encoding Bug
+category: runtime-errors
+module: serialization
+problem_type: bug
+tags:
+  - fixtures
+  - json
+  - double-encoding
+  - browser-eval
+---
+
 # Fixture Double-Encoding Bug
 
 ## Problem

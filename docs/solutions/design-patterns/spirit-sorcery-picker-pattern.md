@@ -1,3 +1,15 @@
+---
+title: Spirit/Sorcery Picker Design
+category: design-patterns
+module: magic-system
+problem_type: ui_pattern
+tags:
+  - animism
+  - sorcery
+  - picker
+  - magic
+---
+
 # Spirit/Sorcery Picker Design
 
 ## Problem
@@ -10,8 +22,8 @@ Reused the existing miracle picker pattern (from theist cults):
 
 1. Render a checkbox list of available spirits/spells from the cult data.
 2. Enforce a selection limit:
-   - **Sorcery**: `Math.floor(INT / 4)` spells.
-   - **Spirits**: `Math.min(3, Math.floor(CHA / 2))` spirits.
+   - **Sorcery**: 3 spells at Dedicated rank.
+   - **Spirits**: `Math.floor(CHA / 2)` bound spirit slots.
 3. Disable unchecked items once the limit is reached.
 4. Store selections in the same `character.magic` structure used by miracles.
 

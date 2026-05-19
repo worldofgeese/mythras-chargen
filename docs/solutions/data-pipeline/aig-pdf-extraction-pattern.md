@@ -1,3 +1,15 @@
+---
+title: AiG PDF Extraction Pattern
+category: data-pipeline
+module: data-ingestion
+problem_type: extraction_pattern
+tags:
+  - aig
+  - pdf-extraction
+  - json-merge
+  - data-pipeline
+---
+
 # AiG PDF Extraction Pattern
 
 ## Problem

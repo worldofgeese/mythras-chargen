@@ -1,3 +1,15 @@
+---
+title: Hannu's House Rules (AiG Adaptations)
+category: rules
+module: magic-system
+problem_type: house_rule_mapping
+tags:
+  - hannu
+  - house-rules
+  - rune-affinity
+  - magic
+---
+
 # Hannu's House Rules (AiG Adaptations)
 
 ## Problem
