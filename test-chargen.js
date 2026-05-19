@@ -400,6 +400,55 @@ section('Risk 1: PDF Semantic Validation (Sub-era Keywords)');
   }
 }
 
+// Test 1.9: Homeland buttons handle apostrophes without breaking inline handlers
+{
+  const AppObj = App.App;
+  const CD = App.CharacterData;
+
+  if (AppObj && AppObj.renderStep4 && CD) {
+    const previousCulture = CD.culture;
+    const previousHomeland = CD.homeland;
+
+    CD.culture = 'Praxian';
+    CD.homeland = '';
+
+    const step = AppObj.renderStep4();
+    const html = step.innerHTML;
+
+    if (html.includes('data-homeland="Pimper\'s Block"') &&
+        html.includes('onclick="App.selectHomeland(this.dataset.homeland)"') &&
+        !html.includes("App.selectHomeland('Pimper")) {
+      pass('Pimper\'s Block homeland button uses safe data attribute handler');
+    } else {
+      fail('Pimper\'s Block homeland button can break inline handler syntax', html.match(/Pimper.{0,120}/)?.[0]);
+    }
+
+    CD.culture = previousCulture;
+    CD.homeland = previousHomeland;
+  } else {
+    fail('App.renderStep4 not available for homeland handler test');
+  }
+}
+
+// Test 1.10: Bonus skill controls also avoid raw single-quoted names
+{
+  const AppObj = App.App;
+
+  if (AppObj && AppObj.renderStep11) {
+    const renderSource = AppObj.renderStep11.toString();
+
+    if (renderSource.includes("App.updateSkillPoints('bonus', this.dataset.skill") &&
+        renderSource.includes('App.removeBonusSkill(this.dataset.skill)') &&
+        !renderSource.includes("App.removeBonusSkill('${skillName}')")) {
+      pass('Bonus skill controls use data attributes for apostrophe-safe skill names');
+    } else {
+      fail('Bonus skill controls still interpolate raw skill names into inline handlers');
+    }
+  } else {
+    fail('App.renderStep11 not available for bonus skill handler test');
+  }
+}
+
 // ============================================================
 section('Risk 2: Play Mode Form State Consistency');
 // ============================================================

@@ -2471,6 +2471,14 @@ const App = {
   currentStep: 1,
   mode: 'wizard',
   unsavedChanges: false,
+
+  escapeHtmlAttr(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  },
   
   init() {
     this.loadFromLocalStorage();
@@ -3381,11 +3389,15 @@ App.renderStep4 = function() {
     <div class="field">
       <label>Homeland</label>
       <div id="homeland-buttons" style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px;">
-        ${this.getHomelandSuggestions(CharacterData.culture).map(h => `
-          <button type="button" data-testid="homeland-${h.replace(/\s+/g, '-').replace(/'/g, '').toLowerCase()}" onclick="App.selectHomeland('${h}')"
+        ${this.getHomelandSuggestions(CharacterData.culture).map(h => {
+          const homelandTestId = this.escapeHtmlAttr(h.replace(/\s+/g, '-').replace(/'/g, '').toLowerCase());
+          const homelandValue = this.escapeHtmlAttr(h);
+          return `
+          <button type="button" data-testid="homeland-${homelandTestId}" data-homeland="${homelandValue}" onclick="App.selectHomeland(this.dataset.homeland)"
             style="padding: 8px 14px; min-height: 44px; ${CharacterData.homeland === h ? 'background: #000; color: #fff; border-color: #000;' : ''}"
             ${CharacterData.homeland === h ? 'class="primary"' : ''}>${h}</button>
-        `).join('')}
+        `;
+        }).join('')}
       </div>
       ${this.getHomelandSuggestions(CharacterData.culture).length === 0 ? '<p style="color: #666; font-style: italic; margin-top: 4px;">Select a culture first to see homeland options</p>' : ''}
     </div>
@@ -5540,6 +5552,7 @@ App.renderStep11 = function() {
   const sortedSkills = Array.from(allSkills.keys()).sort();
   sortedSkills.forEach(skillName => {
     const points = CharacterData.bonusSkills[skillName] || 0;
+    const skillAttr = this.escapeHtmlAttr(skillName);
     // Calculate total with breakdown
     const skillDef = Calc.resolveSkillDef(skillName);
     const {STR, CON, SIZ, DEX, INT, POW, CHA} = CharacterData.characteristics;
@@ -5564,9 +5577,9 @@ App.renderStep11 = function() {
           </div>
         </div>
         <div style="display: flex; gap: 6px; align-items: center;">
-          <input type="number" min="0" max="${ageCategory ? ageCategory.maxPerSkill : 100}" value="${points}" data-testid="skill-input-${skillName}"
-            onchange="App.updateSkillPoints('bonus', '${skillName}', parseInt(this.value))" style="width: 60px;">
-          <button onclick="App.removeBonusSkill('${skillName}')">×</button>
+          <input type="number" min="0" max="${ageCategory ? ageCategory.maxPerSkill : 100}" value="${points}" data-testid="skill-input-${skillAttr}" data-skill="${skillAttr}"
+            onchange="App.updateSkillPoints('bonus', this.dataset.skill, parseInt(this.value))" style="width: 60px;">
+          <button data-skill="${skillAttr}" onclick="App.removeBonusSkill(this.dataset.skill)">×</button>
         </div>
       </div>
     `;
