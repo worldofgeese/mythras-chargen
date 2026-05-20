@@ -19,9 +19,8 @@
     table { width:100%; border-collapse:collapse; margin:10px 0; }
     th, td { border:1px solid rgba(60,40,20,.22); padding:8px; vertical-align:top; }
     th { background:#e1cda9; text-align:left; }
-    ul { margin:8px 0 8px 22px; padding:0; }
+    ul, ol { margin:8px 0 8px 22px; padding:0; }
     li { margin:4px 0; }
-    code { font-family:"Courier New",monospace; }
     @media print { body { background:white; } main { max-width:none; padding:0; } nav { display:none; } section { break-inside:avoid; box-shadow:none; border:1px solid #999; border-left:5px solid #555; } a { color:#000; text-decoration:none; } }
   </style>
 </head>
@@ -29,73 +28,88 @@
 <main>
   <header>
     <h1>Rules and House Rules</h1>
-    <p>What differs from vanilla Mythras, and where to look when a question comes up.</p>
+    <p>The table procedure when our Glorantha campaign differs from default Mythras.</p>
   </header>
 
   <nav aria-label="Handout navigation">
-    <a href="index.html">Start Here</a>
-    <a href="combat-path.html">Combat Path</a>
-    <a href="magic-path.html">Magic Path</a>
-    <a href="combined-path.html">Magic in Combat</a>
-    <a href="prep-checklist.html">Prep Checklist</a>
-    <a href="source-trail.html">Source Trail</a>
-    <a href="../../index.html">Character Generator</a>
+    <a href="/rules/handouts/index.html">Start Here</a>
+    <a href="/rules/handouts/combat-path.html">Combat Path</a>
+    <a href="/rules/handouts/magic-path.html">Magic Path</a>
+    <a href="/rules/handouts/combined-path.html">Magic in Combat</a>
+    <a href="/rules/handouts/prep-checklist.html">Prep Checklist</a>
+    <a href="/rules/handouts/source-trail.html">Source Trail</a>
+    <a href="/01-Character-Generator.html">Character Generator</a>
   </nav>
 
   <section>
-    <h2>1. Source hierarchy</h2>
-    <p class="ref">AGENTS.md project rule; ADR-003</p>
+    <h2>1. Where to read base material</h2>
+    <p class="ref">Player source order</p>
     <ol>
-      <li>Adventures in Glorantha for Folk Magic, Rune Magic, cultures, and combat styles.</li>
-      <li>Mythras Core Rulebook, 3rd Printing 2018 for base rules, Animism, Sorcery, and Mysticism.</li>
-      <li>Notes from Pavis cult one-pagers for cult definitions and cult magic.</li>
-      <li>Monster Island and A Bird in the Hand for spirit templates where used.</li>
-      <li>Hannu house rules for rune casting, devotional pool, recovery, and rank progression.</li>
+      <li>Adventures in Glorantha for cultures, careers, combat styles, Folk Magic, Rune Affinities, and Rune Magic.</li>
+      <li>Mythras Core Rulebook for core dice rules, combat, Animism, and Sorcery.</li>
+      <li>Cult one-pagers for cult membership, cult skills, cult passions, and cult magic lists.</li>
+      <li>Monster Island and A Bird in the Hand for spirit cult and spirit example material.</li>
+      <li>This handout for the campaign differences listed below.</li>
     </ol>
-    <p><strong>Conflict rule:</strong> when this page or an ADR names a Hannu house rule, that campaign rule overrides vanilla Mythras or AiG for this table. The source hierarchy tells you where the base material comes from; the ADR tells you when the campaign intentionally changes it.</p>
+    <p><strong>Conflict rule:</strong> for the campaign differences listed below, this handout overrides the books. If something is not listed here, use the book.</p>
   </section>
 
   <section>
-    <h2>2. Theist Rune Magic uses Rune Affinity, not Exhort</h2>
-    <p class="ref">ADR-002; ADR-0007; AiG p.24 and p.69-75</p>
-    <p>At this table, theist miracles are cast by checking access, choosing the spell's rune, rolling the matching Rune Affinity, and spending from the Devotional Pool. Exhort remains in some source data only as a legacy Mythras term.</p>
+    <h2>2. Rune Magic uses Rune Affinity</h2>
+    <p class="ref">Adventures in Glorantha p.59-60 and p.69-122</p>
+    <p>When you cast a miracle, choose the rune named by the miracle or cult, roll that Rune Affinity, and spend from your Devotional Pool. You do not need to learn a separate casting skill for miracles in this campaign.</p>
     <table>
-      <tr><th>Rank</th><th>Devotional Pool</th></tr>
-      <tr><td>Initiate</td><td>POW/2</td></tr>
-      <tr><td>Acolyte, if the cult uses that rank</td><td>POW x 0.75</td></tr>
-      <tr><td>Priest</td><td>POW</td></tr>
+      <tr><th>Rank</th><th>Devotional Pool</th><th>What this means</th></tr>
+      <tr><td>Initiate</td><td>POW/2</td><td>Most starting theists. Long-duration miracles can tie up this pool until they end.</td></tr>
+      <tr><td>Acolyte, when a cult uses that rank</td><td>Three quarters of POW</td><td>A deeper temple role with more magic held in service.</td></tr>
+      <tr><td>Priest</td><td>POW</td><td>Full cult service and the largest pool.</td></tr>
     </table>
   </section>
 
   <section>
     <h2>3. Miracle learning, use, and recovery</h2>
-    <p class="ref">ADR-0007, Hannu 2026-03-29 screenshots</p>
+    <p class="ref">Adventures in Glorantha p.69-122; cult one-pagers</p>
     <table>
-      <tr><th>Category</th><th>Player-facing rule</th></tr>
-      <tr><td>Any Rune and normal cult spells</td><td>Learn through the cult; use from Devotional Pool; recover through ritual at shrine, temple, or holy place with sacrifice/offering.</td></tr>
-      <tr><td>Subservient cult spells</td><td>Learn at the subservient cult temple; use from Devotional Pool; annual temple visit matters.</td></tr>
-      <tr><td>Associated cult spells</td><td>Learn through the associated cult; one-time use until you return and resacrifice.</td></tr>
+      <tr><th>Miracle category</th><th>How to treat it in play</th></tr>
+      <tr><td>Any Rune or normal cult miracle</td><td>You learn it through your cult. You recover the committed pool through worship, sacrifice, and access to an appropriate shrine, temple, or holy place.</td></tr>
+      <tr><td>Subservient cult miracle</td><td>It comes through a related servant or subcult. Expect temple access, annual obligations, and local cult relationships to matter.</td></tr>
+      <tr><td>Associated cult miracle</td><td>It is a special one-use gift until you return to the associated cult and make the needed offering again. Mark it clearly on your sheet.</td></tr>
     </table>
   </section>
 
   <section>
-    <h2>4. Animism and Sorcery adaptations</h2>
-    <p class="ref">ADR-0006; ADR-0007; AiG p.60; .rpiv/guidance/magic-system.md</p>
+    <h2>4. Animism uses Spirit Rune for binding and commanding</h2>
+    <p class="ref">Mythras Core p.131-154; Monster-Island.pdf PDF p.129-136; A Bird in the Hand p.43-46</p>
     <ul>
-      <li><strong>Animism:</strong> Binding is replaced by Spirit Rune affinity for this campaign adaptation. Trance remains the skill for spirit-world awareness/discorporation unless the GM calls for Spirit Rune in a specific scene. Starting Spirit Worshippers use CHA/2 bound spirit slots.</li>
-      <li><strong>Sorcery:</strong> Invocation maps to the spell's Rune Affinity. Shaping maps to the Law Rune. Starting sorcerers choose three spells.</li>
-      <li><strong>Mysticism:</strong> Supported by the codebase for future data, but no current supported one-pager requires it at chargen.</li>
+      <li>Roll Spirit Rune when binding or commanding a spirit at this table.</li>
+      <li>Use Trance when the scene is about sensing, entering, or navigating the spirit world.</li>
+      <li>A starting Spirit Worshipper has CHA/2 bound spirit slots.</li>
+      <li>A spirit must have a clear ability written on your sheet, not just a name.</li>
     </ul>
   </section>
 
   <section>
-    <h2>5. Data rule</h2>
-    <p class="ref">ADR-003</p>
-    <p>Do not treat a spell, cult, spirit, or extracted book-data summary as canonical unless it has a source trail: PDF -> reference JSON -> inline app data -> UI. House rules follow a different trail: source artifact or GM ruling -> ADR -> implementation. When in doubt, ask for the source trail instead of guessing.</p>
+    <h2>5. Sorcery uses spell runes and Law Rune</h2>
+    <p class="ref">Mythras Core p.162-178; Adventures in Glorantha p.60</p>
+    <ul>
+      <li>Roll the spell's Rune Affinity to cast the spell.</li>
+      <li>Roll Law Rune for Shaping: changing range, duration, targets, magnitude, or similar spell parameters.</li>
+      <li>Starting dedicated sorcerers know three spells.</li>
+      <li>Before game day, write one fast version and one shaped version of each spell.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>6. What to bring when a rule is unclear</h2>
+    <ul>
+      <li>The name of the book PDF and page number you checked.</li>
+      <li>The name of your cult one-pager if the question is cult-specific.</li>
+      <li>Your character sheet with the relevant rune, skill, pool, or spirit noted.</li>
+    </ul>
   </section>
 
   <footer>
-    <p><a href="index.html">Start Here</a> | <a href="source-trail.html">Source Trail</a> | <a href="../../index.html">Character Generator</a></p>
+    <p><a href="/rules/handouts/index.html">Start Here</a> | <a href="/rules/handouts/source-trail.html">Source Trail</a> | <a href="/01-Character-Generator.html">Character Generator</a></p>
   </footer>
 </main>
 </body>

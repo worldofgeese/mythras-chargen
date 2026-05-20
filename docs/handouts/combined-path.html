@@ -12,15 +12,13 @@
     header, footer { text-align:center; }
     h1 { color:var(--gold); margin:0 0 8px; font-size:2.25rem; }
     h2 { margin:0; }
-    h3 { color:var(--rust); margin:12px 0 4px; }
     nav { margin:20px 0; padding:12px; background:var(--panel); border-radius:10px; }
-    nav a { margin:0 8px 6px; display:inline-block; color:var(--rust); font-weight:bold; }
+    nav a, footer a { margin:0 8px 6px; display:inline-block; color:var(--rust); font-weight:bold; }
     .stage { background:var(--paper); border-left:5px solid var(--gold); border-radius:10px; padding:18px 22px; margin:16px 0; box-shadow:0 10px 24px rgba(45,25,10,.10); }
     .stage-head { display:flex; gap:12px; align-items:baseline; flex-wrap:wrap; }
     .num { color:var(--gold); font-weight:bold; font-size:1.35rem; }
     .ref { margin-left:auto; color:var(--gold); font-family:"Courier New",monospace; font-size:.82rem; }
     .scenario, .source { background:var(--panel); border-radius:8px; padding:10px 12px; margin:10px 0; }
-    .source { border-left:3px solid var(--sage); font-size:.92rem; }
     ul { margin:8px 0 8px 22px; padding:0; }
     li { margin:4px 0; }
     @media print { body { background:white; } main { max-width:none; padding:0; } nav { display:none; } .stage { break-inside:avoid; box-shadow:none; border:1px solid #999; border-left:5px solid #555; } a { color:#000; text-decoration:none; } }
@@ -30,74 +28,74 @@
 <main>
   <header>
     <h1>Magic in Combat</h1>
-    <p>Use this after you know your basic combat loop and your magic tradition.</p>
+    <p>Read this after you understand the basic combat loop and your own magic tradition.</p>
   </header>
 
   <nav aria-label="Handout navigation">
-    <a href="index.html">Start Here</a>
-    <a href="combat-path.html">Combat Path</a>
-    <a href="magic-path.html">Magic Path</a>
-    <a href="rules-and-house-rules.html">House Rules</a>
-    <a href="source-trail.html">Source Trail</a>
-    <a href="../../index.html">Character Generator</a>
+    <a href="/rules/handouts/index.html">Start Here</a>
+    <a href="/rules/handouts/combat-path.html">Combat Path</a>
+    <a href="/rules/handouts/magic-path.html">Magic Path</a>
+    <a href="/rules/handouts/rules-and-house-rules.html">House Rules</a>
+    <a href="/rules/handouts/source-trail.html">Source Trail</a>
+    <a href="/01-Character-Generator.html">Character Generator</a>
   </nav>
 
   <section class="stage" id="stage-1">
-    <div class="stage-head"><span class="num">1</span><h2>Buff before initiative when fiction allows it</h2><span class="ref">MYT combat actions; AiG Folk Magic p.63-68</span></div>
-    <p>Many spells are strongest when cast before steel is drawn. If the party is kicking in a door, agree on the buff routine first.</p>
+    <div class="stage-head"><span class="num">1</span><h2>Buff before initiative when the fiction allows it</h2><span class="ref">Adventures in Glorantha p.63-68</span></div>
+    <p>Many spells are strongest before steel is drawn. If the party is about to enter danger, agree on the buff routine before the first roll.</p>
     <ul>
-      <li>Folk Magic: Bladesharp, Protection, Mobility, Fanaticism.</li>
-      <li>Theism: Shield, Truesword, cult-specific protections.</li>
-      <li>Animism: ready a ward or healing spirit.</li>
-      <li>Sorcery: pre-shape long-duration protective spells if time and MP allow.</li>
+      <li>Folk Magic examples: Bladesharp, Protection, Mobility, Fanaticism.</li>
+      <li>Theist examples: Shield, Truesword, and cult-specific protection miracles.</li>
+      <li>Animist examples: ready a healing, warding, or scouting spirit.</li>
+      <li>Sorcery example: prepare a shaped defensive spell when time allows.</li>
     </ul>
   </section>
 
   <section class="stage" id="stage-2">
-    <div class="stage-head"><span class="num">2</span><h2>Casting spends the same attention as fighting</h2><span class="ref">MYT p.92-93; Magic Path stage 2</span></div>
-    <p>Casting in combat competes with attacking, parrying, and movement. A caster who spends an Action Point may have fewer defenses later in the cycle.</p>
-    <div class="scenario"><strong>Table check:</strong> before you cast, say how many AP you have left and who is keeping enemies off you.</div>
+    <div class="stage-head"><span class="num">2</span><h2>Casting spends the same attention as fighting</h2><span class="ref">Mythras Core p.92-93</span></div>
+    <p>In combat, casting competes with attacking, parrying, moving, and other urgent actions. A caster who spends an Action Point may have fewer defenses later in the cycle.</p>
+    <div class="scenario"><strong>Table check:</strong> before you cast, say how many Action Points you have left and who is keeping enemies away from you.</div>
   </section>
 
   <section class="stage" id="stage-3">
-    <div class="stage-head"><span class="num">3</span><h2>Spoil Spell makes bodyguards matter</h2><span class="ref">MYT p.97, p.121</span></div>
-    <p>If an enemy can hit you while you are casting, they may be able to ruin the spell. Casters need space, cover, or allies.</p>
+    <div class="stage-head"><span class="num">3</span><h2>Interruptions are dangerous</h2><span class="ref">Mythras Core p.97 and p.121</span></div>
+    <p>If an enemy can hit you while you are casting, the spell may fail or be spoiled. Casters need space, cover, or allies.</p>
     <ul>
       <li>Warriors can hold enemies away from casters.</li>
-      <li>Casters can hold magic or prepare before opening the fight.</li>
-      <li>Everyone should know who protects the shaman, priest, or sorcerer.</li>
+      <li>Casters should avoid starting long actions while exposed.</li>
+      <li>The party should know who protects the priest, shaman, or sorcerer.</li>
     </ul>
   </section>
 
   <section class="stage" id="stage-4">
-    <div class="stage-head"><span class="num">4</span><h2>Spirits change the battlefield</h2><span class="ref">MYT Animism p.131-154; ADR-0006</span></div>
-    <p>A bound spirit is another tactical resource. It can heal, scout, protect, or fight spirits while the physical battle continues.</p>
-    <div class="scenario"><strong>Daka Fal example:</strong> command an ancestor spirit to distract a hostile spirit, then use your own AP for movement or defense.</div>
+    <div class="stage-head"><span class="num">4</span><h2>Spirits are tactical allies</h2><span class="ref">Mythras Core p.131-154</span></div>
+    <p>A bound spirit can heal, scout, protect, or fight spirits while the physical battle continues. Know what each spirit does before initiative.</p>
+    <div class="scenario"><strong>Example:</strong> command an ancestor spirit to distract a hostile spirit, then use your own Action Point for movement or defense.</div>
   </section>
 
   <section class="stage" id="stage-5">
-    <div class="stage-head"><span class="num">5</span><h2>Miracles are scarce; know what you learned</h2><span class="ref">ADR-002; ADR-0007; NfP cult lists</span></div>
-    <p>Theist characters do not carry every possible miracle ready to use. Your Initiate Devotional Pool is POW/2, so arrive with your learned/selected miracles already recorded.</p>
+    <div class="stage-head"><span class="num">5</span><h2>Miracles are powerful but limited</h2><span class="ref">Adventures in Glorantha p.69-122</span></div>
+    <p>Theist characters should arrive with selected miracles already recorded. Your Devotional Pool is limited, and some miracle categories need a specific place or cult contact to recover.</p>
     <ul>
-      <li>Record each miracle's category, rune, cost, and recovery rule; a balanced learned set is usually safer than all offense.</li>
-      <li>Associated-cult magic is one-time use until you return to the associated cult and resacrifice; mark it before the session.</li>
+      <li>Write each miracle's rune, cost, duration, and recovery rule.</li>
+      <li>Mark associated cult miracles clearly because they are one-use until recovered through the associated cult.</li>
     </ul>
   </section>
 
   <section class="stage" id="stage-6">
-    <div class="stage-head"><span class="num">6</span><h2>Sorcery rewards pre-built spell profiles</h2><span class="ref">MYT p.162-178; AiG p.60</span></div>
-    <p>Write each sorcery spell as at least two profiles: fast/minimal and slow/full. This prevents rule lookup during combat.</p>
-    <div class="scenario"><strong>Example:</strong> Palsy fast profile for a single location now; shaped profile for range, duration, or magnitude when you have time.</div>
+    <div class="stage-head"><span class="num">6</span><h2>Sorcery rewards pre-built spell profiles</h2><span class="ref">Mythras Core p.162-178</span></div>
+    <p>Write each sorcery spell as at least two profiles: fast/minimal and slow/shaped. This prevents rule lookup during combat.</p>
+    <div class="scenario"><strong>Example:</strong> a fast spell for one target now; a shaped version for range, duration, or stronger effect when there is time.</div>
   </section>
 
   <section class="stage" id="stage-7">
-    <div class="stage-head"><span class="num">7</span><h2>Party script: say what happens before the dice</h2><span class="ref">MYT p.74-106; ADR-0006</span></div>
-    <p>Before a dangerous scene, agree on roles: point fighter, bodyguard, healer, spirit answer, counter-magic answer, retreat signal.</p>
-    <div class="source">This page intentionally avoids vague "combined sources" claims. Use <a href="source-trail.html">Source Trail</a> for the source abbreviation map and <a href="rules-and-house-rules.html">House Rules</a> for campaign-specific differences.</div>
+    <div class="stage-head"><span class="num">7</span><h2>Agree on party roles before danger</h2><span class="ref">Mythras Core p.74-106</span></div>
+    <p>Before a dangerous scene, agree on point fighter, bodyguard, healer, spirit answer, counter-magic answer, and retreat signal.</p>
+    <div class="source">Use <a href="/rules/handouts/source-trail.html">Source Trail</a> for book pages and <a href="/rules/handouts/rules-and-house-rules.html">House Rules</a> for table-specific magic procedure.</div>
   </section>
 
   <footer>
-    <p><a href="index.html">Start Here</a> | <a href="source-trail.html">Source Trail</a> | <a href="../../index.html">Character Generator</a></p>
+    <p><a href="/rules/handouts/index.html">Start Here</a> | <a href="/rules/handouts/source-trail.html">Source Trail</a> | <a href="/01-Character-Generator.html">Character Generator</a></p>
   </footer>
 </main>
 </body>

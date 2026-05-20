@@ -4507,7 +4507,7 @@ section('Player Handout Contract');
   }
 }
 
-// Test: handouts are self-contained static pages with print support and working chargen links
+// Test: handouts are self-contained static pages with print support and working character-generator links
 {
   const handoutDir = path.join(__dirname, 'docs', 'handouts');
   const htmlFiles = fs.existsSync(handoutDir)
@@ -4517,10 +4517,12 @@ section('Player Handout Contract');
 
   for (const file of htmlFiles) {
     const html = fs.readFileSync(path.join(handoutDir, file), 'utf8');
-    if (/https?:\/\//.test(html)) problems.push(`${file}: external URL`);
+    const externalUrls = html.match(/https?:\/\/[^"' <]+/g) || [];
+    const unsupportedUrls = externalUrls.filter(url => url !== 'https://drive.google.com/drive/folders/1CKNxkpoL4sWfzdbkglQyiYvCBXlmyFIj');
+    if (unsupportedUrls.length > 0) problems.push(`${file}: unsupported external URL ${unsupportedUrls[0]}`);
     if (/<script\b/i.test(html)) problems.push(`${file}: script tag`);
     if (!html.includes('@media print')) problems.push(`${file}: missing print CSS`);
-    if (!html.includes('../../index.html')) problems.push(`${file}: missing root chargen link`);
+    if (!html.includes('Character Generator')) problems.push(`${file}: missing Character Generator link`);
     if (!html.includes('source-trail.html') && file !== 'source-trail.html') problems.push(`${file}: missing source trail link`);
   }
 
@@ -4528,6 +4530,78 @@ section('Player Handout Contract');
     pass('Player handouts are standalone, printable, and link back to chargen/source trail');
   } else {
     fail('Player handout static contract failed', problems.slice(0, 8).join('; '));
+  }
+}
+
+// Test: handout links are safe when index.html is also published as /00-START-HERE.html
+{
+  const handoutDir = path.join(__dirname, 'docs', 'handouts');
+  const htmlFiles = fs.existsSync(handoutDir)
+    ? fs.readdirSync(handoutDir).filter(file => file.endsWith('.html'))
+    : [];
+  const handoutRoutes = '(?:index|combat-path|magic-path|combined-path|rules-and-house-rules|prep-checklist|source-trail)\\.html';
+  const relativeHandoutRoute = new RegExp(`href="${handoutRoutes}(?:#[^"]*)?"`, 'i');
+  const relativeSourceRoute = /href="\.\.\/\.\.\/sources\//i;
+  const problems = [];
+
+  for (const file of htmlFiles) {
+    const html = fs.readFileSync(path.join(handoutDir, file), 'utf8');
+    if (relativeHandoutRoute.test(html)) problems.push(`${file}: relative handout route`);
+    if (relativeSourceRoute.test(html)) problems.push(`${file}: relative source route`);
+  }
+
+  if (problems.length === 0) {
+    pass('Player handout links are safe for Copyparty root and nested deployment');
+  } else {
+    fail('Player handout links are not deployment-safe', problems.slice(0, 8).join('; '));
+  }
+}
+
+// Test: handouts are player-facing, not agent/repo-facing
+{
+  const handoutDir = path.join(__dirname, 'docs', 'handouts');
+  const htmlFiles = fs.existsSync(handoutDir)
+    ? fs.readdirSync(handoutDir).filter(file => file.endsWith('.html'))
+    : [];
+  const forbidden = [
+    /\bADR\b/i,
+    /AGENTS\.md/i,
+    /\bJSON\b/i,
+    /reference JSON/i,
+    /attest/i,
+    /Hannu/i,
+    /chargen/i,
+    /codebase/i,
+    /inline (?:constant|data)/i,
+    /CULTS_DATA|MIRACLES_DATA|\.rpiv/i,
+    /Mysticism/i
+  ];
+  const problems = [];
+
+  for (const file of htmlFiles) {
+    const html = fs.readFileSync(path.join(handoutDir, file), 'utf8');
+    forbidden.forEach(pattern => {
+      if (pattern.test(html)) problems.push(`${file}: ${pattern}`);
+    });
+  }
+
+  if (problems.length === 0) {
+    pass('Player handouts avoid internal agent/data jargon and unsupported mysticism');
+  } else {
+    fail('Player handouts contain internal or unsupported terms', problems.slice(0, 10).join('; '));
+  }
+}
+
+// Test: Start Here inline content links do not inherit navigation spacing
+{
+  const indexPath = path.join(__dirname, 'docs', 'handouts', 'index.html');
+  const html = fs.existsSync(indexPath) ? fs.readFileSync(indexPath, 'utf8') : '';
+  const routeAnchorRule = /\.route\s+a\s*,|,\s*\.route\s+a\b/;
+
+  if (!routeAnchorRule.test(html)) {
+    pass('Start Here inline links render without navigation spacing around punctuation');
+  } else {
+    fail('Start Here route links inherit navigation spacing', 'Split .route a styling from nav/footer link spacing');
   }
 }
 
@@ -4540,14 +4614,16 @@ section('Player Handout Contract');
     /You don't roll "Folk Magic"/i
   ];
   const hasForbiddenClaim = forbiddenClaims.some(pattern => pattern.test(html));
-  const hasHouseRuleLabel = /Hannu house rule|ADR-0007|House rule/i.test(html);
+  const hasHouseRuleLabel = /House rule/i.test(html);
   const hasSystemSpecificRows = /Theism[\s\S]*Rune Affinity[\s\S]*Animism[\s\S]*Spirit Rune[\s\S]*Sorcery[\s\S]*Law Rune/i.test(html);
+  const explainsTerms = /Rune Affinity[\s\S]*Adventures in Glorantha[\s\S]*Spirit Rune[\s\S]*spirit[\s\S]*Shaping[\s\S]*Mythras Core/i.test(html);
+  const hasPlayerSources = /A-Bird-in-the-Hand\.pdf[\s\S]*Monster-Island\.pdf[\s\S]*drive\.google\.com\/drive\/folders\/1CKNxkpoL4sWfzdbkglQyiYvCBXlmyFIj/i.test(html);
 
-  if (!hasForbiddenClaim && hasHouseRuleLabel && hasSystemSpecificRows) {
+  if (!hasForbiddenClaim && hasHouseRuleLabel && hasSystemSpecificRows && explainsTerms && hasPlayerSources) {
     pass('Magic handout distinguishes official rules, AiG adaptations, and house rules');
   } else {
     fail('Magic handout overstates or underdocuments house-rule casting model',
-      JSON.stringify({ hasForbiddenClaim, hasHouseRuleLabel, hasSystemSpecificRows }));
+      JSON.stringify({ hasForbiddenClaim, hasHouseRuleLabel, hasSystemSpecificRows, explainsTerms, hasPlayerSources }));
   }
 }
 

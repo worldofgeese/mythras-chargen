@@ -5,25 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Combat Path - Glorantha in Mythras</title>
   <style>
-    :root { --paper:#fbf4e8; --panel:#efe0c8; --ink:#24170f; --soft:#634b34; --rust:#8f4023; --sage:#526b42; --gold:#a8792c; }
-    * { box-sizing: border-box; }
+    :root { --paper:#fbf4e8; --panel:#efe0c8; --ink:#24170f; --rust:#8f4023; --sage:#526b42; --gold:#a8792c; }
+    * { box-sizing:border-box; }
     body { margin:0; color:var(--ink); background:linear-gradient(180deg,#ead9bd,#f7eddc); font-family:Georgia,"Times New Roman",serif; line-height:1.55; }
     main { max-width:920px; margin:0 auto; padding:32px 20px 56px; }
     header, footer { text-align:center; }
     h1 { color:var(--rust); margin:0 0 8px; font-size:2.25rem; }
-    h2 { margin:0; color:var(--ink); }
-    h3 { margin:12px 0 4px; color:var(--rust); }
+    h2 { margin:0; }
     nav { margin:20px 0; padding:12px; background:var(--panel); border-radius:10px; }
-    nav a { margin:0 8px 6px; display:inline-block; color:var(--rust); font-weight:bold; }
+    nav a, footer a { margin:0 8px 6px; display:inline-block; color:var(--rust); font-weight:bold; }
     .stage { background:var(--paper); border-left:5px solid var(--rust); border-radius:10px; padding:18px 22px; margin:16px 0; box-shadow:0 10px 24px rgba(45,25,10,.10); }
     .stage-head { display:flex; gap:12px; align-items:baseline; flex-wrap:wrap; }
     .num { color:var(--rust); font-weight:bold; font-size:1.35rem; }
     .ref { margin-left:auto; color:var(--gold); font-family:"Courier New",monospace; font-size:.82rem; }
     .at-table, .example, .source { background:var(--panel); border-radius:8px; padding:10px 12px; margin:10px 0; }
-    .source { border-left:3px solid var(--sage); font-size:.92rem; }
     ul { margin:8px 0 8px 22px; padding:0; }
     li { margin:4px 0; }
-    code { font-family:"Courier New",monospace; }
     @media print { body { background:white; } main { max-width:none; padding:0; } nav { display:none; } .stage { break-inside:avoid; box-shadow:none; border:1px solid #999; border-left:5px solid #555; } a { color:#000; text-decoration:none; } }
   </style>
 </head>
@@ -31,73 +28,65 @@
 <main>
   <header>
     <h1>The Combat Path</h1>
-    <p>Read this before your first fight. It teaches Mythras combat in the order you will need it at the table.</p>
+    <p>Read this before your first fight. It teaches the table workflow first, then points to the book pages for the full rules.</p>
   </header>
 
   <nav aria-label="Handout navigation">
-    <a href="index.html">Start Here</a>
-    <a href="magic-path.html">Magic Path</a>
-    <a href="combined-path.html">Magic in Combat</a>
-    <a href="prep-checklist.html">Prep Checklist</a>
-    <a href="source-trail.html">Source Trail</a>
-    <a href="../../index.html">Character Generator</a>
+    <a href="/rules/handouts/index.html">Start Here</a>
+    <a href="/rules/handouts/magic-path.html">Magic Path</a>
+    <a href="/rules/handouts/combined-path.html">Magic in Combat</a>
+    <a href="/rules/handouts/prep-checklist.html">Prep Checklist</a>
+    <a href="/rules/handouts/source-trail.html">Source Trail</a>
+    <a href="/01-Character-Generator.html">Character Generator</a>
   </nav>
 
   <section class="stage" id="stage-1">
-    <div class="stage-head"><span class="num">1</span><h2>Combat is an opposed test, not an attack roll race</h2><span class="ref">MYT p.74-106; AiG combat styles</span></div>
-    <p>You usually roll an attack against a defender's parry, evade, or other defensive response. The better success level wins.</p>
-    <div class="at-table"><strong>At the table:</strong> announce your action, roll the relevant combat style, compare success levels, then resolve damage and any Special Effects.</div>
-    <div class="source">Primary rule: Mythras Core combat procedure. Glorantha adaptation: AiG combat styles and culture-specific fighting traditions. Chargen data: combat styles and weapons in <code>index.html</code>.</div>
+    <div class="stage-head"><span class="num">1</span><h2>Combat is an opposed test</h2><span class="ref">Mythras Core p.74-106</span></div>
+    <p>You usually roll an attack against a defender's parry, evade, or other response. Compare success levels first; then resolve damage and Special Effects.</p>
+    <div class="at-table"><strong>At the table:</strong> say what you do, roll the relevant combat style, compare success levels, choose any Special Effect, then mark damage on a location.</div>
   </section>
 
   <section class="stage" id="stage-2">
-    <div class="stage-head"><span class="num">2</span><h2>Action Points are your round budget</h2><span class="ref">MYT p.74-76; character sheet attributes</span></div>
-    <p>Each attack, parry, evade, spell cast, or other major combat action spends from a small pool. Running out means you cannot defend normally.</p>
+    <div class="stage-head"><span class="num">2</span><h2>Action Points are your round budget</h2><span class="ref">Mythras Core p.74-76</span></div>
+    <p>Attacking, parrying, evading, casting, and other major actions spend from a small pool. If you run out, you are much easier to hurt.</p>
     <ul>
       <li>Do not spend your last Action Point casually.</li>
-      <li>If you cast in melee, you may be unable to parry later in the cycle.</li>
-      <li>Multiple opponents are dangerous because they drain your reactions.</li>
+      <li>Multiple enemies are dangerous because they drain reactions.</li>
+      <li>Casters need allies because casting competes with defending.</li>
     </ul>
-    <div class="example">Example: A warrior with 2 AP attacks once and saves one AP to parry. A reckless warrior attacks twice and has no parry left.</div>
   </section>
 
   <section class="stage" id="stage-3">
-    <div class="stage-head"><span class="num">3</span><h2>Combat Style is the skill, weapons are permissions</h2><span class="ref">AiG p.25-41 culture styles; Mythras Core p.49-50 combat styles; Source Trail: combat-style data</span></div>
-    <p>Your combat style percentage applies to the weapons listed inside that style. If your Balazaring Hunter style includes Sling, the Sling row should use that style value.</p>
-    <div class="at-table"><strong>Check before play:</strong> know which weapons belong to each of your combat styles and write the same percentage beside those weapons.</div>
-    <div class="source">Implementation note: Play Mode and PDF export derive weapon percentages from the matching combat style so a weapon such as Sling does not show 0% when its style is known.</div>
+    <div class="stage-head"><span class="num">3</span><h2>Combat Style is the skill; weapons are permissions</h2><span class="ref">Mythras Core p.49-50; Adventures in Glorantha p.25-41</span></div>
+    <p>Your combat style percentage applies to the weapons listed inside that style. A sling, sword, spear, or shield should not be rolled at 0% if it belongs to a style you know.</p>
+    <div class="at-table"><strong>Before play:</strong> write which carried weapons belong to each style and copy the style percentage beside those weapons.</div>
   </section>
 
   <section class="stage" id="stage-4">
-    <div class="stage-head"><span class="num">4</span><h2>Special Effects are the reason to fight tactically</h2><span class="ref">MYT p.94-106</span></div>
-    <p>When you win the opposed roll by the required margin, choose a Special Effect. They often matter more than raw damage.</p>
+    <div class="stage-head"><span class="num">4</span><h2>Special Effects are your tactical choices</h2><span class="ref">Mythras Core p.94-106</span></div>
+    <p>Special Effects often matter more than raw damage. Pick a few that fit your character before the first fight.</p>
     <ul>
-      <li><strong>Choose Location</strong> targets an unarmoured or wounded spot.</li>
-      <li><strong>Trip Opponent</strong> controls the enemy's next action.</li>
-      <li><strong>Disarm</strong> or <strong>Damage Weapon</strong> can end a fight without killing.</li>
-      <li><strong>Impale</strong>, <strong>Bleed</strong>, and similar effects make wounds spiral.</li>
+      <li><strong>Choose Location</strong> targets a weak or unarmoured location.</li>
+      <li><strong>Trip Opponent</strong> controls an enemy's next action.</li>
+      <li><strong>Disarm</strong> can end a fight without killing.</li>
+      <li><strong>Impale</strong> and <strong>Bleed</strong> make wounds spiral.</li>
     </ul>
   </section>
 
   <section class="stage" id="stage-5">
-    <div class="stage-head"><span class="num">5</span><h2>Hit locations make armour and positioning matter</h2><span class="ref">MYT p.78-83; character sheet HP table</span></div>
-    <p>Damage lands on a location. Armour protects that location, and wounds apply penalties or incapacitation depending on severity.</p>
-    <div class="at-table"><strong>Player habit:</strong> track each location separately. A healthy chest does not save a ruined arm.</div>
+    <div class="stage-head"><span class="num">5</span><h2>Hit locations make armour specific</h2><span class="ref">Mythras Core p.78-83</span></div>
+    <p>Damage lands on a location. Armour protects only that location, and a wounded arm remains a problem even if your chest is healthy.</p>
+    <div class="example">Player habit: mark damage on the exact location immediately, then check whether the wound changes what you can do.</div>
   </section>
 
   <section class="stage" id="stage-6">
-    <div class="stage-head"><span class="num">6</span><h2>Before combat, choose risk posture</h2><span class="ref">MYT p.92-93; Magic in Combat stages 1-3</span></div>
-    <p>Decide whether you are ambushing, holding ground, withdrawing, protecting a caster, or trying to disable rather than kill.</p>
-    <ul>
-      <li>Buff before initiative if the fiction gives you time.</li>
-      <li>Keep allies between enemies and casters.</li>
-      <li>Use terrain to avoid being surrounded.</li>
-    </ul>
-    <div class="source">Next handout: <a href="combined-path.html">Magic in Combat</a> explains how casting interacts with Action Points and Special Effects.</div>
+    <div class="stage-head"><span class="num">6</span><h2>Choose a risk posture before danger</h2><span class="ref">Mythras Core p.92-93</span></div>
+    <p>Before the first roll, decide whether the party is ambushing, holding ground, withdrawing, protecting a caster, or trying to disable rather than kill.</p>
+    <div class="source">Next: <a href="/rules/handouts/combined-path.html">Magic in Combat</a> explains how spells, spirits, and miracles fit into this Action Point economy.</div>
   </section>
 
   <footer>
-    <p><a href="index.html">Start Here</a> | <a href="source-trail.html">Source Trail</a> | <a href="../../index.html">Character Generator</a></p>
+    <p><a href="/rules/handouts/index.html">Start Here</a> | <a href="/rules/handouts/source-trail.html">Source Trail</a> | <a href="/01-Character-Generator.html">Character Generator</a></p>
   </footer>
 </main>
 </body>
