@@ -3720,6 +3720,122 @@ fixtures.forEach(fixtureInfo => {
   }
 }
 
+// Test 6.15b: Step 7 normalizes invalid stored age before the late bonus-point gate
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj && AppObj.renderStep7 && CD) {
+    CD.age = 0;
+    const html = AppObj.renderStep7().innerHTML;
+
+    if (CD.age === 21 && html.includes('value="21"') && !html.includes('value="0"')) {
+      pass('Wizard Step 7 normalizes invalid age to adult default');
+    } else {
+      fail('Wizard Step 7 normalizes invalid age to adult default',
+        `Rendered age=${CD.age}, html contains value 0: ${html.includes('value="0"')}`);
+    }
+  } else {
+    fail('App.renderStep7 not available for age default test');
+  }
+}
+
+// Test 6.15c: readonly Play Mode identity fields cannot corrupt wizard age
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj && AppObj.updatePersistedField && CD) {
+    CD.age = 21;
+    const target = {
+      type: 'number',
+      value: '',
+      readOnly: true,
+      dataset: { persist: 'age' },
+      getAttribute: name => name === 'data-persist' ? 'age' : null
+    };
+    const updated = AppObj.updatePersistedField(target);
+
+    if (updated === false && CD.age === 21) {
+      pass('Readonly persisted age field is ignored');
+    } else {
+      fail('Readonly persisted age field is ignored', `updated=${updated}, age=${CD.age}`);
+    }
+  } else {
+    fail('App.updatePersistedField not available for readonly age test');
+  }
+}
+
+// Test 6.15d: Step 11 validation APIs agree when age is invalid
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj && AppObj.validateCurrentStep && AppObj.getValidationState && CD) {
+    CD.age = 0;
+    CD.bonusSkills = {};
+    for (let i = 0; i < 10; i++) {
+      CD.bonusSkills[`Skill ${i}`] = 15;
+    }
+    AppObj.currentStep = 11;
+    let toastMessage = '';
+    AppObj.showToast = msg => { toastMessage = msg; };
+
+    const allowed = AppObj.validateCurrentStep();
+    const state = AppObj.getValidationState();
+    const stateMentionsAge = state.errors.some(error => /age/i.test(error));
+
+    if (!allowed && !state.valid && /age/i.test(toastMessage) && stateMentionsAge) {
+      pass('Step 11 validation APIs agree on invalid age');
+    } else {
+      fail('Step 11 validation APIs agree on invalid age',
+        JSON.stringify({allowed, state, toastMessage}));
+    }
+  } else {
+    fail('App.validateCurrentStep or App.getValidationState not available for invalid age test');
+  }
+}
+
+// Test 6.15e: Step 7 age input ignores empty/invalid edits instead of saving NaN
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj && AppObj.updateAgeFromInput && CD) {
+    CD.age = 21;
+    let requestedSave = false;
+    AppObj.requestSaveToLocalStorage = () => { requestedSave = true; };
+
+    const updated = AppObj.updateAgeFromInput({ value: '' });
+
+    if (updated === false && CD.age === 21 && requestedSave === false) {
+      pass('Step 7 age input ignores empty edits without saving invalid age');
+    } else {
+      fail('Step 7 age input ignores empty edits without saving invalid age',
+        JSON.stringify({updated, age: CD.age, requestedSave}));
+    }
+  } else {
+    fail('App.updateAgeFromInput not available for age input test');
+  }
+}
+
+// Test 6.15f: agent Step 11 rejects invalid age instead of using adult defaults
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj && AppObj.agent && AppObj.agent.setStep && CD) {
+    CD.age = 0;
+    CD.bonusSkills = {};
+    const bonusSkills = {};
+    for (let i = 0; i < 10; i++) {
+      bonusSkills[`Skill ${i}`] = 15;
+    }
+
+    const result = AppObj.agent.setStep(11, { bonusSkills });
+    const mentionsAge = (result.errors || []).some(error => /age/i.test(error));
+
+    if (result.success === false && mentionsAge && Object.keys(CD.bonusSkills).length === 0) {
+      pass('Agent Step 11 rejects invalid age before accepting bonus points');
+    } else {
+      fail('Agent Step 11 rejects invalid age before accepting bonus points',
+        JSON.stringify({result, age: CD.age, bonusSkills: CD.bonusSkills}));
+    }
+  } else {
+    fail('App.agent.setStep not available for invalid Step 11 age test');
+  }
+}
+
 // Test 6.16: review screen escapes imported character and equipment labels
 {
   const { App: AppObj, CharacterData: CD } = loadApp();

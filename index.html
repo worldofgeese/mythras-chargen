@@ -2895,6 +2895,7 @@ const App = {
   },
 
   updatePersistedField(target) {
+    if (target.readOnly) return false;
     const field = (target.dataset && target.dataset.persist) || target.getAttribute('data-persist');
     if (!field || !Object.prototype.hasOwnProperty.call(CharacterData, field)) return false;
 
@@ -4070,10 +4071,14 @@ App.getValidationState = function() {
   }
   if (step === 11) {
     const ageCategory = Calc.getAgeCategory(CharacterData.age);
-    const total = ageCategory ? ageCategory.bonusPoints : 150;
-    const spent = Object.values(CharacterData.bonusSkills).reduce((a, b) => a + b, 0);
-    if (spent !== total) errors.push(`Bonus points: ${spent}/${total} spent`);
-    if (App.getCultInitiationGateErrors) errors.push(...App.getCultInitiationGateErrors());
+    if (!ageCategory) {
+      errors.push('Age must be 11 or older before assigning bonus points');
+    } else {
+      const total = ageCategory.bonusPoints;
+      const spent = Object.values(CharacterData.bonusSkills).reduce((a, b) => a + b, 0);
+      if (spent !== total) errors.push(`Bonus points: ${spent}/${total} spent`);
+      if (App.getCultInitiationGateErrors) errors.push(...App.getCultInitiationGateErrors());
+    }
   }
   if (step === 12) {
     if (!CharacterData.socialClass) errors.push('A social class must be rolled or selected');
@@ -4407,7 +4412,7 @@ App.confirmCustomPassion = function() {
 App.renderStep7 = function() {
   const div = document.createElement('div');
   div.className = 'wizard-step';
-  const ageValue = Number.isFinite(Number(CharacterData.age)) ? Number(CharacterData.age) : 21;
+  const ageValue = App.ensureValidAge ? App.ensureValidAge() : 21;
   const safeAge = this.escapeHtmlAttr(ageValue);
   const safeGender = this.escapeHtmlAttr(CharacterData.gender || '');
   const safeFamily = this.escapeHtml(CharacterData.family || '');
@@ -4420,7 +4425,7 @@ App.renderStep7 = function() {
       <div class="field">
         <label>Age</label>
         <input type="number" min="12" max="99" value="${safeAge}" 
-          oninput="CharacterData.age = parseInt(this.value); App.requestSaveToLocalStorage()">
+          oninput="App.updateAgeFromInput(this)" onchange="this.value = App.ensureValidAge()">
       </div>
       <div class="field">
         <label>Gender</label>
@@ -4440,6 +4445,29 @@ App.renderStep7 = function() {
     </div>
   `;
   return div;
+};
+
+App.normalizeAge = function(age) {
+  const number = Number(age);
+  return Number.isFinite(number) && Calc.getAgeCategory(number) ? number : 21;
+};
+
+App.ensureValidAge = function() {
+  const normalizedAge = this.normalizeAge(CharacterData.age);
+  if (CharacterData.age !== normalizedAge) {
+    CharacterData.age = normalizedAge;
+  }
+  return normalizedAge;
+};
+
+App.updateAgeFromInput = function(inputEl) {
+  const age = parseInt(inputEl?.value, 10);
+  if (!Number.isFinite(age) || !Calc.getAgeCategory(age)) {
+    return false;
+  }
+  CharacterData.age = age;
+  this.requestSaveToLocalStorage();
+  return true;
 };
 
 App.renderStep8 = function() {
@@ -9224,8 +9252,12 @@ App.agent.setStep = function(step, data) {
           return {success: false, errors, state: App.agent.getState()};
         }
         const ageCategory = Calc.getAgeCategory ? Calc.getAgeCategory(CharacterData.age) : null;
-        const expectedTotal = ageCategory ? ageCategory.bonusPoints : 150;
-        const maxPerSkill = ageCategory ? ageCategory.maxPerSkill : 15;
+        if (!ageCategory) {
+          errors.push('Age must be 11 or older before assigning bonus points');
+          return {success: false, errors, state: App.agent.getState()};
+        }
+        const expectedTotal = ageCategory.bonusPoints;
+        const maxPerSkill = ageCategory.maxPerSkill;
         const total11 = Object.values(bonusSkills).reduce((a, b) => a + b, 0);
         if (total11 !== expectedTotal) errors.push(`Bonus points must total ${expectedTotal} (got ${total11})`);
         for (const [name, val] of Object.entries(bonusSkills)) {
