@@ -52,34 +52,14 @@ Current live visible layout, last verified 2026-05-20:
 /w/
   00-START-HERE.html
   01-Character-Generator.html
-  characters/
-    active-pregens/
-      Ionara-Grand-daughter-of-Thiralda.pdf
-      Vasana-Farnans-Daughter.pdf
-  rules/
-    handouts/
-      combat-path.html
-      combined-path.html
-      index.html
-      magic-path.html
-      prep-checklist.html
-      rules-and-house-rules.html
-      source-trail.html
-  sources/
-    books/
-      A-Bird-in-the-Hand.pdf
-      Adventures in Glorantha GenCon Preview.pdf
-      Monster-Island.pdf
-      Mythras Core Rulebook (3rd Printing 2018).pdf
-      RuneQuest Starter Set - Book 2 Glorantha.pdf
+  characters/active-pregens/: Ionara-Grand-daughter-of-Thiralda.pdf, Vasana-Farnans-Daughter.pdf
+  rules/handouts/: combat-path.html, combined-path.html, index.html, magic-path.html, prep-checklist.html, rules-and-house-rules.html, source-trail.html
+  sources/books/: A-Bird-in-the-Hand.pdf, Adventures in Glorantha GenCon Preview.pdf, Monster-Island.pdf, Mythras Core Rulebook (3rd Printing 2018).pdf, RuneQuest Starter Set - Book 2 Glorantha.pdf
 ```
 
 Root hygiene:
-- Keep `/w` to the two launch files plus `characters/`, `rules/`, and `sources/`.
-- Active pregen PDFs belong in `/w/characters/active-pregens/`.
-- Handouts from `docs/handouts/*.html` belong in `/w/rules/handouts/`.
-- Player source PDFs belong in `/w/sources/books/`.
-- Legacy sheets and superseded exports must be archived under `~/staging/archive/` or kept local.
+- Keep `/w` to the two launch files plus `characters/`, `rules/`, and `sources/`; archive legacy/superseded files under `~/staging/archive/` or keep them local.
+- Put active pregen PDFs in `/w/characters/active-pregens/`, handouts in `/w/rules/handouts/`, and player source PDFs in `/w/sources/books/`.
 
 Publish:
 
