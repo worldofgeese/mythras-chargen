@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Source Trail - Glorantha in Mythras</title>
+  <style>
+    :root { --paper:#fbf4e8; --panel:#efe0c8; --ink:#24170f; --rust:#8f4023; --sage:#526b42; --gold:#a8792c; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:linear-gradient(180deg,#ecdcc0,#f8efe2); font-family:Georgia,"Times New Roman",serif; line-height:1.55; }
+    main { max-width:980px; margin:0 auto; padding:32px 20px 56px; }
+    header, footer { text-align:center; }
+    h1 { color:var(--gold); margin:0 0 8px; font-size:2.25rem; }
+    h2 { margin:0 0 8px; }
+    nav { margin:20px 0; padding:12px; background:var(--panel); border-radius:10px; text-align:center; }
+    nav a, footer a { margin:0 8px 6px; display:inline-block; color:var(--rust); font-weight:bold; }
+    section { background:var(--paper); border-left:5px solid var(--gold); border-radius:10px; padding:18px 22px; margin:16px 0; box-shadow:0 10px 24px rgba(45,25,10,.10); }
+    table { width:100%; border-collapse:collapse; margin:10px 0; }
+    th, td { border:1px solid rgba(60,40,20,.22); padding:8px; vertical-align:top; }
+    th { background:#e1cda9; text-align:left; }
+    code { font-family:"Courier New",monospace; }
+    ul { margin:8px 0 8px 22px; padding:0; }
+    li { margin:4px 0; }
+    @media print { body { background:white; } main { max-width:none; padding:0; } nav { display:none; } section { break-inside:avoid; box-shadow:none; border:1px solid #999; border-left:5px solid #555; } a { color:#000; text-decoration:none; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Source Trail</h1>
+    <p>Abbreviations, source order, and where the chargen data comes from.</p>
+  </header>
+
+  <nav aria-label="Handout navigation">
+    <a href="index.html">Start Here</a>
+    <a href="combat-path.html">Combat Path</a>
+    <a href="magic-path.html">Magic Path</a>
+    <a href="combined-path.html">Magic in Combat</a>
+    <a href="rules-and-house-rules.html">House Rules</a>
+    <a href="prep-checklist.html">Prep Checklist</a>
+    <a href="../../index.html">Character Generator</a>
+  </nav>
+
+  <section>
+    <h2>Abbreviation map</h2>
+    <table>
+      <tr><th>Code</th><th>Meaning</th><th>Used for</th><th>Repo reference</th></tr>
+      <tr><td>MYT</td><td>Mythras Core Rulebook, 3rd Printing 2018</td><td>Base rules, combat, Animism, Sorcery, Mysticism</td><td><code>references/mythras-raw/</code></td></tr>
+      <tr><td>AiG</td><td>Adventures in Glorantha GenCon preview</td><td>Cultures, combat styles, Folk Magic, Rune Magic adaptation</td><td><code>references/aig-raw/</code></td></tr>
+      <tr><td>NfP</td><td>Notes from Pavis cult one-pagers</td><td>Cult definitions, cult skills, cult magic lists</td><td><code>references/cults-raw/</code>, <code>references/theism-miracles.json</code></td></tr>
+      <tr><td>MI</td><td>Monster Island</td><td>Spirit templates where used</td><td><code>references/spirits-raw/monster-island.json</code></td></tr>
+      <tr><td>BiH</td><td>A Bird in the Hand</td><td>Spirit templates where used</td><td><code>references/spirits-raw/bird-in-hand.json</code></td></tr>
+      <tr><td>ADR</td><td>Architecture Decision Record</td><td>Campaign-specific decisions and data governance</td><td><code>docs/adr/</code></td></tr>
+      <tr><td>REF</td><td>Reference JSON</td><td>Machine-readable extracted data used by the chargen</td><td><code>references/*.json</code></td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>Player page-reference trail</h2>
+    <p>Use this table when a handout says "see Source Trail." It points you to the rule topic without requiring repo knowledge.</p>
+    <table>
+      <tr><th>Topic</th><th>Player source to check</th><th>Campaign note</th></tr>
+      <tr><td>Character creation sequence, cultures, and careers</td><td>AiG p.23-41</td><td>The generator encodes the culture/career tables and homeland prompts.</td></tr>
+      <tr><td>Skill point limits and base skill math</td><td>Mythras Core p.20-23</td><td>Chargen enforces the 15-point per-skill allocation cap where that step applies.</td></tr>
+      <tr><td>Combat styles and weapon permissions</td><td>Mythras Core p.49-50; AiG p.25-41</td><td>Combat Style is the rolled skill; listed weapons are the permission set for that style.</td></tr>
+      <tr><td>Action Points, hit locations, armour, and Special Effects</td><td>Mythras Core p.74-106</td><td>Combat Path summarizes the table workflow; the book has the full combat procedure.</td></tr>
+      <tr><td>Folk Magic</td><td>AiG p.63-68</td><td>Most characters choose three cultural spells, plus two career spells when the career grants them.</td></tr>
+      <tr><td>Theism, Rune Magic, and miracles</td><td>AiG p.69-122; NfP cult one-pagers</td><td>Hannu/ADR rules replace Exhort with Rune Affinity and use POW/2 Devotional Pool at initiate rank.</td></tr>
+      <tr><td>Miracle recovery categories</td><td>ADR-0007; NfP cult one-pagers</td><td>Associated-cult miracles are one-time use until return and resacrifice.</td></tr>
+      <tr><td>Animism and spirit binding</td><td>Mythras Core p.131-154; Monster Island and Bird in the Hand spirit examples</td><td>Hannu/ADR rules use Spirit Rune for binding/commanding; starting slots use CHA/2.</td></tr>
+      <tr><td>Sorcery</td><td>Mythras Core p.162-178; AiG p.60</td><td>Invocation uses the spell Rune Affinity; Shaping uses Law Rune; starting dedicated sorcerers know three spells.</td></tr>
+      <tr><td>House-rule status</td><td>ADR-0002, ADR-0006, ADR-0007</td><td>When an ADR and a printed rule differ, use the ADR for this campaign.</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>Attestation chain</h2>
+    <p>Player-facing extracted book and data mechanics should follow this chain:</p>
+    <p><strong>Source PDF -> reference JSON -> inline constant -> UI/PDF output.</strong></p>
+    <p>House rules follow this chain instead: <strong>source artifact or GM ruling -> ADR -> implementation -> player handout.</strong></p>
+    <ul>
+      <li>Cult miracle lists: NfP PDFs -> <code>references/theism-miracles.json</code> -> <code>MIRACLES_DATA</code> -> Step 9 and Play Mode.</li>
+      <li>Culture and cult access: AiG/NfP references -> <code>references/culture-cult-map.json</code> -> culture/cult picker.</li>
+      <li>Magic systems: ADR-0006 and source JSON -> cult type detection and system-specific pickers.</li>
+      <li>House rules: Hannu artifact/Discord guidance -> ADR-002 and ADR-0007 -> displayed rules for Rune Affinity, Devotional Pool, and recovery.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What to ask when uncertain</h2>
+    <ul>
+      <li>Is this an official Mythras rule, an AiG adaptation, NfP cult data, or a Hannu house rule?</li>
+      <li>Does this spell or spirit appear in a reference JSON?</li>
+      <li>Does this rule apply at chargen, advancement, or only during play?</li>
+      <li>Is this already implemented in the character generator or only documented for the table?</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><a href="index.html">Start Here</a> | <a href="../../index.html">Character Generator</a></p>
+  </footer>
+</main>
+</body>
+</html>

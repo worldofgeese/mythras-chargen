@@ -3,256 +3,102 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Combined Path: Magic in Combat</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <title>Magic in Combat - Glorantha in Mythras</title>
   <style>
-    :root {
-      --bg: #efe4d1;
-      --bg-deep: #e5d3b5;
-      --paper: #f9f2e7;
-      --panel: #f3e6d2;
-      --panel-strong: #ead4b4;
-      --ink: #20170f;
-      --ink-soft: #5a4633;
-      --rule: rgba(58, 38, 21, 0.2);
-      --rust: #8f4023;
-      --sage: #556d43;
-      --gold: #af7d2d;
-      --shadow: 0 18px 42px rgba(49, 30, 16, 0.14);
-      --font-display: "Fraunces", Georgia, serif;
-      --font-body: "IBM Plex Sans", "Segoe UI", sans-serif;
-      --font-mono: "IBM Plex Mono", "Cascadia Code", monospace;
-    }
-
-    * { box-sizing: border-box; min-width: 0; }
-    body { margin: 0; color: var(--ink); font-family: var(--font-body); line-height: 1.55; background: radial-gradient(circle at top left, rgba(143, 64, 35, 0.16), transparent 28%), radial-gradient(circle at bottom right, rgba(85, 109, 67, 0.12), transparent 26%), linear-gradient(180deg, var(--bg), var(--bg-deep)); min-height: 100vh; }
-    .container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
-    header { text-align: center; margin-bottom: 3rem; }
-    header h1 { font-family: var(--font-display); font-size: clamp(1.8rem, 5vw, 2.6rem); color: var(--gold); margin: 0 0 0.5rem; line-height: 1.2; }
-    header .subtitle { font-size: 1rem; color: var(--ink-soft); font-style: italic; }
-
-    .winding-path { position: relative; margin: 2rem auto; padding: 1.5rem 0; max-width: 500px; }
-    .winding-path svg { width: 100%; height: auto; display: block; }
-    .winding-path .path-line { fill: none; stroke: var(--panel-strong); stroke-width: 28; stroke-linecap: round; stroke-linejoin: round; }
-    .winding-path .path-line-inner { fill: none; stroke: var(--panel); stroke-width: 22; stroke-linecap: round; stroke-linejoin: round; }
-    .winding-path .node { cursor: pointer; transition: transform 0.2s; }
-    .winding-path .node:hover { transform: scale(1.15); }
-    .winding-path .node circle { fill: var(--panel-strong); stroke: var(--rule); stroke-width: 2; }
-    .winding-path .node text { fill: var(--ink-soft); font-family: var(--font-display); font-size: 12px; font-weight: 700; text-anchor: middle; dominant-baseline: central; }
-    .winding-path .node.start circle { fill: var(--gold); stroke: var(--gold); }
-    .winding-path .node.start text { fill: white; }
-    .winding-path .node.end circle { fill: var(--gold); stroke: var(--gold); }
-    .winding-path .node.end text { fill: white; }
-
-    .stage { background: var(--paper); border-radius: 10px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
-    .stage-header { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 0.75rem; }
-    .stage-number { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--gold); min-width: 2rem; }
-    .stage h2 { font-family: var(--font-display); font-size: 1.2rem; color: var(--ink); margin: 0; }
-    .stage-ref { font-family: var(--font-mono); font-size: 0.75rem; color: var(--gold); margin-left: auto; white-space: nowrap; }
-    .stage p { margin: 0.5rem 0; }
-    .stage .key-concept { background: var(--panel); border-radius: 6px; padding: 0.75rem 1rem; margin: 0.75rem 0; border-left: 3px solid var(--gold); }
-    .stage .key-concept strong { color: var(--gold); }
-    .stage .example { font-family: var(--font-mono); font-size: 0.85rem; background: var(--panel-strong); border-radius: 4px; padding: 0.6rem 0.8rem; margin: 0.5rem 0; white-space: pre-wrap; }
-    .stage ul { padding-left: 1.2rem; margin: 0.5rem 0; }
-    .stage li { margin: 0.3rem 0; }
-    .tip { background: rgba(175, 125, 45, 0.1); border: 1px solid rgba(175, 125, 45, 0.3); border-radius: 6px; padding: 0.6rem 0.8rem; margin: 0.75rem 0; font-size: 0.9rem; }
-    .tip::before { content: "💡 "; }
-
-    .scenario { background: var(--panel); border-radius: 8px; padding: 1rem 1.2rem; margin: 1rem 0; border: 1px solid var(--rule); }
-    .scenario h3 { font-family: var(--font-display); font-size: 1rem; color: var(--rust); margin: 0 0 0.5rem; }
-
-    footer { text-align: center; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 0.85rem; }
-    @media (max-width: 600px) { .container { padding: 1rem; } .stage { padding: 1rem 1.2rem; } .stage-header { flex-wrap: wrap; } .stage-ref { margin-left: 0; width: 100%; } }
+    :root { --paper:#fbf4e8; --panel:#efe0c8; --ink:#24170f; --rust:#8f4023; --sage:#526b42; --gold:#a8792c; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:linear-gradient(180deg,#ecdfc9,#f8efe2); font-family:Georgia,"Times New Roman",serif; line-height:1.55; }
+    main { max-width:920px; margin:0 auto; padding:32px 20px 56px; }
+    header, footer { text-align:center; }
+    h1 { color:var(--gold); margin:0 0 8px; font-size:2.25rem; }
+    h2 { margin:0; }
+    h3 { color:var(--rust); margin:12px 0 4px; }
+    nav { margin:20px 0; padding:12px; background:var(--panel); border-radius:10px; }
+    nav a { margin:0 8px 6px; display:inline-block; color:var(--rust); font-weight:bold; }
+    .stage { background:var(--paper); border-left:5px solid var(--gold); border-radius:10px; padding:18px 22px; margin:16px 0; box-shadow:0 10px 24px rgba(45,25,10,.10); }
+    .stage-head { display:flex; gap:12px; align-items:baseline; flex-wrap:wrap; }
+    .num { color:var(--gold); font-weight:bold; font-size:1.35rem; }
+    .ref { margin-left:auto; color:var(--gold); font-family:"Courier New",monospace; font-size:.82rem; }
+    .scenario, .source { background:var(--panel); border-radius:8px; padding:10px 12px; margin:10px 0; }
+    .source { border-left:3px solid var(--sage); font-size:.92rem; }
+    ul { margin:8px 0 8px 22px; padding:0; }
+    li { margin:4px 0; }
+    @media print { body { background:white; } main { max-width:none; padding:0; } nav { display:none; } .stage { break-inside:avoid; box-shadow:none; border:1px solid #999; border-left:5px solid #555; } a { color:#000; text-decoration:none; } }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>The Combined Path</h1>
-      <p class="subtitle">Where steel meets sorcery — how magic and combat interact in Mythras</p>
-    </header>
+<main>
+  <header>
+    <h1>Magic in Combat</h1>
+    <p>Use this after you know your basic combat loop and your magic tradition.</p>
+  </header>
 
-    <p style="text-align:center; color:var(--ink-soft); margin-bottom:2rem;"><em>Prerequisites: Complete at least Stages 1–5 of both the <a href="combat-path.html">Combat Path</a> and <a href="magic-path.html">Magic Path</a>.</em></p>
+  <nav aria-label="Handout navigation">
+    <a href="index.html">Start Here</a>
+    <a href="combat-path.html">Combat Path</a>
+    <a href="magic-path.html">Magic Path</a>
+    <a href="rules-and-house-rules.html">House Rules</a>
+    <a href="source-trail.html">Source Trail</a>
+    <a href="../../index.html">Character Generator</a>
+  </nav>
 
-    <nav class="winding-path" aria-label="Progress through 7 stages">
-      <svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
-        <path class="path-line" d="M 50,170 C 150,170 250,160 350,145 S 460,120 470,100 C 470,80 380,70 270,60 S 130,45 80,30"/>
-        <path class="path-line-inner" d="M 50,170 C 150,170 250,160 350,145 S 460,120 470,100 C 470,80 380,70 270,60 S 130,45 80,30"/>
-        <a href="#stage-1" class="node start"><circle cx="50" cy="170" r="16"/><text x="50" y="170">1</text></a>
-        <a href="#stage-2" class="node"><circle cx="170" cy="162" r="16"/><text x="170" y="162">2</text></a>
-        <a href="#stage-3" class="node"><circle cx="310" cy="148" r="16"/><text x="310" y="148">3</text></a>
-        <a href="#stage-4" class="node"><circle cx="440" cy="115" r="16"/><text x="440" y="115">4</text></a>
-        <a href="#stage-5" class="node"><circle cx="370" cy="78" r="16"/><text x="370" y="78">5</text></a>
-        <a href="#stage-6" class="node"><circle cx="230" cy="55" r="16"/><text x="230" y="55">6</text></a>
-        <a href="#stage-7" class="node end"><circle cx="100" cy="35" r="16"/><text x="100" y="35">7</text></a>
-        <text x="50" y="192" font-family="var(--font-body)" font-size="9" fill="var(--ink-soft)" text-anchor="middle">Begin</text>
-        <text x="100" y="18" font-family="var(--font-body)" font-size="9" fill="var(--gold)" text-anchor="middle">Mastery</text>
-      </svg>
-    </nav>
+  <section class="stage" id="stage-1">
+    <div class="stage-head"><span class="num">1</span><h2>Buff before initiative when fiction allows it</h2><span class="ref">MYT combat actions; AiG Folk Magic p.63-68</span></div>
+    <p>Many spells are strongest when cast before steel is drawn. If the party is kicking in a door, agree on the buff routine first.</p>
+    <ul>
+      <li>Folk Magic: Bladesharp, Protection, Mobility, Fanaticism.</li>
+      <li>Theism: Shield, Truesword, cult-specific protections.</li>
+      <li>Animism: ready a ward or healing spirit.</li>
+      <li>Sorcery: pre-shape long-duration protective spells if time and MP allow.</li>
+    </ul>
+  </section>
 
-    <article class="stage" id="stage-1">
-      <div class="stage-header">
-        <span class="stage-number">1</span>
-        <h2>Pre-Combat Buffing</h2>
-        <span class="stage-ref">Core p.92 · AiG p.59</span>
-      </div>
-      <p>The most important magic happens <strong>before</strong> initiative is rolled. Smart warriors cast their buffs before engaging.</p>
-      <div class="key-concept">
-        <strong>The Pre-Combat Checklist</strong>:
-        <ul>
-          <li>Folk Magic: Bladesharp (+1 damage), Protection (+1 AP), Fanaticism (ignore wounds)</li>
-          <li>Theism: Shield (magical armour), Truesword (bypass armour)</li>
-          <li>Animism: Command healing spirit to stand ready, activate ward spirits</li>
-          <li>Sorcery: Shape Damage Resistance for long duration, pre-cast Haste</li>
-        </ul>
-      </div>
-      <div class="tip">In a dungeon, cast your buffs at the door. In an ambush, you don't get this luxury — another reason ambushes are devastating.</div>
-    </article>
+  <section class="stage" id="stage-2">
+    <div class="stage-head"><span class="num">2</span><h2>Casting spends the same attention as fighting</h2><span class="ref">MYT p.92-93; Magic Path stage 2</span></div>
+    <p>Casting in combat competes with attacking, parrying, and movement. A caster who spends an Action Point may have fewer defenses later in the cycle.</p>
+    <div class="scenario"><strong>Table check:</strong> before you cast, say how many AP you have left and who is keeping enemies off you.</div>
+  </section>
 
-    <article class="stage" id="stage-2">
-      <div class="stage-header">
-        <span class="stage-number">2</span>
-        <h2>Cast Magic as a Combat Action</h2>
-        <span class="stage-ref">Core p.92–93</span>
-      </div>
-      <p>Casting in combat costs <strong>1 Action Point</strong> and takes <strong>1 Turn</strong> (your entire action for that AP spend).</p>
-      <div class="key-concept">
-        <strong>The Trade-off</strong>: Every AP spent casting is an AP you can't use to Attack or Parry. A warrior with 2 AP who casts on Turn 1 can only Parry once — no attacks that Cycle.
-      </div>
-      <ul>
-        <li><strong>Cast Magic</strong> (Proactive): Spend 1 AP, roll your casting skill/Rune Affinity</li>
-        <li><strong>Hold Magic</strong> (Free): Prepare a spell to release later as a Reactive action</li>
-        <li><strong>Counter Spell</strong> (Reactive, 1 AP): Oppose an incoming spell with your own magic</li>
-      </ul>
-      <div class="example">Round 1, Initiative order:
-  Enemy warrior (Init 14): Attacks your mage
-  Your mage (Init 11): Already spent AP on Cast Magic → can't Parry!
-  
-Solution: Hold Magic before combat, or have allies protect you.</div>
-    </article>
+  <section class="stage" id="stage-3">
+    <div class="stage-head"><span class="num">3</span><h2>Spoil Spell makes bodyguards matter</h2><span class="ref">MYT p.97, p.121</span></div>
+    <p>If an enemy can hit you while you are casting, they may be able to ruin the spell. Casters need space, cover, or allies.</p>
+    <ul>
+      <li>Warriors can hold enemies away from casters.</li>
+      <li>Casters can hold magic or prepare before opening the fight.</li>
+      <li>Everyone should know who protects the shaman, priest, or sorcerer.</li>
+    </ul>
+  </section>
 
-    <article class="stage" id="stage-3">
-      <div class="stage-header">
-        <span class="stage-number">3</span>
-        <h2>Spoil Spell & Concentration</h2>
-        <span class="stage-ref">Core p.97, p.121</span>
-      </div>
-      <p>Magic users are vulnerable during casting. The enemy can disrupt your spells:</p>
-      <div class="key-concept">
-        <strong>Spoil Spell</strong> (Special Effect): If an attacker hits a caster who is mid-cast, they can choose Spoil Spell — the spell fails and the MP are lost.
-      </div>
-      <ul>
-        <li><strong>Concentration spells</strong>: Some spells require ongoing focus. Taking damage forces a Willpower roll — fail and the spell drops.</li>
-        <li><strong>Defensive casting</strong>: Cast from behind allies, or use Hold Magic to pre-cast before entering danger.</li>
-        <li><strong>Counter Spell</strong>: Spend 1 AP reactively to oppose an enemy's spell with your own skill.</li>
-      </ul>
-      <div class="tip">The "Spoil Spell" special effect makes protecting your casters a real tactical priority. Formation Fighting helps.</div>
-    </article>
+  <section class="stage" id="stage-4">
+    <div class="stage-head"><span class="num">4</span><h2>Spirits change the battlefield</h2><span class="ref">MYT Animism p.131-154; ADR-0006</span></div>
+    <p>A bound spirit is another tactical resource. It can heal, scout, protect, or fight spirits while the physical battle continues.</p>
+    <div class="scenario"><strong>Daka Fal example:</strong> command an ancestor spirit to distract a hostile spirit, then use your own AP for movement or defense.</div>
+  </section>
 
-    <article class="stage" id="stage-4">
-      <div class="stage-header">
-        <span class="stage-number">4</span>
-        <h2>Spirits in Combat</h2>
-        <span class="stage-ref">Core p.134–136 · AiG p.134–151</span>
-      </div>
-      <p>Animist characters bring spirits to the fight. Spirits operate semi-independently:</p>
-      <ul>
-        <li><strong>Commanding a spirit</strong>: Costs 1 AP. Roll Spirit Rune to direct your bound spirit.</li>
-        <li><strong>Spirit attacks</strong>: Spirits can attack in the Spirit World (vs. target's Willpower) or Manifest physically.</li>
-        <li><strong>Healing spirits</strong>: Command to heal an ally — the spirit does the work, not you.</li>
-        <li><strong>Ward spirits</strong>: Set to automatically defend against incoming spirit attacks.</li>
-      </ul>
-      <div class="scenario">
-        <h3>Scenario: Daka Fal Shaman in Battle</h3>
-        <p>Turn 1: Command Ancestor Spirit to attack enemy shaman (spirit combat)<br>
-        Turn 2: Cast Folk Magic "Disruption" at enemy warrior<br>
-        Turn 3: Command Healing Spirit to heal wounded ally<br>
-        Meanwhile: Ward spirit automatically blocks enemy spirit intrusion</p>
-      </div>
-    </article>
+  <section class="stage" id="stage-5">
+    <div class="stage-head"><span class="num">5</span><h2>Miracles are scarce; know what you learned</h2><span class="ref">ADR-002; ADR-0007; NfP cult lists</span></div>
+    <p>Theist characters do not carry every possible miracle ready to use. Your Initiate Devotional Pool is POW/2, so arrive with your learned/selected miracles already recorded.</p>
+    <ul>
+      <li>Record each miracle's category, rune, cost, and recovery rule; a balanced learned set is usually safer than all offense.</li>
+      <li>Associated-cult magic is one-time use until you return to the associated cult and resacrifice; mark it before the session.</li>
+    </ul>
+  </section>
 
-    <article class="stage" id="stage-5">
-      <div class="stage-header">
-        <span class="stage-number">5</span>
-        <h2>Miracles Under Pressure</h2>
-        <span class="stage-ref">Core p.181 · AiG p.69</span>
-      </div>
-      <p>Theist miracles are powerful but limited by the Devotional Pool:</p>
-      <div class="key-concept">
-        <strong>Tactical miracle use</strong>: Your Devotional Pool is small (POW/2 = typically 5-7 miracles). Choose wisely — you can't swap prepared miracles mid-combat.
-      </div>
-      <ul>
-        <li><strong>Offensive miracles</strong>: Lightning, Sunbright, Sever Spirit — direct damage or debuffs</li>
-        <li><strong>Defensive miracles</strong>: Shield, Heal Body, Regrow Limb — keep your party alive</li>
-        <li><strong>Utility miracles</strong>: Extension (double duration), Find Enemy, Command (animal/element)</li>
-        <li><strong>Exhort</strong>: Spend extra MP to boost intensity beyond your Rune Affinity ÷ 10</li>
-      </ul>
-      <div class="tip">Prepare a mix: 2 offensive, 2 defensive, 2 utility. Don't go all-offence — you'll regret it when someone takes a Major Wound.</div>
-    </article>
+  <section class="stage" id="stage-6">
+    <div class="stage-head"><span class="num">6</span><h2>Sorcery rewards pre-built spell profiles</h2><span class="ref">MYT p.162-178; AiG p.60</span></div>
+    <p>Write each sorcery spell as at least two profiles: fast/minimal and slow/full. This prevents rule lookup during combat.</p>
+    <div class="scenario"><strong>Example:</strong> Palsy fast profile for a single location now; shaped profile for range, duration, or magnitude when you have time.</div>
+  </section>
 
-    <article class="stage" id="stage-6">
-      <div class="stage-header">
-        <span class="stage-number">6</span>
-        <h2>Sorcery Shaping in Combat</h2>
-        <span class="stage-ref">Core p.163–166</span>
-      </div>
-      <p>Sorcerers are the most flexible casters but pay for it in casting time and MP:</p>
-      <div class="key-concept">
-        <strong>The Shaping Dilemma</strong>: More shaping = more powerful spell but costs more MP and may take longer. In combat, you often want minimal shaping for speed.
-      </div>
-      <ul>
-        <li><strong>Quick cast</strong> (0 shaping): Minimum effect, 1 MP, instant. Good for emergencies.</li>
-        <li><strong>Standard cast</strong> (2-3 shaping): Balanced power/cost. Your bread and butter.</li>
-        <li><strong>Full power</strong> (max shaping): Devastating but expensive. Save for boss fights.</li>
-      </ul>
-      <div class="example">Sorcerer with Law Rune 46% (4 shaping capacity):
-  Quick: "Palsy" at base → 1 MP, paralyzes 1 location
-  Full:  "Palsy" +2 Magnitude +1 Range +1 Duration
-         → 4 MP, paralyzes 3 locations at range, lasts hours</div>
-    </article>
+  <section class="stage" id="stage-7">
+    <div class="stage-head"><span class="num">7</span><h2>Party script: say what happens before the dice</h2><span class="ref">MYT p.74-106; ADR-0006</span></div>
+    <p>Before a dangerous scene, agree on roles: point fighter, bodyguard, healer, spirit answer, counter-magic answer, retreat signal.</p>
+    <div class="source">This page intentionally avoids vague "combined sources" claims. Use <a href="source-trail.html">Source Trail</a> for the source abbreviation map and <a href="rules-and-house-rules.html">House Rules</a> for campaign-specific differences.</div>
+  </section>
 
-    <article class="stage" id="stage-7">
-      <div class="stage-header">
-        <span class="stage-number">7</span>
-        <h2>The Integrated Warband</h2>
-        <span class="stage-ref">Combined sources</span>
-      </div>
-      <p>A well-coordinated party uses all systems together:</p>
-      <div class="scenario">
-        <h3>Scenario: Ambushing a Chaos Nest</h3>
-        <p><strong>Before combat</strong>:<br>
-        • Theist (Humakt): Casts Truesword, Shield<br>
-        • Animist (Waha): Commands ward spirit, readies healing spirit<br>
-        • Sorcerer (Arkat): Shapes Damage Resistance on the warriors<br>
-        • Everyone: Casts Bladesharp, Protection (Folk Magic)</p>
-        <p><strong>Round 1</strong>:<br>
-        • Warriors engage (Attack, 2 AP each) — buffed weapons hit hard<br>
-        • Sorcerer: Casts Palsy on enemy leader from range<br>
-        • Shaman: Commands attack spirit against enemy shaman</p>
-        <p><strong>Round 2</strong>:<br>
-        • Warrior takes Serious Wound → Shaman commands healing spirit<br>
-        • Theist: Invokes Lightning on clustered enemies<br>
-        • Sorcerer: Counter Spells enemy magic</p>
-      </div>
-      <div class="key-concept">
-        <strong>Party Roles by Magic System</strong>:
-        <ul>
-          <li><strong>Theists</strong>: Burst damage + emergency healing. Limited by Devotional Pool.</li>
-          <li><strong>Animists</strong>: Sustained support via spirits. Action economy advantage (spirits act semi-independently).</li>
-          <li><strong>Sorcerers</strong>: Flexible utility + control. Best at long-duration buffs and battlefield control.</li>
-          <li><strong>Mystics</strong>: Self-sufficient frontliners. Don't need support but can't support others.</li>
-        </ul>
-      </div>
-      <div class="tip">The best parties have complementary magic. A theist + animist + sorcerer covers burst, sustain, and control. Add a mystic for an unkillable point-fighter.</div>
-    </article>
-
-    <footer>
-      <p>Sources: Mythras Core Rulebook (3rd Printing, 2018) · Adventures in Glorantha · Hannu house rules</p>
-      <p>See also: <a href="combat-path.html">Combat Path</a> · <a href="magic-path.html">Magic Path</a></p>
-      <p>For the Mythras character generator: <a href="../index.html">Back to Chargen</a></p>
-    </footer>
-  </div>
+  <footer>
+    <p><a href="index.html">Start Here</a> | <a href="source-trail.html">Source Trail</a> | <a href="../../index.html">Character Generator</a></p>
+  </footer>
+</main>
 </body>
 </html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rules and House Rules - Glorantha in Mythras</title>
+  <style>
+    :root { --paper:#fbf4e8; --panel:#efe0c8; --ink:#24170f; --rust:#8f4023; --sage:#526b42; --gold:#a8792c; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:linear-gradient(180deg,#ecdcc0,#f8efe2); font-family:Georgia,"Times New Roman",serif; line-height:1.55; }
+    main { max-width:960px; margin:0 auto; padding:32px 20px 56px; }
+    header, footer { text-align:center; }
+    h1 { color:var(--rust); margin:0 0 8px; font-size:2.25rem; }
+    h2 { margin:0; }
+    nav { margin:20px 0; padding:12px; background:var(--panel); border-radius:10px; text-align:center; }
+    nav a, footer a { margin:0 8px 6px; display:inline-block; color:var(--rust); font-weight:bold; }
+    section { background:var(--paper); border-left:5px solid var(--rust); border-radius:10px; padding:18px 22px; margin:16px 0; box-shadow:0 10px 24px rgba(45,25,10,.10); }
+    .ref { color:var(--gold); font-family:"Courier New",monospace; font-size:.82rem; }
+    table { width:100%; border-collapse:collapse; margin:10px 0; }
+    th, td { border:1px solid rgba(60,40,20,.22); padding:8px; vertical-align:top; }
+    th { background:#e1cda9; text-align:left; }
+    ul { margin:8px 0 8px 22px; padding:0; }
+    li { margin:4px 0; }
+    code { font-family:"Courier New",monospace; }
+    @media print { body { background:white; } main { max-width:none; padding:0; } nav { display:none; } section { break-inside:avoid; box-shadow:none; border:1px solid #999; border-left:5px solid #555; } a { color:#000; text-decoration:none; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Rules and House Rules</h1>
+    <p>What differs from vanilla Mythras, and where to look when a question comes up.</p>
+  </header>
+
+  <nav aria-label="Handout navigation">
+    <a href="index.html">Start Here</a>
+    <a href="combat-path.html">Combat Path</a>
+    <a href="magic-path.html">Magic Path</a>
+    <a href="combined-path.html">Magic in Combat</a>
+    <a href="prep-checklist.html">Prep Checklist</a>
+    <a href="source-trail.html">Source Trail</a>
+    <a href="../../index.html">Character Generator</a>
+  </nav>
+
+  <section>
+    <h2>1. Source hierarchy</h2>
+    <p class="ref">AGENTS.md project rule; ADR-003</p>
+    <ol>
+      <li>Adventures in Glorantha for Folk Magic, Rune Magic, cultures, and combat styles.</li>
+      <li>Mythras Core Rulebook, 3rd Printing 2018 for base rules, Animism, Sorcery, and Mysticism.</li>
+      <li>Notes from Pavis cult one-pagers for cult definitions and cult magic.</li>
+      <li>Monster Island and A Bird in the Hand for spirit templates where used.</li>
+      <li>Hannu house rules for rune casting, devotional pool, recovery, and rank progression.</li>
+    </ol>
+    <p><strong>Conflict rule:</strong> when this page or an ADR names a Hannu house rule, that campaign rule overrides vanilla Mythras or AiG for this table. The source hierarchy tells you where the base material comes from; the ADR tells you when the campaign intentionally changes it.</p>
+  </section>
+
+  <section>
+    <h2>2. Theist Rune Magic uses Rune Affinity, not Exhort</h2>
+    <p class="ref">ADR-002; ADR-0007; AiG p.24 and p.69-75</p>
+    <p>At this table, theist miracles are cast by checking access, choosing the spell's rune, rolling the matching Rune Affinity, and spending from the Devotional Pool. Exhort remains in some source data only as a legacy Mythras term.</p>
+    <table>
+      <tr><th>Rank</th><th>Devotional Pool</th></tr>
+      <tr><td>Initiate</td><td>POW/2</td></tr>
+      <tr><td>Acolyte, if the cult uses that rank</td><td>POW x 0.75</td></tr>
+      <tr><td>Priest</td><td>POW</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>3. Miracle learning, use, and recovery</h2>
+    <p class="ref">ADR-0007, Hannu 2026-03-29 screenshots</p>
+    <table>
+      <tr><th>Category</th><th>Player-facing rule</th></tr>
+      <tr><td>Any Rune and normal cult spells</td><td>Learn through the cult; use from Devotional Pool; recover through ritual at shrine, temple, or holy place with sacrifice/offering.</td></tr>
+      <tr><td>Subservient cult spells</td><td>Learn at the subservient cult temple; use from Devotional Pool; annual temple visit matters.</td></tr>
+      <tr><td>Associated cult spells</td><td>Learn through the associated cult; one-time use until you return and resacrifice.</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>4. Animism and Sorcery adaptations</h2>
+    <p class="ref">ADR-0006; ADR-0007; AiG p.60; .rpiv/guidance/magic-system.md</p>
+    <ul>
+      <li><strong>Animism:</strong> Binding is replaced by Spirit Rune affinity for this campaign adaptation. Trance remains the skill for spirit-world awareness/discorporation unless the GM calls for Spirit Rune in a specific scene. Starting Spirit Worshippers use CHA/2 bound spirit slots.</li>
+      <li><strong>Sorcery:</strong> Invocation maps to the spell's Rune Affinity. Shaping maps to the Law Rune. Starting sorcerers choose three spells.</li>
+      <li><strong>Mysticism:</strong> Supported by the codebase for future data, but no current supported one-pager requires it at chargen.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>5. Data rule</h2>
+    <p class="ref">ADR-003</p>
+    <p>Do not treat a spell, cult, spirit, or extracted book-data summary as canonical unless it has a source trail: PDF -> reference JSON -> inline app data -> UI. House rules follow a different trail: source artifact or GM ruling -> ADR -> implementation. When in doubt, ask for the source trail instead of guessing.</p>
+  </section>
+
+  <footer>
+    <p><a href="index.html">Start Here</a> | <a href="source-trail.html">Source Trail</a> | <a href="../../index.html">Character Generator</a></p>
+  </footer>
+</main>
+</body>
+</html>
