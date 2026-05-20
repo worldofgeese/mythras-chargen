@@ -11,9 +11,39 @@
     "CHA": 11
   },
   "charMethod": "point-buy",
-  "attributes": {},
-  "culture": "Praxian",
-  "homeland": "Grazelands (placeholder)",
+  "attributes": {
+    "actionPoints": 2,
+    "experienceModifier": 0,
+    "healingRate": 2,
+    "luckPoints": 3,
+    "magicPoints": 14,
+    "initiativeBonus": 11,
+    "damageModifier": "-1d2",
+    "hitPoints": {
+      "Head": 4,
+      "Chest": 6,
+      "Abdomen": 5,
+      "Right Arm": 3,
+      "Left Arm": 3,
+      "Right Leg": 4,
+      "Left Leg": 4
+    },
+    "encumbrance": {
+      "unencumbered": 16,
+      "burdened": 17,
+      "overloaded": 25,
+      "noMovement": 32
+    },
+    "runeAffinities": {
+      "primary": 58,
+      "secondary": 48,
+      "tertiary": 38
+    },
+    "folkMagicBase": 55,
+    "movementRate": 6
+  },
+  "culture": "Grazelander/Pure Horse",
+  "homeland": "Pure Horse People, Grazelands",
   "culturalSkills": {
     "Athletics": 5,
     "Brawn": 0,
@@ -61,7 +91,7 @@
   "careerSkills": {
     "Endurance": 10,
     "Willpower": 15,
-    "Combat Style (Grazelander Cavalry)": 10,
+    "Combat Style (Grazelander Noble)": 10,
     "Devotion (Maran Gor)": 15,
     "Exhort": 15,
     "Oratory": 15,
@@ -81,7 +111,7 @@
     "Oratory": 15,
     "Folk Magic": 15,
     "Endurance": 15,
-    "Combat Style (Grazelander Cavalry)": 15,
+    "Combat Style (Grazelander Noble)": 15,
     "Survival": 15
   },
   "hobbySkillName": null,
@@ -96,7 +126,7 @@
       "cost": 0
     },
     {
-      "name": "Transport: Raft",
+      "name": "Transport: Riding horse (Teza)",
       "enc": 0,
       "quantity": 1,
       "cost": 0
@@ -134,12 +164,32 @@
   ],
   "weapons": [
     {
-      "name": "Dagger",
-      "damage": "1d4+1",
-      "size": "S",
+      "name": "Mace",
+      "damage": "1d8",
+      "size": "M",
       "reach": "S",
       "ap": 6,
+      "hp": 6,
+      "skill": 0,
+      "quantity": 1
+    },
+    {
+      "name": "Small Shield",
+      "damage": "1d3",
+      "size": "M",
+      "reach": "S",
+      "ap": 4,
       "hp": 8,
+      "skill": 0,
+      "quantity": 1
+    },
+    {
+      "name": "Lance",
+      "damage": "1d10+1",
+      "size": "H",
+      "reach": "VL",
+      "ap": 4,
+      "hp": 10,
       "skill": 0,
       "quantity": 1
     },
@@ -164,7 +214,7 @@
   ],
   "combatStyles": [
     {
-      "name": "Grazelander Cavalry",
+      "name": "Grazelander Noble",
       "weapons": [
         "Mace",
         "Small Shield",
@@ -172,142 +222,140 @@
         "Dagger"
       ],
       "traits": [
-        "Mounted Combat"
+        "Intimidating Scream",
+        "Mounted Combat",
+        "Shield Wall"
       ],
       "skill": 0,
-      "notes": "Placeholder - Grazelander culture not in chargen"
+      "notes": "Pregen custom style for Pure Horse/Grazelander mounted priestess"
     }
   ],
-  "notes": "",
-  "background": "",
-  "hitPoints": {},
+  "notes": "Pure Horse People priestess of Maran Gor; granddaughter of Thiralda. Fought Lunars across the Grazelands and Pennel Ford; a direct, truth-loving wanderer in Orlanthi lands.",
+  "background": "Ionara was born one of the Pure Horse People and is a skilled rider capable of sleeping in the saddle as well as fighting. Her grandmother Thiralda was also a priestess of Maran Gor, famed throughout the Grazelands. She fought the Lunar Empire across the Grazelands and at Pennel Ford, and now wanders Orlanthi lands with visible disdain for so-called civilization.",
+  "hitPoints": {
+    "Head": {
+      "current": 4,
+      "max": 4
+    },
+    "Chest": {
+      "current": 6,
+      "max": 6
+    },
+    "Abdomen": {
+      "current": 5,
+      "max": 5
+    },
+    "Right Arm": {
+      "current": 3,
+      "max": 3
+    },
+    "Left Arm": {
+      "current": 3,
+      "max": 3
+    },
+    "Right Leg": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Leg": {
+      "current": 4,
+      "max": 4
+    }
+  },
   "companions": [
     {
       "name": "Teza",
-      "species": "War Bison (Praxian cavalry)",
-      "characteristics": {
-        "STR": 31,
-        "CON": 16,
-        "SIZ": 29,
-        "DEX": 10,
-        "POW": 9
-      },
-      "hitLocations": {
-        "Right Hind Leg": {
-          "max": 9,
-          "ap": 3
-        },
-        "Left Hind Leg": {
-          "max": 9,
-          "ap": 3
-        },
-        "Hindquarters": {
-          "max": 10,
-          "ap": 3
-        },
-        "Forequarters": {
-          "max": 11,
-          "ap": 3
-        },
-        "Right Foreleg": {
-          "max": 8,
-          "ap": 3
-        },
-        "Left Foreleg": {
-          "max": 8,
-          "ap": 3
-        },
-        "Head": {
-          "max": 9,
-          "ap": 3
-        }
-      },
-      "attacks": [
-        {
-          "name": "Head Butt",
-          "skill": 50,
-          "damage": "2d10+2d6",
-          "notes": "Cannot also Trample same round"
-        },
-        {
-          "name": "Trample",
-          "skill": 50,
-          "damage": "6d6",
-          "notes": "Against downed foe only"
-        }
-      ],
-      "armor": 3,
-      "movement": 10,
-      "damageModifier": "+2d6",
-      "hitPointsTotal": 21,
-      "healingRate": 3,
-      "strikeRank": 0,
-      "notes": "War-trained cavalry bison. Use mount DM (+2d6) for lance charges."
-    },
-    {
-      "name": "Riding Horse",
       "species": "Riding Horse",
       "characteristics": {
-        "STR": 22,
-        "CON": 13,
-        "SIZ": 31,
-        "DEX": 10,
-        "POW": 7
+        "STR": 30,
+        "CON": 17,
+        "SIZ": 30,
+        "DEX": 20,
+        "POW": 17
       },
       "hitLocations": {
         "Right Hind Leg": {
-          "max": 9,
+          "current": 7,
+          "max": 7,
           "ap": 1
         },
         "Left Hind Leg": {
-          "max": 9,
+          "current": 7,
+          "max": 7,
           "ap": 1
         },
         "Hindquarters": {
-          "max": 10,
+          "current": 9,
+          "max": 9,
           "ap": 1
         },
         "Forequarters": {
-          "max": 11,
+          "current": 9,
+          "max": 9,
           "ap": 1
         },
         "Right Front Leg": {
-          "max": 8,
+          "current": 7,
+          "max": 7,
           "ap": 1
         },
         "Left Front Leg": {
-          "max": 8,
+          "current": 7,
+          "max": 7,
           "ap": 1
         },
         "Head": {
-          "max": 9,
+          "current": 7,
+          "max": 7,
           "ap": 1
         }
       },
       "attacks": [
         {
-          "name": "Hoof",
-          "skill": 42,
-          "damage": "1d6+1d12",
-          "notes": "Rear and Plunge"
+          "name": "Bite",
+          "skill": 25,
+          "damage": "1D8+3D6",
+          "notes": ""
+        },
+        {
+          "name": "Kick",
+          "skill": 25,
+          "damage": "1D6+3D6",
+          "notes": ""
+        },
+        {
+          "name": "Rear & Plunge",
+          "skill": 25,
+          "damage": "2D6+3D6",
+          "notes": ""
+        },
+        {
+          "name": "Trample",
+          "skill": 25,
+          "damage": "4D6",
+          "notes": "Against downed foe only"
         }
       ],
       "armor": 1,
       "movement": 12,
-      "damageModifier": "+1d12",
-      "hitPointsTotal": 20,
-      "healingRate": 2,
+      "damageModifier": "+3D6",
+      "hitPointsTotal": 23,
+      "healingRate": 3,
       "strikeRank": 0,
-      "notes": "Riding horse. Not trained for combat — will flee unless cornered."
+      "notes": "Riding horse. Normally only attacks if life threatened. Owner attacks OR horse attacks — not both per round. Use mount's +3D6 damage bonus for lance charges."
     }
   ],
   "cult": "Maran Gor",
   "miracles": [
+    "Extension",
+    "Find (Specific Thing)",
+    "Divination",
     "Blast Earth",
     "Create Fissure",
-    "Shake Earth"
+    "Shake Earth",
+    "Summon Gnome"
   ],
-  "devotionalPool": 0,
+  "devotionalPool": 7,
   "selectedProfessionalSkills": [
     "Devotion (Maran Gor)",
     "Exhort",

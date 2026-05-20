@@ -192,6 +192,7 @@ function loadApp() {
         Calc,
         App: typeof App !== 'undefined' ? App : null,
         CULTURES_DATA,
+        CULTURE_BUILDS: typeof CULTURE_BUILDS !== 'undefined' ? CULTURE_BUILDS : null,
         WEAPONS_DATA,
         WEAPON_ALIASES: typeof WEAPON_ALIASES !== 'undefined' ? WEAPON_ALIASES : null,
         DATA_INDEXES: typeof DATA_INDEXES !== 'undefined' ? DATA_INDEXES : null,
@@ -374,6 +375,50 @@ asyncTest('exportSinglePagePDF() behavior output capture failed', async () => {
   }
 });
 
+// Test 1.1b: PDF companion labels do not repeat species/status text
+asyncTest('exportSinglePagePDF() companion label normalization failed', async () => {
+  const character = createPdfTestCharacter({
+    companions: [{
+      name: 'Shadowcat',
+      species: 'Shadowcat (bonded)',
+      characteristics: { STR: 8, CON: 8, SIZ: 3, DEX: 18, INT: 5, POW: 10 },
+      attacks: [],
+      hitLocations: {},
+      movement: '8m',
+      armor: 1,
+      damageModifier: '-1d4',
+      hitPointsTotal: 8
+    }]
+  });
+  const { text } = await captureSinglePagePdf(character);
+
+  if (text.includes('COMPANION: Shadowcat (bonded)') &&
+      !text.includes('COMPANION: Shadowcat (Shadowcat (bonded))')) {
+    pass('exportSinglePagePDF() avoids duplicated companion labels');
+  } else {
+    fail('exportSinglePagePDF() repeats companion species/status labels',
+      text.split('\n').filter(line => line.includes('COMPANION:')).join(' | '));
+  }
+});
+
+// Test 1.1c: Companion label normalization keeps meaningful species qualifiers
+{
+  const { App: AppObj } = loadApp();
+  if (AppObj && AppObj.formatCompanionLabel) {
+    const bonded = AppObj.formatCompanionLabel({ name: 'Shadowcat', species: 'Shadowcat (bonded)' });
+    const qualified = AppObj.formatCompanionLabel({ name: 'Wolf', species: 'Dire Wolf' });
+
+    if (bonded === 'Shadowcat (bonded)' && qualified === 'Wolf (Dire Wolf)') {
+      pass('Companion label normalization keeps status and species qualifiers');
+    } else {
+      fail('Companion label normalization drops meaningful species qualifiers',
+        JSON.stringify({ bonded, qualified }));
+    }
+  } else {
+    fail('App.formatCompanionLabel unavailable for label normalization test');
+  }
+}
+
 // Test 1.8: Culture-specific keywords for Glorantha cultures
 {
   if (App.GLORANTHA_CULTURES_DATA && App.GLORANTHA_CULTURES_DATA.length > 0) {
@@ -532,6 +577,81 @@ asyncTest('exportSinglePagePDF() behavior output capture failed', async () => {
   }
 }
 
+// Test 1.12b: Secondary placeholder skills require their Primary counterpart
+{
+  const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
+  if (AppObj && AppObj.renderCareerDetails && AppObj.toggleProfessionalSkill && CD) {
+    CD.culture = 'Balazaring';
+    CD.career = 'Scholar';
+    CD.selectedProfessionalSkills = [];
+    CD.careerSkills = {};
+    _sandbox.alert = () => {};
+
+    const initialHtml = AppObj.renderCareerDetails();
+    const secondaryDisabled = /data-skill="Lore \(Secondary\)"[\s\S]*?disabled/.test(initialHtml);
+    const rejected = AppObj.toggleProfessionalSkill('Lore (Secondary)', true) === false;
+    const keptOut = !CD.selectedProfessionalSkills.includes('Lore (Secondary)');
+
+    AppObj.toggleProfessionalSkill('Lore (Primary)', true);
+    AppObj.resolveProfessionalSkill('Lore (Primary)', 'Monkeys');
+    const afterPrimaryHtml = AppObj.renderCareerDetails();
+    const secondaryEnabled = /data-skill="Lore \(Secondary\)"[\s\S]*?disabled/.test(afterPrimaryHtml) === false;
+
+    AppObj.toggleProfessionalSkill('Lore (Secondary)', true);
+    AppObj.resolveProfessionalSkill('Lore (Secondary)', 'Local Legends');
+    AppObj.toggleProfessionalSkill('Lore (Primary)', false);
+    const secondaryRemovedAfterPrimary = !CD.selectedProfessionalSkills.includes('Lore (Local Legends)') &&
+      !CD.selectedProfessionalSkills.includes('Lore (Secondary)') &&
+      !Object.prototype.hasOwnProperty.call(CD.careerSkills, 'Lore (Local Legends)');
+
+    if (secondaryDisabled && rejected && keptOut && secondaryEnabled && secondaryRemovedAfterPrimary) {
+      pass('Secondary placeholder skills require Primary before selection');
+    } else {
+      fail('Secondary placeholder skills can be selected without Primary',
+        JSON.stringify({ secondaryDisabled, rejected, keptOut, secondaryEnabled, secondaryRemovedAfterPrimary, selected: CD.selectedProfessionalSkills }));
+    }
+  } else {
+    fail('Professional skill picker unavailable for Primary/Secondary dependency test');
+  }
+}
+
+// Test 1.12c: Secondary Catch placeholder skills require Primary Catch
+{
+  const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
+  if (AppObj && AppObj.renderCareerDetails && AppObj.toggleProfessionalSkill && CD) {
+    CD.culture = 'Balazaring';
+    CD.career = 'Fisher';
+    CD.selectedProfessionalSkills = [];
+    CD.careerSkills = {};
+    _sandbox.alert = () => {};
+
+    const initialHtml = AppObj.renderCareerDetails();
+    const secondaryCatchDisabled = /data-skill="Lore \(Secondary Catch\)"[\s\S]*?disabled/.test(initialHtml);
+    const rejected = AppObj.toggleProfessionalSkill('Lore (Secondary Catch)', true) === false;
+
+    AppObj.toggleProfessionalSkill('Lore (Primary Catch)', true);
+    AppObj.resolveProfessionalSkill('Lore (Primary Catch)', 'River Fish');
+    const afterPrimaryHtml = AppObj.renderCareerDetails();
+    const secondaryCatchEnabled = /data-skill="Lore \(Secondary Catch\)"[\s\S]*?disabled/.test(afterPrimaryHtml) === false;
+    AppObj.toggleProfessionalSkill('Lore (Secondary Catch)', true);
+    AppObj.resolveProfessionalSkill('Lore (Secondary Catch)', 'Lake Fish');
+    AppObj.toggleProfessionalSkill('Lore (Primary Catch)', false);
+    const secondaryCatchRemovedAfterPrimary = !CD.selectedProfessionalSkills.includes('Lore (Lake Fish)') &&
+      !CD.selectedProfessionalSkills.includes('Lore (Secondary Catch)') &&
+      !Object.prototype.hasOwnProperty.call(CD.careerSkills, 'Lore (Lake Fish)') &&
+      !Object.prototype.hasOwnProperty.call(CD._disambiguationMap || {}, 'career:Lore (Secondary Catch)');
+
+    if (secondaryCatchDisabled && rejected && secondaryCatchEnabled && secondaryCatchRemovedAfterPrimary) {
+      pass('Secondary Catch placeholder skills require Primary Catch before selection');
+    } else {
+      fail('Secondary Catch placeholder skill can be selected without Primary Catch',
+        JSON.stringify({ secondaryCatchDisabled, rejected, secondaryCatchEnabled, secondaryCatchRemovedAfterPrimary, selected: CD.selectedProfessionalSkills, careerSkills: CD.careerSkills, map: CD._disambiguationMap }));
+    }
+  } else {
+    fail('Professional skill picker unavailable for Primary Catch/Secondary Catch dependency test');
+  }
+}
+
 // Test 1.13: Skill point clamps also sync the visible input value
 {
   const { App: AppObj, CharacterData: CD } = loadApp();
@@ -655,6 +775,55 @@ section('Risk 2: Play Mode Form State Consistency');
     fail('Combat styles array modification failed');
   }
 }
+
+// Test 2.5: Play Mode weapon rows derive skill from matching combat style
+{
+  const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
+  if (AppObj && AppObj.renderPlayCombat && CD && _sandbox) {
+    CD.characteristics = { STR: 10, DEX: 10 };
+    CD.culturalSkills = {};
+    CD.careerSkills = {};
+    CD.bonusSkills = {
+      'Combat Style (Javelin Skirmisher)': 5,
+      'Combat Style (Balazaring Hunter)': 17
+    };
+    CD.combatStyles = [
+      { name: 'Javelin Skirmisher', weapons: ['Javelin'], traits: [] },
+      { name: 'Balazaring Hunter', weapons: ['Sling', 'Dagger'], traits: [] }
+    ];
+    CD.weapons = [{ name: 'Sling', damage: '1d8', size: 'S', reach: 'Ranged', ap: 4, hp: 4 }];
+
+    AppObj.renderPlayCombat();
+    const html = _sandbox.document.getElementById('play-combat').innerHTML;
+
+    if (/data-testid="weapon-name">Sling/.test(html) && /data-testid="weapon-skill"><input type="number" value="37"/.test(html)) {
+      pass('Play Mode weapon rows derive Sling skill from combat style');
+    } else {
+      fail('Play Mode weapon row leaves Sling skill at zero', html.match(/data-testid="weapon-skill"[\s\S]{0,90}/)?.[0]);
+    }
+  } else {
+    fail('App.renderPlayCombat unavailable for weapon skill derivation test');
+  }
+}
+
+asyncTest('exportSinglePagePDF() derives weapon skills from combat styles for unskilled weapons', async () => {
+  const { text } = await captureSinglePagePdf(createPdfTestCharacter({
+    characteristics: { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 10, POW: 10, CHA: 10 },
+    attributes: App.Calc.calculateAllAttributes({ STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 10, POW: 10, CHA: 10 }),
+    culturalSkills: {},
+    careerSkills: {},
+    bonusSkills: { 'Combat Style (Balazaring Hunter)': 17 },
+    combatStyles: [{ name: 'Balazaring Hunter', weapons: ['Sling', 'Dagger'], traits: [] }],
+    weapons: [{ name: 'Sling', damage: '1d8', size: 'S', reach: 'Ranged', ap: 4, hp: 4 }]
+  }));
+
+  if (text.includes('Sling') && text.includes('37%')) {
+    pass('exportSinglePagePDF() derives weapon skills from combat styles for unskilled weapons');
+  } else {
+    fail('exportSinglePagePDF() leaves unskilled weapon skill blank or zero',
+      text.split('\n').filter(line => line.includes('Sling') || line.includes('37%')).join(' | '));
+  }
+});
 
 // ============================================================
 section('Risk 3: Multi-page PDF Scaling Artifacts');
@@ -1896,6 +2065,28 @@ section('Wave 2 Goal C: Skill Compilation Consolidation');
   }
 }
 
+{
+  if (App.App && App.App.compileAllSkills) {
+    App.CharacterData.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 10, CHA: 10 };
+    App.CharacterData.culture = 'God Forgot';
+    App.CharacterData.culturalSkills = {};
+    App.CharacterData.careerSkills = { Customs: 10 };
+    App.CharacterData.bonusSkills = { Customs: 15 };
+
+    const compiled = App.App.compileAllSkills();
+    const customsRows = compiled.filter(s => s.name.startsWith('Customs'));
+    const customs = customsRows.find(s => s.name === 'Customs (God Forgot)');
+    if (customsRows.length === 1 && customs &&
+        customs.base === 70 && customs.career === 10 && customs.bonus === 15) {
+      pass('Customs allocations merge into the culture-specific Customs skill row');
+    } else {
+      fail('Customs allocations split into duplicate skill rows', JSON.stringify(customsRows));
+    }
+  } else {
+    fail('App.compileAllSkills function not found for Customs merge test');
+  }
+}
+
 // ============================================================
 section('Wave 2 Goal D: Standardize Weapon Data Shape');
 // ============================================================
@@ -2363,7 +2554,9 @@ const fixtures = [
   { file: 'balazaring-hunter.json', name: 'Balazaring Hunter' },
   { file: 'sartarite-warrior.json', name: 'Sartarite Warrior' },
   { file: 'praxian-beast-rider.json', name: 'Praxian Beast Rider' },
-  { file: 'telmori-wolfbrother.json', name: 'Telmori Wolfbrother' }
+  { file: 'telmori-wolfbrother.json', name: 'Telmori Wolfbrother' },
+  { file: 'ionara.json', name: 'Ionara' },
+  { file: 'vasana.json', name: 'Vasana' }
 ];
 
 fixtures.forEach(fixtureInfo => {
@@ -2601,6 +2794,165 @@ fixtures.forEach(fixtureInfo => {
   }
 });
 
+[
+  { file: 'ionara.json', name: 'Ionara' },
+  { file: 'vasana.json', name: 'Vasana' }
+].forEach(fixtureInfo => {
+  const fixture = loadFixture(fixtureInfo.file);
+  if (!fixture) return;
+
+  {
+    const charTotal = Object.values(fixture.characteristics || {}).reduce((sum, value) => sum + value, 0);
+    const culturalTotal = Object.values(fixture.culturalSkills || {}).reduce((sum, value) => sum + value, 0);
+    const careerTotal = Object.values(fixture.careerSkills || {}).reduce((sum, value) => sum + value, 0);
+    const bonusTotal = Object.values(fixture.bonusSkills || {}).reduce((sum, value) => sum + value, 0);
+    const ageCategory = App.Calc.getAgeCategory(fixture.age);
+    const expectedBonusTotal = ageCategory ? ageCategory.bonusPoints : 150;
+    const errors = [];
+
+    if (charTotal !== 75) errors.push(`characteristics ${charTotal}/75`);
+    if (culturalTotal !== 100) errors.push(`cultural ${culturalTotal}/100`);
+    if (careerTotal !== 100) errors.push(`career ${careerTotal}/100`);
+    if (bonusTotal !== expectedBonusTotal) errors.push(`bonus ${bonusTotal}/${expectedBonusTotal}`);
+    if ((fixture.folkMagicSpells || []).length !== 3) errors.push(`folk magic ${(fixture.folkMagicSpells || []).length}/3`);
+    if ((fixture.selectedProfessionalSkills || []).length !== 3) errors.push(`professional skills ${(fixture.selectedProfessionalSkills || []).length}/3`);
+
+    if (errors.length === 0) {
+      pass(`${fixtureInfo.name}: chargen point budgets are complete`);
+    } else {
+      fail(`${fixtureInfo.name}: chargen point budget mismatch`, errors.join(', '));
+    }
+  }
+
+  {
+    App.CharacterData.fromJSON(JSON.stringify(fixture));
+    App.CharacterData.attributes = App.Calc.calculateAllAttributes(App.CharacterData.characteristics);
+    App.App.currentStep = 9;
+
+    const expectedPool = Math.floor(App.CharacterData.characteristics.POW / 2);
+    const validation = App.App.getValidationState();
+    const errors = [];
+    if (App.CharacterData.devotionalPool !== expectedPool) {
+      errors.push(`devotionalPool ${App.CharacterData.devotionalPool}/${expectedPool}`);
+    }
+    if (!validation.valid) {
+      errors.push(...validation.errors);
+    }
+
+    if (errors.length === 0) {
+      pass(`${fixtureInfo.name}: cult initiation and magic choices are valid`);
+    } else {
+      fail(`${fixtureInfo.name}: cult initiation validation failed`, errors.join('; '));
+    }
+  }
+});
+
+const activePregenContracts = {
+  Ionara: {
+    culture: 'Grazelander/Pure Horse',
+    homeland: 'Pure Horse People, Grazelands',
+    combatStyle: {
+      name: 'Grazelander Noble',
+      weapons: ['Mace', 'Small Shield', 'Lance', 'Dagger']
+    },
+    companion: {
+      name: 'Teza',
+      species: 'Riding Horse',
+      characteristics: { STR: 30, CON: 17, SIZ: 30, DEX: 20, POW: 17 },
+      attacks: [
+        ['Bite', 25, '1D8+3D6'],
+        ['Kick', 25, '1D6+3D6'],
+        ['Rear & Plunge', 25, '2D6+3D6'],
+        ['Trample', 25, '4D6']
+      ],
+      movement: 12,
+      armor: 1,
+      damageModifier: '+3D6'
+    }
+  },
+  Vasana: {
+    combatStyle: {
+      name: 'Colymar Bison Cavalry',
+      weapons: ['Broadsword', 'Lance', 'Medium Shield', 'Composite Bow']
+    },
+    companion: {
+      name: 'Molon',
+      species: 'Bison (War-trained)',
+      characteristics: { STR: 36, CON: 17, SIZ: 34, DEX: 12, POW: 10 },
+      attacks: [
+        ['Head Butt', 50, '2D10+3D6'],
+        ['Trample', 50, '6D6']
+      ],
+      movement: 12,
+      armor: 3,
+      damageModifier: '+3D6'
+    }
+  }
+};
+
+Object.entries(activePregenContracts).forEach(([name, contract]) => {
+  const fixture = loadFixture(`${name.toLowerCase()}.json`);
+  if (!fixture) return;
+  const errors = [];
+  if (contract.culture && fixture.culture !== contract.culture) {
+    errors.push(`culture ${fixture.culture}`);
+  }
+  if (contract.homeland && fixture.homeland !== contract.homeland) {
+    errors.push(`homeland ${fixture.homeland}`);
+  }
+  const style = (fixture.combatStyles || []).find(cs => cs.name === contract.combatStyle.name);
+  if (!style) {
+    errors.push(`missing combat style ${contract.combatStyle.name}`);
+  } else {
+    const weapons = style.weapons || [];
+    const missingWeapons = contract.combatStyle.weapons.filter(weapon => !weapons.includes(weapon));
+    if (missingWeapons.length > 0) errors.push(`missing style weapons ${missingWeapons.join(', ')}`);
+  }
+  const weaponRows = (fixture.weapons || []).map(w => typeof w === 'string' ? w : w.name).filter(Boolean);
+  const missingWeaponRows = contract.combatStyle.weapons.filter(weapon => !weaponRows.includes(weapon));
+  if (missingWeaponRows.length > 0) {
+    errors.push(`missing weapon table rows ${missingWeaponRows.join(', ')}`);
+  }
+
+  const companion = (fixture.companions || []).find(c => c.name === contract.companion.name);
+  if (!companion) {
+    errors.push(`missing companion ${contract.companion.name}`);
+  } else {
+    Object.entries(contract.companion.characteristics).forEach(([key, value]) => {
+      if (companion.characteristics?.[key] !== value) {
+        errors.push(`${contract.companion.name}.${key} ${companion.characteristics?.[key]}/${value}`);
+      }
+    });
+    if (companion.species !== contract.companion.species) {
+      errors.push(`${contract.companion.name}.species ${companion.species}`);
+    }
+    if (companion.movement !== contract.companion.movement) {
+      errors.push(`${contract.companion.name}.movement ${companion.movement}/${contract.companion.movement}`);
+    }
+    if (companion.armor !== contract.companion.armor) {
+      errors.push(`${contract.companion.name}.armor ${companion.armor}/${contract.companion.armor}`);
+    }
+    if (companion.damageModifier !== contract.companion.damageModifier) {
+      errors.push(`${contract.companion.name}.damageModifier ${companion.damageModifier}/${contract.companion.damageModifier}`);
+    }
+    contract.companion.attacks.forEach(([attackName, skill, damage]) => {
+      const attack = (companion.attacks || []).find(a => a.name === attackName);
+      if (!attack) {
+        errors.push(`missing ${contract.companion.name} attack ${attackName}`);
+      } else {
+        if (attack.skill !== skill) errors.push(`${attackName}.skill ${attack.skill}/${skill}`);
+        if (attack.damage !== damage) errors.push(`${attackName}.damage ${attack.damage}/${damage}`);
+      }
+    });
+  }
+
+  if (errors.length === 0) {
+    pass(`${name}: active player pregen contract matches approved companion/combat spec`);
+  } else {
+    fail(`${name}: active player pregen contract mismatch`, errors.join('; '));
+  }
+});
+
 // ============================================================
 section('Wave 3 Goal 3: PDF Content Regression Tests');
 // ============================================================
@@ -2626,7 +2978,8 @@ fixtures.forEach(fixtureInfo => {
       ...Object.keys(fixture.characteristics || {}),
       ...(fixture.weapons || []).map(w => typeof w === 'string' ? w : w.name).filter(Boolean),
       ...(fixture.folkMagicSpells || []),
-      ...(fixture.passions || []).map(p => typeof p === 'string' ? p.split(':')[0] : p.name).filter(Boolean)
+      ...(fixture.passions || []).map(p => typeof p === 'string' ? p.split(':')[0] : p.name).filter(Boolean),
+      fixture.notes ? fixture.notes.split(';')[0] : null
     ];
     const missing = expected.filter(value => value && !text.includes(value));
 
@@ -3988,6 +4341,7 @@ section('Cult Data Tests');
       garbageEntryPattern.test(m.name) ||
       ocrPrefixPattern.test(m.name) ||
       /^B[olxw]\s|^Wo\s|^Qo\s|^Rc\s|^RW\s|^RS\s|^Ke\s/.test(m.name) ||
+      /^[BR]\s+(Claws|Keenclaw|Dismiss Magic)$/.test(m.name) ||
       /Summon\(/.test(m.name) ||
       /\s+ij\s+/.test(m.name)
     );
@@ -4001,6 +4355,31 @@ section('Cult Data Tests');
     fail('MIRACLES_DATA still contains runtime-cleaned OCR artifacts', dirtyMiracle);
   } else {
     pass('MIRACLES_DATA miracle names are pre-cleaned');
+  }
+}
+
+// Test: Reviewed miracle OCR corrections preserve canonical entries
+{
+  const cults = App.MIRACLES_DATA?.cults || {};
+  const expectedCorrections = [
+    { cult: 'Odayla', name: 'Claws', rune: 'Beast', rank: 'initiate', source: 'normal' },
+    { cult: 'Yinkin', name: 'Claws', rune: 'Any', rank: 'initiate', source: 'associate' },
+    { cult: 'Basmol', name: 'Keenclaw', rune: 'Beast', rank: 'runelord', source: 'normal' },
+    { cult: 'Mee Vorala', name: 'Dismiss Magic', rune: 'Beast', rank: 'initiate', source: 'normal' }
+  ];
+  const missing = expectedCorrections.filter(expected => {
+    const miracle = (cults[expected.cult]?.miracles || []).find(m => m.name === expected.name);
+    return !miracle ||
+      miracle.rank !== expected.rank ||
+      miracle.source !== expected.source ||
+      !Array.isArray(miracle.runes) ||
+      !miracle.runes.includes(expected.rune);
+  });
+
+  if (missing.length === 0) {
+    pass('Reviewed miracle OCR corrections preserve canonical miracle entries');
+  } else {
+    fail('Reviewed miracle OCR corrections deleted or malformed canonical entries', JSON.stringify(missing));
   }
 }
 
@@ -4102,6 +4481,149 @@ section('Cult Data Tests');
         reviewedCorrectionKeys: Object.keys(reviewedCorrections),
         missingCultCitation: missingCultCitation ? missingCultCitation.name : null
       }));
+  }
+}
+
+section('Player Handout Contract');
+
+// Test: player-facing handout set has a start route and required references
+{
+  const handoutDir = path.join(__dirname, 'docs', 'handouts');
+  const requiredHandouts = [
+    'index.html',
+    'combat-path.html',
+    'magic-path.html',
+    'combined-path.html',
+    'rules-and-house-rules.html',
+    'prep-checklist.html',
+    'source-trail.html'
+  ];
+  const missing = requiredHandouts.filter(file => !fs.existsSync(path.join(handoutDir, file)));
+
+  if (missing.length === 0) {
+    pass('docs/handouts includes the complete player handout route set');
+  } else {
+    fail('docs/handouts is missing player handout routes', missing.join(', '));
+  }
+}
+
+// Test: handouts are self-contained static pages with print support and working character-generator links
+{
+  const handoutDir = path.join(__dirname, 'docs', 'handouts');
+  const htmlFiles = fs.existsSync(handoutDir)
+    ? fs.readdirSync(handoutDir).filter(file => file.endsWith('.html'))
+    : [];
+  const problems = [];
+
+  for (const file of htmlFiles) {
+    const html = fs.readFileSync(path.join(handoutDir, file), 'utf8');
+    const externalUrls = html.match(/https?:\/\/[^"' <]+/g) || [];
+    const unsupportedUrls = externalUrls.filter(url => url !== 'https://drive.google.com/drive/folders/1CKNxkpoL4sWfzdbkglQyiYvCBXlmyFIj');
+    if (unsupportedUrls.length > 0) problems.push(`${file}: unsupported external URL ${unsupportedUrls[0]}`);
+    if (/<script\b/i.test(html)) problems.push(`${file}: script tag`);
+    if (!html.includes('@media print')) problems.push(`${file}: missing print CSS`);
+    if (!html.includes('Character Generator')) problems.push(`${file}: missing Character Generator link`);
+    if (!html.includes('source-trail.html') && file !== 'source-trail.html') problems.push(`${file}: missing source trail link`);
+  }
+
+  if (htmlFiles.length >= 7 && problems.length === 0) {
+    pass('Player handouts are standalone, printable, and link back to chargen/source trail');
+  } else {
+    fail('Player handout static contract failed', problems.slice(0, 8).join('; '));
+  }
+}
+
+// Test: handout links are safe when index.html is also published as /00-START-HERE.html
+{
+  const handoutDir = path.join(__dirname, 'docs', 'handouts');
+  const htmlFiles = fs.existsSync(handoutDir)
+    ? fs.readdirSync(handoutDir).filter(file => file.endsWith('.html'))
+    : [];
+  const handoutRoutes = '(?:index|combat-path|magic-path|combined-path|rules-and-house-rules|prep-checklist|source-trail)\\.html';
+  const relativeHandoutRoute = new RegExp(`href="${handoutRoutes}(?:#[^"]*)?"`, 'i');
+  const relativeSourceRoute = /href="\.\.\/\.\.\/sources\//i;
+  const problems = [];
+
+  for (const file of htmlFiles) {
+    const html = fs.readFileSync(path.join(handoutDir, file), 'utf8');
+    if (relativeHandoutRoute.test(html)) problems.push(`${file}: relative handout route`);
+    if (relativeSourceRoute.test(html)) problems.push(`${file}: relative source route`);
+  }
+
+  if (problems.length === 0) {
+    pass('Player handout links are safe for Copyparty root and nested deployment');
+  } else {
+    fail('Player handout links are not deployment-safe', problems.slice(0, 8).join('; '));
+  }
+}
+
+// Test: handouts are player-facing, not agent/repo-facing
+{
+  const handoutDir = path.join(__dirname, 'docs', 'handouts');
+  const htmlFiles = fs.existsSync(handoutDir)
+    ? fs.readdirSync(handoutDir).filter(file => file.endsWith('.html'))
+    : [];
+  const forbidden = [
+    /\bADR\b/i,
+    /AGENTS\.md/i,
+    /\bJSON\b/i,
+    /reference JSON/i,
+    /attest/i,
+    /Hannu/i,
+    /chargen/i,
+    /codebase/i,
+    /inline (?:constant|data)/i,
+    /CULTS_DATA|MIRACLES_DATA|\.rpiv/i,
+    /Mysticism/i
+  ];
+  const problems = [];
+
+  for (const file of htmlFiles) {
+    const html = fs.readFileSync(path.join(handoutDir, file), 'utf8');
+    forbidden.forEach(pattern => {
+      if (pattern.test(html)) problems.push(`${file}: ${pattern}`);
+    });
+  }
+
+  if (problems.length === 0) {
+    pass('Player handouts avoid internal agent/data jargon and unsupported mysticism');
+  } else {
+    fail('Player handouts contain internal or unsupported terms', problems.slice(0, 10).join('; '));
+  }
+}
+
+// Test: Start Here inline content links do not inherit navigation spacing
+{
+  const indexPath = path.join(__dirname, 'docs', 'handouts', 'index.html');
+  const html = fs.existsSync(indexPath) ? fs.readFileSync(indexPath, 'utf8') : '';
+  const routeAnchorRule = /\.route\s+a\s*,|,\s*\.route\s+a\b/;
+
+  if (!routeAnchorRule.test(html)) {
+    pass('Start Here inline links render without navigation spacing around punctuation');
+  } else {
+    fail('Start Here route links inherit navigation spacing', 'Split .route a styling from nav/footer link spacing');
+  }
+}
+
+// Test: magic handout labels house rules without overstating universal Rune replacement
+{
+  const magicPath = path.join(__dirname, 'docs', 'handouts', 'magic-path.html');
+  const html = fs.existsSync(magicPath) ? fs.readFileSync(magicPath, 'utf8') : '';
+  const forbiddenClaims = [
+    /all casting skills are replaced by\s*<strong>Rune Affinities<\/strong>/i,
+    /You don't roll "Folk Magic"/i
+  ];
+  const hasForbiddenClaim = forbiddenClaims.some(pattern => pattern.test(html));
+  const hasHouseRuleLabel = /House rule/i.test(html);
+  const hasSystemSpecificRows = /Theism[\s\S]*Rune Affinity[\s\S]*Animism[\s\S]*Spirit Rune[\s\S]*Sorcery[\s\S]*Law Rune/i.test(html);
+  const explainsTerms = /Rune Affinity[\s\S]*Adventures in Glorantha[\s\S]*Spirit Rune[\s\S]*spirit[\s\S]*Shaping[\s\S]*Mythras Core/i.test(html);
+  const hasPlayerSources = /A-Bird-in-the-Hand\.pdf[\s\S]*Monster-Island\.pdf[\s\S]*drive\.google\.com\/drive\/folders\/1CKNxkpoL4sWfzdbkglQyiYvCBXlmyFIj/i.test(html);
+
+  if (!hasForbiddenClaim && hasHouseRuleLabel && hasSystemSpecificRows && explainsTerms && hasPlayerSources) {
+    pass('Magic handout distinguishes official rules, AiG adaptations, and house rules');
+  } else {
+    fail('Magic handout overstates or underdocuments house-rule casting model',
+      JSON.stringify({ hasForbiddenClaim, hasHouseRuleLabel, hasSystemSpecificRows, explainsTerms, hasPlayerSources }));
   }
 }
 
@@ -4504,7 +5026,7 @@ section('Auto-Boost to 50% (U2)');
 }
 
 // ============================================================
-section('Auto-Boost Phase 3: Cultural/Career Reallocation');
+section('Auto-Boost Cultural/Career Pool Safety');
 // ============================================================
 
 {
@@ -4520,32 +5042,355 @@ section('Auto-Boost Phase 3: Cultural/Career Reallocation');
     CD.culturalSkills = { Athletics: 15, Brawn: 15, Dance: 15, Sing: 15, Ride: 10, Stealth: 10, Evade: 10, Perception: 10 };
     CD.careerSkills = { Dance: 15, Ride: 15, Sing: 15, Swim: 15 };
 
-    // Run auto-boost
+    const beforeCultural = JSON.stringify(CD.culturalSkills);
+    const beforeCareer = JSON.stringify(CD.careerSkills);
+
     AppRef.autoBoostCultSkills();
 
-    // Check that some cultural/career points were moved TO cult skills
-    const cultObj = CultsData.find(c => c.name === 'Chalana Arroy');
-    const cultSkillNames = (cultObj.cultSkills || []).filter(s => typeof AppRef.needsDisambiguation === 'undefined' || !AppRef.needsDisambiguation?.(s));
-    let cultCulturalPts = 0;
-    let cultCareerPts = 0;
-    for (const name of cultSkillNames) {
-      cultCulturalPts += CD.culturalSkills[name] || 0;
-      cultCareerPts += CD.careerSkills[name] || 0;
-    }
-
-    if (cultCulturalPts > 0 || cultCareerPts > 0) {
-      pass('Phase 3 reallocates cultural/career points to cult skills');
+    if (JSON.stringify(CD.culturalSkills) === beforeCultural && JSON.stringify(CD.careerSkills) === beforeCareer) {
+      pass('autoBoostCultSkills does not reallocate cultural/career points behind the UI');
     } else {
-      fail('Phase 3 reallocates cultural/career points to cult skills', `Cultural: ${cultCulturalPts}, Career: ${cultCareerPts}`);
+      fail('autoBoostCultSkills reallocated cultural/career points behind the UI',
+        JSON.stringify({ beforeCultural, afterCultural: CD.culturalSkills, beforeCareer, afterCareer: CD.careerSkills }));
     }
   } else {
     fail('App.autoBoostCultSkills function not found');
   }
 }
 
+{
+  const { App: AppRef, CharacterData: CD, Calc: CalcRef, CULTS_DATA: CultsData } = loadApp();
+
+  if (AppRef && AppRef.autoBoostCultSkills) {
+    CD.cult = 'Orlanth';
+    CD.characteristics = { STR: 12, CON: 12, SIZ: 12, DEX: 13, INT: 15, POW: 6, CHA: 5 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.runeAffinities = { primary: 'Storm', secondary: 'Movement', tertiary: 'Death' };
+    CD.combatStyles = [{ name: 'Hill Clan Levy', weapons: ['Broadsword', 'Sling'] }];
+    CD.age = 22;
+    CD.bonusSkills = {};
+    CD.culturalSkills = {
+      'Language (Heortling)': 0,
+      Ride: 15,
+      'Craft (Smithing)': 0,
+      'Lore (Cult)': 15,
+      Athletics: 15,
+      Brawn: 0,
+      Endurance: 10,
+      Evade: 15,
+      Locale: 5,
+      Perception: 15,
+      Willpower: 10,
+      Commerce: 0,
+      Courtesy: 0,
+      Healing: 0,
+      Musicianship: 0,
+      Survival: 0
+    };
+    CD.careerSkills = {
+      Customs: 0,
+      Dance: 0,
+      Deceit: 0,
+      Influence: 0,
+      Insight: 0,
+      Locale: 0,
+      Willpower: 0,
+      Oratory: 0,
+      'Devotion (Orlanth)': 0,
+      'Lore (Cult)': 0
+    };
+
+    AppRef.autoBoostCultSkills();
+
+    const overCultural = Object.entries(CD.culturalSkills).filter(([, value]) => value > 15);
+    const overCareer = Object.entries(CD.careerSkills).filter(([, value]) => value > 15);
+    if (overCultural.length === 0 && overCareer.length === 0) {
+      pass('Quick Boost preserves 15-point cultural/career per-skill caps');
+    } else {
+      fail('Quick Boost preserves 15-point cultural/career per-skill caps',
+        `Cultural over cap: ${JSON.stringify(overCultural)}, Career over cap: ${JSON.stringify(overCareer)}`);
+    }
+  } else {
+    fail('App.autoBoostCultSkills function not found for cap regression');
+  }
+}
+
 // ============================================================
 section('Step 9 Initiation Gate');
 // ============================================================
+
+{
+  const { App: AppRef, CharacterData: CD, CULTURES_DATA: CulturesData } = loadApp();
+
+  if (AppRef && AppRef.getCulturalSkillRenderPlan) {
+    const praxian = CulturesData.find(c => c.name === 'Praxian');
+
+    CD.culturalSkills = { Navigate: 0 };
+    const navigatePlan = AppRef.getCulturalSkillRenderPlan(praxian)
+      .map(item => item.type === 'choice' ? item.storedChoice : item.skillName)
+      .filter(Boolean);
+    const navigateCount = navigatePlan.filter(name => name === 'Navigate').length;
+
+    CD.culturalSkills = { Swim: 0 };
+    const swimPlan = AppRef.getCulturalSkillRenderPlan(praxian)
+      .map(item => item.type === 'choice' ? item.storedChoice : item.skillName)
+      .filter(Boolean);
+
+    if (navigateCount === 1 && swimPlan.includes('Swim') && swimPlan.includes('Navigate')) {
+      pass('Step 5 collapses duplicate cultural rows when a choice resolves to an existing skill');
+    } else {
+      fail('Step 5 renders duplicate or missing cultural choice rows',
+        JSON.stringify({ navigatePlan, swimPlan }));
+    }
+  } else {
+    fail('App.getCulturalSkillRenderPlan function not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD } = loadApp();
+
+  if (AppRef && AppRef.selectCulture && AppRef.getHomelandSuggestions && AppRef.validateCurrentStep) {
+    AppRef.currentStep = 4;
+    AppRef.selectCulture('Praxian');
+    AppRef.selectHomeland("Pimper's Block");
+    AppRef.selectCulture('Telmori Hsunchen');
+    AppRef.selectCombatStyle('Telmori Hunter');
+    const validHomelands = AppRef.getHomelandSuggestions('Telmori Hsunchen');
+    const homelandValid = validHomelands.includes(CD.homeland);
+    const allowed = AppRef.validateCurrentStep();
+
+    if (homelandValid && allowed === true) {
+      pass('Changing Step 4 cultures resets homeland to a valid visible option');
+    } else {
+      fail('Changing Step 4 cultures left stale or blank homeland',
+        JSON.stringify({ homeland: CD.homeland, validHomelands, allowed }));
+    }
+  } else {
+    fail('Step 4 homeland reset dependencies not found');
+  }
+}
+
+{
+  const { CULTURE_BUILDS: CultureBuilds, CULTURES_DATA: CulturesData } = loadApp();
+
+  if (CultureBuilds && CulturesData) {
+    const missing = [];
+    Object.entries(CultureBuilds).forEach(([cultureName, builds]) => {
+      const culture = CulturesData.find(c => c.name === cultureName);
+      const styleNames = new Set((culture?.combatStyles || []).map(cs => cs.name));
+      builds.forEach(build => {
+        if (!styleNames.has(build.style)) {
+          missing.push(`${cultureName}/${build.name}: ${build.style}`);
+        }
+      });
+    });
+
+    if (missing.length === 0) {
+      pass('All Step 4 suggested builds reference valid culture combat styles');
+    } else {
+      fail('Suggested builds reference missing combat styles', missing.join('; '));
+    }
+  } else {
+    fail('Suggested build data not available to tests');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD } = loadApp();
+
+  if (AppRef && AppRef.selectCulture && AppRef._doApplyBuild) {
+    AppRef.currentStep = 4;
+    AppRef.selectCulture('Praxian');
+    AppRef.selectCombatStyle('Bison');
+    AppRef.selectCulture('Sartarite (Heortling)');
+    const autoStyleBefore = CD.combatStyles[0]?.name;
+
+    AppRef._doApplyBuild({
+      name: 'Orlanthi Thane',
+      stats: 'High STR, CHA',
+      career: 'Warrior',
+      style: 'Loyal Housecarl'
+    });
+
+    const selected = CD._pendingCombatStyleSelection === false &&
+      CD.career === 'Warrior' &&
+      CD.combatStyles.length === 1 &&
+      CD.combatStyles[0].name === 'Loyal Housecarl' &&
+      CD.combatStyles[0].weapons.includes('Broadsword');
+
+    if (autoStyleBefore === 'Hill Clan Levy' && selected) {
+      pass('Applying a Step 4 suggested build sets its valid combat style without stale state');
+    } else {
+      fail('Suggested build did not apply combat style cleanly',
+        JSON.stringify({ autoStyleBefore, career: CD.career, pending: CD._pendingCombatStyleSelection, combatStyles: CD.combatStyles }));
+    }
+  } else {
+    fail('Suggested build application dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, CULTURE_BUILDS: CultureBuilds } = loadApp();
+
+  if (AppRef && AppRef.selectCulture && AppRef._doApplyBuild && CultureBuilds) {
+    const invalid = [];
+    Object.entries(CultureBuilds).forEach(([cultureName, builds]) => {
+      builds.forEach(build => {
+        AppRef.currentStep = 4;
+        AppRef.selectCulture(cultureName);
+        AppRef._doApplyBuild(build);
+        const total = Object.values(CD.characteristics).reduce((sum, value) => sum + value, 0);
+        const highStats = build.stats.match(/STR|CON|SIZ|DEX|INT|POW|CHA/g) || [];
+        const highsVisible = highStats.every(stat => CD.characteristics[stat] >= 13);
+        if (total !== 75 || !highsVisible) {
+          invalid.push(`${cultureName}/${build.name}: total=${total}, highs=${highStats.map(stat => `${stat}:${CD.characteristics[stat]}`).join(',')}`);
+        }
+      });
+    });
+
+    if (invalid.length === 0) {
+      pass('All Step 4 suggested builds apply valid 75-point characteristics');
+    } else {
+      fail('Suggested builds apply invalid characteristic budgets', invalid.join('; '));
+    }
+  } else {
+    fail('Suggested build characteristic dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD } = loadApp();
+
+  if (AppRef && AppRef.validateCurrentStep && AppRef.getValidationState) {
+    AppRef.currentStep = 5;
+    CD.culture = 'God Forgot';
+    CD.culturalSkills = {
+      Conceal: 10,
+      Deceit: 15,
+      Endurance: 15,
+      Influence: 15,
+      Insight: 15,
+      Locale: 15,
+      Willpower: 15,
+      'Craft (any)': 0,
+      'Lore (any)': 0
+    };
+    CD.folkMagicSpells = ['Alarm', 'Avert', 'Bludgeon'];
+    CD.runeAffinities = { primary: 'Darkness', secondary: 'Law', tertiary: 'Stasis' };
+
+    const allowed = AppRef.validateCurrentStep();
+    const allowedState = AppRef.getValidationState();
+    if (allowed === true && allowedState.valid === true) {
+      pass('Step 5 ignores unresolved cultural placeholders with zero allocated points');
+    } else {
+      fail('Step 5 blocked zero-point unresolved cultural placeholders',
+        JSON.stringify({ allowed, allowedState }));
+    }
+
+    CD.culturalSkills['Craft (any)'] = 5;
+    CD.culturalSkills.Conceal = 5;
+    const blocked = AppRef.validateCurrentStep();
+    const blockedState = AppRef.getValidationState();
+    if (blocked === false && blockedState.errors.some(e => e.includes('Craft (any)'))) {
+      pass('Step 5 blocks unresolved cultural placeholders with allocated points');
+    } else {
+      fail('Step 5 allowed allocated unresolved cultural placeholder',
+        JSON.stringify({ blocked, blockedState }));
+    }
+  } else {
+    fail('Step 5 validation dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD } = loadApp();
+
+  if (AppRef && AppRef.validateCurrentStep) {
+    AppRef.currentStep = 4;
+    CD.culture = 'Praxian';
+    CD.homeland = 'Prax';
+    CD.combatStyles = [];
+    CD._pendingCombatStyleSelection = true;
+
+    const blocked = AppRef.validateCurrentStep();
+    if (blocked === false) {
+      pass('Step 4 blocks cultures with multiple combat styles until one is selected');
+    } else {
+      fail('Step 4 allowed advancement without a combat style selection');
+    }
+
+    CD.combatStyles = [{ name: 'Bison Rider', weapons: ['Lance', 'Sling'], traits: ['Mounted'] }];
+    CD._pendingCombatStyleSelection = false;
+    const allowed = AppRef.validateCurrentStep();
+    if (allowed === true) {
+      pass('Step 4 allows advancement after selecting a combat style');
+    } else {
+      fail('Step 4 blocked advancement despite a selected combat style');
+    }
+  } else {
+    fail('App.validateCurrentStep function not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, CULTURES_DATA: CulturesData } = loadApp();
+
+  if (AppRef && AppRef.selectCulture && AppRef.selectCombatStyle && AppRef.renderCultureDetails) {
+    const praxian = CulturesData.find(c => c.name === 'Praxian');
+    const firstStyle = praxian?.combatStyles?.find(cs => !cs.restrictions);
+    AppRef.currentStep = 4;
+    AppRef.selectCulture('Praxian');
+    const detailsHtml = AppRef.renderCultureDetails();
+    const pending = CD._pendingCombatStyleSelection === true && (!CD.combatStyles || CD.combatStyles.length === 0);
+    const dropdownRendered = detailsHtml.includes('id="combat-style-select"');
+
+    AppRef.selectCombatStyle(firstStyle.name);
+    const selected = CD._pendingCombatStyleSelection === false &&
+      CD.combatStyles.length === 1 &&
+      CD.combatStyles[0].name === firstStyle.name;
+
+    if (pending && dropdownRendered && selected) {
+      pass('selectCulture(Praxian) defers combat style selection and selectCombatStyle() applies chosen style');
+    } else {
+      fail('Praxian combat style dropdown flow failed',
+        JSON.stringify({ pending, dropdownRendered, selected, style: firstStyle?.name, combatStyles: CD.combatStyles }));
+    }
+  } else {
+    fail('Step 4 combat style selection UI dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD } = loadApp();
+
+  if (AppRef && AppRef.validateCurrentStep && AppRef.getValidationState) {
+    AppRef.currentStep = 12;
+    CD.culture = 'Praxian';
+    CD.socialClass = null;
+    CD.socialClassMoneyMod = 1;
+
+    const blocked = AppRef.validateCurrentStep();
+    const state = AppRef.getValidationState();
+    if (blocked === false && state.valid === false && state.errors.some(e => e.includes('social class'))) {
+      pass('Step 12 blocks advancement until social class is rolled or selected');
+    } else {
+      fail('Step 12 allowed blank social class', JSON.stringify({ blocked, state }));
+    }
+
+    CD.socialClass = 'Freeman';
+    CD.socialClassMoneyMod = 1;
+    const allowed = AppRef.validateCurrentStep();
+    const allowedState = AppRef.getValidationState();
+    if (allowed === true && allowedState.valid === true) {
+      pass('Step 12 allows advancement after social class selection');
+    } else {
+      fail('Step 12 blocked valid social class selection', JSON.stringify({ allowed, allowedState }));
+    }
+  } else {
+    fail('App.validateCurrentStep or App.getValidationState function not found');
+  }
+}
 
 {
   const { App: AppRef, CharacterData: CD, CULTS_DATA: CultsData } = loadApp();
@@ -4580,6 +5425,282 @@ section('Step 9 Initiation Gate');
     }
   } else {
     fail('App.validateCurrentStep function not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, Calc: CalcRef, CULTS_DATA: CultsData } = loadApp();
+
+  if (AppRef && AppRef.validateCurrentStep && AppRef.getEffectiveInitiateMiracleLimit) {
+    CD.cult = 'Orlanth';
+    CD.characteristics = { STR: 12, CON: 12, SIZ: 12, DEX: 13, INT: 15, POW: 14, CHA: 14 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.runeAffinities = { primary: 'Air', secondary: 'Movement', tertiary: 'Death' };
+    CD.combatStyles = [{ name: 'Sartarite Fyrd', weapons: ['Broadsword', 'Spear'] }];
+    CD.culturalSkills = {
+      'Language (Heortling)': 0,
+      'Native Tongue': 0,
+      'Combat Style (Cultural Style)': 25
+    };
+    CD.careerSkills = {
+      'Devotion (Orlanth)': 22
+    };
+    CD.bonusSkills = {
+      Oratory: 22
+    };
+    CD.devotionalPool = 7;
+
+    const selectedRunes = Object.values(CD.runeAffinities);
+    const qualifiedMiracles = AppRef.getQualifiedInitiateMiracles('Orlanth')
+      .filter(m => m.source === 'common' || (m.runes || []).some(r => r === 'Any' || selectedRunes.includes(r)));
+    CD.miracles = qualifiedMiracles
+      .slice(0, AppRef.getEffectiveInitiateMiracleLimit('Orlanth'))
+      .map(m => m.name);
+    AppRef.currentStep = 9;
+
+    const result = AppRef.validateCurrentStep();
+    if (result !== false) {
+      pass('Step 9 initiation gate resolves case, rune, devotion, and sword combat-style cult skills');
+    } else {
+      fail('Step 9 initiation gate resolves case, rune, devotion, and sword combat-style cult skills');
+    }
+
+    const stormspeech = AppRef.resolveCultSkillRequirement('Language (Stormspeech)');
+    if (stormspeech.key === 'Language (Stormspeech)' && stormspeech.matchedName === 'Language (Stormspeech)') {
+      pass('Cult-specific language requirements do not alias to another learned language');
+    } else {
+      fail('Cult-specific language requirements do not alias to another learned language',
+        `Resolved to ${stormspeech.key}/${stormspeech.matchedName}`);
+    }
+
+    CD.culture = 'Praxian';
+    CD.characteristics = { STR: 12, CON: 12, SIZ: 12, DEX: 12, INT: 12, POW: 8, CHA: 7 };
+    CD.combatStyles = [{ name: 'Bison', weapons: ['1H Axe', 'Javelin', 'Lance', '1H Sword', 'Praxian Shield'] }];
+    CD.culturalSkills = {};
+    CD.careerSkills = { 'Combat Style (Bison)': 11 };
+    CD.bonusSkills = { 'Combat Style (Bison)': 15 };
+    const tribalStyle = AppRef.resolveCultSkillRequirement('Combat Style (Tribal)');
+    if (tribalStyle.key === 'Combat Style (Bison)' && tribalStyle.value === 50 && tribalStyle.qualifies) {
+      pass('Tribal combat-style cult requirements resolve to the selected cultural combat style');
+    } else {
+      fail('Tribal combat-style cult requirements resolve to the selected cultural combat style',
+        JSON.stringify(tribalStyle));
+    }
+
+    CD.combatStyles = [{ name: 'Hill Clan Levy', weapons: ['Axe', 'Spear', 'Shield', 'Longbow', 'Javelin'] }];
+    CD.culturalSkills = {};
+    CD.careerSkills = { 'Combat Style (Hill Clan Levy)': 30 };
+    CD.bonusSkills = { 'Combat Style (Hill Clan Levy)': 15 };
+    const swordStyle = AppRef.resolveCultSkillRequirement('Combat style with sword');
+    if (swordStyle.value === 0 && swordStyle.qualifies === false) {
+      pass('Weapon-specific cult combat requirements fail when no matching weapon style exists');
+    } else {
+      fail('Weapon-specific cult combat requirement fell back to non-matching style',
+        JSON.stringify(swordStyle));
+    }
+
+    CD.cult = 'Buserian';
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 10, CHA: 10 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.runeAffinities = { primary: 'Fire', secondary: 'Truth', tertiary: 'Stasis' };
+    CD.culturalSkills = {};
+    CD.careerSkills = {};
+    CD.bonusSkills = {
+      'Language (Tradetalk)': 50,
+      'Lore (Stars)': 50,
+      'Lore (Cult)': 50,
+      Perception: 50,
+      'Runic Affinity': 10
+    };
+    const buserian = CultsData.find(c => c.name === 'Buserian');
+    const buserianSummary = AppRef.getCultInitiationRequirementSummary(buserian);
+    if (buserianSummary.requiredCount === 5 && buserianSummary.qualifyingSkills.length === 5 &&
+        buserianSummary.skillDetails.some(s => s.name === 'Language (Any)' && s.matchedName === 'Language (Tradetalk)') &&
+        buserianSummary.skillDetails.some(s => s.name === 'Lore (Any)' && s.matchedName.startsWith('Lore ('))) {
+      pass('Placeholder cult skills count toward the five-skill initiation requirement when resolved');
+    } else {
+      fail('Placeholder cult skills lowered or failed initiation requirement count',
+        JSON.stringify(buserianSummary));
+    }
+  } else {
+    fail('Step 9 initiation gate resolver dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD } = loadApp();
+
+  if (AppRef && AppRef.selectCult) {
+    AppRef.showConfirmation = (_message, onConfirm) => onConfirm();
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 10, POW: 12, CHA: 8 };
+    CD.cult = 'Daka Fal';
+    CD.boundSpirits = [{ name: 'Old Ancestor', type: 'Ancestor' }];
+    CD.sorcerySpells = ['Holdfast'];
+    CD.miracles = ['Extension'];
+
+    AppRef.selectCult('Waha');
+
+    if (CD.cult === 'Waha' && CD.boundSpirits.length === 0 && CD.sorcerySpells.length === 0 && CD.miracles.length === 0) {
+      pass('Changing cult clears stale miracles, bound spirits, and sorcery spells');
+    } else {
+      fail('Changing cult preserved stale magic selections',
+        JSON.stringify({ cult: CD.cult, miracles: CD.miracles, spirits: CD.boundSpirits, spells: CD.sorcerySpells }));
+    }
+  } else {
+    fail('App.selectCult unavailable for stale magic selection test');
+  }
+}
+
+{
+  const { App: AppRef } = loadApp();
+  if (AppRef && AppRef.renderStep10) {
+    const source = AppRef.renderStep10.toString();
+    if (!source.includes("onchange=\"App.updateSkillPoints('career'") &&
+        !source.includes("onchange=\"App.disambiguateAndUpdateFreeText('career'")) {
+      pass('Step 10 career allocation avoids inline onchange handlers for apostrophe-safe skill names');
+    } else {
+      fail('Step 10 career allocation still embeds raw skill names in inline onchange handlers');
+    }
+  } else {
+    fail('App.renderStep10 unavailable for apostrophe-safe handler test');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, Calc: CalcRef } = loadApp();
+
+  if (AppRef && AppRef.autoBoostCultSkills) {
+    CD.cult = 'Orlanth';
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 10, POW: 10, CHA: 10 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.runeAffinities = { primary: 'Air', secondary: 'Movement', tertiary: 'Death' };
+    CD.age = 21;
+    CD.culturalSkills = { Athletics: 15, Brawn: 15 };
+    CD.careerSkills = {};
+    CD.bonusSkills = {};
+
+    AppRef.autoBoostCultSkills();
+
+    const noHiddenCulturalDevotion = !Object.prototype.hasOwnProperty.call(CD.culturalSkills, 'Devotion (Orlanth)');
+    const noHiddenCareerDevotion = !Object.prototype.hasOwnProperty.call(CD.careerSkills, 'Devotion (Orlanth)');
+    const originalPoolsIntact = CD.culturalSkills.Athletics === 15 && CD.culturalSkills.Brawn === 15;
+    if (noHiddenCulturalDevotion && noHiddenCareerDevotion && originalPoolsIntact) {
+      pass('Quick Boost does not create hidden cultural/career allocations for unavailable cult skills');
+    } else {
+      fail('Quick Boost created hidden invalid cultural/career allocations',
+        JSON.stringify({ culturalSkills: CD.culturalSkills, careerSkills: CD.careerSkills, bonusSkills: CD.bonusSkills }));
+    }
+  } else {
+    fail('App.autoBoostCultSkills unavailable for hidden allocation regression');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, Calc: CalcRef } = loadApp();
+
+  if (AppRef && AppRef.compileAllSkills) {
+    CD.characteristics = { STR: 12, CON: 12, SIZ: 12, DEX: 13, INT: 15, POW: 6, CHA: 5 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.runeAffinities = { primary: 'Storm', secondary: 'Movement', tertiary: 'Death' };
+    CD.bonusSkills = { 'Runic Affinity': 8 };
+    CD.culturalSkills = {};
+    CD.careerSkills = {};
+
+    if (AppRef.getRuneAffinityDisplayValues) {
+      const runeDisplay = AppRef.getRuneAffinityDisplayValues();
+      if (runeDisplay.values.primary === 50 && runeDisplay.bonusBySlot.primary === 8) {
+        pass('Runic Affinity bonus displays on the selected primary rune');
+      } else {
+        fail('Runic Affinity bonus displays on the selected primary rune',
+          JSON.stringify(runeDisplay));
+      }
+    } else {
+      fail('App.getRuneAffinityDisplayValues function not found');
+    }
+
+    const compiled = AppRef.compileAllSkills();
+    if (!compiled.some(s => s.name === 'Runic Affinity' || s.name.startsWith('Runic Affinity ('))) {
+      pass('Runic Affinity bonuses are not rendered as standalone skill rows');
+    } else {
+      fail('Runic Affinity bonuses are not rendered as standalone skill rows',
+        JSON.stringify(compiled.filter(s => s.name === 'Runic Affinity' || s.name.startsWith('Runic Affinity ('))));
+    }
+
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 10, CHA: 10 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.runeAffinities = { primary: 'Darkness', secondary: 'Law', tertiary: 'Stasis' };
+    CD.bonusSkills = { 'Runic Affinity (Law)': 10 };
+    const lawDisplay = AppRef.getRuneAffinityDisplayValues();
+    if (lawDisplay.values.primary === 50 && lawDisplay.values.secondary === 50 &&
+        lawDisplay.bonusBySlot.secondary === 10) {
+      pass('Specific Rune Affinity bonus displays on the matching selected rune');
+    } else {
+      fail('Specific Rune Affinity bonus displays on the matching selected rune',
+        JSON.stringify(lawDisplay));
+    }
+  } else {
+    fail('Rune affinity display test dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, Calc: CalcRef } = loadApp();
+
+  if (AppRef && AppRef.resolveCultSkillRequirement && AppRef.validateCurrentStep) {
+    CD.cult = 'Arkat';
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 10, CHA: 10 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.runeAffinities = { primary: 'Darkness', secondary: 'Law', tertiary: 'Stasis' };
+    CD.culturalSkills = {};
+    CD.careerSkills = {};
+    CD.bonusSkills = { 'Runic Affinity (Law)': 10 };
+    CD.sorcerySpells = ['Holdfast'];
+    AppRef.currentStep = 9;
+
+    const invocation = AppRef.resolveCultSkillRequirement('Invocation');
+    const shaping = AppRef.resolveCultSkillRequirement('Shaping');
+    const result = AppRef.validateCurrentStep();
+    if (invocation.key === 'Runic Affinity' && invocation.value === 50 &&
+        shaping.key === 'Runic Affinity (Law)' && shaping.value === 50 &&
+        result !== false) {
+      pass('Sorcery cult requirements use spell Rune Affinity and Law Rune instead of Invocation/Shaping skills');
+    } else {
+      fail('Sorcery cult requirements use spell Rune Affinity and Law Rune instead of Invocation/Shaping skills',
+        JSON.stringify({ invocation, shaping, result }));
+    }
+  } else {
+    fail('Sorcery cult skill resolver dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, Calc: CalcRef } = loadApp();
+
+  if (AppRef && AppRef.resolveCultSkillRequirement) {
+    CD.cult = 'Daka Fal';
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 10, CHA: 10 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.culturalSkills = {};
+    CD.careerSkills = {
+      'Binding (Daka Fal)': 15,
+      Trance: 15
+    };
+    CD.bonusSkills = {
+      'Binding (Daka Fal)': 15,
+      Trance: 15
+    };
+
+    const binding = AppRef.resolveCultSkillRequirement('Binding (Shaman)');
+    const trance = AppRef.resolveCultSkillRequirement('Trance (Shaman)');
+    if (binding.key === 'Binding (Daka Fal)' && binding.value === 50 &&
+        trance.key === 'Trance' && trance.value === 50) {
+      pass('Animist shaman cult skills resolve to concrete Binding and Trance skills');
+    } else {
+      fail('Animist shaman cult skills resolve to concrete Binding and Trance skills',
+        JSON.stringify({ binding, trance }));
+    }
+  } else {
+    fail('Animist shaman cult skill resolver dependencies not found');
   }
 }
 
@@ -4648,6 +5769,9 @@ section('Miracle Pool Capping (pool > available qualified)');
       CD.characteristics = { STR: 11, CON: 11, SIZ: 11, DEX: 11, INT: 18, POW: 16, CHA: 11 };
       CD.devotionalPool = 8;
       CD.runeAffinities = { primary: 'Fire', secondary: 'Death', tertiary: 'Disorder' };
+      CD.bonusSkills = { Willpower: 15, 'Lore (Cult)': 15, 'First Aid': 15, Devotion: 15, Healing: 15, 'Runic Affinity': 15 };
+      CD.culturalSkills = { Willpower: 15, 'First Aid': 15, Healing: 15, Insight: 15 };
+      CD.careerSkills = { 'Lore (Cult)': 15, Devotion: 15, 'Runic Affinity': 15 };
       CD.miracles = ['Extension', 'Find (Specific Thing)', 'Divination', 'Chastise'];
       AppRef.currentStep = 9;
       AppRef.totalSteps = 13;
@@ -4664,6 +5788,61 @@ section('Miracle Pool Capping (pool > available qualified)');
     }
   } else {
     fail('App.agent.next or MIRACLES_DATA not found for miracle cap test');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, MIRACLES_DATA: MiraclesRef } = loadApp();
+
+  if (AppRef && AppRef.agent && AppRef.agent.selectMiracle && MiraclesRef?.cults?.Orlanth) {
+    CD.cult = 'Orlanth';
+    CD.cultType = { types: ['theist'], label: 'Theist' };
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 10, POW: 12, CHA: 10 };
+    CD.devotionalPool = 2;
+    CD.runeAffinities = { primary: 'Air', secondary: 'Movement', tertiary: 'Death' };
+    CD.miracles = [];
+
+    const result = AppRef.agent.selectMiracle('Extension');
+    if (result.success && result.miracles.includes('Extension')) {
+      pass('App.agent.selectMiracle selects valid object-shaped miracle entries by name');
+    } else {
+      fail('App.agent.selectMiracle rejected a valid miracle name',
+        JSON.stringify(result));
+    }
+  } else {
+    fail('App.agent.selectMiracle object-shaped miracle test dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD } = loadApp();
+
+  if (AppRef && AppRef.getValidationState && AppRef.agent && AppRef.agent.next) {
+    AppRef.currentStep = 9;
+    CD.cult = 'Daka Fal';
+    CD.cultType = { primary: 'animist', types: ['animist'], isHybrid: false };
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 10, POW: 10, CHA: 8 };
+    CD.boundSpiritSlots = 4;
+    CD.boundSpirits = [];
+
+    const animistState = AppRef.getValidationState();
+    const animistNext = AppRef.agent.next();
+
+    CD.cult = 'Arkat';
+    CD.cultType = { primary: 'sorcery', types: ['sorcery'], isHybrid: false };
+    CD.sorcerySpells = [];
+    const sorceryState = AppRef.getValidationState();
+
+    if (!animistState.valid && animistState.errors.some(e => e.includes('bound spirit')) &&
+        !animistNext.success && animistNext.errors.some(e => e.includes('bound spirit')) &&
+        !sorceryState.valid && sorceryState.errors.some(e => e.includes('sorcery spell'))) {
+      pass('Step 9 structured and agent validation blocks missing animist spirits and sorcery spells');
+    } else {
+      fail('Step 9 structured/agent validation missed required magic selections',
+        JSON.stringify({ animistState, animistNext, sorceryState }));
+    }
+  } else {
+    fail('Step 9 structured/agent validation dependencies not found');
   }
 }
 

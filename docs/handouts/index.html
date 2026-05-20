@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Start Here - Glorantha in Mythras Player Handouts</title>
+  <style>
+    :root { --paper:#fbf4e8; --panel:#efe0c8; --ink:#24170f; --rust:#8f4023; --sage:#526b42; --gold:#a8792c; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:linear-gradient(180deg,#ecdcc0,#f8efe2); font-family:Georgia,"Times New Roman",serif; line-height:1.55; }
+    main { max-width:960px; margin:0 auto; padding:32px 20px 56px; }
+    header, footer { text-align:center; }
+    h1 { color:var(--rust); margin:0 0 8px; font-size:2.35rem; }
+    h2 { margin:0 0 8px; }
+    nav, .card, .route { background:var(--paper); border-radius:10px; padding:16px 20px; margin:16px 0; box-shadow:0 10px 24px rgba(45,25,10,.10); }
+    nav { background:var(--panel); text-align:center; }
+    nav a, footer a { color:var(--rust); font-weight:bold; margin:0 8px 6px; display:inline-block; }
+    .route a { color:var(--rust); font-weight:bold; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; }
+    .card { border-left:5px solid var(--sage); }
+    .route { border-left:5px solid var(--gold); }
+    ol, ul { margin:8px 0 8px 22px; padding:0; }
+    li { margin:4px 0; }
+    @media print { body { background:white; } main { max-width:none; padding:0; } nav { display:none; } .card,.route { break-inside:avoid; box-shadow:none; border:1px solid #999; border-left:5px solid #555; } a { color:#000; text-decoration:none; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Glorantha in Mythras: Start Here</h1>
+    <p>This is the reading path for players. It tells you what to open first, what to skip until later, and which book pages answer the usual table questions.</p>
+  </header>
+
+  <nav aria-label="Handout navigation">
+    <a href="/rules/handouts/combat-path.html">Combat Path</a>
+    <a href="/rules/handouts/magic-path.html">Magic Path</a>
+    <a href="/rules/handouts/combined-path.html">Magic in Combat</a>
+    <a href="/rules/handouts/rules-and-house-rules.html">House Rules</a>
+    <a href="/rules/handouts/prep-checklist.html">Prep Checklist</a>
+    <a href="/rules/handouts/source-trail.html">Source Trail</a>
+    <a href="/01-Character-Generator.html">Character Generator</a>
+  </nav>
+
+  <section class="route">
+    <h2>Read in this order</h2>
+    <ol>
+      <li><strong>Create your character.</strong> Open the <a href="/01-Character-Generator.html">Character Generator</a>, follow the steps, then export a PDF sheet.</li>
+      <li><strong>Learn the basic dice language.</strong> Read Mythras Core Rulebook p.20-23 for characteristics and skill base values, then p.38-42 for skill tests and opposed rolls.</li>
+      <li><strong>Learn your homeland and culture.</strong> Read Adventures in Glorantha p.23-41 for cultures, careers, and combat styles that match your sheet.</li>
+      <li><strong>Learn the first combat loop.</strong> Read <a href="/rules/handouts/combat-path.html">Combat Path</a> stages 1-4, then Mythras Core Rulebook p.74-106 when you want the full procedure.</li>
+      <li><strong>Learn only your own magic first.</strong> Everyone with spells reads Folk Magic in Adventures in Glorantha p.63-68. Then read the section in <a href="/rules/handouts/magic-path.html">Magic Path</a> for your own tradition.</li>
+      <li><strong>Read the table differences.</strong> Read <a href="/rules/handouts/rules-and-house-rules.html">House Rules</a> before using miracles, spirits, sorcery, devotional pools, or cult recovery rules.</li>
+      <li><strong>Use the session checklist.</strong> Before game day, finish the <a href="/rules/handouts/prep-checklist.html">Prep Checklist</a>.</li>
+    </ol>
+  </section>
+
+  <section class="grid">
+    <article class="card">
+      <h2>If you are mostly a warrior</h2>
+      <p>Know your combat style, the weapons inside it, Action Points, armour, hit locations, and two Special Effects you are likely to use.</p>
+    </article>
+    <article class="card">
+      <h2>If you are a cult initiate</h2>
+      <p>Know your Rune Affinities, selected miracles, Devotional Pool, and how each miracle is recovered after use.</p>
+    </article>
+    <article class="card">
+      <h2>If you work with spirits</h2>
+      <p>Know your Spirit Rune value, bound spirit slots, each spirit's ability, and whether the scene needs spirit-world perception or a binding/command roll.</p>
+    </article>
+    <article class="card">
+      <h2>If you are a sorcerer</h2>
+      <p>Know your three spells, the rune each spell uses, your Law Rune value for shaping, and one fast version of each spell.</p>
+    </article>
+  </section>
+
+  <section class="route">
+    <h2>Where the PDFs live</h2>
+    <p>The player file server keeps book PDFs under <strong>sources/books/</strong>. The source guide lists the exact filenames and page ranges. Cult one-pagers are linked from <a href="/rules/handouts/source-trail.html">Source Trail</a>.</p>
+  </section>
+
+  <footer>
+    <p><a href="/rules/handouts/source-trail.html">Source Trail</a> | <a href="/01-Character-Generator.html">Character Generator</a></p>
+  </footer>
+</main>
+</body>
+</html>
