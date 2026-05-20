@@ -966,6 +966,30 @@ asyncTest('exportSinglePagePDF() magic wrapping capture failed', async () => {
   }
 });
 
+// Test 3.4: PDF sorcery rules use RAW Invocation/Shaping, not rune affinity mappings
+asyncTest('exportSinglePagePDF() sorcery rule text capture failed', async () => {
+  if (!App.App || !App.App.exportSinglePagePDF) return;
+
+  const { text } = await captureSinglePagePdf(createPdfTestCharacter({
+    cult: 'Arkat',
+    cultType: { primary: 'sorcery', types: ['sorcery'], isHybrid: false },
+    miracles: [],
+    sorcerySpells: ['Holdfast', 'Phantom (Sense)', 'Project (Sense)'],
+    folkMagicSpells: [],
+    careerFolkMagic: [],
+    boundSpirits: []
+  }));
+  const hasRawText = text.includes('Casting: Invocation skill') && text.includes('Shaping: Shaping skill');
+  const hasRuneMappingText = /Rune Affinity of spell|Law Rune affinity/.test(text);
+
+  if (hasRawText && !hasRuneMappingText) {
+    pass('exportSinglePagePDF() labels sorcery as RAW Invocation/Shaping');
+  } else {
+    fail('exportSinglePagePDF() still labels sorcery as rune-affinity casting',
+      JSON.stringify({ hasRawText, hasRuneMappingText, text: text.match(/Casting:[^\n]+/)?.[0] || '' }));
+  }
+});
+
 // ============================================================
 section('Risk 4: Normalized Character Model (Helpers Module)');
 // ============================================================
@@ -4611,12 +4635,14 @@ section('Player Handout Contract');
   const html = fs.existsSync(magicPath) ? fs.readFileSync(magicPath, 'utf8') : '';
   const forbiddenClaims = [
     /all casting skills are replaced by\s*<strong>Rune Affinities<\/strong>/i,
-    /You don't roll "Folk Magic"/i
+    /You don't roll "Folk Magic"/i,
+    /Roll the spell's Rune Affinity/i,
+    /Law Rune for Shaping/i
   ];
   const hasForbiddenClaim = forbiddenClaims.some(pattern => pattern.test(html));
   const hasHouseRuleLabel = /House rule/i.test(html);
-  const hasSystemSpecificRows = /Theism[\s\S]*Rune Affinity[\s\S]*Animism[\s\S]*Spirit Rune[\s\S]*Sorcery[\s\S]*Law Rune/i.test(html);
-  const explainsTerms = /Rune Affinity[\s\S]*Adventures in Glorantha[\s\S]*Spirit Rune[\s\S]*spirit[\s\S]*Shaping[\s\S]*Mythras Core/i.test(html);
+  const hasSystemSpecificRows = /Theism[\s\S]*Rune Affinity[\s\S]*Animism[\s\S]*Spirit Rune[\s\S]*Sorcery[\s\S]*Invocation[\s\S]*Shaping/i.test(html);
+  const explainsTerms = /Rune Affinity[\s\S]*Adventures in Glorantha[\s\S]*Spirit Rune[\s\S]*spirit[\s\S]*Invocation[\s\S]*Shaping[\s\S]*Mythras Core/i.test(html);
   const hasPlayerSources = /A-Bird-in-the-Hand\.pdf[\s\S]*Monster-Island\.pdf[\s\S]*drive\.google\.com\/drive\/folders\/1CKNxkpoL4sWfzdbkglQyiYvCBXlmyFIj/i.test(html);
 
   if (!hasForbiddenClaim && hasHouseRuleLabel && hasSystemSpecificRows && explainsTerms && hasPlayerSources) {
@@ -4624,6 +4650,34 @@ section('Player Handout Contract');
   } else {
     fail('Magic handout overstates or underdocuments house-rule casting model',
       JSON.stringify({ hasForbiddenClaim, hasHouseRuleLabel, hasSystemSpecificRows, explainsTerms, hasPlayerSources }));
+  }
+}
+
+// Test: player handouts do not invent a sorcery spell-rune map
+{
+  const handoutDir = path.join(__dirname, 'docs', 'handouts');
+  const htmlFiles = fs.readdirSync(handoutDir).filter(f => f.endsWith('.html'));
+  const forbiddenSorceryRuneClaims = [
+    /spell's Rune Affinity/i,
+    /rune each spell uses/i,
+    /Law Rune value for shaping/i,
+    /Law Rune for Shaping/i,
+    /using your Law Rune/i,
+    /roll Law Rune/i
+  ];
+  const problems = [];
+
+  for (const file of htmlFiles) {
+    const html = fs.readFileSync(path.join(handoutDir, file), 'utf8');
+    forbiddenSorceryRuneClaims.forEach(pattern => {
+      if (pattern.test(html)) problems.push(`${file}: ${pattern}`);
+    });
+  }
+
+  if (problems.length === 0) {
+    pass('Player handouts keep sorcery on RAW Invocation/Shaping without a rune map');
+  } else {
+    fail('Player handouts still describe sorcery as spell runes or Law Rune shaping', problems.join('; '));
   }
 }
 
@@ -5644,32 +5698,156 @@ section('Step 9 Initiation Gate');
 }
 
 {
+  const { App: AppRef, CharacterData: CD, Calc: CalcRef, _sandbox } = loadApp();
+
+  if (AppRef && AppRef.renderPlayMagic) {
+    CD.cult = 'Arkat';
+    CD.cultType = { primary: 'sorcery', types: ['sorcery'], isHybrid: false };
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 10, CHA: 10 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.sorcerySpells = ['Holdfast'];
+    CD.folkMagicSpells = [];
+    CD.careerFolkMagic = [];
+
+    AppRef.renderPlayMagic();
+    const html = _sandbox.elements['play-magic']?.innerHTML || '';
+    const hasRawText = /Casting:<\/strong>\s*Invocation skill/i.test(html) &&
+      /Shaping:<\/strong>\s*Shaping skill/i.test(html);
+    const hasRuneMappingText = /Rune Affinity of spell|Law Rune affinity/i.test(html);
+
+    if (hasRawText && !hasRuneMappingText) {
+      pass('Play Mode labels sorcery as RAW Invocation/Shaping');
+    } else {
+      fail('Play Mode still labels sorcery as rune-affinity casting',
+        JSON.stringify({ hasRawText, hasRuneMappingText, html }));
+    }
+  } else {
+    fail('Play Mode sorcery rule text dependencies not found');
+  }
+}
+
+{
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  const hasRawStep9Text = /<strong>Casting:<\/strong>\s*Invocation skill/i.test(html) &&
+    /<strong>Shaping:<\/strong>\s*Shaping skill/i.test(html);
+  const hasRuneMappingText = /Rune Affinity of spell|Law Rune affinity|replaces Invocation|replaces Shaping skill/i.test(html);
+
+  if (hasRawStep9Text && !hasRuneMappingText) {
+    pass('Step 9 sorcery picker labels RAW Invocation/Shaping');
+  } else {
+    fail('Step 9 sorcery picker still labels sorcery as rune-affinity casting',
+      JSON.stringify({ hasRawStep9Text, hasRuneMappingText }));
+  }
+}
+
+{
   const { App: AppRef, CharacterData: CD, Calc: CalcRef } = loadApp();
 
   if (AppRef && AppRef.resolveCultSkillRequirement && AppRef.validateCurrentStep) {
     CD.cult = 'Arkat';
     CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 10, CHA: 10 };
     CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
-    CD.runeAffinities = { primary: 'Darkness', secondary: 'Law', tertiary: 'Stasis' };
+    CD.runeAffinities = { primary: 'Darkness', secondary: 'Stasis', tertiary: 'Law' };
     CD.culturalSkills = {};
-    CD.careerSkills = {};
-    CD.bonusSkills = { 'Runic Affinity (Law)': 10 };
+    CD.selectedProfessionalSkills = ['Invocation (Arkat)', 'Shaping', 'Literacy'];
+    CD.careerSkills = { 'Invocation (Arkat)': 15, Shaping: 15 };
+    CD.bonusSkills = { 'Invocation (Arkat)': 5, Shaping: 10 };
     CD.sorcerySpells = ['Holdfast'];
     AppRef.currentStep = 9;
 
     const invocation = AppRef.resolveCultSkillRequirement('Invocation');
     const shaping = AppRef.resolveCultSkillRequirement('Shaping');
     const result = AppRef.validateCurrentStep();
-    if (invocation.key === 'Runic Affinity' && invocation.value === 50 &&
-        shaping.key === 'Runic Affinity (Law)' && shaping.value === 50 &&
+    if (invocation.key === 'Invocation (Arkat)' && invocation.value === 50 &&
+        shaping.key === 'Shaping' && shaping.value === 50 &&
         result !== false) {
-      pass('Sorcery cult requirements use spell Rune Affinity and Law Rune instead of Invocation/Shaping skills');
+      pass('Sorcery cult requirements use RAW Invocation and Shaping skills');
     } else {
-      fail('Sorcery cult requirements use spell Rune Affinity and Law Rune instead of Invocation/Shaping skills',
+      fail('Sorcery cult requirements use RAW Invocation and Shaping skills',
         JSON.stringify({ invocation, shaping, result }));
     }
   } else {
     fail('Sorcery cult skill resolver dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, Calc: CalcRef } = loadApp();
+
+  if (AppRef && AppRef.validateCurrentStep && AppRef.getValidationState) {
+    CD.cult = 'Arkat';
+    CD.cultType = { primary: 'sorcery', types: ['sorcery'], isHybrid: false };
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 10, CHA: 10 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.selectedProfessionalSkills = ['Invocation (Arkat)', 'Shaping', 'Literacy'];
+    CD.careerSkills = { 'Invocation (Arkat)': 0, Shaping: 0, Literacy: 0 };
+    CD.bonusSkills = {};
+    CD.sorcerySpells = ['Holdfast'];
+    AppRef.currentStep = 9;
+
+    const step9Result = AppRef.validateCurrentStep();
+    const step9State = AppRef.getValidationState();
+
+    CD.bonusSkills = {
+      'Invocation (Arkat)': 15,
+      Shaping: 15,
+      Conceal: 15,
+      Deceit: 15,
+      Endurance: 15,
+      Influence: 15,
+      Insight: 15,
+      Locale: 15,
+      Perception: 15,
+      Willpower: 15
+    };
+    AppRef.currentStep = 11;
+    const blockedValidation = AppRef.validateCurrentStep();
+    const blockedState = AppRef.getValidationState();
+
+    CD.careerSkills = { 'Invocation (Arkat)': 5, Shaping: 10, Literacy: 85 };
+    const allowedValidation = AppRef.validateCurrentStep();
+    const allowedState = AppRef.getValidationState();
+
+    if (step9Result === true &&
+        step9State.valid === true &&
+        blockedValidation === false &&
+        blockedState.valid === false &&
+        blockedState.errors.some(e => e.includes('Initiation requires 2 cult skills at 50%+')) &&
+        allowedValidation === true &&
+        allowedState.valid === true) {
+      pass('Sorcery initiation gate defers until career and bonus skills are allocated');
+    } else {
+      fail('Sorcery initiation gate defers until career and bonus skills are allocated',
+        JSON.stringify({ step9Result, step9State, blockedState, allowedState }));
+    }
+  } else {
+    fail('Sorcery deferred initiation gate dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, Calc: CalcRef } = loadApp();
+
+  if (AppRef && AppRef.compileAllSkills && CalcRef?.resolveSkillDef) {
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 10, CHA: 10 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.selectedProfessionalSkills = ['Invocation (Arkat)', 'Shaping', 'Literacy'];
+    CD.careerSkills = { 'Invocation (Arkat)': 0, Shaping: 0, Literacy: 0 };
+
+    const invocationDef = CalcRef.resolveSkillDef('Invocation (Arkat)');
+    const invocationSkill = AppRef.compileAllSkills().find(s => s.name === 'Invocation (Arkat)');
+    const invocationRequirement = AppRef.resolveCultSkillRequirement('Invocation');
+    if (invocationDef?.name === 'Invocation' &&
+        invocationSkill?.base === 30 &&
+        invocationRequirement.key === 'Invocation (Arkat)' &&
+        invocationRequirement.value === 30) {
+      pass('Invocation specializations inherit RAW Invocation base skill');
+    } else {
+      fail('Invocation specializations inherit RAW Invocation base skill',
+        JSON.stringify({ invocationDef, invocationSkill, invocationRequirement }));
+    }
+  } else {
+    fail('Invocation specialization test dependencies not found');
   }
 }
 

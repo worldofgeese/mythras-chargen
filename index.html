@@ -1841,8 +1841,11 @@ const Calc = {
       const generic = skillName.substring(0, parenIdx).trim() + ' (any)';
       def = Helpers.getSkill(generic);
       if (def) return def;
+      const base = skillName.substring(0, parenIdx).trim();
+      def = Helpers.getSkill(base);
+      if (def) return def;
       // Fallback: match any skill with same prefix (e.g., "Combat Style (Hill Clan Levy)" → "Combat Style (Cultural Style)")
-      const prefix = skillName.substring(0, parenIdx).trim();
+      const prefix = base;
       def = SKILLS_DATA.find(s => s.name.startsWith(prefix + ' ('));
       if (def) return def;
     }
@@ -2791,6 +2794,11 @@ const App = {
       const spent = Object.values(CharacterData.bonusSkills).reduce((a, b) => a + b, 0);
       if (spent !== ageCategory.bonusPoints) {
         this.showToast(`You must distribute exactly ${ageCategory.bonusPoints} bonus points for your age`, 'error');
+        return false;
+      }
+      const cultGateErrors = App.getCultInitiationGateErrors ? App.getCultInitiationGateErrors() : [];
+      if (cultGateErrors.length > 0) {
+        this.showToast(cultGateErrors[0], 'error');
         return false;
       }
     }
@@ -4065,6 +4073,7 @@ App.getValidationState = function() {
     const total = ageCategory ? ageCategory.bonusPoints : 150;
     const spent = Object.values(CharacterData.bonusSkills).reduce((a, b) => a + b, 0);
     if (spent !== total) errors.push(`Bonus points: ${spent}/${total} spent`);
+    if (App.getCultInitiationGateErrors) errors.push(...App.getCultInitiationGateErrors());
   }
   if (step === 12) {
     if (!CharacterData.socialClass) errors.push('A social class must be rolled or selected');
@@ -4858,7 +4867,7 @@ App.renderStep9 = function() {
       if (cultType.types.includes('sorcery')) {
         const sorceryPickerEl = div.querySelector('#sorcery-picker');
         const magicPoints = CharacterData.sorceryResource || CharacterData.characteristics.POW || 0;
-        // Starting spells = 3 for Dedicated rank (Rune Affinity ~50% / 20 ≈ 3). Mythras Core p.165: memorisation limit = INT.
+        // Starting spells = 3 for Dedicated rank at character creation. Mythras Core p.165: memorisation limit = INT.
         const maxSpells = 3;
         if (!CharacterData.sorcerySpells) CharacterData.sorcerySpells = [];
         const selectedCount = CharacterData.sorcerySpells.length;
@@ -4875,10 +4884,10 @@ App.renderStep9 = function() {
           <div class="magic-panel magic-panel--sorcery">
             <h3>Sorcery${cultType.isHybrid ? ' \u2014 Sorcerer Path' : ''}</h3>
             <p><strong>Resource:</strong> Magic Points (${magicPoints})</p>
-            <p><strong>Casting:</strong> Rune Affinity of spell (replaces Invocation)</p>
-            <p><strong>Shaping:</strong> Law Rune affinity (replaces Shaping skill)</p>
-            <p><strong>Intensity:</strong> Rune Affinity / 10 | <strong>Shaping Points:</strong> Law Rune / 10</p>
-            <p class="spell-picker__source">Source: Mythras Core p.162-178, AiG p.60</p>
+            <p><strong>Casting:</strong> Invocation skill</p>
+            <p><strong>Shaping:</strong> Shaping skill</p>
+            <p><strong>Intensity:</strong> Invocation / 10 | <strong>Shaping Points:</strong> Shaping / 10</p>
+            <p class="spell-picker__source">Source: Mythras Core p.162-178. Sorcery spells do not use a rune map in this tool.</p>
           </div>
           <div class="spell-picker">
             <h4>Starting Spells <span style="font-weight:normal">(${selectedCount} / ${maxSpells} \u2014 Dedicated rank, Core p.165)</span></h4>
@@ -5153,7 +5162,6 @@ App.resolveDefaultCultSkillKey = function(cultSkillName) {
   const normalized = this.normalizeSkillName(cultSkillName);
   if (CharacterData.cult && normalized.startsWith('devotion')) return `Devotion (${CharacterData.cult})`;
   if (CharacterData.cult && normalized.startsWith('binding')) return `Binding (${CharacterData.cult})`;
-  if (CharacterData.cult && normalized === 'invocation') return `Invocation (${CharacterData.cult})`;
   if (normalized.startsWith('trance')) return 'Trance';
   return cultSkillName;
 };
@@ -5374,13 +5382,6 @@ App.resolveCombatStyleRequirement = function(cultSkillName) {
 App.resolveCultSkillRequirement = function(cultSkillName, allSkillsArr = null) {
   const skills = allSkillsArr || (App.compileAllSkills ? App.compileAllSkills() : []);
   const normalized = this.normalizeSkillName(cultSkillName);
-  const cultObj = CharacterData.cult ? CULTS_DATA.find(c => c.name === CharacterData.cult) : null;
-  const cultType = cultObj ? detectCultType(cultObj) : CharacterData.cultType;
-
-  if (cultType?.types?.includes('sorcery')) {
-    if (normalized === 'invocation') return this.resolveRuneAffinityRequirement(cultSkillName);
-    if (normalized === 'shaping') return this.resolveRuneAffinityRequirement(cultSkillName, 'Law');
-  }
 
   if (normalized === 'runic affinity') {
     return this.resolveRuneAffinityRequirement(cultSkillName);
@@ -5435,6 +5436,30 @@ App.getCultInitiationRequirementSummary = function(cultObj, allSkillsArr = null)
   };
 };
 
+App.shouldDeferCultSkillGateToPostAllocation = function(cultType) {
+  return !!cultType?.types?.includes('sorcery');
+};
+
+App.getCultInitiationGateErrors = function(options = {}) {
+  const errors = [];
+  if (!CharacterData.cult) return errors;
+
+  const cultObj = CULTS_DATA.find(c => c.name === CharacterData.cult);
+  if (!cultObj) return errors;
+
+  const cultType = CharacterData.cultType || detectCultType(cultObj);
+  if (options.deferSorcery && this.shouldDeferCultSkillGateToPostAllocation(cultType)) {
+    return errors;
+  }
+
+  const allSkillsArr = App.compileAllSkills ? App.compileAllSkills() : [];
+  const summary = App.getCultInitiationRequirementSummary(cultObj, allSkillsArr);
+  if (!summary.qualifies) {
+    errors.push(`Initiation requires ${summary.requiredCount} cult skills at 50%+. You have ${summary.qualifyingSkills.length}. Use Quick Boost to raise skills, or go back to reallocate cultural/career points.`);
+  }
+  return errors;
+};
+
 /**
  * Update the cult requirement warning + boost panel in-place.
  * Shared between selectCult (via setTimeout) and autoBoostCultSkills (direct).
@@ -5448,6 +5473,8 @@ App.updateCultRequirementUI = function() {
   const summary = App.getCultInitiationRequirementSummary(cult, allSkills);
   const { skillDetails, requiredCount, qualifyingSkills } = summary;
   const warning = document.getElementById('cult-requirement-warning');
+  const cultType = CharacterData.cultType || detectCultType(cult);
+  const deferredGate = App.shouldDeferCultSkillGateToPostAllocation(cultType);
 
   if (qualifyingSkills.length >= requiredCount) {
     if (warning) {
@@ -5464,7 +5491,9 @@ App.updateCultRequirementUI = function() {
       }).join(', ');
       warning.innerHTML = `<div style="background: #fff3cd; border: 1px solid #ffc107; padding: 10px; margin: 8px 0; font-size: 12px; border-radius: 4px;">
         <strong>\u26a0\ufe0f Initiation requires ${requiredCount} cult skills at 50%+.</strong> Currently ${qualifyingSkills.length}/${requiredCount}.
-        Use Quick Boost below, or go back to reallocate cultural/career skill points.
+        ${deferredGate
+          ? 'Sorcery uses RAW Invocation and Shaping; finish career points in Step 10 and bonus points in Step 11 before the final gate is checked.'
+          : 'Use Quick Boost below, or go back to reallocate cultural/career skill points.'}
         <div style="margin-top: 6px; line-height: 1.6;"><strong>Cult skills:</strong> ${skillList}</div>
       </div>`;
     }
@@ -5648,13 +5677,7 @@ App.getStep9ValidationErrors = function() {
   const cultObj = CULTS_DATA.find(c => c.name === CharacterData.cult);
   const cultType = CharacterData.cultType || detectCultType(cultObj || CharacterData.cult);
 
-  if (cultObj) {
-    const allSkillsArr = App.compileAllSkills ? App.compileAllSkills() : [];
-    const summary = App.getCultInitiationRequirementSummary(cultObj, allSkillsArr);
-    if (!summary.qualifies) {
-      errors.push(`Initiation requires ${summary.requiredCount} cult skills at 50%+. You have ${summary.qualifyingSkills.length}. Use Quick Boost to raise skills, or go back to reallocate cultural/career points.`);
-    }
-  }
+  errors.push(...App.getCultInitiationGateErrors({ deferSorcery: true }));
 
   if (cultType.types.includes('theist')) {
     const selectedMiracles = (CharacterData.miracles || []).length;
@@ -7988,10 +8011,10 @@ App.renderPlayMagic = function() {
             ${sorcerySpells.map(spell => `<li data-testid="sorcery-spell-name">${esc(spell)}</li>`).join('')}
           </ul>
         ` : '<p style="font-size: 0.85em; color: #666;">No sorcery spells selected.</p>'}
-        <p style="font-size: 0.9em;"><strong>Casting:</strong> Rune Affinity of spell (replaces Invocation per AiG)</p>
-        <p style="font-size: 0.9em;"><strong>Shaping:</strong> Law Rune affinity (replaces Shaping skill per AiG)</p>
-        <p style="font-size: 0.9em;"><strong>Intensity:</strong> Rune Affinity / 10 &nbsp;|&nbsp; <strong>Shaping Points:</strong> Law Rune / 10</p>
-        <p style="font-size: 0.8em; color: #666;">Source: Mythras Core p.162-178, AiG p.60 adaptation</p>
+        <p style="font-size: 0.9em;"><strong>Casting:</strong> Invocation skill</p>
+        <p style="font-size: 0.9em;"><strong>Shaping:</strong> Shaping skill</p>
+        <p style="font-size: 0.9em;"><strong>Intensity:</strong> Invocation / 10 &nbsp;|&nbsp; <strong>Shaping Points:</strong> Shaping / 10</p>
+        <p style="font-size: 0.8em; color: #666;">Source: Mythras Core p.162-178. Sorcery spells do not use a rune map in this tool.</p>
       `;
     }
 
@@ -8503,7 +8526,7 @@ App.exportSinglePagePDF = async function() {
         const mp = CharacterData.sorceryResource || CharacterData.characteristics.POW || 0;
         txt(`SORCERY (${CharacterData.cult}) — Magic Points: ${mp}`, L, y, { bold: true, size: 7 });
         y -= 8;
-        txt('Casting: Rune Affinity of spell | Shaping: Law Rune affinity | Intensity = Rune/10', L, y, { size: 5.5 });
+        txt('Casting: Invocation skill | Shaping: Shaping skill | Intensity = Invocation/10', L, y, { size: 5.5 });
         y -= 8;
         // List selected sorcery spells with effects
         const spells = CharacterData.sorcerySpells || [];
