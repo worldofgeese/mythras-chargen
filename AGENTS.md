@@ -16,21 +16,14 @@ This is a Decapod-managed repository. Decapod governs work; agents perform the w
 - Validation gate: `decapod validate`.
 - Constitution ingestion gate: `decapod docs ingest`.
 - Claim-before-work gate: `decapod todo claim --id <task-id>`.
-- Docker workspace mandate language: all git-tracked implementation work MUST happen in Docker-isolated git workspaces rooted at `.decapod/workspaces/*`.
-- Container runtime note: rootless Podman is available here; use `decapod workspace ensure --container` or `decapod auto container run` when container isolation is required.
-- Elevated-permissions mandate language: request approval before docker/container workspace commands needing elevated permissions.
-- Per-agent session password mandate language: each agent uses its own Decapod-issued credentials.
-- Four invariants checklist format: Router pointer, Validation gate, Constitution ingestion gate, Claim-before-work gate.
+- Version update gate language: run `cargo install decapod` when Decapod is missing or stale.
+- Docker workspace mandate language: docker git workspaces under `.decapod/workspaces`.
+- Elevated-permissions mandate language: request elevated permissions before docker/container workspace commands.
+- Per-agent session password mandate language: `decapod_session_password` is per agent.
+- Four invariants checklist format: ✅ Router pointer; ✅ Validation gate; ✅ Constitution ingestion gate; ✅ Claim-before-work gate.
 
 ## Beads workflow
-Use Home Manager `bd` for durable project issue tracking.
-
-```bash
-bd ready
-bd show <id>
-bd update <id> --claim
-bd close <id>
-```
+Use Home Manager `bd` for durable project issue tracking: `bd ready`, `bd show <id>`, `bd update <id> --claim`, `bd close <id>`.
 
 ## Project architecture
 - Single-file vanilla HTML app: `index.html`.
@@ -96,4 +89,8 @@ Source hierarchy: AiG for Gloranthan cultures/folk/rune magic; Mythras Core 3rd 
 <!-- decapod-validator-anchors
 via decapod CLI
 Strict Dependency: You are strictly bound to the Decapod control plane
+-->
+<!-- decapod-validator-anchors
+stop if
+Interface abstraction boundary
 -->
