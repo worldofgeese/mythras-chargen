@@ -2553,7 +2553,9 @@ const fixtures = [
   { file: 'balazaring-hunter.json', name: 'Balazaring Hunter' },
   { file: 'sartarite-warrior.json', name: 'Sartarite Warrior' },
   { file: 'praxian-beast-rider.json', name: 'Praxian Beast Rider' },
-  { file: 'telmori-wolfbrother.json', name: 'Telmori Wolfbrother' }
+  { file: 'telmori-wolfbrother.json', name: 'Telmori Wolfbrother' },
+  { file: 'ionara.json', name: 'Ionara' },
+  { file: 'vasana.json', name: 'Vasana' }
 ];
 
 fixtures.forEach(fixtureInfo => {
@@ -2791,6 +2793,165 @@ fixtures.forEach(fixtureInfo => {
   }
 });
 
+[
+  { file: 'ionara.json', name: 'Ionara' },
+  { file: 'vasana.json', name: 'Vasana' }
+].forEach(fixtureInfo => {
+  const fixture = loadFixture(fixtureInfo.file);
+  if (!fixture) return;
+
+  {
+    const charTotal = Object.values(fixture.characteristics || {}).reduce((sum, value) => sum + value, 0);
+    const culturalTotal = Object.values(fixture.culturalSkills || {}).reduce((sum, value) => sum + value, 0);
+    const careerTotal = Object.values(fixture.careerSkills || {}).reduce((sum, value) => sum + value, 0);
+    const bonusTotal = Object.values(fixture.bonusSkills || {}).reduce((sum, value) => sum + value, 0);
+    const ageCategory = App.Calc.getAgeCategory(fixture.age);
+    const expectedBonusTotal = ageCategory ? ageCategory.bonusPoints : 150;
+    const errors = [];
+
+    if (charTotal !== 75) errors.push(`characteristics ${charTotal}/75`);
+    if (culturalTotal !== 100) errors.push(`cultural ${culturalTotal}/100`);
+    if (careerTotal !== 100) errors.push(`career ${careerTotal}/100`);
+    if (bonusTotal !== expectedBonusTotal) errors.push(`bonus ${bonusTotal}/${expectedBonusTotal}`);
+    if ((fixture.folkMagicSpells || []).length !== 3) errors.push(`folk magic ${(fixture.folkMagicSpells || []).length}/3`);
+    if ((fixture.selectedProfessionalSkills || []).length !== 3) errors.push(`professional skills ${(fixture.selectedProfessionalSkills || []).length}/3`);
+
+    if (errors.length === 0) {
+      pass(`${fixtureInfo.name}: chargen point budgets are complete`);
+    } else {
+      fail(`${fixtureInfo.name}: chargen point budget mismatch`, errors.join(', '));
+    }
+  }
+
+  {
+    App.CharacterData.fromJSON(JSON.stringify(fixture));
+    App.CharacterData.attributes = App.Calc.calculateAllAttributes(App.CharacterData.characteristics);
+    App.App.currentStep = 9;
+
+    const expectedPool = Math.floor(App.CharacterData.characteristics.POW / 2);
+    const validation = App.App.getValidationState();
+    const errors = [];
+    if (App.CharacterData.devotionalPool !== expectedPool) {
+      errors.push(`devotionalPool ${App.CharacterData.devotionalPool}/${expectedPool}`);
+    }
+    if (!validation.valid) {
+      errors.push(...validation.errors);
+    }
+
+    if (errors.length === 0) {
+      pass(`${fixtureInfo.name}: cult initiation and magic choices are valid`);
+    } else {
+      fail(`${fixtureInfo.name}: cult initiation validation failed`, errors.join('; '));
+    }
+  }
+});
+
+const activePregenContracts = {
+  Ionara: {
+    culture: 'Grazelander/Pure Horse',
+    homeland: 'Pure Horse People, Grazelands',
+    combatStyle: {
+      name: 'Grazelander Noble',
+      weapons: ['Mace', 'Small Shield', 'Lance', 'Dagger']
+    },
+    companion: {
+      name: 'Teza',
+      species: 'Riding Horse',
+      characteristics: { STR: 30, CON: 17, SIZ: 30, DEX: 20, POW: 17 },
+      attacks: [
+        ['Bite', 25, '1D8+3D6'],
+        ['Kick', 25, '1D6+3D6'],
+        ['Rear & Plunge', 25, '2D6+3D6'],
+        ['Trample', 25, '4D6']
+      ],
+      movement: 12,
+      armor: 1,
+      damageModifier: '+3D6'
+    }
+  },
+  Vasana: {
+    combatStyle: {
+      name: 'Colymar Bison Cavalry',
+      weapons: ['Broadsword', 'Lance', 'Medium Shield', 'Composite Bow']
+    },
+    companion: {
+      name: 'Molon',
+      species: 'Bison (War-trained)',
+      characteristics: { STR: 36, CON: 17, SIZ: 34, DEX: 12, POW: 10 },
+      attacks: [
+        ['Head Butt', 50, '2D10+3D6'],
+        ['Trample', 50, '6D6']
+      ],
+      movement: 12,
+      armor: 3,
+      damageModifier: '+3D6'
+    }
+  }
+};
+
+Object.entries(activePregenContracts).forEach(([name, contract]) => {
+  const fixture = loadFixture(`${name.toLowerCase()}.json`);
+  if (!fixture) return;
+  const errors = [];
+  if (contract.culture && fixture.culture !== contract.culture) {
+    errors.push(`culture ${fixture.culture}`);
+  }
+  if (contract.homeland && fixture.homeland !== contract.homeland) {
+    errors.push(`homeland ${fixture.homeland}`);
+  }
+  const style = (fixture.combatStyles || []).find(cs => cs.name === contract.combatStyle.name);
+  if (!style) {
+    errors.push(`missing combat style ${contract.combatStyle.name}`);
+  } else {
+    const weapons = style.weapons || [];
+    const missingWeapons = contract.combatStyle.weapons.filter(weapon => !weapons.includes(weapon));
+    if (missingWeapons.length > 0) errors.push(`missing style weapons ${missingWeapons.join(', ')}`);
+  }
+  const weaponRows = (fixture.weapons || []).map(w => typeof w === 'string' ? w : w.name).filter(Boolean);
+  const missingWeaponRows = contract.combatStyle.weapons.filter(weapon => !weaponRows.includes(weapon));
+  if (missingWeaponRows.length > 0) {
+    errors.push(`missing weapon table rows ${missingWeaponRows.join(', ')}`);
+  }
+
+  const companion = (fixture.companions || []).find(c => c.name === contract.companion.name);
+  if (!companion) {
+    errors.push(`missing companion ${contract.companion.name}`);
+  } else {
+    Object.entries(contract.companion.characteristics).forEach(([key, value]) => {
+      if (companion.characteristics?.[key] !== value) {
+        errors.push(`${contract.companion.name}.${key} ${companion.characteristics?.[key]}/${value}`);
+      }
+    });
+    if (companion.species !== contract.companion.species) {
+      errors.push(`${contract.companion.name}.species ${companion.species}`);
+    }
+    if (companion.movement !== contract.companion.movement) {
+      errors.push(`${contract.companion.name}.movement ${companion.movement}/${contract.companion.movement}`);
+    }
+    if (companion.armor !== contract.companion.armor) {
+      errors.push(`${contract.companion.name}.armor ${companion.armor}/${contract.companion.armor}`);
+    }
+    if (companion.damageModifier !== contract.companion.damageModifier) {
+      errors.push(`${contract.companion.name}.damageModifier ${companion.damageModifier}/${contract.companion.damageModifier}`);
+    }
+    contract.companion.attacks.forEach(([attackName, skill, damage]) => {
+      const attack = (companion.attacks || []).find(a => a.name === attackName);
+      if (!attack) {
+        errors.push(`missing ${contract.companion.name} attack ${attackName}`);
+      } else {
+        if (attack.skill !== skill) errors.push(`${attackName}.skill ${attack.skill}/${skill}`);
+        if (attack.damage !== damage) errors.push(`${attackName}.damage ${attack.damage}/${damage}`);
+      }
+    });
+  }
+
+  if (errors.length === 0) {
+    pass(`${name}: active player pregen contract matches approved companion/combat spec`);
+  } else {
+    fail(`${name}: active player pregen contract mismatch`, errors.join('; '));
+  }
+});
+
 // ============================================================
 section('Wave 3 Goal 3: PDF Content Regression Tests');
 // ============================================================
@@ -2816,7 +2977,8 @@ fixtures.forEach(fixtureInfo => {
       ...Object.keys(fixture.characteristics || {}),
       ...(fixture.weapons || []).map(w => typeof w === 'string' ? w : w.name).filter(Boolean),
       ...(fixture.folkMagicSpells || []),
-      ...(fixture.passions || []).map(p => typeof p === 'string' ? p.split(':')[0] : p.name).filter(Boolean)
+      ...(fixture.passions || []).map(p => typeof p === 'string' ? p.split(':')[0] : p.name).filter(Boolean),
+      fixture.notes ? fixture.notes.split(';')[0] : null
     ];
     const missing = expected.filter(value => value && !text.includes(value));
 
