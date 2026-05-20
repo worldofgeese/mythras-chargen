@@ -40,15 +40,38 @@ Player-facing material is published to Copyparty on Loving Kypris.
 - Public root: `https://copyparty.hound-celsius.ts.net/`
 - Host staging: `~/staging/`; archive outside player root: `~/staging/archive/`
 
-Canonical visible layout:
+Mandatory sync rule:
+- If a local change affects any file mirrored on Copyparty, sync that change to the remote server before closing the task. This includes `index.html`, `docs/handouts/*.html`, active pregen character PDFs, and player source PDFs.
+- Preserve the remote structure below exactly. Do not flatten directories, copy handouts or PDFs into `/w`, or rename player-facing paths unless the user explicitly asks for a fileserver reorganization.
+- Before changing the remote, inspect the live tree with `ssh worldofgeese@loving-kypris.hound-celsius.ts.net 'podman exec copyparty find /w -maxdepth 5 -mindepth 1 | sort'` and only update the path that corresponds to the local file.
+- After syncing, verify the affected public URL with `curl -fsSL` and include that verification in the handoff.
+
+Current live visible layout, last verified 2026-05-20:
 
 ```text
 /w/
   00-START-HERE.html
   01-Character-Generator.html
-  characters/active-pregens/
-  rules/handouts/
-  sources/books/
+  characters/
+    active-pregens/
+      Ionara-Grand-daughter-of-Thiralda.pdf
+      Vasana-Farnans-Daughter.pdf
+  rules/
+    handouts/
+      combat-path.html
+      combined-path.html
+      index.html
+      magic-path.html
+      prep-checklist.html
+      rules-and-house-rules.html
+      source-trail.html
+  sources/
+    books/
+      A-Bird-in-the-Hand.pdf
+      Adventures in Glorantha GenCon Preview.pdf
+      Monster-Island.pdf
+      Mythras Core Rulebook (3rd Printing 2018).pdf
+      RuneQuest Starter Set - Book 2 Glorantha.pdf
 ```
 
 Root hygiene:
