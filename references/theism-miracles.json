@@ -8,7 +8,11 @@
       "Orlanth": "CultOnePagers2019/Storm/Orlanth.pdf, p.1",
       "Blackfang": "CultOnePagers2019/Independent/Blackfang.pdf, p.1",
       "Yelmalio": "CultOnePagers2019/Yelm/Yelmalio.pdf, p.1-2",
-      "Arkat": "CultOnePagers2019/Arkat/Arkat.pdf, p.1"
+      "Arkat": "CultOnePagers2019/Arkat/Arkat.pdf, p.1",
+      "Odayla": "CultOnePagers2019/Storm/Odayla.pdf, p.1",
+      "Yinkin": "CultOnePagers2019/Storm/Yinkin.pdf, p.1",
+      "Basmol": "CultOnePagers2019/Pamalt/Basmol.pdf, p.1",
+      "Mee Vorala": "CultOnePagers2019/Darkness/Mee Vorala.pdf, p.1"
     }
   },
   "rune_code_legend": {
@@ -3394,13 +3398,12 @@
           "rune_inferred": true
         },
         {
-          "name": "B Claws",
+          "name": "Claws",
           "runes": [
             "Beast"
           ],
           "source": "normal",
-          "rank": "initiate",
-          "rune_inferred": true
+          "rank": "initiate"
         },
         {
           "name": "Excommunication",
@@ -5000,13 +5003,12 @@
           "rank": "initiate"
         },
         {
-          "name": "B Claws",
+          "name": "Claws",
           "runes": [
             "Any"
           ],
           "source": "associate",
-          "rank": "initiate",
-          "rune_inferred": true
+          "rank": "initiate"
         },
         {
           "name": "Shield",
@@ -8450,13 +8452,12 @@
           "rank": "runelord"
         },
         {
-          "name": "B Keenclaw",
+          "name": "Keenclaw",
           "runes": [
             "Beast"
           ],
           "source": "normal",
-          "rank": "runelord",
-          "rune_inferred": true
+          "rank": "runelord"
         },
         {
           "name": "Transform Self",
@@ -10442,13 +10443,12 @@
           "rune_inferred": true
         },
         {
-          "name": "R Dismiss Magic",
+          "name": "Dismiss Magic",
           "runes": [
             "Beast"
           ],
           "source": "normal",
-          "rank": "initiate",
-          "rune_inferred": true
+          "rank": "initiate"
         },
         {
           "name": "Soul Sight",
