@@ -1580,19 +1580,19 @@ const STARTING_SPIRITS = [
 
 const CULTURE_BUILDS = {
   "Praxian": [
-    { name: "Beast Rider Warrior", stats: "High STR, CON", career: "Warrior", style: "Beast Rider Warrior", tip: "Mounted combat specialist. Lance charges and archery from the saddle." },
-    { name: "Desert Shaman", stats: "High POW, INT", career: "Shaman", style: "Desert Skirmisher", tip: "Spirit talker who survives the wastes through cunning and magic." },
-    { name: "Tribal Hunter", stats: "High DEX, CON", career: "Hunter", style: "Desert Skirmisher", tip: "Patient tracker and skirmisher. Javelin and sling from a distance." }
+    { name: "Beast Rider Warrior", stats: "High STR, CON", career: "Warrior", style: "Bison", tip: "Mounted combat specialist. Lance charges and archery from the saddle." },
+    { name: "Desert Shaman", stats: "High POW, INT", career: "Shaman", style: "Bolo Lizard", tip: "Spirit talker who survives the wastes through cunning and magic." },
+    { name: "Tribal Hunter", stats: "High DEX, CON", career: "Hunter", style: "Impala", tip: "Patient tracker and skirmisher. Javelin and sling from a distance." }
   ],
   "Sartarite (Heortling)": [
-    { name: "Orlanthi Thane", stats: "High STR, CHA", career: "Warrior", style: "Orlanthi Warrior", tip: "Sword-and-shield fighter who leads from the front." },
-    { name: "Wind Lord Aspirant", stats: "High POW, STR", career: "Priest", style: "Thane's Guard", tip: "Devotee of Orlanth who combines martial prowess with divine magic." },
-    { name: "Clan Skald", stats: "High CHA, INT", career: "Entertainer", style: "Orlanthi Warrior", tip: "Storyteller and musician who inspires the warband with tales of glory." }
+    { name: "Orlanthi Thane", stats: "High STR, CHA", career: "Warrior", style: "Loyal Housecarl", tip: "Sword-and-shield fighter who leads from the front." },
+    { name: "Wind Lord Aspirant", stats: "High POW, STR", career: "Priest", style: "Hill Clan Levy", tip: "Devotee of Orlanth who combines martial prowess with divine magic." },
+    { name: "Clan Skald", stats: "High CHA, INT", career: "Entertainer", style: "Hill Clan Levy", tip: "Storyteller and musician who inspires the warband with tales of glory." }
   ],
   "Lunar Heartland": [
-    { name: "Lunar Legionary", stats: "High STR, CON", career: "Warrior", style: "Lunar Legionary", tip: "Disciplined soldier in the Emperor's armies. Shield wall and scimitar." },
-    { name: "Seven Mothers Priestess", stats: "High POW, CHA", career: "Priest", style: "Palace Guard", tip: "Devoted to the Red Goddess. Combines faith with political cunning." },
-    { name: "Heartland Spy", stats: "High DEX, CHA", career: "Agent", style: "Noble Cavalry", tip: "Works in the shadows for the Lunar Empire. Charm and a hidden blade." }
+    { name: "Lunar Legionary", stats: "High STR, CON", career: "Warrior", style: "Lunar Corps Hoplite", tip: "Disciplined soldier in the Emperor's armies. Shield wall and scimitar." },
+    { name: "Seven Mothers Priestess", stats: "High POW, CHA", career: "Priest", style: "Dara Happan Urbanite", tip: "Devoted to the Red Goddess. Combines faith with political cunning." },
+    { name: "Heartland Spy", stats: "High DEX, CHA", career: "Agent", style: "Dart Contestant", tip: "Works in the shadows for the Lunar Empire. Charm and a hidden blade." }
   ],
   "Esrolian": [
     { name: "Earth Priestess", stats: "High POW, CHA", career: "Priest", style: "Clan Protector", tip: "Devoted to the Earth goddesses. Political power through the temples." },
@@ -1604,8 +1604,8 @@ const CULTURE_BUILDS = {
     { name: "Clan Raider", stats: "High STR, DEX", career: "Warrior", style: "Hunter Raider", tip: "Fast and vicious. Raids neighbouring clans for cattle and glory." }
   ],
   "Telmori Hsunchen": [
-    { name: "Wolf Pack Alpha", stats: "High STR, POW", career: "Warrior", style: "Wolf Pack Hunter", tip: "Fights alongside wolves. Can shapeshift during the full moon." },
-    { name: "Wolfbrother Shaman", stats: "High POW, INT", career: "Shaman", style: "Wolfbrother", tip: "Speaks to wolf spirits and the spirit of Telmor." }
+    { name: "Wolf Pack Alpha", stats: "High STR, POW", career: "Warrior", style: "Wolf Hunter", tip: "Fights alongside wolves. Can shapeshift during the full moon." },
+    { name: "Wolfbrother Shaman", stats: "High POW, INT", career: "Shaman", style: "Telmori Hunter", tip: "Speaks to wolf spirits and the spirit of Telmor." }
   ]
 };
 
@@ -3576,6 +3576,10 @@ App.selectCulture = function(cultureName) {
   const culture = CULTURES_DATA.find(c => c.name === cultureName);
   if (culture) {
     CharacterData.culture = cultureName;
+    const homelands = this.getHomelandSuggestions(cultureName);
+    CharacterData.homeland = homelands.includes(CharacterData.homeland)
+      ? CharacterData.homeland
+      : (homelands[0] || '');
     CharacterData.culturalSkills = {};
 
     // Auto-add native language (ADR-004) — user can allocate points in Step 5
@@ -3674,9 +3678,27 @@ App._doApplyBuild = function(build) {
   
   const highStats = build.stats.match(/STR|CON|SIZ|DEX|INT|POW|CHA/g) || [];
   highStats.forEach(stat => { CharacterData.characteristics[stat] = 13; });
+  let total = allStats.reduce((sum, stat) => sum + CharacterData.characteristics[stat], 0);
+  const supportingStats = allStats.filter(stat => !highStats.includes(stat));
+  for (const stat of supportingStats) {
+    if (total <= 75) break;
+    const reduction = Math.min(total - 75, CharacterData.characteristics[stat] - 3);
+    CharacterData.characteristics[stat] -= reduction;
+    total -= reduction;
+  }
+  for (const stat of supportingStats) {
+    if (total >= 75) break;
+    const increase = Math.min(75 - total, 13 - CharacterData.characteristics[stat]);
+    CharacterData.characteristics[stat] += increase;
+    total += increase;
+  }
   
   // Set career
   CharacterData.career = build.career;
+
+  if (build.style) {
+    this.selectCombatStyle(build.style);
+  }
   
   this.saveToLocalStorage();
   this.renderCurrentStep();

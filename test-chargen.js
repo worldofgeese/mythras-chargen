@@ -192,6 +192,7 @@ function loadApp() {
         Calc,
         App: typeof App !== 'undefined' ? App : null,
         CULTURES_DATA,
+        CULTURE_BUILDS: typeof CULTURE_BUILDS !== 'undefined' ? CULTURE_BUILDS : null,
         WEAPONS_DATA,
         WEAPON_ALIASES: typeof WEAPON_ALIASES !== 'undefined' ? WEAPON_ALIASES : null,
         DATA_INDEXES: typeof DATA_INDEXES !== 'undefined' ? DATA_INDEXES : null,
@@ -5067,6 +5068,118 @@ section('Step 9 Initiation Gate');
     }
   } else {
     fail('App.getCulturalSkillRenderPlan function not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD } = loadApp();
+
+  if (AppRef && AppRef.selectCulture && AppRef.getHomelandSuggestions && AppRef.validateCurrentStep) {
+    AppRef.currentStep = 4;
+    AppRef.selectCulture('Praxian');
+    AppRef.selectHomeland("Pimper's Block");
+    AppRef.selectCulture('Telmori Hsunchen');
+    AppRef.selectCombatStyle('Telmori Hunter');
+    const validHomelands = AppRef.getHomelandSuggestions('Telmori Hsunchen');
+    const homelandValid = validHomelands.includes(CD.homeland);
+    const allowed = AppRef.validateCurrentStep();
+
+    if (homelandValid && allowed === true) {
+      pass('Changing Step 4 cultures resets homeland to a valid visible option');
+    } else {
+      fail('Changing Step 4 cultures left stale or blank homeland',
+        JSON.stringify({ homeland: CD.homeland, validHomelands, allowed }));
+    }
+  } else {
+    fail('Step 4 homeland reset dependencies not found');
+  }
+}
+
+{
+  const { CULTURE_BUILDS: CultureBuilds, CULTURES_DATA: CulturesData } = loadApp();
+
+  if (CultureBuilds && CulturesData) {
+    const missing = [];
+    Object.entries(CultureBuilds).forEach(([cultureName, builds]) => {
+      const culture = CulturesData.find(c => c.name === cultureName);
+      const styleNames = new Set((culture?.combatStyles || []).map(cs => cs.name));
+      builds.forEach(build => {
+        if (!styleNames.has(build.style)) {
+          missing.push(`${cultureName}/${build.name}: ${build.style}`);
+        }
+      });
+    });
+
+    if (missing.length === 0) {
+      pass('All Step 4 suggested builds reference valid culture combat styles');
+    } else {
+      fail('Suggested builds reference missing combat styles', missing.join('; '));
+    }
+  } else {
+    fail('Suggested build data not available to tests');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD } = loadApp();
+
+  if (AppRef && AppRef.selectCulture && AppRef._doApplyBuild) {
+    AppRef.currentStep = 4;
+    AppRef.selectCulture('Praxian');
+    AppRef.selectCombatStyle('Bison');
+    AppRef.selectCulture('Sartarite (Heortling)');
+    const autoStyleBefore = CD.combatStyles[0]?.name;
+
+    AppRef._doApplyBuild({
+      name: 'Orlanthi Thane',
+      stats: 'High STR, CHA',
+      career: 'Warrior',
+      style: 'Loyal Housecarl'
+    });
+
+    const selected = CD._pendingCombatStyleSelection === false &&
+      CD.career === 'Warrior' &&
+      CD.combatStyles.length === 1 &&
+      CD.combatStyles[0].name === 'Loyal Housecarl' &&
+      CD.combatStyles[0].weapons.includes('Broadsword');
+
+    if (autoStyleBefore === 'Hill Clan Levy' && selected) {
+      pass('Applying a Step 4 suggested build sets its valid combat style without stale state');
+    } else {
+      fail('Suggested build did not apply combat style cleanly',
+        JSON.stringify({ autoStyleBefore, career: CD.career, pending: CD._pendingCombatStyleSelection, combatStyles: CD.combatStyles }));
+    }
+  } else {
+    fail('Suggested build application dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, CULTURE_BUILDS: CultureBuilds } = loadApp();
+
+  if (AppRef && AppRef.selectCulture && AppRef._doApplyBuild && CultureBuilds) {
+    const invalid = [];
+    Object.entries(CultureBuilds).forEach(([cultureName, builds]) => {
+      builds.forEach(build => {
+        AppRef.currentStep = 4;
+        AppRef.selectCulture(cultureName);
+        AppRef._doApplyBuild(build);
+        const total = Object.values(CD.characteristics).reduce((sum, value) => sum + value, 0);
+        const highStats = build.stats.match(/STR|CON|SIZ|DEX|INT|POW|CHA/g) || [];
+        const highsVisible = highStats.every(stat => CD.characteristics[stat] >= 13);
+        if (total !== 75 || !highsVisible) {
+          invalid.push(`${cultureName}/${build.name}: total=${total}, highs=${highStats.map(stat => `${stat}:${CD.characteristics[stat]}`).join(',')}`);
+        }
+      });
+    });
+
+    if (invalid.length === 0) {
+      pass('All Step 4 suggested builds apply valid 75-point characteristics');
+    } else {
+      fail('Suggested builds apply invalid characteristic budgets', invalid.join('; '));
+    }
+  } else {
+    fail('Suggested build characteristic dependencies not found');
   }
 }
 
