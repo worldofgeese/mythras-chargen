@@ -2180,7 +2180,9 @@
   ],
   "blockers": [
     "permission basis is not confirmed",
-    "independent vision extraction/verification has not been run for AiG pages"
+    "independent vision extraction/verification has not been run for AiG pages",
+    "isolated implementation worktree has no ignored AiG PDF local hint to render",
+    "matching root-checkout legacy PDF was used for metadata confirmation only; no lawful vision extraction or independent verification was performed"
   ],
-  "notes": "Raw AiG page records are complete as blocked scaffolds only. They are not extraction evidence and cannot promote normalized facts."
+  "notes": "Raw AiG page records are complete as blocked scaffolds only. They are not extraction evidence and cannot promote normalized facts. This U5 follow-up confirmed source metadata only; it did not render, extract, or verify pages."
 }
