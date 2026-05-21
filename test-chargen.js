@@ -202,6 +202,7 @@ function loadApp() {
         WEAPON_ALIASES: typeof WEAPON_ALIASES !== 'undefined' ? WEAPON_ALIASES : null,
         DATA_INDEXES: typeof DATA_INDEXES !== 'undefined' ? DATA_INDEXES : null,
         SKILLS_DATA,
+        SKILL_DESCRIPTIONS: typeof SKILL_DESCRIPTIONS !== 'undefined' ? SKILL_DESCRIPTIONS : null,
         HIT_LOCATIONS,
         GLORANTHA_CULTURES_DATA: typeof GLORANTHA_CULTURES_DATA !== 'undefined' ? GLORANTHA_CULTURES_DATA : null,
         Helpers: typeof Helpers !== 'undefined' ? Helpers : null,
@@ -1180,7 +1181,35 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
   }
 }
 
-// Test 1.12b: Professional skill picker preserves Primary/Secondary specialty slots with clearer labels
+// Test 1.12b: Skill row rendering escapes imported skill names and tooltip descriptions
+{
+  const { App: AppObj, SKILL_DESCRIPTIONS } = loadApp();
+  if (AppObj && AppObj.renderSkillRow && SKILL_DESCRIPTIONS) {
+    const maliciousName = '<img src=x onerror="globalThis.__skillNameXss=1">';
+    const maliciousDesc = '<img src=x onerror="globalThis.__skillDescXss=1">';
+    SKILL_DESCRIPTIONS['Unsafe Tooltip'] = maliciousDesc;
+
+    const importedSkillRow = AppObj.renderSkillRow({ name: maliciousName, base: 0, cultural: 0, career: 1, bonus: 0 });
+    const tooltipRow = AppObj.renderSkillRow({ name: 'Unsafe Tooltip', base: 0, cultural: 0, career: 1, bonus: 0 });
+    const skillNameEscaped = importedSkillRow.includes('&lt;img src=x onerror=&quot;globalThis.__skillNameXss=1&quot;&gt;') &&
+      !importedSkillRow.includes('<img src=x') &&
+      !importedSkillRow.includes('onerror="globalThis.__skillNameXss=1"');
+    const tooltipDescEscaped = tooltipRow.includes('&lt;img src=x onerror=&quot;globalThis.__skillDescXss=1&quot;&gt;') &&
+      !tooltipRow.includes('<img src=x') &&
+      !tooltipRow.includes('onerror="globalThis.__skillDescXss=1"');
+
+    if (skillNameEscaped && tooltipDescEscaped) {
+      pass('Skill row rendering escapes imported skill names and tooltip descriptions');
+    } else {
+      fail('Skill row rendering exposes imported skill names or tooltip descriptions as HTML',
+        JSON.stringify({ skillNameEscaped, tooltipDescEscaped, importedSkillRow, tooltipRow }));
+    }
+  } else {
+    fail('Could not verify skill row escaping');
+  }
+}
+
+// Test 1.12c: Professional skill picker preserves Primary/Secondary specialty slots with clearer labels
 {
   const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
   if (AppObj && AppObj.renderCareerDetails && AppObj.toggleProfessionalSkill && AppObj.resolveProfessionalSkill && CD) {
@@ -1227,7 +1256,7 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
   }
 }
 
-// Test 1.12c: Professional skill picker rejects duplicate resolved specialty names
+// Test 1.12d: Professional skill picker rejects duplicate resolved specialty names
 {
   const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
   if (AppObj && AppObj.toggleProfessionalSkill && AppObj.resolveProfessionalSkill && CD) {
@@ -1266,7 +1295,7 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
   }
 }
 
-// Test 1.12d: Professional skill picker preserves Primary/Secondary Catch specialty slots with clearer labels
+// Test 1.12e: Professional skill picker preserves Primary/Secondary Catch specialty slots with clearer labels
 {
   const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
   if (AppObj && AppObj.renderCareerDetails && AppObj.toggleProfessionalSkill && AppObj.resolveProfessionalSkill && CD) {

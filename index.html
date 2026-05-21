@@ -9510,12 +9510,14 @@ const App = {
 // =============================================================================
 
 App.skillWithTooltip = function(name) {
-  if (typeof name !== 'string') return String(name);
+  const rawName = String(name);
+  const safeName = App.escapeHtml(rawName);
+  if (typeof name !== 'string') return safeName;
   const desc = SKILL_DESCRIPTIONS[name] || SKILL_DESCRIPTIONS[name.split('(')[0].trim()];
   if (desc) {
-    return `${name} <span class="skill-tooltip" tabindex="0">ℹ️<span class="tooltip-text">${desc}</span></span>`;
+    return `${safeName} <span class="skill-tooltip" tabindex="0">ℹ️<span class="tooltip-text">${App.escapeHtml(desc)}</span></span>`;
   }
-  return name;
+  return safeName;
 };
 
 App.renderBodyDiagram = function(hitPoints, includeArmor = false) {
