@@ -13396,7 +13396,7 @@
   },
   {
     "name": "Waha",
-    "pantheon": "Storm",
+    "pantheon": "Praxian",
     "source": "CultOnePagers2019/Praxian/Waha.pdf",
     "sourcePages": [
       1,
@@ -13520,7 +13520,12 @@
     "oppositeRune": "Life",
     "additionalPantheons": [
       "Praxian"
-    ]
+    ],
+    "canonicalRecord": false,
+    "doNotUseForAppGeneration": true,
+    "supersededBy": "references/cults-raw/praxian/waha.json",
+    "recordStatus": "redirected-to-canonical",
+    "supersessionReason": "Aggregate Praxian Waha record is redirected to the canonical checked file."
   },
   {
     "name": "Zola Fel",
@@ -17523,7 +17528,12 @@
     "oppositeRune": "Life",
     "additionalPantheons": [
       "Praxian"
-    ]
+    ],
+    "canonicalRecord": false,
+    "doNotUseForAppGeneration": true,
+    "supersededBy": "references/cults-raw/praxian/waha.json",
+    "recordStatus": "superseded",
+    "supersessionReason": "Stale duplicate Waha aggregate record; use references/cults-raw/praxian/waha.json."
   },
   {
     "name": "Ygg of Threestep",

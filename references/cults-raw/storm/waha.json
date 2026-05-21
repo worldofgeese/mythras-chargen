@@ -119,5 +119,10 @@
   "oppositeRune": "Life",
   "additionalPantheons": [
     "Praxian"
-  ]
+  ],
+  "recordStatus": "superseded",
+  "canonicalRecord": false,
+  "doNotUseForAppGeneration": true,
+  "supersededBy": "references/cults-raw/praxian/waha.json",
+  "supersessionReason": "Waha is treated as a Praxian cult authority in this app. The Storm-path file is a stale duplicate and must not feed app data."
 }

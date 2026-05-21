@@ -5,9 +5,9 @@
   "epithet": "The Butcher, Khan of the Praxian Gods",
   "version": "6.0.1",
   "versionDate": "2026-05-17",
-  "source": "Notes from Pavis - Glorantha One Pager",
-  "verified": true,
-  "verificationNote": "Verified against Waha.pdf provided by Hannu 2026-05-17",
+  "source": "references/cults-upstream/Praxian/Waha.pdf",
+  "verified": false,
+  "verificationNote": "Source metadata was checked from tracked local Praxian Waha.pdf, but no vision extraction or independent verifier artifact exists. Existing mechanics remain legacy canonical data pending vision verification.",
   "requirements": {
     "initiate": "Cult is closed to women. Human initiates need Ride and a tribal weapon at 50%+, one spirit magic spell, and knowledge of all tribal herds. Must prove warrior abilities to tribal elders or at a seasonal festival.",
     "runeLord": "Must be an initiate of noble descent from Waha. Or agree with GM to use RQG pp. 274-276."
@@ -103,5 +103,11 @@
     "mainAreas": ["Coastal", "Pamaltela", "Dragon Pass", "East", "Fonrit", "Holy Country", "Lunar", "Oceans", "West"],
     "localities": ["Dragon Pass", "East", "Elder Wilds", "Holy Country", "Janube River States", "Jonatela", "Jrusteli Isles", "Lunar Provinces", "Maniria", "Northern Fronela", "Pent", "Prax", "Ralios", "Safelster", "Tarsh", "Umathela", "Vesmonstran"]
   },
-  "sources": ["Book Of Doom", "Cult Compendium", "Cults of Runequest - The Lightbringers", "Gods Of Glorantha", "Guide to Glorantha", "Red Book of Magic", "RQG"]
+  "sources": ["Book Of Doom", "Cult Compendium", "Cults of Runequest - The Lightbringers", "Gods Of Glorantha", "Guide to Glorantha", "Red Book of Magic", "RQG"],
+  "sourcePages": [1, 2],
+  "sourceCitation": "references/cults-upstream/Praxian/Waha.pdf, p.1-2",
+  "sourceVersion": "2019 edition v5.2",
+  "canonicalRecord": true,
+  "doNotUseForAppGeneration": false,
+  "verificationState": "blocked_pending_vision_verification"
 }
