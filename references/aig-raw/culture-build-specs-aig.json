@@ -1,0 +1,2756 @@
+{
+  "_source": "Reference-backed complete specs for every inline Step 4 suggested build. Specs intentionally exercise app creation budgets with No Cult defaults; cult-specific builds remain optional player choices from culture-cult-map.json.",
+  "page_citations": {
+    "culture_packages": "Adventures in Glorantha p.25-41",
+    "character_creation": "Mythras Core Rulebook 3rd Printing 2018 p.13-31",
+    "combat_styles": "references/aig-raw/cultures.json culture combatStyles entries with Combat Styles Encyclopedia citations"
+  },
+  "builds": {
+    "Praxian": [
+      {
+        "name": "Beast Rider Warrior",
+        "stats": "High STR, CON",
+        "career": "Warrior",
+        "style": "Bison",
+        "tip": "Mounted combat specialist. Lance charges and archery from the saddle.",
+        "specId": "praxian-beast-rider-warrior"
+      },
+      {
+        "name": "Desert Shaman",
+        "stats": "High POW, INT",
+        "career": "Shaman",
+        "style": "Bolo Lizard",
+        "tip": "Spirit talker who survives the wastes through cunning and magic.",
+        "specId": "praxian-desert-shaman"
+      },
+      {
+        "name": "Tribal Hunter",
+        "stats": "High DEX, CON",
+        "career": "Hunter",
+        "style": "Impala",
+        "tip": "Patient tracker and skirmisher. Javelin and sling from a distance.",
+        "specId": "praxian-tribal-hunter"
+      }
+    ],
+    "Sartarite (Heortling)": [
+      {
+        "name": "Orlanthi Thane",
+        "stats": "High STR, CHA",
+        "career": "Warrior",
+        "style": "Loyal Housecarl",
+        "tip": "Sword-and-shield fighter who leads from the front.",
+        "specId": "sartarite-heortling-orlanthi-thane"
+      },
+      {
+        "name": "Wind Lord Aspirant",
+        "stats": "High POW, STR",
+        "career": "Priest",
+        "style": "Hill Clan Levy",
+        "tip": "Devotee of Orlanth who combines martial prowess with divine magic.",
+        "specId": "sartarite-heortling-wind-lord-aspirant"
+      },
+      {
+        "name": "Clan Skald",
+        "stats": "High CHA, INT",
+        "career": "Entertainer",
+        "style": "Hill Clan Levy",
+        "tip": "Storyteller and musician who inspires the warband with tales of glory.",
+        "specId": "sartarite-heortling-clan-skald"
+      }
+    ],
+    "Lunar Heartland": [
+      {
+        "name": "Lunar Legionary",
+        "stats": "High STR, CON",
+        "career": "Warrior",
+        "style": "Lunar Corps Hoplite",
+        "tip": "Disciplined soldier in the Emperor's armies. Shield wall and scimitar.",
+        "specId": "lunar-heartland-lunar-legionary"
+      },
+      {
+        "name": "Seven Mothers Priestess",
+        "stats": "High POW, CHA",
+        "career": "Priest",
+        "style": "Dara Happan Urbanite",
+        "tip": "Devoted to the Red Goddess. Combines faith with political cunning.",
+        "specId": "lunar-heartland-seven-mothers-priestess"
+      },
+      {
+        "name": "Heartland Spy",
+        "stats": "High DEX, CHA",
+        "career": "Agent",
+        "style": "Dart Contestant",
+        "tip": "Works in the shadows for the Lunar Empire. Charm and a hidden blade.",
+        "specId": "lunar-heartland-heartland-spy"
+      }
+    ],
+    "Esrolian": [
+      {
+        "name": "Earth Priestess",
+        "stats": "High POW, CHA",
+        "career": "Priest",
+        "style": "Clan Protector",
+        "tip": "Devoted to the Earth goddesses. Political power through the temples.",
+        "specId": "esrolian-earth-priestess"
+      },
+      {
+        "name": "Citizen Soldier",
+        "stats": "High STR, CON",
+        "career": "Warrior",
+        "style": "Citizen Legionary",
+        "tip": "Formation fighter defending the city-states. Spear, shield, and discipline.",
+        "specId": "esrolian-citizen-soldier"
+      },
+      {
+        "name": "Temple Scholar",
+        "stats": "High INT, CHA",
+        "career": "Scholar",
+        "style": "City-State Phalangite",
+        "tip": "Esrolian intellectual. Knows more about Glorantha than most.",
+        "specId": "esrolian-temple-scholar"
+      }
+    ],
+    "Balazaring": [
+      {
+        "name": "Hawk Hunter",
+        "stats": "High DEX, CON",
+        "career": "Hunter",
+        "style": "Hawk Slayer",
+        "tip": "Hunts with trained hawks in the wild hills. Expert with longspear.",
+        "specId": "balazaring-hawk-hunter"
+      },
+      {
+        "name": "Clan Raider",
+        "stats": "High STR, DEX",
+        "career": "Warrior",
+        "style": "Hunter Raider",
+        "tip": "Fast and vicious. Raids neighbouring clans for cattle and glory.",
+        "specId": "balazaring-clan-raider"
+      }
+    ],
+    "Telmori Hsunchen": [
+      {
+        "name": "Wolf Pack Alpha",
+        "stats": "High STR, POW",
+        "career": "Warrior",
+        "style": "Wolf Hunter",
+        "tip": "Fights alongside wolves. Can shapeshift during the full moon.",
+        "specId": "telmori-hsunchen-wolf-pack-alpha"
+      },
+      {
+        "name": "Wolfbrother Shaman",
+        "stats": "High POW, INT",
+        "career": "Shaman",
+        "style": "Telmori Hunter",
+        "tip": "Speaks to wolf spirits and the spirit of Telmor.",
+        "specId": "telmori-hsunchen-wolfbrother-shaman"
+      }
+    ],
+    "God Forgot": [
+      {
+        "name": "Holar Militia Guard",
+        "stats": "High STR, CON",
+        "career": "Warrior",
+        "style": "Holar Militia",
+        "tip": "Caste soldier defending the island with shield wall discipline and practical folk magic.",
+        "specId": "god-forgot-holar-militia-guard"
+      },
+      {
+        "name": "Zzistori Sorcerer",
+        "stats": "High INT, POW",
+        "career": "Sorcerer",
+        "style": "Talar Defensive School",
+        "tip": "Atheist wizard-caste initiate; sorcery and Law replace divine worship.",
+        "specId": "god-forgot-zzistori-sorcerer"
+      },
+      {
+        "name": "Talar Strategist",
+        "stats": "High INT, CHA",
+        "career": "Official",
+        "style": "Talar Defensive School",
+        "tip": "Immortal noble-caste planner relying on status, scholarship, and defensive training.",
+        "specId": "god-forgot-talar-strategist"
+      }
+    ],
+    "Lunar Provincial": [
+      {
+        "name": "Provincial Hoplite",
+        "stats": "High STR, CON",
+        "career": "Warrior",
+        "style": "Lunar Corps Hoplite",
+        "tip": "Tarshite or provincial soldier drilled in Lunar shield-wall tactics.",
+        "specId": "lunar-provincial-provincial-hoplite"
+      },
+      {
+        "name": "Colonial Survivalist",
+        "stats": "High DEX, CON",
+        "career": "Scout",
+        "style": "Colonial Survivalist",
+        "tip": "Frontier survivor who knows how to pass among locals and stay alive.",
+        "specId": "lunar-provincial-colonial-survivalist"
+      },
+      {
+        "name": "Seven Mothers Envoy",
+        "stats": "High CHA, INT",
+        "career": "Courtier",
+        "style": "Colonial Noble",
+        "tip": "Provincial Lunar negotiator balancing imperial loyalties and local cult ties.",
+        "specId": "lunar-provincial-seven-mothers-envoy"
+      }
+    ]
+  },
+  "specs": {
+    "praxian-beast-rider-warrior": {
+      "id": "praxian-beast-rider-warrior",
+      "culture": "Praxian",
+      "buildName": "Beast Rider Warrior",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": null,
+      "spec": {
+        "step1": {
+          "name": "Beast Rider Warrior",
+          "concept": "Praxian Beast Rider Warrior: Mounted combat specialist. Lance charges and archery from the saddle."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 13,
+            "CON": 13,
+            "SIZ": 9,
+            "DEX": 10,
+            "INT": 10,
+            "POW": 10,
+            "CHA": 10
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "Praxian",
+          "homeland": "Prax",
+          "combatStyle": "Bison"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Beast",
+            "secondary": "Death",
+            "tertiary": "Spirit"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (Praxian)",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Beast Rider Warrior)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "Prax",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Warrior",
+          "professionalSkills": [
+            "Brawn",
+            "Endurance",
+            "Survival"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (Bison)": 15,
+            "Brawn": 15,
+            "Endurance": 15,
+            "Athletics": 15,
+            "Evade": 15,
+            "Willpower": 15,
+            "Survival": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (Bison)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    },
+    "praxian-desert-shaman": {
+      "id": "praxian-desert-shaman",
+      "culture": "Praxian",
+      "buildName": "Desert Shaman",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": null,
+      "spec": {
+        "step1": {
+          "name": "Desert Shaman",
+          "concept": "Praxian Desert Shaman: Spirit talker who survives the wastes through cunning and magic."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 9,
+            "CON": 10,
+            "SIZ": 10,
+            "DEX": 10,
+            "INT": 13,
+            "POW": 13,
+            "CHA": 10
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "Praxian",
+          "homeland": "Prax",
+          "combatStyle": "Bolo Lizard"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Beast",
+            "secondary": "Death",
+            "tertiary": "Spirit"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (Praxian)",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Desert Shaman)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "Prax",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Shaman",
+          "professionalSkills": [
+            "Trance",
+            "Binding",
+            "Spirit Combat"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (Bolo Lizard)": 15,
+            "Trance": 15,
+            "Binding": 15,
+            "Spirit Combat": 15,
+            "Willpower": 15,
+            "Insight": 15,
+            "Survival": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (Bolo Lizard)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    },
+    "praxian-tribal-hunter": {
+      "id": "praxian-tribal-hunter",
+      "culture": "Praxian",
+      "buildName": "Tribal Hunter",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": null,
+      "spec": {
+        "step1": {
+          "name": "Tribal Hunter",
+          "concept": "Praxian Tribal Hunter: Patient tracker and skirmisher. Javelin and sling from a distance."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 9,
+            "CON": 13,
+            "SIZ": 10,
+            "DEX": 13,
+            "INT": 10,
+            "POW": 10,
+            "CHA": 10
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "Praxian",
+          "homeland": "Prax",
+          "combatStyle": "Impala"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Beast",
+            "secondary": "Death",
+            "tertiary": "Spirit"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (Praxian)",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Tribal Hunter)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "Prax",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Hunter",
+          "professionalSkills": [
+            "Survival",
+            "Track",
+            "Perception"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (Impala)": 15,
+            "Survival": 15,
+            "Track": 15,
+            "Perception": 15,
+            "Stealth": 15,
+            "Endurance": 15,
+            "Athletics": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (Impala)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    },
+    "sartarite-heortling-orlanthi-thane": {
+      "id": "sartarite-heortling-orlanthi-thane",
+      "culture": "Sartarite (Heortling)",
+      "buildName": "Orlanthi Thane",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": null,
+      "spec": {
+        "step1": {
+          "name": "Orlanthi Thane",
+          "concept": "Sartarite (Heortling) Orlanthi Thane: Sword-and-shield fighter who leads from the front."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 13,
+            "CON": 9,
+            "SIZ": 10,
+            "DEX": 10,
+            "INT": 10,
+            "POW": 10,
+            "CHA": 13
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "Sartarite (Heortling)",
+          "homeland": "Sartar",
+          "combatStyle": "Loyal Housecarl"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Air",
+            "secondary": "Movement",
+            "tertiary": "Death"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (Sartarite (Heortling))",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Orlanthi Thane)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "Sartar",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Warrior",
+          "professionalSkills": [
+            "Brawn",
+            "Endurance",
+            "Survival"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (Loyal Housecarl)": 15,
+            "Brawn": 15,
+            "Endurance": 15,
+            "Athletics": 15,
+            "Evade": 15,
+            "Willpower": 15,
+            "Survival": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (Loyal Housecarl)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    },
+    "sartarite-heortling-wind-lord-aspirant": {
+      "id": "sartarite-heortling-wind-lord-aspirant",
+      "culture": "Sartarite (Heortling)",
+      "buildName": "Wind Lord Aspirant",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": null,
+      "spec": {
+        "step1": {
+          "name": "Wind Lord Aspirant",
+          "concept": "Sartarite (Heortling) Wind Lord Aspirant: Devotee of Orlanth who combines martial prowess with divine magic."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 13,
+            "CON": 9,
+            "SIZ": 10,
+            "DEX": 10,
+            "INT": 10,
+            "POW": 13,
+            "CHA": 10
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "Sartarite (Heortling)",
+          "homeland": "Sartar",
+          "combatStyle": "Hill Clan Levy"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Air",
+            "secondary": "Movement",
+            "tertiary": "Death"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (Sartarite (Heortling))",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Wind Lord Aspirant)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "Sartar",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Priest",
+          "professionalSkills": [
+            "Devotion",
+            "Oratory",
+            "Lore (Cult)"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (Hill Clan Levy)": 15,
+            "Devotion": 15,
+            "Oratory": 15,
+            "Lore (Cult)": 15,
+            "Influence": 15,
+            "Willpower": 15,
+            "Insight": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (Hill Clan Levy)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    },
+    "sartarite-heortling-clan-skald": {
+      "id": "sartarite-heortling-clan-skald",
+      "culture": "Sartarite (Heortling)",
+      "buildName": "Clan Skald",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": null,
+      "spec": {
+        "step1": {
+          "name": "Clan Skald",
+          "concept": "Sartarite (Heortling) Clan Skald: Storyteller and musician who inspires the warband with tales of glory."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 9,
+            "CON": 10,
+            "SIZ": 10,
+            "DEX": 10,
+            "INT": 13,
+            "POW": 10,
+            "CHA": 13
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "Sartarite (Heortling)",
+          "homeland": "Sartar",
+          "combatStyle": "Hill Clan Levy"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Air",
+            "secondary": "Movement",
+            "tertiary": "Death"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (Sartarite (Heortling))",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Clan Skald)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "Sartar",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Entertainer",
+          "professionalSkills": [
+            "Sing",
+            "Dance",
+            "Oratory"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (Hill Clan Levy)": 15,
+            "Sing": 15,
+            "Dance": 15,
+            "Oratory": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Evade": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (Hill Clan Levy)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    },
+    "lunar-heartland-lunar-legionary": {
+      "id": "lunar-heartland-lunar-legionary",
+      "culture": "Lunar Heartland",
+      "buildName": "Lunar Legionary",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": null,
+      "spec": {
+        "step1": {
+          "name": "Lunar Legionary",
+          "concept": "Lunar Heartland Lunar Legionary: Disciplined soldier in the Emperor's armies. Shield wall and scimitar."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 13,
+            "CON": 13,
+            "SIZ": 9,
+            "DEX": 10,
+            "INT": 10,
+            "POW": 10,
+            "CHA": 10
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "Lunar Heartland",
+          "homeland": "Lunar Heartland",
+          "combatStyle": "Lunar Corps Hoplite"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Moon",
+            "secondary": "Law",
+            "tertiary": "Harmony"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (Lunar Heartland)",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Lunar Legionary)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "Lunar Heartland",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Warrior",
+          "professionalSkills": [
+            "Brawn",
+            "Endurance",
+            "Survival"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (Lunar Corps Hoplite)": 15,
+            "Brawn": 15,
+            "Endurance": 15,
+            "Athletics": 15,
+            "Evade": 15,
+            "Willpower": 15,
+            "Survival": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (Lunar Corps Hoplite)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    },
+    "lunar-heartland-seven-mothers-priestess": {
+      "id": "lunar-heartland-seven-mothers-priestess",
+      "culture": "Lunar Heartland",
+      "buildName": "Seven Mothers Priestess",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": null,
+      "spec": {
+        "step1": {
+          "name": "Seven Mothers Priestess",
+          "concept": "Lunar Heartland Seven Mothers Priestess: Devoted to the Red Goddess. Combines faith with political cunning."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 9,
+            "CON": 10,
+            "SIZ": 10,
+            "DEX": 10,
+            "INT": 10,
+            "POW": 13,
+            "CHA": 13
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "Lunar Heartland",
+          "homeland": "Lunar Heartland",
+          "combatStyle": "Dara Happan Urbanite"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Moon",
+            "secondary": "Law",
+            "tertiary": "Harmony"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (Lunar Heartland)",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Seven Mothers Priestess)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "Lunar Heartland",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Priest",
+          "professionalSkills": [
+            "Devotion",
+            "Oratory",
+            "Lore (Cult)"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (Dara Happan Urbanite)": 15,
+            "Devotion": 15,
+            "Oratory": 15,
+            "Lore (Cult)": 15,
+            "Influence": 15,
+            "Willpower": 15,
+            "Insight": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (Dara Happan Urbanite)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    },
+    "lunar-heartland-heartland-spy": {
+      "id": "lunar-heartland-heartland-spy",
+      "culture": "Lunar Heartland",
+      "buildName": "Heartland Spy",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": null,
+      "spec": {
+        "step1": {
+          "name": "Heartland Spy",
+          "concept": "Lunar Heartland Heartland Spy: Works in the shadows for the Lunar Empire. Charm and a hidden blade."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 9,
+            "CON": 10,
+            "SIZ": 10,
+            "DEX": 13,
+            "INT": 10,
+            "POW": 10,
+            "CHA": 13
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "Lunar Heartland",
+          "homeland": "Lunar Heartland",
+          "combatStyle": "Dart Contestant"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Moon",
+            "secondary": "Law",
+            "tertiary": "Harmony"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (Lunar Heartland)",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Heartland Spy)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "Lunar Heartland",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Agent",
+          "professionalSkills": [
+            "Stealth",
+            "Deceit",
+            "Perception"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (Dart Contestant)": 15,
+            "Stealth": 15,
+            "Deceit": 15,
+            "Perception": 15,
+            "Insight": 15,
+            "Influence": 15,
+            "Evade": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (Dart Contestant)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    },
+    "esrolian-earth-priestess": {
+      "id": "esrolian-earth-priestess",
+      "culture": "Esrolian",
+      "buildName": "Earth Priestess",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": null,
+      "spec": {
+        "step1": {
+          "name": "Earth Priestess",
+          "concept": "Esrolian Earth Priestess: Devoted to the Earth goddesses. Political power through the temples."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 9,
+            "CON": 10,
+            "SIZ": 10,
+            "DEX": 10,
+            "INT": 10,
+            "POW": 13,
+            "CHA": 13
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "Esrolian",
+          "homeland": "Esrolia",
+          "combatStyle": "Clan Protector"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Earth",
+            "secondary": "Fertility",
+            "tertiary": "Harmony"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (Esrolian)",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Earth Priestess)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "Esrolia",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Priest",
+          "professionalSkills": [
+            "Devotion",
+            "Oratory",
+            "Lore (Cult)"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (Clan Protector)": 15,
+            "Devotion": 15,
+            "Oratory": 15,
+            "Lore (Cult)": 15,
+            "Influence": 15,
+            "Willpower": 15,
+            "Insight": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (Clan Protector)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    },
+    "esrolian-citizen-soldier": {
+      "id": "esrolian-citizen-soldier",
+      "culture": "Esrolian",
+      "buildName": "Citizen Soldier",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": null,
+      "spec": {
+        "step1": {
+          "name": "Citizen Soldier",
+          "concept": "Esrolian Citizen Soldier: Formation fighter defending the city-states. Spear, shield, and discipline."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 13,
+            "CON": 13,
+            "SIZ": 9,
+            "DEX": 10,
+            "INT": 10,
+            "POW": 10,
+            "CHA": 10
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "Esrolian",
+          "homeland": "Esrolia",
+          "combatStyle": "Citizen Legionary"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Earth",
+            "secondary": "Fertility",
+            "tertiary": "Harmony"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (Esrolian)",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Citizen Soldier)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "Esrolia",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Warrior",
+          "professionalSkills": [
+            "Brawn",
+            "Endurance",
+            "Survival"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (Citizen Legionary)": 15,
+            "Brawn": 15,
+            "Endurance": 15,
+            "Athletics": 15,
+            "Evade": 15,
+            "Willpower": 15,
+            "Survival": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (Citizen Legionary)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    },
+    "esrolian-temple-scholar": {
+      "id": "esrolian-temple-scholar",
+      "culture": "Esrolian",
+      "buildName": "Temple Scholar",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": null,
+      "spec": {
+        "step1": {
+          "name": "Temple Scholar",
+          "concept": "Esrolian Temple Scholar: Esrolian intellectual. Knows more about Glorantha than most."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 9,
+            "CON": 10,
+            "SIZ": 10,
+            "DEX": 10,
+            "INT": 13,
+            "POW": 10,
+            "CHA": 13
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "Esrolian",
+          "homeland": "Esrolia",
+          "combatStyle": "City-State Phalangite"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Earth",
+            "secondary": "Fertility",
+            "tertiary": "Harmony"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (Esrolian)",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Temple Scholar)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "Esrolia",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Scholar",
+          "professionalSkills": [
+            "Research",
+            "Bureaucracy",
+            "Lore (History)"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (City-State Phalangite)": 15,
+            "Research": 15,
+            "Bureaucracy": 15,
+            "Lore (History)": 15,
+            "Customs": 15,
+            "Insight": 15,
+            "Willpower": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (City-State Phalangite)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    },
+    "balazaring-hawk-hunter": {
+      "id": "balazaring-hawk-hunter",
+      "culture": "Balazaring",
+      "buildName": "Hawk Hunter",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": null,
+      "spec": {
+        "step1": {
+          "name": "Hawk Hunter",
+          "concept": "Balazaring Hawk Hunter: Hunts with trained hawks in the wild hills. Expert with longspear."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 9,
+            "CON": 13,
+            "SIZ": 10,
+            "DEX": 13,
+            "INT": 10,
+            "POW": 10,
+            "CHA": 10
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "Balazaring",
+          "homeland": "Balazar",
+          "combatStyle": "Hawk Slayer"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Beast",
+            "secondary": "Spirit",
+            "tertiary": "Movement"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (Balazaring)",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Hawk Hunter)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "Balazar",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Hunter",
+          "professionalSkills": [
+            "Survival",
+            "Track",
+            "Perception"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (Hawk Slayer)": 15,
+            "Survival": 15,
+            "Track": 15,
+            "Perception": 15,
+            "Stealth": 15,
+            "Endurance": 15,
+            "Athletics": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (Hawk Slayer)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    },
+    "balazaring-clan-raider": {
+      "id": "balazaring-clan-raider",
+      "culture": "Balazaring",
+      "buildName": "Clan Raider",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": null,
+      "spec": {
+        "step1": {
+          "name": "Clan Raider",
+          "concept": "Balazaring Clan Raider: Fast and vicious. Raids neighbouring clans for cattle and glory."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 13,
+            "CON": 9,
+            "SIZ": 10,
+            "DEX": 13,
+            "INT": 10,
+            "POW": 10,
+            "CHA": 10
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "Balazaring",
+          "homeland": "Balazar",
+          "combatStyle": "Hunter Raider"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Beast",
+            "secondary": "Spirit",
+            "tertiary": "Movement"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (Balazaring)",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Clan Raider)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "Balazar",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Warrior",
+          "professionalSkills": [
+            "Brawn",
+            "Endurance",
+            "Survival"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (Hunter Raider)": 15,
+            "Brawn": 15,
+            "Endurance": 15,
+            "Athletics": 15,
+            "Evade": 15,
+            "Willpower": 15,
+            "Survival": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (Hunter Raider)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    },
+    "telmori-hsunchen-wolf-pack-alpha": {
+      "id": "telmori-hsunchen-wolf-pack-alpha",
+      "culture": "Telmori Hsunchen",
+      "buildName": "Wolf Pack Alpha",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": null,
+      "spec": {
+        "step1": {
+          "name": "Wolf Pack Alpha",
+          "concept": "Telmori Hsunchen Wolf Pack Alpha: Fights alongside wolves. Can shapeshift during the full moon."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 13,
+            "CON": 9,
+            "SIZ": 10,
+            "DEX": 10,
+            "INT": 10,
+            "POW": 13,
+            "CHA": 10
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "Telmori Hsunchen",
+          "homeland": "Telmori Wilds",
+          "combatStyle": "Wolf Hunter"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Beast",
+            "secondary": "Spirit",
+            "tertiary": "Death"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (Telmori Hsunchen)",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Wolf Pack Alpha)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "Telmori Wilds",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Warrior",
+          "professionalSkills": [
+            "Brawn",
+            "Endurance",
+            "Survival"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (Wolf Hunter)": 15,
+            "Brawn": 15,
+            "Endurance": 15,
+            "Athletics": 15,
+            "Evade": 15,
+            "Willpower": 15,
+            "Survival": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (Wolf Hunter)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    },
+    "telmori-hsunchen-wolfbrother-shaman": {
+      "id": "telmori-hsunchen-wolfbrother-shaman",
+      "culture": "Telmori Hsunchen",
+      "buildName": "Wolfbrother Shaman",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": null,
+      "spec": {
+        "step1": {
+          "name": "Wolfbrother Shaman",
+          "concept": "Telmori Hsunchen Wolfbrother Shaman: Speaks to wolf spirits and the spirit of Telmor."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 9,
+            "CON": 10,
+            "SIZ": 10,
+            "DEX": 10,
+            "INT": 13,
+            "POW": 13,
+            "CHA": 10
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "Telmori Hsunchen",
+          "homeland": "Telmori Wilds",
+          "combatStyle": "Telmori Hunter"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Beast",
+            "secondary": "Spirit",
+            "tertiary": "Death"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (Telmori Hsunchen)",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Wolfbrother Shaman)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "Telmori Wilds",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Shaman",
+          "professionalSkills": [
+            "Trance",
+            "Binding",
+            "Spirit Combat"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (Telmori Hunter)": 15,
+            "Trance": 15,
+            "Binding": 15,
+            "Spirit Combat": 15,
+            "Willpower": 15,
+            "Insight": 15,
+            "Survival": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (Telmori Hunter)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    },
+    "god-forgot-holar-militia-guard": {
+      "id": "god-forgot-holar-militia-guard",
+      "culture": "God Forgot",
+      "buildName": "Holar Militia Guard",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": "God Forgot is AiG-atheist; build specs intentionally use No Cult by default.",
+      "spec": {
+        "step1": {
+          "name": "Holar Militia Guard",
+          "concept": "God Forgot Holar Militia Guard: Caste soldier defending the island with shield wall discipline and practical folk magic."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 13,
+            "CON": 13,
+            "SIZ": 9,
+            "DEX": 10,
+            "INT": 10,
+            "POW": 10,
+            "CHA": 10
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "God Forgot",
+          "homeland": "God Forgot",
+          "combatStyle": "Holar Militia"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Law",
+            "secondary": "Stasis",
+            "tertiary": "Truth"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (God Forgot)",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Holar Militia Guard)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "God Forgot",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Warrior",
+          "professionalSkills": [
+            "Brawn",
+            "Endurance",
+            "Survival"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (Holar Militia)": 15,
+            "Brawn": 15,
+            "Endurance": 15,
+            "Athletics": 15,
+            "Evade": 15,
+            "Willpower": 15,
+            "Survival": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (Holar Militia)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    },
+    "god-forgot-zzistori-sorcerer": {
+      "id": "god-forgot-zzistori-sorcerer",
+      "culture": "God Forgot",
+      "buildName": "Zzistori Sorcerer",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": "God Forgot is AiG-atheist; build specs intentionally use No Cult by default.",
+      "spec": {
+        "step1": {
+          "name": "Zzistori Sorcerer",
+          "concept": "God Forgot Zzistori Sorcerer: Atheist wizard-caste initiate; sorcery and Law replace divine worship."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 9,
+            "CON": 10,
+            "SIZ": 10,
+            "DEX": 10,
+            "INT": 13,
+            "POW": 13,
+            "CHA": 10
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "God Forgot",
+          "homeland": "God Forgot",
+          "combatStyle": "Talar Defensive School"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Law",
+            "secondary": "Stasis",
+            "tertiary": "Truth"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (God Forgot)",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Zzistori Sorcerer)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "God Forgot",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Sorcerer",
+          "professionalSkills": [
+            "Invocation",
+            "Shaping",
+            "Lore (Sorcery)"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (Talar Defensive School)": 15,
+            "Invocation": 15,
+            "Shaping": 15,
+            "Lore (Sorcery)": 15,
+            "Willpower": 15,
+            "Insight": 15,
+            "Locale": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (Talar Defensive School)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    },
+    "god-forgot-talar-strategist": {
+      "id": "god-forgot-talar-strategist",
+      "culture": "God Forgot",
+      "buildName": "Talar Strategist",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": "God Forgot is AiG-atheist; build specs intentionally use No Cult by default.",
+      "spec": {
+        "step1": {
+          "name": "Talar Strategist",
+          "concept": "God Forgot Talar Strategist: Immortal noble-caste planner relying on status, scholarship, and defensive training."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 9,
+            "CON": 10,
+            "SIZ": 10,
+            "DEX": 10,
+            "INT": 13,
+            "POW": 10,
+            "CHA": 13
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "God Forgot",
+          "homeland": "God Forgot",
+          "combatStyle": "Talar Defensive School"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Law",
+            "secondary": "Stasis",
+            "tertiary": "Truth"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (God Forgot)",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Talar Strategist)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "God Forgot",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Official",
+          "professionalSkills": [
+            "Bureaucracy",
+            "Influence",
+            "Insight"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (Talar Defensive School)": 15,
+            "Bureaucracy": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Customs": 15,
+            "Willpower": 15,
+            "Locale": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (Talar Defensive School)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    },
+    "lunar-provincial-provincial-hoplite": {
+      "id": "lunar-provincial-provincial-hoplite",
+      "culture": "Lunar Provincial",
+      "buildName": "Provincial Hoplite",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": null,
+      "spec": {
+        "step1": {
+          "name": "Provincial Hoplite",
+          "concept": "Lunar Provincial Provincial Hoplite: Tarshite or provincial soldier drilled in Lunar shield-wall tactics."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 13,
+            "CON": 13,
+            "SIZ": 9,
+            "DEX": 10,
+            "INT": 10,
+            "POW": 10,
+            "CHA": 10
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "Lunar Provincial",
+          "homeland": "Tarsh",
+          "combatStyle": "Lunar Corps Hoplite"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Moon",
+            "secondary": "Disorder",
+            "tertiary": "Illusion"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (Lunar Provincial)",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Provincial Hoplite)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "Tarsh",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Warrior",
+          "professionalSkills": [
+            "Brawn",
+            "Endurance",
+            "Survival"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (Lunar Corps Hoplite)": 15,
+            "Brawn": 15,
+            "Endurance": 15,
+            "Athletics": 15,
+            "Evade": 15,
+            "Willpower": 15,
+            "Survival": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (Lunar Corps Hoplite)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    },
+    "lunar-provincial-colonial-survivalist": {
+      "id": "lunar-provincial-colonial-survivalist",
+      "culture": "Lunar Provincial",
+      "buildName": "Colonial Survivalist",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": null,
+      "spec": {
+        "step1": {
+          "name": "Colonial Survivalist",
+          "concept": "Lunar Provincial Colonial Survivalist: Frontier survivor who knows how to pass among locals and stay alive."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 9,
+            "CON": 13,
+            "SIZ": 10,
+            "DEX": 13,
+            "INT": 10,
+            "POW": 10,
+            "CHA": 10
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "Lunar Provincial",
+          "homeland": "Tarsh",
+          "combatStyle": "Colonial Survivalist"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Moon",
+            "secondary": "Disorder",
+            "tertiary": "Illusion"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (Lunar Provincial)",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Colonial Survivalist)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "Tarsh",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Scout",
+          "professionalSkills": [
+            "Survival",
+            "Stealth",
+            "Perception"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (Colonial Survivalist)": 15,
+            "Survival": 15,
+            "Stealth": 15,
+            "Perception": 15,
+            "Track": 15,
+            "Endurance": 15,
+            "Evade": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (Colonial Survivalist)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    },
+    "lunar-provincial-seven-mothers-envoy": {
+      "id": "lunar-provincial-seven-mothers-envoy",
+      "culture": "Lunar Provincial",
+      "buildName": "Seven Mothers Envoy",
+      "citations": [
+        "Adventures in Glorantha p.25-41 (culture packages)",
+        "Mythras Core Rulebook 3rd Printing 2018 p.13-31 (character creation point budgets)",
+        "references/aig-raw/cultures.json (combat styles and culture metadata)"
+      ],
+      "blockedCultSelection": null,
+      "spec": {
+        "step1": {
+          "name": "Seven Mothers Envoy",
+          "concept": "Lunar Provincial Seven Mothers Envoy: Provincial Lunar negotiator balancing imperial loyalties and local cult ties."
+        },
+        "step2": {
+          "characteristics": {
+            "STR": 9,
+            "CON": 10,
+            "SIZ": 10,
+            "DEX": 10,
+            "INT": 13,
+            "POW": 10,
+            "CHA": 13
+          }
+        },
+        "step3": {},
+        "step4": {
+          "culture": "Lunar Provincial",
+          "homeland": "Tarsh",
+          "combatStyle": "Colonial Noble"
+        },
+        "step5": {
+          "culturalSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Willpower": 15,
+            "Customs": 10
+          },
+          "runeAffinities": {
+            "primary": "Moon",
+            "secondary": "Disorder",
+            "tertiary": "Illusion"
+          },
+          "folkMagicSpells": [
+            "Heal",
+            "Protection",
+            "Bladesharp"
+          ]
+        },
+        "step6": {
+          "passions": [
+            {
+              "name": "Loyalty (Lunar Provincial)",
+              "value": 47
+            },
+            {
+              "name": "Devotion (Seven Mothers Envoy)",
+              "value": 47
+            }
+          ]
+        },
+        "step7": {
+          "age": 21,
+          "gender": "",
+          "family": "Tarsh",
+          "backgroundEvents": ""
+        },
+        "step8": {
+          "career": "Courtier",
+          "professionalSkills": [
+            "Courtesy",
+            "Influence",
+            "Insight"
+          ]
+        },
+        "step9": {
+          "cult": null
+        },
+        "step10": {
+          "careerSkills": {
+            "Combat Style (Colonial Noble)": 15,
+            "Courtesy": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Willpower": 15,
+            "Deceit": 15,
+            "Oratory": 10
+          },
+          "careerFolkMagic": [
+            "Heal",
+            "Protection"
+          ]
+        },
+        "step11": {
+          "bonusSkills": {
+            "Athletics": 15,
+            "Endurance": 15,
+            "Willpower": 15,
+            "Perception": 15,
+            "Influence": 15,
+            "Insight": 15,
+            "Locale": 15,
+            "Survival": 15,
+            "Combat Style (Colonial Noble)": 15,
+            "Customs": 15
+          }
+        },
+        "step12": {
+          "socialClass": "Freeman"
+        }
+      }
+    }
+  }
+}

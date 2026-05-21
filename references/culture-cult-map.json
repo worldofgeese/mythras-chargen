@@ -1,12 +1,14 @@
 {
   "source": "Derived from CultOnePagers2019 areas + AiG culture descriptions",
-  "note": "Maps each AiG culture to available cults. 'primary' = most common/expected. 'secondary' = available but less typical. Based on pantheon geography and cult area data; culture magic caveats live in references/aig-raw/culture-magic-profiles-aig.json.",
+  "note": "Maps each AiG culture to available cults. 'primary' = most common/expected. 'secondary' = available but less typical. Culture aliases canonicalize older/source labels before lookup. Seven Mothers is a display grouping only; app selection uses cited individual 7 Mothers subcult records. Culture magic caveats live in references/aig-raw/culture-magic-profiles-aig.json.",
   "page_citations": {
     "culture_descriptions": "Adventures in Glorantha p.26-41; Praxian p.33-35; Sartarite (Heortling) p.37-39",
     "cult_area_data": "Notes from Pavis Cult One-Pagers (2019 v5.2), individual cult area sections; reviewed corrections cite Yelmalio p.1-2, Arkat p.1, Pavis p.1, Zola Fel p.1, Waha p.1, Eiritha p.1, Storm Bull p.1, Foundchild p.1, Daka Fal p.1",
     "praxian_yelmalio": "CultOnePagers2019/Yelm/Yelmalio.pdf, p.1-2 (areas and Pavis association)",
     "god_forgot_arkat": "CultOnePagers2019/Arkat/Arkat.pdf, p.1 (areas include Holy Country)",
-    "god_forgot_magic_caveat": "Adventures in Glorantha p.30-31 (atheist culture; gods not worshipped; Rune Magic unavailable; Spirit Magic viewed as pointless; Folk Magic treated as diluted sorcery)"
+    "god_forgot_magic_caveat": "Adventures in Glorantha p.30-31 (atheist culture; gods not worshipped; Rune Magic unavailable; Spirit Magic viewed as pointless; Folk Magic treated as diluted sorcery)",
+    "culture_aliases": "Adventures in Glorantha p.33-39 (Tarsh/Provincial Lunar and Sartarite/Heortling labels); references/aig-raw/cultures.json aliases",
+    "seven_mothers_display_group": "Notes from Pavis Cult One-Pagers (2019 v5.2), Lunar/7 Mothers individual subcult packets; no aggregate Seven Mothers app record is source-backed here"
   },
   "cultures": {
     "Sartarite (Heortling)": {
@@ -162,6 +164,31 @@
         "Orlanth"
       ],
       "note": "Telmori primarily worship their wolf ancestor Telmor. Telmor cult data is in Hsunchen pantheon."
+    }
+  },
+  "culture_aliases": {
+    "Sartarite": "Sartarite (Heortling)",
+    "Heortling": "Sartarite (Heortling)",
+    "Orlanthi": "Sartarite (Heortling)",
+    "Lunar Tarshite": "Lunar Provincial",
+    "Tarshite": "Lunar Provincial",
+    "Provincial Lunar/Tarsh": "Lunar Provincial",
+    "Provincial Lunar": "Lunar Provincial",
+    "Telmori": "Telmori Hsunchen"
+  },
+  "cult_display_groups": {
+    "Seven Mothers": {
+      "displayOnly": true,
+      "members": [
+        "7 Mothers - Yanafal Tarnils",
+        "7 Mothers - Irrippi Ontor",
+        "7 Mothers - Jakaleel",
+        "7 Mothers - Danfive Xaron",
+        "7 Mothers - Teelo Norri",
+        "7 Mothers - Queen Deezola",
+        "7 Mothers - She Who Waits"
+      ],
+      "note": "Seven Mothers is preserved as a player-facing/source label; choose an individual 7 Mothers subcult record for app mechanics."
     }
   }
 }

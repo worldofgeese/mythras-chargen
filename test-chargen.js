@@ -196,6 +196,7 @@ function loadApp() {
         COMBAT_STYLES_DATA: typeof COMBAT_STYLES_DATA !== 'undefined' ? COMBAT_STYLES_DATA : null,
         STARTING_SPIRITS: typeof STARTING_SPIRITS !== 'undefined' ? STARTING_SPIRITS : null,
         CULTURE_BUILDS: typeof CULTURE_BUILDS !== 'undefined' ? CULTURE_BUILDS : null,
+        CULTURE_BUILD_SPECS: typeof CULTURE_BUILD_SPECS !== 'undefined' ? CULTURE_BUILD_SPECS : null,
         CULTURE_MAGIC_PROFILES: typeof CULTURE_MAGIC_PROFILES !== 'undefined' ? CULTURE_MAGIC_PROFILES : null,
         WEAPONS_DATA,
         WEAPON_ALIASES: typeof WEAPON_ALIASES !== 'undefined' ? WEAPON_ALIASES : null,
@@ -205,9 +206,12 @@ function loadApp() {
         GLORANTHA_CULTURES_DATA: typeof GLORANTHA_CULTURES_DATA !== 'undefined' ? GLORANTHA_CULTURES_DATA : null,
         Helpers: typeof Helpers !== 'undefined' ? Helpers : null,
         normalizeCharacter: (typeof App !== 'undefined' && App.normalizeCharacter) ? App.normalizeCharacter : null,
+        normalizeCultureName: typeof normalizeCultureName !== 'undefined' ? normalizeCultureName : null,
         CAREERS_DATA: typeof CAREERS_DATA !== 'undefined' ? CAREERS_DATA : null,
         CULTS_DATA: typeof CULTS_DATA !== 'undefined' ? CULTS_DATA : null,
         CULTURE_CULT_MAP: typeof CULTURE_CULT_MAP !== 'undefined' ? CULTURE_CULT_MAP : null,
+        CULTURE_ALIASES: typeof CULTURE_ALIASES !== 'undefined' ? CULTURE_ALIASES : null,
+        CULT_DISPLAY_GROUPS: typeof CULT_DISPLAY_GROUPS !== 'undefined' ? CULT_DISPLAY_GROUPS : null,
         isAnySkill: typeof isAnySkill !== 'undefined' ? isAnySkill : null,
         isPlaceholderSkill: typeof isPlaceholderSkill !== 'undefined' ? isPlaceholderSkill : null,
         needsDisambiguation: typeof needsDisambiguation !== 'undefined' ? needsDisambiguation : null,
@@ -4892,6 +4896,69 @@ section('Cult Data Tests');
   }
 }
 
+// Test: Waha app data is singular and points at canonical Praxian source
+{
+  const wahaRecords = (App.CULTS_DATA || []).filter(cult => cult.name === 'Waha');
+  const waha = wahaRecords[0];
+  if (
+    wahaRecords.length === 1 &&
+    waha?.pantheon === 'Praxian' &&
+    waha?.canonicalRecord === true &&
+    waha?.doNotUseForAppGeneration === false &&
+    Array.isArray(waha?.sourcePages) &&
+    waha.sourcePages.includes(1) &&
+    waha.sourcePages.includes(2) &&
+    /Praxian\/Waha\.pdf, p\.1-2$/.test(waha?.sourceCitation || '')
+  ) {
+    pass('CULTS_DATA contains one canonical source-cited Praxian Waha');
+  } else {
+    fail('CULTS_DATA Waha authority is duplicated or missing canonical citation',
+      JSON.stringify(wahaRecords.map(cult => ({
+        pantheon: cult.pantheon,
+        canonicalRecord: cult.canonicalRecord,
+        doNotUseForAppGeneration: cult.doNotUseForAppGeneration,
+        sourceCitation: cult.sourceCitation
+      }))));
+  }
+}
+
+// Test: stale aggregate Waha records are blocked from app generation
+{
+  const aggregatePath = path.join(__dirname, 'references', 'cults-raw', 'cults.json');
+  const aggregate = JSON.parse(fs.readFileSync(aggregatePath, 'utf8'));
+  const aggregateWaha = aggregate.filter(cult => cult.name === 'Waha');
+  const unblocked = aggregateWaha.filter(cult =>
+    cult.doNotUseForAppGeneration !== true ||
+    cult.canonicalRecord !== false ||
+    !['redirected-to-canonical', 'superseded'].includes(cult.recordStatus)
+  );
+  const stormPath = path.join(__dirname, 'references', 'cults-raw', 'storm', 'waha.json');
+  const stormWaha = JSON.parse(fs.readFileSync(stormPath, 'utf8'));
+  const canonicalPath = path.join(__dirname, 'references', 'cults-raw', 'praxian', 'waha.json');
+  const canonicalWaha = JSON.parse(fs.readFileSync(canonicalPath, 'utf8'));
+  if (
+    aggregateWaha.length >= 1 &&
+    unblocked.length === 0 &&
+    stormWaha.doNotUseForAppGeneration === true &&
+    stormWaha.recordStatus === 'superseded' &&
+    canonicalWaha.canonicalRecord === true &&
+    canonicalWaha.doNotUseForAppGeneration === false
+  ) {
+    pass('Stale aggregate and Storm Waha records are blocked in favor of Praxian canonical source');
+  } else {
+    fail('Waha stale-source guards are missing',
+      JSON.stringify({
+        aggregateWaha: aggregateWaha.map(cult => ({
+          recordStatus: cult.recordStatus,
+          canonicalRecord: cult.canonicalRecord,
+          doNotUseForAppGeneration: cult.doNotUseForAppGeneration
+        })),
+        stormStatus: stormWaha.recordStatus,
+        canonicalRecord: canonicalWaha.canonicalRecord
+      }));
+  }
+}
+
 // Test: culture-cult-map reference matches inline app data
 {
   const refPath = path.join(__dirname, 'references', 'culture-cult-map.json');
@@ -4919,6 +4986,52 @@ section('Cult Data Tests');
         hasPraxianYelmalioCitation: Boolean(ref.page_citations?.praxian_yelmalio),
         hasGodForgotArkatCitation: Boolean(ref.page_citations?.god_forgot_arkat)
       }));
+  }
+}
+
+// Test: culture aliases and Seven Mothers display grouping stay source-backed
+{
+  const refPath = path.join(__dirname, 'references', 'culture-cult-map.json');
+  const ref = JSON.parse(fs.readFileSync(refPath, 'utf8'));
+  const aliasesMatch = JSON.stringify(ref.culture_aliases || {}) === JSON.stringify(App.CULTURE_ALIASES || {});
+  const groupsMatch = JSON.stringify(ref.cult_display_groups || {}) === JSON.stringify(App.CULT_DISPLAY_GROUPS || {});
+  const sevenMothersGroup = App.CULT_DISPLAY_GROUPS?.['Seven Mothers'];
+  const hasAggregateCult = (App.CULTS_DATA || []).some(cult => cult.name === 'Seven Mothers');
+  const lunarMapsUseSubcults = ['Lunar Heartland', 'Lunar Provincial'].every(cultureName => {
+    const names = [
+      ...(App.CULTURE_CULT_MAP?.[cultureName]?.primary || []),
+      ...(App.CULTURE_CULT_MAP?.[cultureName]?.secondary || [])
+    ];
+    return !names.includes('Seven Mothers') &&
+      (sevenMothersGroup?.members || []).some(member => names.includes(member));
+  });
+  const aliasWorks = App.normalizeCultureName?.('Lunar Tarshite') === 'Lunar Provincial' &&
+    App.normalizeCultureName?.('Heortling') === 'Sartarite (Heortling)';
+
+  if (aliasesMatch && groupsMatch && sevenMothersGroup?.displayOnly === true && !hasAggregateCult && lunarMapsUseSubcults && aliasWorks) {
+    pass('Culture aliases and Seven Mothers display group are source-backed and non-selectable as aggregate cult');
+  } else {
+    fail('Culture alias/display group source data is out of sync',
+      JSON.stringify({ aliasesMatch, groupsMatch, hasAggregateCult, lunarMapsUseSubcults, aliasWorks }));
+  }
+}
+
+// Test: pregen concept source labels normalize to supported app cultures
+{
+  const pregenPath = path.join(__dirname, 'references', 'pregen-concepts.json');
+  const pregen = JSON.parse(fs.readFileSync(pregenPath, 'utf8'));
+  const vostor = (pregen.characters || []).find(character => character.name === 'Vostor Son of Pyjeem');
+  const vostorCultureCanonical = vostor?.culture === 'Lunar Provincial' &&
+    App.normalizeCultureName?.(vostor?.sourceCultureLabel) === vostor?.culture;
+  const displayOnlyCult = vostor?.cult === 'Seven Mothers' &&
+    vostor?.cultDisplayGroup === 'Seven Mothers' &&
+    !(App.CULTS_DATA || []).some(cult => cult.name === 'Seven Mothers');
+
+  if (vostorCultureCanonical && displayOnlyCult) {
+    pass('Vostor concept uses canonical Lunar Provincial culture while preserving source labels/display-only cult group');
+  } else {
+    fail('Vostor concept still has an unsupported culture or selectable aggregate cult assumption',
+      JSON.stringify({ vostorCultureCanonical, displayOnlyCult, vostor }));
   }
 }
 
@@ -5496,7 +5609,7 @@ section('Quick Boost Panel (U1: number inputs, no re-render)');
 
 {
   // Test: adjustCultBoost accepts an absolute value (not a delta)
-  const { App: AppRef, CharacterData: CD } = loadApp();
+  const { App: AppRef, CharacterData: CD, CULTURE_CULT_MAP: CultureCultMap } = loadApp();
   const sandbox = AppRef ? AppRef._sandbox || CD._sandbox : null;
   
   if (AppRef && AppRef.adjustCultBoost) {
@@ -5767,7 +5880,7 @@ section('Step 9 Initiation Gate');
 }
 
 {
-  const { App: AppRef, CharacterData: CD } = loadApp();
+  const { App: AppRef, CharacterData: CD, CULTURE_CULT_MAP: CultureCultMap } = loadApp();
 
   if (AppRef && AppRef.selectCulture && AppRef.getHomelandSuggestions && AppRef.validateCurrentStep) {
     AppRef.currentStep = 4;
@@ -5829,6 +5942,124 @@ section('Step 9 Initiation Gate');
     }
   } else {
     fail('Suggested build data not available to tests');
+  }
+}
+
+{
+  const { CULTURE_BUILDS: CultureBuilds, CULTURE_BUILD_SPECS: CultureBuildSpecs } = loadApp();
+  const refPath = path.join(__dirname, 'references', 'aig-raw', 'culture-build-specs-aig.json');
+  const ref = JSON.parse(fs.readFileSync(refPath, 'utf8'));
+
+  if (CultureBuilds && CultureBuildSpecs) {
+    const missingSpecIds = [];
+    Object.entries(CultureBuilds).forEach(([cultureName, builds]) => {
+      builds.forEach(build => {
+        if (!build.specId || !CultureBuildSpecs[build.specId]) {
+          missingSpecIds.push(`${cultureName}/${build.name}`);
+        }
+      });
+    });
+    const buildsMatch = JSON.stringify(ref.builds || {}) === JSON.stringify(CultureBuilds);
+    const specsMatch = JSON.stringify(ref.specs || {}) === JSON.stringify(CultureBuildSpecs);
+    const hasCitations = Boolean(ref.page_citations?.culture_packages) &&
+      Boolean(ref.page_citations?.character_creation) &&
+      Boolean(ref.page_citations?.combat_styles);
+
+    if (missingSpecIds.length === 0 && buildsMatch && specsMatch && hasCitations) {
+      pass('All Step 4 suggested builds link to source-backed complete character specs');
+    } else {
+      fail('Suggested build specs are missing or out of sync with reference data',
+        JSON.stringify({ missingSpecIds, buildsMatch, specsMatch, hasCitations }));
+    }
+  } else {
+    fail('Suggested build spec data not available to tests');
+  }
+}
+
+{
+  const { CULTURE_BUILDS: CultureBuilds, CULTURE_BUILD_SPECS: CultureBuildSpecs } = loadApp();
+
+  if (CultureBuilds && CultureBuildSpecs) {
+    const failures = [];
+    Object.entries(CultureBuilds).forEach(([cultureName, builds]) => {
+      builds.forEach(build => {
+        const record = CultureBuildSpecs[build.specId];
+        const fresh = loadApp();
+        fresh.App.renderCurrentStep = () => {};
+        fresh.App.saveToLocalStorage = () => {};
+        fresh.App.switchMode = mode => { fresh.App.mode = mode; };
+        const result = fresh.App.agent.buildCharacter(record?.spec);
+        const selectedStyle = fresh.CharacterData.combatStyles?.[0]?.name;
+        if (
+          !record ||
+          !result.success ||
+          fresh.CharacterData.culture !== cultureName ||
+          fresh.CharacterData.career !== build.career ||
+          selectedStyle !== build.style ||
+          fresh.CharacterData.cult !== null
+        ) {
+          failures.push(`${cultureName}/${build.name}: ${JSON.stringify({
+            success: result.success,
+            failedStep: result.failedStep,
+            errors: result.errors,
+            culture: fresh.CharacterData.culture,
+            career: fresh.CharacterData.career,
+            style: selectedStyle,
+            cult: fresh.CharacterData.cult
+          })}`);
+        }
+      });
+    });
+
+    if (failures.length === 0) {
+      pass('All Step 4 suggested build specs produce complete valid characters');
+    } else {
+      fail('Suggested build complete-character specs failed to build', failures.join('; '));
+    }
+  } else {
+    fail('Suggested build spec data not available to tests');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, CULTURE_CULT_MAP: CultureCultMap } = loadApp();
+
+  if (AppRef && AppRef.selectCulture && AppRef.selectCult && AppRef.renderStep9) {
+    AppRef.currentStep = 4;
+    AppRef.selectCulture('Praxian');
+    AppRef.selectCult('Waha');
+    CD.miracles = ['Shield'];
+    CD.boundSpirits = [{name: 'Ancestor Spirit — Sagacity (Int 1)'}];
+    AppRef.selectCulture('God Forgot');
+    CD.career = 'Warrior';
+    AppRef.currentStep = 9;
+    const step9 = AppRef.renderStep9();
+    const html = step9.innerHTML || '';
+
+    const cleared = CD.cult === null &&
+      CD.cultType === null &&
+      CD.devotionalPool === 0 &&
+      CD.boundSpiritSlots === 0 &&
+      CD.sorceryResource === 0 &&
+      CD.miracles.length === 0 &&
+      CD.boundSpirits.length === 0 &&
+      CD.sorcerySpells.length === 0;
+    const godForgotMap = CultureCultMap?.['God Forgot'] || {};
+    const godForgotNoCult = html.includes('✓ No Cult') &&
+      (godForgotMap.primary || []).length === 0 &&
+      (godForgotMap.secondary || []).includes('Arkat') &&
+      !html.includes('Select Initiate Miracles') &&
+      !html.includes('Starting Bound Spirits') &&
+      !(godForgotMap.secondary || []).includes('Waha');
+
+    if (cleared && godForgotNoCult) {
+      pass('Changing culture clears stale cult magic and leaves God Forgot on no-cult defaults');
+    } else {
+      fail('Culture change left stale cult state or God Forgot cult UI',
+        JSON.stringify({ cleared, godForgotNoCult, cult: CD.cult, devotionalPool: CD.devotionalPool, boundSpiritSlots: CD.boundSpiritSlots }));
+    }
+  } else {
+    fail('Culture-change cult clearing dependencies not found');
   }
 }
 
