@@ -16,16 +16,16 @@
       "canonical_locator": "https://copyparty.hound-celsius.ts.net/sources/books/Adventures%20in%20Glorantha%20GenCon%20Preview.pdf",
       "local_hint": "references/sources/pdfs/aig.pdf",
       "lifecycle_state": "permission_pending",
-      "source_revision_id": "aig:permission-pending:2026-05-21",
-      "sha256": null,
-      "size_bytes": null,
+      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+      "sha256": "0edc1e549c560222a7c2b80e9eb0fb713d962bb30a280a7a6b760821e2983572",
+      "size_bytes": 202097364,
       "page_count": 212,
       "acquired_at": null,
       "permission_basis": {
         "status": "permission_pending",
-        "note": "TDM permission must be confirmed before new committed extraction evidence is promoted."
+        "note": "TDM extraction permission is not confirmed; source identity is recorded but evidence promotion remains blocked."
       },
-      "precedence": "Primary Gloranthan culture and AiG magic source after future verified extraction; current raw records remain legacy until migrated.",
+      "precedence": "Primary Gloranthan culture and AiG magic source only after future verified extraction; current raw records remain source_blocked legacy data.",
       "render_contract": {
         "renderer": "pdftoppm",
         "renderer_version": "runtime-detected",
@@ -47,9 +47,17 @@
         "acceptance"
       ],
       "blockers": [
-        "sha256 unavailable in committed manifest",
-        "permission basis is not confirmed"
-      ]
+        "permission basis is not confirmed",
+        "independent vision extraction/verification has not been run for AiG pages"
+      ],
+      "observed_source_metadata": {
+        "observed_at": "2026-05-21",
+        "sha256_method": "sha256sum against local non-git AiG PDF",
+        "page_count_method": "pdfinfo against local non-git AiG PDF",
+        "canonical_locator_head_status": 200,
+        "canonical_locator_content_length": 202097364,
+        "note": "The source PDF is not committed; references/sources/pdfs/aig.pdf remains an ignored local hint."
+      }
     },
     {
       "source_id": "cse",

@@ -1,32 +1,32 @@
 # Adventures in Glorantha Reference Extractions
 
-## Status: Structured Extraction Complete
+## Status: Legacy Structured Extractions (Source-Blocked)
 
-This directory contains structured reference data extracted from **Adventures in Glorantha (GenCon 2015 Preview, GenCon 2015)**.
+This directory contains legacy structured reference data for **Adventures in Glorantha (GenCon 2015 Preview, GenCon 2015)**. Under the current source-authority policy, these records are source-blocked until bounded vision extraction and independent verification exist.
 
 ### Source PDF
 
-`/home/worldofgeese/Downloads/RuneQuest_TDM_Sixth_Edition_Adventures_in_Glorantha_Special_GenCon.pdf` (193MB, 212 pages) is the source PDF used for page-level validation. The PDF is a hybrid: text-layer pages plus scanned images.
+The canonical locator is recorded in `references/sources/manifest.json`; `references/sources/pdfs/aig.pdf` is the ignored local hint. The observed source revision is recorded by SHA-256, size, and 212-page count, but the PDF is not committed.
 
 ### Validation Method
 
-`AiG-full-ocr.md` was removed as an active data store after the vision/OCR validation pass. The authoritative chain is now the source PDF plus structured JSON with page citations. Validation used `pdftotext`, rendered page images, and OCR spot checks against the local PDF.
+Earlier `pdftotext`/OCR-era checks are retained only as historical context. The current authoritative chain requires the source manifest, all-page blocked records, bounded vision evidence, and independent verifier artifacts before normalized AiG facts can be accepted.
 
 ### Structured JSON Files
 
 | File | Status | Content | Source Pages |
 |------|--------|---------|-------------|
-| `cultures.json` | Complete, validated | 8 cultures (skills, passions, folk magic, CSE-linked combat styles) | p.26-41 |
+| `cultures.json` | Legacy, source-blocked | 8 cultures (skills, passions, folk magic, CSE-linked combat styles) | p.26-41 |
 | `cultures-mistral.json` | Superseded raw extraction | Historical Mistral extraction used during reconciliation | p.26-41 |
 | `combat-styles-aig.json` | Superseded incomplete | Historical partial AiG combat-style extraction; app uses `../combat-styles.json` | p.26-41 |
-| `equipment-aig.json` | Complete, validated | Starting money/equipment derivation; combat styles point to CSE authority | p.24-41 |
-| `creation-summary-aig.json` | Complete | 12-step creation process | p.23-25 |
-| `folk-magic-aig.json` | Complete, validated | AiG Folk Magic spells plus all 8 culture folk magic lists | p.26-41, p.63-68 |
-| `culture-magic-profiles-aig.json` | Complete, validated | Culture-level magic-system fit and caveats | p.26-41, p.59-62, p.136-137 |
-| `rune-affinities.json` | Complete | Rune system mechanics | p.24 |
-| `magic-overview-aig.json` | Complete, validated overview | Magic system summaries and general casting rules | p.59-62 |
-| `rune-magic-aig.json` | Validated raw spell text | Rune spell names/pages/descriptions; stat-line metadata not yet normalized | p.69-122 |
-| `spirit-magic-aig.json` | Validated raw spirit text | Spirit traditions, abilities, passions, and spirits; rune associations not yet normalized | p.134-151 |
+| `equipment-aig.json` | Legacy, source-blocked | Starting money/equipment derivation; combat styles point to CSE authority | p.24-41 |
+| `creation-summary-aig.json` | Legacy | 12-step creation process | p.23-25 |
+| `folk-magic-aig.json` | Legacy, source-blocked | AiG Folk Magic spells plus all 8 culture folk magic lists | p.26-41, p.63-68 |
+| `culture-magic-profiles-aig.json` | Legacy, source-blocked | Culture-level magic-system fit and caveats | p.26-41, p.59-62, p.136-137 |
+| `rune-affinities.json` | Legacy | Rune system mechanics | p.24 |
+| `magic-overview-aig.json` | Legacy, source-blocked overview | Magic system summaries and general casting rules | p.59-62 |
+| `rune-magic-aig.json` | Legacy raw spell text | Rune spell names/pages/descriptions; stat-line metadata not yet normalized | p.69-122 |
+| `spirit-magic-aig.json` | Legacy raw spirit text | Spirit traditions, abilities, passions, and spirits; rune associations not yet normalized | p.134-151 |
 
 ### Key Finding: Equipment Chapter
 

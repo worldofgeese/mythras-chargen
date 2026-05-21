@@ -83,6 +83,17 @@
       "rationale": "AiG data is legacy raw/normalized mix; U5/U8 rebuilds it from vision evidence."
     },
     {
+      "id": "aig-raw-page-records",
+      "path_glob": "references/aig-raw/pages/*.json",
+      "artifact_class": "raw_legacy_json",
+      "disposition": "migrate-in-this-plan",
+      "required_scope": true,
+      "source_ids": [
+        "aig"
+      ],
+      "rationale": "U5 all-page AiG records are blocked scaffolds until vision extraction and independent verification produce bounded evidence."
+    },
+    {
       "id": "aig-readme",
       "path": "references/aig-raw/README.md",
       "artifact_class": "raw_legacy_json",

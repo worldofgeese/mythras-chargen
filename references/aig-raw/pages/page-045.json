@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "schema": "references/sources/schema.json#/schemas/page_evidence_record",
+  "source_id": "aig",
+  "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+  "pdf_page": 45,
+  "printed_page_label": null,
+  "page_state": "blocked",
+  "work_state": "blocked",
+  "source_pdf": {
+    "sha256": "0edc1e549c560222a7c2b80e9eb0fb713d962bb30a280a7a6b760821e2983572",
+    "page_count": 212,
+    "lifecycle_state": "permission_pending"
+  },
+  "render": {
+    "status": "not_rendered",
+    "cache_path": ".cache/source-pages/aig/page-0045.png",
+    "image_sha256": null,
+    "dimensions": null
+  },
+  "blocks": [],
+  "extraction": {
+    "status": "blocked",
+    "workflow_id": "vision-page-workflow.v1",
+    "artifact_id": null,
+    "reason": "No U5 vision extraction artifact exists for this page."
+  },
+  "verification": {
+    "status": "blocked",
+    "workflow_id": "vision-page-workflow.v1",
+    "artifact_id": null,
+    "independent": false,
+    "reason": "No independent verifier artifact exists for this page."
+  },
+  "derived_facts": [],
+  "blockers": [
+    "AiG extraction permission basis is not confirmed",
+    "Independent vision extraction and verification artifacts have not been produced for this page"
+  ],
+  "evidence_policy": {
+    "full_page_text_committed": false,
+    "bounded_excerpts_committed": false
+  },
+  "notes": "Blocked page record only; it intentionally contains no page transcription or extraction result."
+}

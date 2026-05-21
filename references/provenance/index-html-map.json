@@ -3,8 +3,8 @@
   "schema": "references/provenance/schema.json#/provenance_map_schema",
   "source": "index.html",
   "generated_at": "2026-05-21",
-  "map_state": "scaffold",
-  "notes": "Foundation-level constant coverage only. Fact-level canonical hashes and source page/block refs are intentionally pending until U5-U10 source-specific extraction units.",
+  "map_state": "source-blocked-scaffold",
+  "notes": "AiG culture facts are wired to a real source revision and all-page blocked coverage; fact-level acceptance remains pending vision verification.",
   "entries": [
     {
       "constant_name": "SKILLS_DATA",
@@ -41,15 +41,22 @@
     },
     {
       "constant_name": "CULTURES_DATA",
-      "status": "pending_fact_map",
+      "status": "source_blocked",
       "disposition": "migrate-in-this-plan",
       "source_files": [
-        "references/aig-raw/cultures.json"
+        "references/aig-raw/cultures.json",
+        "references/aig-raw/page-index.json",
+        "references/sources/pages/aig.json"
       ],
       "source_ids": [
         "aig"
       ],
-      "rationale": "AiG culture constants await U5/U8 verified extraction."
+      "rationale": "AiG culture constants await U5/U8 verified extraction.",
+      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+      "source_state": "permission_pending",
+      "page_coverage": "references/sources/pages/aig.json",
+      "page_index": "references/aig-raw/page-index.json",
+      "blocked_reason": "AiG source revision and all-page blocked records exist, but no independent vision verification artifacts exist."
     },
     {
       "constant_name": "CULTURE_BUILDS",
@@ -66,15 +73,22 @@
     },
     {
       "constant_name": "CULTURE_MAGIC_PROFILES",
-      "status": "pending_fact_map",
+      "status": "source_blocked",
       "disposition": "migrate-in-this-plan",
       "source_files": [
-        "references/aig-raw/culture-magic-profiles-aig.json"
+        "references/aig-raw/culture-magic-profiles-aig.json",
+        "references/aig-raw/page-index.json",
+        "references/sources/pages/aig.json"
       ],
       "source_ids": [
         "aig"
       ],
-      "rationale": "Magic profiles await verified AiG rebuild."
+      "rationale": "Magic profiles await verified AiG rebuild.",
+      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+      "source_state": "permission_pending",
+      "page_coverage": "references/sources/pages/aig.json",
+      "page_index": "references/aig-raw/page-index.json",
+      "blocked_reason": "AiG source revision and all-page blocked records exist, but no independent vision verification artifacts exist."
     },
     {
       "constant_name": "CAREERS_DATA",

@@ -259,6 +259,7 @@ runCommandTest('Render workflow can list sources without rendering pages',
   const provenanceSchema = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/provenance/schema.json'), 'utf8'));
   const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/sources/manifest.json'), 'utf8'));
   const legacy = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/provenance/legacy-disposition.json'), 'utf8'));
+  const indexMap = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/provenance/index-html-map.json'), 'utf8'));
   const sourceValidator = require('./scripts/source_manifest_validator.js');
   const provenanceValidator = require('./scripts/validate_provenance.js');
   const requiredSources = ['aig', 'cse', 'waha', 'bird-in-hand', 'monster-island'];
@@ -285,6 +286,121 @@ runCommandTest('Render workflow can list sources without rendering pages',
     pass('Active Waha seed source records real tracked PDF metadata');
   } else {
     fail('Active Waha seed source is missing real tracked PDF metadata');
+  }
+
+  const expectedAigHash = '0edc1e549c560222a7c2b80e9eb0fb713d962bb30a280a7a6b760821e2983572';
+  const aigSource = manifest.sources.find(source => source.source_id === 'aig');
+  const aigCoverage = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/sources/pages/aig.json'), 'utf8'));
+  const aigPageIndex = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/aig-raw/page-index.json'), 'utf8'));
+  const aigRevision = aigSource?.source_revision_id;
+  if (aigSource &&
+      aigSource.lifecycle_state === 'permission_pending' &&
+      aigSource.sha256 === expectedAigHash &&
+      aigSource.size_bytes === 202097364 &&
+      aigSource.page_count === 212 &&
+      aigSource.permission_basis?.status === 'permission_pending' &&
+      aigCoverage.source_revision_id === aigRevision &&
+      aigPageIndex.source_revision_id === aigRevision) {
+    pass('AiG source revision records observed PDF identity without promoting authority');
+  } else {
+    fail('AiG source revision metadata is incomplete or promoted prematurely',
+      JSON.stringify({
+        lifecycle: aigSource?.lifecycle_state,
+        hash: aigSource?.sha256,
+        size: aigSource?.size_bytes,
+        pageCount: aigSource?.page_count,
+        permission: aigSource?.permission_basis?.status,
+        coverageRevision: aigCoverage.source_revision_id,
+        indexRevision: aigPageIndex.source_revision_id
+      }));
+  }
+
+  const expectedAiGPages = Array.from({ length: 212 }, (_, index) => index + 1);
+  const coveragePages = new Set((aigCoverage.pages || []).map(page => page.pdf_page));
+  const pageIndexPages = new Set((aigPageIndex.pages || []).map(page => page.pdf_page));
+  const missingCoveragePages = expectedAiGPages.filter(page => !coveragePages.has(page));
+  const missingIndexPages = expectedAiGPages.filter(page => !pageIndexPages.has(page));
+  const allBlockedCoverage = (aigCoverage.pages || []).every(page =>
+    page.source_revision_id === aigRevision &&
+    page.work_state === 'blocked' &&
+    page.render?.status === 'not_rendered' &&
+    page.extraction === null &&
+    page.verification === null &&
+    page.raw_page_record &&
+    fs.existsSync(path.join(__dirname, page.raw_page_record))
+  );
+  const allBlockedIndex = (aigPageIndex.pages || []).every(page =>
+    page.source_revision_id === aigRevision &&
+    page.work_state === 'blocked' &&
+    page.render_status === 'not_rendered' &&
+    page.extraction_status === 'blocked' &&
+    page.verification_status === 'blocked' &&
+    fs.existsSync(path.join(__dirname, page.record))
+  );
+  if (aigCoverage.expected_page_count === 212 &&
+      aigPageIndex.expected_page_count === 212 &&
+      aigCoverage.pages.length === 212 &&
+      aigPageIndex.pages.length === 212 &&
+      missingCoveragePages.length === 0 &&
+      missingIndexPages.length === 0 &&
+      allBlockedCoverage &&
+      allBlockedIndex) {
+    pass('AiG page coverage enumerates all 212 blocked page records');
+  } else {
+    fail('AiG page coverage is not complete and blocked',
+      JSON.stringify({
+        coverageExpected: aigCoverage.expected_page_count,
+        indexExpected: aigPageIndex.expected_page_count,
+        coverageCount: aigCoverage.pages?.length,
+        indexCount: aigPageIndex.pages?.length,
+        missingCoveragePages: missingCoveragePages.slice(0, 10),
+        missingIndexPages: missingIndexPages.slice(0, 10),
+        allBlockedCoverage,
+        allBlockedIndex
+      }));
+  }
+
+  const aigAuthorityFiles = [
+    'references/aig-raw/cultures.json',
+    'references/aig-raw/culture-magic-profiles-aig.json',
+    'references/aig-raw/folk-magic-aig.json',
+    'references/aig-raw/rune-magic-aig.json',
+    'references/aig-raw/spirit-magic-aig.json'
+  ];
+  const authorityProblems = aigAuthorityFiles.flatMap(relPath => {
+    const doc = JSON.parse(fs.readFileSync(path.join(__dirname, relPath), 'utf8'));
+    const problems = [];
+    if (doc.source_id !== 'aig') problems.push(`${relPath}: source_id`);
+    if (doc.source_revision_id !== aigRevision) problems.push(`${relPath}: source_revision_id`);
+    if (doc.authority_state !== 'source_blocked') problems.push(`${relPath}: authority_state`);
+    if (doc.page_index !== 'references/aig-raw/page-index.json') problems.push(`${relPath}: page_index`);
+    if (doc.page_coverage !== 'references/sources/pages/aig.json') problems.push(`${relPath}: page_coverage`);
+    if (!Array.isArray(doc.source_blockers) || doc.source_blockers.length === 0) problems.push(`${relPath}: source_blockers`);
+    return problems;
+  });
+  const culturesRef = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/aig-raw/cultures.json'), 'utf8'));
+  const cultureNames = (culturesRef.cultures || []).map(culture => culture.name);
+  const cultureSourceRefs = culturesRef.culture_source_refs || {};
+  const culturesWithoutBlockedRefs = cultureNames.filter(name =>
+    cultureSourceRefs[name]?.source_revision_id !== aigRevision ||
+    cultureSourceRefs[name]?.verification_state !== 'blocked' ||
+    !Array.isArray(cultureSourceRefs[name]?.pdf_pages) ||
+    cultureSourceRefs[name].pdf_pages.length === 0
+  );
+  const aigMapEntries = new Map((indexMap.entries || []).map(entry => [entry.constant_name, entry]));
+  const aigInlineProblems = ['CULTURES_DATA', 'CULTURE_MAGIC_PROFILES'].filter(name =>
+    aigMapEntries.get(name)?.status !== 'source_blocked' ||
+    aigMapEntries.get(name)?.source_revision_id !== aigRevision ||
+    aigMapEntries.get(name)?.page_coverage !== 'references/sources/pages/aig.json'
+  );
+  if (authorityProblems.length === 0 &&
+      cultureNames.length === 8 &&
+      culturesWithoutBlockedRefs.length === 0 &&
+      aigInlineProblems.length === 0) {
+    pass('AiG culture authority is wired to blocked source revision and provenance state');
+  } else {
+    fail('AiG culture authority source revision wiring is incomplete',
+      JSON.stringify({ authorityProblems, cultureCount: cultureNames.length, culturesWithoutBlockedRefs, aigInlineProblems }));
   }
 
   const sourceStates = sourceSchema.lifecycle_states.source_revisions;
