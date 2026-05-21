@@ -1309,14 +1309,15 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
     const firstSlotShowsFirstLore = /data-skill="Lore \(Primary\)"[\s\S]*?value="Wolves"/.test(html);
     const secondSlotShowsSecondLore = /data-skill="Lore \(Secondary\)"[\s\S]*?value="Local Legends"/.test(html);
     const slotsDoNotCollapse = !/data-skill="Lore \(Secondary\)"[\s\S]*?value="Wolves"/.test(html);
+    const secondSlotEditable = !/data-skill="Lore \(Secondary\)"[\s\S]*?disabled/.test(html);
     const mapRepaired = CD._disambiguationMap['career:Lore (Primary)'] === 'Lore (Wolves)' &&
       CD._disambiguationMap['career:Lore (Secondary)'] === 'Lore (Local Legends)';
 
-    if (firstSlotShowsFirstLore && secondSlotShowsSecondLore && slotsDoNotCollapse && mapRepaired) {
+    if (firstSlotShowsFirstLore && secondSlotShowsSecondLore && slotsDoNotCollapse && secondSlotEditable && mapRepaired) {
       pass('Professional skill picker repairs imported paired specialty slot mappings');
     } else {
       fail('Professional skill picker collapses imported paired specialty slots',
-        JSON.stringify({ firstSlotShowsFirstLore, secondSlotShowsSecondLore, slotsDoNotCollapse, mapRepaired, map: CD._disambiguationMap, html }));
+        JSON.stringify({ firstSlotShowsFirstLore, secondSlotShowsSecondLore, slotsDoNotCollapse, secondSlotEditable, mapRepaired, map: CD._disambiguationMap, html }));
     }
   } else {
     fail('Professional skill picker unavailable for imported paired specialty mapping test');
@@ -1339,14 +1340,15 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
     const html = AppObj.renderCareerDetails();
     const firstSlotUsesSelectedOrder = /data-skill="Lore \(Primary\)"[\s\S]*?value="Wolves"/.test(html);
     const secondSlotUsesSelectedOrder = /data-skill="Lore \(Secondary\)"[\s\S]*?value="Local Legends"/.test(html);
+    const secondSlotEditable = !/data-skill="Lore \(Secondary\)"[\s\S]*?disabled/.test(html);
     const staleMapOverwritten = CD._disambiguationMap['career:Lore (Primary)'] === 'Lore (Wolves)' &&
       CD._disambiguationMap['career:Lore (Secondary)'] === 'Lore (Local Legends)';
 
-    if (firstSlotUsesSelectedOrder && secondSlotUsesSelectedOrder && staleMapOverwritten) {
+    if (firstSlotUsesSelectedOrder && secondSlotUsesSelectedOrder && secondSlotEditable && staleMapOverwritten) {
       pass('Professional skill picker rebuilds stale imported paired specialty maps');
     } else {
       fail('Professional skill picker preserves stale imported paired specialty maps',
-        JSON.stringify({ firstSlotUsesSelectedOrder, secondSlotUsesSelectedOrder, staleMapOverwritten, map: CD._disambiguationMap, html }));
+        JSON.stringify({ firstSlotUsesSelectedOrder, secondSlotUsesSelectedOrder, secondSlotEditable, staleMapOverwritten, map: CD._disambiguationMap, html }));
     }
   } else {
     fail('Professional skill picker unavailable for stale paired specialty map test');
@@ -4416,6 +4418,31 @@ fixtures.forEach(fixtureInfo => {
         pass('App.importCharacterData rejects malicious nested companion numeric fields before mutation');
       } else {
         fail('App.importCharacterData accepts unsafe nested companion import data');
+      }
+
+      const duplicateSelectedSuccess = AppObj.importCharacterData({
+        ...createTestCharacter(),
+        name: 'Duplicate Selected Import',
+        selectedProfessionalSkills: ['Lore (Wolves)', 'Lore (Wolves)', 'Literacy'],
+        careerSkills: { 'Lore (Wolves)': 0, Literacy: 0 },
+        _disambiguationMap: {}
+      });
+      const duplicateMapSuccess = AppObj.importCharacterData({
+        ...createTestCharacter(),
+        name: 'Duplicate Map Import',
+        selectedProfessionalSkills: ['Lore (Wolves)', 'Lore (Local Legends)', 'Literacy'],
+        careerSkills: { 'Lore (Wolves)': 0, 'Lore (Local Legends)': 0, Literacy: 0 },
+        _disambiguationMap: {
+          'career:Lore (Primary)': 'Lore (Wolves)',
+          'career:Lore (Secondary)': 'Lore (Wolves)'
+        }
+      });
+
+      if (!duplicateSelectedSuccess && !duplicateMapSuccess && CD.name === 'Import Original') {
+        pass('App.importCharacterData rejects duplicate professional specialty imports before mutation');
+      } else {
+        fail('App.importCharacterData accepts duplicate professional specialty imports',
+          JSON.stringify({ duplicateSelectedSuccess, duplicateMapSuccess, name: CD.name }));
       }
 
       let saved = false;
