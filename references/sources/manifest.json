@@ -241,16 +241,16 @@
       "canonical_locator": "https://copyparty.hound-celsius.ts.net/sources/books/Monster-Island.pdf",
       "local_hint": "references/sources/pdfs/monster-island.pdf",
       "lifecycle_state": "permission_pending",
-      "source_revision_id": "monster-island:permission-pending:2026-05-21",
-      "sha256": null,
-      "size_bytes": null,
-      "page_count": null,
+      "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
+      "sha256": "dd79904483ab62766799e6480da7081cbcbbdd9cb1a608ecc5dfdeae7cce0782",
+      "size_bytes": 10363314,
+      "page_count": 298,
       "acquired_at": null,
       "permission_basis": {
         "status": "permission_pending",
-        "note": "Existing raw record is explicitly unverified; new extraction is blocked until hash/page/permission metadata are recorded."
+        "note": "Public Copyparty source is located and fingerprinted, but extraction/attestation permission is not confirmed; render, extraction, normalization, and acceptance remain blocked."
       },
-      "precedence": "Template/example source only; Monster Island cannot act as source authority until verified contributing-page evidence exists.",
+      "precedence": "Template/example source for Monster Island spirit-cult structures and spirit loadouts only. It must not override canonical Gloranthan authorities (AiG for Gloranthan cultures/folk/rune magic, Mythras Core for base spirit rules, Notes from Pavis for cults); promotion requires verified contributing-page evidence.",
       "render_contract": {
         "renderer": "pdftoppm",
         "renderer_version": "runtime-detected",
@@ -272,11 +272,44 @@
         "acceptance"
       ],
       "blockers": [
-        "sha256 unavailable in committed manifest",
-        "page count unavailable",
         "permission basis is not confirmed",
+        "true vision extraction and independent verification artifacts have not been produced",
         "existing raw record is explicitly unverified and lacks page/block evidence"
-      ]
+      ],
+      "acceptance_state": "blocked_pending_vision_verification",
+      "acceptance_blockers": [
+        "Source PDF metadata is recorded, but permission remains pending.",
+        "Candidate spirit/cult pages were located by local text scan only; no rendered page images, bounded vision extraction artifacts, or independent verifier metadata are committed.",
+        "Monster Island remains non-authoritative and cannot feed app-facing Gloranthan cult data until verified page/block evidence exists."
+      ],
+      "source_access": {
+        "public_copyparty_source": {
+          "status": "available",
+          "checked_at": "2026-05-21",
+          "url": "https://copyparty.hound-celsius.ts.net/sources/books/Monster-Island.pdf",
+          "head_status": 200,
+          "content_length": 10363314,
+          "content_type": "application/pdf",
+          "last_modified": "Wed, 20 May 2026 08:39:45 GMT"
+        },
+        "local_ignored_source": {
+          "status": "available_for_metadata_only",
+          "path": "references/sources/pdfs/monster-island.pdf",
+          "sha256": "dd79904483ab62766799e6480da7081cbcbbdd9cb1a608ecc5dfdeae7cce0782",
+          "size_bytes": 10363314,
+          "page_count": 298,
+          "git_tracked": false
+        }
+      },
+      "observed_source_metadata": {
+        "observed_at": "2026-05-21",
+        "sha256_method": "sha256sum against ignored local PDF downloaded from public Copyparty locator",
+        "size_method": "stat -c %s against ignored local PDF; matches Copyparty content-length",
+        "page_count_method": "pdfinfo against ignored local PDF",
+        "canonical_locator_head_status": 200,
+        "canonical_locator_content_length": 10363314,
+        "note": "The source PDF is not committed; references/sources/pdfs/monster-island.pdf remains an ignored local hint."
+      }
     }
   ]
 }
