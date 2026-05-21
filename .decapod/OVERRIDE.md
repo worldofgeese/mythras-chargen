@@ -19,7 +19,12 @@ These repo-specific rules extend the embedded Decapod constitution and the canon
 
 #### Beads workflow
 
-Use Home Manager `bd` for durable project issue tracking: `bd ready`, `bd show <id>`, `bd update <id> --claim`, `bd close <id>`.
+This project uses Home Manager `bd` (beads) for durable issue tracking.
+
+- Run `bd prime` for workflow context and command guidance.
+- Use `bd ready`, `bd show <id>`, `bd update <id> --claim`, and `bd close <id>`.
+- Use `bd remember "insight"` for persistent project memory; do not create `MEMORY.md` files.
+- Do not use markdown TODO lists for task tracking.
 
 #### Project architecture
 
@@ -102,6 +107,23 @@ Use container workspaces only when a change introduces a dependency manager, bui
 - Commit only verified work with the required Copilot co-author trailer.
 - Push final `main` to both `origin` and `paphos`.
 - Clean up temporary servers with specific PIDs, not name-based process killing.
+
+#### Agent behavioral guidelines
+
+These guidelines bias toward caution over speed; use judgment for trivial tasks.
+
+Before implementing:
+- State assumptions explicitly and ask when requirements are unclear.
+- Present multiple interpretations instead of silently picking one.
+- Prefer the simplest approach that satisfies the request and push back on unnecessary complexity.
+
+When editing existing code:
+- Touch only what the task requires.
+- Do not refactor, reformat, or delete unrelated adjacent code.
+- Match existing style even when a different style would be preferable.
+- Remove only the imports, variables, or functions made unused by the current change.
+
+For multi-step tasks, define verifiable success criteria and keep looping until those criteria are met.
 
 ### core/ENGINEERING_EXCELLENCE.md
 
