@@ -102,7 +102,7 @@
     },
     {
       "constant_name": "CULTS_DATA",
-      "status": "pending_fact_map",
+      "status": "source_blocked",
       "disposition": "migrate-in-this-plan",
       "source_files": [
         "references/cults-raw/cults.json"
@@ -110,7 +110,12 @@
       "source_ids": [
         "waha"
       ],
-      "rationale": "Cult constants await later cult/Waha provenance tightening."
+      "rationale": "Waha app-facing data remains legacy/canonical only where sourced from the Praxian record; fact-level acceptance is blocked until U6 vision extraction and independent verification are available.",
+      "blocked_by": [
+        "references/sources/pages/waha.json has coverage_state=blocked",
+        "references/cults-raw/storm/waha.json is superseded and must not feed app generation",
+        "Waha fact-level source/page/block provenance is pending vision verification"
+      ]
     },
     {
       "constant_name": "CULTURE_CULT_MAP",
@@ -136,7 +141,7 @@
     },
     {
       "constant_name": "MIRACLES_DATA",
-      "status": "pending_fact_map",
+      "status": "source_blocked",
       "disposition": "governed-now",
       "source_files": [
         "references/theism-miracles.json"
@@ -144,7 +149,12 @@
       "source_ids": [
         "waha"
       ],
-      "rationale": "Miracle constants are governed by current cleaned miracle authority."
+      "rationale": "Waha app-facing data remains legacy/canonical only where sourced from the Praxian record; fact-level acceptance is blocked until U6 vision extraction and independent verification are available.",
+      "blocked_by": [
+        "references/sources/pages/waha.json has coverage_state=blocked",
+        "references/cults-raw/storm/waha.json is superseded and must not feed app generation",
+        "Waha fact-level source/page/block provenance is pending vision verification"
+      ]
     },
     {
       "constant_name": "WEAPON_ALIASES",
