@@ -36,17 +36,36 @@
       "intensity": 1,
       "owner": "Kaia",
       "animal": "Wahoin rodent",
-      "characteristics": {"INT": 9, "POW": 11, "CHA": 9},
+      "characteristics": {
+        "INT": 9,
+        "POW": 11,
+        "CHA": 9
+      },
       "action_points": 2,
       "spirit_damage": "1d8",
       "magic_points": 11,
       "initiative_bonus": "+9",
-      "skills": {"willpower": "72%", "spectral_combat": "70%"},
-      "abilities": ["Bless (Initiative, +2)"],
+      "skills": {
+        "willpower": "72%",
+        "spectral_combat": "70%"
+      },
+      "abilities": [
+        "Bless (Initiative, +2)"
+      ],
       "fetish": "Wahoin skull",
       "narrative": "Respected by the Oodaki for the speed with which it snares Huku spiders. When manifest it appears as if dozens of grey rodents scurry across Kaia's body, granting limbs greater alacrity.",
       "owner_rank": "Spirit Worshipper",
-      "page": "p.43"
+      "page": "p.43",
+      "source_ref": {
+        "source_id": "bird-in-hand",
+        "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+        "pdf_page": 43,
+        "page_manifest_path": "references/sources/pages/bird-in-hand.json",
+        "coverage_state": "blocked",
+        "evidence_state": "legacy_page_citation_source_blocked",
+        "block_id": null,
+        "block_state": "blocked_no_page_evidence"
+      }
     },
     {
       "name": "Eous",
@@ -54,16 +73,35 @@
       "intensity": 2,
       "owner": "Kaia",
       "animal": "Sloth",
-      "characteristics": {"INS": 9, "POW": 17, "CHA": 9},
+      "characteristics": {
+        "INS": 9,
+        "POW": 17,
+        "CHA": 9
+      },
       "action_points": 3,
       "spirit_damage": "1d8",
       "magic_points": 17,
       "initiative_bonus": "+9",
-      "skills": {"willpower": "84%", "spectral_combat": "76%"},
-      "abilities": ["Endowment (Camouflage \u2014 two difficult grades penalty to opponents attempting to spot spirit worshipper)"],
+      "skills": {
+        "willpower": "84%",
+        "spectral_combat": "76%"
+      },
+      "abilities": [
+        "Endowment (Camouflage — two difficult grades penalty to opponents attempting to spot spirit worshipper)"
+      ],
       "narrative": "The sleepy spirit of the sloth. Summoned from its binding, Eous casts a sloth-shaped shadow over Kaia that lets his great bulk blend slowly into the background.",
       "owner_rank": "Spirit Worshipper",
-      "page": "p.43"
+      "page": "p.43",
+      "source_ref": {
+        "source_id": "bird-in-hand",
+        "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+        "pdf_page": 43,
+        "page_manifest_path": "references/sources/pages/bird-in-hand.json",
+        "coverage_state": "blocked",
+        "evidence_state": "legacy_page_citation_source_blocked",
+        "block_id": null,
+        "block_state": "blocked_no_page_evidence"
+      }
     },
     {
       "name": "Anylil",
@@ -71,17 +109,36 @@
       "intensity": 1,
       "owner": "Mele",
       "animal": "Crimson butterfly",
-      "characteristics": {"INS": 9, "POW": 11, "CHA": 9},
+      "characteristics": {
+        "INS": 9,
+        "POW": 11,
+        "CHA": 9
+      },
       "action_points": 2,
       "spirit_damage": "1d8",
       "magic_points": 11,
       "initiative_bonus": "+9",
-      "skills": {"willpower": "72%", "spectral_combat": "70%"},
-      "abilities": ["Bless (Initiative, +2)"],
+      "skills": {
+        "willpower": "72%",
+        "spectral_combat": "70%"
+      },
+      "abilities": [
+        "Bless (Initiative, +2)"
+      ],
       "fetish": "Dried husk of a centipede",
       "narrative": "The crimson butterfly. It manifests as a burst of vibrant red, and then settles onto Mele's tattooed hide, giving it a rouge-sheen and noticeably quicker reflexes.",
       "owner_rank": "High Shaman",
-      "page": "p.44"
+      "page": "p.44",
+      "source_ref": {
+        "source_id": "bird-in-hand",
+        "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+        "pdf_page": 44,
+        "page_manifest_path": "references/sources/pages/bird-in-hand.json",
+        "coverage_state": "blocked",
+        "evidence_state": "legacy_page_citation_source_blocked",
+        "block_id": null,
+        "block_state": "blocked_no_page_evidence"
+      }
     },
     {
       "name": "Woeyff",
@@ -89,16 +146,35 @@
       "intensity": 2,
       "owner": "Mele",
       "animal": "Octopoid (Oodaku gift)",
-      "characteristics": {"INS": 9, "POW": 17, "CHA": 9},
+      "characteristics": {
+        "INS": 9,
+        "POW": 17,
+        "CHA": 9
+      },
       "action_points": 3,
       "spirit_damage": "1d8",
       "magic_points": 17,
       "initiative_bonus": "+9",
-      "skills": {"willpower": "84%", "spectral_combat": "76%"},
-      "abilities": ["Endowment (Camouflage \u2014 two difficult grades penalty to opponents attempting to spot spirit worshipper)"],
+      "skills": {
+        "willpower": "84%",
+        "spectral_combat": "76%"
+      },
+      "abilities": [
+        "Endowment (Camouflage — two difficult grades penalty to opponents attempting to spot spirit worshipper)"
+      ],
       "narrative": "A gift of Oodaku, manifesting as a shadowed sprawl of eight octopoid limbs, barely discernible by the naked eye. Mele simply seems to fade from view when cloaked by Woeyff.",
       "owner_rank": "High Shaman",
-      "page": "p.44-45"
+      "page": "p.44-45",
+      "source_ref": {
+        "source_id": "bird-in-hand",
+        "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+        "pdf_page": 44,
+        "page_manifest_path": "references/sources/pages/bird-in-hand.json",
+        "coverage_state": "blocked",
+        "evidence_state": "legacy_page_citation_source_blocked",
+        "block_id": null,
+        "block_state": "blocked_no_page_evidence"
+      }
     },
     {
       "name": "Jked",
@@ -106,17 +182,36 @@
       "intensity": 2,
       "owner": "Mele",
       "animal": "Monkey",
-      "characteristics": {"INS": 9, "POW": 13, "CHA": 9},
+      "characteristics": {
+        "INS": 9,
+        "POW": 13,
+        "CHA": 9
+      },
       "action_points": 2,
       "spirit_damage": "1d8",
       "magic_points": 13,
       "initiative_bonus": "+9",
-      "skills": {"willpower": "84%", "spectral_combat": "76%"},
-      "abilities": ["Endowment (Camouflage \u2014 two difficult grades penalty to opponents attempting to spot spirit worshipper)"],
+      "skills": {
+        "willpower": "84%",
+        "spectral_combat": "76%"
+      },
+      "abilities": [
+        "Endowment (Camouflage — two difficult grades penalty to opponents attempting to spot spirit worshipper)"
+      ],
       "fetish": "Dried monkey-dung",
       "narrative": "Must be coaxed from its fetish with a hooting cry, seemingly answered in echo as Jked grants simian dexterity. Spirit opponents are pelted with a hail of foul excrement.",
       "owner_rank": "High Shaman",
-      "page": "p.45"
+      "page": "p.45",
+      "source_ref": {
+        "source_id": "bird-in-hand",
+        "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+        "pdf_page": 45,
+        "page_manifest_path": "references/sources/pages/bird-in-hand.json",
+        "coverage_state": "blocked",
+        "evidence_state": "legacy_page_citation_source_blocked",
+        "block_id": null,
+        "block_state": "blocked_no_page_evidence"
+      }
     },
     {
       "name": "Kugkowcs",
@@ -124,16 +219,35 @@
       "intensity": 2,
       "owner": "Mele",
       "animal": "Tetrapus (alien octopoid)",
-      "characteristics": {"INS": 10, "POW": 14, "CHA": 11},
+      "characteristics": {
+        "INS": 10,
+        "POW": 14,
+        "CHA": 11
+      },
       "action_points": 2,
       "spirit_damage": "1d8",
       "magic_points": 14,
       "initiative_bonus": "+11",
-      "skills": {"willpower": "78%", "spectral_combat": "75%"},
-      "abilities": ["Bless (Stealth \u2014 improves by one difficult grade)"],
+      "skills": {
+        "willpower": "78%",
+        "spectral_combat": "75%"
+      },
+      "abilities": [
+        "Bless (Stealth — improves by one difficult grade)"
+      ],
       "narrative": "The alien spirit of the Tetrapus. Kugkowcs manifests by Mele seemingly vomiting it out, marking the path for Mele to tread with utmost quiet.",
       "owner_rank": "High Shaman",
-      "page": "p.45"
+      "page": "p.45",
+      "source_ref": {
+        "source_id": "bird-in-hand",
+        "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+        "pdf_page": 45,
+        "page_manifest_path": "references/sources/pages/bird-in-hand.json",
+        "coverage_state": "blocked",
+        "evidence_state": "legacy_page_citation_source_blocked",
+        "block_id": null,
+        "block_state": "blocked_no_page_evidence"
+      }
     },
     {
       "name": "Hoja",
@@ -141,16 +255,35 @@
       "intensity": 2,
       "owner": "Mele",
       "animal": "Coral",
-      "characteristics": {"INS": 12, "POW": 11, "CHA": 7},
+      "characteristics": {
+        "INS": 12,
+        "POW": 11,
+        "CHA": 7
+      },
       "action_points": 2,
       "spirit_damage": "1d8",
       "magic_points": 11,
       "initiative_bonus": "+10",
-      "skills": {"willpower": "72%", "spectral_combat": "68%"},
-      "abilities": ["Endowment (Grappler \u2014 a successful strike allows an immediate Grapple in addition to inflicting damage, or if Parrying, Grip or Pin Weapon)"],
+      "skills": {
+        "willpower": "72%",
+        "spectral_combat": "68%"
+      },
+      "abilities": [
+        "Endowment (Grappler — a successful strike allows an immediate Grapple in addition to inflicting damage, or if Parrying, Grip or Pin Weapon)"
+      ],
       "narrative": "Another blessing of Oodaku, Hoja is held in a hoop of twisting coral. When coaxed forth from its fetish, Hoja seemly transforms Mele's hands into writhing tentacles, grasping a target with spectral suckered-limbs.",
       "owner_rank": "High Shaman",
-      "page": "p.45"
+      "page": "p.45",
+      "source_ref": {
+        "source_id": "bird-in-hand",
+        "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+        "pdf_page": 45,
+        "page_manifest_path": "references/sources/pages/bird-in-hand.json",
+        "coverage_state": "blocked",
+        "evidence_state": "legacy_page_citation_source_blocked",
+        "block_id": null,
+        "block_state": "blocked_no_page_evidence"
+      }
     },
     {
       "name": "Fylue",
@@ -158,16 +291,35 @@
       "intensity": 2,
       "owner": "Mele",
       "animal": "River Eel",
-      "characteristics": {"INS": 13, "POW": 13, "CHA": 9},
+      "characteristics": {
+        "INS": 13,
+        "POW": 13,
+        "CHA": 9
+      },
       "action_points": 3,
       "spirit_damage": "1d8",
       "magic_points": 13,
       "initiative_bonus": "+11",
-      "skills": {"willpower": "76%", "spectral_combat": "72%"},
-      "abilities": ["Endowment (Venomous \u2014 POT 72, Resist Endurance, Onset 1 Combat Round struck Hit Location then affecting rest of the body 1d3+3 rounds late, Duration 2d10 minutes, Condition Paralysis; may use Inject Venom Special Effect Mythras p.218)"],
+      "skills": {
+        "willpower": "76%",
+        "spectral_combat": "72%"
+      },
+      "abilities": [
+        "Endowment (Venomous — POT 72, Resist Endurance, Onset 1 Combat Round struck Hit Location then affecting rest of the body 1d3+3 rounds late, Duration 2d10 minutes, Condition Paralysis; may use Inject Venom Special Effect Mythras p.218)"
+      ],
       "narrative": "The spirit of the river Eels found not far from Mele's village. Fylue's spectral bite injects a soothing liquid that drains the strength of its opponents.",
       "owner_rank": "High Shaman",
-      "page": "p.45"
+      "page": "p.45",
+      "source_ref": {
+        "source_id": "bird-in-hand",
+        "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+        "pdf_page": 45,
+        "page_manifest_path": "references/sources/pages/bird-in-hand.json",
+        "coverage_state": "blocked",
+        "evidence_state": "legacy_page_citation_source_blocked",
+        "block_id": null,
+        "block_state": "blocked_no_page_evidence"
+      }
     },
     {
       "name": "Ghu",
@@ -175,24 +327,50 @@
       "intensity": 3,
       "owner": "Mele",
       "animal": "Ghua tree",
-      "characteristics": {"INS": 9, "POW": 21, "CHA": 9},
+      "characteristics": {
+        "INS": 9,
+        "POW": 21,
+        "CHA": 9
+      },
       "action_points": 3,
       "magic_points": 21,
       "initiative_bonus": "+9",
-      "skills": {"willpower": "92%", "spectral_combat": "80%"},
-      "abilities": ["Absorb Magic \u2014 any magic cast at Mele causes Ghu to visibly appear, looming over Mele, and absorbing magic into its trunk"],
+      "skills": {
+        "willpower": "92%",
+        "spectral_combat": "80%"
+      },
+      "abilities": [
+        "Absorb Magic — any magic cast at Mele causes Ghu to visibly appear, looming over Mele, and absorbing magic into its trunk"
+      ],
       "fetish": "Smooth bark of a Ghua tree",
       "narrative": "The sheltering spirit of the Ghua tree. Its fetish is the smooth bark of a mighty specimen that has been revered by Mele's tribe for five generations. When manifest, Mele is cast in shadow.",
       "owner_rank": "High Shaman",
-      "page": "p.45-46"
+      "page": "p.45-46",
+      "source_ref": {
+        "source_id": "bird-in-hand",
+        "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+        "pdf_page": 45,
+        "page_manifest_path": "references/sources/pages/bird-in-hand.json",
+        "coverage_state": "blocked",
+        "evidence_state": "legacy_page_citation_source_blocked",
+        "block_id": null,
+        "block_state": "blocked_no_page_evidence"
+      }
     }
   ],
   "tiki_spirits": {
     "description": "Tiki Masks are fetishes carved to present a fearsome visage. They hold Intensity 1 or 2 nature spirits. Activation requires a Binding or Hard Willpower check as an action at the cost of 1 MP; the aid lasts for a single scene and the spirit departs, the fetish empty.",
-    "example_names": ["Ustafi", "Waynd", "Vlnon", "Lamn", "Cyrnyn", "Totli"],
+    "example_names": [
+      "Ustafi",
+      "Waynd",
+      "Vlnon",
+      "Lamn",
+      "Cyrnyn",
+      "Totli"
+    ],
     "intensity": "1-2",
     "typical_blessing": "+2 to a specific skill or attribute",
-    "note": "These are one-use-per-scene spirits offered to adventurers \u2014 a good model for starting character spirits."
+    "note": "These are one-use-per-scene spirits offered to adventurers — a good model for starting character spirits."
   },
   "iz_unique_spirit": {
     "name": "Iz",
@@ -207,8 +385,8 @@
       "binding_skill": "~69%",
       "trance_skill": "~69%",
       "spirits": [
-        "1 Intensity 1 Nature Spirit (friendly, in fetish) \u2014 e.g. Whulla",
-        "1 Intensity 2 Nature Spirit (friendly, in fetish) \u2014 e.g. Eous"
+        "1 Intensity 1 Nature Spirit (friendly, in fetish) — e.g. Whulla",
+        "1 Intensity 2 Nature Spirit (friendly, in fetish) — e.g. Eous"
       ],
       "total_spirits": 2,
       "note": "Kaia has exactly 2 spirits at Spirit Worshipper rank (CHA 14 / 2 = 7 slots, but only 2 bound)."
@@ -224,5 +402,36 @@
         "6. Create fetish for each spirit (narrative description)"
       ]
     }
+  },
+  "source_ref": {
+    "source_id": "bird-in-hand",
+    "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+    "manifest_path": "references/sources/manifest.json",
+    "page_manifest_path": "references/sources/pages/bird-in-hand.json",
+    "coverage_state": "blocked",
+    "evidence_state": "legacy_vision_claim_source_blocked",
+    "gaps": [
+      "source sha256 is not recorded",
+      "source page count is not recorded",
+      "no committed page/block evidence or verifier run metadata is available"
+    ],
+    "legacy_cited_pages": [
+      43,
+      44,
+      45,
+      46
+    ]
+  },
+  "attestation": {
+    "status": "source_blocked",
+    "legacy_verified": true,
+    "legacy_verified_at": "2026-05-17",
+    "legacy_verification_notes": "Vision-verified all spirit stats against Bird in Hand PDF p.43-46 page images. Corrected Whulla POW/CHA, filled all previously UNVERIFIED entries with actual PDF data.",
+    "authority_state": "not_accepted_without_portable_source_page_block_evidence",
+    "gaps": [
+      "source sha256 is not recorded",
+      "source page count is not recorded",
+      "no committed page/block evidence or verifier run metadata is available"
+    ]
   }
 }

@@ -29,7 +29,7 @@
     },
     {
       "constant_name": "COMBAT_STYLES_DATA",
-      "status": "pending_fact_map",
+      "status": "source_blocked",
       "disposition": "governed-now",
       "source_files": [
         "references/combat-styles.json"
@@ -37,7 +37,18 @@
       "source_ids": [
         "cse"
       ],
-      "rationale": "Inline combat styles map to current CSE-derived authority."
+      "rationale": "Inline combat styles map to CSE-derived normalized records, but page/block attestation is source-blocked until CSE source evidence is available.",
+      "normalized_file": "references/combat-styles.json",
+      "normalized_path": "$.styles",
+      "source_refs": [
+        {
+          "source_id": "cse",
+          "source_revision_id": "cse:unavailable:106d7ad39e8b:2026-05-21",
+          "page_manifest_path": "references/sources/pages/cse.json",
+          "coverage_state": "blocked",
+          "evidence_state": "legacy_page_citation_source_blocked"
+        }
+      ]
     },
     {
       "constant_name": "CULTURES_DATA",
@@ -169,6 +180,30 @@
       "source_files": [],
       "source_ids": [],
       "rationale": "Historical export name is retained for compatibility but no current inline constant is required."
+    },
+    {
+      "constant_name": "STARTING_SPIRITS",
+      "status": "source_blocked",
+      "disposition": "must-fix-before-acceptance",
+      "source_files": [
+        "references/spirits-raw/bird-in-hand.json"
+      ],
+      "source_ids": [
+        "bird-in-hand"
+      ],
+      "source_refs": [
+        {
+          "source_id": "bird-in-hand",
+          "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+          "page_manifest_path": "references/sources/pages/bird-in-hand.json",
+          "coverage_state": "blocked",
+          "evidence_state": "legacy_page_citation_source_blocked"
+        }
+      ],
+      "external_source_gaps": [
+        "mythras-core is cited by STARTING_SPIRITS but is not yet represented in the source manifest"
+      ],
+      "rationale": "Starting spirit examples are app-facing legacy data; Bird in Hand citations are source-blocked and Mythras Core refs need future manifest wiring."
     }
   ]
 }

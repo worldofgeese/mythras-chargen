@@ -194,6 +194,7 @@ function loadApp() {
         App: typeof App !== 'undefined' ? App : null,
         CULTURES_DATA,
         COMBAT_STYLES_DATA: typeof COMBAT_STYLES_DATA !== 'undefined' ? COMBAT_STYLES_DATA : null,
+        STARTING_SPIRITS: typeof STARTING_SPIRITS !== 'undefined' ? STARTING_SPIRITS : null,
         CULTURE_BUILDS: typeof CULTURE_BUILDS !== 'undefined' ? CULTURE_BUILDS : null,
         CULTURE_MAGIC_PROFILES: typeof CULTURE_MAGIC_PROFILES !== 'undefined' ? CULTURE_MAGIC_PROFILES : null,
         WEAPONS_DATA,
@@ -262,6 +263,7 @@ runCommandTest('Render workflow can list sources without rendering pages',
   const sourceValidator = require('./scripts/source_manifest_validator.js');
   const provenanceValidator = require('./scripts/validate_provenance.js');
   const requiredSources = ['aig', 'cse', 'waha', 'bird-in-hand', 'monster-island'];
+  const manifestById = new Map(manifest.sources.map(source => [source.source_id, source]));
   const manifestIds = manifest.sources.map(source => source.source_id).sort();
   const missingSources = requiredSources.filter(sourceId => !manifestIds.includes(sourceId));
 
@@ -343,6 +345,50 @@ runCommandTest('Render workflow can list sources without rendering pages',
     pass('Provenance value hashes use stable canonical JSON ordering');
   } else {
     fail('Provenance value hashes are not canonical');
+  }
+
+  const cseRaw = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'cse-raw', 'combat-styles-cse.json'), 'utf8'));
+  const cseAuthority = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'combat-styles.json'), 'utf8'));
+  const cseRawDisposition = legacy.dispositions.find(item => item.id === 'cse-raw');
+  const cseAuthorityDisposition = legacy.dispositions.find(item => item.id === 'combat-styles-authority');
+  const cseRawAuthorityErrors = provenanceValidator.validateSourceAuthorityMetadata(cseRaw, cseRawDisposition, manifestById);
+  const cseAuthorityErrors = provenanceValidator.validateSourceAuthorityMetadata(cseAuthority, cseAuthorityDisposition, manifestById);
+  if (cseRawAuthorityErrors.length === 0 &&
+      cseAuthorityErrors.length === 0 &&
+      cseRaw.source_ref?.source_revision_id === manifestById.get('cse')?.source_revision_id &&
+      cseAuthority.authority?.source_ref?.source_revision_id === manifestById.get('cse')?.source_revision_id) {
+    pass('CSE authorities use portable source_revision refs instead of machine-local source paths');
+  } else {
+    fail('CSE authorities have invalid source refs',
+      JSON.stringify({ cseRawAuthorityErrors, cseAuthorityErrors }));
+  }
+
+  const missingRefResult = provenanceValidator.validateSourceAuthorityMetadata(
+    {},
+    { id: 'synthetic-cse', disposition: 'governed-now', source_ids: ['cse'], enforce_source_refs: true },
+    manifestById
+  );
+  if (missingRefResult.some(error => error.includes('missing source_ref'))) {
+    pass('Provenance validator rejects governed authorities missing source refs');
+  } else {
+    fail('Provenance validator allows governed authorities missing source refs', missingRefResult.join('\n'));
+  }
+
+  const governedMonster = {
+    ...legacy,
+    dispositions: legacy.dispositions.map(item => item.id === 'spirits-monster-island'
+      ? { ...item, disposition: 'governed-now', scan_for_unverified: true, enforce_source_refs: true }
+      : item)
+  };
+  const governedMonsterResult = provenanceValidator.validateLegacyDisposition(governedMonster, provenanceSchema, __dirname);
+  if (!governedMonsterResult.ok &&
+      governedMonsterResult.errors.some(error =>
+        error.includes('monster-island') &&
+        (error.includes('UNVERIFIED') || error.includes('verified') || error.includes('source_authority')))) {
+    pass('Provenance validator rejects UNVERIFIED Monster Island data when governed');
+  } else {
+    fail('Provenance validator allows UNVERIFIED Monster Island data when governed',
+      governedMonsterResult.errors.join('\n'));
   }
 }
 

@@ -8,7 +8,15 @@
   "spirit_cult_template": {
     "description": "All of Monster Island's totemic cults follow an identical structure. This template is the Monster Island approach Hannu recommended for spirit cults.",
     "structure": {
-      "core_skills": ["Binding", "Dance", "Influence", "Insight", "Sing", "Trance", "Willpower"],
+      "core_skills": [
+        "Binding",
+        "Dance",
+        "Influence",
+        "Insight",
+        "Sing",
+        "Trance",
+        "Willpower"
+      ],
       "note": "Healing is not a primary role of kahunas (shamans); that skill is left to dowager-matriarchs.",
       "ranks": {
         "follower": {
@@ -52,7 +60,17 @@
     "description": "How to generate spirits for starting animist characters, based on Monster Island NPC stat blocks.",
     "approach": "Each kahuna possesses a number of fetishes as part of their status. Every tribe has its own selection of friendly and neutral spirits.",
     "spirit_stat_format": {
-      "fields": ["Type", "Ability", "Intensity", "INS_or_INT", "POW", "CHA", "Spectral_Combat", "Willpower", "Optional_Skills"],
+      "fields": [
+        "Type",
+        "Ability",
+        "Intensity",
+        "INS_or_INT",
+        "POW",
+        "CHA",
+        "Spectral_Combat",
+        "Willpower",
+        "Optional_Skills"
+      ],
       "derived_formulas": {
         "spectral_combat": "50% + POW + CHA",
         "willpower": "50% + (POW × 2)",
@@ -62,34 +80,119 @@
     "example_spirit_worshipper_loadout": {
       "note": "Based on Monster Island NPC stat blocks for Spirit Worshippers (Assistant Shamans)",
       "typical_spirits": [
-        {"type": "Nature Spirit (Trait)", "intensity": 2, "ins": "9-15", "pow": "13-14", "cha": "9-15"},
-        {"type": "Nature Spirit (Boost)", "intensity": 2, "ins": "10", "pow": "14", "cha": "10"}
+        {
+          "type": "Nature Spirit (Trait)",
+          "intensity": 2,
+          "ins": "9-15",
+          "pow": "13-14",
+          "cha": "9-15"
+        },
+        {
+          "type": "Nature Spirit (Boost)",
+          "intensity": 2,
+          "ins": "10",
+          "pow": "14",
+          "cha": "10"
+        }
       ],
       "total_spirits": "2-3 for a starting Spirit Worshipper"
     },
     "example_shaman_loadout": {
       "note": "Based on Monster Island NPC stat blocks for full Shamans",
       "typical_spirits": [
-        {"type": "Nature Spirit (Trait)", "intensity": 2, "ins": "9-13", "pow": "13", "cha": "9-13"},
-        {"type": "Nature Spirit (Boost)", "intensity": 3, "ins": "14", "pow": "24", "cha": "14"},
-        {"type": "Nature Spirit (Dominate)", "intensity": 4, "ins": "10-11", "pow": "26-27", "cha": "10-11"},
-        {"type": "Shape-shifting Spirit", "intensity": "3-4", "ins": "13", "pow": "24-28", "cha": "13"},
-        {"type": "Neutral Spirit", "intensity": 3, "int": "9-10", "pow": "19-23", "cha": "6-11"}
+        {
+          "type": "Nature Spirit (Trait)",
+          "intensity": 2,
+          "ins": "9-13",
+          "pow": "13",
+          "cha": "9-13"
+        },
+        {
+          "type": "Nature Spirit (Boost)",
+          "intensity": 3,
+          "ins": "14",
+          "pow": "24",
+          "cha": "14"
+        },
+        {
+          "type": "Nature Spirit (Dominate)",
+          "intensity": 4,
+          "ins": "10-11",
+          "pow": "26-27",
+          "cha": "10-11"
+        },
+        {
+          "type": "Shape-shifting Spirit",
+          "intensity": "3-4",
+          "ins": "13",
+          "pow": "24-28",
+          "cha": "13"
+        },
+        {
+          "type": "Neutral Spirit",
+          "intensity": 3,
+          "int": "9-10",
+          "pow": "19-23",
+          "cha": "6-11"
+        }
       ],
       "total_spirits": "4-6 for a full Shaman"
     },
     "example_high_shaman_loadout": {
       "note": "Based on Monster Island NPC stat blocks for High Shamans",
       "typical_spirits": [
-        {"type": "Nature Spirit (Trait)", "intensity": 2, "ins": "9", "pow": "13", "cha": "9"},
-        {"type": "Nature Spirit (Boost)", "intensity": 4, "ins": "11", "pow": "30", "cha": "11"},
-        {"type": "Nature Spirit (Dominate)", "intensity": "4-5", "ins": "10-13", "pow": "27-32", "cha": "10-13"},
-        {"type": "Shape-shifting Spirit", "intensity": 5, "ins": "17", "pow": "34", "cha": "17"},
-        {"type": "Neutral Spirit", "intensity": "4-5", "int": "8-12", "pow": "25-33", "cha": "8-12"},
-        {"type": "Hostile Spirit", "intensity": "4-5", "int": "9-10", "pow": "26-36", "cha": "7-8"}
+        {
+          "type": "Nature Spirit (Trait)",
+          "intensity": 2,
+          "ins": "9",
+          "pow": "13",
+          "cha": "9"
+        },
+        {
+          "type": "Nature Spirit (Boost)",
+          "intensity": 4,
+          "ins": "11",
+          "pow": "30",
+          "cha": "11"
+        },
+        {
+          "type": "Nature Spirit (Dominate)",
+          "intensity": "4-5",
+          "ins": "10-13",
+          "pow": "27-32",
+          "cha": "10-13"
+        },
+        {
+          "type": "Shape-shifting Spirit",
+          "intensity": 5,
+          "ins": "17",
+          "pow": "34",
+          "cha": "17"
+        },
+        {
+          "type": "Neutral Spirit",
+          "intensity": "4-5",
+          "int": "8-12",
+          "pow": "25-33",
+          "cha": "8-12"
+        },
+        {
+          "type": "Hostile Spirit",
+          "intensity": "4-5",
+          "int": "9-10",
+          "pow": "26-36",
+          "cha": "7-8"
+        }
       ],
       "total_spirits": "8-12 for a High Shaman",
-      "fetch_abilities_example": ["Binding", "Comprehension", "Covert", "Deadly", "Elemental", "Perception"]
+      "fetch_abilities_example": [
+        "Binding",
+        "Comprehension",
+        "Covert",
+        "Deadly",
+        "Elemental",
+        "Perception"
+      ]
     }
   },
   "spirit_types_available": {
@@ -144,5 +247,32 @@
       "cult_skills": "Replace Monster Island's Dance/Sing with cult-specific skills from one-pager",
       "spirit_rune_adaptation": "Per Hannu: Binding → Spirit Rune affinity"
     }
+  },
+  "source_ref": {
+    "source_id": "monster-island",
+    "source_revision_id": "monster-island:permission-pending:2026-05-21",
+    "manifest_path": "references/sources/manifest.json",
+    "page_manifest_path": "references/sources/pages/monster-island.json",
+    "coverage_state": "blocked",
+    "evidence_state": "legacy_pdftotext_unverified_source_blocked",
+    "gaps": [
+      "source sha256 is not recorded",
+      "source page count is not recorded",
+      "legacy extraction has unverified page numbers",
+      "no committed page/block evidence or verifier run metadata is available"
+    ]
+  },
+  "attestation": {
+    "status": "source_blocked",
+    "legacy_verified": false,
+    "source_authority": false,
+    "authority_state": "blocked_until_verified_contributing_pages_exist",
+    "verification_notes": "Extracted via pdftotext from full book. Page numbers need verification against physical book.",
+    "gaps": [
+      "source sha256 is not recorded",
+      "source page count is not recorded",
+      "legacy extraction has unverified page numbers",
+      "no committed page/block evidence or verifier run metadata is available"
+    ]
   }
 }

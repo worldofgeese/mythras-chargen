@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "schema": "references/sources/schema.json",
   "generated_at": "2026-05-21",
-  "notes": "Foundation scaffold only. Pending/unavailable sources deliberately block render, extraction, normalization, and acceptance until hashes, page counts, and permissions are recorded from lawful local copies.",
+  "notes": "Source attestation manifest for portable source authority. U7 records CSE/Bird/Monster legacy data against manifest source_revision_ids, but keeps extraction/acceptance blocked where source PDFs, hashes, page counts, or independent page evidence are unavailable in this worktree.",
   "sources": [
     {
       "source_id": "aig",
@@ -72,7 +72,7 @@
         "status": "confirmed",
         "note": "Existing cse raw record states user confirmed permission; source PDF is not committed or available to this scaffold."
       },
-      "precedence": "Supersedes AiG culture combat-style rows for app combat styles once page evidence is rebuilt.",
+      "precedence": "Legacy CSE-derived rows remain the current combat-style authority, but U7 marks promotion to verified authority blocked until portable source/page evidence exists.",
       "render_contract": {
         "renderer": "pdftoppm",
         "renderer_version": "runtime-detected",
@@ -94,7 +94,9 @@
         "acceptance"
       ],
       "blockers": [
-        "portable source file and page count unavailable in this worktree"
+        "portable source file and page count unavailable in this worktree",
+        "legacy hash is preserved from references/cse-raw/combat-styles-cse.json but cannot be re-rendered here",
+        "no verified page/block evidence has been committed for CSE rows"
       ]
     },
     {
@@ -154,7 +156,7 @@
         "status": "permission_pending",
         "note": "Public/source locator exists for player use, but extraction permission and source hash are not recorded in this scaffold."
       },
-      "precedence": "Spirit examples only; does not override Mythras Core animism rules.",
+      "precedence": "Spirit examples remain legacy template inputs only; they are source-blocked until portable source/page/block evidence exists.",
       "render_contract": {
         "renderer": "pdftoppm",
         "renderer_version": "runtime-detected",
@@ -178,7 +180,8 @@
       "blockers": [
         "sha256 unavailable in committed manifest",
         "page count unavailable",
-        "permission basis is not confirmed"
+        "permission basis is not confirmed",
+        "legacy vision-verification claim lacks committed verifier/page/block artifacts"
       ]
     },
     {
@@ -201,7 +204,7 @@
         "status": "permission_pending",
         "note": "Existing raw record is explicitly unverified; new extraction is blocked until hash/page/permission metadata are recorded."
       },
-      "precedence": "Template/example source only; raw legacy data remains blocked until vision verified.",
+      "precedence": "Template/example source only; Monster Island cannot act as source authority until verified contributing-page evidence exists.",
       "render_contract": {
         "renderer": "pdftoppm",
         "renderer_version": "runtime-detected",
@@ -225,7 +228,8 @@
       "blockers": [
         "sha256 unavailable in committed manifest",
         "page count unavailable",
-        "permission basis is not confirmed"
+        "permission basis is not confirmed",
+        "existing raw record is explicitly unverified and lacks page/block evidence"
       ]
     }
   ]
