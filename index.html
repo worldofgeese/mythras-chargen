@@ -4046,6 +4046,51 @@ function isProfessionalSkillSelected(skillName) {
   const resolved = (CharacterData._disambiguationMap || {})[`career:${skillName}`];
   return Boolean(resolved && selected.includes(resolved));
 }
+
+function getProfessionalSkillRenderState(skillName, claimedResolvedSkills) {
+  const selected = CharacterData.selectedProfessionalSkills || [];
+  if (!needsDisambiguation(skillName)) {
+    return { isChecked: selected.includes(skillName), resolved: '' };
+  }
+
+  if (!CharacterData._disambiguationMap) CharacterData._disambiguationMap = {};
+  const dMap = CharacterData._disambiguationMap;
+  const mapKey = `career:${skillName}`;
+  let isChecked = selected.includes(skillName);
+  let resolved = '';
+
+  const mappedResolution = dMap[mapKey];
+  if (mappedResolution && selected.includes(mappedResolution) && !claimedResolvedSkills.has(mappedResolution)) {
+    isChecked = true;
+    resolved = mappedResolution;
+    claimedResolvedSkills.add(mappedResolution);
+  }
+
+  const parsed = parsePlaceholderSkill(skillName);
+  if (!resolved && parsed && !selected.includes(skillName)) {
+    const resolvedEntry = selected.find(s =>
+      s.startsWith(parsed.category + ' (') && !needsDisambiguation(s) && !claimedResolvedSkills.has(s)
+    );
+    if (resolvedEntry) {
+      isChecked = true;
+      resolved = resolvedEntry;
+      dMap[mapKey] = resolvedEntry;
+      claimedResolvedSkills.add(resolvedEntry);
+    }
+  }
+
+  if (isChecked && !resolved && parsed) {
+    resolved = Object.keys(CharacterData.careerSkills).find(k =>
+      k.startsWith(parsed.category + ' (') && !needsDisambiguation(k) && !claimedResolvedSkills.has(k)
+    ) || '';
+    if (resolved) {
+      dMap[mapKey] = resolved;
+      claimedResolvedSkills.add(resolved);
+    }
+  }
+
+  return { isChecked, resolved };
+}
 const SPECIAL_EFFECTS_DATA = [{"name":"Accidental Injury","offensive":false,"defensive":true,"stackable":false,"specific_roll":"Attacker Fumbles"},{"name":"Arise","offensive":false,"defensive":true,"stackable":false},{"name":"Bash","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Shields or Bludgeoning"},{"name":"Bleed","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Cutting Weapons"},{"name":"Blind Opponent","offensive":false,"defensive":true,"stackable":false,"specific_roll":"Defender Criticals"},{"name":"Bypass Armour","offensive":true,"defensive":false,"stackable":true,"specific_roll":"Attacker Criticals"},{"name":"Choose Location","offensive":true,"defensive":false,"stackable":false,"specific_roll":"See Description"},{"name":"Circumvent Cover","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Ranged Weapons"},{"name":"Circumvent Parry","offensive":true,"defensive":false,"stackable":false,"specific_roll":"Attacker Criticals"},{"name":"Close Range","offensive":true,"defensive":true,"stackable":false},{"name":"Compel Surrender","offensive":true,"defensive":true,"stackable":false},{"name":"Damage Weapon","offensive":true,"defensive":true,"stackable":false},{"name":"Disarm Opponent","offensive":true,"defensive":true,"stackable":false},{"name":"Drop Foe","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Siege Weapons, Firearms"},{"name":"Duck Back","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Ranged Weapons"},{"name":"Enhance Parry","offensive":false,"defensive":true,"stackable":false,"specific_roll":"Defender Criticals"},{"name":"Entangle","offensive":true,"defensive":true,"stackable":false,"specific_weapon_type":"Entangling Weapons"},{"name":"Flurry","offensive":true,"defensive":false,"stackable":true,"specific_weapon_type":"Unarmed"},{"name":"Force Failure","offensive":true,"defensive":true,"stackable":false,"specific_roll":"Opponent Fumbles"},{"name":"Grip","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Unarmed"},{"name":"Impale","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Impaling Weapons"},{"name":"Kill Silently","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Small Weapons","specific_roll":"See Description"},{"name":"Marksman","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Ranged Weapons"},{"name":"Maximise Damage","offensive":true,"defensive":false,"stackable":true,"specific_roll":"Attacker Criticals"},{"name":"Open Range","offensive":false,"defensive":true,"stackable":false},{"name":"Overextend Opponent","offensive":false,"defensive":true,"stackable":true},{"name":"Overpenetration","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Ranged Weapons","specific_roll":"Critical Only"},{"name":"Pin Down","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Ranged Weapons"},{"name":"Pin Weapon","offensive":true,"defensive":true,"stackable":false,"specific_roll":"Critical Only"},{"name":"Prepare Counter","offensive":false,"defensive":true,"stackable":true},{"name":"Press Advantage","offensive":true,"defensive":false,"stackable":false},{"name":"Rapid Reload","offensive":true,"defensive":false,"stackable":true},{"name":"Remise","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Small Weapon Only"},{"name":"Scar Foe","offensive":true,"defensive":true,"stackable":false},{"name":"Select Target","offensive":false,"defensive":true,"stackable":false,"specific_roll":"Attacker Fumbles"},{"name":"Slip Free","offensive":false,"defensive":true,"stackable":false,"specific_roll":"Defender Criticals"},{"name":"Spoil Spell","offensive":true,"defensive":false,"stackable":false},{"name":"Stand Fast","offensive":false,"defensive":true,"stackable":false},{"name":"Stun Location","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Bludgeoning Weapons"},{"name":"Sunder","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Axes, Two Handed Weapons"},{"name":"Take Weapon","offensive":true,"defensive":true,"stackable":false,"specific_weapon_type":"Unarmed"},{"name":"Trip Opponent","offensive":true,"defensive":true,"stackable":false},{"name":"Weapon Malfunction","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Ranged Weapons","specific_roll":"Attacker Fumbles"},{"name":"Withdraw","offensive":false,"defensive":true,"stackable":false}];
 const COMBAT_TRAITS_DATA = [{"name":"Antelope Lancer","explanation":"Performing a mounted charge with this combat style does not incur the one step difficulty penalty to hit. Allows rider to ignore the skill cap placed upon combat rolls by the Ride skill. When using a ranged weapon, shift a random Hit Location roll to an adjoining body location"},{"name":"Assassination","explanation":"Allows the user access to the normally restricted 'Kill Silently' special effect."},{"name":"Batter Aside","explanation":"If the fighter’s Damage Modifier is two or more steps greater than his opponent’s, his weapon is considered one size larger for the purposes of bypassing parries"},{"name":"Batter Down","explanation":"If the fighter’s Damage Modifier is one or more steps greater than his opponent’s, his Damage Modifier roll is counted as double solely for the purposes of calculating Knockback."},{"name":"Beast-back Lancer","explanation":"Performing a mounted charge with this combat style does not incur the one step difficulty penalty to hit."},{"name":"Berserker","explanation":"The style emphasises entering into a violent frenzy where personal safety and pain are disregarded. At the beginning of a fight, or upon taking an injury, a berserker may attempt to roll his POW x5 to enter a frenzy. When in a frenzy:\\n- Damage modifier is increased by one step.\\n- Parrying or Evading attacks are one step more difficult.\\n- Endurance rolls for resisting the effects of injury are one step easier.\\n- Effects of Fatigue are ignored.\\nAfter the fight any deferred Fatigue levels plus one additional level are applied."},{"name":"Bison Tribe Combat Style","explanation":"Performing a mounted charge with this combat style does not incur the one step difficulty penalty to hit. Allows rider to ignore the skill cap placed upon combat rolls by the Ride skill. Permits clubs and axes to roll the weapon’s damage twice and pick the best result, but only when using the Damage Weapon special effect against shields."},{"name":"Blind Fighting","explanation":"Allows user to reduce any penalties imposed due to poor lighting or temporary blinding to be reduced by one difficulty grade."},{"name":"Cautious Fighter","explanation":"Can use the Change Range action to automatically withdraw from engagement with no need to roll"},{"name":"Chariot Fighting","explanation":"Style allows those riding in a chariot to ignore the skill cap placed upon their combat rolls by the driver’s Drive skill."},{"name":"Daredevil","explanation":"May use Evade to dodge blows in hand to hand combat without ending up prone."},{"name":"Defensive Minded","explanation":"Increases the Size of your weapon when parrying by one step, provided no offensive action is taken that round."},{"name":"Do or Die","explanation":"Allows dual weapon combinations to use the Flurry special effect, provided that each subsequent attack utilises the alternating weapon."},{"name":"Formation Fighting*","explanation":"Permits a group of three or more warriors to draw into close formation, placing more open or disordered opponents at a disadvantage (provided the ‘unit’ cannot be outflanked) and thus reducing each foe’s Action Points by one if they engage. All of the group need to have this."},{"name":"Grappler","explanation":"The style grants its user an advantage when entangling or immobilising opponents, making a foe’s opposed rolls to evade or break free one difficulty grade harder. Rq6 pg 135."},{"name":"Hawkeye","explanation":"Hawkeye. Penalties for shooting smaller than man-size targets are reduced by one grade."},{"name":"Horse Archery","explanation":"Shooting arrows from galloping horseback. Applies only to bow. Style allows rider to ignore the skill cap placed upon combat rolls by the Ride skill. The style permits launching ranged attacks whilst galloping"},{"name":"Intimidating Scream","explanation":"Style encourages frequent yells and bellows in combat to intimidate foes, making any psychological resistance rolls inflicted on an opponent one grade harder."},{"name":"Lancer","explanation":"This Combat Style emphasizes devastating charges with Lances or other weapons. Performing a mounted charge with this combat style does not\\nincur the one step difficulty penalty."},{"name":"Longshot","explanation":"The style emphasises accurate fire at extreme ranges. When firing ranged weapons, use the row one step above the correct row for Distance. (ie. when shooting at 125m., use the 101 – 120m. row)."},{"name":"Marksmanship","explanation":"This style focuses on accurate ranged fire and striking small targets. When rolling a random Hit Location, the location struck may be shifted to an\\nadjoining Hit location. Ranged Weapons Only."},{"name":"Mounted Combat","explanation":"Style allows rider to ignore the skill cap placed upon combat rolls by the Ride skill."},{"name":"Mounted Lancer","explanation":"Performing a mounted charge with this combat style does not incur the one step difficulty penalty to hit."},{"name":"Mounted Skirmisher","explanation":"The style permits launching ranged attacks whilst moving fast (but not whilst galloping)."},{"name":"Pelorian Cavalry","explanation":"Performing a mounted charge with this combat style does not incur the one step difficulty penalty to hit. Allows rider to ignore the skill cap placed upon combat rolls by the Ride skill. Permits launching ranged attacks whilst moving fast (but not whilst galloping)"},{"name":"Prancing","explanation":"May use the springing leaps of his mount to evade ranged attacks without going prone by rolling against Ride skill. In addition may fire at the top of a jump ignoring passive cover from shields"},{"name":"Ranged Marksman","explanation":"When using a ranged weapon, shift a random Hit Location roll to an adjoining body location."},{"name":"Shield Splitter","explanation":"Permits clubs and axes to roll the weapon’s damage twice and pick the best result, but only when using the Damage Weapon special effect against shields."},{"name":"Shield Wall*","explanation":"Allows a group of three or more shield users to overlap their protection, adding one to the number of locations which can be protected with passive blocking, and resisting Knockback, Leaping attacks and Bash as if using the Brace action.  All of the characters need to have this."},{"name":"Skirmisher","explanation":"The style permits launching ranged attacks whilst at a run (but not whilst sprinting)."},{"name":"Swashbuckling","explanation":"Style allows the user to engage in attacks and evades made whilst jumping or swinging into (or disengaging from) combat, ignoring any skill cap placed on it by the Athletics skill."},{"name":"Throw Weapons","explanation":"Any nominal melee weapon in the style can also be thrown at no penalty to skill, but when used in this way a weapon’s damage roll is halved."},{"name":"Trained Beast","explanation":"Intended for styles which emphasise fighting in close coordination with an animal companion (such as trained birds of prey, pet wolves, and so on), the user may utilise any of his Action Points to defend against attacks launched at his beast."},{"name":"Unarmed Prowess","explanation":"Permits the user to treat his Unarmed blocks and parries as ‘Medium’ sized, enabling him to better defend himself from armed opponents."}];
 
@@ -11055,48 +11100,13 @@ App.renderCareerDetails = function() {
       ${career.professionalSkills && career.professionalSkills.length > 0 ? `
         <h4 style="margin-top: 15px;">Professional Skills (choose 3)</h4>
         <div id="professional-skills-picker" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 8px; margin-top: 8px;">
-          ${career.professionalSkills.map(skill => {
+          ${(() => {
+            const claimedResolvedProfessionalSkills = new Set();
+            return career.professionalSkills.map(skill => {
             const needsSpec = needsDisambiguation(skill);
             const requiredPrimary = getPrimaryPlaceholderFor(skill);
             const isDisabled = Boolean(requiredPrimary && !isProfessionalSkillSelected(requiredPrimary));
-            // Check if the original placeholder OR a resolved version is in selectedProfessionalSkills
-            let isChecked = (CharacterData.selectedProfessionalSkills || []).includes(skill);
-            let resolved = '';
-            if (needsSpec && !isChecked) {
-              // Check disambiguation map for THIS specific placeholder's resolution
-              const dMap = CharacterData._disambiguationMap || {};
-              const step8MapKey = `career:${skill}`;
-              if (dMap[step8MapKey] && (CharacterData.selectedProfessionalSkills || []).includes(dMap[step8MapKey])) {
-                isChecked = true;
-                resolved = dMap[step8MapKey];
-              } else {
-                // Fallback: check if a resolved version is in the array (only for unclaimed entries)
-                const parsed = parsePlaceholderSkill(skill);
-                if (parsed) {
-                  const claimed = new Set(Object.values(dMap));
-                  const resolvedEntry = (CharacterData.selectedProfessionalSkills || []).find(s =>
-                    s.startsWith(parsed.category + ' (') && !needsDisambiguation(s) && !claimed.has(s)
-                  );
-                  if (resolvedEntry) {
-                    isChecked = true;
-                    resolved = resolvedEntry;
-                  }
-                }
-              }
-            }
-            if (needsSpec && isChecked && !resolved) {
-              // Find resolved version from disambiguation map or careerSkills
-              const dMap = CharacterData._disambiguationMap || {};
-              const step8MapKey = `career:${skill}`;
-              resolved = dMap[step8MapKey] || '';
-              if (!resolved) {
-                const parsed = parsePlaceholderSkill(skill);
-                const claimed = new Set(Object.values(dMap));
-                resolved = parsed ? (Object.keys(CharacterData.careerSkills).find(k =>
-                  k.startsWith(parsed.category + ' (') && !needsDisambiguation(k) && !claimed.has(k)
-                ) || '') : '';
-              }
-            }
+            const { isChecked, resolved } = getProfessionalSkillRenderState(skill, claimedResolvedProfessionalSkills);
             const resolvedSpec = resolved ? (resolved.match(/\((.+)\)/) || [])[1] || '' : '';
             const skillAttr = this.escapeHtmlAttr(skill);
             const skillLabel = this.escapeHtml(getProfessionalSkillChoiceLabel(skill));
@@ -11113,7 +11123,8 @@ App.renderCareerDetails = function() {
               </label>
               ${isChecked && needsSpec ? `<input type="text" placeholder="Enter specialization..." value="${resolvedSpecAttr}" data-skill="${skillAttr}" style="display: block; margin: 4px 0 0 20px; font-size: 12px; padding: 3px 6px; width: calc(100% - 24px);" onchange="App.resolveProfessionalSkill(this.dataset.skill, this.value, this)">` : ''}
             </div>`;
-          }).join('')}
+            }).join('');
+          })()}
         </div>
       ` : ''}
     </div>

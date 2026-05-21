@@ -1295,7 +1295,35 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
   }
 }
 
-// Test 1.12e: Professional skill picker preserves Primary/Secondary Catch specialty slots with clearer labels
+// Test 1.12e: Professional skill picker repairs imported paired specialty slots without a map
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj && AppObj.renderCareerDetails && CD) {
+    CD.culture = 'Balazaring';
+    CD.career = 'Scholar';
+    CD.selectedProfessionalSkills = ['Lore (Wolves)', 'Lore (Local Legends)', 'Literacy'];
+    CD.careerSkills = { 'Lore (Wolves)': 0, 'Lore (Local Legends)': 0, Literacy: 0 };
+    CD._disambiguationMap = {};
+
+    const html = AppObj.renderCareerDetails();
+    const firstSlotShowsFirstLore = /data-skill="Lore \(Primary\)"[\s\S]*?value="Wolves"/.test(html);
+    const secondSlotShowsSecondLore = /data-skill="Lore \(Secondary\)"[\s\S]*?value="Local Legends"/.test(html);
+    const slotsDoNotCollapse = !/data-skill="Lore \(Secondary\)"[\s\S]*?value="Wolves"/.test(html);
+    const mapRepaired = CD._disambiguationMap['career:Lore (Primary)'] === 'Lore (Wolves)' &&
+      CD._disambiguationMap['career:Lore (Secondary)'] === 'Lore (Local Legends)';
+
+    if (firstSlotShowsFirstLore && secondSlotShowsSecondLore && slotsDoNotCollapse && mapRepaired) {
+      pass('Professional skill picker repairs imported paired specialty slot mappings');
+    } else {
+      fail('Professional skill picker collapses imported paired specialty slots',
+        JSON.stringify({ firstSlotShowsFirstLore, secondSlotShowsSecondLore, slotsDoNotCollapse, mapRepaired, map: CD._disambiguationMap, html }));
+    }
+  } else {
+    fail('Professional skill picker unavailable for imported paired specialty mapping test');
+  }
+}
+
+// Test 1.12f: Professional skill picker preserves Primary/Secondary Catch specialty slots with clearer labels
 {
   const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
   if (AppObj && AppObj.renderCareerDetails && AppObj.toggleProfessionalSkill && AppObj.resolveProfessionalSkill && CD) {
