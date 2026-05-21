@@ -1143,6 +1143,43 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
   }
 }
 
+// Test 1.12a: Direct career/culture skills render with tooltip metadata
+{
+  const { App: AppObj, CAREERS_DATA, CULTURES_DATA, needsDisambiguation } = loadApp();
+  if (AppObj && AppObj.skillWithTooltip && CAREERS_DATA && CULTURES_DATA && needsDisambiguation) {
+    const directSkills = new Set();
+    CAREERS_DATA.forEach(career => {
+      (career.standardSkills || []).forEach(skill => directSkills.add(skill));
+      (career.professionalSkills || []).forEach(skill => directSkills.add(skill));
+    });
+    CULTURES_DATA.forEach(culture => {
+      (culture.standardSkills || []).forEach(skill => directSkills.add(skill));
+      (culture.professionalSkills || []).forEach(skill => directSkills.add(skill));
+    });
+
+    const missingTooltips = Array.from(directSkills)
+      .filter(skill => typeof skill === 'string')
+      .filter(skill => !skill.startsWith('Combat Style ('))
+      .filter(skill => !needsDisambiguation(skill))
+      .filter(skill => !AppObj.skillWithTooltip(skill).includes('class="skill-tooltip"'))
+      .sort();
+    const scholar = CAREERS_DATA.find(career => career.name === 'Scholar');
+    const nativeTongueStillValid = Boolean(scholar && (scholar.standardSkills || []).includes('Native Tongue'));
+    const nativeTonguePlayRow = AppObj.renderSkillRow({ name: 'Native Tongue', base: 60, cultural: 0, career: 0, bonus: 0 });
+    const nativeTonguePlayRowHasTooltip = nativeTonguePlayRow.includes('class="skill-tooltip"') &&
+      nativeTonguePlayRow.includes('birth language');
+
+    if (nativeTongueStillValid && nativeTonguePlayRowHasTooltip && missingTooltips.length === 0) {
+      pass('Direct career/culture skill rows have tooltip metadata');
+    } else {
+      fail('Direct career/culture skill rows lack tooltip metadata',
+        JSON.stringify({ nativeTongueStillValid, nativeTonguePlayRowHasTooltip, missingTooltips }));
+    }
+  } else {
+    fail('Could not verify direct skill tooltip metadata');
+  }
+}
+
 // Test 1.12b: Professional skill picker deduplicates Primary/Secondary placeholders
 {
   const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();

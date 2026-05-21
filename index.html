@@ -4122,6 +4122,7 @@ const SKILL_DESCRIPTIONS = {
   "Influence": "Persuasion, negotiation, and charm. Getting people to agree with you.",
   "Insight": "Reading people — detecting lies, sensing motives, understanding emotions.",
   "Locale": "Knowledge of local geography, landmarks, and navigation in familiar areas.",
+  "Native Tongue": "Speaking and understanding your birth language. Character creation grants an automatic +40% bonus.",
   "Perception": "Spotting hidden things, noticing ambushes, finding clues, and general awareness.",
   "Ride": "Staying mounted, controlling a horse or other mount in difficult situations.",
   "Sing": "Vocal performance. Also used for storytelling and oral tradition.",
@@ -4134,11 +4135,22 @@ const SKILL_DESCRIPTIONS = {
   "Acting": "Pretending to be someone else. Different from Deceit — this is theatrical.",
   "Commerce": "Buying, selling, and evaluating the worth of goods and services.",
   "Courtesy": "Court etiquette, formal address, and navigating noble society.",
+  "Craft": "Creating, repairing, and evaluating goods within a chosen craft specialty.",
+  "Culture": "Knowledge of a specific society's customs, laws, taboos, and history.",
   "Healing": "Long-term medical care, surgery, treating disease. Slower but more thorough than First Aid.",
+  "Exhort": "Theistic prayer and ritual appeal used to call on a god or cult for divine magic.",
+  "Invocation": "Sorcerous casting skill used to invoke spells from a cult, school, or grimoire.",
+  "Lockpicking": "Opening locks without the proper key and bypassing simple physical security.",
   "Lore": "Academic knowledge of a specific subject (History, Mythology, etc.).",
+  "Meditation": "Focused concentration used to enter deep mental states and maintain mystical talents.",
   "Musicianship": "Playing musical instruments. Used for entertainment and ritual.",
+  "Mysticism": "Knowledge and practice of a mystical path used to awaken and direct supernatural talents.",
+  "Navigation": "Finding a route through unfamiliar terrain or waters using maps, stars, landmarks, and local signs.",
   "Navigate": "Finding your way across unfamiliar terrain using stars, landmarks, and maps.",
+  "Seamanship": "Handling ships, sails, ropes, watches, and other practical duties at sea.",
   "Seduction": "Romantic or sexual persuasion.",
+  "Shaping": "Sorcerous technique for altering a spell's range, duration, targets, and other parameters.",
+  "Sleight": "Manual dexterity for palming objects, picking pockets, tricks, and other subtle hand work.",
   "Streetwise": "Knowing the criminal underworld — finding black markets, fences, and underground contacts.",
   "Survival": "Living off the land — finding food, water, shelter in the wilderness.",
   "Track": "Following footprints, trails, and signs left by creatures or people.",
@@ -14157,7 +14169,7 @@ App.renderSkillRow = function(skill) {
   
   return `
     <tr data-testid="skill-row">
-      <td data-testid="skill-name">${displayName}</td>
+      <td data-testid="skill-name">${this.skillWithTooltip(displayName)}</td>
       <td class="base-col">${skill.base}</td>
       <td class="input-col">${skill.cultural}</td>
       <td class="input-col">${skill.career}</td>
