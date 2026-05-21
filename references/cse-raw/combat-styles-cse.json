@@ -1313,17 +1313,18 @@
   ],
   "source_ref": {
     "source_id": "cse",
-    "source_revision_id": "cse:unavailable:106d7ad39e8b:2026-05-21",
+    "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
     "manifest_path": "references/sources/manifest.json",
     "page_manifest_path": "references/sources/pages/cse.json",
     "coverage_state": "blocked",
-    "evidence_state": "legacy_hash_and_page_citations_only",
+    "evidence_state": "published_source_legacy_page_citations_only",
     "gaps": [
-      "source PDF is not available at a portable project path",
-      "page count is unknown",
+      "published CSE PDF has not been rendered into page images",
+      "legacy row citations have not been independently verified against page/block evidence",
       "no page image hashes or independent verifier artifacts are committed"
     ],
-    "known_hash_sha256": "106d7ad39e8b63d39cc6a5e79db7ec2f031b165b5c05017113bc13f2469841a6"
+    "known_hash_sha256": "106d7ad39e8b63d39cc6a5e79db7ec2f031b165b5c05017113bc13f2469841a6",
+    "published_source_url": "https://copyparty.hound-celsius.ts.net/sources/books/Combat%20Styles%20Encyclopedia.pdf"
   },
   "attestation_state": "source_blocked"
 }

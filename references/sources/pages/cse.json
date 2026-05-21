@@ -2,47 +2,33 @@
   "schemaVersion": 1,
   "schema": "references/sources/schema.json#/schemas/page_coverage",
   "source_id": "cse",
-  "source_revision_id": "cse:unavailable:106d7ad39e8b:2026-05-21",
+  "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
   "coverage_state": "blocked",
-  "coverage_mode": "blocked-legacy-metadata",
-  "expected_page_count": null,
+  "coverage_mode": "blocked-pending-vision-page-evidence",
+  "expected_page_count": 1109,
   "pages": [],
   "known_ranges": [
     {
       "label": "legacy CSE combat-style row citations",
       "pages": "146-148, 168-175, 186-194, 386-388, 390-392, 928, 930-932, 936-937, 939-941, 943-948",
       "state": "blocked",
-      "reason": "Row-level page numbers exist in legacy JSON, but source PDF/page renders are unavailable for full coverage classification.",
+      "reason": "Row-level page numbers exist in legacy JSON, but rendered page/block evidence and independent verification are not yet committed for these CSE facts.",
       "source_file": "references/cse-raw/combat-styles-cse.json"
     }
   ],
   "blockers": [
-    "CSE source PDF and page count are unavailable in this worktree",
-    "legacy row citations cannot be promoted without verified page/block evidence",
-    "CSE PDF is not present locally or under public Copyparty /sources/books as of 2026-05-21",
-    "expected_page_count remains unknown because no CSE PDF was available to inspect"
+    "CSE source PDF is published/player-visible, but rendered page images and page/block evidence have not been generated.",
+    "Legacy row citations cannot be promoted until independent vision verification exists for contributing pages."
   ],
-  "notes": "U7 preserves legacy CSE page citations as blocked metadata only; on 2026-05-21 no local or public Copyparty CSE PDF was available, so no page image, text extraction, or full-page coverage is committed.",
+  "notes": "U2 records the published CSE source identity and page count only. Legacy CSE page citations remain blocked metadata until page images, block evidence, extraction, and independent verification are committed.",
   "source_access": {
-    "local_source": {
-      "status": "not_found",
-      "checked_at": "2026-05-21",
-      "checked_paths": [
-        "references/sources/pdfs/cse.pdf",
-        "repo search for *cse*.pdf and *combat*style*.pdf"
-      ],
-      "note": "No renderable CSE PDF was available for page counting or page-image generation."
-    },
     "public_copyparty_source": {
-      "status": "not_found",
+      "status": "available",
       "checked_at": "2026-05-21",
-      "checked_urls": [
-        "https://copyparty.hound-celsius.ts.net/sources/books/Combat%20Styles%20Encyclopedia.pdf",
-        "https://copyparty.hound-celsius.ts.net/sources/books/Combat-Styles-Encyclopedia.pdf",
-        "https://copyparty.hound-celsius.ts.net/sources/books/CSE.pdf",
-        "https://copyparty.hound-celsius.ts.net/sources/books/cse.pdf"
-      ],
-      "note": "Public Copyparty /sources/books did not contain a CSE PDF when inspected before this blocked update."
+      "url": "https://copyparty.hound-celsius.ts.net/sources/books/Combat%20Styles%20Encyclopedia.pdf",
+      "sha256": "106d7ad39e8b63d39cc6a5e79db7ec2f031b165b5c05017113bc13f2469841a6",
+      "size_bytes": 2831310,
+      "page_count": 1109
     }
   }
 }

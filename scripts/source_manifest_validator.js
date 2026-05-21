@@ -71,6 +71,36 @@ function validateDuplicateSources(source, errors, location) {
   }
 }
 
+function validatePublicCopypartyAccess(source, errors, location) {
+  const locator = source.canonical_locator;
+  if (source.lifecycle_state !== 'active' ||
+      typeof locator !== 'string' ||
+      !locator.startsWith('https://copyparty.hound-celsius.ts.net/sources/books/')) {
+    return;
+  }
+
+  const publicSource = source.source_access && source.source_access.public_copyparty_source;
+  if (!isObject(publicSource)) {
+    add(errors, location, 'source_access.public_copyparty_source.url is required for active public Copyparty sources');
+    return;
+  }
+  if (publicSource.status !== 'available') {
+    add(errors, location, 'source_access.public_copyparty_source.status must be available for active public Copyparty sources');
+  }
+  if (publicSource.url !== locator) {
+    add(errors, location, 'source_access.public_copyparty_source.url must match canonical_locator');
+  }
+  if (publicSource.sha256 !== source.sha256) {
+    add(errors, location, 'source_access.public_copyparty_source.sha256 must match source sha256');
+  }
+  if (publicSource.size_bytes !== source.size_bytes) {
+    add(errors, location, 'source_access.public_copyparty_source.size_bytes must match source size_bytes');
+  }
+  if (publicSource.page_count !== source.page_count) {
+    add(errors, location, 'source_access.public_copyparty_source.page_count must match source page_count');
+  }
+}
+
 function validateManifest(manifest, schema) {
   const errors = [];
   if (!isObject(manifest)) return { ok: false, errors: ['manifest: must be an object'], sourceIds: new Set() };
@@ -118,6 +148,7 @@ function validateManifest(manifest, schema) {
       if (!Number.isInteger(source.page_count) || source.page_count <= 0) add(errors, label, 'active source requires positive page_count');
       if (typeof source.acquired_at !== 'string' || !source.acquired_at) add(errors, label, 'active source requires acquired_at');
       if (Array.isArray(source.blockers) && source.blockers.length > 0) add(errors, label, 'active source must not have blockers');
+      validatePublicCopypartyAccess(source, errors, label);
     } else {
       if (!Array.isArray(source.blocks) || source.blocks.length === 0) add(errors, label, 'non-active source must list blocked operations in blocks[]');
       if (!Array.isArray(source.blockers) || source.blockers.length === 0) add(errors, label, 'non-active source must explain blockers[]');
