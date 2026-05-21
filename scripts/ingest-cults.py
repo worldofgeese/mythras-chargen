@@ -534,18 +534,22 @@ def validate_waha_authority() -> list[str]:
     aggregate = read_reference_json("references/cults-raw/cults.json")
 
     waha_source = next((source for source in manifest.get("sources", []) if source.get("source_id") == "waha"), None)
+    source_hash = None
+    source_size = None
     if not waha_source:
         issues.append("Waha source missing from references/sources/manifest.json")
         source_revision_id = None
     else:
         source_revision_id = waha_source.get("source_revision_id")
+        source_hash = waha_source.get("sha256")
+        source_size = waha_source.get("size_bytes")
         if waha_source.get("acceptance_state") != "blocked_pending_vision_verification":
             issues.append("Waha source must remain blocked_pending_vision_verification until vision verification exists")
         if not waha_source.get("acceptance_blockers"):
             issues.append("Waha source blocked state must list acceptance_blockers")
         public_source = waha_source.get("source_access", {}).get("public_copyparty_source", {})
-        if public_source.get("status") == "not_found" and waha_source.get("acceptance_state") != "blocked_pending_vision_verification":
-            issues.append("Unavailable public Copyparty Waha source must block acceptance")
+        if public_source.get("status") != "available":
+            issues.append("Updated Waha source must be mirrored to public Copyparty source library")
         duplicate_sources = waha_source.get("duplicate_sources", [])
         if not any(
             duplicate.get("locator") == "references/cults-upstream/Storm/Waha.pdf"
@@ -565,6 +569,14 @@ def validate_waha_authority() -> list[str]:
         work_state = page.get("work_state")
         if work_state == "blocked" and not page.get("blockers"):
             issues.append(f"Waha page {page.get('pdf_page')} blocked state must list blockers")
+        if work_state == "rendered":
+            render = page.get("render") or {}
+            if render.get("status") != "rendered" or not render.get("image_sha256") or not render.get("dimensions"):
+                issues.append(f"Waha page {page.get('pdf_page')} rendered state must include image hash and dimensions")
+            if page.get("extraction") or page.get("verification"):
+                issues.append(f"Waha page {page.get('pdf_page')} rendered-only state must not include extraction or verification metadata")
+            if not page.get("blockers"):
+                issues.append(f"Waha page {page.get('pdf_page')} rendered-only blocked coverage must list verification blockers")
         if work_state in {"verified", "normalized", "accepted"}:
             verification = page.get("verification")
             if not page.get("extraction") or not verification or verification.get("independent") is not True:
@@ -577,6 +589,8 @@ def validate_waha_authority() -> list[str]:
         issues.append("Praxian Waha must not claim a completed verification refresh")
     if authority.get("source_revision_id") != source_revision_id or authority.get("canonical_record") is not True:
         issues.append("Praxian Waha sourceAuthority must point at the Waha source revision as canonical")
+    if praxian.get("sourceSha256") != source_hash or praxian.get("sourceSizeBytes") != source_size:
+        issues.append("Praxian Waha source metadata must match the active Waha manifest revision")
 
     storm_authority = storm.get("sourceAuthority", {})
     if storm.get("recordStatus") != "superseded" or storm.get("doNotUseForAppGeneration") is not True:
@@ -585,6 +599,8 @@ def validate_waha_authority() -> list[str]:
         issues.append("Storm Waha raw record must redirect to Praxian Waha")
     if storm_authority.get("authority_status") != "superseded_duplicate":
         issues.append("Storm Waha sourceAuthority must mark superseded_duplicate")
+    if storm.get("sourceRevisionId") != source_revision_id:
+        issues.append("Storm Waha superseded record must cite the active Waha source revision")
 
     aggregate_waha = [cult for cult in aggregate if cult.get("name") == "Waha"]
     if len(aggregate_waha) < 2:
@@ -597,6 +613,9 @@ def validate_waha_authority() -> list[str]:
         issues.append("Aggregate Praxian Waha entry must redirect to canonical raw record")
     if not any(cult.get("recordStatus") == "superseded" for cult in aggregate_waha):
         issues.append("Aggregate Storm Waha entry must be superseded")
+    for cult in aggregate_waha:
+        if cult.get("sourceRevisionId") != source_revision_id:
+            issues.append("Aggregate Waha entries must cite the active Waha source revision")
 
     return issues
 

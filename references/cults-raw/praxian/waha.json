@@ -8,9 +8,9 @@
   "epithet": "The Butcher, Khan of the Praxian Gods",
   "version": "6.0.1",
   "versionDate": "2026-05-17",
-  "source": "references/cults-upstream/Praxian/Waha.pdf",
+  "source": "https://copyparty.hound-celsius.ts.net/sources/books/Waha.pdf",
   "verified": false,
-  "verificationNote": "Source metadata was checked from tracked local Praxian Waha.pdf on 2026-05-21, but no vision extraction or independent verifier artifact exists. Existing mechanics remain legacy canonical data, not a completed refresh.",
+  "verificationNote": "Updated supplied Waha PDF was hashed, mirrored to Copyparty, and rendered to ignored page images on 2026-05-21. No bounded vision extraction or independent verifier artifact exists, so existing mechanics remain blocked legacy canonical data.",
   "requirements": {
     "initiate": "Cult is closed to women. Human initiates need Ride and a tribal weapon at 50%+, one spirit magic spell, and knowledge of all tribal herds. Must prove warrior abilities to tribal elders or at a seasonal festival.",
     "runeLord": "Must be an initiate of noble descent from Waha. Or agree with GM to use RQG pp. 274-276."
@@ -188,26 +188,28 @@
     1,
     2
   ],
-  "sourceCitation": "references/cults-upstream/Praxian/Waha.pdf, p.1-2",
-  "sourceVersion": "2019 edition v5.2",
-  "sourceRevisionId": "waha:references-cults-upstream-praxian-waha-pdf:688c0d9a5303:2026-05-21",
-  "sourceSha256": "688c0d9a5303bdfbbfc24ea0f03a1bd2a4d4b2ae702fb52df23f1f048dca199d",
-  "sourceSizeBytes": 101899,
+  "sourceCitation": "https://copyparty.hound-celsius.ts.net/sources/books/Waha.pdf, p.1-2",
+  "sourceVersion": "updated one-pager v6.0.1 (2026-05-17 supplied PDF)",
+  "sourceRevisionId": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
+  "sourceSha256": "a36461fa3ba86159be1d8993ea920824446171380ff3c11c10a47a8cd95475f1",
+  "sourceSizeBytes": 153745,
   "sourcePageCount": 2,
   "canonicalRecord": true,
   "doNotUseForAppGeneration": false,
   "verificationState": "blocked_pending_vision_verification",
   "sourceAuthority": {
     "source_id": "waha",
-    "source_revision_id": "waha:references-cults-upstream-praxian-waha-pdf:688c0d9a5303:2026-05-21",
+    "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
     "canonical_record": true,
-    "authority_status": "legacy_canonical_pending_vision_verification",
+    "authority_status": "updated_source_pending_independent_verification",
     "page_coverage": "references/sources/pages/waha.json",
     "blocked_by": [
-      "No canonical Copyparty Waha one-pager was found under public /sources/books or /rules/handouts on 2026-05-21.",
-      "No rendered page images, vision extraction artifacts, or independent verifier metadata were produced in this unit."
+      "Rendered page image exists in ignored cache, but no bounded vision extraction artifact has been committed.",
+      "Independent verifier pass from rendered page evidence has not been performed in this environment, so facts remain blocked."
     ],
     "supersedes": [
+      "references/cults-upstream/Praxian/Waha.pdf",
+      "references/cults-upstream/Storm/Waha.pdf",
       "references/cults-raw/storm/waha.json",
       "references/cults-raw/cults.json entries for Waha"
     ]

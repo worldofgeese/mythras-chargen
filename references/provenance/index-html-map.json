@@ -136,11 +136,24 @@
       "source_ids": [
         "waha"
       ],
-      "rationale": "Waha app-facing data remains legacy/canonical only where sourced from the Praxian record; fact-level acceptance is blocked until U6 vision extraction and independent verification are available.",
+      "rationale": "Updated Waha source revision is active and rendered, but app-facing Waha facts remain legacy/canonical only where sourced from the Praxian record; fact-level acceptance is blocked until bounded vision extraction and independent verification are available.",
       "blocked_by": [
-        "references/sources/pages/waha.json has coverage_state=blocked",
+        "references/sources/pages/waha.json has coverage_state=blocked with rendered pages but no extraction or independent verification artifacts",
         "references/cults-raw/storm/waha.json is superseded and must not feed app generation",
         "Waha fact-level source/page/block provenance is pending vision verification"
+      ],
+      "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
+      "source_state": "active_source_pending_independent_verification",
+      "page_coverage": "references/sources/pages/waha.json",
+      "source_refs": [
+        {
+          "source_id": "waha",
+          "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
+          "page_manifest_path": "references/sources/pages/waha.json",
+          "coverage_state": "blocked",
+          "evidence_state": "rendered_pages_pending_independent_vision_verification",
+          "public_pdf_url": "https://copyparty.hound-celsius.ts.net/sources/books/Waha.pdf"
+        }
       ]
     },
     {
@@ -175,11 +188,24 @@
       "source_ids": [
         "waha"
       ],
-      "rationale": "Waha app-facing data remains legacy/canonical only where sourced from the Praxian record; fact-level acceptance is blocked until U6 vision extraction and independent verification are available.",
+      "rationale": "Updated Waha source revision is active and rendered, but app-facing Waha facts remain legacy/canonical only where sourced from the Praxian record; fact-level acceptance is blocked until bounded vision extraction and independent verification are available.",
       "blocked_by": [
-        "references/sources/pages/waha.json has coverage_state=blocked",
+        "references/sources/pages/waha.json has coverage_state=blocked with rendered pages but no extraction or independent verification artifacts",
         "references/cults-raw/storm/waha.json is superseded and must not feed app generation",
         "Waha fact-level source/page/block provenance is pending vision verification"
+      ],
+      "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
+      "source_state": "active_source_pending_independent_verification",
+      "page_coverage": "references/sources/pages/waha.json",
+      "source_refs": [
+        {
+          "source_id": "waha",
+          "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
+          "page_manifest_path": "references/sources/pages/waha.json",
+          "coverage_state": "blocked",
+          "evidence_state": "rendered_pages_pending_independent_vision_verification",
+          "public_pdf_url": "https://copyparty.hound-celsius.ts.net/sources/books/Waha.pdf"
+        }
       ]
     },
     {
