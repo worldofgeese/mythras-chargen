@@ -13524,14 +13524,17 @@
     "recordStatus": "redirected-to-canonical",
     "canonicalRecord": false,
     "doNotUseForAppGeneration": true,
-    "sourceRevisionId": "waha:references-cults-upstream-praxian-waha-pdf:688c0d9a5303:2026-05-21",
+    "sourceRevisionId": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
     "sourceAuthority": {
       "source_id": "waha",
-      "source_revision_id": "waha:references-cults-upstream-praxian-waha-pdf:688c0d9a5303:2026-05-21",
+      "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
       "authority_status": "legacy_aggregate_redirect",
       "canonical_record_path": "references/cults-raw/praxian/waha.json",
       "do_not_use_for_app_generation": true
-    }
+    },
+    "sourceSha256": "a36461fa3ba86159be1d8993ea920824446171380ff3c11c10a47a8cd95475f1",
+    "sourceSizeBytes": 153745,
+    "sourcePageCount": 2
   },
   {
     "name": "Zola Fel",
@@ -17539,14 +17542,17 @@
     "canonicalRecord": false,
     "doNotUseForAppGeneration": true,
     "supersededBy": "references/cults-raw/praxian/waha.json",
-    "sourceRevisionId": "waha:references-cults-upstream-praxian-waha-pdf:688c0d9a5303:2026-05-21",
+    "sourceRevisionId": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
     "sourceAuthority": {
       "source_id": "waha",
-      "source_revision_id": "waha:references-cults-upstream-praxian-waha-pdf:688c0d9a5303:2026-05-21",
+      "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
       "authority_status": "superseded_duplicate",
       "canonical_record_path": "references/cults-raw/praxian/waha.json",
       "do_not_use_for_app_generation": true
-    }
+    },
+    "sourceSha256": "a36461fa3ba86159be1d8993ea920824446171380ff3c11c10a47a8cd95475f1",
+    "sourceSizeBytes": 153745,
+    "sourcePageCount": 2
   },
   {
     "name": "Ygg of Threestep",

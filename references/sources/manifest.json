@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "schema": "references/sources/schema.json",
   "generated_at": "2026-05-21",
-  "notes": "Source attestation manifest for portable source authority. U7 records CSE/Monster legacy data against manifest source_revision_ids, but keeps extraction/acceptance blocked where source PDFs, hashes, page counts, or independent page evidence are unavailable. Bird in Hand records source identity and target page renders; Monster Island records supplied PDF metadata plus candidate page render hashes/dimensions. Spirit facts remain blocked pending permission, bounded extraction, and independent vision verification.",
+  "notes": "Source attestation manifest for portable source authority. Updated Waha now points at the supplied 2026-05-17 one-pager revision mirrored to Copyparty; Waha fact acceptance remains blocked until bounded vision extraction and independent verification exist. Bird in Hand records source identity and target page renders; Monster Island records supplied PDF metadata plus candidate page render hashes/dimensions. Spirit facts remain blocked pending permission, bounded extraction, and independent vision verification.",
   "sources": [
     {
       "source_id": "aig",
@@ -160,24 +160,24 @@
     {
       "source_id": "waha",
       "title": "Waha Cult One-Pager",
-      "edition": "Notes from Pavis Cult One-Pagers 2019 v5.2",
+      "edition": "Notes from Pavis updated one-pager v6.0.1 (2026-05-17 supplied PDF)",
       "authority_scope": [
         "Waha cult",
         "Waha miracle and spirit-society data"
       ],
-      "canonical_locator": "references/cults-upstream/Praxian/Waha.pdf",
-      "local_hint": "references/cults-upstream/Praxian/Waha.pdf",
+      "canonical_locator": "https://copyparty.hound-celsius.ts.net/sources/books/Waha.pdf",
+      "local_hint": "references/sources/pdfs/waha.pdf",
       "lifecycle_state": "active",
-      "source_revision_id": "waha:references-cults-upstream-praxian-waha-pdf:688c0d9a5303:2026-05-21",
-      "sha256": "688c0d9a5303bdfbbfc24ea0f03a1bd2a4d4b2ae702fb52df23f1f048dca199d",
-      "size_bytes": 101899,
+      "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
+      "sha256": "a36461fa3ba86159be1d8993ea920824446171380ff3c11c10a47a8cd95475f1",
+      "size_bytes": 153745,
       "page_count": 2,
       "acquired_at": "2026-05-21",
       "permission_basis": {
-        "status": "public_fan_material",
-        "note": "Tracked Notes from Pavis one-pager used as existing project source authority; no new source PDF added by this unit."
+        "status": "player_visible_copyparty_source",
+        "note": "User-supplied updated Waha one-pager is mirrored to the project Copyparty source library; source PDF remains ignored and uncommitted."
       },
-      "precedence": "Canonical Waha mechanics must come from the tracked Praxian one-pager record at references/cults-raw/praxian/waha.json. Aggregate and Storm Waha duplicates are redirects/superseded and must not feed app generation. This unit records source metadata only; acceptance remains blocked until vision extraction and independent verification exist.",
+      "precedence": "Current Waha authority is the supplied updated one-pager revision identified by this manifest hash. Older tracked Praxian and Storm Waha PDFs are superseded legacy artifacts and must not feed app generation. Existing normalized/app facts remain blocked legacy data until rendered-page extraction and independent verification are accepted.",
       "render_contract": {
         "renderer": "pdftoppm",
         "renderer_version": "runtime-detected",
@@ -196,42 +196,63 @@
       "blockers": [],
       "acceptance_state": "blocked_pending_vision_verification",
       "acceptance_blockers": [
-        "No canonical Copyparty Waha one-pager was found under public /sources/books or /rules/handouts on 2026-05-21.",
-        "No rendered page images, vision extraction artifacts, or independent verifier metadata were produced in this unit."
+        "Rendered page image exists in ignored cache, but no bounded vision extraction artifact has been committed.",
+        "Independent verifier pass from rendered page evidence has not been performed in this environment, so facts remain blocked."
       ],
       "source_access": {
-        "local_tracked_source": {
+        "local_ignored_source": {
           "status": "available",
-          "path": "references/cults-upstream/Praxian/Waha.pdf",
-          "sha256": "688c0d9a5303bdfbbfc24ea0f03a1bd2a4d4b2ae702fb52df23f1f048dca199d",
-          "size_bytes": 101899,
+          "path": "references/sources/pdfs/waha.pdf",
+          "sha256": "a36461fa3ba86159be1d8993ea920824446171380ff3c11c10a47a8cd95475f1",
+          "size_bytes": 153745,
           "page_count": 2,
-          "git_tracked": true
+          "git_tracked": false
         },
         "public_copyparty_source": {
-          "status": "not_found",
+          "status": "available",
           "checked_at": "2026-05-21",
-          "checked_urls": [
-            "https://copyparty.hound-celsius.ts.net/sources/books/Waha.pdf",
-            "https://copyparty.hound-celsius.ts.net/rules/handouts/Waha.pdf",
-            "https://copyparty.hound-celsius.ts.net/sources/books/?ls",
-            "https://copyparty.hound-celsius.ts.net/rules/handouts/?ls"
-          ],
-          "note": "Public Copyparty exposes /sources/books and /rules/handouts, but no Waha one-pager PDF was listed or retrievable there."
+          "url": "https://copyparty.hound-celsius.ts.net/sources/books/Waha.pdf",
+          "head_status": 200,
+          "content_length": 153745,
+          "content_type": "application/pdf",
+          "sha256_verified_by_curl": "a36461fa3ba86159be1d8993ea920824446171380ff3c11c10a47a8cd95475f1"
         }
       },
       "duplicate_sources": [
+        {
+          "locator": "references/cults-upstream/Praxian/Waha.pdf",
+          "sha256": "688c0d9a5303bdfbbfc24ea0f03a1bd2a4d4b2ae702fb52df23f1f048dca199d",
+          "size_bytes": 101899,
+          "page_count": 2,
+          "lifecycle_state": "superseded",
+          "superseded_by": "https://copyparty.hound-celsius.ts.net/sources/books/Waha.pdf",
+          "do_not_use_for_app_generation": true,
+          "reason": "Tracked Praxian Waha PDF is older than the supplied updated Waha source revision."
+        },
         {
           "locator": "references/cults-upstream/Storm/Waha.pdf",
           "sha256": "5cb56373288e9c8a30c8fecf920c3a574fb86fed3a739391a358f7b30a623aa6",
           "size_bytes": 101899,
           "page_count": 2,
           "lifecycle_state": "superseded",
-          "superseded_by": "references/cults-upstream/Praxian/Waha.pdf",
+          "superseded_by": "https://copyparty.hound-celsius.ts.net/sources/books/Waha.pdf",
           "do_not_use_for_app_generation": true,
-          "reason": "Storm-path Waha is a stale duplicate for app purposes; Praxian Waha is the canonical record location."
+          "reason": "Storm-path Waha is a stale duplicate and is superseded by the supplied updated Waha source revision."
         }
-      ]
+      ],
+      "observed_source_metadata": {
+        "observed_at": "2026-05-21",
+        "sha256_method": "sha256sum against user-supplied PDF hydrated to ignored local_hint; curl stream from Copyparty matched same hash",
+        "size_method": "stat -c %s against ignored local_hint; Copyparty HEAD content-length matched",
+        "page_count_method": "pdfinfo against ignored local_hint",
+        "render_method": "pdftoppm 22.09.0 at 300 dpi into ignored .cache/source-pages/waha/*.png",
+        "rendered_page_hashes": {
+          "1": "f732eb2cf70fbe9857c54081b882664ec10ad7121fe15dde5a268575c791d506",
+          "2": "9b6d8b466c37291157199ee12800992633132912ab2c68799cf9d2680984033e"
+        },
+        "used_for_vision_extraction": false,
+        "verification_blocker_observed_at": "2026-05-21"
+      }
     },
     {
       "source_id": "bird-in-hand",

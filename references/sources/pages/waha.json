@@ -2,51 +2,63 @@
   "schemaVersion": 1,
   "schema": "references/sources/schema.json#/schemas/page_coverage",
   "source_id": "waha",
-  "source_revision_id": "waha:references-cults-upstream-praxian-waha-pdf:688c0d9a5303:2026-05-21",
+  "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
   "coverage_state": "blocked",
-  "coverage_mode": "local-source-metadata-only",
+  "coverage_mode": "rendered-source-pending-independent-verification",
   "expected_page_count": 2,
   "pages": [
     {
       "pdf_page": 1,
       "printed_page_label": "1",
-      "source_revision_id": "waha:references-cults-upstream-praxian-waha-pdf:688c0d9a5303:2026-05-21",
-      "work_state": "blocked",
+      "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
+      "work_state": "rendered",
       "contributes": null,
       "render": {
-        "status": "not_rendered",
+        "status": "rendered",
         "cache_path": ".cache/source-pages/waha/page-0001.png",
-        "image_sha256": null,
-        "dimensions": null
+        "image_sha256": "f732eb2cf70fbe9857c54081b882664ec10ad7121fe15dde5a268575c791d506",
+        "dimensions": {
+          "width": 2550,
+          "height": 3301
+        },
+        "renderer": "pdftoppm",
+        "renderer_version": "22.09.0",
+        "dpi": 300
       },
       "extraction": null,
       "verification": null,
       "derived_facts": [],
-      "notes": "Blocked: no rendered image, extraction artifact, or independent verifier metadata has been produced.",
+      "notes": "Rendered from updated supplied Waha source revision; no committed extraction or independent verification artifact exists.",
       "blockers": [
-        "No canonical Copyparty Waha one-pager was found under public /sources/books or /rules/handouts on 2026-05-21.",
-        "No rendered page images, vision extraction artifacts, or independent verifier metadata were produced in this unit."
+        "Rendered page image exists in ignored cache, but no bounded vision extraction artifact has been committed.",
+        "Independent verifier pass from rendered page evidence has not been performed in this environment, so facts remain blocked."
       ]
     },
     {
       "pdf_page": 2,
       "printed_page_label": "2",
-      "source_revision_id": "waha:references-cults-upstream-praxian-waha-pdf:688c0d9a5303:2026-05-21",
-      "work_state": "blocked",
+      "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
+      "work_state": "rendered",
       "contributes": null,
       "render": {
-        "status": "not_rendered",
+        "status": "rendered",
         "cache_path": ".cache/source-pages/waha/page-0002.png",
-        "image_sha256": null,
-        "dimensions": null
+        "image_sha256": "9b6d8b466c37291157199ee12800992633132912ab2c68799cf9d2680984033e",
+        "dimensions": {
+          "width": 2550,
+          "height": 3301
+        },
+        "renderer": "pdftoppm",
+        "renderer_version": "22.09.0",
+        "dpi": 300
       },
       "extraction": null,
       "verification": null,
       "derived_facts": [],
-      "notes": "Blocked: no rendered image, extraction artifact, or independent verifier metadata has been produced.",
+      "notes": "Rendered from updated supplied Waha source revision; no committed extraction or independent verification artifact exists.",
       "blockers": [
-        "No canonical Copyparty Waha one-pager was found under public /sources/books or /rules/handouts on 2026-05-21.",
-        "No rendered page images, vision extraction artifacts, or independent verifier metadata were produced in this unit."
+        "Rendered page image exists in ignored cache, but no bounded vision extraction artifact has been committed.",
+        "Independent verifier pass from rendered page evidence has not been performed in this environment, so facts remain blocked."
       ]
     }
   ],
@@ -56,33 +68,34 @@
       "pages": "1-2",
       "state": "blocked",
       "blockers": [
-        "No canonical Copyparty Waha one-pager was found under public /sources/books or /rules/handouts on 2026-05-21.",
-        "No rendered page images, vision extraction artifacts, or independent verifier metadata were produced in this unit."
-      ]
+        "Rendered page image exists in ignored cache, but no bounded vision extraction artifact has been committed.",
+        "Independent verifier pass from rendered page evidence has not been performed in this environment, so facts remain blocked."
+      ],
+      "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21"
     }
   ],
   "blockers": [
-    "No canonical Copyparty Waha one-pager was found under public /sources/books or /rules/handouts on 2026-05-21.",
-    "No rendered page images, vision extraction artifacts, or independent verifier metadata were produced in this unit."
+    "Rendered page image exists in ignored cache, but no bounded vision extraction artifact has been committed.",
+    "Independent verifier pass from rendered page evidence has not been performed in this environment, so facts remain blocked."
   ],
-  "notes": "Source identity is recorded from tracked local PDFs only. No rendered pages, vision extraction, or independent verification metadata exists, so this Waha refresh is blocked rather than accepted.",
+  "notes": "Updated Waha source revision pages were rendered to ignored PNG cache and hashed. No bounded vision extraction or independent verifier artifact exists, so page coverage and Waha facts remain blocked.",
   "source_access": {
-    "local_tracked_source": {
+    "local_ignored_source": {
       "status": "available",
-      "path": "references/cults-upstream/Praxian/Waha.pdf",
-      "sha256": "688c0d9a5303bdfbbfc24ea0f03a1bd2a4d4b2ae702fb52df23f1f048dca199d",
-      "size_bytes": 101899,
-      "page_count": 2
+      "path": "references/sources/pdfs/waha.pdf",
+      "sha256": "a36461fa3ba86159be1d8993ea920824446171380ff3c11c10a47a8cd95475f1",
+      "size_bytes": 153745,
+      "page_count": 2,
+      "git_tracked": false
     },
     "public_copyparty_source": {
-      "status": "not_found",
+      "status": "available",
       "checked_at": "2026-05-21",
-      "checked_urls": [
-        "https://copyparty.hound-celsius.ts.net/sources/books/Waha.pdf",
-        "https://copyparty.hound-celsius.ts.net/rules/handouts/Waha.pdf",
-        "https://copyparty.hound-celsius.ts.net/sources/books/?ls",
-        "https://copyparty.hound-celsius.ts.net/rules/handouts/?ls"
-      ]
+      "url": "https://copyparty.hound-celsius.ts.net/sources/books/Waha.pdf",
+      "head_status": 200,
+      "content_length": 153745,
+      "content_type": "application/pdf",
+      "sha256_verified_by_curl": "a36461fa3ba86159be1d8993ea920824446171380ff3c11c10a47a8cd95475f1"
     }
   }
 }

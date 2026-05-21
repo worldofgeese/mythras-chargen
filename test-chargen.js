@@ -269,6 +269,8 @@ runCommandTest('Render workflow can list sources without rendering pages',
   const sourceValidator = require('./scripts/source_manifest_validator.js');
   const provenanceValidator = require('./scripts/validate_provenance.js');
   const requiredSources = ['aig', 'cse', 'waha', 'bird-in-hand', 'monster-island'];
+  const expectedWahaRevision = 'waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21';
+  const expectedWahaHash = 'a36461fa3ba86159be1d8993ea920824446171380ff3c11c10a47a8cd95475f1';
   const manifestById = new Map(manifest.sources.map(source => [source.source_id, source]));
   const manifestIds = manifest.sources.map(source => source.source_id).sort();
   const missingSources = requiredSources.filter(sourceId => !manifestIds.includes(sourceId));
@@ -289,26 +291,59 @@ runCommandTest('Render workflow can list sources without rendering pages',
   }
 
   const activeWaha = manifest.sources.find(source => source.source_id === 'waha');
-  if (activeWaha && activeWaha.sha256 && activeWaha.page_count === 2 && activeWaha.local_hint === 'references/cults-upstream/Praxian/Waha.pdf') {
-    pass('Active Waha seed source records real tracked PDF metadata');
+  if (activeWaha &&
+      activeWaha.source_revision_id === expectedWahaRevision &&
+      activeWaha.sha256 === expectedWahaHash &&
+      activeWaha.size_bytes === 153745 &&
+      activeWaha.page_count === 2 &&
+      activeWaha.local_hint === 'references/sources/pdfs/waha.pdf' &&
+      activeWaha.canonical_locator === 'https://copyparty.hound-celsius.ts.net/sources/books/Waha.pdf') {
+    pass('Active Waha source records updated supplied PDF metadata');
   } else {
-    fail('Active Waha seed source is missing real tracked PDF metadata');
+    fail('Active Waha source is missing updated supplied PDF metadata',
+      JSON.stringify({
+        revision: activeWaha?.source_revision_id,
+        hash: activeWaha?.sha256,
+        size: activeWaha?.size_bytes,
+        pageCount: activeWaha?.page_count,
+        localHint: activeWaha?.local_hint,
+        locator: activeWaha?.canonical_locator
+      }));
   }
 
   const wahaPages = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/sources/pages/waha.json'), 'utf8'));
   const wahaBlockedForVerification = activeWaha?.acceptance_state === 'blocked_pending_vision_verification' &&
-    activeWaha?.source_access?.public_copyparty_source?.status === 'not_found' &&
+    activeWaha?.source_access?.public_copyparty_source?.status === 'available' &&
     wahaPages.coverage_state === 'blocked' &&
-    wahaPages.pages.every(page => page.work_state === 'blocked' && !page.extraction && !page.verification && Array.isArray(page.blockers) && page.blockers.length > 0);
+    wahaPages.source_revision_id === expectedWahaRevision &&
+    wahaPages.pages.every(page =>
+      page.source_revision_id === expectedWahaRevision &&
+      page.work_state === 'rendered' &&
+      page.render?.status === 'rendered' &&
+      /^[a-f0-9]{64}$/.test(page.render?.image_sha256 || '') &&
+      page.render?.cache_path?.startsWith('.cache/source-pages/waha/') &&
+      !page.extraction &&
+      !page.verification &&
+      Array.isArray(page.blockers) &&
+      page.blockers.some(blocker => /independent verifier/i.test(blocker))
+    );
   if (wahaBlockedForVerification) {
-    pass('Waha source refresh is honestly blocked until source/page verification exists');
+    pass('Waha source refresh records rendered page evidence but remains blocked pending independent verification');
   } else {
-    fail('Waha source refresh must not claim completed page verification',
+    fail('Waha source refresh must record updated rendered evidence without claiming verification',
       JSON.stringify({
         acceptanceState: activeWaha?.acceptance_state,
         publicCopypartyStatus: activeWaha?.source_access?.public_copyparty_source?.status,
+        pageRevision: wahaPages.source_revision_id,
         coverageState: wahaPages.coverage_state,
-        pageStates: wahaPages.pages.map(page => page.work_state)
+        pageStates: wahaPages.pages.map(page => ({
+          page: page.pdf_page,
+          workState: page.work_state,
+          renderStatus: page.render?.status,
+          hasExtraction: Boolean(page.extraction),
+          hasVerification: Boolean(page.verification),
+          blockers: page.blockers
+        }))
       }));
   }
 
@@ -629,6 +664,7 @@ info(`Loaded ${App.SKILLS_DATA.length} skills, ${App.WEAPONS_DATA.length} weapon
 
 section('Waha Source Authority');
 {
+  const expectedWahaRevision = 'waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21';
   const praxianWaha = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/cults-raw/praxian/waha.json'), 'utf8'));
   const stormWaha = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/cults-raw/storm/waha.json'), 'utf8'));
   const aggregateCults = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/cults-raw/cults.json'), 'utf8'));
@@ -642,10 +678,16 @@ section('Waha Source Authority');
     appCanonical.folkMagic?.includes('Dispel Magic');
 
   if (praxianWaha.canonicalRecord === true &&
+      praxianWaha.sourceRevisionId === expectedWahaRevision &&
+      praxianWaha.sourceAuthority?.source_revision_id === expectedWahaRevision &&
+      praxianWaha.verified === false &&
       praxianWaha.verificationState === 'blocked_pending_vision_verification' &&
       stormWaha.recordStatus === 'superseded' &&
       stormWaha.doNotUseForAppGeneration === true &&
+      stormWaha.sourceRevisionId === expectedWahaRevision &&
+      stormWaha.sourceAuthority?.source_revision_id === expectedWahaRevision &&
       aggregateBlocked &&
+      aggregateWaha.every(cult => cult.sourceRevisionId === expectedWahaRevision && cult.sourceAuthority?.source_revision_id === expectedWahaRevision) &&
       appWaha.length === 1 &&
       appCanonical.pantheon === 'Praxian' &&
       appCanonical.cultSkills?.includes('Tracking') &&
@@ -657,9 +699,11 @@ section('Waha Source Authority');
     fail('Stale Waha duplicate can still feed app data',
       JSON.stringify({
         praxianCanonical: praxianWaha.canonicalRecord,
+        praxianRevision: praxianWaha.sourceRevisionId,
         praxianVerificationState: praxianWaha.verificationState,
         stormStatus: stormWaha.recordStatus,
         stormDoNotUse: stormWaha.doNotUseForAppGeneration,
+        stormRevision: stormWaha.sourceRevisionId,
         aggregateWaha: aggregateWaha.map(cult => ({ source: cult.source, status: cult.recordStatus, doNotUse: cult.doNotUseForAppGeneration })),
         appWahaCount: appWaha.length,
         appWahaSkills: appCanonical.cultSkills
@@ -5000,6 +5044,7 @@ section('Cult Data Tests');
 
 // Test: stale aggregate Waha records are blocked from app generation
 {
+  const expectedWahaRevision = 'waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21';
   const aggregatePath = path.join(__dirname, 'references', 'cults-raw', 'cults.json');
   const aggregate = JSON.parse(fs.readFileSync(aggregatePath, 'utf8'));
   const aggregateWaha = aggregate.filter(cult => cult.name === 'Waha');
@@ -5017,8 +5062,11 @@ section('Cult Data Tests');
     unblocked.length === 0 &&
     stormWaha.doNotUseForAppGeneration === true &&
     stormWaha.recordStatus === 'superseded' &&
+    stormWaha.sourceRevisionId === expectedWahaRevision &&
     canonicalWaha.canonicalRecord === true &&
-    canonicalWaha.doNotUseForAppGeneration === false
+    canonicalWaha.doNotUseForAppGeneration === false &&
+    canonicalWaha.sourceRevisionId === expectedWahaRevision &&
+    aggregateWaha.every(cult => cult.sourceRevisionId === expectedWahaRevision)
   ) {
     pass('Stale aggregate and Storm Waha records are blocked in favor of Praxian canonical source');
   } else {
@@ -5030,7 +5078,9 @@ section('Cult Data Tests');
           doNotUseForAppGeneration: cult.doNotUseForAppGeneration
         })),
         stormStatus: stormWaha.recordStatus,
-        canonicalRecord: canonicalWaha.canonicalRecord
+        stormRevision: stormWaha.sourceRevisionId,
+        canonicalRecord: canonicalWaha.canonicalRecord,
+        canonicalRevision: canonicalWaha.sourceRevisionId
       }));
   }
 }
