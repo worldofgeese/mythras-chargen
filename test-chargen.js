@@ -288,6 +288,41 @@ runCommandTest('Render workflow can list sources without rendering pages',
     fail('Active Waha seed source is missing real tracked PDF metadata');
   }
 
+  const wahaPages = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/sources/pages/waha.json'), 'utf8'));
+  const wahaBlockedForVerification = activeWaha?.acceptance_state === 'blocked_pending_vision_verification' &&
+    activeWaha?.source_access?.public_copyparty_source?.status === 'not_found' &&
+    wahaPages.coverage_state === 'blocked' &&
+    wahaPages.pages.every(page => page.work_state === 'blocked' && !page.extraction && !page.verification && Array.isArray(page.blockers) && page.blockers.length > 0);
+  if (wahaBlockedForVerification) {
+    pass('Waha source refresh is honestly blocked until source/page verification exists');
+  } else {
+    fail('Waha source refresh must not claim completed page verification',
+      JSON.stringify({
+        acceptanceState: activeWaha?.acceptance_state,
+        publicCopypartyStatus: activeWaha?.source_access?.public_copyparty_source?.status,
+        coverageState: wahaPages.coverage_state,
+        pageStates: wahaPages.pages.map(page => page.work_state)
+      }));
+  }
+
+  const invalidAcceptedWahaPages = JSON.parse(JSON.stringify(wahaPages));
+  invalidAcceptedWahaPages.coverage_state = 'accepted';
+  invalidAcceptedWahaPages.pages[0].work_state = 'accepted';
+  invalidAcceptedWahaPages.pages[0].extraction = null;
+  invalidAcceptedWahaPages.pages[0].verification = null;
+  const invalidAcceptedWahaResult = sourceValidator.validatePageCoverage(
+    invalidAcceptedWahaPages,
+    new Map((manifest.sources || []).map(source => [source.source_id, source])),
+    sourceSchema,
+    'references/sources/pages/waha.json'
+  );
+  if (invalidAcceptedWahaResult.some(error => error.includes('accepted page requires verification metadata'))) {
+    pass('Waha page coverage validator rejects accepted pages without verifier metadata');
+  } else {
+    fail('Waha page coverage validator allowed accepted Waha page without verifier metadata',
+      invalidAcceptedWahaResult.join('\n'));
+  }
+
   const expectedAigHash = '0edc1e549c560222a7c2b80e9eb0fb713d962bb30a280a7a6b760821e2983572';
   const aigSource = manifest.sources.find(source => source.source_id === 'aig');
   const aigCoverage = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/sources/pages/aig.json'), 'utf8'));
@@ -465,6 +500,46 @@ runCommandTest('Render workflow can list sources without rendering pages',
 section('Loading Application');
 const App = loadApp();
 info(`Loaded ${App.SKILLS_DATA.length} skills, ${App.WEAPONS_DATA.length} weapons, ${App.CULTURES_DATA.length} cultures`);
+
+section('Waha Source Authority');
+{
+  const praxianWaha = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/cults-raw/praxian/waha.json'), 'utf8'));
+  const stormWaha = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/cults-raw/storm/waha.json'), 'utf8'));
+  const aggregateCults = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/cults-raw/cults.json'), 'utf8'));
+  const aggregateWaha = aggregateCults.filter(cult => cult.name === 'Waha');
+  const appWaha = App.CULTS_DATA.filter(cult => cult.name === 'Waha');
+  const appCanonical = appWaha[0] || {};
+  const aggregateBlocked = aggregateWaha.length >= 2 && aggregateWaha.every(cult => cult.doNotUseForAppGeneration === true);
+  const hasStaleInlineMechanics = appWaha.length !== 1 ||
+    appCanonical.cultSkills?.includes('Track') ||
+    appCanonical.cultSkills?.some(skill => /\(Shaman\)/.test(skill)) ||
+    appCanonical.folkMagic?.includes('Dispel Magic');
+
+  if (praxianWaha.canonicalRecord === true &&
+      praxianWaha.verificationState === 'blocked_pending_vision_verification' &&
+      stormWaha.recordStatus === 'superseded' &&
+      stormWaha.doNotUseForAppGeneration === true &&
+      aggregateBlocked &&
+      appWaha.length === 1 &&
+      appCanonical.pantheon === 'Praxian' &&
+      appCanonical.cultSkills?.includes('Tracking') &&
+      appCanonical.cultSkills?.includes('Peaceful Cut') &&
+      appCanonical.cultSkills?.includes('Understand Herd Beast') &&
+      !hasStaleInlineMechanics) {
+    pass('Canonical Waha app data excludes stale Storm/aggregate duplicate records');
+  } else {
+    fail('Stale Waha duplicate can still feed app data',
+      JSON.stringify({
+        praxianCanonical: praxianWaha.canonicalRecord,
+        praxianVerificationState: praxianWaha.verificationState,
+        stormStatus: stormWaha.recordStatus,
+        stormDoNotUse: stormWaha.doNotUseForAppGeneration,
+        aggregateWaha: aggregateWaha.map(cult => ({ source: cult.source, status: cult.recordStatus, doNotUse: cult.doNotUseForAppGeneration })),
+        appWahaCount: appWaha.length,
+        appWahaSkills: appCanonical.cultSkills
+      }));
+  }
+}
 
 // Helper to create a valid test character
 function createTestCharacter(culture = 'Generic') {

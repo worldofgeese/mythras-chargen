@@ -518,6 +518,88 @@ def validate_entries(miracles: list[dict], cult_name: str) -> list[str]:
     return warnings
 
 
+
+def read_reference_json(relative_path: str) -> dict | list:
+    """Read a committed reference JSON file relative to the repository root."""
+    return json.loads((ROOT / relative_path).read_text())
+
+
+def validate_waha_authority() -> list[str]:
+    """Fail closed if stale Waha duplicates can still masquerade as app authority."""
+    issues: list[str] = []
+    manifest = read_reference_json("references/sources/manifest.json")
+    page_doc = read_reference_json("references/sources/pages/waha.json")
+    praxian = read_reference_json("references/cults-raw/praxian/waha.json")
+    storm = read_reference_json("references/cults-raw/storm/waha.json")
+    aggregate = read_reference_json("references/cults-raw/cults.json")
+
+    waha_source = next((source for source in manifest.get("sources", []) if source.get("source_id") == "waha"), None)
+    if not waha_source:
+        issues.append("Waha source missing from references/sources/manifest.json")
+        source_revision_id = None
+    else:
+        source_revision_id = waha_source.get("source_revision_id")
+        if waha_source.get("acceptance_state") != "blocked_pending_vision_verification":
+            issues.append("Waha source must remain blocked_pending_vision_verification until vision verification exists")
+        if not waha_source.get("acceptance_blockers"):
+            issues.append("Waha source blocked state must list acceptance_blockers")
+        public_source = waha_source.get("source_access", {}).get("public_copyparty_source", {})
+        if public_source.get("status") == "not_found" and waha_source.get("acceptance_state") != "blocked_pending_vision_verification":
+            issues.append("Unavailable public Copyparty Waha source must block acceptance")
+        duplicate_sources = waha_source.get("duplicate_sources", [])
+        if not any(
+            duplicate.get("locator") == "references/cults-upstream/Storm/Waha.pdf"
+            and duplicate.get("lifecycle_state") == "superseded"
+            and duplicate.get("do_not_use_for_app_generation") is True
+            for duplicate in duplicate_sources
+        ):
+            issues.append("Storm Waha source duplicate must be recorded as superseded in the manifest")
+
+    if page_doc.get("source_revision_id") != source_revision_id:
+        issues.append("Waha page manifest source_revision_id must match manifest")
+    if page_doc.get("coverage_state") != "blocked":
+        issues.append("Waha page coverage must be blocked until extraction and independent verification exist")
+    if not page_doc.get("blockers"):
+        issues.append("Blocked Waha page coverage must list blockers")
+    for page in page_doc.get("pages", []):
+        work_state = page.get("work_state")
+        if work_state == "blocked" and not page.get("blockers"):
+            issues.append(f"Waha page {page.get('pdf_page')} blocked state must list blockers")
+        if work_state in {"verified", "normalized", "accepted"}:
+            verification = page.get("verification")
+            if not page.get("extraction") or not verification or verification.get("independent") is not True:
+                issues.append(f"Waha page {page.get('pdf_page')} cannot be {work_state} without independent verification metadata")
+
+    authority = praxian.get("sourceAuthority", {})
+    if not praxian.get("canonicalRecord") or praxian.get("doNotUseForAppGeneration") is not False:
+        issues.append("Praxian Waha must be the single canonical raw record")
+    if praxian.get("verified") is not False or praxian.get("verificationState") != "blocked_pending_vision_verification":
+        issues.append("Praxian Waha must not claim a completed verification refresh")
+    if authority.get("source_revision_id") != source_revision_id or authority.get("canonical_record") is not True:
+        issues.append("Praxian Waha sourceAuthority must point at the Waha source revision as canonical")
+
+    storm_authority = storm.get("sourceAuthority", {})
+    if storm.get("recordStatus") != "superseded" or storm.get("doNotUseForAppGeneration") is not True:
+        issues.append("Storm Waha raw record must be marked superseded and doNotUseForAppGeneration")
+    if storm.get("supersededBy") != "references/cults-raw/praxian/waha.json":
+        issues.append("Storm Waha raw record must redirect to Praxian Waha")
+    if storm_authority.get("authority_status") != "superseded_duplicate":
+        issues.append("Storm Waha sourceAuthority must mark superseded_duplicate")
+
+    aggregate_waha = [cult for cult in aggregate if cult.get("name") == "Waha"]
+    if len(aggregate_waha) < 2:
+        issues.append("Aggregate cults.json should retain explicit Waha duplicate disposition records")
+    app_eligible = [cult for cult in aggregate_waha if cult.get("doNotUseForAppGeneration") is not True]
+    if app_eligible:
+        sources = ", ".join(cult.get("source", "<missing>") for cult in app_eligible)
+        issues.append(f"Aggregate Waha entries must not be app-generation eligible: {sources}")
+    if not any(cult.get("recordStatus") == "redirected-to-canonical" for cult in aggregate_waha):
+        issues.append("Aggregate Praxian Waha entry must redirect to canonical raw record")
+    if not any(cult.get("recordStatus") == "superseded" for cult in aggregate_waha):
+        issues.append("Aggregate Storm Waha entry must be superseded")
+
+    return issues
+
 def process_pdf(pdf_path: Path, write: bool = False, diff: bool = True) -> dict:
     """Process a single cult PDF and optionally write/diff the result."""
     result = extract_cult_miracles(pdf_path)
@@ -619,6 +701,10 @@ def main():
                         print(f"  {json_file.relative_to(ROOT)}: has garbled flags")
                         issues += 1
                         break
+        waha_issues = validate_waha_authority()
+        for issue in waha_issues:
+            print(f"  references/cults-raw/*/waha.json: {issue}")
+        issues += len(waha_issues)
         print(f"\n{'✅ All clean' if issues == 0 else f'⚠️  {issues} files with issues'}")
         sys.exit(0 if issues == 0 else 1)
     

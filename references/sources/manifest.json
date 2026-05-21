@@ -125,7 +125,7 @@
         "status": "public_fan_material",
         "note": "Tracked Notes from Pavis one-pager used as existing project source authority; no new source PDF added by this unit."
       },
-      "precedence": "Specific Waha one-pager evidence overrides aggregate cult raw records for Waha after future page verification.",
+      "precedence": "Canonical Waha mechanics must come from the tracked Praxian one-pager record at references/cults-raw/praxian/waha.json. Aggregate and Storm Waha duplicates are redirects/superseded and must not feed app generation. This unit records source metadata only; acceptance remains blocked until vision extraction and independent verification exist.",
       "render_contract": {
         "renderer": "pdftoppm",
         "renderer_version": "runtime-detected",
@@ -141,7 +141,45 @@
         "cache_path_pattern": ".cache/source-pages/{source_id}/page-{pdf_page:04d}.png"
       },
       "blocks": [],
-      "blockers": []
+      "blockers": [],
+      "acceptance_state": "blocked_pending_vision_verification",
+      "acceptance_blockers": [
+        "No canonical Copyparty Waha one-pager was found under public /sources/books or /rules/handouts on 2026-05-21.",
+        "No rendered page images, vision extraction artifacts, or independent verifier metadata were produced in this unit."
+      ],
+      "source_access": {
+        "local_tracked_source": {
+          "status": "available",
+          "path": "references/cults-upstream/Praxian/Waha.pdf",
+          "sha256": "688c0d9a5303bdfbbfc24ea0f03a1bd2a4d4b2ae702fb52df23f1f048dca199d",
+          "size_bytes": 101899,
+          "page_count": 2,
+          "git_tracked": true
+        },
+        "public_copyparty_source": {
+          "status": "not_found",
+          "checked_at": "2026-05-21",
+          "checked_urls": [
+            "https://copyparty.hound-celsius.ts.net/sources/books/Waha.pdf",
+            "https://copyparty.hound-celsius.ts.net/rules/handouts/Waha.pdf",
+            "https://copyparty.hound-celsius.ts.net/sources/books/?ls",
+            "https://copyparty.hound-celsius.ts.net/rules/handouts/?ls"
+          ],
+          "note": "Public Copyparty exposes /sources/books and /rules/handouts, but no Waha one-pager PDF was listed or retrievable there."
+        }
+      },
+      "duplicate_sources": [
+        {
+          "locator": "references/cults-upstream/Storm/Waha.pdf",
+          "sha256": "5cb56373288e9c8a30c8fecf920c3a574fb86fed3a739391a358f7b30a623aa6",
+          "size_bytes": 101899,
+          "page_count": 2,
+          "lifecycle_state": "superseded",
+          "superseded_by": "references/cults-upstream/Praxian/Waha.pdf",
+          "do_not_use_for_app_generation": true,
+          "reason": "Storm-path Waha is a stale duplicate for app purposes; Praxian Waha is the canonical record location."
+        }
+      ]
     },
     {
       "source_id": "bird-in-hand",

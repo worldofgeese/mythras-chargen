@@ -119,5 +119,25 @@
   "oppositeRune": "Life",
   "additionalPantheons": [
     "Praxian"
-  ]
+  ],
+  "recordStatus": "superseded",
+  "canonicalRecord": false,
+  "doNotUseForAppGeneration": true,
+  "supersededBy": "references/cults-raw/praxian/waha.json",
+  "supersessionReason": "Waha is a Praxian cult authority in this app. The Storm-path file is a stale duplicate and must not feed app data.",
+  "sourceRevisionId": "waha:references-cults-upstream-praxian-waha-pdf:688c0d9a5303:2026-05-21",
+  "sourceSha256": "5cb56373288e9c8a30c8fecf920c3a574fb86fed3a739391a358f7b30a623aa6",
+  "sourceSizeBytes": 101899,
+  "sourcePageCount": 2,
+  "sourceAuthority": {
+    "source_id": "waha",
+    "source_revision_id": "waha:references-cults-upstream-praxian-waha-pdf:688c0d9a5303:2026-05-21",
+    "canonical_record": false,
+    "authority_status": "superseded_duplicate",
+    "canonical_record_path": "references/cults-raw/praxian/waha.json",
+    "do_not_use_for_app_generation": true,
+    "blocked_by": [
+      "Superseded by Praxian Waha canonical record before app generation."
+    ]
+  }
 }

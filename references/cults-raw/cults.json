@@ -13396,7 +13396,7 @@
   },
   {
     "name": "Waha",
-    "pantheon": "Storm",
+    "pantheon": "Praxian",
     "source": "CultOnePagers2019/Praxian/Waha.pdf",
     "sourcePages": [
       1,
@@ -13520,7 +13520,18 @@
     "oppositeRune": "Life",
     "additionalPantheons": [
       "Praxian"
-    ]
+    ],
+    "recordStatus": "redirected-to-canonical",
+    "canonicalRecord": false,
+    "doNotUseForAppGeneration": true,
+    "sourceRevisionId": "waha:references-cults-upstream-praxian-waha-pdf:688c0d9a5303:2026-05-21",
+    "sourceAuthority": {
+      "source_id": "waha",
+      "source_revision_id": "waha:references-cults-upstream-praxian-waha-pdf:688c0d9a5303:2026-05-21",
+      "authority_status": "legacy_aggregate_redirect",
+      "canonical_record_path": "references/cults-raw/praxian/waha.json",
+      "do_not_use_for_app_generation": true
+    }
   },
   {
     "name": "Zola Fel",
@@ -17523,7 +17534,19 @@
     "oppositeRune": "Life",
     "additionalPantheons": [
       "Praxian"
-    ]
+    ],
+    "recordStatus": "superseded",
+    "canonicalRecord": false,
+    "doNotUseForAppGeneration": true,
+    "supersededBy": "references/cults-raw/praxian/waha.json",
+    "sourceRevisionId": "waha:references-cults-upstream-praxian-waha-pdf:688c0d9a5303:2026-05-21",
+    "sourceAuthority": {
+      "source_id": "waha",
+      "source_revision_id": "waha:references-cults-upstream-praxian-waha-pdf:688c0d9a5303:2026-05-21",
+      "authority_status": "superseded_duplicate",
+      "canonical_record_path": "references/cults-raw/praxian/waha.json",
+      "do_not_use_for_app_generation": true
+    }
   },
   {
     "name": "Ygg of Threestep",

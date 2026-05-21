@@ -45,6 +45,32 @@ function validateRenderContract(contract, errors, location) {
   if (!Array.isArray(contract.args)) add(errors, location, 'render_contract.args must be an array');
 }
 
+
+function validateDuplicateSources(source, errors, location) {
+  if (source.duplicate_sources === undefined) return;
+  if (!Array.isArray(source.duplicate_sources)) {
+    add(errors, location, 'duplicate_sources must be an array when present');
+    return;
+  }
+
+  for (const [index, duplicate] of source.duplicate_sources.entries()) {
+    const label = `${location}.duplicate_sources[${index}]`;
+    if (!isObject(duplicate)) {
+      add(errors, label, 'must be an object');
+      continue;
+    }
+    if (!isPortableLocator(duplicate.locator)) add(errors, label, `locator is not portable: ${duplicate.locator}`);
+    if (!isSha256(duplicate.sha256)) add(errors, label, 'sha256 is required for tracked duplicate sources');
+    if (typeof duplicate.size_bytes !== 'number' || duplicate.size_bytes <= 0) add(errors, label, 'size_bytes must be positive');
+    if (!Number.isInteger(duplicate.page_count) || duplicate.page_count <= 0) add(errors, label, 'page_count must be a positive integer');
+    if (duplicate.lifecycle_state === 'superseded') {
+      if (!duplicate.superseded_by) add(errors, label, 'superseded duplicate requires superseded_by');
+      if (duplicate.do_not_use_for_app_generation !== true) add(errors, label, 'superseded duplicate must set do_not_use_for_app_generation=true');
+      if (typeof duplicate.reason !== 'string' || duplicate.reason.length < 12) add(errors, label, 'superseded duplicate requires reason');
+    }
+  }
+}
+
 function validateManifest(manifest, schema) {
   const errors = [];
   if (!isObject(manifest)) return { ok: false, errors: ['manifest: must be an object'], sourceIds: new Set() };
@@ -74,6 +100,16 @@ function validateManifest(manifest, schema) {
       add(errors, label, 'permission_basis.status is required');
     }
     validateRenderContract(source.render_contract, errors, label);
+    validateDuplicateSources(source, errors, label);
+
+    if (source.acceptance_state === 'blocked_pending_vision_verification' &&
+        (!Array.isArray(source.acceptance_blockers) || source.acceptance_blockers.length === 0)) {
+      add(errors, label, 'blocked acceptance_state requires acceptance_blockers[]');
+    }
+    if (source.source_access?.public_copyparty_source?.status === 'not_found' &&
+        source.acceptance_state !== 'blocked_pending_vision_verification') {
+      add(errors, label, 'missing public Copyparty source must keep acceptance_state blocked_pending_vision_verification');
+    }
 
     if (source.lifecycle_state === 'active') {
       if (!source.canonical_locator) add(errors, label, 'active source requires canonical_locator');
@@ -111,6 +147,9 @@ function validatePageCoverage(pageDoc, manifestById, schema, relPath) {
   if (pageDoc.coverage_state === 'blocked' && (!Array.isArray(pageDoc.blockers) || pageDoc.blockers.length === 0)) {
     add(errors, relPath, 'blocked coverage requires blockers[]');
   }
+  if (pageDoc.source_access?.public_copyparty_source?.status === 'not_found' && pageDoc.coverage_state !== 'blocked') {
+    add(errors, relPath, 'missing public Copyparty source requires blocked coverage_state');
+  }
   const expectedPageCount = pageDoc.expected_page_count;
   if (expectedPageCount !== null && expectedPageCount !== undefined &&
       (!Number.isInteger(expectedPageCount) || expectedPageCount <= 0)) {
@@ -132,6 +171,9 @@ function validatePageCoverage(pageDoc, manifestById, schema, relPath) {
     seenPages.add(page.pdf_page);
     if (page.source_revision_id !== source.source_revision_id) add(errors, label, 'source_revision_id must match manifest');
     if (!pageStates.has(page.work_state)) add(errors, label, `invalid work_state ${page.work_state}`);
+    if (pageDoc.source_id === 'waha' && page.work_state === 'blocked' && (!Array.isArray(page.blockers) || page.blockers.length === 0)) {
+      add(errors, label, 'blocked page requires blockers[]');
+    }
     if (!isObject(page.render)) add(errors, label, 'render object is required');
     if (page.render && page.render.status === 'rendered') {
       if (!isSha256(page.render.image_sha256)) add(errors, label, 'rendered page requires image_sha256');
