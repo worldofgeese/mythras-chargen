@@ -84,6 +84,19 @@ Source hierarchy: AiG for Gloranthan cultures/folk/rune magic; Mythras Core 3rd 
 - Run `decapod validate` before claiming done.
 - After `index.html` changes, use `agent-browser` like a human: click/type/select, try changed choices, use fresh DOM refs after re-render, inspect screenshots, and verify Play Mode/PDF export.
 
+#### Container testing scope
+
+Containerized proof is not required for this repository's normal application validation because the chargen tool is a single-file static HTML application with no package install, build step, server runtime, or container-dependent dependency graph.
+
+For this app, the required proof surfaces are:
+- `node test-chargen.js`
+- `node test-agent-api.mjs` after magic-system changes
+- `./scripts/ingest-cults.py --validate` after cult/reference data changes
+- `decapod validate` from an isolated Decapod worktree
+- Human-style `agent-browser` QA after `index.html` changes
+
+Use container workspaces only when a change introduces a dependency manager, build system, external service runtime, or when the human explicitly requests container isolation for a specific task.
+
 #### Commit and publish
 
 - Commit only verified work with the required Copilot co-author trailer.
