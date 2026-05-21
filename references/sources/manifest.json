@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "schema": "references/sources/schema.json",
   "generated_at": "2026-05-21",
-  "notes": "Source attestation manifest for portable source authority. U7 records CSE/Monster legacy data against manifest source_revision_ids, but keeps extraction/acceptance blocked where source PDFs, hashes, page counts, or independent page evidence are unavailable. Bird in Hand now records source identity and target page renders; its spirit facts remain blocked pending bounded extraction and independent vision verification.",
+  "notes": "Source attestation manifest for portable source authority. U7 records CSE/Monster legacy data against manifest source_revision_ids, but keeps extraction/acceptance blocked where source PDFs, hashes, page counts, or independent page evidence are unavailable. Bird in Hand records source identity and target page renders; Monster Island records supplied PDF metadata plus candidate page render hashes/dimensions. Spirit facts remain blocked pending permission, bounded extraction, and independent vision verification.",
   "sources": [
     {
       "source_id": "aig",
@@ -302,7 +302,7 @@
       "acquired_at": null,
       "permission_basis": {
         "status": "permission_pending",
-        "note": "Public Copyparty source is located and fingerprinted, but extraction/attestation permission is not confirmed; render, extraction, normalization, and acceptance remain blocked."
+        "note": "User-supplied local PDF was used only for bounded render/cache evidence; extraction/attestation permission is not confirmed, so normalization and acceptance remain blocked."
       },
       "precedence": "Template/example source for Monster Island spirit-cult structures and spirit loadouts only. It must not override canonical Gloranthan authorities (AiG for Gloranthan cultures/folk/rune magic, Mythras Core for base spirit rules, Notes from Pavis for cults); promotion requires verified contributing-page evidence.",
       "render_contract": {
@@ -320,21 +320,22 @@
         "cache_path_pattern": ".cache/source-pages/{source_id}/page-{pdf_page:04d}.png"
       },
       "blocks": [
-        "render",
         "extraction",
         "normalization",
         "acceptance"
       ],
       "blockers": [
         "permission basis is not confirmed",
-        "true vision extraction and independent verification artifacts have not been produced",
-        "existing raw record is explicitly unverified and lacks page/block evidence"
+        "bounded extraction artifacts have not been produced from the rendered candidate pages",
+        "independent verifier artifacts have not been produced",
+        "existing raw record is explicitly unverified and lacks accepted page/block facts"
       ],
       "acceptance_state": "blocked_pending_vision_verification",
       "acceptance_blockers": [
         "Source PDF metadata is recorded, but permission remains pending.",
-        "Candidate spirit/cult pages were located by local text scan only; no rendered page images, bounded vision extraction artifacts, or independent verifier metadata are committed.",
-        "Monster Island remains non-authoritative and cannot feed app-facing Gloranthan cult data until verified page/block evidence exists."
+        "Candidate pages 133-140 and 285-286 are rendered into ignored cache and recorded with image hashes/dimensions, but no bounded extraction artifact exists.",
+        "No independent verifier artifact exists for the rendered pages.",
+        "Monster Island remains non-authoritative and cannot feed accepted Gloranthan cult data until permission and verified page/block evidence exist."
       ],
       "source_access": {
         "public_copyparty_source": {
@@ -347,22 +348,49 @@
           "last_modified": "Wed, 20 May 2026 08:39:45 GMT"
         },
         "local_ignored_source": {
-          "status": "available_for_metadata_only",
+          "status": "available_for_render_cache",
           "path": "references/sources/pdfs/monster-island.pdf",
           "sha256": "dd79904483ab62766799e6480da7081cbcbbdd9cb1a608ecc5dfdeae7cce0782",
           "size_bytes": 10363314,
           "page_count": 298,
-          "git_tracked": false
+          "git_tracked": false,
+          "rendered_candidate_pages": [
+            133,
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            285,
+            286
+          ],
+          "render_cache_path": ".cache/source-pages/monster-island/"
         }
       },
       "observed_source_metadata": {
         "observed_at": "2026-05-21",
-        "sha256_method": "sha256sum against ignored local PDF downloaded from public Copyparty locator",
-        "size_method": "stat -c %s against ignored local PDF; matches Copyparty content-length",
-        "page_count_method": "pdfinfo against ignored local PDF",
+        "sha256_method": "sha256sum against user-supplied local PDF copied into ignored local hint",
+        "size_method": "stat -c %s against ignored local PDF; matches supplied metadata",
+        "page_count_method": "pdfinfo against user-supplied local PDF",
         "canonical_locator_head_status": 200,
         "canonical_locator_content_length": 10363314,
-        "note": "The source PDF is not committed; references/sources/pdfs/monster-island.pdf remains an ignored local hint."
+        "note": "The source PDF and rendered pages are ignored and uncommitted. This unit rendered candidate pages into .cache and committed only bounded image hashes/dimensions; no extraction, independent verification, or accepted facts were produced.",
+        "rendered_candidate_pdf_pages": [
+          133,
+          134,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          285,
+          286
+        ],
+        "render_cache_recorded": true,
+        "used_for_vision_extraction": false
       }
     }
   ]

@@ -312,6 +312,81 @@ runCommandTest('Render workflow can list sources without rendering pages',
       }));
   }
 
+  const expectedMonsterHash = 'dd79904483ab62766799e6480da7081cbcbbdd9cb1a608ecc5dfdeae7cce0782';
+  const expectedMonsterPages = [133, 134, 135, 136, 137, 138, 139, 140, 285, 286];
+  const monsterSource = manifestById.get('monster-island');
+  const monsterRevision = monsterSource?.source_revision_id;
+  const monsterPages = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/sources/pages/monster-island.json'), 'utf8'));
+  const monsterRaw = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/spirits-raw/monster-island.json'), 'utf8'));
+  const actualMonsterPages = (monsterPages.pages || []).map(page => page.pdf_page).sort((a, b) => a - b);
+  const renderedCandidatePages = (monsterPages.pages || []).every(page =>
+    expectedMonsterPages.includes(page.pdf_page) &&
+    page.source_revision_id === monsterRevision &&
+    page.work_state === 'rendered' &&
+    page.render?.status === 'rendered' &&
+    /^[a-f0-9]{64}$/.test(page.render?.image_sha256 || '') &&
+    page.render?.dimensions?.width > 0 &&
+    page.render?.dimensions?.height > 0 &&
+    typeof page.render?.cache_path === 'string' &&
+    !path.isAbsolute(page.render.cache_path) &&
+    page.extraction?.status === 'blocked_not_run' &&
+    page.verification?.status === 'blocked_not_run' &&
+    page.verification?.independent === false &&
+    Array.isArray(page.derived_facts) &&
+    page.derived_facts.length === 0
+  );
+  if (monsterSource?.lifecycle_state === 'permission_pending' &&
+      monsterSource?.permission_basis?.status === 'permission_pending' &&
+      monsterSource?.sha256 === expectedMonsterHash &&
+      monsterSource?.size_bytes === 10363314 &&
+      monsterSource?.page_count === 298 &&
+      monsterPages.coverage_state === 'blocked' &&
+      monsterPages.coverage_mode === 'candidate-spirit-cult-pages-rendered-verification-blocked' &&
+      JSON.stringify(actualMonsterPages) === JSON.stringify(expectedMonsterPages) &&
+      renderedCandidatePages &&
+      monsterRaw.attestation?.status === 'source_blocked' &&
+      monsterRaw.attestation?.source_authority === false) {
+    pass('Monster Island candidate pages are rendered as bounded evidence without authority promotion');
+  } else {
+    fail('Monster Island candidate page evidence is missing or promoted prematurely',
+      JSON.stringify({
+        lifecycle: monsterSource?.lifecycle_state,
+        permission: monsterSource?.permission_basis?.status,
+        hash: monsterSource?.sha256,
+        size: monsterSource?.size_bytes,
+        pageCount: monsterSource?.page_count,
+        coverageState: monsterPages.coverage_state,
+        coverageMode: monsterPages.coverage_mode,
+        pages: actualMonsterPages,
+        renderedCandidatePages,
+        rawStatus: monsterRaw.attestation?.status,
+        rawSourceAuthority: monsterRaw.attestation?.source_authority
+      }));
+  }
+
+  const startingSpiritsMap = (indexMap.entries || []).find(entry => entry.constant_name === 'STARTING_SPIRITS');
+  const acceptedMonsterEntries = (indexMap.entries || []).filter(entry =>
+    (entry.source_ids || []).includes('monster-island') &&
+    ['verified', 'normalized', 'accepted'].includes(entry.status)
+  );
+  const blockedMonsterRefs = (startingSpiritsMap?.blocked_candidate_sources || []).filter(ref => ref.source_id === 'monster-island');
+  if (acceptedMonsterEntries.length === 0 &&
+      startingSpiritsMap?.status === 'source_blocked' &&
+      blockedMonsterRefs.length === 1 &&
+      blockedMonsterRefs[0].source_revision_id === monsterRevision &&
+      blockedMonsterRefs[0].coverage_state === 'blocked' &&
+      blockedMonsterRefs[0].authority_state === 'non_authoritative' &&
+      blockedMonsterRefs[0].evidence_state === 'rendered_pages_extraction_and_verification_blocked') {
+    pass('Monster Island remains blocked in app provenance while permission is pending');
+  } else {
+    fail('Monster Island is missing blocked app provenance or was accepted prematurely',
+      JSON.stringify({
+        startingSpiritsStatus: startingSpiritsMap?.status,
+        acceptedMonsterEntries: acceptedMonsterEntries.map(entry => entry.constant_name),
+        blockedMonsterRefs
+      }));
+  }
+
   const invalidAcceptedWahaPages = JSON.parse(JSON.stringify(wahaPages));
   invalidAcceptedWahaPages.coverage_state = 'accepted';
   invalidAcceptedWahaPages.pages[0].work_state = 'accepted';
