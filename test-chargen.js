@@ -3456,39 +3456,36 @@ section('Wave 3 Goal 4: Template PDF Field Coverage');
 }
 
 // ============================================================
-section('Wave 3 Goal 5: Vendor pdf-lib Locally');
+section('Wave 3 Goal 5: Inline pdf-lib in index.html');
 // ============================================================
 
-// Test 5.1: lib/pdf-lib.min.js exists
-{
-  const libPath = path.join(__dirname, 'lib', 'pdf-lib.min.js');
-  if (fs.existsSync(libPath)) {
-    const stats = fs.statSync(libPath);
-    if (stats.size > 400000) {
-      pass(`lib/pdf-lib.min.js exists (${Math.floor(stats.size / 1024)}KB)`);
-    } else {
-      fail('lib/pdf-lib.min.js too small or corrupt');
-    }
-  } else {
-    fail('lib/pdf-lib.min.js not found');
-  }
-}
-
-// Test 5.2: index.html does not inline parse-heavy pdf-lib at startup
+// Test 5.1: pdf-lib is embedded directly in index.html
 {
   const htmlPath = path.join(__dirname, 'index.html');
   const html = fs.readFileSync(htmlPath, 'utf8');
   const scripts = extractScripts(html);
   const inlinePdfLib = scripts.find(script => script.length > 400000 && script.includes('PDFLib') && !script.includes('CharacterData'));
-  if (!inlinePdfLib && html.includes('App.ensurePDFLib')) {
-    pass('index.html lazy-loads pdf-lib instead of inlining it at startup');
+  if (inlinePdfLib) {
+    pass(`index.html inlines pdf-lib (${Math.floor(inlinePdfLib.length / 1024)}KB)`);
   } else {
-    fail('index.html still inlines parse-heavy pdf-lib at startup');
+    fail('index.html does not inline pdf-lib');
   }
 }
 
-// Test 5.3: ensurePDFLib loads and caches the local library
-asyncTest('ensurePDFLib lazy-load test failed', async () => {
+// Test 5.2: no external local pdf-lib file is required at runtime
+{
+  const htmlPath = path.join(__dirname, 'index.html');
+  const libPath = path.join(__dirname, 'lib', 'pdf-lib.min.js');
+  const html = fs.readFileSync(htmlPath, 'utf8');
+  if (!html.includes('lib/pdf-lib.min.js') && !fs.existsSync(libPath)) {
+    pass('PDF export no longer depends on lib/pdf-lib.min.js');
+  } else {
+    fail('PDF export still references or ships lib/pdf-lib.min.js');
+  }
+}
+
+// Test 5.3: ensurePDFLib returns the inline/global library without appending scripts
+asyncTest('ensurePDFLib inline test failed', async () => {
   const { App: AppObj, _sandbox } = loadApp();
   if (!AppObj || !AppObj.ensurePDFLib || !_sandbox) {
     fail('App.ensurePDFLib not available');
@@ -3497,24 +3494,19 @@ asyncTest('ensurePDFLib lazy-load test failed', async () => {
 
   const mockPdfLib = _sandbox.PDFLib;
   let appended = 0;
-  let loadedSrc = null;
-  _sandbox.PDFLib = undefined;
   AppObj._pdfLibPromise = null;
   _sandbox.document.createElement = tag => ({ tagName: tag, onload: null, onerror: null, src: '' });
-  _sandbox.document.head.appendChild = script => {
+  _sandbox.document.head.appendChild = () => {
     appended++;
-    loadedSrc = script.src;
-    _sandbox.PDFLib = mockPdfLib;
-    script.onload();
   };
 
   const first = await AppObj.ensurePDFLib();
   const second = await AppObj.ensurePDFLib();
 
-  if (first === mockPdfLib && second === mockPdfLib && appended === 1 && loadedSrc === 'lib/pdf-lib.min.js') {
-    pass('ensurePDFLib lazy-loads and caches local pdf-lib');
+  if (first === mockPdfLib && second === mockPdfLib && appended === 0) {
+    pass('ensurePDFLib resolves the inline PDFLib without appending scripts');
   } else {
-    fail('ensurePDFLib did not lazy-load/cache local pdf-lib', JSON.stringify({ appended, loadedSrc, loaded: first === mockPdfLib }));
+    fail('ensurePDFLib did not use inline PDFLib', JSON.stringify({ appended, loaded: first === mockPdfLib }));
   }
 });
 
