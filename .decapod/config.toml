@@ -1,0 +1,20 @@
+schema_version = "1.0.0"
+
+[init]
+specs = false
+diagram_style = "ascii"
+entrypoints = [
+    "AGENTS.md",
+    "CLAUDE.md",
+    "GEMINI.md",
+    "CODEX.md",
+]
+
+[repo]
+product_name = "mythras-chargen"
+product_summary = "Mythras Adventures in Glorantha character generator"
+architecture_direction = "single-file vanilla HTML app with JSON reference provenance"
+product_type = "application"
+done_criteria = "tests and provenance validation pass"
+primary_languages = ["html"]
+detected_surfaces = ["web"]

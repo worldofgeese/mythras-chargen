@@ -1,26 +1,50 @@
-# Codex Agent Entrypoint
+# CODEX.md - Agent Entrypoint
 
-<!-- decapod-validator-entrypoint
-includes .decapod CLI-only jail rule
-includes Docker workspace mandate
-includes elevated-permissions mandate
-includes per-agent session password mandate
--->
+You are working in a Decapod-managed repository.
+See `AGENTS.md` for the universal contract.
 
-Router pointer: `core/DECAPOD.md`. Read it with `decapod docs show core/DECAPOD.md`; use `decapod docs show docs/...` for embedded docs.
+## Project Context
 
-Jail rule: .decapod access is CLI-only; .decapod files are accessed only via decapod CLI.
+- Read `.decapod/config.toml` before planning; it captures project name, summary, architecture, primary languages, and entrypoint preferences.
+- Treat `.decapod/config.toml` as human-editable project context. You may update it when user intent or project direction changes.
+- Read `.decapod/OVERRIDE.md` when present; it is the repo-local place for constitution overrides.
+- Do not mutate Decapod-owned state under `.decapod/` directly; use Decapod CLI surfaces for generated specs, data, workspaces, and sessions.
 
-Docker workspace mandate: Docker git workspaces live under `.decapod/workspaces` through `decapod workspace ensure --container`.
+## Quick Start
 
-Elevated-permissions mandate: request elevated permissions before Docker/container workspace commands.
+```bash
+cargo install decapod
+decapod validate && decapod docs ingest && decapod session acquire
+decapod rpc --op agent.init
+decapod workspace status
+decapod todo add "<task>" && decapod todo claim --id <task-id>
+decapod infer orientation --task-id <task-id>
+decapod workspace ensure
+cd .decapod/workspaces/<your-worktree>
+decapod rpc --op context.resolve
+```
 
-Per-agent session password mandate: use a dedicated `DECAPOD_SESSION_PASSWORD`.
+## Control-Plane First
 
-Claim-before-work mandate and task creation mandate: run `decapod todo add "<task>"` and `decapod todo claim --id <task-id>`.
+```bash
+decapod capabilities --format json
+decapod rpc --op context.scope --params '{"query":"<problem>","limit":8}'
+decapod data schema --deterministic
+```
 
-Core constitution ingestion mandate: run `decapod docs ingest`.
+## Operating Mode
 
-Version update step: `cargo install decapod`.
+- Use Docker git workspaces and execute in `.decapod/workspaces/*`.
+- Call `decapod workspace status` at startup and before implementation work.
+- request elevated permissions before Docker/container workspace commands.
+- `.decapod files are accessed only via decapod CLI`.
+- Read and update `.decapod/config.toml` as project context; use Decapod CLI for other `.decapod/` state.
+- Read `.decapod/OVERRIDE.md` for repo-local constitution overrides when present.
+- `DECAPOD_SESSION_PASSWORD` is required for session-scoped operations.
+- Read canonical router: `decapod docs show core/DECAPOD.md`.
+- Use shared aptitude memory for human-taught preferences across sessions/providers: `decapod data memory add|get` (aliases: `decapod data aptitude`).
+- Operator reference: `decapod docs show docs/PLAYBOOK.md`.
+- Capability authority: `decapod capabilities --format json`.
+- Scoped context feature: `decapod docs search --query "<problem>" --op <op>` or `decapod rpc --op context.scope`.
 
-Follow `AGENTS.md` for the repository operating contract.
+Stop if requirements are ambiguous or conflicting.
