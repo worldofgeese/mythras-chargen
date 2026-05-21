@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "schema": "references/sources/schema.json#/schemas/page_coverage",
+  "source_id": "cse",
+  "source_revision_id": "cse:unavailable:106d7ad39e8b:2026-05-21",
+  "coverage_state": "blocked",
+  "coverage_mode": "scaffold",
+  "expected_page_count": null,
+  "pages": [],
+  "known_ranges": [],
+  "blockers": [
+    "CSE source PDF and page count are unavailable in this worktree"
+  ],
+  "notes": "No page evidence is committed by foundation tooling. Later units must populate bounded vision evidence after source metadata is accepted."
+}

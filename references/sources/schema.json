@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "schema_id": "mythras-chargen.source-attestation.foundation.v1",
+  "purpose": "Shared contracts for portable source manifests, page-work manifests, vision evidence, and lifecycle invalidation.",
+  "source_revision_id_derivation": {
+    "active_source_rule": "source_id + canonical_locator + sha256 + acquired_at, serialized canonically and hashed or slugged deterministically",
+    "pending_source_rule": "source_id plus explicit pending/unavailable lifecycle state and date; pending IDs are never accepted as verified authority",
+    "live_copyparty_uri_note": "A Copyparty URL is a locator only. Authority comes from source_revision_id, sha256, permission basis, and page evidence."
+  },
+  "lifecycle_states": {
+    "source_revisions": [
+      "active",
+      "superseded",
+      "retired",
+      "unavailable",
+      "hash_mismatch",
+      "permission_pending"
+    ],
+    "page_work": [
+      "pending",
+      "blocked",
+      "rendered",
+      "extracted",
+      "verification_failed",
+      "needs_reextract",
+      "conflict",
+      "verified",
+      "normalized",
+      "accepted",
+      "stale",
+      "invalidated",
+      "superseded"
+    ]
+  },
+  "missingness_states": [
+    "absent_optional",
+    "not_applicable",
+    "unknown",
+    "blocked",
+    "unverified"
+  ],
+  "missingness_rules": {
+    "unknown": "Allowed only in raw/page evidence or blocked manifests; not allowed in accepted app-facing facts.",
+    "blocked": "Requires blockers[] and lifecycle state that prevents promotion.",
+    "unverified": "Allowed only before verified/normalized/accepted states; never allowed in governed app-facing records.",
+    "not_applicable": "Allowed when a schema field genuinely does not apply and a rationale is present.",
+    "absent_optional": "Allowed only for optional fields declared by this schema."
+  },
+  "render_contract_defaults": {
+    "renderer": "pdftoppm",
+    "renderer_version": "runtime-detected",
+    "dpi": 300,
+    "image_format": "png",
+    "color_mode": "rgb",
+    "args": [
+      "-r",
+      "300",
+      "-png",
+      "-singlefile"
+    ],
+    "cache_path_pattern": ".cache/source-pages/{source_id}/page-{pdf_page:04d}.png"
+  },
+  "excerpt_budgets": {
+    "block_excerpt_char_max": 360,
+    "page_excerpt_char_max": 1200,
+    "source_excerpt_char_max": 4000,
+    "full_page_text_committed": false,
+    "long_prose_fallback": "Record source revision, page, block id, region, excerpt hash, and bounded excerpt only."
+  },
+  "canonical_json": {
+    "serialization": "UTF-8 JSON with sorted object keys, no insignificant whitespace, NFC-normalized strings before hashing.",
+    "value_hash_algorithm": "sha256(canonical-json(value))",
+    "fact_id_rule": "{namespace}:{source_id}:{stable_slug}:{field}; namespaces are owned in provenance schema."
+  },
+  "promotion_protocol": {
+    "base_tree_hash_required": true,
+    "atomic_update_sets": [
+      "raw page evidence",
+      "normalized reference JSON",
+      "provenance map",
+      "inline app constant drift report"
+    ],
+    "stale_base_action": "reject promotion and rebase/regenerate from current tree",
+    "parallel_agent_rule": "No agent may promote accepted facts from an obsolete base tree hash."
+  },
+  "invalidation_rules": [
+    "source hash change",
+    "render contract change",
+    "extractor prompt/version change",
+    "verifier identity/prompt/version change",
+    "schema version change",
+    "derived-rule version change"
+  ],
+  "schemas": {
+    "source_manifest": {
+      "required": [
+        "source_id",
+        "title",
+        "lifecycle_state",
+        "source_revision_id",
+        "permission_basis",
+        "render_contract"
+      ],
+      "active_required": [
+        "canonical_locator",
+        "sha256",
+        "size_bytes",
+        "page_count",
+        "acquired_at"
+      ],
+      "blocked_required": [
+        "blockers",
+        "blocks"
+      ],
+      "portable_locator_rule": "No machine-local absolute paths in canonical_locator or local_hint."
+    },
+    "page_coverage": {
+      "required": [
+        "schemaVersion",
+        "source_id",
+        "source_revision_id",
+        "coverage_state",
+        "coverage_mode",
+        "pages"
+      ],
+      "page_required": [
+        "pdf_page",
+        "work_state",
+        "source_revision_id",
+        "render"
+      ],
+      "accepted_required": [
+        "extraction",
+        "verification",
+        "derived_facts"
+      ],
+      "non_contributing_rule": "contributes:false requires exclusion_reason and does not require derived facts."
+    },
+    "page_evidence_record": {
+      "required": [
+        "source_id",
+        "source_revision_id",
+        "pdf_page",
+        "printed_page_label",
+        "blocks",
+        "extraction",
+        "verification"
+      ],
+      "block_required": [
+        "block_id",
+        "block_type",
+        "reading_order",
+        "region",
+        "excerpt_hash"
+      ],
+      "block_types": [
+        "heading",
+        "paragraph",
+        "table",
+        "stat_block",
+        "sidebar",
+        "caption",
+        "page_label"
+      ]
+    },
+    "extraction_artifact": {
+      "required": [
+        "artifact_id",
+        "workflow_id",
+        "source_id",
+        "source_revision_id",
+        "pdf_page",
+        "rendered_image",
+        "extractor_prompt_id",
+        "extractor_run_id",
+        "tool_identity",
+        "schema_version"
+      ]
+    },
+    "verification_artifact": {
+      "required": [
+        "artifact_id",
+        "workflow_id",
+        "source_id",
+        "source_revision_id",
+        "pdf_page",
+        "rendered_image",
+        "verifier_prompt_id",
+        "verifier_run_id",
+        "tool_identity",
+        "independence"
+      ],
+      "independence_rule": "Verifier must not use extractor output, extractor scratchpad, extractor rationale, or the same run id/prompt context."
+    }
+  }
+}

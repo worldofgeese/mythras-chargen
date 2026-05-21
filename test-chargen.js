@@ -7,6 +7,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 
 // ANSI colors for output
 const colors = {
@@ -229,6 +230,121 @@ function loadApp() {
 // ============================================================
 // MAIN TEST SUITE
 // ============================================================
+
+function runCommandTest(msg, command, args) {
+  try {
+    execFileSync(command, args, { cwd: __dirname, encoding: 'utf8', stdio: 'pipe' });
+    pass(msg);
+  } catch (err) {
+    const output = [err.stdout, err.stderr].filter(Boolean).join('\n').trim();
+    fail(msg, output || err.message);
+  }
+}
+
+section('Source Attestation Foundation');
+
+runCommandTest('Source manifest validator accepts foundation scaffold',
+  process.execPath, ['scripts/source_manifest_validator.js', '--quiet']);
+runCommandTest('Provenance validator accepts legacy disposition scaffold',
+  process.execPath, ['scripts/validate_provenance.js', '--quiet']);
+runCommandTest('Page-work manifest validator accepts scaffold states',
+  'python3', ['scripts/source_page_work_manifest.py', '--validate', '--quiet']);
+runCommandTest('Vision workflow validator accepts independent verification contract',
+  'python3', ['scripts/vision_page_workflow.py', '--validate-workflow', '--quiet']);
+runCommandTest('Render workflow can list sources without rendering pages',
+  'python3', ['scripts/render_source_pages.py', '--list-sources', '--quiet']);
+
+{
+  const sourceSchema = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/sources/schema.json'), 'utf8'));
+  const provenanceSchema = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/provenance/schema.json'), 'utf8'));
+  const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/sources/manifest.json'), 'utf8'));
+  const legacy = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/provenance/legacy-disposition.json'), 'utf8'));
+  const sourceValidator = require('./scripts/source_manifest_validator.js');
+  const provenanceValidator = require('./scripts/validate_provenance.js');
+  const requiredSources = ['aig', 'cse', 'waha', 'bird-in-hand', 'monster-island'];
+  const manifestIds = manifest.sources.map(source => source.source_id).sort();
+  const missingSources = requiredSources.filter(sourceId => !manifestIds.includes(sourceId));
+
+  if (missingSources.length === 0) {
+    pass('Source manifest declares all foundation source IDs');
+  } else {
+    fail('Source manifest missing foundation source IDs', missingSources.join(', '));
+  }
+
+  const blockedPending = manifest.sources
+    .filter(source => source.lifecycle_state !== 'active')
+    .every(source => Array.isArray(source.blocks) && source.blocks.includes('extraction') && source.blockers.length > 0);
+  if (blockedPending) {
+    pass('Pending/unavailable sources explicitly block extraction');
+  } else {
+    fail('Pending/unavailable source does not block extraction');
+  }
+
+  const activeWaha = manifest.sources.find(source => source.source_id === 'waha');
+  if (activeWaha && activeWaha.sha256 && activeWaha.page_count === 2 && activeWaha.local_hint === 'references/cults-upstream/Praxian/Waha.pdf') {
+    pass('Active Waha seed source records real tracked PDF metadata');
+  } else {
+    fail('Active Waha seed source is missing real tracked PDF metadata');
+  }
+
+  const sourceStates = sourceSchema.lifecycle_states.source_revisions;
+  const pageStates = sourceSchema.lifecycle_states.page_work;
+  if (sourceStates.includes('permission_pending') &&
+      pageStates.includes('verification_failed') &&
+      pageStates.includes('accepted') &&
+      sourceSchema.excerpt_budgets.full_page_text_committed === false) {
+    pass('Source schema defines pending, verification, acceptance, and excerpt-budget contracts');
+  } else {
+    fail('Source schema missing required lifecycle or excerpt-budget contracts');
+  }
+
+  const invalidActive = {
+    schemaVersion: 1,
+    sources: [{
+      source_id: 'broken-active',
+      title: 'Broken Active Source',
+      lifecycle_state: 'active',
+      source_revision_id: 'broken-active:test',
+      canonical_locator: 'references/sources/pdfs/broken.pdf',
+      local_hint: 'references/sources/pdfs/broken.pdf',
+      permission_basis: { status: 'confirmed' },
+      render_contract: sourceSchema.render_contract_defaults
+    }]
+  };
+  const invalidActiveResult = sourceValidator.validateManifest(invalidActive, sourceSchema);
+  if (!invalidActiveResult.ok && invalidActiveResult.errors.some(error => error.includes('broken-active') && error.includes('sha256'))) {
+    pass('Source manifest validator fails loudly for active sources without hashes');
+  } else {
+    fail('Source manifest validator allows active source without hash', invalidActiveResult.errors.join('\n'));
+  }
+
+  const constants = new Set(legacy.app_constants.map(item => item.constant_name));
+  const missingConstants = provenanceValidator.EXPORTED_APP_CONSTANTS.filter(name => !constants.has(name));
+  if (missingConstants.length === 0) {
+    pass('Legacy disposition classifies exported app data constants');
+  } else {
+    fail('Legacy disposition missing exported app data constants', missingConstants.join(', '));
+  }
+
+  const missingSkillDisposition = {
+    ...legacy,
+    app_constants: legacy.app_constants.filter(item => item.constant_name !== 'SKILLS_DATA')
+  };
+  const missingSkillResult = provenanceValidator.validateLegacyDisposition(missingSkillDisposition, provenanceSchema, __dirname);
+  if (!missingSkillResult.ok && missingSkillResult.errors.some(error => error.includes('SKILLS_DATA'))) {
+    pass('Provenance validator fails closed for unclassified exported constants');
+  } else {
+    fail('Provenance validator allows unclassified exported constants', missingSkillResult.errors.join('\n'));
+  }
+
+  const canonicalA = provenanceValidator.valueHash({ b: 2, a: ['x', { z: true }] });
+  const canonicalB = provenanceValidator.valueHash({ a: ['x', { z: true }], b: 2 });
+  if (canonicalA === canonicalB && /^[a-f0-9]{64}$/.test(canonicalA)) {
+    pass('Provenance value hashes use stable canonical JSON ordering');
+  } else {
+    fail('Provenance value hashes are not canonical');
+  }
+}
 
 section('Loading Application');
 const App = loadApp();

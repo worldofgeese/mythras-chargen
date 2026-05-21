@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "schema": "references/sources/schema.json#/schemas/extraction_artifact",
+  "workflow_id": "vision-page-workflow.v1",
+  "mode": "manual-agent-driven-with-tool-assisted-rendering",
+  "committed_boundaries": {
+    "allowed": [
+      "source manifest metadata",
+      "page work state",
+      "bounded block excerpts",
+      "region coordinates",
+      "hashes",
+      "extractor/verifier metadata",
+      "normalized facts with provenance"
+    ],
+    "forbidden": [
+      "source PDFs",
+      "rendered page images",
+      "OCR full-page text",
+      "extractor scratchpads",
+      "full-page copyrighted transcription"
+    ]
+  },
+  "scratch_locations": [
+    ".cache/source-pages/",
+    "references/sources/scratch/"
+  ],
+  "extractor": {
+    "prompt_id": "vision-extract-bounded-page.v1",
+    "prompt_version": "2026-05-21",
+    "inputs": [
+      "rendered page image",
+      "source manifest record",
+      "source schema",
+      "requested source/page scope"
+    ],
+    "outputs": [
+      "bounded page evidence JSON",
+      "derived fact candidates"
+    ],
+    "must_not_output": [
+      "full page transcription",
+      "unbounded prose"
+    ]
+  },
+  "verifier": {
+    "prompt_id": "vision-verify-bounded-page.v1",
+    "prompt_version": "2026-05-21",
+    "inputs": [
+      "rendered page image",
+      "source manifest record",
+      "source schema",
+      "expected page-work target"
+    ],
+    "forbidden_inputs": [
+      "extractor output",
+      "extractor scratchpad",
+      "extractor rationale",
+      "same run id as extractor"
+    ],
+    "outputs": [
+      "verification artifact",
+      "agreement/disagreement",
+      "required rework"
+    ]
+  },
+  "independence_rules": [
+    "verifier_run_id must differ from extractor_run_id",
+    "verifier_prompt_id must differ from extractor_prompt_id",
+    "verifier must attest it did not read extractor scratch/rationale",
+    "tool_identity may match only when run ids and prompt contexts differ and independence attestation is explicit"
+  ],
+  "disagreement_handling": {
+    "on_disagreement": "Set page work_state to verification_failed, needs_reextract, or conflict and retain bounded failure metadata.",
+    "normalization_gate": "normalized and accepted states require a passing independent verification artifact.",
+    "adversarial_sampling": "Large batches must include sampled adversarial checks by a verifier that did not perform extraction."
+  }
+}

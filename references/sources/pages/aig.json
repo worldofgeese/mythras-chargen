@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "schema": "references/sources/schema.json#/schemas/page_coverage",
+  "source_id": "aig",
+  "source_revision_id": "aig:permission-pending:2026-05-21",
+  "coverage_state": "blocked",
+  "coverage_mode": "scaffold",
+  "expected_page_count": 212,
+  "pages": [],
+  "known_ranges": [
+    {
+      "label": "legacy AiG raw citation ranges",
+      "pages": "23-151",
+      "state": "blocked",
+      "reason": "legacy raw data is not promoted until U5 vision verification"
+    }
+  ],
+  "blockers": [
+    "AIG hash and permission basis are pending"
+  ],
+  "notes": "No page evidence is committed by foundation tooling. Later units must populate bounded vision evidence after source metadata is accepted."
+}

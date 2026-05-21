@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "schema": "references/provenance/schema.json#/validation_report_schema",
+  "report_type": "foundation-provenance-scaffold",
+  "generated_by": "scripts/validate_provenance.js",
+  "generated_at": "2026-05-21T00:00:00Z",
+  "status": "scaffold",
+  "inputs": {
+    "tree_hash": null,
+    "note": "This committed scaffold is not acceptance evidence. Regenerate with scripts/validate_provenance.js before relying on results."
+  },
+  "summary": {
+    "legacy_disposition_required": true,
+    "fact_level_entries_pending": true,
+    "full_source_extraction_included": false
+  }
+}
