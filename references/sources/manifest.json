@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "schema": "references/sources/schema.json",
   "generated_at": "2026-05-21",
-  "notes": "Source attestation manifest for portable source authority. U7 records CSE/Bird/Monster legacy data against manifest source_revision_ids, but keeps extraction/acceptance blocked where source PDFs, hashes, page counts, or independent page evidence are unavailable in this worktree.",
+  "notes": "Source attestation manifest for portable source authority. U7 records CSE/Monster legacy data against manifest source_revision_ids, but keeps extraction/acceptance blocked where source PDFs, hashes, page counts, or independent page evidence are unavailable. Bird in Hand now records source identity and target page renders; its spirit facts remain blocked pending bounded extraction and independent vision verification.",
   "sources": [
     {
       "source_id": "aig",
@@ -242,17 +242,17 @@
       ],
       "canonical_locator": "https://copyparty.hound-celsius.ts.net/sources/books/A-Bird-in-the-Hand.pdf",
       "local_hint": "references/sources/pdfs/bird-in-hand.pdf",
-      "lifecycle_state": "permission_pending",
-      "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
-      "sha256": null,
-      "size_bytes": null,
-      "page_count": null,
-      "acquired_at": null,
+      "lifecycle_state": "active",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "sha256": "2d76fcb74715f5b5f9e514528c4da68fa8d36fc4b435468278802d02d1eb26e3",
+      "size_bytes": 11290904,
+      "page_count": 60,
+      "acquired_at": "2026-05-21",
       "permission_basis": {
-        "status": "permission_pending",
-        "note": "Public/source locator exists for player use, but extraction permission and source hash are not recorded in this scaffold."
+        "status": "player_visible_copyparty_source",
+        "note": "Source PDF is available from the project Copyparty player-visible source library; the PDF remains ignored and uncommitted. Full-page transcription remains forbidden by the vision workflow boundaries."
       },
-      "precedence": "Spirit examples remain legacy template inputs only; they are source-blocked until portable source/page/block evidence exists.",
+      "precedence": "Bird in Hand is the source-identified example authority for legacy spirit stat-block pages 43-46, but legacy spirit facts remain blocked until bounded page/block extraction and independent vision verification artifacts are committed.",
       "render_contract": {
         "renderer": "pdftoppm",
         "renderer_version": "runtime-detected",
@@ -267,18 +267,22 @@
         ],
         "cache_path_pattern": ".cache/source-pages/{source_id}/page-{pdf_page:04d}.png"
       },
-      "blocks": [
-        "render",
-        "extraction",
-        "normalization",
-        "acceptance"
+      "blocks": [],
+      "blockers": [],
+      "acceptance_state": "blocked_pending_vision_verification",
+      "acceptance_blockers": [
+        "No bounded page/block extraction artifact has been committed for Bird pages 43-46.",
+        "No independent verifier artifact has been produced from a true vision-only pass in this environment.",
+        "Legacy spirit facts therefore remain not accepted as normalized source authority."
       ],
-      "blockers": [
-        "sha256 unavailable in committed manifest",
-        "page count unavailable",
-        "permission basis is not confirmed",
-        "legacy vision-verification claim lacks committed verifier/page/block artifacts"
-      ]
+      "observed_source_metadata": {
+        "observed_at": "2026-05-21",
+        "sha256_method": "sha256sum against ignored local copy downloaded from Copyparty canonical locator",
+        "page_count_method": "pdfinfo against ignored local Copyparty download",
+        "canonical_locator_head_status": 200,
+        "canonical_locator_content_length": 11290904,
+        "note": "The source PDF is not committed; references/sources/pdfs/bird-in-hand.pdf remains an ignored local hint."
+      }
     },
     {
       "source_id": "monster-island",

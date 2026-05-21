@@ -233,16 +233,16 @@
       "source_refs": [
         {
           "source_id": "bird-in-hand",
-          "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+          "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
           "page_manifest_path": "references/sources/pages/bird-in-hand.json",
           "coverage_state": "blocked",
-          "evidence_state": "legacy_page_citation_source_blocked"
+          "evidence_state": "rendered_pages_pending_independent_vision_verification"
         }
       ],
       "external_source_gaps": [
         "mythras-core is cited by STARTING_SPIRITS but is not yet represented in the source manifest"
       ],
-      "rationale": "Starting spirit examples are app-facing legacy data; Bird in Hand citations are source-blocked and Mythras Core refs need future manifest wiring."
+      "rationale": "Starting spirit examples are app-facing legacy data; Bird in Hand source identity and target page renders now exist, but page/block extraction, independent vision verification, and Mythras Core manifest wiring remain future work."
     }
   ]
 }

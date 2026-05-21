@@ -2,23 +2,1272 @@
   "schemaVersion": 1,
   "schema": "references/sources/schema.json#/schemas/page_coverage",
   "source_id": "bird-in-hand",
-  "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+  "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
   "coverage_state": "blocked",
-  "coverage_mode": "blocked-legacy-metadata",
-  "expected_page_count": null,
-  "pages": [],
+  "coverage_mode": "source-identified-target-pages-rendered-pending-vision-verification",
+  "expected_page_count": 60,
+  "pages": [
+    {
+      "pdf_page": 1,
+      "printed_page_label": "1",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0001.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 2,
+      "printed_page_label": "2",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0002.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 3,
+      "printed_page_label": "3",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0003.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 4,
+      "printed_page_label": "4",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0004.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 5,
+      "printed_page_label": "5",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0005.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 6,
+      "printed_page_label": "6",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0006.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 7,
+      "printed_page_label": "7",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0007.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 8,
+      "printed_page_label": "8",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0008.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 9,
+      "printed_page_label": "9",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0009.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 10,
+      "printed_page_label": "10",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0010.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 11,
+      "printed_page_label": "11",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0011.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 12,
+      "printed_page_label": "12",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0012.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 13,
+      "printed_page_label": "13",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0013.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 14,
+      "printed_page_label": "14",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0014.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 15,
+      "printed_page_label": "15",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0015.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 16,
+      "printed_page_label": "16",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0016.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 17,
+      "printed_page_label": "17",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0017.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 18,
+      "printed_page_label": "18",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0018.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 19,
+      "printed_page_label": "19",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0019.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 20,
+      "printed_page_label": "20",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0020.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 21,
+      "printed_page_label": "21",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0021.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 22,
+      "printed_page_label": "22",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0022.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 23,
+      "printed_page_label": "23",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0023.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 24,
+      "printed_page_label": "24",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0024.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 25,
+      "printed_page_label": "25",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0025.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 26,
+      "printed_page_label": "26",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0026.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 27,
+      "printed_page_label": "27",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0027.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 28,
+      "printed_page_label": "28",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0028.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 29,
+      "printed_page_label": "29",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0029.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 30,
+      "printed_page_label": "30",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0030.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 31,
+      "printed_page_label": "31",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0031.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 32,
+      "printed_page_label": "32",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0032.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 33,
+      "printed_page_label": "33",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0033.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 34,
+      "printed_page_label": "34",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0034.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 35,
+      "printed_page_label": "35",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0035.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 36,
+      "printed_page_label": "36",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0036.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 37,
+      "printed_page_label": "37",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0037.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 38,
+      "printed_page_label": "38",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0038.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 39,
+      "printed_page_label": "39",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0039.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 40,
+      "printed_page_label": "40",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0040.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 41,
+      "printed_page_label": "41",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0041.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 42,
+      "printed_page_label": "42",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0042.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 43,
+      "printed_page_label": "43",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "rendered",
+      "contributes": true,
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0043.png",
+        "image_sha256": "6bf326835edb9bc6ca1018e95e68ec5ee0c179b3de88ef6e9e9911113f4a3a73",
+        "dimensions": {
+          "width": 2550,
+          "height": 3301
+        },
+        "renderer": "pdftoppm",
+        "dpi": 300
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Rendered target legacy spirit stat-block page; bounded extraction and independent vision verification are still missing.",
+      "blockers": [
+        "No bounded page/block extraction artifact has been committed for Bird pages 43-46.",
+        "No independent verifier artifact has been produced from a true vision-only pass in this environment.",
+        "Legacy spirit facts therefore remain not accepted as normalized source authority."
+      ]
+    },
+    {
+      "pdf_page": 44,
+      "printed_page_label": "44",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "rendered",
+      "contributes": true,
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0044.png",
+        "image_sha256": "ea4568989222ad9569c8defd735c05e709431f489ab85611175bfea47d0366db",
+        "dimensions": {
+          "width": 2550,
+          "height": 3301
+        },
+        "renderer": "pdftoppm",
+        "dpi": 300
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Rendered target legacy spirit stat-block page; bounded extraction and independent vision verification are still missing.",
+      "blockers": [
+        "No bounded page/block extraction artifact has been committed for Bird pages 43-46.",
+        "No independent verifier artifact has been produced from a true vision-only pass in this environment.",
+        "Legacy spirit facts therefore remain not accepted as normalized source authority."
+      ]
+    },
+    {
+      "pdf_page": 45,
+      "printed_page_label": "45",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "rendered",
+      "contributes": true,
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0045.png",
+        "image_sha256": "2b7ca0cdcfbc1da09fe0d8a5f69cc7d774be3c0589bd8552289d9f7a1d024b1f",
+        "dimensions": {
+          "width": 2550,
+          "height": 3301
+        },
+        "renderer": "pdftoppm",
+        "dpi": 300
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Rendered target legacy spirit stat-block page; bounded extraction and independent vision verification are still missing.",
+      "blockers": [
+        "No bounded page/block extraction artifact has been committed for Bird pages 43-46.",
+        "No independent verifier artifact has been produced from a true vision-only pass in this environment.",
+        "Legacy spirit facts therefore remain not accepted as normalized source authority."
+      ]
+    },
+    {
+      "pdf_page": 46,
+      "printed_page_label": "46",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "rendered",
+      "contributes": true,
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0046.png",
+        "image_sha256": "9d2065424448cc0b857b8d27b87ccf0a5cd590f92537a0d9c5e0997fcd638094",
+        "dimensions": {
+          "width": 2550,
+          "height": 3301
+        },
+        "renderer": "pdftoppm",
+        "dpi": 300
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Rendered target legacy spirit stat-block page; bounded extraction and independent vision verification are still missing.",
+      "blockers": [
+        "No bounded page/block extraction artifact has been committed for Bird pages 43-46.",
+        "No independent verifier artifact has been produced from a true vision-only pass in this environment.",
+        "Legacy spirit facts therefore remain not accepted as normalized source authority."
+      ]
+    },
+    {
+      "pdf_page": 47,
+      "printed_page_label": "47",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0047.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 48,
+      "printed_page_label": "48",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0048.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 49,
+      "printed_page_label": "49",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0049.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 50,
+      "printed_page_label": "50",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0050.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 51,
+      "printed_page_label": "51",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0051.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 52,
+      "printed_page_label": "52",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0052.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 53,
+      "printed_page_label": "53",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0053.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 54,
+      "printed_page_label": "54",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0054.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 55,
+      "printed_page_label": "55",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0055.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 56,
+      "printed_page_label": "56",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0056.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 57,
+      "printed_page_label": "57",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0057.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 58,
+      "printed_page_label": "58",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0058.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 59,
+      "printed_page_label": "59",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0059.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    },
+    {
+      "pdf_page": 60,
+      "printed_page_label": "60",
+      "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+      "work_state": "blocked",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/bird-in-hand/page-0060.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Page not classified by this unit; only legacy spirit citation range 43-46 was targeted.",
+      "blockers": [
+        "Page was not in the targeted legacy Bird spirit citation range for this unit."
+      ]
+    }
+  ],
   "known_ranges": [
     {
       "label": "legacy Bird in Hand spirit stat-block citations",
       "pages": "43-46",
-      "state": "blocked",
-      "reason": "Existing raw metadata cites these pages, but source hash/page count and committed page/block evidence are unavailable.",
+      "state": "rendered_pending_vision_verification",
+      "reason": "Existing raw metadata cites these pages; source identity and page renders are now recorded, but bounded extraction and independent verifier artifacts are still missing.",
       "source_file": "references/spirits-raw/bird-in-hand.json"
     }
   ],
   "blockers": [
-    "Bird in Hand hash/page count/permission metadata pending",
-    "legacy verification claim lacks committed independent verifier/page/block artifacts"
+    "No bounded page/block extraction artifact has been committed for Bird pages 43-46.",
+    "No independent verifier artifact has been produced from a true vision-only pass in this environment.",
+    "Legacy spirit facts therefore remain not accepted as normalized source authority."
   ],
-  "notes": "U7 records legacy cited page range as source-blocked metadata only; no source page evidence is committed."
+  "notes": "Bird source metadata is recorded and pages 43-46 are targeted for rendering. This page-work manifest intentionally stays blocked because true independent vision verification was not completed.",
+  "source_access": {
+    "public_copyparty_source": {
+      "status": "available",
+      "checked_at": "2026-05-21",
+      "url": "https://copyparty.hound-celsius.ts.net/sources/books/A-Bird-in-the-Hand.pdf",
+      "head_status": 200,
+      "content_length": 11290904,
+      "sha256": "2d76fcb74715f5b5f9e514528c4da68fa8d36fc4b435468278802d02d1eb26e3",
+      "page_count": 60
+    },
+    "local_ignored_source": {
+      "status": "downloaded",
+      "path": "references/sources/pdfs/bird-in-hand.pdf",
+      "git_ignored": true,
+      "sha256": "2d76fcb74715f5b5f9e514528c4da68fa8d36fc4b435468278802d02d1eb26e3",
+      "size_bytes": 11290904,
+      "page_count": 60
+    }
+  }
 }

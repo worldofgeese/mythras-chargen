@@ -2,9 +2,9 @@
   "source": "A Bird in the Hand (The Design Mechanism, Monster Island adventure)",
   "author": "John Holmes",
   "extracted_at": "2026-05-16",
-  "verified": true,
-  "verified_at": "2026-05-17",
-  "verification_notes": "Vision-verified all spirit stats against Bird in Hand PDF p.43-46 page images. Corrected Whulla POW/CHA, filled all previously UNVERIFIED entries with actual PDF data.",
+  "verified": false,
+  "verified_at": null,
+  "verification_notes": "Legacy 2026-05-17 vision-verification note is preserved under attestation. Current work records source identity and renders target pages, but does not accept these facts as verified because bounded page/block extraction artifacts and independent verifier metadata are missing.",
   "purpose": "Demonstrates how spirits are statted, described, and used in play. Provides concrete examples of spirit stat blocks at various intensities for use as templates in chargen.",
   "spirit_stat_block_format": {
     "description": "Each spirit has a name, type, intensity, characteristics, derived skills, and abilities. Also includes a narrative description of how the spirit manifests.",
@@ -58,13 +58,13 @@
       "page": "p.43",
       "source_ref": {
         "source_id": "bird-in-hand",
-        "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+        "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
         "pdf_page": 43,
         "page_manifest_path": "references/sources/pages/bird-in-hand.json",
         "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_source_blocked",
+        "evidence_state": "rendered_pages_pending_independent_vision_verification",
         "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_state": "rendered_no_page_block_evidence"
       }
     },
     {
@@ -94,13 +94,13 @@
       "page": "p.43",
       "source_ref": {
         "source_id": "bird-in-hand",
-        "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+        "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
         "pdf_page": 43,
         "page_manifest_path": "references/sources/pages/bird-in-hand.json",
         "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_source_blocked",
+        "evidence_state": "rendered_pages_pending_independent_vision_verification",
         "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_state": "rendered_no_page_block_evidence"
       }
     },
     {
@@ -131,13 +131,13 @@
       "page": "p.44",
       "source_ref": {
         "source_id": "bird-in-hand",
-        "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+        "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
         "pdf_page": 44,
         "page_manifest_path": "references/sources/pages/bird-in-hand.json",
         "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_source_blocked",
+        "evidence_state": "rendered_pages_pending_independent_vision_verification",
         "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_state": "rendered_no_page_block_evidence"
       }
     },
     {
@@ -167,13 +167,13 @@
       "page": "p.44-45",
       "source_ref": {
         "source_id": "bird-in-hand",
-        "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+        "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
         "pdf_page": 44,
         "page_manifest_path": "references/sources/pages/bird-in-hand.json",
         "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_source_blocked",
+        "evidence_state": "rendered_pages_pending_independent_vision_verification",
         "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_state": "rendered_no_page_block_evidence"
       }
     },
     {
@@ -204,13 +204,13 @@
       "page": "p.45",
       "source_ref": {
         "source_id": "bird-in-hand",
-        "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+        "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
         "pdf_page": 45,
         "page_manifest_path": "references/sources/pages/bird-in-hand.json",
         "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_source_blocked",
+        "evidence_state": "rendered_pages_pending_independent_vision_verification",
         "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_state": "rendered_no_page_block_evidence"
       }
     },
     {
@@ -240,13 +240,13 @@
       "page": "p.45",
       "source_ref": {
         "source_id": "bird-in-hand",
-        "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+        "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
         "pdf_page": 45,
         "page_manifest_path": "references/sources/pages/bird-in-hand.json",
         "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_source_blocked",
+        "evidence_state": "rendered_pages_pending_independent_vision_verification",
         "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_state": "rendered_no_page_block_evidence"
       }
     },
     {
@@ -276,13 +276,13 @@
       "page": "p.45",
       "source_ref": {
         "source_id": "bird-in-hand",
-        "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+        "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
         "pdf_page": 45,
         "page_manifest_path": "references/sources/pages/bird-in-hand.json",
         "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_source_blocked",
+        "evidence_state": "rendered_pages_pending_independent_vision_verification",
         "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_state": "rendered_no_page_block_evidence"
       }
     },
     {
@@ -312,13 +312,13 @@
       "page": "p.45",
       "source_ref": {
         "source_id": "bird-in-hand",
-        "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+        "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
         "pdf_page": 45,
         "page_manifest_path": "references/sources/pages/bird-in-hand.json",
         "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_source_blocked",
+        "evidence_state": "rendered_pages_pending_independent_vision_verification",
         "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_state": "rendered_no_page_block_evidence"
       }
     },
     {
@@ -348,13 +348,13 @@
       "page": "p.45-46",
       "source_ref": {
         "source_id": "bird-in-hand",
-        "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+        "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
         "pdf_page": 45,
         "page_manifest_path": "references/sources/pages/bird-in-hand.json",
         "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_source_blocked",
+        "evidence_state": "rendered_pages_pending_independent_vision_verification",
         "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_state": "rendered_no_page_block_evidence"
       }
     }
   ],
@@ -405,15 +405,15 @@
   },
   "source_ref": {
     "source_id": "bird-in-hand",
-    "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+    "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
     "manifest_path": "references/sources/manifest.json",
     "page_manifest_path": "references/sources/pages/bird-in-hand.json",
     "coverage_state": "blocked",
-    "evidence_state": "legacy_vision_claim_source_blocked",
+    "evidence_state": "rendered_pages_pending_independent_vision_verification",
     "gaps": [
-      "source sha256 is not recorded",
-      "source page count is not recorded",
-      "no committed page/block evidence or verifier run metadata is available"
+      "No bounded page/block extraction artifact has been committed for Bird pages 43-46.",
+      "No independent verifier artifact has been produced from a true vision-only pass in this environment.",
+      "Legacy spirit facts therefore remain not accepted as normalized source authority."
     ],
     "legacy_cited_pages": [
       43,
@@ -423,15 +423,15 @@
     ]
   },
   "attestation": {
-    "status": "source_blocked",
+    "status": "rendered_pending_vision_verification",
     "legacy_verified": true,
     "legacy_verified_at": "2026-05-17",
     "legacy_verification_notes": "Vision-verified all spirit stats against Bird in Hand PDF p.43-46 page images. Corrected Whulla POW/CHA, filled all previously UNVERIFIED entries with actual PDF data.",
-    "authority_state": "not_accepted_without_portable_source_page_block_evidence",
+    "authority_state": "not_accepted_without_committed_page_block_evidence_and_independent_verifier",
     "gaps": [
-      "source sha256 is not recorded",
-      "source page count is not recorded",
-      "no committed page/block evidence or verifier run metadata is available"
+      "No bounded page/block extraction artifact has been committed for Bird pages 43-46.",
+      "No independent verifier artifact has been produced from a true vision-only pass in this environment.",
+      "Legacy spirit facts therefore remain not accepted as normalized source authority."
     ]
   }
 }

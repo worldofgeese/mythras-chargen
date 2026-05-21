@@ -58,6 +58,17 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def png_dimensions(path: Path) -> dict[str, int]:
+    with path.open("rb") as handle:
+        header = handle.read(24)
+    if len(header) < 24 or header[:8] != b"\x89PNG\r\n\x1a\n" or header[12:16] != b"IHDR":
+        raise SystemExit(f"{path}: rendered output is not a valid PNG")
+    return {
+        "width": int.from_bytes(header[16:20], "big"),
+        "height": int.from_bytes(header[20:24], "big"),
+    }
+
+
 def require_renderable(source: dict) -> Path:
     if source.get("lifecycle_state") != "active":
         raise SystemExit(f"{source.get('source_id')}: source state {source.get('lifecycle_state')} blocks rendering")
@@ -89,6 +100,7 @@ def render_page(source: dict, pdf_path: Path, page: int, cache_root: Path, updat
     command = [renderer, "-f", str(page), "-l", str(page), "-r", dpi, "-png", "-singlefile", str(pdf_path), str(out_prefix)]
     subprocess.run(command, cwd=ROOT, check=True)
     image_hash = sha256_file(output_png)
+    dimensions = png_dimensions(output_png)
 
     if update_manifest:
         page_path = PAGE_DIR / f"{source_id}.json"
@@ -101,6 +113,7 @@ def render_page(source: dict, pdf_path: Path, page: int, cache_root: Path, updat
                     "status": "rendered",
                     "cache_path": str(output_png.relative_to(ROOT)),
                     "image_sha256": image_hash,
+                    "dimensions": dimensions,
                     "renderer": "pdftoppm",
                     "dpi": int(dpi),
                 })
@@ -116,6 +129,7 @@ def render_page(source: dict, pdf_path: Path, page: int, cache_root: Path, updat
                     "status": "rendered",
                     "cache_path": str(output_png.relative_to(ROOT)),
                     "image_sha256": image_hash,
+                    "dimensions": dimensions,
                     "renderer": "pdftoppm",
                     "dpi": int(dpi),
                 },
