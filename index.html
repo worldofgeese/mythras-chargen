@@ -4029,18 +4029,15 @@ function getSecondaryPlaceholderFor(skillName) {
   return null;
 }
 
-function getProfessionalSkillPickerOptions(professionalSkills) {
-  const skills = Array.isArray(professionalSkills) ? professionalSkills : [];
-  const skillSet = new Set(skills);
-  const seenSkills = new Set();
-
-  return skills.filter(skill => {
-    const primary = getPrimaryPlaceholderFor(skill);
-    if (primary && skillSet.has(primary)) return false;
-    if (seenSkills.has(skill)) return false;
-    seenSkills.add(skill);
-    return true;
-  });
+function getProfessionalSkillChoiceLabel(skillName) {
+  const parsed = parsePlaceholderSkill(skillName);
+  if (!parsed) return skillName;
+  const hint = parsed.hint.toLowerCase();
+  if (hint === 'primary') return `${parsed.category} (specialty 1)`;
+  if (hint === 'secondary') return `${parsed.category} (specialty 2)`;
+  if (hint === 'primary catch') return `${parsed.category} (catch specialty 1)`;
+  if (hint === 'secondary catch') return `${parsed.category} (catch specialty 2)`;
+  return skillName;
 }
 
 function isProfessionalSkillSelected(skillName) {
@@ -11043,7 +11040,7 @@ App.renderCareerDetails = function() {
       ${career.professionalSkills && career.professionalSkills.length > 0 ? `
         <h4 style="margin-top: 15px;">Professional Skills (choose 3)</h4>
         <div id="professional-skills-picker" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 8px; margin-top: 8px;">
-          ${getProfessionalSkillPickerOptions(career.professionalSkills).map(skill => {
+          ${career.professionalSkills.map(skill => {
             const needsSpec = needsDisambiguation(skill);
             const requiredPrimary = getPrimaryPlaceholderFor(skill);
             const isDisabled = Boolean(requiredPrimary && !isProfessionalSkillSelected(requiredPrimary));
@@ -11087,9 +11084,10 @@ App.renderCareerDetails = function() {
             }
             const resolvedSpec = resolved ? (resolved.match(/\((.+)\)/) || [])[1] || '' : '';
             const skillAttr = this.escapeHtmlAttr(skill);
-            const skillLabel = this.escapeHtml(skill);
+            const skillLabel = this.escapeHtml(getProfessionalSkillChoiceLabel(skill));
             const resolvedSpecAttr = this.escapeHtmlAttr(resolvedSpec);
-            const disabledTitle = isDisabled ? ` title="Select ${this.escapeHtmlAttr(requiredPrimary)} first" disabled` : '';
+            const requiredPrimaryLabel = requiredPrimary ? getProfessionalSkillChoiceLabel(requiredPrimary) : '';
+            const disabledTitle = isDisabled ? ` title="Select ${this.escapeHtmlAttr(requiredPrimaryLabel)} first" disabled` : '';
             return `<div>
               <label style="font-size: 13px;">
                 <input type="checkbox"

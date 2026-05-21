@@ -1180,7 +1180,7 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
   }
 }
 
-// Test 1.12b: Professional skill picker deduplicates Primary/Secondary placeholders
+// Test 1.12b: Professional skill picker preserves Primary/Secondary specialty slots with clearer labels
 {
   const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
   if (AppObj && AppObj.renderCareerDetails && AppObj.toggleProfessionalSkill && AppObj.resolveProfessionalSkill && CD) {
@@ -1191,27 +1191,43 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
     CD._disambiguationMap = {};
     _sandbox.alert = () => {};
 
-    const html = AppObj.renderCareerDetails();
-    const primaryMatches = html.match(/data-skill="Lore \(Primary\)"/g) || [];
-    const secondaryPresent = html.includes('data-skill="Lore (Secondary)"');
+    const initialHtml = AppObj.renderCareerDetails();
+    const primaryMatches = initialHtml.match(/data-skill="Lore \(Primary\)"/g) || [];
+    const secondaryMatches = initialHtml.match(/data-skill="Lore \(Secondary\)"/g) || [];
+    const labelsAreClear = initialHtml.includes('Lore (specialty 1)') &&
+      initialHtml.includes('Lore (specialty 2)') &&
+      initialHtml.includes('title="Select Lore (specialty 1) first"') &&
+      !initialHtml.includes('> Lore (Primary)') &&
+      !initialHtml.includes('> Lore (Secondary)');
+    const secondaryInitiallyDisabled = /data-skill="Lore \(Secondary\)"[\s\S]*?disabled/.test(initialHtml);
+    const rejectedBeforePrimary = AppObj.toggleProfessionalSkill('Lore (Secondary)', true) === false;
+
     AppObj.toggleProfessionalSkill('Lore (Primary)', true);
     AppObj.resolveProfessionalSkill('Lore (Primary)', 'Wolves');
-    const specializationPreserved = CD.selectedProfessionalSkills.includes('Lore (Wolves)') &&
+    const afterPrimaryHtml = AppObj.renderCareerDetails();
+    const secondaryEnabledAfterPrimary = /data-skill="Lore \(Secondary\)"[\s\S]*?disabled/.test(afterPrimaryHtml) === false;
+    AppObj.toggleProfessionalSkill('Lore (Secondary)', true);
+    AppObj.resolveProfessionalSkill('Lore (Secondary)', 'Local Legends');
+    const bothSpecialtiesPreserved = CD.selectedProfessionalSkills.includes('Lore (Wolves)') &&
+      CD.selectedProfessionalSkills.includes('Lore (Local Legends)') &&
       Object.prototype.hasOwnProperty.call(CD.careerSkills, 'Lore (Wolves)') &&
-      CD._disambiguationMap['career:Lore (Primary)'] === 'Lore (Wolves)';
+      Object.prototype.hasOwnProperty.call(CD.careerSkills, 'Lore (Local Legends)') &&
+      CD._disambiguationMap['career:Lore (Primary)'] === 'Lore (Wolves)' &&
+      CD._disambiguationMap['career:Lore (Secondary)'] === 'Lore (Local Legends)';
 
-    if (primaryMatches.length === 1 && !secondaryPresent && specializationPreserved) {
-      pass('Professional skill picker deduplicates Lore Primary/Secondary and preserves specialization');
+    if (primaryMatches.length === 1 && secondaryMatches.length === 1 && labelsAreClear &&
+        secondaryInitiallyDisabled && rejectedBeforePrimary && secondaryEnabledAfterPrimary && bothSpecialtiesPreserved) {
+      pass('Professional skill picker preserves two Lore specialty slots with clear labels');
     } else {
-      fail('Professional skill picker shows duplicate Lore Primary/Secondary options',
-        JSON.stringify({ primaryCount: primaryMatches.length, secondaryPresent, specializationPreserved, selected: CD.selectedProfessionalSkills, careerSkills: CD.careerSkills }));
+      fail('Professional skill picker mishandles two Lore specialty slots',
+        JSON.stringify({ primaryCount: primaryMatches.length, secondaryCount: secondaryMatches.length, labelsAreClear, secondaryInitiallyDisabled, rejectedBeforePrimary, secondaryEnabledAfterPrimary, bothSpecialtiesPreserved, selected: CD.selectedProfessionalSkills, careerSkills: CD.careerSkills, map: CD._disambiguationMap }));
     }
   } else {
-    fail('Professional skill picker unavailable for Primary/Secondary dedupe test');
+    fail('Professional skill picker unavailable for Primary/Secondary slot test');
   }
 }
 
-// Test 1.12c: Professional skill picker deduplicates Primary/Secondary Catch placeholders
+// Test 1.12c: Professional skill picker preserves Primary/Secondary Catch specialty slots with clearer labels
 {
   const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
   if (AppObj && AppObj.renderCareerDetails && AppObj.toggleProfessionalSkill && AppObj.resolveProfessionalSkill && CD) {
@@ -1222,23 +1238,39 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
     CD._disambiguationMap = {};
     _sandbox.alert = () => {};
 
-    const html = AppObj.renderCareerDetails();
-    const primaryCatchMatches = html.match(/data-skill="Lore \(Primary Catch\)"/g) || [];
-    const secondaryCatchPresent = html.includes('data-skill="Lore (Secondary Catch)"');
+    const initialHtml = AppObj.renderCareerDetails();
+    const primaryCatchMatches = initialHtml.match(/data-skill="Lore \(Primary Catch\)"/g) || [];
+    const secondaryCatchMatches = initialHtml.match(/data-skill="Lore \(Secondary Catch\)"/g) || [];
+    const labelsAreClear = initialHtml.includes('Lore (catch specialty 1)') &&
+      initialHtml.includes('Lore (catch specialty 2)') &&
+      initialHtml.includes('title="Select Lore (catch specialty 1) first"') &&
+      !initialHtml.includes('> Lore (Primary Catch)') &&
+      !initialHtml.includes('> Lore (Secondary Catch)');
+    const secondaryInitiallyDisabled = /data-skill="Lore \(Secondary Catch\)"[\s\S]*?disabled/.test(initialHtml);
+    const rejectedBeforePrimary = AppObj.toggleProfessionalSkill('Lore (Secondary Catch)', true) === false;
+
     AppObj.toggleProfessionalSkill('Lore (Primary Catch)', true);
     AppObj.resolveProfessionalSkill('Lore (Primary Catch)', 'River Fish');
-    const specializationPreserved = CD.selectedProfessionalSkills.includes('Lore (River Fish)') &&
+    const afterPrimaryHtml = AppObj.renderCareerDetails();
+    const secondaryEnabledAfterPrimary = /data-skill="Lore \(Secondary Catch\)"[\s\S]*?disabled/.test(afterPrimaryHtml) === false;
+    AppObj.toggleProfessionalSkill('Lore (Secondary Catch)', true);
+    AppObj.resolveProfessionalSkill('Lore (Secondary Catch)', 'Lake Fish');
+    const bothSpecialtiesPreserved = CD.selectedProfessionalSkills.includes('Lore (River Fish)') &&
+      CD.selectedProfessionalSkills.includes('Lore (Lake Fish)') &&
       Object.prototype.hasOwnProperty.call(CD.careerSkills, 'Lore (River Fish)') &&
-      CD._disambiguationMap['career:Lore (Primary Catch)'] === 'Lore (River Fish)';
+      Object.prototype.hasOwnProperty.call(CD.careerSkills, 'Lore (Lake Fish)') &&
+      CD._disambiguationMap['career:Lore (Primary Catch)'] === 'Lore (River Fish)' &&
+      CD._disambiguationMap['career:Lore (Secondary Catch)'] === 'Lore (Lake Fish)';
 
-    if (primaryCatchMatches.length === 1 && !secondaryCatchPresent && specializationPreserved) {
-      pass('Professional skill picker deduplicates Lore Primary/Secondary Catch and preserves specialization');
+    if (primaryCatchMatches.length === 1 && secondaryCatchMatches.length === 1 && labelsAreClear &&
+        secondaryInitiallyDisabled && rejectedBeforePrimary && secondaryEnabledAfterPrimary && bothSpecialtiesPreserved) {
+      pass('Professional skill picker preserves two catch specialty slots with clear labels');
     } else {
-      fail('Professional skill picker shows duplicate Lore Primary/Secondary Catch options',
-        JSON.stringify({ primaryCatchCount: primaryCatchMatches.length, secondaryCatchPresent, specializationPreserved, selected: CD.selectedProfessionalSkills, careerSkills: CD.careerSkills, map: CD._disambiguationMap }));
+      fail('Professional skill picker mishandles two catch specialty slots',
+        JSON.stringify({ primaryCatchCount: primaryCatchMatches.length, secondaryCatchCount: secondaryCatchMatches.length, labelsAreClear, secondaryInitiallyDisabled, rejectedBeforePrimary, secondaryEnabledAfterPrimary, bothSpecialtiesPreserved, selected: CD.selectedProfessionalSkills, careerSkills: CD.careerSkills, map: CD._disambiguationMap }));
     }
   } else {
-    fail('Professional skill picker unavailable for Primary/Secondary Catch dedupe test');
+    fail('Professional skill picker unavailable for Primary/Secondary Catch slot test');
   }
 }
 
