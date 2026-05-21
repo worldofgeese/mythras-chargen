@@ -27,6 +27,17 @@ This project uses Home Manager `bd` (beads) for durable issue tracking.
 - Use `bd remember "insight"` for persistent project memory; do not create `MEMORY.md` files.
 - Do not use markdown TODO lists for task tracking.
 
+#### Fan-out and subagent prompts
+
+When orchestrating parallel or serial subagents, the parent agent must pass the repo contract into each subagent prompt instead of relying on ambient context.
+
+- Tell every subagent to read and obey `AGENTS.md` and `.decapod/OVERRIDE.md` before editing.
+- Tell every subagent to run `bd prime` and use Beads for durable task tracking; do not create or claim `decapod todo` work items.
+- Include the relevant Beads issue ID or require the subagent to create/claim a Beads issue before implementation.
+- Include required proof gates for the affected files: `node test-chargen.js`, `node test-agent-api.mjs` after magic/build changes, `./scripts/ingest-cults.py --validate` after cult/reference data changes, `decapod validate`, and human-style `agent-browser` QA after `index.html` changes.
+- Include Copyparty sync and verification rules whenever a subagent may touch mirrored files.
+- Treat subagent work as provisional until the orchestrator verifies the diff, proof gates, Beads state, and Copyparty obligations.
+
 #### Project architecture
 
 - Single-file vanilla HTML app: `index.html`.
