@@ -14,6 +14,16 @@ dist/
 references/aig-raw/AiG.pdf
 /.agent-shell/
 
+# Source attestation local/generated artifacts
+.cache/
+references/sources/pdfs/
+references/sources/rendered-pages/
+references/sources/cache/
+references/sources/scratch/
+references/sources/**/*.pdf
+references/sources/**/*.png
+references/sources/**/*.tmp
+
 # BEGIN swamp managed section - DO NOT EDIT
 
 # Runtime data (not needed in version control)

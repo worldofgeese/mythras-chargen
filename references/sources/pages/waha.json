@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "schema": "references/sources/schema.json#/schemas/page_coverage",
+  "source_id": "waha",
+  "source_revision_id": "waha:references-cults-upstream-praxian-waha-pdf:688c0d9a5303:2026-05-21",
+  "coverage_state": "pending",
+  "coverage_mode": "scaffold",
+  "expected_page_count": 2,
+  "pages": [
+    {
+      "pdf_page": 1,
+      "printed_page_label": "1",
+      "source_revision_id": "waha:references-cults-upstream-praxian-waha-pdf:688c0d9a5303:2026-05-21",
+      "work_state": "pending",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/waha/page-0001.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Scaffold only; no page image or text evidence committed."
+    },
+    {
+      "pdf_page": 2,
+      "printed_page_label": "2",
+      "source_revision_id": "waha:references-cults-upstream-praxian-waha-pdf:688c0d9a5303:2026-05-21",
+      "work_state": "pending",
+      "contributes": null,
+      "render": {
+        "status": "not_rendered",
+        "cache_path": ".cache/source-pages/waha/page-0002.png",
+        "image_sha256": null,
+        "dimensions": null
+      },
+      "extraction": null,
+      "verification": null,
+      "derived_facts": [],
+      "notes": "Scaffold only; no page image or text evidence committed."
+    }
+  ],
+  "known_ranges": [
+    {
+      "label": "Waha one-pager",
+      "pages": "1-2",
+      "state": "pending"
+    }
+  ],
+  "blockers": [],
+  "notes": "Active source metadata is present, but rendering/extraction has not been performed in this unit."
+}

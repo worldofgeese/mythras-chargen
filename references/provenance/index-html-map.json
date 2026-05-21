@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "schema": "references/provenance/schema.json#/provenance_map_schema",
+  "source": "index.html",
+  "generated_at": "2026-05-21",
+  "map_state": "scaffold",
+  "notes": "Foundation-level constant coverage only. Fact-level canonical hashes and source page/block refs are intentionally pending until U5-U10 source-specific extraction units.",
+  "entries": [
+    {
+      "constant_name": "SKILLS_DATA",
+      "status": "pending_fact_map",
+      "disposition": "governed-now",
+      "source_files": [
+        "references/mythras-raw/standard-skills.json",
+        "references/mythras-raw/professional-skills.json"
+      ],
+      "source_ids": [],
+      "rationale": "Inline skill data is exported and must remain classified even while base Mythras raw files are outside this fan-out."
+    },
+    {
+      "constant_name": "WEAPONS_DATA",
+      "status": "pending_fact_map",
+      "disposition": "governed-now",
+      "source_files": [
+        "references/weapons-attestation.json"
+      ],
+      "source_ids": [],
+      "rationale": "Inline weapon data maps to current weapons attestation."
+    },
+    {
+      "constant_name": "COMBAT_STYLES_DATA",
+      "status": "pending_fact_map",
+      "disposition": "governed-now",
+      "source_files": [
+        "references/combat-styles.json"
+      ],
+      "source_ids": [
+        "cse"
+      ],
+      "rationale": "Inline combat styles map to current CSE-derived authority."
+    },
+    {
+      "constant_name": "CULTURES_DATA",
+      "status": "pending_fact_map",
+      "disposition": "migrate-in-this-plan",
+      "source_files": [
+        "references/aig-raw/cultures.json"
+      ],
+      "source_ids": [
+        "aig"
+      ],
+      "rationale": "AiG culture constants await U5/U8 verified extraction."
+    },
+    {
+      "constant_name": "CULTURE_BUILDS",
+      "status": "pending_fact_map",
+      "disposition": "migrate-in-this-plan",
+      "source_files": [
+        "references/aig-raw/equipment-aig.json",
+        "references/aig-raw/cultures.json"
+      ],
+      "source_ids": [
+        "aig"
+      ],
+      "rationale": "Culture builds await verified AiG rebuild."
+    },
+    {
+      "constant_name": "CULTURE_MAGIC_PROFILES",
+      "status": "pending_fact_map",
+      "disposition": "migrate-in-this-plan",
+      "source_files": [
+        "references/aig-raw/culture-magic-profiles-aig.json"
+      ],
+      "source_ids": [
+        "aig"
+      ],
+      "rationale": "Magic profiles await verified AiG rebuild."
+    },
+    {
+      "constant_name": "CAREERS_DATA",
+      "status": "pending_fact_map",
+      "disposition": "governed-now",
+      "source_files": [
+        "references/mythras-raw/careers-detail.json"
+      ],
+      "source_ids": [],
+      "rationale": "Base career data is classified for coverage; source-specific rebuild is outside this fan-out."
+    },
+    {
+      "constant_name": "CULTS_DATA",
+      "status": "pending_fact_map",
+      "disposition": "migrate-in-this-plan",
+      "source_files": [
+        "references/cults-raw/cults.json"
+      ],
+      "source_ids": [
+        "waha"
+      ],
+      "rationale": "Cult constants await later cult/Waha provenance tightening."
+    },
+    {
+      "constant_name": "CULTURE_CULT_MAP",
+      "status": "pending_fact_map",
+      "disposition": "governed-now",
+      "source_files": [
+        "references/culture-cult-map.json"
+      ],
+      "source_ids": [
+        "waha"
+      ],
+      "rationale": "Culture/cult map has reviewed citations and is in current governance."
+    },
+    {
+      "constant_name": "DISAMBIGUATION_LISTS",
+      "status": "pending_fact_map",
+      "disposition": "governed-now",
+      "source_files": [
+        "references/disambiguation-lists.json"
+      ],
+      "source_ids": [],
+      "rationale": "Skill disambiguation constants are governed by current reference data."
+    },
+    {
+      "constant_name": "MIRACLES_DATA",
+      "status": "pending_fact_map",
+      "disposition": "governed-now",
+      "source_files": [
+        "references/theism-miracles.json"
+      ],
+      "source_ids": [
+        "waha"
+      ],
+      "rationale": "Miracle constants are governed by current cleaned miracle authority."
+    },
+    {
+      "constant_name": "WEAPON_ALIASES",
+      "status": "pending_fact_map",
+      "disposition": "governed-now",
+      "source_files": [
+        "references/weapons-attestation.json"
+      ],
+      "source_ids": [],
+      "rationale": "Weapon aliases derive from weapon normalization authority."
+    },
+    {
+      "constant_name": "DATA_INDEXES",
+      "status": "pending_fact_map",
+      "disposition": "governed-now",
+      "source_files": [
+        "index.html"
+      ],
+      "source_ids": [],
+      "rationale": "Derived indexes are app-derived and covered by drift tests rather than source PDF provenance."
+    },
+    {
+      "constant_name": "HIT_LOCATIONS",
+      "status": "pending_fact_map",
+      "disposition": "governed-now",
+      "source_files": [
+        "references/mythras-raw/combat-resolution.json"
+      ],
+      "source_ids": [],
+      "rationale": "Base hit location table is classified for coverage."
+    },
+    {
+      "constant_name": "GLORANTHA_CULTURES_DATA",
+      "status": "superseded",
+      "disposition": "superseded",
+      "source_files": [],
+      "source_ids": [],
+      "rationale": "Historical export name is retained for compatibility but no current inline constant is required."
+    }
+  ]
+}

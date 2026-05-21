@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "schema": "references/sources/schema.json",
+  "generated_at": "2026-05-21",
+  "notes": "Foundation scaffold only. Pending/unavailable sources deliberately block render, extraction, normalization, and acceptance until hashes, page counts, and permissions are recorded from lawful local copies.",
+  "sources": [
+    {
+      "source_id": "aig",
+      "title": "Adventures in Glorantha GenCon Preview",
+      "edition": "GenCon 2015 Preview",
+      "authority_scope": [
+        "gloranthan cultures",
+        "AiG rune magic",
+        "AiG spirit magic"
+      ],
+      "canonical_locator": "https://copyparty.hound-celsius.ts.net/sources/books/Adventures%20in%20Glorantha%20GenCon%20Preview.pdf",
+      "local_hint": "references/sources/pdfs/aig.pdf",
+      "lifecycle_state": "permission_pending",
+      "source_revision_id": "aig:permission-pending:2026-05-21",
+      "sha256": null,
+      "size_bytes": null,
+      "page_count": 212,
+      "acquired_at": null,
+      "permission_basis": {
+        "status": "permission_pending",
+        "note": "TDM permission must be confirmed before new committed extraction evidence is promoted."
+      },
+      "precedence": "Primary Gloranthan culture and AiG magic source after future verified extraction; current raw records remain legacy until migrated.",
+      "render_contract": {
+        "renderer": "pdftoppm",
+        "renderer_version": "runtime-detected",
+        "dpi": 300,
+        "image_format": "png",
+        "color_mode": "rgb",
+        "args": [
+          "-r",
+          "300",
+          "-png",
+          "-singlefile"
+        ],
+        "cache_path_pattern": ".cache/source-pages/{source_id}/page-{pdf_page:04d}.png"
+      },
+      "blocks": [
+        "render",
+        "extraction",
+        "normalization",
+        "acceptance"
+      ],
+      "blockers": [
+        "sha256 unavailable in committed manifest",
+        "permission basis is not confirmed"
+      ]
+    },
+    {
+      "source_id": "cse",
+      "title": "Combat Styles Encyclopedia",
+      "edition": "unknown local copy",
+      "authority_scope": [
+        "combat style names",
+        "combat style weapons",
+        "combat style traits"
+      ],
+      "canonical_locator": "bibliographic:Combat Styles Encyclopedia",
+      "local_hint": "references/sources/pdfs/cse.pdf",
+      "lifecycle_state": "unavailable",
+      "source_revision_id": "cse:unavailable:106d7ad39e8b:2026-05-21",
+      "sha256": "106d7ad39e8b63d39cc6a5e79db7ec2f031b165b5c05017113bc13f2469841a6",
+      "size_bytes": null,
+      "page_count": null,
+      "acquired_at": null,
+      "permission_basis": {
+        "status": "confirmed",
+        "note": "Existing cse raw record states user confirmed permission; source PDF is not committed or available to this scaffold."
+      },
+      "precedence": "Supersedes AiG culture combat-style rows for app combat styles once page evidence is rebuilt.",
+      "render_contract": {
+        "renderer": "pdftoppm",
+        "renderer_version": "runtime-detected",
+        "dpi": 300,
+        "image_format": "png",
+        "color_mode": "rgb",
+        "args": [
+          "-r",
+          "300",
+          "-png",
+          "-singlefile"
+        ],
+        "cache_path_pattern": ".cache/source-pages/{source_id}/page-{pdf_page:04d}.png"
+      },
+      "blocks": [
+        "render",
+        "extraction",
+        "normalization",
+        "acceptance"
+      ],
+      "blockers": [
+        "portable source file and page count unavailable in this worktree"
+      ]
+    },
+    {
+      "source_id": "waha",
+      "title": "Waha Cult One-Pager",
+      "edition": "Notes from Pavis Cult One-Pagers 2019 v5.2",
+      "authority_scope": [
+        "Waha cult",
+        "Waha miracle and spirit-society data"
+      ],
+      "canonical_locator": "references/cults-upstream/Praxian/Waha.pdf",
+      "local_hint": "references/cults-upstream/Praxian/Waha.pdf",
+      "lifecycle_state": "active",
+      "source_revision_id": "waha:references-cults-upstream-praxian-waha-pdf:688c0d9a5303:2026-05-21",
+      "sha256": "688c0d9a5303bdfbbfc24ea0f03a1bd2a4d4b2ae702fb52df23f1f048dca199d",
+      "size_bytes": 101899,
+      "page_count": 2,
+      "acquired_at": "2026-05-21",
+      "permission_basis": {
+        "status": "public_fan_material",
+        "note": "Tracked Notes from Pavis one-pager used as existing project source authority; no new source PDF added by this unit."
+      },
+      "precedence": "Specific Waha one-pager evidence overrides aggregate cult raw records for Waha after future page verification.",
+      "render_contract": {
+        "renderer": "pdftoppm",
+        "renderer_version": "runtime-detected",
+        "dpi": 300,
+        "image_format": "png",
+        "color_mode": "rgb",
+        "args": [
+          "-r",
+          "300",
+          "-png",
+          "-singlefile"
+        ],
+        "cache_path_pattern": ".cache/source-pages/{source_id}/page-{pdf_page:04d}.png"
+      },
+      "blocks": [],
+      "blockers": []
+    },
+    {
+      "source_id": "bird-in-hand",
+      "title": "A Bird in the Hand",
+      "edition": "The Design Mechanism adventure",
+      "authority_scope": [
+        "example spirit stat blocks"
+      ],
+      "canonical_locator": "https://copyparty.hound-celsius.ts.net/sources/books/A-Bird-in-the-Hand.pdf",
+      "local_hint": "references/sources/pdfs/bird-in-hand.pdf",
+      "lifecycle_state": "permission_pending",
+      "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
+      "sha256": null,
+      "size_bytes": null,
+      "page_count": null,
+      "acquired_at": null,
+      "permission_basis": {
+        "status": "permission_pending",
+        "note": "Public/source locator exists for player use, but extraction permission and source hash are not recorded in this scaffold."
+      },
+      "precedence": "Spirit examples only; does not override Mythras Core animism rules.",
+      "render_contract": {
+        "renderer": "pdftoppm",
+        "renderer_version": "runtime-detected",
+        "dpi": 300,
+        "image_format": "png",
+        "color_mode": "rgb",
+        "args": [
+          "-r",
+          "300",
+          "-png",
+          "-singlefile"
+        ],
+        "cache_path_pattern": ".cache/source-pages/{source_id}/page-{pdf_page:04d}.png"
+      },
+      "blocks": [
+        "render",
+        "extraction",
+        "normalization",
+        "acceptance"
+      ],
+      "blockers": [
+        "sha256 unavailable in committed manifest",
+        "page count unavailable",
+        "permission basis is not confirmed"
+      ]
+    },
+    {
+      "source_id": "monster-island",
+      "title": "Monster Island",
+      "edition": "The Design Mechanism 2013",
+      "authority_scope": [
+        "spirit cult template examples",
+        "spirit abilities examples"
+      ],
+      "canonical_locator": "https://copyparty.hound-celsius.ts.net/sources/books/Monster-Island.pdf",
+      "local_hint": "references/sources/pdfs/monster-island.pdf",
+      "lifecycle_state": "permission_pending",
+      "source_revision_id": "monster-island:permission-pending:2026-05-21",
+      "sha256": null,
+      "size_bytes": null,
+      "page_count": null,
+      "acquired_at": null,
+      "permission_basis": {
+        "status": "permission_pending",
+        "note": "Existing raw record is explicitly unverified; new extraction is blocked until hash/page/permission metadata are recorded."
+      },
+      "precedence": "Template/example source only; raw legacy data remains blocked until vision verified.",
+      "render_contract": {
+        "renderer": "pdftoppm",
+        "renderer_version": "runtime-detected",
+        "dpi": 300,
+        "image_format": "png",
+        "color_mode": "rgb",
+        "args": [
+          "-r",
+          "300",
+          "-png",
+          "-singlefile"
+        ],
+        "cache_path_pattern": ".cache/source-pages/{source_id}/page-{pdf_page:04d}.png"
+      },
+      "blocks": [
+        "render",
+        "extraction",
+        "normalization",
+        "acceptance"
+      ],
+      "blockers": [
+        "sha256 unavailable in committed manifest",
+        "page count unavailable",
+        "permission basis is not confirmed"
+      ]
+    }
+  ]
+}

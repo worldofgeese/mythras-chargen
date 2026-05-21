@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "schema_id": "mythras-chargen.provenance.foundation.v1",
+  "purpose": "Contracts for legacy disposition, app constant coverage, stable fact mapping, and provenance validation.",
+  "artifact_classes": [
+    "source_pdf",
+    "player_facing_pdf",
+    "generated_artifact",
+    "template_app_asset",
+    "handout",
+    "normalized_authority_json",
+    "raw_legacy_json",
+    "fixture",
+    "foundation_control",
+    "app_runtime",
+    "out_of_scope_legacy_data"
+  ],
+  "dispositions": [
+    "governed-now",
+    "migrate-in-this-plan",
+    "superseded",
+    "exempt/out-of-scope",
+    "must-fix-before-acceptance"
+  ],
+  "app_constant_dispositions": [
+    "governed-now",
+    "migrate-in-this-plan",
+    "superseded",
+    "exempt/out-of-scope",
+    "must-fix-before-acceptance"
+  ],
+  "fact_statuses": [
+    "pending_fact_map",
+    "source_blocked",
+    "verified",
+    "normalized",
+    "accepted",
+    "stale",
+    "invalidated",
+    "superseded"
+  ],
+  "fact_id_namespaces": {
+    "app": "Inline index.html constants and app-facing records.",
+    "ref": "Normalized references/*.json authority records.",
+    "page": "Vision page evidence block records.",
+    "rule": "Derived or house-rule records."
+  },
+  "value_hash": {
+    "algorithm": "sha256",
+    "canonicalization": "Sort object keys recursively, preserve array order, NFC-normalize strings, serialize as compact UTF-8 JSON."
+  },
+  "legacy_disposition_schema": {
+    "required": [
+      "schemaVersion",
+      "dispositions",
+      "app_constants"
+    ],
+    "disposition_required": [
+      "id",
+      "artifact_class",
+      "disposition",
+      "required_scope",
+      "rationale"
+    ],
+    "path_selector_rule": "Each disposition must use exactly one of path, path_glob, or constant_name.",
+    "fail_closed_rule": "Every tracked source-like artifact and exported app data constant must match at least one disposition."
+  },
+  "provenance_map_schema": {
+    "required": [
+      "schemaVersion",
+      "source",
+      "entries"
+    ],
+    "entry_required": [
+      "constant_name",
+      "status",
+      "disposition"
+    ],
+    "accepted_entry_required": [
+      "fact_id",
+      "canonical_value_hash",
+      "source_refs",
+      "normalized_file",
+      "normalized_path"
+    ],
+    "source_ref_required": [
+      "source_id",
+      "source_revision_id",
+      "pdf_page",
+      "block_id"
+    ]
+  },
+  "validation_report_schema": {
+    "required": [
+      "schemaVersion",
+      "report_type",
+      "generated_by",
+      "status",
+      "inputs",
+      "summary"
+    ],
+    "input_hash_note": "Reports without an input tree hash are scaffold evidence and must be regenerated before acceptance."
+  },
+  "forbidden_markers": {
+    "governed_files": [
+      "UNVERIFIED",
+      "PLACEHOLDER",
+      "TODO_SOURCE"
+    ],
+    "known_ocr_name_prefixes": [
+      "^[?.:!]+[a-z]*\\s*",
+      "^[a-z]{1,4}\\s(?=[A-Z])",
+      "^\\(a\\):[a-z]*\\s*",
+      "^\\d[a-z?]*\\s+"
+    ]
+  },
+  "promotion_protocol": {
+    "base_tree_hash_required": true,
+    "single_writer_per_fact_namespace": true,
+    "stale_base_action": "fail validation with fact id, source id, and file path"
+  }
+}
