@@ -4,7 +4,7 @@
   "source_id": "monster-island",
   "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
   "coverage_state": "blocked",
-  "coverage_mode": "candidate-spirit-cult-pages-blocked",
+  "coverage_mode": "candidate-spirit-cult-pages-rendered-verification-blocked",
   "expected_page_count": null,
   "source_pdf": {
     "sha256": "dd79904483ab62766799e6480da7081cbcbbdd9cb1a608ecc5dfdeae7cce0782",
@@ -19,251 +19,421 @@
       "pdf_page": 133,
       "printed_page_label": "132",
       "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
-      "work_state": "blocked",
+      "work_state": "rendered",
       "contributes": null,
       "candidate_label": "Animism of the Savages / Cult Structure",
       "candidate_reason": "candidate source page for totemic animism overview and common cult-structure template",
       "render": {
-        "status": "not_rendered",
+        "status": "rendered",
         "cache_path": ".cache/source-pages/monster-island/page-0133.png",
-        "image_sha256": null,
-        "dimensions": null,
-        "blocked_reason": "render/extraction evidence remains blocked until permission and independent vision verification are available"
+        "image_sha256": "11ce9672f83e6b80a1a797e616240ca1bd45b6099dfdc6b4511735b4823170ac",
+        "dimensions": {
+          "width": 2550,
+          "height": 3301
+        },
+        "renderer": "pdftoppm",
+        "dpi": 300,
+        "rendered_at": "2026-05-21",
+        "source_pdf_sha256": "dd79904483ab62766799e6480da7081cbcbbdd9cb1a608ecc5dfdeae7cce0782"
       },
-      "extraction": null,
-      "verification": null,
+      "extraction": {
+        "status": "blocked_not_run",
+        "artifact_id": null,
+        "blocked_reason": "Permission basis remains pending; bounded extraction artifact was not produced.",
+        "allowed_future_scope": "Only bounded page/block extraction may be committed after permission/source authority is resolved."
+      },
+      "verification": {
+        "status": "blocked_not_run",
+        "independent": false,
+        "artifact_id": null,
+        "blocked_reason": "No independent verifier run was performed; verifier must use rendered page evidence without extractor output when unblocked."
+      },
       "derived_facts": [],
       "blockers": [
         "permission basis is not confirmed",
-        "page was not rendered through the committed vision workflow",
-        "no bounded vision extraction artifact or independent verifier metadata exists"
+        "bounded extraction artifact has not been produced",
+        "independent verifier artifact has not been produced",
+        "rendered page remains non-authoritative until extraction and verification are accepted"
       ],
-      "notes": "Blocked candidate page record only; located by local metadata/text scan and not accepted as source authority."
+      "notes": "Candidate page rendered into ignored cache for bounded evidence only; no extraction, verification, or accepted fact promotion."
     },
     {
       "pdf_page": 134,
       "printed_page_label": "133",
       "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
-      "work_state": "blocked",
+      "work_state": "rendered",
       "contributes": null,
       "candidate_label": "Cult Structure continued",
       "candidate_reason": "candidate source page for kahuna ranks and cult duties",
       "render": {
-        "status": "not_rendered",
+        "status": "rendered",
         "cache_path": ".cache/source-pages/monster-island/page-0134.png",
-        "image_sha256": null,
-        "dimensions": null,
-        "blocked_reason": "render/extraction evidence remains blocked until permission and independent vision verification are available"
+        "image_sha256": "1b1df756fb82bbead413ab0dda483c1aa278cab78af7c77b93a93a46fbc7db6e",
+        "dimensions": {
+          "width": 2550,
+          "height": 3301
+        },
+        "renderer": "pdftoppm",
+        "dpi": 300,
+        "rendered_at": "2026-05-21",
+        "source_pdf_sha256": "dd79904483ab62766799e6480da7081cbcbbdd9cb1a608ecc5dfdeae7cce0782"
       },
-      "extraction": null,
-      "verification": null,
+      "extraction": {
+        "status": "blocked_not_run",
+        "artifact_id": null,
+        "blocked_reason": "Permission basis remains pending; bounded extraction artifact was not produced.",
+        "allowed_future_scope": "Only bounded page/block extraction may be committed after permission/source authority is resolved."
+      },
+      "verification": {
+        "status": "blocked_not_run",
+        "independent": false,
+        "artifact_id": null,
+        "blocked_reason": "No independent verifier run was performed; verifier must use rendered page evidence without extractor output when unblocked."
+      },
       "derived_facts": [],
       "blockers": [
         "permission basis is not confirmed",
-        "page was not rendered through the committed vision workflow",
-        "no bounded vision extraction artifact or independent verifier metadata exists"
+        "bounded extraction artifact has not been produced",
+        "independent verifier artifact has not been produced",
+        "rendered page remains non-authoritative until extraction and verification are accepted"
       ],
-      "notes": "Blocked candidate page record only; located by local metadata/text scan and not accepted as source authority."
+      "notes": "Candidate page rendered into ignored cache for bounded evidence only; no extraction, verification, or accepted fact promotion."
     },
     {
       "pdf_page": 135,
       "printed_page_label": "134",
       "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
-      "work_state": "blocked",
+      "work_state": "rendered",
       "contributes": null,
       "candidate_label": "Membership",
       "candidate_reason": "candidate source page for membership/progression and fetishes",
       "render": {
-        "status": "not_rendered",
+        "status": "rendered",
         "cache_path": ".cache/source-pages/monster-island/page-0135.png",
-        "image_sha256": null,
-        "dimensions": null,
-        "blocked_reason": "render/extraction evidence remains blocked until permission and independent vision verification are available"
+        "image_sha256": "cd6136022e35d25955d395bba8d9aba12e5389b3fcfef361aa9a7ba7e4ce0046",
+        "dimensions": {
+          "width": 2550,
+          "height": 3301
+        },
+        "renderer": "pdftoppm",
+        "dpi": 300,
+        "rendered_at": "2026-05-21",
+        "source_pdf_sha256": "dd79904483ab62766799e6480da7081cbcbbdd9cb1a608ecc5dfdeae7cce0782"
       },
-      "extraction": null,
-      "verification": null,
+      "extraction": {
+        "status": "blocked_not_run",
+        "artifact_id": null,
+        "blocked_reason": "Permission basis remains pending; bounded extraction artifact was not produced.",
+        "allowed_future_scope": "Only bounded page/block extraction may be committed after permission/source authority is resolved."
+      },
+      "verification": {
+        "status": "blocked_not_run",
+        "independent": false,
+        "artifact_id": null,
+        "blocked_reason": "No independent verifier run was performed; verifier must use rendered page evidence without extractor output when unblocked."
+      },
       "derived_facts": [],
       "blockers": [
         "permission basis is not confirmed",
-        "page was not rendered through the committed vision workflow",
-        "no bounded vision extraction artifact or independent verifier metadata exists"
+        "bounded extraction artifact has not been produced",
+        "independent verifier artifact has not been produced",
+        "rendered page remains non-authoritative until extraction and verification are accepted"
       ],
-      "notes": "Blocked candidate page record only; located by local metadata/text scan and not accepted as source authority."
+      "notes": "Candidate page rendered into ignored cache for bounded evidence only; no extraction, verification, or accepted fact promotion."
     },
     {
       "pdf_page": 136,
       "printed_page_label": "135",
       "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
-      "work_state": "blocked",
+      "work_state": "rendered",
       "contributes": null,
       "candidate_label": "Shaman progression",
       "candidate_reason": "candidate source page for Worshipper/Shaman progression and fetch initiation",
       "render": {
-        "status": "not_rendered",
+        "status": "rendered",
         "cache_path": ".cache/source-pages/monster-island/page-0136.png",
-        "image_sha256": null,
-        "dimensions": null,
-        "blocked_reason": "render/extraction evidence remains blocked until permission and independent vision verification are available"
+        "image_sha256": "e9dda315b1109ee9517a77c0c431c9e631f5bf24eae011e4be42d866fc1a66b7",
+        "dimensions": {
+          "width": 2550,
+          "height": 3301
+        },
+        "renderer": "pdftoppm",
+        "dpi": 300,
+        "rendered_at": "2026-05-21",
+        "source_pdf_sha256": "dd79904483ab62766799e6480da7081cbcbbdd9cb1a608ecc5dfdeae7cce0782"
       },
-      "extraction": null,
-      "verification": null,
+      "extraction": {
+        "status": "blocked_not_run",
+        "artifact_id": null,
+        "blocked_reason": "Permission basis remains pending; bounded extraction artifact was not produced.",
+        "allowed_future_scope": "Only bounded page/block extraction may be committed after permission/source authority is resolved."
+      },
+      "verification": {
+        "status": "blocked_not_run",
+        "independent": false,
+        "artifact_id": null,
+        "blocked_reason": "No independent verifier run was performed; verifier must use rendered page evidence without extractor output when unblocked."
+      },
       "derived_facts": [],
       "blockers": [
         "permission basis is not confirmed",
-        "page was not rendered through the committed vision workflow",
-        "no bounded vision extraction artifact or independent verifier metadata exists"
+        "bounded extraction artifact has not been produced",
+        "independent verifier artifact has not been produced",
+        "rendered page remains non-authoritative until extraction and verification are accepted"
       ],
-      "notes": "Blocked candidate page record only; located by local metadata/text scan and not accepted as source authority."
+      "notes": "Candidate page rendered into ignored cache for bounded evidence only; no extraction, verification, or accepted fact promotion."
     },
     {
       "pdf_page": 137,
       "printed_page_label": "136",
       "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
-      "work_state": "blocked",
+      "work_state": "rendered",
       "contributes": null,
       "candidate_label": "High Shaman / Spirit Lord progression",
       "candidate_reason": "candidate source page for High Shaman and Spirit Lord responsibilities/gifts",
       "render": {
-        "status": "not_rendered",
+        "status": "rendered",
         "cache_path": ".cache/source-pages/monster-island/page-0137.png",
-        "image_sha256": null,
-        "dimensions": null,
-        "blocked_reason": "render/extraction evidence remains blocked until permission and independent vision verification are available"
+        "image_sha256": "9453280da8af1c598abdd0157d894a53a99024753b27b5761eb82557a084c9d5",
+        "dimensions": {
+          "width": 2550,
+          "height": 3301
+        },
+        "renderer": "pdftoppm",
+        "dpi": 300,
+        "rendered_at": "2026-05-21",
+        "source_pdf_sha256": "dd79904483ab62766799e6480da7081cbcbbdd9cb1a608ecc5dfdeae7cce0782"
       },
-      "extraction": null,
-      "verification": null,
+      "extraction": {
+        "status": "blocked_not_run",
+        "artifact_id": null,
+        "blocked_reason": "Permission basis remains pending; bounded extraction artifact was not produced.",
+        "allowed_future_scope": "Only bounded page/block extraction may be committed after permission/source authority is resolved."
+      },
+      "verification": {
+        "status": "blocked_not_run",
+        "independent": false,
+        "artifact_id": null,
+        "blocked_reason": "No independent verifier run was performed; verifier must use rendered page evidence without extractor output when unblocked."
+      },
       "derived_facts": [],
       "blockers": [
         "permission basis is not confirmed",
-        "page was not rendered through the committed vision workflow",
-        "no bounded vision extraction artifact or independent verifier metadata exists"
+        "bounded extraction artifact has not been produced",
+        "independent verifier artifact has not been produced",
+        "rendered page remains non-authoritative until extraction and verification are accepted"
       ],
-      "notes": "Blocked candidate page record only; located by local metadata/text scan and not accepted as source authority."
+      "notes": "Candidate page rendered into ignored cache for bounded evidence only; no extraction, verification, or accepted fact promotion."
     },
     {
       "pdf_page": 138,
       "printed_page_label": "137",
       "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
-      "work_state": "blocked",
+      "work_state": "rendered",
       "contributes": null,
       "candidate_label": "Allies and Enemies / Totemic Cult Spirits",
       "candidate_reason": "candidate source page for friendly/neutral/hostile spirit attitude rules",
       "render": {
-        "status": "not_rendered",
+        "status": "rendered",
         "cache_path": ".cache/source-pages/monster-island/page-0138.png",
-        "image_sha256": null,
-        "dimensions": null,
-        "blocked_reason": "render/extraction evidence remains blocked until permission and independent vision verification are available"
+        "image_sha256": "ce930c732347a9d42cffc5f9c222dd8ae998b50a70fc5accb2e9e487fe6347bc",
+        "dimensions": {
+          "width": 2550,
+          "height": 3301
+        },
+        "renderer": "pdftoppm",
+        "dpi": 300,
+        "rendered_at": "2026-05-21",
+        "source_pdf_sha256": "dd79904483ab62766799e6480da7081cbcbbdd9cb1a608ecc5dfdeae7cce0782"
       },
-      "extraction": null,
-      "verification": null,
+      "extraction": {
+        "status": "blocked_not_run",
+        "artifact_id": null,
+        "blocked_reason": "Permission basis remains pending; bounded extraction artifact was not produced.",
+        "allowed_future_scope": "Only bounded page/block extraction may be committed after permission/source authority is resolved."
+      },
+      "verification": {
+        "status": "blocked_not_run",
+        "independent": false,
+        "artifact_id": null,
+        "blocked_reason": "No independent verifier run was performed; verifier must use rendered page evidence without extractor output when unblocked."
+      },
       "derived_facts": [],
       "blockers": [
         "permission basis is not confirmed",
-        "page was not rendered through the committed vision workflow",
-        "no bounded vision extraction artifact or independent verifier metadata exists"
+        "bounded extraction artifact has not been produced",
+        "independent verifier artifact has not been produced",
+        "rendered page remains non-authoritative until extraction and verification are accepted"
       ],
-      "notes": "Blocked candidate page record only; located by local metadata/text scan and not accepted as source authority."
+      "notes": "Candidate page rendered into ignored cache for bounded evidence only; no extraction, verification, or accepted fact promotion."
     },
     {
       "pdf_page": 139,
       "printed_page_label": "138",
       "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
-      "work_state": "blocked",
+      "work_state": "rendered",
       "contributes": null,
       "candidate_label": "Totemic Cult Spirits table",
       "candidate_reason": "candidate source page for tribe cult spirit lists",
       "render": {
-        "status": "not_rendered",
+        "status": "rendered",
         "cache_path": ".cache/source-pages/monster-island/page-0139.png",
-        "image_sha256": null,
-        "dimensions": null,
-        "blocked_reason": "render/extraction evidence remains blocked until permission and independent vision verification are available"
+        "image_sha256": "ed964411aef0f8c74a8371d7dc5124dd9dbf538490db32c99340e6abf2f36f55",
+        "dimensions": {
+          "width": 2550,
+          "height": 3301
+        },
+        "renderer": "pdftoppm",
+        "dpi": 300,
+        "rendered_at": "2026-05-21",
+        "source_pdf_sha256": "dd79904483ab62766799e6480da7081cbcbbdd9cb1a608ecc5dfdeae7cce0782"
       },
-      "extraction": null,
-      "verification": null,
+      "extraction": {
+        "status": "blocked_not_run",
+        "artifact_id": null,
+        "blocked_reason": "Permission basis remains pending; bounded extraction artifact was not produced.",
+        "allowed_future_scope": "Only bounded page/block extraction may be committed after permission/source authority is resolved."
+      },
+      "verification": {
+        "status": "blocked_not_run",
+        "independent": false,
+        "artifact_id": null,
+        "blocked_reason": "No independent verifier run was performed; verifier must use rendered page evidence without extractor output when unblocked."
+      },
       "derived_facts": [],
       "blockers": [
         "permission basis is not confirmed",
-        "page was not rendered through the committed vision workflow",
-        "no bounded vision extraction artifact or independent verifier metadata exists"
+        "bounded extraction artifact has not been produced",
+        "independent verifier artifact has not been produced",
+        "rendered page remains non-authoritative until extraction and verification are accepted"
       ],
-      "notes": "Blocked candidate page record only; located by local metadata/text scan and not accepted as source authority."
+      "notes": "Candidate page rendered into ignored cache for bounded evidence only; no extraction, verification, or accepted fact promotion."
     },
     {
       "pdf_page": 140,
       "printed_page_label": "139",
       "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
-      "work_state": "blocked",
+      "work_state": "rendered",
       "contributes": null,
       "candidate_label": "Totemic Cult Spirits table continued",
       "candidate_reason": "candidate source page for tribe cult spirit lists and random spirit table",
       "render": {
-        "status": "not_rendered",
+        "status": "rendered",
         "cache_path": ".cache/source-pages/monster-island/page-0140.png",
-        "image_sha256": null,
-        "dimensions": null,
-        "blocked_reason": "render/extraction evidence remains blocked until permission and independent vision verification are available"
+        "image_sha256": "d08f2b091c8906e7784fa0f623c977059edb99a51d6e0a33eb127acf0b0548a8",
+        "dimensions": {
+          "width": 2550,
+          "height": 3301
+        },
+        "renderer": "pdftoppm",
+        "dpi": 300,
+        "rendered_at": "2026-05-21",
+        "source_pdf_sha256": "dd79904483ab62766799e6480da7081cbcbbdd9cb1a608ecc5dfdeae7cce0782"
       },
-      "extraction": null,
-      "verification": null,
+      "extraction": {
+        "status": "blocked_not_run",
+        "artifact_id": null,
+        "blocked_reason": "Permission basis remains pending; bounded extraction artifact was not produced.",
+        "allowed_future_scope": "Only bounded page/block extraction may be committed after permission/source authority is resolved."
+      },
+      "verification": {
+        "status": "blocked_not_run",
+        "independent": false,
+        "artifact_id": null,
+        "blocked_reason": "No independent verifier run was performed; verifier must use rendered page evidence without extractor output when unblocked."
+      },
       "derived_facts": [],
       "blockers": [
         "permission basis is not confirmed",
-        "page was not rendered through the committed vision workflow",
-        "no bounded vision extraction artifact or independent verifier metadata exists"
+        "bounded extraction artifact has not been produced",
+        "independent verifier artifact has not been produced",
+        "rendered page remains non-authoritative until extraction and verification are accepted"
       ],
-      "notes": "Blocked candidate page record only; located by local metadata/text scan and not accepted as source authority."
+      "notes": "Candidate page rendered into ignored cache for bounded evidence only; no extraction, verification, or accepted fact promotion."
     },
     {
       "pdf_page": 285,
       "printed_page_label": "284",
       "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
-      "work_state": "blocked",
+      "work_state": "rendered",
       "contributes": null,
       "candidate_label": "Appendix kahuna spirit loadouts",
       "candidate_reason": "candidate source page for Assistant Shaman and Shaman spirit loadout examples",
       "render": {
-        "status": "not_rendered",
+        "status": "rendered",
         "cache_path": ".cache/source-pages/monster-island/page-0285.png",
-        "image_sha256": null,
-        "dimensions": null,
-        "blocked_reason": "render/extraction evidence remains blocked until permission and independent vision verification are available"
+        "image_sha256": "7ce1de3efa353906b00f5f0eb556ede6b36c736e218cafa8e52c24f3688c7d5e",
+        "dimensions": {
+          "width": 2550,
+          "height": 3301
+        },
+        "renderer": "pdftoppm",
+        "dpi": 300,
+        "rendered_at": "2026-05-21",
+        "source_pdf_sha256": "dd79904483ab62766799e6480da7081cbcbbdd9cb1a608ecc5dfdeae7cce0782"
       },
-      "extraction": null,
-      "verification": null,
+      "extraction": {
+        "status": "blocked_not_run",
+        "artifact_id": null,
+        "blocked_reason": "Permission basis remains pending; bounded extraction artifact was not produced.",
+        "allowed_future_scope": "Only bounded page/block extraction may be committed after permission/source authority is resolved."
+      },
+      "verification": {
+        "status": "blocked_not_run",
+        "independent": false,
+        "artifact_id": null,
+        "blocked_reason": "No independent verifier run was performed; verifier must use rendered page evidence without extractor output when unblocked."
+      },
       "derived_facts": [],
       "blockers": [
         "permission basis is not confirmed",
-        "page was not rendered through the committed vision workflow",
-        "no bounded vision extraction artifact or independent verifier metadata exists"
+        "bounded extraction artifact has not been produced",
+        "independent verifier artifact has not been produced",
+        "rendered page remains non-authoritative until extraction and verification are accepted"
       ],
-      "notes": "Blocked candidate page record only; located by local metadata/text scan and not accepted as source authority."
+      "notes": "Candidate page rendered into ignored cache for bounded evidence only; no extraction, verification, or accepted fact promotion."
     },
     {
       "pdf_page": 286,
       "printed_page_label": "285",
       "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
-      "work_state": "blocked",
+      "work_state": "rendered",
       "contributes": null,
       "candidate_label": "Appendix high shaman spirit loadouts",
       "candidate_reason": "candidate source page for High Shaman spirit loadout examples",
       "render": {
-        "status": "not_rendered",
+        "status": "rendered",
         "cache_path": ".cache/source-pages/monster-island/page-0286.png",
-        "image_sha256": null,
-        "dimensions": null,
-        "blocked_reason": "render/extraction evidence remains blocked until permission and independent vision verification are available"
+        "image_sha256": "d5b1bac0fb057a7f3f990874f07834b216b209df786d060ba7654cd3071ad2c9",
+        "dimensions": {
+          "width": 2550,
+          "height": 3301
+        },
+        "renderer": "pdftoppm",
+        "dpi": 300,
+        "rendered_at": "2026-05-21",
+        "source_pdf_sha256": "dd79904483ab62766799e6480da7081cbcbbdd9cb1a608ecc5dfdeae7cce0782"
       },
-      "extraction": null,
-      "verification": null,
+      "extraction": {
+        "status": "blocked_not_run",
+        "artifact_id": null,
+        "blocked_reason": "Permission basis remains pending; bounded extraction artifact was not produced.",
+        "allowed_future_scope": "Only bounded page/block extraction may be committed after permission/source authority is resolved."
+      },
+      "verification": {
+        "status": "blocked_not_run",
+        "independent": false,
+        "artifact_id": null,
+        "blocked_reason": "No independent verifier run was performed; verifier must use rendered page evidence without extractor output when unblocked."
+      },
       "derived_facts": [],
       "blockers": [
         "permission basis is not confirmed",
-        "page was not rendered through the committed vision workflow",
-        "no bounded vision extraction artifact or independent verifier metadata exists"
+        "bounded extraction artifact has not been produced",
+        "independent verifier artifact has not been produced",
+        "rendered page remains non-authoritative until extraction and verification are accepted"
       ],
-      "notes": "Blocked candidate page record only; located by local metadata/text scan and not accepted as source authority."
+      "notes": "Candidate page rendered into ignored cache for bounded evidence only; no extraction, verification, or accepted fact promotion."
     }
   ],
   "known_ranges": [
@@ -271,31 +441,31 @@
       "label": "Animism of the Savages and totemic cult structure",
       "pdf_pages": "133-138",
       "printed_pages": "132-137",
-      "state": "blocked",
-      "reason": "Candidate range located by local text scan; no committed vision extraction or independent verification."
+      "state": "rendered_extraction_blocked",
+      "reason": "Candidate range rendered into ignored cache; extraction, independent verification, normalization, and acceptance remain blocked."
     },
     {
       "label": "Totemic cult spirit lists and spirit attitude examples",
       "pdf_pages": "139-140",
       "printed_pages": "138-139",
-      "state": "blocked",
-      "reason": "Candidate range located by local text scan; no committed vision extraction or independent verification."
+      "state": "rendered_extraction_blocked",
+      "reason": "Candidate range rendered into ignored cache; extraction, independent verification, normalization, and acceptance remain blocked."
     },
     {
       "label": "Appendix kahuna spirit loadout examples",
       "pdf_pages": "285-286",
       "printed_pages": "284-285",
-      "state": "blocked",
-      "reason": "Candidate range located by local text scan; no committed vision extraction or independent verification."
+      "state": "rendered_extraction_blocked",
+      "reason": "Candidate range rendered into ignored cache; extraction, independent verification, normalization, and acceptance remain blocked."
     }
   ],
   "blockers": [
-    "Source metadata is recorded, but permission basis remains pending.",
-    "Candidate pages have not been rendered through the committed vision workflow.",
-    "No bounded extraction artifact or independent verifier artifact exists for Monster Island pages.",
+    "Source metadata and candidate page renders are recorded, but permission basis remains pending.",
+    "No bounded extraction artifact exists for Monster Island pages.",
+    "No independent verifier artifact exists for Monster Island pages.",
     "Legacy raw extraction remains unverified and cannot act as source authority."
   ],
-  "notes": "Source PDF metadata and candidate page ranges are recorded without committing the PDF or page images. Monster Island remains blocked/non-authoritative until a vision extractor and independent verifier produce bounded page/block evidence.",
+  "notes": "Source PDF metadata and candidate page render hashes/dimensions are recorded without committing the PDF or page images. Monster Island remains blocked/non-authoritative until permission and independent vision verification produce accepted page/block evidence.",
   "source_access": {
     "public_copyparty_source": {
       "status": "available",
@@ -307,12 +477,25 @@
       "last_modified": "Wed, 20 May 2026 08:39:45 GMT"
     },
     "local_ignored_source": {
-      "status": "available_for_metadata_only",
+      "status": "available_for_render_cache",
       "path": "references/sources/pdfs/monster-island.pdf",
       "sha256": "dd79904483ab62766799e6480da7081cbcbbdd9cb1a608ecc5dfdeae7cce0782",
       "size_bytes": 10363314,
       "page_count": 298,
-      "git_tracked": false
+      "git_tracked": false,
+      "rendered_candidate_pages": [
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        285,
+        286
+      ],
+      "render_cache_path": ".cache/source-pages/monster-island/"
     }
   }
 }

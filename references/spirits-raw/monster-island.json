@@ -1,10 +1,10 @@
 {
   "source": "Monster Island (The Design Mechanism, 2013)",
   "chapter": "Chapter 6: Magic",
-  "pages": "UNVERIFIED - legacy pdftotext extraction; candidate PDF pages 133-140 and 285-286 identified by local text scan only",
+  "pages": "UNVERIFIED legacy pdftotext extraction; candidate PDF pages 133-140 and 285-286 are rendered into ignored cache with hashes/dimensions but extraction and independent verification remain blocked",
   "extracted_at": "2026-05-16",
   "verified": false,
-  "verification_notes": "Legacy extraction via pdftotext remains unverified. This unit located and fingerprinted the public Copyparty Monster Island PDF, then recorded candidate spirit/cult pages, but did not complete true vision extraction or independent verification.",
+  "verification_notes": "Legacy extraction via pdftotext remains unverified. This unit confirmed supplied Monster Island PDF metadata and rendered candidate pages into ignored cache, but did not produce bounded extraction artifacts, independent verifier artifacts, or accepted source authority.",
   "spirit_cult_template": {
     "description": "All of Monster Island's totemic cults follow an identical structure. This template is the Monster Island approach Hannu recommended for spirit cults.",
     "structure": {
@@ -254,12 +254,12 @@
     "manifest_path": "references/sources/manifest.json",
     "page_manifest_path": "references/sources/pages/monster-island.json",
     "coverage_state": "blocked",
-    "evidence_state": "source_metadata_recorded_vision_verification_blocked",
+    "evidence_state": "candidate_pages_rendered_extraction_and_verification_blocked",
     "gaps": [
       "permission basis is not confirmed",
-      "candidate pages were located by local text scan only",
-      "no committed page/block evidence or independent verifier run metadata is available",
-      "Monster Island remains non-authoritative until verified contributing pages exist"
+      "candidate pages are rendered into ignored cache but no bounded extraction artifact exists",
+      "no independent verifier artifact is available",
+      "Monster Island remains non-authoritative until accepted contributing pages exist"
     ],
     "candidate_pdf_pages": [
       133,
@@ -284,13 +284,13 @@
     "status": "source_blocked",
     "legacy_verified": false,
     "source_authority": false,
-    "authority_state": "blocked_until_verified_contributing_pages_exist",
-    "verification_notes": "Source metadata is recorded, but true vision extraction/independent verification has not been completed.",
+    "authority_state": "blocked_until_permission_and_verified_contributing_pages_exist",
+    "verification_notes": "Rendered candidate pages provide bounded page evidence only; no extraction or independent verification has been accepted.",
     "gaps": [
       "permission basis is not confirmed",
-      "candidate pages were located by local text scan only",
-      "no committed page/block evidence or independent verifier run metadata is available",
-      "Monster Island remains non-authoritative until verified contributing pages exist"
+      "candidate pages are rendered into ignored cache but no bounded extraction artifact exists",
+      "no independent verifier artifact is available",
+      "Monster Island remains non-authoritative until accepted contributing pages exist"
     ],
     "source_metadata": {
       "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
@@ -298,6 +298,18 @@
       "size_bytes": 10363314,
       "page_count": 298,
       "canonical_locator": "https://copyparty.hound-celsius.ts.net/sources/books/Monster-Island.pdf"
-    }
+    },
+    "rendered_candidate_pdf_pages": [
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      285,
+      286
+    ]
   }
 }

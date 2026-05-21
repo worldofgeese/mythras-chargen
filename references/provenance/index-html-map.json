@@ -225,10 +225,12 @@
       "status": "source_blocked",
       "disposition": "must-fix-before-acceptance",
       "source_files": [
-        "references/spirits-raw/bird-in-hand.json"
+        "references/spirits-raw/bird-in-hand.json",
+        "references/spirits-raw/monster-island.json"
       ],
       "source_ids": [
-        "bird-in-hand"
+        "bird-in-hand",
+        "monster-island"
       ],
       "source_refs": [
         {
@@ -242,7 +244,34 @@
       "external_source_gaps": [
         "mythras-core is cited by STARTING_SPIRITS but is not yet represented in the source manifest"
       ],
-      "rationale": "Starting spirit examples are app-facing legacy data; Bird in Hand source identity and target page renders now exist, but page/block extraction, independent vision verification, and Mythras Core manifest wiring remain future work."
+      "rationale": "Starting spirit examples are app-facing legacy data; Bird in Hand target page renders and Monster Island candidate page renders now exist, but page/block extraction, independent vision verification, Mythras Core manifest wiring, and accepted provenance remain future work.",
+      "blocked_candidate_sources": [
+        {
+          "source_id": "monster-island",
+          "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
+          "page_manifest_path": "references/sources/pages/monster-island.json",
+          "coverage_state": "blocked",
+          "authority_state": "non_authoritative",
+          "evidence_state": "rendered_pages_extraction_and_verification_blocked",
+          "candidate_pdf_pages": [
+            133,
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            285,
+            286
+          ],
+          "blocked_by": [
+            "permission basis remains pending",
+            "no bounded extraction artifact exists",
+            "no independent verifier artifact exists"
+          ]
+        }
+      ]
     }
   ]
 }
