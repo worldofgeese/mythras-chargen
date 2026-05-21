@@ -39,6 +39,11 @@ def validate() -> list[str]:
             errors.append(f"{page_path.relative_to(ROOT)}: invalid coverage_state {page_doc.get('coverage_state')}")
         if page_doc.get("coverage_state") == "blocked" and not page_doc.get("blockers"):
             errors.append(f"{page_path.relative_to(ROOT)}: blocked coverage requires blockers")
+        expected_page_count = page_doc.get("expected_page_count")
+        if expected_page_count is not None and (
+            not isinstance(expected_page_count, int) or expected_page_count <= 0
+        ):
+            errors.append(f"{page_path.relative_to(ROOT)}: expected_page_count must be a positive integer or null")
         seen_pages: set[int] = set()
         for record in page_doc.get("pages", []):
             page = record.get("pdf_page")
@@ -54,6 +59,15 @@ def validate() -> list[str]:
                 errors.append(f"{label}: source_revision_id mismatch")
             if record.get("work_state") in {"normalized", "accepted"} and not record.get("derived_facts"):
                 errors.append(f"{label}: normalized/accepted page requires derived_facts")
+        if isinstance(expected_page_count, int) and page_doc.get("pages"):
+            if len(page_doc.get("pages", [])) != expected_page_count:
+                errors.append(
+                    f"{page_path.relative_to(ROOT)}: expected {expected_page_count} page records, "
+                    f"found {len(page_doc.get('pages', []))}"
+                )
+            for page in range(1, expected_page_count + 1):
+                if page not in seen_pages:
+                    errors.append(f"{source_id}: missing pdf_page {page}")
     return errors
 
 

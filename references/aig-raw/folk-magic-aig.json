@@ -4,7 +4,7 @@
   "page": "p.63-68",
   "note": "AiG Folk Magic chapter (p.63-68) lists 45 Glorantha-specific/modified spells. Standard Mythras Core spells (Bladesharp, Heal, Alarm, etc.) are referenced by name in culture spell lists but not redefined here — see references/mythras-raw/folk-magic-spells.json for the core spell definitions. Culture-specific assignments from AiG culture chapters (p.26-41) preserved in spells_from_cultures.",
   "core_reference": "Mythras/RuneQuest 6th Edition Folk Magic spell list",
-  "verified": true,
+  "verified": false,
   "spells": [
     {
       "name": "Binding",
@@ -487,5 +487,17 @@
   },
   "missing_cultures": [],
   "validated_at": "2026-05-21",
-  "validation_method": "Magic and pre-Magic PDF validation against AiG p.30-41 and p.63-68; culture lists merged from references/aig-raw/cultures.json."
+  "validation_method": "Magic and pre-Magic PDF validation against AiG p.30-41 and p.63-68; culture lists merged from references/aig-raw/cultures.json.",
+  "source_id": "aig",
+  "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+  "authority_state": "source_blocked",
+  "authority_disposition": "legacy-stale-until-vision-verified",
+  "page_index": "references/aig-raw/page-index.json",
+  "page_coverage": "references/sources/pages/aig.json",
+  "source_blockers": [
+    "permission basis is not confirmed",
+    "independent vision extraction/verification has not been run for AiG pages"
+  ],
+  "provenance_note": "Legacy reference data predates the U5 vision-only authority gate. It remains usable as stale input only while source_blocked; no app-facing AiG fact is promoted as accepted by this metadata.",
+  "legacy_verified": true
 }

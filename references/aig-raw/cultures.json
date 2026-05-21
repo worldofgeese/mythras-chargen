@@ -533,5 +533,155 @@
   ],
   "validated_at": "2026-05-21",
   "validation_method": "PDF page render/OCR validation against Adventures in Glorantha GenCon preview p.26-41; combat-style rows superseded by Combat Styles Encyclopedia via references/combat-styles.json.",
-  "combat_styles_authority": "references/combat-styles.json"
+  "combat_styles_authority": "references/combat-styles.json",
+  "source_id": "aig",
+  "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+  "authority_state": "source_blocked",
+  "authority_disposition": "legacy-stale-until-vision-verified",
+  "page_index": "references/aig-raw/page-index.json",
+  "page_coverage": "references/sources/pages/aig.json",
+  "source_blockers": [
+    "permission basis is not confirmed",
+    "independent vision extraction/verification has not been run for AiG pages"
+  ],
+  "provenance_note": "Legacy reference data predates the U5 vision-only authority gate. It remains usable as stale input only while source_blocked; no app-facing AiG fact is promoted as accepted by this metadata.",
+  "culture_source_refs": {
+    "Balazaring": {
+      "source_id": "aig",
+      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+      "page_range": "p.26-28",
+      "pdf_pages": [
+        26,
+        27,
+        28
+      ],
+      "verification_state": "blocked",
+      "page_records": [
+        "references/aig-raw/pages/page-026.json",
+        "references/aig-raw/pages/page-027.json",
+        "references/aig-raw/pages/page-028.json"
+      ]
+    },
+    "Esrolian": {
+      "source_id": "aig",
+      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+      "page_range": "p.28-29",
+      "pdf_pages": [
+        28,
+        29
+      ],
+      "verification_state": "blocked",
+      "page_records": [
+        "references/aig-raw/pages/page-028.json",
+        "references/aig-raw/pages/page-029.json"
+      ]
+    },
+    "God Forgot": {
+      "source_id": "aig",
+      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+      "page_range": "p.29-30",
+      "pdf_pages": [
+        29,
+        30
+      ],
+      "verification_state": "blocked",
+      "page_records": [
+        "references/aig-raw/pages/page-029.json",
+        "references/aig-raw/pages/page-030.json"
+      ]
+    },
+    "Lunar Heartland": {
+      "source_id": "aig",
+      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+      "page_range": "p.30-32",
+      "pdf_pages": [
+        30,
+        31,
+        32
+      ],
+      "verification_state": "blocked",
+      "page_records": [
+        "references/aig-raw/pages/page-030.json",
+        "references/aig-raw/pages/page-031.json",
+        "references/aig-raw/pages/page-032.json"
+      ]
+    },
+    "Praxian": {
+      "source_id": "aig",
+      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+      "page_range": "p.32-35",
+      "pdf_pages": [
+        32,
+        33,
+        34,
+        35
+      ],
+      "verification_state": "blocked",
+      "page_records": [
+        "references/aig-raw/pages/page-032.json",
+        "references/aig-raw/pages/page-033.json",
+        "references/aig-raw/pages/page-034.json",
+        "references/aig-raw/pages/page-035.json"
+      ]
+    },
+    "Lunar Provincial": {
+      "source_id": "aig",
+      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+      "page_range": "p.35-37",
+      "pdf_pages": [
+        35,
+        36,
+        37
+      ],
+      "verification_state": "blocked",
+      "page_records": [
+        "references/aig-raw/pages/page-035.json",
+        "references/aig-raw/pages/page-036.json",
+        "references/aig-raw/pages/page-037.json"
+      ]
+    },
+    "Sartarite (Heortling)": {
+      "source_id": "aig",
+      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+      "page_range": "p.37-39",
+      "pdf_pages": [
+        37,
+        38,
+        39
+      ],
+      "verification_state": "blocked",
+      "page_records": [
+        "references/aig-raw/pages/page-037.json",
+        "references/aig-raw/pages/page-038.json",
+        "references/aig-raw/pages/page-039.json"
+      ]
+    },
+    "Telmori Hsunchen": {
+      "source_id": "aig",
+      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+      "page_range": "p.39-41",
+      "pdf_pages": [
+        39,
+        40,
+        41
+      ],
+      "verification_state": "blocked",
+      "page_records": [
+        "references/aig-raw/pages/page-039.json",
+        "references/aig-raw/pages/page-040.json",
+        "references/aig-raw/pages/page-041.json"
+      ]
+    }
+  },
+  "supported_aliases": {
+    "Balazaring": [],
+    "Esrolian": [],
+    "God Forgot": [],
+    "Lunar Heartland": [],
+    "Praxian": [],
+    "Lunar Provincial": [],
+    "Sartarite (Heortling)": [],
+    "Telmori Hsunchen": []
+  },
+  "alias_authority_state": "no additional aliases accepted until source-verified"
 }

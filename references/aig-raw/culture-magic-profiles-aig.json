@@ -3,7 +3,7 @@
   "extracted_at": "2026-05-21",
   "page": "p.26-41, p.59-62, p.136-137",
   "note": "Culture-level magic fit profiles derived from vision/OCR validation. These profiles summarize what the PDF supports for chargen guidance; they do not invent missing Lunar Magic rules.",
-  "validation_method": "Subagent PDF validation using pdftotext, rendered pages, and OCR against the local AiG PDF.",
+  "validation_method": "Legacy non-vision validation predates the U5 authority gate; not accepted until independent vision verification exists.",
   "profiles": {
     "Balazaring": {
       "summary": "Primitive hill culture with everyday folk magic and ancestor/hunting cult access; higher magic is normally through cult or shamanic practice rather than a distinct cultural system.",
@@ -369,6 +369,225 @@
         ],
         "notes": "No Lunar Magic culture signal."
       }
+    }
+  },
+  "source_id": "aig",
+  "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+  "authority_state": "source_blocked",
+  "authority_disposition": "legacy-stale-until-vision-verified",
+  "page_index": "references/aig-raw/page-index.json",
+  "page_coverage": "references/sources/pages/aig.json",
+  "source_blockers": [
+    "permission basis is not confirmed",
+    "independent vision extraction/verification has not been run for AiG pages"
+  ],
+  "provenance_note": "Legacy reference data predates the U5 vision-only authority gate. It remains usable as stale input only while source_blocked; no app-facing AiG fact is promoted as accepted by this metadata.",
+  "profile_source_refs": {
+    "Balazaring": {
+      "source_id": "aig",
+      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+      "citations": [
+        "AiG p.26-28",
+        "AiG p.59-62"
+      ],
+      "pdf_pages": [
+        26,
+        27,
+        28,
+        59,
+        60,
+        61,
+        62
+      ],
+      "verification_state": "blocked",
+      "page_records": [
+        "references/aig-raw/pages/page-026.json",
+        "references/aig-raw/pages/page-027.json",
+        "references/aig-raw/pages/page-028.json",
+        "references/aig-raw/pages/page-059.json",
+        "references/aig-raw/pages/page-060.json",
+        "references/aig-raw/pages/page-061.json",
+        "references/aig-raw/pages/page-062.json"
+      ]
+    },
+    "Esrolian": {
+      "source_id": "aig",
+      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+      "citations": [
+        "AiG p.28-29",
+        "AiG p.59-62"
+      ],
+      "pdf_pages": [
+        28,
+        29,
+        59,
+        60,
+        61,
+        62
+      ],
+      "verification_state": "blocked",
+      "page_records": [
+        "references/aig-raw/pages/page-028.json",
+        "references/aig-raw/pages/page-029.json",
+        "references/aig-raw/pages/page-059.json",
+        "references/aig-raw/pages/page-060.json",
+        "references/aig-raw/pages/page-061.json",
+        "references/aig-raw/pages/page-062.json"
+      ]
+    },
+    "God Forgot": {
+      "source_id": "aig",
+      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+      "citations": [
+        "AiG p.30-31",
+        "AiG p.59-62"
+      ],
+      "pdf_pages": [
+        30,
+        31,
+        59,
+        60,
+        61,
+        62
+      ],
+      "verification_state": "blocked",
+      "page_records": [
+        "references/aig-raw/pages/page-030.json",
+        "references/aig-raw/pages/page-031.json",
+        "references/aig-raw/pages/page-059.json",
+        "references/aig-raw/pages/page-060.json",
+        "references/aig-raw/pages/page-061.json",
+        "references/aig-raw/pages/page-062.json"
+      ]
+    },
+    "Lunar Heartland": {
+      "source_id": "aig",
+      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+      "citations": [
+        "AiG p.31-34",
+        "AiG p.59-60"
+      ],
+      "pdf_pages": [
+        31,
+        32,
+        33,
+        34,
+        59,
+        60
+      ],
+      "verification_state": "blocked",
+      "page_records": [
+        "references/aig-raw/pages/page-031.json",
+        "references/aig-raw/pages/page-032.json",
+        "references/aig-raw/pages/page-033.json",
+        "references/aig-raw/pages/page-034.json",
+        "references/aig-raw/pages/page-059.json",
+        "references/aig-raw/pages/page-060.json"
+      ]
+    },
+    "Lunar Provincial": {
+      "source_id": "aig",
+      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+      "citations": [
+        "AiG p.34-37",
+        "AiG p.59-60"
+      ],
+      "pdf_pages": [
+        34,
+        35,
+        36,
+        37,
+        59,
+        60
+      ],
+      "verification_state": "blocked",
+      "page_records": [
+        "references/aig-raw/pages/page-034.json",
+        "references/aig-raw/pages/page-035.json",
+        "references/aig-raw/pages/page-036.json",
+        "references/aig-raw/pages/page-037.json",
+        "references/aig-raw/pages/page-059.json",
+        "references/aig-raw/pages/page-060.json"
+      ]
+    },
+    "Praxian": {
+      "source_id": "aig",
+      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+      "citations": [
+        "AiG p.34-36",
+        "AiG p.60",
+        "AiG p.136-137"
+      ],
+      "pdf_pages": [
+        34,
+        35,
+        36,
+        60,
+        136,
+        137
+      ],
+      "verification_state": "blocked",
+      "page_records": [
+        "references/aig-raw/pages/page-034.json",
+        "references/aig-raw/pages/page-035.json",
+        "references/aig-raw/pages/page-036.json",
+        "references/aig-raw/pages/page-060.json",
+        "references/aig-raw/pages/page-136.json",
+        "references/aig-raw/pages/page-137.json"
+      ]
+    },
+    "Sartarite (Heortling)": {
+      "source_id": "aig",
+      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+      "citations": [
+        "AiG p.37-39",
+        "AiG p.59-62"
+      ],
+      "pdf_pages": [
+        37,
+        38,
+        39,
+        59,
+        60,
+        61,
+        62
+      ],
+      "verification_state": "blocked",
+      "page_records": [
+        "references/aig-raw/pages/page-037.json",
+        "references/aig-raw/pages/page-038.json",
+        "references/aig-raw/pages/page-039.json",
+        "references/aig-raw/pages/page-059.json",
+        "references/aig-raw/pages/page-060.json",
+        "references/aig-raw/pages/page-061.json",
+        "references/aig-raw/pages/page-062.json"
+      ]
+    },
+    "Telmori Hsunchen": {
+      "source_id": "aig",
+      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+      "citations": [
+        "AiG p.39-41",
+        "AiG p.60",
+        "AiG p.136-137"
+      ],
+      "pdf_pages": [
+        39,
+        40,
+        41,
+        60,
+        136,
+        137
+      ],
+      "verification_state": "blocked",
+      "page_records": [
+        "references/aig-raw/pages/page-039.json",
+        "references/aig-raw/pages/page-040.json",
+        "references/aig-raw/pages/page-041.json",
+        "references/aig-raw/pages/page-060.json",
+        "references/aig-raw/pages/page-136.json",
+        "references/aig-raw/pages/page-137.json"
+      ]
     }
   }
 }

@@ -111,6 +111,11 @@ function validatePageCoverage(pageDoc, manifestById, schema, relPath) {
   if (pageDoc.coverage_state === 'blocked' && (!Array.isArray(pageDoc.blockers) || pageDoc.blockers.length === 0)) {
     add(errors, relPath, 'blocked coverage requires blockers[]');
   }
+  const expectedPageCount = pageDoc.expected_page_count;
+  if (expectedPageCount !== null && expectedPageCount !== undefined &&
+      (!Number.isInteger(expectedPageCount) || expectedPageCount <= 0)) {
+    add(errors, relPath, 'expected_page_count must be null/omitted or a positive integer');
+  }
   if (source.lifecycle_state === 'active' && Number.isInteger(source.page_count) && pageDoc.expected_page_count !== source.page_count) {
     add(errors, relPath, `expected_page_count ${pageDoc.expected_page_count} must match active source page_count ${source.page_count}`);
   }
@@ -141,6 +146,14 @@ function validatePageCoverage(pageDoc, manifestById, schema, relPath) {
       add(errors, label, `${page.work_state} page requires derived_facts[]`);
     }
     if (page.contributes === false && !page.exclusion_reason) add(errors, label, 'non-contributing page requires exclusion_reason');
+  }
+  if (Number.isInteger(expectedPageCount) && (pageDoc.pages || []).length > 0) {
+    if ((pageDoc.pages || []).length !== expectedPageCount) {
+      add(errors, relPath, `expected ${expectedPageCount} page records, found ${(pageDoc.pages || []).length}`);
+    }
+    for (let page = 1; page <= expectedPageCount; page++) {
+      if (!seenPages.has(page)) add(errors, relPath, `missing pdf_page ${page}`);
+    }
   }
 
   return errors;

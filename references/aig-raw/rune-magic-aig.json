@@ -2292,5 +2292,16 @@
       "page": "p.122",
       "description": "This spell is no longer necessary to give worship to a divine being. Such things are performed as part of mundane ritual and ceremony which are performed daily by the priests of a cult."
     }
-  ]
+  ],
+  "source_id": "aig",
+  "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+  "authority_state": "source_blocked",
+  "authority_disposition": "legacy-stale-until-vision-verified",
+  "page_index": "references/aig-raw/page-index.json",
+  "page_coverage": "references/sources/pages/aig.json",
+  "source_blockers": [
+    "permission basis is not confirmed",
+    "independent vision extraction/verification has not been run for AiG pages"
+  ],
+  "provenance_note": "Legacy reference data predates the U5 vision-only authority gate. It remains usable as stale input only while source_blocked; no app-facing AiG fact is promoted as accepted by this metadata."
 }
