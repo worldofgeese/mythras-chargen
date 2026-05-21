@@ -7276,6 +7276,86 @@ section('Step 9 Initiation Gate');
 }
 
 {
+  const { App: AppRef, CAREERS_DATA, CharacterData: CD } = loadApp();
+
+  if (AppRef && CAREERS_DATA && AppRef.selectCareer) {
+    const sorcerer = CAREERS_DATA.find(career => career.name === 'Sorcerer');
+    CD.culture = 'God Forgot';
+    AppRef.selectCareer('Sorcerer');
+    const html = AppRef.renderStep8().innerHTML || '';
+    const professionalSkills = sorcerer?.professionalSkills || [];
+    const hasInvocation = professionalSkills.includes('Invocation (Cult, School or Grimoire)') &&
+      html.includes('Invocation (Cult, School or Grimoire)');
+    const hasShaping = professionalSkills.includes('Shaping') && html.includes('Shaping');
+
+    if (hasInvocation && hasShaping) {
+      pass('Sorcerer career keeps Invocation and Shaping in the professional skill flow');
+    } else {
+      fail('Sorcerer career keeps Invocation and Shaping in the professional skill flow',
+        JSON.stringify({ professionalSkills, html }));
+    }
+  } else {
+    fail('Sorcerer career professional skill flow dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD } = loadApp();
+
+  if (AppRef && AppRef.renderStep9) {
+    const scenarios = [
+      { label: 'God Forgot Sorcerer', culture: 'God Forgot', career: 'Sorcerer' },
+      { label: 'Praxian Warrior', culture: 'Praxian', career: 'Warrior' }
+    ];
+
+    const snapshots = scenarios.map(({ label, culture, career }) => {
+      CD.culture = culture;
+      CD.career = career;
+      CD.cult = null;
+      CD.cultType = null;
+      CD.miracles = [];
+      CD.boundSpirits = [];
+      CD.sorceryResource = 0;
+      CD.sorcerySpells = [];
+      AppRef.currentStep = 9;
+
+      const html = AppRef.renderStep9().innerHTML || '';
+      return {
+        label,
+        noCultButton: html.includes('✓ No Cult'),
+        sorceryPanel: html.includes('magic-panel--sorcery'),
+        resourceText: html.includes('Magic Points'),
+        castingText: html.includes('Invocation skill'),
+        shapingText: html.includes('Shaping skill'),
+        spellsText: html.includes('Starting Spells'),
+        resourceState: CD.sorceryResource === 0,
+        spellsState: Array.isArray(CD.sorcerySpells) && CD.sorcerySpells.length === 0
+      };
+    });
+
+    const noCultBaselinesHold = snapshots.every(snapshot =>
+      snapshot.noCultButton &&
+      !snapshot.sorceryPanel &&
+      !snapshot.resourceText &&
+      !snapshot.castingText &&
+      !snapshot.shapingText &&
+      !snapshot.spellsText &&
+      snapshot.resourceState &&
+      snapshot.spellsState
+    );
+
+    if (noCultBaselinesHold) {
+      pass('No Cult keeps sorcery picker, resource, and spells absent for God Forgot Sorcerer and a Praxian Warrior comparison');
+    } else {
+      fail('No Cult keeps sorcery picker, resource, and spells absent for God Forgot Sorcerer and a Praxian Warrior comparison',
+        JSON.stringify(snapshots));
+    }
+  } else {
+    fail('No Cult sorcery baseline dependencies not found');
+  }
+}
+
+{
   const { App: AppRef, CharacterData: CD, Calc: CalcRef } = loadApp();
 
   if (AppRef && AppRef.validateCurrentStep && AppRef.getValidationState) {
