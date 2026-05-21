@@ -4,7 +4,7 @@
   "source": "index.html",
   "generated_at": "2026-05-21",
   "map_state": "source-blocked-scaffold",
-  "notes": "AiG culture facts are wired to a real source revision and all-page blocked coverage; fact-level acceptance remains pending vision verification.",
+  "notes": "AiG culture facts and CSE combat-style facts have source revisions recorded, but fact-level acceptance remains pending vision/page/block verification.",
   "entries": [
     {
       "constant_name": "SKILLS_DATA",
@@ -37,16 +37,16 @@
       "source_ids": [
         "cse"
       ],
-      "rationale": "Inline combat styles map to CSE-derived normalized records, but page/block attestation is source-blocked until CSE source evidence is available.",
+      "rationale": "Inline combat styles map to CSE-derived normalized records. The CSE PDF is player-visible, but page/block attestation remains blocked until rendered pages and independent vision verification exist.",
       "normalized_file": "references/combat-styles.json",
       "normalized_path": "$.styles",
       "source_refs": [
         {
           "source_id": "cse",
-          "source_revision_id": "cse:unavailable:106d7ad39e8b:2026-05-21",
+          "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
           "page_manifest_path": "references/sources/pages/cse.json",
           "coverage_state": "blocked",
-          "evidence_state": "legacy_page_citation_source_blocked"
+          "evidence_state": "legacy_page_citation_pending_vision_verification"
         }
       ]
     },

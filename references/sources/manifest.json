@@ -62,25 +62,25 @@
     {
       "source_id": "cse",
       "title": "Combat Styles Encyclopedia",
-      "edition": "unknown local copy",
+      "edition": "user-supplied PDF, published 2026-05-21",
       "authority_scope": [
         "combat style names",
         "combat style weapons",
         "combat style traits"
       ],
-      "canonical_locator": "bibliographic:Combat Styles Encyclopedia",
-      "local_hint": "references/sources/pdfs/cse.pdf",
-      "lifecycle_state": "unavailable",
-      "source_revision_id": "cse:unavailable:106d7ad39e8b:2026-05-21",
+      "canonical_locator": "https://copyparty.hound-celsius.ts.net/sources/books/Combat%20Styles%20Encyclopedia.pdf",
+      "local_hint": "references/sources/pdfs/Combat Styles Encyclopedia.pdf",
+      "lifecycle_state": "active",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
       "sha256": "106d7ad39e8b63d39cc6a5e79db7ec2f031b165b5c05017113bc13f2469841a6",
-      "size_bytes": null,
-      "page_count": null,
-      "acquired_at": null,
+      "size_bytes": 2831310,
+      "page_count": 1109,
+      "acquired_at": "2026-05-21",
       "permission_basis": {
         "status": "confirmed",
-        "note": "Existing cse raw record states user confirmed permission; source PDF is not committed or available to this scaffold."
+        "note": "User supplied the source PDF for project use; source identity and player-visible publication are recorded while fact/page acceptance remains blocked pending vision verification."
       },
-      "precedence": "Legacy CSE-derived rows remain the current combat-style authority, but U7 marks promotion to verified authority blocked until portable source/page evidence exists.",
+      "precedence": "CSE is the combat-style definition authority for names, weapons, and traits. Current normalized combat-style facts remain source_blocked until rendered page/block evidence and independent vision verification exist.",
       "render_contract": {
         "renderer": "pdftoppm",
         "renderer_version": "runtime-detected",
@@ -95,17 +95,41 @@
         ],
         "cache_path_pattern": ".cache/source-pages/{source_id}/page-{pdf_page:04d}.png"
       },
-      "blocks": [
-        "render",
-        "extraction",
-        "normalization",
-        "acceptance"
+      "blocks": [],
+      "blockers": [],
+      "acceptance_state": "blocked_pending_vision_verification",
+      "acceptance_blockers": [
+        "Published/player-visible source PDF is available, but no rendered page images or page/block evidence are committed.",
+        "Legacy CSE row citations have not been independently verified against rendered page evidence."
       ],
-      "blockers": [
-        "portable source file and page count unavailable in this worktree",
-        "legacy hash is preserved from references/cse-raw/combat-styles-cse.json but cannot be re-rendered here",
-        "no verified page/block evidence has been committed for CSE rows"
-      ]
+      "source_access": {
+        "local_supplied_source": {
+          "status": "available_outside_repo",
+          "path": "local:user-supplied/Combat Styles Encyclopedia.pdf",
+          "sha256": "106d7ad39e8b63d39cc6a5e79db7ec2f031b165b5c05017113bc13f2469841a6",
+          "size_bytes": 2831310,
+          "page_count": 1109,
+          "git_tracked": false
+        },
+        "public_copyparty_source": {
+          "status": "available",
+          "checked_at": "2026-05-21",
+          "url": "https://copyparty.hound-celsius.ts.net/sources/books/Combat%20Styles%20Encyclopedia.pdf",
+          "container_path": "/w/sources/books/Combat Styles Encyclopedia.pdf",
+          "sha256": "106d7ad39e8b63d39cc6a5e79db7ec2f031b165b5c05017113bc13f2469841a6",
+          "size_bytes": 2831310,
+          "page_count": 1109,
+          "verification": "curl -fsSL public URL piped to sha256sum matched the supplied source hash"
+        }
+      },
+      "observed_source_metadata": {
+        "observed_at": "2026-05-21",
+        "sha256_method": "sha256sum against user-supplied non-git PDF and curl -fsSL public URL stream",
+        "page_count_method": "pdfinfo against user-supplied non-git PDF",
+        "public_url_sha256": "106d7ad39e8b63d39cc6a5e79db7ec2f031b165b5c05017113bc13f2469841a6",
+        "public_url_content_length": 2831310,
+        "note": "The source PDF is not committed; references/sources/pdfs/Combat Styles Encyclopedia.pdf remains an ignored local hint."
+      }
     },
     {
       "source_id": "waha",

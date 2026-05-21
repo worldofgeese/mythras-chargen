@@ -267,6 +267,9 @@ runCommandTest('Render workflow can list sources without rendering pages',
   const manifestById = new Map(manifest.sources.map(source => [source.source_id, source]));
   const manifestIds = manifest.sources.map(source => source.source_id).sort();
   const missingSources = requiredSources.filter(sourceId => !manifestIds.includes(sourceId));
+  const expectedCseHash = '106d7ad39e8b63d39cc6a5e79db7ec2f031b165b5c05017113bc13f2469841a6';
+  const expectedCseRevision = 'cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21';
+  const expectedCsePublicUrl = 'https://copyparty.hound-celsius.ts.net/sources/books/Combat%20Styles%20Encyclopedia.pdf';
 
   if (missingSources.length === 0) {
     pass('Source manifest declares all foundation source IDs');
@@ -471,6 +474,39 @@ runCommandTest('Render workflow can list sources without rendering pages',
     fail('Source manifest validator allows active source without hash', invalidActiveResult.errors.join('\n'));
   }
 
+  const invalidPublishedCse = {
+    schemaVersion: 1,
+    sources: [{
+      source_id: 'cse',
+      title: 'Combat Styles Encyclopedia',
+      lifecycle_state: 'active',
+      source_revision_id: expectedCseRevision,
+      canonical_locator: expectedCsePublicUrl,
+      local_hint: 'references/sources/pdfs/Combat Styles Encyclopedia.pdf',
+      sha256: expectedCseHash,
+      size_bytes: 2831310,
+      page_count: 1109,
+      acquired_at: '2026-05-21',
+      permission_basis: { status: 'confirmed' },
+      render_contract: sourceSchema.render_contract_defaults,
+      blocks: [],
+      blockers: [],
+      source_access: {
+        public_copyparty_source: {
+          status: 'available'
+        }
+      }
+    }]
+  };
+  const invalidPublishedCseResult = sourceValidator.validateManifest(invalidPublishedCse, sourceSchema);
+  if (!invalidPublishedCseResult.ok &&
+      invalidPublishedCseResult.errors.some(error => error.includes('cse') && error.includes('public_copyparty_source.url'))) {
+    pass('Source manifest validator rejects published CSE sources without a public URL');
+  } else {
+    fail('Source manifest validator allows published CSE source without a public URL',
+      invalidPublishedCseResult.errors.join('\n'));
+  }
+
   const constants = new Set(legacy.app_constants.map(item => item.constant_name));
   const missingConstants = provenanceValidator.EXPORTED_APP_CONSTANTS.filter(name => !constants.has(name));
   if (missingConstants.length === 0) {
@@ -500,8 +536,10 @@ runCommandTest('Render workflow can list sources without rendering pages',
 
   const cseRaw = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'cse-raw', 'combat-styles-cse.json'), 'utf8'));
   const cseAuthority = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'combat-styles.json'), 'utf8'));
+  const cseCoverage = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'sources', 'pages', 'cse.json'), 'utf8'));
   const cseRawDisposition = legacy.dispositions.find(item => item.id === 'cse-raw');
   const cseAuthorityDisposition = legacy.dispositions.find(item => item.id === 'combat-styles-authority');
+  const cseSource = manifestById.get('cse');
   const cseRawAuthorityErrors = provenanceValidator.validateSourceAuthorityMetadata(cseRaw, cseRawDisposition, manifestById);
   const cseAuthorityErrors = provenanceValidator.validateSourceAuthorityMetadata(cseAuthority, cseAuthorityDisposition, manifestById);
   if (cseRawAuthorityErrors.length === 0 &&
@@ -512,6 +550,55 @@ runCommandTest('Render workflow can list sources without rendering pages',
   } else {
     fail('CSE authorities have invalid source refs',
       JSON.stringify({ cseRawAuthorityErrors, cseAuthorityErrors }));
+  }
+
+  if (cseSource &&
+      cseSource.lifecycle_state === 'active' &&
+      cseSource.source_revision_id === expectedCseRevision &&
+      cseSource.sha256 === expectedCseHash &&
+      cseSource.size_bytes === 2831310 &&
+      cseSource.page_count === 1109 &&
+      cseSource.canonical_locator === expectedCsePublicUrl &&
+      cseSource.source_access?.public_copyparty_source?.status === 'available' &&
+      cseSource.source_access?.public_copyparty_source?.url === expectedCsePublicUrl &&
+      cseCoverage.source_revision_id === expectedCseRevision &&
+      cseCoverage.expected_page_count === 1109) {
+    pass('CSE source manifest records published player-visible PDF identity');
+  } else {
+    fail('CSE source manifest is missing published PDF identity',
+      JSON.stringify({
+        lifecycle: cseSource?.lifecycle_state,
+        revision: cseSource?.source_revision_id,
+        hash: cseSource?.sha256,
+        size: cseSource?.size_bytes,
+        pageCount: cseSource?.page_count,
+        canonicalLocator: cseSource?.canonical_locator,
+        publicStatus: cseSource?.source_access?.public_copyparty_source?.status,
+        publicUrl: cseSource?.source_access?.public_copyparty_source?.url,
+        coverageRevision: cseCoverage.source_revision_id,
+        coveragePageCount: cseCoverage.expected_page_count
+      }));
+  }
+
+  const cseIndexEntry = (indexMap.entries || []).find(entry => entry.constant_name === 'COMBAT_STYLES_DATA');
+  if (cseCoverage.coverage_state === 'blocked' &&
+      cseCoverage.pages.length === 0 &&
+      Array.isArray(cseCoverage.blockers) &&
+      cseCoverage.blockers.some(blocker => blocker.includes('vision')) &&
+      cseRaw.attestation_state === 'source_blocked' &&
+      cseAuthority.authority?.attestation_state === 'source_blocked' &&
+      cseIndexEntry?.status === 'source_blocked') {
+    pass('CSE facts remain source-blocked until page/block evidence exists');
+  } else {
+    fail('CSE facts were promoted without page/block evidence',
+      JSON.stringify({
+        coverageState: cseCoverage.coverage_state,
+        pageCount: cseCoverage.pages?.length,
+        blockers: cseCoverage.blockers,
+        rawAttestation: cseRaw.attestation_state,
+        authorityAttestation: cseAuthority.authority?.attestation_state,
+        indexStatus: cseIndexEntry?.status
+      }));
   }
 
   const missingRefResult = provenanceValidator.validateSourceAuthorityMetadata(
