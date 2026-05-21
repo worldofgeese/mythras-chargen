@@ -4059,13 +4059,6 @@ function getProfessionalSkillRenderState(skillName, claimedResolvedSkills) {
   let isChecked = selected.includes(skillName);
   let resolved = '';
 
-  const mappedResolution = dMap[mapKey];
-  if (mappedResolution && selected.includes(mappedResolution) && !claimedResolvedSkills.has(mappedResolution)) {
-    isChecked = true;
-    resolved = mappedResolution;
-    claimedResolvedSkills.add(mappedResolution);
-  }
-
   const parsed = parsePlaceholderSkill(skillName);
   if (!resolved && parsed && !selected.includes(skillName)) {
     const resolvedEntry = selected.find(s =>
@@ -4077,6 +4070,13 @@ function getProfessionalSkillRenderState(skillName, claimedResolvedSkills) {
       dMap[mapKey] = resolvedEntry;
       claimedResolvedSkills.add(resolvedEntry);
     }
+  }
+
+  const mappedResolution = dMap[mapKey];
+  if (!resolved && mappedResolution && selected.includes(mappedResolution) && !claimedResolvedSkills.has(mappedResolution)) {
+    isChecked = true;
+    resolved = mappedResolution;
+    claimedResolvedSkills.add(mappedResolution);
   }
 
   if (isChecked && !resolved && parsed) {
@@ -8688,6 +8688,32 @@ const CharacterData = {
         errors.push(`${field} must be an array`);
       }
     });
+
+    if (Array.isArray(data.selectedProfessionalSkills)) {
+      const seenProfessionalSkills = new Set();
+      data.selectedProfessionalSkills.forEach((skill, index) => {
+        if (typeof skill !== 'string') {
+          errors.push(`selectedProfessionalSkills[${index}] must be a string`);
+        } else if (seenProfessionalSkills.has(skill)) {
+          errors.push(`selectedProfessionalSkills contains duplicate "${skill}"`);
+        } else {
+          seenProfessionalSkills.add(skill);
+        }
+      });
+    }
+
+    if (this.isRecord(data._disambiguationMap)) {
+      const seenResolvedSkills = new Map();
+      Object.entries(data._disambiguationMap).forEach(([key, value]) => {
+        if (typeof value !== 'string') {
+          errors.push(`_disambiguationMap.${key} must be a string`);
+        } else if (value && seenResolvedSkills.has(value)) {
+          errors.push(`_disambiguationMap maps both ${seenResolvedSkills.get(value)} and ${key} to "${value}"`);
+        } else if (value) {
+          seenResolvedSkills.set(value, key);
+        }
+      });
+    }
 
 	    if (this.isRecord(data.characteristics)) {
 	      ['STR', 'CON', 'SIZ', 'DEX', 'INT', 'POW', 'CHA'].forEach(charName => {

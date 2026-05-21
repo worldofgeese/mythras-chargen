@@ -1323,7 +1323,71 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
   }
 }
 
-// Test 1.12f: Professional skill picker preserves Primary/Secondary Catch specialty slots with clearer labels
+// Test 1.12f: Professional skill picker rebuilds stale imported paired specialty maps
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj && AppObj.renderCareerDetails && CD) {
+    CD.culture = 'Balazaring';
+    CD.career = 'Scholar';
+    CD.selectedProfessionalSkills = ['Lore (Wolves)', 'Lore (Local Legends)', 'Literacy'];
+    CD.careerSkills = { 'Lore (Wolves)': 0, 'Lore (Local Legends)': 0, Literacy: 0 };
+    CD._disambiguationMap = {
+      'career:Lore (Primary)': 'Lore (Local Legends)',
+      'career:Lore (Secondary)': 'Lore (Wolves)'
+    };
+
+    const html = AppObj.renderCareerDetails();
+    const firstSlotUsesSelectedOrder = /data-skill="Lore \(Primary\)"[\s\S]*?value="Wolves"/.test(html);
+    const secondSlotUsesSelectedOrder = /data-skill="Lore \(Secondary\)"[\s\S]*?value="Local Legends"/.test(html);
+    const staleMapOverwritten = CD._disambiguationMap['career:Lore (Primary)'] === 'Lore (Wolves)' &&
+      CD._disambiguationMap['career:Lore (Secondary)'] === 'Lore (Local Legends)';
+
+    if (firstSlotUsesSelectedOrder && secondSlotUsesSelectedOrder && staleMapOverwritten) {
+      pass('Professional skill picker rebuilds stale imported paired specialty maps');
+    } else {
+      fail('Professional skill picker preserves stale imported paired specialty maps',
+        JSON.stringify({ firstSlotUsesSelectedOrder, secondSlotUsesSelectedOrder, staleMapOverwritten, map: CD._disambiguationMap, html }));
+    }
+  } else {
+    fail('Professional skill picker unavailable for stale paired specialty map test');
+  }
+}
+
+// Test 1.12g: Character import rejects duplicate professional specialty slots
+{
+  const { CharacterData: CD } = loadApp();
+  if (CD && CD.fromJSON) {
+    const duplicateSelected = {
+      ...createTestCharacter('Balazaring'),
+      selectedProfessionalSkills: ['Lore (Wolves)', 'Lore (Wolves)', 'Literacy'],
+      careerSkills: { 'Lore (Wolves)': 0, Literacy: 0 },
+      _disambiguationMap: {}
+    };
+    const duplicateMap = {
+      ...createTestCharacter('Balazaring'),
+      selectedProfessionalSkills: ['Lore (Wolves)', 'Lore (Local Legends)', 'Literacy'],
+      careerSkills: { 'Lore (Wolves)': 0, 'Lore (Local Legends)': 0, Literacy: 0 },
+      _disambiguationMap: {
+        'career:Lore (Primary)': 'Lore (Wolves)',
+        'career:Lore (Secondary)': 'Lore (Wolves)'
+      }
+    };
+
+    const duplicateSelectedRejected = CD.fromJSON(JSON.stringify(duplicateSelected)) === false;
+    const duplicateMapRejected = CD.fromJSON(JSON.stringify(duplicateMap)) === false;
+
+    if (duplicateSelectedRejected && duplicateMapRejected) {
+      pass('Character import rejects duplicate professional specialty slots');
+    } else {
+      fail('Character import accepts duplicate professional specialty slots',
+        JSON.stringify({ duplicateSelectedRejected, duplicateMapRejected }));
+    }
+  } else {
+    fail('CharacterData.fromJSON unavailable for duplicate professional specialty import test');
+  }
+}
+
+// Test 1.12h: Professional skill picker preserves Primary/Secondary Catch specialty slots with clearer labels
 {
   const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
   if (AppObj && AppObj.renderCareerDetails && AppObj.toggleProfessionalSkill && AppObj.resolveProfessionalSkill && CD) {
