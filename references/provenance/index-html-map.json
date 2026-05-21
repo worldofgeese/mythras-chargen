@@ -46,8 +46,23 @@
           "source_revision_id": "cse:unavailable:106d7ad39e8b:2026-05-21",
           "page_manifest_path": "references/sources/pages/cse.json",
           "coverage_state": "blocked",
-          "evidence_state": "legacy_page_citation_source_blocked"
+          "evidence_state": "legacy_page_citation_source_blocked",
+          "public_pdf_state": {
+            "status": "not_found",
+            "checked_at": "2026-05-21",
+            "candidate_urls": [
+              "https://copyparty.hound-celsius.ts.net/sources/books/Combat%20Styles%20Encyclopedia.pdf",
+              "https://copyparty.hound-celsius.ts.net/sources/books/Combat-Styles-Encyclopedia.pdf",
+              "https://copyparty.hound-celsius.ts.net/sources/books/CSE.pdf",
+              "https://copyparty.hound-celsius.ts.net/sources/books/cse.pdf"
+            ]
+          }
         }
+      ],
+      "blocked_by": [
+        "CSE PDF is not present locally or under public Copyparty /sources/books as of 2026-05-21",
+        "CSE source size_bytes and page_count remain unknown because the source PDF is unavailable",
+        "Legacy CSE hash/page citations cannot be promoted without verified page/block evidence"
       ]
     },
     {

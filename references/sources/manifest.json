@@ -122,8 +122,40 @@
       "blockers": [
         "portable source file and page count unavailable in this worktree",
         "legacy hash is preserved from references/cse-raw/combat-styles-cse.json but cannot be re-rendered here",
-        "no verified page/block evidence has been committed for CSE rows"
-      ]
+        "no verified page/block evidence has been committed for CSE rows",
+        "CSE PDF is not present locally or under public Copyparty /sources/books as of 2026-05-21",
+        "source size_bytes and page_count remain unknown because the source PDF is unavailable"
+      ],
+      "acceptance_state": "blocked_pending_vision_verification",
+      "acceptance_blockers": [
+        "No CSE PDF is present in the project worktree or ignored references/sources/pdfs local hint.",
+        "No CSE PDF is visible under public Copyparty /sources/books as of 2026-05-21.",
+        "The legacy CSE hash/page citations cannot be promoted without the source PDF size, page count, and verified page/block evidence."
+      ],
+      "source_access": {
+        "local_source": {
+          "status": "not_found",
+          "checked_at": "2026-05-21",
+          "checked_paths": [
+            "references/sources/pdfs/cse.pdf",
+            "repo search for *cse*.pdf and *combat*style*.pdf"
+          ],
+          "search_command": "find . \\( -path './.git' -o -path './node_modules' \\) -prune -o \\( -iname '*cse*.pdf' -o -iname '*combat*style*.pdf' -o -iname '*combat-style*.pdf' -o -iname '*Combat*Styles*Encyclopedia*.pdf' \\) -print",
+          "note": "No local CSE PDF was found in the repository, isolated worktree, or ignored source-pdf hint path."
+        },
+        "public_copyparty_source": {
+          "status": "not_found",
+          "checked_at": "2026-05-21",
+          "checked_urls": [
+            "https://copyparty.hound-celsius.ts.net/sources/books/Combat%20Styles%20Encyclopedia.pdf",
+            "https://copyparty.hound-celsius.ts.net/sources/books/Combat-Styles-Encyclopedia.pdf",
+            "https://copyparty.hound-celsius.ts.net/sources/books/CSE.pdf",
+            "https://copyparty.hound-celsius.ts.net/sources/books/cse.pdf"
+          ],
+          "live_tree_command": "ssh worldofgeese@loving-kypris.hound-celsius.ts.net 'podman exec copyparty find /w -maxdepth 5 -mindepth 1 | sort'",
+          "note": "Live /w/sources/books lists the existing source PDFs but no Combat Styles Encyclopedia/CSE PDF."
+        }
+      }
     },
     {
       "source_id": "waha",
