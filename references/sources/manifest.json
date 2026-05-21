@@ -48,7 +48,9 @@
       ],
       "blockers": [
         "permission basis is not confirmed",
-        "independent vision extraction/verification has not been run for AiG pages"
+        "independent vision extraction/verification has not been run for AiG pages",
+        "isolated implementation worktree has no ignored AiG PDF local hint to render",
+        "matching root-checkout legacy PDF was used for metadata confirmation only; no lawful vision extraction or independent verification was performed"
       ],
       "observed_source_metadata": {
         "observed_at": "2026-05-21",
@@ -56,7 +58,23 @@
         "page_count_method": "pdfinfo against local non-git AiG PDF",
         "canonical_locator_head_status": 200,
         "canonical_locator_content_length": 202097364,
-        "note": "The source PDF is not committed; references/sources/pdfs/aig.pdf remains an ignored local hint."
+        "note": "The source PDF is not committed. This U5 follow-up confirmed matching metadata from the root checkout legacy ignored hint and the public locator HEAD response, but did not render, extract, or verify pages because the isolated worktree has no local source hint and AiG extraction permission remains pending.",
+        "isolated_worktree_local_hint_status": "missing",
+        "isolated_worktree_checked_paths": [
+          "references/sources/pdfs/aig.pdf",
+          "references/aig-raw/AiG.pdf",
+          "references/sources/pdfs/Adventures in Glorantha GenCon Preview.pdf"
+        ],
+        "root_checkout_legacy_hint_status": "available-for-metadata-only",
+        "root_checkout_legacy_hint_path": "references/aig-raw/AiG.pdf",
+        "root_checkout_legacy_hint_sha256": "0edc1e549c560222a7c2b80e9eb0fb713d962bb30a280a7a6b760821e2983572",
+        "root_checkout_legacy_hint_size_bytes": 202097364,
+        "root_checkout_legacy_hint_page_count": 212,
+        "root_checkout_legacy_hint_pdf_version": "1.6",
+        "canonical_locator_head_content_type": "application/pdf",
+        "canonical_locator_head_last_modified": "Mon, 30 Mar 2026 18:42:16 GMT",
+        "used_for_vision_extraction": false,
+        "extraction_blocker_observed_at": "2026-05-21"
       }
     },
     {
