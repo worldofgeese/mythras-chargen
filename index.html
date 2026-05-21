@@ -4011,45 +4011,44 @@ function parsePlaceholderSkill(skillName) {
   return { category: match[1], hint: match[2] };
 }
 
-function getPrimaryPlaceholderFor(skillName) {
+function getPrimarySecondaryPlaceholderInfo(skillName) {
   const parsed = parsePlaceholderSkill(skillName);
   if (!parsed) return null;
-  const hint = parsed.hint.toLowerCase();
-  if (hint === 'secondary') return `${parsed.category} (Primary)`;
-  if (hint === 'secondary catch') return `${parsed.category} (Primary Catch)`;
-  return null;
+  const match = parsed.hint.trim().match(/^(primary|secondary)(?:\s+(.+))?$/i);
+  if (!match) return null;
+  const suffix = (match[2] || '').trim();
+  const suffixLabel = suffix ? ` ${suffix.replace(/\b\w/g, letter => letter.toUpperCase())}` : '';
+  return {
+    category: parsed.category,
+    role: match[1].toLowerCase(),
+    suffixLabel,
+    key: `${parsed.category.toLowerCase()}:${suffix.toLowerCase()}`
+  };
+}
+
+function getPrimaryPlaceholderFor(skillName) {
+  const info = getPrimarySecondaryPlaceholderInfo(skillName);
+  return info && info.role === 'secondary' ? `${info.category} (Primary${info.suffixLabel})` : null;
 }
 
 function getSecondaryPlaceholderFor(skillName) {
-  const parsed = parsePlaceholderSkill(skillName);
-  if (!parsed) return null;
-  const hint = parsed.hint.toLowerCase();
-  if (hint === 'primary') return `${parsed.category} (Secondary)`;
-  if (hint === 'primary catch') return `${parsed.category} (Secondary Catch)`;
-  return null;
-}
-
-function getPrimarySecondaryPlaceholderGroup(skillName) {
-  const parsed = parsePlaceholderSkill(skillName);
-  if (!parsed) return null;
-  const match = parsed.hint.trim().toLowerCase().match(/^(primary|secondary)(?:\s+(.+))?$/);
-  if (!match) return null;
-  return {
-    key: `${parsed.category.toLowerCase()}:${(match[2] || '').trim()}`,
-    role: match[1]
-  };
+  const info = getPrimarySecondaryPlaceholderInfo(skillName);
+  return info && info.role === 'primary' ? `${info.category} (Secondary${info.suffixLabel})` : null;
 }
 
 function getProfessionalSkillPickerOptions(professionalSkills) {
   const skills = Array.isArray(professionalSkills) ? professionalSkills : [];
-  const primaryGroups = new Set(skills
-    .map(getPrimarySecondaryPlaceholderGroup)
-    .filter(group => group && group.role === 'primary')
-    .map(group => group.key));
+  const groupsByIndex = [];
+  const primaryGroups = new Set();
+  for (const skill of skills) {
+    const group = getPrimarySecondaryPlaceholderInfo(skill);
+    groupsByIndex.push(group);
+    if (group && group.role === 'primary') primaryGroups.add(group.key);
+  }
   const seenGroups = new Set();
 
-  return skills.filter(skill => {
-    const group = getPrimarySecondaryPlaceholderGroup(skill);
+  return skills.filter((skill, index) => {
+    const group = groupsByIndex[index];
     if (!group) return true;
     if (group.role === 'secondary' && primaryGroups.has(group.key)) return false;
     if (seenGroups.has(group.key)) return false;
