@@ -99,6 +99,64 @@ button.primary:hover { background: #333; }
   margin-left: 8px;
 }
 
+.source-coverage-panel {
+  border: 1px solid #999;
+  background: #f7f7f7;
+  margin: 0 0 12px;
+  padding: 8px 10px;
+  font-size: 12px;
+}
+
+.source-coverage-panel summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.source-coverage-summary {
+  margin: 8px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.source-coverage-list {
+  display: grid;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.source-coverage-entry {
+  border-left: 4px solid #777;
+  background: #fff;
+  padding: 6px 8px;
+}
+
+.source-coverage-entry[data-status="verified"] { border-left-color: #1b7f35; }
+.source-coverage-entry[data-status="attested"] { border-left-color: #0969da; }
+.source-coverage-entry[data-status="partial"] { border-left-color: #9a6700; }
+.source-coverage-entry[data-status="blocked"],
+.source-coverage-entry[data-status="unverified"] { border-left-color: #cf222e; }
+
+.source-coverage-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 6px 0;
+  font-size: 11px;
+}
+
+.source-coverage-badge {
+  border: 1px solid #999;
+  background: #fff;
+  padding: 2px 5px;
+}
+
+.source-coverage-badge[data-status="verified"] { border-color: #1b7f35; color: #1b7f35; }
+.source-coverage-badge[data-status="attested"] { border-color: #0969da; color: #0969da; }
+.source-coverage-badge[data-status="partial"] { border-color: #9a6700; color: #9a6700; }
+.source-coverage-badge[data-status="blocked"],
+.source-coverage-badge[data-status="unverified"] { border-color: #cf222e; color: #cf222e; }
+
 .budget-tracker {
   background: #fff3cd;
   padding: 8px 12px;
@@ -680,6 +738,11 @@ select:focus {
     <button onclick="App.exportSinglePagePDF()" id="btn-export-pdf" disabled title="Generate a single-page PDF character sheet (quick export)">Export PDF</button>
     <button onclick="App.generateRandomCharacter()" title="Generate a completely random character for testing">🎲 Random</button>
   </div>
+
+  <details id="source-coverage-panel" class="source-coverage-panel no-print" data-testid="source-coverage-panel">
+    <summary>Source coverage and provenance status</summary>
+    <div id="source-coverage-content" data-testid="source-coverage-content">Loading source coverage…</div>
+  </details>
 
   <!-- WIZARD MODE -->
   <div id="wizard-mode">
@@ -7358,6 +7421,441 @@ const DATA_INDEXES = {
   cultsByName: new Map(CULTS_DATA.map(cult => [normalizeLookupKey(cult.name), cult]))
 };
 
+const PROVENANCE_COVERAGE = {
+  "schemaVersion": 1,
+  "source": "index.html inline generated-data provenance coverage",
+  "scope": "Generated and displayed data surfaces in index.html",
+  "updatedAt": "2026-05-21",
+  "coverageStatuses": {
+    "verified": "Reference JSON carries page citations and the inline constant is tested as a current mirror of that reference.",
+    "attested": "Reference JSON attests inclusion policy and source pages, but the inline constant may be filtered or normalized for play.",
+    "partial": "Reference JSON/page citations exist, but the app combines sources or generated helper rows that are not a one-to-one mirror yet.",
+    "unverified": "Committed reference JSON explicitly marks the source extraction as not verified.",
+    "blocked": "The UI must disclose that a current reference has gaps before treating the displayed data as fully proven."
+  },
+  "entries": [
+    {
+      "id": "skills",
+      "label": "Skill definitions and base formulae",
+      "inlineConstants": [
+        "SKILLS_DATA"
+      ],
+      "displaySurfaces": [
+        "Wizard skill allocation",
+        "Play Mode skill table"
+      ],
+      "status": "partial",
+      "summary": "Core standard/professional skill formulae are cited, while passion templates and Glorantha-specific aliases still need a consolidated provenance crosswalk.",
+      "references": [
+        {
+          "path": "references/mythras-raw/standard-skills.json",
+          "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+          "citation": "p.12, p.54"
+        },
+        {
+          "path": "references/mythras-raw/professional-skills.json",
+          "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+          "citation": "p.45-54"
+        },
+        {
+          "path": "references/aig-raw/rune-affinities.json",
+          "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+          "citation": "p.24"
+        }
+      ],
+      "blockers": [
+        "Add a source-backed crosswalk for generated passion rows and Glorantha alias skills before marking SKILLS_DATA fully verified."
+      ]
+    },
+    {
+      "id": "weapons-equipment",
+      "label": "Weapons, prices, equipment, and starting kit",
+      "inlineConstants": [
+        "WEAPONS_DATA",
+        "ITEM_PRICES",
+        "EQUIPMENT_DATA"
+      ],
+      "displaySurfaces": [
+        "Step 13 equipment",
+        "Play Mode combat",
+        "Play Mode equipment",
+        "PDF export equipment"
+      ],
+      "status": "attested",
+      "summary": "Weapon inclusion is filtered to Gloranthan-attested sources; starting equipment and money are derived from Mythras Core plus AiG culture notes.",
+      "references": [
+        {
+          "path": "references/weapons-attestation.json",
+          "source": "WEAPONS_DATA attestation",
+          "citation": "Mythras Core p.62-67 and Gloranthan setting rows"
+        },
+        {
+          "path": "references/mythras-raw/melee-weapons.json",
+          "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+          "citation": "p.62-64"
+        },
+        {
+          "path": "references/mythras-raw/ranged-weapons.json",
+          "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+          "citation": "p.65-67"
+        },
+        {
+          "path": "references/aig-raw/equipment-aig.json",
+          "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+          "citation": "p.24-41"
+        },
+        {
+          "path": "references/mythras-raw/equipment-starting.json",
+          "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+          "citation": "p.33-34"
+        }
+      ],
+      "blockers": []
+    },
+    {
+      "id": "runes",
+      "label": "Rune affinity display data",
+      "inlineConstants": [
+        "RUNES_DATA"
+      ],
+      "displaySurfaces": [
+        "Step 5 rune choices",
+        "Play Mode rune affinities",
+        "PDF export rune affinities"
+      ],
+      "status": "partial",
+      "summary": "Rune meanings and glyphs are sourced, but the UI combines AiG affinity rules with RuneQuest Starter Set descriptions.",
+      "references": [
+        {
+          "path": "references/aig-raw/rune-affinities.json",
+          "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+          "citation": "p.24"
+        },
+        {
+          "path": "references/rq-starter-set/runes.json",
+          "source": "RuneQuest Starter Set Book 2: The World of Glorantha",
+          "citation": "p.4-6"
+        },
+        {
+          "path": "references/rune-glyph-map.json",
+          "source": "Local rune glyph map",
+          "citation": "glyph metadata"
+        }
+      ],
+      "blockers": [
+        "Document the exact field-level merge between AiG affinity rules and RuneQuest Starter Set rune descriptions."
+      ]
+    },
+    {
+      "id": "cultures-combat-styles",
+      "label": "Cultures, homelands, and combat styles",
+      "inlineConstants": [
+        "CULTURES_DATA",
+        "COMBAT_STYLES_DATA",
+        "COMBAT_STYLES_BY_ID"
+      ],
+      "displaySurfaces": [
+        "Step 4 culture picker",
+        "Step 4 combat style picker",
+        "Play Mode combat",
+        "PDF export combat styles"
+      ],
+      "status": "verified",
+      "summary": "AiG culture data is linked to CSE combat style IDs; tests require inline combat styles to match the CSE reference JSON.",
+      "references": [
+        {
+          "path": "references/aig-raw/cultures.json",
+          "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+          "citation": "p.26-41"
+        },
+        {
+          "path": "references/combat-styles.json",
+          "source": "Combat Styles Encyclopedia",
+          "citation": "style page refs in each row"
+        },
+        {
+          "path": "references/cse-raw/combat-styles-cse.json",
+          "source": "Combat Styles Encyclopedia raw extraction",
+          "citation": "style page refs in each row"
+        }
+      ],
+      "blockers": []
+    },
+    {
+      "id": "social-class",
+      "label": "Social class and starting money tables",
+      "inlineConstants": [
+        "SOCIAL_CLASS_TABLES",
+        "CULTURE_TYPE_MAPPING"
+      ],
+      "displaySurfaces": [
+        "Step 12 social class",
+        "Play Mode identity",
+        "Play Mode equipment"
+      ],
+      "status": "partial",
+      "summary": "Mythras Core social class rows are cited; culture type mapping is reconciled with AiG cultures and still deserves a dedicated field-level proof table.",
+      "references": [
+        {
+          "path": "references/mythras-raw/social-class.json",
+          "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+          "citation": "p.21, p.24"
+        },
+        {
+          "path": "references/aig-raw/equipment-aig.json",
+          "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+          "citation": "p.24-41"
+        }
+      ],
+      "blockers": [
+        "Field-level attestation for CULTURE_TYPE_MAPPING remains separate from the raw social-class tables."
+      ]
+    },
+    {
+      "id": "careers",
+      "label": "Career lists and career skills",
+      "inlineConstants": [
+        "CAREERS_DATA"
+      ],
+      "displaySurfaces": [
+        "Step 8 career picker",
+        "Step 10 career skill allocation",
+        "Play Mode identity"
+      ],
+      "status": "partial",
+      "summary": "Career skill lists are sourced from Mythras Core; culture availability uses AiG career-category notes.",
+      "references": [
+        {
+          "path": "references/mythras-raw/careers-detail.json",
+          "source": "Mythras Core Rulebook",
+          "citation": "p.28-40"
+        },
+        {
+          "path": "references/aig-raw/careers.json",
+          "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+          "citation": "p.26-41"
+        },
+        {
+          "path": "references/mythras-raw/careers-by-culture.json",
+          "source": "Mythras Core Rulebook",
+          "citation": "p.28"
+        }
+      ],
+      "blockers": [
+        "Culture-specific career filtering needs explicit tests against AiG careers_by_culture before this can be full verified coverage."
+      ]
+    },
+    {
+      "id": "cults-and-cult-map",
+      "label": "Cult records and culture-to-cult map",
+      "inlineConstants": [
+        "CULTS_DATA",
+        "CULTURE_CULT_MAP"
+      ],
+      "displaySurfaces": [
+        "Step 8 cult picker",
+        "Step 9 initiation gate",
+        "Play Mode cult summary"
+      ],
+      "status": "partial",
+      "summary": "Cult data carries sourceCitation/sourcePages in raw JSON and the culture map carries page_citations, but OCR-derived cult rows are still normalized for play.",
+      "references": [
+        {
+          "path": "references/cults-raw/cults.json",
+          "source": "Notes from Pavis Cult One-Pagers",
+          "citation": "per-cult sourceCitation/sourcePages"
+        },
+        {
+          "path": "references/culture-cult-map.json",
+          "source": "Derived from CultOnePagers2019 areas + AiG culture descriptions",
+          "citation": "page_citations"
+        },
+        {
+          "path": "references/theism-miracles.json",
+          "source": "Notes from Pavis Cult One-Pagers (2019 v5.2)",
+          "citation": "individual cult PDF miracle lists"
+        }
+      ],
+      "blockers": [
+        "Keep cult OCR normalization and per-cult page citations synchronized through scripts/ingest-cults.py."
+      ]
+    },
+    {
+      "id": "special-effects-and-traits",
+      "label": "Special effects and combat traits",
+      "inlineConstants": [
+        "SPECIAL_EFFECTS_DATA",
+        "COMBAT_TRAITS_DATA"
+      ],
+      "displaySurfaces": [
+        "Special Effects Reference",
+        "Combat style trait display"
+      ],
+      "status": "attested",
+      "summary": "Core special effects and Glorantha-relevant combat traits have attestation/reference JSON.",
+      "references": [
+        {
+          "path": "references/mythras-raw/special-effects.json",
+          "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+          "citation": "p.96-101"
+        },
+        {
+          "path": "references/combat-traits-attestation.json",
+          "source": "COMBAT_TRAITS_DATA attestation",
+          "citation": "Mythras Core p.135-137 and AiG combat styles"
+        }
+      ],
+      "blockers": []
+    },
+    {
+      "id": "folk-magic",
+      "label": "Folk Magic spell names and descriptions",
+      "inlineConstants": [
+        "FOLK_MAGIC_DESCRIPTIONS",
+        "FOLK_MAGIC_SPELLS"
+      ],
+      "displaySurfaces": [
+        "Step 5 folk magic",
+        "Step 10 career folk magic",
+        "Play Mode Folk Magic",
+        "PDF export Folk Magic"
+      ],
+      "status": "attested",
+      "summary": "General picker membership is reconciled against Mythras Core, AiG, and cult one-pagers; AiG-specific descriptions come from the verified AiG extraction.",
+      "references": [
+        {
+          "path": "references/folk-magic-reconciliation.json",
+          "source": "FOLK_MAGIC_SPELLS attestation",
+          "citation": "Mythras Core p.122-130, AiG culture lists, cult folk magic"
+        },
+        {
+          "path": "references/mythras-raw/folk-magic-spells.json",
+          "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+          "citation": "p.122-130"
+        },
+        {
+          "path": "references/aig-raw/folk-magic-aig.json",
+          "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+          "citation": "p.63-68"
+        }
+      ],
+      "blockers": []
+    },
+    {
+      "id": "theism-miracles",
+      "label": "Theist miracle lists and rune access",
+      "inlineConstants": [
+        "MIRACLES_DATA"
+      ],
+      "displaySurfaces": [
+        "Step 9 miracle picker",
+        "Play Mode Theist Miracles",
+        "PDF export miracles"
+      ],
+      "status": "blocked",
+      "summary": "Most miracle rows are normalized from cult one-pagers, but current reference JSON still records cults with no miracles section.",
+      "references": [
+        {
+          "path": "references/theism-miracles.json",
+          "source": "Notes from Pavis Cult One-Pagers (2019 v5.2)",
+          "citation": "individual cult PDF miracle lists"
+        },
+        {
+          "path": "references/aig-raw/rune-magic-aig.json",
+          "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+          "citation": "p.69-122",
+          "verified": false
+        }
+      ],
+      "blockers": [
+        "references/theism-miracles.json currently lists Hearth Mother (Praxian) and Gerak Kag (Darkness) under no_miracles_section.",
+        "references/aig-raw/rune-magic-aig.json has verified=false."
+      ]
+    },
+    {
+      "id": "sorcery-spells",
+      "label": "Sorcery spells and sorcery resource rules",
+      "inlineConstants": [
+        "SORCERY_SPELLS"
+      ],
+      "displaySurfaces": [
+        "Step 9 sorcery spell picker",
+        "Play Mode Sorcery",
+        "PDF export sorcery"
+      ],
+      "status": "verified",
+      "summary": "Sorcery spell names/descriptions and chargen rules are backed by the verified Mythras Core sorcery extraction.",
+      "references": [
+        {
+          "path": "references/mythras-raw/sorcery.json",
+          "source": "Mythras Core Rulebook (3rd Printing, 2018)",
+          "citation": "p.162-178",
+          "verified": true
+        }
+      ],
+      "blockers": []
+    },
+    {
+      "id": "spirit-starting-options",
+      "label": "Starting spirit options and animist guidance",
+      "inlineConstants": [
+        "STARTING_SPIRITS"
+      ],
+      "displaySurfaces": [
+        "Step 9 spirit picker",
+        "Play Mode Spirit Magic",
+        "PDF export bound spirits"
+      ],
+      "status": "unverified",
+      "summary": "Concrete example spirits cite verified Bird in the Hand examples, but broader spirit-magic chapter/page references are still explicitly unverified.",
+      "references": [
+        {
+          "path": "references/spirits-raw/bird-in-hand.json",
+          "source": "A Bird in the Hand",
+          "citation": "p.43-46",
+          "verified": true
+        },
+        {
+          "path": "references/aig-raw/spirit-magic-aig.json",
+          "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+          "citation": "p.134-151",
+          "verified": false
+        },
+        {
+          "path": "references/mythras-raw/magic-page-references.json",
+          "source": "Mythras Core Rulebook, 3rd Printing (2018)",
+          "citation": "Animism chapter refs",
+          "verified": false
+        }
+      ],
+      "blockers": [
+        "references/aig-raw/spirit-magic-aig.json has verified=false.",
+        "references/mythras-raw/magic-page-references.json has verified=false for magic chapter page references."
+      ]
+    },
+    {
+      "id": "culture-magic-profiles",
+      "label": "Culture magic-fit guidance",
+      "inlineConstants": [
+        "CULTURE_MAGIC_PROFILES"
+      ],
+      "displaySurfaces": [
+        "Step 4 Culture Magic Fit"
+      ],
+      "status": "verified",
+      "summary": "Culture magic guidance mirrors the AiG culture magic profile JSON and carries citations on each profile.",
+      "references": [
+        {
+          "path": "references/aig-raw/culture-magic-profiles-aig.json",
+          "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+          "citation": "p.26-41, p.59-62, p.136-137"
+        }
+      ],
+      "blockers": []
+    }
+  ]
+};
+
 // Helpers module - normalized character model operations
 const Helpers = {
   getWeaponByName(name) {
@@ -8323,10 +8821,80 @@ const App = {
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
   },
+
+  getProvenanceEntriesForConstants(constants) {
+    const wanted = new Set((constants || []).map(String));
+    return (PROVENANCE_COVERAGE.entries || [])
+      .filter(entry => (entry.inlineConstants || []).some(name => wanted.has(name)));
+  },
+
+  formatProvenanceReferences(entry) {
+    return (entry.references || [])
+      .map(ref => `${ref.source || ref.path}${ref.citation ? ` ${ref.citation}` : ''}`)
+      .join('; ');
+  },
+
+  renderProvenanceBadgesForConstants(constants) {
+    const entries = this.getProvenanceEntriesForConstants(constants);
+    if (entries.length === 0) return '';
+    return `
+      <div class="source-coverage-badges" data-testid="source-coverage-badges">
+        ${entries.map(entry => {
+          const status = entry.status || 'partial';
+          const title = [
+            entry.summary || '',
+            this.formatProvenanceReferences(entry),
+            ...(entry.blockers || [])
+          ].filter(Boolean).join(' ');
+          return `<span class="source-coverage-badge" data-testid="source-coverage-badge" data-status="${this.escapeHtmlAttr(status)}" title="${this.escapeHtmlAttr(title)}">${this.escapeHtml(entry.label)}: ${this.escapeHtml(status)}</span>`;
+        }).join('')}
+      </div>
+    `;
+  },
+
+  renderProvenanceCoverage() {
+    const container = document.getElementById('source-coverage-content');
+    if (!container) return;
+    const entries = PROVENANCE_COVERAGE.entries || [];
+    const counts = entries.reduce((acc, entry) => {
+      const status = entry.status || 'partial';
+      acc[status] = (acc[status] || 0) + 1;
+      return acc;
+    }, {});
+    const statusSummary = Object.entries(counts)
+      .map(([status, count]) => `<span class="source-coverage-badge" data-status="${this.escapeHtmlAttr(status)}">${this.escapeHtml(status)}: ${count}</span>`)
+      .join('');
+
+    container.innerHTML = `
+      <p>${this.escapeHtml(PROVENANCE_COVERAGE.scope)}. UI badges disclose blocked or unverified generated data instead of treating it as fully proven.</p>
+      <div class="source-coverage-summary" data-testid="source-coverage-summary">${statusSummary}</div>
+      <div class="source-coverage-list">
+        ${entries.map(entry => {
+          const status = entry.status || 'partial';
+          const refs = (entry.references || []).map(ref =>
+            `<li>${this.escapeHtml(ref.path)} — ${this.escapeHtml(ref.citation || ref.source || 'source cited')}</li>`
+          ).join('');
+          const blockers = (entry.blockers || []).length
+            ? `<div><strong>Blocked source proof:</strong> ${entry.blockers.map(b => this.escapeHtml(b)).join(' ')}</div>`
+            : '';
+          return `
+            <section class="source-coverage-entry" data-testid="source-coverage-entry" data-status="${this.escapeHtmlAttr(status)}">
+              <strong>${this.escapeHtml(entry.label)}</strong>
+              <span class="source-coverage-badge" data-status="${this.escapeHtmlAttr(status)}">${this.escapeHtml(status)}</span>
+              <div>${this.escapeHtml(entry.summary || '')}</div>
+              ${blockers}
+              <ul>${refs}</ul>
+            </section>
+          `;
+        }).join('')}
+      </div>
+    `;
+  },
   
   init() {
     this.loadFromLocalStorage();
     this.renderCurrentStep();
+    this.renderProvenanceCoverage();
     this.updateStepIndicator();
     this.attachKeyboardShortcuts();
     this.attachPersistHandlers();
@@ -9467,6 +10035,7 @@ App.renderCultureDetails = function() {
   return `
     <div style="background: #f5f5f5; padding: 15px; margin-top: 15px; border: 1px solid #999;">
       <h3>${culture.name} Culture</h3>
+      ${this.renderProvenanceBadgesForConstants(['CULTURES_DATA', 'COMBAT_STYLES_DATA', 'CULTURE_MAGIC_PROFILES'])}
       <p><strong>Type:</strong> ${culture.type}</p>
       <p><strong>Starting Money:</strong> ${culture.startingMoney} ${CharacterData.startingMoney ? `<strong>→ Rolled: ${CharacterData.startingMoney} Lunars</strong>` : `<button onclick="App.rollStartingMoney()" style="margin-left:8px;">🎲 Roll</button>`}</p>
       
@@ -13605,7 +14174,7 @@ App.renderPlayCombat = function() {
   const combatStyles = CharacterData.combatStyles || [];
   let stylesHtml = '';
   if (combatStyles.length > 0) {
-    stylesHtml = '<h3>Combat Styles</h3>' + combatStyles.map(cs => `
+    stylesHtml = '<h3>Combat Styles</h3>' + this.renderProvenanceBadgesForConstants(['COMBAT_STYLES_DATA']) + combatStyles.map(cs => `
       <div class="combat-style-card">
         <div class="style-name">${cs.name} (${this.computeCombatStyleSkill(cs)}%)</div>
         <div class="style-detail"><strong>Weapons:</strong> ${Array.isArray(cs.weapons) ? cs.weapons.join(', ') : (cs.weapons || 'None')}</div>
@@ -13617,6 +14186,7 @@ App.renderPlayCombat = function() {
   container.innerHTML = `
     ${stylesHtml}
     <h3>Weapons</h3>
+    ${this.renderProvenanceBadgesForConstants(['WEAPONS_DATA', 'ITEM_PRICES', 'EQUIPMENT_DATA'])}
     <div class="weapon-row">
       <div>Weapon</div>
       <div>Skill</div>
@@ -13697,6 +14267,7 @@ App.renderPlayMagic = function() {
     if (cult) {
       cultInfo = `
         <h3>${esc(cult.name)} Cult</h3>
+        ${this.renderProvenanceBadgesForConstants(['CULTS_DATA', 'CULTURE_CULT_MAP'])}
         ${cult.personalityTraits && cult.personalityTraits.length > 0 ? `
           <p style="font-size: 0.9em;"><strong>Personality Traits:</strong> ${cult.personalityTraits.map(esc).join(', ')}</p>
         ` : ''}
@@ -13721,6 +14292,7 @@ App.renderPlayMagic = function() {
 
       miraclesInfo += `
         <h3>Theist Miracles (Initiate)</h3>
+        ${this.renderProvenanceBadgesForConstants(['MIRACLES_DATA'])}
         <p style="font-size: 0.9em;"><strong>Rune Affinities:</strong> ${runeList}</p>
         <p style="font-size: 0.9em;"><strong>Devotional Pool:</strong> ${CharacterData.devotionalPool || Math.floor((CharacterData.characteristics.POW || 0) / 2)}</p>
         <ul data-testid="miracles-list">
@@ -13782,6 +14354,7 @@ App.renderPlayMagic = function() {
       const boundSpirits = CharacterData.boundSpirits || [];
       miraclesInfo += `
         <h3>Spirit Magic (Animist${cultType.isHybrid ? ' — Shaman Path' : ''})</h3>
+        ${this.renderProvenanceBadgesForConstants(['STARTING_SPIRITS'])}
         <p style="font-size: 0.9em;"><strong>Bound Spirit Slots:</strong> ${spiritSlots} (CHA/2 for Spirit Worshipper rank)</p>
         ${boundSpirits.length > 0 ? `
           <p style="font-size: 0.9em;"><strong>Selected Spirits:</strong></p>
@@ -13801,6 +14374,7 @@ App.renderPlayMagic = function() {
       const sorcerySpells = CharacterData.sorcerySpells || [];
       miraclesInfo += `
         <h3>Sorcery${cultType.isHybrid ? ' — Sorcerer Path' : ''}</h3>
+        ${this.renderProvenanceBadgesForConstants(['SORCERY_SPELLS'])}
         <p style="font-size: 0.9em;"><strong>Resource:</strong> Magic Points (${magicPoints})</p>
         ${sorcerySpells.length > 0 ? `
           <p style="font-size: 0.9em;"><strong>Selected Spells:</strong></p>
@@ -13830,6 +14404,7 @@ App.renderPlayMagic = function() {
     ${cultInfo}
     ${miraclesInfo}
     <h3>Folk Magic (${folkMagicBase}%)</h3>
+    ${this.renderProvenanceBadgesForConstants(['FOLK_MAGIC_DESCRIPTIONS', 'FOLK_MAGIC_SPELLS'])}
     <ul data-testid="folk-magic-spells">
       ${allSpells.map(spell => `<li data-testid="spell-name">${esc(spell)}</li>`).join('')}
     </ul>
@@ -13850,6 +14425,7 @@ App.renderPlayEquipment = function() {
     </ul>` : '';
 
   container.innerHTML = `
+    ${this.renderProvenanceBadgesForConstants(['EQUIPMENT_DATA', 'WEAPONS_DATA', 'SOCIAL_CLASS_TABLES'])}
     ${CharacterData.startingMoney ? `<p><strong>Starting Money:</strong> ${CharacterData.startingMoney} Lunars</p>` : ''}
     <p data-testid="equipment-enc"><strong>Total ENC:</strong> ${totalEnc} / ${unencumbered} (${totalEnc > overloaded ? 'Overloaded!' : totalEnc > unencumbered ? 'Burdened' : 'Unencumbered'})</p>
     ${armorHtml}
