@@ -133,11 +133,21 @@ Use container workspaces only when a change introduces a dependency manager, bui
 
 ### specs/GIT.md
 
+#### Project-specific container workspace scope
+
+For this repository, `claim.git.container_workspace_required` does not apply to normal validation of the chargen application because the product is a single-file static HTML app with no install step, build step, server runtime, or container-dependent dependency graph.
+
+Git-tracked implementation work still MUST occur in isolated Decapod worktrees rooted at `.decapod/workspaces/*`; this override only removes the additional containerized execution requirement for routine app proof. Containerized execution becomes required again when a change introduces a dependency manager, build system, external service runtime, or the human explicitly asks for container isolation.
+
 ---
 
 ## Interfaces Overrides (Binding Contracts)
 
 ### interfaces/CLAIMS.md
+
+| claim | Project-specific override | Proof surface |
+| --- | --- | --- |
+| `claim.git.container_workspace_required` | For this single-file static HTML app, isolated Decapod worktrees plus the project proof gates satisfy the workspace requirement; Docker/Podman container execution is not required for routine validation. | `node test-chargen.js`; `node test-agent-api.mjs` after magic changes; `./scripts/ingest-cults.py --validate` after cult/reference data changes; `decapod validate` from the isolated Decapod worktree; human-style `agent-browser` QA after `index.html` changes. |
 
 ### interfaces/CONTROL_PLANE.md
 
