@@ -4,12 +4,21 @@
   "source_id": "bird-in-hand",
   "source_revision_id": "bird-in-hand:permission-pending:2026-05-21",
   "coverage_state": "blocked",
-  "coverage_mode": "scaffold",
+  "coverage_mode": "blocked-legacy-metadata",
   "expected_page_count": null,
   "pages": [],
-  "known_ranges": [],
-  "blockers": [
-    "Bird in Hand hash/page count/permission metadata pending"
+  "known_ranges": [
+    {
+      "label": "legacy Bird in Hand spirit stat-block citations",
+      "pages": "43-46",
+      "state": "blocked",
+      "reason": "Existing raw metadata cites these pages, but source hash/page count and committed page/block evidence are unavailable.",
+      "source_file": "references/spirits-raw/bird-in-hand.json"
+    }
   ],
-  "notes": "No page evidence is committed by foundation tooling. Later units must populate bounded vision evidence after source metadata is accepted."
+  "blockers": [
+    "Bird in Hand hash/page count/permission metadata pending",
+    "legacy verification claim lacks committed independent verifier/page/block artifacts"
+  ],
+  "notes": "U7 records legacy cited page range as source-blocked metadata only; no source page evidence is committed."
 }

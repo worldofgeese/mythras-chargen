@@ -114,7 +114,8 @@
         "cse"
       ],
       "scan_for_unverified": true,
-      "rationale": "Current combat-style authority input until CSE page evidence is rebuilt."
+      "rationale": "Current combat-style authority input until CSE page evidence is rebuilt.",
+      "enforce_source_refs": true
     },
     {
       "id": "cult-onepager-pdfs",
@@ -158,23 +159,25 @@
       "id": "spirits-bird",
       "path": "references/spirits-raw/bird-in-hand.json",
       "artifact_class": "raw_legacy_json",
-      "disposition": "migrate-in-this-plan",
+      "disposition": "must-fix-before-acceptance",
       "required_scope": true,
       "source_ids": [
         "bird-in-hand"
       ],
-      "rationale": "Existing spirit examples are not accepted into the new evidence chain until U7-style vision provenance is added."
+      "rationale": "Legacy Bird in Hand spirit examples have partial source refs but remain source-blocked until portable page/block evidence exists.",
+      "enforce_source_refs": true
     },
     {
       "id": "spirits-monster-island",
       "path": "references/spirits-raw/monster-island.json",
       "artifact_class": "raw_legacy_json",
-      "disposition": "migrate-in-this-plan",
+      "disposition": "must-fix-before-acceptance",
       "required_scope": true,
       "source_ids": [
         "monster-island"
       ],
-      "rationale": "Existing Monster Island data is explicitly unverified and remains blocked until vision evidence exists."
+      "rationale": "Existing Monster Island data is explicitly unverified and cannot become governed authority until verified page evidence exists.",
+      "enforce_source_refs": true
     },
     {
       "id": "meta-docs",
@@ -194,7 +197,8 @@
         "cse"
       ],
       "scan_for_unverified": true,
-      "rationale": "Current app-facing combat style authority with source citations."
+      "rationale": "Current app-facing combat style authority with source citations.",
+      "enforce_source_refs": true
     },
     {
       "id": "combat-traits-attestation",
@@ -440,6 +444,18 @@
       "disposition": "superseded",
       "source_files": [],
       "rationale": "Historical export name is retained for compatibility but no current inline constant is required."
+    },
+    {
+      "constant_name": "STARTING_SPIRITS",
+      "artifact_class": "app_runtime",
+      "disposition": "must-fix-before-acceptance",
+      "source_files": [
+        "references/spirits-raw/bird-in-hand.json"
+      ],
+      "source_ids": [
+        "bird-in-hand"
+      ],
+      "rationale": "Inline starting spirit examples cite legacy Bird in Hand records and Mythras Core pages; they remain source-blocked until normalized spirit authority exists."
     }
   ],
   "advisory_local_only": [

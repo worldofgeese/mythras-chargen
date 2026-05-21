@@ -4,12 +4,13 @@
   "source_id": "monster-island",
   "source_revision_id": "monster-island:permission-pending:2026-05-21",
   "coverage_state": "blocked",
-  "coverage_mode": "scaffold",
+  "coverage_mode": "blocked-legacy-metadata",
   "expected_page_count": null,
   "pages": [],
   "known_ranges": [],
   "blockers": [
-    "Monster Island hash/page count/permission metadata pending"
+    "Monster Island hash/page count/permission metadata pending",
+    "legacy raw extraction has unverified page numbers and cannot act as authority"
   ],
-  "notes": "No page evidence is committed by foundation tooling. Later units must populate bounded vision evidence after source metadata is accepted."
+  "notes": "U7 keeps Monster Island blocked because no truthful page range, page render, extraction artifact, or independent verification metadata is available."
 }

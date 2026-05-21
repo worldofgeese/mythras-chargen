@@ -4,12 +4,21 @@
   "source_id": "cse",
   "source_revision_id": "cse:unavailable:106d7ad39e8b:2026-05-21",
   "coverage_state": "blocked",
-  "coverage_mode": "scaffold",
+  "coverage_mode": "blocked-legacy-metadata",
   "expected_page_count": null,
   "pages": [],
-  "known_ranges": [],
-  "blockers": [
-    "CSE source PDF and page count are unavailable in this worktree"
+  "known_ranges": [
+    {
+      "label": "legacy CSE combat-style row citations",
+      "pages": "146-148, 168-175, 186-194, 386-388, 390-392, 928, 930-932, 936-937, 939-941, 943-948",
+      "state": "blocked",
+      "reason": "Row-level page numbers exist in legacy JSON, but source PDF/page renders are unavailable for full coverage classification.",
+      "source_file": "references/cse-raw/combat-styles-cse.json"
+    }
   ],
-  "notes": "No page evidence is committed by foundation tooling. Later units must populate bounded vision evidence after source metadata is accepted."
+  "blockers": [
+    "CSE source PDF and page count are unavailable in this worktree",
+    "legacy row citations cannot be promoted without verified page/block evidence"
+  ],
+  "notes": "U7 preserves legacy CSE page citations as blocked metadata only; no page image, text extraction, or full-page coverage is committed."
 }

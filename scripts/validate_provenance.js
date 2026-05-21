@@ -9,6 +9,7 @@ const EXPORTED_APP_CONSTANTS = [
   'SKILLS_DATA',
   'WEAPONS_DATA',
   'COMBAT_STYLES_DATA',
+  'STARTING_SPIRITS',
   'CULTURES_DATA',
   'CULTURE_BUILDS',
   'CULTURE_MAGIC_PROFILES',
@@ -119,6 +120,97 @@ function validateDispositionShape(disposition, schema, errors, location) {
   if (typeof disposition.rationale !== 'string' || disposition.rationale.length < 12) add(errors, location, 'rationale must explain classification');
 }
 
+function sourceRefsFrom(container) {
+  if (!isObject(container)) return [];
+  const refs = [];
+  if (isObject(container.source_ref)) refs.push(container.source_ref);
+  if (Array.isArray(container.source_refs)) refs.push(...container.source_refs.filter(isObject));
+  return refs;
+}
+
+function collectAuthoritySourceRefs(payload) {
+  return [
+    ...sourceRefsFrom(payload),
+    ...sourceRefsFrom(payload && payload.authority),
+    ...sourceRefsFrom(payload && payload.attestation)
+  ];
+}
+
+function isMachineLocalLocator(value) {
+  return typeof value === 'string' && (value.startsWith('/') || /^[A-Za-z]:[\\/]/.test(value) || value.includes('\\'));
+}
+
+function collectMachineLocalSourceLocators(value, location = '$', found = []) {
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => collectMachineLocalSourceLocators(item, `${location}[${index}]`, found));
+  } else if (isObject(value)) {
+    for (const [key, child] of Object.entries(value)) {
+      const childLocation = `${location}.${key}`;
+      if (['source_pdf', 'source_path', 'canonical_locator', 'local_hint'].includes(key) && isMachineLocalLocator(child)) {
+        found.push(`${childLocation}=${child}`);
+      }
+      collectMachineLocalSourceLocators(child, childLocation, found);
+    }
+  }
+  return found;
+}
+
+function collectUnverifiedAuthorityMarkers(value, location = '$', found = []) {
+  if (typeof value === 'string') {
+    if (value.includes('UNVERIFIED')) found.push(`${location}:UNVERIFIED`);
+  } else if (Array.isArray(value)) {
+    value.forEach((item, index) => collectUnverifiedAuthorityMarkers(item, `${location}[${index}]`, found));
+  } else if (isObject(value)) {
+    for (const [key, child] of Object.entries(value)) {
+      const childLocation = `${location}.${key}`;
+      if (key === 'verified' && child === false) found.push(`${childLocation}:false`);
+      if (key === 'source_authority' && child === false) found.push(`${childLocation}:false`);
+      collectUnverifiedAuthorityMarkers(child, childLocation, found);
+    }
+  }
+  return found;
+}
+
+function validateSourceAuthorityMetadata(payload, disposition, manifestById = new Map()) {
+  const errors = [];
+  const sourceIds = Array.isArray(disposition.source_ids) ? disposition.source_ids : [];
+  const refs = collectAuthoritySourceRefs(payload);
+
+  if (disposition.enforce_source_refs === true) {
+    for (const sourceId of sourceIds) {
+      const matchingRefs = refs.filter(ref => ref.source_id === sourceId);
+      if (matchingRefs.length === 0) {
+        add(errors, disposition.id || 'source authority', `missing source_ref for source_id ${sourceId}`);
+        continue;
+      }
+      for (const ref of matchingRefs) {
+        if (typeof ref.source_revision_id !== 'string' || !ref.source_revision_id) {
+          add(errors, disposition.id || 'source authority', `source_ref for ${sourceId} missing source_revision_id`);
+        } else if (manifestById.has(sourceId) && ref.source_revision_id !== manifestById.get(sourceId).source_revision_id) {
+          add(errors, disposition.id || 'source authority', `source_ref for ${sourceId} has stale source_revision_id ${ref.source_revision_id}`);
+        }
+        if (typeof ref.page_manifest_path !== 'string' || !ref.page_manifest_path) {
+          add(errors, disposition.id || 'source authority', `source_ref for ${sourceId} missing page_manifest_path`);
+        }
+      }
+    }
+
+    const localLocators = collectMachineLocalSourceLocators(payload);
+    for (const locator of localLocators) {
+      add(errors, disposition.id || 'source authority', `machine-local source locator is not portable: ${locator}`);
+    }
+  }
+
+  if (disposition.disposition === 'governed-now') {
+    const unverifiedMarkers = collectUnverifiedAuthorityMarkers(payload);
+    for (const marker of unverifiedMarkers) {
+      add(errors, disposition.id || 'source authority', `governed source authority contains unverified marker ${marker}`);
+    }
+  }
+
+  return errors;
+}
+
 function validateLegacyDisposition(legacy, schema, root = ROOT) {
   const errors = [];
   if (!isObject(legacy)) return { ok: false, errors: ['legacy-disposition: must be an object'] };
@@ -134,7 +226,8 @@ function validateLegacyDisposition(legacy, schema, root = ROOT) {
     if (!schema.app_constant_dispositions.includes(constant.disposition)) add(errors, `app_constants[${index}]`, `invalid app constant disposition ${constant.disposition}`);
   }
 
-  const sourceIds = new Set((readJson(root, 'references/sources/manifest.json').sources || []).map(source => source.source_id));
+  const manifestById = new Map((readJson(root, 'references/sources/manifest.json').sources || []).map(source => [source.source_id, source]));
+  const sourceIds = new Set(manifestById.keys());
   for (const [index, disposition] of (legacy.dispositions || []).entries()) {
     for (const sourceId of disposition.source_ids || []) {
       if (!sourceIds.has(sourceId)) add(errors, `dispositions[${index}]`, `unknown source_id ${sourceId}`);
@@ -172,6 +265,14 @@ function validateLegacyDisposition(legacy, schema, root = ROOT) {
         }
       }
     }
+  }
+
+  for (const disposition of dispositions.filter(item => item.enforce_source_refs === true || item.source_ids?.includes('monster-island'))) {
+    if (!disposition.path || !disposition.path.endsWith('.json')) continue;
+    const fullPath = path.join(root, disposition.path);
+    if (!fs.existsSync(fullPath)) continue;
+    const payload = readJson(root, disposition.path);
+    errors.push(...validateSourceAuthorityMetadata(payload, disposition, manifestById).map(error => `${disposition.path}: ${error}`));
   }
 
   return { ok: errors.length === 0, errors };
@@ -249,6 +350,7 @@ module.exports = {
   isTrackedSourceLike,
   validateAll,
   validateLegacyDisposition,
+  validateSourceAuthorityMetadata,
   validateIndexMap,
   validateReport
 };

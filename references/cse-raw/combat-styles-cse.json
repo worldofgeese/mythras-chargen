@@ -1,10 +1,9 @@
 {
   "schemaVersion": 1,
   "source": "Combat Styles Encyclopedia",
-  "source_pdf": "/home/worldofgeese/Downloads/Combat Styles Encyclopedia.pdf",
   "sha256": "106d7ad39e8b63d39cc6a5e79db7ec2f031b165b5c05017113bc13f2469841a6",
   "extracted_at": "2026-05-21",
-  "extraction_method": "pdfinfo + pdftotext -layout; page rows validated by CSE extraction subagent. Original CSE rows are preserved with printed traits and source weapons; app-normalized rows live in references/combat-styles.json.",
+  "extraction_method": "Legacy pdfinfo + pdftotext -layout extraction retained from prior work; U7 did not re-render or re-extract because the portable CSE source PDF/page count is unavailable. Original rows are preserved with printed traits and source weapons; app-normalized rows live in references/combat-styles.json.",
   "permission": "User confirmed permission to use Combat Styles Encyclopedia for combat styles.",
   "rows": [
     {
@@ -1311,5 +1310,20 @@
       "restriction": null,
       "notes": null
     }
-  ]
+  ],
+  "source_ref": {
+    "source_id": "cse",
+    "source_revision_id": "cse:unavailable:106d7ad39e8b:2026-05-21",
+    "manifest_path": "references/sources/manifest.json",
+    "page_manifest_path": "references/sources/pages/cse.json",
+    "coverage_state": "blocked",
+    "evidence_state": "legacy_hash_and_page_citations_only",
+    "gaps": [
+      "source PDF is not available at a portable project path",
+      "page count is unknown",
+      "no page image hashes or independent verifier artifacts are committed"
+    ],
+    "known_hash_sha256": "106d7ad39e8b63d39cc6a5e79db7ec2f031b165b5c05017113bc13f2469841a6"
+  },
+  "attestation_state": "source_blocked"
 }
