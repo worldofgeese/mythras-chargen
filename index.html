@@ -10964,16 +10964,28 @@ App.toggleProfessionalSkill = function(skillName, checked, sourceElement) {
   return true;
 };
 
-App.resolveProfessionalSkill = function(originalName, specialization) {
-  if (!specialization || !specialization.trim()) return;
+App.resolveProfessionalSkill = function(originalName, specialization, sourceElement) {
+  if (!specialization || !specialization.trim()) return false;
   const parsed = parsePlaceholderSkill(originalName);
-  if (!parsed) return;
+  if (!parsed) return false;
   const resolvedName = `${parsed.category} (${specialization.trim()})`;
 
   // Track disambiguation mapping
   if (!CharacterData._disambiguationMap) CharacterData._disambiguationMap = {};
   const mapKey = `career:${originalName}`;
   const previousResolution = CharacterData._disambiguationMap[mapKey];
+
+  const duplicateResolution = previousResolution !== resolvedName &&
+    ((CharacterData.selectedProfessionalSkills || []).includes(resolvedName) ||
+      Object.prototype.hasOwnProperty.call(CharacterData.careerSkills || {}, resolvedName));
+  if (duplicateResolution) {
+    alert(`${resolvedName} is already selected. Choose a different specialization.`);
+    if (sourceElement) {
+      const previousSpec = previousResolution ? (previousResolution.match(/\((.+)\)/) || [])[1] || '' : '';
+      sourceElement.value = previousSpec;
+    }
+    return false;
+  }
 
   // Remove old placeholder key from careerSkills
   delete CharacterData.careerSkills[originalName];
@@ -11004,6 +11016,7 @@ App.resolveProfessionalSkill = function(originalName, specialization) {
   // Do NOT re-render here — the input already shows the correct value and re-rendering
   // would destroy focus/cause jarring UX. The state is saved and will render correctly
   // on next navigation or explicit re-render.
+  return true;
 };
 
 App.renderCareerDetails = function() {
@@ -11096,7 +11109,7 @@ App.renderCareerDetails = function() {
                   ${disabledTitle}
                   onchange="App.toggleProfessionalSkill(this.dataset.skill, this.checked, this)"> ${skillLabel}
               </label>
-              ${isChecked && needsSpec ? `<input type="text" placeholder="Enter specialization..." value="${resolvedSpecAttr}" data-skill="${skillAttr}" style="display: block; margin: 4px 0 0 20px; font-size: 12px; padding: 3px 6px; width: calc(100% - 24px);" onchange="App.resolveProfessionalSkill(this.dataset.skill, this.value)">` : ''}
+              ${isChecked && needsSpec ? `<input type="text" placeholder="Enter specialization..." value="${resolvedSpecAttr}" data-skill="${skillAttr}" style="display: block; margin: 4px 0 0 20px; font-size: 12px; padding: 3px 6px; width: calc(100% - 24px);" onchange="App.resolveProfessionalSkill(this.dataset.skill, this.value, this)">` : ''}
             </div>`;
           }).join('')}
         </div>
