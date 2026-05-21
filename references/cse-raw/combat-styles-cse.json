@@ -1,0 +1,1315 @@
+{
+  "schemaVersion": 1,
+  "source": "Combat Styles Encyclopedia",
+  "source_pdf": "/home/worldofgeese/Downloads/Combat Styles Encyclopedia.pdf",
+  "sha256": "106d7ad39e8b63d39cc6a5e79db7ec2f031b165b5c05017113bc13f2469841a6",
+  "extracted_at": "2026-05-21",
+  "extraction_method": "pdfinfo + pdftotext -layout; page rows validated by CSE extraction subagent. Original CSE rows are preserved with printed traits and source weapons; app-normalized rows live in references/combat-styles.json.",
+  "permission": "User confirmed permission to use Combat Styles Encyclopedia for combat styles.",
+  "rows": [
+    {
+      "page": 146,
+      "area": "Balazar",
+      "card_kind": "Barbarian for Balazar Combat Style Card",
+      "source_name": "Balazaring Hawk Slayer",
+      "app_culture": "Balazaring",
+      "additional_app_cultures": [],
+      "app_name": "Hawk Slayer",
+      "printed_traits": [
+        "Mounted Combat"
+      ],
+      "normalized_traits": [
+        "Mounted Combat"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "1H Longspear"
+      ],
+      "app_weapons": [
+        "Longspear"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 147,
+      "area": "Balazar",
+      "card_kind": "Barbarian for Balazar Combat Style Card",
+      "source_name": "Balazaring Hunter Raider",
+      "app_culture": "Balazaring",
+      "additional_app_cultures": [],
+      "app_name": "Hunter Raider",
+      "printed_traits": [
+        "Skirmisher"
+      ],
+      "normalized_traits": [
+        "Skirmisher"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "1H Short Spear",
+        "Sling"
+      ],
+      "app_weapons": [
+        "Shortspear",
+        "Sling"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 148,
+      "area": "Balazar",
+      "card_kind": "Barbarian for Balazar Combat Style Card",
+      "source_name": "Balazaring Pony Cavalry",
+      "app_culture": "Balazaring",
+      "additional_app_cultures": [],
+      "app_name": "Pony Cavalry",
+      "printed_traits": [
+        "Mounted Combat"
+      ],
+      "normalized_traits": [
+        "Mounted Combat"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "1H Short Spear",
+        "Short Bow"
+      ],
+      "app_weapons": [
+        "Shortspear",
+        "Short Bow"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 386,
+      "area": "Esrolia/God Forgot",
+      "card_kind": "Civilized for Esrolia Combat Style Card",
+      "source_name": "Esrolian Citizen Legionary",
+      "app_culture": "Esrolian",
+      "additional_app_cultures": [],
+      "app_name": "Citizen Legionary",
+      "printed_traits": [
+        "Formation Fighting*"
+      ],
+      "normalized_traits": [
+        "Formation Fighting"
+      ],
+      "printed_marker": "*",
+      "source_weapons": [
+        "Shortsword",
+        "Javelin",
+        "Sling",
+        "Target Shield"
+      ],
+      "app_weapons": [
+        "Shortsword",
+        "Javelin",
+        "Sling",
+        "Target Shield"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 387,
+      "area": "Esrolia/God Forgot",
+      "card_kind": "Civilized for Esrolia Combat Style Card",
+      "source_name": "Esrolian City-State Phalangite",
+      "app_culture": "Esrolian",
+      "additional_app_cultures": [],
+      "app_name": "City-State Phalangite",
+      "printed_traits": [
+        "Formation Fighting*"
+      ],
+      "normalized_traits": [
+        "Formation Fighting"
+      ],
+      "printed_marker": "*",
+      "source_weapons": [
+        "Longspear",
+        "Pike/Sarissa"
+      ],
+      "app_weapons": [
+        "Longspear",
+        "Pike/Sarissa"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 388,
+      "area": "Esrolia/God Forgot",
+      "card_kind": "Civilized for Esrolia Combat Style Card",
+      "source_name": "Esrolian Clan Protector",
+      "app_culture": "Esrolian",
+      "additional_app_cultures": [],
+      "app_name": "Clan Protector",
+      "printed_traits": [
+        "Daredevil"
+      ],
+      "normalized_traits": [
+        "Daredevil"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Shortsword",
+        "Target Shield"
+      ],
+      "app_weapons": [
+        "Shortsword",
+        "Target Shield"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 390,
+      "area": "Esrolia/God Forgot",
+      "card_kind": "Civilized for Esrolia Combat Style Card",
+      "source_name": "God Forgot Holar Militia",
+      "app_culture": "God Forgot",
+      "additional_app_cultures": [],
+      "app_name": "Holar Militia",
+      "printed_traits": [
+        "Shield Wall*"
+      ],
+      "normalized_traits": [
+        "Shield Wall"
+      ],
+      "printed_marker": "*",
+      "source_weapons": [
+        "Short Spear",
+        "Sling",
+        "Western Infantry Shield"
+      ],
+      "app_weapons": [
+        "Shortspear",
+        "Sling",
+        "Western Infantry Shield"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 391,
+      "area": "Esrolia/God Forgot",
+      "card_kind": "Civilized for Esrolia Combat Style Card",
+      "source_name": "God Forgot Talar Defensive School",
+      "app_culture": "God Forgot",
+      "additional_app_cultures": [],
+      "app_name": "Talar Defensive School",
+      "printed_traits": [
+        "Impromptu Weapons"
+      ],
+      "normalized_traits": [
+        "Impromptu Weapons"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Shortsword",
+        "Dagger",
+        "Unarmed",
+        "Buckler"
+      ],
+      "app_weapons": [
+        "Shortsword",
+        "Dagger",
+        "Unarmed",
+        "Buckler"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 392,
+      "area": "Esrolia/God Forgot",
+      "card_kind": "Civilized for Esrolia Combat Style Card",
+      "source_name": "God Forgotten Holari",
+      "app_culture": "God Forgot",
+      "additional_app_cultures": [],
+      "app_name": "God Forgotten Holari",
+      "printed_traits": [
+        "Skirmisher"
+      ],
+      "normalized_traits": [
+        "Skirmisher"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Broadsword",
+        "Short Spear",
+        "Sling",
+        "Scutum"
+      ],
+      "app_weapons": [
+        "Broadsword",
+        "Shortspear",
+        "Sling",
+        "Scutum Shield"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 186,
+      "area": "Dragon Pass/Lunar",
+      "card_kind": "Civilized for Dragon Pass - Lunar Combat Style Card",
+      "source_name": "Lunar Colonial Noble",
+      "app_culture": "Lunar Provincial",
+      "additional_app_cultures": [],
+      "app_name": "Colonial Noble",
+      "printed_traits": [
+        "Formation Fighting*",
+        "Mounted Combat",
+        "Ranged Marksman"
+      ],
+      "normalized_traits": [
+        "Formation Fighting",
+        "Mounted Combat",
+        "Ranged Marksman"
+      ],
+      "printed_marker": "*",
+      "source_weapons": [
+        "Short Spear",
+        "Sickle Sword",
+        "Recurve Bow",
+        "Pelorian Aspis"
+      ],
+      "app_weapons": [
+        "Shortspear",
+        "Sickle Sword/Khopesh",
+        "Recurve Bow",
+        "Pelorian Aspis"
+      ],
+      "restriction": "Aristocracy or Ruling class only",
+      "notes": null
+    },
+    {
+      "page": 187,
+      "area": "Dragon Pass/Lunar",
+      "card_kind": "Civilized for Dragon Pass - Lunar Combat Style Card",
+      "source_name": "Lunar Colonial Survivalist",
+      "app_culture": "Lunar Provincial",
+      "additional_app_cultures": [],
+      "app_name": "Colonial Survivalist",
+      "printed_traits": [
+        "Hidden Weapons"
+      ],
+      "normalized_traits": [
+        "Hidden Weapons"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Shortsword",
+        "Sling",
+        "Dagger"
+      ],
+      "app_weapons": [
+        "Shortsword",
+        "Sling",
+        "Dagger"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 188,
+      "area": "Dragon Pass/Lunar",
+      "card_kind": "Civilized for Dragon Pass - Lunar Combat Style Card",
+      "source_name": "Lunar Corps Hoplite",
+      "app_culture": "Lunar Heartland",
+      "additional_app_cultures": [
+        "Lunar Provincial"
+      ],
+      "app_name": "Lunar Corps Hoplite",
+      "printed_traits": [
+        "Formation Fighting*",
+        "Shield Wall*",
+        "Siege Warfare"
+      ],
+      "normalized_traits": [
+        "Formation Fighting",
+        "Shield Wall",
+        "Siege Warfare"
+      ],
+      "printed_marker": "*",
+      "source_weapons": [
+        "Short Spear",
+        "Sickle Sword",
+        "Kontos",
+        "Pelorian Aspis"
+      ],
+      "app_weapons": [
+        "Shortspear",
+        "Sickle Sword/Khopesh",
+        "Kontos",
+        "Pelorian Aspis"
+      ],
+      "restriction": "Warrior career only",
+      "notes": null
+    },
+    {
+      "page": 189,
+      "area": "Dragon Pass/Lunar",
+      "card_kind": "Civilized for Dragon Pass - Lunar Combat Style Card",
+      "source_name": "Lunar Dara Happan Heavy Infantry",
+      "app_culture": "Lunar Heartland",
+      "additional_app_cultures": [],
+      "app_name": "Dara Happan Heavy Infantry",
+      "printed_traits": [
+        "Intimidating Scream"
+      ],
+      "normalized_traits": [
+        "Intimidating Scream"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Kontos",
+        "Shortsword",
+        "Dart",
+        "Dara Happan Hoplon"
+      ],
+      "app_weapons": [
+        "Kontos",
+        "Shortsword",
+        "Dart",
+        "Dara Happan Hoplon"
+      ],
+      "restriction": "Warrior career only",
+      "notes": null
+    },
+    {
+      "page": 190,
+      "area": "Dragon Pass/Lunar",
+      "card_kind": "Civilized for Dragon Pass - Lunar Combat Style Card",
+      "source_name": "Lunar Dara Happan Urbanite",
+      "app_culture": "Lunar Heartland",
+      "additional_app_cultures": [],
+      "app_name": "Dara Happan Urbanite",
+      "printed_traits": [
+        "Impromptu Weapons"
+      ],
+      "normalized_traits": [
+        "Impromptu Weapons"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Club",
+        "Shortsword",
+        "Dagger",
+        "Buckler"
+      ],
+      "app_weapons": [
+        "Club",
+        "Shortsword",
+        "Dagger",
+        "Buckler"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 191,
+      "area": "Dragon Pass/Lunar",
+      "card_kind": "Civilized for Dragon Pass - Lunar Combat Style Card",
+      "source_name": "Lunar Dart Contestant",
+      "app_culture": "Lunar Heartland",
+      "additional_app_cultures": [],
+      "app_name": "Dart Contestant",
+      "printed_traits": [
+        "Assassination",
+        "Daredevil"
+      ],
+      "normalized_traits": [
+        "Assassination",
+        "Daredevil"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Shortsword",
+        "Dart",
+        "Dagger"
+      ],
+      "app_weapons": [
+        "Shortsword",
+        "Dart",
+        "Dagger"
+      ],
+      "restriction": "Agent career only",
+      "notes": null
+    },
+    {
+      "page": 192,
+      "area": "Dragon Pass/Lunar",
+      "card_kind": "Civilized for Dragon Pass - Lunar Combat Style Card",
+      "source_name": "Lunar Pelorian Cavalry",
+      "app_culture": "Lunar Heartland",
+      "additional_app_cultures": [
+        "Lunar Provincial"
+      ],
+      "app_name": "Pelorian Cavalry",
+      "printed_traits": [
+        "Pelorian Cavalry",
+        "Mounted Skirmisher"
+      ],
+      "normalized_traits": [
+        "Pelorian Cavalry",
+        "Mounted Skirmisher"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Kontos",
+        "Sickle Sword",
+        "Recurve Bow",
+        "Pelorian Aspis",
+        "Pelorian Peltast Shield"
+      ],
+      "app_weapons": [
+        "Kontos",
+        "Sickle Sword/Khopesh",
+        "Recurve Bow",
+        "Pelorian Aspis",
+        "Pelorian Peltast Shield"
+      ],
+      "restriction": "Warrior career only",
+      "notes": null
+    },
+    {
+      "page": 193,
+      "area": "Dragon Pass/Lunar",
+      "card_kind": "Civilized for Dragon Pass - Lunar Combat Style Card",
+      "source_name": "Lunar Pelorian Noble",
+      "app_culture": "Lunar Heartland",
+      "additional_app_cultures": [],
+      "app_name": "Pelorian Noble",
+      "printed_traits": [
+        "Formation Fighting*",
+        "Mounted Combat",
+        "Ranged Marksman"
+      ],
+      "normalized_traits": [
+        "Formation Fighting",
+        "Mounted Combat",
+        "Ranged Marksman"
+      ],
+      "printed_marker": "*",
+      "source_weapons": [
+        "Sickle Sword",
+        "Short Spear",
+        "Recurve Bow",
+        "Pelorian Aspis"
+      ],
+      "app_weapons": [
+        "Sickle Sword/Khopesh",
+        "Shortspear",
+        "Recurve Bow",
+        "Pelorian Aspis"
+      ],
+      "restriction": "Aristocracy or Ruling class only",
+      "notes": null
+    },
+    {
+      "page": 194,
+      "area": "Dragon Pass/Lunar",
+      "card_kind": "Civilized for Dragon Pass - Lunar Combat Style Card",
+      "source_name": "Lunar Sagittan Peltast",
+      "app_culture": "Lunar Heartland",
+      "additional_app_cultures": [],
+      "app_name": "Sagittan Peltast",
+      "printed_traits": [
+        "Sagittan Peltast"
+      ],
+      "normalized_traits": [
+        "Sagittan Peltast"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Recurve Bow",
+        "Sling",
+        "Dagger",
+        "Pelorian Peltast Shield"
+      ],
+      "app_weapons": [
+        "Recurve Bow",
+        "Sling",
+        "Dagger",
+        "Pelorian Peltast Shield"
+      ],
+      "restriction": "Warrior career only",
+      "notes": null
+    },
+    {
+      "page": 168,
+      "area": "Dragon Pass/Sartar/Telmori",
+      "card_kind": "Barbarian for Dragon Pass Combat Style Card",
+      "source_name": "Sartarite Alynx Brother",
+      "app_culture": "Sartarite (Heortling)",
+      "additional_app_cultures": [],
+      "app_name": "Alynx Brother",
+      "printed_traits": [
+        "Daredevil",
+        "Do or Die",
+        "Trained Beast"
+      ],
+      "normalized_traits": [
+        "Daredevil",
+        "Do or Die",
+        "Trained Beast"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Short Spear",
+        "Javelin",
+        "Dagger"
+      ],
+      "app_weapons": [
+        "Shortspear",
+        "Javelin",
+        "Dagger"
+      ],
+      "restriction": "Herder, Hunter or Scout career only",
+      "notes": null
+    },
+    {
+      "page": 169,
+      "area": "Dragon Pass/Sartar/Telmori",
+      "card_kind": "Barbarian for Dragon Pass Combat Style Card",
+      "source_name": "Sartarite Hill Clan Levy",
+      "app_culture": "Sartarite (Heortling)",
+      "additional_app_cultures": [],
+      "app_name": "Hill Clan Levy",
+      "printed_traits": [
+        "Intimidating Scream",
+        "Throw Weapons"
+      ],
+      "normalized_traits": [
+        "Intimidating Scream",
+        "Throw Weapons"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Long Axe 1H",
+        "Short Spear",
+        "Long Bow",
+        "Javelin",
+        "Orlanthi Round Shield"
+      ],
+      "app_weapons": [
+        "Long Axe",
+        "Shortspear",
+        "Long Bow",
+        "Javelin",
+        "Orlanthi Round Shield"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 170,
+      "area": "Dragon Pass/Sartar/Telmori",
+      "card_kind": "Barbarian for Dragon Pass Combat Style Card",
+      "source_name": "Sartarite Loyal Housecarl",
+      "app_culture": "Sartarite (Heortling)",
+      "additional_app_cultures": [],
+      "app_name": "Loyal Housecarl",
+      "printed_traits": [
+        "Batter Aside",
+        "Intimidating Scream",
+        "Shield Wall*"
+      ],
+      "normalized_traits": [
+        "Batter Aside",
+        "Intimidating Scream",
+        "Shield Wall"
+      ],
+      "printed_marker": "*",
+      "source_weapons": [
+        "Broadsword",
+        "Short Spear",
+        "Great Axe",
+        "Orlanthi Scutum"
+      ],
+      "app_weapons": [
+        "Broadsword",
+        "Shortspear",
+        "Great Axe",
+        "Orlanthi Scutum"
+      ],
+      "restriction": "Warrior career only",
+      "notes": null
+    },
+    {
+      "page": 171,
+      "area": "Dragon Pass/Sartar/Telmori",
+      "card_kind": "Barbarian for Dragon Pass Combat Style Card",
+      "source_name": "Sartarite Noble",
+      "app_culture": "Sartarite (Heortling)",
+      "additional_app_cultures": [],
+      "app_name": "Sartarite Noble",
+      "printed_traits": [
+        "Intimidating Scream",
+        "Mounted Combat",
+        "Shield Wall*"
+      ],
+      "normalized_traits": [
+        "Intimidating Scream",
+        "Mounted Combat",
+        "Shield Wall"
+      ],
+      "printed_marker": "*",
+      "source_weapons": [
+        "Broadsword",
+        "Short Spear",
+        "Javelin",
+        "Orlanthi Scutum"
+      ],
+      "app_weapons": [
+        "Broadsword",
+        "Shortspear",
+        "Javelin",
+        "Orlanthi Scutum"
+      ],
+      "restriction": "Gentry or Ruling class only",
+      "notes": null
+    },
+    {
+      "page": 172,
+      "area": "Dragon Pass/Sartar/Telmori",
+      "card_kind": "Barbarian for Dragon Pass Combat Style Card",
+      "source_name": "Sartarite Upland Crofter",
+      "app_culture": "Sartarite (Heortling)",
+      "additional_app_cultures": [],
+      "app_name": "Upland Crofter",
+      "printed_traits": [
+        "Ranged Marksman",
+        "Skirmisher"
+      ],
+      "normalized_traits": [
+        "Ranged Marksman",
+        "Skirmisher"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Short Spear",
+        "Sling",
+        "Orlanthi Round Shield"
+      ],
+      "app_weapons": [
+        "Shortspear",
+        "Sling",
+        "Orlanthi Round Shield"
+      ],
+      "restriction": "Herder, Hunter or Scout career only",
+      "notes": null
+    },
+    {
+      "page": 173,
+      "area": "Dragon Pass/Sartar/Telmori",
+      "card_kind": "Barbarian for Dragon Pass Combat Style Card",
+      "source_name": "Tarshite Militia",
+      "app_culture": "Sartarite (Heortling)",
+      "additional_app_cultures": [],
+      "app_name": "Tarshite Militia",
+      "printed_traits": [
+        "Defensive Minded",
+        "Formation Fighting*",
+        "Siege Warfare"
+      ],
+      "normalized_traits": [
+        "Defensive Minded",
+        "Formation Fighting",
+        "Siege Warfare"
+      ],
+      "printed_marker": "*",
+      "source_weapons": [
+        "Shortsword",
+        "Short Spear",
+        "Javelin",
+        "Peltast Shield"
+      ],
+      "app_weapons": [
+        "Shortsword",
+        "Shortspear",
+        "Javelin",
+        "Peltast Shield"
+      ],
+      "restriction": "Warrior career only",
+      "notes": null
+    },
+    {
+      "page": 174,
+      "area": "Dragon Pass/Sartar/Telmori",
+      "card_kind": "Primitive for Dragon Pass Combat Style Card",
+      "source_name": "Telmori Hunter",
+      "app_culture": "Telmori Hsunchen",
+      "additional_app_cultures": [],
+      "app_name": "Telmori Hunter",
+      "printed_traits": [
+        "Intimidating Scream",
+        "Trained Beast"
+      ],
+      "normalized_traits": [
+        "Intimidating Scream",
+        "Trained Beast"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Club",
+        "Short Spear",
+        "Longspear",
+        "Short Bow"
+      ],
+      "app_weapons": [
+        "Club",
+        "Shortspear",
+        "Longspear",
+        "Short Bow"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 175,
+      "area": "Dragon Pass/Sartar/Telmori",
+      "card_kind": "Primitive for Dragon Pass Combat Style Card",
+      "source_name": "Telmori Wolf Hunter",
+      "app_culture": "Telmori Hsunchen",
+      "additional_app_cultures": [],
+      "app_name": "Wolf Hunter",
+      "printed_traits": [
+        "Intimidating Scream",
+        "Mancatcher"
+      ],
+      "normalized_traits": [
+        "Intimidating Scream",
+        "Mancatcher"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Unarmed"
+      ],
+      "app_weapons": [
+        "Unarmed"
+      ],
+      "restriction": null,
+      "notes": "Can be used in either human or lupine forms; wolf form also gains Unarmed Prowess."
+    },
+    {
+      "page": 928,
+      "area": "Prax",
+      "card_kind": "Nomad for Prax Combat Style Card",
+      "source_name": "Agimori",
+      "app_culture": "Praxian",
+      "additional_app_cultures": [],
+      "app_name": "Agimori",
+      "printed_traits": [
+        "Batter Aside",
+        "Knockout Blow",
+        "Shield Splitter"
+      ],
+      "normalized_traits": [
+        "Batter Aside",
+        "Knockout Blow",
+        "Shield Splitter"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Longspear",
+        "Club",
+        "Javelin",
+        "Doraddi War Shield"
+      ],
+      "app_weapons": [
+        "Longspear",
+        "Club",
+        "Javelin",
+        "Doraddi War Shield"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 930,
+      "area": "Prax",
+      "card_kind": "Nomad for Prax Combat Style Card",
+      "source_name": "Baboon",
+      "app_culture": "Praxian",
+      "additional_app_cultures": [],
+      "app_name": "Baboon",
+      "printed_traits": [
+        "Daredevil",
+        "Intimidating Scream",
+        "Swashbuckling"
+      ],
+      "normalized_traits": [
+        "Daredevil",
+        "Intimidating Scream",
+        "Swashbuckling"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Longspear",
+        "Sling",
+        "Stone"
+      ],
+      "app_weapons": [
+        "Longspear",
+        "Sling",
+        "Thrown Stone"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 931,
+      "area": "Prax",
+      "card_kind": "Nomad for Prax Combat Style Card",
+      "source_name": "Basmoli",
+      "app_culture": "Praxian",
+      "additional_app_cultures": [],
+      "app_name": "Basmoli",
+      "printed_traits": [
+        "Blind Fighting",
+        "Daredevil",
+        "Ranged Marksman"
+      ],
+      "normalized_traits": [
+        "Blind Fighting",
+        "Daredevil",
+        "Ranged Marksman"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Short Spear",
+        "Longspear",
+        "Javelin",
+        "Dagger"
+      ],
+      "app_weapons": [
+        "Shortspear",
+        "Longspear",
+        "Javelin",
+        "Dagger"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 932,
+      "area": "Prax",
+      "card_kind": "Nomad for Prax Combat Style Card",
+      "source_name": "Bison",
+      "app_culture": "Praxian",
+      "additional_app_cultures": [],
+      "app_name": "Bison",
+      "printed_traits": [
+        "Bison Tribe Combat Style"
+      ],
+      "normalized_traits": [
+        "Bison Tribe Combat Style"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Long Axe 1H",
+        "Broadsword",
+        "Lance",
+        "Javelin",
+        "Praxian Shield"
+      ],
+      "app_weapons": [
+        "Long Axe",
+        "Broadsword",
+        "Lance",
+        "Javelin",
+        "Praxian Shield"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 936,
+      "area": "Prax",
+      "card_kind": "Nomad for Prax Combat Style Card",
+      "source_name": "Bolo Lizard",
+      "app_culture": "Praxian",
+      "additional_app_cultures": [],
+      "app_name": "Bolo Lizard",
+      "printed_traits": [
+        "Mancatcher",
+        "Mounted Combat",
+        "Skirmisher"
+      ],
+      "normalized_traits": [
+        "Mancatcher",
+        "Mounted Combat",
+        "Skirmisher"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Short Spear",
+        "Bolas",
+        "Dagger",
+        "Praxian Shield"
+      ],
+      "app_weapons": [
+        "Shortspear",
+        "Bolas",
+        "Dagger",
+        "Praxian Shield"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 937,
+      "area": "Prax",
+      "card_kind": "Nomad for Prax Combat Style Card",
+      "source_name": "Cannibal Cult",
+      "app_culture": "Praxian",
+      "additional_app_cultures": [],
+      "app_name": "Cannibal Cult",
+      "printed_traits": [
+        "Assassination",
+        "Knockout Blow",
+        "Mancatcher"
+      ],
+      "normalized_traits": [
+        "Assassination",
+        "Knockout Blow",
+        "Mancatcher"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Club",
+        "Net",
+        "Whip",
+        "Dagger"
+      ],
+      "app_weapons": [
+        "Club",
+        "Net",
+        "Whip",
+        "Dagger"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 939,
+      "area": "Prax",
+      "card_kind": "Nomad for Prax Combat Style Card",
+      "source_name": "High Llama",
+      "app_culture": "Praxian",
+      "additional_app_cultures": [],
+      "app_name": "High Llama",
+      "printed_traits": [
+        "Mounted Combat",
+        "Throw Weapons",
+        "Trained Beast"
+      ],
+      "normalized_traits": [
+        "Mounted Combat",
+        "Throw Weapons",
+        "Trained Beast"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Long Axe 1H",
+        "Longspear",
+        "Lance",
+        "Javelin",
+        "Praxian Shield"
+      ],
+      "app_weapons": [
+        "Long Axe",
+        "Longspear",
+        "Lance",
+        "Javelin",
+        "Praxian Shield"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 940,
+      "area": "Prax",
+      "card_kind": "Nomad for Prax Combat Style Card",
+      "source_name": "Impala",
+      "app_culture": "Praxian",
+      "additional_app_cultures": [],
+      "app_name": "Impala",
+      "printed_traits": [
+        "Mounted Combat",
+        "Prancing",
+        "Ranged Marksman"
+      ],
+      "normalized_traits": [
+        "Mounted Combat",
+        "Prancing",
+        "Ranged Marksman"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Long Axe 1H",
+        "Recurve Bow",
+        "Dart",
+        "Praxian Shield"
+      ],
+      "app_weapons": [
+        "Long Axe",
+        "Recurve Bow",
+        "Dart",
+        "Praxian Shield"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 941,
+      "area": "Prax",
+      "card_kind": "Nomad for Prax Combat Style Card",
+      "source_name": "Morokanth",
+      "app_culture": "Praxian",
+      "additional_app_cultures": [],
+      "app_name": "Morokanth",
+      "printed_traits": [
+        "Batter Aside",
+        "Do or Die",
+        "Morokanth Fu",
+        "Shield Splitter"
+      ],
+      "normalized_traits": [
+        "Batter Aside",
+        "Do or Die",
+        "Morokanth Fu",
+        "Shield Splitter"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Club",
+        "Short Spear",
+        "Longspear",
+        "Unarmed",
+        "Praxian Shield"
+      ],
+      "app_weapons": [
+        "Club",
+        "Shortspear",
+        "Longspear",
+        "Unarmed",
+        "Praxian Shield"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 943,
+      "area": "Prax",
+      "card_kind": "Nomad for Prax Combat Style Card",
+      "source_name": "Ostrich",
+      "app_culture": "Praxian",
+      "additional_app_cultures": [],
+      "app_name": "Ostrich",
+      "printed_traits": [
+        "Mounted Combat",
+        "Ranged Marksman",
+        "Skirmisher"
+      ],
+      "normalized_traits": [
+        "Mounted Combat",
+        "Ranged Marksman",
+        "Skirmisher"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Short Spear",
+        "Boomerang",
+        "Dart",
+        "Sling",
+        "Praxian Shield"
+      ],
+      "app_weapons": [
+        "Shortspear",
+        "Boomerang",
+        "Dart",
+        "Sling",
+        "Praxian Shield"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 944,
+      "area": "Prax",
+      "card_kind": "Nomad for Prax Combat Style Card",
+      "source_name": "Pol-Joni",
+      "app_culture": "Praxian",
+      "additional_app_cultures": [],
+      "app_name": "Pol-Joni",
+      "printed_traits": [
+        "Assassination",
+        "Mounted Combat",
+        "Skirmisher"
+      ],
+      "normalized_traits": [
+        "Assassination",
+        "Mounted Combat",
+        "Skirmisher"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Short Spear",
+        "Long Axe 1H",
+        "Praxian Shield"
+      ],
+      "app_weapons": [
+        "Shortspear",
+        "Long Axe",
+        "Praxian Shield"
+      ],
+      "restriction": null,
+      "notes": "May select weapons from an alternate Praxian tribe or Orlanthi combat style."
+    },
+    {
+      "page": 945,
+      "area": "Prax",
+      "card_kind": "Nomad for Prax Combat Style Card",
+      "source_name": "Rhino",
+      "app_culture": "Praxian",
+      "additional_app_cultures": [],
+      "app_name": "Rhino",
+      "printed_traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Intimidating Scream"
+      ],
+      "normalized_traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Intimidating Scream"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Long Axe 1H",
+        "Mace",
+        "Lance",
+        "Javelin",
+        "Praxian Shield"
+      ],
+      "app_weapons": [
+        "Long Axe",
+        "Mace",
+        "Lance",
+        "Javelin",
+        "Praxian Shield"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 946,
+      "area": "Prax",
+      "card_kind": "Nomad for Prax Combat Style Card",
+      "source_name": "Sable",
+      "app_culture": "Praxian",
+      "additional_app_cultures": [],
+      "app_name": "Sable",
+      "printed_traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Ranged Marksman"
+      ],
+      "normalized_traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Ranged Marksman"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Scimitar",
+        "Lance",
+        "Recurve Bow",
+        "Praxian Shield"
+      ],
+      "app_weapons": [
+        "Scimitar",
+        "Lance",
+        "Recurve Bow",
+        "Praxian Shield"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 947,
+      "area": "Prax",
+      "card_kind": "Nomad for Prax Combat Style Card",
+      "source_name": "Unicorn",
+      "app_culture": "Praxian",
+      "additional_app_cultures": [],
+      "app_name": "Unicorn",
+      "printed_traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Kuschile Archery"
+      ],
+      "normalized_traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Kuschile Archery"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Lance",
+        "Recurve Bow",
+        "Dart",
+        "Pelorian Peltast Shield"
+      ],
+      "app_weapons": [
+        "Lance",
+        "Recurve Bow",
+        "Dart",
+        "Pelorian Peltast Shield"
+      ],
+      "restriction": null,
+      "notes": null
+    },
+    {
+      "page": 948,
+      "area": "Prax",
+      "card_kind": "Nomad for Prax Combat Style Card",
+      "source_name": "Zebra",
+      "app_culture": "Praxian",
+      "additional_app_cultures": [],
+      "app_name": "Zebra",
+      "printed_traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Trained Beast"
+      ],
+      "normalized_traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Trained Beast"
+      ],
+      "printed_marker": null,
+      "source_weapons": [
+        "Short Spear",
+        "Broadsword",
+        "Recurve Bow",
+        "Orlanthi Round Shield"
+      ],
+      "app_weapons": [
+        "Shortspear",
+        "Broadsword",
+        "Recurve Bow",
+        "Orlanthi Round Shield"
+      ],
+      "restriction": null,
+      "notes": null
+    }
+  ]
+}

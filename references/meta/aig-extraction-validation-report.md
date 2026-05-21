@@ -4,6 +4,8 @@
 **Validator:** Subagent (attestable-chain-validator)
 **Target:** `aig-character-sheet.html`
 
+**Status:** Superseded by the 2026-05-21 AiG vision/OCR validation pass and drift tests in `test-chargen.js`. The old Provincial Lunar/Tarsh discrepancy below is historical and should not be used as current source authority.
+
 ---
 
 ## Section 1: SKILLS_DATA — Every Entry
@@ -172,7 +174,7 @@
 | standardSkills–folkMagic–passions | Present in HTML | NOT FOUND IN SOURCE | cultures.json p.32 | ⚠️ UNVERIFIABLE |
 | startingMoney | 4d6×15 Lunars | 4d6x15 | creation-summary-aig.json p.24 | ✅ |
 
-### Culture: Provincial Lunar/Tarsh
+### Culture: Lunar Provincial (historical label: Provincial Lunar/Tarsh)
 **Source:** cultures.json p.35-37
 **Status:** ⚠️ PARTIAL — UNVERIFIABLE (OCR source incomplete)
 
@@ -181,9 +183,9 @@
 | type | Civilised | Barbarian | cultures.json p.35 | ❌ **MISMATCH** |
 | startingMoney | 4d6×5 Lunars | 4d6x5 | creation-summary-aig.json p.24 | ✅ |
 
-**Note:** HTML lists Provincial Lunar/Tarsh as "Civilised" but reference JSON says "Barbarian". This is a significant discrepancy that affects available careers.
+**2026-05-21 update:** Current canonical JSON lists Lunar Provincial as Civilised; Tarshite characters choose Lunar Provincial or Sartarite. The old mismatch in this report is superseded.
 
-### Culture: Sartarite/Heortling
+### Culture: Sartarite (Heortling) (historical label: Sartarite/Heortling)
 **Source:** cultures.json p.37-39
 **Status:** ⚠️ PARTIAL — UNVERIFIABLE (OCR source incomplete)
 
@@ -203,7 +205,7 @@
 | standardSkills–folkMagic–passions | Present in HTML | NOT FOUND IN SOURCE | cultures.json p.39 | ⚠️ UNVERIFIABLE |
 | startingMoney | 4d6×2 Lunars | 4d6x2 | creation-summary-aig.json p.24 | ✅ |
 
-**Discrepancies:** 1 confirmed (Provincial Lunar/Tarsh culture type: Civilised vs Barbarian). 6 cultures unverifiable due to OCR gaps.
+**Discrepancies:** Superseded by 2026-05-21 vision/OCR validation and JSON drift tests. Current canonical stores resolve the Lunar Provincial culture type and all eight culture mappings.
 
 ---
 
@@ -446,7 +448,7 @@ HTML DAMAGE_MOD_TABLE spot check:
 | 7. WEAPONS_DATA | ✅ PASS | 0 (+1 data corruption: Scimitar AP) |
 
 ### Critical Issues (require fix):
-1. **Provincial Lunar/Tarsh culture type** listed as "Civilised" in HTML but should be "Barbarian" per AiG reference
+1. **Superseded:** Lunar Provincial is now validated as Civilised, with Tarshite characters choosing Lunar Provincial or Sartarite. See `references/aig-raw/careers.json` and `references/aig-raw/cultures.json`.
 2. **Initiative Bonus rounding** uses `Math.round()` instead of `Math.floor()` — can produce values 1 higher than RAW
 3. **Scimitar armour_points** contains Python datetime object instead of numeric value
 

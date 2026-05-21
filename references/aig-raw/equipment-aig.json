@@ -3,7 +3,7 @@
   "extracted_at": "2026-05-03",
   "extraction_method": "Visual reading of scanned PDF pages 29-41 via claude-doc-tools image export",
   "page": "p.26-41 (Culture sections)",
-  "note": "The AiG GenCon preview does NOT contain a dedicated Equipment chapter (it was planned but never published). Starting equipment is derived from: 1) Combat style weapon lists per culture, 2) Cultural narrative descriptions of technology level. Starting money formulas are in the Characters chapter p.24-25. Social class determines equipment quality per Mythras Core p.21-24 and p.33-34.",
+  "note": "The AiG GenCon preview does NOT contain a dedicated Equipment chapter (it was planned but never published). Starting equipment is derived from: 1) Combat style weapon lists per culture, 2) Cultural narrative descriptions of technology level. Starting money formulas are in the Characters chapter p.24-25. Social class determines equipment quality per Mythras Core p.21-24 and p.33-34. Combat style weapon lists are linked by CSE IDs because Combat Styles Encyclopedia supersedes AiG for combat styles only.",
   "equipment_chapter_status": "NOT PRESENT in GenCon 2015 preview. Referenced as 'Economics and Equipment' but was among chapters noted as incomplete.",
   "starting_money": {
     "source_page": "p.24-25",
@@ -54,645 +54,108 @@
       "source_page": "p.27",
       "culture_type": "Primitive",
       "technology_note": "Hunters who use bow and spear. Most weapons and tools crafted from wood and stone. Occupying Lunars have made bronze more available. Richest Balazarings revel in owning metal weapons.",
-      "styles": [
-        {
-          "name": "Hunter Raider",
-          "weapons": [
-            "Spear",
-            "Bow",
-            "Sling"
-          ],
-          "traits": [
-            "Skirmisher"
-          ]
-        },
-        {
-          "name": "Pony Cavalry",
-          "weapons": [
-            "Spear",
-            "Bow"
-          ],
-          "traits": [
-            "Mounted Combat"
-          ]
-        },
-        {
-          "name": "Hawk Slayer",
-          "weapons": [
-            "Longspear"
-          ],
-          "traits": [
-            "Mounted Combat"
-          ]
-        }
-      ]
+      "combat_style_ids": [
+        "cse:balazaring:hawk-slayer",
+        "cse:balazaring:hunter-raider",
+        "cse:balazaring:pony-cavalry"
+      ],
+      "combat_styles_source": "references/combat-styles.json"
     },
     "Esrolian": {
       "source_page": "p.28-29",
       "culture_type": "Civilised",
       "technology_note": "Urbanised Orlanthi with mature bronze-working. Well-equipped military with formation-trained troops.",
-      "styles": [
-        {
-          "name": "Citizen Legionary",
-          "weapons": [
-            "Shortsword",
-            "Shield",
-            "Javelin",
-            "Sling"
-          ],
-          "traits": [
-            "Formation Fighting"
-          ]
-        },
-        {
-          "name": "City-State Phalangite",
-          "weapons": [
-            "Longspear",
-            "Sarissa",
-            "Bow"
-          ],
-          "traits": [
-            "Formation Fighting"
-          ]
-        },
-        {
-          "name": "Clan Protector",
-          "weapons": [
-            "Shortsword",
-            "Shield",
-            "Shortspear"
-          ],
-          "traits": [
-            "Daredevil"
-          ]
-        }
-      ]
+      "combat_style_ids": [
+        "cse:esrolian:citizen-legionary",
+        "cse:esrolian:city-state-phalangite",
+        "cse:esrolian:clan-protector"
+      ],
+      "combat_styles_source": "references/combat-styles.json"
     },
     "God Forgot": {
       "source_page": "p.30",
       "culture_type": "Civilised",
       "technology_note": "Western-style culture using Brithini caste system. Holars (warriors) and Horali (mercenaries) use conventional bronze weapons. Zzistori (sorcerers) use improvised weapons.",
-      "styles": [
-        {
-          "name": "Holar Militia",
-          "weapons": [
-            "1H Spear",
-            "Western Infantry Shield",
-            "Sling"
-          ],
-          "traits": [
-            "Shield Wall"
-          ]
-        },
-        {
-          "name": "God Forgotten Horali",
-          "weapons": [
-            "Sword",
-            "Shield",
-            "Spear",
-            "Sling"
-          ],
-          "traits": [
-            "Skirmisher"
-          ]
-        },
-        {
-          "name": "Talar Defensive School",
-          "weapons": [
-            "Unarmed",
-            "Shortsword",
-            "Dagger",
-            "Buckler"
-          ],
-          "traits": [
-            "Improvised Weapons"
-          ]
-        }
-      ]
+      "combat_style_ids": [
+        "cse:god-forgot:holar-militia",
+        "cse:god-forgot:talar-defensive-school",
+        "cse:god-forgot:god-forgotten-holari"
+      ],
+      "combat_styles_source": "references/combat-styles.json"
     },
     "Lunar Heartland": {
       "source_page": "p.32-33",
       "culture_type": "Civilised",
       "technology_note": "Highly advanced Dara Happan civilisation with bronze and some iron. Professional military with heavy infantry, cavalry, and specialist units.",
-      "styles": [
-        {
-          "name": "Dara Happan Urbanite",
-          "weapons": [
-            "Club",
-            "Dagger",
-            "Shortsword",
-            "Buckler"
-          ],
-          "traits": [
-            "Defensive Minded"
-          ],
-          "restriction": null
-        },
-        {
-          "name": "Dart Contestant",
-          "weapons": [
-            "Dart",
-            "Dagger",
-            "Shortsword"
-          ],
-          "traits": [
-            "Assassination",
-            "Daredevil"
-          ],
-          "restriction": "Agent career only"
-        },
-        {
-          "name": "Sagittan Peltast",
-          "weapons": [
-            "Composite Bow",
-            "Sling",
-            "Pelorian Peltast Shield",
-            "Dagger"
-          ],
-          "traits": [
-            "Ranged Marksman",
-            "Skirmisher"
-          ],
-          "restriction": "Warrior career only"
-        },
-        {
-          "name": "Lunar Corps Hoplite",
-          "weapons": [
-            "1H Spear",
-            "Pelorian Aspis",
-            "Sickle Sword/Khopesh",
-            "Kontos"
-          ],
-          "traits": [
-            "Formation Fighting",
-            "Shield Wall",
-            "Siege Warfare"
-          ],
-          "restriction": "Warrior career only"
-        },
-        {
-          "name": "Dara Happan Heavy Infantry",
-          "weapons": [
-            "Kontos",
-            "Dara Happan Hoplon",
-            "Shortsword",
-            "Dart"
-          ],
-          "traits": [
-            "Formation Fighting",
-            "Hoplon Fighting",
-            "Intimidating Scream"
-          ],
-          "restriction": "Warrior career only"
-        },
-        {
-          "name": "Pelorian Cavalry",
-          "weapons": [
-            "Composite Bow",
-            "Kontos",
-            "Pelorian Aspis",
-            "Sickle Sword/Khopesh",
-            "Pelorian Peltast Shield"
-          ],
-          "traits": [
-            "Beast-back Lancer",
-            "Mounted Combat",
-            "Mounted Skirmisher"
-          ],
-          "restriction": "Warrior career only"
-        },
-        {
-          "name": "Pelorian Noble",
-          "weapons": [
-            "Sickle Sword/Khopesh",
-            "Pelorian Aspis",
-            "Composite Bow",
-            "1H Spear"
-          ],
-          "traits": [
-            "Formation Fighting",
-            "Mounted Combat",
-            "Ranged Marksman"
-          ],
-          "restriction": "Aristocracy or Ruling class only"
-        }
-      ]
+      "combat_style_ids": [
+        "cse:lunar-heartland:lunar-corps-hoplite",
+        "cse:lunar-heartland:dara-happan-heavy-infantry",
+        "cse:lunar-heartland:dara-happan-urbanite",
+        "cse:lunar-heartland:dart-contestant",
+        "cse:lunar-heartland:pelorian-cavalry",
+        "cse:lunar-heartland:pelorian-noble",
+        "cse:lunar-heartland:sagittan-peltast"
+      ],
+      "combat_styles_source": "references/combat-styles.json"
     },
     "Lunar Provincial": {
       "source_page": "p.33-34",
       "culture_type": "Civilised",
       "technology_note": "Provincial Lunars far from heartland. Mix of Dara Happan military equipment and local adaptations.",
-      "styles": [
-        {
-          "name": "Lunar Corps Hoplite",
-          "weapons": [
-            "1H Spear",
-            "Pelorian Aspis",
-            "Sickle Sword/Khopesh"
-          ],
-          "traits": [
-            "Formation Fighting",
-            "Shield Wall",
-            "Siege Warfare"
-          ],
-          "restriction": "Warrior career only"
-        },
-        {
-          "name": "Pelorian Cavalry",
-          "weapons": [
-            "Composite Bow",
-            "Pelorian Aspis",
-            "Sickle Sword/Khopesh",
-            "Kontos",
-            "Pelorian Peltast Shield"
-          ],
-          "traits": [
-            "Beast-back Lancer",
-            "Mounted Combat",
-            "Mounted Skirmisher"
-          ],
-          "restriction": "Warrior career only"
-        },
-        {
-          "name": "Colonial Noble",
-          "weapons": [
-            "1H Spear",
-            "Pelorian Aspis",
-            "Sickle Sword/Khopesh",
-            "Composite Bow"
-          ],
-          "traits": [
-            "Formation Fighting",
-            "Mounted Combat",
-            "Ranged Marksman"
-          ],
-          "restriction": "Aristocracy or Ruling class only"
-        },
-        {
-          "name": "Colonial Survivalist",
-          "weapons": [
-            "Shortsword",
-            "Dagger",
-            "Sling"
-          ],
-          "traits": [
-            "Hidden Weapons"
-          ],
-          "restriction": null
-        }
-      ]
+      "combat_style_ids": [
+        "cse:lunar-provincial:colonial-noble",
+        "cse:lunar-provincial:colonial-survivalist",
+        "cse:lunar-provincial:lunar-corps-hoplite",
+        "cse:lunar-provincial:pelorian-cavalry"
+      ],
+      "combat_styles_source": "references/combat-styles.json"
     },
     "Praxian": {
       "source_page": "p.34-36",
       "culture_type": "Nomad",
       "technology_note": "Primitive level of technology. Metal goods highly prized and must be traded, stolen, or won in battle. Weapons mostly leather, bone, and wood. Riding beast tribes use Combat Style traits like Skirmisher when mounted.",
-      "styles_by_tribe": {
-        "note": "The weapons and traits for the Praxian Warrior style are dependent on each particular tribe (AiG p.35).",
-        "Agimori": {
-          "weapons": [
-            "1H Spear",
-            "Club",
-            "Doraddi War Shield",
-            "Javelin"
-          ],
-          "traits": [
-            "Batter Aside",
-            "Knockout Blow",
-            "Shield Splitter"
-          ]
-        },
-        "Baboon": {
-          "weapons": [
-            "Thrown Stone",
-            "Sling",
-            "1H Spear",
-            "2H Spear"
-          ],
-          "traits": [
-            "Daredevil",
-            "Intimidating Scream",
-            "Swashbuckling"
-          ]
-        },
-        "Basmoli": {
-          "weapons": [
-            "1H Spear",
-            "2H Spear",
-            "Dagger",
-            "Javelin"
-          ],
-          "traits": [
-            "Blind Fighting",
-            "Daredevil",
-            "Ranged Marksman"
-          ]
-        },
-        "Bison": {
-          "weapons": [
-            "1H Axe",
-            "Javelin",
-            "Lance",
-            "1H Sword",
-            "Praxian Shield"
-          ],
-          "traits": [
-            "Beast-back Lancer",
-            "Mounted Combat",
-            "Shield Splitter"
-          ]
-        },
-        "Bolo Lizard": {
-          "weapons": [
-            "Bolas",
-            "Dagger",
-            "1H Spear",
-            "Praxian Shield"
-          ],
-          "traits": [
-            "Mancatcher",
-            "Mounted Combat",
-            "Skirmishing"
-          ]
-        },
-        "Cannibal Cult": {
-          "weapons": [
-            "Dagger",
-            "Club",
-            "Net",
-            "Whip"
-          ],
-          "traits": [
-            "Assassination",
-            "Knockout Blow",
-            "Mancatcher"
-          ]
-        },
-        "High Llama": {
-          "weapons": [
-            "Javelin",
-            "Lance",
-            "Long Axe",
-            "2H Spear",
-            "Praxian Shield"
-          ],
-          "traits": [
-            "Mounted Combat",
-            "Throw Weapons",
-            "Trained Beast"
-          ]
-        },
-        "Impala": {
-          "weapons": [
-            "1H Axe",
-            "Composite Bow",
-            "Dart",
-            "Praxian Shield"
-          ],
-          "traits": [
-            "Mounted Combat",
-            "Prancing",
-            "Ranged Marksman"
-          ]
-        },
-        "Morokanth": {
-          "weapons": [
-            "Claws",
-            "Club",
-            "1H Spear",
-            "2H Spear",
-            "Praxian Shield"
-          ],
-          "traits": [
-            "Batter Aside",
-            "Do or Die (Claws)",
-            "Shield Splitter"
-          ]
-        },
-        "Ostrich": {
-          "weapons": [
-            "Boomerang",
-            "Dart",
-            "Sling",
-            "1H Spear",
-            "Praxian Shield"
-          ],
-          "traits": [
-            "Mounted Combat",
-            "Ranged Marksman",
-            "Skirmishing"
-          ]
-        },
-        "Pol-Joni": {
-          "weapons": [
-            "1H Spear",
-            "1H Axe",
-            "Short Bow",
-            "Praxian Shield"
-          ],
-          "traits": [
-            "Assassination",
-            "Mounted Combat",
-            "Skirmishing"
-          ],
-          "notes": "or select weapons from an alternate Praxian tribe or Orlanthi combat style"
-        },
-        "Rhino": {
-          "weapons": [
-            "Javelin",
-            "Lance",
-            "Long Axe",
-            "Mace",
-            "Praxian Shield"
-          ],
-          "traits": [
-            "Beast-back Lancer",
-            "Intimidating Scream",
-            "Mounted Combat"
-          ]
-        },
-        "Sable": {
-          "weapons": [
-            "Composite Bow",
-            "Lance",
-            "Scimitar",
-            "Praxian Shield"
-          ],
-          "traits": [
-            "Beast-back Lancer",
-            "Mounted Combat",
-            "Ranged Marksman"
-          ]
-        },
-        "Unicorn": {
-          "weapons": [
-            "Bow",
-            "Dart",
-            "Lance",
-            "Shortsword",
-            "Pelorian Peltast Shield"
-          ],
-          "traits": [
-            "Beast-back Lancer",
-            "Kuschile Archery",
-            "Mounted Combat"
-          ]
-        },
-        "Zebra (Pavis Survivors)": {
-          "weapons": [
-            "Composite Bow",
-            "1H Spear",
-            "Broadsword",
-            "Orlanthi Round Shield"
-          ],
-          "traits": [
-            "Beast-back Lancer",
-            "Mounted Combat",
-            "Trained Beast"
-          ]
-        }
-      }
+      "combat_style_ids": [
+        "cse:praxian:agimori",
+        "cse:praxian:baboon",
+        "cse:praxian:basmoli",
+        "cse:praxian:bison",
+        "cse:praxian:bolo-lizard",
+        "cse:praxian:cannibal-cult",
+        "cse:praxian:high-llama",
+        "cse:praxian:impala",
+        "cse:praxian:morokanth",
+        "cse:praxian:ostrich",
+        "cse:praxian:pol-joni",
+        "cse:praxian:rhino",
+        "cse:praxian:sable",
+        "cse:praxian:unicorn",
+        "cse:praxian:zebra"
+      ],
+      "combat_styles_source": "references/combat-styles.json"
     },
     "Sartarite (Heortling)": {
       "source_page": "p.36-38",
       "culture_type": "Barbarian",
       "technology_note": "Sophisticated crafters and metalworkers. Learned art of metalworking from the dwarves (god Gustbran). Bronze weapons standard, iron rare and prized.",
-      "styles": [
-        {
-          "name": "Hill Clan Levy",
-          "weapons": [
-            "1H Axe",
-            "1H Spear",
-            "Orlanthi Round Shield",
-            "Longbow or Javelin"
-          ],
-          "traits": [
-            "Intimidating Scream",
-            "Throw Weapons"
-          ],
-          "restriction": null
-        },
-        {
-          "name": "Upland Crafter",
-          "weapons": [
-            "Sling",
-            "1H Spear",
-            "Orlanthi Round Shield"
-          ],
-          "traits": [
-            "Ranged Marksman",
-            "Skirmisher"
-          ],
-          "restriction": "Herder, Hunter or Scout career only"
-        },
-        {
-          "name": "Alynx Brother",
-          "weapons": [
-            "Dagger",
-            "1H Spear",
-            "Javelin"
-          ],
-          "traits": [
-            "Daredevil",
-            "Do or Die",
-            "Trained Beast"
-          ],
-          "restriction": "Herder, Hunter or Scout career only"
-        },
-        {
-          "name": "Loyal Housecarl",
-          "weapons": [
-            "Broadsword",
-            "1H Spear",
-            "Orlanthi Scutum",
-            "Great Axe"
-          ],
-          "traits": [
-            "Batter Aside",
-            "Intimidating Scream",
-            "Shield Wall"
-          ],
-          "restriction": "Warrior career only"
-        },
-        {
-          "name": "Sartarite Noble",
-          "weapons": [
-            "Broadsword",
-            "1H Spear",
-            "Orlanthi Scutum",
-            "Javelin"
-          ],
-          "traits": [
-            "Intimidating Scream",
-            "Mounted Combat",
-            "Shield Wall"
-          ],
-          "restriction": "Gentry or Ruling class only"
-        },
-        {
-          "name": "Esrolian Cohort",
-          "weapons": [
-            "Great Axe",
-            "Shortsword",
-            "Orlanthi Scutum",
-            "Javelin"
-          ],
-          "traits": [
-            "Formation Fighting",
-            "Shield Splitter",
-            "Shield Wall"
-          ],
-          "restriction": "Warrior career only"
-        },
-        {
-          "name": "Tarshite Militia",
-          "weapons": [
-            "Shortsword",
-            "1H Spear",
-            "Peltast Shield",
-            "Javelin"
-          ],
-          "traits": [
-            "Defensive Minded",
-            "Formation Fighting",
-            "Siege Warfare"
-          ],
-          "restriction": "Warrior career only"
-        }
-      ]
+      "combat_style_ids": [
+        "cse:sartarite-heortling:alynx-brother",
+        "cse:sartarite-heortling:hill-clan-levy",
+        "cse:sartarite-heortling:loyal-housecarl",
+        "cse:sartarite-heortling:sartarite-noble",
+        "cse:sartarite-heortling:upland-crofter",
+        "cse:sartarite-heortling:tarshite-militia"
+      ],
+      "combat_styles_source": "references/combat-styles.json"
     },
     "Telmori Hsunchen": {
       "source_page": "p.39-41",
       "culture_type": "Primitive",
       "technology_note": "Neolithic hunter-gatherers with little or no technology. Simple weapons of wood, stone, and bone. In wolf form, use teeth and claws.",
-      "styles": [
-        {
-          "name": "Telmori Hunter",
-          "weapons": [
-            "Club",
-            "1H Spear",
-            "2H Spear",
-            "Javelin",
-            "Short Bow"
-          ],
-          "traits": [
-            "Intimidating Scream",
-            "Trained Beast (Wolf)"
-          ],
-          "restriction": null
-        },
-        {
-          "name": "Wolf Hunter",
-          "weapons": [
-            "Teeth and Claws"
-          ],
-          "traits": [
-            "Intimidating Scream",
-            "Mancatcher"
-          ],
-          "restriction": null,
-          "note": "Can be used in either human or lupine forms. In wolf form also gains Unarmed Prowess trait."
-        }
-      ]
+      "combat_style_ids": [
+        "cse:telmori-hsunchen:telmori-hunter",
+        "cse:telmori-hsunchen:wolf-hunter"
+      ],
+      "combat_styles_source": "references/combat-styles.json"
     }
   },
   "social_status_by_culture": {
@@ -718,5 +181,8 @@
       "5. Cultural technology level constrains available materials (e.g., Balazaring: stone/wood; Sartarite: bronze; Lunar: bronze/some iron)"
     ],
     "attestation_note": "This derivation method is attested by AiG p.24-25 ('Determine Starting Money and Equipment') which gives only the money formula and directs players to purchase equipment. The combat style weapons are the character's starting weapons per standard Mythras character creation (Core p.33: 'Characters begin with weapons and a shield as noted in their Combat Style')."
-  }
+  },
+  "validated_at": "2026-05-21",
+  "validation_method": "Pre-Magic PDF validation plus CSE supersession for combat styles.",
+  "combat_style_authority": "references/combat-styles.json"
 }

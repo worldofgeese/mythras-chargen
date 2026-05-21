@@ -1,0 +1,374 @@
+{
+  "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+  "extracted_at": "2026-05-21",
+  "page": "p.26-41, p.59-62, p.136-137",
+  "note": "Culture-level magic fit profiles derived from vision/OCR validation. These profiles summarize what the PDF supports for chargen guidance; they do not invent missing Lunar Magic rules.",
+  "validation_method": "Subagent PDF validation using pdftotext, rendered pages, and OCR against the local AiG PDF.",
+  "profiles": {
+    "Balazaring": {
+      "summary": "Primitive hill culture with everyday folk magic and ancestor/hunting cult access; higher magic is normally through cult or shamanic practice rather than a distinct cultural system.",
+      "citations": [
+        "AiG p.26-28",
+        "AiG p.59-62"
+      ],
+      "folkMagic": {
+        "status": "cultural",
+        "pages": [
+          "p.26-28",
+          "p.59"
+        ],
+        "notes": "Culture list includes Beastcall, Find Game, and other practical spells taught as ordinary folk magic."
+      },
+      "runeMagic": {
+        "status": "cult-mediated",
+        "pages": [
+          "p.59",
+          "p.26-28"
+        ],
+        "notes": "Rune Magic is available through cult worship, not as a separate culture package."
+      },
+      "spiritMagic": {
+        "status": "available",
+        "pages": [
+          "p.60",
+          "p.26-28"
+        ],
+        "notes": "Animist access is plausible through Daka Fal/Foundchild and local spirit practice, but not singled out as a dominant culture rule."
+      },
+      "sorcery": {
+        "status": "unusual",
+        "pages": [
+          "p.59",
+          "p.26-28"
+        ],
+        "notes": "No cultural sorcery signal in the Balazaring section."
+      },
+      "lunarMagic": {
+        "status": "absent",
+        "pages": [
+          "p.26-28"
+        ],
+        "notes": "No Lunar Magic culture signal."
+      }
+    },
+    "Esrolian": {
+      "summary": "Civilised Earth-culture society with common folk magic and strong theist cult access, especially Ernalda and related Holy Country cults.",
+      "citations": [
+        "AiG p.28-29",
+        "AiG p.59-62"
+      ],
+      "folkMagic": {
+        "status": "cultural",
+        "pages": [
+          "p.28-29",
+          "p.59"
+        ],
+        "notes": "Culture list includes Alarm, Appraise, Glamour, Heal, and other civic/temple-adjacent folk magic."
+      },
+      "runeMagic": {
+        "status": "cult-mediated",
+        "pages": [
+          "p.59",
+          "p.28-29"
+        ],
+        "notes": "Theist Rune Magic is expected through Earth and city cults."
+      },
+      "spiritMagic": {
+        "status": "available",
+        "pages": [
+          "p.60"
+        ],
+        "notes": "Spirit Magic exists in Glorantha but is not a defining Esrolian culture signal."
+      },
+      "sorcery": {
+        "status": "unusual",
+        "pages": [
+          "p.59"
+        ],
+        "notes": "No cultural sorcery signal."
+      },
+      "lunarMagic": {
+        "status": "absent",
+        "pages": [
+          "p.28-29"
+        ],
+        "notes": "No Lunar Magic culture signal."
+      }
+    },
+    "God Forgot": {
+      "summary": "Atheist/secularist Brithini-descended culture where Zzistori sorcery is the cultural higher-magic signal; gods are not worshipped and Rune Magic is unavailable.",
+      "citations": [
+        "AiG p.30-31",
+        "AiG p.59-62"
+      ],
+      "folkMagic": {
+        "status": "cultural",
+        "pages": [
+          "p.30-31",
+          "p.59"
+        ],
+        "notes": "Folk Magic is treated as diluted sorcery and remains available through the culture list."
+      },
+      "runeMagic": {
+        "status": "unavailable",
+        "pages": [
+          "p.30-31",
+          "p.59"
+        ],
+        "notes": "The culture description says gods are not worshipped and Rune Magic is unavailable."
+      },
+      "spiritMagic": {
+        "status": "discouraged",
+        "pages": [
+          "p.30-31",
+          "p.60"
+        ],
+        "notes": "Spirit Magic is viewed as pointless by the culture."
+      },
+      "sorcery": {
+        "status": "cultural",
+        "pages": [
+          "p.30-31",
+          "p.59-60"
+        ],
+        "notes": "Zzistori are the blue wizard caste; Zzistori must take Shaping as an adjunct to sorcerous skills."
+      },
+      "lunarMagic": {
+        "status": "absent",
+        "pages": [
+          "p.30-31"
+        ],
+        "notes": "No Lunar Magic culture signal."
+      }
+    },
+    "Lunar Heartland": {
+      "summary": "Civilised Lunar/Dara Happan culture with common folk magic, theist cult access, and Lunar Magic as setting context; the GenCon preview does not provide usable Lunar Magic chargen rules.",
+      "citations": [
+        "AiG p.31-34",
+        "AiG p.59-60"
+      ],
+      "folkMagic": {
+        "status": "cultural",
+        "pages": [
+          "p.31-34",
+          "p.59"
+        ],
+        "notes": "Culture list includes Avert, Firearrow, Glamour, Light, Polish, and related spells."
+      },
+      "runeMagic": {
+        "status": "cult-mediated",
+        "pages": [
+          "p.59",
+          "p.31-34"
+        ],
+        "notes": "Theist cult access is present through Lunar and Solar cults."
+      },
+      "spiritMagic": {
+        "status": "available",
+        "pages": [
+          "p.60"
+        ],
+        "notes": "Not the culture-defining higher magic."
+      },
+      "sorcery": {
+        "status": "available",
+        "pages": [
+          "p.59-60"
+        ],
+        "notes": "Possible through schools/cults, but not the primary culture signal."
+      },
+      "lunarMagic": {
+        "status": "context",
+        "pages": [
+          "p.60",
+          "p.31-34"
+        ],
+        "notes": "AiG describes Lunar Magic and Red Moon phase dependence, but the preview only points to chapter XX and lacks full Lunar Magic rules."
+      }
+    },
+    "Lunar Provincial": {
+      "summary": "Civilised provincial Lunar/Tarshite culture with common folk magic, Seven Mothers access, local god recognition, and Lunar Magic as unsupported preview context.",
+      "citations": [
+        "AiG p.34-37",
+        "AiG p.59-60"
+      ],
+      "folkMagic": {
+        "status": "cultural",
+        "pages": [
+          "p.34-37",
+          "p.59"
+        ],
+        "notes": "Culture list includes Alarm, Appraise, Cleanse, Find Safe Shelter, Incognito, Preserve, and related spells."
+      },
+      "runeMagic": {
+        "status": "cult-mediated",
+        "pages": [
+          "p.59",
+          "p.34-37"
+        ],
+        "notes": "Seven Mothers and local cult access mediate theist magic."
+      },
+      "spiritMagic": {
+        "status": "available",
+        "pages": [
+          "p.60"
+        ],
+        "notes": "Available in Glorantha but not the defining provincial Lunar signal."
+      },
+      "sorcery": {
+        "status": "available",
+        "pages": [
+          "p.59-60"
+        ],
+        "notes": "Possible through schools/cults, but not the primary culture signal."
+      },
+      "lunarMagic": {
+        "status": "context",
+        "pages": [
+          "p.60",
+          "p.34-37"
+        ],
+        "notes": "The culture has Lunar setting context, but the preview lacks full Lunar Magic rules."
+      }
+    },
+    "Praxian": {
+      "summary": "Nomad beast-rider culture with strong animist/spirit-magic signal alongside folk magic and cult Rune Magic through Waha, Eiritha, Daka Fal, Storm Bull, and others.",
+      "citations": [
+        "AiG p.34-36",
+        "AiG p.60",
+        "AiG p.136-137"
+      ],
+      "folkMagic": {
+        "status": "cultural",
+        "pages": [
+          "p.34-36",
+          "p.59"
+        ],
+        "notes": "Culture list includes Beastcall (Tribal Beast), Deflect, Fanaticism, Find Water/Food/Shelter, and related survival magic."
+      },
+      "runeMagic": {
+        "status": "cult-mediated",
+        "pages": [
+          "p.59",
+          "p.34-36"
+        ],
+        "notes": "Rune Magic is available through Praxian cults."
+      },
+      "spiritMagic": {
+        "status": "cultural",
+        "pages": [
+          "p.34-36",
+          "p.60",
+          "p.136-137"
+        ],
+        "notes": "Praxian cult/tradition access and beast-rider culture strongly support animism and Spirit Magic."
+      },
+      "sorcery": {
+        "status": "unusual",
+        "pages": [
+          "p.59"
+        ],
+        "notes": "No cultural sorcery signal."
+      },
+      "lunarMagic": {
+        "status": "absent",
+        "pages": [
+          "p.34-36"
+        ],
+        "notes": "No Lunar Magic culture signal."
+      }
+    },
+    "Sartarite (Heortling)": {
+      "summary": "Barbarian Orlanthi culture with common folk magic and strong cult-mediated Rune Magic through Orlanth, Ernalda, Humakt, and related gods.",
+      "citations": [
+        "AiG p.37-39",
+        "AiG p.59-62"
+      ],
+      "folkMagic": {
+        "status": "cultural",
+        "pages": [
+          "p.37-39",
+          "p.59"
+        ],
+        "notes": "Culture list includes Beastcall, Coordination, Fanaticism, Find Herd Animal, Mindspeech, Mobility, Pet, and Protection."
+      },
+      "runeMagic": {
+        "status": "cult-mediated",
+        "pages": [
+          "p.59",
+          "p.37-39"
+        ],
+        "notes": "Theist Rune Magic through Orlanthi and allied cults is the main higher-magic signal."
+      },
+      "spiritMagic": {
+        "status": "available",
+        "pages": [
+          "p.60"
+        ],
+        "notes": "Available through traditions/cults but not the primary culture signal."
+      },
+      "sorcery": {
+        "status": "unusual",
+        "pages": [
+          "p.59"
+        ],
+        "notes": "No cultural sorcery signal."
+      },
+      "lunarMagic": {
+        "status": "opposed-context",
+        "pages": [
+          "p.37-39",
+          "p.60"
+        ],
+        "notes": "Lunar Magic exists in the setting but is culturally opposed by many Sartarites."
+      }
+    },
+    "Telmori Hsunchen": {
+      "summary": "Primitive Hsunchen wolf people with folk magic and a strong Korgatsu/Telmor animist spirit-magic signal.",
+      "citations": [
+        "AiG p.39-41",
+        "AiG p.60",
+        "AiG p.136-137"
+      ],
+      "folkMagic": {
+        "status": "cultural",
+        "pages": [
+          "p.39-41",
+          "p.59"
+        ],
+        "notes": "Culture list includes Beastcall (Wolf), Find Prey, Find Food, Heat, Pathway, Pierce, and related wolf survival magic."
+      },
+      "runeMagic": {
+        "status": "cult-mediated",
+        "pages": [
+          "p.59",
+          "p.39-41"
+        ],
+        "notes": "Cult-mediated magic exists through Telmor and related worship."
+      },
+      "spiritMagic": {
+        "status": "cultural",
+        "pages": [
+          "p.39-41",
+          "p.60",
+          "p.136-137"
+        ],
+        "notes": "The culture has explicit wolf/Hsunchen spirit and Korgatsu-style animist signals."
+      },
+      "sorcery": {
+        "status": "unusual",
+        "pages": [
+          "p.59"
+        ],
+        "notes": "No cultural sorcery signal."
+      },
+      "lunarMagic": {
+        "status": "absent",
+        "pages": [
+          "p.39-41"
+        ],
+        "notes": "No Lunar Magic culture signal."
+      }
+    }
+  }
+}

@@ -1,51 +1,88 @@
 {
   "source": "Adventures in Glorantha (GenCon 2015 Preview)",
   "extracted_at": "2026-04-02",
-  "note": "Named combat styles from culture sections. Only Balazaring and Esrolian had complete data in OCR source.",
+  "note": "Historical partial AiG OCR extraction. Combat Styles Encyclopedia supersedes AiG for combat styles only; use references/combat-styles.json for app data.",
   "combat_styles": [
     {
       "culture": "Balazaring",
       "name": "Hunter Raider",
-      "weapons": ["Spear", "Bow", "Sling"],
-      "traits": ["Skirmisher"]
+      "weapons": [
+        "Spear",
+        "Bow",
+        "Sling"
+      ],
+      "traits": [
+        "Skirmisher"
+      ]
     },
     {
       "culture": "Balazaring",
       "name": "Pony Cavalry",
-      "weapons": ["Spear", "Bow"],
-      "traits": ["Mounted"]
+      "weapons": [
+        "Spear",
+        "Bow"
+      ],
+      "traits": [
+        "Mounted"
+      ]
     },
     {
       "culture": "Balazaring",
       "name": "Hawk Slayer",
-      "weapons": ["Longspear"],
-      "traits": ["Mounted"]
+      "weapons": [
+        "Longspear"
+      ],
+      "traits": [
+        "Mounted"
+      ]
     },
     {
       "culture": "Esrolian",
       "name": "Citizen Legionary",
-      "weapons": ["Shortsword", "Shield", "Javelin", "Sling"],
-      "traits": ["Formation Fighting"]
+      "weapons": [
+        "Shortsword",
+        "Shield",
+        "Javelin",
+        "Sling"
+      ],
+      "traits": [
+        "Formation Fighting"
+      ]
     },
     {
       "culture": "Esrolian",
       "name": "City-State Phalangite",
-      "weapons": ["Longspear/Sarissa", "Bow"],
-      "traits": ["Formation Fighting"]
+      "weapons": [
+        "Longspear/Sarissa",
+        "Bow"
+      ],
+      "traits": [
+        "Formation Fighting"
+      ]
     },
     {
       "culture": "Esrolian",
       "name": "Clan Protector",
-      "weapons": ["Shortsword", "Shield", "Shortspear"],
-      "traits": ["Daredevil"]
+      "weapons": [
+        "Shortsword",
+        "Shield",
+        "Shortspear"
+      ],
+      "traits": [
+        "Daredevil"
+      ]
     }
   ],
-  "missing_cultures": [
+  "status": "superseded-incomplete",
+  "superseded_by": "references/combat-styles.json",
+  "do_not_use_for_app_generation": true,
+  "validated_at": "2026-05-21",
+  "legacy_missing_cultures_at_extraction": [
     "God Forgot",
     "Lunar Heartland",
     "Praxian",
-    "Provincial Lunar/Tarsh",
-    "Sartarite/Heortling",
+    "Lunar Provincial",
+    "Sartarite (Heortling)",
     "Telmori Hsunchen"
   ]
 }

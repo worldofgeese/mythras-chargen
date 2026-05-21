@@ -1,32 +1,32 @@
 # Adventures in Glorantha Reference Extractions
 
-## Status: Full Extraction Complete
+## Status: Structured Extraction Complete
 
 This directory contains structured reference data extracted from **Adventures in Glorantha (GenCon 2015 Preview, GenCon 2015)**.
 
 ### Source PDF
 
-`AiG.pdf` (193MB, 212 pages, gitignored) — downloaded from `files.geese.party`. The PDF is a hybrid: ~87 pages have text layers, ~125 pages are scanned images.
+`/home/worldofgeese/Downloads/RuneQuest_TDM_Sixth_Edition_Adventures_in_Glorantha_Special_GenCon.pdf` (193MB, 212 pages) is the source PDF used for page-level validation. The PDF is a hybrid: text-layer pages plus scanned images.
 
-### Full OCR Extraction
+### Validation Method
 
-`AiG-full-ocr.md` (14,638 lines) — complete text extraction using `claude-doc-tools` with Tesseract OCR for scanned pages. This is the authoritative text reference for page-level citations.
-
-**Extraction method:** `python3.11 /tmp/claude-doc-tools/convert.py AiG.pdf`
-- Text-layer pages: extracted via pdfplumber
-- Scanned pages: OCR'd via Tesseract 5.3.0
+`AiG-full-ocr.md` was removed as an active data store after the vision/OCR validation pass. The authoritative chain is now the source PDF plus structured JSON with page citations. Validation used `pdftotext`, rendered page images, and OCR spot checks against the local PDF.
 
 ### Structured JSON Files
 
 | File | Status | Content | Source Pages |
 |------|--------|---------|-------------|
-| `cultures.json` | Complete | 8 cultures (skills, type) | p.26-41 |
-| `cultures-mistral.json` | Complete | Extended culture data with passions | p.26-41 |
-| `combat-styles-aig.json` | Partial (2/8) | Named combat styles | p.26-41 |
-| `equipment-aig.json` | **Complete** | All 8 cultures' combat styles, starting money, equipment derivation | p.24-41 |
+| `cultures.json` | Complete, validated | 8 cultures (skills, passions, folk magic, CSE-linked combat styles) | p.26-41 |
+| `cultures-mistral.json` | Superseded raw extraction | Historical Mistral extraction used during reconciliation | p.26-41 |
+| `combat-styles-aig.json` | Superseded incomplete | Historical partial AiG combat-style extraction; app uses `../combat-styles.json` | p.26-41 |
+| `equipment-aig.json` | Complete, validated | Starting money/equipment derivation; combat styles point to CSE authority | p.24-41 |
 | `creation-summary-aig.json` | Complete | 12-step creation process | p.23-25 |
-| `folk-magic-aig.json` | Partial (2/8) | Culture folk magic lists | p.26-41 |
+| `folk-magic-aig.json` | Complete, validated | AiG Folk Magic spells plus all 8 culture folk magic lists | p.26-41, p.63-68 |
+| `culture-magic-profiles-aig.json` | Complete, validated | Culture-level magic-system fit and caveats | p.26-41, p.59-62, p.136-137 |
 | `rune-affinities.json` | Complete | Rune system mechanics | p.24 |
+| `magic-overview-aig.json` | Complete, validated overview | Magic system summaries and general casting rules | p.59-62 |
+| `rune-magic-aig.json` | Validated raw spell text | Rune spell names/pages/descriptions; stat-line metadata not yet normalized | p.69-122 |
+| `spirit-magic-aig.json` | Validated raw spirit text | Spirit traditions, abilities, passions, and spirits; rune associations not yet normalized | p.134-151 |
 
 ### Key Finding: Equipment Chapter
 

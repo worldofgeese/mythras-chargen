@@ -4,7 +4,7 @@
   "page": "p.63-68",
   "note": "AiG Folk Magic chapter (p.63-68) lists 45 Glorantha-specific/modified spells. Standard Mythras Core spells (Bladesharp, Heal, Alarm, etc.) are referenced by name in culture spell lists but not redefined here — see references/mythras-raw/folk-magic-spells.json for the core spell definitions. Culture-specific assignments from AiG culture chapters (p.26-41) preserved in spells_from_cultures.",
   "core_reference": "Mythras/RuneQuest 6th Edition Folk Magic spell list",
-  "verified": false,
+  "verified": true,
   "spells": [
     {
       "name": "Binding",
@@ -189,9 +189,16 @@
       "traits": [
         "Ranged",
         "Concentration"
-      ],
-      "notes": [
-        "This spell should only be used if Progressive magic is allowed. Each point of the spell cast upon a ranged weapon projectile creates a duplicate magical missile the instant that the original is loosed or thrown. All missiles, original and magical, do the same amount of damage; however, each of the missile attacks is rolled separately and flies towards a separate target. For example, a caster who knows Multimissile 3 could launch a volley of arrows from his bow against four broo: 1 original plus 3 magical missiles, each of which must strike a different target. Note that this spell only works on personal weapons, not siege engines."
+      ]
+    },
+    {
+      "name": "Multimissile",
+      "page": "p.67",
+      "description": "This spell should only be used if Progressive magic is allowed. Each point of the spell cast upon a ranged weapon projectile creates a duplicate magical missile the instant that the original is loosed or thrown. All missiles, original and magical, do the same amount of damage; however, each of the missile attacks is rolled separately and flies towards a separate target. For example, a caster who knows Multimissile 3 could launch a volley of arrows from his bow against four broo: 1 original plus 3 magical missiles, each of which must strike a different target. Note that this spell only works on personal weapons, not siege engines.",
+      "traits": [
+        "Instant",
+        "Touch",
+        "Progressive"
       ]
     },
     {
@@ -359,6 +366,7 @@
     "Jumping",
     "Lantern",
     "Lightwall",
+    "Multimissile",
     "Pamalt's Touch",
     "Parry",
     "Peaceful Cut",
@@ -403,14 +411,81 @@
       "Lock",
       "Perfume",
       "Repair"
+    ],
+    "God Forgot": [
+      "Alarm",
+      "Avert",
+      "Bladesharp",
+      "Bludgeon",
+      "Find Truth",
+      "Heal",
+      "Perfume",
+      "Pierce",
+      "Preserve",
+      "Protection"
+    ],
+    "Lunar Heartland": [
+      "Avert",
+      "Bladesharp",
+      "Calculate",
+      "Firearrow",
+      "Glamour",
+      "Heal",
+      "Light",
+      "Pierce",
+      "Polish",
+      "Protection"
+    ],
+    "Praxian": [
+      "Appraise",
+      "Beastcall (Tribal Beast)",
+      "Bladesharp",
+      "Cleanse",
+      "Deflect",
+      "Dry",
+      "Fanaticism",
+      "Find (Water, Food, Shelter)",
+      "Heal",
+      "Preserve"
+    ],
+    "Lunar Provincial": [
+      "Alarm",
+      "Appraise",
+      "Bladesharp",
+      "Calm",
+      "Cleanse",
+      "Dry",
+      "Find Safe Shelter",
+      "Incognito",
+      "Ignite",
+      "Preserve"
+    ],
+    "Sartarite (Heortling)": [
+      "Avert",
+      "Beastcall (Alynx or Herd Animal)",
+      "Bladesharp",
+      "Coordination",
+      "Fanaticism",
+      "Find Herd Animal",
+      "Mindspeech",
+      "Mobility",
+      "Pet",
+      "Protection"
+    ],
+    "Telmori Hsunchen": [
+      "Beastcall (Wolf)",
+      "Bladesharp",
+      "Cleanse",
+      "Deflect",
+      "Find Prey",
+      "Find Food",
+      "Heat",
+      "Ignite",
+      "Pathway",
+      "Pierce"
     ]
   },
-  "missing_cultures": [
-    "God Forgot",
-    "Lunar Heartland",
-    "Praxian",
-    "Provincial Lunar/Tarsh",
-    "Sartarite/Heortling",
-    "Telmori Hsunchen"
-  ]
+  "missing_cultures": [],
+  "validated_at": "2026-05-21",
+  "validation_method": "Magic and pre-Magic PDF validation against AiG p.30-41 and p.63-68; culture lists merged from references/aig-raw/cultures.json."
 }

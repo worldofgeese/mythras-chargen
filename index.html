@@ -828,7 +828,2064 @@ const ITEM_PRICES = {"Backpack/Satchel": 2, "Battleaxe": 20, "Battleaxe 2H": 20,
 const WEAPON_2H_STATS = {"Broad Axe": {"damage_2h": "1d10", "size_2h": "L"}, "Katana": {"damage_2h": "1d10", "size_2h": "L"}, "Klanth": {"damage_2h": "2d6", "size_2h": "L"}, "Long Axe": {"damage_2h": "1d8+2", "size_2h": "L", "reach_2h": "L"}, "Maquahuitl": {"damage_2h": "2d6+4", "size_2h": "L", "hp_2h": 12}, "Ninja-to": {"damage_2h": "1d8+1", "size_2h": "L"}, "Ptsath": {"damage_2h": "1d10+1", "size_2h": "L"}, "Longsword": {"damage_2h": "1d10", "size_2h": "L"}, "Battleaxe": {"damage_2h": "1d8+1", "size_2h": "L"}};
 const EQUIPMENT_DATA = [{"name":"Abacus","encumbrance":1},{"name":"Astrolabe","encumbrance":1},{"name":"Backpack/Satchel","encumbrance":1},{"name":"Bedroll","encumbrance":1},{"name":"Bit & Bridle","encumbrance":1},{"name":"Block & tackle","encumbrance":1},{"name":"Bottle, glass/earthenware"},{"name":"Candle, 6 hour","encumbrance":1},{"name":"Chain, 2m","encumbrance":2},{"name":"Chest, Large","encumbrance":5},{"name":"Chest, Small","encumbrance":3},{"name":"Cooking Pot","encumbrance":2},{"name":"Craft tools","encumbrance":2},{"name":"Crop (riding)"},{"name":"Crowbar","encumbrance":1},{"name":"Doorjamb","encumbrance":2},{"name":"Driver\u2019s whip"},{"name":"Falconer\u2019s Kit","encumbrance":1},{"name":"Feed/mount rations (per day)","encumbrance":1},{"name":"Fine wine goblet"},{"name":"First aid kit"},{"name":"Fish hooks (20)"},{"name":"Fishing kit","encumbrance":1},{"name":"Fishing Net","encumbrance":4},{"name":"Flint & tinder"},{"name":"Game Snares and Traps","encumbrance":1},{"name":"Goad","encumbrance":1},{"name":"Grappling hook"},{"name":"Hammer/Saw/Mallet/Chisel","encumbrance":1},{"name":"Healer\u2019s kit","encumbrance":1},{"name":"Hourglass","encumbrance":1},{"name":"Knife"},{"name":"Ladder, rope 3m","encumbrance":4},{"name":"Lantern, basic","encumbrance":1},{"name":"Lock picks"},{"name":"Lockbox","encumbrance":1},{"name":"Lodestone"},{"name":"Milling Stone","encumbrance":2},{"name":"Mirror (hand glass)","encumbrance":1},{"name":"Mug/Beaker/Dish/Plate"},{"name":"Musical instrument","encumbrance":2},{"name":"Nails or tacks (50)","encumbrance":1},{"name":"Oil flask","encumbrance":1},{"name":"Papyrus or paper sheet"},{"name":"Pickaxe","encumbrance":1},{"name":"Pole, 3m","encumbrance":1},{"name":"Quills and ink","encumbrance":1},{"name":"Quiver"},{"name":"Razor, folding"},{"name":"Rope (hemp), 10m","encumbrance":2},{"name":"Sack, large","encumbrance":1},{"name":"Sack, small"},{"name":"Saddle, riding","encumbrance":3},{"name":"Saddle, war","encumbrance":4},{"name":"Saddlebag","encumbrance":2},{"name":"Saw, hand","encumbrance":1},{"name":"Scythe/Sickle","encumbrance":2},{"name":"Sextant","encumbrance":1},{"name":"Ship\u2019s Compass","encumbrance":1},{"name":"Shoes, horse","encumbrance":1},{"name":"Spade/Hoe/Pitchfork","encumbrance":1},{"name":"Torch, 1 hour"},{"name":"Torch, 6 hour","encumbrance":1},{"name":"Waterskin or Canteen","encumbrance":1},{"name":"Wax, block","encumbrance":1}];
 const RUNES_DATA = [{"name":"Rune:Beast","short_name":"Beast","rune":"Beast","meaning":"Animal Life","personality_traits":"Uncouth, Rough-edged,\\xa0Loyal, Wild, Instinctive, Savage","rune_type":"Form"},{"name":"Rune:Chaos","short_name":"Chaos","rune":"Chaos","meaning":"Entropy, Evil, Corruption","personality_traits":"Evil, Chaos","rune_type":"Form"},{"name":"Rune:Cold","short_name":"Cold","rune":"Cold","meaning":"","personality_traits":"","rune_type":"Condition"},{"name":"Rune:Darkness","short_name":"Darkness","rune":"Darkness","meaning":"Darkness, Cold, Underworld, Hunger, Insects","personality_traits":"Cruel, Cold, Secretive,\\xa0Patient","rune_type":"Elemental","metal":"Lead","instrument":"Drum","weapon_and_tool":"Weapon: Club Tool: Hammer","tool":"Hammer","weapon":"Club","action":"Conceal","color":"Purple","direction":"Below","emotion":"Fear","fauna_flora_flesh":"Fauna: Insects Flora: Fungi Flesh: Fat","fauna":"Insects","flesh":"Fat","flora":"Fungi","organ":"Stomach","sense":"Hearing","action_direction":"Conceal->Below","stone":"Obsidian"},{"name":"Rune:Death","short_name":"Death","rune":"Death","meaning":"Death, Separation, Endings. Opposite to Life","personality_traits":"Relentless, Ruthless, Unemotional, Ascetic","rune_type":"Power","opposite_rune":"Life"},{"name":"Rune:Disorder","short_name":"Disorder","rune":"Disorder","meaning":"Disorder, Trickery, Trouble","personality_traits":"Destructive, Reckless, Selfish, Greedy","rune_type":"Power","opposite_rune":"Harmony"},{"name":"Rune:Dragon","short_name":"Dragon","rune":"Dragon","meaning":"Dragon Magic","personality_traits":"","rune_type":"Condition"},{"name":"Rune:Dragonewt","short_name":"Dragonewt","rune":"Dragonewt","meaning":"Dragonewts","personality_traits":"","rune_type":"Form"},{"name":"Rune:Earth","short_name":"Earth","rune":"Earth","meaning":"Earth, Physical things, Agriculture, Solidity, Axes, Reptiles","personality_traits":"Pragmatic, Prudent, Worldly, Sensual","rune_type":"Elemental","metal":"Copper","instrument":"Bell","weapon_and_tool":"Weapon: Axe Tool: Pot","tool":"Pot","weapon":"Axe","action":"Heal/Repair","color":"Green","direction":"East","emotion":"Compassion","fauna_flora_flesh":"Fauna: Reptiles Flora: Grain/Shrubs Flesh: Bone","fauna":"Reptiles","flesh":"Bone","flora":"Grain/Shrubs","organ":"Heart","sense":"Touch","action_direction":"Heal/Repair->East","stone":"Emerald"},{"name":"Rune:Eternal Battle","short_name":"Eternal Battle","rune":"Eternal Battle","meaning":"Anti-Chaos","personality_traits":"Chaoshater, Frenzy, Rage, Violence","rune_type":"Condition"},{"name":"Rune:Fate","short_name":"Fate","rune":"Fate","meaning":"Destiny and predestination","personality_traits":"","rune_type":"Condition"},{"name":"Rune:Fertility","short_name":"Fertility","rune":"Fertility,Life","meaning":"Love, Plenty, Sex","personality_traits":"Generous, Lustful, Pleasureseeking","rune_type":"Power","opposite_rune":"Death"},{"name":"Rune:Fire/Sky","short_name":"Fire/Sky","rune":"Fire","meaning":"Fire, Sky, Purity, Light, Stars, The Sky Dome","personality_traits":"Loyal, Honest, Pure, Idealist, Chastity,\\xa0Perceptive","rune_type":"Elemental","metal":"Gold","instrument":"Harp","weapon_and_tool":"Weapon: Spear Tool: Firestarter","tool":"Firestarter","weapon":"Spear","action":"Command","color":"Yellow","direction":"Above","emotion":"Pride","fauna_flora_flesh":"Fauna: Birds Flora: Flowers Flesh: Sinew","fauna":"Birds","flesh":"Sinew","flora":"Flowers","organ":"Brain","sense":"Sight","action_direction":"Command->Above","stone":"Beryl"},{"name":"Rune:Harmony","short_name":"Harmony","rune":"Harmony","meaning":"Harmony, Co-operation, Healing","personality_traits":"Forgiving, Merciful, Peaceful, Generous, Compassionate","rune_type":"Power","opposite_rune":"Disorder"},{"name":"Rune:Illusion","short_name":"Illusion","rune":"Illusion","meaning":"Falsehood, Concealment, Tricks","personality_traits":"Deceitful, Cowardly, Corrupted, Imaginative, Subjective","rune_type":"Power","opposite_rune":"Truth"},{"name":"Rune:Infinity","short_name":"Infinity","rune":"Infinity","meaning":"All, Eternity, Everything, Divine, True\\xa0Dragons, Illumination","personality_traits":"","rune_type":"Condition"},{"name":"Rune:Law","short_name":"Law","rune":"Law","meaning":"Logic and cosmic laws","personality_traits":"Logical, Rigorous, Materialistic","rune_type":"Condition"},{"name":"Rune:Light","short_name":"Light","rune":"Light","meaning":"The Sky Dome","personality_traits":"Loyal, Honest, Purity","rune_type":"Condition"},{"name":"Rune:Luck","short_name":"Luck","rune":"Luck","meaning":"Fortuity, Fate, Destiny","personality_traits":"Reckless, Fatalistic","rune_type":"Condition"},{"name":"Rune:Magic","short_name":"Magic","rune":"Magic","meaning":"Communication between worlds","personality_traits":"","rune_type":"Condition"},{"name":"Rune:Man","short_name":"Man","rune":"Man","meaning":"Mortal humanoids, Slave","personality_traits":"Tribal, Social","rune_type":"Form"},{"name":"Rune:Mastery","short_name":"Mastery","rune":"Mastery","meaning":"Leadership, Authority, Sovereignty","personality_traits":"Proud, Just, Authoritative","rune_type":"Condition"},{"name":"Rune:Moon","short_name":"Moon","rune":"Moon","meaning":"Illusion, Cycles, Balance","personality_traits":"Tolerant, Balanced,\\xa0Spiritual\\xa0liberation, Open-minded","rune_type":"Condition"},{"name":"Rune:Movement","short_name":"Movement","rune":"Movement","meaning":"Change, Conflict, Mobility","personality_traits":"Adventurous, Dynamic, Impulsive, Reckless, Energetic, Rebellious","rune_type":"Power","opposite_rune":"Stasis"},{"name":"Rune:Plant","short_name":"Plant","rune":"Plant","meaning":"Plant life","personality_traits":"Unstoppable\\xa0Growth, Nurturing","rune_type":"Form"},{"name":"Rune:Power","short_name":"Power","rune":"Power","meaning":"Sovereign of the southern continent","personality_traits":"","rune_type":"Condition"},{"name":"Rune:Spirit","short_name":"Spirit","rune":"Spirit","meaning":"Discorporate beings","personality_traits":"Ecstatic, Spiritual, Aware, Mystical","rune_type":"Form"},{"name":"Rune:Stasis","short_name":"Stasis","rune":"Stasis","meaning":"Stasis, Immobility, Permanence, Unchanging","personality_traits":"Stubborn, Inflexible, Exacting, Conservative","rune_type":"Power","opposite_rune":"Movement"},{"name":"Rune:Storm","short_name":"Storm","rune":"Storm/Air","meaning":"Air, Breath, Violence, Weather, Storm, Wind, Middle Air, Swords","personality_traits":"Passionate, Proud, Unpredictable, Violent","rune_type":"Elemental","metal":"Tin","instrument":"Horn","weapon_and_tool":"Weapon: Sword Tool: Knife","tool":"Knife","weapon":"Sword","action":"Fight","color":"Orange","direction":"West","emotion":"Anger","fauna_flora_flesh":"Fauna: Mammals Flora: Trees Flesh: Muscle","fauna":"Mammals","flesh":"Muscle","flora":"Trees","organ":"Lungs","sense":"Smell","action_direction":"Fight->West","stone":"Flint"},{"name":"Rune:Trade","short_name":"Trade","rune":"Trade","meaning":"Communication, Trade, Exchange","personality_traits":"Fairdealing, Openminded","rune_type":"Condition"},{"name":"Rune:Truth","short_name":"Truth","rune":"Truth","meaning":"Truth, Knowledge, Writing","personality_traits":"Truthful, Observant, Dutiful, Faithful, Fair","rune_type":"Power","opposite_rune":"Illusion"},{"name":"Rune:Unlife","short_name":"Unlife","rune":"Unlife","meaning":"Undead and unliving","personality_traits":"Soulless, Fiendish, Relentless, Cold","rune_type":"Condition"},{"name":"Rune:Water","short_name":"Water","rune":"Water","meaning":"Water, Fluidity, Seas, Rivers,\\xa0Blood, Fish","personality_traits":"Mercurial, Capricious, Mutable","rune_type":"Elemental","metal":"Quicksilver","instrument":"Reed Pipes","weapon_and_tool":"Weapon: Net Tool: Net","tool":"Net","weapon":"Net","action":"Create","color":"Blue","direction":"South","emotion":"Lust","fauna_flora_flesh":"Fauna: Fish Flora: Algae Flesh: Blood","fauna":"Fish","flesh":"Blood","flora":"Algae","organ":"Genitals","sense":"Taste","action_direction":"Create->South","stone":"Pearl"}];
-const CULTURES_DATA = [{"name":"Balazaring","type":"Primitive","standardSkills":["Athletics","Brawn","Endurance","Evade","Locale","Perception","Stealth",{"choice":["Boating","Swim"]}],"professionalSkills":[{"choice":"Craft (any)"},"Healing",{"choice":"Lore (any)"},"Musicianship","Navigate","Survival","Track"],"combatStyles":[{"name":"Hunter Raider","weapons":["Spear","Bow","Sling"],"traits":["Skirmisher"]},{"name":"Pony Cavalry","weapons":["Spear","Bow"],"traits":["Mounted"]},{"name":"Hawk Slayer","weapons":["Longspear"],"traits":["Mounted"]}],"folkMagic":["Beastcall (Dog, Pig or Giant Hawk)","Bladesharp","Cleanse","Coordination","Deflect","Dry","Find Game","Ignite","Mobility","Speedart"],"passions":[{"name":"Loyalty","needsSubject":true,"subjectSuggestions":["Clan","Citadel","Chief","Tribe"],"formula":"POW+CHA+30"},{"name":"Loyalty (City)","formula":"POW+CHA+30"},{"choice":["Love","Hate","Fear","Devotion"],"needsSubject":true,"subjectSuggestions":["the Wilds","Citadel King","Lunars","Giant Hawks","Aldryami"],"formula":"POW+CHA+30"}],"startingMoney":"4d6×2 Lunars","careers":"All Primitive"},{"name":"Esrolian","type":"Civilised","standardSkills":["Conceal","Deceit","Drive","Influence","Insight","Locale","Perception","Willpower"],"professionalSkills":[{"choice":"Art (any)"},"Commerce",{"choice":"Craft (any)"},"Courtesy",{"choice":"Language (any)"},{"choice":"Lore (any)"},"Musicianship","Streetwise"],"combatStyles":[{"name":"Citizen Legionary","weapons":["Shortsword","Shield","Javelin","Sling"],"traits":["Formation Fighting"]},{"name":"City-State Phalangite","weapons":["Longspear/Sarissa","Bow"],"traits":["Formation Fighting"]},{"name":"Clan Protector","weapons":["Shortsword","Shield","Shortspear"],"traits":["Daredevil"]}],"folkMagic":["Alarm","Appraise","Bladesharp","Calculate","Calm","Glamour","Heal","Lock","Perfume","Repair"],"passions":[{"name":"Loyalty (Clan)","formula":"POW+CHA+30"},{"name":"Loyalty (Grandmother)","formula":"POW+CHA+50"},{"name":"Loyalty (Queen)","formula":"POW+CHA+25"}],"startingMoney":"4d6×15 Lunars","careers":"All Civilised"},{"name":"God Forgot","type":"Civilised","standardSkills":["Conceal","Deceit","Endurance","Influence","Insight","Locale","Willpower"],"professionalSkills":["Commerce",{"choice":"Craft (any)"},"Courtesy","Engineering","Gambling",{"choice":"Lore (any)"},"Mechanisms","Streetwise"],"combatStyles":[{"name":"Horali Militia","weapons":["1H Spear","Western Infantry Shield","Sling"],"traits":["Shield Wall"]},{"name":"God Forgotten Horali","weapons":["Sword","Shield","Spear","Sling"],"traits":["Skirmisher"]},{"name":"Talar Defensive School","weapons":["Unarmed","Shortsword","Dagger","Buckler"],"traits":["Improvised Weapons"]}],"folkMagic":["Alarm","Avert","Bladesharp","Bludgeon","Find Truth","Heal","Perfume","Pierce","Preserve","Protection"],"passions":[{"name":"Loyalty (Caste)","formula":"POW+CHA+30"},{"name":"Despise (Gods)","formula":"POW+CHA+30"},{"name":"Hate (Outsiders)","formula":"POW+CHA+30"},{"name":"Suffer (Willingly)","formula":"POW+CHA+30"}],"startingMoney":"4d6×15 Lunars","careers":"Career is dependent on caste. Dronars: Beast Handler, Courtesan, Crafter, Entertainer, Farmer, Fisher, Herder, Hunter, Merchant, Miner, Sailor, Scout, Thief. Horali: Warrior. Zzistori: Sorcerer. Talar: Agent, Alchemist, Courtier, Official, Scholar, Warrior."},{"name":"Lunar Heartland","type":"Civilised","standardSkills":["Conceal","Deceit","Drive","Influence","Insight","Locale","Perception","Willpower"],"professionalSkills":[{"choice":"Art (any)"},"Commerce",{"choice":"Craft (any)"},"Courtesy",{"choice":"Language (any)"},{"choice":"Lore (any)"},"Musicianship","Streetwise"],"combatStyles":[{"name":"Dara Happan Urbanite","weapons":["Club","Dagger","Shortsword","Buckler"],"traits":["Defensive Minded"]},{"name":"Dart Contestant","weapons":["Dart","Dagger","Shortsword"],"traits":["Assassination","Daredevil"],"restrictions":"only available to Agent career"},{"name":"Sagittan Peltast","weapons":["Composite Bow","Sling","Pelorian Peltast Shield","Dagger"],"traits":["Ranged Marksman","Skirmishing"]},{"name":"Lunar Corps Hoplite","weapons":["1H Spear","Pelorian Aspis","Sickle Sword/Khopesh","Kontos"],"traits":["Formation Fighting","Shield Wall","Siege Warfare"],"restrictions":"only available to Warrior career"},{"name":"Dara Happan Heavy Infantry","weapons":["Kontos","Dara Happan Hoplon","Shortsword","Dart"],"traits":["Formation Fighting","Hoplon Fighting","Intimidating Scream"]},{"name":"Pelorian Cavalry","weapons":["Composite Bow","Kontos","Pelorian Aspis","Sickle Sword/Khopesh","Pelorian Peltast Shield"],"traits":["Beast-back Lancer","Mounted Combat","Mounted Skirmishing"]},{"name":"Pelorian Noble","weapons":["Sickle Sword/Khopesh","1H Spear","Pelorian Aspis","Composite Bow"],"traits":["Formation Fighting","Mounted Combat","Ranged Marksman"],"restrictions":"only available to those of Aristocracy or Ruling class"}],"folkMagic":["Avert","Bladesharp","Calculate","Firearrow","Glamour","Heal","Light","Pierce","Polish","Protection"],"passions":[{"name":"Loyalty (the Red Emperor)","formula":"POW+CHA+30"},{"choice":["Love"],"needsSubject":true,"subjectSuggestions":["Family","Sibling","Lover","the Lunar Way","Dara Happa"],"formula":"POW+CHA+30"},{"name":"Hate (Disobedience)","formula":"POW+CHA+30"}],"startingMoney":"4d6×10 Lunars","careers":"All Civilised"},{"name":"Lunar Provincial","type":"Civilised","standardSkills":["Conceal","Deceit","Endurance","Influence","Insight","Locale","Willpower"],"professionalSkills":[{"choice":"Art (any)"},"Commerce",{"choice":"Craft (any)"},"Courtesy","Culture",{"choice":"Language (local)"},{"choice":"Lore (any)"},"Streetwise"],"combatStyles":[{"name":"Lunar Corps Hoplite","weapons":["1H Spear","Pelorian Aspis","Sickle Sword/Khopesh"],"traits":["Formation Fighting","Shield Wall","Siege Warfare"],"restrictions":"only available to Warrior career"},{"name":"Pelorian Cavalry","weapons":["Composite Bow","Pelorian Aspis","Sickle Sword/Khopesh","Kontos","Pelorian Peltast Shield"],"traits":["Beast-back Lancer","Mounted Combat","Mounted Skirmishing"],"restrictions":"only available to Warrior career"},{"name":"Colonial Noble","weapons":["1H Spear","Pelorian Aspis","Sickle Sword/Khopesh","Composite Bow"],"traits":["Formation Fighting","Mounted Combat","Ranged Marksman"],"restrictions":"only available to those of Aristocracy or Ruling class"},{"name":"Colonial Survivalist","weapons":["Shortsword","Dagger","Sling"],"traits":["Hidden Weapons"]}],"folkMagic":["Alarm","Appraise","Bladesharp","Calm","Cleanse","Dry","Find Safe Shelter","Incognito","Ignite","Preserve"],"passions":[{"name":"Loyalty (Empire)","formula":"POW+CHA+30"},{"choice":["Love"],"needsSubject":true,"subjectSuggestions":["Family","Homeland","Lover","the Seven Mothers"],"formula":"POW+CHA+30"},{"choice":["Love","Hate"],"needsSubject":true,"subjectSuggestions":["Locals","Sartarites","Tarshites","Lunar Taxes"],"formula":"POW+CHA+30"}],"startingMoney":"4d6×5 Lunars","careers":"Any Civilised"},{"name":"Praxian","type":"Nomad","standardSkills":["Endurance","First Aid","Locale","Perception","Ride","Stealth",{"choice":["Navigate","Swim"]},"Willpower"],"professionalSkills":[{"choice":"Craft (any)"},"Healing",{"choice":"Lore (any)"},"Musicianship","Navigate","Survival","Track"],"combatStyles":[{"name":"Agimori","weapons":["1H Spear","Club","Doraddi War Shield","Javelin"],"traits":["Batter Aside","Knockout Blow","Shield Splitter"]},{"name":"Baboon","weapons":["Thrown Stone","Sling","1H Spear","2H Spear"],"traits":["Daredevil","Intimidating Scream","Swashbuckling"]},{"name":"Basmoli","weapons":["1H Spear","2H Spear","Dagger","Javelin"],"traits":["Blind Fighting","Daredevil","Ranged Marksman"]},{"name":"Bison","weapons":["1H Axe","Javelin","Lance","1H Sword","Praxian Shield"],"traits":["Beast-back Lancer","Mounted Combat","Shield Splitter"]},{"name":"Bolo Lizard","weapons":["Bolas","Dagger","1H Spear","Praxian Shield"],"traits":["Mancatcher","Mounted Combat","Skirmishing"]},{"name":"Cannibal Cult","weapons":["Dagger","Club","Net","Whip"],"traits":["Assassination","Knockout Blow","Mancatcher"]},{"name":"High Llama","weapons":["Javelin","Lance","Long Axe","2H Spear","Praxian Shield"],"traits":["Mounted Combat","Throw Weapons","Trained Beast"]},{"name":"Impala","weapons":["1H Axe","Composite Bow","Dart","Praxian Shield"],"traits":["Mounted Combat","Prancing","Ranged Marksman"]},{"name":"Morokanth","weapons":["Claws","Club","1H Spear","2H Spear","Praxian Shield"],"traits":["Batter Aside","Do or Die (Claws)","Shield Splitter"]},{"name":"Ostrich","weapons":["Boomerang","Dart","Sling","1H Spear","Praxian Shield"],"traits":["Mounted Combat","Ranged Marksman","Skirmishing"]},{"name":"Pol-Joni","weapons":["1H Spear","1H Axe","Short Bow","Praxian Shield"],"traits":["Assassination","Mounted Combat","Skirmishing"],"notes":"or select weapons from an alternate Praxian tribe or Orlanthi combat style"},{"name":"Rhino","weapons":["Javelin","Lance","Long Axe","Mace","Praxian Shield"],"traits":["Beast-back Lancer","Intimidating Scream","Mounted Combat"]},{"name":"Sable","weapons":["Composite Bow","Lance","Scimitar","Praxian Shield"],"traits":["Beast-back Lancer","Mounted Combat","Ranged Marksman"]},{"name":"Unicorn","weapons":["Bow","Dart","Lance","Shortsword","Pelorian Peltast Shield"],"traits":["Beast-back Lancer","Kuschile Archery","Mounted Combat"]},{"name":"Zebra (Pavis Survivors)","weapons":["Composite Bow","1H Spear","Broadsword","Orlanthi Round Shield"],"traits":["Beast-back Lancer","Mounted Combat","Trained Beast"]}],"folkMagic":["Appraise","Beastcall (Tribal Beast)","Bladesharp","Cleanse","Deflect","Dry","Fanaticism","Find (Water, Food, Shelter)","Heal","Preserve"],"passions":[{"name":"Hate (Horses)","formula":"POW+CHA+30"},{"name":"Hate (Chaos)","formula":"POW+CHA+30"},{"name":"Distrust (Foreigners)","formula":"POW+CHA+30"},{"name":"Fear (Water)","formula":"POW+CHA+30"}],"startingMoney":"4d6×15 Lunars","careers":"Any Nomad"},{"name":"Sartarite (Heortling)","type":"Barbarian","standardSkills":["Athletics","Brawn","Endurance","Evade","Locale","Perception",{"choice":["Ride","Swim"]},"Willpower"],"professionalSkills":[{"choice":"Craft (any)"},"Commerce","Courtesy","Healing",{"choice":"Lore (any)"},"Musicianship","Survival"],"combatStyles":[{"name":"Hill Clan Levy","weapons":["1H Axe","1H Spear","Orlanthi Round Shield","Longbow","Javelin"],"traits":["Intimidating Scream","Throw Weapons"]},{"name":"Upland Crofter","weapons":["Sling","1H Spear","Orlanthi Round Shield"],"traits":["Ranged Marksman","Skirmishing"],"restrictions":"only available to Herder, Hunter or Scout career"},{"name":"Alynx Brother","weapons":["Dagger","1H Spear","Javelin"],"traits":["Daredevil","Do or Die","Trained Beast"],"restrictions":"only available to Herder, Hunter or Scout career"},{"name":"Loyal Housecarl","weapons":["Broadsword","1H Spear","Orlanthi Scutum","Greataxe"],"traits":["Batter Aside","Intimidating Scream","Shield Wall"],"restrictions":"only available to Warrior career"},{"name":"Sartarite Noble","weapons":["Broadsword","1H Spear","Orlanthi Scutum","Javelin"],"traits":["Intimidating Scream","Mounted Combat","Shield Wall"],"restrictions":"only available to those of Gentry or Ruling class"},{"name":"Esrolian Cohort","weapons":["Greataxe","Shortsword","Orlanthi Scutum","Javelin"],"traits":["Formation Fighting","Shield Splitter","Shield Wall"],"restrictions":"only available to those of Gentry or Ruling class"},{"name":"Tarshite Militia","weapons":["Shortsword","1H Spear","Peltast Shield","Javelin"],"traits":["Defensive Minded","Formation Fighting","Siege Warfare"],"restrictions":"only available to those of Gentry or Ruling class"}],"folkMagic":["Avert","Beastcall (Alynx or Herd Animal)","Bladesharp","Coordination","Fanaticism","Find Herd Animal","Heal","Mindspeech","Mobility","Pet","Protection"],"passions":[{"name":"Loyalty (Clan)","formula":"POW+CHA+30"},{"name":"Love (Freedom)","formula":"POW+CHA+30"},{"choice":["Hate"],"needsSubject":true,"subjectSuggestions":["Telmori","Lunar Tarshites","Greydogs","Delecti's Undead","Beastfolk"],"formula":"POW+CHA+30"},{"name":"Hate (Lunar Oppression)","formula":"POW+CHA+30"}],"startingMoney":"4d6×10 Lunars","careers":"Any Barbarian"},{"name":"Telmori Hsunchen","type":"Primitive","standardSkills":["Athletics","Brawn","Endurance","Evade","Locale","Perception","Stealth"],"professionalSkills":[{"choice":"Craft (any)"},"Healing","Lore (Telmori)","Musicianship","Navigate","Survival","Track"],"combatStyles":[{"name":"Telmori Hunter","weapons":["Club","1H Spear","2H Spear","Javelin","Short Bow"],"traits":["Intimidating Scream","Trained Beast (Wolf)"]},{"name":"Wolf Hunter","weapons":["Teeth and Claws"],"traits":["Intimidating Scream","Mancatcher"],"notes":"Can be used in either human or lupine forms. In wolf form also gains Unarmed Prowess trait."}],"folkMagic":["Beastcall (Wolf)","Bladesharp","Cleanse","Deflect","Find Prey","Find Food","Heat","Ignite","Pathway","Pierce"],"passions":[{"name":"Loyalty (Pack)","formula":"POW+CHA+30"},{"name":"Love (Freedom)","formula":"POW+CHA+30"},{"name":"Hate (Lunars)","formula":"POW+CHA+30"}],"startingMoney":"4d6×2 Lunars","careers":"Any Primitive"}];
+const COMBAT_STYLES_DATA = {
+  "schemaVersion": 1,
+  "authority": {
+    "source": "Combat Styles Encyclopedia",
+    "scope": "combat-styles-only",
+    "supersedes": [
+      "Adventures in Glorantha culture-combat-style rows"
+    ],
+    "generatedFrom": "references/cse-raw/combat-styles-cse.json",
+    "source_pdf": "/home/worldofgeese/Downloads/Combat Styles Encyclopedia.pdf",
+    "sha256": "106d7ad39e8b63d39cc6a5e79db7ec2f031b165b5c05017113bc13f2469841a6",
+    "validated_at": "2026-05-21"
+  },
+  "cultureAliases": {
+    "Sartarite/Heortling": "Sartarite (Heortling)",
+    "Heortling": "Sartarite (Heortling)",
+    "Provincial Lunar/Tarsh": "Lunar Provincial",
+    "Lunar Provincial/Tarsh": "Lunar Provincial",
+    "Tarshite": "Lunar Provincial",
+    "Telmori": "Telmori Hsunchen",
+    "Telmori Hsunchen": "Telmori Hsunchen"
+  },
+  "styles": [
+    {
+      "id": "cse:balazaring:hawk-slayer",
+      "culture": "Balazaring",
+      "sourceCulture": "Balazar",
+      "sourceName": "Balazaring Hawk Slayer",
+      "name": "Hawk Slayer",
+      "weapons": [
+        "Longspear"
+      ],
+      "sourceWeapons": [
+        "1H Longspear"
+      ],
+      "traits": [
+        "Mounted Combat"
+      ],
+      "printedTraits": [
+        "Mounted Combat"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 146
+      }
+    },
+    {
+      "id": "cse:balazaring:hunter-raider",
+      "culture": "Balazaring",
+      "sourceCulture": "Balazar",
+      "sourceName": "Balazaring Hunter Raider",
+      "name": "Hunter Raider",
+      "weapons": [
+        "Shortspear",
+        "Sling"
+      ],
+      "sourceWeapons": [
+        "1H Short Spear",
+        "Sling"
+      ],
+      "traits": [
+        "Skirmisher"
+      ],
+      "printedTraits": [
+        "Skirmisher"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 147
+      }
+    },
+    {
+      "id": "cse:balazaring:pony-cavalry",
+      "culture": "Balazaring",
+      "sourceCulture": "Balazar",
+      "sourceName": "Balazaring Pony Cavalry",
+      "name": "Pony Cavalry",
+      "weapons": [
+        "Shortspear",
+        "Short Bow"
+      ],
+      "sourceWeapons": [
+        "1H Short Spear",
+        "Short Bow"
+      ],
+      "traits": [
+        "Mounted Combat"
+      ],
+      "printedTraits": [
+        "Mounted Combat"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 148
+      }
+    },
+    {
+      "id": "cse:esrolian:citizen-legionary",
+      "culture": "Esrolian",
+      "sourceCulture": "Esrolia/God Forgot",
+      "sourceName": "Esrolian Citizen Legionary",
+      "name": "Citizen Legionary",
+      "weapons": [
+        "Shortsword",
+        "Javelin",
+        "Sling",
+        "Target Shield"
+      ],
+      "sourceWeapons": [
+        "Shortsword",
+        "Javelin",
+        "Sling",
+        "Target Shield"
+      ],
+      "traits": [
+        "Formation Fighting"
+      ],
+      "printedTraits": [
+        "Formation Fighting*"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 386
+      }
+    },
+    {
+      "id": "cse:esrolian:city-state-phalangite",
+      "culture": "Esrolian",
+      "sourceCulture": "Esrolia/God Forgot",
+      "sourceName": "Esrolian City-State Phalangite",
+      "name": "City-State Phalangite",
+      "weapons": [
+        "Longspear",
+        "Pike/Sarissa"
+      ],
+      "sourceWeapons": [
+        "Longspear",
+        "Pike/Sarissa"
+      ],
+      "traits": [
+        "Formation Fighting"
+      ],
+      "printedTraits": [
+        "Formation Fighting*"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 387
+      }
+    },
+    {
+      "id": "cse:esrolian:clan-protector",
+      "culture": "Esrolian",
+      "sourceCulture": "Esrolia/God Forgot",
+      "sourceName": "Esrolian Clan Protector",
+      "name": "Clan Protector",
+      "weapons": [
+        "Shortsword",
+        "Target Shield"
+      ],
+      "sourceWeapons": [
+        "Shortsword",
+        "Target Shield"
+      ],
+      "traits": [
+        "Daredevil"
+      ],
+      "printedTraits": [
+        "Daredevil"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 388
+      }
+    },
+    {
+      "id": "cse:god-forgot:holar-militia",
+      "culture": "God Forgot",
+      "sourceCulture": "Esrolia/God Forgot",
+      "sourceName": "God Forgot Holar Militia",
+      "name": "Holar Militia",
+      "weapons": [
+        "Shortspear",
+        "Sling",
+        "Western Infantry Shield"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Sling",
+        "Western Infantry Shield"
+      ],
+      "traits": [
+        "Shield Wall"
+      ],
+      "printedTraits": [
+        "Shield Wall*"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 390
+      }
+    },
+    {
+      "id": "cse:god-forgot:talar-defensive-school",
+      "culture": "God Forgot",
+      "sourceCulture": "Esrolia/God Forgot",
+      "sourceName": "God Forgot Talar Defensive School",
+      "name": "Talar Defensive School",
+      "weapons": [
+        "Shortsword",
+        "Dagger",
+        "Unarmed",
+        "Buckler"
+      ],
+      "sourceWeapons": [
+        "Shortsword",
+        "Dagger",
+        "Unarmed",
+        "Buckler"
+      ],
+      "traits": [
+        "Impromptu Weapons"
+      ],
+      "printedTraits": [
+        "Impromptu Weapons"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 391
+      }
+    },
+    {
+      "id": "cse:god-forgot:god-forgotten-holari",
+      "culture": "God Forgot",
+      "sourceCulture": "Esrolia/God Forgot",
+      "sourceName": "God Forgotten Holari",
+      "name": "God Forgotten Holari",
+      "weapons": [
+        "Broadsword",
+        "Shortspear",
+        "Sling",
+        "Scutum Shield"
+      ],
+      "sourceWeapons": [
+        "Broadsword",
+        "Short Spear",
+        "Sling",
+        "Scutum"
+      ],
+      "traits": [
+        "Skirmisher"
+      ],
+      "printedTraits": [
+        "Skirmisher"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 392
+      }
+    },
+    {
+      "id": "cse:lunar-provincial:colonial-noble",
+      "culture": "Lunar Provincial",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Colonial Noble",
+      "name": "Colonial Noble",
+      "weapons": [
+        "Shortspear",
+        "Sickle Sword/Khopesh",
+        "Recurve Bow",
+        "Pelorian Aspis"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Sickle Sword",
+        "Recurve Bow",
+        "Pelorian Aspis"
+      ],
+      "traits": [
+        "Formation Fighting",
+        "Mounted Combat",
+        "Ranged Marksman"
+      ],
+      "printedTraits": [
+        "Formation Fighting*",
+        "Mounted Combat",
+        "Ranged Marksman"
+      ],
+      "restrictions": "Aristocracy or Ruling class only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 186
+      }
+    },
+    {
+      "id": "cse:lunar-provincial:colonial-survivalist",
+      "culture": "Lunar Provincial",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Colonial Survivalist",
+      "name": "Colonial Survivalist",
+      "weapons": [
+        "Shortsword",
+        "Sling",
+        "Dagger"
+      ],
+      "sourceWeapons": [
+        "Shortsword",
+        "Sling",
+        "Dagger"
+      ],
+      "traits": [
+        "Hidden Weapons"
+      ],
+      "printedTraits": [
+        "Hidden Weapons"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 187
+      }
+    },
+    {
+      "id": "cse:lunar-heartland:lunar-corps-hoplite",
+      "culture": "Lunar Heartland",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Corps Hoplite",
+      "name": "Lunar Corps Hoplite",
+      "weapons": [
+        "Shortspear",
+        "Sickle Sword/Khopesh",
+        "Kontos",
+        "Pelorian Aspis"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Sickle Sword",
+        "Kontos",
+        "Pelorian Aspis"
+      ],
+      "traits": [
+        "Formation Fighting",
+        "Shield Wall",
+        "Siege Warfare"
+      ],
+      "printedTraits": [
+        "Formation Fighting*",
+        "Shield Wall*",
+        "Siege Warfare"
+      ],
+      "restrictions": "Warrior career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 188
+      }
+    },
+    {
+      "id": "cse:lunar-provincial:lunar-corps-hoplite",
+      "culture": "Lunar Provincial",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Corps Hoplite",
+      "name": "Lunar Corps Hoplite",
+      "weapons": [
+        "Shortspear",
+        "Sickle Sword/Khopesh",
+        "Kontos",
+        "Pelorian Aspis"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Sickle Sword",
+        "Kontos",
+        "Pelorian Aspis"
+      ],
+      "traits": [
+        "Formation Fighting",
+        "Shield Wall",
+        "Siege Warfare"
+      ],
+      "printedTraits": [
+        "Formation Fighting*",
+        "Shield Wall*",
+        "Siege Warfare"
+      ],
+      "restrictions": "Warrior career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 188
+      }
+    },
+    {
+      "id": "cse:lunar-heartland:dara-happan-heavy-infantry",
+      "culture": "Lunar Heartland",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Dara Happan Heavy Infantry",
+      "name": "Dara Happan Heavy Infantry",
+      "weapons": [
+        "Kontos",
+        "Shortsword",
+        "Dart",
+        "Dara Happan Hoplon"
+      ],
+      "sourceWeapons": [
+        "Kontos",
+        "Shortsword",
+        "Dart",
+        "Dara Happan Hoplon"
+      ],
+      "traits": [
+        "Intimidating Scream"
+      ],
+      "printedTraits": [
+        "Intimidating Scream"
+      ],
+      "restrictions": "Warrior career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 189
+      }
+    },
+    {
+      "id": "cse:lunar-heartland:dara-happan-urbanite",
+      "culture": "Lunar Heartland",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Dara Happan Urbanite",
+      "name": "Dara Happan Urbanite",
+      "weapons": [
+        "Club",
+        "Shortsword",
+        "Dagger",
+        "Buckler"
+      ],
+      "sourceWeapons": [
+        "Club",
+        "Shortsword",
+        "Dagger",
+        "Buckler"
+      ],
+      "traits": [
+        "Impromptu Weapons"
+      ],
+      "printedTraits": [
+        "Impromptu Weapons"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 190
+      }
+    },
+    {
+      "id": "cse:lunar-heartland:dart-contestant",
+      "culture": "Lunar Heartland",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Dart Contestant",
+      "name": "Dart Contestant",
+      "weapons": [
+        "Shortsword",
+        "Dart",
+        "Dagger"
+      ],
+      "sourceWeapons": [
+        "Shortsword",
+        "Dart",
+        "Dagger"
+      ],
+      "traits": [
+        "Assassination",
+        "Daredevil"
+      ],
+      "printedTraits": [
+        "Assassination",
+        "Daredevil"
+      ],
+      "restrictions": "Agent career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 191
+      }
+    },
+    {
+      "id": "cse:lunar-heartland:pelorian-cavalry",
+      "culture": "Lunar Heartland",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Pelorian Cavalry",
+      "name": "Pelorian Cavalry",
+      "weapons": [
+        "Kontos",
+        "Sickle Sword/Khopesh",
+        "Recurve Bow",
+        "Pelorian Aspis",
+        "Pelorian Peltast Shield"
+      ],
+      "sourceWeapons": [
+        "Kontos",
+        "Sickle Sword",
+        "Recurve Bow",
+        "Pelorian Aspis",
+        "Pelorian Peltast Shield"
+      ],
+      "traits": [
+        "Pelorian Cavalry",
+        "Mounted Skirmisher"
+      ],
+      "printedTraits": [
+        "Pelorian Cavalry",
+        "Mounted Skirmisher"
+      ],
+      "restrictions": "Warrior career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 192
+      }
+    },
+    {
+      "id": "cse:lunar-provincial:pelorian-cavalry",
+      "culture": "Lunar Provincial",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Pelorian Cavalry",
+      "name": "Pelorian Cavalry",
+      "weapons": [
+        "Kontos",
+        "Sickle Sword/Khopesh",
+        "Recurve Bow",
+        "Pelorian Aspis",
+        "Pelorian Peltast Shield"
+      ],
+      "sourceWeapons": [
+        "Kontos",
+        "Sickle Sword",
+        "Recurve Bow",
+        "Pelorian Aspis",
+        "Pelorian Peltast Shield"
+      ],
+      "traits": [
+        "Pelorian Cavalry",
+        "Mounted Skirmisher"
+      ],
+      "printedTraits": [
+        "Pelorian Cavalry",
+        "Mounted Skirmisher"
+      ],
+      "restrictions": "Warrior career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 192
+      }
+    },
+    {
+      "id": "cse:lunar-heartland:pelorian-noble",
+      "culture": "Lunar Heartland",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Pelorian Noble",
+      "name": "Pelorian Noble",
+      "weapons": [
+        "Sickle Sword/Khopesh",
+        "Shortspear",
+        "Recurve Bow",
+        "Pelorian Aspis"
+      ],
+      "sourceWeapons": [
+        "Sickle Sword",
+        "Short Spear",
+        "Recurve Bow",
+        "Pelorian Aspis"
+      ],
+      "traits": [
+        "Formation Fighting",
+        "Mounted Combat",
+        "Ranged Marksman"
+      ],
+      "printedTraits": [
+        "Formation Fighting*",
+        "Mounted Combat",
+        "Ranged Marksman"
+      ],
+      "restrictions": "Aristocracy or Ruling class only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 193
+      }
+    },
+    {
+      "id": "cse:lunar-heartland:sagittan-peltast",
+      "culture": "Lunar Heartland",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Sagittan Peltast",
+      "name": "Sagittan Peltast",
+      "weapons": [
+        "Recurve Bow",
+        "Sling",
+        "Dagger",
+        "Pelorian Peltast Shield"
+      ],
+      "sourceWeapons": [
+        "Recurve Bow",
+        "Sling",
+        "Dagger",
+        "Pelorian Peltast Shield"
+      ],
+      "traits": [
+        "Sagittan Peltast"
+      ],
+      "printedTraits": [
+        "Sagittan Peltast"
+      ],
+      "restrictions": "Warrior career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 194
+      }
+    },
+    {
+      "id": "cse:sartarite-heortling:alynx-brother",
+      "culture": "Sartarite (Heortling)",
+      "sourceCulture": "Dragon Pass/Sartar/Telmori",
+      "sourceName": "Sartarite Alynx Brother",
+      "name": "Alynx Brother",
+      "weapons": [
+        "Shortspear",
+        "Javelin",
+        "Dagger"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Javelin",
+        "Dagger"
+      ],
+      "traits": [
+        "Daredevil",
+        "Do or Die",
+        "Trained Beast"
+      ],
+      "printedTraits": [
+        "Daredevil",
+        "Do or Die",
+        "Trained Beast"
+      ],
+      "restrictions": "Herder, Hunter or Scout career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 168
+      }
+    },
+    {
+      "id": "cse:sartarite-heortling:hill-clan-levy",
+      "culture": "Sartarite (Heortling)",
+      "sourceCulture": "Dragon Pass/Sartar/Telmori",
+      "sourceName": "Sartarite Hill Clan Levy",
+      "name": "Hill Clan Levy",
+      "weapons": [
+        "Long Axe",
+        "Shortspear",
+        "Long Bow",
+        "Javelin",
+        "Orlanthi Round Shield"
+      ],
+      "sourceWeapons": [
+        "Long Axe 1H",
+        "Short Spear",
+        "Long Bow",
+        "Javelin",
+        "Orlanthi Round Shield"
+      ],
+      "traits": [
+        "Intimidating Scream",
+        "Throw Weapons"
+      ],
+      "printedTraits": [
+        "Intimidating Scream",
+        "Throw Weapons"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 169
+      }
+    },
+    {
+      "id": "cse:sartarite-heortling:loyal-housecarl",
+      "culture": "Sartarite (Heortling)",
+      "sourceCulture": "Dragon Pass/Sartar/Telmori",
+      "sourceName": "Sartarite Loyal Housecarl",
+      "name": "Loyal Housecarl",
+      "weapons": [
+        "Broadsword",
+        "Shortspear",
+        "Great Axe",
+        "Orlanthi Scutum"
+      ],
+      "sourceWeapons": [
+        "Broadsword",
+        "Short Spear",
+        "Great Axe",
+        "Orlanthi Scutum"
+      ],
+      "traits": [
+        "Batter Aside",
+        "Intimidating Scream",
+        "Shield Wall"
+      ],
+      "printedTraits": [
+        "Batter Aside",
+        "Intimidating Scream",
+        "Shield Wall*"
+      ],
+      "restrictions": "Warrior career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 170
+      }
+    },
+    {
+      "id": "cse:sartarite-heortling:sartarite-noble",
+      "culture": "Sartarite (Heortling)",
+      "sourceCulture": "Dragon Pass/Sartar/Telmori",
+      "sourceName": "Sartarite Noble",
+      "name": "Sartarite Noble",
+      "weapons": [
+        "Broadsword",
+        "Shortspear",
+        "Javelin",
+        "Orlanthi Scutum"
+      ],
+      "sourceWeapons": [
+        "Broadsword",
+        "Short Spear",
+        "Javelin",
+        "Orlanthi Scutum"
+      ],
+      "traits": [
+        "Intimidating Scream",
+        "Mounted Combat",
+        "Shield Wall"
+      ],
+      "printedTraits": [
+        "Intimidating Scream",
+        "Mounted Combat",
+        "Shield Wall*"
+      ],
+      "restrictions": "Gentry or Ruling class only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 171
+      }
+    },
+    {
+      "id": "cse:sartarite-heortling:upland-crofter",
+      "culture": "Sartarite (Heortling)",
+      "sourceCulture": "Dragon Pass/Sartar/Telmori",
+      "sourceName": "Sartarite Upland Crofter",
+      "name": "Upland Crofter",
+      "weapons": [
+        "Shortspear",
+        "Sling",
+        "Orlanthi Round Shield"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Sling",
+        "Orlanthi Round Shield"
+      ],
+      "traits": [
+        "Ranged Marksman",
+        "Skirmisher"
+      ],
+      "printedTraits": [
+        "Ranged Marksman",
+        "Skirmisher"
+      ],
+      "restrictions": "Herder, Hunter or Scout career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 172
+      }
+    },
+    {
+      "id": "cse:sartarite-heortling:tarshite-militia",
+      "culture": "Sartarite (Heortling)",
+      "sourceCulture": "Dragon Pass/Sartar/Telmori",
+      "sourceName": "Tarshite Militia",
+      "name": "Tarshite Militia",
+      "weapons": [
+        "Shortsword",
+        "Shortspear",
+        "Javelin",
+        "Peltast Shield"
+      ],
+      "sourceWeapons": [
+        "Shortsword",
+        "Short Spear",
+        "Javelin",
+        "Peltast Shield"
+      ],
+      "traits": [
+        "Defensive Minded",
+        "Formation Fighting",
+        "Siege Warfare"
+      ],
+      "printedTraits": [
+        "Defensive Minded",
+        "Formation Fighting*",
+        "Siege Warfare"
+      ],
+      "restrictions": "Warrior career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 173
+      }
+    },
+    {
+      "id": "cse:telmori-hsunchen:telmori-hunter",
+      "culture": "Telmori Hsunchen",
+      "sourceCulture": "Dragon Pass/Sartar/Telmori",
+      "sourceName": "Telmori Hunter",
+      "name": "Telmori Hunter",
+      "weapons": [
+        "Club",
+        "Shortspear",
+        "Longspear",
+        "Short Bow"
+      ],
+      "sourceWeapons": [
+        "Club",
+        "Short Spear",
+        "Longspear",
+        "Short Bow"
+      ],
+      "traits": [
+        "Intimidating Scream",
+        "Trained Beast"
+      ],
+      "printedTraits": [
+        "Intimidating Scream",
+        "Trained Beast"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 174
+      }
+    },
+    {
+      "id": "cse:telmori-hsunchen:wolf-hunter",
+      "culture": "Telmori Hsunchen",
+      "sourceCulture": "Dragon Pass/Sartar/Telmori",
+      "sourceName": "Telmori Wolf Hunter",
+      "name": "Wolf Hunter",
+      "weapons": [
+        "Unarmed"
+      ],
+      "sourceWeapons": [
+        "Unarmed"
+      ],
+      "traits": [
+        "Intimidating Scream",
+        "Mancatcher"
+      ],
+      "printedTraits": [
+        "Intimidating Scream",
+        "Mancatcher"
+      ],
+      "restrictions": null,
+      "notes": "Can be used in either human or lupine forms; wolf form also gains Unarmed Prowess.",
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 175
+      }
+    },
+    {
+      "id": "cse:praxian:agimori",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Agimori",
+      "name": "Agimori",
+      "weapons": [
+        "Longspear",
+        "Club",
+        "Javelin",
+        "Doraddi War Shield"
+      ],
+      "sourceWeapons": [
+        "Longspear",
+        "Club",
+        "Javelin",
+        "Doraddi War Shield"
+      ],
+      "traits": [
+        "Batter Aside",
+        "Knockout Blow",
+        "Shield Splitter"
+      ],
+      "printedTraits": [
+        "Batter Aside",
+        "Knockout Blow",
+        "Shield Splitter"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 928
+      }
+    },
+    {
+      "id": "cse:praxian:baboon",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Baboon",
+      "name": "Baboon",
+      "weapons": [
+        "Longspear",
+        "Sling",
+        "Thrown Stone"
+      ],
+      "sourceWeapons": [
+        "Longspear",
+        "Sling",
+        "Stone"
+      ],
+      "traits": [
+        "Daredevil",
+        "Intimidating Scream",
+        "Swashbuckling"
+      ],
+      "printedTraits": [
+        "Daredevil",
+        "Intimidating Scream",
+        "Swashbuckling"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 930
+      }
+    },
+    {
+      "id": "cse:praxian:basmoli",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Basmoli",
+      "name": "Basmoli",
+      "weapons": [
+        "Shortspear",
+        "Longspear",
+        "Javelin",
+        "Dagger"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Longspear",
+        "Javelin",
+        "Dagger"
+      ],
+      "traits": [
+        "Blind Fighting",
+        "Daredevil",
+        "Ranged Marksman"
+      ],
+      "printedTraits": [
+        "Blind Fighting",
+        "Daredevil",
+        "Ranged Marksman"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 931
+      }
+    },
+    {
+      "id": "cse:praxian:bison",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Bison",
+      "name": "Bison",
+      "weapons": [
+        "Long Axe",
+        "Broadsword",
+        "Lance",
+        "Javelin",
+        "Praxian Shield"
+      ],
+      "sourceWeapons": [
+        "Long Axe 1H",
+        "Broadsword",
+        "Lance",
+        "Javelin",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Bison Tribe Combat Style"
+      ],
+      "printedTraits": [
+        "Bison Tribe Combat Style"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 932
+      }
+    },
+    {
+      "id": "cse:praxian:bolo-lizard",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Bolo Lizard",
+      "name": "Bolo Lizard",
+      "weapons": [
+        "Shortspear",
+        "Bolas",
+        "Dagger",
+        "Praxian Shield"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Bolas",
+        "Dagger",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Mancatcher",
+        "Mounted Combat",
+        "Skirmisher"
+      ],
+      "printedTraits": [
+        "Mancatcher",
+        "Mounted Combat",
+        "Skirmisher"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 936
+      }
+    },
+    {
+      "id": "cse:praxian:cannibal-cult",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Cannibal Cult",
+      "name": "Cannibal Cult",
+      "weapons": [
+        "Club",
+        "Net",
+        "Whip",
+        "Dagger"
+      ],
+      "sourceWeapons": [
+        "Club",
+        "Net",
+        "Whip",
+        "Dagger"
+      ],
+      "traits": [
+        "Assassination",
+        "Knockout Blow",
+        "Mancatcher"
+      ],
+      "printedTraits": [
+        "Assassination",
+        "Knockout Blow",
+        "Mancatcher"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 937
+      }
+    },
+    {
+      "id": "cse:praxian:high-llama",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "High Llama",
+      "name": "High Llama",
+      "weapons": [
+        "Long Axe",
+        "Longspear",
+        "Lance",
+        "Javelin",
+        "Praxian Shield"
+      ],
+      "sourceWeapons": [
+        "Long Axe 1H",
+        "Longspear",
+        "Lance",
+        "Javelin",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Mounted Combat",
+        "Throw Weapons",
+        "Trained Beast"
+      ],
+      "printedTraits": [
+        "Mounted Combat",
+        "Throw Weapons",
+        "Trained Beast"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 939
+      }
+    },
+    {
+      "id": "cse:praxian:impala",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Impala",
+      "name": "Impala",
+      "weapons": [
+        "Long Axe",
+        "Recurve Bow",
+        "Dart",
+        "Praxian Shield"
+      ],
+      "sourceWeapons": [
+        "Long Axe 1H",
+        "Recurve Bow",
+        "Dart",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Mounted Combat",
+        "Prancing",
+        "Ranged Marksman"
+      ],
+      "printedTraits": [
+        "Mounted Combat",
+        "Prancing",
+        "Ranged Marksman"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 940
+      }
+    },
+    {
+      "id": "cse:praxian:morokanth",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Morokanth",
+      "name": "Morokanth",
+      "weapons": [
+        "Club",
+        "Shortspear",
+        "Longspear",
+        "Unarmed",
+        "Praxian Shield"
+      ],
+      "sourceWeapons": [
+        "Club",
+        "Short Spear",
+        "Longspear",
+        "Unarmed",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Batter Aside",
+        "Do or Die",
+        "Morokanth Fu",
+        "Shield Splitter"
+      ],
+      "printedTraits": [
+        "Batter Aside",
+        "Do or Die",
+        "Morokanth Fu",
+        "Shield Splitter"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 941
+      }
+    },
+    {
+      "id": "cse:praxian:ostrich",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Ostrich",
+      "name": "Ostrich",
+      "weapons": [
+        "Shortspear",
+        "Boomerang",
+        "Dart",
+        "Sling",
+        "Praxian Shield"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Boomerang",
+        "Dart",
+        "Sling",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Mounted Combat",
+        "Ranged Marksman",
+        "Skirmisher"
+      ],
+      "printedTraits": [
+        "Mounted Combat",
+        "Ranged Marksman",
+        "Skirmisher"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 943
+      }
+    },
+    {
+      "id": "cse:praxian:pol-joni",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Pol-Joni",
+      "name": "Pol-Joni",
+      "weapons": [
+        "Shortspear",
+        "Long Axe",
+        "Praxian Shield"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Long Axe 1H",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Assassination",
+        "Mounted Combat",
+        "Skirmisher"
+      ],
+      "printedTraits": [
+        "Assassination",
+        "Mounted Combat",
+        "Skirmisher"
+      ],
+      "restrictions": null,
+      "notes": "May select weapons from an alternate Praxian tribe or Orlanthi combat style.",
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 944
+      }
+    },
+    {
+      "id": "cse:praxian:rhino",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Rhino",
+      "name": "Rhino",
+      "weapons": [
+        "Long Axe",
+        "Mace",
+        "Lance",
+        "Javelin",
+        "Praxian Shield"
+      ],
+      "sourceWeapons": [
+        "Long Axe 1H",
+        "Mace",
+        "Lance",
+        "Javelin",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Intimidating Scream"
+      ],
+      "printedTraits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Intimidating Scream"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 945
+      }
+    },
+    {
+      "id": "cse:praxian:sable",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Sable",
+      "name": "Sable",
+      "weapons": [
+        "Scimitar",
+        "Lance",
+        "Recurve Bow",
+        "Praxian Shield"
+      ],
+      "sourceWeapons": [
+        "Scimitar",
+        "Lance",
+        "Recurve Bow",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Ranged Marksman"
+      ],
+      "printedTraits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Ranged Marksman"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 946
+      }
+    },
+    {
+      "id": "cse:praxian:unicorn",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Unicorn",
+      "name": "Unicorn",
+      "weapons": [
+        "Lance",
+        "Recurve Bow",
+        "Dart",
+        "Pelorian Peltast Shield"
+      ],
+      "sourceWeapons": [
+        "Lance",
+        "Recurve Bow",
+        "Dart",
+        "Pelorian Peltast Shield"
+      ],
+      "traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Kuschile Archery"
+      ],
+      "printedTraits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Kuschile Archery"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 947
+      }
+    },
+    {
+      "id": "cse:praxian:zebra",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Zebra",
+      "name": "Zebra",
+      "weapons": [
+        "Shortspear",
+        "Broadsword",
+        "Recurve Bow",
+        "Orlanthi Round Shield"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Broadsword",
+        "Recurve Bow",
+        "Orlanthi Round Shield"
+      ],
+      "traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Trained Beast"
+      ],
+      "printedTraits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Trained Beast"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 948
+      }
+    }
+  ]
+};
+
+const CULTURES_DATA = [
+  {
+    "name": "Balazaring",
+    "type": "Primitive",
+    "standardSkills": [
+      "Athletics",
+      "Brawn",
+      "Endurance",
+      "Evade",
+      "Locale",
+      "Perception",
+      "Stealth",
+      {
+        "choice": [
+          "Boating",
+          "Swim"
+        ]
+      }
+    ],
+    "professionalSkills": [
+      {
+        "choice": "Craft (any)"
+      },
+      "Healing",
+      {
+        "choice": "Lore (any)"
+      },
+      "Musicianship",
+      "Navigate",
+      "Survival",
+      "Track"
+    ],
+    "folkMagic": [
+      "Beastcall (Dog, Pig or Giant Hawk)",
+      "Bladesharp",
+      "Cleanse",
+      "Coordination",
+      "Deflect",
+      "Dry",
+      "Find Game",
+      "Ignite",
+      "Mobility",
+      "Speedart"
+    ],
+    "passions": [
+      {
+        "name": "Loyalty",
+        "needsSubject": true,
+        "subjectSuggestions": [
+          "Clan",
+          "Citadel",
+          "Chief",
+          "Tribe"
+        ],
+        "formula": "POW+CHA+30"
+      },
+      {
+        "name": "Loyalty (City)",
+        "formula": "POW+CHA+30"
+      },
+      {
+        "choice": [
+          "Love",
+          "Hate",
+          "Fear",
+          "Devotion"
+        ],
+        "needsSubject": true,
+        "subjectSuggestions": [
+          "the Wilds",
+          "Citadel King",
+          "Lunars",
+          "Giant Hawks",
+          "Aldryami"
+        ],
+        "formula": "POW+CHA+30"
+      }
+    ],
+    "startingMoney": "4d6×2 Lunars",
+    "careers": "All Primitive",
+    "combatStyleIds": [
+      "cse:balazaring:hawk-slayer",
+      "cse:balazaring:hunter-raider",
+      "cse:balazaring:pony-cavalry"
+    ]
+  },
+  {
+    "name": "Esrolian",
+    "type": "Civilised",
+    "standardSkills": [
+      "Conceal",
+      "Deceit",
+      "Drive",
+      "Influence",
+      "Insight",
+      "Locale",
+      "Perception",
+      "Willpower"
+    ],
+    "professionalSkills": [
+      {
+        "choice": "Art (any)"
+      },
+      "Commerce",
+      {
+        "choice": "Craft (any)"
+      },
+      "Courtesy",
+      {
+        "choice": "Language (any)"
+      },
+      {
+        "choice": "Lore (any)"
+      },
+      "Musicianship",
+      "Streetwise"
+    ],
+    "folkMagic": [
+      "Alarm",
+      "Appraise",
+      "Bladesharp",
+      "Calculate",
+      "Calm",
+      "Glamour",
+      "Heal",
+      "Lock",
+      "Perfume",
+      "Repair"
+    ],
+    "passions": [
+      {
+        "name": "Loyalty (Clan)",
+        "formula": "POW+CHA+30"
+      },
+      {
+        "name": "Loyalty (Grandmother)",
+        "formula": "POW+CHA+50"
+      },
+      {
+        "name": "Loyalty (Queen)",
+        "formula": "POW+CHA+25"
+      }
+    ],
+    "startingMoney": "4d6×15 Lunars",
+    "careers": "All Civilised",
+    "combatStyleIds": [
+      "cse:esrolian:citizen-legionary",
+      "cse:esrolian:city-state-phalangite",
+      "cse:esrolian:clan-protector"
+    ]
+  },
+  {
+    "name": "God Forgot",
+    "type": "Civilised",
+    "standardSkills": [
+      "Conceal",
+      "Deceit",
+      "Endurance",
+      "Influence",
+      "Insight",
+      "Locale",
+      "Willpower"
+    ],
+    "professionalSkills": [
+      "Commerce",
+      {
+        "choice": "Craft (any)"
+      },
+      "Courtesy",
+      "Engineering",
+      "Gambling",
+      {
+        "choice": "Lore (any)"
+      },
+      "Mechanisms",
+      "Streetwise"
+    ],
+    "folkMagic": [
+      "Alarm",
+      "Avert",
+      "Bladesharp",
+      "Bludgeon",
+      "Find Truth",
+      "Heal",
+      "Perfume",
+      "Pierce",
+      "Preserve",
+      "Protection"
+    ],
+    "passions": [
+      {
+        "name": "Loyalty (Caste)",
+        "formula": "POW+CHA+30"
+      },
+      {
+        "name": "Despise (Gods)",
+        "formula": "POW+CHA+30"
+      },
+      {
+        "name": "Hate (Outsiders)",
+        "formula": "POW+CHA+30"
+      },
+      {
+        "name": "Suffer (Willingly)",
+        "formula": "POW+CHA+30"
+      }
+    ],
+    "startingMoney": "4d6×15 Lunars",
+    "careers": "Career is dependent on caste. Dronars: Beast Handler, Courtesan, Crafter, Entertainer, Farmer, Fisher, Herder, Hunter, Merchant, Miner, Sailor, Scout, Thief. Horali: Warrior. Zzistori: Sorcerer. Talar: Agent, Alchemist, Courtier, Official, Scholar, Warrior.",
+    "combatStyleIds": [
+      "cse:god-forgot:holar-militia",
+      "cse:god-forgot:talar-defensive-school",
+      "cse:god-forgot:god-forgotten-holari"
+    ]
+  },
+  {
+    "name": "Lunar Heartland",
+    "type": "Civilised",
+    "standardSkills": [
+      "Conceal",
+      "Deceit",
+      "Drive",
+      "Influence",
+      "Insight",
+      "Locale",
+      "Perception",
+      "Willpower"
+    ],
+    "professionalSkills": [
+      {
+        "choice": "Art (any)"
+      },
+      "Commerce",
+      {
+        "choice": "Craft (any)"
+      },
+      "Courtesy",
+      {
+        "choice": "Language (any)"
+      },
+      {
+        "choice": "Lore (any)"
+      },
+      "Musicianship",
+      "Streetwise"
+    ],
+    "folkMagic": [
+      "Avert",
+      "Bladesharp",
+      "Calculate",
+      "Firearrow",
+      "Glamour",
+      "Heal",
+      "Light",
+      "Pierce",
+      "Polish",
+      "Protection"
+    ],
+    "passions": [
+      {
+        "name": "Loyalty (the Red Emperor)",
+        "formula": "POW+CHA+30"
+      },
+      {
+        "choice": [
+          "Love"
+        ],
+        "needsSubject": true,
+        "subjectSuggestions": [
+          "Family",
+          "Sibling",
+          "Lover",
+          "the Lunar Way",
+          "Dara Happa"
+        ],
+        "formula": "POW+CHA+30"
+      },
+      {
+        "name": "Hate (Disobedience)",
+        "formula": "POW+CHA+30"
+      }
+    ],
+    "startingMoney": "4d6×10 Lunars",
+    "careers": "All Civilised",
+    "combatStyleIds": [
+      "cse:lunar-heartland:lunar-corps-hoplite",
+      "cse:lunar-heartland:dara-happan-heavy-infantry",
+      "cse:lunar-heartland:dara-happan-urbanite",
+      "cse:lunar-heartland:dart-contestant",
+      "cse:lunar-heartland:pelorian-cavalry",
+      "cse:lunar-heartland:pelorian-noble",
+      "cse:lunar-heartland:sagittan-peltast"
+    ]
+  },
+  {
+    "name": "Lunar Provincial",
+    "type": "Civilised",
+    "standardSkills": [
+      "Conceal",
+      "Deceit",
+      "Endurance",
+      "Influence",
+      "Insight",
+      "Locale",
+      "Willpower"
+    ],
+    "professionalSkills": [
+      {
+        "choice": "Art (any)"
+      },
+      "Commerce",
+      {
+        "choice": "Craft (any)"
+      },
+      "Courtesy",
+      "Culture",
+      {
+        "choice": "Language (local)"
+      },
+      {
+        "choice": "Lore (any)"
+      },
+      "Streetwise"
+    ],
+    "folkMagic": [
+      "Alarm",
+      "Appraise",
+      "Bladesharp",
+      "Calm",
+      "Cleanse",
+      "Dry",
+      "Find Safe Shelter",
+      "Incognito",
+      "Ignite",
+      "Preserve"
+    ],
+    "passions": [
+      {
+        "name": "Loyalty (Empire)",
+        "formula": "POW+CHA+30"
+      },
+      {
+        "choice": [
+          "Love"
+        ],
+        "needsSubject": true,
+        "subjectSuggestions": [
+          "Family",
+          "Homeland",
+          "Lover",
+          "the Seven Mothers"
+        ],
+        "formula": "POW+CHA+30"
+      },
+      {
+        "choice": [
+          "Love",
+          "Hate"
+        ],
+        "needsSubject": true,
+        "subjectSuggestions": [
+          "Locals",
+          "Sartarites",
+          "Tarshites",
+          "Lunar Taxes"
+        ],
+        "formula": "POW+CHA+30"
+      }
+    ],
+    "startingMoney": "4d6×5 Lunars",
+    "careers": "Any Civilised",
+    "combatStyleIds": [
+      "cse:lunar-provincial:colonial-noble",
+      "cse:lunar-provincial:colonial-survivalist",
+      "cse:lunar-provincial:lunar-corps-hoplite",
+      "cse:lunar-provincial:pelorian-cavalry"
+    ]
+  },
+  {
+    "name": "Praxian",
+    "type": "Nomad",
+    "standardSkills": [
+      "Endurance",
+      "First Aid",
+      "Locale",
+      "Perception",
+      "Ride",
+      "Stealth",
+      {
+        "choice": [
+          "Navigate",
+          "Swim"
+        ]
+      },
+      "Willpower"
+    ],
+    "professionalSkills": [
+      {
+        "choice": "Craft (any)"
+      },
+      "Healing",
+      {
+        "choice": "Lore (any)"
+      },
+      "Musicianship",
+      "Navigate",
+      "Survival",
+      "Track"
+    ],
+    "folkMagic": [
+      "Appraise",
+      "Beastcall (Tribal Beast)",
+      "Bladesharp",
+      "Cleanse",
+      "Deflect",
+      "Dry",
+      "Fanaticism",
+      "Find (Water, Food, Shelter)",
+      "Heal",
+      "Preserve"
+    ],
+    "passions": [
+      {
+        "name": "Hate (Horses)",
+        "formula": "POW+CHA+30"
+      },
+      {
+        "name": "Hate (Chaos)",
+        "formula": "POW+CHA+30"
+      },
+      {
+        "name": "Distrust (Foreigners)",
+        "formula": "POW+CHA+30"
+      },
+      {
+        "name": "Fear (Water)",
+        "formula": "POW+CHA+30"
+      }
+    ],
+    "startingMoney": "4d6×15 Lunars",
+    "careers": "Any Nomad",
+    "combatStyleIds": [
+      "cse:praxian:agimori",
+      "cse:praxian:baboon",
+      "cse:praxian:basmoli",
+      "cse:praxian:bison",
+      "cse:praxian:bolo-lizard",
+      "cse:praxian:cannibal-cult",
+      "cse:praxian:high-llama",
+      "cse:praxian:impala",
+      "cse:praxian:morokanth",
+      "cse:praxian:ostrich",
+      "cse:praxian:pol-joni",
+      "cse:praxian:rhino",
+      "cse:praxian:sable",
+      "cse:praxian:unicorn",
+      "cse:praxian:zebra"
+    ]
+  },
+  {
+    "name": "Sartarite (Heortling)",
+    "type": "Barbarian",
+    "standardSkills": [
+      "Athletics",
+      "Brawn",
+      "Endurance",
+      "Evade",
+      "Locale",
+      "Perception",
+      {
+        "choice": [
+          "Ride",
+          "Swim"
+        ]
+      },
+      "Willpower"
+    ],
+    "professionalSkills": [
+      {
+        "choice": "Craft (any)"
+      },
+      "Commerce",
+      "Courtesy",
+      "Healing",
+      {
+        "choice": "Lore (any)"
+      },
+      "Musicianship",
+      "Survival"
+    ],
+    "folkMagic": [
+      "Avert",
+      "Beastcall (Alynx or Herd Animal)",
+      "Bladesharp",
+      "Coordination",
+      "Fanaticism",
+      "Find Herd Animal",
+      "Heal",
+      "Mindspeech",
+      "Mobility",
+      "Pet",
+      "Protection"
+    ],
+    "passions": [
+      {
+        "name": "Loyalty (Clan)",
+        "formula": "POW+CHA+30"
+      },
+      {
+        "name": "Love (Freedom)",
+        "formula": "POW+CHA+30"
+      },
+      {
+        "choice": [
+          "Hate"
+        ],
+        "needsSubject": true,
+        "subjectSuggestions": [
+          "Telmori",
+          "Lunar Tarshites",
+          "Greydogs",
+          "Delecti's Undead",
+          "Beastfolk"
+        ],
+        "formula": "POW+CHA+30"
+      },
+      {
+        "name": "Hate (Lunar Oppression)",
+        "formula": "POW+CHA+30"
+      }
+    ],
+    "startingMoney": "4d6×10 Lunars",
+    "careers": "Any Barbarian",
+    "combatStyleIds": [
+      "cse:sartarite-heortling:alynx-brother",
+      "cse:sartarite-heortling:hill-clan-levy",
+      "cse:sartarite-heortling:loyal-housecarl",
+      "cse:sartarite-heortling:sartarite-noble",
+      "cse:sartarite-heortling:upland-crofter",
+      "cse:sartarite-heortling:tarshite-militia"
+    ]
+  },
+  {
+    "name": "Telmori Hsunchen",
+    "type": "Primitive",
+    "standardSkills": [
+      "Athletics",
+      "Brawn",
+      "Endurance",
+      "Evade",
+      "Locale",
+      "Perception",
+      "Stealth"
+    ],
+    "professionalSkills": [
+      {
+        "choice": "Craft (any)"
+      },
+      "Healing",
+      "Lore (Telmori)",
+      "Musicianship",
+      "Navigate",
+      "Survival",
+      "Track"
+    ],
+    "folkMagic": [
+      "Beastcall (Wolf)",
+      "Bladesharp",
+      "Cleanse",
+      "Deflect",
+      "Find Prey",
+      "Find Food",
+      "Heat",
+      "Ignite",
+      "Pathway",
+      "Pierce"
+    ],
+    "passions": [
+      {
+        "name": "Loyalty (Pack)",
+        "formula": "POW+CHA+30"
+      },
+      {
+        "name": "Love (Freedom)",
+        "formula": "POW+CHA+30"
+      },
+      {
+        "name": "Hate (Lunars)",
+        "formula": "POW+CHA+30"
+      }
+    ],
+    "startingMoney": "4d6×2 Lunars",
+    "careers": "Any Primitive",
+    "combatStyleIds": [
+      "cse:telmori-hsunchen:telmori-hunter",
+      "cse:telmori-hsunchen:wolf-hunter"
+    ]
+  }
+];
+
+const COMBAT_STYLES_BY_ID = Object.fromEntries(COMBAT_STYLES_DATA.styles.map(style => [style.id, style]));
+
+function resolveCombatStyle(styleId) {
+  const style = COMBAT_STYLES_BY_ID[styleId];
+  if (!style) return null;
+  return {
+    id: style.id,
+    name: style.name,
+    weapons: style.weapons,
+    traits: style.traits,
+    ...(style.restrictions ? { restrictions: style.restrictions } : {}),
+    ...(style.notes ? { notes: style.notes } : {}),
+    citation: style.citation
+  };
+}
+
+CULTURES_DATA.forEach(culture => {
+  culture.combatStyles = (culture.combatStyleIds || [])
+    .map(resolveCombatStyle)
+    .filter(Boolean);
+});
 // =============================================================================
 // SOCIAL CLASS TABLES (Mythras Core p.21, 24)
 // =============================================================================
@@ -906,7 +2963,162 @@ function detectCultType(cult) {
   };
 }
 
-const CULTURE_CULT_MAP = {"Sartarite (Heortling)":{"primary":["Orlanth","Ernalda","Humakt","Issaries","Lhankor Mhy","Chalana Arroy"],"secondary":["Storm Bull","Eurmal","Odayla","Babeester Gor","Maran Gor","Vinga","Barntar","Heler","Yinkin","Elmal","Ty Kora Tek","Engizi","Asrelia","Donandar","Lanbril","Foundchild"]},"Esrolian":{"primary":["Ernalda","Babeester Gor","Chalana Arroy","Issaries","Lhankor Mhy","Ty Kora Tek"],"secondary":["Orlanth","Humakt","Asrelia","Maran Gor","Donandar","Eurmal","Lanbril","Grain Goddesses","Uleria","Argan Argar"]},"Lunar Heartland":{"primary":["7 Mothers - Yanafal Tarnils","7 Mothers - Irrippi Ontor","7 Mothers - Jakaleel","7 Mothers - Danfive Xaron","7 Mothers - Teelo Norri","7 Mothers - Queen Deezola","7 Mothers - She Who Waits","Etyries"],"secondary":["Yelm","Lodril","Dendara","Buserian","Shargash","Polaris","Lanbril","Uleria","Chalana Arroy","Lokarnos"]},"Lunar Provincial":{"primary":["7 Mothers - Yanafal Tarnils","7 Mothers - Irrippi Ontor","Etyries"],"secondary":["Orlanth","Ernalda","Humakt","Issaries","Yelmalio","Chalana Arroy","Lhankor Mhy","Lanbril","7 Mothers - Jakaleel","7 Mothers - Danfive Xaron","7 Mothers - Teelo Norri","7 Mothers - Queen Deezola"]},"Praxian":{"primary":["Waha","Eiritha","Storm Bull","Foundchild","Daka Fal"],"secondary":["Chalana Arroy","Issaries","Humakt","Lanbril","Zorak Zoran","Pavis","Zola Fel","Basmol","Gagarth","Yelmalio"]},"Balazaring":{"primary":["Foundchild","Yelmalio","Daka Fal"],"secondary":["Storm Bull","Chalana Arroy","Orlanth","Waha","Eiritha","Odayla"]},"God Forgot":{"primary":[],"secondary":["Lhankor Mhy","Issaries","Chalana Arroy","Dormal","Arkat"],"note":"God Forgot is explicitly atheistic/secularist. Cults are rare — 'No cult' is the expected default here."},"Telmori Hsunchen":{"primary":["Telmor"],"secondary":["Storm Bull","Foundchild","Odayla","Orlanth"],"note":"Telmori primarily worship their wolf ancestor Telmor. Telmor cult data is in Hsunchen pantheon."}};
+const CULTURE_CULT_MAP = {
+  "Sartarite (Heortling)": {
+    "primary": [
+      "Orlanth",
+      "Ernalda",
+      "Humakt",
+      "Issaries",
+      "Lhankor Mhy",
+      "Chalana Arroy"
+    ],
+    "secondary": [
+      "Storm Bull",
+      "Eurmal",
+      "Odayla",
+      "Babeester Gor",
+      "Maran Gor",
+      "Vinga",
+      "Barntar",
+      "Heler",
+      "Yinkin",
+      "Elmal",
+      "Ty Kora Tek",
+      "Engizi",
+      "Asrelia",
+      "Donandar",
+      "Lanbril",
+      "Foundchild"
+    ]
+  },
+  "Esrolian": {
+    "primary": [
+      "Ernalda",
+      "Babeester Gor",
+      "Chalana Arroy",
+      "Issaries",
+      "Lhankor Mhy",
+      "Ty Kora Tek"
+    ],
+    "secondary": [
+      "Orlanth",
+      "Humakt",
+      "Asrelia",
+      "Maran Gor",
+      "Donandar",
+      "Eurmal",
+      "Lanbril",
+      "Grain Goddesses",
+      "Uleria",
+      "Argan Argar"
+    ]
+  },
+  "Lunar Heartland": {
+    "primary": [
+      "7 Mothers - Yanafal Tarnils",
+      "7 Mothers - Irrippi Ontor",
+      "7 Mothers - Jakaleel",
+      "7 Mothers - Danfive Xaron",
+      "7 Mothers - Teelo Norri",
+      "7 Mothers - Queen Deezola",
+      "7 Mothers - She Who Waits",
+      "Etyries"
+    ],
+    "secondary": [
+      "Yelm",
+      "Lodril",
+      "Dendara",
+      "Buserian",
+      "Shargash",
+      "Polaris",
+      "Lanbril",
+      "Uleria",
+      "Chalana Arroy",
+      "Lokarnos"
+    ]
+  },
+  "Lunar Provincial": {
+    "primary": [
+      "7 Mothers - Yanafal Tarnils",
+      "7 Mothers - Irrippi Ontor",
+      "Etyries"
+    ],
+    "secondary": [
+      "Orlanth",
+      "Ernalda",
+      "Humakt",
+      "Issaries",
+      "Yelmalio",
+      "Chalana Arroy",
+      "Lhankor Mhy",
+      "Lanbril",
+      "7 Mothers - Jakaleel",
+      "7 Mothers - Danfive Xaron",
+      "7 Mothers - Teelo Norri",
+      "7 Mothers - Queen Deezola"
+    ]
+  },
+  "Praxian": {
+    "primary": [
+      "Waha",
+      "Eiritha",
+      "Storm Bull",
+      "Foundchild",
+      "Daka Fal"
+    ],
+    "secondary": [
+      "Chalana Arroy",
+      "Issaries",
+      "Humakt",
+      "Lanbril",
+      "Zorak Zoran",
+      "Pavis",
+      "Zola Fel",
+      "Basmol",
+      "Gagarth",
+      "Yelmalio"
+    ]
+  },
+  "Balazaring": {
+    "primary": [
+      "Foundchild",
+      "Yelmalio",
+      "Daka Fal"
+    ],
+    "secondary": [
+      "Storm Bull",
+      "Chalana Arroy",
+      "Orlanth",
+      "Waha",
+      "Eiritha",
+      "Odayla"
+    ]
+  },
+  "God Forgot": {
+    "primary": [],
+    "secondary": [
+      "Lhankor Mhy",
+      "Issaries",
+      "Chalana Arroy",
+      "Dormal",
+      "Arkat"
+    ],
+    "note": "God Forgot is explicitly atheistic/secularist in AiG p.30-31: gods are not worshipped and Rune Magic is unavailable. The listed secondary cults are rare/manual non-default options with non-AiG provenance, especially Arkat sorcery access."
+  },
+  "Telmori Hsunchen": {
+    "primary": [
+      "Telmor"
+    ],
+    "secondary": [
+      "Storm Bull",
+      "Foundchild",
+      "Odayla",
+      "Orlanth"
+    ],
+    "note": "Telmori primarily worship their wolf ancestor Telmor. Telmor cult data is in Hsunchen pantheon."
+  }
+};
 
 // =============================================================================
 // FIX 1: Background Equipment Table (Mythras Core p.33-34)
@@ -1580,33 +3792,543 @@ const STARTING_SPIRITS = [
 
 const CULTURE_BUILDS = {
   "Praxian": [
-    { name: "Beast Rider Warrior", stats: "High STR, CON", career: "Warrior", style: "Bison", tip: "Mounted combat specialist. Lance charges and archery from the saddle." },
-    { name: "Desert Shaman", stats: "High POW, INT", career: "Shaman", style: "Bolo Lizard", tip: "Spirit talker who survives the wastes through cunning and magic." },
-    { name: "Tribal Hunter", stats: "High DEX, CON", career: "Hunter", style: "Impala", tip: "Patient tracker and skirmisher. Javelin and sling from a distance." }
+    {
+      "name": "Beast Rider Warrior",
+      "stats": "High STR, CON",
+      "career": "Warrior",
+      "style": "Bison",
+      "tip": "Mounted combat specialist. Lance charges and archery from the saddle."
+    },
+    {
+      "name": "Desert Shaman",
+      "stats": "High POW, INT",
+      "career": "Shaman",
+      "style": "Bolo Lizard",
+      "tip": "Spirit talker who survives the wastes through cunning and magic."
+    },
+    {
+      "name": "Tribal Hunter",
+      "stats": "High DEX, CON",
+      "career": "Hunter",
+      "style": "Impala",
+      "tip": "Patient tracker and skirmisher. Javelin and sling from a distance."
+    }
   ],
   "Sartarite (Heortling)": [
-    { name: "Orlanthi Thane", stats: "High STR, CHA", career: "Warrior", style: "Loyal Housecarl", tip: "Sword-and-shield fighter who leads from the front." },
-    { name: "Wind Lord Aspirant", stats: "High POW, STR", career: "Priest", style: "Hill Clan Levy", tip: "Devotee of Orlanth who combines martial prowess with divine magic." },
-    { name: "Clan Skald", stats: "High CHA, INT", career: "Entertainer", style: "Hill Clan Levy", tip: "Storyteller and musician who inspires the warband with tales of glory." }
+    {
+      "name": "Orlanthi Thane",
+      "stats": "High STR, CHA",
+      "career": "Warrior",
+      "style": "Loyal Housecarl",
+      "tip": "Sword-and-shield fighter who leads from the front."
+    },
+    {
+      "name": "Wind Lord Aspirant",
+      "stats": "High POW, STR",
+      "career": "Priest",
+      "style": "Hill Clan Levy",
+      "tip": "Devotee of Orlanth who combines martial prowess with divine magic."
+    },
+    {
+      "name": "Clan Skald",
+      "stats": "High CHA, INT",
+      "career": "Entertainer",
+      "style": "Hill Clan Levy",
+      "tip": "Storyteller and musician who inspires the warband with tales of glory."
+    }
   ],
   "Lunar Heartland": [
-    { name: "Lunar Legionary", stats: "High STR, CON", career: "Warrior", style: "Lunar Corps Hoplite", tip: "Disciplined soldier in the Emperor's armies. Shield wall and scimitar." },
-    { name: "Seven Mothers Priestess", stats: "High POW, CHA", career: "Priest", style: "Dara Happan Urbanite", tip: "Devoted to the Red Goddess. Combines faith with political cunning." },
-    { name: "Heartland Spy", stats: "High DEX, CHA", career: "Agent", style: "Dart Contestant", tip: "Works in the shadows for the Lunar Empire. Charm and a hidden blade." }
+    {
+      "name": "Lunar Legionary",
+      "stats": "High STR, CON",
+      "career": "Warrior",
+      "style": "Lunar Corps Hoplite",
+      "tip": "Disciplined soldier in the Emperor's armies. Shield wall and scimitar."
+    },
+    {
+      "name": "Seven Mothers Priestess",
+      "stats": "High POW, CHA",
+      "career": "Priest",
+      "style": "Dara Happan Urbanite",
+      "tip": "Devoted to the Red Goddess. Combines faith with political cunning."
+    },
+    {
+      "name": "Heartland Spy",
+      "stats": "High DEX, CHA",
+      "career": "Agent",
+      "style": "Dart Contestant",
+      "tip": "Works in the shadows for the Lunar Empire. Charm and a hidden blade."
+    }
   ],
   "Esrolian": [
-    { name: "Earth Priestess", stats: "High POW, CHA", career: "Priest", style: "Clan Protector", tip: "Devoted to the Earth goddesses. Political power through the temples." },
-    { name: "Citizen Soldier", stats: "High STR, CON", career: "Warrior", style: "Citizen Legionary", tip: "Formation fighter defending the city-states. Spear, shield, and discipline." },
-    { name: "Temple Scholar", stats: "High INT, CHA", career: "Scholar", style: "City-State Phalangite", tip: "Esrolian intellectual. Knows more about Glorantha than most." }
+    {
+      "name": "Earth Priestess",
+      "stats": "High POW, CHA",
+      "career": "Priest",
+      "style": "Clan Protector",
+      "tip": "Devoted to the Earth goddesses. Political power through the temples."
+    },
+    {
+      "name": "Citizen Soldier",
+      "stats": "High STR, CON",
+      "career": "Warrior",
+      "style": "Citizen Legionary",
+      "tip": "Formation fighter defending the city-states. Spear, shield, and discipline."
+    },
+    {
+      "name": "Temple Scholar",
+      "stats": "High INT, CHA",
+      "career": "Scholar",
+      "style": "City-State Phalangite",
+      "tip": "Esrolian intellectual. Knows more about Glorantha than most."
+    }
   ],
   "Balazaring": [
-    { name: "Hawk Hunter", stats: "High DEX, CON", career: "Hunter", style: "Hawk Slayer", tip: "Hunts with trained hawks in the wild hills. Expert with longspear." },
-    { name: "Clan Raider", stats: "High STR, DEX", career: "Warrior", style: "Hunter Raider", tip: "Fast and vicious. Raids neighbouring clans for cattle and glory." }
+    {
+      "name": "Hawk Hunter",
+      "stats": "High DEX, CON",
+      "career": "Hunter",
+      "style": "Hawk Slayer",
+      "tip": "Hunts with trained hawks in the wild hills. Expert with longspear."
+    },
+    {
+      "name": "Clan Raider",
+      "stats": "High STR, DEX",
+      "career": "Warrior",
+      "style": "Hunter Raider",
+      "tip": "Fast and vicious. Raids neighbouring clans for cattle and glory."
+    }
   ],
   "Telmori Hsunchen": [
-    { name: "Wolf Pack Alpha", stats: "High STR, POW", career: "Warrior", style: "Wolf Hunter", tip: "Fights alongside wolves. Can shapeshift during the full moon." },
-    { name: "Wolfbrother Shaman", stats: "High POW, INT", career: "Shaman", style: "Telmori Hunter", tip: "Speaks to wolf spirits and the spirit of Telmor." }
+    {
+      "name": "Wolf Pack Alpha",
+      "stats": "High STR, POW",
+      "career": "Warrior",
+      "style": "Wolf Hunter",
+      "tip": "Fights alongside wolves. Can shapeshift during the full moon."
+    },
+    {
+      "name": "Wolfbrother Shaman",
+      "stats": "High POW, INT",
+      "career": "Shaman",
+      "style": "Telmori Hunter",
+      "tip": "Speaks to wolf spirits and the spirit of Telmor."
+    }
+  ],
+  "God Forgot": [
+    {
+      "name": "Holar Militia Guard",
+      "stats": "High STR, CON",
+      "career": "Warrior",
+      "style": "Holar Militia",
+      "tip": "Caste soldier defending the island with shield wall discipline and practical folk magic."
+    },
+    {
+      "name": "Zzistori Sorcerer",
+      "stats": "High INT, POW",
+      "career": "Sorcerer",
+      "style": "Talar Defensive School",
+      "tip": "Atheist wizard-caste initiate; sorcery and Law replace divine worship."
+    },
+    {
+      "name": "Talar Strategist",
+      "stats": "High INT, CHA",
+      "career": "Official",
+      "style": "Talar Defensive School",
+      "tip": "Immortal noble-caste planner relying on status, scholarship, and defensive training."
+    }
+  ],
+  "Lunar Provincial": [
+    {
+      "name": "Provincial Hoplite",
+      "stats": "High STR, CON",
+      "career": "Warrior",
+      "style": "Lunar Corps Hoplite",
+      "tip": "Tarshite or provincial soldier drilled in Lunar shield-wall tactics."
+    },
+    {
+      "name": "Colonial Survivalist",
+      "stats": "High DEX, CON",
+      "career": "Scout",
+      "style": "Colonial Survivalist",
+      "tip": "Frontier survivor who knows how to pass among locals and stay alive."
+    },
+    {
+      "name": "Seven Mothers Envoy",
+      "stats": "High CHA, INT",
+      "career": "Courtier",
+      "style": "Colonial Noble",
+      "tip": "Provincial Lunar negotiator balancing imperial loyalties and local cult ties."
+    }
   ]
+};
+
+const CULTURE_MAGIC_PROFILES = {
+  "Balazaring": {
+    "summary": "Primitive hill culture with everyday folk magic and ancestor/hunting cult access; higher magic is normally through cult or shamanic practice rather than a distinct cultural system.",
+    "citations": [
+      "AiG p.26-28",
+      "AiG p.59-62"
+    ],
+    "folkMagic": {
+      "status": "cultural",
+      "pages": [
+        "p.26-28",
+        "p.59"
+      ],
+      "notes": "Culture list includes Beastcall, Find Game, and other practical spells taught as ordinary folk magic."
+    },
+    "runeMagic": {
+      "status": "cult-mediated",
+      "pages": [
+        "p.59",
+        "p.26-28"
+      ],
+      "notes": "Rune Magic is available through cult worship, not as a separate culture package."
+    },
+    "spiritMagic": {
+      "status": "available",
+      "pages": [
+        "p.60",
+        "p.26-28"
+      ],
+      "notes": "Animist access is plausible through Daka Fal/Foundchild and local spirit practice, but not singled out as a dominant culture rule."
+    },
+    "sorcery": {
+      "status": "unusual",
+      "pages": [
+        "p.59",
+        "p.26-28"
+      ],
+      "notes": "No cultural sorcery signal in the Balazaring section."
+    },
+    "lunarMagic": {
+      "status": "absent",
+      "pages": [
+        "p.26-28"
+      ],
+      "notes": "No Lunar Magic culture signal."
+    }
+  },
+  "Esrolian": {
+    "summary": "Civilised Earth-culture society with common folk magic and strong theist cult access, especially Ernalda and related Holy Country cults.",
+    "citations": [
+      "AiG p.28-29",
+      "AiG p.59-62"
+    ],
+    "folkMagic": {
+      "status": "cultural",
+      "pages": [
+        "p.28-29",
+        "p.59"
+      ],
+      "notes": "Culture list includes Alarm, Appraise, Glamour, Heal, and other civic/temple-adjacent folk magic."
+    },
+    "runeMagic": {
+      "status": "cult-mediated",
+      "pages": [
+        "p.59",
+        "p.28-29"
+      ],
+      "notes": "Theist Rune Magic is expected through Earth and city cults."
+    },
+    "spiritMagic": {
+      "status": "available",
+      "pages": [
+        "p.60"
+      ],
+      "notes": "Spirit Magic exists in Glorantha but is not a defining Esrolian culture signal."
+    },
+    "sorcery": {
+      "status": "unusual",
+      "pages": [
+        "p.59"
+      ],
+      "notes": "No cultural sorcery signal."
+    },
+    "lunarMagic": {
+      "status": "absent",
+      "pages": [
+        "p.28-29"
+      ],
+      "notes": "No Lunar Magic culture signal."
+    }
+  },
+  "God Forgot": {
+    "summary": "Atheist/secularist Brithini-descended culture where Zzistori sorcery is the cultural higher-magic signal; gods are not worshipped and Rune Magic is unavailable.",
+    "citations": [
+      "AiG p.30-31",
+      "AiG p.59-62"
+    ],
+    "folkMagic": {
+      "status": "cultural",
+      "pages": [
+        "p.30-31",
+        "p.59"
+      ],
+      "notes": "Folk Magic is treated as diluted sorcery and remains available through the culture list."
+    },
+    "runeMagic": {
+      "status": "unavailable",
+      "pages": [
+        "p.30-31",
+        "p.59"
+      ],
+      "notes": "The culture description says gods are not worshipped and Rune Magic is unavailable."
+    },
+    "spiritMagic": {
+      "status": "discouraged",
+      "pages": [
+        "p.30-31",
+        "p.60"
+      ],
+      "notes": "Spirit Magic is viewed as pointless by the culture."
+    },
+    "sorcery": {
+      "status": "cultural",
+      "pages": [
+        "p.30-31",
+        "p.59-60"
+      ],
+      "notes": "Zzistori are the blue wizard caste; Zzistori must take Shaping as an adjunct to sorcerous skills."
+    },
+    "lunarMagic": {
+      "status": "absent",
+      "pages": [
+        "p.30-31"
+      ],
+      "notes": "No Lunar Magic culture signal."
+    }
+  },
+  "Lunar Heartland": {
+    "summary": "Civilised Lunar/Dara Happan culture with common folk magic, theist cult access, and Lunar Magic as setting context; the GenCon preview does not provide usable Lunar Magic chargen rules.",
+    "citations": [
+      "AiG p.31-34",
+      "AiG p.59-60"
+    ],
+    "folkMagic": {
+      "status": "cultural",
+      "pages": [
+        "p.31-34",
+        "p.59"
+      ],
+      "notes": "Culture list includes Avert, Firearrow, Glamour, Light, Polish, and related spells."
+    },
+    "runeMagic": {
+      "status": "cult-mediated",
+      "pages": [
+        "p.59",
+        "p.31-34"
+      ],
+      "notes": "Theist cult access is present through Lunar and Solar cults."
+    },
+    "spiritMagic": {
+      "status": "available",
+      "pages": [
+        "p.60"
+      ],
+      "notes": "Not the culture-defining higher magic."
+    },
+    "sorcery": {
+      "status": "available",
+      "pages": [
+        "p.59-60"
+      ],
+      "notes": "Possible through schools/cults, but not the primary culture signal."
+    },
+    "lunarMagic": {
+      "status": "context",
+      "pages": [
+        "p.60",
+        "p.31-34"
+      ],
+      "notes": "AiG describes Lunar Magic and Red Moon phase dependence, but the preview only points to chapter XX and lacks full Lunar Magic rules."
+    }
+  },
+  "Lunar Provincial": {
+    "summary": "Civilised provincial Lunar/Tarshite culture with common folk magic, Seven Mothers access, local god recognition, and Lunar Magic as unsupported preview context.",
+    "citations": [
+      "AiG p.34-37",
+      "AiG p.59-60"
+    ],
+    "folkMagic": {
+      "status": "cultural",
+      "pages": [
+        "p.34-37",
+        "p.59"
+      ],
+      "notes": "Culture list includes Alarm, Appraise, Cleanse, Find Safe Shelter, Incognito, Preserve, and related spells."
+    },
+    "runeMagic": {
+      "status": "cult-mediated",
+      "pages": [
+        "p.59",
+        "p.34-37"
+      ],
+      "notes": "Seven Mothers and local cult access mediate theist magic."
+    },
+    "spiritMagic": {
+      "status": "available",
+      "pages": [
+        "p.60"
+      ],
+      "notes": "Available in Glorantha but not the defining provincial Lunar signal."
+    },
+    "sorcery": {
+      "status": "available",
+      "pages": [
+        "p.59-60"
+      ],
+      "notes": "Possible through schools/cults, but not the primary culture signal."
+    },
+    "lunarMagic": {
+      "status": "context",
+      "pages": [
+        "p.60",
+        "p.34-37"
+      ],
+      "notes": "The culture has Lunar setting context, but the preview lacks full Lunar Magic rules."
+    }
+  },
+  "Praxian": {
+    "summary": "Nomad beast-rider culture with strong animist/spirit-magic signal alongside folk magic and cult Rune Magic through Waha, Eiritha, Daka Fal, Storm Bull, and others.",
+    "citations": [
+      "AiG p.34-36",
+      "AiG p.60",
+      "AiG p.136-137"
+    ],
+    "folkMagic": {
+      "status": "cultural",
+      "pages": [
+        "p.34-36",
+        "p.59"
+      ],
+      "notes": "Culture list includes Beastcall (Tribal Beast), Deflect, Fanaticism, Find Water/Food/Shelter, and related survival magic."
+    },
+    "runeMagic": {
+      "status": "cult-mediated",
+      "pages": [
+        "p.59",
+        "p.34-36"
+      ],
+      "notes": "Rune Magic is available through Praxian cults."
+    },
+    "spiritMagic": {
+      "status": "cultural",
+      "pages": [
+        "p.34-36",
+        "p.60",
+        "p.136-137"
+      ],
+      "notes": "Praxian cult/tradition access and beast-rider culture strongly support animism and Spirit Magic."
+    },
+    "sorcery": {
+      "status": "unusual",
+      "pages": [
+        "p.59"
+      ],
+      "notes": "No cultural sorcery signal."
+    },
+    "lunarMagic": {
+      "status": "absent",
+      "pages": [
+        "p.34-36"
+      ],
+      "notes": "No Lunar Magic culture signal."
+    }
+  },
+  "Sartarite (Heortling)": {
+    "summary": "Barbarian Orlanthi culture with common folk magic and strong cult-mediated Rune Magic through Orlanth, Ernalda, Humakt, and related gods.",
+    "citations": [
+      "AiG p.37-39",
+      "AiG p.59-62"
+    ],
+    "folkMagic": {
+      "status": "cultural",
+      "pages": [
+        "p.37-39",
+        "p.59"
+      ],
+      "notes": "Culture list includes Beastcall, Coordination, Fanaticism, Find Herd Animal, Mindspeech, Mobility, Pet, and Protection."
+    },
+    "runeMagic": {
+      "status": "cult-mediated",
+      "pages": [
+        "p.59",
+        "p.37-39"
+      ],
+      "notes": "Theist Rune Magic through Orlanthi and allied cults is the main higher-magic signal."
+    },
+    "spiritMagic": {
+      "status": "available",
+      "pages": [
+        "p.60"
+      ],
+      "notes": "Available through traditions/cults but not the primary culture signal."
+    },
+    "sorcery": {
+      "status": "unusual",
+      "pages": [
+        "p.59"
+      ],
+      "notes": "No cultural sorcery signal."
+    },
+    "lunarMagic": {
+      "status": "opposed-context",
+      "pages": [
+        "p.37-39",
+        "p.60"
+      ],
+      "notes": "Lunar Magic exists in the setting but is culturally opposed by many Sartarites."
+    }
+  },
+  "Telmori Hsunchen": {
+    "summary": "Primitive Hsunchen wolf people with folk magic and a strong Korgatsu/Telmor animist spirit-magic signal.",
+    "citations": [
+      "AiG p.39-41",
+      "AiG p.60",
+      "AiG p.136-137"
+    ],
+    "folkMagic": {
+      "status": "cultural",
+      "pages": [
+        "p.39-41",
+        "p.59"
+      ],
+      "notes": "Culture list includes Beastcall (Wolf), Find Prey, Find Food, Heat, Pathway, Pierce, and related wolf survival magic."
+    },
+    "runeMagic": {
+      "status": "cult-mediated",
+      "pages": [
+        "p.59",
+        "p.39-41"
+      ],
+      "notes": "Cult-mediated magic exists through Telmor and related worship."
+    },
+    "spiritMagic": {
+      "status": "cultural",
+      "pages": [
+        "p.39-41",
+        "p.60",
+        "p.136-137"
+      ],
+      "notes": "The culture has explicit wolf/Hsunchen spirit and Korgatsu-style animist signals."
+    },
+    "sorcery": {
+      "status": "unusual",
+      "pages": [
+        "p.59"
+      ],
+      "notes": "No cultural sorcery signal."
+    },
+    "lunarMagic": {
+      "status": "absent",
+      "pages": [
+        "p.39-41"
+      ],
+      "notes": "No Lunar Magic culture signal."
+    }
+  }
 };
 
 // =============================================================================
@@ -3660,13 +6382,15 @@ App.selectCombatStyle = function(styleName) {
   const style = culture.combatStyles.find(cs => cs.name === styleName);
   if (!style) return;
   const baseSkill = (CharacterData.characteristics.STR || 0) + (CharacterData.characteristics.DEX || 0);
-  CharacterData.combatStyles = [{
-    name: style.name,
-    weapons: style.weapons || [],
-    traits: style.traits || [],
-    skill: baseSkill,
-    notes: style.notes || ''
-  }];
+	  CharacterData.combatStyles = [{
+	    id: style.id,
+	    name: style.name,
+	    weapons: style.weapons || [],
+	    traits: style.traits || [],
+	    skill: baseSkill,
+	    notes: style.notes || '',
+	    citation: style.citation
+	  }];
   CharacterData._pendingCombatStyleSelection = false;
   this.saveToLocalStorage();
 };
@@ -3776,9 +6500,38 @@ App.renderCultureDetails = function() {
       
       <h4>Folk Magic Options</h4>
       <p>${culture.folkMagic.join(', ')}</p>
+      ${this.renderCultureMagicProfile(culture.name)}
     </div>
 
     ${this.renderCultureBuilds(culture.name)}
+  `;
+};
+
+App.renderCultureMagicProfile = function(cultureName) {
+  const profile = CULTURE_MAGIC_PROFILES[cultureName];
+  if (!profile) return '';
+
+  const magicRows = [
+    ['Folk Magic', profile.folkMagic],
+    ['Rune Magic', profile.runeMagic],
+    ['Spirit Magic', profile.spiritMagic],
+    ['Sorcery', profile.sorcery],
+    ['Lunar Magic', profile.lunarMagic]
+  ].filter(([, entry]) => entry);
+
+  return `
+      <h4>Culture Magic Fit</h4>
+      <p>${this.escapeHtml(profile.summary)}</p>
+      <div style="display: grid; gap: 6px; margin-top: 8px;">
+        ${magicRows.map(([label, entry]) => `
+          <div style="border-left: 3px solid #666; padding-left: 8px;">
+            <strong>${label}:</strong> ${this.escapeHtml(entry.status)}
+            <span class="page-ref">(${entry.pages.join(', ')})</span><br>
+            <span style="color: #555;">${this.escapeHtml(entry.notes)}</span>
+          </div>
+        `).join('')}
+      </div>
+      <p class="page-ref" style="margin-top: 8px;">Culture magic profile citations: ${profile.citations.join('; ')}</p>
   `;
 };
 

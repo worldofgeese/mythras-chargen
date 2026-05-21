@@ -192,7 +192,9 @@ function loadApp() {
         Calc,
         App: typeof App !== 'undefined' ? App : null,
         CULTURES_DATA,
+        COMBAT_STYLES_DATA: typeof COMBAT_STYLES_DATA !== 'undefined' ? COMBAT_STYLES_DATA : null,
         CULTURE_BUILDS: typeof CULTURE_BUILDS !== 'undefined' ? CULTURE_BUILDS : null,
+        CULTURE_MAGIC_PROFILES: typeof CULTURE_MAGIC_PROFILES !== 'undefined' ? CULTURE_MAGIC_PROFILES : null,
         WEAPONS_DATA,
         WEAPON_ALIASES: typeof WEAPON_ALIASES !== 'undefined' ? WEAPON_ALIASES : null,
         DATA_INDEXES: typeof DATA_INDEXES !== 'undefined' ? DATA_INDEXES : null,
@@ -4575,6 +4577,108 @@ section('Cult Data Tests');
   }
 }
 
+// Test: culture magic profile reference matches inline app data
+{
+  const refPath = path.join(__dirname, 'references', 'aig-raw', 'culture-magic-profiles-aig.json');
+  const ref = JSON.parse(fs.readFileSync(refPath, 'utf8'));
+  const refProfiles = ref.profiles || {};
+  const inlineProfiles = App.CULTURE_MAGIC_PROFILES || {};
+  const missing = Object.keys(inlineProfiles).filter(k => !refProfiles[k]);
+  const extra = Object.keys(refProfiles).filter(k => !inlineProfiles[k]);
+  const diffs = Object.keys(inlineProfiles).filter(k => refProfiles[k] && JSON.stringify(refProfiles[k]) !== JSON.stringify(inlineProfiles[k]));
+
+  if (missing.length === 0 && extra.length === 0 && diffs.length === 0 &&
+      ref.page &&
+      ref.validation_method) {
+    pass('culture magic profile reference matches inline app data');
+  } else {
+    fail('culture magic profile reference is out of sync with inline data',
+      JSON.stringify({ missing, extra, diffs, hasPage: Boolean(ref.page), hasValidationMethod: Boolean(ref.validation_method) }));
+  }
+}
+
+// Test: CSE combat-style authority matches inline culture combat styles
+{
+  const refPath = path.join(__dirname, 'references', 'combat-styles.json');
+  const legacyPath = path.join(__dirname, 'references', 'aig-raw', 'combat-styles-aig.json');
+  const culturesPath = path.join(__dirname, 'references', 'aig-raw', 'cultures.json');
+  const equipmentPath = path.join(__dirname, 'references', 'aig-raw', 'equipment-aig.json');
+  const ref = JSON.parse(fs.readFileSync(refPath, 'utf8'));
+  const legacy = JSON.parse(fs.readFileSync(legacyPath, 'utf8'));
+  const culturesRef = JSON.parse(fs.readFileSync(culturesPath, 'utf8'));
+  const equipmentRef = JSON.parse(fs.readFileSync(equipmentPath, 'utf8'));
+  const grouped = {};
+  (ref.styles || []).forEach(style => {
+    (grouped[style.culture] ||= []).push({
+      id: style.id,
+      name: style.name,
+      weapons: style.weapons,
+      traits: style.traits,
+      ...(style.restrictions ? { restrictions: style.restrictions } : {}),
+      ...(style.notes ? { notes: style.notes } : {}),
+      citation: style.citation
+    });
+  });
+  const groupedIds = Object.fromEntries(Object.entries(grouped).map(([culture, styles]) => [culture, styles.map(style => style.id)]));
+  const inlineGrouped = Object.fromEntries((App.CULTURES_DATA || []).map(culture => [culture.name, culture.combatStyles || []]));
+  const inlineIds = Object.fromEntries((App.CULTURES_DATA || []).map(culture => [culture.name, culture.combatStyleIds || []]));
+  const refCultureIds = Object.fromEntries((culturesRef.cultures || []).map(culture => [culture.name, culture.combat_style_ids || []]));
+  const equipmentCultureIds = Object.fromEntries(Object.entries(equipmentRef.combat_styles_by_culture || {}).map(([culture, entry]) => [culture, entry.combat_style_ids || []]));
+  const missing = Object.keys(inlineGrouped).filter(culture => !grouped[culture]);
+  const extra = Object.keys(grouped).filter(culture => !inlineGrouped[culture]);
+  const diffs = Object.keys(inlineGrouped).filter(culture => grouped[culture] && JSON.stringify(grouped[culture]) !== JSON.stringify(inlineGrouped[culture]));
+  const idDiffs = Object.keys(groupedIds).filter(culture =>
+    JSON.stringify(groupedIds[culture]) !== JSON.stringify(inlineIds[culture]) ||
+    JSON.stringify(groupedIds[culture]) !== JSON.stringify(refCultureIds[culture]) ||
+    JSON.stringify(groupedIds[culture]) !== JSON.stringify(equipmentCultureIds[culture])
+  );
+  const competingAiGPayloads = [
+    ...(culturesRef.cultures || []).filter(culture => culture.combat_styles).map(culture => `cultures:${culture.name}`),
+    ...Object.entries(equipmentRef.combat_styles_by_culture || {}).filter(([, entry]) => entry.styles || entry.styles_by_tribe).map(([culture]) => `equipment:${culture}`)
+  ];
+
+  if (ref.authority?.source === 'Combat Styles Encyclopedia' &&
+      JSON.stringify(App.COMBAT_STYLES_DATA) === JSON.stringify(ref) &&
+      legacy.status === 'superseded-incomplete' &&
+      legacy.do_not_use_for_app_generation === true &&
+      missing.length === 0 &&
+      extra.length === 0 &&
+      diffs.length === 0 &&
+      idDiffs.length === 0 &&
+      competingAiGPayloads.length === 0) {
+    pass('CSE combat-style authority matches inline culture combat styles');
+  } else {
+    fail('CSE combat-style authority is out of sync with inline data',
+      JSON.stringify({
+        source: ref.authority?.source,
+        inlineAuthorityMatch: JSON.stringify(App.COMBAT_STYLES_DATA) === JSON.stringify(ref),
+        legacyStatus: legacy.status,
+        legacyDoNotUse: legacy.do_not_use_for_app_generation,
+        missing,
+        extra,
+        diffs,
+        idDiffs,
+        competingAiGPayloads
+      }));
+  }
+}
+
+// Test: all canonical CSE combat-style weapons resolve in app weapon data
+{
+  const refPath = path.join(__dirname, 'references', 'combat-styles.json');
+  const ref = JSON.parse(fs.readFileSync(refPath, 'utf8'));
+  const weapons = new Set((App.WEAPONS_DATA || []).map(weapon => weapon.name));
+  const aliases = App.WEAPON_ALIASES || {};
+  const unresolved = [...new Set((ref.styles || []).flatMap(style => style.weapons || []))]
+    .filter(weapon => !weapons.has(weapon) && !aliases[weapon]);
+
+  if (unresolved.length === 0) {
+    pass('All canonical CSE combat-style weapons resolve in app weapon data');
+  } else {
+    fail('Canonical CSE combat-style weapons are unresolved', unresolved.join(', '));
+  }
+}
+
 // Test: miracle reference data matches inline app data
 {
   const refPath = path.join(__dirname, 'references', 'theism-miracles.json');
@@ -5345,6 +5449,23 @@ section('Step 9 Initiation Gate');
   const { CULTURE_BUILDS: CultureBuilds, CULTURES_DATA: CulturesData } = loadApp();
 
   if (CultureBuilds && CulturesData) {
+    const missingCultures = CulturesData
+      .map(culture => culture.name)
+      .filter(cultureName => !Array.isArray(CultureBuilds[cultureName]) || CultureBuilds[cultureName].length === 0);
+    if (missingCultures.length === 0) {
+      pass('All cultures have Step 4 suggested builds');
+    } else {
+      fail('Step 4 suggested builds missing cultures', missingCultures.join(', '));
+    }
+  } else {
+    fail('Suggested build data not available to tests');
+  }
+}
+
+{
+  const { CULTURE_BUILDS: CultureBuilds, CULTURES_DATA: CulturesData } = loadApp();
+
+  if (CultureBuilds && CulturesData) {
     const missing = [];
     Object.entries(CultureBuilds).forEach(([cultureName, builds]) => {
       const culture = CulturesData.find(c => c.name === cultureName);
@@ -5363,6 +5484,64 @@ section('Step 9 Initiation Gate');
     }
   } else {
     fail('Suggested build data not available to tests');
+  }
+}
+
+{
+  const { CULTURE_MAGIC_PROFILES: Profiles, CULTURES_DATA: CulturesData } = loadApp();
+
+  if (Profiles && CulturesData) {
+    const missingCultures = CulturesData
+      .map(culture => culture.name)
+      .filter(cultureName => !Profiles[cultureName]);
+    const malformed = Object.entries(Profiles)
+      .filter(([cultureName, profile]) => {
+        const hasKnownSignal = ['folkMagic', 'runeMagic', 'spiritMagic', 'sorcery', 'lunarMagic']
+          .some(key => profile[key] && typeof profile[key].status === 'string' && Array.isArray(profile[key].pages));
+        return !CulturesData.some(culture => culture.name === cultureName) ||
+          !Array.isArray(profile.citations) ||
+          profile.citations.length === 0 ||
+          !hasKnownSignal;
+      })
+      .map(([cultureName]) => cultureName);
+
+    if (missingCultures.length === 0 && malformed.length === 0) {
+      pass('Culture magic profiles cover every culture with cited magic-system signals');
+    } else {
+      fail('Culture magic profiles are missing or malformed',
+        JSON.stringify({ missingCultures, malformed }));
+    }
+  } else {
+    fail('Culture magic profiles not available to tests');
+  }
+}
+
+{
+  const { CULTURE_MAGIC_PROFILES: Profiles } = loadApp();
+  const godForgot = Profiles?.['God Forgot'];
+  const praxian = Profiles?.Praxian;
+  const telmori = Profiles?.['Telmori Hsunchen'];
+  const lunarProvincial = Profiles?.['Lunar Provincial'];
+  const lunarHeartland = Profiles?.['Lunar Heartland'];
+  const failures = [];
+
+  if (godForgot?.sorcery?.status !== 'cultural' || godForgot?.runeMagic?.status !== 'unavailable') {
+    failures.push('God Forgot sorcery/rune magic signal');
+  }
+  if (praxian?.spiritMagic?.status !== 'cultural') {
+    failures.push('Praxian animism/spirit magic signal');
+  }
+  if (telmori?.spiritMagic?.status !== 'cultural') {
+    failures.push('Telmori animism/spirit magic signal');
+  }
+  if (lunarProvincial?.lunarMagic?.status !== 'context' || lunarHeartland?.lunarMagic?.status !== 'context') {
+    failures.push('Lunar Magic preview caveat signal');
+  }
+
+  if (failures.length === 0) {
+    pass('Culture magic profiles preserve key AiG cultural magic signals');
+  } else {
+    fail('Culture magic profiles missing key AiG signals', failures.join('; '));
   }
 }
 
@@ -5386,8 +5565,10 @@ section('Step 9 Initiation Gate');
     const selected = CD._pendingCombatStyleSelection === false &&
       CD.career === 'Warrior' &&
       CD.combatStyles.length === 1 &&
+      CD.combatStyles[0].id === 'cse:sartarite-heortling:loyal-housecarl' &&
       CD.combatStyles[0].name === 'Loyal Housecarl' &&
-      CD.combatStyles[0].weapons.includes('Broadsword');
+      CD.combatStyles[0].weapons.includes('Broadsword') &&
+      CD.combatStyles[0].citation?.source === 'Combat Styles Encyclopedia';
 
     if (autoStyleBefore === 'Hill Clan Levy' && selected) {
       pass('Applying a Step 4 suggested build sets its valid combat style without stale state');
