@@ -4029,6 +4029,35 @@ function getSecondaryPlaceholderFor(skillName) {
   return null;
 }
 
+function getPrimarySecondaryPlaceholderGroup(skillName) {
+  const parsed = parsePlaceholderSkill(skillName);
+  if (!parsed) return null;
+  const match = parsed.hint.trim().toLowerCase().match(/^(primary|secondary)(?:\s+(.+))?$/);
+  if (!match) return null;
+  return {
+    key: `${parsed.category.toLowerCase()}:${(match[2] || '').trim()}`,
+    role: match[1]
+  };
+}
+
+function getProfessionalSkillPickerOptions(professionalSkills) {
+  const skills = Array.isArray(professionalSkills) ? professionalSkills : [];
+  const primaryGroups = new Set(skills
+    .map(getPrimarySecondaryPlaceholderGroup)
+    .filter(group => group && group.role === 'primary')
+    .map(group => group.key));
+  const seenGroups = new Set();
+
+  return skills.filter(skill => {
+    const group = getPrimarySecondaryPlaceholderGroup(skill);
+    if (!group) return true;
+    if (group.role === 'secondary' && primaryGroups.has(group.key)) return false;
+    if (seenGroups.has(group.key)) return false;
+    seenGroups.add(group.key);
+    return true;
+  });
+}
+
 function isProfessionalSkillSelected(skillName) {
   const selected = CharacterData.selectedProfessionalSkills || [];
   if (selected.includes(skillName)) return true;
@@ -11017,7 +11046,7 @@ App.renderCareerDetails = function() {
       ${career.professionalSkills && career.professionalSkills.length > 0 ? `
         <h4 style="margin-top: 15px;">Professional Skills (choose 3)</h4>
         <div id="professional-skills-picker" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 8px; margin-top: 8px;">
-          ${career.professionalSkills.map(skill => {
+          ${getProfessionalSkillPickerOptions(career.professionalSkills).map(skill => {
             const needsSpec = needsDisambiguation(skill);
             const requiredPrimary = getPrimaryPlaceholderFor(skill);
             const isDisabled = Boolean(requiredPrimary && !isProfessionalSkillSelected(requiredPrimary));

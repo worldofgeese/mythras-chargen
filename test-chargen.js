@@ -937,78 +937,65 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
   }
 }
 
-// Test 1.12b: Secondary placeholder skills require their Primary counterpart
+// Test 1.12b: Professional skill picker deduplicates Primary/Secondary placeholders
 {
   const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
-  if (AppObj && AppObj.renderCareerDetails && AppObj.toggleProfessionalSkill && CD) {
+  if (AppObj && AppObj.renderCareerDetails && AppObj.toggleProfessionalSkill && AppObj.resolveProfessionalSkill && CD) {
     CD.culture = 'Balazaring';
     CD.career = 'Scholar';
     CD.selectedProfessionalSkills = [];
     CD.careerSkills = {};
+    CD._disambiguationMap = {};
     _sandbox.alert = () => {};
 
-    const initialHtml = AppObj.renderCareerDetails();
-    const secondaryDisabled = /data-skill="Lore \(Secondary\)"[\s\S]*?disabled/.test(initialHtml);
-    const rejected = AppObj.toggleProfessionalSkill('Lore (Secondary)', true) === false;
-    const keptOut = !CD.selectedProfessionalSkills.includes('Lore (Secondary)');
-
+    const html = AppObj.renderCareerDetails();
+    const primaryMatches = html.match(/data-skill="Lore \(Primary\)"/g) || [];
+    const secondaryPresent = html.includes('data-skill="Lore (Secondary)"');
     AppObj.toggleProfessionalSkill('Lore (Primary)', true);
-    AppObj.resolveProfessionalSkill('Lore (Primary)', 'Monkeys');
-    const afterPrimaryHtml = AppObj.renderCareerDetails();
-    const secondaryEnabled = /data-skill="Lore \(Secondary\)"[\s\S]*?disabled/.test(afterPrimaryHtml) === false;
+    AppObj.resolveProfessionalSkill('Lore (Primary)', 'Wolves');
+    const specializationPreserved = CD.selectedProfessionalSkills.includes('Lore (Wolves)') &&
+      Object.prototype.hasOwnProperty.call(CD.careerSkills, 'Lore (Wolves)') &&
+      CD._disambiguationMap['career:Lore (Primary)'] === 'Lore (Wolves)';
 
-    AppObj.toggleProfessionalSkill('Lore (Secondary)', true);
-    AppObj.resolveProfessionalSkill('Lore (Secondary)', 'Local Legends');
-    AppObj.toggleProfessionalSkill('Lore (Primary)', false);
-    const secondaryRemovedAfterPrimary = !CD.selectedProfessionalSkills.includes('Lore (Local Legends)') &&
-      !CD.selectedProfessionalSkills.includes('Lore (Secondary)') &&
-      !Object.prototype.hasOwnProperty.call(CD.careerSkills, 'Lore (Local Legends)');
-
-    if (secondaryDisabled && rejected && keptOut && secondaryEnabled && secondaryRemovedAfterPrimary) {
-      pass('Secondary placeholder skills require Primary before selection');
+    if (primaryMatches.length === 1 && !secondaryPresent && specializationPreserved) {
+      pass('Professional skill picker deduplicates Lore Primary/Secondary and preserves specialization');
     } else {
-      fail('Secondary placeholder skills can be selected without Primary',
-        JSON.stringify({ secondaryDisabled, rejected, keptOut, secondaryEnabled, secondaryRemovedAfterPrimary, selected: CD.selectedProfessionalSkills }));
+      fail('Professional skill picker shows duplicate Lore Primary/Secondary options',
+        JSON.stringify({ primaryCount: primaryMatches.length, secondaryPresent, specializationPreserved, selected: CD.selectedProfessionalSkills, careerSkills: CD.careerSkills }));
     }
   } else {
-    fail('Professional skill picker unavailable for Primary/Secondary dependency test');
+    fail('Professional skill picker unavailable for Primary/Secondary dedupe test');
   }
 }
 
-// Test 1.12c: Secondary Catch placeholder skills require Primary Catch
+// Test 1.12c: Professional skill picker deduplicates Primary/Secondary Catch placeholders
 {
   const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
-  if (AppObj && AppObj.renderCareerDetails && AppObj.toggleProfessionalSkill && CD) {
+  if (AppObj && AppObj.renderCareerDetails && AppObj.toggleProfessionalSkill && AppObj.resolveProfessionalSkill && CD) {
     CD.culture = 'Balazaring';
     CD.career = 'Fisher';
     CD.selectedProfessionalSkills = [];
     CD.careerSkills = {};
+    CD._disambiguationMap = {};
     _sandbox.alert = () => {};
 
-    const initialHtml = AppObj.renderCareerDetails();
-    const secondaryCatchDisabled = /data-skill="Lore \(Secondary Catch\)"[\s\S]*?disabled/.test(initialHtml);
-    const rejected = AppObj.toggleProfessionalSkill('Lore (Secondary Catch)', true) === false;
-
+    const html = AppObj.renderCareerDetails();
+    const primaryCatchMatches = html.match(/data-skill="Lore \(Primary Catch\)"/g) || [];
+    const secondaryCatchPresent = html.includes('data-skill="Lore (Secondary Catch)"');
     AppObj.toggleProfessionalSkill('Lore (Primary Catch)', true);
     AppObj.resolveProfessionalSkill('Lore (Primary Catch)', 'River Fish');
-    const afterPrimaryHtml = AppObj.renderCareerDetails();
-    const secondaryCatchEnabled = /data-skill="Lore \(Secondary Catch\)"[\s\S]*?disabled/.test(afterPrimaryHtml) === false;
-    AppObj.toggleProfessionalSkill('Lore (Secondary Catch)', true);
-    AppObj.resolveProfessionalSkill('Lore (Secondary Catch)', 'Lake Fish');
-    AppObj.toggleProfessionalSkill('Lore (Primary Catch)', false);
-    const secondaryCatchRemovedAfterPrimary = !CD.selectedProfessionalSkills.includes('Lore (Lake Fish)') &&
-      !CD.selectedProfessionalSkills.includes('Lore (Secondary Catch)') &&
-      !Object.prototype.hasOwnProperty.call(CD.careerSkills, 'Lore (Lake Fish)') &&
-      !Object.prototype.hasOwnProperty.call(CD._disambiguationMap || {}, 'career:Lore (Secondary Catch)');
+    const specializationPreserved = CD.selectedProfessionalSkills.includes('Lore (River Fish)') &&
+      Object.prototype.hasOwnProperty.call(CD.careerSkills, 'Lore (River Fish)') &&
+      CD._disambiguationMap['career:Lore (Primary Catch)'] === 'Lore (River Fish)';
 
-    if (secondaryCatchDisabled && rejected && secondaryCatchEnabled && secondaryCatchRemovedAfterPrimary) {
-      pass('Secondary Catch placeholder skills require Primary Catch before selection');
+    if (primaryCatchMatches.length === 1 && !secondaryCatchPresent && specializationPreserved) {
+      pass('Professional skill picker deduplicates Lore Primary/Secondary Catch and preserves specialization');
     } else {
-      fail('Secondary Catch placeholder skill can be selected without Primary Catch',
-        JSON.stringify({ secondaryCatchDisabled, rejected, secondaryCatchEnabled, secondaryCatchRemovedAfterPrimary, selected: CD.selectedProfessionalSkills, careerSkills: CD.careerSkills, map: CD._disambiguationMap }));
+      fail('Professional skill picker shows duplicate Lore Primary/Secondary Catch options',
+        JSON.stringify({ primaryCatchCount: primaryCatchMatches.length, secondaryCatchPresent, specializationPreserved, selected: CD.selectedProfessionalSkills, careerSkills: CD.careerSkills, map: CD._disambiguationMap }));
     }
   } else {
-    fail('Professional skill picker unavailable for Primary Catch/Secondary Catch dependency test');
+    fail('Professional skill picker unavailable for Primary/Secondary Catch dedupe test');
   }
 }
 
