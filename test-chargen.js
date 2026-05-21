@@ -206,6 +206,7 @@ function loadApp() {
         CAREERS_DATA: typeof CAREERS_DATA !== 'undefined' ? CAREERS_DATA : null,
         CULTS_DATA: typeof CULTS_DATA !== 'undefined' ? CULTS_DATA : null,
         CULTURE_CULT_MAP: typeof CULTURE_CULT_MAP !== 'undefined' ? CULTURE_CULT_MAP : null,
+        PROVENANCE_COVERAGE: typeof PROVENANCE_COVERAGE !== 'undefined' ? PROVENANCE_COVERAGE : null,
         isAnySkill: typeof isAnySkill !== 'undefined' ? isAnySkill : null,
         isPlaceholderSkill: typeof isPlaceholderSkill !== 'undefined' ? isPlaceholderSkill : null,
         needsDisambiguation: typeof needsDisambiguation !== 'undefined' ? needsDisambiguation : null,
@@ -4725,6 +4726,181 @@ section('Cult Data Tests');
         reviewedCorrectionKeys: Object.keys(reviewedCorrections),
         missingCultCitation: missingCultCitation ? missingCultCitation.name : null
       }));
+  }
+}
+
+section('Index Provenance Coverage');
+
+// Test: index.html provenance coverage mirrors committed reference JSON
+{
+  const refPath = path.join(__dirname, 'references', 'provenance', 'index-html-coverage.json');
+  const ref = JSON.parse(fs.readFileSync(refPath, 'utf8'));
+  const inline = App.PROVENANCE_COVERAGE;
+  const requiredConstants = [
+    'SKILLS_DATA',
+    'WEAPONS_DATA',
+    'EQUIPMENT_DATA',
+    'RUNES_DATA',
+    'COMBAT_STYLES_DATA',
+    'CULTURES_DATA',
+    'SOCIAL_CLASS_TABLES',
+    'CAREERS_DATA',
+    'CULTS_DATA',
+    'CULTURE_CULT_MAP',
+    'SPECIAL_EFFECTS_DATA',
+    'COMBAT_TRAITS_DATA',
+    'FOLK_MAGIC_DESCRIPTIONS',
+    'FOLK_MAGIC_SPELLS',
+    'MIRACLES_DATA',
+    'SORCERY_SPELLS',
+    'STARTING_SPIRITS',
+    'CULTURE_MAGIC_PROFILES'
+  ];
+  const coveredConstants = new Set((ref.entries || []).flatMap(entry => entry.inlineConstants || []));
+  const missingConstants = requiredConstants.filter(name => !coveredConstants.has(name));
+  const missingRefs = (ref.entries || []).flatMap(entry =>
+    (entry.references || [])
+      .map(reference => reference.path)
+      .filter(referencePath => !fs.existsSync(path.join(__dirname, referencePath)))
+      .map(referencePath => `${entry.id}:${referencePath}`)
+  );
+  const entriesWithoutCitation = (ref.entries || []).filter(entry =>
+    !(entry.references || []).every(reference => reference.citation || reference.source)
+  ).map(entry => entry.id);
+  const blockedOrUnverified = (ref.entries || []).filter(entry =>
+    ['blocked', 'unverified'].includes(entry.status) && (entry.blockers || []).length > 0
+  );
+
+  if (inline &&
+      JSON.stringify(inline) === JSON.stringify(ref) &&
+      missingConstants.length === 0 &&
+      missingRefs.length === 0 &&
+      entriesWithoutCitation.length === 0 &&
+      blockedOrUnverified.length >= 2) {
+    pass('index.html provenance coverage mirrors committed JSON and covers generated data constants');
+  } else {
+    fail('index.html provenance coverage contract is incomplete',
+      JSON.stringify({
+        inlineMatchesReference: inline ? JSON.stringify(inline) === JSON.stringify(ref) : false,
+        missingConstants,
+        missingRefs,
+        entriesWithoutCitation,
+        blockedOrUnverified: blockedOrUnverified.map(entry => entry.id)
+      }));
+  }
+}
+
+// Test: provenance coverage statuses reflect current reference verification gaps
+{
+  const coverage = App.PROVENANCE_COVERAGE || {};
+  const entriesById = Object.fromEntries((coverage.entries || []).map(entry => [entry.id, entry]));
+  const sorceryRef = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'mythras-raw', 'sorcery.json'), 'utf8'));
+  const spiritRef = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'aig-raw', 'spirit-magic-aig.json'), 'utf8'));
+  const magicPagesRef = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'mythras-raw', 'magic-page-references.json'), 'utf8'));
+  const runeMagicRef = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'aig-raw', 'rune-magic-aig.json'), 'utf8'));
+  const miraclesRef = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'theism-miracles.json'), 'utf8'));
+
+  const statusesMatch =
+    entriesById['sorcery-spells']?.status === 'verified' &&
+    sorceryRef.verified === true &&
+    entriesById['spirit-starting-options']?.status === 'unverified' &&
+    spiritRef.verified === false &&
+    magicPagesRef.verified === false &&
+    entriesById['theism-miracles']?.status === 'blocked' &&
+    runeMagicRef.verified === false &&
+    Array.isArray(miraclesRef.no_miracles_section) &&
+    miraclesRef.no_miracles_section.length > 0;
+
+  if (statusesMatch) {
+    pass('provenance coverage exposes verified, blocked, and unverified reference states');
+  } else {
+    fail('provenance coverage does not reflect current reference verification gaps',
+      JSON.stringify({
+        sorceryStatus: entriesById['sorcery-spells']?.status,
+        spiritStatus: entriesById['spirit-starting-options']?.status,
+        theismStatus: entriesById['theism-miracles']?.status,
+        sorceryVerified: sorceryRef.verified,
+        spiritVerified: spiritRef.verified,
+        magicPagesVerified: magicPagesRef.verified,
+        runeMagicVerified: runeMagicRef.verified,
+        noMiraclesSections: miraclesRef.no_miracles_section
+      }));
+  }
+}
+
+// Test: provenance UI renderer surfaces badges and blocked proof text
+{
+  const { App: AppRef, _sandbox } = loadApp();
+  if (AppRef && AppRef.renderProvenanceCoverage && AppRef.renderProvenanceBadgesForConstants) {
+    AppRef.renderProvenanceCoverage();
+    const coverageHtml = _sandbox.document.getElementById('source-coverage-content').innerHTML;
+    const badgesHtml = AppRef.renderProvenanceBadgesForConstants(['MIRACLES_DATA', 'STARTING_SPIRITS', 'SORCERY_SPELLS']);
+
+    if (coverageHtml.includes('Blocked source proof') &&
+        coverageHtml.includes('data-status=\"blocked\"') &&
+        coverageHtml.includes('data-status=\"unverified\"') &&
+        badgesHtml.includes('source-coverage-badge') &&
+        badgesHtml.includes('Theist miracle lists') &&
+        badgesHtml.includes('Starting spirit options') &&
+        badgesHtml.includes('Sorcery spells')) {
+      pass('provenance UI renderer exposes source badges and blocked/unverified coverage');
+    } else {
+      fail('provenance UI renderer did not expose expected source coverage',
+        JSON.stringify({
+          hasBlockedProof: coverageHtml.includes('Blocked source proof'),
+          hasBlockedStatus: coverageHtml.includes('data-status=\"blocked\"'),
+          hasUnverifiedStatus: coverageHtml.includes('data-status=\"unverified\"'),
+          badgesHtml
+        }));
+    }
+  } else {
+    fail('provenance UI rendering helpers are missing');
+  }
+}
+
+// Test: generated Play Mode sections include provenance badges for displayed data
+{
+  const { App: AppRef, CharacterData: CD, Calc: CalcRef, MIRACLES_DATA: MiraclesData, _sandbox } = loadApp();
+  if (AppRef && AppRef.renderPlayCombat && AppRef.renderPlayMagic && AppRef.renderPlayEquipment) {
+    CD.characteristics = { STR: 12, CON: 12, SIZ: 12, DEX: 12, INT: 12, POW: 12, CHA: 12 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.culture = 'Praxian';
+    CD.combatStyles = [{ name: 'Bison', weapons: ['Lance'], traits: ['Mounted Combat'], skill: 24 }];
+    CD.weapons = [{ name: 'Lance', damage: '1d10', size: 'L', reach: 'VL', ap: 4, hp: 10 }];
+    CD.equipment = [{ name: 'Bedroll', quantity: 1, enc: 1 }];
+    CD.armor = [];
+    CD.startingMoney = 120;
+    CD.cult = 'Waha';
+    CD.miracles = [(MiraclesData.cults.Waha?.miracles || [])[0]?.name || 'Dismiss Magic'];
+    CD.boundSpiritSlots = 6;
+    CD.boundSpirits = [{ name: 'Nature Spirit — Camouflage (Int 2)' }];
+    CD.folkMagicSpells = ['Alarm'];
+    CD.careerFolkMagic = [];
+    CD.runeAffinities = { primary: 'Beast', secondary: 'Air', tertiary: 'Man' };
+
+    AppRef.renderPlayCombat();
+    AppRef.renderPlayMagic();
+    AppRef.renderPlayEquipment();
+
+    const combatHtml = _sandbox.document.getElementById('play-combat').innerHTML;
+    const magicHtml = _sandbox.document.getElementById('play-magic').innerHTML;
+    const equipmentHtml = _sandbox.document.getElementById('play-equipment').innerHTML;
+    const hasCombatBadges = combatHtml.includes('Cultures, homelands, and combat styles: verified') &&
+      combatHtml.includes('Weapons, prices, equipment, and starting kit: attested');
+    const hasMagicBadges = magicHtml.includes('Theist miracle lists and rune access: blocked') &&
+      magicHtml.includes('Starting spirit options and animist guidance: unverified') &&
+      magicHtml.includes('Folk Magic spell names and descriptions: attested');
+    const hasEquipmentBadges = equipmentHtml.includes('Weapons, prices, equipment, and starting kit: attested') &&
+      equipmentHtml.includes('Social class and starting money tables: partial');
+
+    if (hasCombatBadges && hasMagicBadges && hasEquipmentBadges) {
+      pass('Play Mode generated data sections include provenance status badges');
+    } else {
+      fail('Play Mode generated data sections are missing provenance status badges',
+        JSON.stringify({ hasCombatBadges, hasMagicBadges, hasEquipmentBadges }));
+    }
+  } else {
+    fail('Play Mode provenance badge render dependencies are missing');
   }
 }
 
