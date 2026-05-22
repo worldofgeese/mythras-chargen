@@ -8355,25 +8355,45 @@ function getUnknownSorcerySpellNames(spells) {
   return spells.filter(spell => typeof spell !== 'string' || !knownSpells.has(spell));
 }
 
-function getInvocationSpecializations(character) {
-  const skillNames = [
-    ...(Array.isArray(character?.selectedProfessionalSkills) ? character.selectedProfessionalSkills : []),
+function getCharacterSkillNames(character) {
+  const selectedSkills = Array.isArray(character?.selectedProfessionalSkills) ? character.selectedProfessionalSkills : [];
+  const selectedSkillNames = selectedSkills.map(skill => {
+    if (!skill || typeof skill !== 'object') return skill;
+    const name = String(skill.name || '');
+    const specialization = String(skill.specialization || '').trim();
+    if (/^Invocation\b/i.test(name) && specialization) return `Invocation (${specialization})`;
+    return name;
+  });
+  return [
+    ...selectedSkillNames,
     ...Object.keys(character?.culturalSkills || {}),
     ...Object.keys(character?.careerSkills || {}),
     ...Object.keys(character?.bonusSkills || {})
   ];
+}
+
+function getInvocationSpecializations(character) {
+  const skillNames = getCharacterSkillNames(character);
   const specializations = skillNames
     .map(skillName => String(skillName || '').match(/^Invocation\s*\(([^)]+)\)$/i)?.[1]?.trim())
     .filter(Boolean);
   return [...new Set(specializations)];
 }
 
+function hasGenericInvocationSkill(character) {
+  return getCharacterSkillNames(character)
+    .some(skillName => String(skillName || '').trim().toLowerCase() === 'invocation');
+}
+
 function getSorcerySourceSchoolErrors(character, source) {
   if (!source) return [];
   const school = source.isCultBacked ? source.cultName : (source.school || source.sourceLabel);
   if (!school) return [];
-  const mismatches = getInvocationSpecializations(character)
-    .filter(specialization => specialization !== school);
+  const specializations = getInvocationSpecializations(character);
+  const mismatches = specializations.filter(specialization => specialization !== school);
+  if (!specializations.includes(school) && !hasGenericInvocationSkill(character)) {
+    return [`Invocation specialization must match ${school} for ${source.sourceLabel} (found ${mismatches.join(', ') || 'none'})`];
+  }
   return mismatches.length > 0
     ? [`Invocation specialization must match ${school} for ${source.sourceLabel} (found ${mismatches.join(', ')})`]
     : [];
@@ -16120,6 +16140,11 @@ App.agent.buildCharacter = function(spec) {
     if (!spec || typeof spec !== 'object') {
       return {success: false, errors: ['spec object is required'], failedStep: null};
     }
+    if (!CharacterData.applyPlainObject({characteristics: {STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 10, POW: 10, CHA: 10}})) {
+      return {success: false, errors: ['Unable to reset character state'], failedStep: null};
+    }
+    App.mode = 'wizard';
+    App.currentStep = 1;
     // Iterate steps 1 through 12
     for (let step = 1; step <= 12; step++) {
       const stepKey = `step${step}`;

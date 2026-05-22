@@ -65,7 +65,13 @@ function assert(condition, msg) {
 }
 
 function reload() {
-  execSync('agent-browser open http://127.0.0.1:8765/index.html', {
+  try {
+    execSync('agent-browser eval "localStorage.clear(); sessionStorage.clear();"', {
+      encoding: 'utf8',
+      timeout: 5000
+    });
+  } catch (e) { /* page may not be open yet */ }
+  execSync(`agent-browser open http://127.0.0.1:8765/index.html?t=${Date.now()}`, {
     encoding: 'utf8',
     timeout: 15000
   });
@@ -268,6 +274,45 @@ assert(ae3bWrongCultSchool.success === false &&
   ae3bWrongCultSchool.failedStep === 9 &&
   ae3bWrongCultSchool.errors.some(error => /Invocation specialization/i.test(error) && /Arkat/.test(error)),
   'AE3b invalid: buildCharacter rejects Zzistori Invocation for Arkat cult');
+
+const ae3bMissingInvocationBase = {
+  step1: { name: 'Missing Invocation', concept: 'No Invocation import' },
+  step2: { characteristics: { STR: 8, CON: 10, SIZ: 10, DEX: 9, INT: 15, POW: 15, CHA: 8 } },
+  step4: { culture: 'God Forgot', homeland: 'God Forgot' },
+  step5: {
+    culturalSkills: { Athletics: 10, Endurance: 10, 'First Aid': 15, Locale: 15, Perception: 15, Willpower: 15, Influence: 10, Insight: 10 },
+    runeAffinities: { primary: 'Law', secondary: 'Truth', tertiary: 'Stasis' },
+    folkMagicSpells: ['Avert', 'Calm', 'Calculate']
+  },
+  step6: { passions: [{ type: 'Loyalty', subject: 'Zzistori School', value: 47 }, { type: 'Love', subject: 'Knowledge', value: 47 }] },
+  step7: { age: 21, gender: 'Male', family: 'Zzistori school cell' },
+  step8: { career: 'Sorcerer', professionalSkills: ['Shaping', { name: 'Lore (any)', specialization: 'Sorcery' }, 'Literacy'] },
+  step10: {
+    careerSkills: { Customs: 10, Deceit: 10, Influence: 10, Insight: 10, Locale: 10, Perception: 10, Willpower: 10, Shaping: 10, 'Lore (Sorcery)': 10, Literacy: 10 },
+    careerFolkMagic: ['Appraise', 'Befuddle']
+  },
+  step11: { bonusSkills: { Customs: 15, Deceit: 15, Influence: 15, Insight: 15, Locale: 15, Perception: 15, Willpower: 15, Shaping: 15, 'Lore (Sorcery)': 15, Literacy: 15 } },
+  step12: { socialClass: 'Freeman' }
+};
+const ae3bMissingSchool = evalPageJSON(`JSON.stringify(App.agent.buildCharacter(${JSON.stringify({
+  ...ae3bMissingInvocationBase,
+  step1: { name: 'Missing Zzistori Invocation', concept: 'No Zzistori Invocation import' },
+  step9: { cult: null, sorcerySpells: ['Holdfast'] }
+})}))`);
+assert(ae3bMissingSchool.success === false &&
+  ae3bMissingSchool.failedStep === 9 &&
+  ae3bMissingSchool.errors.some(error => /Invocation specialization/i.test(error) && /Zzistori School/.test(error)),
+  'AE3b invalid: buildCharacter rejects missing Invocation for No Cult Zzistori');
+
+const ae3bMissingCultSchool = evalPageJSON(`JSON.stringify(App.agent.buildCharacter(${JSON.stringify({
+  ...ae3bMissingInvocationBase,
+  step1: { name: 'Missing Arkat Invocation', concept: 'No Arkat Invocation import' },
+  step9: { cult: 'Arkat', sorcerySpells: ['Holdfast'] }
+})}))`);
+assert(ae3bMissingCultSchool.success === false &&
+  ae3bMissingCultSchool.failedStep === 9 &&
+  ae3bMissingCultSchool.errors.some(error => /Invocation specialization/i.test(error) && /Arkat/.test(error)),
+  'AE3b invalid: buildCharacter rejects missing Invocation for Arkat cult');
 
 // ═══════════════════════════════════════════════════════════════
 console.log('\n\x1b[36m═══ AE4: Waha (Hybrid Theist+Animist) ═══\x1b[0m\n');

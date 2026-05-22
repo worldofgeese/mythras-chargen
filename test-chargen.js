@@ -4300,6 +4300,8 @@ fixtures.forEach(fixtureInfo => {
     CD.cult = 'Arkat';
     CD.cultType = { primary: 'sorcery', types: ['sorcery'], isHybrid: false };
     CD.characteristics = { STR: 11, CON: 12, SIZ: 13, DEX: 14, INT: 15, POW: 13, CHA: 10 };
+    CD.selectedProfessionalSkills = ['Invocation (Arkat)', 'Shaping'];
+    CD.careerSkills = { 'Invocation (Arkat)': 10, Shaping: 10 };
     CD.boundSpiritSlots = 4;
     CD.boundSpirits = [{ name: 'Disease Spirit' }];
     CD.sorceryResource = 13;
@@ -4349,6 +4351,8 @@ fixtures.forEach(fixtureInfo => {
         cult: null,
         cultType: null,
         characteristics: { STR: 11, CON: 12, SIZ: 13, DEX: 14, INT: 15, POW: 13, CHA: 10 },
+        selectedProfessionalSkills: ['Invocation', 'Shaping', 'Lore (Sorcery)'],
+        careerSkills: { Invocation: 10, Shaping: 10, 'Lore (Sorcery)': 10 },
         boundSpirits: [{ name: 'Healing Spirit' }],
         sorceryResource: 0,
         sorcerySpells: ['Project (Sense)'],
@@ -4970,6 +4974,8 @@ fixtures.forEach(fixtureInfo => {
       cultType: null,
       characteristics,
       attributes: CalcRef.calculateAllAttributes(characteristics),
+      selectedProfessionalSkills: ['Invocation', 'Shaping', 'Lore (Sorcery)'],
+      careerSkills: { Invocation: 10, Shaping: 10, 'Lore (Sorcery)': 10 },
       miracles: ['Shield'],
       devotionalPool: 99,
       sorceryResource: 0,
@@ -5804,6 +5810,8 @@ section('Cult Data Tests');
       cult: null,
       cultType: null,
       characteristics: { STR: 11, CON: 12, SIZ: 13, DEX: 14, INT: 15, POW: 13, CHA: 10 },
+      selectedProfessionalSkills: ['Invocation', 'Shaping', 'Lore (Sorcery)'],
+      careerSkills: { Invocation: 10, Shaping: 10, 'Lore (Sorcery)': 10 },
       sorceryResource: 0,
       sorcerySpells: ['Project (Sense)', 'Animate (Substance)']
     };
@@ -7520,6 +7528,11 @@ section('Step 9 Initiation Gate');
     const wrongCultSchoolErrors = AppRef.getStep9ValidationErrors();
     const rejectsZzistoriUnderArkat = wrongCultSchoolErrors.some(error => /Invocation specialization/i.test(error) && /Arkat/.test(error));
 
+    CD.selectedProfessionalSkills = ['Shaping', 'Lore (Sorcery)'];
+    CD.careerSkills = { Shaping: 10, 'Lore (Sorcery)': 10 };
+    const missingCultSchoolErrors = AppRef.getStep9ValidationErrors();
+    const rejectsMissingCultSchool = missingCultSchoolErrors.some(error => /Invocation specialization/i.test(error) && /Arkat/.test(error));
+
     CD.selectedProfessionalSkills = ['Invocation (Arkat)', 'Shaping', 'Lore (Sorcery)'];
     CD.careerSkills = { 'Invocation (Arkat)': 10, Shaping: 10, 'Lore (Sorcery)': 10 };
     const correctCultSchoolErrors = AppRef.getStep9ValidationErrors();
@@ -7539,11 +7552,25 @@ section('Step 9 Initiation Gate');
     }));
     const rejectsWrongCultSchoolImport = importSuccess === false && CD.name === 'Before Wrong Cult School Import';
 
-    if (rejectsZzistoriUnderArkat && acceptsArkatInvocation && rejectsWrongCultSchoolImport) {
-      pass('Arkat source rejects stale Zzistori Invocation specializations');
+    CD.name = 'Before Missing Cult School Import';
+    const missingImportSuccess = CD.fromJSON(JSON.stringify({
+      ...createTestCharacter('God Forgot'),
+      name: 'Missing Cult School Import',
+      career: 'Sorcerer',
+      cult: 'Arkat',
+      cultType: { primary: 'sorcery', types: ['sorcery'], isHybrid: false },
+      characteristics,
+      selectedProfessionalSkills: ['Shaping', 'Lore (Sorcery)'],
+      careerSkills: { Shaping: 10, 'Lore (Sorcery)': 10 },
+      sorcerySpells: ['Holdfast']
+    }));
+    const rejectsMissingCultSchoolImport = missingImportSuccess === false && CD.name === 'Before Missing Cult School Import';
+
+    if (rejectsZzistoriUnderArkat && rejectsMissingCultSchool && acceptsArkatInvocation && rejectsWrongCultSchoolImport && rejectsMissingCultSchoolImport) {
+      pass('Arkat source rejects missing or stale Zzistori Invocation specializations');
     } else {
-      fail('Arkat source accepts stale Zzistori Invocation specialization',
-        JSON.stringify({ wrongCultSchoolErrors, correctCultSchoolErrors, importSuccess, name: CD.name }));
+      fail('Arkat source accepts missing or stale Zzistori Invocation specialization',
+        JSON.stringify({ wrongCultSchoolErrors, missingCultSchoolErrors, correctCultSchoolErrors, importSuccess, missingImportSuccess, name: CD.name }));
     }
   } else {
     fail('Arkat Invocation specialization validation dependencies not found');
@@ -7575,6 +7602,11 @@ section('Step 9 Initiation Gate');
     const correctSchoolErrors = AppRef.getStep9ValidationErrors();
     const acceptsCorrectSchool = !correctSchoolErrors.some(error => /Invocation specialization/i.test(error));
 
+    CD.selectedProfessionalSkills = ['Shaping', 'Lore (Sorcery)'];
+    CD.careerSkills = { Shaping: 10, 'Lore (Sorcery)': 10 };
+    const missingSchoolErrors = AppRef.getStep9ValidationErrors();
+    const rejectsMissingSchool = missingSchoolErrors.some(error => /Invocation specialization/i.test(error) && /Zzistori School/.test(error));
+
     CD.name = 'Before Wrong School Import';
     const importSuccess = CD.fromJSON(JSON.stringify({
       ...createTestCharacter('God Forgot'),
@@ -7589,11 +7621,25 @@ section('Step 9 Initiation Gate');
     }));
     const rejectsWrongSchoolImport = importSuccess === false && CD.name === 'Before Wrong School Import';
 
-    if (rejectsWrongSchool && acceptsCorrectSchool && rejectsWrongSchoolImport) {
-      pass('Zzistori source rejects mismatched Invocation school specializations');
+    CD.name = 'Before Missing School Import';
+    const missingImportSuccess = CD.fromJSON(JSON.stringify({
+      ...createTestCharacter('God Forgot'),
+      name: 'Missing School Import',
+      career: 'Sorcerer',
+      cult: null,
+      cultType: null,
+      characteristics,
+      selectedProfessionalSkills: ['Shaping', 'Lore (Sorcery)'],
+      careerSkills: { Shaping: 10, 'Lore (Sorcery)': 10 },
+      sorcerySpells: ['Holdfast']
+    }));
+    const rejectsMissingSchoolImport = missingImportSuccess === false && CD.name === 'Before Missing School Import';
+
+    if (rejectsWrongSchool && acceptsCorrectSchool && rejectsMissingSchool && rejectsWrongSchoolImport && rejectsMissingSchoolImport) {
+      pass('Zzistori source rejects missing or mismatched Invocation school specializations');
     } else {
-      fail('Zzistori source accepts mismatched Invocation school specialization',
-        JSON.stringify({ wrongSchoolErrors, correctSchoolErrors, importSuccess, name: CD.name }));
+      fail('Zzistori source accepts missing or mismatched Invocation school specialization',
+        JSON.stringify({ wrongSchoolErrors, correctSchoolErrors, missingSchoolErrors, importSuccess, missingImportSuccess, name: CD.name }));
     }
   } else {
     fail('Zzistori Invocation specialization validation dependencies not found');
@@ -7756,6 +7802,8 @@ section('Step 9 Initiation Gate');
     CD.career = 'Sorcerer';
     CD.cult = null;
     CD.cultType = null;
+    CD.selectedProfessionalSkills = ['Invocation', 'Shaping', 'Lore (Sorcery)'];
+    CD.careerSkills = { Invocation: 10, Shaping: 10, 'Lore (Sorcery)': 10 };
     CD.devotionalPool = 0;
     CD.boundSpiritSlots = 0;
     CD.miracles = [];
