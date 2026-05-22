@@ -1,0 +1,43 @@
+{
+  "artifact_id": "bird-in-hand-page-0047-verification-opus-2026-05-22",
+  "artifact_kind": "verification",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "bird-in-hand",
+  "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+  "pdf_page": 47,
+  "printed_page_label": "46",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/bird-in-hand/page-0047.png",
+    "image_sha256": "8a5a16a0f2975cae9a97149dee76b41dbe3d4688b4123931d9f8f09b0704834d",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "bird-in-hand-ghu-extract-gpt55-2026-05-22",
+  "verifier_prompt_id": "vision-verify-bounded-page.v1",
+  "verifier_run_id": "bird-in-hand-ghu-verify-opus-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "independence": {
+    "read_extractor_output": false,
+    "read_extractor_scratch": false,
+    "read_extractor_rationale": false
+  },
+  "agreement": "pass",
+  "verified_blocks": [
+    "bird-p47-b001"
+  ],
+  "bounded_excerpts": [
+    "Ghu, Intensity 3 Guardian Spirit",
+    "Spirit Damage: 1d10",
+    "Initiative Bonus: +10",
+    "Warding",
+    "Willpower 92%, Spectral Combat 81%"
+  ],
+  "uncertain_or_not_visible": {
+    "owner": "not_visible_on_page_47",
+    "fetish": "not_visible_on_page_47",
+    "narrative_description": "not_visible_on_page_47"
+  }
+}

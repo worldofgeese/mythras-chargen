@@ -1,0 +1,137 @@
+{
+  "artifact_id": "bird-in-hand-page-0045-extraction-gpt55-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "bird-in-hand",
+  "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+  "pdf_page": 45,
+  "printed_page_label": "44",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/bird-in-hand/page-0045.png",
+    "image_sha256": "2b7ca0cdcfbc1da09fe0d8a5f69cc7d774be3c0589bd8552289d9f7a1d024b1f",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "bird-in-hand-extract-gpt55-2026-05-22",
+  "tool_identity": "GPT-5.5 via GitHub Copilot CLI",
+  "schema_version": 1,
+  "blocks": [
+    {
+      "block_id": "bird-p45-b001",
+      "block_type": "heading",
+      "reading_order": 1,
+      "region": {
+        "x": 0.06,
+        "y": 0.05,
+        "w": 0.5,
+        "h": 0.06
+      },
+      "bounded_excerpt": "Mele's Bound Spirits",
+      "facts": {
+        "section": "Mele's Bound Spirits",
+        "owner": "Mele",
+        "owner_rank": "High Shaman"
+      }
+    },
+    {
+      "block_id": "bird-p45-b002",
+      "block_type": "stat_block",
+      "reading_order": 2,
+      "region": {
+        "x": 0.06,
+        "y": 0.12,
+        "w": 0.78,
+        "h": 0.2
+      },
+      "bounded_excerpt": "Anylil, Intensity 1 Nature Spirit ... Crimson butterfly ... Bless (Initiative, +2)",
+      "facts": {
+        "spirit": "Anylil",
+        "type": "Nature Spirit",
+        "intensity": 1,
+        "owner": "Mele",
+        "animal": "Crimson butterfly",
+        "characteristics": {
+          "INS": 9,
+          "POW": 11,
+          "CHA": 9
+        },
+        "action_points": 2,
+        "spirit_damage": "1d8",
+        "magic_points": 11,
+        "initiative_bonus": "+9",
+        "skills": {
+          "willpower": "72%",
+          "spectral_combat": "70%"
+        },
+        "abilities": [
+          "Bless (Initiative, +2)"
+        ],
+        "fetish": "Dried husk of a centipede",
+        "manifestation": "burst of vibrant red; rouge sheen and quicker reflexes"
+      },
+      "adjudications": [
+        {
+          "artifact_id": "bird-spelling-adjudication-gpt55-opus-crop-2026-05-22",
+          "field": "example_spirits.Anylil.name",
+          "observed_source_spelling": "Anylil",
+          "normalized_value": "Anylil",
+          "rejected_values": [
+            "Anyill"
+          ]
+        }
+      ]
+    },
+    {
+      "block_id": "bird-p45-b003",
+      "block_type": "paragraph",
+      "reading_order": 3,
+      "region": {
+        "x": 0.06,
+        "y": 0.35,
+        "w": 0.78,
+        "h": 0.22
+      },
+      "bounded_excerpt": "Woeyff is a gift of Oodaku, manifesting as a shadowed sprawl of eight octopoid limbs; Mele fades from view when cloaked by Woeyff.",
+      "facts": {
+        "spirit": "Woeyff",
+        "owner": "Mele",
+        "animal": "Octopoid (Oodaku gift)",
+        "manifestation": "shadowed sprawl of eight octopoid limbs; Mele fades from view when cloaked by Woeyff"
+      },
+      "adjudications": [
+        {
+          "artifact_id": "bird-spelling-adjudication-gpt55-opus-2026-05-22",
+          "field": "example_spirits.Woeyff.name",
+          "observed_source_spelling": "Woeyff",
+          "normalized_value": "Woeyff",
+          "rejected_values": [
+            "Wocyff"
+          ]
+        }
+      ]
+    }
+  ],
+  "adjudications": [
+    {
+      "artifact_id": "bird-spelling-adjudication-gpt55-opus-crop-2026-05-22",
+      "field": "example_spirits.Anylil.name",
+      "observed_source_spelling": "Anylil",
+      "normalized_value": "Anylil",
+      "rejected_values": [
+        "Anyill"
+      ]
+    },
+    {
+      "artifact_id": "bird-spelling-adjudication-gpt55-2026-05-22",
+      "field": "example_spirits.Woeyff.name",
+      "observed_source_spelling": "Woeyff",
+      "normalized_value": "Woeyff",
+      "rejected_values": [
+        "Wocyff"
+      ]
+    }
+  ]
+}

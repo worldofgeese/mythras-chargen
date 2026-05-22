@@ -1,0 +1,72 @@
+{
+  "artifact_id": "bird-in-hand-page-0043-extraction-gpt55-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "bird-in-hand",
+  "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+  "pdf_page": 43,
+  "printed_page_label": "42",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/bird-in-hand/page-0043.png",
+    "image_sha256": "6bf326835edb9bc6ca1018e95e68ec5ee0c179b3de88ef6e9e9911113f4a3a73",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "bird-in-hand-extract-gpt55-2026-05-22",
+  "tool_identity": "GPT-5.5 via GitHub Copilot CLI",
+  "schema_version": 1,
+  "blocks": [
+    {
+      "block_id": "bird-p43-b001",
+      "block_type": "heading",
+      "reading_order": 1,
+      "region": {
+        "x": 0.06,
+        "y": 0.05,
+        "w": 0.42,
+        "h": 0.06
+      },
+      "bounded_excerpt": "White Death Guard",
+      "facts": {
+        "section": "White Death Guard"
+      }
+    },
+    {
+      "block_id": "bird-p43-b002",
+      "block_type": "stat_block",
+      "reading_order": 2,
+      "region": {
+        "x": 0.06,
+        "y": 0.12,
+        "w": 0.54,
+        "h": 0.24
+      },
+      "bounded_excerpt": "Kaia, Spirit Worshipper ... Binding 69%, Trance 69% ... two bound spirits",
+      "facts": {
+        "owner": "Kaia",
+        "owner_rank": "Spirit Worshipper",
+        "binding": "69%",
+        "trance": "69%",
+        "bound_spirit_count": 2
+      }
+    },
+    {
+      "block_id": "bird-p43-b003",
+      "block_type": "paragraph",
+      "reading_order": 3,
+      "region": {
+        "x": 0.06,
+        "y": 0.39,
+        "w": 0.84,
+        "h": 0.12
+      },
+      "bounded_excerpt": "Kaia carries fetish-bound spirits and uses them as examples for spirit worshipper play.",
+      "facts": {
+        "example_context": "Kaia is the spirit-worshipper owner for Whulla and Eous."
+      }
+    }
+  ]
+}

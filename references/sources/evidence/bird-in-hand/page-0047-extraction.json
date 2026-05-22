@@ -1,0 +1,59 @@
+{
+  "artifact_id": "bird-in-hand-page-0047-extraction-gpt55-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "bird-in-hand",
+  "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+  "pdf_page": 47,
+  "printed_page_label": "46",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/bird-in-hand/page-0047.png",
+    "image_sha256": "8a5a16a0f2975cae9a97149dee76b41dbe3d4688b4123931d9f8f09b0704834d",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "bird-in-hand-ghu-extract-gpt55-2026-05-22",
+  "tool_identity": "GPT-5.5 via GitHub Copilot CLI",
+  "schema_version": 1,
+  "blocks": [
+    {
+      "block_id": "bird-p47-b001",
+      "block_type": "stat_block",
+      "reading_order": 1,
+      "region": {
+        "x": 0.06,
+        "y": 0.06,
+        "w": 0.38,
+        "h": 0.18
+      },
+      "bounded_excerpt": "Ghu, Intensity 3 Guardian Spirit ... Spirit Damage 1d10 ... Initiative Bonus +10 ... Warding ... Willpower 92%, Spectral Combat 81%",
+      "facts": {
+        "spirit": "Ghu",
+        "type": "Guardian Spirit",
+        "intensity": 3,
+        "characteristics": {
+          "INS": 9,
+          "POW": 21,
+          "CHA": 9
+        },
+        "action_points": 3,
+        "spirit_damage": "1d10",
+        "magic_points": 21,
+        "initiative_bonus": "+10",
+        "skills": {
+          "willpower": "92%",
+          "spectral_combat": "81%"
+        },
+        "abilities": [
+          "Warding (blocks spells with a Magnitude less than or equal to twice the spirit's Intensity)"
+        ]
+      }
+    }
+  ],
+  "quality_notes": [
+    "Page was added after page 46 showed Ghu narrative but no stat block."
+  ]
+}

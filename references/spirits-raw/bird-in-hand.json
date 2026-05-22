@@ -2,9 +2,16 @@
   "source": "A Bird in the Hand (The Design Mechanism, Monster Island adventure)",
   "author": "John Holmes",
   "extracted_at": "2026-05-16",
-  "verified": false,
-  "verified_at": null,
-  "verification_notes": "Legacy 2026-05-17 vision-verification note is preserved under attestation. Current work records source identity and renders target pages, but does not accept these facts as verified because bounded page/block extraction artifacts and independent verifier metadata are missing.",
+  "verified": true,
+  "verification_scope": "example_spirits_only",
+  "verified_at": "2026-05-22",
+  "verification_notes": "Targeted Bird spirit examples from PDF pages 43-47 are backed by bounded vision extraction and independent verification artifacts. Page 47 was added to verify the Ghu stat block continuation.",
+  "non_authoritative_sections": [
+    "spirit_stat_block_format",
+    "tiki_spirits",
+    "iz_unique_spirit",
+    "chargen_implications"
+  ],
   "purpose": "Demonstrates how spirits are statted, described, and used in play. Provides concrete examples of spirit stat blocks at various intensities for use as templates in chargen.",
   "spirit_stat_block_format": {
     "description": "Each spirit has a name, type, intensity, characteristics, derived skills, and abilities. Also includes a narrative description of how the spirit manifests.",
@@ -37,7 +44,7 @@
       "owner": "Kaia",
       "animal": "Wahoin rodent",
       "characteristics": {
-        "INT": 9,
+        "INS": 9,
         "POW": 11,
         "CHA": 9
       },
@@ -59,12 +66,25 @@
       "source_ref": {
         "source_id": "bird-in-hand",
         "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
-        "pdf_page": 43,
+        "pdf_page": 44,
+        "pdf_pages": [
+          44
+        ],
         "page_manifest_path": "references/sources/pages/bird-in-hand.json",
-        "coverage_state": "blocked",
-        "evidence_state": "rendered_pages_pending_independent_vision_verification",
-        "block_id": null,
-        "block_state": "rendered_no_page_block_evidence"
+        "coverage_state": "verified",
+        "evidence_state": "bounded_extraction_independent_vision_verified",
+        "block_id": "bird-p44-b002",
+        "block_ids": [
+          "bird-p44-b002",
+          "bird-p44-b003"
+        ],
+        "block_state": "verified_page_block_evidence",
+        "extraction_artifact_paths": [
+          "references/sources/evidence/bird-in-hand/page-0044-extraction.json"
+        ],
+        "verification_artifact_paths": [
+          "references/sources/evidence/bird-in-hand/page-0044-verification.json"
+        ]
       }
     },
     {
@@ -95,12 +115,25 @@
       "source_ref": {
         "source_id": "bird-in-hand",
         "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
-        "pdf_page": 43,
+        "pdf_page": 44,
+        "pdf_pages": [
+          44
+        ],
         "page_manifest_path": "references/sources/pages/bird-in-hand.json",
-        "coverage_state": "blocked",
-        "evidence_state": "rendered_pages_pending_independent_vision_verification",
-        "block_id": null,
-        "block_state": "rendered_no_page_block_evidence"
+        "coverage_state": "verified",
+        "evidence_state": "bounded_extraction_independent_vision_verified",
+        "block_id": "bird-p44-b004",
+        "block_ids": [
+          "bird-p44-b004",
+          "bird-p44-b005"
+        ],
+        "block_state": "verified_page_block_evidence",
+        "extraction_artifact_paths": [
+          "references/sources/evidence/bird-in-hand/page-0044-extraction.json"
+        ],
+        "verification_artifact_paths": [
+          "references/sources/evidence/bird-in-hand/page-0044-verification.json"
+        ]
       }
     },
     {
@@ -132,12 +165,24 @@
       "source_ref": {
         "source_id": "bird-in-hand",
         "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
-        "pdf_page": 44,
+        "pdf_page": 45,
+        "pdf_pages": [
+          45
+        ],
         "page_manifest_path": "references/sources/pages/bird-in-hand.json",
-        "coverage_state": "blocked",
-        "evidence_state": "rendered_pages_pending_independent_vision_verification",
-        "block_id": null,
-        "block_state": "rendered_no_page_block_evidence"
+        "coverage_state": "verified",
+        "evidence_state": "bounded_extraction_independent_vision_verified",
+        "block_id": "bird-p45-b002",
+        "block_ids": [
+          "bird-p45-b002"
+        ],
+        "block_state": "verified_page_block_evidence",
+        "extraction_artifact_paths": [
+          "references/sources/evidence/bird-in-hand/page-0045-extraction.json"
+        ],
+        "verification_artifact_paths": [
+          "references/sources/evidence/bird-in-hand/page-0045-verification.json"
+        ]
       }
     },
     {
@@ -168,12 +213,28 @@
       "source_ref": {
         "source_id": "bird-in-hand",
         "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
-        "pdf_page": 44,
+        "pdf_page": 45,
+        "pdf_pages": [
+          45,
+          46
+        ],
         "page_manifest_path": "references/sources/pages/bird-in-hand.json",
-        "coverage_state": "blocked",
-        "evidence_state": "rendered_pages_pending_independent_vision_verification",
-        "block_id": null,
-        "block_state": "rendered_no_page_block_evidence"
+        "coverage_state": "verified",
+        "evidence_state": "bounded_extraction_independent_vision_verified",
+        "block_id": "bird-p45-b003",
+        "block_ids": [
+          "bird-p45-b003",
+          "bird-p46-b001"
+        ],
+        "block_state": "verified_page_block_evidence",
+        "extraction_artifact_paths": [
+          "references/sources/evidence/bird-in-hand/page-0045-extraction.json",
+          "references/sources/evidence/bird-in-hand/page-0046-extraction.json"
+        ],
+        "verification_artifact_paths": [
+          "references/sources/evidence/bird-in-hand/page-0045-verification.json",
+          "references/sources/evidence/bird-in-hand/page-0046-verification.json"
+        ]
       }
     },
     {
@@ -205,12 +266,24 @@
       "source_ref": {
         "source_id": "bird-in-hand",
         "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
-        "pdf_page": 45,
+        "pdf_page": 46,
+        "pdf_pages": [
+          46
+        ],
         "page_manifest_path": "references/sources/pages/bird-in-hand.json",
-        "coverage_state": "blocked",
-        "evidence_state": "rendered_pages_pending_independent_vision_verification",
-        "block_id": null,
-        "block_state": "rendered_no_page_block_evidence"
+        "coverage_state": "verified",
+        "evidence_state": "bounded_extraction_independent_vision_verified",
+        "block_id": "bird-p46-b002",
+        "block_ids": [
+          "bird-p46-b002"
+        ],
+        "block_state": "verified_page_block_evidence",
+        "extraction_artifact_paths": [
+          "references/sources/evidence/bird-in-hand/page-0046-extraction.json"
+        ],
+        "verification_artifact_paths": [
+          "references/sources/evidence/bird-in-hand/page-0046-verification.json"
+        ]
       }
     },
     {
@@ -241,12 +314,24 @@
       "source_ref": {
         "source_id": "bird-in-hand",
         "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
-        "pdf_page": 45,
+        "pdf_page": 46,
+        "pdf_pages": [
+          46
+        ],
         "page_manifest_path": "references/sources/pages/bird-in-hand.json",
-        "coverage_state": "blocked",
-        "evidence_state": "rendered_pages_pending_independent_vision_verification",
-        "block_id": null,
-        "block_state": "rendered_no_page_block_evidence"
+        "coverage_state": "verified",
+        "evidence_state": "bounded_extraction_independent_vision_verified",
+        "block_id": "bird-p46-b003",
+        "block_ids": [
+          "bird-p46-b003"
+        ],
+        "block_state": "verified_page_block_evidence",
+        "extraction_artifact_paths": [
+          "references/sources/evidence/bird-in-hand/page-0046-extraction.json"
+        ],
+        "verification_artifact_paths": [
+          "references/sources/evidence/bird-in-hand/page-0046-verification.json"
+        ]
       }
     },
     {
@@ -277,12 +362,24 @@
       "source_ref": {
         "source_id": "bird-in-hand",
         "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
-        "pdf_page": 45,
+        "pdf_page": 46,
+        "pdf_pages": [
+          46
+        ],
         "page_manifest_path": "references/sources/pages/bird-in-hand.json",
-        "coverage_state": "blocked",
-        "evidence_state": "rendered_pages_pending_independent_vision_verification",
-        "block_id": null,
-        "block_state": "rendered_no_page_block_evidence"
+        "coverage_state": "verified",
+        "evidence_state": "bounded_extraction_independent_vision_verified",
+        "block_id": "bird-p46-b004",
+        "block_ids": [
+          "bird-p46-b004"
+        ],
+        "block_state": "verified_page_block_evidence",
+        "extraction_artifact_paths": [
+          "references/sources/evidence/bird-in-hand/page-0046-extraction.json"
+        ],
+        "verification_artifact_paths": [
+          "references/sources/evidence/bird-in-hand/page-0046-verification.json"
+        ]
       }
     },
     {
@@ -313,12 +410,24 @@
       "source_ref": {
         "source_id": "bird-in-hand",
         "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
-        "pdf_page": 45,
+        "pdf_page": 46,
+        "pdf_pages": [
+          46
+        ],
         "page_manifest_path": "references/sources/pages/bird-in-hand.json",
-        "coverage_state": "blocked",
-        "evidence_state": "rendered_pages_pending_independent_vision_verification",
-        "block_id": null,
-        "block_state": "rendered_no_page_block_evidence"
+        "coverage_state": "verified",
+        "evidence_state": "bounded_extraction_independent_vision_verified",
+        "block_id": "bird-p46-b005",
+        "block_ids": [
+          "bird-p46-b005"
+        ],
+        "block_state": "verified_page_block_evidence",
+        "extraction_artifact_paths": [
+          "references/sources/evidence/bird-in-hand/page-0046-extraction.json"
+        ],
+        "verification_artifact_paths": [
+          "references/sources/evidence/bird-in-hand/page-0046-verification.json"
+        ]
       }
     },
     {
@@ -334,13 +443,13 @@
       },
       "action_points": 3,
       "magic_points": 21,
-      "initiative_bonus": "+9",
+      "initiative_bonus": "+10",
       "skills": {
         "willpower": "92%",
-        "spectral_combat": "80%"
+        "spectral_combat": "81%"
       },
       "abilities": [
-        "Absorb Magic — any magic cast at Mele causes Ghu to visibly appear, looming over Mele, and absorbing magic into its trunk"
+        "Warding (blocks spells with a Magnitude less than or equal to twice the spirit's Intensity)"
       ],
       "fetish": "Smooth bark of a Ghua tree",
       "narrative": "The sheltering spirit of the Ghua tree. Its fetish is the smooth bark of a mighty specimen that has been revered by Mele's tribe for five generations. When manifest, Mele is cast in shadow.",
@@ -349,13 +458,30 @@
       "source_ref": {
         "source_id": "bird-in-hand",
         "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
-        "pdf_page": 45,
+        "pdf_page": 46,
+        "pdf_pages": [
+          46,
+          47
+        ],
         "page_manifest_path": "references/sources/pages/bird-in-hand.json",
-        "coverage_state": "blocked",
-        "evidence_state": "rendered_pages_pending_independent_vision_verification",
-        "block_id": null,
-        "block_state": "rendered_no_page_block_evidence"
-      }
+        "coverage_state": "verified",
+        "evidence_state": "bounded_extraction_independent_vision_verified",
+        "block_id": "bird-p46-b006",
+        "block_ids": [
+          "bird-p46-b006",
+          "bird-p47-b001"
+        ],
+        "block_state": "verified_page_block_evidence",
+        "extraction_artifact_paths": [
+          "references/sources/evidence/bird-in-hand/page-0046-extraction.json",
+          "references/sources/evidence/bird-in-hand/page-0047-extraction.json"
+        ],
+        "verification_artifact_paths": [
+          "references/sources/evidence/bird-in-hand/page-0046-verification.json",
+          "references/sources/evidence/bird-in-hand/page-0047-verification.json"
+        ]
+      },
+      "spirit_damage": "1d10"
     }
   ],
   "tiki_spirits": {
@@ -408,13 +534,28 @@
     "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
     "manifest_path": "references/sources/manifest.json",
     "page_manifest_path": "references/sources/pages/bird-in-hand.json",
-    "coverage_state": "blocked",
-    "evidence_state": "rendered_pages_pending_independent_vision_verification",
-    "gaps": [
-      "No bounded page/block extraction artifact has been committed for Bird pages 43-46.",
-      "No independent verifier artifact has been produced from a true vision-only pass in this environment.",
-      "Legacy spirit facts therefore remain not accepted as normalized source authority."
+    "coverage_state": "verified",
+    "evidence_state": "bounded_extraction_independent_vision_verified",
+    "verified_pdf_pages": [
+      43,
+      44,
+      45,
+      46,
+      47
     ],
+    "evidence_paths": [
+      "references/sources/evidence/bird-in-hand/page-0043-extraction.json",
+      "references/sources/evidence/bird-in-hand/page-0043-verification.json",
+      "references/sources/evidence/bird-in-hand/page-0044-extraction.json",
+      "references/sources/evidence/bird-in-hand/page-0044-verification.json",
+      "references/sources/evidence/bird-in-hand/page-0045-extraction.json",
+      "references/sources/evidence/bird-in-hand/page-0045-verification.json",
+      "references/sources/evidence/bird-in-hand/page-0046-extraction.json",
+      "references/sources/evidence/bird-in-hand/page-0046-verification.json",
+      "references/sources/evidence/bird-in-hand/page-0047-extraction.json",
+      "references/sources/evidence/bird-in-hand/page-0047-verification.json"
+    ],
+    "gaps": [],
     "legacy_cited_pages": [
       43,
       44,
@@ -423,15 +564,19 @@
     ]
   },
   "attestation": {
-    "status": "rendered_pending_vision_verification",
+    "status": "target_example_spirits_bounded_vision_verified",
     "legacy_verified": true,
     "legacy_verified_at": "2026-05-17",
-    "legacy_verification_notes": "Vision-verified all spirit stats against Bird in Hand PDF p.43-46 page images. Corrected Whulla POW/CHA, filled all previously UNVERIFIED entries with actual PDF data.",
-    "authority_state": "not_accepted_without_committed_page_block_evidence_and_independent_verifier",
-    "gaps": [
-      "No bounded page/block extraction artifact has been committed for Bird pages 43-46.",
-      "No independent verifier artifact has been produced from a true vision-only pass in this environment.",
-      "Legacy spirit facts therefore remain not accepted as normalized source authority."
-    ]
+    "legacy_verification_notes": "Vision-verified all spirit stats against Bird in Hand PDF p.43-46 page images. Corrected Whulla POW/CHA, filled all previously unverified entries with actual PDF data.",
+    "authority_state": "accepted_for_target_example_spirit_stat_blocks",
+    "verified_pdf_pages": [
+      43,
+      44,
+      45,
+      46,
+      47
+    ],
+    "verification_notes": "Current authority comes from committed bounded page/block extraction and independent verifier artifacts. Page 47 was included because Ghu stat values continue after the page 46 narrative block.",
+    "gaps": []
   }
 }

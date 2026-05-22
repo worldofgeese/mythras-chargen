@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "schema": "references/sources/schema.json",
   "generated_at": "2026-05-21",
-  "notes": "Source attestation manifest for portable source authority. Mythras Core is now recorded as a Copyparty-backed source revision for base rules and magic-system references. Updated Waha points at the supplied 2026-05-17 one-pager revision mirrored to Copyparty and has bounded vision extraction plus independent verification. Bird in Hand records source identity and target page renders; Monster Island records supplied PDF metadata plus candidate page render hashes/dimensions. Spirit facts remain blocked pending permission, bounded extraction, and independent vision verification.",
+  "notes": "Source attestation manifest for portable source authority. Mythras Core is recorded as a Copyparty-backed source revision for base rules and magic-system references. Updated Waha and targeted Bird in Hand spirit examples have bounded vision extraction plus independent verification. Monster Island records supplied PDF metadata plus candidate page render hashes/dimensions and remains permission-blocked.",
   "sources": [
     {
       "source_id": "aig",
@@ -350,7 +350,7 @@
         "status": "player_visible_copyparty_source",
         "note": "Source PDF is available from the project Copyparty player-visible source library; the PDF remains ignored and uncommitted. Full-page transcription remains forbidden by the vision workflow boundaries."
       },
-      "precedence": "Bird in Hand is the source-identified example authority for legacy spirit stat-block pages 43-46, but legacy spirit facts remain blocked until bounded page/block extraction and independent vision verification artifacts are committed.",
+      "precedence": "Bird in Hand is the source-identified example authority for legacy spirit stat-block pages 43-47. Normalized/app Bird example-spirit facts are accepted only through the bounded extraction and independent verification artifacts recorded under references/sources/evidence/bird-in-hand/.",
       "render_contract": {
         "renderer": "pdftoppm",
         "renderer_version": "runtime-detected",
@@ -367,12 +367,8 @@
       },
       "blocks": [],
       "blockers": [],
-      "acceptance_state": "blocked_pending_vision_verification",
-      "acceptance_blockers": [
-        "No bounded page/block extraction artifact has been committed for Bird pages 43-46.",
-        "No independent verifier artifact has been produced from a true vision-only pass in this environment.",
-        "Legacy spirit facts therefore remain not accepted as normalized source authority."
-      ],
+      "acceptance_state": "bounded_vision_verified",
+      "acceptance_blockers": [],
       "source_access": {
         "public_copyparty_source": {
           "status": "available",
@@ -392,7 +388,30 @@
         "page_count_method": "pdfinfo against ignored local Copyparty download",
         "canonical_locator_head_status": 200,
         "canonical_locator_content_length": 11290904,
-        "note": "The source PDF is not committed; references/sources/pdfs/bird-in-hand.pdf remains an ignored local hint."
+        "note": "The source PDF is not committed; references/sources/pdfs/bird-in-hand.pdf remains an ignored local hint.",
+        "render_method": "pdftoppm 22.09.0 at 300 dpi into ignored .cache/source-pages/bird-in-hand/*.png",
+        "rendered_page_hashes": {
+          "43": "6bf326835edb9bc6ca1018e95e68ec5ee0c179b3de88ef6e9e9911113f4a3a73",
+          "44": "ea4568989222ad9569c8defd735c05e709431f489ab85611175bfea47d0366db",
+          "45": "2b7ca0cdcfbc1da09fe0d8a5f69cc7d774be3c0589bd8552289d9f7a1d024b1f",
+          "46": "9d2065424448cc0b857b8d27b87ccf0a5cd590f92537a0d9c5e0997fcd638094",
+          "47": "8a5a16a0f2975cae9a97149dee76b41dbe3d4688b4123931d9f8f09b0704834d"
+        },
+        "used_for_vision_extraction": true,
+        "vision_extraction_completed_at": "2026-05-22",
+        "vision_verification_completed_at": "2026-05-22",
+        "vision_evidence_paths": [
+          "references/sources/evidence/bird-in-hand/page-0043-extraction.json",
+          "references/sources/evidence/bird-in-hand/page-0043-verification.json",
+          "references/sources/evidence/bird-in-hand/page-0044-extraction.json",
+          "references/sources/evidence/bird-in-hand/page-0044-verification.json",
+          "references/sources/evidence/bird-in-hand/page-0045-extraction.json",
+          "references/sources/evidence/bird-in-hand/page-0045-verification.json",
+          "references/sources/evidence/bird-in-hand/page-0046-extraction.json",
+          "references/sources/evidence/bird-in-hand/page-0046-verification.json",
+          "references/sources/evidence/bird-in-hand/page-0047-extraction.json",
+          "references/sources/evidence/bird-in-hand/page-0047-verification.json"
+        ]
       }
     },
     {

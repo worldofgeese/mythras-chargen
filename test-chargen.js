@@ -377,15 +377,14 @@ runCommandTest('Render workflow can list sources without rendering pages',
       Array.isArray(page.blockers) &&
       page.blockers.length === 0
     );
-  const wahaEvidenceBlocksJoin = wahaPages.pages.every(page => {
-    const extraction = readJson(page.extraction.artifact_path);
-    const verification = readJson(page.verification.artifact_path);
-    const extractionBlockIds = new Set((extraction.blocks || []).map(block => block.block_id));
-    const verifiedBlockIds = new Set(verification.verified_blocks || []);
-    return (page.derived_facts || []).flatMap(fact => fact.block_ids || [])
-      .every(blockId => extractionBlockIds.has(blockId) && verifiedBlockIds.has(blockId));
-  });
-  if (wahaVisionVerified && wahaEvidenceBlocksJoin) {
+  const wahaPageCoverageErrors = sourceValidator.validatePageCoverage(
+    wahaPages,
+    manifestById,
+    sourceSchema,
+    'references/sources/pages/waha.json',
+    __dirname
+  );
+  if (wahaVisionVerified && wahaPageCoverageErrors.length === 0) {
     pass('Waha source refresh records bounded vision evidence and independent verification');
   } else {
     fail('Waha source refresh must record bounded extraction and independent verification',
@@ -402,7 +401,131 @@ runCommandTest('Render workflow can list sources without rendering pages',
           hasVerification: Boolean(page.verification),
           blockers: page.blockers
         })),
-        evidenceBlocksJoin: wahaEvidenceBlocksJoin
+        pageCoverageErrors: wahaPageCoverageErrors
+      }));
+  }
+
+  const activeBird = manifest.sources.find(source => source.source_id === 'bird-in-hand');
+  const birdPages = readJson('references/sources/pages/bird-in-hand.json');
+  const birdRaw = readJson('references/spirits-raw/bird-in-hand.json');
+  const verifiedBirdPages = new Set([43, 44, 45, 46, 47]);
+  const birdTargetPagesVerified = birdPages.pages
+    .filter(page => verifiedBirdPages.has(page.pdf_page))
+    .every(page =>
+      page.source_revision_id === activeBird?.source_revision_id &&
+      page.work_state === 'verified' &&
+      page.render?.status === 'rendered' &&
+      /^[a-f0-9]{64}$/.test(page.render?.image_sha256 || '') &&
+      page.render?.cache_path?.startsWith('.cache/source-pages/bird-in-hand/') &&
+      page.extraction?.artifact_path?.startsWith('references/sources/evidence/bird-in-hand/') &&
+      page.verification?.artifact_path?.startsWith('references/sources/evidence/bird-in-hand/') &&
+      page.verification?.independent === true &&
+      Array.isArray(page.blockers) &&
+      page.blockers.length === 0
+    );
+  const birdNonTargetPagesBlocked = birdPages.pages
+    .filter(page => !verifiedBirdPages.has(page.pdf_page))
+    .every(page =>
+      page.work_state === 'blocked' &&
+      page.contributes === false &&
+      typeof page.exclusion_reason === 'string' &&
+      page.render?.status === 'not_rendered'
+    );
+  const birdPageCoverageErrors = sourceValidator.validatePageCoverage(
+    birdPages,
+    manifestById,
+    sourceSchema,
+    'references/sources/pages/bird-in-hand.json',
+    __dirname
+  );
+  const birdAuthorityMetadataErrors = provenanceValidator.validateSourceAuthorityMetadata(
+    birdRaw,
+    {
+      id: 'bird-in-hand-raw',
+      disposition: 'governed-now',
+      source_ids: ['bird-in-hand'],
+      enforce_source_refs: true
+    },
+    manifestById
+  );
+  const birdSpiritNames = birdRaw.example_spirits.map(spirit => spirit.name);
+  const birdSpiritsVerified = birdRaw.verified === true &&
+    birdRaw.verification_scope === 'example_spirits_only' &&
+    Array.isArray(birdRaw.non_authoritative_sections) &&
+    birdRaw.attestation?.status === 'target_example_spirits_bounded_vision_verified' &&
+    birdRaw.source_ref?.coverage_state === 'verified' &&
+    birdRaw.example_spirits.every(spirit =>
+      spirit.source_ref?.coverage_state === 'verified' &&
+      Array.isArray(spirit.source_ref?.block_ids) &&
+      spirit.source_ref.block_ids.length > 0
+    );
+  const appStartingSpirits = loadApp().STARTING_SPIRITS || [];
+  const ghu = birdRaw.example_spirits.find(spirit => spirit.name === 'Ghu');
+  const appGhu = appStartingSpirits.find(spirit => (spirit.source || '').includes('(Ghu)'));
+  const ghuAbilityName = (ghu?.abilities?.[0] || '').split(/[ (—-]/)[0];
+  const appGhuMatchesRaw = appGhu &&
+    appGhu.name.includes(ghuAbilityName) &&
+    appGhu.ability.startsWith(ghuAbilityName) &&
+    !`${appGhu.name} ${appGhu.ability}`.includes('Absorb Magic') &&
+    appGhu.intensity === ghu.intensity &&
+    appGhu.pow === ghu.characteristics?.POW &&
+    appGhu.cha === ghu.characteristics?.CHA &&
+    appGhu.source.includes('p.46-47');
+  const ghuEvidenceText = [
+    ...(ghu?.source_ref?.extraction_artifact_paths || []),
+    ...(ghu?.source_ref?.verification_artifact_paths || [])
+  ].map(artifactPath => JSON.stringify(readJson(artifactPath))).join(' ');
+  const ghuEvidenceHasStaleAbsorbMagic = /Absorb Magic|absorbs magic/i.test(ghuEvidenceText);
+  const rawBirdSpiritsByName = new Map(birdRaw.example_spirits.map(spirit => [spirit.name, spirit]));
+  const birdAppCitationMismatches = appStartingSpirits
+    .filter(spirit => (spirit.source || '').startsWith('Bird in the Hand p.'))
+    .flatMap(spirit => {
+      const match = spirit.source.match(/^Bird in the Hand p\.(\d+)(?:-(\d+))? \(([^)]+)\)$/);
+      if (!match) return [`${spirit.name}: unparseable source ${spirit.source}`];
+      const startPage = Number(match[1]);
+      const endPage = Number(match[2] || match[1]);
+      const actualPages = Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index);
+      const rawSpirit = rawBirdSpiritsByName.get(match[3]);
+      const expectedPages = rawSpirit?.source_ref?.pdf_pages || [];
+      return JSON.stringify(actualPages) === JSON.stringify(expectedPages)
+        ? []
+        : [`${spirit.name}: app ${JSON.stringify(actualPages)} raw ${JSON.stringify(expectedPages)}`];
+    });
+  if (activeBird?.acceptance_state === 'bounded_vision_verified' &&
+      birdPages.coverage_state === 'verified' &&
+      birdTargetPagesVerified &&
+      birdNonTargetPagesBlocked &&
+      birdPageCoverageErrors.length === 0 &&
+      birdAuthorityMetadataErrors.length === 0 &&
+      birdSpiritsVerified &&
+      birdSpiritNames.includes('Anylil') &&
+      birdSpiritNames.includes('Woeyff') &&
+      !birdSpiritNames.includes('Anyill') &&
+      !birdSpiritNames.includes('Wocyff') &&
+      ghu?.spirit_damage === '1d10' &&
+      ghu?.initiative_bonus === '+10' &&
+      ghu?.skills?.spectral_combat === '81%' &&
+      ghu?.abilities?.[0]?.startsWith('Warding') &&
+      !ghuEvidenceHasStaleAbsorbMagic &&
+      appGhuMatchesRaw &&
+      birdAppCitationMismatches.length === 0) {
+    pass('Bird in Hand example spirits are backed by bounded vision evidence and corrected spellings');
+  } else {
+    fail('Bird in Hand example spirit evidence is incomplete or stale',
+      JSON.stringify({
+        acceptanceState: activeBird?.acceptance_state,
+        coverageState: birdPages.coverage_state,
+        targetPagesVerified: birdTargetPagesVerified,
+        nonTargetPagesBlocked: birdNonTargetPagesBlocked,
+        pageCoverageErrors: birdPageCoverageErrors,
+        authorityMetadataErrors: birdAuthorityMetadataErrors,
+        birdSpiritsVerified,
+        birdSpiritNames,
+        ghu,
+        appGhu,
+        appGhuMatchesRaw,
+        ghuEvidenceHasStaleAbsorbMagic,
+        birdAppCitationMismatches
       }));
   }
 
@@ -465,6 +588,7 @@ runCommandTest('Render workflow can list sources without rendering pages',
   );
   const blockedMonsterRefs = (startingSpiritsMap?.blocked_candidate_sources || []).filter(ref => ref.source_id === 'monster-island');
   const mythrasCoreStartingSpiritRef = (startingSpiritsMap?.source_refs || []).find(ref => ref.source_id === 'mythras-core');
+  const birdStartingSpiritRef = (startingSpiritsMap?.source_refs || []).find(ref => ref.source_id === 'bird-in-hand');
   if (acceptedMonsterEntries.length === 0 &&
       startingSpiritsMap?.status === 'source_blocked' &&
       (startingSpiritsMap?.source_ids || []).includes('mythras-core') &&
@@ -472,19 +596,24 @@ runCommandTest('Render workflow can list sources without rendering pages',
       mythrasCoreStartingSpiritRef?.source_revision_id === expectedMythrasCoreRevision &&
       mythrasCoreStartingSpiritRef?.page_manifest_path === 'references/sources/pages/mythras-core.json' &&
       mythrasCoreStartingSpiritRef?.coverage_state === 'blocked' &&
+      birdStartingSpiritRef?.source_revision_id === activeBird?.source_revision_id &&
+      birdStartingSpiritRef?.page_manifest_path === 'references/sources/pages/bird-in-hand.json' &&
+      birdStartingSpiritRef?.coverage_state === 'verified' &&
+      birdStartingSpiritRef?.evidence_state === 'bounded_extraction_independent_vision_verified' &&
       blockedMonsterRefs.length === 1 &&
       blockedMonsterRefs[0].source_revision_id === monsterRevision &&
       blockedMonsterRefs[0].coverage_state === 'blocked' &&
       blockedMonsterRefs[0].authority_state === 'non_authoritative' &&
       blockedMonsterRefs[0].evidence_state === 'rendered_pages_extraction_and_verification_blocked') {
-    pass('Starting spirit provenance wires Mythras Core and keeps Monster Island blocked while permission is pending');
+    pass('Starting spirit provenance wires verified Bird evidence while keeping unresolved sources blocked');
   } else {
-    fail('Starting spirit provenance is missing Mythras Core wiring or accepted Monster Island prematurely',
+    fail('Starting spirit provenance is missing Bird/Mythras Core wiring or accepted Monster Island prematurely',
       JSON.stringify({
         startingSpiritsStatus: startingSpiritsMap?.status,
         sourceIds: startingSpiritsMap?.source_ids,
         externalSourceGaps: startingSpiritsMap?.external_source_gaps,
         mythrasCoreStartingSpiritRef,
+        birdStartingSpiritRef,
         acceptedMonsterEntries: acceptedMonsterEntries.map(entry => entry.constant_name),
         blockedMonsterRefs
       }));

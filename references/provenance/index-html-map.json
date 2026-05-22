@@ -308,11 +308,30 @@
           "source_id": "bird-in-hand",
           "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
           "page_manifest_path": "references/sources/pages/bird-in-hand.json",
-          "coverage_state": "blocked",
-          "evidence_state": "rendered_pages_pending_independent_vision_verification"
+          "coverage_state": "verified",
+          "evidence_state": "bounded_extraction_independent_vision_verified",
+          "verified_pdf_pages": [
+            43,
+            44,
+            45,
+            46,
+            47
+          ],
+          "evidence_paths": [
+            "references/sources/evidence/bird-in-hand/page-0043-extraction.json",
+            "references/sources/evidence/bird-in-hand/page-0043-verification.json",
+            "references/sources/evidence/bird-in-hand/page-0044-extraction.json",
+            "references/sources/evidence/bird-in-hand/page-0044-verification.json",
+            "references/sources/evidence/bird-in-hand/page-0045-extraction.json",
+            "references/sources/evidence/bird-in-hand/page-0045-verification.json",
+            "references/sources/evidence/bird-in-hand/page-0046-extraction.json",
+            "references/sources/evidence/bird-in-hand/page-0046-verification.json",
+            "references/sources/evidence/bird-in-hand/page-0047-extraction.json",
+            "references/sources/evidence/bird-in-hand/page-0047-verification.json"
+          ]
         }
       ],
-      "rationale": "Starting spirit examples are app-facing legacy data; Bird in Hand target page renders and Monster Island candidate page renders now exist, and Mythras Core source identity is wired through the source manifest. Page/block extraction, independent vision verification, and accepted provenance remain future work.",
+      "rationale": "Starting spirit examples remain source-blocked overall because Mythras Core base spirit-rule pages and Monster Island candidate examples are still not accepted. Bird in Hand example-spirit pages 43-47 are now bounded-vision verified with independent page/block evidence.",
       "blocked_candidate_sources": [
         {
           "source_id": "monster-island",

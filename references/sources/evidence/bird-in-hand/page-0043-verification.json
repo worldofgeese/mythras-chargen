@@ -1,0 +1,39 @@
+{
+  "artifact_id": "bird-in-hand-page-0043-verification-opus-2026-05-22",
+  "artifact_kind": "verification",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "bird-in-hand",
+  "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+  "pdf_page": 43,
+  "printed_page_label": "42",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/bird-in-hand/page-0043.png",
+    "image_sha256": "6bf326835edb9bc6ca1018e95e68ec5ee0c179b3de88ef6e9e9911113f4a3a73",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "bird-in-hand-extract-gpt55-2026-05-22",
+  "verifier_prompt_id": "vision-verify-bounded-page.v1",
+  "verifier_run_id": "bird-in-hand-verify-opus-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "independence": {
+    "read_extractor_output": false,
+    "read_extractor_scratch": false,
+    "read_extractor_rationale": false
+  },
+  "agreement": "pass",
+  "verified_blocks": [
+    "bird-p43-b001",
+    "bird-p43-b002",
+    "bird-p43-b003"
+  ],
+  "bounded_excerpts": [
+    "White Death Guard",
+    "Kaia, Spirit Worshipper",
+    "Binding 69%, Trance 69%",
+    "two bound spirits"
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "artifact_id": "bird-in-hand-page-0046-extraction-gpt55-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "bird-in-hand",
+  "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+  "pdf_page": 46,
+  "printed_page_label": "45",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/bird-in-hand/page-0046.png",
+    "image_sha256": "9d2065424448cc0b857b8d27b87ccf0a5cd590f92537a0d9c5e0997fcd638094",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "bird-in-hand-extract-gpt55-2026-05-22",
+  "tool_identity": "GPT-5.5 via GitHub Copilot CLI",
+  "schema_version": 1,
+  "blocks": [
+    {
+      "block_id": "bird-p46-b001",
+      "block_type": "stat_block",
+      "reading_order": 1,
+      "region": {
+        "x": 0.06,
+        "y": 0.06,
+        "w": 0.78,
+        "h": 0.08
+      },
+      "bounded_excerpt": "Woeyff, Intensity 2 Nature Spirit ... Endowment (Camouflage - two difficult grades penalty...)",
+      "facts": {
+        "spirit": "Woeyff",
+        "type": "Nature Spirit",
+        "intensity": 2,
+        "owner": "Mele",
+        "animal": "Octopoid (Oodaku gift)",
+        "characteristics": {
+          "INS": 9,
+          "POW": 17,
+          "CHA": 9
+        },
+        "action_points": 3,
+        "spirit_damage": "1d8",
+        "magic_points": 17,
+        "initiative_bonus": "+9",
+        "skills": {
+          "willpower": "84%",
+          "spectral_combat": "76%"
+        },
+        "abilities": [
+          "Endowment (Camouflage - two difficult grades penalty to opponents attempting to spot spirit worshipper)"
+        ]
+      }
+    },
+    {
+      "block_id": "bird-p46-b002",
+      "block_type": "stat_block",
+      "reading_order": 2,
+      "region": {
+        "x": 0.06,
+        "y": 0.16,
+        "w": 0.78,
+        "h": 0.16
+      },
+      "bounded_excerpt": "Jked must be coaxed from its fetish of dried monkey-dung ... grants a simian dexterity ... foul excrement.",
+      "facts": {
+        "spirit": "Jked",
+        "type": "Nature Spirit",
+        "intensity": 2,
+        "owner": "Mele",
+        "animal": "Monkey",
+        "characteristics": {
+          "INS": 9,
+          "POW": 13,
+          "CHA": 9
+        },
+        "action_points": 2,
+        "spirit_damage": "1d8",
+        "magic_points": 13,
+        "initiative_bonus": "+9",
+        "skills": {
+          "willpower": "84%",
+          "spectral_combat": "76%"
+        },
+        "abilities": [
+          "Endowment (Camouflage — two difficult grades penalty to opponents attempting to spot spirit worshipper)"
+        ],
+        "fetish": "Dried monkey-dung",
+        "manifestation": "hooting cry answered in echo; grants simian dexterity; spirit opponents are pelted with foul excrement"
+      }
+    },
+    {
+      "block_id": "bird-p46-b003",
+      "block_type": "stat_block",
+      "reading_order": 3,
+      "region": {
+        "x": 0.06,
+        "y": 0.34,
+        "w": 0.78,
+        "h": 0.14
+      },
+      "bounded_excerpt": "Kugkowcs manifests by Mele seemingly vomiting it out ... marking a quiet path ... grappling limbs.",
+      "facts": {
+        "spirit": "Kugkowcs",
+        "type": "Nature Spirit",
+        "intensity": 2,
+        "owner": "Mele",
+        "animal": "Tetrapus (alien octopoid)",
+        "characteristics": {
+          "INS": 10,
+          "POW": 14,
+          "CHA": 11
+        },
+        "action_points": 2,
+        "spirit_damage": "1d8",
+        "magic_points": 14,
+        "initiative_bonus": "+11",
+        "skills": {
+          "willpower": "78%",
+          "spectral_combat": "75%"
+        },
+        "abilities": [
+          "Bless (Stealth — improves by one difficult grade)"
+        ],
+        "manifestation": "Mele seemingly vomits it out; it marks a quiet path and presents grappling limbs to spirit opponents"
+      }
+    },
+    {
+      "block_id": "bird-p46-b004",
+      "block_type": "stat_block",
+      "reading_order": 4,
+      "region": {
+        "x": 0.06,
+        "y": 0.5,
+        "w": 0.78,
+        "h": 0.14
+      },
+      "bounded_excerpt": "Hoja is held in a hoop of twisting coral ... Mele's hands transform into writhing tentacles ... Endowment (Grappler).",
+      "facts": {
+        "spirit": "Hoja",
+        "type": "Nature Spirit",
+        "intensity": 2,
+        "owner": "Mele",
+        "animal": "Coral",
+        "characteristics": {
+          "INS": 12,
+          "POW": 11,
+          "CHA": 7
+        },
+        "action_points": 2,
+        "spirit_damage": "1d8",
+        "magic_points": 11,
+        "initiative_bonus": "+10",
+        "skills": {
+          "willpower": "72%",
+          "spectral_combat": "68%"
+        },
+        "abilities": [
+          "Endowment (Grappler - a successful strike allows an immediate Grapple in addition to inflicting damage, or if Parrying, Grip or Pin Weapon)"
+        ],
+        "fetish": "Hoop of twisting coral",
+        "manifestation": "Mele's hands transform into writhing tentacles; spectral suckered-limbs grapple targets"
+      }
+    },
+    {
+      "block_id": "bird-p46-b005",
+      "block_type": "stat_block",
+      "reading_order": 5,
+      "region": {
+        "x": 0.06,
+        "y": 0.66,
+        "w": 0.78,
+        "h": 0.16
+      },
+      "bounded_excerpt": "Fylue's spectral bite injects a soothing liquid ... Endowment (Venomous - POT 72, Resist Endurance, Onset 1 Combat Round...).",
+      "facts": {
+        "spirit": "Fylue",
+        "type": "Nature Spirit",
+        "intensity": 2,
+        "owner": "Mele",
+        "animal": "River Eel",
+        "characteristics": {
+          "INS": 13,
+          "POW": 13,
+          "CHA": 9
+        },
+        "action_points": 3,
+        "spirit_damage": "1d8",
+        "magic_points": 13,
+        "initiative_bonus": "+11",
+        "skills": {
+          "willpower": "76%",
+          "spectral_combat": "72%"
+        },
+        "abilities": [
+          "Endowment (Venomous - POT 72, Resist Endurance, Onset 1 Combat Round struck Hit Location then affecting rest of the body 1d3+3 rounds late, Duration 2d10 minutes, Condition Paralysis; may use Inject Venom Special Effect Mythras page 218)"
+        ],
+        "manifestation": "Mele's mouth drips venom; fanged eels writhe from his one good clawed hand"
+      }
+    },
+    {
+      "block_id": "bird-p46-b006",
+      "block_type": "paragraph",
+      "reading_order": 6,
+      "region": {
+        "x": 0.06,
+        "y": 0.84,
+        "w": 0.78,
+        "h": 0.1
+      },
+      "bounded_excerpt": "Ghu is the sheltering spirit of the Ghua tree; its fetish is smooth bark from a revered specimen; Mele is cast in shadow.",
+      "facts": {
+        "spirit": "Ghu",
+        "owner": "Mele",
+        "animal": "Ghua tree",
+        "fetish": "Smooth bark of a mighty Ghua tree revered for five generations",
+        "manifestation": "Mele is cast in shadow"
+      }
+    }
+  ]
+}

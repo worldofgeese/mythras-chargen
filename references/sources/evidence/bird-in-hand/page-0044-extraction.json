@@ -1,0 +1,157 @@
+{
+  "artifact_id": "bird-in-hand-page-0044-extraction-gpt55-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "bird-in-hand",
+  "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+  "pdf_page": 44,
+  "printed_page_label": "43",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/bird-in-hand/page-0044.png",
+    "image_sha256": "ea4568989222ad9569c8defd735c05e709431f489ab85611175bfea47d0366db",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "bird-in-hand-extract-gpt55-2026-05-22",
+  "tool_identity": "GPT-5.5 via GitHub Copilot CLI",
+  "schema_version": 1,
+  "blocks": [
+    {
+      "block_id": "bird-p44-b001",
+      "block_type": "heading",
+      "reading_order": 1,
+      "region": {
+        "x": 0.06,
+        "y": 0.05,
+        "w": 0.42,
+        "h": 0.06
+      },
+      "bounded_excerpt": "Kaia's Bound Spirits",
+      "facts": {
+        "section": "Kaia's Bound Spirits"
+      }
+    },
+    {
+      "block_id": "bird-p44-b002",
+      "block_type": "stat_block",
+      "reading_order": 2,
+      "region": {
+        "x": 0.06,
+        "y": 0.13,
+        "w": 0.78,
+        "h": 0.16
+      },
+      "bounded_excerpt": "Whulla, Intensity 1 Nature Spirit ... INS 9, POW 11, CHA 9 ... Bless (Initiative, +2)",
+      "facts": {
+        "spirit": "Whulla",
+        "type": "Nature Spirit",
+        "intensity": 1,
+        "owner": "Kaia",
+        "animal": "Wahoin rodent",
+        "characteristics": {
+          "INS": 9,
+          "POW": 11,
+          "CHA": 9
+        },
+        "action_points": 2,
+        "spirit_damage": "1d8",
+        "magic_points": 11,
+        "initiative_bonus": "+9",
+        "skills": {
+          "willpower": "72%",
+          "spectral_combat": "70%"
+        },
+        "abilities": [
+          "Bless (Initiative, +2)"
+        ],
+        "fetish": "Wahoin skull"
+      }
+    },
+    {
+      "block_id": "bird-p44-b003",
+      "block_type": "paragraph",
+      "reading_order": 3,
+      "region": {
+        "x": 0.06,
+        "y": 0.3,
+        "w": 0.78,
+        "h": 0.08
+      },
+      "bounded_excerpt": "Whulla appears as grey rodents scurrying across Kaia and grants alacrity.",
+      "facts": {
+        "spirit": "Whulla",
+        "manifestation": "grey rodents scurry across Kaia; grants limbs greater alacrity"
+      }
+    },
+    {
+      "block_id": "bird-p44-b004",
+      "block_type": "stat_block",
+      "reading_order": 4,
+      "region": {
+        "x": 0.06,
+        "y": 0.42,
+        "w": 0.78,
+        "h": 0.16
+      },
+      "bounded_excerpt": "Eous, Intensity 2 Nature Spirit ... INS 9, POW 17, CHA 9 ... Endowment (Camouflage)",
+      "facts": {
+        "spirit": "Eous",
+        "type": "Nature Spirit",
+        "intensity": 2,
+        "owner": "Kaia",
+        "animal": "Sloth",
+        "characteristics": {
+          "INS": 9,
+          "POW": 17,
+          "CHA": 9
+        },
+        "action_points": 3,
+        "spirit_damage": "1d8",
+        "magic_points": 17,
+        "initiative_bonus": "+9",
+        "skills": {
+          "willpower": "84%",
+          "spectral_combat": "76%"
+        },
+        "abilities": [
+          "Endowment (Camouflage — two difficult grades penalty to opponents attempting to spot spirit worshipper)"
+        ]
+      }
+    },
+    {
+      "block_id": "bird-p44-b005",
+      "block_type": "paragraph",
+      "reading_order": 5,
+      "region": {
+        "x": 0.06,
+        "y": 0.59,
+        "w": 0.78,
+        "h": 0.08
+      },
+      "bounded_excerpt": "Eous casts a sloth-shaped shadow over Kaia that helps him blend into the background.",
+      "facts": {
+        "spirit": "Eous",
+        "manifestation": "sloth-shaped shadow over Kaia; blends slowly into background"
+      }
+    },
+    {
+      "block_id": "bird-p44-b006",
+      "block_type": "heading",
+      "reading_order": 6,
+      "region": {
+        "x": 0.06,
+        "y": 0.72,
+        "w": 0.5,
+        "h": 0.06
+      },
+      "bounded_excerpt": "Mele, The High Shaman",
+      "facts": {
+        "owner": "Mele",
+        "owner_rank": "High Shaman"
+      }
+    }
+  ]
+}

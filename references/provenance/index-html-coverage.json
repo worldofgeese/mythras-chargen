@@ -170,7 +170,7 @@
       "status": "unverified",
       "summary": "Concrete example spirits cite verified Bird in the Hand examples, but broader spirit-magic chapter/page references are still explicitly unverified.",
       "references": [
-        {"path": "references/spirits-raw/bird-in-hand.json", "source": "A Bird in the Hand", "citation": "p.43-46", "verified": true},
+        {"path": "references/spirits-raw/bird-in-hand.json", "source": "A Bird in the Hand", "citation": "p.43-47", "verified": true},
         {"path": "references/aig-raw/spirit-magic-aig.json", "source": "Adventures in Glorantha (GenCon 2015 Preview)", "citation": "p.134-151", "verified": false},
         {"path": "references/mythras-raw/magic-page-references.json", "source": "Mythras Core Rulebook, 3rd Printing (2018)", "citation": "Animism chapter refs", "verified": false}
       ],

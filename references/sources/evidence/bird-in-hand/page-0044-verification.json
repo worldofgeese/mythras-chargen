@@ -1,0 +1,42 @@
+{
+  "artifact_id": "bird-in-hand-page-0044-verification-opus-2026-05-22",
+  "artifact_kind": "verification",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "bird-in-hand",
+  "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+  "pdf_page": 44,
+  "printed_page_label": "43",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/bird-in-hand/page-0044.png",
+    "image_sha256": "ea4568989222ad9569c8defd735c05e709431f489ab85611175bfea47d0366db",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "bird-in-hand-extract-gpt55-2026-05-22",
+  "verifier_prompt_id": "vision-verify-bounded-page.v1",
+  "verifier_run_id": "bird-in-hand-verify-opus-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "independence": {
+    "read_extractor_output": false,
+    "read_extractor_scratch": false,
+    "read_extractor_rationale": false
+  },
+  "agreement": "pass",
+  "verified_blocks": [
+    "bird-p44-b001",
+    "bird-p44-b002",
+    "bird-p44-b003",
+    "bird-p44-b004",
+    "bird-p44-b005",
+    "bird-p44-b006"
+  ],
+  "bounded_excerpts": [
+    "Kaia's Bound Spirits",
+    "Whulla, Intensity 1 Nature Spirit",
+    "Eous, Intensity 2 Nature Spirit",
+    "Mele, The High Shaman"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "artifact_id": "bird-in-hand-page-0045-verification-opus-2026-05-22",
+  "artifact_kind": "verification",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "bird-in-hand",
+  "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
+  "pdf_page": 45,
+  "printed_page_label": "44",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/bird-in-hand/page-0045.png",
+    "image_sha256": "2b7ca0cdcfbc1da09fe0d8a5f69cc7d774be3c0589bd8552289d9f7a1d024b1f",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "bird-in-hand-extract-gpt55-2026-05-22",
+  "verifier_prompt_id": "vision-verify-bounded-page.v1",
+  "verifier_run_id": "bird-in-hand-verify-opus-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "independence": {
+    "read_extractor_output": false,
+    "read_extractor_scratch": false,
+    "read_extractor_rationale": false
+  },
+  "agreement": "pass_with_spelling_adjudication",
+  "verified_blocks": [
+    "bird-p45-b001",
+    "bird-p45-b002",
+    "bird-p45-b003"
+  ],
+  "bounded_excerpts": [
+    "Mele's Bound Spirits",
+    "Anylil, Intensity 1 Nature Spirit",
+    "Woeyff, Intensity 2 Nature Spirit"
+  ],
+  "adjudication_artifact_id": "bird-spelling-adjudication-gpt55-opus-2026-05-22",
+  "verified_normalizations": [
+    {
+      "source_spelling": "Anylil",
+      "normalized_value": "Anylil",
+      "adjudication": "Focused crop adjudication rejected Anyill."
+    },
+    {
+      "source_spelling": "Woeyff",
+      "normalized_value": "Woeyff",
+      "adjudication": "Focused GPT-5.5 and Opus vision adjudications rejected Wocyff."
+    }
+  ],
+  "verified_block_facts": [
+    {
+      "block_id": "bird-p45-b002",
+      "bounded_excerpt": "Anylil, Intensity 1 Nature Spirit ... Crimson butterfly ... Bless (Initiative, +2)",
+      "verified_facts": {
+        "spirit": "Anylil",
+        "source_spelling": "Anylil"
+      }
+    },
+    {
+      "block_id": "bird-p45-b003",
+      "bounded_excerpt": "Woeyff is a gift of Oodaku ... cloaked by Woeyff.",
+      "verified_facts": {
+        "spirit": "Woeyff",
+        "source_spelling": "Woeyff",
+        "manifestation": "shadowed sprawl of eight octopoid limbs; Mele fades from view"
+      }
+    }
+  ]
+}
