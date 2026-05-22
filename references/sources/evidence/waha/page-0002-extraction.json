@@ -1,0 +1,234 @@
+{
+  "artifact_id": "waha-page-0002-extraction-gpt55-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "waha",
+  "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
+  "pdf_page": 2,
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/waha/page-0002.png",
+    "image_sha256": "9b6d8b466c37291157199ee12800992633132912ab2c68799cf9d2680984033e",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "waha-extract-gpt55-2026-05-22",
+  "tool_identity": "GPT-5.5 via GitHub Copilot CLI",
+  "schema_version": 1,
+  "blocks": [
+    {
+      "block_id": "waha-p2-b001",
+      "block_type": "paragraph",
+      "reading_order": 1,
+      "region": {
+        "x": 0.057,
+        "y": 0.002,
+        "w": 0.87,
+        "h": 0.066
+      },
+      "bounded_excerpt": "Continents: Genertela, Oceans, Pamaltela Main Areas: Coastal, Pamaltela, Dragon Pass...",
+      "facts": {
+        "areas": {
+          "continents": [
+            "Genertela",
+            "Oceans",
+            "Pamaltela"
+          ],
+          "mainAreas": [
+            "Coastal",
+            "Pamaltela",
+            "Dragon Pass",
+            "East",
+            "Fonrit",
+            "Holy Country",
+            "Lunar",
+            "Oceans",
+            "West"
+          ],
+          "localities": [
+            "Dragon Pass",
+            "East",
+            "Elder Wilds",
+            "Holy Country",
+            "Janube River States",
+            "Jonatela",
+            "Jrusteli Isles",
+            "Lunar Provinces",
+            "Maniria",
+            "Northern Fronela",
+            "Pent",
+            "Prax",
+            "Ralios",
+            "Safelster",
+            "Tarsh",
+            "Umathela",
+            "Vesmonstran"
+          ]
+        }
+      }
+    },
+    {
+      "block_id": "waha-p2-b002",
+      "block_type": "paragraph",
+      "reading_order": 2,
+      "region": {
+        "x": 0.057,
+        "y": 0.091,
+        "w": 0.49,
+        "h": 0.045
+      },
+      "bounded_excerpt": "Relentless, Ruthless, Unemotional, Ascetic ... Tribal, Social",
+      "facts": {
+        "personalityTraits": [
+          "Relentless",
+          "Ruthless",
+          "Unemotional",
+          "Ascetic",
+          "Tribal",
+          "Social"
+        ]
+      }
+    },
+    {
+      "block_id": "waha-p2-b003",
+      "block_type": "paragraph",
+      "reading_order": 3,
+      "region": {
+        "x": 0.057,
+        "y": 0.155,
+        "w": 0.19,
+        "h": 0.045
+      },
+      "bounded_excerpt": "Opposite:Life",
+      "facts": {
+        "opposingRunes": [
+          "Life"
+        ]
+      }
+    },
+    {
+      "block_id": "waha-p2-b004",
+      "block_type": "paragraph",
+      "reading_order": 4,
+      "region": {
+        "x": 0.057,
+        "y": 0.219,
+        "w": 0.86,
+        "h": 0.061
+      },
+      "bounded_excerpt": "Enemy: Chaos, foreign men, predators Hostile: Herd harmers, Lightbringers...",
+      "facts": {
+        "associations": {
+          "enemy": [
+            "Chaos",
+            "foreign men",
+            "predators"
+          ],
+          "hostile": [
+            "Herd harmers",
+            "Lightbringers",
+            "Yelm",
+            "horses",
+            "non-Peaceful Cut users"
+          ],
+          "friendly": [
+            "Anti-Chaos allies"
+          ],
+          "associated": [
+            "Eiritha",
+            "Foundchild",
+            "Oakfed",
+            "Storm Bull"
+          ]
+        }
+      }
+    },
+    {
+      "block_id": "waha-p2-b005",
+      "block_type": "paragraph",
+      "reading_order": 5,
+      "region": {
+        "x": 0.057,
+        "y": 0.304,
+        "w": 0.89,
+        "h": 0.052
+      },
+      "bounded_excerpt": "High Holy Day: Dark Season, Death Week, Godsday To Dark Season, Fertility Week, Freezeday...",
+      "facts": {
+        "holyDays": {
+          "highHolyDay": "Dark Season, Death Week, Godsday to Dark Season, Fertility Week, Freezeday",
+          "holyDays": "All Seasons, Death Week, Godsday"
+        }
+      }
+    },
+    {
+      "block_id": "waha-p2-b006",
+      "block_type": "paragraph",
+      "reading_order": 6,
+      "region": {
+        "x": 0.057,
+        "y": 0.386,
+        "w": 0.88,
+        "h": 0.057
+      },
+      "bounded_excerpt": "Death — Action: Combat, Color: Black,Red, Fauna: Bat, Meaning: Death...",
+      "facts": {
+        "runeMeanings": {
+          "Death": {
+            "action": "Combat",
+            "color": [
+              "Black",
+              "Red"
+            ],
+            "fauna": "Bat",
+            "metal": "Iron",
+            "oppositeRune": "Life"
+          }
+        }
+      }
+    },
+    {
+      "block_id": "waha-p2-b007",
+      "block_type": "paragraph",
+      "reading_order": 7,
+      "region": {
+        "x": 0.057,
+        "y": 0.452,
+        "w": 0.77,
+        "h": 0.051
+      },
+      "bounded_excerpt": "Man — Action: Insight, Color: Any, Fauna: Human, Meaning: Mortal Humanoids, Slave...",
+      "facts": {
+        "runeMeanings": {
+          "Man": {
+            "action": "Insight",
+            "color": [
+              "Any"
+            ],
+            "fauna": "Human",
+            "metal": "Bronze",
+            "weapon": "Sword"
+          }
+        }
+      }
+    },
+    {
+      "block_id": "waha-p2-b008",
+      "block_type": "page_label",
+      "reading_order": 8,
+      "region": {
+        "x": 0.057,
+        "y": 0.529,
+        "w": 0.86,
+        "h": 0.071
+      },
+      "bounded_excerpt": "Glorantha One Pager - from NotesFromPavis. ... 5/17/2026 7:47:09 AM Version: 6.0.1",
+      "facts": {
+        "version": "6.0.1",
+        "versionDate": "2026-05-17"
+      }
+    }
+  ]
+}

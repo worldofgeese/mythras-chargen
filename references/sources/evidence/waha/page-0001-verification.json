@@ -1,0 +1,62 @@
+{
+  "artifact_id": "waha-page-0001-verification-opus-2026-05-22",
+  "artifact_kind": "verification",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "waha",
+  "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
+  "pdf_page": 1,
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/waha/page-0001.png",
+    "image_sha256": "f732eb2cf70fbe9857c54081b882664ec10ad7121fe15dde5a268575c791d506",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "waha-extract-gpt55-2026-05-22",
+  "verifier_prompt_id": "vision-verify-bounded-page.v1",
+  "verifier_run_id": "waha-verify-opus-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "independence": {
+    "read_extractor_output": false,
+    "read_extractor_scratch": false,
+    "read_extractor_rationale": false
+  },
+  "agreement": "pass_with_spelling_adjudication",
+  "adjudication_artifact_id": "waha-spelling-adjudication-gpt55-2026-05-22",
+  "verified_blocks": [
+    "waha-p1-b001",
+    "waha-p1-b002",
+    "waha-p1-b003",
+    "waha-p1-b004",
+    "waha-p1-b005",
+    "waha-p1-b006",
+    "waha-p1-b007",
+    "waha-p1-b008",
+    "waha-p1-b009",
+    "waha-p1-b010",
+    "waha-p1-b011"
+  ],
+  "bounded_excerpts": [
+    "Runes: Death, Man",
+    "The Butcher, Khan of the Praxian Gods",
+    "Initiate: closed to women; Ride and tribal weapon at 50%+...",
+    "Must prove their warrior abilities to the tribal elders or by proving themselves at a seasonal festival",
+    "Aveert, Countermagic (n)",
+    "Command Cult Spirit, Discorporation",
+    "High Priest: Return to holy place and sacrifice — Summon Spirit Of Reprisal"
+  ],
+  "verified_normalizations": [
+    {
+      "source_spelling": "Aveert",
+      "normalized_value": "Avert",
+      "adjudication": "Source spelling has double e; app-facing value remains canonical spell name."
+    },
+    {
+      "source_spelling": "Discorporation",
+      "normalized_value": "Discorporation",
+      "adjudication": "Focused adjudication rejected extractor-only Discoperation reading."
+    }
+  ]
+}

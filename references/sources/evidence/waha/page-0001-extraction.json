@@ -1,0 +1,307 @@
+{
+  "artifact_id": "waha-page-0001-extraction-gpt55-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "waha",
+  "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
+  "pdf_page": 1,
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/waha/page-0001.png",
+    "image_sha256": "f732eb2cf70fbe9857c54081b882664ec10ad7121fe15dde5a268575c791d506",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "waha-extract-gpt55-2026-05-22",
+  "tool_identity": "GPT-5.5 via GitHub Copilot CLI",
+  "schema_version": 1,
+  "blocks": [
+    {
+      "block_id": "waha-p1-b001",
+      "block_type": "heading",
+      "reading_order": 1,
+      "region": {
+        "x": 0.057,
+        "y": 0.052,
+        "w": 0.16,
+        "h": 0.035
+      },
+      "bounded_excerpt": "Waha",
+      "facts": {
+        "name": "Waha"
+      }
+    },
+    {
+      "block_id": "waha-p1-b002",
+      "block_type": "stat_block",
+      "reading_order": 2,
+      "region": {
+        "x": 0.057,
+        "y": 0.101,
+        "w": 0.33,
+        "h": 0.061
+      },
+      "bounded_excerpt": "Runes ... Death, Man",
+      "facts": {
+        "runes": [
+          "Death",
+          "Man"
+        ],
+        "epithet": "The Butcher, Khan of the Praxian Gods",
+        "version_note": "2026 Version AiG/RQG etc"
+      }
+    },
+    {
+      "block_id": "waha-p1-b003",
+      "block_type": "paragraph",
+      "reading_order": 3,
+      "region": {
+        "x": 0.057,
+        "y": 0.226,
+        "w": 0.85,
+        "h": 0.087
+      },
+      "bounded_excerpt": "Initiate: The cult is closed to women. Human initiates need Ride and a tribal weapon at 50%+... Must prove their warrior abilities...",
+      "facts": {
+        "requirements": {
+          "initiate": "Cult is closed to women. Human initiates need Ride and a tribal weapon at 50%+, one spirit magic spell, and knowledge of all tribal herds. Must prove their warrior abilities to the tribal elders or by proving themselves at a seasonal festival.",
+          "runeLord": "Must be an initiate of noble descent from Waha. Or agree with GM to use RQG pp. 274-276."
+        }
+      }
+    },
+    {
+      "block_id": "waha-p1-b004",
+      "block_type": "paragraph",
+      "reading_order": 4,
+      "region": {
+        "x": 0.057,
+        "y": 0.342,
+        "w": 0.86,
+        "h": 0.064
+      },
+      "bounded_excerpt": "Combat Style (Tribal), Craft (Butchery), Dance, Devotion, Locale, Lore (Cult), Navigation...",
+      "facts": {
+        "cultSkills": [
+          "Combat Style (Tribal)",
+          "Craft (Butchery)",
+          "Dance",
+          "Devotion",
+          "Locale",
+          "Lore (Cult)",
+          "Navigation",
+          "Oratory",
+          "Peaceful Cut",
+          "Perception",
+          "Ride",
+          "Runic Affinity",
+          "Sing",
+          "Survival",
+          "Tracking",
+          "Trance",
+          "Understand Herd Beast"
+        ],
+        "oath_note": "Oath is taken at initiate."
+      }
+    },
+    {
+      "block_id": "waha-p1-b005",
+      "block_type": "paragraph",
+      "reading_order": 5,
+      "region": {
+        "x": 0.057,
+        "y": 0.441,
+        "w": 0.81,
+        "h": 0.051
+      },
+      "bounded_excerpt": "Aveert, Countermagic (n), Distraction, Find Spirit, Heal, Protection (n), Second Sight...",
+      "facts": {
+        "folkMagic": [
+          "Avert",
+          "Countermagic (n)",
+          "Distraction",
+          "Find Spirit",
+          "Heal",
+          "Protection (n)",
+          "Second Sight",
+          "Slow (n)",
+          "Speedart",
+          "Spiritshield (n)",
+          "Vigour"
+        ],
+        "folkMagicNote": "(n) = progressive spell"
+      },
+      "normalizations": [
+        {
+          "source_spelling": "Aveert",
+          "normalized_value": "Avert",
+          "reason": "Canonical folk magic spell name elsewhere in project data is Avert; source page visibly spells this instance Aveert."
+        }
+      ]
+    },
+    {
+      "block_id": "waha-p1-b006",
+      "block_type": "paragraph",
+      "reading_order": 6,
+      "region": {
+        "x": 0.057,
+        "y": 0.545,
+        "w": 0.89,
+        "h": 0.078
+      },
+      "bounded_excerpt": "Initiate: Return to holy place and sacrifice ... Find (Specific Thing), Axis Mundi...",
+      "facts": {
+        "miracles": {
+          "initiate": [
+            "Find (Specific Thing)",
+            "Axis Mundi",
+            "Command Cult Spirit",
+            "Discorporation",
+            "Dismiss Gnome",
+            "Dismiss Magic",
+            "Divination",
+            "Multispell",
+            "Shield",
+            "Soul Sight",
+            "Spirit Block",
+            "Summon Cult Spirit",
+            "Summon Gnome",
+            "Warding"
+          ],
+          "initiateNote": "Return to holy place and sacrifice"
+        }
+      }
+    },
+    {
+      "block_id": "waha-p1-b007",
+      "block_type": "paragraph",
+      "reading_order": 7,
+      "region": {
+        "x": 0.057,
+        "y": 0.631,
+        "w": 0.85,
+        "h": 0.064
+      },
+      "bounded_excerpt": "Initiate - associate: One time use ... Eiritha: Speak With Herd Beasts...",
+      "facts": {
+        "associate": {
+          "Eiritha": [
+            "Speak With Herd Beasts"
+          ],
+          "Oakfed": [
+            "Cremate Dead"
+          ],
+          "Storm Bull": [
+            "Impede Chaos (Eternal)"
+          ]
+        },
+        "associateNote": "One time use, Return to associate cult temple and resacrifice"
+      }
+    },
+    {
+      "block_id": "waha-p1-b008",
+      "block_type": "paragraph",
+      "reading_order": 8,
+      "region": {
+        "x": 0.057,
+        "y": 0.703,
+        "w": 0.74,
+        "h": 0.063
+      },
+      "bounded_excerpt": "Runelord / Rune Priest: Return to holy place and sacrifice ... Awaken, Chastise...",
+      "facts": {
+        "runeLord": [
+          "Awaken",
+          "Chastise",
+          "Alter Creature (One use)",
+          "Excommunication",
+          "Extension",
+          "Find Enemy",
+          "Heal Wound",
+          "Mindlink",
+          "Sanctify",
+          "Summon Spirit Of Law"
+        ],
+        "runeLordNote": "Return to holy place and sacrifice"
+      }
+    },
+    {
+      "block_id": "waha-p1-b009",
+      "block_type": "paragraph",
+      "reading_order": 9,
+      "region": {
+        "x": 0.057,
+        "y": 0.771,
+        "w": 0.42,
+        "h": 0.054
+      },
+      "bounded_excerpt": "High Priest: Return to holy place and sacrifice ... Summon Spirit Of Reprisal",
+      "facts": {
+        "highPriest": [
+          "Summon Spirit Of Reprisal"
+        ],
+        "highPriestNote": "Return to holy place and sacrifice"
+      }
+    },
+    {
+      "block_id": "waha-p1-b010",
+      "block_type": "paragraph",
+      "reading_order": 10,
+      "region": {
+        "x": 0.057,
+        "y": 0.842,
+        "w": 0.25,
+        "h": 0.047
+      },
+      "bounded_excerpt": "Pantheons ... Storm, Praxian",
+      "facts": {
+        "pantheons": [
+          "Storm",
+          "Praxian"
+        ]
+      }
+    },
+    {
+      "block_id": "waha-p1-b011",
+      "block_type": "paragraph",
+      "reading_order": 11,
+      "region": {
+        "x": 0.057,
+        "y": 0.902,
+        "w": 0.83,
+        "h": 0.059
+      },
+      "bounded_excerpt": "Book Of Doom, Cult Compendium, Cults of Runequest - The Lightbringers...",
+      "facts": {
+        "sources": [
+          "Book Of Doom",
+          "Cult Compendium",
+          "Cults of Runequest - The Lightbringers",
+          "Gods Of Glorantha",
+          "Guide to Glorantha",
+          "Red Book of Magic",
+          "RQG"
+        ]
+      }
+    }
+  ],
+  "adjudications": [
+    {
+      "artifact_id": "waha-spelling-adjudication-gpt55-2026-05-22",
+      "field": "folkMagic[0]",
+      "observed_source_spelling": "Aveert",
+      "normalized_value": "Avert",
+      "bounded_excerpt": "Aveert, Countermagic (n)",
+      "confidence": "high"
+    },
+    {
+      "artifact_id": "waha-spelling-adjudication-gpt55-2026-05-22",
+      "field": "miracles.initiate[3]",
+      "observed_source_spelling": "Discorporation",
+      "normalized_value": "Discorporation",
+      "bounded_excerpt": "Command Cult Spirit, Discorporation",
+      "confidence": "high"
+    }
+  ]
+}

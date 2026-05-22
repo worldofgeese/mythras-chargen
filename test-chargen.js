@@ -44,6 +44,16 @@ function info(msg) {
   console.log(`${colors.gray}${msg}${colors.reset}`);
 }
 
+const jsonCache = new Map();
+
+function readJson(relativePath) {
+  const absolutePath = path.join(__dirname, relativePath);
+  if (!jsonCache.has(absolutePath)) {
+    jsonCache.set(absolutePath, JSON.parse(fs.readFileSync(absolutePath, 'utf8')));
+  }
+  return jsonCache.get(absolutePath);
+}
+
 const pendingTests = [];
 
 function asyncTest(msg, fn) {
@@ -262,19 +272,21 @@ runCommandTest('Render workflow can list sources without rendering pages',
   'python3', ['scripts/render_source_pages.py', '--list-sources', '--quiet']);
 
 {
-  const sourceSchema = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/sources/schema.json'), 'utf8'));
-  const provenanceSchema = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/provenance/schema.json'), 'utf8'));
-  const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/sources/manifest.json'), 'utf8'));
-  const legacy = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/provenance/legacy-disposition.json'), 'utf8'));
-  const indexMap = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/provenance/index-html-map.json'), 'utf8'));
+  const sourceSchema = readJson('references/sources/schema.json');
+  const provenanceSchema = readJson('references/provenance/schema.json');
+  const manifest = readJson('references/sources/manifest.json');
+  const legacy = readJson('references/provenance/legacy-disposition.json');
+  const indexMap = readJson('references/provenance/index-html-map.json');
   const sourceValidator = require('./scripts/source_manifest_validator.js');
   const provenanceValidator = require('./scripts/validate_provenance.js');
-  const requiredSources = ['aig', 'cse', 'waha', 'bird-in-hand', 'monster-island'];
+  const requiredSources = ['aig', 'mythras-core', 'cse', 'waha', 'bird-in-hand', 'monster-island'];
   const expectedWahaRevision = 'waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21';
   const expectedWahaHash = 'a36461fa3ba86159be1d8993ea920824446171380ff3c11c10a47a8cd95475f1';
   const manifestById = new Map(manifest.sources.map(source => [source.source_id, source]));
   const manifestIds = manifest.sources.map(source => source.source_id).sort();
   const missingSources = requiredSources.filter(sourceId => !manifestIds.includes(sourceId));
+  const expectedMythrasCoreHash = 'de88d7107f936420954474fa4c08a5393c321e8895ca6bea0cdca1194bcb8b90';
+  const expectedMythrasCoreRevision = 'mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22';
   const expectedCseHash = '106d7ad39e8b63d39cc6a5e79db7ec2f031b165b5c05017113bc13f2469841a6';
   const expectedCseRevision = 'cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21';
   const expectedCsePublicUrl = 'https://copyparty.hound-celsius.ts.net/sources/books/Combat%20Styles%20Encyclopedia.pdf';
@@ -292,6 +304,39 @@ runCommandTest('Render workflow can list sources without rendering pages',
     pass('Pending/unavailable sources explicitly block extraction');
   } else {
     fail('Pending/unavailable source does not block extraction');
+  }
+
+  const mythrasCore = manifestById.get('mythras-core');
+  const mythrasCorePages = readJson('references/sources/pages/mythras-core.json');
+  if (mythrasCore &&
+      mythrasCore.lifecycle_state === 'active' &&
+      mythrasCore.source_revision_id === expectedMythrasCoreRevision &&
+      mythrasCore.sha256 === expectedMythrasCoreHash &&
+      mythrasCore.size_bytes === 19068127 &&
+      mythrasCore.page_count === 309 &&
+      mythrasCore.local_hint === 'references/sources/pdfs/mythras-core.pdf' &&
+      mythrasCore.canonical_locator === 'https://copyparty.hound-celsius.ts.net/sources/books/Mythras%20Core%20Rulebook%20%283rd%20Printing%202018%29.pdf' &&
+      mythrasCorePages.source_revision_id === expectedMythrasCoreRevision &&
+      mythrasCorePages.expected_page_count === 309 &&
+      mythrasCorePages.coverage_state === 'blocked' &&
+      Array.isArray(mythrasCorePages.known_ranges) &&
+      mythrasCorePages.known_ranges.some(range => range.label === 'Animism') &&
+      mythrasCorePages.known_ranges.some(range => range.label === 'Sorcery') &&
+      mythrasCorePages.known_ranges.some(range => range.label === 'Mysticism')) {
+    pass('Mythras Core source manifest records Copyparty PDF identity and blocked page coverage');
+  } else {
+    fail('Mythras Core source manifest/page coverage is missing or incomplete',
+      JSON.stringify({
+        revision: mythrasCore?.source_revision_id,
+        hash: mythrasCore?.sha256,
+        size: mythrasCore?.size_bytes,
+        pageCount: mythrasCore?.page_count,
+        localHint: mythrasCore?.local_hint,
+        locator: mythrasCore?.canonical_locator,
+        pageRevision: mythrasCorePages?.source_revision_id,
+        expectedPageCount: mythrasCorePages?.expected_page_count,
+        coverageState: mythrasCorePages?.coverage_state
+      }));
   }
 
   const activeWaha = manifest.sources.find(source => source.source_id === 'waha');
@@ -315,26 +360,35 @@ runCommandTest('Render workflow can list sources without rendering pages',
       }));
   }
 
-  const wahaPages = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/sources/pages/waha.json'), 'utf8'));
-  const wahaBlockedForVerification = activeWaha?.acceptance_state === 'blocked_pending_vision_verification' &&
+  const wahaPages = readJson('references/sources/pages/waha.json');
+  const wahaVisionVerified = activeWaha?.acceptance_state === 'bounded_vision_verified' &&
     activeWaha?.source_access?.public_copyparty_source?.status === 'available' &&
-    wahaPages.coverage_state === 'blocked' &&
+    wahaPages.coverage_state === 'verified' &&
     wahaPages.source_revision_id === expectedWahaRevision &&
     wahaPages.pages.every(page =>
       page.source_revision_id === expectedWahaRevision &&
-      page.work_state === 'rendered' &&
+      page.work_state === 'verified' &&
       page.render?.status === 'rendered' &&
       /^[a-f0-9]{64}$/.test(page.render?.image_sha256 || '') &&
       page.render?.cache_path?.startsWith('.cache/source-pages/waha/') &&
-      !page.extraction &&
-      !page.verification &&
+      page.extraction?.artifact_path?.startsWith('references/sources/evidence/waha/') &&
+      page.verification?.artifact_path?.startsWith('references/sources/evidence/waha/') &&
+      page.verification?.independent === true &&
       Array.isArray(page.blockers) &&
-      page.blockers.some(blocker => /independent verifier/i.test(blocker))
+      page.blockers.length === 0
     );
-  if (wahaBlockedForVerification) {
-    pass('Waha source refresh records rendered page evidence but remains blocked pending independent verification');
+  const wahaEvidenceBlocksJoin = wahaPages.pages.every(page => {
+    const extraction = readJson(page.extraction.artifact_path);
+    const verification = readJson(page.verification.artifact_path);
+    const extractionBlockIds = new Set((extraction.blocks || []).map(block => block.block_id));
+    const verifiedBlockIds = new Set(verification.verified_blocks || []);
+    return (page.derived_facts || []).flatMap(fact => fact.block_ids || [])
+      .every(blockId => extractionBlockIds.has(blockId) && verifiedBlockIds.has(blockId));
+  });
+  if (wahaVisionVerified && wahaEvidenceBlocksJoin) {
+    pass('Waha source refresh records bounded vision evidence and independent verification');
   } else {
-    fail('Waha source refresh must record updated rendered evidence without claiming verification',
+    fail('Waha source refresh must record bounded extraction and independent verification',
       JSON.stringify({
         acceptanceState: activeWaha?.acceptance_state,
         publicCopypartyStatus: activeWaha?.source_access?.public_copyparty_source?.status,
@@ -347,7 +401,8 @@ runCommandTest('Render workflow can list sources without rendering pages',
           hasExtraction: Boolean(page.extraction),
           hasVerification: Boolean(page.verification),
           blockers: page.blockers
-        }))
+        })),
+        evidenceBlocksJoin: wahaEvidenceBlocksJoin
       }));
   }
 
@@ -409,18 +464,27 @@ runCommandTest('Render workflow can list sources without rendering pages',
     ['verified', 'normalized', 'accepted'].includes(entry.status)
   );
   const blockedMonsterRefs = (startingSpiritsMap?.blocked_candidate_sources || []).filter(ref => ref.source_id === 'monster-island');
+  const mythrasCoreStartingSpiritRef = (startingSpiritsMap?.source_refs || []).find(ref => ref.source_id === 'mythras-core');
   if (acceptedMonsterEntries.length === 0 &&
       startingSpiritsMap?.status === 'source_blocked' &&
+      (startingSpiritsMap?.source_ids || []).includes('mythras-core') &&
+      !Array.isArray(startingSpiritsMap?.external_source_gaps) &&
+      mythrasCoreStartingSpiritRef?.source_revision_id === expectedMythrasCoreRevision &&
+      mythrasCoreStartingSpiritRef?.page_manifest_path === 'references/sources/pages/mythras-core.json' &&
+      mythrasCoreStartingSpiritRef?.coverage_state === 'blocked' &&
       blockedMonsterRefs.length === 1 &&
       blockedMonsterRefs[0].source_revision_id === monsterRevision &&
       blockedMonsterRefs[0].coverage_state === 'blocked' &&
       blockedMonsterRefs[0].authority_state === 'non_authoritative' &&
       blockedMonsterRefs[0].evidence_state === 'rendered_pages_extraction_and_verification_blocked') {
-    pass('Monster Island remains blocked in app provenance while permission is pending');
+    pass('Starting spirit provenance wires Mythras Core and keeps Monster Island blocked while permission is pending');
   } else {
-    fail('Monster Island is missing blocked app provenance or was accepted prematurely',
+    fail('Starting spirit provenance is missing Mythras Core wiring or accepted Monster Island prematurely',
       JSON.stringify({
         startingSpiritsStatus: startingSpiritsMap?.status,
+        sourceIds: startingSpiritsMap?.source_ids,
+        externalSourceGaps: startingSpiritsMap?.external_source_gaps,
+        mythrasCoreStartingSpiritRef,
         acceptedMonsterEntries: acceptedMonsterEntries.map(entry => entry.constant_name),
         blockedMonsterRefs
       }));
@@ -435,13 +499,30 @@ runCommandTest('Render workflow can list sources without rendering pages',
     invalidAcceptedWahaPages,
     new Map((manifest.sources || []).map(source => [source.source_id, source])),
     sourceSchema,
-    'references/sources/pages/waha.json'
+    'references/sources/pages/waha.json',
+    __dirname
   );
   if (invalidAcceptedWahaResult.some(error => error.includes('accepted page requires verification metadata'))) {
     pass('Waha page coverage validator rejects accepted pages without verifier metadata');
   } else {
     fail('Waha page coverage validator allowed accepted Waha page without verifier metadata',
       invalidAcceptedWahaResult.join('\n'));
+  }
+
+  const invalidWahaBlockJoinPages = JSON.parse(JSON.stringify(wahaPages));
+  invalidWahaBlockJoinPages.pages[0].derived_facts[0].block_ids = ['waha-p1-missing'];
+  const invalidWahaBlockJoinResult = sourceValidator.validatePageCoverage(
+    invalidWahaBlockJoinPages,
+    new Map((manifest.sources || []).map(source => [source.source_id, source])),
+    sourceSchema,
+    'references/sources/pages/waha.json',
+    __dirname
+  );
+  if (invalidWahaBlockJoinResult.some(error => error.includes('missing from verification artifact'))) {
+    pass('Waha page coverage validator rejects derived facts not joined to verifier blocks');
+  } else {
+    fail('Waha page coverage validator allowed unverified derived block IDs',
+      invalidWahaBlockJoinResult.join('\n'));
   }
 
   const expectedAigHash = '0edc1e549c560222a7c2b80e9eb0fb713d962bb30a280a7a6b760821e2983572';
@@ -753,13 +834,27 @@ info(`Loaded ${App.SKILLS_DATA.length} skills, ${App.WEAPONS_DATA.length} weapon
 section('Waha Source Authority');
 {
   const expectedWahaRevision = 'waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21';
-  const praxianWaha = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/cults-raw/praxian/waha.json'), 'utf8'));
-  const stormWaha = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/cults-raw/storm/waha.json'), 'utf8'));
-  const aggregateCults = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/cults-raw/cults.json'), 'utf8'));
+  const praxianWaha = readJson('references/cults-raw/praxian/waha.json');
+  const stormWaha = readJson('references/cults-raw/storm/waha.json');
+  const aggregateCults = readJson('references/cults-raw/cults.json');
+  const indexMap = readJson('references/provenance/index-html-map.json');
   const aggregateWaha = aggregateCults.filter(cult => cult.name === 'Waha');
   const appWaha = App.CULTS_DATA.filter(cult => cult.name === 'Waha');
   const appCanonical = appWaha[0] || {};
+  const wahaCoverage = readJson('references/sources/pages/waha.json');
+  const wahaIndexEntry = (indexMap.entries || []).find(entry => entry.constant_name === 'CULTS_DATA');
+  const wahaMiraclesEntry = (indexMap.entries || []).find(entry => entry.constant_name === 'MIRACLES_DATA');
   const aggregateBlocked = aggregateWaha.length >= 2 && aggregateWaha.every(cult => cult.doNotUseForAppGeneration === true);
+  const pagesVerified = wahaCoverage.coverage_state === 'verified' &&
+    wahaCoverage.pages.every(page =>
+      page.work_state === 'verified' &&
+      page.extraction?.artifact_path &&
+      page.verification?.artifact_path &&
+      page.verification?.independent === true &&
+      Array.isArray(page.derived_facts) &&
+      page.derived_facts.length > 0);
+  const sourceSpelling = praxianWaha.sourceAuthority?.source_spelling_normalizations?.find(item =>
+    item.source_spelling === 'Aveert' && item.normalized_value === 'Avert');
   const hasStaleInlineMechanics = appWaha.length !== 1 ||
     appCanonical.cultSkills?.includes('Track') ||
     appCanonical.cultSkills?.some(skill => /\(Shaman\)/.test(skill)) ||
@@ -768,8 +863,14 @@ section('Waha Source Authority');
   if (praxianWaha.canonicalRecord === true &&
       praxianWaha.sourceRevisionId === expectedWahaRevision &&
       praxianWaha.sourceAuthority?.source_revision_id === expectedWahaRevision &&
-      praxianWaha.verified === false &&
-      praxianWaha.verificationState === 'blocked_pending_vision_verification' &&
+      praxianWaha.verified === true &&
+      praxianWaha.verificationState === 'vision_verified' &&
+      praxianWaha.sourceAuthority?.authority_status === 'bounded_vision_verified' &&
+      praxianWaha.sourceAuthority?.blocked_by?.length === 0 &&
+      sourceSpelling &&
+      pagesVerified &&
+      wahaIndexEntry?.status === 'verified' &&
+      wahaMiraclesEntry?.status === 'verified' &&
       stormWaha.recordStatus === 'superseded' &&
       stormWaha.doNotUseForAppGeneration === true &&
       stormWaha.sourceRevisionId === expectedWahaRevision &&
@@ -782,13 +883,19 @@ section('Waha Source Authority');
       appCanonical.cultSkills?.includes('Peaceful Cut') &&
       appCanonical.cultSkills?.includes('Understand Herd Beast') &&
       !hasStaleInlineMechanics) {
-    pass('Canonical Waha app data excludes stale Storm/aggregate duplicate records');
+    pass('Canonical Waha app data is backed by bounded independent vision evidence');
   } else {
-    fail('Stale Waha duplicate can still feed app data',
+    fail('Canonical Waha app data lacks bounded vision evidence or duplicate protection',
       JSON.stringify({
         praxianCanonical: praxianWaha.canonicalRecord,
         praxianRevision: praxianWaha.sourceRevisionId,
+        praxianVerified: praxianWaha.verified,
         praxianVerificationState: praxianWaha.verificationState,
+        sourceSpelling,
+        coverageState: wahaCoverage.coverage_state,
+        pageStates: wahaCoverage.pages.map(page => ({ page: page.pdf_page, state: page.work_state, independent: page.verification?.independent })),
+        indexStatus: wahaIndexEntry?.status,
+        miraclesStatus: wahaMiraclesEntry?.status,
         stormStatus: stormWaha.recordStatus,
         stormDoNotUse: stormWaha.doNotUseForAppGeneration,
         stormRevision: stormWaha.sourceRevisionId,
@@ -800,7 +907,7 @@ section('Waha Source Authority');
 }
 
 // Helper to create a valid test character
-function createTestCharacter(culture = 'Generic') {
+function createTestCharacter(culture = 'Sartarite (Heortling)') {
   return {
     name: 'Test Character',
     culture: culture,
@@ -2164,7 +2271,7 @@ section('Risk 5: Data Attestation & Validation Layer');
   if (App.CharacterData && App.CharacterData.toJSON && App.CharacterData.fromJSON) {
     // Set up test data
     App.CharacterData.name = 'JSON Test Character';
-    App.CharacterData.culture = 'Generic';
+    App.CharacterData.culture = 'Sartarite (Heortling)';
     App.CharacterData.characteristics = { STR: 15, CON: 13, SIZ: 12, DEX: 14, INT: 11, POW: 10, CHA: 9 };
     App.CharacterData.culturalSkills = { 'Ride': 45, 'Locale': 30 };
     App.CharacterData.notes = 'Test notes for serialization';
@@ -4252,8 +4359,8 @@ fixtures.forEach(fixtureInfo => {
     CD.cultType = { primary: 'animist', types: ['animist'], isHybrid: false };
     CD.boundSpiritSlots = 5;
     CD.boundSpirits = [{ name: 'Ancestor Spirit' }];
-    CD.sorceryResource = 14;
-    CD.sorcerySpells = ['Animate (Substance)'];
+    CD.sorceryResource = 0;
+    CD.sorcerySpells = [];
     CD.companions = [{ name: 'Greywind', species: 'Bison' }];
 
     const serialized = CD.toJSON();
@@ -4262,9 +4369,10 @@ fixtures.forEach(fixtureInfo => {
     CD.sorceryResource = 0;
     CD.sorcerySpells = [];
     CD.companions = [];
-    CD.fromJSON(serialized);
+    const roundTripSuccess = CD.fromJSON(serialized);
 
     const preserved =
+      roundTripSuccess &&
       CD.cultType && CD.cultType.primary === 'animist' &&
       CD.boundSpiritSlots === 5 &&
       CD.boundSpirits && CD.boundSpirits[0] && CD.boundSpirits[0].name === 'Ancestor Spirit' &&
@@ -4272,8 +4380,22 @@ fixtures.forEach(fixtureInfo => {
       CD.sorcerySpells && CD.sorcerySpells.length === 0 &&
       CD.companions && CD.companions[0] && CD.companions[0].name === 'Greywind';
 
-    if (preserved) {
-      pass('Character JSON round-trip preserves valid magic and clears stale sorcery state');
+    CD.name = 'Before Stale Round Trip';
+    const staleSuccess = CD.fromJSON({
+      ...serialized,
+      name: 'Stale Sorcery Round Trip',
+      sorceryResource: 14,
+      sorcerySpells: ['Animate (Substance)']
+    });
+    const staleRejected = staleSuccess === false &&
+      CD.name === 'Before Stale Round Trip' &&
+      CD.boundSpiritSlots === 5 &&
+      CD.boundSpirits && CD.boundSpirits[0] && CD.boundSpirits[0].name === 'Ancestor Spirit' &&
+      CD.sorcerySpells && CD.sorcerySpells.length === 0 &&
+      CD.companions && CD.companions[0] && CD.companions[0].name === 'Greywind';
+
+    if (preserved && staleRejected) {
+      pass('Character JSON round-trip preserves valid magic and rejects stale sorcery state');
     } else {
       fail('Character JSON round-trip drops valid magic or keeps stale sorcery state');
     }
@@ -4302,8 +4424,8 @@ fixtures.forEach(fixtureInfo => {
     CD.characteristics = { STR: 11, CON: 12, SIZ: 13, DEX: 14, INT: 15, POW: 13, CHA: 10 };
     CD.selectedProfessionalSkills = ['Invocation (Arkat)', 'Shaping'];
     CD.careerSkills = { 'Invocation (Arkat)': 10, Shaping: 10 };
-    CD.boundSpiritSlots = 4;
-    CD.boundSpirits = [{ name: 'Disease Spirit' }];
+    CD.boundSpiritSlots = 0;
+    CD.boundSpirits = [];
     CD.sorceryResource = 13;
     CD.sorcerySpells = ['Dominate (Creatures)'];
     CD.companions = [{ name: 'Hoofbeat', species: 'Horse' }];
@@ -4322,8 +4444,8 @@ fixtures.forEach(fixtureInfo => {
       CD.name === 'Storage Round Trip' &&
       CD.cult === 'Arkat' &&
       CD.cultType && CD.cultType.primary === 'sorcery' &&
-      CD.boundSpiritSlots === 4 &&
-      CD.boundSpirits && CD.boundSpirits[0] && CD.boundSpirits[0].name === 'Disease Spirit' &&
+      CD.boundSpiritSlots === 0 &&
+      CD.boundSpirits && CD.boundSpirits.length === 0 &&
       CD.sorceryResource === 13 &&
       CD.sorcerySpells && CD.sorcerySpells[0] === 'Dominate (Creatures)' &&
       CD.companions && CD.companions[0] && CD.companions[0].name === 'Hoofbeat';
@@ -4353,7 +4475,7 @@ fixtures.forEach(fixtureInfo => {
         characteristics: { STR: 11, CON: 12, SIZ: 13, DEX: 14, INT: 15, POW: 13, CHA: 10 },
         selectedProfessionalSkills: ['Invocation', 'Shaping', 'Lore (Sorcery)'],
         careerSkills: { Invocation: 10, Shaping: 10, 'Lore (Sorcery)': 10 },
-        boundSpirits: [{ name: 'Healing Spirit' }],
+        boundSpirits: [],
         sorceryResource: 0,
         sorcerySpells: ['Project (Sense)'],
         companions: [{ name: 'Red Mane', species: 'Horse' }]
@@ -4362,7 +4484,7 @@ fixtures.forEach(fixtureInfo => {
 
     const success = CD.fromJSON(JSON.stringify(payload));
     if (success && CD.name === 'Versioned Envelope' &&
-        CD.boundSpirits && CD.boundSpirits[0].name === 'Healing Spirit' &&
+        CD.boundSpirits && CD.boundSpirits.length === 0 &&
         CD.sorceryResource === 13 &&
         CD.sorcerySpells && CD.sorcerySpells[0] === 'Project (Sense)' &&
         CD.companions && CD.companions[0].name === 'Red Mane') {
@@ -4533,6 +4655,52 @@ fixtures.forEach(fixtureInfo => {
       } else {
         fail('App.importCharacterData accepts duplicate professional specialty imports',
           JSON.stringify({ duplicateSelectedSuccess, duplicateMapSuccess, name: CD.name }));
+      }
+
+      const forgedInvocationSuccess = AppObj.importCharacterData({
+        ...createTestCharacter(),
+        name: 'Forged Invocation Import',
+        career: 'Farmer',
+        selectedProfessionalSkills: ['Invocation', 'Commerce', 'Track'],
+        careerSkills: { Invocation: 0, Commerce: 0, Track: 0 },
+        cult: 'Arkat',
+        cultType: { primary: 'sorcery', types: ['sorcery'], isHybrid: false },
+        sorcerySpells: ['Holdfast']
+      });
+
+      if (!forgedInvocationSuccess && CD.name === 'Import Original') {
+        pass('App.importCharacterData rejects forged professional skills before mutation');
+      } else {
+        fail('App.importCharacterData accepts forged professional skill imports',
+          JSON.stringify({ forgedInvocationSuccess, name: CD.name }));
+      }
+
+      const missingCareerInvocationSuccess = AppObj.importCharacterData({
+        ...createTestCharacter(),
+        name: 'Missing Career Invocation Import',
+        career: '',
+        selectedProfessionalSkills: ['Invocation (Arkat)', 'Shaping', 'Lore (Sorcery)'],
+        careerSkills: { 'Invocation (Arkat)': 0, Shaping: 0, 'Lore (Sorcery)': 0 },
+        cult: 'Arkat',
+        cultType: { primary: 'sorcery', types: ['sorcery'], isHybrid: false },
+        sorcerySpells: ['Holdfast']
+      });
+      const unknownCareerInvocationSuccess = AppObj.importCharacterData({
+        ...createTestCharacter(),
+        name: 'Unknown Career Invocation Import',
+        career: 'Imaginary Sorcerer',
+        selectedProfessionalSkills: ['Invocation (Arkat)', 'Shaping', 'Lore (Sorcery)'],
+        careerSkills: { 'Invocation (Arkat)': 0, Shaping: 0, 'Lore (Sorcery)': 0 },
+        cult: 'Arkat',
+        cultType: { primary: 'sorcery', types: ['sorcery'], isHybrid: false },
+        sorcerySpells: ['Holdfast']
+      });
+
+      if (!missingCareerInvocationSuccess && !unknownCareerInvocationSuccess && CD.name === 'Import Original') {
+        pass('App.importCharacterData rejects Invocation imports without career authority');
+      } else {
+        fail('App.importCharacterData accepts Invocation imports without career authority',
+          JSON.stringify({ missingCareerInvocationSuccess, unknownCareerInvocationSuccess, name: CD.name }));
       }
 
       let saved = false;
@@ -4976,14 +5144,16 @@ fixtures.forEach(fixtureInfo => {
       attributes: CalcRef.calculateAllAttributes(characteristics),
       selectedProfessionalSkills: ['Invocation', 'Shaping', 'Lore (Sorcery)'],
       careerSkills: { Invocation: 10, Shaping: 10, 'Lore (Sorcery)': 10 },
-      miracles: ['Shield'],
-      devotionalPool: 99,
+      miracles: [],
+      devotionalPool: 0,
       sorceryResource: 0,
       sorcerySpells: ['Holdfast', 'Animate (Substance)', 'Project (Sense)'],
       folkMagicSpells: [],
       careerFolkMagic: [],
       boundSpirits: []
     }));
+    CD.miracles = ['Shield'];
+    CD.devotionalPool = 99;
 
     AppObj.renderPlayMagic();
     const html = _sandbox.elements['play-magic'].innerHTML;
@@ -5516,6 +5686,7 @@ section('Cult Data Tests');
 
 // Test: Waha app data is singular and points at canonical Praxian source
 {
+  const expectedWahaRevision = 'waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21';
   const wahaRecords = (App.CULTS_DATA || []).filter(cult => cult.name === 'Waha');
   const waha = wahaRecords[0];
   if (
@@ -5523,18 +5694,26 @@ section('Cult Data Tests');
     waha?.pantheon === 'Praxian' &&
     waha?.canonicalRecord === true &&
     waha?.doNotUseForAppGeneration === false &&
+    waha?.source === 'https://copyparty.hound-celsius.ts.net/sources/books/Waha.pdf' &&
+    waha?.sourceRevisionId === expectedWahaRevision &&
+    waha?.sourceSha256 === 'a36461fa3ba86159be1d8993ea920824446171380ff3c11c10a47a8cd95475f1' &&
+    waha?.verificationState === 'vision_verified' &&
     Array.isArray(waha?.sourcePages) &&
     waha.sourcePages.includes(1) &&
     waha.sourcePages.includes(2) &&
-    /Praxian\/Waha\.pdf, p\.1-2$/.test(waha?.sourceCitation || '')
+    waha?.sourceCitation === 'https://copyparty.hound-celsius.ts.net/sources/books/Waha.pdf, p.1-2'
   ) {
-    pass('CULTS_DATA contains one canonical source-cited Praxian Waha');
+    pass('CULTS_DATA contains one canonical vision-verified Praxian Waha source');
   } else {
-    fail('CULTS_DATA Waha authority is duplicated or missing canonical citation',
+    fail('CULTS_DATA Waha authority is duplicated or missing verified source metadata',
       JSON.stringify(wahaRecords.map(cult => ({
         pantheon: cult.pantheon,
         canonicalRecord: cult.canonicalRecord,
         doNotUseForAppGeneration: cult.doNotUseForAppGeneration,
+        source: cult.source,
+        sourceRevisionId: cult.sourceRevisionId,
+        sourceSha256: cult.sourceSha256,
+        verificationState: cult.verificationState,
         sourceCitation: cult.sourceCitation
       }))));
   }
@@ -5788,20 +5967,25 @@ section('Cult Data Tests');
     const noZzistoriCultMapEntry = !godForgotCultNames.includes('Zzistori') &&
       !godForgotCultNames.includes('Zzistori School (God Forgot sorcery)');
 
-    const staleSuccess = CD.fromJSON(JSON.stringify({
+    CD.name = 'Before Stale Sorcery Import';
+    CD.sorcerySpells = ['Holdfast'];
+    const staleNoSourcePayload = {
       ...createTestCharacter('Praxian'),
       name: 'Stale Sorcery Import',
-      career: 'Sorcerer',
+      career: 'Farmer',
       cult: null,
-      cultType: { primary: 'sorcery', types: ['sorcery'], isHybrid: false },
+      cultType: null,
+      selectedProfessionalSkills: [],
       sorceryResource: 12,
       sorcerySpells: ['Project (Sense)']
-    }));
-    const staleCleared = staleSuccess &&
-      CD.cultType === null &&
-      CD.sorceryResource === 0 &&
+    };
+    const staleErrors = CD.validatePlainObject(staleNoSourcePayload);
+    const staleSuccess = CD.fromJSON(JSON.stringify(staleNoSourcePayload));
+    const staleRejected = staleErrors.some(error => /sorcerySpells requires an active sorcery source/i.test(error)) &&
+      staleSuccess === false &&
+      CD.name === 'Before Stale Sorcery Import' &&
       Array.isArray(CD.sorcerySpells) &&
-      CD.sorcerySpells.length === 0;
+      CD.sorcerySpells[0] === 'Holdfast';
 
     const validZzistoriPayload = {
       ...createTestCharacter('God Forgot'),
@@ -5815,12 +5999,365 @@ section('Cult Data Tests');
       sorceryResource: 0,
       sorcerySpells: ['Project (Sense)', 'Animate (Substance)']
     };
+    const createInheritedIndexedArray = (...values) => {
+      const array = new Array(values.length);
+      const prototype = Object.create(Array.prototype);
+      values.forEach((value, index) => {
+        prototype[index] = value;
+      });
+      Object.setPrototypeOf(array, prototype);
+      return array;
+    };
+    const createInheritedIndexedArrayAfterLength = (index, value) => {
+      const array = [];
+      const prototype = Object.create(Array.prototype);
+      prototype[index] = value;
+      Object.setPrototypeOf(array, prototype);
+      return array;
+    };
     const validSuccess = CD.fromJSON(JSON.stringify(validZzistoriPayload));
     const validSource = AppRef.resolveActiveSorcerySource(CD);
     const validPreserved = validSuccess &&
       validSource?.sourceLabel === 'Zzistori School (God Forgot sorcery)' &&
       CD.sorceryResource === 13 &&
       JSON.stringify(CD.sorcerySpells) === JSON.stringify(validZzistoriPayload.sorcerySpells);
+
+    CD.name = 'Before Valid Envelope Import';
+    const validEnvelopeSuccess = CD.fromJSON({ version: 1, data: validZzistoriPayload });
+    const validEnvelopePreserved = validEnvelopeSuccess &&
+      CD.name === 'Valid Zzistori Import' &&
+      JSON.stringify(CD.sorcerySpells) === JSON.stringify(validZzistoriPayload.sorcerySpells);
+
+    CD.name = 'Before Inherited Import';
+    const inheritedImportPayload = Object.create(validZzistoriPayload);
+    const inheritedImportErrors = CD.validatePlainObject(inheritedImportPayload);
+    const inheritedImportSuccess = CD.fromJSON(inheritedImportPayload);
+    const inheritedImportRejected = inheritedImportErrors.some(error => /own fields only/i.test(error)) &&
+      inheritedImportSuccess === false &&
+      CD.name === 'Before Inherited Import';
+
+    CD.name = 'Before Inherited Unknown Import';
+    const inheritedUnknownPayload = {
+      ...validZzistoriPayload,
+      name: 'Inherited Unknown Import'
+    };
+    Object.setPrototypeOf(inheritedUnknownPayload, { evil: 'ignored prototype field' });
+    const inheritedUnknownErrors = CD.validatePlainObject(inheritedUnknownPayload);
+    const inheritedUnknownSuccess = CD.fromJSON(inheritedUnknownPayload);
+    const inheritedUnknownRejected = inheritedUnknownErrors.some(error => /own fields only: evil/i.test(error)) &&
+      inheritedUnknownSuccess === false &&
+      CD.name === 'Before Inherited Unknown Import';
+
+    CD.name = 'Before Hidden Inherited Import';
+    const hiddenImportPrototype = {};
+    Object.defineProperty(hiddenImportPrototype, 'sorcerySpells', {
+      value: ['Project (Sense)'],
+      enumerable: false
+    });
+    const hiddenInheritedPayload = {
+      ...validZzistoriPayload,
+      name: 'Hidden Inherited Import'
+    };
+    delete hiddenInheritedPayload.sorcerySpells;
+    Object.setPrototypeOf(hiddenInheritedPayload, hiddenImportPrototype);
+    const hiddenInheritedErrors = CD.validatePlainObject(hiddenInheritedPayload);
+    const hiddenInheritedSuccess = CD.fromJSON(hiddenInheritedPayload);
+    const hiddenInheritedRejected = hiddenInheritedErrors.some(error => /own fields only: sorcerySpells/i.test(error)) &&
+      hiddenInheritedSuccess === false &&
+      CD.name === 'Before Hidden Inherited Import';
+
+    CD.name = 'Before Null Prototype Import';
+    const nullPrototype = Object.create(null);
+    nullPrototype.name = 'Null Prototype Injected Name';
+    const nullPrototypePayload = {
+      ...validZzistoriPayload
+    };
+    delete nullPrototypePayload.name;
+    Object.setPrototypeOf(nullPrototypePayload, nullPrototype);
+    const nullPrototypeErrors = CD.validatePlainObject(nullPrototypePayload);
+    const nullPrototypeSuccess = CD.fromJSON(nullPrototypePayload);
+    const nullPrototypeRejected = nullPrototypeErrors.some(error => /own fields only: name/i.test(error)) &&
+      nullPrototypeSuccess === false &&
+      CD.name === 'Before Null Prototype Import';
+
+    CD.name = 'Before Inherited Nested Import';
+    const inheritedCharacteristics = Object.create(validZzistoriPayload.characteristics);
+    const inheritedNestedPayload = {
+      ...validZzistoriPayload,
+      name: 'Inherited Nested Import',
+      characteristics: inheritedCharacteristics
+    };
+    const inheritedNestedErrors = CD.validatePlainObject(inheritedNestedPayload);
+    const inheritedNestedSuccess = CD.fromJSON(inheritedNestedPayload);
+    const inheritedNestedRejected = inheritedNestedErrors.some(error => /characteristics must use own fields only/i.test(error)) &&
+      inheritedNestedSuccess === false &&
+      CD.name === 'Before Inherited Nested Import';
+
+    CD.name = 'Before Hidden Nested Import';
+    const hiddenCharacteristicsPrototype = {};
+    Object.defineProperty(hiddenCharacteristicsPrototype, 'STR', {
+      value: validZzistoriPayload.characteristics.STR,
+      enumerable: false
+    });
+    const hiddenCharacteristics = {
+      CON: validZzistoriPayload.characteristics.CON,
+      SIZ: validZzistoriPayload.characteristics.SIZ,
+      DEX: validZzistoriPayload.characteristics.DEX,
+      INT: validZzistoriPayload.characteristics.INT,
+      POW: validZzistoriPayload.characteristics.POW,
+      CHA: validZzistoriPayload.characteristics.CHA
+    };
+    Object.setPrototypeOf(hiddenCharacteristics, hiddenCharacteristicsPrototype);
+    const hiddenNestedPayload = {
+      ...validZzistoriPayload,
+      name: 'Hidden Nested Import',
+      characteristics: hiddenCharacteristics
+    };
+    const hiddenNestedErrors = CD.validatePlainObject(hiddenNestedPayload);
+    const hiddenNestedSuccess = CD.fromJSON(hiddenNestedPayload);
+    const hiddenNestedRejected = hiddenNestedErrors.some(error => /characteristics must use own fields only: STR/i.test(error)) &&
+      hiddenNestedSuccess === false &&
+      CD.name === 'Before Hidden Nested Import';
+
+    CD.name = 'Before Inherited Companion Import';
+    const inheritedCompanion = Object.create({
+      name: 'Prototype Wolf',
+      attacks: [{ name: 'Bite', skill: 45 }]
+    });
+    const inheritedAttack = Object.assign(Object.create({ name: 'Prototype Claw' }), { skill: 40 });
+    const inheritedCompanionPayload = {
+      ...validZzistoriPayload,
+      name: 'Inherited Companion Import',
+      companions: [
+        inheritedCompanion,
+        { name: 'Own Wolf', attacks: [inheritedAttack] }
+      ]
+    };
+    const inheritedCompanionErrors = CD.validatePlainObject(inheritedCompanionPayload);
+    const inheritedCompanionSuccess = CD.fromJSON(inheritedCompanionPayload);
+    const inheritedCompanionRejected = inheritedCompanionErrors.some(error => /companions\[0\] must use own fields only: name/i.test(error)) &&
+      inheritedCompanionErrors.some(error => /companions\[1\]\.attacks\[0\] must use own fields only: name/i.test(error)) &&
+      inheritedCompanionSuccess === false &&
+      CD.name === 'Before Inherited Companion Import';
+
+    CD.name = 'Before Inherited Array Object Import';
+    const inheritedEquipment = Object.assign(Object.create({ evil: true }), { name: 'Prototype Rope' });
+    const inheritedCombatStyle = Object.assign(Object.create({ evil: true }), { name: 'Sword & Shield', skill: 50 });
+    const inheritedArrayObjectPayload = {
+      ...validZzistoriPayload,
+      name: 'Inherited Array Object Import',
+      equipment: [inheritedEquipment],
+      combatStyles: [inheritedCombatStyle]
+    };
+    const inheritedArrayObjectErrors = CD.validatePlainObject(inheritedArrayObjectPayload);
+    const inheritedArrayObjectSuccess = CD.fromJSON(inheritedArrayObjectPayload);
+    const inheritedArrayObjectRejected = inheritedArrayObjectErrors.some(error => /equipment\[0\] must use own fields only: evil/i.test(error)) &&
+      inheritedArrayObjectErrors.some(error => /combatStyles\[0\] must use own fields only: evil/i.test(error)) &&
+      inheritedArrayObjectSuccess === false &&
+      CD.name === 'Before Inherited Array Object Import';
+
+    CD.name = 'Before Alias Magic Import';
+    const aliasMagicPayload = {
+      ...validZzistoriPayload,
+      name: 'Alias Magic Import',
+      spells: ['Holdfast'],
+      spirits: ['Ancestor Spirit — Sagacity (Int 1)']
+    };
+    delete aliasMagicPayload.sorcerySpells;
+    const aliasMagicErrors = CD.validatePlainObject(aliasMagicPayload);
+    const aliasMagicSuccess = CD.fromJSON(aliasMagicPayload);
+    const aliasMagicRejected = aliasMagicErrors.some(error => /Unknown character field "spells"/i.test(error)) &&
+      aliasMagicErrors.some(error => /Unknown character field "spirits"/i.test(error)) &&
+      aliasMagicSuccess === false &&
+      CD.name === 'Before Alias Magic Import';
+
+    const unknownReferenceCases = [
+      { field: 'culture', value: 'Atlantis', pattern: /Unknown culture "Atlantis"/i, payload: { culture: 'Atlantis' } },
+      { field: 'career', value: 'Laser Gunner', pattern: /Unknown career "Laser Gunner"/i, payload: { career: 'Laser Gunner', selectedProfessionalSkills: [], sorcerySpells: [] } },
+      { field: 'cult', value: 'Invisible College', pattern: /Unknown cult "Invisible College"/i, payload: { cult: 'Invisible College', sorcerySpells: [] } }
+    ];
+    const unknownReferenceResults = unknownReferenceCases.map(testCase => {
+      CD.name = `Before Unknown ${testCase.field} Import`;
+      const payload = {
+        ...validZzistoriPayload,
+        name: `Unknown ${testCase.field} Import`,
+        ...testCase.payload
+      };
+      const errors = CD.validatePlainObject(payload);
+      const success = CD.fromJSON(payload);
+      return {
+        field: testCase.field,
+        errors,
+        rejected: errors.some(error => testCase.pattern.test(error)) &&
+          success === false &&
+          CD.name === `Before Unknown ${testCase.field} Import`
+      };
+    });
+    const unknownReferencesRejected = unknownReferenceResults.every(result => result.rejected);
+
+    CD.name = 'Before Inherited Envelope Import';
+    const inheritedEnvelopePayload = Object.create({ version: 1, data: validZzistoriPayload });
+    const inheritedEnvelopeErrors = CD.validatePlainObject(CD.unwrapSavePayload(inheritedEnvelopePayload));
+    const inheritedEnvelopeSuccess = CD.fromJSON(inheritedEnvelopePayload);
+    const inheritedEnvelopeRejected = inheritedEnvelopeErrors.length > 0 &&
+      inheritedEnvelopeSuccess === false &&
+      CD.name === 'Before Inherited Envelope Import';
+
+    CD.name = 'Before Duplicate Magic Import';
+    const duplicateMagicPayload = {
+      ...validZzistoriPayload,
+      name: 'Duplicate Magic Import',
+      sorcerySpells: ['Project (Sense)', 'Project (Sense)']
+    };
+    const duplicateMagicErrors = CD.validatePlainObject(duplicateMagicPayload);
+    const duplicateMagicSuccess = CD.fromJSON(JSON.stringify(duplicateMagicPayload));
+    const duplicateMagicRejected = duplicateMagicErrors.some(error => /Duplicate sorcery spell/i.test(error)) &&
+      duplicateMagicSuccess === false &&
+      CD.name === 'Before Duplicate Magic Import';
+
+    CD.name = 'Before Inherited Array Import';
+    const inheritedArrayPayload = {
+      ...validZzistoriPayload,
+      name: 'Inherited Array Import',
+      selectedProfessionalSkills: createInheritedIndexedArray('Invocation', 'Shaping', 'Lore (Sorcery)'),
+      sorcerySpells: createInheritedIndexedArray('Project (Sense)')
+    };
+    const inheritedArrayErrors = CD.validatePlainObject(inheritedArrayPayload);
+    const inheritedArraySuccess = CD.fromJSON(inheritedArrayPayload);
+    const inheritedArrayRejected = inheritedArrayErrors.some(error => /selectedProfessionalSkills\[0\] must be an own array element/i.test(error)) &&
+      inheritedArrayErrors.some(error => /sorcerySpells\[0\] must be an own array element/i.test(error)) &&
+      inheritedArraySuccess === false &&
+      CD.name === 'Before Inherited Array Import';
+
+    const inheritedArrayAfterLengthErrors = CD.validatePlainObject({
+      ...validZzistoriPayload,
+      name: 'Inherited Array After Length Import',
+      sorcerySpells: createInheritedIndexedArrayAfterLength(0, 'Project (Sense)')
+    });
+    const inheritedArrayAfterLengthRejected = inheritedArrayAfterLengthErrors.some(error => /sorcerySpells\[0\] must be an own array element/i.test(error));
+
+    const inheritedMiracleArrayErrors = CD.validatePlainObject({
+      ...createTestCharacter('Praxian'),
+      cult: 'Waha',
+      miracles: createInheritedIndexedArray('Shield')
+    });
+    const inheritedSpiritArrayErrors = CD.validatePlainObject({
+      ...createTestCharacter('Praxian'),
+      cult: 'Daka Fal',
+      boundSpirits: createInheritedIndexedArray('Ancestor Spirit — Sagacity (Int 1)'),
+      sorcerySpells: []
+    });
+    const inheritedMagicArrayRejected = inheritedMiracleArrayErrors.some(error => /miracles\[0\] must be an own array element/i.test(error)) &&
+      inheritedSpiritArrayErrors.some(error => /boundSpirits\[0\] must be an own array element/i.test(error));
+
+    CD.name = 'Before Incompatible Miracle Import';
+    const incompatibleMiraclePayload = {
+      ...validZzistoriPayload,
+      name: 'Incompatible Miracle Import',
+      sorcerySpells: [],
+      miracles: ['Shield']
+    };
+    const incompatibleMiracleErrors = CD.validatePlainObject(incompatibleMiraclePayload);
+    const incompatibleMiracleSuccess = CD.fromJSON(JSON.stringify(incompatibleMiraclePayload));
+    const incompatibleMiracleRejected = incompatibleMiracleErrors.some(error => /miracles requires a theist cult/i.test(error)) &&
+      incompatibleMiracleSuccess === false &&
+      CD.name === 'Before Incompatible Miracle Import';
+
+    CD.name = 'Before Incompatible Spirit Import';
+    const incompatibleSpiritPayload = {
+      ...validZzistoriPayload,
+      name: 'Incompatible Spirit Import',
+      sorcerySpells: [],
+      boundSpirits: ['Ancestor Spirit — Sagacity (Int 1)']
+    };
+    const incompatibleSpiritErrors = CD.validatePlainObject(incompatibleSpiritPayload);
+    const incompatibleSpiritSuccess = CD.fromJSON(JSON.stringify(incompatibleSpiritPayload));
+    const incompatibleSpiritRejected = incompatibleSpiritErrors.some(error => /boundSpirits requires an animist cult/i.test(error)) &&
+      incompatibleSpiritSuccess === false &&
+      CD.name === 'Before Incompatible Spirit Import';
+
+    CD.name = 'Before Malformed Miracle Import';
+    const malformedMiraclePayload = {
+      ...validZzistoriPayload,
+      name: 'Malformed Miracle Import',
+      sorcerySpells: [],
+      miracles: [{}]
+    };
+    const malformedMiracleErrors = CD.validatePlainObject(malformedMiraclePayload);
+    const malformedMiracleSuccess = CD.fromJSON(JSON.stringify(malformedMiraclePayload));
+    const malformedMiracleRejected = malformedMiracleErrors.some(error => /miracles\[0\] must be a string/i.test(error)) &&
+      malformedMiracleSuccess === false &&
+      CD.name === 'Before Malformed Miracle Import';
+
+    CD.name = 'Before Malformed Spirit Import';
+    const malformedSpiritPayload = {
+      ...validZzistoriPayload,
+      name: 'Malformed Spirit Import',
+      sorcerySpells: [],
+      boundSpirits: [{}]
+    };
+    const malformedSpiritErrors = CD.validatePlainObject(malformedSpiritPayload);
+    const malformedSpiritSuccess = CD.fromJSON(JSON.stringify(malformedSpiritPayload));
+    const malformedSpiritRejected = malformedSpiritErrors.some(error => /boundSpirits\[0\] must be a string or object with own name/i.test(error)) &&
+      malformedSpiritSuccess === false &&
+      CD.name === 'Before Malformed Spirit Import';
+
+    CD.name = 'Before Inherited Spirit Entry Import';
+    const inheritedSpiritEntry = Object.create({ name: 'Ancestor Spirit — Sagacity (Int 1)' });
+    const inheritedSpiritEntryPayload = {
+      ...createTestCharacter('Praxian'),
+      name: 'Inherited Spirit Entry Import',
+      cult: 'Daka Fal',
+      cultType: { primary: 'animist', types: ['animist'], isHybrid: false },
+      boundSpiritSlots: 4,
+      boundSpirits: [inheritedSpiritEntry],
+      miracles: [],
+      sorceryResource: 0,
+      sorcerySpells: []
+    };
+    const inheritedSpiritEntryErrors = CD.validatePlainObject(inheritedSpiritEntryPayload);
+    const inheritedSpiritEntrySuccess = CD.fromJSON(inheritedSpiritEntryPayload);
+    const inheritedSpiritEntryRejected = inheritedSpiritEntryErrors.some(error => /boundSpirits\[0\] must be a string or object with own name/i.test(error)) &&
+      inheritedSpiritEntrySuccess === false &&
+      CD.name === 'Before Inherited Spirit Entry Import';
+
+    CD.name = 'Before Inherited Spirit Fields Import';
+    const inheritedSpiritFieldsEntry = Object.assign(
+      Object.create({ evil: true }),
+      { name: 'Ancestor Spirit — Sagacity (Int 1)' }
+    );
+    const inheritedSpiritFieldsPayload = {
+      ...createTestCharacter('Praxian'),
+      name: 'Inherited Spirit Fields Import',
+      cult: 'Daka Fal',
+      cultType: { primary: 'animist', types: ['animist'], isHybrid: false },
+      boundSpiritSlots: 4,
+      boundSpirits: [inheritedSpiritFieldsEntry],
+      miracles: [],
+      sorceryResource: 0,
+      sorcerySpells: []
+    };
+    const inheritedSpiritFieldsErrors = CD.validatePlainObject(inheritedSpiritFieldsPayload);
+    const inheritedSpiritFieldsSuccess = CD.fromJSON(inheritedSpiritFieldsPayload);
+    const inheritedSpiritFieldsRejected = inheritedSpiritFieldsErrors.some(error => /boundSpirits\[0\] must use own fields only: evil/i.test(error)) &&
+      inheritedSpiritFieldsSuccess === false &&
+      CD.name === 'Before Inherited Spirit Fields Import';
+
+    const zeroSpellMismatchPayload = {
+      ...validZzistoriPayload,
+      name: 'Zero Spell Mismatch Import',
+      selectedProfessionalSkills: ['Invocation (Arkat)', 'Shaping', 'Lore (Sorcery)'],
+      careerSkills: { 'Invocation (Arkat)': 10, Shaping: 10, 'Lore (Sorcery)': 10 },
+      sorceryResource: 0,
+      sorcerySpells: []
+    };
+    const zeroSpellSuccess = CD.fromJSON(JSON.stringify(zeroSpellMismatchPayload));
+    const zeroSpellSource = AppRef.resolveActiveSorcerySource(CD);
+    const zeroSpellMismatchPreserved = zeroSpellSuccess &&
+      CD.name === 'Zero Spell Mismatch Import' &&
+      zeroSpellSource?.sourceLabel === 'Zzistori School (God Forgot sorcery)' &&
+      Array.isArray(CD.sorcerySpells) &&
+      CD.sorcerySpells.length === 0;
 
     const serialized = CD.toJSON();
     const noPersistedSource = !Object.prototype.hasOwnProperty.call(serialized, 'sorcerySource') &&
@@ -5837,14 +6374,56 @@ section('Cult Data Tests');
 
     const scopedCorrectly = noSourceResults.every(result => result.source === null) && arkatIsCultBacked && noZzistoriCultMapEntry;
 
-    if (scopedCorrectly && staleCleared && validPreserved && noPersistedSource && rejectsUnsupportedSource) {
+    if (scopedCorrectly && staleRejected && validPreserved && validEnvelopePreserved && inheritedImportRejected && inheritedUnknownRejected && hiddenInheritedRejected && nullPrototypeRejected && inheritedNestedRejected && hiddenNestedRejected && inheritedCompanionRejected && inheritedArrayObjectRejected && aliasMagicRejected && unknownReferencesRejected && inheritedEnvelopeRejected && duplicateMagicRejected && inheritedArrayRejected && inheritedArrayAfterLengthRejected && inheritedMagicArrayRejected && incompatibleMiracleRejected && incompatibleSpiritRejected && malformedMiracleRejected && malformedSpiritRejected && inheritedSpiritEntryRejected && inheritedSpiritFieldsRejected && zeroSpellMismatchPreserved && noPersistedSource && rejectsUnsupportedSource) {
       pass('Derived Zzistori sorcery is scoped and import normalization guards persisted state');
     } else {
       fail('Derived Zzistori sorcery resolver or import guards are incorrect',
-        JSON.stringify({ noSourceResults, arkatSource, godForgotCultNames, staleCleared, validSource, validPreserved, serialized, rejectsUnsupportedSource }));
+        JSON.stringify({ noSourceResults, arkatSource, godForgotCultNames, staleRejected, staleErrors, validSource, validPreserved, validEnvelopePreserved, inheritedImportErrors, inheritedImportRejected, inheritedUnknownErrors, inheritedUnknownRejected, hiddenInheritedErrors, hiddenInheritedRejected, nullPrototypeErrors, nullPrototypeRejected, inheritedNestedErrors, inheritedNestedRejected, hiddenNestedErrors, hiddenNestedRejected, inheritedCompanionErrors, inheritedCompanionRejected, inheritedArrayObjectErrors, inheritedArrayObjectRejected, aliasMagicErrors, aliasMagicRejected, unknownReferenceResults, unknownReferencesRejected, inheritedEnvelopeErrors, inheritedEnvelopeRejected, duplicateMagicErrors, duplicateMagicRejected, inheritedArrayErrors, inheritedArrayRejected, inheritedArrayAfterLengthErrors, inheritedArrayAfterLengthRejected, inheritedMiracleArrayErrors, inheritedSpiritArrayErrors, inheritedMagicArrayRejected, incompatibleMiracleErrors, incompatibleMiracleRejected, incompatibleSpiritErrors, incompatibleSpiritRejected, malformedMiracleErrors, malformedMiracleRejected, malformedSpiritErrors, malformedSpiritRejected, inheritedSpiritEntryErrors, inheritedSpiritEntryRejected, inheritedSpiritFieldsErrors, inheritedSpiritFieldsRejected, zeroSpellSource, zeroSpellMismatchPreserved, serialized, rejectsUnsupportedSource }));
     }
   } else {
     fail('Derived sorcery resolver and CharacterData JSON helpers are available for import guard tests');
+  }
+}
+
+// Test: Rejected culture rollback restores transient combat-style selection state
+{
+  const { App: AppObj, CharacterData: CD, CULTURES_DATA } = loadApp();
+  if (AppObj?.agent && CD && Array.isArray(CULTURES_DATA)) {
+    AppObj.agent.setStep(1, { name: 'Rollback Transient State', concept: 'God Forgot sorcerer changes culture' });
+    AppObj.agent.setStep(2, { characteristics: { STR: 8, CON: 10, SIZ: 10, DEX: 9, INT: 15, POW: 15, CHA: 8 } });
+    AppObj.agent.setStep(4, { culture: 'God Forgot', homeland: 'God Forgot' });
+    AppObj.agent.setStep(8, { career: 'Sorcerer', professionalSkills: ['Invocation', 'Shaping', { name: 'Lore (any)', specialization: 'Sorcery' }] });
+    AppObj.agent.selectCult(null);
+    AppObj.agent.toggleSpell('Holdfast');
+    CD._pendingCombatStyleSelection = false;
+    CULTURES_DATA.push({
+      name: 'Synthetic Multi-Style Culture',
+      type: 'civilised',
+      homelands: ['Test Homeland'],
+      standardSkills: ['Athletics'],
+      professionalSkills: [],
+      folkMagic: [],
+      passions: [],
+      combatStyles: [
+        { name: 'Synthetic Spear', weapons: ['Spear'] },
+        { name: 'Synthetic Sword', weapons: ['Sword'] }
+      ]
+    });
+
+    const result = AppObj.selectCulture('Synthetic Multi-Style Culture');
+    const restored = result?.success === false &&
+      CD.culture === 'God Forgot' &&
+      CD._pendingCombatStyleSelection === false &&
+      AppObj.agent.getMagicState().selectedSpells.includes('Holdfast');
+
+    if (restored) {
+      pass('Rejected culture rollback restores transient combat-style selection state');
+    } else {
+      fail('Rejected culture rollback leaks transient combat-style selection state',
+        JSON.stringify({ result, culture: CD.culture, pending: CD._pendingCombatStyleSelection, magic: AppObj.agent.getMagicState() }));
+    }
+  } else {
+    fail('App agent and culture data are available for transient rollback test');
   }
 }
 
@@ -7523,10 +8102,15 @@ section('Step 9 Initiation Gate');
     CD.sorcerySpells = ['Holdfast'];
     AppRef.currentStep = 9;
 
-    AppRef.selectCult('Arkat');
+    const wrongCultSchoolSelection = AppRef.selectCult('Arkat');
+    const wrongCultSchoolErrors = wrongCultSchoolSelection?.error ? [wrongCultSchoolSelection.error] : AppRef.getStep9ValidationErrors();
+    const rejectsZzistoriUnderArkat = wrongCultSchoolSelection?.success === false &&
+      wrongCultSchoolErrors.some(error => /Invocation specialization/i.test(error) && /Arkat/.test(error));
+
+    CD.cult = 'Arkat';
+    CD.cultType = { primary: 'sorcery', types: ['sorcery'], isHybrid: false };
+    CD.sorceryResource = characteristics.POW;
     CD.sorcerySpells = ['Holdfast'];
-    const wrongCultSchoolErrors = AppRef.getStep9ValidationErrors();
-    const rejectsZzistoriUnderArkat = wrongCultSchoolErrors.some(error => /Invocation specialization/i.test(error) && /Arkat/.test(error));
 
     CD.selectedProfessionalSkills = ['Shaping', 'Lore (Sorcery)'];
     CD.careerSkills = { Shaping: 10, 'Lore (Sorcery)': 10 };
@@ -7898,6 +8482,7 @@ section('Step 9 Initiation Gate');
     CD.career = 'Sorcerer';
     CD.cult = 'Arkat';
     CD.cultType = detectCultType(CULTS_DATA.find(cult => cult.name === 'Arkat'));
+    CD.selectedProfessionalSkills = ['Invocation', 'Shaping', 'Lore (Sorcery)'];
     CD.devotionalPool = 0;
     CD.boundSpiritSlots = 0;
     CD.miracles = [];
@@ -7932,6 +8517,7 @@ section('Step 9 Initiation Gate');
     CD.career = 'Sorcerer';
     CD.cult = 'Arkat';
     CD.cultType = detectCultType(CULTS_DATA.find(cult => cult.name === 'Arkat'));
+    CD.selectedProfessionalSkills = ['Invocation', 'Shaping', 'Lore (Sorcery)'];
     CD.devotionalPool = 0;
     CD.boundSpiritSlots = 0;
     CD.miracles = [];
@@ -7940,10 +8526,19 @@ section('Step 9 Initiation Gate');
     CD.sorcerySpells = ['Holdfast'];
     AppRef.currentStep = 9;
 
-    AppRef.selectCult(null);
+    const rejectedSwitch = AppRef.selectCult(null);
     const sourceAfterSwitch = AppRef.resolveActiveSorcerySource(CD);
-    const clearedCultSpells = CD.cult === null &&
-      sourceAfterSwitch?.sourceLabel === 'Zzistori School (God Forgot sorcery)' &&
+    const rejectedCultSpellLoss = rejectedSwitch?.success === false &&
+      CD.cult === 'Arkat' &&
+      sourceAfterSwitch?.sourceLabel === 'Arkat' &&
+      CD.sorcerySpells.length === 1 &&
+      CD.sorcerySpells[0] === 'Holdfast';
+
+    CD.sorcerySpells = [];
+    AppRef.selectCult(null);
+    const sourceAfterZeroSpellSwitch = AppRef.resolveActiveSorcerySource(CD);
+    const zeroSpellSwitchAllowed = CD.cult === null &&
+      sourceAfterZeroSpellSwitch?.sourceLabel === 'Zzistori School (God Forgot sorcery)' &&
       CD.sorcerySpells.length === 0 &&
       AppRef.getStep9ValidationErrors().some(error => /sorcery spell/i.test(error));
 
@@ -7953,11 +8548,11 @@ section('Step 9 Initiation Gate');
       CD.sorcerySpells.length === 1 &&
       CD.sorcerySpells[0] === 'Animate (Substance)';
 
-    if (clearedCultSpells && preservesExistingNoCultSpells) {
-      pass('Switching from Arkat to No Cult clears cult-backed sorcery before deriving Zzistori');
+    if (rejectedCultSpellLoss && zeroSpellSwitchAllowed && preservesExistingNoCultSpells) {
+      pass('Switching from Arkat to No Cult rejects spell loss before deriving Zzistori');
     } else {
-      fail('Arkat sorcery spells leaked into No Cult Zzistori state',
-        JSON.stringify({ clearedCultSpells, preservesExistingNoCultSpells, sourceAfterSwitch, spells: CD.sorcerySpells }));
+      fail('Arkat sorcery source switch failed to protect selected spells',
+        JSON.stringify({ rejectedCultSpellLoss, zeroSpellSwitchAllowed, preservesExistingNoCultSpells, sourceAfterSwitch, spells: CD.sorcerySpells }));
     }
   } else {
     fail('No Cult sorcery stale-state regression dependencies not found');
@@ -7974,6 +8569,7 @@ section('Step 9 Initiation Gate');
     CD.career = 'Sorcerer';
     CD.cult = null;
     CD.cultType = null;
+    CD.selectedProfessionalSkills = ['Invocation', 'Shaping', 'Lore (Sorcery)'];
     CD.devotionalPool = 0;
     CD.boundSpiritSlots = 0;
     CD.miracles = [];
@@ -7982,24 +8578,33 @@ section('Step 9 Initiation Gate');
     CD.sorcerySpells = ['Animate (Substance)'];
     AppRef.currentStep = 9;
 
-    AppRef.selectCult('Arkat');
+    const rejectedSwitch = AppRef.selectCult('Arkat', { skipConfirmation: true });
     const arkatSource = AppRef.resolveActiveSorcerySource(CD);
-    const clearedZzistoriSpells = CD.cult === 'Arkat' &&
-      arkatSource?.sourceLabel === 'Arkat' &&
+    const rejectedZzistoriSpellLoss = rejectedSwitch?.success === false &&
+      CD.cult === null &&
+      arkatSource?.sourceLabel === 'Zzistori School (God Forgot sorcery)' &&
+      CD.sorcerySpells.length === 1 &&
+      CD.sorcerySpells[0] === 'Animate (Substance)';
+
+    CD.sorcerySpells = [];
+    AppRef.selectCult('Arkat', { skipConfirmation: true });
+    const arkatSourceAfterZeroSpellSwitch = AppRef.resolveActiveSorcerySource(CD);
+    const zeroSpellSwitchAllowed = CD.cult === 'Arkat' &&
+      arkatSourceAfterZeroSpellSwitch?.sourceLabel === 'Arkat' &&
       CD.sorcerySpells.length === 0;
 
     CD.sorcerySpells = ['Holdfast'];
-    AppRef.selectCult('Arkat');
+    AppRef.selectCult('Arkat', { skipConfirmation: true });
     const preservesSameCultSpells = CD.cult === 'Arkat' &&
       CD.sorcerySpells.length === 1 &&
       CD.sorcerySpells[0] === 'Holdfast' &&
       detectCultType(CULTS_DATA.find(cult => cult.name === 'Arkat'))?.primary === 'sorcery';
 
-    if (clearedZzistoriSpells && preservesSameCultSpells) {
-      pass('Switching from No Cult Zzistori to Arkat clears source-backed sorcery spells');
+    if (rejectedZzistoriSpellLoss && zeroSpellSwitchAllowed && preservesSameCultSpells) {
+      pass('Switching from No Cult Zzistori to Arkat rejects spell loss and preserves same-source spells');
     } else {
-      fail('Zzistori sorcery spells leaked into Arkat cult-backed state',
-        JSON.stringify({ clearedZzistoriSpells, preservesSameCultSpells, arkatSource, spells: CD.sorcerySpells }));
+      fail('Zzistori sorcery source switch failed to protect selected spells',
+        JSON.stringify({ rejectedZzistoriSpellLoss, zeroSpellSwitchAllowed, preservesSameCultSpells, arkatSource, spells: CD.sorcerySpells }));
     }
   } else {
     fail('Arkat switch stale-state regression dependencies not found');

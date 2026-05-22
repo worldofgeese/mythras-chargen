@@ -9,8 +9,8 @@
   "version": "6.0.1",
   "versionDate": "2026-05-17",
   "source": "https://copyparty.hound-celsius.ts.net/sources/books/Waha.pdf",
-  "verified": false,
-  "verificationNote": "Updated supplied Waha PDF was hashed, mirrored to Copyparty, and rendered to ignored page images on 2026-05-21. No bounded vision extraction or independent verifier artifact exists, so existing mechanics remain blocked legacy canonical data.",
+  "verified": true,
+  "verificationNote": "Updated supplied Waha PDF was hashed, mirrored to Copyparty, rendered to ignored page images, then verified with bounded GPT-5.5 extraction plus independent Opus vision verification on 2026-05-22. Source spelling Aveert is normalized to canonical spell name Avert for app-facing data.",
   "requirements": {
     "initiate": "Cult is closed to women. Human initiates need Ride and a tribal weapon at 50%+, one spirit magic spell, and knowledge of all tribal herds. Must prove warrior abilities to tribal elders or at a seasonal festival.",
     "runeLord": "Must be an initiate of noble descent from Waha. Or agree with GM to use RQG pp. 274-276."
@@ -196,16 +196,39 @@
   "sourcePageCount": 2,
   "canonicalRecord": true,
   "doNotUseForAppGeneration": false,
-  "verificationState": "blocked_pending_vision_verification",
+  "verificationState": "vision_verified",
   "sourceAuthority": {
     "source_id": "waha",
     "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
     "canonical_record": true,
-    "authority_status": "updated_source_pending_independent_verification",
+    "authority_status": "bounded_vision_verified",
     "page_coverage": "references/sources/pages/waha.json",
-    "blocked_by": [
-      "Rendered page image exists in ignored cache, but no bounded vision extraction artifact has been committed.",
-      "Independent verifier pass from rendered page evidence has not been performed in this environment, so facts remain blocked."
+    "blocked_by": [],
+    "vision_evidence": [
+      {
+        "pdf_page": 1,
+        "extraction_artifact": "references/sources/evidence/waha/page-0001-extraction.json",
+        "verification_artifact": "references/sources/evidence/waha/page-0001-verification.json"
+      },
+      {
+        "pdf_page": 2,
+        "extraction_artifact": "references/sources/evidence/waha/page-0002-extraction.json",
+        "verification_artifact": "references/sources/evidence/waha/page-0002-verification.json"
+      }
+    ],
+    "source_spelling_normalizations": [
+      {
+        "field": "folkMagic[0]",
+        "source_spelling": "Aveert",
+        "normalized_value": "Avert",
+        "adjudication_artifact_id": "waha-spelling-adjudication-gpt55-2026-05-22"
+      },
+      {
+        "field": "miracles.initiate[3]",
+        "source_spelling": "Discorporation",
+        "normalized_value": "Discorporation",
+        "adjudication_artifact_id": "waha-spelling-adjudication-gpt55-2026-05-22"
+      }
     ],
     "supersedes": [
       "references/cults-upstream/Praxian/Waha.pdf",

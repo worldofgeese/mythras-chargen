@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "schema": "references/sources/schema.json#/schemas/page_coverage",
+  "source_id": "mythras-core",
+  "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+  "coverage_state": "blocked",
+  "coverage_mode": "source-identified-page-evidence-pending",
+  "expected_page_count": 309,
+  "source_pdf": {
+    "sha256": "de88d7107f936420954474fa4c08a5393c321e8895ca6bea0cdca1194bcb8b90",
+    "size_bytes": 19068127,
+    "page_count": 309,
+    "canonical_locator": "https://copyparty.hound-celsius.ts.net/sources/books/Mythras%20Core%20Rulebook%20%283rd%20Printing%202018%29.pdf",
+    "local_hint": "references/sources/pdfs/mythras-core.pdf",
+    "lifecycle_state": "active"
+  },
+  "pages": [],
+  "known_ranges": [
+    {
+      "label": "Folk Magic",
+      "pdf_pages": "122-130",
+      "printed_pages": "122-130",
+      "state": "source_identified_evidence_pending",
+      "reason": "Existing folk magic raw records cite Mythras Core, but complete page/block evidence is outside this Phase 1 source-discovery unit."
+    },
+    {
+      "label": "Animism",
+      "pdf_pages": "131-154",
+      "printed_pages": "131-154",
+      "state": "source_identified_evidence_pending",
+      "reason": "Existing animism raw records cite Mythras Core; access-model research and accepted fact promotion require bounded evidence plus independent verification."
+    },
+    {
+      "label": "Mysticism",
+      "pdf_pages": "155-161",
+      "printed_pages": "155-161",
+      "state": "source_identified_evidence_pending",
+      "reason": "Mysticism implementation is tracked separately and must verify these RAW pages before app-facing behavior is promoted."
+    },
+    {
+      "label": "Sorcery",
+      "pdf_pages": "162-178",
+      "printed_pages": "162-178",
+      "state": "source_identified_evidence_pending",
+      "reason": "Existing sorcery raw records include verified legacy coverage; future changes still require bounded source evidence."
+    }
+  ],
+  "blockers": [
+    "Mythras Core source identity is recorded, but a complete page-work manifest has not been generated.",
+    "Bounded page/block extraction artifacts have not been committed for every app-facing Mythras Core fact.",
+    "Independent verifier artifacts are not present for the full Mythras Core reference surface."
+  ],
+  "notes": "Phase 1 source discovery record only. Source PDF metadata is committed through the manifest while the PDF itself remains ignored under references/sources/pdfs/.",
+  "source_access": {
+    "public_copyparty_source": {
+      "status": "available",
+      "checked_at": "2026-05-22",
+      "url": "https://copyparty.hound-celsius.ts.net/sources/books/Mythras%20Core%20Rulebook%20%283rd%20Printing%202018%29.pdf",
+      "head_status": 200,
+      "content_length": 19068127,
+      "content_type": "application/pdf",
+      "sha256": "de88d7107f936420954474fa4c08a5393c321e8895ca6bea0cdca1194bcb8b90",
+      "size_bytes": 19068127,
+      "page_count": 309
+    },
+    "local_ignored_source": {
+      "status": "available",
+      "path": "references/sources/pdfs/mythras-core.pdf",
+      "sha256": "de88d7107f936420954474fa4c08a5393c321e8895ca6bea0cdca1194bcb8b90",
+      "size_bytes": 19068127,
+      "page_count": 309,
+      "git_tracked": false
+    }
+  }
+}

@@ -118,31 +118,59 @@
     },
     {
       "constant_name": "CULTS_DATA",
-      "status": "source_blocked",
+      "status": "verified",
       "disposition": "migrate-in-this-plan",
+      "fact_id": "app:CULTS_DATA:waha",
+      "canonical_value_hash": "8ecacacec330be1196a3d54f5ea6e9bfd9426532255c047e4f1ed60fe90ed0ba",
+      "normalized_file": "references/cults-raw/praxian/waha.json",
+      "normalized_path": "$",
       "source_files": [
         "references/cults-raw/cults.json"
       ],
       "source_ids": [
         "waha"
       ],
-      "rationale": "Updated Waha source revision is active and rendered, but app-facing Waha facts remain legacy/canonical only where sourced from the Praxian record; fact-level acceptance is blocked until bounded vision extraction and independent verification are available.",
-      "blocked_by": [
-        "references/sources/pages/waha.json has coverage_state=blocked with rendered pages but no extraction or independent verification artifacts",
-        "references/cults-raw/storm/waha.json is superseded and must not feed app generation",
-        "Waha fact-level source/page/block provenance is pending vision verification"
-      ],
+      "rationale": "Waha app-facing cult facts are backed by bounded GPT-5.5 vision extraction, independent Opus verification, and focused spelling adjudication. The source spelling Aveert is recorded as normalized to canonical Avert.",
       "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
-      "source_state": "active_source_pending_independent_verification",
+      "source_state": "bounded_vision_verified",
       "page_coverage": "references/sources/pages/waha.json",
       "source_refs": [
         {
           "source_id": "waha",
           "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
+          "pdf_page": 1,
+          "block_id": "waha-p1-b001",
           "page_manifest_path": "references/sources/pages/waha.json",
-          "coverage_state": "blocked",
-          "evidence_state": "rendered_pages_pending_independent_vision_verification",
+          "coverage_state": "verified",
+          "evidence_state": "bounded_extraction_independent_verification",
           "public_pdf_url": "https://copyparty.hound-celsius.ts.net/sources/books/Waha.pdf"
+        },
+        {
+          "source_id": "waha",
+          "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
+          "pdf_page": 1,
+          "block_id": "waha-p1-b003",
+          "page_manifest_path": "references/sources/pages/waha.json",
+          "coverage_state": "verified",
+          "evidence_state": "bounded_extraction_independent_verification"
+        },
+        {
+          "source_id": "waha",
+          "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
+          "pdf_page": 1,
+          "block_id": "waha-p1-b005",
+          "page_manifest_path": "references/sources/pages/waha.json",
+          "coverage_state": "verified",
+          "evidence_state": "bounded_extraction_independent_verification"
+        },
+        {
+          "source_id": "waha",
+          "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
+          "pdf_page": 2,
+          "block_id": "waha-p2-b004",
+          "page_manifest_path": "references/sources/pages/waha.json",
+          "coverage_state": "verified",
+          "evidence_state": "bounded_extraction_independent_verification"
         }
       ]
     },
@@ -170,31 +198,50 @@
     },
     {
       "constant_name": "MIRACLES_DATA",
-      "status": "source_blocked",
+      "status": "verified",
       "disposition": "governed-now",
+      "fact_id": "app:MIRACLES_DATA:waha",
+      "canonical_value_hash": "92493634bb9abd3bf6233961f712304fc8eda9e3668959b0a6c148444414c22f",
+      "normalized_file": "references/cults-raw/praxian/waha.json",
+      "normalized_path": "$.miracles",
       "source_files": [
         "references/theism-miracles.json"
       ],
       "source_ids": [
         "waha"
       ],
-      "rationale": "Updated Waha source revision is active and rendered, but app-facing Waha facts remain legacy/canonical only where sourced from the Praxian record; fact-level acceptance is blocked until bounded vision extraction and independent verification are available.",
-      "blocked_by": [
-        "references/sources/pages/waha.json has coverage_state=blocked with rendered pages but no extraction or independent verification artifacts",
-        "references/cults-raw/storm/waha.json is superseded and must not feed app generation",
-        "Waha fact-level source/page/block provenance is pending vision verification"
-      ],
+      "rationale": "Waha miracle facts are backed by bounded GPT-5.5 vision extraction, independent Opus verification, and focused spelling adjudication for the Discorporation reading.",
       "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
-      "source_state": "active_source_pending_independent_verification",
+      "source_state": "bounded_vision_verified",
       "page_coverage": "references/sources/pages/waha.json",
       "source_refs": [
         {
           "source_id": "waha",
           "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
+          "pdf_page": 1,
+          "block_id": "waha-p1-b006",
           "page_manifest_path": "references/sources/pages/waha.json",
-          "coverage_state": "blocked",
-          "evidence_state": "rendered_pages_pending_independent_vision_verification",
+          "coverage_state": "verified",
+          "evidence_state": "bounded_extraction_independent_verification",
           "public_pdf_url": "https://copyparty.hound-celsius.ts.net/sources/books/Waha.pdf"
+        },
+        {
+          "source_id": "waha",
+          "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
+          "pdf_page": 1,
+          "block_id": "waha-p1-b007",
+          "page_manifest_path": "references/sources/pages/waha.json",
+          "coverage_state": "verified",
+          "evidence_state": "bounded_extraction_independent_verification"
+        },
+        {
+          "source_id": "waha",
+          "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
+          "pdf_page": 1,
+          "block_id": "waha-p1-b008",
+          "page_manifest_path": "references/sources/pages/waha.json",
+          "coverage_state": "verified",
+          "evidence_state": "bounded_extraction_independent_verification"
         }
       ]
     },
@@ -246,9 +293,17 @@
       ],
       "source_ids": [
         "bird-in-hand",
-        "monster-island"
+        "monster-island",
+        "mythras-core"
       ],
       "source_refs": [
+        {
+          "source_id": "mythras-core",
+          "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+          "page_manifest_path": "references/sources/pages/mythras-core.json",
+          "coverage_state": "blocked",
+          "evidence_state": "source_identified_page_evidence_pending"
+        },
         {
           "source_id": "bird-in-hand",
           "source_revision_id": "bird-in-hand:copyparty-sources-books-a-bird-in-the-hand-pdf:2d76fcb74715:2026-05-21",
@@ -257,10 +312,7 @@
           "evidence_state": "rendered_pages_pending_independent_vision_verification"
         }
       ],
-      "external_source_gaps": [
-        "mythras-core is cited by STARTING_SPIRITS but is not yet represented in the source manifest"
-      ],
-      "rationale": "Starting spirit examples are app-facing legacy data; Bird in Hand target page renders and Monster Island candidate page renders now exist, but page/block extraction, independent vision verification, Mythras Core manifest wiring, and accepted provenance remain future work.",
+      "rationale": "Starting spirit examples are app-facing legacy data; Bird in Hand target page renders and Monster Island candidate page renders now exist, and Mythras Core source identity is wired through the source manifest. Page/block extraction, independent vision verification, and accepted provenance remain future work.",
       "blocked_candidate_sources": [
         {
           "source_id": "monster-island",

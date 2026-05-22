@@ -1,0 +1,45 @@
+{
+  "artifact_id": "waha-page-0002-verification-opus-2026-05-22",
+  "artifact_kind": "verification",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "waha",
+  "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
+  "pdf_page": 2,
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/waha/page-0002.png",
+    "image_sha256": "9b6d8b466c37291157199ee12800992633132912ab2c68799cf9d2680984033e",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "waha-extract-gpt55-2026-05-22",
+  "verifier_prompt_id": "vision-verify-bounded-page.v1",
+  "verifier_run_id": "waha-verify-opus-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "independence": {
+    "read_extractor_output": false,
+    "read_extractor_scratch": false,
+    "read_extractor_rationale": false
+  },
+  "agreement": "pass",
+  "verified_blocks": [
+    "waha-p2-b001",
+    "waha-p2-b002",
+    "waha-p2-b003",
+    "waha-p2-b004",
+    "waha-p2-b005",
+    "waha-p2-b006",
+    "waha-p2-b007",
+    "waha-p2-b008"
+  ],
+  "bounded_excerpts": [
+    "Continents: Genertela, Oceans, Pamaltela",
+    "Death: Relentless, Ruthless, Unemotional, Ascetic. Man: Tribal, Social",
+    "Opposite:Life",
+    "Enemy: Chaos, foreign men, predators",
+    "High Holy Day: Dark Season, Death Week, Godsday To Dark Season...",
+    "Glorantha One Pager - from NotesFromPavis. Version: 6.0.1"
+  ]
+}

@@ -3,16 +3,16 @@
   "schema": "references/sources/schema.json#/schemas/page_coverage",
   "source_id": "waha",
   "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
-  "coverage_state": "blocked",
-  "coverage_mode": "rendered-source-pending-independent-verification",
+  "coverage_state": "verified",
+  "coverage_mode": "rendered-source-bounded-vision-verified",
   "expected_page_count": 2,
   "pages": [
     {
       "pdf_page": 1,
       "printed_page_label": "1",
       "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
-      "work_state": "rendered",
-      "contributes": null,
+      "work_state": "verified",
+      "contributes": true,
       "render": {
         "status": "rendered",
         "cache_path": ".cache/source-pages/waha/page-0001.png",
@@ -25,21 +25,79 @@
         "renderer_version": "22.09.0",
         "dpi": 300
       },
-      "extraction": null,
-      "verification": null,
-      "derived_facts": [],
-      "notes": "Rendered from updated supplied Waha source revision; no committed extraction or independent verification artifact exists.",
-      "blockers": [
-        "Rendered page image exists in ignored cache, but no bounded vision extraction artifact has been committed.",
-        "Independent verifier pass from rendered page evidence has not been performed in this environment, so facts remain blocked."
-      ]
+      "extraction": {
+        "artifact_path": "references/sources/evidence/waha/page-0001-extraction.json",
+        "artifact_id": "waha-page-0001-extraction-gpt55-2026-05-22",
+        "extractor_prompt_id": "vision-extract-bounded-page.v1",
+        "extractor_run_id": "waha-extract-gpt55-2026-05-22",
+        "tool_identity": "GPT-5.5 via GitHub Copilot CLI",
+        "block_count": 11
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/waha/page-0001-verification.json",
+        "artifact_id": "waha-page-0001-verification-opus-2026-05-22",
+        "verifier_prompt_id": "vision-verify-bounded-page.v1",
+        "verifier_run_id": "waha-verify-opus-2026-05-22",
+        "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+        "independent": true,
+        "read_extractor_output": false,
+        "read_extractor_scratch": false,
+        "read_extractor_rationale": false,
+        "agreement": "pass_with_spelling_adjudication"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:waha:p1:cult_identity",
+          "block_ids": [
+            "waha-p1-b001",
+            "waha-p1-b002"
+          ],
+          "fields": [
+            "name",
+            "runes",
+            "epithet",
+            "version"
+          ]
+        },
+        {
+          "fact_id": "ref:waha:p1:access_and_magic",
+          "block_ids": [
+            "waha-p1-b003",
+            "waha-p1-b004",
+            "waha-p1-b005",
+            "waha-p1-b006",
+            "waha-p1-b007",
+            "waha-p1-b008",
+            "waha-p1-b009"
+          ],
+          "fields": [
+            "requirements",
+            "cultSkills",
+            "folkMagic",
+            "miracles"
+          ]
+        },
+        {
+          "fact_id": "ref:waha:p1:source_spelling_normalization",
+          "block_ids": [
+            "waha-p1-b005",
+            "waha-p1-b006"
+          ],
+          "fields": [
+            "sourceSpellings",
+            "normalizedValues"
+          ]
+        }
+      ],
+      "notes": "Bounded vision extraction by GPT-5.5 and independent Opus verification agree after focused spelling adjudication.",
+      "blockers": []
     },
     {
       "pdf_page": 2,
       "printed_page_label": "2",
       "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
-      "work_state": "rendered",
-      "contributes": null,
+      "work_state": "verified",
+      "contributes": true,
       "render": {
         "status": "rendered",
         "cache_path": ".cache/source-pages/waha/page-0002.png",
@@ -52,33 +110,72 @@
         "renderer_version": "22.09.0",
         "dpi": 300
       },
-      "extraction": null,
-      "verification": null,
-      "derived_facts": [],
-      "notes": "Rendered from updated supplied Waha source revision; no committed extraction or independent verification artifact exists.",
-      "blockers": [
-        "Rendered page image exists in ignored cache, but no bounded vision extraction artifact has been committed.",
-        "Independent verifier pass from rendered page evidence has not been performed in this environment, so facts remain blocked."
-      ]
+      "extraction": {
+        "artifact_path": "references/sources/evidence/waha/page-0002-extraction.json",
+        "artifact_id": "waha-page-0002-extraction-gpt55-2026-05-22",
+        "extractor_prompt_id": "vision-extract-bounded-page.v1",
+        "extractor_run_id": "waha-extract-gpt55-2026-05-22",
+        "tool_identity": "GPT-5.5 via GitHub Copilot CLI",
+        "block_count": 8
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/waha/page-0002-verification.json",
+        "artifact_id": "waha-page-0002-verification-opus-2026-05-22",
+        "verifier_prompt_id": "vision-verify-bounded-page.v1",
+        "verifier_run_id": "waha-verify-opus-2026-05-22",
+        "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+        "independent": true,
+        "read_extractor_output": false,
+        "read_extractor_scratch": false,
+        "read_extractor_rationale": false,
+        "agreement": "pass"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:waha:p2:cult_context",
+          "block_ids": [
+            "waha-p2-b001",
+            "waha-p2-b002",
+            "waha-p2-b003",
+            "waha-p2-b004",
+            "waha-p2-b005"
+          ],
+          "fields": [
+            "areas",
+            "personalityTraits",
+            "opposingRunes",
+            "associations",
+            "holyDays"
+          ]
+        },
+        {
+          "fact_id": "ref:waha:p2:rune_meanings_and_footer",
+          "block_ids": [
+            "waha-p2-b006",
+            "waha-p2-b007",
+            "waha-p2-b008"
+          ],
+          "fields": [
+            "runeMeanings",
+            "sourceVersion"
+          ]
+        }
+      ],
+      "notes": "Bounded vision extraction by GPT-5.5 and independent Opus verification agree.",
+      "blockers": []
     }
   ],
   "known_ranges": [
     {
       "label": "Waha one-pager",
       "pages": "1-2",
-      "state": "blocked",
-      "blockers": [
-        "Rendered page image exists in ignored cache, but no bounded vision extraction artifact has been committed.",
-        "Independent verifier pass from rendered page evidence has not been performed in this environment, so facts remain blocked."
-      ],
+      "state": "verified",
+      "blockers": [],
       "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21"
     }
   ],
-  "blockers": [
-    "Rendered page image exists in ignored cache, but no bounded vision extraction artifact has been committed.",
-    "Independent verifier pass from rendered page evidence has not been performed in this environment, so facts remain blocked."
-  ],
-  "notes": "Updated Waha source revision pages were rendered to ignored PNG cache and hashed. No bounded vision extraction or independent verifier artifact exists, so page coverage and Waha facts remain blocked.",
+  "blockers": [],
+  "notes": "Updated Waha source revision pages were rendered to ignored PNG cache and hashed. Bounded GPT-5.5 extraction and independent Opus verification artifacts now cover pages 1-2; source spelling conflicts were adjudicated with a focused GPT-5.5 vision pass.",
   "source_access": {
     "local_ignored_source": {
       "status": "available",

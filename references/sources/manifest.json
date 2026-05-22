@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "schema": "references/sources/schema.json",
   "generated_at": "2026-05-21",
-  "notes": "Source attestation manifest for portable source authority. Updated Waha now points at the supplied 2026-05-17 one-pager revision mirrored to Copyparty; Waha fact acceptance remains blocked until bounded vision extraction and independent verification exist. Bird in Hand records source identity and target page renders; Monster Island records supplied PDF metadata plus candidate page render hashes/dimensions. Spirit facts remain blocked pending permission, bounded extraction, and independent vision verification.",
+  "notes": "Source attestation manifest for portable source authority. Mythras Core is now recorded as a Copyparty-backed source revision for base rules and magic-system references. Updated Waha points at the supplied 2026-05-17 one-pager revision mirrored to Copyparty and has bounded vision extraction plus independent verification. Bird in Hand records source identity and target page renders; Monster Island records supplied PDF metadata plus candidate page render hashes/dimensions. Spirit facts remain blocked pending permission, bounded extraction, and independent vision verification.",
   "sources": [
     {
       "source_id": "aig",
@@ -49,32 +49,110 @@
       "blockers": [
         "permission basis is not confirmed",
         "independent vision extraction/verification has not been run for AiG pages",
-        "isolated implementation worktree has no ignored AiG PDF local hint to render",
-        "matching root-checkout legacy PDF was used for metadata confirmation only; no lawful vision extraction or independent verification was performed"
+        "ignored local PDF hint may be hydrated from Copyparty for metadata checks, but render/extraction remains blocked until permission and independent verification exist",
+        "matching source PDF was used for metadata confirmation only; no lawful vision extraction or independent verification was performed"
       ],
       "observed_source_metadata": {
-        "observed_at": "2026-05-21",
-        "sha256_method": "sha256sum against local non-git AiG PDF",
-        "page_count_method": "pdfinfo against local non-git AiG PDF",
+        "observed_at": "2026-05-22",
+        "sha256_method": "sha256sum against ignored local hint hydrated from Copyparty canonical locator",
+        "page_count_method": "pdfinfo against ignored local hint hydrated from Copyparty canonical locator",
         "canonical_locator_head_status": 200,
         "canonical_locator_content_length": 202097364,
-        "note": "The source PDF is not committed. This U5 follow-up confirmed matching metadata from the root checkout legacy ignored hint and the public locator HEAD response, but did not render, extract, or verify pages because the isolated worktree has no local source hint and AiG extraction permission remains pending.",
-        "isolated_worktree_local_hint_status": "missing",
+        "note": "The source PDF is not committed. The current orchestrator worktree hydrated the ignored local hint from the Copyparty canonical locator and confirmed matching metadata, but did not render, extract, or verify pages because AiG extraction permission remains pending.",
+        "isolated_worktree_local_hint_status": "hydrated-for-metadata-only",
         "isolated_worktree_checked_paths": [
           "references/sources/pdfs/aig.pdf",
           "references/aig-raw/AiG.pdf",
           "references/sources/pdfs/Adventures in Glorantha GenCon Preview.pdf"
         ],
-        "root_checkout_legacy_hint_status": "available-for-metadata-only",
-        "root_checkout_legacy_hint_path": "references/aig-raw/AiG.pdf",
-        "root_checkout_legacy_hint_sha256": "0edc1e549c560222a7c2b80e9eb0fb713d962bb30a280a7a6b760821e2983572",
-        "root_checkout_legacy_hint_size_bytes": 202097364,
-        "root_checkout_legacy_hint_page_count": 212,
-        "root_checkout_legacy_hint_pdf_version": "1.6",
+        "copyparty_hydrated_local_hint_path": "references/sources/pdfs/aig.pdf",
+        "copyparty_hydrated_local_hint_sha256": "0edc1e549c560222a7c2b80e9eb0fb713d962bb30a280a7a6b760821e2983572",
+        "copyparty_hydrated_local_hint_size_bytes": 202097364,
+        "copyparty_hydrated_local_hint_page_count": 212,
         "canonical_locator_head_content_type": "application/pdf",
         "canonical_locator_head_last_modified": "Mon, 30 Mar 2026 18:42:16 GMT",
         "used_for_vision_extraction": false,
-        "extraction_blocker_observed_at": "2026-05-21"
+        "extraction_blocker_observed_at": "2026-05-22"
+      }
+    },
+    {
+      "source_id": "mythras-core",
+      "title": "Mythras Core Rulebook",
+      "edition": "3rd Printing 2018",
+      "authority_scope": [
+        "base Mythras rules",
+        "standard and professional skills",
+        "careers",
+        "combat rules",
+        "folk magic",
+        "animism",
+        "sorcery",
+        "mysticism",
+        "base spirit rules"
+      ],
+      "canonical_locator": "https://copyparty.hound-celsius.ts.net/sources/books/Mythras%20Core%20Rulebook%20%283rd%20Printing%202018%29.pdf",
+      "local_hint": "references/sources/pdfs/mythras-core.pdf",
+      "lifecycle_state": "active",
+      "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+      "sha256": "de88d7107f936420954474fa4c08a5393c321e8895ca6bea0cdca1194bcb8b90",
+      "size_bytes": 19068127,
+      "page_count": 309,
+      "acquired_at": "2026-05-22",
+      "permission_basis": {
+        "status": "player_visible_copyparty_source",
+        "note": "Mythras Core is available from the project Copyparty source library; the PDF remains ignored and uncommitted. Existing raw Mythras reference files still require page/block evidence before new accepted fact promotion."
+      },
+      "precedence": "Mythras Core 3rd Printing 2018 is the base-rules authority for generic Mythras systems, including Animism, Sorcery, Mysticism, Folk Magic, skills, careers, combat, and base spirit rules. Setting-specific Gloranthan facts still come from AiG, Notes from Pavis, and other governed sources.",
+      "render_contract": {
+        "renderer": "pdftoppm",
+        "renderer_version": "runtime-detected",
+        "dpi": 300,
+        "image_format": "png",
+        "color_mode": "rgb",
+        "args": [
+          "-r",
+          "300",
+          "-png",
+          "-singlefile"
+        ],
+        "cache_path_pattern": ".cache/source-pages/{source_id}/page-{pdf_page:04d}.png"
+      },
+      "blocks": [],
+      "blockers": [],
+      "acceptance_state": "blocked_pending_vision_verification",
+      "acceptance_blockers": [
+        "Source PDF identity is recorded, but a complete page-work manifest and bounded page/block evidence have not been committed for every app-facing Mythras Core fact.",
+        "Existing Mythras raw files remain mixed legacy/verified records; new fact promotion requires rendered page evidence and independent verification."
+      ],
+      "source_access": {
+        "public_copyparty_source": {
+          "status": "available",
+          "checked_at": "2026-05-22",
+          "url": "https://copyparty.hound-celsius.ts.net/sources/books/Mythras%20Core%20Rulebook%20%283rd%20Printing%202018%29.pdf",
+          "head_status": 200,
+          "content_length": 19068127,
+          "content_type": "application/pdf",
+          "sha256": "de88d7107f936420954474fa4c08a5393c321e8895ca6bea0cdca1194bcb8b90",
+          "size_bytes": 19068127,
+          "page_count": 309
+        },
+        "local_ignored_source": {
+          "status": "available",
+          "path": "references/sources/pdfs/mythras-core.pdf",
+          "sha256": "de88d7107f936420954474fa4c08a5393c321e8895ca6bea0cdca1194bcb8b90",
+          "size_bytes": 19068127,
+          "page_count": 309,
+          "git_tracked": false
+        }
+      },
+      "observed_source_metadata": {
+        "observed_at": "2026-05-22",
+        "sha256_method": "sha256sum against ignored local copy downloaded from Copyparty canonical locator",
+        "size_method": "stat -c %s against ignored local PDF",
+        "page_count_method": "pdfinfo against ignored local Copyparty download",
+        "canonical_locator_head_status": 200,
+        "canonical_locator_content_length": 19068127,
+        "note": "The source PDF is not committed; references/sources/pdfs/mythras-core.pdf remains an ignored local hint."
       }
     },
     {
@@ -169,7 +247,7 @@
         "status": "player_visible_copyparty_source",
         "note": "User-supplied updated Waha one-pager is mirrored to the project Copyparty source library; source PDF remains ignored and uncommitted."
       },
-      "precedence": "Current Waha authority is the supplied updated one-pager revision identified by this manifest hash. Older tracked Praxian and Storm Waha PDFs are superseded legacy artifacts and must not feed app generation. Existing normalized/app facts remain blocked legacy data until rendered-page extraction and independent verification are accepted.",
+      "precedence": "Current Waha authority is the supplied updated one-pager revision identified by this manifest hash. Older tracked Praxian and Storm Waha PDFs are superseded legacy artifacts and must not feed app generation. Normalized/app Waha facts are accepted only through the bounded extraction and independent verification artifacts recorded under references/sources/evidence/waha/.",
       "render_contract": {
         "renderer": "pdftoppm",
         "renderer_version": "runtime-detected",
@@ -186,11 +264,8 @@
       },
       "blocks": [],
       "blockers": [],
-      "acceptance_state": "blocked_pending_vision_verification",
-      "acceptance_blockers": [
-        "Rendered page image exists in ignored cache, but no bounded vision extraction artifact has been committed.",
-        "Independent verifier pass from rendered page evidence has not been performed in this environment, so facts remain blocked."
-      ],
+      "acceptance_state": "bounded_vision_verified",
+      "acceptance_blockers": [],
       "source_access": {
         "local_ignored_source": {
           "status": "available",
@@ -245,8 +320,15 @@
           "1": "f732eb2cf70fbe9857c54081b882664ec10ad7121fe15dde5a268575c791d506",
           "2": "9b6d8b466c37291157199ee12800992633132912ab2c68799cf9d2680984033e"
         },
-        "used_for_vision_extraction": false,
-        "verification_blocker_observed_at": "2026-05-21"
+        "used_for_vision_extraction": true,
+        "vision_extraction_completed_at": "2026-05-22",
+        "vision_verification_completed_at": "2026-05-22",
+        "vision_evidence_paths": [
+          "references/sources/evidence/waha/page-0001-extraction.json",
+          "references/sources/evidence/waha/page-0001-verification.json",
+          "references/sources/evidence/waha/page-0002-extraction.json",
+          "references/sources/evidence/waha/page-0002-verification.json"
+        ]
       }
     },
     {

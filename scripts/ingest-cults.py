@@ -46,6 +46,11 @@ STANDARD_RUNELORD = {"Excommunication", "Mindlink", "Sanctify", "Summon Spirit o
 # Common initiate miracles (appear in almost every cult)
 COMMON_MIRACLES = {"Extension", "Find (Specific Thing)", "Divination", "Chastise"}
 
+WAHA_ACCEPTANCE_STATE = "bounded_vision_verified"
+WAHA_PAGE_VERIFIED_STATES = {"verified", "normalized", "accepted"}
+WAHA_VERIFICATION_STATE = "vision_verified"
+WAHA_SUPERSEDED_AUTHORITY_STATE = "superseded_duplicate"
+
 # Skip patterns for catalogue/relationship PDFs
 SKIP_PATTERNS = [
     "Pantheon Cult Catalogue",
@@ -543,10 +548,10 @@ def validate_waha_authority() -> list[str]:
         source_revision_id = waha_source.get("source_revision_id")
         source_hash = waha_source.get("sha256")
         source_size = waha_source.get("size_bytes")
-        if waha_source.get("acceptance_state") != "blocked_pending_vision_verification":
-            issues.append("Waha source must remain blocked_pending_vision_verification until vision verification exists")
-        if not waha_source.get("acceptance_blockers"):
-            issues.append("Waha source blocked state must list acceptance_blockers")
+        if waha_source.get("acceptance_state") != WAHA_ACCEPTANCE_STATE:
+            issues.append(f"Waha source must record {WAHA_ACCEPTANCE_STATE} acceptance after vision verification")
+        if waha_source.get("acceptance_blockers"):
+            issues.append("Verified Waha source must not retain acceptance_blockers")
         public_source = waha_source.get("source_access", {}).get("public_copyparty_source", {})
         if public_source.get("status") != "available":
             issues.append("Updated Waha source must be mirrored to public Copyparty source library")
@@ -561,10 +566,13 @@ def validate_waha_authority() -> list[str]:
 
     if page_doc.get("source_revision_id") != source_revision_id:
         issues.append("Waha page manifest source_revision_id must match manifest")
-    if page_doc.get("coverage_state") != "blocked":
-        issues.append("Waha page coverage must be blocked until extraction and independent verification exist")
-    if not page_doc.get("blockers"):
+    coverage_state = page_doc.get("coverage_state")
+    if coverage_state not in {"blocked", "verified"}:
+        issues.append("Waha page coverage must be blocked or verified")
+    if coverage_state == "blocked" and not page_doc.get("blockers"):
         issues.append("Blocked Waha page coverage must list blockers")
+    if coverage_state == "verified" and page_doc.get("blockers"):
+        issues.append("Verified Waha page coverage must not retain blockers")
     for page in page_doc.get("pages", []):
         work_state = page.get("work_state")
         if work_state == "blocked" and not page.get("blockers"):
@@ -577,7 +585,7 @@ def validate_waha_authority() -> list[str]:
                 issues.append(f"Waha page {page.get('pdf_page')} rendered-only state must not include extraction or verification metadata")
             if not page.get("blockers"):
                 issues.append(f"Waha page {page.get('pdf_page')} rendered-only blocked coverage must list verification blockers")
-        if work_state in {"verified", "normalized", "accepted"}:
+        if work_state in WAHA_PAGE_VERIFIED_STATES:
             verification = page.get("verification")
             if not page.get("extraction") or not verification or verification.get("independent") is not True:
                 issues.append(f"Waha page {page.get('pdf_page')} cannot be {work_state} without independent verification metadata")
@@ -585,10 +593,14 @@ def validate_waha_authority() -> list[str]:
     authority = praxian.get("sourceAuthority", {})
     if not praxian.get("canonicalRecord") or praxian.get("doNotUseForAppGeneration") is not False:
         issues.append("Praxian Waha must be the single canonical raw record")
-    if praxian.get("verified") is not False or praxian.get("verificationState") != "blocked_pending_vision_verification":
-        issues.append("Praxian Waha must not claim a completed verification refresh")
+    if praxian.get("verified") is not True or praxian.get("verificationState") != WAHA_VERIFICATION_STATE:
+        issues.append("Praxian Waha must record completed bounded vision verification")
     if authority.get("source_revision_id") != source_revision_id or authority.get("canonical_record") is not True:
         issues.append("Praxian Waha sourceAuthority must point at the Waha source revision as canonical")
+    if authority.get("authority_status") != WAHA_ACCEPTANCE_STATE:
+        issues.append("Praxian Waha sourceAuthority must record bounded vision verification")
+    if authority.get("blocked_by"):
+        issues.append("Praxian Waha sourceAuthority must not retain blockers after verification")
     if praxian.get("sourceSha256") != source_hash or praxian.get("sourceSizeBytes") != source_size:
         issues.append("Praxian Waha source metadata must match the active Waha manifest revision")
 
@@ -597,8 +609,8 @@ def validate_waha_authority() -> list[str]:
         issues.append("Storm Waha raw record must be marked superseded and doNotUseForAppGeneration")
     if storm.get("supersededBy") != "references/cults-raw/praxian/waha.json":
         issues.append("Storm Waha raw record must redirect to Praxian Waha")
-    if storm_authority.get("authority_status") != "superseded_duplicate":
-        issues.append("Storm Waha sourceAuthority must mark superseded_duplicate")
+    if storm_authority.get("authority_status") != WAHA_SUPERSEDED_AUTHORITY_STATE:
+        issues.append(f"Storm Waha sourceAuthority must mark {WAHA_SUPERSEDED_AUTHORITY_STATE}")
     if storm.get("sourceRevisionId") != source_revision_id:
         issues.append("Storm Waha superseded record must cite the active Waha source revision")
 

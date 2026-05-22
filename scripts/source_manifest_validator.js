@@ -160,7 +160,54 @@ function validateManifest(manifest, schema) {
   return { ok: errors.length === 0, errors, sourceIds: seen };
 }
 
-function validatePageCoverage(pageDoc, manifestById, schema, relPath) {
+function collectDerivedBlockIds(page) {
+  return new Set((page.derived_facts || []).flatMap(fact =>
+    Array.isArray(fact.block_ids) ? fact.block_ids : []));
+}
+
+function validateEvidenceJoin(pageDoc, page, root, errors, label) {
+  const extractionPath = page.extraction?.artifact_path;
+  const verificationPath = page.verification?.artifact_path;
+  if (!extractionPath || !verificationPath) {
+    add(errors, label, 'verified page requires extraction and verification artifact paths');
+    return;
+  }
+
+  let extraction;
+  let verification;
+  try {
+    extraction = readJson(root, extractionPath);
+    verification = readJson(root, verificationPath);
+  } catch (err) {
+    add(errors, label, `cannot read evidence artifact: ${err.message}`);
+    return;
+  }
+
+  for (const [artifactKind, artifact] of [['extraction', extraction], ['verification', verification]]) {
+    if (artifact.source_revision_id !== page.source_revision_id) {
+      add(errors, label, `${artifactKind} artifact source_revision_id must match page source_revision_id`);
+    }
+    if (artifact.pdf_page !== page.pdf_page) {
+      add(errors, label, `${artifactKind} artifact pdf_page must match page pdf_page`);
+    }
+    if (artifact.rendered_image?.image_sha256 !== page.render?.image_sha256) {
+      add(errors, label, `${artifactKind} artifact image_sha256 must match page render image_sha256`);
+    }
+  }
+
+  const extractionBlockIds = new Set((extraction.blocks || []).map(block => block.block_id));
+  if (page.extraction?.block_count !== undefined && page.extraction.block_count !== extractionBlockIds.size) {
+    add(errors, label, 'extraction.block_count must match extraction artifact blocks');
+  }
+
+  const verifiedBlockIds = new Set(verification.verified_blocks || []);
+  for (const blockId of collectDerivedBlockIds(page)) {
+    if (!extractionBlockIds.has(blockId)) add(errors, label, `derived fact block_id ${blockId} is missing from extraction artifact`);
+    if (!verifiedBlockIds.has(blockId)) add(errors, label, `derived fact block_id ${blockId} is missing from verification artifact`);
+  }
+}
+
+function validatePageCoverage(pageDoc, manifestById, schema, relPath, root = ROOT) {
   const errors = [];
   const pageStates = new Set(schema.lifecycle_states.page_work || []);
   if (!isObject(pageDoc)) return [`${relPath}: must be an object`];
@@ -214,6 +261,7 @@ function validatePageCoverage(pageDoc, manifestById, schema, relPath) {
       if (!isObject(page.extraction)) add(errors, label, `${page.work_state} page requires extraction metadata`);
       if (!isObject(page.verification)) add(errors, label, `${page.work_state} page requires verification metadata`);
       if (page.verification && page.verification.independent !== true) add(errors, label, 'verification.independent must be true');
+      if (page.extraction && page.verification) validateEvidenceJoin(pageDoc, page, root, errors, label);
     }
     if (['normalized', 'accepted'].includes(page.work_state) && (!Array.isArray(page.derived_facts) || page.derived_facts.length === 0)) {
       add(errors, label, `${page.work_state} page requires derived_facts[]`);
@@ -272,7 +320,7 @@ function validateAll(options = {}) {
       continue;
     }
     const pageDoc = readJson(root, relPath);
-    errors.push(...validatePageCoverage(pageDoc, manifestById, schema, relPath));
+    errors.push(...validatePageCoverage(pageDoc, manifestById, schema, relPath, root));
   }
 
   const pageDir = path.join(root, 'references/sources/pages');
@@ -305,6 +353,7 @@ module.exports = {
   validateManifest,
   validatePageCoverage,
   validateWorkflow,
+  validateEvidenceJoin,
   isPortableLocator,
   isSha256
 };
