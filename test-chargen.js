@@ -4193,14 +4193,14 @@ fixtures.forEach(fixtureInfo => {
       CD.cultType && CD.cultType.primary === 'animist' &&
       CD.boundSpiritSlots === 5 &&
       CD.boundSpirits && CD.boundSpirits[0] && CD.boundSpirits[0].name === 'Ancestor Spirit' &&
-      CD.sorceryResource === 14 &&
-      CD.sorcerySpells && CD.sorcerySpells[0] === 'Animate (Substance)' &&
+      CD.sorceryResource === 0 &&
+      CD.sorcerySpells && CD.sorcerySpells.length === 0 &&
       CD.companions && CD.companions[0] && CD.companions[0].name === 'Greywind';
 
     if (preserved) {
-      pass('Character JSON round-trip preserves magic and companion state');
+      pass('Character JSON round-trip preserves valid magic and clears stale sorcery state');
     } else {
-      fail('Character JSON round-trip drops magic or companion state');
+      fail('Character JSON round-trip drops valid magic or keeps stale sorcery state');
     }
   } else {
     fail('CharacterData JSON methods not available for magic persistence test');
@@ -4220,7 +4220,11 @@ fixtures.forEach(fixtureInfo => {
 
     CD.fromJSON(JSON.stringify(createTestCharacter()));
     CD.name = 'Storage Round Trip';
+    CD.culture = 'God Forgot';
+    CD.career = 'Sorcerer';
+    CD.cult = 'Arkat';
     CD.cultType = { primary: 'sorcery', types: ['sorcery'], isHybrid: false };
+    CD.characteristics = { STR: 11, CON: 12, SIZ: 13, DEX: 14, INT: 15, POW: 13, CHA: 10 };
     CD.boundSpiritSlots = 4;
     CD.boundSpirits = [{ name: 'Disease Spirit' }];
     CD.sorceryResource = 13;
@@ -4239,6 +4243,7 @@ fixtures.forEach(fixtureInfo => {
 
     const preserved =
       CD.name === 'Storage Round Trip' &&
+      CD.cult === 'Arkat' &&
       CD.cultType && CD.cultType.primary === 'sorcery' &&
       CD.boundSpiritSlots === 4 &&
       CD.boundSpirits && CD.boundSpirits[0] && CD.boundSpirits[0].name === 'Disease Spirit' &&
@@ -4263,9 +4268,14 @@ fixtures.forEach(fixtureInfo => {
     const payload = {
       version: 1,
       data: {
-        ...createTestCharacter(),
+        ...createTestCharacter('God Forgot'),
         name: 'Versioned Envelope',
+        career: 'Sorcerer',
+        cult: null,
+        cultType: null,
+        characteristics: { STR: 11, CON: 12, SIZ: 13, DEX: 14, INT: 15, POW: 13, CHA: 10 },
         boundSpirits: [{ name: 'Healing Spirit' }],
+        sorceryResource: 0,
         sorcerySpells: ['Project (Sight)'],
         companions: [{ name: 'Red Mane', species: 'Horse' }]
       }
@@ -4274,6 +4284,7 @@ fixtures.forEach(fixtureInfo => {
     const success = CD.fromJSON(JSON.stringify(payload));
     if (success && CD.name === 'Versioned Envelope' &&
         CD.boundSpirits && CD.boundSpirits[0].name === 'Healing Spirit' &&
+        CD.sorceryResource === 13 &&
         CD.sorcerySpells && CD.sorcerySpells[0] === 'Project (Sight)' &&
         CD.companions && CD.companions[0].name === 'Red Mane') {
       pass('CharacterData.fromJSON accepts versioned save envelopes');
@@ -5543,6 +5554,138 @@ section('Cult Data Tests');
   } else {
     fail('God Forgot Zzistori sorcery profile is missing school/source backing',
       JSON.stringify({ hasSchoolLabel, isSchoolNotCult, hasSorcererPrereq, hasRawSorceryMechanics, hasSourceCitations, inlineMatches, access, inlineAccess }));
+  }
+}
+
+// Test: God Forgot Sorcerer No Cult derives active Zzistori sorcery without pretending it is a cult
+{
+  const { App: AppRef, CharacterData: CD, detectCultType } = loadApp();
+
+  if (AppRef && typeof AppRef.resolveActiveSorcerySource === 'function') {
+    CD.characteristics = { STR: 11, CON: 12, SIZ: 13, DEX: 14, INT: 15, POW: 14, CHA: 10 };
+    CD.culture = 'God Forgot';
+    CD.career = 'Sorcerer';
+    CD.cult = null;
+    CD.cultType = null;
+    CD.sorceryResource = 0;
+    CD.sorcerySpells = [];
+
+    const source = AppRef.resolveActiveSorcerySource(CD);
+    const nullCultType = typeof detectCultType === 'function' ? detectCultType(null) : undefined;
+    const hasZzistoriSource = source &&
+      source.sourceLabel === 'Zzistori School (God Forgot sorcery)' &&
+      source.resource === 'Magic Points' &&
+      source.resourceValue === 14 &&
+      source.magicPoints === 14 &&
+      source.startingSpellLimit === 3 &&
+      Array.isArray(source.skills) &&
+      source.skills.includes('Invocation') &&
+      source.skills.includes('Shaping') &&
+      source.cultRequired === false &&
+      source.cultName === null &&
+      source.sourceType === 'culture-backed school' &&
+      source.sourceKind === 'culture-backed school';
+
+    if (hasZzistoriSource && !nullCultType && CD.cult === null) {
+      pass('God Forgot Sorcerer No Cult derives Zzistori source without cult classification');
+    } else {
+      fail('God Forgot Sorcerer No Cult source derivation is missing or cult-backed',
+        JSON.stringify({ source, nullCultType, cult: CD.cult }));
+    }
+  } else {
+    fail('Derived sorcery source resolver is available on App');
+  }
+}
+
+// Test: derived Zzistori source is scoped and import normalization repairs stale sorcery state
+{
+  const { App: AppRef, CharacterData: CD, CULTS_DATA, CULTURE_CULT_MAP, detectCultType } = loadApp();
+
+  if (AppRef && typeof AppRef.resolveActiveSorcerySource === 'function' && CD?.fromJSON && CD?.toJSON) {
+    const noSourceCases = [
+      { label: 'non-God-Forgot No Cult', culture: 'Praxian', career: 'Sorcerer', cult: null },
+      { label: 'God Forgot non-Sorcerer No Cult', culture: 'God Forgot', career: 'Warrior', cult: null }
+    ];
+    const noSourceResults = noSourceCases.map(testCase => {
+      CD.culture = testCase.culture;
+      CD.career = testCase.career;
+      CD.cult = testCase.cult;
+      CD.cultType = null;
+      return { label: testCase.label, source: AppRef.resolveActiveSorcerySource(CD) };
+    });
+
+    CD.culture = 'God Forgot';
+    CD.career = 'Sorcerer';
+    CD.cult = 'Arkat';
+    CD.cultType = detectCultType(CULTS_DATA.find(cult => cult.name === 'Arkat'));
+    const arkatSource = AppRef.resolveActiveSorcerySource(CD);
+    const arkatIsCultBacked = arkatSource?.sourceLabel === 'Arkat' &&
+      arkatSource?.cultName === 'Arkat' &&
+      arkatSource?.sourceKind === 'cult-backed cult' &&
+      arkatSource?.sourceType === 'cult-backed sorcery' &&
+      arkatSource?.sourceLabel !== 'Zzistori School (God Forgot sorcery)';
+    const godForgotCultNames = [
+      ...(CULTURE_CULT_MAP?.['God Forgot']?.primary || []),
+      ...(CULTURE_CULT_MAP?.['God Forgot']?.secondary || [])
+    ];
+    const noZzistoriCultMapEntry = !godForgotCultNames.includes('Zzistori') &&
+      !godForgotCultNames.includes('Zzistori School (God Forgot sorcery)');
+
+    const staleSuccess = CD.fromJSON(JSON.stringify({
+      ...createTestCharacter('Praxian'),
+      name: 'Stale Sorcery Import',
+      career: 'Sorcerer',
+      cult: null,
+      cultType: { primary: 'sorcery', types: ['sorcery'], isHybrid: false },
+      sorceryResource: 12,
+      sorcerySpells: ['Project (Sight)']
+    }));
+    const staleCleared = staleSuccess &&
+      CD.cultType === null &&
+      CD.sorceryResource === 0 &&
+      Array.isArray(CD.sorcerySpells) &&
+      CD.sorcerySpells.length === 0;
+
+    const validZzistoriPayload = {
+      ...createTestCharacter('God Forgot'),
+      name: 'Valid Zzistori Import',
+      career: 'Sorcerer',
+      cult: null,
+      cultType: null,
+      characteristics: { STR: 11, CON: 12, SIZ: 13, DEX: 14, INT: 15, POW: 13, CHA: 10 },
+      sorceryResource: 0,
+      sorcerySpells: ['Project (Sight)', 'Animate (Substance)']
+    };
+    const validSuccess = CD.fromJSON(JSON.stringify(validZzistoriPayload));
+    const validSource = AppRef.resolveActiveSorcerySource(CD);
+    const validPreserved = validSuccess &&
+      validSource?.sourceLabel === 'Zzistori School (God Forgot sorcery)' &&
+      CD.sorceryResource === 13 &&
+      JSON.stringify(CD.sorcerySpells) === JSON.stringify(validZzistoriPayload.sorcerySpells);
+
+    const serialized = CD.toJSON();
+    const noPersistedSource = !Object.prototype.hasOwnProperty.call(serialized, 'sorcerySource') &&
+      !Object.prototype.hasOwnProperty.call(serialized, 'sorcerySourceLabel') &&
+      !Object.prototype.hasOwnProperty.call(serialized, 'sorcerySourceName') &&
+      !Object.prototype.hasOwnProperty.call(serialized, 'sourceLabel');
+
+    CD.name = 'Before Unsupported Source';
+    const unsupportedSuccess = CD.fromJSON(JSON.stringify({
+      ...validZzistoriPayload,
+      sorcerySource: { sourceLabel: 'Zzistori School (God Forgot sorcery)' }
+    }));
+    const rejectsUnsupportedSource = unsupportedSuccess === false && CD.name === 'Before Unsupported Source';
+
+    const scopedCorrectly = noSourceResults.every(result => result.source === null) && arkatIsCultBacked && noZzistoriCultMapEntry;
+
+    if (scopedCorrectly && staleCleared && validPreserved && noPersistedSource && rejectsUnsupportedSource) {
+      pass('Derived Zzistori sorcery is scoped and import normalization guards persisted state');
+    } else {
+      fail('Derived Zzistori sorcery resolver or import guards are incorrect',
+        JSON.stringify({ noSourceResults, arkatSource, godForgotCultNames, staleCleared, validSource, validPreserved, serialized, rejectsUnsupportedSource }));
+    }
+  } else {
+    fail('Derived sorcery resolver and CharacterData JSON helpers are available for import guard tests');
   }
 }
 

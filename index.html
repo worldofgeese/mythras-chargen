@@ -3383,6 +3383,8 @@ const CULTS_DATA = [{"name":"7 Mothers - Danfive Xaron","pantheon":"Lunar","cult
 // Automatically determines which magic system(s) a cult uses based on its cultSkills array.
 // Source: docs/adr/ADR-0006-full-magic-system-coverage.md
 function detectCultType(cult) {
+  if (!cult) return null;
+
   const skills = (cult && cult.cultSkills) || [];
 
   const hasDevotionLike = skills.some(s => /^Devotion/i.test(s));
@@ -8326,6 +8328,85 @@ const Calc = {
   }
 };
 
+function getCharacterMagicPoints(character) {
+  return Number(character?.characteristics?.POW) || 0;
+}
+
+function resolveCultureBackedSorcerySource(character = CharacterData) {
+  if (!character || character.cult) return null;
+
+  const culture = normalizeCultureName(character.culture);
+  const access = CULTURE_MAGIC_PROFILES[culture]?.sorcery?.sourceAccess;
+  if (!access || access.cultRequired !== false) return null;
+  if (access.culture && normalizeCultureName(access.culture) !== culture) return null;
+  if (access.careerPrerequisite && character.career !== access.careerPrerequisite) return null;
+
+  const magicPoints = getCharacterMagicPoints(character);
+  return {
+    sourceLabel: access.sourceLabel,
+    label: access.sourceLabel,
+    sourceType: access.accessType || 'culture-backed school',
+    sourceKind: 'culture-backed school',
+    accessType: access.accessType || 'culture-backed school',
+    cultRequired: false,
+    cultName: null,
+    cultType: null,
+    isCultBacked: false,
+    resource: access.resource || 'Magic Points',
+    resourceValue: magicPoints,
+    magicPoints,
+    skills: [...(access.skills || [])],
+    startingSpellLimit: access.startingSpellLimit || 3,
+    spellListSource: access.spellListSource || null,
+    pages: [...(access.pages || [])]
+  };
+}
+
+function resolveCultBackedSorcerySource(character = CharacterData) {
+  if (!character?.cult) return null;
+
+  const cult = CULTS_DATA.find(c => c.name === character.cult);
+  const cultType = detectCultType(cult);
+  if (!cultType?.types?.includes('sorcery')) return null;
+
+  const magicPoints = getCharacterMagicPoints(character);
+  return {
+    sourceLabel: character.cult,
+    label: character.cult,
+    sourceType: 'cult-backed sorcery',
+    sourceKind: 'cult-backed cult',
+    accessType: 'cult-backed sorcery',
+    cultRequired: true,
+    cultName: character.cult,
+    cultType,
+    isCultBacked: true,
+    resource: 'Magic Points',
+    resourceValue: magicPoints,
+    magicPoints,
+    skills: ['Invocation', 'Shaping'],
+    startingSpellLimit: 3,
+    spellListSource: null,
+    pages: []
+  };
+}
+
+function resolveActiveSorcerySource(character = CharacterData) {
+  return resolveCultBackedSorcerySource(character) || resolveCultureBackedSorcerySource(character);
+}
+
+function normalizeSorceryState(character = CharacterData) {
+  const source = resolveActiveSorcerySource(character);
+  if (!source) {
+    character.sorceryResource = 0;
+    character.sorcerySpells = [];
+    return null;
+  }
+
+  character.sorceryResource = source.magicPoints;
+  character.sorcerySpells = Array.isArray(character.sorcerySpells) ? character.sorcerySpells : [];
+  return source;
+}
+
 // =============================================================================
 // CHARACTER DATA MODEL
 // =============================================================================
@@ -8794,7 +8875,7 @@ const CharacterData = {
     this.backgroundEvents = this.coerceText(data.backgroundEvents);
     this.career = data.career || null;
     this.cult = data.cult || null;
-    this.cultType = data.cultType || null;
+    this.cultType = this.cult ? detectCultType(CULTS_DATA.find(c => c.name === this.cult)) : null;
     this.miracles = Array.isArray(data.miracles) ? data.miracles : [];
     this.devotionalPool = data.devotionalPool || 0;
     this.boundSpiritSlots = data.boundSpiritSlots || 0;
@@ -8818,6 +8899,7 @@ const CharacterData = {
     this.hitPoints = data.hitPoints || {};
     this.companions = this.sanitizeCompanions(data.companions);
     this._disambiguationMap = data._disambiguationMap || {};
+    normalizeSorceryState(this);
     return true;
   },
 
@@ -8932,6 +9014,10 @@ const App = {
   autosaveDelayMs: 250,
   _autosaveTimer: null,
   normalizeCultureName,
+  resolveActiveSorcerySource,
+  resolveCultureBackedSorcerySource,
+  resolveCultBackedSorcerySource,
+  normalizeSorceryState,
 
 
   escapeHtml(value) {
@@ -10064,6 +10150,7 @@ App.selectCulture = function(cultureName) {
         });
       }
     }
+    this.normalizeSorceryState(CharacterData);
     this.saveToLocalStorage();
     this.renderCurrentStep();
   }
@@ -11023,6 +11110,7 @@ App.selectCareer = function(careerName) {
     // Reset professional skill selection on career change (BUG-013)
     CharacterData.selectedProfessionalSkills = [];
 
+    this.normalizeSorceryState(CharacterData);
     this.saveToLocalStorage();
     this.renderCurrentStep();
   }
@@ -11505,8 +11593,8 @@ App.selectCult = function(cultName) {
     CharacterData.cultType = null;
     CharacterData.miracles = [];
     CharacterData.boundSpirits = [];
-    CharacterData.sorcerySpells = [];
   }
+  this.normalizeSorceryState(CharacterData);
 
   // Resolve cult-bound placeholder skills (ADR-005)
   if (cultName) {
@@ -11579,6 +11667,7 @@ App.clearCultSelection = function() {
   CharacterData.boundSpiritSlots = 0;
   CharacterData.sorceryResource = 0;
   this.clearCultMagicSelections();
+  this.normalizeSorceryState(CharacterData);
 };
 
 /**
