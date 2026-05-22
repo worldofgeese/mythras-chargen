@@ -154,6 +154,34 @@ assert(ae3b.devotionalPool === 0, 'AE3b: No Devotional Pool');
 assert(ae3b.selectedMiracles.length === 0, 'AE3b: No miracles');
 assert(ae3b.selectedSpells.length === 3 && ae3b.selectedSpells.includes('Holdfast') && ae3b.selectedSpells.includes('Animate (Substance)') && ae3b.selectedSpells.includes('Project (Sense)'), 'AE3b: 3 Zzistori starting spells selected');
 assert(ae3b.limits.sorcerySpells === 3, 'AE3b: Sorcery spell limit = 3');
+assert(ae3bBuild.character?.sorcerySourceLabel === 'Zzistori School (God Forgot sorcery)', 'AE3b: buildCharacter character output exposes Zzistori label');
+assert(ae3bBuild.character?.sorceryResource === 15, 'AE3b: buildCharacter character output exposes Magic Points');
+assert(Array.isArray(ae3bBuild.character?.sorcerySpells) && ae3bBuild.character.sorcerySpells.length === 3, 'AE3b: buildCharacter character output keeps selected spells');
+
+const ae3bPlay = evalPageJSON(`JSON.stringify({
+  ui: App.agent.getUIState(),
+  playMode: App.agent.assertPlayMode(),
+  magicState: App.agent.getMagicState(),
+  magicHtml: document.getElementById('play-magic') ? document.getElementById('play-magic').innerHTML : ''
+})`);
+assert(ae3bPlay.ui.mode === 'play', 'AE3b: buildCharacter switches to Play Mode');
+assert(ae3bPlay.playMode.sections.includes('magic') &&
+  !ae3bPlay.playMode.missing.some(item => item.includes('magic')) &&
+  !ae3bPlay.playMode.errors.some(item => item.includes('Sorcery')),
+  'AE3b: Play Mode readiness includes source-backed magic');
+assert(ae3bPlay.magicHtml.includes('Zzistori School (God Forgot sorcery)') &&
+  ae3bPlay.magicHtml.includes('Magic Points (15)') &&
+  ae3bPlay.magicHtml.includes('Invocation skill') &&
+  ae3bPlay.magicHtml.includes('Shaping skill') &&
+  ae3bPlay.magicHtml.includes('Holdfast') &&
+  ae3bPlay.magicHtml.includes('Animate (Substance)') &&
+  ae3bPlay.magicHtml.includes('Project (Sense)') &&
+  !ae3bPlay.magicHtml.includes('Devotional Pool'),
+  'AE3b: Play Mode renders Zzistori label, Magic Points, skills, and selected spells');
+assert(ae3bPlay.magicState.sorcerySourceLabel === ae3b.sorcerySourceLabel &&
+  ae3bPlay.magicState.sorceryResource === ae3b.sorceryResource &&
+  JSON.stringify(ae3bPlay.magicState.selectedSpells) === JSON.stringify(ae3b.selectedSpells),
+  'AE3b: Magic state remains consistent after switching to Play Mode');
 
 // ═══════════════════════════════════════════════════════════════
 console.log('\n\x1b[36m═══ AE4: Waha (Hybrid Theist+Animist) ═══\x1b[0m\n');

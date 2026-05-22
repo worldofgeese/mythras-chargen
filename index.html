@@ -8349,6 +8349,17 @@ function getCharacterMagicPoints(character) {
   return Number(character?.characteristics?.POW) || 0;
 }
 
+function formatSorcerySourcePages(source) {
+  const pages = Array.isArray(source?.pages) ? source.pages : [];
+  const hasZzistoriPages = pages.includes('AiG p.30-31') &&
+    pages.includes('AiG p.59-60') &&
+    pages.includes('Mythras Core p.162') &&
+    pages.includes('Mythras Core p.166-177');
+  if (hasZzistoriPages) return 'AiG p.30-31, p.59-60; Mythras Core p.162, p.166-177';
+  if (pages.length > 0) return pages.join('; ');
+  return 'Mythras Core p.162, p.166-177';
+}
+
 function resolveCultureBackedSorcerySource(character = CharacterData) {
   if (!character || character.cult) return null;
 
@@ -9035,6 +9046,7 @@ const App = {
   resolveCultureBackedSorcerySource,
   resolveCultBackedSorcerySource,
   normalizeSorceryState,
+  formatSorcerySourcePages,
 
 
   escapeHtml(value) {
@@ -11319,10 +11331,7 @@ App.renderSorceryPickerPanel = function(source, options = {}) {
   const heading = options.heading || (activeSource.isCultBacked
     ? `Sorcery${options.isHybrid ? ' — Sorcerer Path' : ''}`
     : sourceLabel);
-  const pages = (activeSource.pages && activeSource.pages.length > 0)
-    ? activeSource.pages
-    : ['Mythras Core p.162-178'];
-  const pageCopy = pages.join('; ');
+  const pageCopy = this.formatSorcerySourcePages(activeSource);
   const sourceIntro = activeSource.isCultBacked
     ? `<p><strong>Source:</strong> ${this.escapeHtml(sourceLabel)}</p>`
     : `<p><strong>Source:</strong> ${this.escapeHtml(sourceLabel)} <span class="source-coverage-badge" data-status="attested">attested</span></p>`;
@@ -14519,6 +14528,35 @@ App.renderPlayMagic = function() {
   const folkMagicBase = CharacterData.attributes.folkMagicBase;
   const allSpells = [...new Set([...CharacterData.folkMagicSpells, ...CharacterData.careerFolkMagic])];
   const esc = value => this.escapeHtml(value);
+  const activeSorcerySource = this.normalizeSorceryState(CharacterData);
+  const renderSorceryInfo = (source, cultType = {}) => {
+    if (!source) return '';
+    const magicPoints = source.magicPoints ?? source.resourceValue ?? CharacterData.sorceryResource ?? CharacterData.characteristics.POW ?? 0;
+    const sorcerySpells = CharacterData.sorcerySpells || [];
+    const sourceLabel = source.sourceLabel || CharacterData.cult || 'Sorcery';
+    const heading = source.isCultBacked
+      ? `Sorcery${cultType.isHybrid ? ' — Sorcerer Path' : ''}`
+      : `Sorcery — ${sourceLabel}`;
+    const pageCopy = this.formatSorcerySourcePages(source);
+    const badgeConstants = source.isCultBacked ? ['SORCERY_SPELLS'] : ['SORCERY_SPELLS', 'CULTURE_MAGIC_PROFILES'];
+
+    return `
+      <h3>${esc(heading)}</h3>
+      ${this.renderProvenanceBadgesForConstants(badgeConstants)}
+      <p style="font-size: 0.9em;"><strong>Source:</strong> ${esc(sourceLabel)}; ${esc(pageCopy)}</p>
+      <p style="font-size: 0.9em;"><strong>Resource:</strong> Magic Points (${magicPoints})</p>
+      ${sorcerySpells.length > 0 ? `
+        <p style="font-size: 0.9em;"><strong>Selected Spells:</strong></p>
+        <ul data-testid="sorcery-spells-list">
+          ${sorcerySpells.map(spell => `<li data-testid="sorcery-spell-name">${esc(spell)}</li>`).join('')}
+        </ul>
+      ` : '<p style="font-size: 0.85em; color: #666;">No sorcery spells selected.</p>'}
+      <p style="font-size: 0.9em;"><strong>Casting:</strong> Invocation skill</p>
+      <p style="font-size: 0.9em;"><strong>Shaping:</strong> Shaping skill</p>
+      <p style="font-size: 0.9em;"><strong>Intensity:</strong> Invocation / 10 &nbsp;|&nbsp; <strong>Shaping Points:</strong> Shaping / 10</p>
+      <p style="font-size: 0.8em; color: #666;">Source: ${esc(pageCopy)}. Sorcery spells do not use a rune map in this tool.</p>
+    `;
+  };
 
   // Get cult info if selected
   let cultInfo = '';
@@ -14631,23 +14669,7 @@ App.renderPlayMagic = function() {
 
     // Sorcery display (ADR-0006)
     if (cultType.types.includes('sorcery')) {
-      const magicPoints = CharacterData.sorceryResource || CharacterData.characteristics.POW || 0;
-      const sorcerySpells = CharacterData.sorcerySpells || [];
-      miraclesInfo += `
-        <h3>Sorcery${cultType.isHybrid ? ' — Sorcerer Path' : ''}</h3>
-        ${this.renderProvenanceBadgesForConstants(['SORCERY_SPELLS'])}
-        <p style="font-size: 0.9em;"><strong>Resource:</strong> Magic Points (${magicPoints})</p>
-        ${sorcerySpells.length > 0 ? `
-          <p style="font-size: 0.9em;"><strong>Selected Spells:</strong></p>
-          <ul data-testid="sorcery-spells-list">
-            ${sorcerySpells.map(spell => `<li data-testid="sorcery-spell-name">${esc(spell)}</li>`).join('')}
-          </ul>
-        ` : '<p style="font-size: 0.85em; color: #666;">No sorcery spells selected.</p>'}
-        <p style="font-size: 0.9em;"><strong>Casting:</strong> Invocation skill</p>
-        <p style="font-size: 0.9em;"><strong>Shaping:</strong> Shaping skill</p>
-        <p style="font-size: 0.9em;"><strong>Intensity:</strong> Invocation / 10 &nbsp;|&nbsp; <strong>Shaping Points:</strong> Shaping / 10</p>
-        <p style="font-size: 0.8em; color: #666;">Source: Mythras Core p.162-178. Sorcery spells do not use a rune map in this tool.</p>
-      `;
+      miraclesInfo += renderSorceryInfo(activeSorcerySource, cultType);
     }
 
     // Mysticism stub (ADR-0006)
@@ -14659,6 +14681,8 @@ App.renderPlayMagic = function() {
         <p style="font-size: 0.85em; color: #555; font-style: italic;">Mysticism uses raw Mythras Core rules. Max active talent Intensity = Meditation skill / 10.</p>
       `;
     }
+  } else if (activeSorcerySource) {
+    miraclesInfo += renderSorceryInfo(activeSorcerySource, { primary: 'sorcery', types: ['sorcery'], isHybrid: false });
   }
 
   container.innerHTML = `
@@ -15087,6 +15111,7 @@ App.exportSinglePagePDF = async function() {
     }
 
     // ADR-0006: Magic system display based on cult type
+    const pdfActiveSorcerySource = App.normalizeSorceryState(CharacterData);
     if (CharacterData.cult && y > 50) {
       const pdfCult = CULTS_DATA.find(c => c.name === CharacterData.cult);
       const pdfCultType = CharacterData.cultType || detectCultType(pdfCult);
@@ -15167,6 +15192,31 @@ App.exportSinglePagePDF = async function() {
         txt('Resource: Concentration (no MP cost) | Max Intensity = Meditation/10', L, y, { size: 5.5 });
         y -= 10;
       }
+    }
+
+    if (!CharacterData.cult && pdfActiveSorcerySource && y > 50) {
+      const mp = pdfActiveSorcerySource.magicPoints ?? pdfActiveSorcerySource.resourceValue ?? CharacterData.sorceryResource ?? CharacterData.characteristics.POW ?? 0;
+      const sourceLabel = pdfActiveSorcerySource.sourceLabel || 'Sorcery';
+      const sourcePages = App.formatSorcerySourcePages(pdfActiveSorcerySource);
+      txt(`SORCERY (${sourceLabel}) — Magic Points: ${mp}`, L, y, { bold: true, size: 7 });
+      y -= 8;
+      txt('Casting: Invocation skill | Shaping: Shaping skill | Intensity = Invocation/10', L, y, { size: 5.5 });
+      y -= 8;
+      txt(`Source: ${sourcePages}`, L, y, { size: 5.5 });
+      y -= 8;
+      const spells = CharacterData.sorcerySpells || [];
+      if (spells.length > 0) {
+        txt('Spells:', L, y, { bold: true, size: 6 });
+        y -= 7;
+        spells.forEach(spellName => {
+          if (y < 30) return;
+          const spellData = SORCERY_SPELLS.find(s => s[0] === spellName);
+          const desc = spellData && spellData[2] ? ` — ${spellData[2]}` : '';
+          const resist = spellData && spellData[1] ? ` [${spellData[1]}]` : '';
+          drawWrappedText(`• ${spellName}${resist}${desc}`, L + 4, W - 8, { size: 5.5, lineHeight: 6 });
+        });
+      }
+      y -= 4;
     }
 
     // Folk Magic
@@ -15277,6 +15327,7 @@ App.agent = {};
 App.agent.getState = function() {
   try {
     const skills = App.compileAllSkills ? App.compileAllSkills() : [];
+    const activeSorcerySource = App.normalizeSorceryState(CharacterData);
     const compiledSkills = skills.map(s => ({
       name: s.name,
       total: s.base + s.cultural + s.career + s.bonus,
@@ -15299,6 +15350,11 @@ App.agent.getState = function() {
       cult: CharacterData.cult || null,
       miracles: [...(CharacterData.miracles || [])],
       devotionalPool: CharacterData.devotionalPool || 0,
+      activeSorcerySource: activeSorcerySource ? {...activeSorcerySource} : null,
+      sorcerySourceLabel: activeSorcerySource?.sourceLabel || null,
+      sorcerySourceType: activeSorcerySource?.sourceType || null,
+      sorceryResource: activeSorcerySource?.magicPoints || CharacterData.sorceryResource || 0,
+      sorcerySpells: [...(CharacterData.sorcerySpells || [])],
       socialClass: CharacterData.socialClass || null,
       skills: compiledSkills,
       passions: [...(CharacterData.passions || [])],
@@ -16342,7 +16398,7 @@ App.agent.assertPlayMode = function() {
 
     // Check magic
     const magicState = App.agent.getMagicState();
-    if (magicState.cultName) {
+    if (magicState.cultName || magicState.activeSorcerySource) {
       sections.push('magic');
       if (magicState.cultType.types.includes('theist') && magicState.selectedMiracles.length === 0) {
         errors.push('Theist cult but no miracles selected');
@@ -16350,8 +16406,8 @@ App.agent.assertPlayMode = function() {
       if (magicState.cultType.types.includes('animist') && magicState.selectedSpirits.length === 0) {
         errors.push('Animist cult but no spirits bound');
       }
-      if (magicState.cultType.types.includes('sorcery') && magicState.selectedSpells.length === 0) {
-        errors.push('Sorcery cult but no spells selected');
+      if ((magicState.cultType.types.includes('sorcery') || magicState.activeSorcerySource) && magicState.selectedSpells.length === 0) {
+        errors.push('Sorcery source but no spells selected');
       }
     } else {
       missing.push('magic (no cult selected)');

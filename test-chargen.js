@@ -1774,6 +1774,81 @@ asyncTest('exportSinglePagePDF() sorcery rule text capture failed', async () => 
   }
 });
 
+// Test 3.5: PDF source-backed Zzistori sorcery uses school label and no theist fields
+asyncTest('exportSinglePagePDF() Zzistori source-backed sorcery capture failed', async () => {
+  if (!App.App || !App.App.exportSinglePagePDF) return;
+
+  const characteristics = { STR: 8, CON: 10, SIZ: 10, DEX: 9, INT: 15, POW: 15, CHA: 8 };
+  const { text } = await captureSinglePagePdf(createPdfTestCharacter({
+    name: 'Talor Zzistori',
+    culture: 'God Forgot',
+    homeland: 'God Forgot',
+    career: 'Sorcerer',
+    cult: null,
+    cultType: null,
+    characteristics,
+    attributes: App.Calc.calculateAllAttributes(characteristics),
+    miracles: ['Shield'],
+    devotionalPool: 99,
+    boundSpirits: [],
+    sorceryResource: 0,
+    sorcerySpells: ['Holdfast', 'Animate (Substance)', 'Project (Sense)'],
+    folkMagicSpells: [],
+    careerFolkMagic: [],
+    weapons: [],
+    equipment: [],
+    armor: [],
+    passions: [],
+    combatStyles: []
+  }));
+  const hasZzistoriHeader = text.includes('Zzistori School (God Forgot sorcery)') &&
+    text.includes('Magic Points: 15');
+  const hasRawText = text.includes('Casting: Invocation skill') && text.includes('Shaping: Shaping skill');
+  const hasSelectedSpells = ['Holdfast', 'Animate (Substance)', 'Project (Sense)'].every(spell => text.includes(spell));
+  const hasSourceCopy = text.includes('AiG p.30-31, p.59-60; Mythras Core p.162, p.166-177');
+  const hasTheistLeak = text.includes('THEIST MIRACLES') ||
+    text.includes('Devotional Pool') ||
+    text.includes('Shield');
+
+  if (hasZzistoriHeader && hasRawText && hasSelectedSpells && hasSourceCopy && !hasTheistLeak) {
+    pass('exportSinglePagePDF() renders Zzistori source-backed sorcery without theist fields');
+  } else {
+    fail('exportSinglePagePDF() omits Zzistori source-backed sorcery or leaks theist fields',
+      JSON.stringify({ hasZzistoriHeader, hasRawText, hasSelectedSpells, hasSourceCopy, hasTheistLeak, magicText: text.split('\n').filter(line => /SORCERY|Magic Points|Invocation|Shaping|Zzistori|Devotional|Shield|AiG/.test(line)).join(' | ') }));
+  }
+});
+
+// Test 3.6: PDF cult-backed sorcery keeps the cult label distinct from Zzistori
+asyncTest('exportSinglePagePDF() Arkat sorcery label capture failed', async () => {
+  if (!App.App || !App.App.exportSinglePagePDF) return;
+
+  const characteristics = { STR: 8, CON: 10, SIZ: 10, DEX: 9, INT: 15, POW: 13, CHA: 10 };
+  const { text } = await captureSinglePagePdf(createPdfTestCharacter({
+    cult: 'Arkat',
+    cultType: { primary: 'sorcery', types: ['sorcery'], isHybrid: false },
+    characteristics,
+    attributes: App.Calc.calculateAllAttributes(characteristics),
+    miracles: [],
+    devotionalPool: 0,
+    sorceryResource: 13,
+    sorcerySpells: ['Holdfast'],
+    folkMagicSpells: [],
+    careerFolkMagic: [],
+    boundSpirits: []
+  }));
+
+  if (text.includes('SORCERY (Arkat)') &&
+      text.includes('Magic Points: 13') &&
+      text.includes('Holdfast') &&
+      !text.includes('Zzistori School (God Forgot sorcery)') &&
+      !text.includes('Devotional Pool')) {
+    pass('exportSinglePagePDF() keeps Arkat cult-backed sorcery label distinct');
+  } else {
+    fail('exportSinglePagePDF() regressed Arkat cult-backed sorcery labeling',
+      text.split('\n').filter(line => /SORCERY|Magic Points|Arkat|Zzistori|Devotional/.test(line)).join(' | '));
+  }
+});
+
 // ============================================================
 section('Risk 4: Normalized Character Model (Helpers Module)');
 // ============================================================
@@ -4880,6 +4955,82 @@ fixtures.forEach(fixtureInfo => {
   }
 }
 
+// Test 6.19b: Play Mode renders source-backed Zzistori sorcery without theist fields
+{
+  const { App: AppObj, CharacterData: CD, Calc: CalcRef, _sandbox } = loadApp();
+  if (AppObj && AppObj.renderPlayMagic && CD && _sandbox) {
+    const characteristics = { STR: 8, CON: 10, SIZ: 10, DEX: 9, INT: 15, POW: 15, CHA: 8 };
+    CD.fromJSON(JSON.stringify({
+      ...createTestCharacter('God Forgot'),
+      name: 'Talor Zzistori',
+      culture: 'God Forgot',
+      homeland: 'God Forgot',
+      career: 'Sorcerer',
+      cult: null,
+      cultType: null,
+      characteristics,
+      attributes: CalcRef.calculateAllAttributes(characteristics),
+      miracles: ['Shield'],
+      devotionalPool: 99,
+      sorceryResource: 0,
+      sorcerySpells: ['Holdfast', 'Animate (Substance)', 'Project (Sense)'],
+      folkMagicSpells: [],
+      careerFolkMagic: [],
+      boundSpirits: []
+    }));
+
+    AppObj.renderPlayMagic();
+    const html = _sandbox.elements['play-magic'].innerHTML;
+    const hasSourceLabel = html.includes('Zzistori School (God Forgot sorcery)');
+    const hasMagicPoints = html.includes('Magic Points (15)');
+    const hasRawSkills = /Invocation skill/i.test(html) && /Shaping skill/i.test(html);
+    const hasSelectedSpells = ['Holdfast', 'Animate (Substance)', 'Project (Sense)'].every(spell => html.includes(spell));
+    const hasSourceCopy = html.includes('AiG p.30-31, p.59-60; Mythras Core p.162, p.166-177');
+    const hasTheistLeak = /Devotional Pool|data-testid="miracle-name"|Shield/.test(html);
+
+    if (hasSourceLabel && hasMagicPoints && hasRawSkills && hasSelectedSpells && hasSourceCopy && !hasTheistLeak) {
+      pass('Play Mode renders Zzistori source-backed sorcery without theist fields');
+    } else {
+      fail('Play Mode omits Zzistori source-backed sorcery or leaks theist fields',
+        JSON.stringify({ hasSourceLabel, hasMagicPoints, hasRawSkills, hasSelectedSpells, hasSourceCopy, hasTheistLeak, html }));
+    }
+  } else {
+    fail('App.renderPlayMagic not available for Zzistori Play Mode test');
+  }
+}
+
+// Test 6.19c: Play Mode keeps Arkat cult-backed sorcery label distinct from Zzistori
+{
+  const { App: AppObj, CharacterData: CD, Calc: CalcRef, _sandbox } = loadApp();
+  if (AppObj && AppObj.renderPlayMagic && CD && _sandbox) {
+    CD.fromJSON(JSON.stringify(createTestCharacter('God Forgot')));
+    CD.characteristics = { STR: 8, CON: 10, SIZ: 10, DEX: 9, INT: 15, POW: 13, CHA: 10 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.cult = 'Arkat';
+    CD.cultType = { primary: 'sorcery', types: ['sorcery'], isHybrid: false };
+    CD.sorceryResource = 13;
+    CD.sorcerySpells = ['Holdfast'];
+    CD.folkMagicSpells = [];
+    CD.careerFolkMagic = [];
+
+    AppObj.renderPlayMagic();
+    const html = _sandbox.elements['play-magic'].innerHTML;
+
+    if (html.includes('Arkat Cult') &&
+        html.includes('Sorcery') &&
+        html.includes('Magic Points (13)') &&
+        html.includes('Holdfast') &&
+        !html.includes('Zzistori School (God Forgot sorcery)') &&
+        !html.includes('Devotional Pool')) {
+      pass('Play Mode keeps Arkat cult-backed sorcery label distinct');
+    } else {
+      fail('Play Mode regressed Arkat cult-backed sorcery labeling', html);
+    }
+  } else {
+    fail('App.renderPlayMagic not available for Arkat Play Mode label test');
+  }
+}
+
 // Test 6.20: data-persist input handling updates CharacterData before saving
 {
   const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
@@ -7520,7 +7671,7 @@ section('Step 9 Initiation Gate');
       html.includes('Casting:</strong> Invocation skill') &&
       html.includes('Shaping:</strong> Shaping skill') &&
       html.includes('AiG p.30-31') &&
-      html.includes('Mythras Core p.166-177') &&
+      html.includes('Mythras Core p.162, p.166-177') &&
       html.includes('Starting Spells') &&
       html.includes('Holdfast');
     const requiresSorcerySelection = missingSpellErrors.some(error => /sorcery spell/i.test(error));
