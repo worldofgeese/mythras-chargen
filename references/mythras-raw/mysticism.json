@@ -3,79 +3,293 @@
   "chapter": "Chapter 11: Mysticism",
   "pages": "155-161",
   "extracted_at": "2026-05-16",
-  "verified": false,
-  "verification_notes": "Extracted via pdftotext. Requires human verification against source PDF.",
+  "verified": true,
+  "verified_at": "2026-05-22",
+  "core_rules_verified": true,
+  "verification_scope": "Mythras Core Mysticism chargen-relevant rules from PDF pages 155-161 plus boundary check on page 196.",
+  "app_access_state": "blocked_no_verified_provider",
+  "app_access_notes": "Core Mysticism rules are verified, but this record does not identify a source-backed culture, career, cult, school, order, or tradition provider for app-facing character access.",
+  "authority_state": "reference_authoritative_not_app_promoted",
+  "source_ref": {
+    "source_id": "mythras-core",
+    "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+    "pages": [
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      196
+    ],
+    "pdf_pages": [
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      196
+    ],
+    "page_manifest_path": "references/sources/pages/mythras-core.json",
+    "coverage_state": "verified",
+    "evidence_state": "bounded_extraction_independent_vision_verified_reference_only",
+    "block_ids": [
+      "mythras-core-p0155-b001",
+      "mythras-core-p0155-b002",
+      "mythras-core-p0155-b003",
+      "mythras-core-p0156-b001",
+      "mythras-core-p0156-b002",
+      "mythras-core-p0156-b003",
+      "mythras-core-p0157-b001",
+      "mythras-core-p0157-b002",
+      "mythras-core-p0157-b003",
+      "mythras-core-p0158-b001",
+      "mythras-core-p0159-b001",
+      "mythras-core-p0160-b001",
+      "mythras-core-p0161-b001",
+      "mythras-core-p0196-b001"
+    ],
+    "block_state": "verified_page_block_evidence",
+    "evidence_paths": [
+      "references/sources/evidence/mythras-core/page-0155-extraction.json",
+      "references/sources/evidence/mythras-core/page-0155-verification.json",
+      "references/sources/evidence/mythras-core/page-0156-extraction.json",
+      "references/sources/evidence/mythras-core/page-0156-verification.json",
+      "references/sources/evidence/mythras-core/page-0157-extraction.json",
+      "references/sources/evidence/mythras-core/page-0157-verification.json",
+      "references/sources/evidence/mythras-core/page-0158-extraction.json",
+      "references/sources/evidence/mythras-core/page-0158-verification.json",
+      "references/sources/evidence/mythras-core/page-0159-extraction.json",
+      "references/sources/evidence/mythras-core/page-0159-verification.json",
+      "references/sources/evidence/mythras-core/page-0160-extraction.json",
+      "references/sources/evidence/mythras-core/page-0160-verification.json",
+      "references/sources/evidence/mythras-core/page-0161-extraction.json",
+      "references/sources/evidence/mythras-core/page-0161-verification.json",
+      "references/sources/evidence/mythras-core/page-0196-extraction.json",
+      "references/sources/evidence/mythras-core/page-0196-verification.json"
+    ]
+  },
   "chargen_rules": {
     "skills": {
       "mysticism": {
-        "base": "UNVERIFIED - likely POW+CON or INT+POW",
-        "description": "Represents the depth of knowledge concerning a particular mystical path. Each incidence must be tied to a specific path (foundation of mystical knowledge). Paths are the mystical equivalent of Combat Styles: diverse talents and abilities folded into the umbrella skill.",
-        "intensity_formula": "Talent Intensity available = Mysticism skill / 10",
-        "page": "p.155-156"
+        "base": "POW+CON",
+        "description": "Represents knowledge of a specific mystical path and controls the maximum Intensity for individual Talents from that path.",
+        "intensity_formula": "Maximum Intensity for each individual Talent = Mysticism skill / 20.",
+        "page": "p.154",
+        "source_ref": {
+          "source_id": "mythras-core",
+          "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+          "pages": [
+            155
+          ],
+          "pdf_pages": [
+            155
+          ],
+          "page_manifest_path": "references/sources/pages/mythras-core.json",
+          "coverage_state": "verified",
+          "evidence_state": "bounded_extraction_independent_vision_verified_reference_only",
+          "block_ids": [
+            "mythras-core-p0155-b002",
+            "mythras-core-p0155-b003"
+          ],
+          "block_state": "verified_page_block_evidence",
+          "evidence_paths": [
+            "references/sources/evidence/mythras-core/page-0155-extraction.json",
+            "references/sources/evidence/mythras-core/page-0155-verification.json"
+          ]
+        }
       },
       "meditation": {
-        "base": "UNVERIFIED - likely INT+CON",
-        "description": "The ability to reach a state of concentration by removing all extraneous distractions. Governs how many talents can be maintained simultaneously.",
-        "concentration_formula": "Maximum cumulative Intensity of active talents = Meditation skill / 10",
-        "page": "p.155-156",
-        "example": "Meditation 66% = max Intensity 7, split across multiple talents (e.g., Augment X at 2, Invoke Y at 1, Enhance Z at 4)"
+        "base": "INT+CON",
+        "description": "Represents the mystic concentration discipline and controls cumulative Intensity of active Talents.",
+        "concentration_formula": "Maximum cumulative Intensity of active Talents = Meditation skill / 10.",
+        "page": "p.154",
+        "source_ref": {
+          "source_id": "mythras-core",
+          "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+          "pages": [
+            155
+          ],
+          "pdf_pages": [
+            155
+          ],
+          "page_manifest_path": "references/sources/pages/mythras-core.json",
+          "coverage_state": "verified",
+          "evidence_state": "bounded_extraction_independent_vision_verified_reference_only",
+          "block_ids": [
+            "mythras-core-p0155-b002",
+            "mythras-core-p0155-b003"
+          ],
+          "block_state": "verified_page_block_evidence",
+          "evidence_paths": [
+            "references/sources/evidence/mythras-core/page-0155-extraction.json",
+            "references/sources/evidence/mythras-core/page-0155-verification.json"
+          ]
+        }
       }
     },
-    "aig_adaptation": {
-      "note": "AiG's Mysticism chapter was never published. Per Hannu (2026-05-16): 'Mysticism raw' — uses Mythras Core rules without adaptation. No Rune Affinity overlay specified for Mysticism.",
-      "source": "Hannu Discord 2026-05-16"
-    },
     "paths": {
-      "page": "p.156",
-      "description": "A path contains knowledge of multiple mental disciplines called talents: skill augmentations, trait invocations, and attribute enhancements. Paths are often based on ancient hermetic teachings, passed down in sacred books or by esoteric gurus or secret mountain-top schools.",
-      "structure": "Each path is tied to a profession or philosophy. Rare for an adept to learn more than one.",
-      "examples": [
-        {
-          "name": "Path of Abjuration",
-          "talents": ["Augment Endurance", "Augment Survival", "Invoke Denial (Food)", "Invoke Denial (Water)", "Invoke Denial (Sleep)", "Enhance Fatigue", "Enhance Hit Points"]
-        },
-        {
-          "name": "Path of Shadows",
-          "talents": ["Augment Perception", "Augment Stealth", "Augment Ranged Combat Style", "Invoke Adhesion", "Invoke Astral Projection", "Invoke Dark Sight", "Enhance Fatigue"]
-        }
-      ]
+      "page": "p.155",
+      "description": "Each incidence of the Mysticism skill is tied to a specific path, a foundation of mystical knowledge taught through a school, guru, sacred text, or similar tradition.",
+      "structure": "A path contains multiple Talents, and a starting mystic chooses one path at character creation; other paths may be learned during play.",
+      "source_ref": {
+        "source_id": "mythras-core",
+        "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+        "pages": [
+          156
+        ],
+        "pdf_pages": [
+          156
+        ],
+        "page_manifest_path": "references/sources/pages/mythras-core.json",
+        "coverage_state": "verified",
+        "evidence_state": "bounded_extraction_independent_vision_verified_reference_only",
+        "block_ids": [
+          "mythras-core-p0156-b001",
+          "mythras-core-p0156-b003"
+        ],
+        "block_state": "verified_page_block_evidence",
+        "evidence_paths": [
+          "references/sources/evidence/mythras-core/page-0156-extraction.json",
+          "references/sources/evidence/mythras-core/page-0156-verification.json"
+        ]
+      }
     },
     "talent_types": {
-      "page": "p.157-161",
+      "page": "p.155",
       "types": [
         {
           "name": "Augment",
-          "description": "Skill augmentations — boost a specific skill by a number of grades equal to the Intensity applied",
-          "examples": ["Augment Endurance", "Augment Perception", "Augment Stealth", "Augment Combat Style"]
+          "description": "Skill augmentations."
         },
         {
           "name": "Invoke",
-          "description": "Trait invocations — grant supernatural abilities or creature traits",
-          "examples": ["Invoke Adhesion", "Invoke Astral Projection", "Invoke Dark Sight", "Invoke Denial (Substance)"]
+          "description": "Trait invocations."
         },
         {
           "name": "Enhance",
-          "description": "Attribute enhancements — boost attributes like Hit Points, Fatigue, Action Points",
-          "examples": ["Enhance Hit Points", "Enhance Fatigue", "Enhance Action Points"]
+          "description": "Attribute enhancements."
         }
-      ]
+      ],
+      "catalog_scope": "The named Talent catalog spans the rest of the Mysticism chapter, but this bead verifies catalog presence rather than normalizing every Talent rule.",
+      "source_ref": {
+        "source_id": "mythras-core",
+        "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+        "pages": [
+          156,
+          157,
+          158,
+          159,
+          160,
+          161
+        ],
+        "pdf_pages": [
+          156,
+          157,
+          158,
+          159,
+          160,
+          161
+        ],
+        "page_manifest_path": "references/sources/pages/mythras-core.json",
+        "coverage_state": "verified",
+        "evidence_state": "bounded_extraction_independent_vision_verified_reference_only",
+        "block_ids": [
+          "mythras-core-p0156-b001",
+          "mythras-core-p0157-b001",
+          "mythras-core-p0157-b003",
+          "mythras-core-p0158-b001",
+          "mythras-core-p0159-b001",
+          "mythras-core-p0160-b001",
+          "mythras-core-p0161-b001"
+        ],
+        "block_state": "verified_page_block_evidence",
+        "evidence_paths": [
+          "references/sources/evidence/mythras-core/page-0156-extraction.json",
+          "references/sources/evidence/mythras-core/page-0156-verification.json",
+          "references/sources/evidence/mythras-core/page-0157-extraction.json",
+          "references/sources/evidence/mythras-core/page-0157-verification.json",
+          "references/sources/evidence/mythras-core/page-0158-extraction.json",
+          "references/sources/evidence/mythras-core/page-0158-verification.json",
+          "references/sources/evidence/mythras-core/page-0159-extraction.json",
+          "references/sources/evidence/mythras-core/page-0159-verification.json",
+          "references/sources/evidence/mythras-core/page-0160-extraction.json",
+          "references/sources/evidence/mythras-core/page-0160-verification.json",
+          "references/sources/evidence/mythras-core/page-0161-extraction.json",
+          "references/sources/evidence/mythras-core/page-0161-verification.json"
+        ]
+      }
     },
     "casting_mechanics": {
-      "page": "p.157-158",
-      "resource": "No external resource consumed — talents are powered by concentration (Meditation skill)",
-      "activation": "Requires a successful Mysticism skill roll to activate a talent",
-      "duration": "Talents remain active as long as the mystic concentrates. Multiple talents can be maintained simultaneously up to the Meditation limit.",
-      "limitation": "Effects do not extend beyond the mystic themselves — they become a tool to manipulate the world, but magic does not project outward"
+      "page": "p.154-156",
+      "resource": "Talents cost Magic Points when activated.",
+      "activation": "Implementing a Talent requires knowing the specific Talent, having enough Magic Points, and passing the relevant Mysticism skill check.",
+      "duration": "Active Talent capacity is bounded by Meditation; individual Talent strength is bounded by Mysticism.",
+      "limitation": "Mysticism effects are self-directed and do not confer powers on others.",
+      "source_ref": {
+        "source_id": "mythras-core",
+        "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+        "pages": [
+          155,
+          157
+        ],
+        "pdf_pages": [
+          155,
+          157
+        ],
+        "page_manifest_path": "references/sources/pages/mythras-core.json",
+        "coverage_state": "verified",
+        "evidence_state": "bounded_extraction_independent_vision_verified_reference_only",
+        "block_ids": [
+          "mythras-core-p0155-b003",
+          "mythras-core-p0157-b001",
+          "mythras-core-p0157-b002",
+          "mythras-core-p0157-b003"
+        ],
+        "block_state": "verified_page_block_evidence",
+        "evidence_paths": [
+          "references/sources/evidence/mythras-core/page-0155-extraction.json",
+          "references/sources/evidence/mythras-core/page-0155-verification.json",
+          "references/sources/evidence/mythras-core/page-0157-extraction.json",
+          "references/sources/evidence/mythras-core/page-0157-verification.json"
+        ]
+      }
     },
     "starting_at_chargen": {
-      "note": "A starting mystic chooses one path and learns talents from it. The number of starting talents is determined by cult/school membership (see Cults chapter p.196). Typically a mystic knows several talents from their path at creation.",
-      "path_choice": "One path chosen at character creation",
-      "page": "p.155-156, p.196"
+      "note": "A starting mystic chooses one path and begins with known Talents equal to one twentieth of the relevant Mysticism skill. Core page 196 was checked as a boundary page and does not identify a Mysticism-specific app access provider.",
+      "path_choice": "One path chosen at character creation.",
+      "app_provider_status": "blocked_no_verified_provider",
+      "page": "p.155 and boundary p.195",
+      "source_ref": {
+        "source_id": "mythras-core",
+        "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+        "pages": [
+          156,
+          196
+        ],
+        "pdf_pages": [
+          156,
+          196
+        ],
+        "page_manifest_path": "references/sources/pages/mythras-core.json",
+        "coverage_state": "verified",
+        "evidence_state": "bounded_extraction_independent_vision_verified_reference_only",
+        "block_ids": [
+          "mythras-core-p0156-b002",
+          "mythras-core-p0156-b003",
+          "mythras-core-p0196-b001"
+        ],
+        "block_state": "verified_page_block_evidence",
+        "evidence_paths": [
+          "references/sources/evidence/mythras-core/page-0156-extraction.json",
+          "references/sources/evidence/mythras-core/page-0156-verification.json",
+          "references/sources/evidence/mythras-core/page-0196-extraction.json",
+          "references/sources/evidence/mythras-core/page-0196-verification.json"
+        ]
+      }
     }
-  },
-  "glorantha_notes": {
-    "applicability": "Per AiG overview (p.60): 'The study of mysticism in Glorantha is limited to only those of Draconic blood or those deluded enough to become subservient to them.' Primarily Kralori and Draconic traditions.",
-    "current_cult_data": "No cults in the current 94 one-pagers use Mysticism skills. Zero cults would use this system with current data.",
-    "future_use": "Would become relevant if Kralori cultures or Draconic cults are added to the chargen."
   }
 }

@@ -3394,6 +3394,12 @@ const CULTS_DATA = [{"name":"7 Mothers - Danfive Xaron","pantheon":"Lunar","cult
 // --- Cult Type Detection (ADR-0006) ---
 // Automatically determines which magic system(s) a cult uses based on its cultSkills array.
 // Source: docs/adr/ADR-0006-full-magic-system-coverage.md
+const MYSTICISM_APP_ACCESS_STATE = 'blocked_no_verified_provider';
+
+function isMysticismAppAccessEnabled() {
+  return MYSTICISM_APP_ACCESS_STATE !== 'blocked_no_verified_provider';
+}
+
 function detectCultType(cult) {
   if (!cult) return null;
 
@@ -3408,15 +3414,17 @@ function detectCultType(cult) {
   if (hasDevotionLike) types.push('theist');
   if (hasTranceLike) types.push('animist');
   if (hasInvocationLike) types.push('sorcery');
-  if (hasMysticism) types.push('mysticism');
+  if (hasMysticism && isMysticismAppAccessEnabled()) types.push('mysticism');
 
   // Fallback: if no recognized magic skills, treat as theist (most common)
-  if (types.length === 0) types.push('theist');
+  const blockedTypes = hasMysticism && !isMysticismAppAccessEnabled() ? ['mysticism'] : [];
+  if (types.length === 0 && blockedTypes.length === 0) types.push('theist');
 
   return {
-    primary: types[0],
+    primary: types[0] || null,
     types: types,
-    isHybrid: types.length > 1
+    isHybrid: types.length > 1,
+    blockedTypes
   };
 }
 

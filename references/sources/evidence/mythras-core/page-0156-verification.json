@@ -1,0 +1,44 @@
+{
+  "artifact_id": "mythras-core-page-0156-verification-opus-2026-05-22",
+  "artifact_kind": "verification",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "mythras-core",
+  "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+  "pdf_page": 156,
+  "printed_page_label": "155",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/mythras-core/page-0156.png",
+    "image_sha256": "353b7b6abfc8249f4640b4854b6d2ad703f3b372c111b539e14a580b0849c5ed",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "prompt_id": "vision-verify-bounded-page.v1",
+  "prompt_hash": "9104c773552e4fec692e97a3bb912c98a72fafc02c22a8bc1358a29e1c138836",
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "mythras-core-mysticism-extract-opus-2026-05-22",
+  "verifier_prompt_id": "vision-verify-bounded-page.v1",
+  "verifier_run_id": "mythras-core-mysticism-verify-opus-2026-05-22",
+  "focused_verifier_run_ids": [
+    "mythras-core-mysticism-formula-verify-opus-2026-05-22"
+  ],
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "independence": {
+    "read_extractor_output": false,
+    "read_extractor_scratch": false,
+    "read_extractor_rationale": false
+  },
+  "agreement": "pass",
+  "verified_findings": [
+    "Mysticism is path-tied",
+    "starting Talents = Mysticism/20",
+    "one starting path"
+  ],
+  "promotion_cautions": [],
+  "verified_blocks": [
+    "mythras-core-p0156-b001",
+    "mythras-core-p0156-b002",
+    "mythras-core-p0156-b003"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "artifact_id": "mythras-core-page-0156-extraction-opus-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "mythras-core",
+  "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+  "pdf_page": 156,
+  "printed_page_label": "155",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/mythras-core/page-0156.png",
+    "image_sha256": "353b7b6abfc8249f4640b4854b6d2ad703f3b372c111b539e14a580b0849c5ed",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "prompt_id": "vision-extract-bounded-page.v1",
+  "prompt_hash": "b7f238590e4c20288c726620659c6ea5f76b8063fac39a052a06d8cee5a23c84",
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "mythras-core-mysticism-extract-opus-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "schema_version": 1,
+  "contributes_to_mysticism": true,
+  "blocks": [
+    {
+      "block_id": "mythras-core-p0156-b001",
+      "block_type": "path_rule",
+      "reading_order": 1,
+      "bounded_excerpt": "Each incidence of Mysticism is tied to a path. Paths contain skill augmentations, trait invocations, and attribute enhancements.",
+      "confidence": "high"
+    },
+    {
+      "block_id": "mythras-core-p0156-b002",
+      "block_type": "chargen_rule",
+      "reading_order": 2,
+      "bounded_excerpt": "A starting mystic begins with known Talents equal to one twentieth of the relevant Mysticism skill.",
+      "confidence": "high"
+    },
+    {
+      "block_id": "mythras-core-p0156-b003",
+      "block_type": "chargen_rule",
+      "reading_order": 3,
+      "bounded_excerpt": "A starting mystic chooses one path at character creation; other paths may be learned during play.",
+      "confidence": "high"
+    }
+  ]
+}

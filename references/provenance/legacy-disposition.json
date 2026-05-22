@@ -140,6 +140,19 @@
       "rationale": "Cult raw JSON is legacy extraction output scoped to later Waha/cult reconciliation units."
     },
     {
+      "id": "mythras-core-mysticism",
+      "path": "references/mythras-raw/mysticism.json",
+      "artifact_class": "raw_legacy_json",
+      "disposition": "governed-now",
+      "required_scope": true,
+      "source_ids": [
+        "mythras-core"
+      ],
+      "scan_for_unverified": true,
+      "rationale": "Mythras Core Mysticism is now bounded by page-work evidence and remains reference-only until a source-backed app access provider is verified.",
+      "enforce_source_refs": true
+    },
+    {
       "id": "mythras-raw",
       "path_glob": "references/mythras-raw/*.json",
       "artifact_class": "raw_legacy_json",

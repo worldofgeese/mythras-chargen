@@ -69,9 +69,10 @@ const sourceEvidenceMetadataFields = new Set([
   'fact_id',
   'image_sha256',
   'printed_page_label',
-  'raw_page_record',
+  'focused_verifier_run_ids',
+  'prompt_hash',
+  'prompt_id',
   'reading_order',
-  'record',
   'rendered_at',
   'renderer',
   'schema_version',
@@ -88,7 +89,7 @@ const sourceEvidenceMetadataFields = new Set([
 
 function isSourceEvidenceMetadataString(value) {
   return /^[a-f0-9]{64}$/.test(value) ||
-    /^aig-p\d{3}-b\d{3}$/.test(value) ||
+    /^(aig|waha|mythras-core)-p\d{3,4}-b\d{3}$/.test(value) ||
     /^(blocked|completed|extracted|extraction|not_rendered|pass|passed|pending|rendered|verified|verification)$/i.test(value);
 }
 
@@ -377,12 +378,12 @@ runCommandTest('Render workflow can list sources without rendering pages',
       mythrasCore.canonical_locator === 'https://copyparty.hound-celsius.ts.net/sources/books/Mythras%20Core%20Rulebook%20%283rd%20Printing%202018%29.pdf' &&
       mythrasCorePages.source_revision_id === expectedMythrasCoreRevision &&
       mythrasCorePages.expected_page_count === 309 &&
-      mythrasCorePages.coverage_state === 'blocked' &&
+      mythrasCorePages.coverage_state === 'pending' &&
       Array.isArray(mythrasCorePages.known_ranges) &&
       mythrasCorePages.known_ranges.some(range => range.label === 'Animism') &&
       mythrasCorePages.known_ranges.some(range => range.label === 'Sorcery') &&
       mythrasCorePages.known_ranges.some(range => range.label === 'Mysticism')) {
-    pass('Mythras Core source manifest records Copyparty PDF identity and blocked page coverage');
+    pass('Mythras Core source manifest records Copyparty PDF identity and page-work scaffold');
   } else {
     fail('Mythras Core source manifest/page coverage is missing or incomplete',
       JSON.stringify({
@@ -396,6 +397,256 @@ runCommandTest('Render workflow can list sources without rendering pages',
         expectedPageCount: mythrasCorePages?.expected_page_count,
         coverageState: mythrasCorePages?.coverage_state
       }));
+  }
+
+  const mysticismTargetPageNumbers = new Set([155, 156, 157, 158, 159, 160, 161, 196]);
+  const mythrasCorePageByNumber = new Map((mythrasCorePages.pages || []).map(page => [page.pdf_page, page]));
+  const mythrasCoreAllPagesScaffolded = mythrasCorePages.pages.length === mythrasCorePages.expected_page_count &&
+    mythrasCorePageByNumber.size === mythrasCorePages.expected_page_count &&
+    Array.from({ length: mythrasCorePages.expected_page_count }, (_, index) => index + 1)
+      .every(pageNumber => mythrasCorePageByNumber.has(pageNumber));
+  const mysticismSourceEvidenceBudgets = {
+    maxCharsPerPage: sourceSchema.excerpt_budgets.page_excerpt_char_max,
+    maxCharsTotal: sourceSchema.excerpt_budgets.source_excerpt_char_max
+  };
+  const mysticismPageRecordProblems = [];
+  for (const pageNumber of mysticismTargetPageNumbers) {
+    const pageRecord = mythrasCorePageByNumber.get(pageNumber);
+    if (!pageRecord) {
+      mysticismPageRecordProblems.push(`missing page ${pageNumber}`);
+      continue;
+    }
+    if (pageRecord.source_revision_id !== expectedMythrasCoreRevision) {
+      mysticismPageRecordProblems.push(`page ${pageNumber} has source_revision_id ${pageRecord.source_revision_id}`);
+    }
+    if (pageRecord.work_state !== 'verified') {
+      mysticismPageRecordProblems.push(`page ${pageNumber} work_state ${pageRecord.work_state}`);
+    }
+    if (pageRecord.render?.status !== 'rendered' || !pageRecord.render?.cache_path) {
+      mysticismPageRecordProblems.push(`page ${pageNumber} is not rendered with a cache_path`);
+    }
+    if (!pageRecord.extraction?.artifact_path) {
+      mysticismPageRecordProblems.push(`page ${pageNumber} missing extraction artifact`);
+    }
+    if (!pageRecord.verification?.artifact_path) {
+      mysticismPageRecordProblems.push(`page ${pageNumber} missing verification artifact`);
+    }
+    if (pageNumber === 196) {
+      if (pageRecord.contributes_to_mysticism !== false || pageRecord.contributes !== false) {
+        mysticismPageRecordProblems.push('page 196 must remain a non-contributing Mysticism boundary page');
+      }
+      if (!pageRecord.exclusion_reason) {
+        mysticismPageRecordProblems.push('page 196 non-contributing boundary record needs an exclusion_reason');
+      }
+    } else if (pageRecord.contributes_to_mysticism !== true) {
+      mysticismPageRecordProblems.push(`page ${pageNumber} must contribute to Mysticism rules`);
+    }
+  }
+  const nonTargetMythrasCorePagesPending = (mythrasCorePages.pages || [])
+    .filter(page => !mysticismTargetPageNumbers.has(page.pdf_page))
+    .every(page => page.work_state === 'pending' &&
+      page.render?.status === 'not_rendered' &&
+      page.extraction === null &&
+      page.verification === null &&
+      Array.isArray(page.derived_facts) &&
+      page.derived_facts.length === 0);
+  if (!mythrasCoreAllPagesScaffolded || mysticismPageRecordProblems.length || !nonTargetMythrasCorePagesPending) {
+    fail(`Mythras Core Mysticism page-work is not bounded and verified: ${[
+      !mythrasCoreAllPagesScaffolded ? 'all 309 page records are not scaffolded exactly once' : null,
+      mysticismPageRecordProblems.join('; '),
+      !nonTargetMythrasCorePagesPending ? 'non-target pages are not pending scaffolds' : null
+    ].filter(Boolean).join('; ')}`);
+  } else {
+    pass('Mythras Core Mysticism page-work verifies only pages 155-161 and boundary page 196');
+  }
+
+  const mysticismEvidenceProblems = [];
+  const mysticismEvidencePaths = new Set();
+  const mysticismEvidenceBlockIdsByPage = new Map();
+  let mysticismEvidenceSourceTextTotal = 0;
+  for (const pageNumber of mysticismTargetPageNumbers) {
+    const pageRecord = mythrasCorePageByNumber.get(pageNumber);
+    if (!pageRecord?.extraction?.artifact_path || !pageRecord?.verification?.artifact_path) {
+      continue;
+    }
+    const extractionPath = pageRecord.extraction.artifact_path;
+    const verificationPath = pageRecord.verification.artifact_path;
+    mysticismEvidencePaths.add(extractionPath);
+    mysticismEvidencePaths.add(verificationPath);
+    if (!fs.existsSync(path.join(__dirname, extractionPath)) || !fs.existsSync(path.join(__dirname, verificationPath))) {
+      mysticismEvidenceProblems.push(`page ${pageNumber} artifact path missing on disk`);
+      continue;
+    }
+    const extractionArtifact = readJson(extractionPath);
+    const verificationArtifact = readJson(verificationPath);
+    if (extractionArtifact.artifact_kind !== 'extraction' || verificationArtifact.artifact_kind !== 'verification') {
+      mysticismEvidenceProblems.push(`page ${pageNumber} artifacts must be extraction/verification pair`);
+    }
+    for (const [label, artifact] of [['extraction', extractionArtifact], ['verification', verificationArtifact]]) {
+      if (artifact.source_id !== 'mythras-core' ||
+          artifact.source_revision_id !== expectedMythrasCoreRevision ||
+          artifact.pdf_page !== pageNumber) {
+        mysticismEvidenceProblems.push(`page ${pageNumber} ${label} artifact has mismatched source metadata`);
+      }
+      if (!artifact.prompt_id || !artifact.prompt_hash) {
+        mysticismEvidenceProblems.push(`page ${pageNumber} ${label} artifact missing prompt identity`);
+      }
+    }
+    if ((verificationArtifact.input_artifacts || []).includes(extractionPath)) {
+      mysticismEvidenceProblems.push(`page ${pageNumber} verification must not list extraction output as an input artifact`);
+    }
+    if (!verificationArtifact.agreement?.startsWith('pass')) {
+      mysticismEvidenceProblems.push(`page ${pageNumber} verification agreement is not passing`);
+    }
+    if (verificationArtifact.independence?.read_extractor_output !== false ||
+        verificationArtifact.independence?.read_extractor_scratch !== false ||
+        verificationArtifact.independence?.read_extractor_rationale !== false) {
+      mysticismEvidenceProblems.push(`page ${pageNumber} verification independence flags must exclude extractor output/scratch/rationale`);
+    }
+    const extractionBlockIds = new Set((extractionArtifact.blocks || []).map(block => block.block_id));
+    const verifiedBlockIds = verificationArtifact.verified_blocks || [];
+    if (!Array.isArray(verifiedBlockIds) || verifiedBlockIds.length === 0) {
+      mysticismEvidenceProblems.push(`page ${pageNumber} verification has no verified block IDs`);
+    }
+    if (!Array.isArray(verificationArtifact.verified_findings) || verificationArtifact.verified_findings.length === 0) {
+      mysticismEvidenceProblems.push(`page ${pageNumber} verification has no verified findings`);
+    }
+    for (const blockId of verifiedBlockIds) {
+      if (!extractionBlockIds.has(blockId)) {
+        mysticismEvidenceProblems.push(`page ${pageNumber} verification cites unknown block ${blockId}`);
+      }
+    }
+    for (const block of (extractionArtifact.blocks || [])) {
+      if (typeof block.block_id !== 'string' ||
+          typeof block.block_type !== 'string' ||
+          !Number.isInteger(block.reading_order) ||
+          typeof block.bounded_excerpt !== 'string' ||
+          block.bounded_excerpt.length === 0 ||
+          block.bounded_excerpt.length > sourceSchema.excerpt_budgets.block_excerpt_char_max ||
+          typeof block.confidence !== 'string') {
+        mysticismEvidenceProblems.push(`page ${pageNumber} extraction block ${block.block_id || '<missing>'} lacks bounded evidence metadata`);
+      }
+    }
+    mysticismEvidenceBlockIdsByPage.set(pageNumber, new Set(verifiedBlockIds));
+    const pageSourceTextTotal = sourceEvidenceTextLength(extractionArtifact) + sourceEvidenceTextLength(verificationArtifact);
+    if (pageSourceTextTotal > mysticismSourceEvidenceBudgets.maxCharsPerPage) {
+      mysticismEvidenceProblems.push(`page ${pageNumber} source text budget ${pageSourceTextTotal} exceeds ${mysticismSourceEvidenceBudgets.maxCharsPerPage}`);
+    }
+    mysticismEvidenceSourceTextTotal += pageSourceTextTotal;
+  }
+  if (mysticismEvidenceSourceTextTotal > mysticismSourceEvidenceBudgets.maxCharsTotal) {
+    mysticismEvidenceProblems.push(`Mysticism evidence source text budget ${mysticismEvidenceSourceTextTotal} exceeds ${mysticismSourceEvidenceBudgets.maxCharsTotal}`);
+  }
+  if (mysticismEvidencePaths.size !== mysticismTargetPageNumbers.size * 2) {
+    mysticismEvidenceProblems.push(`expected ${mysticismTargetPageNumbers.size * 2} extraction/verification evidence paths, found ${mysticismEvidencePaths.size}`);
+  }
+  if (mysticismEvidenceProblems.length) {
+    fail(`Mythras Core Mysticism evidence artifacts are incomplete: ${mysticismEvidenceProblems.join('; ')}`);
+  } else {
+    pass('Mythras Core Mysticism evidence artifacts are bounded, independent, and budgeted');
+  }
+  const mysticismRaw = readJson('references/mythras-raw/mysticism.json');
+  const mysticismDisposition = legacy.dispositions.find(disposition =>
+    disposition.id === 'mythras-core-mysticism' ||
+    (disposition.paths || []).includes('references/mythras-raw/mysticism.json'));
+  const mysticismProvenanceErrors = mysticismDisposition
+    ? provenanceValidator.validateSourceAuthorityMetadata(mysticismRaw, mysticismDisposition, manifestById)
+    : ['references/mythras-raw/mysticism.json has no explicit provenance disposition'];
+  const requiredMysticismSourceRefs = new Map([
+    ['skills.mysticism', mysticismRaw.chargen_rules?.skills?.mysticism?.source_ref],
+    ['skills.meditation', mysticismRaw.chargen_rules?.skills?.meditation?.source_ref],
+    ['paths', mysticismRaw.chargen_rules?.paths?.source_ref],
+    ['talent_types', mysticismRaw.chargen_rules?.talent_types?.source_ref],
+    ['casting_mechanics', mysticismRaw.chargen_rules?.casting_mechanics?.source_ref],
+    ['starting_at_chargen', mysticismRaw.chargen_rules?.starting_at_chargen?.source_ref]
+  ]);
+  const mysticismSourceRefProblems = [];
+  for (const [label, sourceRef] of requiredMysticismSourceRefs.entries()) {
+    if (!sourceRef) {
+      mysticismSourceRefProblems.push(`${label} missing source_ref`);
+      continue;
+    }
+    if (!Array.isArray(sourceRef.evidence_paths) || sourceRef.evidence_paths.length === 0) {
+      mysticismSourceRefProblems.push(`${label} source_ref missing evidence_paths`);
+    }
+    if (sourceRef.source_id !== 'mythras-core' ||
+        sourceRef.source_revision_id !== expectedMythrasCoreRevision ||
+        !Array.isArray(sourceRef.pages) ||
+        sourceRef.pages.length === 0 ||
+        !Array.isArray(sourceRef.block_ids) ||
+        sourceRef.block_ids.length === 0) {
+      mysticismSourceRefProblems.push(`${label} source_ref is not tied to Mythras Core pages and block IDs`);
+    }
+    for (const evidencePath of (sourceRef.evidence_paths || [])) {
+      if (!mysticismEvidencePaths.has(evidencePath)) {
+        mysticismSourceRefProblems.push(`${label} cites unknown evidence path ${evidencePath}`);
+      }
+    }
+    for (const pageNumber of (sourceRef.pages || [])) {
+      const pageRecord = mythrasCorePageByNumber.get(pageNumber);
+      if (!pageRecord || !mysticismTargetPageNumbers.has(pageNumber)) {
+        mysticismSourceRefProblems.push(`${label} cites unverified page ${pageNumber}`);
+        continue;
+      }
+      for (const expectedEvidencePath of [
+        pageRecord.extraction?.artifact_path,
+        pageRecord.verification?.artifact_path
+      ].filter(Boolean)) {
+        if (!sourceRef.evidence_paths?.includes(expectedEvidencePath)) {
+          mysticismSourceRefProblems.push(`${label} does not include evidence path ${expectedEvidencePath}`);
+        }
+      }
+    }
+    for (const blockId of (sourceRef.block_ids || [])) {
+      const match = blockId.match(/^mythras-core-p(\d{4})-b\d{3}$/);
+      const pageNumber = match ? Number(match[1]) : null;
+      if (!pageNumber || !mysticismEvidenceBlockIdsByPage.get(pageNumber)?.has(blockId)) {
+        mysticismSourceRefProblems.push(`${label} cites unknown verified block ${blockId}`);
+      }
+    }
+  }
+  const explicitMysticismFieldProblems = [];
+  const expectedMysticismFields = new Map([
+    ['skills.mysticism.base', [mysticismRaw.chargen_rules?.skills?.mysticism?.base, 'POW+CON']],
+    ['skills.meditation.base', [mysticismRaw.chargen_rules?.skills?.meditation?.base, 'INT+CON']],
+    ['starting_at_chargen.app_provider_status', [mysticismRaw.chargen_rules?.starting_at_chargen?.app_provider_status, 'blocked_no_verified_provider']],
+    ['authority_state', [mysticismRaw.authority_state, 'reference_authoritative_not_app_promoted']]
+  ]);
+  for (const [label, [actual, expected]] of expectedMysticismFields.entries()) {
+    if (actual !== expected) explicitMysticismFieldProblems.push(`${label} is ${actual}`);
+  }
+  const mysticismAcceptedFactsVerified = mysticismRaw.verified === true &&
+    mysticismRaw.core_rules_verified === true &&
+    mysticismRaw.app_access_state === 'blocked_no_verified_provider' &&
+    explicitMysticismFieldProblems.length === 0 &&
+    mysticismProvenanceErrors.length === 0 &&
+    mysticismSourceRefProblems.length === 0;
+  if (!mysticismAcceptedFactsVerified) {
+    fail(`Mysticism raw data must be verified, source-ref governed, and app-blocked until provider evidence exists: ${[
+      mysticismRaw.verified !== true ? 'verified is not true' : null,
+      mysticismRaw.core_rules_verified !== true ? 'core_rules_verified is not true' : null,
+      mysticismRaw.app_access_state !== 'blocked_no_verified_provider' ? `app_access_state is ${mysticismRaw.app_access_state}` : null,
+      ...explicitMysticismFieldProblems,
+      ...mysticismProvenanceErrors,
+      ...mysticismSourceRefProblems
+    ].filter(Boolean).join('; ')}`);
+  } else {
+    pass('Mysticism raw data is verified from Mythras Core but remains blocked from app access without a provider');
+  }
+
+  const { detectCultType: appDetectCultType } = loadApp();
+  const blockedMysticismOnlyCultType = appDetectCultType({
+    name: 'Blocked Mystic Order',
+    cultSkills: ['Mysticism (Path of Shadows)', 'Meditation']
+  });
+  if (blockedMysticismOnlyCultType?.primary === null &&
+      Array.isArray(blockedMysticismOnlyCultType.types) &&
+      !blockedMysticismOnlyCultType.types.includes('mysticism') &&
+      blockedMysticismOnlyCultType.blockedTypes?.includes('mysticism')) {
+    pass('App magic detection keeps Mysticism blocked until provider access is source-verified');
+  } else {
+    fail('App magic detection must not expose Mysticism while provider access is unverified',
+      JSON.stringify(blockedMysticismOnlyCultType));
   }
 
   const activeWaha = manifest.sources.find(source => source.source_id === 'waha');

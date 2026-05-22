@@ -1,0 +1,33 @@
+{
+  "artifact_id": "mythras-core-page-0161-extraction-opus-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "mythras-core",
+  "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+  "pdf_page": 161,
+  "printed_page_label": "160",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/mythras-core/page-0161.png",
+    "image_sha256": "1e0efd384138175177819c4bf6b29187e27f9c6964ba4f8d0020e27788dce655",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "prompt_id": "vision-extract-bounded-page.v1",
+  "prompt_hash": "b7f238590e4c20288c726620659c6ea5f76b8063fac39a052a06d8cee5a23c84",
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "mythras-core-mysticism-extract-opus-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "schema_version": 1,
+  "contributes_to_mysticism": true,
+  "blocks": [
+    {
+      "block_id": "mythras-core-p0161-b001",
+      "block_type": "talent_catalog",
+      "reading_order": 1,
+      "bounded_excerpt": "Mysticism Talent catalog concludes the chapter.",
+      "confidence": "medium"
+    }
+  ]
+}

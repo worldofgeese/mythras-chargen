@@ -1,0 +1,40 @@
+{
+  "artifact_id": "mythras-core-page-0159-verification-opus-2026-05-22",
+  "artifact_kind": "verification",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "mythras-core",
+  "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+  "pdf_page": 159,
+  "printed_page_label": "158",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/mythras-core/page-0159.png",
+    "image_sha256": "5c15f12a6c5916d694be340c5193727977928e6f6ca9034c397d55fb63269c3a",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "prompt_id": "vision-verify-bounded-page.v1",
+  "prompt_hash": "9104c773552e4fec692e97a3bb912c98a72fafc02c22a8bc1358a29e1c138836",
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "mythras-core-mysticism-extract-opus-2026-05-22",
+  "verifier_prompt_id": "vision-verify-bounded-page.v1",
+  "verifier_run_id": "mythras-core-mysticism-verify-opus-2026-05-22",
+  "focused_verifier_run_ids": [],
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "independence": {
+    "read_extractor_output": false,
+    "read_extractor_scratch": false,
+    "read_extractor_rationale": false
+  },
+  "agreement": "pass_bounded_catalog_scope_only",
+  "verified_findings": [
+    "Talent catalog continues"
+  ],
+  "promotion_cautions": [
+    "Talent catalog pages are verified for chapter scope only; exact Talent list is not normalized by this bead."
+  ],
+  "verified_blocks": [
+    "mythras-core-p0159-b001"
+  ]
+}
