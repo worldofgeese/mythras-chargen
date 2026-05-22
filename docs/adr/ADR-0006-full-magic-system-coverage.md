@@ -128,6 +128,10 @@ Every data constant must trace to a verifiable source maintained as JSON (per AD
 
 No data may enter the chargen without a corresponding reference JSON file with page citations. LLM-generated content must be marked "UNVERIFIED" until human-verified against the source PDF.
 
+## Amendment
+
+ADR-0013 amends the Mysticism promotion status in this ADR. Mysticism remains a target Mythras magic system for eventual coverage, but `references/mythras-raw/mysticism.json` is currently unverified and must not become app-facing until its Core pages are human/vision verified and at least one source-backed access provider exists.
+
 ## Related
 
 - **ADRs**: Supersedes `docs/adr/001-magic-system-architecture.md` (ADR-001). Extends `docs/adr/002-rune-affinity-casting-model.md` (ADR-002, Theist casting rules remain unchanged).
