@@ -54,6 +54,28 @@ function readJson(relativePath) {
   return jsonCache.get(absolutePath);
 }
 
+const sourceEvidenceBudgetFields = new Set([
+  'bounded_excerpt',
+  'candidate_reason',
+  'exclusion_reason',
+  'notes',
+  'page_boundary_notes'
+]);
+
+function sourceEvidenceTextLength(value, key = '', insideFacts = false) {
+  if (typeof value === 'string') {
+    return sourceEvidenceBudgetFields.has(key) || insideFacts ? value.length : 0;
+  }
+  if (Array.isArray(value)) {
+    return value.reduce((total, item) => total + sourceEvidenceTextLength(item, key, insideFacts), 0);
+  }
+  if (value && typeof value === 'object') {
+    return Object.entries(value).reduce((total, [childKey, childValue]) =>
+      total + sourceEvidenceTextLength(childValue, childKey, insideFacts || childKey === 'facts'), 0);
+  }
+  return 0;
+}
+
 const pendingTests = [];
 
 function asyncTest(msg, fn) {
@@ -747,7 +769,54 @@ runCommandTest('Render workflow can list sources without rendering pages',
   const pageIndexPages = new Set((aigPageIndex.pages || []).map(page => page.pdf_page));
   const missingCoveragePages = expectedAiGPages.filter(page => !coveragePages.has(page));
   const missingIndexPages = expectedAiGPages.filter(page => !pageIndexPages.has(page));
-  const allPendingCoverage = (aigCoverage.pages || []).every(page =>
+  const extractedAiGPages = new Map([
+    [31, { blocks: 5 }],
+    [32, { blocks: 1 }],
+    [60, { blocks: 6 }],
+    [61, { blocks: 7 }],
+    [62, { blocks: 9 }]
+  ]);
+  const allowedAiGBlockTypes = new Set(sourceSchema.schemas.page_evidence_record.block_types);
+  let aigExtractionSourceTextTotal = 0;
+  const extractedCoverageProblems = (aigCoverage.pages || []).flatMap(page => {
+    const expected = extractedAiGPages.get(page.pdf_page);
+    if (!expected) return [];
+    const artifactPath = page.extraction?.artifact_path;
+    const artifact = artifactPath && fs.existsSync(path.join(__dirname, artifactPath))
+      ? JSON.parse(fs.readFileSync(path.join(__dirname, artifactPath), 'utf8'))
+      : null;
+    const artifactBlocks = artifact?.blocks || [];
+    const pageExcerptTotal = artifactBlocks.reduce((total, block) =>
+      total + (typeof block.bounded_excerpt === 'string' ? block.bounded_excerpt.length : 0), 0);
+    const pageSourceTextTotal = artifact ? sourceEvidenceTextLength(artifact) : 0;
+    aigExtractionSourceTextTotal += pageSourceTextTotal;
+    const problems = [];
+    if (page.source_revision_id !== aigRevision) problems.push(`${page.pdf_page}: source_revision_id`);
+    if (page.work_state !== 'extracted') problems.push(`${page.pdf_page}: work_state`);
+    if (page.contributes !== null) problems.push(`${page.pdf_page}: contributes_unverified`);
+    if (page.render?.status !== 'rendered') problems.push(`${page.pdf_page}: render.status`);
+    if (!/^[a-f0-9]{64}$/.test(page.render?.image_sha256 || '')) problems.push(`${page.pdf_page}: render.image_sha256`);
+    if (!page.render?.cache_path?.startsWith('.cache/source-pages/aig/')) problems.push(`${page.pdf_page}: render.cache_path`);
+    if (page.extraction?.block_count !== expected.blocks) problems.push(`${page.pdf_page}: extraction.block_count`);
+    if (page.verification !== null) problems.push(`${page.pdf_page}: verification`);
+    if (!Array.isArray(page.derived_facts) || page.derived_facts.length !== 0) problems.push(`${page.pdf_page}: derived_facts_unverified`);
+    if ('candidate_label' in page || 'candidate_reason' in page || 'exclusion_reason' in page) problems.push(`${page.pdf_page}: unverified_manifest_prose`);
+    if (page.notes !== 'Extraction artifact linked; independent verification pending.') problems.push(`${page.pdf_page}: notes`);
+    if (artifact?.artifact_kind !== 'extraction') problems.push(`${page.pdf_page}: artifact_kind`);
+    if (artifact?.source_revision_id !== aigRevision) problems.push(`${page.pdf_page}: artifact_revision`);
+    if (artifact?.pdf_page !== page.pdf_page) problems.push(`${page.pdf_page}: artifact_page`);
+    if (artifactBlocks.length !== expected.blocks) problems.push(`${page.pdf_page}: artifact_blocks`);
+    if (artifactBlocks.some(block => !allowedAiGBlockTypes.has(block.block_type))) problems.push(`${page.pdf_page}: artifact_block_type`);
+    if (pageExcerptTotal > sourceSchema.excerpt_budgets.page_excerpt_char_max) problems.push(`${page.pdf_page}: artifact_page_excerpt_budget`);
+    if (pageSourceTextTotal > sourceSchema.excerpt_budgets.page_excerpt_char_max) problems.push(`${page.pdf_page}: artifact_page_source_text_budget`);
+    if (artifactBlocks.some(block =>
+      typeof block.bounded_excerpt !== 'string' ||
+      block.bounded_excerpt.length > sourceSchema.excerpt_budgets.block_excerpt_char_max
+    )) problems.push(`${page.pdf_page}: artifact_excerpt_budget`);
+    return problems;
+  });
+  const nonExtractedCoveragePending = (aigCoverage.pages || []).every(page =>
+    extractedAiGPages.has(page.pdf_page) || (
     page.source_revision_id === aigRevision &&
     page.work_state === 'pending' &&
     page.render?.status === 'not_rendered' &&
@@ -755,6 +824,7 @@ runCommandTest('Render workflow can list sources without rendering pages',
     page.verification === null &&
     page.raw_page_record &&
     fs.existsSync(path.join(__dirname, page.raw_page_record))
+    )
   );
   const allBlockedIndex = (aigPageIndex.pages || []).every(page =>
     page.source_revision_id === legacyAigRevision &&
@@ -770,9 +840,11 @@ runCommandTest('Render workflow can list sources without rendering pages',
       aigPageIndex.pages.length === 212 &&
       missingCoveragePages.length === 0 &&
       missingIndexPages.length === 0 &&
-      allPendingCoverage &&
+      extractedCoverageProblems.length === 0 &&
+      aigExtractionSourceTextTotal <= sourceSchema.excerpt_budgets.source_excerpt_char_max &&
+      nonExtractedCoveragePending &&
       allBlockedIndex) {
-    pass('AiG page coverage enumerates pending active pages while legacy page index remains blocked');
+    pass('AiG page coverage tracks bounded extracted pages while legacy page index remains blocked');
   } else {
     fail('AiG page coverage/index state is not complete',
       JSON.stringify({
@@ -782,7 +854,9 @@ runCommandTest('Render workflow can list sources without rendering pages',
         indexCount: aigPageIndex.pages?.length,
         missingCoveragePages: missingCoveragePages.slice(0, 10),
         missingIndexPages: missingIndexPages.slice(0, 10),
-        allPendingCoverage,
+        extractedCoverageProblems,
+        aigExtractionSourceTextTotal,
+        nonExtractedCoveragePending,
         allBlockedIndex
       }));
   }

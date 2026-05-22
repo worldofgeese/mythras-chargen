@@ -1,0 +1,150 @@
+{
+  "artifact_id": "aig-page-0061-extraction-opus-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 61,
+  "printed_page_label": "60",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0061.png",
+    "image_sha256": "c56f5a4423bbcc18054f5fff7bde6081849e0d2d642e10f672e7e024f6c6fbe4",
+    "dimensions": {
+      "width": 1658,
+      "height": 2158
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-magic-access-extract-opus-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI vision subagent",
+  "schema_version": 1,
+  "blocks": [
+    {
+      "block_id": "aig-p061-b001",
+      "block_type": "paragraph",
+      "reading_order": 1,
+      "region": {
+        "x": 0.06,
+        "y": 0.1,
+        "w": 0.42,
+        "h": 0.2
+      },
+      "bounded_excerpt": "Spirit Magic / Animism: animists form relationships with spirits.",
+      "facts": {
+        "spirit_magic_practitioner": "Animist",
+        "basis": "spirit_relationships",
+        "rq6_animism_mapping": true
+      }
+    },
+    {
+      "block_id": "aig-p061-b002",
+      "block_type": "paragraph",
+      "reading_order": 2,
+      "region": {
+        "x": 0.06,
+        "y": 0.32,
+        "w": 0.42,
+        "h": 0.2
+      },
+      "bounded_excerpt": "Lunar Magic uses Moon Rune power; strength varies with Red Moon phase.",
+      "facts": {
+        "source": "Moon Rune",
+        "phase_modifier": true,
+        "illumination_risk": true
+      }
+    },
+    {
+      "block_id": "aig-p061-b003",
+      "block_type": "paragraph",
+      "reading_order": 3,
+      "region": {
+        "x": 0.06,
+        "y": 0.55,
+        "w": 0.42,
+        "h": 0.2
+      },
+      "bounded_excerpt": "Mysticism study is limited to Draconic blood or subservient groups.",
+      "facts": {
+        "access": "Draconic",
+        "potency_claim": true,
+        "rq6_mysticism_mapping": true
+      }
+    },
+    {
+      "block_id": "aig-p061-b004",
+      "block_type": "paragraph",
+      "reading_order": 4,
+      "region": {
+        "x": 0.5,
+        "y": 0.1,
+        "w": 0.42,
+        "h": 0.25
+      },
+      "bounded_excerpt": "Conversion notes: older spells/spirits may not conform to RQ6.",
+      "facts": {
+        "section_topic": "conversion_notes"
+      }
+    },
+    {
+      "block_id": "aig-p061-b005",
+      "block_type": "paragraph",
+      "reading_order": 5,
+      "region": {
+        "x": 0.5,
+        "y": 0.37,
+        "w": 0.42,
+        "h": 0.1
+      },
+      "bounded_excerpt": "General rules are guidelines; 'spells' covers spells, spirits, or techniques.",
+      "facts": {
+        "section_topic": "general_magic_rules_intro"
+      }
+    },
+    {
+      "block_id": "aig-p061-b006",
+      "block_type": "paragraph",
+      "reading_order": 6,
+      "region": {
+        "x": 0.5,
+        "y": 0.48,
+        "w": 0.42,
+        "h": 0.15
+      },
+      "bounded_excerpt": "Sorcery Invocation uses linked Rune Affinity plus Four Principles; Shaping uses Law.",
+      "facts": {
+        "sorcery_invocation_replaced_by": "Rune Affinity",
+        "four_principles": [
+          "Combine/Separate",
+          "Command",
+          "Summon/Dismiss",
+          "Tap"
+        ],
+        "shaping_replaced_by": "Law Rune"
+      }
+    },
+    {
+      "block_id": "aig-p061-b007",
+      "block_type": "paragraph",
+      "reading_order": 7,
+      "region": {
+        "x": 0.5,
+        "y": 0.72,
+        "w": 0.42,
+        "h": 0.18
+      },
+      "bounded_excerpt": "Temples/teachers usually offer 1d3+4 Folk spells plus 1d3+4 advanced spells.",
+      "facts": {
+        "spells_per_cult_folk": "1d3+4",
+        "spells_per_cult_advanced": "1d3+4",
+        "advanced_spell_categories": [
+          "Spirit Magic",
+          "Rune Magic",
+          "Sorcery",
+          "Lunar Magic",
+          "Mysticism"
+        ]
+      }
+    }
+  ],
+  "page_boundary_notes": "Continues magic-type overview and begins general Gloranthan magic rules."
+}

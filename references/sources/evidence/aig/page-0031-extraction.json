@@ -1,0 +1,110 @@
+{
+  "artifact_id": "aig-page-0031-extraction-opus-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 31,
+  "printed_page_label": "30",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0031.png",
+    "image_sha256": "4c6447fa6df0b58e77828d9d1124786da52a41fb8943830f4add382ce9adf561",
+    "dimensions": {
+      "width": 1648,
+      "height": 2153
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-magic-access-extract-opus-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI vision subagent",
+  "schema_version": 1,
+  "blocks": [
+    {
+      "block_id": "aig-p031-b001",
+      "block_type": "sidebar",
+      "reading_order": 1,
+      "region": {
+        "x": 0.06,
+        "y": 0.1,
+        "w": 0.4,
+        "h": 0.3
+      },
+      "bounded_excerpt": "God Forgot sidebar: insular atheist culture; sorcery privileged.",
+      "facts": {
+        "section_topic": "god_forgotten_characters_sidebar",
+        "atheism": true,
+        "preferred_magic": "sorcery",
+        "other_magic_lesser": true
+      }
+    },
+    {
+      "block_id": "aig-p031-b002",
+      "block_type": "heading",
+      "reading_order": 2,
+      "region": {
+        "x": 0.06,
+        "y": 0.49,
+        "w": 0.1,
+        "h": 0.025
+      },
+      "bounded_excerpt": "MAGIC",
+      "facts": {
+        "section_topic": "god_forgotten_magic"
+      }
+    },
+    {
+      "block_id": "aig-p031-b003",
+      "block_type": "paragraph",
+      "reading_order": 3,
+      "region": {
+        "x": 0.06,
+        "y": 0.51,
+        "w": 0.41,
+        "h": 0.18
+      },
+      "bounded_excerpt": "God Forgotten magic: Zzistori exclusively practice sorcery; Rune unavailable; Spirit dismissed; Folk as diluted sorcery.",
+      "facts": {
+        "sorcery_caste": "Zzistori",
+        "rune_magic_available": false,
+        "spirit_magic_practised": false,
+        "folk_magic_all_castes": true
+      }
+    },
+    {
+      "block_id": "aig-p031-b004",
+      "block_type": "table",
+      "reading_order": 4,
+      "region": {
+        "x": 0.5,
+        "y": 0.1,
+        "w": 0.45,
+        "h": 0.32
+      },
+      "bounded_excerpt": "Caste/career: Zzistori Sorcerer. Folk samples: Alarm, Avert, Heal, Preserve, Protection.",
+      "facts": {
+        "caste_to_career": {
+          "Zzistori": [
+            "Sorcerer"
+          ]
+        },
+        "folk_magic_sample_count": 5
+      }
+    },
+    {
+      "block_id": "aig-p031-b005",
+      "block_type": "heading",
+      "reading_order": 5,
+      "region": {
+        "x": 0.5,
+        "y": 0.55,
+        "w": 0.4,
+        "h": 0.04
+      },
+      "bounded_excerpt": "Lunar Heartland section begins.",
+      "facts": {
+        "section_topic": "lunar_heartland_culture_start"
+      }
+    }
+  ],
+  "page_boundary_notes": "God Forgot magic content is on this page; next page is Lunar Heartland continuation."
+}

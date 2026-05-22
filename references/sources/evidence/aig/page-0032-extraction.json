@@ -1,0 +1,41 @@
+{
+  "artifact_id": "aig-page-0032-extraction-opus-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 32,
+  "printed_page_label": "31",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0032.png",
+    "image_sha256": "440a2737a8f1f7011d0d8361081b00260a915d262442ab45cf862881a183321e",
+    "dimensions": {
+      "width": 1656,
+      "height": 2159
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-magic-access-extract-opus-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI vision subagent",
+  "schema_version": 1,
+  "blocks": [
+    {
+      "block_id": "aig-p032-b001",
+      "block_type": "paragraph",
+      "reading_order": 1,
+      "region": {
+        "x": 0.05,
+        "y": 0.05,
+        "w": 0.9,
+        "h": 0.9
+      },
+      "bounded_excerpt": "Boundary check: Lunar Heartland continuation only; target content absent.",
+      "facts": {
+        "expected_topic_present": false,
+        "actual_topic": "lunar_heartland_culture_body",
+        "god_forgot_content_present": false
+      }
+    }
+  ],
+  "page_boundary_notes": "Non-contributing boundary page: Lunar Heartland continuation only."
+}

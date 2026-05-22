@@ -556,39 +556,65 @@
     },
     {
       "pdf_page": 31,
-      "printed_page_label": null,
+      "printed_page_label": "30",
       "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
-      "work_state": "pending",
+      "work_state": "extracted",
       "contributes": null,
       "render": {
-        "status": "not_rendered",
+        "status": "rendered",
         "cache_path": ".cache/source-pages/aig/page-0031.png",
-        "image_sha256": null,
-        "dimensions": null
+        "image_sha256": "4c6447fa6df0b58e77828d9d1124786da52a41fb8943830f4add382ce9adf561",
+        "dimensions": {
+          "width": 1648,
+          "height": 2153
+        },
+        "renderer": "pdftoppm",
+        "dpi": 300,
+        "rendered_at": "2026-05-22",
+        "source_pdf_sha256": "0edc1e549c560222a7c2b80e9eb0fb713d962bb30a280a7a6b760821e2983572"
       },
-      "extraction": null,
+      "extraction": {
+        "status": "completed",
+        "artifact_id": "aig-page-0031-extraction-opus-2026-05-22",
+        "artifact_path": "references/sources/evidence/aig/page-0031-extraction.json",
+        "extractor_run_id": "aig-magic-access-extract-opus-2026-05-22",
+        "block_count": 5
+      },
       "verification": null,
       "derived_facts": [],
       "raw_page_record": "references/aig-raw/pages/page-031.json",
-      "notes": "Evidence-ready scaffold only; no rendered image, OCR text, page transcription, extraction result, or verifier result is committed."
+      "notes": "Extraction artifact linked; independent verification pending."
     },
     {
       "pdf_page": 32,
-      "printed_page_label": null,
+      "printed_page_label": "31",
       "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
-      "work_state": "pending",
+      "work_state": "extracted",
       "contributes": null,
       "render": {
-        "status": "not_rendered",
+        "status": "rendered",
         "cache_path": ".cache/source-pages/aig/page-0032.png",
-        "image_sha256": null,
-        "dimensions": null
+        "image_sha256": "440a2737a8f1f7011d0d8361081b00260a915d262442ab45cf862881a183321e",
+        "dimensions": {
+          "width": 1656,
+          "height": 2159
+        },
+        "renderer": "pdftoppm",
+        "dpi": 300,
+        "rendered_at": "2026-05-22",
+        "source_pdf_sha256": "0edc1e549c560222a7c2b80e9eb0fb713d962bb30a280a7a6b760821e2983572"
       },
-      "extraction": null,
+      "extraction": {
+        "status": "completed",
+        "artifact_id": "aig-page-0032-extraction-opus-2026-05-22",
+        "artifact_path": "references/sources/evidence/aig/page-0032-extraction.json",
+        "extractor_run_id": "aig-magic-access-extract-opus-2026-05-22",
+        "block_count": 1
+      },
       "verification": null,
       "derived_facts": [],
       "raw_page_record": "references/aig-raw/pages/page-032.json",
-      "notes": "Evidence-ready scaffold only; no rendered image, OCR text, page transcription, extraction result, or verifier result is committed."
+      "notes": "Extraction artifact linked; independent verification pending."
     },
     {
       "pdf_page": 33,
@@ -1078,57 +1104,96 @@
     },
     {
       "pdf_page": 60,
-      "printed_page_label": null,
+      "printed_page_label": "59",
       "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
-      "work_state": "pending",
+      "work_state": "extracted",
       "contributes": null,
       "render": {
-        "status": "not_rendered",
+        "status": "rendered",
         "cache_path": ".cache/source-pages/aig/page-0060.png",
-        "image_sha256": null,
-        "dimensions": null
+        "image_sha256": "90b3c7655302e6fe5fd8d7204974355ec4be650a4afb3cfac879f9d3e601e346",
+        "dimensions": {
+          "width": 1656,
+          "height": 2159
+        },
+        "renderer": "pdftoppm",
+        "dpi": 300,
+        "rendered_at": "2026-05-22",
+        "source_pdf_sha256": "0edc1e549c560222a7c2b80e9eb0fb713d962bb30a280a7a6b760821e2983572"
       },
-      "extraction": null,
+      "extraction": {
+        "status": "completed",
+        "artifact_id": "aig-page-0060-extraction-opus-2026-05-22",
+        "artifact_path": "references/sources/evidence/aig/page-0060-extraction.json",
+        "extractor_run_id": "aig-magic-access-extract-opus-2026-05-22",
+        "block_count": 6
+      },
       "verification": null,
       "derived_facts": [],
       "raw_page_record": "references/aig-raw/pages/page-060.json",
-      "notes": "Evidence-ready scaffold only; no rendered image, OCR text, page transcription, extraction result, or verifier result is committed."
+      "notes": "Extraction artifact linked; independent verification pending."
     },
     {
       "pdf_page": 61,
-      "printed_page_label": null,
+      "printed_page_label": "60",
       "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
-      "work_state": "pending",
+      "work_state": "extracted",
       "contributes": null,
       "render": {
-        "status": "not_rendered",
+        "status": "rendered",
         "cache_path": ".cache/source-pages/aig/page-0061.png",
-        "image_sha256": null,
-        "dimensions": null
+        "image_sha256": "c56f5a4423bbcc18054f5fff7bde6081849e0d2d642e10f672e7e024f6c6fbe4",
+        "dimensions": {
+          "width": 1658,
+          "height": 2158
+        },
+        "renderer": "pdftoppm",
+        "dpi": 300,
+        "rendered_at": "2026-05-22",
+        "source_pdf_sha256": "0edc1e549c560222a7c2b80e9eb0fb713d962bb30a280a7a6b760821e2983572"
       },
-      "extraction": null,
+      "extraction": {
+        "status": "completed",
+        "artifact_id": "aig-page-0061-extraction-opus-2026-05-22",
+        "artifact_path": "references/sources/evidence/aig/page-0061-extraction.json",
+        "extractor_run_id": "aig-magic-access-extract-opus-2026-05-22",
+        "block_count": 7
+      },
       "verification": null,
       "derived_facts": [],
       "raw_page_record": "references/aig-raw/pages/page-061.json",
-      "notes": "Evidence-ready scaffold only; no rendered image, OCR text, page transcription, extraction result, or verifier result is committed."
+      "notes": "Extraction artifact linked; independent verification pending."
     },
     {
       "pdf_page": 62,
-      "printed_page_label": null,
+      "printed_page_label": "61",
       "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
-      "work_state": "pending",
+      "work_state": "extracted",
       "contributes": null,
       "render": {
-        "status": "not_rendered",
+        "status": "rendered",
         "cache_path": ".cache/source-pages/aig/page-0062.png",
-        "image_sha256": null,
-        "dimensions": null
+        "image_sha256": "c2620036e8e8956152febd289e99ac6e82fbc35e8b289fba651fdc513a37de10",
+        "dimensions": {
+          "width": 1656,
+          "height": 2159
+        },
+        "renderer": "pdftoppm",
+        "dpi": 300,
+        "rendered_at": "2026-05-22",
+        "source_pdf_sha256": "0edc1e549c560222a7c2b80e9eb0fb713d962bb30a280a7a6b760821e2983572"
       },
-      "extraction": null,
+      "extraction": {
+        "status": "completed",
+        "artifact_id": "aig-page-0062-extraction-opus-2026-05-22",
+        "artifact_path": "references/sources/evidence/aig/page-0062-extraction.json",
+        "extractor_run_id": "aig-magic-access-extract-opus-2026-05-22",
+        "block_count": 9
+      },
       "verification": null,
       "derived_facts": [],
       "raw_page_record": "references/aig-raw/pages/page-062.json",
-      "notes": "Evidence-ready scaffold only; no rendered image, OCR text, page transcription, extraction result, or verifier result is committed."
+      "notes": "Extraction artifact linked; independent verification pending."
     },
     {
       "pdf_page": 63,

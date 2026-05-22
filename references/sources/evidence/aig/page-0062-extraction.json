@@ -1,0 +1,175 @@
+{
+  "artifact_id": "aig-page-0062-extraction-opus-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 62,
+  "printed_page_label": "61",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0062.png",
+    "image_sha256": "c2620036e8e8956152febd289e99ac6e82fbc35e8b289fba651fdc513a37de10",
+    "dimensions": {
+      "width": 1656,
+      "height": 2159
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-magic-access-extract-opus-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI vision subagent",
+  "schema_version": 1,
+  "blocks": [
+    {
+      "block_id": "aig-p062-b001",
+      "block_type": "paragraph",
+      "reading_order": 1,
+      "region": {
+        "x": 0.06,
+        "y": 0.1,
+        "w": 0.42,
+        "h": 0.08
+      },
+      "bounded_excerpt": "Continuation: cults/schools vary from one extra spell/skill to a dozen or more.",
+      "facts": {
+        "minor_cult_low_supply": true,
+        "major_cult_high_supply": true
+      }
+    },
+    {
+      "block_id": "aig-p062-b002",
+      "block_type": "paragraph",
+      "reading_order": 2,
+      "region": {
+        "x": 0.06,
+        "y": 0.19,
+        "w": 0.42,
+        "h": 0.18
+      },
+      "bounded_excerpt": "Spell availability usually requires cult/tradition/school membership; rank gates and exceptions exist.",
+      "facts": {
+        "membership_gate": true,
+        "rank_gating": true,
+        "exchange_exception": true
+      }
+    },
+    {
+      "block_id": "aig-p062-b003",
+      "block_type": "paragraph",
+      "reading_order": 3,
+      "region": {
+        "x": 0.06,
+        "y": 0.37,
+        "w": 0.42,
+        "h": 0.18
+      },
+      "bounded_excerpt": "Spell prices: Folk Magic 50 Lunars; higher magic examples cost 500; payment may be gifts, sacrifice, or service.",
+      "facts": {
+        "folk_magic_cost_lunars": 50,
+        "folk_magic_cost_progressive_per_point_lunars": 25,
+        "higher_magic_cost_lunars": 500,
+        "higher_magic_examples": [
+          "Rune Magic",
+          "Sorcery"
+        ],
+        "alternate_payment_forms": true
+      }
+    },
+    {
+      "block_id": "aig-p062-b004",
+      "block_type": "paragraph",
+      "reading_order": 4,
+      "region": {
+        "x": 0.06,
+        "y": 0.56,
+        "w": 0.42,
+        "h": 0.25
+      },
+      "bounded_excerpt": "Learning requires ritual and adherence to tenets; tuition may involve time, tasks, or Heroquests.",
+      "facts": {
+        "ritual_and_tenets_required": true,
+        "tuition_overhead": true,
+        "experience_rolls_abstraction": true
+      }
+    },
+    {
+      "block_id": "aig-p062-b005",
+      "block_type": "table",
+      "reading_order": 5,
+      "region": {
+        "x": 0.5,
+        "y": 0.11,
+        "w": 0.42,
+        "h": 0.3
+      },
+      "bounded_excerpt": "Learning table: Folk 1 day; Spirit/Rune/Sorcery 1 week; Feat 1 month; Mysticism 1+ years.",
+      "facts": {
+        "learning_table_rows": 6,
+        "includes_mysticism_talent_row": true
+      }
+    },
+    {
+      "block_id": "aig-p062-b006",
+      "block_type": "paragraph",
+      "reading_order": 6,
+      "region": {
+        "x": 0.5,
+        "y": 0.42,
+        "w": 0.42,
+        "h": 0.1
+      },
+      "bounded_excerpt": "Casting time: one Action Point per Magic Point invested.",
+      "facts": {
+        "action_point_per_magic_point": true
+      }
+    },
+    {
+      "block_id": "aig-p062-b007",
+      "block_type": "paragraph",
+      "reading_order": 7,
+      "region": {
+        "x": 0.5,
+        "y": 0.53,
+        "w": 0.42,
+        "h": 0.1
+      },
+      "bounded_excerpt": "At zero MP, Willpower failure causes collapse; over-cost spells fail; no casting until recovery.",
+      "facts": {
+        "zero_mp_willpower_test": true,
+        "overcost_spell_fails": true
+      }
+    },
+    {
+      "block_id": "aig-p062-b008",
+      "block_type": "paragraph",
+      "reading_order": 8,
+      "region": {
+        "x": 0.5,
+        "y": 0.65,
+        "w": 0.42,
+        "h": 0.12
+      },
+      "bounded_excerpt": "MP recovery varies by Rune affinity: some recover at sunset, others at dawn.",
+      "facts": {
+        "default_recovery": "dawn",
+        "chaos_dark_death_disorder_recovery": "sunset"
+      }
+    },
+    {
+      "block_id": "aig-p062-b009",
+      "block_type": "paragraph",
+      "reading_order": 9,
+      "region": {
+        "x": 0.5,
+        "y": 0.78,
+        "w": 0.42,
+        "h": 0.15
+      },
+      "bounded_excerpt": "Casting restrictions begin: listed conditions add difficulty grades.",
+      "facts": {
+        "difficulty_grade_per_condition": true,
+        "first_condition": "Mental Impairment"
+      }
+    }
+  ],
+  "page_boundary_notes": "Continues spell availability/learning rules; casting restrictions continue next page."
+}

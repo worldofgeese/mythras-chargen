@@ -1,0 +1,135 @@
+{
+  "artifact_id": "aig-page-0060-extraction-opus-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 60,
+  "printed_page_label": "59",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0060.png",
+    "image_sha256": "90b3c7655302e6fe5fd8d7204974355ec4be650a4afb3cfac879f9d3e601e346",
+    "dimensions": {
+      "width": 1656,
+      "height": 2159
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-magic-access-extract-opus-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI vision subagent",
+  "schema_version": 1,
+  "blocks": [
+    {
+      "block_id": "aig-p060-b001",
+      "block_type": "heading",
+      "reading_order": 1,
+      "region": {
+        "x": 0.3,
+        "y": 0.13,
+        "w": 0.55,
+        "h": 0.2
+      },
+      "bounded_excerpt": "MAGIC (chapter title with Rune Magic glyph)",
+      "facts": {
+        "section_topic": "magic_chapter_opener"
+      }
+    },
+    {
+      "block_id": "aig-p060-b002",
+      "block_type": "paragraph",
+      "reading_order": 2,
+      "region": {
+        "x": 0.06,
+        "y": 0.34,
+        "w": 0.88,
+        "h": 0.05
+      },
+      "bounded_excerpt": "Magic chapter intro; later chapters detail each approach.",
+      "facts": {
+        "section_topic": "magic_chapter_intro"
+      }
+    },
+    {
+      "block_id": "aig-p060-b003",
+      "block_type": "paragraph",
+      "reading_order": 3,
+      "region": {
+        "x": 0.06,
+        "y": 0.4,
+        "w": 0.42,
+        "h": 0.18
+      },
+      "bounded_excerpt": "Magic types are learnable when species, culture, or cult teaches them: Folk, Spirit, Rune, Sorcery, Lunar, Mysticism.",
+      "facts": {
+        "magic_types": [
+          "Folk Magic",
+          "Spirit Magic",
+          "Rune Magic",
+          "Sorcery",
+          "Lunar Magic",
+          "Mysticism"
+        ],
+        "access_gating": [
+          "species",
+          "culture",
+          "cult"
+        ],
+        "mysticism_access": "Draconic",
+        "rune_affinities_constrain_access": true
+      }
+    },
+    {
+      "block_id": "aig-p060-b004",
+      "block_type": "paragraph",
+      "reading_order": 4,
+      "region": {
+        "x": 0.5,
+        "y": 0.4,
+        "w": 0.42,
+        "h": 0.18
+      },
+      "bounded_excerpt": "Rune Magic draws from gods/heroes through worship, ritual, sacrifice; cult ubiquity makes it common higher magic.",
+      "facts": {
+        "source": "gods_heroes",
+        "requires_worship": true,
+        "common_higher_magic": true,
+        "system_mapping_present": true
+      }
+    },
+    {
+      "block_id": "aig-p060-b005",
+      "block_type": "paragraph",
+      "reading_order": 5,
+      "region": {
+        "x": 0.06,
+        "y": 0.62,
+        "w": 0.42,
+        "h": 0.2
+      },
+      "bounded_excerpt": "Folk Magic is common, taught early, and reflects community, profession, or cult needs.",
+      "facts": {
+        "availability": "all_cultures",
+        "origin_scope": "community_profession_cult",
+        "system_mapping_present": true
+      }
+    },
+    {
+      "block_id": "aig-p060-b006",
+      "block_type": "paragraph",
+      "reading_order": 6,
+      "region": {
+        "x": 0.5,
+        "y": 0.62,
+        "w": 0.42,
+        "h": 0.22
+      },
+      "bounded_excerpt": "Sorcery exploits Runes through immutable laws, without gods or spirits; spells are formulaic.",
+      "facts": {
+        "mechanism": "runes_no_gods_spirits",
+        "feared_by_other_practitioners": true,
+        "system_mapping_present": true
+      }
+    }
+  ],
+  "page_boundary_notes": "Magic chapter opener with magic-type overview and Rune/Folk/Sorcery sections."
+}
