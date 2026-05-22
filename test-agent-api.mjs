@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * E2E Test: Agent API via agent-browser
- * Builds 4 characters (AE1-AE4) using App.agent.buildCharacter(), verifies magic system mechanics.
+ * Builds 5 characters (AE1-AE4 plus AE3b) using App.agent.buildCharacter(), verifies magic system mechanics.
  *
  * Prerequisites:
  *   python3 -m http.server 8765 --directory . &
@@ -75,7 +75,7 @@ function reload() {
 // Setup
 // ═══════════════════════════════════════════════════════════════
 
-console.log('\n\x1b[36m═══ E2E Acceptance Tests (AE1-AE4) ═══\x1b[0m\n');
+console.log('\n\x1b[36m═══ E2E Acceptance Tests (AE1-AE4 plus AE3b) ═══\x1b[0m\n');
 console.log('Opening browser...');
 openBrowser();
 try {
@@ -134,6 +134,26 @@ assert(ae3.sorceryResource === 13, 'AE3: Sorcery Resource = POW = 13');
 assert(ae3.selectedMiracles.length === 0, 'AE3: No miracles (sorcery cult)');
 assert(ae3.selectedSpells.length === 1, 'AE3: 1 sorcery spell selected');
 assert(ae3.limits.sorcerySpells === 3, 'AE3: Sorcery spell limit = 3');
+
+// ═══════════════════════════════════════════════════════════════
+console.log('\n\x1b[36m═══ AE3b: Zzistori School (Source-backed Sorcery) ═══\x1b[0m\n');
+// ═══════════════════════════════════════════════════════════════
+
+reload();
+
+const ae3bBuild = evalPageJSON(`JSON.stringify(App.agent.buildCharacter({step1:{name:'Talor Zzistori',concept:'God Forgot school sorcerer'},step2:{characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}},step4:{culture:'God Forgot',homeland:'God Forgot'},step5:{culturalSkills:{Athletics:10,Endurance:10,'First Aid':15,Locale:15,Perception:15,Willpower:15,Influence:10,Insight:10},runeAffinities:{primary:'Law',secondary:'Truth',tertiary:'Stasis'},folkMagicSpells:['Avert','Calm','Calculate']},step6:{passions:[{type:'Loyalty',subject:'Zzistori School',value:47},{type:'Love',subject:'Knowledge',value:47}]},step7:{age:21,gender:'Male',family:'Zzistori school cell'},step8:{career:'Sorcerer',professionalSkills:[{name:'Invocation (Cult, School or Grimoire)',specialization:'Zzistori School'},{name:'Shaping'},{name:'Lore (any)',specialization:'Sorcery'}]},step9:{cult:null,sorcerySpells:['Holdfast','Animate (Substance)','Project (Sense)']},step10:{careerSkills:{Customs:10,Deceit:10,Influence:10,Insight:10,Locale:10,Perception:10,Willpower:10,'Invocation (Zzistori School)':10,Shaping:10,'Lore (Sorcery)':10},careerFolkMagic:['Appraise','Befuddle']},step11:{bonusSkills:{Customs:15,Deceit:15,Influence:15,Insight:15,Locale:15,Perception:15,Willpower:15,'Invocation (Zzistori School)':15,Shaping:15,'Lore (Sorcery)':15}},step12:{socialClass:'Freeman'}}))`);
+const ae3b = evalPageJSON(`JSON.stringify(App.agent.getMagicState())`);
+
+assert(ae3bBuild.success === true, 'AE3b: App.agent.buildCharacter builds No Cult Zzistori path');
+assert(ae3b.cultName === null, 'AE3b: No cult selected');
+assert(ae3b.cultType.primary === null, 'AE3b: No cult type for source-backed school');
+assert(ae3b.activeSorcerySource && ae3b.activeSorcerySource.sourceLabel === 'Zzistori School (God Forgot sorcery)', 'AE3b: Active sorcery source is Zzistori School');
+assert(ae3b.sorcerySourceLabel === 'Zzistori School (God Forgot sorcery)', 'AE3b: Magic state exposes UI source label');
+assert(ae3b.sorceryResource === 15, 'AE3b: Sorcery Resource = POW = 15');
+assert(ae3b.devotionalPool === 0, 'AE3b: No Devotional Pool');
+assert(ae3b.selectedMiracles.length === 0, 'AE3b: No miracles');
+assert(ae3b.selectedSpells.length === 3 && ae3b.selectedSpells.includes('Holdfast') && ae3b.selectedSpells.includes('Animate (Substance)') && ae3b.selectedSpells.includes('Project (Sense)'), 'AE3b: 3 Zzistori starting spells selected');
+assert(ae3b.limits.sorcerySpells === 3, 'AE3b: Sorcery spell limit = 3');
 
 // ═══════════════════════════════════════════════════════════════
 console.log('\n\x1b[36m═══ AE4: Waha (Hybrid Theist+Animist) ═══\x1b[0m\n');

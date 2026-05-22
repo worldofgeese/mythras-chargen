@@ -7494,58 +7494,130 @@ section('Step 9 Initiation Gate');
 }
 
 {
-  const { App: AppRef, CharacterData: CD } = loadApp();
+  const { App: AppRef, CharacterData: CD, Calc: CalcRef } = loadApp();
 
-  if (AppRef && AppRef.renderStep9) {
-    const scenarios = [
-      { label: 'God Forgot Sorcerer', culture: 'God Forgot', career: 'Sorcerer' },
-      { label: 'Praxian Warrior', culture: 'Praxian', career: 'Warrior' }
-    ];
+  if (AppRef && AppRef.renderStep9 && AppRef.toggleSorcerySpell && AppRef.getStep9ValidationErrors) {
+    CD.characteristics = { STR: 11, CON: 12, SIZ: 13, DEX: 14, INT: 15, POW: 14, CHA: 10 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.culture = 'God Forgot';
+    CD.career = 'Sorcerer';
+    CD.cult = null;
+    CD.cultType = null;
+    CD.devotionalPool = 0;
+    CD.boundSpiritSlots = 0;
+    CD.miracles = [];
+    CD.boundSpirits = [];
+    CD.sorceryResource = 0;
+    CD.sorcerySpells = [];
+    AppRef.currentStep = 9;
 
-    const snapshots = scenarios.map(({ label, culture, career }) => {
-      CD.culture = culture;
-      CD.career = career;
-      CD.cult = null;
-      CD.cultType = null;
-      CD.miracles = [];
-      CD.boundSpirits = [];
-      CD.sorceryResource = 0;
-      CD.sorcerySpells = [];
-      AppRef.currentStep = 9;
+    let html = AppRef.renderStep9().innerHTML || '';
+    const missingSpellErrors = AppRef.getStep9ValidationErrors();
+    const exposesZzistoriPanel = html.includes('✓ No Cult') &&
+      html.includes('Zzistori School (God Forgot sorcery)') &&
+      html.includes('magic-panel--sorcery') &&
+      html.includes('Resource:</strong> Magic Points (14)') &&
+      html.includes('Casting:</strong> Invocation skill') &&
+      html.includes('Shaping:</strong> Shaping skill') &&
+      html.includes('AiG p.30-31') &&
+      html.includes('Mythras Core p.166-177') &&
+      html.includes('Starting Spells') &&
+      html.includes('Holdfast');
+    const requiresSorcerySelection = missingSpellErrors.some(error => /sorcery spell/i.test(error));
+    const noTheistLeak = CD.cult === null &&
+      CD.cultType === null &&
+      CD.devotionalPool === 0 &&
+      CD.boundSpiritSlots === 0 &&
+      CD.miracles.length === 0 &&
+      !html.includes('Devotional Pool') &&
+      !html.includes('Miracles (sample)');
 
-      const html = AppRef.renderStep9().innerHTML || '';
-      return {
-        label,
-        noCultButton: html.includes('✓ No Cult'),
-        sorceryPanel: html.includes('magic-panel--sorcery'),
-        resourceText: html.includes('Magic Points'),
-        castingText: html.includes('Invocation skill'),
-        shapingText: html.includes('Shaping skill'),
-        spellsText: html.includes('Starting Spells'),
-        resourceState: CD.sorceryResource === 0,
-        spellsState: Array.isArray(CD.sorcerySpells) && CD.sorcerySpells.length === 0
-      };
-    });
+    AppRef.toggleSorcerySpell('Holdfast', { checked: true });
+    AppRef.toggleSorcerySpell('Animate (Substance)', { checked: true });
+    AppRef.toggleSorcerySpell('Project (Sense)', { checked: true });
+    const selectedThree = JSON.stringify(CD.sorcerySpells) === JSON.stringify(['Holdfast', 'Animate (Substance)', 'Project (Sense)']) &&
+      CD.sorceryResource === 14;
+    const beforeFourth = JSON.stringify(CD.sorcerySpells);
+    const fourthInput = { checked: true };
+    AppRef.toggleSorcerySpell('Wrack', fourthInput);
+    const fourthBlocked = JSON.stringify(CD.sorcerySpells) === beforeFourth &&
+      CD.sorcerySpells.length === 3 &&
+      fourthInput.checked === false;
 
-    const noCultBaselinesHold = snapshots.every(snapshot =>
-      snapshot.noCultButton &&
-      !snapshot.sorceryPanel &&
-      !snapshot.resourceText &&
-      !snapshot.castingText &&
-      !snapshot.shapingText &&
-      !snapshot.spellsText &&
-      snapshot.resourceState &&
-      snapshot.spellsState
-    );
+    html = AppRef.renderStep9().innerHTML || '';
+    const capVisibleAndAccessible = html.includes('3-spell cap reached') &&
+      html.includes('disabled') &&
+      html.includes('aria-disabled="true"') &&
+      html.includes('aria-describedby="sorcery-spell-cap"');
+    const validWithSpells = AppRef.getStep9ValidationErrors().length === 0;
 
-    if (noCultBaselinesHold) {
-      pass('No Cult keeps sorcery picker, resource, and spells absent for God Forgot Sorcerer and a Praxian Warrior comparison');
+    if (exposesZzistoriPanel && requiresSorcerySelection && noTheistLeak && selectedThree && fourthBlocked && capVisibleAndAccessible && validWithSpells) {
+      pass('God Forgot Sorcerer No Cult Step 9 exposes source-backed Zzistori sorcery with capped starting spells');
     } else {
-      fail('No Cult keeps sorcery picker, resource, and spells absent for God Forgot Sorcerer and a Praxian Warrior comparison',
-        JSON.stringify(snapshots));
+      fail('God Forgot Sorcerer No Cult Step 9 source-backed sorcery behavior is incomplete',
+        JSON.stringify({ exposesZzistoriPanel, missingSpellErrors, noTheistLeak, spells: CD.sorcerySpells, sorceryResource: CD.sorceryResource, fourthBlocked, capVisibleAndAccessible, validWithSpells, html: html.slice(0, 1200) }));
     }
   } else {
-    fail('No Cult sorcery baseline dependencies not found');
+    fail('Step 9 Zzistori sorcery dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, Calc: CalcRef, CULTS_DATA, detectCultType } = loadApp();
+
+  if (AppRef && AppRef.renderStep9 && AppRef.getStep9ValidationErrors && AppRef.resolveActiveSorcerySource) {
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 13, CHA: 10 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+
+    CD.culture = 'Praxian';
+    CD.career = 'Warrior';
+    CD.cult = null;
+    CD.cultType = null;
+    CD.devotionalPool = 0;
+    CD.boundSpiritSlots = 0;
+    CD.sorceryResource = 0;
+    CD.sorcerySpells = [];
+    AppRef.currentStep = 9;
+    const genericHtml = AppRef.renderStep9().innerHTML || '';
+    const genericNoCultValid = AppRef.getStep9ValidationErrors().length === 0 &&
+      !genericHtml.includes('Zzistori School') &&
+      !genericHtml.includes('magic-panel--sorcery');
+
+    CD.culture = 'God Forgot';
+    CD.career = 'Warrior';
+    CD.cult = null;
+    CD.cultType = null;
+    CD.sorcerySpells = [];
+    const nonSorcererHtml = AppRef.renderStep9().innerHTML || '';
+    const nonSorcererNoPicker = !nonSorcererHtml.includes('Zzistori School') &&
+      !nonSorcererHtml.includes('magic-panel--sorcery') &&
+      AppRef.getStep9ValidationErrors().length === 0;
+
+    CD.culture = 'God Forgot';
+    CD.career = 'Sorcerer';
+    CD.cult = 'Arkat';
+    CD.cultType = detectCultType(CULTS_DATA.find(cult => cult.name === 'Arkat'));
+    CD.devotionalPool = 0;
+    CD.boundSpiritSlots = 0;
+    CD.miracles = [];
+    CD.sorcerySpells = ['Holdfast'];
+    AppRef.normalizeSorceryState(CD);
+    const arkatSource = AppRef.resolveActiveSorcerySource(CD);
+    const arkatStaysCultBacked = arkatSource?.sourceLabel === 'Arkat' &&
+      arkatSource?.isCultBacked === true &&
+      arkatSource?.sourceLabel !== 'Zzistori School (God Forgot sorcery)' &&
+      CD.cultType?.primary === 'sorcery' &&
+      CD.devotionalPool === 0 &&
+      CD.miracles.length === 0;
+
+    if (genericNoCultValid && nonSorcererNoPicker && arkatStaysCultBacked) {
+      pass('Step 9 validation keeps generic No Cult valid, scopes Zzistori to Sorcerers, and preserves Arkat sorcery');
+    } else {
+      fail('Step 9 validation/source scoping regressed for generic No Cult, non-Sorcerer, or Arkat',
+        JSON.stringify({ genericNoCultValid, nonSorcererNoPicker, arkatSource, cultType: CD.cultType, devotionalPool: CD.devotionalPool }));
+    }
+  } else {
+    fail('Step 9 validation/source scoping dependencies not found');
   }
 }
 

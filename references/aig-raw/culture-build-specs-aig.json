@@ -2252,7 +2252,12 @@
           ]
         },
         "step9": {
-          "cult": null
+          "cult": null,
+          "sorcerySpells": [
+            "Holdfast",
+            "Animate (Substance)",
+            "Project (Sense)"
+          ]
         },
         "step10": {
           "careerSkills": {

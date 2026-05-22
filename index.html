@@ -680,6 +680,18 @@ select:focus {
   margin: 3px 0;
   font-size: 0.9em;
 }
+.spell-picker__list label.spell-picker__option--disabled {
+  color: #777;
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+.spell-picker__list input:disabled {
+  cursor: not-allowed;
+}
+.spell-picker .spell-picker__cap {
+  color: #8a4b00;
+  font-weight: 600;
+}
 .spell-picker__list .spirit-ability {
   font-size: 0.8em;
   color: #555;
@@ -6582,7 +6594,12 @@ const CULTURE_BUILD_SPECS = {
         ]
       },
       "step9": {
-        "cult": null
+        "cult": null,
+        "sorcerySpells": [
+          "Holdfast",
+          "Animate (Substance)",
+          "Project (Sense)"
+        ]
       },
       "step10": {
         "careerSkills": {
@@ -11289,6 +11306,60 @@ App.renderCultDisplayGroupNotice = function(cultMap) {
   return groups.map(([label, group]) => `<div class="magic-panel magic-panel--notice" style="margin: 10px 0;"><strong>${this.escapeHtml(label)}:</strong> ${this.escapeHtml(group.note || 'Display grouping only; choose a cited subcult for mechanics.')}</div>`).join('');
 };
 
+App.renderSorceryPickerPanel = function(source, options = {}) {
+  const activeSource = source || this.resolveActiveSorcerySource(CharacterData);
+  if (!activeSource) return '';
+
+  const magicPoints = activeSource.magicPoints ?? activeSource.resourceValue ?? CharacterData.sorceryResource ?? CharacterData.characteristics.POW ?? 0;
+  const maxSpells = activeSource.startingSpellLimit || 3;
+  if (!CharacterData.sorcerySpells) CharacterData.sorcerySpells = [];
+  const selectedCount = CharacterData.sorcerySpells.length;
+  const capReached = selectedCount >= maxSpells;
+  const sourceLabel = activeSource.sourceLabel || CharacterData.cult || 'Sorcery';
+  const heading = options.heading || (activeSource.isCultBacked
+    ? `Sorcery${options.isHybrid ? ' — Sorcerer Path' : ''}`
+    : sourceLabel);
+  const pages = (activeSource.pages && activeSource.pages.length > 0)
+    ? activeSource.pages
+    : ['Mythras Core p.162-178'];
+  const pageCopy = pages.join('; ');
+  const sourceIntro = activeSource.isCultBacked
+    ? `<p><strong>Source:</strong> ${this.escapeHtml(sourceLabel)}</p>`
+    : `<p><strong>Source:</strong> ${this.escapeHtml(sourceLabel)} <span class="source-coverage-badge" data-status="attested">attested</span></p>`;
+  const capCopy = capReached
+    ? `<p id="sorcery-spell-cap" class="spell-picker__hint spell-picker__cap">3-spell cap reached — deselect a selected spell to choose another.</p>`
+    : `<p id="sorcery-spell-cap" class="spell-picker__hint">Select up to ${maxSpells} spells from your school's grimoire. Spells with (Substance/Species) require specialization at the table.</p>`;
+
+  const spellListHTML = SORCERY_SPELLS.map(([name, resist, desc]) => {
+    const checked = CharacterData.sorcerySpells.includes(name);
+    const disabled = capReached && !checked;
+    const resistTag = resist ? ` <span class="spirit-ability">[Resist: ${this.escapeHtml(resist)}]</span>` : '';
+    const tooltip = desc ? ` <span class="skill-tooltip" title="${this.escapeHtmlAttr(desc)}">ℹ️</span>` : '';
+    const disabledAttrs = disabled
+      ? ` disabled aria-disabled="true" aria-describedby="sorcery-spell-cap" title="3-spell cap reached; deselect a selected spell to choose this one"`
+      : '';
+    const labelClass = disabled ? ' class="spell-picker__option--disabled"' : '';
+    return `<label${labelClass}><input type="checkbox" ${checked ? 'checked' : ''}${disabledAttrs} data-spell="${this.escapeHtmlAttr(name)}" onchange="App.toggleSorcerySpell(this.dataset.spell, this)"> ${this.escapeHtml(name)}${resistTag}${tooltip}</label>`;
+  }).join('');
+
+  return `
+    <div class="magic-panel magic-panel--sorcery">
+      <h3>${this.escapeHtml(heading)}</h3>
+      ${sourceIntro}
+      <p><strong>Resource:</strong> Magic Points (${magicPoints})</p>
+      <p><strong>Casting:</strong> Invocation skill</p>
+      <p><strong>Shaping:</strong> Shaping skill</p>
+      <p><strong>Intensity:</strong> Invocation / 10 | <strong>Shaping Points:</strong> Shaping / 10</p>
+      <p class="spell-picker__source">Source pages: ${this.escapeHtml(pageCopy)}. Sorcery spells do not use a rune map in this tool.</p>
+    </div>
+    <div class="spell-picker">
+      <h4>Starting Spells <span style="font-weight:normal">(${selectedCount} / ${maxSpells} — Dedicated rank, Core p.165)</span></h4>
+      ${capCopy}
+      <div class="spell-picker__list">${spellListHTML}</div>
+    </div>
+  `;
+};
+
 App.renderStep9 = function() {
   if (!CharacterData.career) {
     return this.renderStep8();
@@ -11296,6 +11367,10 @@ App.renderStep9 = function() {
 
   const culture = normalizeCultureName(CharacterData.culture);
   const cultMap = CULTURE_CULT_MAP[culture];
+  const activeSorcerySource = this.normalizeSorceryState(CharacterData);
+  const sourceBackedSorceryHTML = !CharacterData.cult && activeSorcerySource
+    ? this.renderSorceryPickerPanel(activeSorcerySource)
+    : '';
 
   const div = document.createElement('div');
   div.className = 'wizard-step';
@@ -11331,6 +11406,7 @@ App.renderStep9 = function() {
     <div id="cult-requirement-warning"></div>
     <div id="cult-skill-boost-panel"></div>
     <div id="cult-passion-notice" style="margin-top: 10px;"></div>
+    ${sourceBackedSorceryHTML ? `<div id="source-sorcery-picker" style="margin-top: 20px;">${sourceBackedSorceryHTML}</div>` : ''}
     <div id="miracle-picker" style="margin-top: 20px; display: none;"></div>
     <div id="spirit-picker" style="margin-top: 20px; display: none;"></div>
     <div id="sorcery-picker" style="margin-top: 20px; display: none;"></div>
@@ -11421,36 +11497,10 @@ App.renderStep9 = function() {
       // Show sorcery info + spell picker for sorcery cults (separate container so toggleMiracle doesn't wipe it)
       if (cultType.types.includes('sorcery')) {
         const sorceryPickerEl = div.querySelector('#sorcery-picker');
-        const magicPoints = CharacterData.sorceryResource || CharacterData.characteristics.POW || 0;
-        // Starting spells = 3 for Dedicated rank at character creation. Mythras Core p.165: memorisation limit = INT.
-        const maxSpells = 3;
-        if (!CharacterData.sorcerySpells) CharacterData.sorcerySpells = [];
-        const selectedCount = CharacterData.sorcerySpells.length;
-
-        const spellListHTML = SORCERY_SPELLS.map(([name, resist, desc]) => {
-          const checked = CharacterData.sorcerySpells.includes(name);
-          const resistTag = resist ? ` <span class="spirit-ability">[Resist: ${resist}]</span>` : '';
-          const tooltip = desc ? ` <span class="skill-tooltip" title="${desc}">ℹ️</span>` : '';
-          return `<label><input type="checkbox" ${checked ? 'checked' : ''} data-spell="${name.replace(/"/g, '&quot;')}" onchange="App.toggleSorcerySpell(this.dataset.spell, this)"> ${name}${resistTag}${tooltip}</label>`;
-        }).join('');
-
         if (sorceryPickerEl) {
-        sorceryPickerEl.innerHTML = `
-          <div class="magic-panel magic-panel--sorcery">
-            <h3>Sorcery${cultType.isHybrid ? ' \u2014 Sorcerer Path' : ''}</h3>
-            <p><strong>Resource:</strong> Magic Points (${magicPoints})</p>
-            <p><strong>Casting:</strong> Invocation skill</p>
-            <p><strong>Shaping:</strong> Shaping skill</p>
-            <p><strong>Intensity:</strong> Invocation / 10 | <strong>Shaping Points:</strong> Shaping / 10</p>
-            <p class="spell-picker__source">Source: Mythras Core p.162-178. Sorcery spells do not use a rune map in this tool.</p>
-          </div>
-          <div class="spell-picker">
-            <h4>Starting Spells <span style="font-weight:normal">(${selectedCount} / ${maxSpells} \u2014 Dedicated rank, Core p.165)</span></h4>
-            <div class="spell-picker__list">${spellListHTML}</div>
-            <p class="spell-picker__hint">Select up to ${maxSpells} spells from your school's grimoire. Spells with (Substance/Species) require specialization at the table.</p>
-          </div>
-        `;
-        sorceryPickerEl.style.display = 'block';
+          const sorcerySource = this.resolveActiveSorcerySource(CharacterData);
+          sorceryPickerEl.innerHTML = this.renderSorceryPickerPanel(sorcerySource, { isHybrid: cultType.isHybrid });
+          sorceryPickerEl.style.display = 'block';
         }
       }
 
@@ -12237,7 +12287,21 @@ App.getAvailableInitiateMiracleNames = function(cultName) {
 
 App.getStep9ValidationErrors = function() {
   const errors = [];
-  if (!CharacterData.cult) return errors;
+  const activeSorcerySource = App.normalizeSorceryState(CharacterData);
+  const addSorcerySelectionErrors = (source) => {
+    const selectedSpells = (CharacterData.sorcerySpells || []).length;
+    const spellLimit = source?.startingSpellLimit || 3;
+    if (selectedSpells === 0) {
+      errors.push('Please select at least one sorcery spell');
+    } else if (selectedSpells > spellLimit) {
+      errors.push(`Please select no more than ${spellLimit} sorcery spells`);
+    }
+  };
+
+  if (!CharacterData.cult) {
+    if (activeSorcerySource) addSorcerySelectionErrors(activeSorcerySource);
+    return errors;
+  }
 
   const cultObj = CULTS_DATA.find(c => c.name === CharacterData.cult);
   const cultType = CharacterData.cultType || detectCultType(cultObj || CharacterData.cult);
@@ -12260,10 +12324,7 @@ App.getStep9ValidationErrors = function() {
   }
 
   if (cultType.types.includes('sorcery')) {
-    const selectedSpells = (CharacterData.sorcerySpells || []).length;
-    if (selectedSpells === 0) {
-      errors.push('Please select at least one sorcery spell');
-    }
+    addSorcerySelectionErrors(activeSorcerySource);
   }
 
   return errors;
@@ -15706,8 +15767,19 @@ App.agent.setStep = function(step, data) {
         if (cultName === null || cultName === undefined) {
           // No-cult path
           CharacterData.cult = null;
+          CharacterData.cultType = null;
           CharacterData.devotionalPool = 0;
-          App.clearCultMagicSelections();
+          CharacterData.boundSpiritSlots = 0;
+          CharacterData.miracles = [];
+          CharacterData.boundSpirits = [];
+          CharacterData.sorcerySpells = [...(data.sorcerySpells || data.spells || [])];
+          App.normalizeSorceryState(CharacterData);
+          if (!data.__deferValidation) {
+            const step9Errors = App.getStep9ValidationErrors();
+            if (step9Errors.length > 0) {
+              return {success: false, errors: step9Errors, state: App.agent.getState()};
+            }
+          }
           App.currentStep = 9;
           App.renderCurrentStep();
           App.saveToLocalStorage();
@@ -15990,6 +16062,7 @@ App.agent.getUIState = function() {
  */
 App.agent.getMagicState = function() {
   try {
+    const activeSorcerySource = App.normalizeSorceryState(CharacterData);
     const cult = CULTS_DATA.find(c => c.name === CharacterData.cult);
     const cultType = cult ? detectCultType(cult) : {primary: null, types: [], isHybrid: false};
     const cultMiracles = (CharacterData.cult && MIRACLES_DATA.cults[CharacterData.cult])
@@ -15999,9 +16072,13 @@ App.agent.getMagicState = function() {
     return {
       cultType: cultType,
       cultName: CharacterData.cult || null,
+      activeSorcerySource: activeSorcerySource ? {...activeSorcerySource} : null,
+      sorcerySource: activeSorcerySource ? {...activeSorcerySource} : null,
+      sorcerySourceLabel: activeSorcerySource?.sourceLabel || null,
+      sorcerySourceType: activeSorcerySource?.sourceType || null,
       devotionalPool: CharacterData.devotionalPool || 0,
       boundSpiritSlots: CharacterData.boundSpiritSlots || 0,
-      sorceryResource: CharacterData.sorceryResource || 0,
+      sorceryResource: activeSorcerySource?.magicPoints || CharacterData.sorceryResource || 0,
       selectedMiracles: [...(CharacterData.miracles || [])],
       selectedSpells: [...(CharacterData.sorcerySpells || [])],
       selectedSpirits: [...(CharacterData.boundSpirits || [])],
