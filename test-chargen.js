@@ -7773,6 +7773,48 @@ section('Step 9 Initiation Gate');
 }
 
 {
+  const { App: AppRef, CharacterData: CD, Calc: CalcRef, CULTS_DATA, detectCultType } = loadApp();
+
+  if (AppRef && AppRef.selectCult && AppRef.resolveActiveSorcerySource && AppRef.getStep9ValidationErrors) {
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 13, CHA: 10 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.culture = 'God Forgot';
+    CD.career = 'Sorcerer';
+    CD.cult = 'Arkat';
+    CD.cultType = detectCultType(CULTS_DATA.find(cult => cult.name === 'Arkat'));
+    CD.devotionalPool = 0;
+    CD.boundSpiritSlots = 0;
+    CD.miracles = [];
+    CD.boundSpirits = [];
+    CD.sorceryResource = 13;
+    CD.sorcerySpells = ['Holdfast'];
+    AppRef.currentStep = 9;
+
+    AppRef.selectCult(null);
+    const sourceAfterSwitch = AppRef.resolveActiveSorcerySource(CD);
+    const clearedCultSpells = CD.cult === null &&
+      sourceAfterSwitch?.sourceLabel === 'Zzistori School (God Forgot sorcery)' &&
+      CD.sorcerySpells.length === 0 &&
+      AppRef.getStep9ValidationErrors().some(error => /sorcery spell/i.test(error));
+
+    CD.sorcerySpells = ['Animate (Substance)'];
+    AppRef.selectCult(null);
+    const preservesExistingNoCultSpells = CD.cult === null &&
+      CD.sorcerySpells.length === 1 &&
+      CD.sorcerySpells[0] === 'Animate (Substance)';
+
+    if (clearedCultSpells && preservesExistingNoCultSpells) {
+      pass('Switching from Arkat to No Cult clears cult-backed sorcery before deriving Zzistori');
+    } else {
+      fail('Arkat sorcery spells leaked into No Cult Zzistori state',
+        JSON.stringify({ clearedCultSpells, preservesExistingNoCultSpells, sourceAfterSwitch, spells: CD.sorcerySpells }));
+    }
+  } else {
+    fail('No Cult sorcery stale-state regression dependencies not found');
+  }
+}
+
+{
   const { App: AppRef, CharacterData: CD, Calc: CalcRef } = loadApp();
 
   if (AppRef && AppRef.validateCurrentStep && AppRef.getValidationState) {

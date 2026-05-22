@@ -11612,6 +11612,7 @@ App.selectCult = function(cultName) {
     );
     return;
   }
+  const previousCult = CharacterData.cult;
   CharacterData.cult = cultName;
 
   // ADR-0006: Calculate magic resources based on detected cult type
@@ -11652,6 +11653,7 @@ App.selectCult = function(cultName) {
     CharacterData.cultType = null;
     CharacterData.miracles = [];
     CharacterData.boundSpirits = [];
+    if (previousCult) CharacterData.sorcerySpells = [];
   }
   this.normalizeSorceryState(CharacterData);
 
@@ -16170,12 +16172,14 @@ App.agent.getMagicState = function() {
 App.agent.selectCult = function(name) {
   try {
     if (name === null || name === undefined) {
+      const previousCult = CharacterData.cult;
       CharacterData.cult = null;
       CharacterData.cultType = null;
       CharacterData.devotionalPool = 0;
       CharacterData.boundSpiritSlots = 0;
       CharacterData.miracles = [];
       CharacterData.boundSpirits = [];
+      if (previousCult) CharacterData.sorcerySpells = [];
       App.normalizeSorceryState(CharacterData);
       App.saveToLocalStorage();
       return {success: true, magicState: App.agent.getMagicState()};

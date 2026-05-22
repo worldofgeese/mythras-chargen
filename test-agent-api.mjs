@@ -209,6 +209,27 @@ assert(ae3bGranular.toggle.success === true &&
   ae3bGranular.magic.selectedSpells.includes('Holdfast'),
   'AE3b granular: toggleSpell uses derived source spell limit');
 
+const ae3bNoCultSwitch = evalPageJSON(`JSON.stringify((() => {
+  App.agent.setStep(1, {name:'Switching Zzistori', concept:'God Forgot school sorcerer'});
+  App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
+  App.agent.setStep(4, {culture:'God Forgot', homeland:'God Forgot'});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Zzistori School'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  const arkat = App.agent.selectCult('Arkat');
+  const arkatSpell = App.agent.toggleSpell('Holdfast');
+  const before = App.agent.getMagicState();
+  const noCult = App.agent.selectCult(null);
+  const after = App.agent.getMagicState();
+  return {arkat, arkatSpell, before, noCult, after};
+})())`);
+assert(ae3bNoCultSwitch.before.cultName === 'Arkat' &&
+  ae3bNoCultSwitch.before.selectedSpells.includes('Holdfast'),
+  'AE3b granular switch: Arkat spell is selected before No Cult');
+assert(ae3bNoCultSwitch.noCult.success === true &&
+  ae3bNoCultSwitch.after.cultName === null &&
+  ae3bNoCultSwitch.after.sorcerySourceLabel === 'Zzistori School (God Forgot sorcery)' &&
+  ae3bNoCultSwitch.after.selectedSpells.length === 0,
+  'AE3b granular switch: selectCult(null) clears Arkat spells before deriving Zzistori');
+
 // ═══════════════════════════════════════════════════════════════
 console.log('\n\x1b[36m═══ AE4: Waha (Hybrid Theist+Animist) ═══\x1b[0m\n');
 // ═══════════════════════════════════════════════════════════════
