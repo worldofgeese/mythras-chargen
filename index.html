@@ -8349,6 +8349,12 @@ function getCharacterMagicPoints(character) {
   return Number(character?.characteristics?.POW) || 0;
 }
 
+function getUnknownSorcerySpellNames(spells) {
+  if (!Array.isArray(spells)) return [];
+  const knownSpells = new Set(SORCERY_SPELLS.map(([name]) => name));
+  return spells.filter(spell => typeof spell !== 'string' || !knownSpells.has(spell));
+}
+
 function formatSorcerySourcePages(source) {
   const pages = Array.isArray(source?.pages) ? source.pages : [];
   const hasZzistoriPages = pages.includes('AiG p.30-31') &&
@@ -8832,6 +8838,15 @@ const CharacterData = {
         errors.push(`${field} must be an array`);
       }
     });
+
+    const unknownSorcerySpells = getUnknownSorcerySpellNames(data.sorcerySpells);
+    if (unknownSorcerySpells.length > 0) {
+      errors.push(`Unknown sorcery spell(s): ${unknownSorcerySpells.join(', ')}`);
+    }
+    const importedSorcerySource = resolveActiveSorcerySource(data);
+    if (importedSorcerySource && Array.isArray(data.sorcerySpells) && data.sorcerySpells.length > importedSorcerySource.startingSpellLimit) {
+      errors.push(`sorcerySpells exceeds ${importedSorcerySource.startingSpellLimit} spell limit`);
+    }
 
     if (Array.isArray(data.selectedProfessionalSkills)) {
       const seenProfessionalSkills = new Set();
@@ -11613,6 +11628,7 @@ App.selectCult = function(cultName) {
     return;
   }
   const previousCult = CharacterData.cult;
+  const previousSorcerySource = this.resolveActiveSorcerySource(CharacterData);
   CharacterData.cult = cultName;
 
   // ADR-0006: Calculate magic resources based on detected cult type
@@ -11640,6 +11656,9 @@ App.selectCult = function(cultName) {
       CharacterData.sorceryResource = CharacterData.characteristics.POW; // Magic Points = POW
     } else {
       CharacterData.sorceryResource = 0;
+    }
+    if (!previousSorcerySource || previousSorcerySource.sourceLabel !== cultName) {
+      CharacterData.sorcerySpells = [];
     }
 
     // Soft validation: update requirement warning + boost panel (deferred until DOM is ready)
@@ -12300,9 +12319,13 @@ App.getStep9ValidationErrors = function() {
   const errors = [];
   const activeSorcerySource = App.normalizeSorceryState(CharacterData);
   const addSorcerySelectionErrors = (source) => {
-    const selectedSpells = (CharacterData.sorcerySpells || []).length;
+    const selectedSorcerySpells = CharacterData.sorcerySpells || [];
+    const unknownSorcerySpells = getUnknownSorcerySpellNames(selectedSorcerySpells);
+    const selectedSpells = selectedSorcerySpells.length;
     const spellLimit = source?.startingSpellLimit || 3;
-    if (selectedSpells === 0) {
+    if (unknownSorcerySpells.length > 0) {
+      errors.push(`Unknown sorcery spell(s): ${unknownSorcerySpells.join(', ')}`);
+    } else if (selectedSpells === 0) {
       errors.push('Please select at least one sorcery spell');
     } else if (selectedSpells > spellLimit) {
       errors.push(`Please select no more than ${spellLimit} sorcery spells`);

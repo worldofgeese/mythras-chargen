@@ -230,6 +230,33 @@ assert(ae3bNoCultSwitch.noCult.success === true &&
   ae3bNoCultSwitch.after.selectedSpells.length === 0,
   'AE3b granular switch: selectCult(null) clears Arkat spells before deriving Zzistori');
 
+const ae3bArkatSwitch = evalPageJSON(`JSON.stringify((() => {
+  App.agent.setStep(1, {name:'Arkat Switching', concept:'God Forgot school sorcerer'});
+  App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
+  App.agent.setStep(4, {culture:'God Forgot', homeland:'God Forgot'});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Zzistori School'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  App.agent.selectCult(null);
+  App.agent.toggleSpell('Holdfast');
+  const before = App.agent.getMagicState();
+  const arkat = App.agent.selectCult('Arkat');
+  const after = App.agent.getMagicState();
+  return {before, arkat, after};
+})())`);
+assert(ae3bArkatSwitch.before.sorcerySourceLabel === 'Zzistori School (God Forgot sorcery)' &&
+  ae3bArkatSwitch.before.selectedSpells.includes('Holdfast'),
+  'AE3b granular switch: Zzistori spell is selected before Arkat');
+assert(ae3bArkatSwitch.arkat.success === true &&
+  ae3bArkatSwitch.after.cultName === 'Arkat' &&
+  ae3bArkatSwitch.after.sorcerySourceLabel === 'Arkat' &&
+  ae3bArkatSwitch.after.selectedSpells.length === 0,
+  'AE3b granular switch: selectCult(Arkat) clears No Cult Zzistori spells');
+
+const ae3bInvalidSpells = evalPageJSON(`JSON.stringify(App.agent.buildCharacter({step1:{name:'Invalid Zzistori',concept:'Bad spell import'},step2:{characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}},step4:{culture:'God Forgot',homeland:'God Forgot'},step5:{culturalSkills:{Athletics:10,Endurance:10,'First Aid':15,Locale:15,Perception:15,Willpower:15,Influence:10,Insight:10},runeAffinities:{primary:'Law',secondary:'Truth',tertiary:'Stasis'},folkMagicSpells:['Avert','Calm','Calculate']},step6:{passions:[{type:'Loyalty',subject:'Zzistori School',value:47},{type:'Love',subject:'Knowledge',value:47}]},step7:{age:21,gender:'Male',family:'Zzistori school cell'},step8:{career:'Sorcerer',professionalSkills:[{name:'Invocation (Cult, School or Grimoire)',specialization:'Zzistori School'},{name:'Shaping'},{name:'Lore (any)',specialization:'Sorcery'}]},step9:{cult:null,sorcerySpells:['Bogus A','Bogus B','Bogus C']},step10:{careerSkills:{Customs:10,Deceit:10,Influence:10,Insight:10,Locale:10,Perception:10,Willpower:10,'Invocation (Zzistori School)':10,Shaping:10,'Lore (Sorcery)':10},careerFolkMagic:['Appraise','Befuddle']},step11:{bonusSkills:{Customs:15,Deceit:15,Influence:15,Insight:15,Locale:15,Perception:15,Willpower:15,'Invocation (Zzistori School)':15,Shaping:15,'Lore (Sorcery)':15}},step12:{socialClass:'Freeman'}}))`);
+assert(ae3bInvalidSpells.success === false &&
+  ae3bInvalidSpells.failedStep === 9 &&
+  ae3bInvalidSpells.errors.some(error => /unknown sorcery spell/i.test(error)),
+  'AE3b invalid: buildCharacter rejects unknown Zzistori sorcery spells');
+
 // ═══════════════════════════════════════════════════════════════
 console.log('\n\x1b[36m═══ AE4: Waha (Hybrid Theist+Animist) ═══\x1b[0m\n');
 // ═══════════════════════════════════════════════════════════════

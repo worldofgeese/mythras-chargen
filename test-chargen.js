@@ -1471,7 +1471,7 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
     const cultureSpellBox = { checked: true };
     AppObj.toggleFolkMagicSpell('Beastcall', true, 3, cultureSpellBox);
 
-    CD.sorcerySpells = ['Abjure', 'Animate (Substance)', 'Dominate (Human)'];
+    CD.sorcerySpells = ['Abjure', 'Animate (Substance)', 'Dominate (Creatures)'];
     const sorceryBox = { checked: true };
     AppObj.toggleSorcerySpell('Enchant (Object)', sorceryBox);
 
@@ -4303,7 +4303,7 @@ fixtures.forEach(fixtureInfo => {
     CD.boundSpiritSlots = 4;
     CD.boundSpirits = [{ name: 'Disease Spirit' }];
     CD.sorceryResource = 13;
-    CD.sorcerySpells = ['Dominate (Human)'];
+    CD.sorcerySpells = ['Dominate (Creatures)'];
     CD.companions = [{ name: 'Hoofbeat', species: 'Horse' }];
     CD.saveToLocalStorage();
 
@@ -4323,7 +4323,7 @@ fixtures.forEach(fixtureInfo => {
       CD.boundSpiritSlots === 4 &&
       CD.boundSpirits && CD.boundSpirits[0] && CD.boundSpirits[0].name === 'Disease Spirit' &&
       CD.sorceryResource === 13 &&
-      CD.sorcerySpells && CD.sorcerySpells[0] === 'Dominate (Human)' &&
+      CD.sorcerySpells && CD.sorcerySpells[0] === 'Dominate (Creatures)' &&
       CD.companions && CD.companions[0] && CD.companions[0].name === 'Hoofbeat';
 
     if (preserved) {
@@ -4351,7 +4351,7 @@ fixtures.forEach(fixtureInfo => {
         characteristics: { STR: 11, CON: 12, SIZ: 13, DEX: 14, INT: 15, POW: 13, CHA: 10 },
         boundSpirits: [{ name: 'Healing Spirit' }],
         sorceryResource: 0,
-        sorcerySpells: ['Project (Sight)'],
+        sorcerySpells: ['Project (Sense)'],
         companions: [{ name: 'Red Mane', species: 'Horse' }]
       }
     };
@@ -4360,7 +4360,7 @@ fixtures.forEach(fixtureInfo => {
     if (success && CD.name === 'Versioned Envelope' &&
         CD.boundSpirits && CD.boundSpirits[0].name === 'Healing Spirit' &&
         CD.sorceryResource === 13 &&
-        CD.sorcerySpells && CD.sorcerySpells[0] === 'Project (Sight)' &&
+        CD.sorcerySpells && CD.sorcerySpells[0] === 'Project (Sense)' &&
         CD.companions && CD.companions[0].name === 'Red Mane') {
       pass('CharacterData.fromJSON accepts versioned save envelopes');
     } else {
@@ -4936,7 +4936,7 @@ fixtures.forEach(fixtureInfo => {
     CD.cult = 'Arkat';
     CD.cultType = { primary: 'sorcery', types: ['sorcery'], isHybrid: false };
     CD.sorceryResource = 14;
-    CD.sorcerySpells = ['Animate (Substance)', 'Dominate (Human)'];
+    CD.sorcerySpells = ['Animate (Substance)', 'Dominate (Creatures)'];
     CD.folkMagicSpells = [];
     CD.careerFolkMagic = [];
 
@@ -4945,7 +4945,7 @@ fixtures.forEach(fixtureInfo => {
 
     if (html.includes('data-testid="sorcery-spells-list"') &&
         html.includes('Animate (Substance)') &&
-        html.includes('Dominate (Human)')) {
+        html.includes('Dominate (Creatures)')) {
       pass('Play Mode renders selected sorcery spells');
     } else {
       fail('Play Mode does not render selected sorcery spells');
@@ -5789,7 +5789,7 @@ section('Cult Data Tests');
       cult: null,
       cultType: { primary: 'sorcery', types: ['sorcery'], isHybrid: false },
       sorceryResource: 12,
-      sorcerySpells: ['Project (Sight)']
+      sorcerySpells: ['Project (Sense)']
     }));
     const staleCleared = staleSuccess &&
       CD.cultType === null &&
@@ -5805,7 +5805,7 @@ section('Cult Data Tests');
       cultType: null,
       characteristics: { STR: 11, CON: 12, SIZ: 13, DEX: 14, INT: 15, POW: 13, CHA: 10 },
       sorceryResource: 0,
-      sorcerySpells: ['Project (Sight)', 'Animate (Substance)']
+      sorcerySpells: ['Project (Sense)', 'Animate (Substance)']
     };
     const validSuccess = CD.fromJSON(JSON.stringify(validZzistoriPayload));
     const validSource = AppRef.resolveActiveSorcerySource(CD);
@@ -7811,6 +7811,88 @@ section('Step 9 Initiation Gate');
     }
   } else {
     fail('No Cult sorcery stale-state regression dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, Calc: CalcRef, CULTS_DATA, detectCultType } = loadApp();
+
+  if (AppRef && AppRef.selectCult && AppRef.resolveActiveSorcerySource) {
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 13, CHA: 10 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.culture = 'God Forgot';
+    CD.career = 'Sorcerer';
+    CD.cult = null;
+    CD.cultType = null;
+    CD.devotionalPool = 0;
+    CD.boundSpiritSlots = 0;
+    CD.miracles = [];
+    CD.boundSpirits = [];
+    CD.sorceryResource = 13;
+    CD.sorcerySpells = ['Animate (Substance)'];
+    AppRef.currentStep = 9;
+
+    AppRef.selectCult('Arkat');
+    const arkatSource = AppRef.resolveActiveSorcerySource(CD);
+    const clearedZzistoriSpells = CD.cult === 'Arkat' &&
+      arkatSource?.sourceLabel === 'Arkat' &&
+      CD.sorcerySpells.length === 0;
+
+    CD.sorcerySpells = ['Holdfast'];
+    AppRef.selectCult('Arkat');
+    const preservesSameCultSpells = CD.cult === 'Arkat' &&
+      CD.sorcerySpells.length === 1 &&
+      CD.sorcerySpells[0] === 'Holdfast' &&
+      detectCultType(CULTS_DATA.find(cult => cult.name === 'Arkat'))?.primary === 'sorcery';
+
+    if (clearedZzistoriSpells && preservesSameCultSpells) {
+      pass('Switching from No Cult Zzistori to Arkat clears source-backed sorcery spells');
+    } else {
+      fail('Zzistori sorcery spells leaked into Arkat cult-backed state',
+        JSON.stringify({ clearedZzistoriSpells, preservesSameCultSpells, arkatSource, spells: CD.sorcerySpells }));
+    }
+  } else {
+    fail('Arkat switch stale-state regression dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, Calc: CalcRef } = loadApp();
+
+  if (AppRef && AppRef.getStep9ValidationErrors && CD?.fromJSON) {
+    const characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 13, CHA: 10 };
+    CD.characteristics = characteristics;
+    CD.attributes = CalcRef.calculateAllAttributes(characteristics);
+    CD.culture = 'God Forgot';
+    CD.career = 'Sorcerer';
+    CD.cult = null;
+    CD.cultType = null;
+    CD.sorcerySpells = ['Bogus A', 'Bogus B', 'Bogus C'];
+    AppRef.currentStep = 9;
+
+    const validationErrors = AppRef.getStep9ValidationErrors();
+    const rejectsUnknownAtStep9 = validationErrors.some(error => /unknown sorcery spell/i.test(error));
+
+    CD.name = 'Before Invalid Import';
+    const importSuccess = CD.fromJSON(JSON.stringify({
+      ...createTestCharacter('God Forgot'),
+      name: 'Invalid Zzistori Import',
+      career: 'Sorcerer',
+      cult: null,
+      cultType: null,
+      characteristics,
+      sorcerySpells: ['Bogus A']
+    }));
+    const rejectsInvalidImport = importSuccess === false && CD.name === 'Before Invalid Import';
+
+    if (rejectsUnknownAtStep9 && rejectsInvalidImport) {
+      pass('Unknown sorcery spells are rejected before they can occupy the Zzistori cap');
+    } else {
+      fail('Unknown sorcery spells can occupy source-backed sorcery state',
+        JSON.stringify({ validationErrors, importSuccess, name: CD.name, spells: CD.sorcerySpells }));
+    }
+  } else {
+    fail('Unknown sorcery spell validation dependencies not found');
   }
 }
 
