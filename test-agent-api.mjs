@@ -129,7 +129,7 @@ console.log('\n\x1b[36m═══ AE3: Arkat (Sorcery) ═══\x1b[0m\n');
 
 reload();
 
-evalPageJSON(`JSON.stringify(App.agent.buildCharacter({step1:{name:'Malkion the Grey',concept:'Sorcerer philosopher'},step2:{characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:13,CHA:10}},step4:{culture:'God Forgot',homeland:'God Forgot'},step5:{culturalSkills:{Athletics:10,Endurance:10,'First Aid':15,Locale:15,Perception:15,Willpower:15,Influence:10,Insight:10},runeAffinities:{primary:'Law',secondary:'Truth',tertiary:'Stasis'},folkMagicSpells:['Avert','Calm','Calculate']},step6:{passions:[{type:'Loyalty',subject:'Brithini Order',value:47},{type:'Love',subject:'Knowledge',value:47}]},step7:{age:21,gender:'Male',family:'House Malkion'},step8:{career:'Scholar',professionalSkills:[{name:'Lore (any)',specialization:'Sorcery'},{name:'Lore (any)',specialization:'Philosophy'},{name:'Language (any)',specialization:'Old Brithini'}]},step9:{cult:'Arkat',sorcerySpells:['Holdfast']},step10:{careerSkills:{Willpower:15,Perception:15,Locale:15,Influence:15,Insight:15,'First Aid':10,Endurance:10,Athletics:5},careerFolkMagic:['Appraise','Befuddle']},step11:{bonusSkills:{Willpower:15,Perception:15,Locale:15,Influence:15,Insight:15,'First Aid':15,Endurance:15,Athletics:15,'Lore (Sorcery)':15,'Lore (Philosophy)':15}},step12:{socialClass:'Freeman'}}))`);
+evalPageJSON(`JSON.stringify(App.agent.buildCharacter({step1:{name:'Malkion the Grey',concept:'Sorcerer philosopher'},step2:{characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:13,CHA:10}},step4:{culture:'God Forgot',homeland:'God Forgot'},step5:{culturalSkills:{Athletics:10,Endurance:10,'First Aid':15,Locale:15,Perception:15,Willpower:15,Influence:10,Insight:10},runeAffinities:{primary:'Law',secondary:'Truth',tertiary:'Stasis'},folkMagicSpells:['Avert','Calm','Calculate']},step6:{passions:[{type:'Loyalty',subject:'Brithini Order',value:47},{type:'Love',subject:'Knowledge',value:47}]},step7:{age:21,gender:'Male',family:'House Malkion'},step8:{career:'Scholar',professionalSkills:['Invocation','Shaping',{name:'Lore (any)',specialization:'Sorcery'}]},step9:{cult:'Arkat',sorcerySpells:['Holdfast']},step10:{careerSkills:{Willpower:15,Perception:15,Locale:15,Influence:15,Insight:15,'First Aid':10,Endurance:10,Athletics:5},careerFolkMagic:['Appraise','Befuddle']},step11:{bonusSkills:{Willpower:15,Perception:15,Locale:15,Influence:15,Insight:15,'First Aid':15,Endurance:15,Athletics:15,'Lore (Sorcery)':15,'Lore (Philosophy)':15}},step12:{socialClass:'Freeman'}}))`);
 const ae3 = evalPageJSON(`JSON.stringify(App.agent.getMagicState())`);
 
 assert(ae3.cultType.primary === 'sorcery', 'AE3: Arkat detected as sorcery');
@@ -219,7 +219,7 @@ const ae3bNoCultSwitch = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Switching Zzistori', concept:'God Forgot school sorcerer'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
   App.agent.setStep(4, {culture:'God Forgot', homeland:'God Forgot'});
-  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Zzistori School'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Invocation', 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
   const arkat = App.agent.selectCult('Arkat');
   const arkatSpell = App.agent.toggleSpell('Holdfast');
   const before = App.agent.getMagicState();
@@ -313,6 +313,67 @@ assert(ae3bMissingCultSchool.success === false &&
   ae3bMissingCultSchool.failedStep === 9 &&
   ae3bMissingCultSchool.errors.some(error => /Invocation specialization/i.test(error) && /Arkat/.test(error)),
   'AE3b invalid: buildCharacter rejects missing Invocation for Arkat cult');
+
+reload();
+
+const ae3bToggleMissingInvocation = evalPageJSON(`JSON.stringify((() => {
+  App.agent.setStep(1, {name:'Toggle Missing Invocation', concept:'No Invocation direct toggle'});
+  App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
+  App.agent.setStep(4, {culture:'God Forgot', homeland:'God Forgot'});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Shaping', {name:'Lore (any)', specialization:'Sorcery'}, 'Literacy']});
+  App.agent.selectCult(null);
+  const before = App.agent.getMagicState();
+  const toggle = App.agent.toggleSpell('Holdfast');
+  const after = App.agent.getMagicState();
+  return {before, toggle, after};
+})())`);
+assert(ae3bToggleMissingInvocation.before.sorcerySourceLabel === 'Zzistori School (God Forgot sorcery)' &&
+  ae3bToggleMissingInvocation.toggle.success === false &&
+  /Invocation specialization/i.test(ae3bToggleMissingInvocation.toggle.error || '') &&
+  ae3bToggleMissingInvocation.after.selectedSpells.length === 0,
+  'AE3b invalid: toggleSpell rejects and does not mutate missing Invocation Zzistori');
+
+reload();
+
+const ae3bStep9Rollback = evalPageJSON(`JSON.stringify((() => {
+  App.agent.setStep(1, {name:'Rollback Missing Invocation', concept:'Rejected Step 9 mutation'});
+  App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
+  App.agent.setStep(4, {culture:'God Forgot', homeland:'God Forgot'});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Shaping', {name:'Lore (any)', specialization:'Sorcery'}, 'Literacy']});
+  const before = App.agent.getMagicState();
+  const result = App.agent.setStep(9, {cult:'Arkat', sorcerySpells:['Holdfast']});
+  const after = App.agent.getMagicState();
+  return {before, result, after};
+})())`);
+assert(ae3bStep9Rollback.before.cultName === null &&
+  ae3bStep9Rollback.result.success === false &&
+  ae3bStep9Rollback.result.errors.some(error => /Invocation specialization/i.test(error) && /Arkat/.test(error)) &&
+  ae3bStep9Rollback.after.cultName === null &&
+  ae3bStep9Rollback.after.selectedSpells.length === 0,
+  'AE3b invalid: failed Step 9 Arkat set rolls back rejected cult and spells');
+
+reload();
+
+const ae3bBuildRollback = evalPageJSON(`JSON.stringify((() => {
+  const validSpec = {step1:{name:'Rollback Valid Zzistori',concept:'Valid source-backed sorcerer'},step2:{characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}},step4:{culture:'God Forgot',homeland:'God Forgot'},step5:{culturalSkills:{Athletics:10,Endurance:10,'First Aid':15,Locale:15,Perception:15,Willpower:15,Influence:10,Insight:10},runeAffinities:{primary:'Law',secondary:'Truth',tertiary:'Stasis'},folkMagicSpells:['Avert','Calm','Calculate']},step6:{passions:[{type:'Loyalty',subject:'Zzistori School',value:47},{type:'Love',subject:'Knowledge',value:47}]},step7:{age:21,gender:'Male',family:'Zzistori school cell'},step8:{career:'Sorcerer',professionalSkills:['Invocation','Shaping',{name:'Lore (any)',specialization:'Sorcery'}]},step9:{cult:null,sorcerySpells:['Holdfast']},step10:{careerSkills:{Customs:10,Deceit:10,Influence:10,Insight:10,Locale:10,Perception:10,Willpower:10,Invocation:10,Shaping:10,'Lore (Sorcery)':10},careerFolkMagic:['Appraise','Befuddle']},step11:{bonusSkills:{Customs:15,Deceit:15,Influence:15,Insight:15,Locale:15,Perception:15,Willpower:15,Invocation:15,Shaping:15,'Lore (Sorcery)':15}},step12:{socialClass:'Freeman'}};
+  const valid = App.agent.buildCharacter(validSpec);
+  const before = App.agent.getMagicState();
+  const invalid = App.agent.buildCharacter(${JSON.stringify({
+    ...ae3bMissingInvocationBase,
+    step1: { name: 'Rejected BuildCharacter', concept: 'Rejected complete build' },
+    step9: { cult: 'Arkat', sorcerySpells: ['Holdfast'] }
+  })});
+  const after = App.agent.getMagicState();
+  return {valid, before, invalid, after};
+})())`);
+assert(ae3bBuildRollback.valid.success === true &&
+  ae3bBuildRollback.before.sorcerySourceLabel === 'Zzistori School (God Forgot sorcery)' &&
+  ae3bBuildRollback.before.selectedSpells.includes('Holdfast') &&
+  ae3bBuildRollback.invalid.success === false &&
+  ae3bBuildRollback.invalid.failedStep === 9 &&
+  ae3bBuildRollback.after.sorcerySourceLabel === ae3bBuildRollback.before.sorcerySourceLabel &&
+  JSON.stringify(ae3bBuildRollback.after.selectedSpells) === JSON.stringify(ae3bBuildRollback.before.selectedSpells),
+  'AE3b invalid: failed buildCharacter restores previous accepted magic state');
 
 // ═══════════════════════════════════════════════════════════════
 console.log('\n\x1b[36m═══ AE4: Waha (Hybrid Theist+Animist) ═══\x1b[0m\n');

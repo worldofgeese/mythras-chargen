@@ -15902,6 +15902,32 @@ App.agent.setStep = function(step, data) {
 
       // ─── Step 9: Cult and Miracles ───
       case 9: {
+        const step9Snapshot = {
+          cult: CharacterData.cult,
+          cultType: CharacterData.cultType ? JSON.parse(JSON.stringify(CharacterData.cultType)) : CharacterData.cultType,
+          devotionalPool: CharacterData.devotionalPool,
+          boundSpiritSlots: CharacterData.boundSpiritSlots,
+          sorceryResource: CharacterData.sorceryResource,
+          miracles: [...(CharacterData.miracles || [])],
+          boundSpirits: JSON.parse(JSON.stringify(CharacterData.boundSpirits || [])),
+          sorcerySpells: [...(CharacterData.sorcerySpells || [])],
+          careerSkills: {...(CharacterData.careerSkills || {})},
+          bonusSkills: {...(CharacterData.bonusSkills || {})},
+          selectedProfessionalSkills: [...(CharacterData.selectedProfessionalSkills || [])]
+        };
+        const restoreStep9Snapshot = () => {
+          CharacterData.cult = step9Snapshot.cult;
+          CharacterData.cultType = step9Snapshot.cultType;
+          CharacterData.devotionalPool = step9Snapshot.devotionalPool;
+          CharacterData.boundSpiritSlots = step9Snapshot.boundSpiritSlots;
+          CharacterData.sorceryResource = step9Snapshot.sorceryResource;
+          CharacterData.miracles = step9Snapshot.miracles;
+          CharacterData.boundSpirits = step9Snapshot.boundSpirits;
+          CharacterData.sorcerySpells = step9Snapshot.sorcerySpells;
+          CharacterData.careerSkills = step9Snapshot.careerSkills;
+          CharacterData.bonusSkills = step9Snapshot.bonusSkills;
+          CharacterData.selectedProfessionalSkills = step9Snapshot.selectedProfessionalSkills;
+        };
         const cultName = data.cult;
         if (cultName === null || cultName === undefined) {
           // No-cult path
@@ -15916,6 +15942,7 @@ App.agent.setStep = function(step, data) {
           if (!data.__deferValidation) {
             const step9Errors = App.getStep9ValidationErrors();
             if (step9Errors.length > 0) {
+              restoreStep9Snapshot();
               return {success: false, errors: step9Errors, state: App.agent.getState()};
             }
           }
@@ -15969,6 +15996,7 @@ App.agent.setStep = function(step, data) {
         if (!data.__deferValidation) {
           const step9Errors = App.getStep9ValidationErrors();
           if (step9Errors.length > 0) {
+            restoreStep9Snapshot();
             return {success: false, errors: step9Errors, state: App.agent.getState()};
           }
         }
@@ -16136,10 +16164,27 @@ App.agent.prev = function() {
  * On success: switches to Play Mode and returns the final state.
  */
 App.agent.buildCharacter = function(spec) {
+  let buildSnapshot = null;
+  const shouldRestoreFailedBuild = errors => (errors || []).some(error =>
+    /Invocation specialization|unknown sorcery spell|sorcerySpells exceeds/i.test(error)
+  );
+  const restoreBuildSnapshot = () => {
+    if (!buildSnapshot) return;
+    CharacterData.applyPlainObject(buildSnapshot.character);
+    App.mode = buildSnapshot.mode;
+    App.currentStep = buildSnapshot.currentStep;
+    App.saveToLocalStorage();
+    App.renderCurrentStep();
+  };
   try {
     if (!spec || typeof spec !== 'object') {
       return {success: false, errors: ['spec object is required'], failedStep: null};
     }
+    buildSnapshot = {
+      character: CharacterData.toJSON(),
+      mode: App.mode,
+      currentStep: App.currentStep
+    };
     if (!CharacterData.applyPlainObject({characteristics: {STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 10, POW: 10, CHA: 10}})) {
       return {success: false, errors: ['Unable to reset character state'], failedStep: null};
     }
@@ -16161,6 +16206,7 @@ App.agent.buildCharacter = function(spec) {
     App.currentStep = 9;
     const step9Validation = App.getValidationState();
     if (!step9Validation.valid) {
+      if (shouldRestoreFailedBuild(step9Validation.errors)) restoreBuildSnapshot();
       return {success: false, errors: step9Validation.errors, failedStep: 9};
     }
     App.currentStep = App.totalSteps || 13;
@@ -16170,6 +16216,7 @@ App.agent.buildCharacter = function(spec) {
     }
     return {success: true, errors: [], character: App.agent.getState()};
   } catch (e) {
+    restoreBuildSnapshot();
     return {success: false, errors: [e.message], failedStep: null};
   }
 };
@@ -16300,7 +16347,8 @@ App.agent.selectCult = function(name) {
 App.agent.toggleSpell = function(name) {
   try {
     const spells = CharacterData.sorcerySpells || [];
-    const limit = App.resolveActiveSorcerySource(CharacterData)?.startingSpellLimit || 3;
+    const activeSorcerySource = App.resolveActiveSorcerySource(CharacterData);
+    const limit = activeSorcerySource?.startingSpellLimit || 3;
     const idx = spells.indexOf(name);
     if (idx >= 0) {
       spells.splice(idx, 1);
@@ -16311,6 +16359,10 @@ App.agent.toggleSpell = function(name) {
       // Verify spell exists
       if (!SORCERY_SPELLS.find(s => s[0] === name)) {
         return {success: false, error: `Spell '${name}' not found in SORCERY_SPELLS`};
+      }
+      const sourceErrors = getSorcerySourceSchoolErrors(CharacterData, activeSorcerySource);
+      if (sourceErrors.length > 0) {
+        return {success: false, error: sourceErrors[0], selected: spells.length, limit, spells: [...spells]};
       }
       spells.push(name);
     }
