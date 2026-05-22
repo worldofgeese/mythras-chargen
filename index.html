@@ -8369,8 +8369,8 @@ function getInvocationSpecializations(character) {
 }
 
 function getSorcerySourceSchoolErrors(character, source) {
-  if (!source || source.isCultBacked) return [];
-  const school = source.school || source.sourceLabel;
+  if (!source) return [];
+  const school = source.isCultBacked ? source.cultName : (source.school || source.sourceLabel);
   if (!school) return [];
   const mismatches = getInvocationSpecializations(character)
     .filter(specialization => specialization !== school);

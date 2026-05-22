@@ -263,6 +263,12 @@ assert(ae3bWrongSchool.success === false &&
   ae3bWrongSchool.errors.some(error => /Invocation specialization/i.test(error) && /Zzistori School/.test(error)),
   'AE3b invalid: buildCharacter rejects Arkat Invocation for No Cult Zzistori');
 
+const ae3bWrongCultSchool = evalPageJSON(`JSON.stringify(App.agent.buildCharacter({step1:{name:'Wrong Cult School',concept:'Bad cult school import'},step2:{characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}},step4:{culture:'God Forgot',homeland:'God Forgot'},step5:{culturalSkills:{Athletics:10,Endurance:10,'First Aid':15,Locale:15,Perception:15,Willpower:15,Influence:10,Insight:10},runeAffinities:{primary:'Law',secondary:'Truth',tertiary:'Stasis'},folkMagicSpells:['Avert','Calm','Calculate']},step6:{passions:[{type:'Loyalty',subject:'Zzistori School',value:47},{type:'Love',subject:'Knowledge',value:47}]},step7:{age:21,gender:'Male',family:'Zzistori school cell'},step8:{career:'Sorcerer',professionalSkills:[{name:'Invocation (Cult, School or Grimoire)',specialization:'Zzistori School'},{name:'Shaping'},{name:'Lore (any)',specialization:'Sorcery'}]},step9:{cult:'Arkat',sorcerySpells:['Holdfast']},step10:{careerSkills:{Customs:10,Deceit:10,Influence:10,Insight:10,Locale:10,Perception:10,Willpower:10,'Invocation (Zzistori School)':10,Shaping:10,'Lore (Sorcery)':10},careerFolkMagic:['Appraise','Befuddle']},step11:{bonusSkills:{Customs:15,Deceit:15,Influence:15,Insight:15,Locale:15,Perception:15,Willpower:15,'Invocation (Zzistori School)':15,Shaping:15,'Lore (Sorcery)':15}},step12:{socialClass:'Freeman'}}))`);
+assert(ae3bWrongCultSchool.success === false &&
+  ae3bWrongCultSchool.failedStep === 9 &&
+  ae3bWrongCultSchool.errors.some(error => /Invocation specialization/i.test(error) && /Arkat/.test(error)),
+  'AE3b invalid: buildCharacter rejects Zzistori Invocation for Arkat cult');
+
 // ═══════════════════════════════════════════════════════════════
 console.log('\n\x1b[36m═══ AE4: Waha (Hybrid Theist+Animist) ═══\x1b[0m\n');
 // ═══════════════════════════════════════════════════════════════

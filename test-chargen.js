@@ -7501,6 +7501,58 @@ section('Step 9 Initiation Gate');
 {
   const { App: AppRef, CharacterData: CD, Calc: CalcRef } = loadApp();
 
+  if (AppRef && AppRef.selectCult && AppRef.getStep9ValidationErrors && CD?.fromJSON) {
+    const characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 13, CHA: 10 };
+    CD.characteristics = characteristics;
+    CD.attributes = CalcRef.calculateAllAttributes(characteristics);
+    CD.culture = 'God Forgot';
+    CD.career = 'Sorcerer';
+    CD.cult = null;
+    CD.cultType = null;
+    CD.selectedProfessionalSkills = ['Invocation (Zzistori School)', 'Shaping', 'Lore (Sorcery)'];
+    CD.careerSkills = { 'Invocation (Zzistori School)': 10, Shaping: 10, 'Lore (Sorcery)': 10 };
+    CD.bonusSkills = {};
+    CD.sorcerySpells = ['Holdfast'];
+    AppRef.currentStep = 9;
+
+    AppRef.selectCult('Arkat');
+    CD.sorcerySpells = ['Holdfast'];
+    const wrongCultSchoolErrors = AppRef.getStep9ValidationErrors();
+    const rejectsZzistoriUnderArkat = wrongCultSchoolErrors.some(error => /Invocation specialization/i.test(error) && /Arkat/.test(error));
+
+    CD.selectedProfessionalSkills = ['Invocation (Arkat)', 'Shaping', 'Lore (Sorcery)'];
+    CD.careerSkills = { 'Invocation (Arkat)': 10, Shaping: 10, 'Lore (Sorcery)': 10 };
+    const correctCultSchoolErrors = AppRef.getStep9ValidationErrors();
+    const acceptsArkatInvocation = !correctCultSchoolErrors.some(error => /Invocation specialization/i.test(error));
+
+    CD.name = 'Before Wrong Cult School Import';
+    const importSuccess = CD.fromJSON(JSON.stringify({
+      ...createTestCharacter('God Forgot'),
+      name: 'Wrong Cult School Import',
+      career: 'Sorcerer',
+      cult: 'Arkat',
+      cultType: { primary: 'sorcery', types: ['sorcery'], isHybrid: false },
+      characteristics,
+      selectedProfessionalSkills: ['Invocation (Zzistori School)', 'Shaping', 'Lore (Sorcery)'],
+      careerSkills: { 'Invocation (Zzistori School)': 10, Shaping: 10, 'Lore (Sorcery)': 10 },
+      sorcerySpells: ['Holdfast']
+    }));
+    const rejectsWrongCultSchoolImport = importSuccess === false && CD.name === 'Before Wrong Cult School Import';
+
+    if (rejectsZzistoriUnderArkat && acceptsArkatInvocation && rejectsWrongCultSchoolImport) {
+      pass('Arkat source rejects stale Zzistori Invocation specializations');
+    } else {
+      fail('Arkat source accepts stale Zzistori Invocation specialization',
+        JSON.stringify({ wrongCultSchoolErrors, correctCultSchoolErrors, importSuccess, name: CD.name }));
+    }
+  } else {
+    fail('Arkat Invocation specialization validation dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, Calc: CalcRef } = loadApp();
+
   if (AppRef && AppRef.getStep9ValidationErrors && CD?.fromJSON) {
     const characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 13, CHA: 10 };
     CD.characteristics = characteristics;
