@@ -15,17 +15,17 @@
       ],
       "canonical_locator": "https://copyparty.hound-celsius.ts.net/sources/books/Adventures%20in%20Glorantha%20GenCon%20Preview.pdf",
       "local_hint": "references/sources/pdfs/aig.pdf",
-      "lifecycle_state": "permission_pending",
-      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
+      "lifecycle_state": "active",
+      "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
       "sha256": "0edc1e549c560222a7c2b80e9eb0fb713d962bb30a280a7a6b760821e2983572",
       "size_bytes": 202097364,
       "page_count": 212,
-      "acquired_at": null,
+      "acquired_at": "2026-05-22",
       "permission_basis": {
-        "status": "permission_pending",
-        "note": "TDM extraction permission is not confirmed; source identity is recorded but evidence promotion remains blocked."
+        "status": "player_visible_copyparty_source",
+        "note": "ADR-0012 authorizes the Copyparty-visible, hash-verified AiG PDF for bounded vision evidence. This active lifecycle permits rendering and evidence artifacts only; app-facing fact promotion still requires independent verification and provenance gates."
       },
-      "precedence": "Primary Gloranthan culture and AiG magic source only after future verified extraction; current raw records remain source_blocked legacy data.",
+      "precedence": "Primary Gloranthan culture and AiG magic source for bounded vision evidence after ADR-0012; current raw records remain source_blocked until page/block extraction and independent verification are promoted.",
       "render_contract": {
         "renderer": "pdftoppm",
         "renderer_version": "runtime-detected",
@@ -40,26 +40,14 @@
         ],
         "cache_path_pattern": ".cache/source-pages/{source_id}/page-{pdf_page:04d}.png"
       },
-      "blocks": [
-        "render",
-        "extraction",
-        "normalization",
-        "acceptance"
-      ],
-      "blockers": [
-        "permission basis is not confirmed",
-        "independent vision extraction/verification has not been run for AiG pages",
-        "ignored local PDF hint may be hydrated from Copyparty for metadata checks, but render/extraction remains blocked until permission and independent verification exist",
-        "matching source PDF was used for metadata confirmation only; no lawful vision extraction or independent verification was performed"
-      ],
       "observed_source_metadata": {
         "observed_at": "2026-05-22",
         "sha256_method": "sha256sum against ignored local hint hydrated from Copyparty canonical locator",
         "page_count_method": "pdfinfo against ignored local hint hydrated from Copyparty canonical locator",
         "canonical_locator_head_status": 200,
         "canonical_locator_content_length": 202097364,
-        "note": "The source PDF is not committed. The current orchestrator worktree hydrated the ignored local hint from the Copyparty canonical locator and confirmed matching metadata, but did not render, extract, or verify pages because AiG extraction permission remains pending.",
-        "isolated_worktree_local_hint_status": "hydrated-for-metadata-only",
+        "note": "The source PDF is not committed. The current Decapod worktree hydrated the ignored local hint from the Copyparty canonical locator, confirmed matching metadata, and ADR-0012 permits bounded rendering/evidence work without app-facing promotion.",
+        "isolated_worktree_local_hint_status": "hydrated-and-renderable-for-bounded-evidence",
         "isolated_worktree_checked_paths": [
           "references/sources/pdfs/aig.pdf",
           "references/aig-raw/AiG.pdf",
@@ -72,7 +60,35 @@
         "canonical_locator_head_content_type": "application/pdf",
         "canonical_locator_head_last_modified": "Mon, 30 Mar 2026 18:42:16 GMT",
         "used_for_vision_extraction": false,
-        "extraction_blocker_observed_at": "2026-05-22"
+        "extraction_blocker_observed_at": "2026-05-22",
+        "bounded_evidence_lifecycle_decision": "docs/adr/ADR-0012-aig-bounded-vision-source-lifecycle.md"
+      },
+      "acceptance_state": "blocked_pending_vision_verification",
+      "acceptance_blockers": [
+        "Active lifecycle permits rendering and bounded evidence only; normalized AiG facts remain blocked until independent vision verification exists.",
+        "Legacy AiG raw files remain source_blocked and cannot be promoted into app-facing data without page/block evidence.",
+        "Step 9 magic access, culture facts, and inline constants are not changed by the source lifecycle update."
+      ],
+      "source_access": {
+        "public_copyparty_source": {
+          "status": "available",
+          "checked_at": "2026-05-22",
+          "url": "https://copyparty.hound-celsius.ts.net/sources/books/Adventures%20in%20Glorantha%20GenCon%20Preview.pdf",
+          "head_status": 200,
+          "content_length": 202097364,
+          "content_type": "application/pdf",
+          "sha256": "0edc1e549c560222a7c2b80e9eb0fb713d962bb30a280a7a6b760821e2983572",
+          "size_bytes": 202097364,
+          "page_count": 212
+        },
+        "local_ignored_source": {
+          "status": "available",
+          "path": "references/sources/pdfs/aig.pdf",
+          "sha256": "0edc1e549c560222a7c2b80e9eb0fb713d962bb30a280a7a6b760821e2983572",
+          "size_bytes": 202097364,
+          "page_count": 212,
+          "git_tracked": false
+        }
       }
     },
     {

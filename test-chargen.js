@@ -708,27 +708,35 @@ runCommandTest('Render workflow can list sources without rendering pages',
   }
 
   const expectedAigHash = '0edc1e549c560222a7c2b80e9eb0fb713d962bb30a280a7a6b760821e2983572';
+  const expectedAigRevision = 'aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22';
+  const legacyAigRevision = 'aig:permission-pending:0edc1e549c56:2026-05-21';
   const aigSource = manifest.sources.find(source => source.source_id === 'aig');
   const aigCoverage = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/sources/pages/aig.json'), 'utf8'));
   const aigPageIndex = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/aig-raw/page-index.json'), 'utf8'));
   const aigRevision = aigSource?.source_revision_id;
   if (aigSource &&
-      aigSource.lifecycle_state === 'permission_pending' &&
+      aigSource.lifecycle_state === 'active' &&
+      aigRevision === expectedAigRevision &&
       aigSource.sha256 === expectedAigHash &&
       aigSource.size_bytes === 202097364 &&
       aigSource.page_count === 212 &&
-      aigSource.permission_basis?.status === 'permission_pending' &&
+      aigSource.permission_basis?.status === 'player_visible_copyparty_source' &&
+      aigSource.acceptance_state === 'blocked_pending_vision_verification' &&
+      aigSource.source_access?.public_copyparty_source?.status === 'available' &&
       aigCoverage.source_revision_id === aigRevision &&
-      aigPageIndex.source_revision_id === aigRevision) {
-    pass('AiG source revision records observed PDF identity without promoting authority');
+      aigPageIndex.source_revision_id === legacyAigRevision) {
+    pass('AiG source revision permits bounded evidence without app-facing promotion');
   } else {
-    fail('AiG source revision metadata is incomplete or promoted prematurely',
+    fail('AiG source revision metadata is incomplete or app-promoted prematurely',
       JSON.stringify({
         lifecycle: aigSource?.lifecycle_state,
+        revision: aigRevision,
         hash: aigSource?.sha256,
         size: aigSource?.size_bytes,
         pageCount: aigSource?.page_count,
         permission: aigSource?.permission_basis?.status,
+        acceptanceState: aigSource?.acceptance_state,
+        publicStatus: aigSource?.source_access?.public_copyparty_source?.status,
         coverageRevision: aigCoverage.source_revision_id,
         indexRevision: aigPageIndex.source_revision_id
       }));
@@ -739,9 +747,9 @@ runCommandTest('Render workflow can list sources without rendering pages',
   const pageIndexPages = new Set((aigPageIndex.pages || []).map(page => page.pdf_page));
   const missingCoveragePages = expectedAiGPages.filter(page => !coveragePages.has(page));
   const missingIndexPages = expectedAiGPages.filter(page => !pageIndexPages.has(page));
-  const allBlockedCoverage = (aigCoverage.pages || []).every(page =>
+  const allPendingCoverage = (aigCoverage.pages || []).every(page =>
     page.source_revision_id === aigRevision &&
-    page.work_state === 'blocked' &&
+    page.work_state === 'pending' &&
     page.render?.status === 'not_rendered' &&
     page.extraction === null &&
     page.verification === null &&
@@ -749,7 +757,7 @@ runCommandTest('Render workflow can list sources without rendering pages',
     fs.existsSync(path.join(__dirname, page.raw_page_record))
   );
   const allBlockedIndex = (aigPageIndex.pages || []).every(page =>
-    page.source_revision_id === aigRevision &&
+    page.source_revision_id === legacyAigRevision &&
     page.work_state === 'blocked' &&
     page.render_status === 'not_rendered' &&
     page.extraction_status === 'blocked' &&
@@ -762,11 +770,11 @@ runCommandTest('Render workflow can list sources without rendering pages',
       aigPageIndex.pages.length === 212 &&
       missingCoveragePages.length === 0 &&
       missingIndexPages.length === 0 &&
-      allBlockedCoverage &&
+      allPendingCoverage &&
       allBlockedIndex) {
-    pass('AiG page coverage enumerates all 212 blocked page records');
+    pass('AiG page coverage enumerates pending active pages while legacy page index remains blocked');
   } else {
-    fail('AiG page coverage is not complete and blocked',
+    fail('AiG page coverage/index state is not complete',
       JSON.stringify({
         coverageExpected: aigCoverage.expected_page_count,
         indexExpected: aigPageIndex.expected_page_count,
@@ -774,7 +782,7 @@ runCommandTest('Render workflow can list sources without rendering pages',
         indexCount: aigPageIndex.pages?.length,
         missingCoveragePages: missingCoveragePages.slice(0, 10),
         missingIndexPages: missingIndexPages.slice(0, 10),
-        allBlockedCoverage,
+        allPendingCoverage,
         allBlockedIndex
       }));
   }
@@ -790,7 +798,7 @@ runCommandTest('Render workflow can list sources without rendering pages',
     const doc = JSON.parse(fs.readFileSync(path.join(__dirname, relPath), 'utf8'));
     const problems = [];
     if (doc.source_id !== 'aig') problems.push(`${relPath}: source_id`);
-    if (doc.source_revision_id !== aigRevision) problems.push(`${relPath}: source_revision_id`);
+    if (doc.source_revision_id !== legacyAigRevision) problems.push(`${relPath}: source_revision_id`);
     if (doc.authority_state !== 'source_blocked') problems.push(`${relPath}: authority_state`);
     if (doc.page_index !== 'references/aig-raw/page-index.json') problems.push(`${relPath}: page_index`);
     if (doc.page_coverage !== 'references/sources/pages/aig.json') problems.push(`${relPath}: page_coverage`);
@@ -801,7 +809,7 @@ runCommandTest('Render workflow can list sources without rendering pages',
   const cultureNames = (culturesRef.cultures || []).map(culture => culture.name);
   const cultureSourceRefs = culturesRef.culture_source_refs || {};
   const culturesWithoutBlockedRefs = cultureNames.filter(name =>
-    cultureSourceRefs[name]?.source_revision_id !== aigRevision ||
+    cultureSourceRefs[name]?.source_revision_id !== legacyAigRevision ||
     cultureSourceRefs[name]?.verification_state !== 'blocked' ||
     !Array.isArray(cultureSourceRefs[name]?.pdf_pages) ||
     cultureSourceRefs[name].pdf_pages.length === 0
@@ -809,7 +817,8 @@ runCommandTest('Render workflow can list sources without rendering pages',
   const aigMapEntries = new Map((indexMap.entries || []).map(entry => [entry.constant_name, entry]));
   const aigInlineProblems = ['CULTURES_DATA', 'CULTURE_MAGIC_PROFILES'].filter(name =>
     aigMapEntries.get(name)?.status !== 'source_blocked' ||
-    aigMapEntries.get(name)?.source_revision_id !== aigRevision ||
+    aigMapEntries.get(name)?.source_revision_id !== legacyAigRevision ||
+    aigMapEntries.get(name)?.source_state !== 'permission_pending' ||
     aigMapEntries.get(name)?.page_coverage !== 'references/sources/pages/aig.json'
   );
   if (authorityProblems.length === 0 &&
@@ -1354,6 +1363,32 @@ runCommandTest('Render workflow can list sources without rendering pages',
   } else {
     fail('Provenance validator rejects explicit app-facing governed authority states',
       allowedGovernedAuthorityResult.join('\n'));
+  }
+
+  const appFacingExtractionOnlyResult = provenanceValidator.validateSourceAuthorityMetadata(
+    {
+      source_ref: {
+        source_id: 'bird-in-hand',
+        source_revision_id: activeBird?.source_revision_id,
+        page_manifest_path: 'references/sources/pages/bird-in-hand.json',
+        evidence_state: birdRaw.source_ref?.evidence_state,
+        evidence_paths: (birdRaw.source_ref?.evidence_paths || []).filter(evidencePath => evidencePath.includes('-extraction')).slice(0, 1)
+      },
+      attestation: {
+        status: 'accepted',
+        source_authority: true,
+        authority_state: 'accepted_for_app'
+      }
+    },
+    { id: 'synthetic-extraction-only-app-authority', disposition: 'governed-now', source_ids: ['bird-in-hand'], enforce_source_refs: true },
+    manifestById,
+    __dirname
+  );
+  if (appFacingExtractionOnlyResult.some(error => error.includes('require both extraction and verification artifacts'))) {
+    pass('Provenance validator rejects app-facing authority without verifier evidence');
+  } else {
+    fail('Provenance validator allows app-facing authority with extraction-only evidence',
+      appFacingExtractionOnlyResult.join('\n'));
   }
 
   function validateSyntheticReferenceEvidence(evidencePath, artifact) {

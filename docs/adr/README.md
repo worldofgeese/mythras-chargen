@@ -16,6 +16,8 @@ This directory contains ADRs for the mythras-chargen project. Each ADR is an exe
 | 008 | [Vision-Verified Source Authority for Listed External Data](008-vision-source-authority.md) | accepted | 2026-05-21 |
 | ADR-0009 | [Source Artifact Lifecycle and Canonical Revision Identity](ADR-0009-source-artifact-lifecycle.md) | accepted | 2026-05-21 |
 | ADR-0010 | [Culture-Backed Sorcery Sources](ADR-0010-culture-backed-sorcery-sources.md) | proposed | 2026-05-21 |
+| ADR-0011 | [Agent Orchestration Governance](ADR-0011-agent-orchestration-governance.md) | accepted | 2026-05-22 |
+| ADR-0012 | [AiG Bounded Vision Source Lifecycle](ADR-0012-aig-bounded-vision-source-lifecycle.md) | accepted | 2026-05-22 |
 
 ## Conventions
 

@@ -248,6 +248,7 @@ function hasEvidencePaths(ref) {
 function validateEvidenceArtifactPaths(ref, manifestById, root, trackedFileSet, errors, location, options = {}) {
   if (!Array.isArray(ref.evidence_paths)) return;
   const expectedRevision = ref.source_revision_id || manifestById.get(ref.source_id)?.source_revision_id;
+  const artifactKinds = new Set();
   if (options.appFacing === true) {
     const source = manifestById.get(ref.source_id);
     if (!source) {
@@ -293,6 +294,9 @@ function validateEvidenceArtifactPaths(ref, manifestById, root, trackedFileSet, 
     if (artifact.source_id !== ref.source_id) {
       add(errors, evidenceLocation, `evidence artifact source_id ${artifact.source_id || '<missing>'} does not match ${ref.source_id}`);
     }
+    if (typeof artifact.artifact_kind === 'string') {
+      artifactKinds.add(artifact.artifact_kind);
+    }
     if (typeof expectedRevision === 'string' && artifact.source_revision_id !== expectedRevision) {
       add(errors, evidenceLocation, `evidence artifact has stale source_revision_id ${artifact.source_revision_id || '<missing>'}`);
     }
@@ -304,6 +308,9 @@ function validateEvidenceArtifactPaths(ref, manifestById, root, trackedFileSet, 
         add(errors, evidenceLocation, 'app-facing evidence artifact contains promotion_cautions');
       }
     }
+  }
+  if (options.appFacing === true && (!artifactKinds.has('extraction') || !artifactKinds.has('verification'))) {
+    add(errors, location, 'app-facing evidence_paths require both extraction and verification artifacts');
   }
 }
 
