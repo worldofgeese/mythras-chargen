@@ -10779,8 +10779,7 @@ App.rerenderPreservingScroll = function() {
 
 App.toggleSorcerySpell = function(spellName, inputEl) {
   if (!CharacterData.sorcerySpells) CharacterData.sorcerySpells = [];
-  // Starting spells = 3 for Dedicated rank (Rune Affinity ~50% / 20 ≈ 3). Mythras Core p.165: memorisation limit = INT.
-  const maxSpells = 3;
+  const maxSpells = this.resolveActiveSorcerySource(CharacterData)?.startingSpellLimit || 3;
   if (!this._toggleInList(CharacterData.sorcerySpells, spellName, maxSpells)) {
     if (inputEl) inputEl.checked = false;
     this.showToast(`Maximum ${maxSpells} starting sorcery spells (Dedicated rank)`, 'error');
@@ -15445,7 +15444,14 @@ App.agent.getOptions = function(step) {
         // Cults filtered by CULTURE_CULT_MAP
         const culture = normalizeCultureName(CharacterData.culture);
         const cultMap = CULTURE_CULT_MAP[culture];
-        if (!cultMap) return {primaryCults: [], secondaryCults: [], note: 'No cult map for culture'};
+        const noCultSorcerySource = App.resolveCultureBackedSorcerySource({...CharacterData, cult: null});
+        const noCult = {
+          name: null,
+          label: 'No Cult',
+          activeSorcerySource: noCultSorcerySource ? {...noCultSorcerySource} : null,
+          sorcerySpellLimit: noCultSorcerySource?.startingSpellLimit || null
+        };
+        if (!cultMap) return {noCult, primaryCults: [], secondaryCults: [], sourceBackedSorcery: noCult.activeSorcerySource, note: 'No cult map for culture'};
         const mapCult = (name) => {
           const cult = CULTS_DATA.find(c => c.name === name);
           if (!cult) return {name, notFound: true};
@@ -15462,7 +15468,7 @@ App.agent.getOptions = function(step) {
         const displayGroups = Object.entries(CULT_DISPLAY_GROUPS || {})
           .filter(([, group]) => (group.members || []).some(member => (cultMap.primary || []).includes(member) || (cultMap.secondary || []).includes(member)))
           .map(([label, group]) => ({label, ...group}));
-        return {primaryCults, secondaryCults, displayGroups, note: cultMap.note || null};
+        return {noCult, primaryCults, secondaryCults, displayGroups, sourceBackedSorcery: noCult.activeSorcerySource, note: cultMap.note || null};
       }
       case 10: {
         // Career skill list for point distribution
@@ -16144,7 +16150,7 @@ App.agent.getMagicState = function() {
       availableSpirits: STARTING_SPIRITS.map(s => s.name),
       limits: {
         miracles: CharacterData.devotionalPool || 0,
-        sorcerySpells: 3,
+        sorcerySpells: activeSorcerySource?.startingSpellLimit || 3,
         spirits: CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2)
       }
     };
@@ -16163,6 +16169,17 @@ App.agent.getMagicState = function() {
  */
 App.agent.selectCult = function(name) {
   try {
+    if (name === null || name === undefined) {
+      CharacterData.cult = null;
+      CharacterData.cultType = null;
+      CharacterData.devotionalPool = 0;
+      CharacterData.boundSpiritSlots = 0;
+      CharacterData.miracles = [];
+      CharacterData.boundSpirits = [];
+      App.normalizeSorceryState(CharacterData);
+      App.saveToLocalStorage();
+      return {success: true, magicState: App.agent.getMagicState()};
+    }
     const cult = CULTS_DATA.find(c => c.name === name);
     if (!cult) return {success: false, error: `Cult '${name}' not found`};
     CharacterData.cult = name;
@@ -16200,11 +16217,11 @@ App.agent.selectCult = function(name) {
 App.agent.toggleSpell = function(name) {
   try {
     const spells = CharacterData.sorcerySpells || [];
+    const limit = App.resolveActiveSorcerySource(CharacterData)?.startingSpellLimit || 3;
     const idx = spells.indexOf(name);
     if (idx >= 0) {
       spells.splice(idx, 1);
     } else {
-      const limit = 3;
       if (spells.length >= limit) {
         return {success: false, error: `Spell limit reached (${limit}). Deselect one first.`, selected: spells.length, limit};
       }
@@ -16216,7 +16233,7 @@ App.agent.toggleSpell = function(name) {
     }
     CharacterData.sorcerySpells = spells;
     App.saveToLocalStorage();
-    return {success: true, selected: spells.length, limit: 3, spells: [...spells]};
+    return {success: true, selected: spells.length, limit, spells: [...spells]};
   } catch (e) {
     return {success: false, error: e.message};
   }

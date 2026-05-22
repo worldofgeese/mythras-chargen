@@ -183,6 +183,32 @@ assert(ae3bPlay.magicState.sorcerySourceLabel === ae3b.sorcerySourceLabel &&
   JSON.stringify(ae3bPlay.magicState.selectedSpells) === JSON.stringify(ae3b.selectedSpells),
   'AE3b: Magic state remains consistent after switching to Play Mode');
 
+reload();
+
+const ae3bGranular = evalPageJSON(`JSON.stringify((() => {
+  App.agent.setStep(1, {name:'Granular Zzistori', concept:'God Forgot school sorcerer'});
+  App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
+  App.agent.setStep(4, {culture:'God Forgot', homeland:'God Forgot'});
+  const step8 = App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Zzistori School'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  const options = App.agent.getOptions(9);
+  const select = App.agent.selectCult(null);
+  const toggle = App.agent.toggleSpell('Holdfast');
+  const magic = App.agent.getMagicState();
+  return {step8, options, select, toggle, magic};
+})())`);
+assert(ae3bGranular.step8.success === true, 'AE3b granular: Step 8 Sorcerer setup succeeds');
+assert(ae3bGranular.options.noCult?.activeSorcerySource?.sourceLabel === 'Zzistori School (God Forgot sorcery)' &&
+  ae3bGranular.options.sourceBackedSorcery?.startingSpellLimit === 3,
+  'AE3b granular: getOptions(9) advertises No Cult Zzistori sorcery');
+assert(ae3bGranular.select.success === true &&
+  ae3bGranular.select.magicState?.sorcerySourceLabel === 'Zzistori School (God Forgot sorcery)' &&
+  ae3bGranular.select.magicState?.cultName === null,
+  'AE3b granular: selectCult(null) derives source-backed Zzistori state');
+assert(ae3bGranular.toggle.success === true &&
+  ae3bGranular.toggle.limit === 3 &&
+  ae3bGranular.magic.selectedSpells.includes('Holdfast'),
+  'AE3b granular: toggleSpell uses derived source spell limit');
+
 // ═══════════════════════════════════════════════════════════════
 console.log('\n\x1b[36m═══ AE4: Waha (Hybrid Theist+Animist) ═══\x1b[0m\n');
 // ═══════════════════════════════════════════════════════════════
