@@ -92,6 +92,7 @@
       "disposition": "migrate-in-this-plan",
       "source_files": [
         "references/aig-raw/culture-magic-profiles-aig.json",
+        "references/mythras-raw/sorcery.json",
         "references/aig-raw/page-index.json",
         "references/sources/pages/aig.json"
       ],

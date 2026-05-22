@@ -5511,6 +5511,41 @@ section('Cult Data Tests');
   }
 }
 
+// Test: God Forgot Zzistori sorcery profile is source-backed as a school, not a cult
+{
+  const refPath = path.join(__dirname, 'references', 'aig-raw', 'culture-magic-profiles-aig.json');
+  const ref = JSON.parse(fs.readFileSync(refPath, 'utf8'));
+  const profile = ref.profiles?.['God Forgot'];
+  const inlineProfile = App.CULTURE_MAGIC_PROFILES?.['God Forgot'];
+  const access = profile?.sorcery?.sourceAccess;
+  const inlineAccess = inlineProfile?.sorcery?.sourceAccess;
+  const hasSchoolLabel = access?.sourceLabel === 'Zzistori School (God Forgot sorcery)';
+  const isSchoolNotCult = access?.accessType === 'culture-backed school' &&
+    access?.cultRequired === false &&
+    access?.defaultCult === null &&
+    access?.defaultCult !== 'Arkat';
+  const hasSorcererPrereq = access?.careerPrerequisite === 'Sorcerer';
+  const hasRawSorceryMechanics = access?.resource === 'Magic Points' &&
+    access?.startingSpellLimit === 3 &&
+    Array.isArray(access?.skills) &&
+    access.skills.includes('Invocation') &&
+    access.skills.includes('Shaping');
+  const hasSourceCitations = Array.isArray(access?.pages) &&
+    access.pages.includes('AiG p.30-31') &&
+    access.pages.includes('AiG p.59-60') &&
+    access.pages.includes('Mythras Core p.162') &&
+    access.pages.includes('Mythras Core p.166-177') &&
+    access?.spellListSource?.path === 'references/mythras-raw/sorcery.json';
+  const inlineMatches = JSON.stringify(access) === JSON.stringify(inlineAccess);
+
+  if (hasSchoolLabel && isSchoolNotCult && hasSorcererPrereq && hasRawSorceryMechanics && hasSourceCitations && inlineMatches) {
+    pass('God Forgot Zzistori sorcery profile is source-backed as a school, not a cult');
+  } else {
+    fail('God Forgot Zzistori sorcery profile is missing school/source backing',
+      JSON.stringify({ hasSchoolLabel, isSchoolNotCult, hasSorcererPrereq, hasRawSorceryMechanics, hasSourceCitations, inlineMatches, access, inlineAccess }));
+  }
+}
+
 // Test: CSE combat-style authority matches inline culture combat styles
 {
   const refPath = path.join(__dirname, 'references', 'combat-styles.json');
@@ -6604,6 +6639,22 @@ section('Step 9 Initiation Gate');
     }
   } else {
     fail('Suggested build spec data not available to tests');
+  }
+}
+
+{
+  const { CULTURE_BUILD_SPECS: CultureBuildSpecs } = loadApp();
+  const zzistori = CultureBuildSpecs?.['god-forgot-zzistori-sorcerer'];
+  const passionNames = (zzistori?.spec?.step6?.passions || []).map(passion => passion.name);
+  const usesNoCult = zzistori?.spec?.step9?.cult === null;
+  const hasSchoolLoyalty = passionNames.includes('Loyalty (Zzistori School)');
+  const hasDevotion = passionNames.some(name => /^Devotion\b/.test(name));
+
+  if (zzistori && usesNoCult && hasSchoolLoyalty && !hasDevotion) {
+    pass('Zzistori suggested build uses No Cult and school loyalty instead of Devotion');
+  } else {
+    fail('Zzistori suggested build still implies cult devotion',
+      JSON.stringify({ exists: Boolean(zzistori), usesNoCult, hasSchoolLoyalty, hasDevotion, passionNames }));
   }
 }
 

@@ -15,6 +15,7 @@ This directory contains ADRs for the mythras-chargen project. Each ADR is an exe
 | ADR-0007 | [Hannu House Rules for Rune Magic Casting and Devotional Pool](ADR-0007-hannu-house-rules.md) | accepted | 2026-05-17 |
 | 008 | [Vision-Verified Source Authority for Listed External Data](008-vision-source-authority.md) | accepted | 2026-05-21 |
 | ADR-0009 | [Source Artifact Lifecycle and Canonical Revision Identity](ADR-0009-source-artifact-lifecycle.md) | accepted | 2026-05-21 |
+| ADR-0010 | [Culture-Backed Sorcery Sources](ADR-0010-culture-backed-sorcery-sources.md) | proposed | 2026-05-21 |
 
 ## Conventions
 

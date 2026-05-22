@@ -131,7 +131,37 @@
           "p.30-31",
           "p.59-60"
         ],
-        "notes": "Zzistori are the blue wizard caste; Zzistori must take Shaping as an adjunct to sorcerous skills."
+        "notes": "Zzistori are the blue wizard caste; Zzistori must take Shaping as an adjunct to sorcerous skills.",
+        "sourceAccess": {
+          "sourceLabel": "Zzistori School (God Forgot sorcery)",
+          "accessType": "culture-backed school",
+          "culture": "God Forgot",
+          "school": "Zzistori School",
+          "careerPrerequisite": "Sorcerer",
+          "cultRequired": false,
+          "defaultCult": null,
+          "resource": "Magic Points",
+          "skills": [
+            "Invocation",
+            "Shaping"
+          ],
+          "startingSpellLimit": 3,
+          "spellListSource": {
+            "path": "references/mythras-raw/sorcery.json",
+            "source": "Mythras Core Rulebook (3rd Printing, 2018)",
+            "pages": [
+              "p.162",
+              "p.166-177"
+            ]
+          },
+          "pages": [
+            "AiG p.30-31",
+            "AiG p.59-60",
+            "Mythras Core p.162",
+            "Mythras Core p.166-177"
+          ],
+          "notes": "A God Forgot Sorcerer can enter character creation through the Zzistori school without selecting a cult; starting spells still use the RAW Mythras sorcery list and Magic Point resource."
+        }
       },
       "lunarMagic": {
         "status": "absent",
