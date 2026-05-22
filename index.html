@@ -8355,6 +8355,30 @@ function getUnknownSorcerySpellNames(spells) {
   return spells.filter(spell => typeof spell !== 'string' || !knownSpells.has(spell));
 }
 
+function getInvocationSpecializations(character) {
+  const skillNames = [
+    ...(Array.isArray(character?.selectedProfessionalSkills) ? character.selectedProfessionalSkills : []),
+    ...Object.keys(character?.culturalSkills || {}),
+    ...Object.keys(character?.careerSkills || {}),
+    ...Object.keys(character?.bonusSkills || {})
+  ];
+  const specializations = skillNames
+    .map(skillName => String(skillName || '').match(/^Invocation\s*\(([^)]+)\)$/i)?.[1]?.trim())
+    .filter(Boolean);
+  return [...new Set(specializations)];
+}
+
+function getSorcerySourceSchoolErrors(character, source) {
+  if (!source || source.isCultBacked) return [];
+  const school = source.school || source.sourceLabel;
+  if (!school) return [];
+  const mismatches = getInvocationSpecializations(character)
+    .filter(specialization => specialization !== school);
+  return mismatches.length > 0
+    ? [`Invocation specialization must match ${school} for ${source.sourceLabel} (found ${mismatches.join(', ')})`]
+    : [];
+}
+
 function formatSorcerySourcePages(source) {
   const pages = Array.isArray(source?.pages) ? source.pages : [];
   const hasZzistoriPages = pages.includes('AiG p.30-31') &&
@@ -8382,6 +8406,7 @@ function resolveCultureBackedSorcerySource(character = CharacterData) {
     sourceType: access.accessType || 'culture-backed school',
     sourceKind: 'culture-backed school',
     accessType: access.accessType || 'culture-backed school',
+    school: access.school || null,
     cultRequired: false,
     cultName: null,
     cultType: null,
@@ -8410,6 +8435,7 @@ function resolveCultBackedSorcerySource(character = CharacterData) {
     sourceType: 'cult-backed sorcery',
     sourceKind: 'cult-backed cult',
     accessType: 'cult-backed sorcery',
+    school: null,
     cultRequired: true,
     cultName: character.cult,
     cultType,
@@ -8847,6 +8873,7 @@ const CharacterData = {
     if (importedSorcerySource && Array.isArray(data.sorcerySpells) && data.sorcerySpells.length > importedSorcerySource.startingSpellLimit) {
       errors.push(`sorcerySpells exceeds ${importedSorcerySource.startingSpellLimit} spell limit`);
     }
+    errors.push(...getSorcerySourceSchoolErrors(data, importedSorcerySource));
 
     if (Array.isArray(data.selectedProfessionalSkills)) {
       const seenProfessionalSkills = new Set();
@@ -12333,7 +12360,10 @@ App.getStep9ValidationErrors = function() {
   };
 
   if (!CharacterData.cult) {
-    if (activeSorcerySource) addSorcerySelectionErrors(activeSorcerySource);
+    if (activeSorcerySource) {
+      addSorcerySelectionErrors(activeSorcerySource);
+      errors.push(...getSorcerySourceSchoolErrors(CharacterData, activeSorcerySource));
+    }
     return errors;
   }
 
@@ -12359,6 +12389,7 @@ App.getStep9ValidationErrors = function() {
 
   if (cultType.types.includes('sorcery')) {
     addSorcerySelectionErrors(activeSorcerySource);
+    errors.push(...getSorcerySourceSchoolErrors(CharacterData, activeSorcerySource));
   }
 
   return errors;

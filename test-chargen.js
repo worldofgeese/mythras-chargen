@@ -7501,6 +7501,56 @@ section('Step 9 Initiation Gate');
 {
   const { App: AppRef, CharacterData: CD, Calc: CalcRef } = loadApp();
 
+  if (AppRef && AppRef.getStep9ValidationErrors && CD?.fromJSON) {
+    const characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 13, CHA: 10 };
+    CD.characteristics = characteristics;
+    CD.attributes = CalcRef.calculateAllAttributes(characteristics);
+    CD.culture = 'God Forgot';
+    CD.career = 'Sorcerer';
+    CD.cult = null;
+    CD.cultType = null;
+    CD.selectedProfessionalSkills = ['Invocation (Arkat)', 'Shaping', 'Lore (Sorcery)'];
+    CD.careerSkills = { 'Invocation (Arkat)': 10, Shaping: 10, 'Lore (Sorcery)': 10 };
+    CD.bonusSkills = {};
+    CD.sorcerySpells = ['Holdfast'];
+    AppRef.currentStep = 9;
+
+    const wrongSchoolErrors = AppRef.getStep9ValidationErrors();
+    const rejectsWrongSchool = wrongSchoolErrors.some(error => /Invocation specialization/i.test(error) && /Zzistori School/.test(error));
+
+    CD.selectedProfessionalSkills = ['Invocation (Zzistori School)', 'Shaping', 'Lore (Sorcery)'];
+    CD.careerSkills = { 'Invocation (Zzistori School)': 10, Shaping: 10, 'Lore (Sorcery)': 10 };
+    const correctSchoolErrors = AppRef.getStep9ValidationErrors();
+    const acceptsCorrectSchool = !correctSchoolErrors.some(error => /Invocation specialization/i.test(error));
+
+    CD.name = 'Before Wrong School Import';
+    const importSuccess = CD.fromJSON(JSON.stringify({
+      ...createTestCharacter('God Forgot'),
+      name: 'Wrong School Import',
+      career: 'Sorcerer',
+      cult: null,
+      cultType: null,
+      characteristics,
+      selectedProfessionalSkills: ['Invocation (Arkat)', 'Shaping', 'Lore (Sorcery)'],
+      careerSkills: { 'Invocation (Arkat)': 10, Shaping: 10, 'Lore (Sorcery)': 10 },
+      sorcerySpells: ['Holdfast']
+    }));
+    const rejectsWrongSchoolImport = importSuccess === false && CD.name === 'Before Wrong School Import';
+
+    if (rejectsWrongSchool && acceptsCorrectSchool && rejectsWrongSchoolImport) {
+      pass('Zzistori source rejects mismatched Invocation school specializations');
+    } else {
+      fail('Zzistori source accepts mismatched Invocation school specialization',
+        JSON.stringify({ wrongSchoolErrors, correctSchoolErrors, importSuccess, name: CD.name }));
+    }
+  } else {
+    fail('Zzistori Invocation specialization validation dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, Calc: CalcRef } = loadApp();
+
   if (AppRef && AppRef.compileAllSkills) {
     CD.characteristics = { STR: 12, CON: 12, SIZ: 12, DEX: 13, INT: 15, POW: 6, CHA: 5 };
     CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
