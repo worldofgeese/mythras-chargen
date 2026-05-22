@@ -284,6 +284,7 @@ runCommandTest('Render workflow can list sources without rendering pages',
   const expectedWahaHash = 'a36461fa3ba86159be1d8993ea920824446171380ff3c11c10a47a8cd95475f1';
   const manifestById = new Map(manifest.sources.map(source => [source.source_id, source]));
   const manifestIds = manifest.sources.map(source => source.source_id).sort();
+  const trackedFiles = new Set(execFileSync('git', ['ls-files'], { cwd: __dirname, encoding: 'utf8' }).split('\n').filter(Boolean));
   const missingSources = requiredSources.filter(sourceId => !manifestIds.includes(sourceId));
   const expectedMythrasCoreHash = 'de88d7107f936420954474fa4c08a5393c321e8895ca6bea0cdca1194bcb8b90';
   const expectedMythrasCoreRevision = 'mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22';
@@ -299,11 +300,17 @@ runCommandTest('Render workflow can list sources without rendering pages',
 
   const blockedPending = manifest.sources
     .filter(source => source.lifecycle_state !== 'active')
-    .every(source => Array.isArray(source.blocks) && source.blocks.includes('extraction') && source.blockers.length > 0);
+    .every(source => {
+      if (!Array.isArray(source.blocks) || !Array.isArray(source.blockers) || source.blockers.length === 0) return false;
+      if (source.acceptance_state === 'reference_evidence_verified_app_promotion_blocked') {
+        return source.blocks.includes('normalization') && source.blocks.includes('acceptance');
+      }
+      return source.blocks.includes('extraction');
+    });
   if (blockedPending) {
-    pass('Pending/unavailable sources explicitly block extraction');
+    pass('Pending/unavailable sources explicitly block unverified operations');
   } else {
-    fail('Pending/unavailable source does not block extraction');
+    fail('Pending/unavailable source does not block unverified operations');
   }
 
   const mythrasCore = manifestById.get('mythras-core');
@@ -536,52 +543,95 @@ runCommandTest('Render workflow can list sources without rendering pages',
   const monsterPages = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/sources/pages/monster-island.json'), 'utf8'));
   const monsterRaw = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/spirits-raw/monster-island.json'), 'utf8'));
   const actualMonsterPages = (monsterPages.pages || []).map(page => page.pdf_page).sort((a, b) => a - b);
-  const renderedCandidatePages = (monsterPages.pages || []).every(page =>
+  const monsterPageEvidencePaths = (monsterPages.pages || []).flatMap(page => [
+    page.extraction?.artifact_path,
+    page.verification?.artifact_path
+  ].filter(Boolean)).sort();
+  const monsterEvidenceArtifacts = monsterPageEvidencePaths.map(artifactPath => ({
+    path: artifactPath,
+    tracked: trackedFiles.has(artifactPath),
+    artifact: fs.existsSync(path.join(__dirname, artifactPath)) ? readJson(artifactPath) : null
+  }));
+  const isValidMonsterEvidenceArtifact = ({ path: artifactPath, tracked, artifact }) =>
+    tracked &&
+    artifact?.source_id === 'monster-island' &&
+    artifact?.source_revision_id === monsterRevision &&
+    expectedMonsterPages.includes(artifact.pdf_page) &&
+    artifactPath.includes(String(artifact.pdf_page).padStart(4, '0'));
+  const monsterEvidenceArtifactsValid = monsterEvidenceArtifacts.length === 20 &&
+    monsterEvidenceArtifacts.every(isValidMonsterEvidenceArtifact);
+  const verifiedMonsterPages = (monsterPages.pages || []).every(page =>
     expectedMonsterPages.includes(page.pdf_page) &&
     page.source_revision_id === monsterRevision &&
-    page.work_state === 'rendered' &&
+    page.work_state === 'verified' &&
     page.render?.status === 'rendered' &&
     /^[a-f0-9]{64}$/.test(page.render?.image_sha256 || '') &&
     page.render?.dimensions?.width > 0 &&
     page.render?.dimensions?.height > 0 &&
     typeof page.render?.cache_path === 'string' &&
     !path.isAbsolute(page.render.cache_path) &&
-    page.extraction?.status === 'blocked_not_run' &&
-    page.verification?.status === 'blocked_not_run' &&
-    page.verification?.independent === false &&
+    page.extraction?.status === 'completed' &&
+    typeof page.extraction?.artifact_path === 'string' &&
+    fs.existsSync(path.join(__dirname, page.extraction.artifact_path)) &&
+    typeof page.extraction?.block_count === 'number' &&
+    page.verification?.status?.startsWith('passed') &&
+    page.verification?.independent === true &&
+    typeof page.verification?.artifact_path === 'string' &&
+    fs.existsSync(path.join(__dirname, page.verification.artifact_path)) &&
     Array.isArray(page.derived_facts) &&
-    page.derived_facts.length === 0
+    page.derived_facts.length > 0
   );
+  const startingSpiritsMap = (indexMap.entries || []).find(entry => entry.constant_name === 'STARTING_SPIRITS');
+  const monsterStartingSpiritRef = (startingSpiritsMap?.source_refs || []).find(ref => ref.source_id === 'monster-island');
+  const monsterPathSet = JSON.stringify(monsterPageEvidencePaths);
+  const monsterEvidencePathSetsMatch = [
+    monsterSource?.observed_source_metadata?.vision_evidence_paths,
+    monsterRaw.source_ref?.evidence_paths,
+    monsterStartingSpiritRef?.evidence_paths
+  ].every(paths => JSON.stringify([...(paths || [])].sort()) === monsterPathSet);
   if (monsterSource?.lifecycle_state === 'permission_pending' &&
       monsterSource?.permission_basis?.status === 'permission_pending' &&
       monsterSource?.sha256 === expectedMonsterHash &&
       monsterSource?.size_bytes === 10363314 &&
       monsterSource?.page_count === 298 &&
-      monsterPages.coverage_state === 'blocked' &&
-      monsterPages.coverage_mode === 'candidate-spirit-cult-pages-rendered-verification-blocked' &&
+      monsterSource?.acceptance_state === 'reference_evidence_verified_app_promotion_blocked' &&
+      monsterPages.coverage_state === 'verified' &&
+      monsterPages.coverage_mode === 'candidate-spirit-cult-pages-bounded-vision-verified' &&
       JSON.stringify(actualMonsterPages) === JSON.stringify(expectedMonsterPages) &&
-      renderedCandidatePages &&
-      monsterRaw.attestation?.status === 'source_blocked' &&
-      monsterRaw.attestation?.source_authority === false) {
-    pass('Monster Island candidate pages are rendered as bounded evidence without authority promotion');
+      verifiedMonsterPages &&
+      monsterRaw.verified === true &&
+      monsterRaw.attestation?.status === 'bounded_vision_verified' &&
+      monsterRaw.attestation?.source_authority === true &&
+      monsterRaw.attestation?.authority_state === 'reference_authoritative_not_app_promoted' &&
+      monsterEvidenceArtifactsValid &&
+      monsterEvidencePathSetsMatch) {
+    pass('Monster Island candidate pages have bounded extraction and independent verification');
   } else {
-    fail('Monster Island candidate page evidence is missing or promoted prematurely',
+    fail('Monster Island candidate page evidence is missing or not page-scoped verified',
       JSON.stringify({
         lifecycle: monsterSource?.lifecycle_state,
         permission: monsterSource?.permission_basis?.status,
+        acceptanceState: monsterSource?.acceptance_state,
         hash: monsterSource?.sha256,
         size: monsterSource?.size_bytes,
         pageCount: monsterSource?.page_count,
         coverageState: monsterPages.coverage_state,
         coverageMode: monsterPages.coverage_mode,
         pages: actualMonsterPages,
-        renderedCandidatePages,
+        verifiedMonsterPages,
+        rawVerified: monsterRaw.verified,
         rawStatus: monsterRaw.attestation?.status,
-        rawSourceAuthority: monsterRaw.attestation?.source_authority
+        rawSourceAuthority: monsterRaw.attestation?.source_authority,
+        rawAuthorityState: monsterRaw.attestation?.authority_state,
+        evidenceArtifactsValid: monsterEvidenceArtifactsValid,
+        evidencePathSetsMatch: monsterEvidencePathSetsMatch,
+        untrackedEvidence: monsterEvidenceArtifacts.filter(item => !item.tracked).map(item => item.path),
+        staleEvidence: monsterEvidenceArtifacts
+          .filter(item => item.artifact?.source_revision_id !== monsterRevision)
+          .map(item => item.path)
       }));
   }
 
-  const startingSpiritsMap = (indexMap.entries || []).find(entry => entry.constant_name === 'STARTING_SPIRITS');
   const acceptedMonsterEntries = (indexMap.entries || []).filter(entry =>
     (entry.source_ids || []).includes('monster-island') &&
     ['verified', 'normalized', 'accepted'].includes(entry.status)
@@ -600,12 +650,14 @@ runCommandTest('Render workflow can list sources without rendering pages',
       birdStartingSpiritRef?.page_manifest_path === 'references/sources/pages/bird-in-hand.json' &&
       birdStartingSpiritRef?.coverage_state === 'verified' &&
       birdStartingSpiritRef?.evidence_state === 'bounded_extraction_independent_vision_verified' &&
-      blockedMonsterRefs.length === 1 &&
-      blockedMonsterRefs[0].source_revision_id === monsterRevision &&
-      blockedMonsterRefs[0].coverage_state === 'blocked' &&
-      blockedMonsterRefs[0].authority_state === 'non_authoritative' &&
-      blockedMonsterRefs[0].evidence_state === 'rendered_pages_extraction_and_verification_blocked') {
-    pass('Starting spirit provenance wires verified Bird evidence while keeping unresolved sources blocked');
+      monsterStartingSpiritRef?.source_revision_id === monsterRevision &&
+      monsterStartingSpiritRef?.page_manifest_path === 'references/sources/pages/monster-island.json' &&
+      monsterStartingSpiritRef?.coverage_state === 'verified' &&
+      monsterStartingSpiritRef?.evidence_state === 'bounded_extraction_independent_vision_verified_reference_only' &&
+      Array.isArray(monsterStartingSpiritRef?.evidence_paths) &&
+      monsterStartingSpiritRef.evidence_paths.length === 20 &&
+      blockedMonsterRefs.length === 0) {
+    pass('Starting spirit provenance wires Bird and Monster Island evidence while keeping app surface blocked');
   } else {
     fail('Starting spirit provenance is missing Bird/Mythras Core wiring or accepted Monster Island prematurely',
       JSON.stringify({
@@ -614,6 +666,7 @@ runCommandTest('Render workflow can list sources without rendering pages',
         externalSourceGaps: startingSpiritsMap?.external_source_gaps,
         mythrasCoreStartingSpiritRef,
         birdStartingSpiritRef,
+        monsterStartingSpiritRef,
         acceptedMonsterEntries: acceptedMonsterEntries.map(entry => entry.constant_name),
         blockedMonsterRefs
       }));
@@ -938,21 +991,458 @@ runCommandTest('Render workflow can list sources without rendering pages',
     fail('Provenance validator allows governed authorities missing source refs', missingRefResult.join('\n'));
   }
 
-  const governedMonster = {
-    ...legacy,
-    dispositions: legacy.dispositions.map(item => item.id === 'spirits-monster-island'
-      ? { ...item, disposition: 'governed-now', scan_for_unverified: true, enforce_source_refs: true }
-      : item)
-  };
-  const governedMonsterResult = provenanceValidator.validateLegacyDisposition(governedMonster, provenanceSchema, __dirname);
-  if (!governedMonsterResult.ok &&
-      governedMonsterResult.errors.some(error =>
-        error.includes('monster-island') &&
-        (error.includes('UNVERIFIED') || error.includes('verified') || error.includes('source_authority')))) {
-    pass('Provenance validator rejects UNVERIFIED Monster Island data when governed');
+  const governedReferenceOnlyMonsterResult = provenanceValidator.validateSourceAuthorityMetadata(
+    monsterRaw,
+    { id: 'synthetic-monster-island-governed', disposition: 'governed-now', source_ids: ['monster-island'], enforce_source_refs: true },
+    manifestById
+  );
+  if (governedReferenceOnlyMonsterResult.some(error => error.includes('not app-facing'))) {
+    pass('Provenance validator rejects governed reference-only Monster Island authority');
   } else {
-    fail('Provenance validator allows UNVERIFIED Monster Island data when governed',
-      governedMonsterResult.errors.join('\n'));
+    fail('Provenance validator allows governed reference-only Monster Island authority',
+      governedReferenceOnlyMonsterResult.join('\n'));
+  }
+
+  const emptyReferenceEvidenceResult = provenanceValidator.validateSourceAuthorityMetadata(
+    {
+      source_ref: {
+        source_id: 'monster-island',
+        source_revision_id: monsterRevision,
+        page_manifest_path: 'references/sources/pages/monster-island.json',
+        evidence_paths: []
+      },
+      attestation: {
+        status: 'bounded_vision_verified',
+        source_authority: true,
+        authority_state: 'reference_authoritative_not_app_promoted'
+      }
+    },
+    { id: 'synthetic-empty-reference-evidence', disposition: 'must-fix-before-acceptance', source_ids: ['monster-island'], enforce_source_refs: true },
+    manifestById
+  );
+  if (emptyReferenceEvidenceResult.some(error => error.includes('lacks evidence_paths'))) {
+    pass('Provenance validator rejects reference authority without evidence paths');
+  } else {
+    fail('Provenance validator allows reference authority without evidence paths',
+      emptyReferenceEvidenceResult.join('\n'));
+  }
+
+  const duplicateMarkerResult = provenanceValidator.validateSourceAuthorityMetadata(
+    {
+      attestation: {
+        status: 'UNVERIFIED',
+        source_authority: true,
+        authority_state: 'accepted_for_app'
+      }
+    },
+    { id: 'synthetic-duplicate-marker', disposition: 'governed-now', source_ids: [], enforce_source_refs: false },
+    manifestById,
+    __dirname
+  );
+  const duplicateMarkerErrors = duplicateMarkerResult.filter(error => error.includes('UNVERIFIED'));
+  if (duplicateMarkerErrors.length === 1) {
+    pass('Provenance validator reports each unverified marker once');
+  } else {
+    fail('Provenance validator duplicates unverified marker errors',
+      duplicateMarkerResult.join('\n'));
+  }
+
+  const mixedReferenceEvidenceResult = provenanceValidator.validateSourceAuthorityMetadata(
+    {
+      source_refs: [
+        {
+          source_id: 'monster-island',
+          source_revision_id: monsterRevision,
+          page_manifest_path: 'references/sources/pages/monster-island.json',
+          evidence_paths: []
+        },
+        {
+          source_id: 'monster-island',
+          source_revision_id: monsterRevision,
+          page_manifest_path: 'references/sources/pages/monster-island.json',
+          evidence_paths: [monsterPageEvidencePaths[0]]
+        }
+      ],
+      attestation: {
+        status: 'bounded_vision_verified',
+        source_authority: true,
+        authority_state: 'reference_authoritative_not_app_promoted'
+      }
+    },
+    { id: 'synthetic-mixed-reference-evidence', disposition: 'must-fix-before-acceptance', source_ids: ['monster-island'], enforce_source_refs: true },
+    manifestById,
+    __dirname
+  );
+  if (mixedReferenceEvidenceResult.some(error => error.includes('lacks evidence_paths'))) {
+    pass('Provenance validator rejects mixed reference refs with missing evidence paths');
+  } else {
+    fail('Provenance validator allows mixed reference refs with missing evidence paths',
+      mixedReferenceEvidenceResult.join('\n'));
+  }
+
+  const missingAuthorityStateResult = provenanceValidator.validateSourceAuthorityMetadata(
+    {
+      source_ref: {
+        source_id: 'monster-island',
+        source_revision_id: monsterRevision,
+        page_manifest_path: 'references/sources/pages/monster-island.json',
+        evidence_paths: [monsterPageEvidencePaths[0]]
+      },
+      attestation: {
+        status: 'bounded_vision_verified',
+        source_authority: true
+      }
+    },
+    { id: 'synthetic-missing-authority-state', disposition: 'governed-now', source_ids: ['monster-island'], enforce_source_refs: true },
+    manifestById,
+    __dirname
+  );
+  if (missingAuthorityStateResult.some(error => error.includes('missing authority_state'))) {
+    pass('Provenance validator rejects governed source authority missing authority_state');
+  } else {
+    fail('Provenance validator allows governed source authority missing authority_state',
+      missingAuthorityStateResult.join('\n'));
+  }
+
+  const blankAuthorityStateResult = provenanceValidator.validateSourceAuthorityMetadata(
+    {
+      source_ref: {
+        source_id: 'monster-island',
+        source_revision_id: monsterRevision,
+        page_manifest_path: 'references/sources/pages/monster-island.json',
+        evidence_paths: [monsterPageEvidencePaths[0]]
+      },
+      attestation: {
+        status: 'bounded_vision_verified',
+        source_authority: true,
+        authority_state: '   '
+      }
+    },
+    { id: 'synthetic-blank-authority-state', disposition: 'governed-now', source_ids: ['monster-island'], enforce_source_refs: true },
+    manifestById,
+    __dirname
+  );
+  if (blankAuthorityStateResult.some(error => error.includes('missing authority_state'))) {
+    pass('Provenance validator rejects governed source authority with blank authority_state');
+  } else {
+    fail('Provenance validator allows governed source authority with blank authority_state',
+      blankAuthorityStateResult.join('\n'));
+  }
+
+  const coercedSourceAuthorityPayloads = [
+    { source_authority: 'true', authority_state: 'accepted_for_app' },
+    { source_authority: 1, authority_state: 'app_promoted' },
+    { source_authority: 'true', authority_state: 'reference_authoritative_not_app_promoted' }
+  ];
+  const coercedSourceAuthorityEscapes = coercedSourceAuthorityPayloads.filter(attestation => {
+    const result = provenanceValidator.validateSourceAuthorityMetadata(
+      {
+        source_ref: {
+          source_id: 'monster-island',
+          source_revision_id: monsterRevision,
+          page_manifest_path: 'references/sources/pages/monster-island.json',
+          evidence_paths: [monsterPageEvidencePaths[0]]
+        },
+        attestation
+      },
+      { id: `synthetic-coerced-source-authority-${attestation.authority_state}`, disposition: 'governed-now', source_ids: ['monster-island'], enforce_source_refs: true },
+      manifestById,
+      __dirname
+    );
+    return !result.some(error => error.includes('source_authority must be boolean'));
+  });
+  if (coercedSourceAuthorityEscapes.length === 0) {
+    pass('Provenance validator rejects non-boolean source_authority values');
+  } else {
+    fail('Provenance validator allows non-boolean source_authority values',
+      coercedSourceAuthorityEscapes.map(item => JSON.stringify(item)).join('\n'));
+  }
+
+  const nonGovernedAppAuthorityStates = ['accepted_for_app', 'app_facing', 'app_promoted', 'governed_app_authority'];
+  const nonGovernedAppAuthorityEscapes = nonGovernedAppAuthorityStates.filter(authorityState => {
+    const result = provenanceValidator.validateSourceAuthorityMetadata(
+      {
+        source_ref: {
+          source_id: 'monster-island',
+          source_revision_id: monsterRevision,
+          page_manifest_path: 'references/sources/pages/monster-island.json',
+          evidence_paths: [monsterPageEvidencePaths[0]]
+        },
+        attestation: {
+          status: 'bounded_vision_verified',
+          source_authority: true,
+          authority_state: authorityState
+        }
+      },
+      { id: `synthetic-non-governed-${authorityState}`, disposition: 'must-fix-before-acceptance', source_ids: ['monster-island'], enforce_source_refs: true },
+      manifestById,
+      __dirname
+    );
+    return !result.some(error => error.includes('requires governed-now disposition'));
+  });
+  if (nonGovernedAppAuthorityEscapes.length === 0) {
+    pass('Provenance validator rejects app-facing authority states outside governed dispositions');
+  } else {
+    fail('Provenance validator allows app-facing authority states outside governed dispositions',
+      nonGovernedAppAuthorityEscapes.join(', '));
+  }
+
+  const unrecognizedAuthorityStates = ['ACCEPTEDFORAPP', 'REFERENCEONLY', 'APPFACING', 'APPPROMOTED', 'GOVERNEDAPPAUTHORITY', 'aCCePtEd_FoR_aPp', 'ReFeReNcE_OnLy'];
+  const unrecognizedAuthorityEscapes = unrecognizedAuthorityStates.filter(authorityState => {
+    const result = provenanceValidator.validateSourceAuthorityMetadata(
+      {
+        source_ref: {
+          source_id: 'monster-island',
+          source_revision_id: monsterRevision,
+          page_manifest_path: 'references/sources/pages/monster-island.json',
+          evidence_paths: [monsterPageEvidencePaths[0]]
+        },
+        attestation: {
+          status: 'bounded_vision_verified',
+          source_authority: true,
+          authority_state: authorityState
+        }
+      },
+      { id: `synthetic-unrecognized-${authorityState}`, disposition: 'must-fix-before-acceptance', source_ids: ['monster-island'], enforce_source_refs: true },
+      manifestById,
+      __dirname
+    );
+    return !result.some(error => error.includes('unrecognized authority_state'));
+  });
+  if (unrecognizedAuthorityEscapes.length === 0) {
+    pass('Provenance validator rejects all-caps and broken-case source authority states');
+  } else {
+    fail('Provenance validator allows all-caps or broken-case source authority states',
+      unrecognizedAuthorityEscapes.join(', '));
+  }
+
+  const promotedReferenceOnlyMonster = JSON.parse(JSON.stringify(monsterRaw));
+  promotedReferenceOnlyMonster.attestation.authority_state = 'accepted_for_app';
+  const promotedReferenceOnlyMonsterResult = provenanceValidator.validateSourceAuthorityMetadata(
+    promotedReferenceOnlyMonster,
+    { id: 'synthetic-promoted-reference-only-monster', disposition: 'governed-now', source_ids: ['monster-island'], enforce_source_refs: true },
+    manifestById,
+    __dirname
+  );
+  if (promotedReferenceOnlyMonsterResult.some(error => error.includes('requires app-facing evidence_state'))) {
+    pass('Provenance validator rejects app-facing promotion using reference-only evidence state');
+  } else {
+    fail('Provenance validator allows app-facing promotion using reference-only evidence state',
+      promotedReferenceOnlyMonsterResult.join('\n'));
+  }
+
+  const governedNullSourceIdsReferenceOnlyResult = provenanceValidator.validateSourceAuthorityMetadata(
+    promotedReferenceOnlyMonster,
+    { id: 'synthetic-governed-null-source-ids-reference-only', disposition: 'governed-now', enforce_source_refs: true },
+    manifestById,
+    __dirname
+  );
+  if (governedNullSourceIdsReferenceOnlyResult.some(error => error.includes('requires app-facing evidence_state'))) {
+    pass('Provenance validator rejects governed reference-only evidence state without explicit source_ids');
+  } else {
+    fail('Provenance validator allows governed reference-only evidence state without explicit source_ids',
+      governedNullSourceIdsReferenceOnlyResult.join('\n'));
+  }
+
+  const nonCanonicalEvidenceResult = provenanceValidator.validateSourceAuthorityMetadata(
+    {
+      source_ref: {
+        source_id: 'monster-island',
+        source_revision_id: monsterRevision,
+        page_manifest_path: 'references/sources/pages/monster-island.json',
+        evidence_paths: ['references/sources/evidence/monster-island/../monster-island/page-0133-extraction.json']
+      },
+      attestation: {
+        status: 'bounded_vision_verified',
+        source_authority: true,
+        authority_state: 'reference_authoritative_not_app_promoted'
+      }
+    },
+    { id: 'synthetic-non-canonical-evidence', disposition: 'must-fix-before-acceptance', source_ids: ['monster-island'], enforce_source_refs: true },
+    manifestById,
+    __dirname
+  );
+  if (nonCanonicalEvidenceResult.some(error => error.includes('canonical relative path'))) {
+    pass('Provenance validator rejects non-canonical reference evidence paths');
+  } else {
+    fail('Provenance validator allows non-canonical reference evidence paths',
+      nonCanonicalEvidenceResult.join('\n'));
+  }
+
+  const parentDirectoryEvidenceResult = provenanceValidator.validateSourceAuthorityMetadata(
+    {
+      source_ref: {
+        source_id: 'monster-island',
+        source_revision_id: monsterRevision,
+        page_manifest_path: 'references/sources/pages/monster-island.json',
+        evidence_paths: ['..']
+      },
+      attestation: {
+        status: 'bounded_vision_verified',
+        source_authority: true,
+        authority_state: 'reference_authoritative_not_app_promoted'
+      }
+    },
+    { id: 'synthetic-parent-directory-evidence', disposition: 'must-fix-before-acceptance', source_ids: ['monster-island'], enforce_source_refs: true },
+    manifestById,
+    __dirname
+  );
+  if (parentDirectoryEvidenceResult.some(error => error.includes('must stay under the repository root'))) {
+    pass('Provenance validator rejects parent-directory reference evidence paths');
+  } else {
+    fail('Provenance validator allows parent-directory reference evidence paths',
+      parentDirectoryEvidenceResult.join('\n'));
+  }
+
+  const referenceAuthorityStates = [
+    'reference_only',
+    'reference_evidence_only',
+    'reference_data',
+    'experimental_reference',
+    'not_for_app_use',
+    'internal_reference_only',
+    'SourceBlocked',
+    'NotApp',
+    'reference_authoritative_app_promoted',
+    'app_facing_reference',
+    'application_reference',
+    'ref_erence_only'
+  ];
+  const escapedReferenceStates = referenceAuthorityStates.filter(authorityState => {
+    const result = provenanceValidator.validateSourceAuthorityMetadata(
+      {
+        ...monsterRaw,
+        attestation: {
+          ...monsterRaw.attestation,
+          authority_state: authorityState
+        }
+      },
+      { id: `synthetic-${authorityState}`, disposition: 'governed-now', source_ids: ['monster-island'], enforce_source_refs: true },
+      manifestById,
+      __dirname
+    );
+    return !result.some(error => error.includes('not app-facing'));
+  });
+  if (escapedReferenceStates.length === 0) {
+    pass('Provenance validator rejects unconventional governed reference-only authority states');
+  } else {
+    fail('Provenance validator allows unconventional governed reference-only authority states',
+      escapedReferenceStates.join(', '));
+  }
+
+  const allowedGovernedAuthorityResult = provenanceValidator.validateSourceAuthorityMetadata(
+    {
+      source_ref: {
+        source_id: 'bird-in-hand',
+        source_revision_id: activeBird?.source_revision_id,
+        page_manifest_path: 'references/sources/pages/bird-in-hand.json',
+        evidence_state: birdRaw.source_ref?.evidence_state,
+        evidence_paths: birdRaw.source_ref?.evidence_paths
+      },
+      attestation: {
+        status: 'accepted',
+        source_authority: true,
+        authority_state: 'accepted_for_app'
+      }
+    },
+    { id: 'synthetic-accepted-app-authority', disposition: 'governed-now', source_ids: ['bird-in-hand'], enforce_source_refs: true },
+    manifestById,
+    __dirname
+  );
+  if (allowedGovernedAuthorityResult.length === 0) {
+    pass('Provenance validator accepts explicit app-facing governed authority states');
+  } else {
+    fail('Provenance validator rejects explicit app-facing governed authority states',
+      allowedGovernedAuthorityResult.join('\n'));
+  }
+
+  function validateSyntheticReferenceEvidence(evidencePath, artifact) {
+    const fullPath = path.join(__dirname, evidencePath);
+    fs.writeFileSync(fullPath, `${JSON.stringify(artifact, null, 2)}\n`);
+    try {
+      return provenanceValidator.validateSourceAuthorityMetadata(
+        {
+          source_ref: {
+            source_id: 'monster-island',
+            source_revision_id: monsterRevision,
+            page_manifest_path: 'references/sources/pages/monster-island.json',
+            evidence_paths: [evidencePath]
+          },
+          attestation: {
+            status: 'bounded_vision_verified',
+            source_authority: true,
+            authority_state: 'reference_authoritative_not_app_promoted'
+          }
+        },
+        { id: `synthetic-${path.basename(evidencePath, '.json')}`, disposition: 'must-fix-before-acceptance', source_ids: ['monster-island'], enforce_source_refs: true },
+        manifestById,
+        __dirname
+      );
+    } finally {
+      fs.rmSync(fullPath, { force: true });
+    }
+  }
+
+  const untrackedEvidencePath = 'references/sources/evidence/monster-island/.tmp-untracked-evidence-test.json';
+  const untrackedEvidenceResult = validateSyntheticReferenceEvidence(untrackedEvidencePath, {
+    source_id: 'monster-island',
+    source_revision_id: monsterRevision,
+    pdf_page: 133
+  });
+  if (untrackedEvidenceResult.some(error => error.includes('not tracked'))) {
+    pass('Provenance validator rejects untracked reference evidence artifacts');
+  } else {
+    fail('Provenance validator allows untracked reference evidence artifacts',
+      untrackedEvidenceResult.join('\n'));
+  }
+
+  const staleEvidencePath = 'references/sources/evidence/monster-island/.tmp-stale-evidence-test.json';
+  const staleEvidenceResult = validateSyntheticReferenceEvidence(staleEvidencePath, {
+    source_id: 'monster-island',
+    source_revision_id: 'monster-island:stale-test-revision:000000000000:2026-01-01',
+    pdf_page: 133
+  });
+  if (staleEvidenceResult.some(error => error.includes('stale source_revision_id'))) {
+    pass('Provenance validator rejects stale reference evidence artifacts');
+  } else {
+    fail('Provenance validator allows stale reference evidence artifacts',
+      staleEvidenceResult.join('\n'));
+  }
+
+  const wrongSourceEvidencePath = 'references/sources/evidence/monster-island/.tmp-wrong-source-evidence-test.json';
+  const wrongSourceEvidenceResult = validateSyntheticReferenceEvidence(wrongSourceEvidencePath, {
+    source_id: 'bird-in-hand',
+    source_revision_id: monsterRevision,
+    pdf_page: 133
+  });
+  if (wrongSourceEvidenceResult.some(error => error.includes('does not match monster-island'))) {
+    pass('Provenance validator rejects cross-source reference evidence artifacts');
+  } else {
+    fail('Provenance validator allows cross-source reference evidence artifacts',
+      wrongSourceEvidenceResult.join('\n'));
+  }
+
+  const governedLegacy = JSON.parse(JSON.stringify(legacy));
+  const governedMonsterDisposition = (governedLegacy.dispositions || []).find(disposition => disposition.id === 'spirits-monster-island');
+  if (governedMonsterDisposition) governedMonsterDisposition.disposition = 'governed-now';
+  const governedLegacyResult = provenanceValidator.validateLegacyDisposition(governedLegacy, provenanceSchema, __dirname);
+  if (!governedLegacyResult.ok && governedLegacyResult.errors.some(error => error.includes('not app-facing'))) {
+    pass('Provenance validator rejects governed legacy Monster Island reference-only authority');
+  } else {
+    fail('Provenance validator allows governed legacy Monster Island reference-only authority',
+      governedLegacyResult.errors.join('\n'));
+  }
+
+  const actualMonsterDisposition = (legacy.dispositions || []).find(disposition => disposition.id === 'spirits-monster-island');
+  const actualLegacyResult = provenanceValidator.validateLegacyDisposition(legacy, provenanceSchema, __dirname);
+  if (actualLegacyResult.ok && actualMonsterDisposition?.disposition === 'must-fix-before-acceptance') {
+    pass('Provenance validator accepts Monster Island reference evidence only while app promotion remains blocked');
+  } else {
+    fail('Provenance validator rejects blocked Monster Island reference evidence state',
+      JSON.stringify({
+        disposition: actualMonsterDisposition?.disposition,
+        errors: actualLegacyResult.errors
+      }));
   }
 }
 

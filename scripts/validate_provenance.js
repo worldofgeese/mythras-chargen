@@ -23,6 +23,17 @@ const EXPORTED_APP_CONSTANTS = [
   'HIT_LOCATIONS',
   'GLORANTHA_CULTURES_DATA'
 ];
+const SOURCE_LOCATOR_KEYS = new Set(['source_pdf', 'source_path', 'canonical_locator', 'local_hint']);
+const GOVERNED_APP_FACING_AUTHORITY_STATES = new Set([
+  'accepted_for_app',
+  'accepted_for_target_example_spirit_stat_blocks',
+  'app_facing',
+  'app_promoted',
+  'governed_app_authority'
+]);
+const APP_FACING_EVIDENCE_STATES = new Set([
+  'bounded_extraction_independent_vision_verified'
+]);
 
 function readJson(root, relPath) {
   try {
@@ -140,41 +151,186 @@ function isMachineLocalLocator(value) {
   return typeof value === 'string' && (value.startsWith('/') || /^[A-Za-z]:[\\/]/.test(value) || value.includes('\\'));
 }
 
-function collectMachineLocalSourceLocators(value, location = '$', found = []) {
+function collectMatches(value, predicate, location = '$', found = []) {
+  const selfMatch = predicate(null, value, location);
+  if (selfMatch) found.push(selfMatch);
   if (Array.isArray(value)) {
-    value.forEach((item, index) => collectMachineLocalSourceLocators(item, `${location}[${index}]`, found));
-  } else if (isObject(value)) {
-    for (const [key, child] of Object.entries(value)) {
-      const childLocation = `${location}.${key}`;
-      if (['source_pdf', 'source_path', 'canonical_locator', 'local_hint'].includes(key) && isMachineLocalLocator(child)) {
-        found.push(`${childLocation}=${child}`);
+    value.forEach((item, index) => {
+      const childLocation = `${location}[${index}]`;
+      if (Array.isArray(item) || isObject(item)) {
+        collectMatches(item, predicate, childLocation, found);
+      } else {
+        const match = predicate(null, item, childLocation);
+        if (match) found.push(match);
       }
-      collectMachineLocalSourceLocators(child, childLocation, found);
-    }
-  }
-  return found;
-}
-
-function collectUnverifiedAuthorityMarkers(value, location = '$', found = []) {
-  if (typeof value === 'string') {
-    if (value.includes('UNVERIFIED')) found.push(`${location}:UNVERIFIED`);
-  } else if (Array.isArray(value)) {
-    value.forEach((item, index) => collectUnverifiedAuthorityMarkers(item, `${location}[${index}]`, found));
+    });
   } else if (isObject(value)) {
     for (const [key, child] of Object.entries(value)) {
       const childLocation = `${location}.${key}`;
-      if (key === 'verified' && child === false) found.push(`${childLocation}:false`);
-      if (key === 'source_authority' && child === false) found.push(`${childLocation}:false`);
-      collectUnverifiedAuthorityMarkers(child, childLocation, found);
+      const match = predicate(key, child, childLocation);
+      if (match) found.push(match);
+      if (Array.isArray(child) || isObject(child)) collectMatches(child, predicate, childLocation, found);
     }
   }
   return found;
 }
 
-function validateSourceAuthorityMetadata(payload, disposition, manifestById = new Map()) {
+function collectMachineLocalSourceLocators(value) {
+  return collectMatches(value, (key, child, location) =>
+    SOURCE_LOCATOR_KEYS.has(key) && isMachineLocalLocator(child) ? `${location}=${child}` : null
+  );
+}
+
+function collectUnverifiedAuthorityMarkers(value) {
+  return collectMatches(value, (key, child, location) => {
+    if (typeof child === 'string' && child.includes('UNVERIFIED')) return `${location}:UNVERIFIED`;
+    if (key === 'verified' && child === false) return `${location}:false`;
+    if (key === 'source_authority' && child === false) return `${location}:false`;
+    return null;
+  });
+}
+
+function collectInvalidSourceAuthorityTypeMarkers(value) {
+  return collectMatches(value, (key, child, location) =>
+    key === 'source_authority' && typeof child !== 'boolean' ? `${location}:${typeof child}` : null
+  );
+}
+
+function tokenizeAuthorityState(value) {
+  return value
+    .replace(/([a-z0-9])([A-Z])/g, '$1_$2')
+    .toLowerCase()
+    .split(/[^a-z0-9]+/)
+    .filter(Boolean);
+}
+
+function normalizeAuthorityState(value) {
+  return tokenizeAuthorityState(value).join('_');
+}
+
+function isAllowedGovernedAuthorityState(value) {
+  if (typeof value !== 'string') return false;
+  return GOVERNED_APP_FACING_AUTHORITY_STATES.has(normalizeAuthorityState(value));
+}
+
+function isAllowedAppFacingEvidenceState(value) {
+  if (typeof value !== 'string') return false;
+  return APP_FACING_EVIDENCE_STATES.has(normalizeAuthorityState(value));
+}
+
+function isReferenceAuthorityState(value) {
+  return typeof value === 'string' && tokenizeAuthorityState(value).includes('reference');
+}
+
+function isKnownSourceAuthorityState(value) {
+  return isAllowedGovernedAuthorityState(value) || isReferenceAuthorityState(value);
+}
+
+function collectReferenceAuthorityMarkers(value) {
+  return collectMatches(value, (key, child, location) =>
+    key === 'authority_state' && isReferenceAuthorityState(child)
+      ? `${location}:${child}`
+      : null
+  );
+}
+
+function collectSourceAuthorityClaims(value) {
+  return collectMatches(value, (key, child, location) => {
+    if (key !== null || !isObject(child) || child.source_authority !== true) return null;
+    return { location, authorityState: child.authority_state };
+  });
+}
+
+function hasEvidencePaths(ref) {
+  return Array.isArray(ref?.evidence_paths) && ref.evidence_paths.some(item => typeof item === 'string' && item.length > 0);
+}
+
+function validateEvidenceArtifactPaths(ref, manifestById, root, trackedFileSet, errors, location, options = {}) {
+  if (!Array.isArray(ref.evidence_paths)) return;
+  const expectedRevision = ref.source_revision_id || manifestById.get(ref.source_id)?.source_revision_id;
+  if (options.appFacing === true) {
+    const source = manifestById.get(ref.source_id);
+    if (!source) {
+      add(errors, location, `app-facing source authority references unknown source_id ${ref.source_id || '<missing>'}`);
+    } else if (source.lifecycle_state !== 'active') {
+      add(errors, location, `app-facing source authority requires active source ${ref.source_id}`);
+    }
+  }
+  for (const [index, evidencePath] of ref.evidence_paths.entries()) {
+    const evidenceLocation = `${location}.evidence_paths[${index}]`;
+    if (typeof evidencePath !== 'string' || evidencePath.length === 0) {
+      add(errors, evidenceLocation, 'must be a non-empty relative path');
+      continue;
+    }
+    if (path.isAbsolute(evidencePath) || evidencePath.includes('\\')) {
+      add(errors, evidenceLocation, `must be a portable relative path: ${evidencePath}`);
+      continue;
+    }
+    const normalizedPath = path.posix.normalize(evidencePath);
+    if (normalizedPath !== evidencePath) {
+      add(errors, evidenceLocation, `must be a canonical relative path: ${evidencePath}`);
+      continue;
+    }
+    if (normalizedPath === '.' || normalizedPath === '..' || normalizedPath.startsWith('../')) {
+      add(errors, evidenceLocation, `must stay under the repository root: ${evidencePath}`);
+      continue;
+    }
+    if (!trackedFileSet.has(normalizedPath)) {
+      add(errors, evidenceLocation, `evidence artifact is not tracked: ${normalizedPath}`);
+    }
+    const fullPath = path.join(root, normalizedPath);
+    if (!fs.existsSync(fullPath)) {
+      add(errors, evidenceLocation, `evidence artifact is missing: ${normalizedPath}`);
+      continue;
+    }
+    let artifact;
+    try {
+      artifact = readJson(root, normalizedPath);
+    } catch (err) {
+      add(errors, evidenceLocation, err.message);
+      continue;
+    }
+    if (artifact.source_id !== ref.source_id) {
+      add(errors, evidenceLocation, `evidence artifact source_id ${artifact.source_id || '<missing>'} does not match ${ref.source_id}`);
+    }
+    if (typeof expectedRevision === 'string' && artifact.source_revision_id !== expectedRevision) {
+      add(errors, evidenceLocation, `evidence artifact has stale source_revision_id ${artifact.source_revision_id || '<missing>'}`);
+    }
+    if (options.appFacing === true) {
+      if (artifact.artifact_kind === 'verification' && !artifact.agreement?.startsWith('pass')) {
+        add(errors, evidenceLocation, `app-facing evidence artifact requires verifier agreement pass, got ${artifact.agreement || '<missing>'}`);
+      }
+      if (Array.isArray(artifact.promotion_cautions) && artifact.promotion_cautions.length > 0) {
+        add(errors, evidenceLocation, 'app-facing evidence artifact contains promotion_cautions');
+      }
+    }
+  }
+}
+
+function validateSourceAuthorityMetadata(payload, disposition, manifestById = new Map(), root = ROOT, trackedFileSet = null) {
   const errors = [];
   const sourceIds = Array.isArray(disposition.source_ids) ? disposition.source_ids : [];
   const refs = collectAuthoritySourceRefs(payload);
+  const tracked = trackedFileSet || new Set(trackedFiles(root));
+  const sourceAuthorityClaims = collectSourceAuthorityClaims(payload);
+
+  const invalidSourceAuthorityTypeMarkers = collectInvalidSourceAuthorityTypeMarkers(payload);
+  for (const marker of invalidSourceAuthorityTypeMarkers) {
+    add(errors, disposition.id || 'source authority', `source_authority must be boolean ${marker}`);
+  }
+
+  for (const { location, authorityState } of sourceAuthorityClaims) {
+    if (typeof authorityState !== 'string' || authorityState.trim().length === 0) {
+      add(errors, disposition.id || 'source authority', `source authority ${location}:missing authority_state`);
+      continue;
+    }
+    if (!isKnownSourceAuthorityState(authorityState)) {
+      add(errors, disposition.id || 'source authority', `source authority has unrecognized authority_state ${location}.authority_state:${authorityState}`);
+    }
+    if (disposition.disposition !== 'governed-now' && isAllowedGovernedAuthorityState(authorityState)) {
+      add(errors, disposition.id || 'source authority', `app-facing authority_state requires governed-now disposition ${location}.authority_state:${authorityState}`);
+    }
+  }
 
   if (disposition.enforce_source_refs === true) {
     for (const sourceId of sourceIds) {
@@ -201,7 +357,39 @@ function validateSourceAuthorityMetadata(payload, disposition, manifestById = ne
     }
   }
 
+  const referenceAuthorityMarkers = collectReferenceAuthorityMarkers(payload);
+  const governedSourceAuthorityNeedsEvidence = disposition.disposition === 'governed-now' &&
+    sourceAuthorityClaims.length > 0;
+  if (referenceAuthorityMarkers.length > 0 || governedSourceAuthorityNeedsEvidence) {
+    const scopedRefs = sourceIds.length > 0 ? refs.filter(ref => sourceIds.includes(ref.source_id)) : refs;
+    const refsMissingEvidence = scopedRefs.filter(ref => !hasEvidencePaths(ref));
+    if (scopedRefs.length === 0 || refsMissingEvidence.length > 0) {
+      const authorityMarkers = referenceAuthorityMarkers.length > 0
+        ? referenceAuthorityMarkers.join(', ')
+        : sourceAuthorityClaims.map(claim => `${claim.location}.source_authority:true`).join(', ');
+      add(errors, disposition.id || 'source authority', `source authority lacks evidence_paths ${authorityMarkers}`);
+    }
+    for (const [index, ref] of scopedRefs.entries()) {
+      if (governedSourceAuthorityNeedsEvidence) {
+        if (typeof ref.evidence_state !== 'string' || ref.evidence_state.length === 0) {
+          add(errors, disposition.id || 'source authority', `app-facing source authority missing evidence_state ${disposition.id || 'source authority'}.source_ref[${index}]`);
+        } else if (!isAllowedAppFacingEvidenceState(ref.evidence_state)) {
+          add(errors, disposition.id || 'source authority', `app-facing source authority requires app-facing evidence_state ${disposition.id || 'source authority'}.source_ref[${index}].evidence_state:${ref.evidence_state}`);
+        }
+      }
+      validateEvidenceArtifactPaths(ref, manifestById, root, tracked, errors, `${disposition.id || 'source authority'}.source_ref[${index}]`, {
+        appFacing: governedSourceAuthorityNeedsEvidence
+      });
+    }
+  }
+
   if (disposition.disposition === 'governed-now') {
+    for (const { location, authorityState } of sourceAuthorityClaims) {
+      if (typeof authorityState !== 'string' || authorityState.trim().length === 0) continue;
+      if (!isAllowedGovernedAuthorityState(authorityState)) {
+        add(errors, disposition.id || 'source authority', `governed source authority is not app-facing ${location}.authority_state:${authorityState}`);
+      }
+    }
     const unverifiedMarkers = collectUnverifiedAuthorityMarkers(payload);
     for (const marker of unverifiedMarkers) {
       add(errors, disposition.id || 'source authority', `governed source authority contains unverified marker ${marker}`);
@@ -240,7 +428,9 @@ function validateLegacyDisposition(legacy, schema, root = ROOT) {
   }
 
   const dispositions = legacy.dispositions || [];
-  const files = trackedFiles(root).filter(isTrackedSourceLike);
+  const allTrackedFiles = trackedFiles(root);
+  const trackedFileSet = new Set(allTrackedFiles);
+  const files = allTrackedFiles.filter(isTrackedSourceLike);
   for (const filePath of files) {
     const matches = dispositions.filter(disposition => matchesDisposition(filePath, disposition));
     if (matches.length === 0) add(errors, filePath, 'tracked source-like artifact lacks legacy disposition');
@@ -272,7 +462,7 @@ function validateLegacyDisposition(legacy, schema, root = ROOT) {
     const fullPath = path.join(root, disposition.path);
     if (!fs.existsSync(fullPath)) continue;
     const payload = readJson(root, disposition.path);
-    errors.push(...validateSourceAuthorityMetadata(payload, disposition, manifestById).map(error => `${disposition.path}: ${error}`));
+    errors.push(...validateSourceAuthorityMetadata(payload, disposition, manifestById, root, trackedFileSet).map(error => `${disposition.path}: ${error}`));
   }
 
   return { ok: errors.length === 0, errors };

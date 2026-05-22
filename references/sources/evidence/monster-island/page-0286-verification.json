@@ -1,0 +1,41 @@
+{
+  "artifact_id": "monster-island-page-0286-verification-opus-2026-05-22",
+  "artifact_kind": "verification",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "monster-island",
+  "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
+  "pdf_page": 286,
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/monster-island/page-0286.png",
+    "image_sha256": "d5b1bac0fb057a7f3f990874f07834b216b209df786d060ba7654cd3071ad2c9",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "monster-island-extract-opus-loadouts-2026-05-22",
+  "verifier_prompt_id": "vision-verify-bounded-page.v1",
+  "verifier_run_id": "monster-island-verify-opus-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "independence": {
+    "read_extractor_output": false,
+    "read_extractor_scratch": false,
+    "read_extractor_rationale": false
+  },
+  "agreement": "pass_with_stat_caution",
+  "verified_blocks": [
+    "monster-island-p286-b001",
+    "monster-island-p286-b002",
+    "monster-island-p286-b003"
+  ],
+  "bounded_excerpts": [
+    "High Shaman",
+    "High Kahuna (Spirit Lord)",
+    "Serpent People"
+  ],
+  "promotion_cautions": [
+    "Do not promote exact stat rows without a stat-specific verification pass.",
+    "Serpent People content is outside this source-evidence scope."
+  ]
+}

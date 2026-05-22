@@ -1,0 +1,104 @@
+{
+  "artifact_id": "monster-island-page-0136-extraction-opus-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "monster-island",
+  "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
+  "pdf_page": 136,
+  "printed_page_label": "135",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/monster-island/page-0136.png",
+    "image_sha256": "e9dda315b1109ee9517a77c0c431c9e631f5bf24eae011e4be42d866fc1a66b7",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "monster-island-extract-opus-cult-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "schema_version": 1,
+  "blocks": [
+    {
+      "block_id": "monster-island-p136-b001",
+      "block_type": "paragraph",
+      "reading_order": 1,
+      "region": {
+        "x": 0.08,
+        "y": 0.07,
+        "w": 0.4,
+        "h": 0.18
+      },
+      "bounded_excerpt": "Primary duties of worshippers... fetching herbs/animals... warding tikis and fetishes... observing movement of spirits.",
+      "facts": {
+        "rank": "Worshipper",
+        "duties": [
+          "fetch ritual materials",
+          "minor sacrifices for warding tikis and fetishes",
+          "spirit-movement patrols"
+        ],
+        "spirit_access": "locate, summon, and bind cult-friendly spirits"
+      }
+    },
+    {
+      "block_id": "monster-island-p136-b002",
+      "block_type": "paragraph",
+      "reading_order": 2,
+      "region": {
+        "x": 0.08,
+        "y": 0.31,
+        "w": 0.4,
+        "h": 0.34
+      },
+      "bounded_excerpt": "Progression to Shaman requires a quest to awaken their Fetch... Each week... Willpower, Survival or Loyalty (Tribe) test.",
+      "facts": {
+        "rank": "Shaman",
+        "shaman_requirement": "fetch-awakening quest",
+        "weekly_test_one_of": [
+          "Willpower",
+          "Survival",
+          "Loyalty (Tribe)"
+        ]
+      }
+    },
+    {
+      "block_id": "monster-island-p136-b003",
+      "block_type": "paragraph",
+      "reading_order": 3,
+      "region": {
+        "x": 0.52,
+        "y": 0.37,
+        "w": 0.42,
+        "h": 0.25
+      },
+      "bounded_excerpt": "If wins, ebon spirit transforms into mastered Fetch. Same INT, POW, CHA... fetch abilities... 1d3 plus the number of weeks...",
+      "facts": {
+        "fetch_stats": "same INT, POW, CHA as candidate",
+        "fetch_abilities_count": "1d3 + weeks wandered",
+        "ref": "RuneQuest pp.404-405"
+      }
+    },
+    {
+      "block_id": "monster-island-p136-b004",
+      "block_type": "paragraph",
+      "reading_order": 4,
+      "region": {
+        "x": 0.52,
+        "y": 0.72,
+        "w": 0.42,
+        "h": 0.15
+      },
+      "bounded_excerpt": "Shaman's duties: keeping village free of bad spirits, controlling guardian tiki spirits, summoning spirits for fetish creation/replacement...",
+      "facts": {
+        "shaman_duties": [
+          "banish bad spirits",
+          "control guardian tikis",
+          "summon spirits for fetishes",
+          "judge tribal law"
+        ],
+        "spirit_access": "summon and bind cult-neutral spirits"
+      }
+    }
+  ],
+  "page_boundary_notes": "Page continues Worshipper material, contains Shaman initiation, and begins High Shaman at bottom."
+}

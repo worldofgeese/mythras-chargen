@@ -1,0 +1,41 @@
+{
+  "artifact_id": "monster-island-page-0133-verification-opus-2026-05-22",
+  "artifact_kind": "verification",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "monster-island",
+  "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
+  "pdf_page": 133,
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/monster-island/page-0133.png",
+    "image_sha256": "11ce9672f83e6b80a1a797e616240ca1bd45b6099dfdc6b4511735b4823170ac",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "monster-island-extract-opus-cult-2026-05-22",
+  "verifier_prompt_id": "vision-verify-bounded-page.v1",
+  "verifier_run_id": "monster-island-verify-opus-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "independence": {
+    "read_extractor_output": false,
+    "read_extractor_scratch": false,
+    "read_extractor_rationale": false
+  },
+  "agreement": "pass_with_boundary_caution",
+  "verified_blocks": [
+    "monster-island-p133-b001",
+    "monster-island-p133-b002",
+    "monster-island-p133-b003"
+  ],
+  "bounded_excerpts": [
+    "ANIMISM OF THE SAVAGES",
+    "totemic cult framing",
+    "cult structure template"
+  ],
+  "promotion_cautions": [
+    "Prior printed page may contain section opener context; do not promote chapter-opener claims from this page alone.",
+    "Source remains non-active; do not promote app-facing facts from Monster Island without a later app-data pass."
+  ]
+}

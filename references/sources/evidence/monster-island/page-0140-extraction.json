@@ -1,0 +1,130 @@
+{
+  "artifact_id": "monster-island-page-0140-extraction-opus-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "monster-island",
+  "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
+  "pdf_page": 140,
+  "printed_page_label": "139",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/monster-island/page-0140.png",
+    "image_sha256": "d08f2b091c8906e7784fa0f623c977059edb99a51d6e0a33eb127acf0b0548a8",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "monster-island-extract-opus-spirits-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "schema_version": 1,
+  "blocks": [
+    {
+      "block_id": "monster-island-p140-b001",
+      "block_type": "table",
+      "reading_order": 1,
+      "region": {
+        "x": 0.07,
+        "y": 0.07,
+        "w": 0.42,
+        "h": 0.22
+      },
+      "bounded_excerpt": "CULT OF VARANRI... Friendly: Ancestor, Nature, Shape-shifting... Neutral: Curse, Death, Predator. Gift: Summon (Dinosaur).",
+      "facts": {
+        "cult_name": "Varanri",
+        "friendly_spirit_categories": [
+          "Ancestor",
+          "Nature",
+          "Shape-shifting"
+        ],
+        "neutral_spirits": [
+          "Curse",
+          "Death",
+          "Predator"
+        ],
+        "gift": "Summon (Dinosaur)"
+      }
+    },
+    {
+      "block_id": "monster-island-p140-b002",
+      "block_type": "paragraph",
+      "reading_order": 2,
+      "region": {
+        "x": 0.07,
+        "y": 0.33,
+        "w": 0.42,
+        "h": 0.2
+      },
+      "bounded_excerpt": "Jungles/subterranean labyrinths infested with spirits... table for kahunas or discorporated characters wandering Spirit World.",
+      "facts": {
+        "random_spirit_table_context": "kahunas or discorporated characters wandering the Spirit World",
+        "attitude_source": "totemic cult relationships"
+      }
+    },
+    {
+      "block_id": "monster-island-p140-b003",
+      "block_type": "table",
+      "reading_order": 3,
+      "region": {
+        "x": 0.07,
+        "y": 0.55,
+        "w": 0.42,
+        "h": 0.42
+      },
+      "bounded_excerpt": "Spirit Encounters Table (1d100 -> Spirit Type)",
+      "facts": {
+        "table_name": "Spirit Encounters Table",
+        "die": "1d100",
+        "spirit_types": [
+          "Ancestor",
+          "Bane",
+          "Curse",
+          "Death",
+          "Elemental",
+          "Fetch",
+          "Guardian",
+          "Haunt",
+          "Nature",
+          "Predator",
+          "Shape-shifting",
+          "Sickness",
+          "Undeath",
+          "Wraith"
+        ]
+      }
+    },
+    {
+      "block_id": "monster-island-p140-b004",
+      "block_type": "table",
+      "reading_order": 4,
+      "region": {
+        "x": 0.51,
+        "y": 0.3,
+        "w": 0.42,
+        "h": 0.3
+      },
+      "bounded_excerpt": "Spirit Intensity table (1d100)",
+      "facts": {
+        "table_name": "Spirit Intensity",
+        "die": "1d100",
+        "intensity_range": "1-7"
+      }
+    },
+    {
+      "block_id": "monster-island-p140-b005",
+      "block_type": "heading",
+      "reading_order": 5,
+      "region": {
+        "x": 0.51,
+        "y": 0.77,
+        "w": 0.42,
+        "h": 0.06
+      },
+      "bounded_excerpt": "SORCERY OF THE HIGH FOLK",
+      "facts": {
+        "out_of_scope_for_spirit_cult_evidence": true
+      }
+    }
+  ],
+  "page_boundary_notes": "Finishes the totemic cult spirit list, records random spirit tables, then transitions to a sorcery section outside this Bead's promotion scope."
+}

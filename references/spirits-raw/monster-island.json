@@ -1,10 +1,11 @@
 {
   "source": "Monster Island (The Design Mechanism, 2013)",
   "chapter": "Chapter 6: Magic",
-  "pages": "UNVERIFIED legacy pdftotext extraction; candidate PDF pages 133-140 and 285-286 are rendered into ignored cache with hashes/dimensions but extraction and independent verification remain blocked",
+  "pages": "Bounded vision verified page evidence for PDF pages 133-140 and 285-286 (printed pages 132-139 and 284-285)",
   "extracted_at": "2026-05-16",
-  "verified": false,
-  "verification_notes": "Legacy extraction via pdftotext remains unverified. This unit confirmed supplied Monster Island PDF metadata and rendered candidate pages into ignored cache, but did not produce bounded extraction artifacts, independent verifier artifacts, or accepted source authority.",
+  "verified": true,
+  "verification_scope": "page-scoped source authority for the Monster Island totemic cult template, spirit attitude/rank gates, and example kahuna spirit loadouts only; exact app-facing STARTING_SPIRITS data was not regenerated in this pass",
+  "verification_notes": "PDF pages 133-140 and 285-286 have rendered page hashes, bounded extraction artifacts, and independent verifier artifacts under references/sources/evidence/monster-island/. The source revision remains non-active/permission-pending, so this is reference evidence rather than app-facing promotion.",
   "spirit_cult_template": {
     "description": "All of Monster Island's totemic cults follow an identical structure. This template is the Monster Island approach Hannu recommended for spirit cults.",
     "structure": {
@@ -253,13 +254,30 @@
     "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
     "manifest_path": "references/sources/manifest.json",
     "page_manifest_path": "references/sources/pages/monster-island.json",
-    "coverage_state": "blocked",
-    "evidence_state": "candidate_pages_rendered_extraction_and_verification_blocked",
-    "gaps": [
-      "permission basis is not confirmed",
-      "candidate pages are rendered into ignored cache but no bounded extraction artifact exists",
-      "no independent verifier artifact is available",
-      "Monster Island remains non-authoritative until accepted contributing pages exist"
+    "coverage_state": "verified",
+    "evidence_state": "bounded_extraction_independent_vision_verified_reference_only",
+    "verification_scope": "totemic cult structure, spirit attitude rank gates, random spirit tables, and example kahuna spirit loadouts",
+    "evidence_paths": [
+      "references/sources/evidence/monster-island/page-0133-extraction.json",
+      "references/sources/evidence/monster-island/page-0133-verification.json",
+      "references/sources/evidence/monster-island/page-0134-extraction.json",
+      "references/sources/evidence/monster-island/page-0134-verification.json",
+      "references/sources/evidence/monster-island/page-0135-extraction.json",
+      "references/sources/evidence/monster-island/page-0135-verification.json",
+      "references/sources/evidence/monster-island/page-0136-extraction.json",
+      "references/sources/evidence/monster-island/page-0136-verification.json",
+      "references/sources/evidence/monster-island/page-0137-extraction.json",
+      "references/sources/evidence/monster-island/page-0137-verification.json",
+      "references/sources/evidence/monster-island/page-0138-extraction.json",
+      "references/sources/evidence/monster-island/page-0138-verification.json",
+      "references/sources/evidence/monster-island/page-0139-extraction.json",
+      "references/sources/evidence/monster-island/page-0139-verification.json",
+      "references/sources/evidence/monster-island/page-0140-extraction.json",
+      "references/sources/evidence/monster-island/page-0140-verification.json",
+      "references/sources/evidence/monster-island/page-0285-extraction.json",
+      "references/sources/evidence/monster-island/page-0285-verification.json",
+      "references/sources/evidence/monster-island/page-0286-extraction.json",
+      "references/sources/evidence/monster-island/page-0286-verification.json"
     ],
     "candidate_pdf_pages": [
       133,
@@ -281,17 +299,11 @@
     "source_page_count": 298
   },
   "attestation": {
-    "status": "source_blocked",
-    "legacy_verified": false,
-    "source_authority": false,
-    "authority_state": "blocked_until_permission_and_verified_contributing_pages_exist",
-    "verification_notes": "Rendered candidate pages provide bounded page evidence only; no extraction or independent verification has been accepted.",
-    "gaps": [
-      "permission basis is not confirmed",
-      "candidate pages are rendered into ignored cache but no bounded extraction artifact exists",
-      "no independent verifier artifact is available",
-      "Monster Island remains non-authoritative until accepted contributing pages exist"
-    ],
+    "status": "bounded_vision_verified",
+    "legacy_verified": true,
+    "source_authority": true,
+    "authority_state": "reference_authoritative_not_app_promoted",
+    "verification_notes": "Candidate pages have bounded extraction and independent verifier artifacts. This promotes Monster Island as page-scoped reference evidence for the raw spirit template and loadout summaries, not as a change to STARTING_SPIRITS.",
     "source_metadata": {
       "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
       "sha256": "dd79904483ab62766799e6480da7081cbcbbdd9cb1a608ecc5dfdeae7cce0782",
@@ -299,7 +311,7 @@
       "page_count": 298,
       "canonical_locator": "https://copyparty.hound-celsius.ts.net/sources/books/Monster-Island.pdf"
     },
-    "rendered_candidate_pdf_pages": [
+    "verified_pdf_pages": [
       133,
       134,
       135,
@@ -310,6 +322,7 @@
       140,
       285,
       286
-    ]
+    ],
+    "evidence_state": "bounded_extraction_independent_vision_verified_reference_only"
   }
 }

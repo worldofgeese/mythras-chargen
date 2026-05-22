@@ -1,0 +1,75 @@
+{
+  "artifact_id": "monster-island-page-0133-extraction-opus-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "monster-island",
+  "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
+  "pdf_page": 133,
+  "printed_page_label": "132",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/monster-island/page-0133.png",
+    "image_sha256": "11ce9672f83e6b80a1a797e616240ca1bd45b6099dfdc6b4511735b4823170ac",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "monster-island-extract-opus-cult-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "schema_version": 1,
+  "blocks": [
+    {
+      "block_id": "monster-island-p133-b001",
+      "block_type": "heading",
+      "reading_order": 1,
+      "region": {
+        "x": 0.05,
+        "y": 0.07,
+        "w": 0.4,
+        "h": 0.1
+      },
+      "bounded_excerpt": "ANIMISM OF THE SAVAGES",
+      "facts": {
+        "section_topic": "animism_overview"
+      }
+    },
+    {
+      "block_id": "monster-island-p133-b002",
+      "block_type": "paragraph",
+      "reading_order": 2,
+      "region": {
+        "x": 0.05,
+        "y": 0.16,
+        "w": 0.4,
+        "h": 0.18
+      },
+      "bounded_excerpt": "All lowland savages are practicing animists, members of their tribal totemic cult... most have access to familial fetishes.",
+      "facts": {
+        "membership_default": "lowland savages are tribal totemic cult animists",
+        "fetish_access": "familial fetishes commonly available",
+        "kahuna_teachers": "ancestor spirits"
+      }
+    },
+    {
+      "block_id": "monster-island-p133-b003",
+      "block_type": "paragraph",
+      "reading_order": 3,
+      "region": {
+        "x": 0.5,
+        "y": 0.26,
+        "w": 0.43,
+        "h": 0.1
+      },
+      "bounded_excerpt": "All of the island's totemic cults follow an identical structure... changing only the totemic animal and various spirits they command.",
+      "facts": {
+        "cult_structure_template": true,
+        "variable_fields": [
+          "totemic animal",
+          "commanded spirits"
+        ]
+      }
+    }
+  ],
+  "page_boundary_notes": "Opening page of the sampled animism section; history/body text continues to the next rendered page."
+}

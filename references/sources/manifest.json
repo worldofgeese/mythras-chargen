@@ -432,9 +432,9 @@
       "acquired_at": null,
       "permission_basis": {
         "status": "permission_pending",
-        "note": "User-supplied local PDF was used only for bounded render/cache evidence; extraction/attestation permission is not confirmed, so normalization and acceptance remain blocked."
+        "note": "Player-visible Copyparty/local PDF was used for bounded render/cache evidence and page-scoped bounded vision extraction. Full-source active lifecycle remains pending because only contributing pages 133-140 and 285-286 are verified."
       },
-      "precedence": "Template/example source for Monster Island spirit-cult structures and spirit loadouts only. It must not override canonical Gloranthan authorities (AiG for Gloranthan cultures/folk/rune magic, Mythras Core for base spirit rules, Notes from Pavis for cults); promotion requires verified contributing-page evidence.",
+      "precedence": "Template/example source for Monster Island spirit-cult structures and spirit loadouts only. It must not override canonical Gloranthan authorities (AiG for Gloranthan cultures/folk/rune magic, Mythras Core for base spirit rules, Notes from Pavis for cults). Verified contributing-page evidence is page-scoped reference authority only until app-facing data is regenerated.",
       "render_contract": {
         "renderer": "pdftoppm",
         "renderer_version": "runtime-detected",
@@ -450,22 +450,19 @@
         "cache_path_pattern": ".cache/source-pages/{source_id}/page-{pdf_page:04d}.png"
       },
       "blocks": [
-        "extraction",
         "normalization",
         "acceptance"
       ],
       "blockers": [
-        "permission basis is not confirmed",
-        "bounded extraction artifacts have not been produced from the rendered candidate pages",
-        "independent verifier artifacts have not been produced",
-        "existing raw record is explicitly unverified and lacks accepted page/block facts"
+        "full-source active lifecycle is still pending; only contributing pages 133-140 and 285-286 are verified",
+        "app-facing STARTING_SPIRITS has not been regenerated from Monster Island exact page evidence",
+        "Mythras Core base spirit-rule pages are still blocked for the starting-spirit app surface"
       ],
-      "acceptance_state": "blocked_pending_vision_verification",
+      "acceptance_state": "reference_evidence_verified_app_promotion_blocked",
       "acceptance_blockers": [
-        "Source PDF metadata is recorded, but permission remains pending.",
-        "Candidate pages 133-140 and 285-286 are rendered into ignored cache and recorded with image hashes/dimensions, but no bounded extraction artifact exists.",
-        "No independent verifier artifact exists for the rendered pages.",
-        "Monster Island remains non-authoritative and cannot feed accepted Gloranthan cult data until permission and verified page/block evidence exist."
+        "Monster Island source revision remains non-active/permission-pending because this is partial contributing-page coverage, not all-page source activation.",
+        "Starting-spirit app constants still require a separate regeneration/provenance pass before Monster Island facts can be app-facing.",
+        "Exact stat-row values in appendix loadouts were bounded-extracted but intentionally not promoted to STARTING_SPIRITS by this pass."
       ],
       "source_access": {
         "public_copyparty_source": {
@@ -506,7 +503,7 @@
         "page_count_method": "pdfinfo against user-supplied local PDF",
         "canonical_locator_head_status": 200,
         "canonical_locator_content_length": 10363314,
-        "note": "The source PDF and rendered pages are ignored and uncommitted. This unit rendered candidate pages into .cache and committed only bounded image hashes/dimensions; no extraction, independent verification, or accepted facts were produced.",
+        "note": "The source PDF and rendered pages are ignored and uncommitted. Candidate pages now have committed bounded extraction artifacts plus independent verifier artifacts; app-facing acceptance remains blocked.",
         "rendered_candidate_pdf_pages": [
           133,
           134,
@@ -520,7 +517,31 @@
           286
         ],
         "render_cache_recorded": true,
-        "used_for_vision_extraction": false
+        "used_for_vision_extraction": true,
+        "vision_extraction_completed_at": "2026-05-22",
+        "vision_verification_completed_at": "2026-05-22",
+        "vision_evidence_paths": [
+          "references/sources/evidence/monster-island/page-0133-extraction.json",
+          "references/sources/evidence/monster-island/page-0133-verification.json",
+          "references/sources/evidence/monster-island/page-0134-extraction.json",
+          "references/sources/evidence/monster-island/page-0134-verification.json",
+          "references/sources/evidence/monster-island/page-0135-extraction.json",
+          "references/sources/evidence/monster-island/page-0135-verification.json",
+          "references/sources/evidence/monster-island/page-0136-extraction.json",
+          "references/sources/evidence/monster-island/page-0136-verification.json",
+          "references/sources/evidence/monster-island/page-0137-extraction.json",
+          "references/sources/evidence/monster-island/page-0137-verification.json",
+          "references/sources/evidence/monster-island/page-0138-extraction.json",
+          "references/sources/evidence/monster-island/page-0138-verification.json",
+          "references/sources/evidence/monster-island/page-0139-extraction.json",
+          "references/sources/evidence/monster-island/page-0139-verification.json",
+          "references/sources/evidence/monster-island/page-0140-extraction.json",
+          "references/sources/evidence/monster-island/page-0140-verification.json",
+          "references/sources/evidence/monster-island/page-0285-extraction.json",
+          "references/sources/evidence/monster-island/page-0285-verification.json",
+          "references/sources/evidence/monster-island/page-0286-extraction.json",
+          "references/sources/evidence/monster-island/page-0286-verification.json"
+        ]
       }
     }
   ]

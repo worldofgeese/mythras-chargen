@@ -1,0 +1,116 @@
+{
+  "artifact_id": "monster-island-page-0134-extraction-opus-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "monster-island",
+  "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
+  "pdf_page": 134,
+  "printed_page_label": "133",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/monster-island/page-0134.png",
+    "image_sha256": "1b1df756fb82bbead413ab0dda483c1aa278cab78af7c77b93a93a46fbc7db6e",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "monster-island-extract-opus-cult-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "schema_version": 1,
+  "blocks": [
+    {
+      "block_id": "monster-island-p134-b001",
+      "block_type": "heading",
+      "reading_order": 1,
+      "region": {
+        "x": 0.06,
+        "y": 0.2,
+        "w": 0.12,
+        "h": 0.04
+      },
+      "bounded_excerpt": "NATURE",
+      "facts": {
+        "topic": "totemic_cult_nature"
+      }
+    },
+    {
+      "block_id": "monster-island-p134-b002",
+      "block_type": "paragraph",
+      "reading_order": 2,
+      "region": {
+        "x": 0.06,
+        "y": 0.24,
+        "w": 0.3,
+        "h": 0.25
+      },
+      "bounded_excerpt": "Purpose of each totemic cult is to keep bound the deity... spirits... offer willing, albeit temporary, service to tribal members.",
+      "facts": {
+        "cult_purpose": "keep the embodied deity bound",
+        "spirit_service": "temporary service to tribal members",
+        "ancestor_upkeep": "regular Magic Point donations"
+      }
+    },
+    {
+      "block_id": "monster-island-p134-b003",
+      "block_type": "paragraph",
+      "reading_order": 3,
+      "region": {
+        "x": 0.06,
+        "y": 0.6,
+        "w": 0.4,
+        "h": 0.1
+      },
+      "bounded_excerpt": "All tribal members join their totemic cult... Follower. Above that the ranks of Worshipper, Shaman, High Shaman and Spirit Lord...",
+      "facts": {
+        "ranks_ordered": [
+          "Follower",
+          "Worshipper",
+          "Shaman",
+          "High Shaman",
+          "Spirit Lord"
+        ],
+        "kahuna_group": [
+          "Worshipper",
+          "Shaman",
+          "High Shaman",
+          "Spirit Lord"
+        ]
+      }
+    },
+    {
+      "block_id": "monster-island-p134-b004",
+      "block_type": "paragraph",
+      "reading_order": 4,
+      "region": {
+        "x": 0.06,
+        "y": 0.7,
+        "w": 0.4,
+        "h": 0.25
+      },
+      "bounded_excerpt": "Each settlement has roughly 2-5 spirit worshippers... at least one full Shaman... High Shaman are rarer, numbering 1-2 per tribe.",
+      "facts": {
+        "per_settlement_worshippers": "2-5",
+        "per_settlement_shamans": "at least 1",
+        "per_tribe_high_shamans": "1-2"
+      }
+    },
+    {
+      "block_id": "monster-island-p134-b005",
+      "block_type": "paragraph",
+      "reading_order": 5,
+      "region": {
+        "x": 0.5,
+        "y": 0.65,
+        "w": 0.43,
+        "h": 0.3
+      },
+      "bounded_excerpt": "Only a single kahuna of Spirit Lord rank is ever allowed at any time... judged by the ancestors themselves in a great conclave of spirits.",
+      "facts": {
+        "spirit_lord_count": "one at a time",
+        "challenge_judges": "ancestor spirits"
+      }
+    }
+  ],
+  "page_boundary_notes": "Interior page of the cult-structure section; decorative illustration is non-rules evidence."
+}

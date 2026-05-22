@@ -1,0 +1,109 @@
+{
+  "artifact_id": "monster-island-page-0137-extraction-opus-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "monster-island",
+  "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
+  "pdf_page": 137,
+  "printed_page_label": "136",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/monster-island/page-0137.png",
+    "image_sha256": "9453280da8af1c598abdd0157d894a53a99024753b27b5761eb82557a084c9d5",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "monster-island-extract-opus-spirits-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "schema_version": 1,
+  "blocks": [
+    {
+      "block_id": "monster-island-p137-b001",
+      "block_type": "paragraph",
+      "reading_order": 1,
+      "region": {
+        "x": 0.07,
+        "y": 0.27,
+        "w": 0.42,
+        "h": 0.22
+      },
+      "bounded_excerpt": "High Shaman... duties... lead the yearly ceremony to rebind the totem god... binding... spirits hostile to the cult.",
+      "facts": {
+        "rank": "High Shaman",
+        "duties": [
+          "wander settlements",
+          "educate shamans",
+          "lead yearly totem god rebinding"
+        ],
+        "spirit_access": "bind hostile spirits; cannot locate or summon them from afar"
+      }
+    },
+    {
+      "block_id": "monster-island-p137-b002",
+      "block_type": "paragraph",
+      "reading_order": 2,
+      "region": {
+        "x": 0.07,
+        "y": 0.52,
+        "w": 0.42,
+        "h": 0.18
+      },
+      "bounded_excerpt": "Only one Spirit Lord may exist upon the island at any time... High Shaman... challenge the current holder...",
+      "facts": {
+        "rank": "Spirit Lord",
+        "count": "one on the island",
+        "challenge_requirements": [
+          "qualified High Shaman",
+          "ancestor permission"
+        ]
+      }
+    },
+    {
+      "block_id": "monster-island-p137-b003",
+      "block_type": "paragraph",
+      "reading_order": 3,
+      "region": {
+        "x": 0.51,
+        "y": 0.48,
+        "w": 0.42,
+        "h": 0.22
+      },
+      "bounded_excerpt": "Responsibilities of Spirit Lord / High Kahuna... guide shamans of all tribes with rigorous neutrality... non-friendly treated as Neutral...",
+      "facts": {
+        "spirit_lord_duties": [
+          "neutral guidance of all tribes' shamans",
+          "watch for Smoking Mirrors",
+          "prevent third cataclysm"
+        ],
+        "spirit_attitude_benefit": "non-friendly spirits treated as Neutral"
+      }
+    },
+    {
+      "block_id": "monster-island-p137-b004",
+      "block_type": "paragraph",
+      "reading_order": 4,
+      "region": {
+        "x": 0.51,
+        "y": 0.85,
+        "w": 0.42,
+        "h": 0.1
+      },
+      "bounded_excerpt": "Core skills: Binding, Dance, Influence, Insight, Sing, Trance, Willpower. Healing not primary; left to dowager-matriarchs.",
+      "facts": {
+        "core_skills": [
+          "Binding",
+          "Dance",
+          "Influence",
+          "Insight",
+          "Sing",
+          "Trance",
+          "Willpower"
+        ],
+        "healing_role": "dowager-matriarchs"
+      }
+    }
+  ],
+  "page_boundary_notes": "Interior page covering High Shaman, Spirit Lord, restrictions, and core skill summary."
+}

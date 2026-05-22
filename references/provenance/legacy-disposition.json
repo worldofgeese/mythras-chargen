@@ -176,7 +176,8 @@
       "source_ids": [
         "monster-island"
       ],
-      "rationale": "Existing Monster Island data is explicitly unverified and cannot become governed authority until verified page evidence exists.",
+      "rationale": "Monster Island spirit template/loadout data has bounded reference evidence, but app-facing promotion remains blocked until source acceptance and regeneration.",
+      "scan_for_unverified": true,
       "enforce_source_refs": true
     },
     {

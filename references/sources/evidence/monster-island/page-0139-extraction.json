@@ -1,0 +1,57 @@
+{
+  "artifact_id": "monster-island-page-0139-extraction-opus-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "monster-island",
+  "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
+  "pdf_page": 139,
+  "printed_page_label": "138",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/monster-island/page-0139.png",
+    "image_sha256": "ed964411aef0f8c74a8371d7dc5124dd9dbf538490db32c99340e6abf2f36f55",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "monster-island-extract-opus-spirits-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "schema_version": 1,
+  "blocks": [
+    {
+      "block_id": "monster-island-p139-b001",
+      "block_type": "table",
+      "reading_order": 1,
+      "region": {
+        "x": 0.05,
+        "y": 0.07,
+        "w": 0.9,
+        "h": 0.88
+      },
+      "bounded_excerpt": "Two-column listing of totemic cults with Totem God, Friendly Spirits, Neutral Spirits, Gift.",
+      "facts": {
+        "table_pattern": [
+          "Totem God",
+          "Friendly Spirits",
+          "Neutral Spirits",
+          "Gift"
+        ],
+        "cult_names": [
+          "Anguri",
+          "Gabari",
+          "Gamari",
+          "Ghidori",
+          "Gyaosi",
+          "Kamacuri",
+          "Kangi",
+          "Kumongi",
+          "Mandahi",
+          "Oodaki"
+        ],
+        "friendly_pattern": "ancestor spirit plus nature/shape-shifting spirits tied to the totem"
+      }
+    }
+  ],
+  "page_boundary_notes": "Pure cult-spirit table page; table continues onto the next rendered page."
+}

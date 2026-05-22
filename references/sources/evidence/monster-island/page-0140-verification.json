@@ -1,0 +1,45 @@
+{
+  "artifact_id": "monster-island-page-0140-verification-opus-2026-05-22",
+  "artifact_kind": "verification",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "monster-island",
+  "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
+  "pdf_page": 140,
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/monster-island/page-0140.png",
+    "image_sha256": "d08f2b091c8906e7784fa0f623c977059edb99a51d6e0a33eb127acf0b0548a8",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "monster-island-extract-opus-spirits-2026-05-22",
+  "verifier_prompt_id": "vision-verify-bounded-page.v1",
+  "verifier_run_id": "monster-island-verify-opus-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "independence": {
+    "read_extractor_output": false,
+    "read_extractor_scratch": false,
+    "read_extractor_rationale": false
+  },
+  "agreement": "pass_with_boundary_caution",
+  "verified_blocks": [
+    "monster-island-p140-b001",
+    "monster-island-p140-b002",
+    "monster-island-p140-b003",
+    "monster-island-p140-b004",
+    "monster-island-p140-b005"
+  ],
+  "bounded_excerpts": [
+    "CULT OF VARANRI",
+    "RANDOM SPIRIT ENCOUNTERS",
+    "Spirit Encounters Table",
+    "Spirit Intensity",
+    "SORCERY OF THE HIGH FOLK"
+  ],
+  "promotion_cautions": [
+    "New sorcery section begins on this page and is outside the spirit-cult evidence scope.",
+    "Do not infer section closure without neighboring printed page 140."
+  ]
+}

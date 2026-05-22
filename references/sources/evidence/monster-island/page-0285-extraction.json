@@ -1,0 +1,92 @@
+{
+  "artifact_id": "monster-island-page-0285-extraction-opus-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "monster-island",
+  "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
+  "pdf_page": 285,
+  "printed_page_label": "284",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/monster-island/page-0285.png",
+    "image_sha256": "7ce1de3efa353906b00f5f0eb556ede6b36c736e218cafa8e52c24f3688c7d5e",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "monster-island-extract-opus-loadouts-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "schema_version": 1,
+  "blocks": [
+    {
+      "block_id": "monster-island-p285-b001",
+      "block_type": "paragraph",
+      "reading_order": 1,
+      "region": {
+        "x": 0.07,
+        "y": 0.38,
+        "w": 0.86,
+        "h": 0.08
+      },
+      "bounded_excerpt": "The following kahuna possess a number of fetishes as part of their status... substitute a spirit of correct type...",
+      "facts": {
+        "scope": "kahuna fetish and spirit examples",
+        "guidance": "substitute tribe-appropriate spirits using listed characteristics and intensity"
+      }
+    },
+    {
+      "block_id": "monster-island-p285-b002",
+      "block_type": "stat_block",
+      "reading_order": 2,
+      "region": {
+        "x": 0.07,
+        "y": 0.47,
+        "w": 0.86,
+        "h": 0.18
+      },
+      "bounded_excerpt": "Assistant Shaman (Spirit Worshipper)... Binding 69%, Trance 69%, Willpower 62%... Fetishes...",
+      "facts": {
+        "loadout": "Assistant Shaman (Spirit Worshipper)",
+        "spirit_rows": [
+          "Nature Spirit (Trait)",
+          "Nature Spirit (Boost)",
+          "Shape-shifting Spirit"
+        ],
+        "other_known_spirits": [
+          "Ancestor Spirits"
+        ]
+      }
+    },
+    {
+      "block_id": "monster-island-p285-b003",
+      "block_type": "stat_block",
+      "reading_order": 3,
+      "region": {
+        "x": 0.07,
+        "y": 0.66,
+        "w": 0.86,
+        "h": 0.28
+      },
+      "bounded_excerpt": "Shaman... Binding 84%, Trance 84%, Willpower 72%... Fetishes...",
+      "facts": {
+        "loadout": "Shaman",
+        "fetch_abilities": [
+          "Autonomy",
+          "Binding",
+          "Domination",
+          "Spellcasting"
+        ],
+        "spirit_rows": [
+          "Nature Spirit",
+          "Shape-shifting Spirit",
+          "Neutral Spirit"
+        ],
+        "other_known_spirits": [
+          "Ancestor Spirits"
+        ]
+      }
+    }
+  ],
+  "page_boundary_notes": "Top warrior loadouts are out of scope; in-scope kahuna spirit loadouts start mid-page and complete on this page."
+}

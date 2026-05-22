@@ -1,0 +1,99 @@
+{
+  "artifact_id": "monster-island-page-0286-extraction-opus-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "monster-island",
+  "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
+  "pdf_page": 286,
+  "printed_page_label": "285",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/monster-island/page-0286.png",
+    "image_sha256": "d5b1bac0fb057a7f3f990874f07834b216b209df786d060ba7654cd3071ad2c9",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "monster-island-extract-opus-loadouts-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "schema_version": 1,
+  "blocks": [
+    {
+      "block_id": "monster-island-p286-b001",
+      "block_type": "stat_block",
+      "reading_order": 1,
+      "region": {
+        "x": 0.07,
+        "y": 0.07,
+        "w": 0.86,
+        "h": 0.32
+      },
+      "bounded_excerpt": "High Shaman... Binding 99%, Trance 99%, Willpower 82%...",
+      "facts": {
+        "loadout": "High Shaman",
+        "spirit_rows": [
+          "Nature Spirit",
+          "Shape-shifting Spirit",
+          "Neutral Spirit",
+          "Hostile Spirit"
+        ],
+        "other_known_spirits": [
+          "Ancestor Spirits",
+          "All Neutral Spirits",
+          "One Hostile Spirit"
+        ]
+      }
+    },
+    {
+      "block_id": "monster-island-p286-b002",
+      "block_type": "stat_block",
+      "reading_order": 2,
+      "region": {
+        "x": 0.07,
+        "y": 0.39,
+        "w": 0.86,
+        "h": 0.32
+      },
+      "bounded_excerpt": "High Kahuna (Spirit Lord)... Binding 114%, Trance 114%, Willpower 92%...",
+      "facts": {
+        "loadout": "High Kahuna (Spirit Lord)",
+        "fetch_abilities": [
+          "Binding",
+          "Comprehension",
+          "Covert",
+          "Deadly",
+          "Elemental",
+          "Perception"
+        ],
+        "spirit_rows": [
+          "Nature Spirit",
+          "Shape-shifting Spirit",
+          "Neutral Spirit",
+          "Hostile Spirit"
+        ],
+        "other_known_spirits": [
+          "Ancestor Spirits",
+          "All Neutral Spirits",
+          "Several Hostile Spirits"
+        ]
+      }
+    },
+    {
+      "block_id": "monster-island-p286-b003",
+      "block_type": "heading",
+      "reading_order": 3,
+      "region": {
+        "x": 0.07,
+        "y": 0.72,
+        "w": 0.4,
+        "h": 0.06
+      },
+      "bounded_excerpt": "SERPENT PEOPLE",
+      "facts": {
+        "out_of_scope_for_spirit_loadouts": true
+      }
+    }
+  ],
+  "page_boundary_notes": "In-scope High Shaman and High Kahuna loadouts occupy the upper page; the lower page transitions to an out-of-scope Serpent People section."
+}

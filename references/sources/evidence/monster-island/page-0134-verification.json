@@ -1,0 +1,42 @@
+{
+  "artifact_id": "monster-island-page-0134-verification-opus-2026-05-22",
+  "artifact_kind": "verification",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "monster-island",
+  "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
+  "pdf_page": 134,
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/monster-island/page-0134.png",
+    "image_sha256": "1b1df756fb82bbead413ab0dda483c1aa278cab78af7c77b93a93a46fbc7db6e",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "monster-island-extract-opus-cult-2026-05-22",
+  "verifier_prompt_id": "vision-verify-bounded-page.v1",
+  "verifier_run_id": "monster-island-verify-opus-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "independence": {
+    "read_extractor_output": false,
+    "read_extractor_scratch": false,
+    "read_extractor_rationale": false
+  },
+  "agreement": "pass",
+  "verified_blocks": [
+    "monster-island-p134-b001",
+    "monster-island-p134-b002",
+    "monster-island-p134-b003",
+    "monster-island-p134-b004",
+    "monster-island-p134-b005"
+  ],
+  "bounded_excerpts": [
+    "NATURE",
+    "ORGANISATION",
+    "Follower, Worshipper, Shaman, High Shaman and Spirit Lord"
+  ],
+  "promotion_cautions": [
+    "Population-density counts are setting guidance, not automatic player character build constraints."
+  ]
+}

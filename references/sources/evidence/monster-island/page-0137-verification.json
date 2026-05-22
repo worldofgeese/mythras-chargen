@@ -1,0 +1,41 @@
+{
+  "artifact_id": "monster-island-page-0137-verification-opus-2026-05-22",
+  "artifact_kind": "verification",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "monster-island",
+  "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
+  "pdf_page": 137,
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/monster-island/page-0137.png",
+    "image_sha256": "9453280da8af1c598abdd0157d894a53a99024753b27b5761eb82557a084c9d5",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "monster-island-extract-opus-spirits-2026-05-22",
+  "verifier_prompt_id": "vision-verify-bounded-page.v1",
+  "verifier_run_id": "monster-island-verify-opus-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "independence": {
+    "read_extractor_output": false,
+    "read_extractor_scratch": false,
+    "read_extractor_rationale": false
+  },
+  "agreement": "pass",
+  "verified_blocks": [
+    "monster-island-p137-b001",
+    "monster-island-p137-b002",
+    "monster-island-p137-b003",
+    "monster-island-p137-b004"
+  ],
+  "bounded_excerpts": [
+    "SPIRIT LORD",
+    "RESTRICTIONS",
+    "SKILLS, SPIRITS AND GIFTS"
+  ],
+  "promotion_cautions": [
+    "Treat challenge procedure and story details as setting context unless explicitly needed."
+  ]
+}

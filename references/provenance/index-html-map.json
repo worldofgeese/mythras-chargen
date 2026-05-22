@@ -329,18 +329,14 @@
             "references/sources/evidence/bird-in-hand/page-0047-extraction.json",
             "references/sources/evidence/bird-in-hand/page-0047-verification.json"
           ]
-        }
-      ],
-      "rationale": "Starting spirit examples remain source-blocked overall because Mythras Core base spirit-rule pages and Monster Island candidate examples are still not accepted. Bird in Hand example-spirit pages 43-47 are now bounded-vision verified with independent page/block evidence.",
-      "blocked_candidate_sources": [
+        },
         {
           "source_id": "monster-island",
           "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
           "page_manifest_path": "references/sources/pages/monster-island.json",
-          "coverage_state": "blocked",
-          "authority_state": "non_authoritative",
-          "evidence_state": "rendered_pages_extraction_and_verification_blocked",
-          "candidate_pdf_pages": [
+          "coverage_state": "verified",
+          "evidence_state": "bounded_extraction_independent_vision_verified_reference_only",
+          "verified_pdf_pages": [
             133,
             134,
             135,
@@ -352,13 +348,31 @@
             285,
             286
           ],
-          "blocked_by": [
-            "permission basis remains pending",
-            "no bounded extraction artifact exists",
-            "no independent verifier artifact exists"
+          "evidence_paths": [
+            "references/sources/evidence/monster-island/page-0133-extraction.json",
+            "references/sources/evidence/monster-island/page-0133-verification.json",
+            "references/sources/evidence/monster-island/page-0134-extraction.json",
+            "references/sources/evidence/monster-island/page-0134-verification.json",
+            "references/sources/evidence/monster-island/page-0135-extraction.json",
+            "references/sources/evidence/monster-island/page-0135-verification.json",
+            "references/sources/evidence/monster-island/page-0136-extraction.json",
+            "references/sources/evidence/monster-island/page-0136-verification.json",
+            "references/sources/evidence/monster-island/page-0137-extraction.json",
+            "references/sources/evidence/monster-island/page-0137-verification.json",
+            "references/sources/evidence/monster-island/page-0138-extraction.json",
+            "references/sources/evidence/monster-island/page-0138-verification.json",
+            "references/sources/evidence/monster-island/page-0139-extraction.json",
+            "references/sources/evidence/monster-island/page-0139-verification.json",
+            "references/sources/evidence/monster-island/page-0140-extraction.json",
+            "references/sources/evidence/monster-island/page-0140-verification.json",
+            "references/sources/evidence/monster-island/page-0285-extraction.json",
+            "references/sources/evidence/monster-island/page-0285-verification.json",
+            "references/sources/evidence/monster-island/page-0286-extraction.json",
+            "references/sources/evidence/monster-island/page-0286-verification.json"
           ]
         }
-      ]
+      ],
+      "rationale": "Starting spirit examples remain source-blocked overall because Mythras Core base spirit-rule pages are not yet verified and the inline STARTING_SPIRITS app constant has not been regenerated from the now-verified Monster Island reference evidence. Bird in Hand pages 43-47 and Monster Island pages 133-140/285-286 have bounded extraction plus independent page/block evidence."
     }
   ]
 }

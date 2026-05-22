@@ -1,0 +1,110 @@
+{
+  "artifact_id": "monster-island-page-0138-extraction-opus-2026-05-22",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "monster-island",
+  "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
+  "pdf_page": 138,
+  "printed_page_label": "137",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/monster-island/page-0138.png",
+    "image_sha256": "ce930c732347a9d42cffc5f9c222dd8ae998b50a70fc5accb2e9e487fe6347bc",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "monster-island-extract-opus-spirits-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "schema_version": 1,
+  "blocks": [
+    {
+      "block_id": "monster-island-p138-b001",
+      "block_type": "paragraph",
+      "reading_order": 1,
+      "region": {
+        "x": 0.07,
+        "y": 0.09,
+        "w": 0.42,
+        "h": 0.1
+      },
+      "bounded_excerpt": "Totemic cults follow same alliances and antipathies as their tribe... Kahuna forbidden direct warfare with one another...",
+      "facts": {
+        "cult_alliances": "match tribal alliances",
+        "kahuna_combat": "direct warfare forbidden"
+      }
+    },
+    {
+      "block_id": "monster-island-p138-b002",
+      "block_type": "paragraph",
+      "reading_order": 2,
+      "region": {
+        "x": 0.07,
+        "y": 0.23,
+        "w": 0.42,
+        "h": 0.18
+      },
+      "bounded_excerpt": "Cult structure universal but spirits are not... friendly or neutral; anything else defaults to hostile; elemental spirits hostile to all totemic cults.",
+      "facts": {
+        "default_attitude": "hostile unless listed friendly or neutral",
+        "universally_hostile": [
+          "Elemental spirits"
+        ],
+        "each_cult_has": "secret Gift"
+      }
+    },
+    {
+      "block_id": "monster-island-p138-b003",
+      "block_type": "table",
+      "reading_order": 3,
+      "region": {
+        "x": 0.1,
+        "y": 0.46,
+        "w": 0.4,
+        "h": 0.3
+      },
+      "bounded_excerpt": "Friendly: Worshipper rank+ can locate/summon/bind. Neutral: Shaman rank+. Hostile: High Shaman rank+ may bind only.",
+      "facts": {
+        "friendly_spirits": {
+          "min_rank": "Worshipper",
+          "abilities": [
+            "locate",
+            "summon from afar",
+            "bind"
+          ]
+        },
+        "neutral_spirits": {
+          "min_rank": "Shaman",
+          "abilities": [
+            "summon from afar",
+            "bind"
+          ]
+        },
+        "hostile_spirits": {
+          "min_rank": "High Shaman",
+          "abilities": [
+            "bind"
+          ],
+          "cannot": "summon from afar"
+        }
+      }
+    },
+    {
+      "block_id": "monster-island-p138-b004",
+      "block_type": "paragraph",
+      "reading_order": 4,
+      "region": {
+        "x": 0.51,
+        "y": 0.75,
+        "w": 0.42,
+        "h": 0.18
+      },
+      "bounded_excerpt": "Nature Spirits with Dominate Species work differently... controls combined SIZ equal to 10x Intensity.",
+      "facts": {
+        "dominate_species_island_rule": "controls combined SIZ equal to 10 x Intensity"
+      }
+    }
+  ],
+  "page_boundary_notes": "Interior page for spirit attitudes, pact context, and an island-specific Dominate Species rule."
+}

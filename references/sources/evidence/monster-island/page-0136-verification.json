@@ -1,0 +1,42 @@
+{
+  "artifact_id": "monster-island-page-0136-verification-opus-2026-05-22",
+  "artifact_kind": "verification",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "monster-island",
+  "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
+  "pdf_page": 136,
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/monster-island/page-0136.png",
+    "image_sha256": "e9dda315b1109ee9517a77c0c431c9e631f5bf24eae011e4be42d866fc1a66b7",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "monster-island-extract-opus-cult-2026-05-22",
+  "verifier_prompt_id": "vision-verify-bounded-page.v1",
+  "verifier_run_id": "monster-island-verify-opus-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI",
+  "independence": {
+    "read_extractor_output": false,
+    "read_extractor_scratch": false,
+    "read_extractor_rationale": false
+  },
+  "agreement": "pass",
+  "verified_blocks": [
+    "monster-island-p136-b001",
+    "monster-island-p136-b002",
+    "monster-island-p136-b003",
+    "monster-island-p136-b004"
+  ],
+  "bounded_excerpts": [
+    "WORSHIPPER",
+    "SHAMAN",
+    "Fetch",
+    "HIGH SHAMAN"
+  ],
+  "promotion_cautions": [
+    "High Shaman section body continues onto the next page."
+  ]
+}
