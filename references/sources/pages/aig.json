@@ -558,8 +558,8 @@
       "pdf_page": 31,
       "printed_page_label": "30",
       "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
-      "work_state": "extracted",
-      "contributes": null,
+      "work_state": "verified",
+      "contributes": true,
       "render": {
         "status": "rendered",
         "cache_path": ".cache/source-pages/aig/page-0031.png",
@@ -580,17 +580,22 @@
         "extractor_run_id": "aig-magic-access-extract-opus-2026-05-22",
         "block_count": 5
       },
-      "verification": null,
+      "verification": {
+        "status": "pass",
+        "independent": true,
+        "artifact_id": "aig-page-0031-verification-opus-2026-05-22",
+        "artifact_path": "references/sources/evidence/aig/page-0031-verification.json"
+      },
       "derived_facts": [],
       "raw_page_record": "references/aig-raw/pages/page-031.json",
-      "notes": "Extraction artifact linked; independent verification pending."
+      "notes": "Verified; promotion blocked."
     },
     {
       "pdf_page": 32,
       "printed_page_label": "31",
       "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
-      "work_state": "extracted",
-      "contributes": null,
+      "work_state": "verified",
+      "contributes": false,
       "render": {
         "status": "rendered",
         "cache_path": ".cache/source-pages/aig/page-0032.png",
@@ -611,10 +616,16 @@
         "extractor_run_id": "aig-magic-access-extract-opus-2026-05-22",
         "block_count": 1
       },
-      "verification": null,
+      "verification": {
+        "status": "pass",
+        "independent": true,
+        "artifact_id": "aig-page-0032-verification-opus-2026-05-22",
+        "artifact_path": "references/sources/evidence/aig/page-0032-verification.json"
+      },
       "derived_facts": [],
       "raw_page_record": "references/aig-raw/pages/page-032.json",
-      "notes": "Extraction artifact linked; independent verification pending."
+      "notes": "Verified; promotion blocked.",
+      "exclusion_reason": "Boundary page; no target magic-access content."
     },
     {
       "pdf_page": 33,
@@ -1106,8 +1117,8 @@
       "pdf_page": 60,
       "printed_page_label": "59",
       "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
-      "work_state": "extracted",
-      "contributes": null,
+      "work_state": "verified",
+      "contributes": true,
       "render": {
         "status": "rendered",
         "cache_path": ".cache/source-pages/aig/page-0060.png",
@@ -1128,17 +1139,22 @@
         "extractor_run_id": "aig-magic-access-extract-opus-2026-05-22",
         "block_count": 6
       },
-      "verification": null,
+      "verification": {
+        "status": "pass",
+        "independent": true,
+        "artifact_id": "aig-page-0060-verification-opus-2026-05-22",
+        "artifact_path": "references/sources/evidence/aig/page-0060-verification.json"
+      },
       "derived_facts": [],
       "raw_page_record": "references/aig-raw/pages/page-060.json",
-      "notes": "Extraction artifact linked; independent verification pending."
+      "notes": "Verified; promotion blocked."
     },
     {
       "pdf_page": 61,
       "printed_page_label": "60",
       "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
-      "work_state": "extracted",
-      "contributes": null,
+      "work_state": "verified",
+      "contributes": true,
       "render": {
         "status": "rendered",
         "cache_path": ".cache/source-pages/aig/page-0061.png",
@@ -1159,17 +1175,22 @@
         "extractor_run_id": "aig-magic-access-extract-opus-2026-05-22",
         "block_count": 7
       },
-      "verification": null,
+      "verification": {
+        "status": "pass",
+        "independent": true,
+        "artifact_id": "aig-page-0061-verification-opus-2026-05-22",
+        "artifact_path": "references/sources/evidence/aig/page-0061-verification.json"
+      },
       "derived_facts": [],
       "raw_page_record": "references/aig-raw/pages/page-061.json",
-      "notes": "Extraction artifact linked; independent verification pending."
+      "notes": "Verified; promotion blocked."
     },
     {
       "pdf_page": 62,
       "printed_page_label": "61",
       "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
-      "work_state": "extracted",
-      "contributes": null,
+      "work_state": "verified",
+      "contributes": true,
       "render": {
         "status": "rendered",
         "cache_path": ".cache/source-pages/aig/page-0062.png",
@@ -1190,10 +1211,15 @@
         "extractor_run_id": "aig-magic-access-extract-opus-2026-05-22",
         "block_count": 9
       },
-      "verification": null,
+      "verification": {
+        "status": "pass",
+        "independent": true,
+        "artifact_id": "aig-page-0062-verification-opus-2026-05-22",
+        "artifact_path": "references/sources/evidence/aig/page-0062-verification.json"
+      },
       "derived_facts": [],
       "raw_page_record": "references/aig-raw/pages/page-062.json",
-      "notes": "Extraction artifact linked; independent verification pending."
+      "notes": "Verified; promotion blocked."
     },
     {
       "pdf_page": 63,

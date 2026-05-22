@@ -1,0 +1,43 @@
+{
+  "artifact_id": "aig-page-0060-verification-opus-2026-05-22",
+  "artifact_kind": "verification",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 60,
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0060.png",
+    "image_sha256": "90b3c7655302e6fe5fd8d7204974355ec4be650a4afb3cfac879f9d3e601e346",
+    "dimensions": {
+      "width": 1656,
+      "height": 2159
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-magic-access-extract-opus-2026-05-22",
+  "verifier_prompt_id": "vision-verify-bounded-page.v1",
+  "verifier_run_id": "aig-page-0060-verify-opus-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI vision subagent",
+  "independence": {
+    "read_extractor_output": false,
+    "read_extractor_scratch": false,
+    "read_extractor_rationale": false
+  },
+  "agreement": "pass",
+  "verified_blocks": [
+    "aig-p060-b001",
+    "aig-p060-b002",
+    "aig-p060-b003",
+    "aig-p060-b004",
+    "aig-p060-b005",
+    "aig-p060-b006"
+  ],
+  "bounded_excerpts": [
+    "Magic",
+    "Sorcery",
+    "Mysticism"
+  ],
+  "promotion_cautions": [
+    "Overview page; resolve placeholders before promotion."
+  ]
+}

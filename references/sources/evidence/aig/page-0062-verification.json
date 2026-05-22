@@ -1,0 +1,46 @@
+{
+  "artifact_id": "aig-page-0062-verification-opus-2026-05-22",
+  "artifact_kind": "verification",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 62,
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0062.png",
+    "image_sha256": "c2620036e8e8956152febd289e99ac6e82fbc35e8b289fba651fdc513a37de10",
+    "dimensions": {
+      "width": 1656,
+      "height": 2159
+    }
+  },
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-magic-access-extract-opus-2026-05-22",
+  "verifier_prompt_id": "vision-verify-bounded-page.v1",
+  "verifier_run_id": "aig-page-0062-verify-opus-2026-05-22",
+  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI vision subagent",
+  "independence": {
+    "read_extractor_output": false,
+    "read_extractor_scratch": false,
+    "read_extractor_rationale": false
+  },
+  "agreement": "pass",
+  "verified_blocks": [
+    "aig-p062-b001",
+    "aig-p062-b002",
+    "aig-p062-b003",
+    "aig-p062-b004",
+    "aig-p062-b005",
+    "aig-p062-b006",
+    "aig-p062-b007",
+    "aig-p062-b008",
+    "aig-p062-b009"
+  ],
+  "bounded_excerpts": [
+    "Availability of Spells",
+    "Learning Spells",
+    "Casting Time"
+  ],
+  "promotion_cautions": [
+    "Table and restrictions need normalization before promotion."
+  ]
+}

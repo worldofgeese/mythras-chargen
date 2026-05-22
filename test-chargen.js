@@ -54,24 +54,54 @@ function readJson(relativePath) {
   return jsonCache.get(absolutePath);
 }
 
-const sourceEvidenceBudgetFields = new Set([
-  'bounded_excerpt',
-  'candidate_reason',
-  'exclusion_reason',
-  'notes',
-  'page_boundary_notes'
+const sourceEvidenceMetadataFields = new Set([
+  'agreement',
+  'artifact_id',
+  'artifact_kind',
+  'artifact_path',
+  'block_id',
+  'block_type',
+  'cache_path',
+  'coverage_mode',
+  'coverage_state',
+  'extractor_prompt_id',
+  'extractor_run_id',
+  'fact_id',
+  'image_sha256',
+  'printed_page_label',
+  'raw_page_record',
+  'reading_order',
+  'record',
+  'rendered_at',
+  'renderer',
+  'schema_version',
+  'source_id',
+  'source_pdf_sha256',
+  'source_revision_id',
+  'status',
+  'tool_identity',
+  'verifier_prompt_id',
+  'verifier_run_id',
+  'workflow_id',
+  'work_state'
 ]);
 
-function sourceEvidenceTextLength(value, key = '', insideFacts = false) {
+function isSourceEvidenceMetadataString(value) {
+  return /^[a-f0-9]{64}$/.test(value) ||
+    /^aig-p\d{3}-b\d{3}$/.test(value) ||
+    /^(blocked|completed|extracted|extraction|not_rendered|pass|passed|pending|rendered|verified|verification)$/i.test(value);
+}
+
+function sourceEvidenceTextLength(value, key = '') {
   if (typeof value === 'string') {
-    return sourceEvidenceBudgetFields.has(key) || insideFacts ? value.length : 0;
+    return sourceEvidenceMetadataFields.has(key) || isSourceEvidenceMetadataString(value) ? 0 : value.length;
   }
   if (Array.isArray(value)) {
-    return value.reduce((total, item) => total + sourceEvidenceTextLength(item, key, insideFacts), 0);
+    return value.reduce((total, item) => total + sourceEvidenceTextLength(item, key), 0);
   }
   if (value && typeof value === 'object') {
     return Object.entries(value).reduce((total, [childKey, childValue]) =>
-      total + sourceEvidenceTextLength(childValue, childKey, insideFacts || childKey === 'facts'), 0);
+      total + sourceEvidenceTextLength(childValue, childKey), 0);
   }
   return 0;
 }
@@ -769,43 +799,68 @@ runCommandTest('Render workflow can list sources without rendering pages',
   const pageIndexPages = new Set((aigPageIndex.pages || []).map(page => page.pdf_page));
   const missingCoveragePages = expectedAiGPages.filter(page => !coveragePages.has(page));
   const missingIndexPages = expectedAiGPages.filter(page => !pageIndexPages.has(page));
-  const extractedAiGPages = new Map([
-    [31, { blocks: 5 }],
-    [32, { blocks: 1 }],
-    [60, { blocks: 6 }],
-    [61, { blocks: 7 }],
-    [62, { blocks: 9 }]
+  const verifiedAiGPages = new Map([
+    [31, { blocks: 5, contributes: true, verification: 'aig-page-0031-verification-opus-2026-05-22' }],
+    [32, { blocks: 1, contributes: false, verification: 'aig-page-0032-verification-opus-2026-05-22' }],
+    [60, { blocks: 6, contributes: true, verification: 'aig-page-0060-verification-opus-2026-05-22' }],
+    [61, { blocks: 7, contributes: true, verification: 'aig-page-0061-verification-opus-2026-05-22' }],
+    [62, { blocks: 9, contributes: true, verification: 'aig-page-0062-verification-opus-2026-05-22' }]
   ]);
   const allowedAiGBlockTypes = new Set(sourceSchema.schemas.page_evidence_record.block_types);
-  let aigExtractionSourceTextTotal = 0;
-  const extractedCoverageProblems = (aigCoverage.pages || []).flatMap(page => {
-    const expected = extractedAiGPages.get(page.pdf_page);
+  let aigEvidenceSourceTextTotal = 0;
+  const verifiedCoverageProblems = (aigCoverage.pages || []).flatMap(page => {
+    const expected = verifiedAiGPages.get(page.pdf_page);
     if (!expected) return [];
     const artifactPath = page.extraction?.artifact_path;
     const artifact = artifactPath && fs.existsSync(path.join(__dirname, artifactPath))
       ? JSON.parse(fs.readFileSync(path.join(__dirname, artifactPath), 'utf8'))
       : null;
+    const verificationPath = page.verification?.artifact_path;
+    const verificationArtifact = verificationPath && fs.existsSync(path.join(__dirname, verificationPath))
+      ? JSON.parse(fs.readFileSync(path.join(__dirname, verificationPath), 'utf8'))
+      : null;
     const artifactBlocks = artifact?.blocks || [];
+    const artifactBlockIds = new Set(artifactBlocks.map(block => block.block_id));
+    const verifiedBlocks = verificationArtifact?.verified_blocks || [];
+    const verifiedBlockIds = new Set(verifiedBlocks);
     const pageExcerptTotal = artifactBlocks.reduce((total, block) =>
       total + (typeof block.bounded_excerpt === 'string' ? block.bounded_excerpt.length : 0), 0);
-    const pageSourceTextTotal = artifact ? sourceEvidenceTextLength(artifact) : 0;
-    aigExtractionSourceTextTotal += pageSourceTextTotal;
+    const pageSourceTextTotal =
+      (artifact ? sourceEvidenceTextLength(artifact) : 0) +
+      (verificationArtifact ? sourceEvidenceTextLength(verificationArtifact) : 0) +
+      sourceEvidenceTextLength(page);
+    aigEvidenceSourceTextTotal += pageSourceTextTotal;
     const problems = [];
     if (page.source_revision_id !== aigRevision) problems.push(`${page.pdf_page}: source_revision_id`);
-    if (page.work_state !== 'extracted') problems.push(`${page.pdf_page}: work_state`);
-    if (page.contributes !== null) problems.push(`${page.pdf_page}: contributes_unverified`);
+    if (page.work_state !== 'verified') problems.push(`${page.pdf_page}: work_state`);
+    if (page.contributes !== expected.contributes) problems.push(`${page.pdf_page}: contributes`);
     if (page.render?.status !== 'rendered') problems.push(`${page.pdf_page}: render.status`);
     if (!/^[a-f0-9]{64}$/.test(page.render?.image_sha256 || '')) problems.push(`${page.pdf_page}: render.image_sha256`);
     if (!page.render?.cache_path?.startsWith('.cache/source-pages/aig/')) problems.push(`${page.pdf_page}: render.cache_path`);
     if (page.extraction?.block_count !== expected.blocks) problems.push(`${page.pdf_page}: extraction.block_count`);
-    if (page.verification !== null) problems.push(`${page.pdf_page}: verification`);
+    if (page.verification?.status !== 'pass') problems.push(`${page.pdf_page}: verification.status`);
+    if (page.verification?.independent !== true) problems.push(`${page.pdf_page}: verification.independent`);
+    if (page.verification?.artifact_id !== expected.verification) problems.push(`${page.pdf_page}: verification.artifact_id`);
     if (!Array.isArray(page.derived_facts) || page.derived_facts.length !== 0) problems.push(`${page.pdf_page}: derived_facts_unverified`);
-    if ('candidate_label' in page || 'candidate_reason' in page || 'exclusion_reason' in page) problems.push(`${page.pdf_page}: unverified_manifest_prose`);
-    if (page.notes !== 'Extraction artifact linked; independent verification pending.') problems.push(`${page.pdf_page}: notes`);
+    if ('candidate_label' in page || 'candidate_reason' in page) problems.push(`${page.pdf_page}: manifest_candidate_prose`);
+    if (expected.contributes && 'exclusion_reason' in page) problems.push(`${page.pdf_page}: exclusion_reason`);
+    if (!expected.contributes && page.exclusion_reason !== 'Boundary page; no target magic-access content.') problems.push(`${page.pdf_page}: exclusion_reason`);
+    if (page.notes !== 'Verified; promotion blocked.') problems.push(`${page.pdf_page}: notes`);
     if (artifact?.artifact_kind !== 'extraction') problems.push(`${page.pdf_page}: artifact_kind`);
     if (artifact?.source_revision_id !== aigRevision) problems.push(`${page.pdf_page}: artifact_revision`);
     if (artifact?.pdf_page !== page.pdf_page) problems.push(`${page.pdf_page}: artifact_page`);
+    if (verificationArtifact?.artifact_kind !== 'verification') problems.push(`${page.pdf_page}: verification_artifact_kind`);
+    if (verificationArtifact?.source_revision_id !== aigRevision) problems.push(`${page.pdf_page}: verification_artifact_revision`);
+    if (verificationArtifact?.pdf_page !== page.pdf_page) problems.push(`${page.pdf_page}: verification_artifact_page`);
+    if (verificationArtifact?.verifier_run_id === verificationArtifact?.extractor_run_id) problems.push(`${page.pdf_page}: verifier_run_id`);
+    if (verificationArtifact?.verifier_prompt_id === verificationArtifact?.extractor_prompt_id) problems.push(`${page.pdf_page}: verifier_prompt_id`);
+    if (verificationArtifact?.independence?.read_extractor_output !== false ||
+        verificationArtifact?.independence?.read_extractor_scratch !== false ||
+        verificationArtifact?.independence?.read_extractor_rationale !== false) problems.push(`${page.pdf_page}: verifier_independence`);
     if (artifactBlocks.length !== expected.blocks) problems.push(`${page.pdf_page}: artifact_blocks`);
+    if (verifiedBlocks.length !== expected.blocks ||
+        verifiedBlockIds.size !== expected.blocks ||
+        verifiedBlocks.some(blockId => !artifactBlockIds.has(blockId))) problems.push(`${page.pdf_page}: verified_blocks`);
     if (artifactBlocks.some(block => !allowedAiGBlockTypes.has(block.block_type))) problems.push(`${page.pdf_page}: artifact_block_type`);
     if (pageExcerptTotal > sourceSchema.excerpt_budgets.page_excerpt_char_max) problems.push(`${page.pdf_page}: artifact_page_excerpt_budget`);
     if (pageSourceTextTotal > sourceSchema.excerpt_budgets.page_excerpt_char_max) problems.push(`${page.pdf_page}: artifact_page_source_text_budget`);
@@ -816,7 +871,7 @@ runCommandTest('Render workflow can list sources without rendering pages',
     return problems;
   });
   const nonExtractedCoveragePending = (aigCoverage.pages || []).every(page =>
-    extractedAiGPages.has(page.pdf_page) || (
+    verifiedAiGPages.has(page.pdf_page) || (
     page.source_revision_id === aigRevision &&
     page.work_state === 'pending' &&
     page.render?.status === 'not_rendered' &&
@@ -840,11 +895,11 @@ runCommandTest('Render workflow can list sources without rendering pages',
       aigPageIndex.pages.length === 212 &&
       missingCoveragePages.length === 0 &&
       missingIndexPages.length === 0 &&
-      extractedCoverageProblems.length === 0 &&
-      aigExtractionSourceTextTotal <= sourceSchema.excerpt_budgets.source_excerpt_char_max &&
+      verifiedCoverageProblems.length === 0 &&
+      aigEvidenceSourceTextTotal <= sourceSchema.excerpt_budgets.source_excerpt_char_max &&
       nonExtractedCoveragePending &&
       allBlockedIndex) {
-    pass('AiG page coverage tracks bounded extracted pages while legacy page index remains blocked');
+    pass('AiG page coverage tracks bounded verified pages while legacy page index remains blocked');
   } else {
     fail('AiG page coverage/index state is not complete',
       JSON.stringify({
@@ -854,8 +909,8 @@ runCommandTest('Render workflow can list sources without rendering pages',
         indexCount: aigPageIndex.pages?.length,
         missingCoveragePages: missingCoveragePages.slice(0, 10),
         missingIndexPages: missingIndexPages.slice(0, 10),
-        extractedCoverageProblems,
-        aigExtractionSourceTextTotal,
+        verifiedCoverageProblems,
+        aigEvidenceSourceTextTotal,
         nonExtractedCoveragePending,
         allBlockedIndex
       }));
