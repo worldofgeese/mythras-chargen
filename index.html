@@ -11335,8 +11335,9 @@ App.renderSorceryPickerPanel = function(source, options = {}) {
   const sourceIntro = activeSource.isCultBacked
     ? `<p><strong>Source:</strong> ${this.escapeHtml(sourceLabel)}</p>`
     : `<p><strong>Source:</strong> ${this.escapeHtml(sourceLabel)} <span class="source-coverage-badge" data-status="attested">attested</span></p>`;
+  const capReachedCopy = `${maxSpells}-spell cap reached`;
   const capCopy = capReached
-    ? `<p id="sorcery-spell-cap" class="spell-picker__hint spell-picker__cap">3-spell cap reached — deselect a selected spell to choose another.</p>`
+    ? `<p id="sorcery-spell-cap" class="spell-picker__hint spell-picker__cap">${this.escapeHtml(capReachedCopy)} — deselect a selected spell to choose another.</p>`
     : `<p id="sorcery-spell-cap" class="spell-picker__hint">Select up to ${maxSpells} spells from your school's grimoire. Spells with (Substance/Species) require specialization at the table.</p>`;
 
   const spellListHTML = SORCERY_SPELLS.map(([name, resist, desc]) => {
@@ -11345,7 +11346,7 @@ App.renderSorceryPickerPanel = function(source, options = {}) {
     const resistTag = resist ? ` <span class="spirit-ability">[Resist: ${this.escapeHtml(resist)}]</span>` : '';
     const tooltip = desc ? ` <span class="skill-tooltip" title="${this.escapeHtmlAttr(desc)}">ℹ️</span>` : '';
     const disabledAttrs = disabled
-      ? ` disabled aria-disabled="true" aria-describedby="sorcery-spell-cap" title="3-spell cap reached; deselect a selected spell to choose this one"`
+      ? ` disabled aria-disabled="true" aria-describedby="sorcery-spell-cap" title="${this.escapeHtmlAttr(`${capReachedCopy}; deselect a selected spell to choose this one`)}"`
       : '';
     const labelClass = disabled ? ' class="spell-picker__option--disabled"' : '';
     return `<label${labelClass}><input type="checkbox" ${checked ? 'checked' : ''}${disabledAttrs} data-spell="${this.escapeHtmlAttr(name)}" onchange="App.toggleSorcerySpell(this.dataset.spell, this)"> ${this.escapeHtml(name)}${resistTag}${tooltip}</label>`;
