@@ -1,0 +1,56 @@
+{
+  "artifact_id": "mythras-core-page-0141-extraction-ocrpdf-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "rendered-page-ocr-pdftext-crosscheck.v1",
+  "source_id": "mythras-core",
+  "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+  "pdf_page": 141,
+  "printed_page_label": "140",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/mythras-core/page-0141.png",
+    "image_sha256": "f680286fc088da82671cc9b0bf6649b7f7bd419aaf776af4482116c4091653a4",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "prompt_id": "automated-pdf-text-page-hash.v1",
+  "prompt_hash": "d6704a1f321f919f6dbbb49ce1128906f581423df10499b67b6213f683ac53c2",
+  "extractor_prompt_id": "automated-pdf-text-page-hash.v1",
+  "extractor_run_id": "mythras-core-app-facing-pages-pdftext-2026-05-23",
+  "tool_identity": "; rendered by pdftoppm per source manifest",
+  "schema_version": 1,
+  "extraction_method": "bounded PDF text-layer hash with rendered-page identity",
+  "text_layer": {
+    "method": "pdftotext -layout",
+    "sha256": "2cd533728edd571c72bc7900f857ea5e1650a7167bf9ea2505f3e5884f0cd829",
+    "char_count": 4816,
+    "non_empty": true
+  },
+  "blocks": [
+    {
+      "block_id": "mythras-core-p0141-b001",
+      "block_type": "page_hash_evidence",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Mythras Core page 141 backs animism-base-spirit-rules.",
+      "excerpt_hash": "2cd533728edd571c72bc7900f857ea5e1650a7167bf9ea2505f3e5884f0cd829",
+      "confidence": "machine_reproducible",
+      "facts": {
+        "app_facing_groups": [
+          "animism-base-spirit-rules"
+        ],
+        "app_facing_labels": [
+          "Animism, base spirit rules, spirit ranks, fetishes, and spirit types"
+        ],
+        "pdf_text_sha256": "2cd533728edd571c72bc7900f857ea5e1650a7167bf9ea2505f3e5884f0cd829",
+        "rendered_image_sha256": "f680286fc088da82671cc9b0bf6649b7f7bd419aaf776af4482116c4091653a4"
+      }
+    }
+  ]
+}

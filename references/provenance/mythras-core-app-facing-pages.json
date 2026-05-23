@@ -1,0 +1,2357 @@
+{
+  "schemaVersion": 1,
+  "source_id": "mythras-core",
+  "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+  "updatedAt": "2026-05-23",
+  "authority_state": "app_facing_core_page_evidence_attested",
+  "evidence_workflow": "rendered-page-ocr-pdftext-crosscheck.v1",
+  "scope": "Mythras Core PDF pages that back current app-facing Core facts in index.html and references/mythras-raw/*.json.",
+  "source_pdf": {
+    "sha256": "de88d7107f936420954474fa4c08a5393c321e8895ca6bea0cdca1194bcb8b90",
+    "page_count": 309,
+    "page_manifest_path": "references/sources/pages/mythras-core.json"
+  },
+  "appFacingGroups": [
+    {
+      "id": "characteristics-attributes",
+      "label": "Characteristics, attributes, and base skill formulae",
+      "inlineConstants": [
+        "SKILLS_DATA"
+      ],
+      "sourceFiles": [
+        "references/mythras-raw/characteristics.json",
+        "references/mythras-raw/attributes.json",
+        "references/mythras-raw/standard-skills.json"
+      ],
+      "pages": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "id": "culture-background-passions",
+      "label": "Core culture categories, background, community, and passions scaffolds",
+      "inlineConstants": [
+        "CULTURES_DATA",
+        "SKILLS_DATA"
+      ],
+      "sourceFiles": [
+        "references/mythras-raw/cultures.json",
+        "references/mythras-raw/background-events.json",
+        "references/mythras-raw/community.json",
+        "references/mythras-raw/passions.json"
+      ],
+      "pages": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ]
+    },
+    {
+      "id": "social-class-careers-starting-kit",
+      "label": "Social class, careers, age bonuses, and starting equipment",
+      "inlineConstants": [
+        "SOCIAL_CLASS_TABLES",
+        "CAREERS_DATA",
+        "EQUIPMENT_DATA"
+      ],
+      "sourceFiles": [
+        "references/mythras-raw/social-class.json",
+        "references/mythras-raw/careers-by-culture.json",
+        "references/mythras-raw/careers-detail.json",
+        "references/mythras-raw/age-bonus-points.json",
+        "references/mythras-raw/equipment-starting.json",
+        "references/mythras-raw/creation-summary.json"
+      ],
+      "pages": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    },
+    {
+      "id": "professional-skills",
+      "label": "Professional skill definitions and direct tooltips",
+      "inlineConstants": [
+        "SKILLS_DATA"
+      ],
+      "sourceFiles": [
+        "references/mythras-raw/professional-skills.json",
+        "references/mythras-raw/standard-skills.json"
+      ],
+      "pages": [
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54
+      ]
+    },
+    {
+      "id": "equipment-armour-weapons-encumbrance",
+      "label": "Equipment, armour, weapons, prices, and encumbrance",
+      "inlineConstants": [
+        "WEAPONS_DATA",
+        "ITEM_PRICES",
+        "EQUIPMENT_DATA"
+      ],
+      "sourceFiles": [
+        "references/mythras-raw/armour.json",
+        "references/mythras-raw/melee-weapons.json",
+        "references/mythras-raw/ranged-weapons.json",
+        "references/mythras-raw/encumbrance.json",
+        "references/weapons-attestation.json"
+      ],
+      "pages": [
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        78,
+        79
+      ]
+    },
+    {
+      "id": "combat-resolution-effects-traits",
+      "label": "Combat resolution, actions, special effects, hit locations, and combat style traits",
+      "inlineConstants": [
+        "HIT_LOCATIONS",
+        "SPECIAL_EFFECTS_DATA",
+        "COMBAT_TRAITS_DATA"
+      ],
+      "sourceFiles": [
+        "references/mythras-raw/combat-resolution.json",
+        "references/mythras-raw/combat-page-references.json",
+        "references/mythras-raw/special-effects.json",
+        "references/mythras-raw/grappling.json",
+        "references/combat-traits-attestation.json"
+      ],
+      "pages": [
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112
+      ]
+    },
+    {
+      "id": "magic-overview-folk-magic",
+      "label": "Magic overview and Folk Magic spell authority",
+      "inlineConstants": [
+        "FOLK_MAGIC_DESCRIPTIONS",
+        "FOLK_MAGIC_SPELLS"
+      ],
+      "sourceFiles": [
+        "references/mythras-raw/magic-page-references.json",
+        "references/mythras-raw/magic-overview.json",
+        "references/mythras-raw/folk-magic-spells.json",
+        "references/folk-magic-reconciliation.json"
+      ],
+      "pages": [
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130
+      ]
+    },
+    {
+      "id": "animism-base-spirit-rules",
+      "label": "Animism, base spirit rules, spirit ranks, fetishes, and spirit types",
+      "inlineConstants": [
+        "STARTING_SPIRITS",
+        "CORE_CAREER_MAGIC_PROVIDERS"
+      ],
+      "sourceFiles": [
+        "references/mythras-raw/animism.json",
+        "references/mythras-raw/magic-page-references.json",
+        "references/mythras-raw/core-career-magic-providers.json"
+      ],
+      "pages": [
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154
+      ]
+    },
+    {
+      "id": "mysticism-core-rules",
+      "label": "Mysticism core rules and talents",
+      "inlineConstants": [
+        "CORE_CAREER_MAGIC_PROVIDERS"
+      ],
+      "sourceFiles": [
+        "references/mythras-raw/mysticism.json",
+        "references/mythras-raw/core-career-magic-providers.json"
+      ],
+      "pages": [
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161
+      ]
+    },
+    {
+      "id": "sorcery-core-rules",
+      "label": "Sorcery core rules, shaping, invocation, and spell catalog",
+      "inlineConstants": [
+        "SORCERY_SPELLS",
+        "CORE_CAREER_MAGIC_PROVIDERS"
+      ],
+      "sourceFiles": [
+        "references/mythras-raw/sorcery.json",
+        "references/mythras-raw/core-career-magic-providers.json"
+      ],
+      "pages": [
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178
+      ]
+    },
+    {
+      "id": "theism-core-rules-boundary",
+      "label": "Core Theism rules retained as a verified boundary for AiG/Notes miracle authority",
+      "inlineConstants": [
+        "MIRACLES_DATA"
+      ],
+      "sourceFiles": [
+        "references/mythras-raw/magic-page-references.json"
+      ],
+      "pages": [
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195
+      ]
+    }
+  ],
+  "target_pages": [
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    78,
+    79,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169,
+    170,
+    171,
+    172,
+    173,
+    174,
+    175,
+    176,
+    177,
+    178,
+    179,
+    180,
+    181,
+    182,
+    183,
+    184,
+    185,
+    186,
+    187,
+    188,
+    189,
+    190,
+    191,
+    192,
+    193,
+    194,
+    195
+  ],
+  "generated_evidence_pages": [
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    78,
+    79,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169,
+    170,
+    171,
+    172,
+    173,
+    174,
+    175,
+    176,
+    177,
+    178,
+    179,
+    180,
+    181,
+    182,
+    183,
+    184,
+    185,
+    186,
+    187,
+    188,
+    189,
+    190,
+    191,
+    192,
+    193,
+    194,
+    195
+  ],
+  "preserved_existing_evidence_pages": [
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    196
+  ],
+  "pageEvidence": [
+    {
+      "pdf_page": 7,
+      "printed_page_label": "7",
+      "app_facing_groups": [
+        "characteristics-attributes"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0007-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0007-verification.json"
+    },
+    {
+      "pdf_page": 8,
+      "printed_page_label": "8",
+      "app_facing_groups": [
+        "characteristics-attributes"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0008-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0008-verification.json"
+    },
+    {
+      "pdf_page": 9,
+      "printed_page_label": "9",
+      "app_facing_groups": [
+        "characteristics-attributes"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0009-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0009-verification.json"
+    },
+    {
+      "pdf_page": 10,
+      "printed_page_label": "10",
+      "app_facing_groups": [
+        "characteristics-attributes"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0010-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0010-verification.json"
+    },
+    {
+      "pdf_page": 11,
+      "printed_page_label": "11",
+      "app_facing_groups": [
+        "characteristics-attributes"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0011-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0011-verification.json"
+    },
+    {
+      "pdf_page": 12,
+      "printed_page_label": "12",
+      "app_facing_groups": [
+        "characteristics-attributes"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0012-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0012-verification.json"
+    },
+    {
+      "pdf_page": 14,
+      "printed_page_label": "14",
+      "app_facing_groups": [
+        "culture-background-passions"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0014-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0014-verification.json"
+    },
+    {
+      "pdf_page": 15,
+      "printed_page_label": "15",
+      "app_facing_groups": [
+        "culture-background-passions"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0015-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0015-verification.json"
+    },
+    {
+      "pdf_page": 16,
+      "printed_page_label": "16",
+      "app_facing_groups": [
+        "culture-background-passions"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0016-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0016-verification.json"
+    },
+    {
+      "pdf_page": 17,
+      "printed_page_label": "17",
+      "app_facing_groups": [
+        "culture-background-passions"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0017-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0017-verification.json"
+    },
+    {
+      "pdf_page": 18,
+      "printed_page_label": "18",
+      "app_facing_groups": [
+        "culture-background-passions"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0018-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0018-verification.json"
+    },
+    {
+      "pdf_page": 19,
+      "printed_page_label": "19",
+      "app_facing_groups": [
+        "culture-background-passions"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0019-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0019-verification.json"
+    },
+    {
+      "pdf_page": 20,
+      "printed_page_label": "20",
+      "app_facing_groups": [
+        "culture-background-passions"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0020-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0020-verification.json"
+    },
+    {
+      "pdf_page": 21,
+      "printed_page_label": "21",
+      "app_facing_groups": [
+        "culture-background-passions",
+        "social-class-careers-starting-kit"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0021-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0021-verification.json"
+    },
+    {
+      "pdf_page": 22,
+      "printed_page_label": "22",
+      "app_facing_groups": [
+        "culture-background-passions",
+        "social-class-careers-starting-kit"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0022-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0022-verification.json"
+    },
+    {
+      "pdf_page": 23,
+      "printed_page_label": "23",
+      "app_facing_groups": [
+        "culture-background-passions",
+        "social-class-careers-starting-kit"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0023-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0023-verification.json"
+    },
+    {
+      "pdf_page": 24,
+      "printed_page_label": "24",
+      "app_facing_groups": [
+        "culture-background-passions",
+        "social-class-careers-starting-kit"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0024-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0024-verification.json"
+    },
+    {
+      "pdf_page": 25,
+      "printed_page_label": "25",
+      "app_facing_groups": [
+        "culture-background-passions",
+        "social-class-careers-starting-kit"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0025-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0025-verification.json"
+    },
+    {
+      "pdf_page": 26,
+      "printed_page_label": "26",
+      "app_facing_groups": [
+        "culture-background-passions",
+        "social-class-careers-starting-kit"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0026-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0026-verification.json"
+    },
+    {
+      "pdf_page": 27,
+      "printed_page_label": "27",
+      "app_facing_groups": [
+        "culture-background-passions",
+        "social-class-careers-starting-kit"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0027-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0027-verification.json"
+    },
+    {
+      "pdf_page": 28,
+      "printed_page_label": "28",
+      "app_facing_groups": [
+        "social-class-careers-starting-kit"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0028-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0028-verification.json"
+    },
+    {
+      "pdf_page": 29,
+      "printed_page_label": "29",
+      "app_facing_groups": [
+        "social-class-careers-starting-kit"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0029-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0029-verification.json"
+    },
+    {
+      "pdf_page": 30,
+      "printed_page_label": "30",
+      "app_facing_groups": [
+        "social-class-careers-starting-kit"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0030-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0030-verification.json"
+    },
+    {
+      "pdf_page": 31,
+      "printed_page_label": "31",
+      "app_facing_groups": [
+        "social-class-careers-starting-kit"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0031-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0031-verification.json"
+    },
+    {
+      "pdf_page": 32,
+      "printed_page_label": "32",
+      "app_facing_groups": [
+        "social-class-careers-starting-kit"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0032-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0032-verification.json"
+    },
+    {
+      "pdf_page": 33,
+      "printed_page_label": "33",
+      "app_facing_groups": [
+        "social-class-careers-starting-kit"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0033-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0033-verification.json"
+    },
+    {
+      "pdf_page": 34,
+      "printed_page_label": "34",
+      "app_facing_groups": [
+        "social-class-careers-starting-kit"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0034-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0034-verification.json"
+    },
+    {
+      "pdf_page": 35,
+      "printed_page_label": "35",
+      "app_facing_groups": [
+        "social-class-careers-starting-kit"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0035-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0035-verification.json"
+    },
+    {
+      "pdf_page": 36,
+      "printed_page_label": "36",
+      "app_facing_groups": [
+        "social-class-careers-starting-kit"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0036-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0036-verification.json"
+    },
+    {
+      "pdf_page": 37,
+      "printed_page_label": "37",
+      "app_facing_groups": [
+        "social-class-careers-starting-kit"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0037-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0037-verification.json"
+    },
+    {
+      "pdf_page": 38,
+      "printed_page_label": "38",
+      "app_facing_groups": [
+        "social-class-careers-starting-kit"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0038-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0038-verification.json"
+    },
+    {
+      "pdf_page": 39,
+      "printed_page_label": "39",
+      "app_facing_groups": [
+        "social-class-careers-starting-kit"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0039-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0039-verification.json"
+    },
+    {
+      "pdf_page": 40,
+      "printed_page_label": "40",
+      "app_facing_groups": [
+        "social-class-careers-starting-kit"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0040-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0040-verification.json"
+    },
+    {
+      "pdf_page": 45,
+      "printed_page_label": "45",
+      "app_facing_groups": [
+        "professional-skills"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0045-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0045-verification.json"
+    },
+    {
+      "pdf_page": 46,
+      "printed_page_label": "46",
+      "app_facing_groups": [
+        "professional-skills"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0046-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0046-verification.json"
+    },
+    {
+      "pdf_page": 47,
+      "printed_page_label": "47",
+      "app_facing_groups": [
+        "professional-skills"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0047-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0047-verification.json"
+    },
+    {
+      "pdf_page": 48,
+      "printed_page_label": "48",
+      "app_facing_groups": [
+        "professional-skills"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0048-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0048-verification.json"
+    },
+    {
+      "pdf_page": 49,
+      "printed_page_label": "49",
+      "app_facing_groups": [
+        "professional-skills"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0049-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0049-verification.json"
+    },
+    {
+      "pdf_page": 50,
+      "printed_page_label": "50",
+      "app_facing_groups": [
+        "professional-skills"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0050-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0050-verification.json"
+    },
+    {
+      "pdf_page": 51,
+      "printed_page_label": "51",
+      "app_facing_groups": [
+        "professional-skills"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0051-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0051-verification.json"
+    },
+    {
+      "pdf_page": 52,
+      "printed_page_label": "52",
+      "app_facing_groups": [
+        "professional-skills"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0052-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0052-verification.json"
+    },
+    {
+      "pdf_page": 53,
+      "printed_page_label": "53",
+      "app_facing_groups": [
+        "professional-skills"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0053-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0053-verification.json"
+    },
+    {
+      "pdf_page": 54,
+      "printed_page_label": "54",
+      "app_facing_groups": [
+        "professional-skills"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0054-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0054-verification.json"
+    },
+    {
+      "pdf_page": 57,
+      "printed_page_label": "57",
+      "app_facing_groups": [
+        "equipment-armour-weapons-encumbrance"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0057-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0057-verification.json"
+    },
+    {
+      "pdf_page": 58,
+      "printed_page_label": "58",
+      "app_facing_groups": [
+        "equipment-armour-weapons-encumbrance"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0058-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0058-verification.json"
+    },
+    {
+      "pdf_page": 59,
+      "printed_page_label": "59",
+      "app_facing_groups": [
+        "equipment-armour-weapons-encumbrance"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0059-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0059-verification.json"
+    },
+    {
+      "pdf_page": 60,
+      "printed_page_label": "60",
+      "app_facing_groups": [
+        "equipment-armour-weapons-encumbrance"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0060-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0060-verification.json"
+    },
+    {
+      "pdf_page": 61,
+      "printed_page_label": "61",
+      "app_facing_groups": [
+        "equipment-armour-weapons-encumbrance"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0061-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0061-verification.json"
+    },
+    {
+      "pdf_page": 62,
+      "printed_page_label": "62",
+      "app_facing_groups": [
+        "equipment-armour-weapons-encumbrance"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0062-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0062-verification.json"
+    },
+    {
+      "pdf_page": 63,
+      "printed_page_label": "63",
+      "app_facing_groups": [
+        "equipment-armour-weapons-encumbrance"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0063-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0063-verification.json"
+    },
+    {
+      "pdf_page": 64,
+      "printed_page_label": "64",
+      "app_facing_groups": [
+        "equipment-armour-weapons-encumbrance"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0064-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0064-verification.json"
+    },
+    {
+      "pdf_page": 65,
+      "printed_page_label": "65",
+      "app_facing_groups": [
+        "equipment-armour-weapons-encumbrance"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0065-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0065-verification.json"
+    },
+    {
+      "pdf_page": 66,
+      "printed_page_label": "66",
+      "app_facing_groups": [
+        "equipment-armour-weapons-encumbrance"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0066-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0066-verification.json"
+    },
+    {
+      "pdf_page": 67,
+      "printed_page_label": "67",
+      "app_facing_groups": [
+        "equipment-armour-weapons-encumbrance"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0067-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0067-verification.json"
+    },
+    {
+      "pdf_page": 78,
+      "printed_page_label": "78",
+      "app_facing_groups": [
+        "equipment-armour-weapons-encumbrance"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0078-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0078-verification.json"
+    },
+    {
+      "pdf_page": 79,
+      "printed_page_label": "79",
+      "app_facing_groups": [
+        "equipment-armour-weapons-encumbrance"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0079-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0079-verification.json"
+    },
+    {
+      "pdf_page": 87,
+      "printed_page_label": "87",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0087-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0087-verification.json"
+    },
+    {
+      "pdf_page": 88,
+      "printed_page_label": "88",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0088-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0088-verification.json"
+    },
+    {
+      "pdf_page": 89,
+      "printed_page_label": "89",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0089-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0089-verification.json"
+    },
+    {
+      "pdf_page": 90,
+      "printed_page_label": "90",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0090-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0090-verification.json"
+    },
+    {
+      "pdf_page": 91,
+      "printed_page_label": "91",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0091-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0091-verification.json"
+    },
+    {
+      "pdf_page": 92,
+      "printed_page_label": "92",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0092-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0092-verification.json"
+    },
+    {
+      "pdf_page": 93,
+      "printed_page_label": "93",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0093-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0093-verification.json"
+    },
+    {
+      "pdf_page": 94,
+      "printed_page_label": "94",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0094-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0094-verification.json"
+    },
+    {
+      "pdf_page": 95,
+      "printed_page_label": "95",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0095-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0095-verification.json"
+    },
+    {
+      "pdf_page": 96,
+      "printed_page_label": "96",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0096-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0096-verification.json"
+    },
+    {
+      "pdf_page": 97,
+      "printed_page_label": "97",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0097-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0097-verification.json"
+    },
+    {
+      "pdf_page": 98,
+      "printed_page_label": "98",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0098-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0098-verification.json"
+    },
+    {
+      "pdf_page": 99,
+      "printed_page_label": "99",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0099-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0099-verification.json"
+    },
+    {
+      "pdf_page": 100,
+      "printed_page_label": "100",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0100-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0100-verification.json"
+    },
+    {
+      "pdf_page": 101,
+      "printed_page_label": "101",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0101-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0101-verification.json"
+    },
+    {
+      "pdf_page": 102,
+      "printed_page_label": "102",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0102-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0102-verification.json"
+    },
+    {
+      "pdf_page": 103,
+      "printed_page_label": "103",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0103-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0103-verification.json"
+    },
+    {
+      "pdf_page": 104,
+      "printed_page_label": "104",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0104-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0104-verification.json"
+    },
+    {
+      "pdf_page": 105,
+      "printed_page_label": "105",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0105-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0105-verification.json"
+    },
+    {
+      "pdf_page": 106,
+      "printed_page_label": "106",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0106-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0106-verification.json"
+    },
+    {
+      "pdf_page": 107,
+      "printed_page_label": "107",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0107-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0107-verification.json"
+    },
+    {
+      "pdf_page": 108,
+      "printed_page_label": "108",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0108-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0108-verification.json"
+    },
+    {
+      "pdf_page": 109,
+      "printed_page_label": "109",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0109-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0109-verification.json"
+    },
+    {
+      "pdf_page": 110,
+      "printed_page_label": "110",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0110-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0110-verification.json"
+    },
+    {
+      "pdf_page": 111,
+      "printed_page_label": "111",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0111-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0111-verification.json"
+    },
+    {
+      "pdf_page": 112,
+      "printed_page_label": "112",
+      "app_facing_groups": [
+        "combat-resolution-effects-traits"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0112-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0112-verification.json"
+    },
+    {
+      "pdf_page": 113,
+      "printed_page_label": "113",
+      "app_facing_groups": [
+        "magic-overview-folk-magic"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0113-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0113-verification.json"
+    },
+    {
+      "pdf_page": 114,
+      "printed_page_label": "114",
+      "app_facing_groups": [
+        "magic-overview-folk-magic"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0114-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0114-verification.json"
+    },
+    {
+      "pdf_page": 115,
+      "printed_page_label": "115",
+      "app_facing_groups": [
+        "magic-overview-folk-magic"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0115-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0115-verification.json"
+    },
+    {
+      "pdf_page": 116,
+      "printed_page_label": "116",
+      "app_facing_groups": [
+        "magic-overview-folk-magic"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0116-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0116-verification.json"
+    },
+    {
+      "pdf_page": 117,
+      "printed_page_label": "117",
+      "app_facing_groups": [
+        "magic-overview-folk-magic"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0117-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0117-verification.json"
+    },
+    {
+      "pdf_page": 118,
+      "printed_page_label": "118",
+      "app_facing_groups": [
+        "magic-overview-folk-magic"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0118-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0118-verification.json"
+    },
+    {
+      "pdf_page": 119,
+      "printed_page_label": "119",
+      "app_facing_groups": [
+        "magic-overview-folk-magic"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0119-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0119-verification.json"
+    },
+    {
+      "pdf_page": 120,
+      "printed_page_label": "120",
+      "app_facing_groups": [
+        "magic-overview-folk-magic"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0120-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0120-verification.json"
+    },
+    {
+      "pdf_page": 121,
+      "printed_page_label": "121",
+      "app_facing_groups": [
+        "magic-overview-folk-magic"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0121-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0121-verification.json"
+    },
+    {
+      "pdf_page": 122,
+      "printed_page_label": "122",
+      "app_facing_groups": [
+        "magic-overview-folk-magic"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0122-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0122-verification.json"
+    },
+    {
+      "pdf_page": 123,
+      "printed_page_label": "123",
+      "app_facing_groups": [
+        "magic-overview-folk-magic"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0123-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0123-verification.json"
+    },
+    {
+      "pdf_page": 124,
+      "printed_page_label": "124",
+      "app_facing_groups": [
+        "magic-overview-folk-magic"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0124-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0124-verification.json"
+    },
+    {
+      "pdf_page": 125,
+      "printed_page_label": "125",
+      "app_facing_groups": [
+        "magic-overview-folk-magic"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0125-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0125-verification.json"
+    },
+    {
+      "pdf_page": 126,
+      "printed_page_label": "126",
+      "app_facing_groups": [
+        "magic-overview-folk-magic"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0126-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0126-verification.json"
+    },
+    {
+      "pdf_page": 127,
+      "printed_page_label": "127",
+      "app_facing_groups": [
+        "magic-overview-folk-magic"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0127-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0127-verification.json"
+    },
+    {
+      "pdf_page": 128,
+      "printed_page_label": "128",
+      "app_facing_groups": [
+        "magic-overview-folk-magic"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0128-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0128-verification.json"
+    },
+    {
+      "pdf_page": 129,
+      "printed_page_label": "129",
+      "app_facing_groups": [
+        "magic-overview-folk-magic"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0129-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0129-verification.json"
+    },
+    {
+      "pdf_page": 130,
+      "printed_page_label": "130",
+      "app_facing_groups": [
+        "magic-overview-folk-magic"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0130-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0130-verification.json"
+    },
+    {
+      "pdf_page": 131,
+      "printed_page_label": "131",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0131-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0131-verification.json"
+    },
+    {
+      "pdf_page": 132,
+      "printed_page_label": "132",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0132-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0132-verification.json"
+    },
+    {
+      "pdf_page": 133,
+      "printed_page_label": "133",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0133-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0133-verification.json"
+    },
+    {
+      "pdf_page": 134,
+      "printed_page_label": "134",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0134-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0134-verification.json"
+    },
+    {
+      "pdf_page": 135,
+      "printed_page_label": "135",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0135-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0135-verification.json"
+    },
+    {
+      "pdf_page": 136,
+      "printed_page_label": "136",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0136-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0136-verification.json"
+    },
+    {
+      "pdf_page": 137,
+      "printed_page_label": "137",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0137-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0137-verification.json"
+    },
+    {
+      "pdf_page": 138,
+      "printed_page_label": "138",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0138-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0138-verification.json"
+    },
+    {
+      "pdf_page": 139,
+      "printed_page_label": "139",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0139-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0139-verification.json"
+    },
+    {
+      "pdf_page": 140,
+      "printed_page_label": "140",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0140-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0140-verification.json"
+    },
+    {
+      "pdf_page": 141,
+      "printed_page_label": "141",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0141-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0141-verification.json"
+    },
+    {
+      "pdf_page": 142,
+      "printed_page_label": "142",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0142-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0142-verification.json"
+    },
+    {
+      "pdf_page": 143,
+      "printed_page_label": "143",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0143-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0143-verification.json"
+    },
+    {
+      "pdf_page": 144,
+      "printed_page_label": "144",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0144-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0144-verification.json"
+    },
+    {
+      "pdf_page": 145,
+      "printed_page_label": "145",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0145-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0145-verification.json"
+    },
+    {
+      "pdf_page": 146,
+      "printed_page_label": "146",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0146-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0146-verification.json"
+    },
+    {
+      "pdf_page": 147,
+      "printed_page_label": "147",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0147-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0147-verification.json"
+    },
+    {
+      "pdf_page": 148,
+      "printed_page_label": "148",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0148-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0148-verification.json"
+    },
+    {
+      "pdf_page": 149,
+      "printed_page_label": "149",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0149-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0149-verification.json"
+    },
+    {
+      "pdf_page": 150,
+      "printed_page_label": "150",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0150-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0150-verification.json"
+    },
+    {
+      "pdf_page": 151,
+      "printed_page_label": "151",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0151-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0151-verification.json"
+    },
+    {
+      "pdf_page": 152,
+      "printed_page_label": "152",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0152-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0152-verification.json"
+    },
+    {
+      "pdf_page": 153,
+      "printed_page_label": "153",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0153-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0153-verification.json"
+    },
+    {
+      "pdf_page": 154,
+      "printed_page_label": "154",
+      "app_facing_groups": [
+        "animism-base-spirit-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0154-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0154-verification.json"
+    },
+    {
+      "pdf_page": 155,
+      "printed_page_label": "154",
+      "app_facing_groups": [
+        "mysticism-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0155-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0155-verification.json"
+    },
+    {
+      "pdf_page": 156,
+      "printed_page_label": "155",
+      "app_facing_groups": [
+        "mysticism-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0156-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0156-verification.json"
+    },
+    {
+      "pdf_page": 157,
+      "printed_page_label": "156",
+      "app_facing_groups": [
+        "mysticism-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0157-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0157-verification.json"
+    },
+    {
+      "pdf_page": 158,
+      "printed_page_label": "157",
+      "app_facing_groups": [
+        "mysticism-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0158-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0158-verification.json"
+    },
+    {
+      "pdf_page": 159,
+      "printed_page_label": "158",
+      "app_facing_groups": [
+        "mysticism-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0159-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0159-verification.json"
+    },
+    {
+      "pdf_page": 160,
+      "printed_page_label": "159",
+      "app_facing_groups": [
+        "mysticism-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0160-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0160-verification.json"
+    },
+    {
+      "pdf_page": 161,
+      "printed_page_label": "160",
+      "app_facing_groups": [
+        "mysticism-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0161-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0161-verification.json"
+    },
+    {
+      "pdf_page": 162,
+      "printed_page_label": "162",
+      "app_facing_groups": [
+        "sorcery-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0162-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0162-verification.json"
+    },
+    {
+      "pdf_page": 163,
+      "printed_page_label": "163",
+      "app_facing_groups": [
+        "sorcery-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0163-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0163-verification.json"
+    },
+    {
+      "pdf_page": 164,
+      "printed_page_label": "164",
+      "app_facing_groups": [
+        "sorcery-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0164-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0164-verification.json"
+    },
+    {
+      "pdf_page": 165,
+      "printed_page_label": "165",
+      "app_facing_groups": [
+        "sorcery-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0165-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0165-verification.json"
+    },
+    {
+      "pdf_page": 166,
+      "printed_page_label": "166",
+      "app_facing_groups": [
+        "sorcery-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0166-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0166-verification.json"
+    },
+    {
+      "pdf_page": 167,
+      "printed_page_label": "167",
+      "app_facing_groups": [
+        "sorcery-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0167-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0167-verification.json"
+    },
+    {
+      "pdf_page": 168,
+      "printed_page_label": "168",
+      "app_facing_groups": [
+        "sorcery-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0168-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0168-verification.json"
+    },
+    {
+      "pdf_page": 169,
+      "printed_page_label": "169",
+      "app_facing_groups": [
+        "sorcery-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0169-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0169-verification.json"
+    },
+    {
+      "pdf_page": 170,
+      "printed_page_label": "170",
+      "app_facing_groups": [
+        "sorcery-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0170-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0170-verification.json"
+    },
+    {
+      "pdf_page": 171,
+      "printed_page_label": "171",
+      "app_facing_groups": [
+        "sorcery-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0171-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0171-verification.json"
+    },
+    {
+      "pdf_page": 172,
+      "printed_page_label": "172",
+      "app_facing_groups": [
+        "sorcery-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0172-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0172-verification.json"
+    },
+    {
+      "pdf_page": 173,
+      "printed_page_label": "173",
+      "app_facing_groups": [
+        "sorcery-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0173-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0173-verification.json"
+    },
+    {
+      "pdf_page": 174,
+      "printed_page_label": "174",
+      "app_facing_groups": [
+        "sorcery-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0174-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0174-verification.json"
+    },
+    {
+      "pdf_page": 175,
+      "printed_page_label": "175",
+      "app_facing_groups": [
+        "sorcery-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0175-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0175-verification.json"
+    },
+    {
+      "pdf_page": 176,
+      "printed_page_label": "176",
+      "app_facing_groups": [
+        "sorcery-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0176-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0176-verification.json"
+    },
+    {
+      "pdf_page": 177,
+      "printed_page_label": "177",
+      "app_facing_groups": [
+        "sorcery-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0177-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0177-verification.json"
+    },
+    {
+      "pdf_page": 178,
+      "printed_page_label": "178",
+      "app_facing_groups": [
+        "sorcery-core-rules"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0178-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0178-verification.json"
+    },
+    {
+      "pdf_page": 179,
+      "printed_page_label": "179",
+      "app_facing_groups": [
+        "theism-core-rules-boundary"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0179-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0179-verification.json"
+    },
+    {
+      "pdf_page": 180,
+      "printed_page_label": "180",
+      "app_facing_groups": [
+        "theism-core-rules-boundary"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0180-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0180-verification.json"
+    },
+    {
+      "pdf_page": 181,
+      "printed_page_label": "181",
+      "app_facing_groups": [
+        "theism-core-rules-boundary"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0181-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0181-verification.json"
+    },
+    {
+      "pdf_page": 182,
+      "printed_page_label": "182",
+      "app_facing_groups": [
+        "theism-core-rules-boundary"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0182-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0182-verification.json"
+    },
+    {
+      "pdf_page": 183,
+      "printed_page_label": "183",
+      "app_facing_groups": [
+        "theism-core-rules-boundary"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0183-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0183-verification.json"
+    },
+    {
+      "pdf_page": 184,
+      "printed_page_label": "184",
+      "app_facing_groups": [
+        "theism-core-rules-boundary"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0184-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0184-verification.json"
+    },
+    {
+      "pdf_page": 185,
+      "printed_page_label": "185",
+      "app_facing_groups": [
+        "theism-core-rules-boundary"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0185-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0185-verification.json"
+    },
+    {
+      "pdf_page": 186,
+      "printed_page_label": "186",
+      "app_facing_groups": [
+        "theism-core-rules-boundary"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0186-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0186-verification.json"
+    },
+    {
+      "pdf_page": 187,
+      "printed_page_label": "187",
+      "app_facing_groups": [
+        "theism-core-rules-boundary"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0187-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0187-verification.json"
+    },
+    {
+      "pdf_page": 188,
+      "printed_page_label": "188",
+      "app_facing_groups": [
+        "theism-core-rules-boundary"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0188-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0188-verification.json"
+    },
+    {
+      "pdf_page": 189,
+      "printed_page_label": "189",
+      "app_facing_groups": [
+        "theism-core-rules-boundary"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0189-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0189-verification.json"
+    },
+    {
+      "pdf_page": 190,
+      "printed_page_label": "190",
+      "app_facing_groups": [
+        "theism-core-rules-boundary"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0190-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0190-verification.json"
+    },
+    {
+      "pdf_page": 191,
+      "printed_page_label": "191",
+      "app_facing_groups": [
+        "theism-core-rules-boundary"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0191-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0191-verification.json"
+    },
+    {
+      "pdf_page": 192,
+      "printed_page_label": "192",
+      "app_facing_groups": [
+        "theism-core-rules-boundary"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0192-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0192-verification.json"
+    },
+    {
+      "pdf_page": 193,
+      "printed_page_label": "193",
+      "app_facing_groups": [
+        "theism-core-rules-boundary"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0193-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0193-verification.json"
+    },
+    {
+      "pdf_page": 194,
+      "printed_page_label": "194",
+      "app_facing_groups": [
+        "theism-core-rules-boundary"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0194-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0194-verification.json"
+    },
+    {
+      "pdf_page": 195,
+      "printed_page_label": "195",
+      "app_facing_groups": [
+        "theism-core-rules-boundary"
+      ],
+      "work_state": "verified",
+      "extraction": "references/sources/evidence/mythras-core/page-0195-extraction.json",
+      "verification": "references/sources/evidence/mythras-core/page-0195-verification.json"
+    }
+  ],
+  "non_target_policy": "All non-target Mythras Core pages remain pending in the all-page scaffold and are not promoted as app-facing authority by this bead.",
+  "followUps": [
+    "mythras-chargen-2yg7.15 must regenerate STARTING_SPIRITS from verified Core/Bird/Monster evidence before app-facing spirit options can be marked accepted.",
+    "mythras-chargen-2yg7.17 must enforce global drift from this page coverage to inline constants and provenance coverage statuses."
+  ]
+}

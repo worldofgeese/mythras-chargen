@@ -1,0 +1,58 @@
+{
+  "artifact_id": "mythras-core-page-0027-extraction-ocrpdf-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "rendered-page-ocr-pdftext-crosscheck.v1",
+  "source_id": "mythras-core",
+  "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+  "pdf_page": 27,
+  "printed_page_label": "26",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/mythras-core/page-0027.png",
+    "image_sha256": "85ac177874604fcdfb80d6fea6b2011d8dd41780c27966520defe42a31a6382d",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "prompt_id": "automated-pdf-text-page-hash.v1",
+  "prompt_hash": "d6704a1f321f919f6dbbb49ce1128906f581423df10499b67b6213f683ac53c2",
+  "extractor_prompt_id": "automated-pdf-text-page-hash.v1",
+  "extractor_run_id": "mythras-core-app-facing-pages-pdftext-2026-05-23",
+  "tool_identity": "; rendered by pdftoppm per source manifest",
+  "schema_version": 1,
+  "extraction_method": "bounded PDF text-layer hash with rendered-page identity",
+  "text_layer": {
+    "method": "pdftotext -layout",
+    "sha256": "38fdc72b8adee39d749d506e4d6d9839e483a714cb103d4a7b2dfdcefb5724ac",
+    "char_count": 3442,
+    "non_empty": true
+  },
+  "blocks": [
+    {
+      "block_id": "mythras-core-p0027-b001",
+      "block_type": "page_hash_evidence",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Mythras Core page 27 backs culture-background-passions, social-class-careers-starting-kit.",
+      "excerpt_hash": "38fdc72b8adee39d749d506e4d6d9839e483a714cb103d4a7b2dfdcefb5724ac",
+      "confidence": "machine_reproducible",
+      "facts": {
+        "app_facing_groups": [
+          "culture-background-passions",
+          "social-class-careers-starting-kit"
+        ],
+        "app_facing_labels": [
+          "Core culture categories, background, community, and passions scaffolds",
+          "Social class, careers, age bonuses, and starting equipment"
+        ],
+        "pdf_text_sha256": "38fdc72b8adee39d749d506e4d6d9839e483a714cb103d4a7b2dfdcefb5724ac",
+        "rendered_image_sha256": "85ac177874604fcdfb80d6fea6b2011d8dd41780c27966520defe42a31a6382d"
+      }
+    }
+  ]
+}

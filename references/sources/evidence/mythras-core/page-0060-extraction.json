@@ -1,0 +1,56 @@
+{
+  "artifact_id": "mythras-core-page-0060-extraction-ocrpdf-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "rendered-page-ocr-pdftext-crosscheck.v1",
+  "source_id": "mythras-core",
+  "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+  "pdf_page": 60,
+  "printed_page_label": "59",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/mythras-core/page-0060.png",
+    "image_sha256": "b1ba1d4811c2df1d89b311f362bc0eb11613a0b3938a56e3ed24692d066564c0",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "prompt_id": "automated-pdf-text-page-hash.v1",
+  "prompt_hash": "d6704a1f321f919f6dbbb49ce1128906f581423df10499b67b6213f683ac53c2",
+  "extractor_prompt_id": "automated-pdf-text-page-hash.v1",
+  "extractor_run_id": "mythras-core-app-facing-pages-pdftext-2026-05-23",
+  "tool_identity": "; rendered by pdftoppm per source manifest",
+  "schema_version": 1,
+  "extraction_method": "bounded PDF text-layer hash with rendered-page identity",
+  "text_layer": {
+    "method": "pdftotext -layout",
+    "sha256": "54ed388092208d67c4c8d54c3a4cdeba90dd442ed2fc6689f036d70befd68a14",
+    "char_count": 3597,
+    "non_empty": true
+  },
+  "blocks": [
+    {
+      "block_id": "mythras-core-p0060-b001",
+      "block_type": "page_hash_evidence",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Mythras Core page 60 backs equipment-armour-weapons-encumbrance.",
+      "excerpt_hash": "54ed388092208d67c4c8d54c3a4cdeba90dd442ed2fc6689f036d70befd68a14",
+      "confidence": "machine_reproducible",
+      "facts": {
+        "app_facing_groups": [
+          "equipment-armour-weapons-encumbrance"
+        ],
+        "app_facing_labels": [
+          "Equipment, armour, weapons, prices, and encumbrance"
+        ],
+        "pdf_text_sha256": "54ed388092208d67c4c8d54c3a4cdeba90dd442ed2fc6689f036d70befd68a14",
+        "rendered_image_sha256": "b1ba1d4811c2df1d89b311f362bc0eb11613a0b3938a56e3ed24692d066564c0"
+      }
+    }
+  ]
+}

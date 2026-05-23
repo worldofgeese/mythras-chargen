@@ -8067,7 +8067,7 @@ const PROVENANCE_COVERAGE = {
         "PDF export bound spirits"
       ],
       "status": "unverified",
-      "summary": "Concrete example spirits cite verified Bird in the Hand examples, but broader spirit-magic chapter/page references are still explicitly unverified.",
+      "summary": "Concrete example spirits cite verified Bird in the Hand examples, and Mythras Core animism/base spirit pages now have bounded page evidence; AiG spirit magic and STARTING_SPIRITS regeneration remain open.",
       "references": [
         {
           "path": "references/spirits-raw/bird-in-hand.json",
@@ -8084,13 +8084,14 @@ const PROVENANCE_COVERAGE = {
         {
           "path": "references/mythras-raw/magic-page-references.json",
           "source": "Mythras Core Rulebook, 3rd Printing (2018)",
-          "citation": "Animism chapter refs",
-          "verified": false
+          "citation": "Animism/base spirit chapter refs, p.131-154",
+          "verified": true,
+          "evidence": "references/provenance/mythras-core-app-facing-pages.json"
         }
       ],
       "blockers": [
         "references/aig-raw/spirit-magic-aig.json has verified=false.",
-        "references/mythras-raw/magic-page-references.json has verified=false for magic chapter page references."
+        "STARTING_SPIRITS has not yet been regenerated from the verified Core/Bird/Monster evidence set."
       ]
     },
     {

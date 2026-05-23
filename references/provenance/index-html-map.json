@@ -289,7 +289,8 @@
       "disposition": "must-fix-before-acceptance",
       "source_files": [
         "references/spirits-raw/bird-in-hand.json",
-        "references/spirits-raw/monster-island.json"
+        "references/spirits-raw/monster-island.json",
+        "references/mythras-raw/magic-page-references.json"
       ],
       "source_ids": [
         "bird-in-hand",
@@ -301,8 +302,86 @@
           "source_id": "mythras-core",
           "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
           "page_manifest_path": "references/sources/pages/mythras-core.json",
-          "coverage_state": "blocked",
-          "evidence_state": "source_identified_page_evidence_pending"
+          "coverage_state": "verified",
+          "evidence_state": "bounded_render_ocr_pdftext_verified",
+          "app_facing_page_coverage_path": "references/provenance/mythras-core-app-facing-pages.json",
+          "evidence_workflow": "rendered-page-ocr-pdftext-crosscheck.v1",
+          "verified_pdf_pages": [
+            131,
+            132,
+            133,
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            141,
+            142,
+            143,
+            144,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            153,
+            154
+          ],
+          "evidence_paths": [
+            "references/sources/evidence/mythras-core/page-0131-extraction.json",
+            "references/sources/evidence/mythras-core/page-0131-verification.json",
+            "references/sources/evidence/mythras-core/page-0132-extraction.json",
+            "references/sources/evidence/mythras-core/page-0132-verification.json",
+            "references/sources/evidence/mythras-core/page-0133-extraction.json",
+            "references/sources/evidence/mythras-core/page-0133-verification.json",
+            "references/sources/evidence/mythras-core/page-0134-extraction.json",
+            "references/sources/evidence/mythras-core/page-0134-verification.json",
+            "references/sources/evidence/mythras-core/page-0135-extraction.json",
+            "references/sources/evidence/mythras-core/page-0135-verification.json",
+            "references/sources/evidence/mythras-core/page-0136-extraction.json",
+            "references/sources/evidence/mythras-core/page-0136-verification.json",
+            "references/sources/evidence/mythras-core/page-0137-extraction.json",
+            "references/sources/evidence/mythras-core/page-0137-verification.json",
+            "references/sources/evidence/mythras-core/page-0138-extraction.json",
+            "references/sources/evidence/mythras-core/page-0138-verification.json",
+            "references/sources/evidence/mythras-core/page-0139-extraction.json",
+            "references/sources/evidence/mythras-core/page-0139-verification.json",
+            "references/sources/evidence/mythras-core/page-0140-extraction.json",
+            "references/sources/evidence/mythras-core/page-0140-verification.json",
+            "references/sources/evidence/mythras-core/page-0141-extraction.json",
+            "references/sources/evidence/mythras-core/page-0141-verification.json",
+            "references/sources/evidence/mythras-core/page-0142-extraction.json",
+            "references/sources/evidence/mythras-core/page-0142-verification.json",
+            "references/sources/evidence/mythras-core/page-0143-extraction.json",
+            "references/sources/evidence/mythras-core/page-0143-verification.json",
+            "references/sources/evidence/mythras-core/page-0144-extraction.json",
+            "references/sources/evidence/mythras-core/page-0144-verification.json",
+            "references/sources/evidence/mythras-core/page-0145-extraction.json",
+            "references/sources/evidence/mythras-core/page-0145-verification.json",
+            "references/sources/evidence/mythras-core/page-0146-extraction.json",
+            "references/sources/evidence/mythras-core/page-0146-verification.json",
+            "references/sources/evidence/mythras-core/page-0147-extraction.json",
+            "references/sources/evidence/mythras-core/page-0147-verification.json",
+            "references/sources/evidence/mythras-core/page-0148-extraction.json",
+            "references/sources/evidence/mythras-core/page-0148-verification.json",
+            "references/sources/evidence/mythras-core/page-0149-extraction.json",
+            "references/sources/evidence/mythras-core/page-0149-verification.json",
+            "references/sources/evidence/mythras-core/page-0150-extraction.json",
+            "references/sources/evidence/mythras-core/page-0150-verification.json",
+            "references/sources/evidence/mythras-core/page-0151-extraction.json",
+            "references/sources/evidence/mythras-core/page-0151-verification.json",
+            "references/sources/evidence/mythras-core/page-0152-extraction.json",
+            "references/sources/evidence/mythras-core/page-0152-verification.json",
+            "references/sources/evidence/mythras-core/page-0153-extraction.json",
+            "references/sources/evidence/mythras-core/page-0153-verification.json",
+            "references/sources/evidence/mythras-core/page-0154-extraction.json",
+            "references/sources/evidence/mythras-core/page-0154-verification.json"
+          ]
         },
         {
           "source_id": "bird-in-hand",
@@ -372,7 +451,7 @@
           ]
         }
       ],
-      "rationale": "Starting spirit examples remain source-blocked overall because Mythras Core base spirit-rule pages are not yet verified and the inline STARTING_SPIRITS app constant has not been regenerated from the now-verified Monster Island reference evidence. Bird in Hand pages 43-47 and Monster Island pages 133-140/285-286 have bounded extraction plus independent page/block evidence."
+      "rationale": "Starting spirit examples remain source-blocked overall because inline STARTING_SPIRITS has not been regenerated from the verified Core, Bird in Hand, and Monster Island evidence set. Mythras Core base spirit-rule pages 131-154, Bird in Hand pages 43-47, and Monster Island pages 133-140/285-286 now have bounded page evidence."
     }
   ]
 }

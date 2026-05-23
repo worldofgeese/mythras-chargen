@@ -1,84 +1,219 @@
 {
   "source": "Mythras Core Rulebook, 3rd Printing (2018)",
   "extracted_at": "2026-05-17",
-  "verified": false,
+  "verified": true,
   "chapters": {
     "magic_overview": {
       "title": "Magic (General Rules & Folk Magic)",
       "page_range": "p.113-130",
       "sections": {
-        "magic_overview": { "page": 113, "title": "Magic — Tailoring Magic, Magical Disciplines" },
-        "magical_traditions": { "page": 114, "title": "Magical Traditions (Cults, Guilds, etc.)" },
-        "how_many_abilities": { "page": 115, "title": "How Many Abilities?" },
-        "casting_time": { "page": 116, "title": "Casting Time" },
-        "magic_points": { "page": 117, "title": "Magic Points" },
-        "spell_traits": { "page": 118, "title": "Spell Traits" },
-        "magnitude_intensity": { "page": 121, "title": "Magnitude and Intensity" },
-        "stacking_magic": { "page": 121, "title": "Stacking Magic" },
-        "folk_magic_access": { "page": 122, "title": "Access to Folk Magic / Starting Folk Magic" },
-        "folk_magic_spells": { "page": 124, "title": "Folk Magic Spell Descriptions", "end_page": 130 }
+        "magic_overview": {
+          "page": 113,
+          "title": "Magic — Tailoring Magic, Magical Disciplines"
+        },
+        "magical_traditions": {
+          "page": 114,
+          "title": "Magical Traditions (Cults, Guilds, etc.)"
+        },
+        "how_many_abilities": {
+          "page": 115,
+          "title": "How Many Abilities?"
+        },
+        "casting_time": {
+          "page": 116,
+          "title": "Casting Time"
+        },
+        "magic_points": {
+          "page": 117,
+          "title": "Magic Points"
+        },
+        "spell_traits": {
+          "page": 118,
+          "title": "Spell Traits"
+        },
+        "magnitude_intensity": {
+          "page": 121,
+          "title": "Magnitude and Intensity"
+        },
+        "stacking_magic": {
+          "page": 121,
+          "title": "Stacking Magic"
+        },
+        "folk_magic_access": {
+          "page": 122,
+          "title": "Access to Folk Magic / Starting Folk Magic"
+        },
+        "folk_magic_spells": {
+          "page": 124,
+          "title": "Folk Magic Spell Descriptions",
+          "end_page": 130
+        }
       }
     },
     "animism": {
       "title": "Animism",
       "page_range": "p.131-154",
       "sections": {
-        "overview": { "page": 131, "title": "What Are Spirits? / What is the Spirit World?" },
-        "spirit_characteristics": { "page": 132, "title": "Spirit Characteristics" },
-        "spirit_combat": { "page": 134, "title": "Spirit Combat" },
-        "shamans": { "page": 136, "title": "Shamans" },
-        "spirit_traditions": { "page": 138, "title": "Spirit Traditions" },
-        "spirit_worshipper": { "page": 139, "title": "Spirit Worshipper (rank)" },
-        "shaman_rank": { "page": 140, "title": "Shaman (rank)" },
-        "high_shaman": { "page": 141, "title": "High Shaman (rank)" },
-        "fetishes": { "page": 142, "title": "Fetishes & Binding" },
-        "spirit_abilities": { "page": 144, "title": "Spirit Abilities", "end_page": 148 },
-        "spirit_types": { "page": 149, "title": "Spirit Types (Ancestor, Elemental, Nature, etc.)", "end_page": 154 }
+        "overview": {
+          "page": 131,
+          "title": "What Are Spirits? / What is the Spirit World?"
+        },
+        "spirit_characteristics": {
+          "page": 132,
+          "title": "Spirit Characteristics"
+        },
+        "spirit_combat": {
+          "page": 134,
+          "title": "Spirit Combat"
+        },
+        "shamans": {
+          "page": 136,
+          "title": "Shamans"
+        },
+        "spirit_traditions": {
+          "page": 138,
+          "title": "Spirit Traditions"
+        },
+        "spirit_worshipper": {
+          "page": 139,
+          "title": "Spirit Worshipper (rank)"
+        },
+        "shaman_rank": {
+          "page": 140,
+          "title": "Shaman (rank)"
+        },
+        "high_shaman": {
+          "page": 141,
+          "title": "High Shaman (rank)"
+        },
+        "fetishes": {
+          "page": 142,
+          "title": "Fetishes & Binding"
+        },
+        "spirit_abilities": {
+          "page": 144,
+          "title": "Spirit Abilities",
+          "end_page": 148
+        },
+        "spirit_types": {
+          "page": 149,
+          "title": "Spirit Types (Ancestor, Elemental, Nature, etc.)",
+          "end_page": 154
+        }
       }
     },
     "mysticism": {
       "title": "Mysticism",
       "page_range": "p.155-161",
       "sections": {
-        "overview": { "page": 155, "title": "Seeking the Truth Within" },
-        "paths_talents": { "page": 156, "title": "Paths and Talents / Starting Mystics" },
-        "using_mysticism": { "page": 157, "title": "Using Mysticism / Implementation" },
-        "magnitude_intensity": { "page": 157, "title": "Magnitude and Intensity" },
-        "talent_descriptions": { "page": 158, "title": "Talent Descriptions", "end_page": 161 }
+        "overview": {
+          "page": 155,
+          "title": "Seeking the Truth Within"
+        },
+        "paths_talents": {
+          "page": 156,
+          "title": "Paths and Talents / Starting Mystics"
+        },
+        "using_mysticism": {
+          "page": 157,
+          "title": "Using Mysticism / Implementation"
+        },
+        "magnitude_intensity": {
+          "page": 157,
+          "title": "Magnitude and Intensity"
+        },
+        "talent_descriptions": {
+          "page": 158,
+          "title": "Talent Descriptions",
+          "end_page": 161
+        }
       }
     },
     "sorcery": {
       "title": "Sorcery",
       "page_range": "p.162-178",
       "sections": {
-        "overview": { "page": 162, "title": "Manipulating Reality" },
-        "shaping": { "page": 163, "title": "Shaping (Duration, Range, Targets, etc.)" },
-        "schools_spells": { "page": 164, "title": "Sources of Knowledge / Schools and Spells" },
-        "starting_sorcerers": { "page": 164, "title": "Starting Sorcerers" },
-        "using_sorcery": { "page": 165, "title": "Using Sorcery / Invoking a Spell" },
-        "invocation_costs": { "page": 166, "title": "Invocation Costs & Time" },
-        "spell_descriptions": { "page": 166, "title": "Spell Descriptions", "end_page": 178 }
+        "overview": {
+          "page": 162,
+          "title": "Manipulating Reality"
+        },
+        "shaping": {
+          "page": 163,
+          "title": "Shaping (Duration, Range, Targets, etc.)"
+        },
+        "schools_spells": {
+          "page": 164,
+          "title": "Sources of Knowledge / Schools and Spells"
+        },
+        "starting_sorcerers": {
+          "page": 164,
+          "title": "Starting Sorcerers"
+        },
+        "using_sorcery": {
+          "page": 165,
+          "title": "Using Sorcery / Invoking a Spell"
+        },
+        "invocation_costs": {
+          "page": 166,
+          "title": "Invocation Costs & Time"
+        },
+        "spell_descriptions": {
+          "page": 166,
+          "title": "Spell Descriptions",
+          "end_page": 178
+        }
       }
     },
     "theism": {
       "title": "Theism",
       "page_range": "p.179-196",
       "sections": {
-        "overview": { "page": 179, "title": "Calling on the Gods" },
-        "cults_miracles": { "page": 180, "title": "Cults and Miracles / Starting Theists" },
-        "using_theism": { "page": 181, "title": "Using Theism" },
-        "devotional_pools": { "page": 181, "title": "Devotional Pools" },
-        "donating_magic_points": { "page": 181, "title": "Donating Magic Points" },
-        "miracle_descriptions": { "page": 183, "title": "Miracle Descriptions", "end_page": 196 }
+        "overview": {
+          "page": 179,
+          "title": "Calling on the Gods"
+        },
+        "cults_miracles": {
+          "page": 180,
+          "title": "Cults and Miracles / Starting Theists"
+        },
+        "using_theism": {
+          "page": 181,
+          "title": "Using Theism"
+        },
+        "devotional_pools": {
+          "page": 181,
+          "title": "Devotional Pools"
+        },
+        "donating_magic_points": {
+          "page": 181,
+          "title": "Donating Magic Points"
+        },
+        "miracle_descriptions": {
+          "page": 183,
+          "title": "Miracle Descriptions",
+          "end_page": 196
+        }
       }
     }
   },
   "aig_references": {
     "source": "Adventures in Glorantha (GenCon Preview, 2016)",
-    "folk_magic": { "page_range": "p.63-68", "title": "Progressive Folk Magic (45 Glorantha-specific spells)" },
-    "rune_magic": { "page_range": "p.69-122", "title": "Rune Magic (367 spells, Rune Affinity casting)" },
-    "spirit_magic": { "page_range": "p.134-151", "title": "Spirit Magic (4 traditions, 33 spirits)" },
-    "magic_overview": { "page_range": "p.59-62", "title": "Magic Systems Overview (6 systems, general rules)" }
+    "folk_magic": {
+      "page_range": "p.63-68",
+      "title": "Progressive Folk Magic (45 Glorantha-specific spells)"
+    },
+    "rune_magic": {
+      "page_range": "p.69-122",
+      "title": "Rune Magic (367 spells, Rune Affinity casting)"
+    },
+    "spirit_magic": {
+      "page_range": "p.134-151",
+      "title": "Spirit Magic (4 traditions, 33 spirits)"
+    },
+    "magic_overview": {
+      "page_range": "p.59-62",
+      "title": "Magic Systems Overview (6 systems, general rules)"
+    }
   },
   "progressive_stages": [
     {
@@ -86,8 +221,14 @@
       "title": "Magic Points & Casting Basics",
       "summary": "How magic points work, casting time, spell traits",
       "sources": [
-        { "book": "Mythras Core", "pages": "p.116-121" },
-        { "book": "AiG", "pages": "p.59-62" }
+        {
+          "book": "Mythras Core",
+          "pages": "p.116-121"
+        },
+        {
+          "book": "AiG",
+          "pages": "p.59-62"
+        }
       ]
     },
     {
@@ -95,8 +236,14 @@
       "title": "Folk Magic",
       "summary": "The universal magic system — 1 MP, 1 Turn, simple effects",
       "sources": [
-        { "book": "Mythras Core", "pages": "p.122-130" },
-        { "book": "AiG", "pages": "p.63-68" }
+        {
+          "book": "Mythras Core",
+          "pages": "p.122-130"
+        },
+        {
+          "book": "AiG",
+          "pages": "p.63-68"
+        }
       ]
     },
     {
@@ -104,8 +251,14 @@
       "title": "Rune Affinities",
       "summary": "How Rune Affinities replace individual casting skills in AiG",
       "sources": [
-        { "book": "AiG", "pages": "p.59-60" },
-        { "book": "Hannu house rules", "pages": "docs/adr/002-rune-affinity-casting-model.md" }
+        {
+          "book": "AiG",
+          "pages": "p.59-60"
+        },
+        {
+          "book": "Hannu house rules",
+          "pages": "docs/adr/002-rune-affinity-casting-model.md"
+        }
       ]
     },
     {
@@ -113,8 +266,14 @@
       "title": "Theism / Rune Magic",
       "summary": "Devotional Pool, miracles, exhorting gods via Rune Affinity",
       "sources": [
-        { "book": "Mythras Core", "pages": "p.179-196" },
-        { "book": "AiG", "pages": "p.69-122" }
+        {
+          "book": "Mythras Core",
+          "pages": "p.179-196"
+        },
+        {
+          "book": "AiG",
+          "pages": "p.69-122"
+        }
       ]
     },
     {
@@ -122,8 +281,14 @@
       "title": "Animism / Spirit Magic",
       "summary": "Spirit World, binding spirits, fetishes, Spirit Rune affinity",
       "sources": [
-        { "book": "Mythras Core", "pages": "p.131-154" },
-        { "book": "AiG", "pages": "p.134-151" }
+        {
+          "book": "Mythras Core",
+          "pages": "p.131-154"
+        },
+        {
+          "book": "AiG",
+          "pages": "p.134-151"
+        }
       ]
     },
     {
@@ -131,7 +296,10 @@
       "title": "Spirit Combat",
       "summary": "How spirit combat works, discorporation, spirit abilities",
       "sources": [
-        { "book": "Mythras Core", "pages": "p.134-136" }
+        {
+          "book": "Mythras Core",
+          "pages": "p.134-136"
+        }
       ]
     },
     {
@@ -139,7 +307,10 @@
       "title": "Sorcery",
       "summary": "Invocation, Shaping (4 principles), spell manipulation",
       "sources": [
-        { "book": "Mythras Core", "pages": "p.162-178" }
+        {
+          "book": "Mythras Core",
+          "pages": "p.162-178"
+        }
       ]
     },
     {
@@ -147,7 +318,10 @@
       "title": "Mysticism",
       "summary": "Meditation, Paths, Talents, concentration-based casting",
       "sources": [
-        { "book": "Mythras Core", "pages": "p.155-161" }
+        {
+          "book": "Mythras Core",
+          "pages": "p.155-161"
+        }
       ]
     },
     {
@@ -155,8 +329,14 @@
       "title": "Combining Magic Systems",
       "summary": "How hybrid cults work, stacking magic, cross-system interactions",
       "sources": [
-        { "book": "Mythras Core", "pages": "p.121" },
-        { "book": "AiG", "pages": "p.59-62" }
+        {
+          "book": "Mythras Core",
+          "pages": "p.121"
+        },
+        {
+          "book": "AiG",
+          "pages": "p.59-62"
+        }
       ]
     },
     {
@@ -164,7 +344,10 @@
       "title": "Enchantments & Permanent Magic",
       "summary": "Creating magical items, permanent effects",
       "sources": [
-        { "book": "Mythras Core", "pages": "p.121" }
+        {
+          "book": "Mythras Core",
+          "pages": "p.121"
+        }
       ]
     },
     {
@@ -172,9 +355,378 @@
       "title": "Magic in Combat",
       "summary": "Cast Magic action, Hold Magic, Counter Spell, Spoil Spell",
       "sources": [
-        { "book": "Mythras Core", "pages": "p.92-93 (combat actions)" },
-        { "book": "AiG", "pages": "p.59-62 (general casting rules)" }
+        {
+          "book": "Mythras Core",
+          "pages": "p.92-93 (combat actions)"
+        },
+        {
+          "book": "AiG",
+          "pages": "p.59-62 (general casting rules)"
+        }
       ]
+    }
+  ],
+  "verified_at": "2026-05-23",
+  "verification_scope": "Mythras Core magic overview, folk magic, animism, mysticism, sorcery, and Core theism boundary pages have page-level rendered OCR/PDF-text evidence. AiG references inside this file remain governed by AiG source-fidelity beads.",
+  "source_ref": {
+    "source_id": "mythras-core",
+    "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+    "pages": [
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172,
+      173,
+      174,
+      175,
+      176,
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
+      183,
+      184,
+      185,
+      186,
+      187,
+      188,
+      189,
+      190,
+      191,
+      192,
+      193,
+      194,
+      195
+    ],
+    "pdf_pages": [
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172,
+      173,
+      174,
+      175,
+      176,
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
+      183,
+      184,
+      185,
+      186,
+      187,
+      188,
+      189,
+      190,
+      191,
+      192,
+      193,
+      194,
+      195
+    ],
+    "page_manifest_path": "references/sources/pages/mythras-core.json",
+    "app_facing_page_coverage_path": "references/provenance/mythras-core-app-facing-pages.json",
+    "coverage_state": "verified",
+    "evidence_state": "bounded_render_ocr_pdftext_verified",
+    "evidence_workflow": "rendered-page-ocr-pdftext-crosscheck.v1",
+    "evidence_paths": [
+      "references/sources/evidence/mythras-core/page-0113-extraction.json",
+      "references/sources/evidence/mythras-core/page-0113-verification.json",
+      "references/sources/evidence/mythras-core/page-0114-extraction.json",
+      "references/sources/evidence/mythras-core/page-0114-verification.json",
+      "references/sources/evidence/mythras-core/page-0115-extraction.json",
+      "references/sources/evidence/mythras-core/page-0115-verification.json",
+      "references/sources/evidence/mythras-core/page-0116-extraction.json",
+      "references/sources/evidence/mythras-core/page-0116-verification.json",
+      "references/sources/evidence/mythras-core/page-0117-extraction.json",
+      "references/sources/evidence/mythras-core/page-0117-verification.json",
+      "references/sources/evidence/mythras-core/page-0118-extraction.json",
+      "references/sources/evidence/mythras-core/page-0118-verification.json",
+      "references/sources/evidence/mythras-core/page-0119-extraction.json",
+      "references/sources/evidence/mythras-core/page-0119-verification.json",
+      "references/sources/evidence/mythras-core/page-0120-extraction.json",
+      "references/sources/evidence/mythras-core/page-0120-verification.json",
+      "references/sources/evidence/mythras-core/page-0121-extraction.json",
+      "references/sources/evidence/mythras-core/page-0121-verification.json",
+      "references/sources/evidence/mythras-core/page-0122-extraction.json",
+      "references/sources/evidence/mythras-core/page-0122-verification.json",
+      "references/sources/evidence/mythras-core/page-0123-extraction.json",
+      "references/sources/evidence/mythras-core/page-0123-verification.json",
+      "references/sources/evidence/mythras-core/page-0124-extraction.json",
+      "references/sources/evidence/mythras-core/page-0124-verification.json",
+      "references/sources/evidence/mythras-core/page-0125-extraction.json",
+      "references/sources/evidence/mythras-core/page-0125-verification.json",
+      "references/sources/evidence/mythras-core/page-0126-extraction.json",
+      "references/sources/evidence/mythras-core/page-0126-verification.json",
+      "references/sources/evidence/mythras-core/page-0127-extraction.json",
+      "references/sources/evidence/mythras-core/page-0127-verification.json",
+      "references/sources/evidence/mythras-core/page-0128-extraction.json",
+      "references/sources/evidence/mythras-core/page-0128-verification.json",
+      "references/sources/evidence/mythras-core/page-0129-extraction.json",
+      "references/sources/evidence/mythras-core/page-0129-verification.json",
+      "references/sources/evidence/mythras-core/page-0130-extraction.json",
+      "references/sources/evidence/mythras-core/page-0130-verification.json",
+      "references/sources/evidence/mythras-core/page-0131-extraction.json",
+      "references/sources/evidence/mythras-core/page-0131-verification.json",
+      "references/sources/evidence/mythras-core/page-0132-extraction.json",
+      "references/sources/evidence/mythras-core/page-0132-verification.json",
+      "references/sources/evidence/mythras-core/page-0133-extraction.json",
+      "references/sources/evidence/mythras-core/page-0133-verification.json",
+      "references/sources/evidence/mythras-core/page-0134-extraction.json",
+      "references/sources/evidence/mythras-core/page-0134-verification.json",
+      "references/sources/evidence/mythras-core/page-0135-extraction.json",
+      "references/sources/evidence/mythras-core/page-0135-verification.json",
+      "references/sources/evidence/mythras-core/page-0136-extraction.json",
+      "references/sources/evidence/mythras-core/page-0136-verification.json",
+      "references/sources/evidence/mythras-core/page-0137-extraction.json",
+      "references/sources/evidence/mythras-core/page-0137-verification.json",
+      "references/sources/evidence/mythras-core/page-0138-extraction.json",
+      "references/sources/evidence/mythras-core/page-0138-verification.json",
+      "references/sources/evidence/mythras-core/page-0139-extraction.json",
+      "references/sources/evidence/mythras-core/page-0139-verification.json",
+      "references/sources/evidence/mythras-core/page-0140-extraction.json",
+      "references/sources/evidence/mythras-core/page-0140-verification.json",
+      "references/sources/evidence/mythras-core/page-0141-extraction.json",
+      "references/sources/evidence/mythras-core/page-0141-verification.json",
+      "references/sources/evidence/mythras-core/page-0142-extraction.json",
+      "references/sources/evidence/mythras-core/page-0142-verification.json",
+      "references/sources/evidence/mythras-core/page-0143-extraction.json",
+      "references/sources/evidence/mythras-core/page-0143-verification.json",
+      "references/sources/evidence/mythras-core/page-0144-extraction.json",
+      "references/sources/evidence/mythras-core/page-0144-verification.json",
+      "references/sources/evidence/mythras-core/page-0145-extraction.json",
+      "references/sources/evidence/mythras-core/page-0145-verification.json",
+      "references/sources/evidence/mythras-core/page-0146-extraction.json",
+      "references/sources/evidence/mythras-core/page-0146-verification.json",
+      "references/sources/evidence/mythras-core/page-0147-extraction.json",
+      "references/sources/evidence/mythras-core/page-0147-verification.json",
+      "references/sources/evidence/mythras-core/page-0148-extraction.json",
+      "references/sources/evidence/mythras-core/page-0148-verification.json",
+      "references/sources/evidence/mythras-core/page-0149-extraction.json",
+      "references/sources/evidence/mythras-core/page-0149-verification.json",
+      "references/sources/evidence/mythras-core/page-0150-extraction.json",
+      "references/sources/evidence/mythras-core/page-0150-verification.json",
+      "references/sources/evidence/mythras-core/page-0151-extraction.json",
+      "references/sources/evidence/mythras-core/page-0151-verification.json",
+      "references/sources/evidence/mythras-core/page-0152-extraction.json",
+      "references/sources/evidence/mythras-core/page-0152-verification.json",
+      "references/sources/evidence/mythras-core/page-0153-extraction.json",
+      "references/sources/evidence/mythras-core/page-0153-verification.json",
+      "references/sources/evidence/mythras-core/page-0154-extraction.json",
+      "references/sources/evidence/mythras-core/page-0154-verification.json",
+      "references/sources/evidence/mythras-core/page-0155-extraction.json",
+      "references/sources/evidence/mythras-core/page-0155-verification.json",
+      "references/sources/evidence/mythras-core/page-0156-extraction.json",
+      "references/sources/evidence/mythras-core/page-0156-verification.json",
+      "references/sources/evidence/mythras-core/page-0157-extraction.json",
+      "references/sources/evidence/mythras-core/page-0157-verification.json",
+      "references/sources/evidence/mythras-core/page-0158-extraction.json",
+      "references/sources/evidence/mythras-core/page-0158-verification.json",
+      "references/sources/evidence/mythras-core/page-0159-extraction.json",
+      "references/sources/evidence/mythras-core/page-0159-verification.json",
+      "references/sources/evidence/mythras-core/page-0160-extraction.json",
+      "references/sources/evidence/mythras-core/page-0160-verification.json",
+      "references/sources/evidence/mythras-core/page-0161-extraction.json",
+      "references/sources/evidence/mythras-core/page-0161-verification.json",
+      "references/sources/evidence/mythras-core/page-0162-extraction.json",
+      "references/sources/evidence/mythras-core/page-0162-verification.json",
+      "references/sources/evidence/mythras-core/page-0163-extraction.json",
+      "references/sources/evidence/mythras-core/page-0163-verification.json",
+      "references/sources/evidence/mythras-core/page-0164-extraction.json",
+      "references/sources/evidence/mythras-core/page-0164-verification.json",
+      "references/sources/evidence/mythras-core/page-0165-extraction.json",
+      "references/sources/evidence/mythras-core/page-0165-verification.json",
+      "references/sources/evidence/mythras-core/page-0166-extraction.json",
+      "references/sources/evidence/mythras-core/page-0166-verification.json",
+      "references/sources/evidence/mythras-core/page-0167-extraction.json",
+      "references/sources/evidence/mythras-core/page-0167-verification.json",
+      "references/sources/evidence/mythras-core/page-0168-extraction.json",
+      "references/sources/evidence/mythras-core/page-0168-verification.json",
+      "references/sources/evidence/mythras-core/page-0169-extraction.json",
+      "references/sources/evidence/mythras-core/page-0169-verification.json",
+      "references/sources/evidence/mythras-core/page-0170-extraction.json",
+      "references/sources/evidence/mythras-core/page-0170-verification.json",
+      "references/sources/evidence/mythras-core/page-0171-extraction.json",
+      "references/sources/evidence/mythras-core/page-0171-verification.json",
+      "references/sources/evidence/mythras-core/page-0172-extraction.json",
+      "references/sources/evidence/mythras-core/page-0172-verification.json",
+      "references/sources/evidence/mythras-core/page-0173-extraction.json",
+      "references/sources/evidence/mythras-core/page-0173-verification.json",
+      "references/sources/evidence/mythras-core/page-0174-extraction.json",
+      "references/sources/evidence/mythras-core/page-0174-verification.json",
+      "references/sources/evidence/mythras-core/page-0175-extraction.json",
+      "references/sources/evidence/mythras-core/page-0175-verification.json",
+      "references/sources/evidence/mythras-core/page-0176-extraction.json",
+      "references/sources/evidence/mythras-core/page-0176-verification.json",
+      "references/sources/evidence/mythras-core/page-0177-extraction.json",
+      "references/sources/evidence/mythras-core/page-0177-verification.json",
+      "references/sources/evidence/mythras-core/page-0178-extraction.json",
+      "references/sources/evidence/mythras-core/page-0178-verification.json",
+      "references/sources/evidence/mythras-core/page-0179-extraction.json",
+      "references/sources/evidence/mythras-core/page-0179-verification.json",
+      "references/sources/evidence/mythras-core/page-0180-extraction.json",
+      "references/sources/evidence/mythras-core/page-0180-verification.json",
+      "references/sources/evidence/mythras-core/page-0181-extraction.json",
+      "references/sources/evidence/mythras-core/page-0181-verification.json",
+      "references/sources/evidence/mythras-core/page-0182-extraction.json",
+      "references/sources/evidence/mythras-core/page-0182-verification.json",
+      "references/sources/evidence/mythras-core/page-0183-extraction.json",
+      "references/sources/evidence/mythras-core/page-0183-verification.json",
+      "references/sources/evidence/mythras-core/page-0184-extraction.json",
+      "references/sources/evidence/mythras-core/page-0184-verification.json",
+      "references/sources/evidence/mythras-core/page-0185-extraction.json",
+      "references/sources/evidence/mythras-core/page-0185-verification.json",
+      "references/sources/evidence/mythras-core/page-0186-extraction.json",
+      "references/sources/evidence/mythras-core/page-0186-verification.json",
+      "references/sources/evidence/mythras-core/page-0187-extraction.json",
+      "references/sources/evidence/mythras-core/page-0187-verification.json",
+      "references/sources/evidence/mythras-core/page-0188-extraction.json",
+      "references/sources/evidence/mythras-core/page-0188-verification.json",
+      "references/sources/evidence/mythras-core/page-0189-extraction.json",
+      "references/sources/evidence/mythras-core/page-0189-verification.json",
+      "references/sources/evidence/mythras-core/page-0190-extraction.json",
+      "references/sources/evidence/mythras-core/page-0190-verification.json",
+      "references/sources/evidence/mythras-core/page-0191-extraction.json",
+      "references/sources/evidence/mythras-core/page-0191-verification.json",
+      "references/sources/evidence/mythras-core/page-0192-extraction.json",
+      "references/sources/evidence/mythras-core/page-0192-verification.json",
+      "references/sources/evidence/mythras-core/page-0193-extraction.json",
+      "references/sources/evidence/mythras-core/page-0193-verification.json",
+      "references/sources/evidence/mythras-core/page-0194-extraction.json",
+      "references/sources/evidence/mythras-core/page-0194-verification.json",
+      "references/sources/evidence/mythras-core/page-0195-extraction.json",
+      "references/sources/evidence/mythras-core/page-0195-verification.json"
+    ],
+    "notes": "Evidence paths point to bounded page-level artifacts; full page text and source PDFs remain uncommitted."
+  },
+  "aig_references_verified": false,
+  "aig_references_note": "AiG page references are retained as reading-guide metadata only until mythras-chargen-2yg7.12 verifies AiG app-facing facts.",
+  "boundary_pages": [
+    {
+      "page": 196,
+      "role": "non_app_facing_mysticism_boundary",
+      "evidence_paths": [
+        "references/sources/evidence/mythras-core/page-0196-extraction.json",
+        "references/sources/evidence/mythras-core/page-0196-verification.json"
+      ],
+      "note": "Page 196 remains preserved as a non-contributing Mysticism boundary check and is intentionally excluded from app-facing Core Theism evidence."
     }
   ]
 }

@@ -1,0 +1,56 @@
+{
+  "artifact_id": "mythras-core-page-0166-extraction-ocrpdf-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "rendered-page-ocr-pdftext-crosscheck.v1",
+  "source_id": "mythras-core",
+  "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+  "pdf_page": 166,
+  "printed_page_label": "165",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/mythras-core/page-0166.png",
+    "image_sha256": "e94e06e98d9f70faf981d28d3c7d7b137f4f18382c827f9fe0f8c43be6ec1cc9",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "prompt_id": "automated-pdf-text-page-hash.v1",
+  "prompt_hash": "d6704a1f321f919f6dbbb49ce1128906f581423df10499b67b6213f683ac53c2",
+  "extractor_prompt_id": "automated-pdf-text-page-hash.v1",
+  "extractor_run_id": "mythras-core-app-facing-pages-pdftext-2026-05-23",
+  "tool_identity": "; rendered by pdftoppm per source manifest",
+  "schema_version": 1,
+  "extraction_method": "bounded PDF text-layer hash with rendered-page identity",
+  "text_layer": {
+    "method": "pdftotext -layout",
+    "sha256": "15a3640da054d6381fa8c8703f84c62177100f1dca5d511da1418ff47413562b",
+    "char_count": 5741,
+    "non_empty": true
+  },
+  "blocks": [
+    {
+      "block_id": "mythras-core-p0166-b001",
+      "block_type": "page_hash_evidence",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Mythras Core page 166 backs sorcery-core-rules.",
+      "excerpt_hash": "15a3640da054d6381fa8c8703f84c62177100f1dca5d511da1418ff47413562b",
+      "confidence": "machine_reproducible",
+      "facts": {
+        "app_facing_groups": [
+          "sorcery-core-rules"
+        ],
+        "app_facing_labels": [
+          "Sorcery core rules, shaping, invocation, and spell catalog"
+        ],
+        "pdf_text_sha256": "15a3640da054d6381fa8c8703f84c62177100f1dca5d511da1418ff47413562b",
+        "rendered_image_sha256": "e94e06e98d9f70faf981d28d3c7d7b137f4f18382c827f9fe0f8c43be6ec1cc9"
+      }
+    }
+  ]
+}

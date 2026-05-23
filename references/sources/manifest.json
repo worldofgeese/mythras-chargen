@@ -116,7 +116,7 @@
       "acquired_at": "2026-05-22",
       "permission_basis": {
         "status": "player_visible_copyparty_source",
-        "note": "Mythras Core is available from the project Copyparty source library; the PDF remains ignored and uncommitted. Existing raw Mythras reference files still require page/block evidence before new accepted fact promotion."
+        "note": "Mythras Core is available from the project Copyparty source library; the PDF remains ignored and uncommitted. App-facing Core page ranges now have bounded rendered-page OCR/PDF-text evidence recorded under references/sources/pages/mythras-core.json."
       },
       "precedence": "Mythras Core 3rd Printing 2018 is the base-rules authority for generic Mythras systems, including Animism, Sorcery, Mysticism, Folk Magic, skills, careers, combat, and base spirit rules. Setting-specific Gloranthan facts still come from AiG, Notes from Pavis, and other governed sources.",
       "render_contract": {
@@ -135,11 +135,8 @@
       },
       "blocks": [],
       "blockers": [],
-      "acceptance_state": "blocked_pending_vision_verification",
-      "acceptance_blockers": [
-        "Source PDF identity is recorded, but a complete page-work manifest and bounded page/block evidence have not been committed for every app-facing Mythras Core fact.",
-        "Existing Mythras raw files remain mixed legacy/verified records; new fact promotion requires rendered page evidence and independent verification."
-      ],
+      "acceptance_state": "app_facing_page_evidence_attested",
+      "acceptance_blockers": [],
       "source_access": {
         "public_copyparty_source": {
           "status": "available",
@@ -168,7 +165,10 @@
         "page_count_method": "pdfinfo against ignored local Copyparty download",
         "canonical_locator_head_status": 200,
         "canonical_locator_content_length": 19068127,
-        "note": "The source PDF is not committed; references/sources/pdfs/mythras-core.pdf remains an ignored local hint."
+        "note": "The source PDF is not committed; references/sources/pdfs/mythras-core.pdf remains an ignored local hint.",
+        "used_for_app_facing_page_evidence": true,
+        "app_facing_page_coverage_path": "references/provenance/mythras-core-app-facing-pages.json",
+        "evidence_workflow": "rendered-page-ocr-pdftext-crosscheck.v1"
       }
     },
     {
@@ -471,8 +471,7 @@
       ],
       "blockers": [
         "full-source active lifecycle is still pending; only contributing pages 133-140 and 285-286 are verified",
-        "app-facing STARTING_SPIRITS has not been regenerated from Monster Island exact page evidence",
-        "Mythras Core base spirit-rule pages are still blocked for the starting-spirit app surface"
+        "app-facing STARTING_SPIRITS has not been regenerated from Monster Island exact page evidence"
       ],
       "acceptance_state": "reference_evidence_verified_app_promotion_blocked",
       "acceptance_blockers": [

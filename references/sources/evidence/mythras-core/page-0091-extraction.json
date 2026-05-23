@@ -1,0 +1,56 @@
+{
+  "artifact_id": "mythras-core-page-0091-extraction-ocrpdf-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "rendered-page-ocr-pdftext-crosscheck.v1",
+  "source_id": "mythras-core",
+  "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+  "pdf_page": 91,
+  "printed_page_label": "90",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/mythras-core/page-0091.png",
+    "image_sha256": "89dc4b945a8decec17aade4dc6a251b35ae5e4042d0d28a99a780c9bf57878d7",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "prompt_id": "automated-pdf-text-page-hash.v1",
+  "prompt_hash": "d6704a1f321f919f6dbbb49ce1128906f581423df10499b67b6213f683ac53c2",
+  "extractor_prompt_id": "automated-pdf-text-page-hash.v1",
+  "extractor_run_id": "mythras-core-app-facing-pages-pdftext-2026-05-23",
+  "tool_identity": "; rendered by pdftoppm per source manifest",
+  "schema_version": 1,
+  "extraction_method": "bounded PDF text-layer hash with rendered-page identity",
+  "text_layer": {
+    "method": "pdftotext -layout",
+    "sha256": "9c63447820d68591202a08c14ffb67aeb3d55e63b8b203e5998b54ddc43aaab7",
+    "char_count": 4536,
+    "non_empty": true
+  },
+  "blocks": [
+    {
+      "block_id": "mythras-core-p0091-b001",
+      "block_type": "page_hash_evidence",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Mythras Core page 91 backs combat-resolution-effects-traits.",
+      "excerpt_hash": "9c63447820d68591202a08c14ffb67aeb3d55e63b8b203e5998b54ddc43aaab7",
+      "confidence": "machine_reproducible",
+      "facts": {
+        "app_facing_groups": [
+          "combat-resolution-effects-traits"
+        ],
+        "app_facing_labels": [
+          "Combat resolution, actions, special effects, hit locations, and combat style traits"
+        ],
+        "pdf_text_sha256": "9c63447820d68591202a08c14ffb67aeb3d55e63b8b203e5998b54ddc43aaab7",
+        "rendered_image_sha256": "89dc4b945a8decec17aade4dc6a251b35ae5e4042d0d28a99a780c9bf57878d7"
+      }
+    }
+  ]
+}

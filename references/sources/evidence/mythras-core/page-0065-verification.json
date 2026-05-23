@@ -1,0 +1,52 @@
+{
+  "artifact_id": "mythras-core-page-0065-verification-ocrpdf-2026-05-23",
+  "artifact_kind": "verification",
+  "workflow_id": "rendered-page-ocr-pdftext-crosscheck.v1",
+  "source_id": "mythras-core",
+  "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+  "pdf_page": 65,
+  "printed_page_label": "64",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/mythras-core/page-0065.png",
+    "image_sha256": "020c7d297ac8b79c6e71520bb84223a4b803efac353639be5b90fa1e6026c485",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "prompt_id": "automated-rendered-ocr-crosscheck.v1",
+  "prompt_hash": "27167940dddf442b68bb93407f4d77938781a7754725278272298b82f73a0fce",
+  "extractor_prompt_id": "automated-pdf-text-page-hash.v1",
+  "extractor_run_id": "mythras-core-app-facing-pages-pdftext-2026-05-23",
+  "verifier_prompt_id": "automated-rendered-ocr-crosscheck.v1",
+  "verifier_run_id": "mythras-core-app-facing-pages-ocr-crosscheck-2026-05-23",
+  "tool_identity": "tesseract 5.3.0; independent rendered-page OCR cross-check",
+  "independent": true,
+  "independence": {
+    "read_extractor_output": false,
+    "read_extractor_scratch": false,
+    "read_extractor_rationale": false,
+    "independent_tool_paths": [
+      "pdftoppm rendered PNG plus tesseract OCR",
+      "pdftotext text-layer hash"
+    ]
+  },
+  "agreement": "pass_rendered_ocr_pdftext_crosscheck",
+  "verified_findings": [
+    "rendered PNG hash is recorded in the page manifest and both evidence artifacts",
+    "PDF text layer produced a non-empty bounded page hash",
+    "Tesseract OCR over the rendered page produced a non-empty independent OCR hash"
+  ],
+  "verified_blocks": [
+    "mythras-core-p0065-b001"
+  ],
+  "ocr_text": {
+    "method": "tesseract rendered PNG --psm 6",
+    "sha256": "6784ca91c658f200d1006c5f10316739ef5b315dfd0f5be0de8a8dd6b500c525",
+    "char_count": 1647,
+    "non_empty": true
+  },
+  "promotion_cautions": [
+    "This automated page-level evidence verifies page identity and bounded text/OCR presence; field-level fact promotion still requires reference-specific drift tests."
+  ]
+}

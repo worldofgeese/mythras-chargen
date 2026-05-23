@@ -1,0 +1,56 @@
+{
+  "artifact_id": "mythras-core-page-0020-extraction-ocrpdf-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "rendered-page-ocr-pdftext-crosscheck.v1",
+  "source_id": "mythras-core",
+  "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+  "pdf_page": 20,
+  "printed_page_label": "19",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/mythras-core/page-0020.png",
+    "image_sha256": "2887599a441c982fbe178a49710c365f8b7fdaaf883b56b66f028d89a3ec6465",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "prompt_id": "automated-pdf-text-page-hash.v1",
+  "prompt_hash": "d6704a1f321f919f6dbbb49ce1128906f581423df10499b67b6213f683ac53c2",
+  "extractor_prompt_id": "automated-pdf-text-page-hash.v1",
+  "extractor_run_id": "mythras-core-app-facing-pages-pdftext-2026-05-23",
+  "tool_identity": "; rendered by pdftoppm per source manifest",
+  "schema_version": 1,
+  "extraction_method": "bounded PDF text-layer hash with rendered-page identity",
+  "text_layer": {
+    "method": "pdftotext -layout",
+    "sha256": "eb946afcfc33eb510603556e536ff94351cce30310f875302c91e3cfcf8cb31c",
+    "char_count": 5857,
+    "non_empty": true
+  },
+  "blocks": [
+    {
+      "block_id": "mythras-core-p0020-b001",
+      "block_type": "page_hash_evidence",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Mythras Core page 20 backs culture-background-passions.",
+      "excerpt_hash": "eb946afcfc33eb510603556e536ff94351cce30310f875302c91e3cfcf8cb31c",
+      "confidence": "machine_reproducible",
+      "facts": {
+        "app_facing_groups": [
+          "culture-background-passions"
+        ],
+        "app_facing_labels": [
+          "Core culture categories, background, community, and passions scaffolds"
+        ],
+        "pdf_text_sha256": "eb946afcfc33eb510603556e536ff94351cce30310f875302c91e3cfcf8cb31c",
+        "rendered_image_sha256": "2887599a441c982fbe178a49710c365f8b7fdaaf883b56b66f028d89a3ec6465"
+      }
+    }
+  ]
+}

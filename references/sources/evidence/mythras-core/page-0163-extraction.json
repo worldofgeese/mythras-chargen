@@ -1,0 +1,56 @@
+{
+  "artifact_id": "mythras-core-page-0163-extraction-ocrpdf-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "rendered-page-ocr-pdftext-crosscheck.v1",
+  "source_id": "mythras-core",
+  "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+  "pdf_page": 163,
+  "printed_page_label": "162",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/mythras-core/page-0163.png",
+    "image_sha256": "04430d9d653b9a938dfbd55c79fc2d00ccec2854cfcece099402e89c5de2b801",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "prompt_id": "automated-pdf-text-page-hash.v1",
+  "prompt_hash": "d6704a1f321f919f6dbbb49ce1128906f581423df10499b67b6213f683ac53c2",
+  "extractor_prompt_id": "automated-pdf-text-page-hash.v1",
+  "extractor_run_id": "mythras-core-app-facing-pages-pdftext-2026-05-23",
+  "tool_identity": "; rendered by pdftoppm per source manifest",
+  "schema_version": 1,
+  "extraction_method": "bounded PDF text-layer hash with rendered-page identity",
+  "text_layer": {
+    "method": "pdftotext -layout",
+    "sha256": "ee13fd399af0c9227726449ea3b693ac6c5bc1bd4bb5121c446e61ad3d4efc1d",
+    "char_count": 3888,
+    "non_empty": true
+  },
+  "blocks": [
+    {
+      "block_id": "mythras-core-p0163-b001",
+      "block_type": "page_hash_evidence",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Mythras Core page 163 backs sorcery-core-rules.",
+      "excerpt_hash": "ee13fd399af0c9227726449ea3b693ac6c5bc1bd4bb5121c446e61ad3d4efc1d",
+      "confidence": "machine_reproducible",
+      "facts": {
+        "app_facing_groups": [
+          "sorcery-core-rules"
+        ],
+        "app_facing_labels": [
+          "Sorcery core rules, shaping, invocation, and spell catalog"
+        ],
+        "pdf_text_sha256": "ee13fd399af0c9227726449ea3b693ac6c5bc1bd4bb5121c446e61ad3d4efc1d",
+        "rendered_image_sha256": "04430d9d653b9a938dfbd55c79fc2d00ccec2854cfcece099402e89c5de2b801"
+      }
+    }
+  ]
+}

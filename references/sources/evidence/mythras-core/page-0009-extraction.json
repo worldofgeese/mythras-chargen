@@ -1,0 +1,56 @@
+{
+  "artifact_id": "mythras-core-page-0009-extraction-ocrpdf-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "rendered-page-ocr-pdftext-crosscheck.v1",
+  "source_id": "mythras-core",
+  "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+  "pdf_page": 9,
+  "printed_page_label": "8",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/mythras-core/page-0009.png",
+    "image_sha256": "591858d970bf41344fbd707ca401312960f74d2bc53e0c33b483c0ac31c0034a",
+    "dimensions": {
+      "width": 2550,
+      "height": 3301
+    }
+  },
+  "prompt_id": "automated-pdf-text-page-hash.v1",
+  "prompt_hash": "d6704a1f321f919f6dbbb49ce1128906f581423df10499b67b6213f683ac53c2",
+  "extractor_prompt_id": "automated-pdf-text-page-hash.v1",
+  "extractor_run_id": "mythras-core-app-facing-pages-pdftext-2026-05-23",
+  "tool_identity": "; rendered by pdftoppm per source manifest",
+  "schema_version": 1,
+  "extraction_method": "bounded PDF text-layer hash with rendered-page identity",
+  "text_layer": {
+    "method": "pdftotext -layout",
+    "sha256": "895353d745b24f9fc685f8419296922bce3342cd03bcb17f3941df579f88a2c8",
+    "char_count": 4713,
+    "non_empty": true
+  },
+  "blocks": [
+    {
+      "block_id": "mythras-core-p0009-b001",
+      "block_type": "page_hash_evidence",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Mythras Core page 9 backs characteristics-attributes.",
+      "excerpt_hash": "895353d745b24f9fc685f8419296922bce3342cd03bcb17f3941df579f88a2c8",
+      "confidence": "machine_reproducible",
+      "facts": {
+        "app_facing_groups": [
+          "characteristics-attributes"
+        ],
+        "app_facing_labels": [
+          "Characteristics, attributes, and base skill formulae"
+        ],
+        "pdf_text_sha256": "895353d745b24f9fc685f8419296922bce3342cd03bcb17f3941df579f88a2c8",
+        "rendered_image_sha256": "591858d970bf41344fbd707ca401312960f74d2bc53e0c33b483c0ac31c0034a"
+      }
+    }
+  ]
+}

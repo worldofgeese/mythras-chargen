@@ -369,8 +369,10 @@ runCommandTest('Render workflow can list sources without rendering pages',
 
   const mythrasCore = manifestById.get('mythras-core');
   const mythrasCorePages = readJson('references/sources/pages/mythras-core.json');
+  const mythrasCoreAppFacingCoverage = readJson('references/provenance/mythras-core-app-facing-pages.json');
   if (mythrasCore &&
       mythrasCore.lifecycle_state === 'active' &&
+      mythrasCore.acceptance_state === 'app_facing_page_evidence_attested' &&
       mythrasCore.source_revision_id === expectedMythrasCoreRevision &&
       mythrasCore.sha256 === expectedMythrasCoreHash &&
       mythrasCore.size_bytes === 19068127 &&
@@ -379,16 +381,20 @@ runCommandTest('Render workflow can list sources without rendering pages',
       mythrasCore.canonical_locator === 'https://copyparty.hound-celsius.ts.net/sources/books/Mythras%20Core%20Rulebook%20%283rd%20Printing%202018%29.pdf' &&
       mythrasCorePages.source_revision_id === expectedMythrasCoreRevision &&
       mythrasCorePages.expected_page_count === 309 &&
-      mythrasCorePages.coverage_state === 'pending' &&
+      mythrasCorePages.coverage_state === 'verified' &&
+      mythrasCorePages.coverage_mode === 'targeted-app-facing-core-page-evidence-with-all-page-scaffold' &&
+      mythrasCoreAppFacingCoverage.source_revision_id === expectedMythrasCoreRevision &&
+      mythrasCoreAppFacingCoverage.authority_state === 'app_facing_core_page_evidence_attested' &&
       Array.isArray(mythrasCorePages.known_ranges) &&
       mythrasCorePages.known_ranges.some(range => range.label === 'Animism') &&
       mythrasCorePages.known_ranges.some(range => range.label === 'Sorcery') &&
       mythrasCorePages.known_ranges.some(range => range.label === 'Mysticism')) {
-    pass('Mythras Core source manifest records Copyparty PDF identity and page-work scaffold');
+    pass('Mythras Core source manifest records Copyparty PDF identity and app-facing page evidence');
   } else {
     fail('Mythras Core source manifest/page coverage is missing or incomplete',
       JSON.stringify({
         revision: mythrasCore?.source_revision_id,
+        acceptanceState: mythrasCore?.acceptance_state,
         hash: mythrasCore?.sha256,
         size: mythrasCore?.size_bytes,
         pageCount: mythrasCore?.page_count,
@@ -396,16 +402,107 @@ runCommandTest('Render workflow can list sources without rendering pages',
         locator: mythrasCore?.canonical_locator,
         pageRevision: mythrasCorePages?.source_revision_id,
         expectedPageCount: mythrasCorePages?.expected_page_count,
-        coverageState: mythrasCorePages?.coverage_state
+        coverageState: mythrasCorePages?.coverage_state,
+        coverageMode: mythrasCorePages?.coverage_mode,
+        appFacingCoverageState: mythrasCoreAppFacingCoverage?.authority_state
       }));
   }
 
   const mysticismTargetPageNumbers = new Set([155, 156, 157, 158, 159, 160, 161, 196]);
   const mythrasCorePageByNumber = new Map((mythrasCorePages.pages || []).map(page => [page.pdf_page, page]));
+  const mythrasCoreAppFacingTargetPages = new Set(mythrasCoreAppFacingCoverage.target_pages || []);
+  const appFacingCoverageByPage = new Map((mythrasCoreAppFacingCoverage.pageEvidence || []).map(page => [page.pdf_page, page]));
   const mythrasCoreAllPagesScaffolded = mythrasCorePages.pages.length === mythrasCorePages.expected_page_count &&
     mythrasCorePageByNumber.size === mythrasCorePages.expected_page_count &&
     Array.from({ length: mythrasCorePages.expected_page_count }, (_, index) => index + 1)
       .every(pageNumber => mythrasCorePageByNumber.has(pageNumber));
+  const coreAppFacingPageProblems = [];
+  if ((mythrasCoreAppFacingCoverage.appFacingGroups || []).length < 10) {
+    coreAppFacingPageProblems.push('expected app-facing Core page groups');
+  }
+  if (mythrasCoreAppFacingTargetPages.size !== (mythrasCoreAppFacingCoverage.target_pages || []).length) {
+    coreAppFacingPageProblems.push('target_pages contains duplicates');
+  }
+  for (const pageNumber of mythrasCoreAppFacingTargetPages) {
+    const pageRecord = mythrasCorePageByNumber.get(pageNumber);
+    const coverageRecord = appFacingCoverageByPage.get(pageNumber);
+    if (!pageRecord) {
+      coreAppFacingPageProblems.push(`missing page ${pageNumber}`);
+      continue;
+    }
+    if (!coverageRecord) {
+      coreAppFacingPageProblems.push(`missing coverage record for page ${pageNumber}`);
+    }
+    if (pageRecord.work_state !== 'verified') {
+      coreAppFacingPageProblems.push(`page ${pageNumber} work_state ${pageRecord.work_state}`);
+    }
+    if (pageRecord.render?.status !== 'rendered' || !pageRecord.render?.image_sha256) {
+      coreAppFacingPageProblems.push(`page ${pageNumber} lacks rendered image metadata`);
+    }
+    if (!pageRecord.extraction?.artifact_path || !pageRecord.verification?.artifact_path) {
+      coreAppFacingPageProblems.push(`page ${pageNumber} lacks extraction/verification paths`);
+      continue;
+    }
+    for (const evidencePath of [pageRecord.extraction.artifact_path, pageRecord.verification.artifact_path]) {
+      if (!fs.existsSync(path.join(__dirname, evidencePath))) {
+        coreAppFacingPageProblems.push(`page ${pageNumber} missing evidence artifact ${evidencePath}`);
+      }
+    }
+    const extractionArtifact = readJson(pageRecord.extraction.artifact_path);
+    const verificationArtifact = readJson(pageRecord.verification.artifact_path);
+    if (extractionArtifact.source_id !== 'mythras-core' ||
+        extractionArtifact.source_revision_id !== expectedMythrasCoreRevision ||
+        extractionArtifact.pdf_page !== pageNumber) {
+      coreAppFacingPageProblems.push(`page ${pageNumber} extraction metadata mismatch`);
+    }
+    if (verificationArtifact.source_id !== 'mythras-core' ||
+        verificationArtifact.source_revision_id !== expectedMythrasCoreRevision ||
+        verificationArtifact.pdf_page !== pageNumber ||
+        !verificationArtifact.agreement?.startsWith('pass')) {
+      coreAppFacingPageProblems.push(`page ${pageNumber} verification metadata mismatch`);
+    }
+    if (verificationArtifact.independence?.read_extractor_output !== false ||
+        verificationArtifact.independence?.read_extractor_scratch !== false ||
+        verificationArtifact.independence?.read_extractor_rationale !== false) {
+      coreAppFacingPageProblems.push(`page ${pageNumber} verification independence flags must exclude extractor context`);
+    }
+    const extractionBlockIds = new Set((extractionArtifact.blocks || []).map(block => block.block_id));
+    for (const blockId of (verificationArtifact.verified_blocks || [])) {
+      if (!extractionBlockIds.has(blockId)) {
+        coreAppFacingPageProblems.push(`page ${pageNumber} verification cites unknown block ${blockId}`);
+      }
+    }
+    for (const block of (extractionArtifact.blocks || [])) {
+      const isLegacyVisionArtifact = extractionArtifact.workflow_id === 'vision-page-workflow.v1';
+      if (typeof block.bounded_excerpt !== 'string' ||
+          block.bounded_excerpt.length === 0 ||
+          block.bounded_excerpt.length > sourceSchema.excerpt_budgets.block_excerpt_char_max ||
+          (!isLegacyVisionArtifact && !block.excerpt_hash)) {
+        coreAppFacingPageProblems.push(`page ${pageNumber} block ${block.block_id || '<missing>'} lacks bounded hash evidence`);
+      }
+    }
+    if (pageRecord.contributes_to_app_facing_core !== true) {
+      coreAppFacingPageProblems.push(`page ${pageNumber} must contribute to app-facing Core coverage`);
+    }
+  }
+  const nonTargetMythrasCorePagesPending = (mythrasCorePages.pages || [])
+    .filter(page => !mythrasCoreAppFacingTargetPages.has(page.pdf_page) && !mysticismTargetPageNumbers.has(page.pdf_page))
+    .every(page => page.work_state === 'pending' &&
+      page.render?.status === 'not_rendered' &&
+      page.extraction === null &&
+      page.verification === null &&
+      Array.isArray(page.derived_facts) &&
+      page.derived_facts.length === 0);
+  if (coreAppFacingPageProblems.length || !nonTargetMythrasCorePagesPending) {
+    fail('Mythras Core app-facing page evidence is incomplete',
+      JSON.stringify({
+        targetCount: mythrasCoreAppFacingTargetPages.size,
+        problems: coreAppFacingPageProblems,
+        nonTargetMythrasCorePagesPending
+      }));
+  } else {
+    pass('Mythras Core app-facing page evidence covers targeted Core ranges and leaves non-target pages pending except preserved Mysticism evidence');
+  }
   const mysticismSourceEvidenceBudgets = {
     maxCharsPerPage: sourceSchema.excerpt_budgets.page_excerpt_char_max,
     maxCharsTotal: sourceSchema.excerpt_budgets.source_excerpt_char_max
@@ -443,22 +540,13 @@ runCommandTest('Render workflow can list sources without rendering pages',
       mysticismPageRecordProblems.push(`page ${pageNumber} must contribute to Mysticism rules`);
     }
   }
-  const nonTargetMythrasCorePagesPending = (mythrasCorePages.pages || [])
-    .filter(page => !mysticismTargetPageNumbers.has(page.pdf_page))
-    .every(page => page.work_state === 'pending' &&
-      page.render?.status === 'not_rendered' &&
-      page.extraction === null &&
-      page.verification === null &&
-      Array.isArray(page.derived_facts) &&
-      page.derived_facts.length === 0);
-  if (!mythrasCoreAllPagesScaffolded || mysticismPageRecordProblems.length || !nonTargetMythrasCorePagesPending) {
+  if (!mythrasCoreAllPagesScaffolded || mysticismPageRecordProblems.length) {
     fail(`Mythras Core Mysticism page-work is not bounded and verified: ${[
       !mythrasCoreAllPagesScaffolded ? 'all 309 page records are not scaffolded exactly once' : null,
-      mysticismPageRecordProblems.join('; '),
-      !nonTargetMythrasCorePagesPending ? 'non-target pages are not pending scaffolds' : null
+      mysticismPageRecordProblems.join('; ')
     ].filter(Boolean).join('; ')}`);
   } else {
-    pass('Mythras Core Mysticism page-work verifies only pages 155-161 and boundary page 196');
+    pass('Mythras Core Mysticism page-work preserves verified pages 155-161 and boundary page 196');
   }
 
   const mysticismEvidenceProblems = [];
@@ -1063,7 +1151,12 @@ runCommandTest('Render workflow can list sources without rendering pages',
       !Array.isArray(startingSpiritsMap?.external_source_gaps) &&
       mythrasCoreStartingSpiritRef?.source_revision_id === expectedMythrasCoreRevision &&
       mythrasCoreStartingSpiritRef?.page_manifest_path === 'references/sources/pages/mythras-core.json' &&
-      mythrasCoreStartingSpiritRef?.coverage_state === 'blocked' &&
+      mythrasCoreStartingSpiritRef?.coverage_state === 'verified' &&
+      mythrasCoreStartingSpiritRef?.evidence_state === 'bounded_render_ocr_pdftext_verified' &&
+      Array.isArray(mythrasCoreStartingSpiritRef?.verified_pdf_pages) &&
+      mythrasCoreStartingSpiritRef.verified_pdf_pages.length === 24 &&
+      Array.isArray(mythrasCoreStartingSpiritRef?.evidence_paths) &&
+      mythrasCoreStartingSpiritRef.evidence_paths.length === 48 &&
       birdStartingSpiritRef?.source_revision_id === activeBird?.source_revision_id &&
       birdStartingSpiritRef?.page_manifest_path === 'references/sources/pages/bird-in-hand.json' &&
       birdStartingSpiritRef?.coverage_state === 'verified' &&
@@ -1075,7 +1168,7 @@ runCommandTest('Render workflow can list sources without rendering pages',
       Array.isArray(monsterStartingSpiritRef?.evidence_paths) &&
       monsterStartingSpiritRef.evidence_paths.length === 20 &&
       blockedMonsterRefs.length === 0) {
-    pass('Starting spirit provenance wires Bird and Monster Island evidence while keeping app surface blocked');
+    pass('Starting spirit provenance wires Core, Bird, and Monster Island evidence while keeping app surface blocked');
   } else {
     fail('Starting spirit provenance is missing Bird/Mythras Core wiring or accepted Monster Island prematurely',
       JSON.stringify({
@@ -8231,7 +8324,10 @@ section('Index Provenance Coverage');
     sorceryRef.verified === true &&
     entriesById['spirit-starting-options']?.status === 'unverified' &&
     spiritRef.verified === false &&
-    magicPagesRef.verified === false &&
+    magicPagesRef.verified === true &&
+    magicPagesRef.source_ref?.coverage_state === 'verified' &&
+    !magicPagesRef.source_ref?.pages?.includes(196) &&
+    magicPagesRef.boundary_pages?.some(page => page.page === 196 && page.role === 'non_app_facing_mysticism_boundary') &&
     entriesById['theism-miracles']?.status === 'blocked' &&
     runeMagicRef.verified === false &&
     Array.isArray(miraclesRef.no_miracles_section) &&
