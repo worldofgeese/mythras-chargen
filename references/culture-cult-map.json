@@ -1,11 +1,12 @@
 {
   "source": "Derived from CultOnePagers2019 areas + AiG culture descriptions",
-  "note": "Maps each AiG culture to available cults. 'primary' = most common/expected. 'secondary' = available but less typical. Based on pantheon geography and cult area data.",
+  "note": "Maps each AiG culture to available cults. 'primary' = most common/expected. 'secondary' = available but less typical. Based on pantheon geography and cult area data; culture magic caveats live in references/aig-raw/culture-magic-profiles-aig.json.",
   "page_citations": {
-    "culture_descriptions": "Adventures in Glorantha p.26-41; Praxian p.33-35; Sartarite/Heortling p.37-39",
+    "culture_descriptions": "Adventures in Glorantha p.26-41; Praxian p.33-35; Sartarite (Heortling) p.37-39",
     "cult_area_data": "Notes from Pavis Cult One-Pagers (2019 v5.2), individual cult area sections; reviewed corrections cite Yelmalio p.1-2, Arkat p.1, Pavis p.1, Zola Fel p.1, Waha p.1, Eiritha p.1, Storm Bull p.1, Foundchild p.1, Daka Fal p.1",
     "praxian_yelmalio": "CultOnePagers2019/Yelm/Yelmalio.pdf, p.1-2 (areas and Pavis association)",
-    "god_forgot_arkat": "CultOnePagers2019/Arkat/Arkat.pdf, p.1 (areas include Holy Country)"
+    "god_forgot_arkat": "CultOnePagers2019/Arkat/Arkat.pdf, p.1 (areas include Holy Country)",
+    "god_forgot_magic_caveat": "Adventures in Glorantha p.30-31 (atheist culture; gods not worshipped; Rune Magic unavailable; Spirit Magic viewed as pointless; Folk Magic treated as diluted sorcery)"
   },
   "cultures": {
     "Sartarite (Heortling)": {
@@ -148,7 +149,7 @@
         "Dormal",
         "Arkat"
       ],
-      "note": "God Forgot is explicitly atheistic/secularist. Cults are rare — 'No cult' is the expected default here."
+      "note": "God Forgot is explicitly atheistic/secularist in AiG p.30-31: gods are not worshipped and Rune Magic is unavailable. The listed secondary cults are rare/manual non-default options with non-AiG provenance, especially Arkat sorcery access."
     },
     "Telmori Hsunchen": {
       "primary": [

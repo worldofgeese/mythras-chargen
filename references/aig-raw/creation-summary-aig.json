@@ -30,7 +30,7 @@
       "page": "p.23"
     },
     "step_4_culture_and_homeland": {
-      "note": "Choose from 8 cultures: Balazaring, Esrolian, God Forgot, Lunar Heartland, Praxian, Provincial Lunar/Tarsh, Sartarite/Heortling, Telmori",
+      "note": "Choose from 8 cultures: Balazaring, Esrolian, God Forgot, Lunar Heartland, Praxian, Lunar Provincial, Sartarite (Heortling), Telmori Hsunchen. Tarshite characters choose either Lunar Provincial or Sartarite culture.",
       "page": "p.23-24"
     },
     "step_5_cultural_skills_and_magic": {
@@ -103,5 +103,6 @@
       "note": "Give character a name and prepare to step out into Glorantha",
       "page": "p.25"
     }
-  }
+  },
+  "validated_at": "2026-05-21"
 }

@@ -1,0 +1,1436 @@
+{
+  "schemaVersion": 1,
+  "authority": {
+    "source": "Combat Styles Encyclopedia",
+    "scope": "combat-styles-only",
+    "supersedes": [
+      "Adventures in Glorantha culture-combat-style rows"
+    ],
+    "generatedFrom": "references/cse-raw/combat-styles-cse.json",
+    "source_pdf": "/home/worldofgeese/Downloads/Combat Styles Encyclopedia.pdf",
+    "sha256": "106d7ad39e8b63d39cc6a5e79db7ec2f031b165b5c05017113bc13f2469841a6",
+    "validated_at": "2026-05-21"
+  },
+  "cultureAliases": {
+    "Sartarite/Heortling": "Sartarite (Heortling)",
+    "Heortling": "Sartarite (Heortling)",
+    "Provincial Lunar/Tarsh": "Lunar Provincial",
+    "Lunar Provincial/Tarsh": "Lunar Provincial",
+    "Tarshite": "Lunar Provincial",
+    "Telmori": "Telmori Hsunchen",
+    "Telmori Hsunchen": "Telmori Hsunchen"
+  },
+  "styles": [
+    {
+      "id": "cse:balazaring:hawk-slayer",
+      "culture": "Balazaring",
+      "sourceCulture": "Balazar",
+      "sourceName": "Balazaring Hawk Slayer",
+      "name": "Hawk Slayer",
+      "weapons": [
+        "Longspear"
+      ],
+      "sourceWeapons": [
+        "1H Longspear"
+      ],
+      "traits": [
+        "Mounted Combat"
+      ],
+      "printedTraits": [
+        "Mounted Combat"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 146
+      }
+    },
+    {
+      "id": "cse:balazaring:hunter-raider",
+      "culture": "Balazaring",
+      "sourceCulture": "Balazar",
+      "sourceName": "Balazaring Hunter Raider",
+      "name": "Hunter Raider",
+      "weapons": [
+        "Shortspear",
+        "Sling"
+      ],
+      "sourceWeapons": [
+        "1H Short Spear",
+        "Sling"
+      ],
+      "traits": [
+        "Skirmisher"
+      ],
+      "printedTraits": [
+        "Skirmisher"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 147
+      }
+    },
+    {
+      "id": "cse:balazaring:pony-cavalry",
+      "culture": "Balazaring",
+      "sourceCulture": "Balazar",
+      "sourceName": "Balazaring Pony Cavalry",
+      "name": "Pony Cavalry",
+      "weapons": [
+        "Shortspear",
+        "Short Bow"
+      ],
+      "sourceWeapons": [
+        "1H Short Spear",
+        "Short Bow"
+      ],
+      "traits": [
+        "Mounted Combat"
+      ],
+      "printedTraits": [
+        "Mounted Combat"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 148
+      }
+    },
+    {
+      "id": "cse:esrolian:citizen-legionary",
+      "culture": "Esrolian",
+      "sourceCulture": "Esrolia/God Forgot",
+      "sourceName": "Esrolian Citizen Legionary",
+      "name": "Citizen Legionary",
+      "weapons": [
+        "Shortsword",
+        "Javelin",
+        "Sling",
+        "Target Shield"
+      ],
+      "sourceWeapons": [
+        "Shortsword",
+        "Javelin",
+        "Sling",
+        "Target Shield"
+      ],
+      "traits": [
+        "Formation Fighting"
+      ],
+      "printedTraits": [
+        "Formation Fighting*"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 386
+      }
+    },
+    {
+      "id": "cse:esrolian:city-state-phalangite",
+      "culture": "Esrolian",
+      "sourceCulture": "Esrolia/God Forgot",
+      "sourceName": "Esrolian City-State Phalangite",
+      "name": "City-State Phalangite",
+      "weapons": [
+        "Longspear",
+        "Pike/Sarissa"
+      ],
+      "sourceWeapons": [
+        "Longspear",
+        "Pike/Sarissa"
+      ],
+      "traits": [
+        "Formation Fighting"
+      ],
+      "printedTraits": [
+        "Formation Fighting*"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 387
+      }
+    },
+    {
+      "id": "cse:esrolian:clan-protector",
+      "culture": "Esrolian",
+      "sourceCulture": "Esrolia/God Forgot",
+      "sourceName": "Esrolian Clan Protector",
+      "name": "Clan Protector",
+      "weapons": [
+        "Shortsword",
+        "Target Shield"
+      ],
+      "sourceWeapons": [
+        "Shortsword",
+        "Target Shield"
+      ],
+      "traits": [
+        "Daredevil"
+      ],
+      "printedTraits": [
+        "Daredevil"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 388
+      }
+    },
+    {
+      "id": "cse:god-forgot:holar-militia",
+      "culture": "God Forgot",
+      "sourceCulture": "Esrolia/God Forgot",
+      "sourceName": "God Forgot Holar Militia",
+      "name": "Holar Militia",
+      "weapons": [
+        "Shortspear",
+        "Sling",
+        "Western Infantry Shield"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Sling",
+        "Western Infantry Shield"
+      ],
+      "traits": [
+        "Shield Wall"
+      ],
+      "printedTraits": [
+        "Shield Wall*"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 390
+      }
+    },
+    {
+      "id": "cse:god-forgot:talar-defensive-school",
+      "culture": "God Forgot",
+      "sourceCulture": "Esrolia/God Forgot",
+      "sourceName": "God Forgot Talar Defensive School",
+      "name": "Talar Defensive School",
+      "weapons": [
+        "Shortsword",
+        "Dagger",
+        "Unarmed",
+        "Buckler"
+      ],
+      "sourceWeapons": [
+        "Shortsword",
+        "Dagger",
+        "Unarmed",
+        "Buckler"
+      ],
+      "traits": [
+        "Impromptu Weapons"
+      ],
+      "printedTraits": [
+        "Impromptu Weapons"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 391
+      }
+    },
+    {
+      "id": "cse:god-forgot:god-forgotten-holari",
+      "culture": "God Forgot",
+      "sourceCulture": "Esrolia/God Forgot",
+      "sourceName": "God Forgotten Holari",
+      "name": "God Forgotten Holari",
+      "weapons": [
+        "Broadsword",
+        "Shortspear",
+        "Sling",
+        "Scutum Shield"
+      ],
+      "sourceWeapons": [
+        "Broadsword",
+        "Short Spear",
+        "Sling",
+        "Scutum"
+      ],
+      "traits": [
+        "Skirmisher"
+      ],
+      "printedTraits": [
+        "Skirmisher"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 392
+      }
+    },
+    {
+      "id": "cse:lunar-provincial:colonial-noble",
+      "culture": "Lunar Provincial",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Colonial Noble",
+      "name": "Colonial Noble",
+      "weapons": [
+        "Shortspear",
+        "Sickle Sword/Khopesh",
+        "Recurve Bow",
+        "Pelorian Aspis"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Sickle Sword",
+        "Recurve Bow",
+        "Pelorian Aspis"
+      ],
+      "traits": [
+        "Formation Fighting",
+        "Mounted Combat",
+        "Ranged Marksman"
+      ],
+      "printedTraits": [
+        "Formation Fighting*",
+        "Mounted Combat",
+        "Ranged Marksman"
+      ],
+      "restrictions": "Aristocracy or Ruling class only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 186
+      }
+    },
+    {
+      "id": "cse:lunar-provincial:colonial-survivalist",
+      "culture": "Lunar Provincial",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Colonial Survivalist",
+      "name": "Colonial Survivalist",
+      "weapons": [
+        "Shortsword",
+        "Sling",
+        "Dagger"
+      ],
+      "sourceWeapons": [
+        "Shortsword",
+        "Sling",
+        "Dagger"
+      ],
+      "traits": [
+        "Hidden Weapons"
+      ],
+      "printedTraits": [
+        "Hidden Weapons"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 187
+      }
+    },
+    {
+      "id": "cse:lunar-heartland:lunar-corps-hoplite",
+      "culture": "Lunar Heartland",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Corps Hoplite",
+      "name": "Lunar Corps Hoplite",
+      "weapons": [
+        "Shortspear",
+        "Sickle Sword/Khopesh",
+        "Kontos",
+        "Pelorian Aspis"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Sickle Sword",
+        "Kontos",
+        "Pelorian Aspis"
+      ],
+      "traits": [
+        "Formation Fighting",
+        "Shield Wall",
+        "Siege Warfare"
+      ],
+      "printedTraits": [
+        "Formation Fighting*",
+        "Shield Wall*",
+        "Siege Warfare"
+      ],
+      "restrictions": "Warrior career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 188
+      }
+    },
+    {
+      "id": "cse:lunar-provincial:lunar-corps-hoplite",
+      "culture": "Lunar Provincial",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Corps Hoplite",
+      "name": "Lunar Corps Hoplite",
+      "weapons": [
+        "Shortspear",
+        "Sickle Sword/Khopesh",
+        "Kontos",
+        "Pelorian Aspis"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Sickle Sword",
+        "Kontos",
+        "Pelorian Aspis"
+      ],
+      "traits": [
+        "Formation Fighting",
+        "Shield Wall",
+        "Siege Warfare"
+      ],
+      "printedTraits": [
+        "Formation Fighting*",
+        "Shield Wall*",
+        "Siege Warfare"
+      ],
+      "restrictions": "Warrior career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 188
+      }
+    },
+    {
+      "id": "cse:lunar-heartland:dara-happan-heavy-infantry",
+      "culture": "Lunar Heartland",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Dara Happan Heavy Infantry",
+      "name": "Dara Happan Heavy Infantry",
+      "weapons": [
+        "Kontos",
+        "Shortsword",
+        "Dart",
+        "Dara Happan Hoplon"
+      ],
+      "sourceWeapons": [
+        "Kontos",
+        "Shortsword",
+        "Dart",
+        "Dara Happan Hoplon"
+      ],
+      "traits": [
+        "Intimidating Scream"
+      ],
+      "printedTraits": [
+        "Intimidating Scream"
+      ],
+      "restrictions": "Warrior career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 189
+      }
+    },
+    {
+      "id": "cse:lunar-heartland:dara-happan-urbanite",
+      "culture": "Lunar Heartland",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Dara Happan Urbanite",
+      "name": "Dara Happan Urbanite",
+      "weapons": [
+        "Club",
+        "Shortsword",
+        "Dagger",
+        "Buckler"
+      ],
+      "sourceWeapons": [
+        "Club",
+        "Shortsword",
+        "Dagger",
+        "Buckler"
+      ],
+      "traits": [
+        "Impromptu Weapons"
+      ],
+      "printedTraits": [
+        "Impromptu Weapons"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 190
+      }
+    },
+    {
+      "id": "cse:lunar-heartland:dart-contestant",
+      "culture": "Lunar Heartland",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Dart Contestant",
+      "name": "Dart Contestant",
+      "weapons": [
+        "Shortsword",
+        "Dart",
+        "Dagger"
+      ],
+      "sourceWeapons": [
+        "Shortsword",
+        "Dart",
+        "Dagger"
+      ],
+      "traits": [
+        "Assassination",
+        "Daredevil"
+      ],
+      "printedTraits": [
+        "Assassination",
+        "Daredevil"
+      ],
+      "restrictions": "Agent career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 191
+      }
+    },
+    {
+      "id": "cse:lunar-heartland:pelorian-cavalry",
+      "culture": "Lunar Heartland",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Pelorian Cavalry",
+      "name": "Pelorian Cavalry",
+      "weapons": [
+        "Kontos",
+        "Sickle Sword/Khopesh",
+        "Recurve Bow",
+        "Pelorian Aspis",
+        "Pelorian Peltast Shield"
+      ],
+      "sourceWeapons": [
+        "Kontos",
+        "Sickle Sword",
+        "Recurve Bow",
+        "Pelorian Aspis",
+        "Pelorian Peltast Shield"
+      ],
+      "traits": [
+        "Pelorian Cavalry",
+        "Mounted Skirmisher"
+      ],
+      "printedTraits": [
+        "Pelorian Cavalry",
+        "Mounted Skirmisher"
+      ],
+      "restrictions": "Warrior career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 192
+      }
+    },
+    {
+      "id": "cse:lunar-provincial:pelorian-cavalry",
+      "culture": "Lunar Provincial",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Pelorian Cavalry",
+      "name": "Pelorian Cavalry",
+      "weapons": [
+        "Kontos",
+        "Sickle Sword/Khopesh",
+        "Recurve Bow",
+        "Pelorian Aspis",
+        "Pelorian Peltast Shield"
+      ],
+      "sourceWeapons": [
+        "Kontos",
+        "Sickle Sword",
+        "Recurve Bow",
+        "Pelorian Aspis",
+        "Pelorian Peltast Shield"
+      ],
+      "traits": [
+        "Pelorian Cavalry",
+        "Mounted Skirmisher"
+      ],
+      "printedTraits": [
+        "Pelorian Cavalry",
+        "Mounted Skirmisher"
+      ],
+      "restrictions": "Warrior career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 192
+      }
+    },
+    {
+      "id": "cse:lunar-heartland:pelorian-noble",
+      "culture": "Lunar Heartland",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Pelorian Noble",
+      "name": "Pelorian Noble",
+      "weapons": [
+        "Sickle Sword/Khopesh",
+        "Shortspear",
+        "Recurve Bow",
+        "Pelorian Aspis"
+      ],
+      "sourceWeapons": [
+        "Sickle Sword",
+        "Short Spear",
+        "Recurve Bow",
+        "Pelorian Aspis"
+      ],
+      "traits": [
+        "Formation Fighting",
+        "Mounted Combat",
+        "Ranged Marksman"
+      ],
+      "printedTraits": [
+        "Formation Fighting*",
+        "Mounted Combat",
+        "Ranged Marksman"
+      ],
+      "restrictions": "Aristocracy or Ruling class only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 193
+      }
+    },
+    {
+      "id": "cse:lunar-heartland:sagittan-peltast",
+      "culture": "Lunar Heartland",
+      "sourceCulture": "Dragon Pass/Lunar",
+      "sourceName": "Lunar Sagittan Peltast",
+      "name": "Sagittan Peltast",
+      "weapons": [
+        "Recurve Bow",
+        "Sling",
+        "Dagger",
+        "Pelorian Peltast Shield"
+      ],
+      "sourceWeapons": [
+        "Recurve Bow",
+        "Sling",
+        "Dagger",
+        "Pelorian Peltast Shield"
+      ],
+      "traits": [
+        "Sagittan Peltast"
+      ],
+      "printedTraits": [
+        "Sagittan Peltast"
+      ],
+      "restrictions": "Warrior career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 194
+      }
+    },
+    {
+      "id": "cse:sartarite-heortling:alynx-brother",
+      "culture": "Sartarite (Heortling)",
+      "sourceCulture": "Dragon Pass/Sartar/Telmori",
+      "sourceName": "Sartarite Alynx Brother",
+      "name": "Alynx Brother",
+      "weapons": [
+        "Shortspear",
+        "Javelin",
+        "Dagger"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Javelin",
+        "Dagger"
+      ],
+      "traits": [
+        "Daredevil",
+        "Do or Die",
+        "Trained Beast"
+      ],
+      "printedTraits": [
+        "Daredevil",
+        "Do or Die",
+        "Trained Beast"
+      ],
+      "restrictions": "Herder, Hunter or Scout career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 168
+      }
+    },
+    {
+      "id": "cse:sartarite-heortling:hill-clan-levy",
+      "culture": "Sartarite (Heortling)",
+      "sourceCulture": "Dragon Pass/Sartar/Telmori",
+      "sourceName": "Sartarite Hill Clan Levy",
+      "name": "Hill Clan Levy",
+      "weapons": [
+        "Long Axe",
+        "Shortspear",
+        "Long Bow",
+        "Javelin",
+        "Orlanthi Round Shield"
+      ],
+      "sourceWeapons": [
+        "Long Axe 1H",
+        "Short Spear",
+        "Long Bow",
+        "Javelin",
+        "Orlanthi Round Shield"
+      ],
+      "traits": [
+        "Intimidating Scream",
+        "Throw Weapons"
+      ],
+      "printedTraits": [
+        "Intimidating Scream",
+        "Throw Weapons"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 169
+      }
+    },
+    {
+      "id": "cse:sartarite-heortling:loyal-housecarl",
+      "culture": "Sartarite (Heortling)",
+      "sourceCulture": "Dragon Pass/Sartar/Telmori",
+      "sourceName": "Sartarite Loyal Housecarl",
+      "name": "Loyal Housecarl",
+      "weapons": [
+        "Broadsword",
+        "Shortspear",
+        "Great Axe",
+        "Orlanthi Scutum"
+      ],
+      "sourceWeapons": [
+        "Broadsword",
+        "Short Spear",
+        "Great Axe",
+        "Orlanthi Scutum"
+      ],
+      "traits": [
+        "Batter Aside",
+        "Intimidating Scream",
+        "Shield Wall"
+      ],
+      "printedTraits": [
+        "Batter Aside",
+        "Intimidating Scream",
+        "Shield Wall*"
+      ],
+      "restrictions": "Warrior career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 170
+      }
+    },
+    {
+      "id": "cse:sartarite-heortling:sartarite-noble",
+      "culture": "Sartarite (Heortling)",
+      "sourceCulture": "Dragon Pass/Sartar/Telmori",
+      "sourceName": "Sartarite Noble",
+      "name": "Sartarite Noble",
+      "weapons": [
+        "Broadsword",
+        "Shortspear",
+        "Javelin",
+        "Orlanthi Scutum"
+      ],
+      "sourceWeapons": [
+        "Broadsword",
+        "Short Spear",
+        "Javelin",
+        "Orlanthi Scutum"
+      ],
+      "traits": [
+        "Intimidating Scream",
+        "Mounted Combat",
+        "Shield Wall"
+      ],
+      "printedTraits": [
+        "Intimidating Scream",
+        "Mounted Combat",
+        "Shield Wall*"
+      ],
+      "restrictions": "Gentry or Ruling class only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 171
+      }
+    },
+    {
+      "id": "cse:sartarite-heortling:upland-crofter",
+      "culture": "Sartarite (Heortling)",
+      "sourceCulture": "Dragon Pass/Sartar/Telmori",
+      "sourceName": "Sartarite Upland Crofter",
+      "name": "Upland Crofter",
+      "weapons": [
+        "Shortspear",
+        "Sling",
+        "Orlanthi Round Shield"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Sling",
+        "Orlanthi Round Shield"
+      ],
+      "traits": [
+        "Ranged Marksman",
+        "Skirmisher"
+      ],
+      "printedTraits": [
+        "Ranged Marksman",
+        "Skirmisher"
+      ],
+      "restrictions": "Herder, Hunter or Scout career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 172
+      }
+    },
+    {
+      "id": "cse:sartarite-heortling:tarshite-militia",
+      "culture": "Sartarite (Heortling)",
+      "sourceCulture": "Dragon Pass/Sartar/Telmori",
+      "sourceName": "Tarshite Militia",
+      "name": "Tarshite Militia",
+      "weapons": [
+        "Shortsword",
+        "Shortspear",
+        "Javelin",
+        "Peltast Shield"
+      ],
+      "sourceWeapons": [
+        "Shortsword",
+        "Short Spear",
+        "Javelin",
+        "Peltast Shield"
+      ],
+      "traits": [
+        "Defensive Minded",
+        "Formation Fighting",
+        "Siege Warfare"
+      ],
+      "printedTraits": [
+        "Defensive Minded",
+        "Formation Fighting*",
+        "Siege Warfare"
+      ],
+      "restrictions": "Warrior career only",
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 173
+      }
+    },
+    {
+      "id": "cse:telmori-hsunchen:telmori-hunter",
+      "culture": "Telmori Hsunchen",
+      "sourceCulture": "Dragon Pass/Sartar/Telmori",
+      "sourceName": "Telmori Hunter",
+      "name": "Telmori Hunter",
+      "weapons": [
+        "Club",
+        "Shortspear",
+        "Longspear",
+        "Short Bow"
+      ],
+      "sourceWeapons": [
+        "Club",
+        "Short Spear",
+        "Longspear",
+        "Short Bow"
+      ],
+      "traits": [
+        "Intimidating Scream",
+        "Trained Beast"
+      ],
+      "printedTraits": [
+        "Intimidating Scream",
+        "Trained Beast"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 174
+      }
+    },
+    {
+      "id": "cse:telmori-hsunchen:wolf-hunter",
+      "culture": "Telmori Hsunchen",
+      "sourceCulture": "Dragon Pass/Sartar/Telmori",
+      "sourceName": "Telmori Wolf Hunter",
+      "name": "Wolf Hunter",
+      "weapons": [
+        "Unarmed"
+      ],
+      "sourceWeapons": [
+        "Unarmed"
+      ],
+      "traits": [
+        "Intimidating Scream",
+        "Mancatcher"
+      ],
+      "printedTraits": [
+        "Intimidating Scream",
+        "Mancatcher"
+      ],
+      "restrictions": null,
+      "notes": "Can be used in either human or lupine forms; wolf form also gains Unarmed Prowess.",
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 175
+      }
+    },
+    {
+      "id": "cse:praxian:agimori",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Agimori",
+      "name": "Agimori",
+      "weapons": [
+        "Longspear",
+        "Club",
+        "Javelin",
+        "Doraddi War Shield"
+      ],
+      "sourceWeapons": [
+        "Longspear",
+        "Club",
+        "Javelin",
+        "Doraddi War Shield"
+      ],
+      "traits": [
+        "Batter Aside",
+        "Knockout Blow",
+        "Shield Splitter"
+      ],
+      "printedTraits": [
+        "Batter Aside",
+        "Knockout Blow",
+        "Shield Splitter"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 928
+      }
+    },
+    {
+      "id": "cse:praxian:baboon",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Baboon",
+      "name": "Baboon",
+      "weapons": [
+        "Longspear",
+        "Sling",
+        "Thrown Stone"
+      ],
+      "sourceWeapons": [
+        "Longspear",
+        "Sling",
+        "Stone"
+      ],
+      "traits": [
+        "Daredevil",
+        "Intimidating Scream",
+        "Swashbuckling"
+      ],
+      "printedTraits": [
+        "Daredevil",
+        "Intimidating Scream",
+        "Swashbuckling"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 930
+      }
+    },
+    {
+      "id": "cse:praxian:basmoli",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Basmoli",
+      "name": "Basmoli",
+      "weapons": [
+        "Shortspear",
+        "Longspear",
+        "Javelin",
+        "Dagger"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Longspear",
+        "Javelin",
+        "Dagger"
+      ],
+      "traits": [
+        "Blind Fighting",
+        "Daredevil",
+        "Ranged Marksman"
+      ],
+      "printedTraits": [
+        "Blind Fighting",
+        "Daredevil",
+        "Ranged Marksman"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 931
+      }
+    },
+    {
+      "id": "cse:praxian:bison",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Bison",
+      "name": "Bison",
+      "weapons": [
+        "Long Axe",
+        "Broadsword",
+        "Lance",
+        "Javelin",
+        "Praxian Shield"
+      ],
+      "sourceWeapons": [
+        "Long Axe 1H",
+        "Broadsword",
+        "Lance",
+        "Javelin",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Bison Tribe Combat Style"
+      ],
+      "printedTraits": [
+        "Bison Tribe Combat Style"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 932
+      }
+    },
+    {
+      "id": "cse:praxian:bolo-lizard",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Bolo Lizard",
+      "name": "Bolo Lizard",
+      "weapons": [
+        "Shortspear",
+        "Bolas",
+        "Dagger",
+        "Praxian Shield"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Bolas",
+        "Dagger",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Mancatcher",
+        "Mounted Combat",
+        "Skirmisher"
+      ],
+      "printedTraits": [
+        "Mancatcher",
+        "Mounted Combat",
+        "Skirmisher"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 936
+      }
+    },
+    {
+      "id": "cse:praxian:cannibal-cult",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Cannibal Cult",
+      "name": "Cannibal Cult",
+      "weapons": [
+        "Club",
+        "Net",
+        "Whip",
+        "Dagger"
+      ],
+      "sourceWeapons": [
+        "Club",
+        "Net",
+        "Whip",
+        "Dagger"
+      ],
+      "traits": [
+        "Assassination",
+        "Knockout Blow",
+        "Mancatcher"
+      ],
+      "printedTraits": [
+        "Assassination",
+        "Knockout Blow",
+        "Mancatcher"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 937
+      }
+    },
+    {
+      "id": "cse:praxian:high-llama",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "High Llama",
+      "name": "High Llama",
+      "weapons": [
+        "Long Axe",
+        "Longspear",
+        "Lance",
+        "Javelin",
+        "Praxian Shield"
+      ],
+      "sourceWeapons": [
+        "Long Axe 1H",
+        "Longspear",
+        "Lance",
+        "Javelin",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Mounted Combat",
+        "Throw Weapons",
+        "Trained Beast"
+      ],
+      "printedTraits": [
+        "Mounted Combat",
+        "Throw Weapons",
+        "Trained Beast"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 939
+      }
+    },
+    {
+      "id": "cse:praxian:impala",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Impala",
+      "name": "Impala",
+      "weapons": [
+        "Long Axe",
+        "Recurve Bow",
+        "Dart",
+        "Praxian Shield"
+      ],
+      "sourceWeapons": [
+        "Long Axe 1H",
+        "Recurve Bow",
+        "Dart",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Mounted Combat",
+        "Prancing",
+        "Ranged Marksman"
+      ],
+      "printedTraits": [
+        "Mounted Combat",
+        "Prancing",
+        "Ranged Marksman"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 940
+      }
+    },
+    {
+      "id": "cse:praxian:morokanth",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Morokanth",
+      "name": "Morokanth",
+      "weapons": [
+        "Club",
+        "Shortspear",
+        "Longspear",
+        "Unarmed",
+        "Praxian Shield"
+      ],
+      "sourceWeapons": [
+        "Club",
+        "Short Spear",
+        "Longspear",
+        "Unarmed",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Batter Aside",
+        "Do or Die",
+        "Morokanth Fu",
+        "Shield Splitter"
+      ],
+      "printedTraits": [
+        "Batter Aside",
+        "Do or Die",
+        "Morokanth Fu",
+        "Shield Splitter"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 941
+      }
+    },
+    {
+      "id": "cse:praxian:ostrich",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Ostrich",
+      "name": "Ostrich",
+      "weapons": [
+        "Shortspear",
+        "Boomerang",
+        "Dart",
+        "Sling",
+        "Praxian Shield"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Boomerang",
+        "Dart",
+        "Sling",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Mounted Combat",
+        "Ranged Marksman",
+        "Skirmisher"
+      ],
+      "printedTraits": [
+        "Mounted Combat",
+        "Ranged Marksman",
+        "Skirmisher"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 943
+      }
+    },
+    {
+      "id": "cse:praxian:pol-joni",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Pol-Joni",
+      "name": "Pol-Joni",
+      "weapons": [
+        "Shortspear",
+        "Long Axe",
+        "Praxian Shield"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Long Axe 1H",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Assassination",
+        "Mounted Combat",
+        "Skirmisher"
+      ],
+      "printedTraits": [
+        "Assassination",
+        "Mounted Combat",
+        "Skirmisher"
+      ],
+      "restrictions": null,
+      "notes": "May select weapons from an alternate Praxian tribe or Orlanthi combat style.",
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 944
+      }
+    },
+    {
+      "id": "cse:praxian:rhino",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Rhino",
+      "name": "Rhino",
+      "weapons": [
+        "Long Axe",
+        "Mace",
+        "Lance",
+        "Javelin",
+        "Praxian Shield"
+      ],
+      "sourceWeapons": [
+        "Long Axe 1H",
+        "Mace",
+        "Lance",
+        "Javelin",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Intimidating Scream"
+      ],
+      "printedTraits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Intimidating Scream"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 945
+      }
+    },
+    {
+      "id": "cse:praxian:sable",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Sable",
+      "name": "Sable",
+      "weapons": [
+        "Scimitar",
+        "Lance",
+        "Recurve Bow",
+        "Praxian Shield"
+      ],
+      "sourceWeapons": [
+        "Scimitar",
+        "Lance",
+        "Recurve Bow",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Ranged Marksman"
+      ],
+      "printedTraits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Ranged Marksman"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 946
+      }
+    },
+    {
+      "id": "cse:praxian:unicorn",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Unicorn",
+      "name": "Unicorn",
+      "weapons": [
+        "Lance",
+        "Recurve Bow",
+        "Dart",
+        "Pelorian Peltast Shield"
+      ],
+      "sourceWeapons": [
+        "Lance",
+        "Recurve Bow",
+        "Dart",
+        "Pelorian Peltast Shield"
+      ],
+      "traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Kuschile Archery"
+      ],
+      "printedTraits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Kuschile Archery"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 947
+      }
+    },
+    {
+      "id": "cse:praxian:zebra",
+      "culture": "Praxian",
+      "sourceCulture": "Prax",
+      "sourceName": "Zebra",
+      "name": "Zebra",
+      "weapons": [
+        "Shortspear",
+        "Broadsword",
+        "Recurve Bow",
+        "Orlanthi Round Shield"
+      ],
+      "sourceWeapons": [
+        "Short Spear",
+        "Broadsword",
+        "Recurve Bow",
+        "Orlanthi Round Shield"
+      ],
+      "traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Trained Beast"
+      ],
+      "printedTraits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Trained Beast"
+      ],
+      "restrictions": null,
+      "notes": null,
+      "citation": {
+        "source": "Combat Styles Encyclopedia",
+        "page": 948
+      }
+    }
+  ]
+}

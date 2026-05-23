@@ -29,34 +29,36 @@
       ],
       "combat_styles": [
         {
-          "name": "Hunter Raider",
-          "weapons": [
-            "Spear",
-            "Bow",
-            "Sling"
-          ],
-          "traits": [
-            "Skirmisher"
-          ]
-        },
-        {
-          "name": "Pony Cavalry",
-          "weapons": [
-            "Spear",
-            "Bow"
-          ],
-          "traits": [
-            "Mounted"
-          ]
-        },
-        {
           "name": "Hawk Slayer",
           "weapons": [
             "Longspear"
           ],
           "traits": [
-            "Mounted"
-          ]
+            "Mounted Combat"
+          ],
+          "restrictions": null
+        },
+        {
+          "name": "Hunter Raider",
+          "weapons": [
+            "Shortspear",
+            "Sling"
+          ],
+          "traits": [
+            "Skirmisher"
+          ],
+          "restrictions": null
+        },
+        {
+          "name": "Pony Cavalry",
+          "weapons": [
+            "Shortspear",
+            "Short Bow"
+          ],
+          "traits": [
+            "Mounted Combat"
+          ],
+          "restrictions": null
         }
       ],
       "passions": [
@@ -91,7 +93,8 @@
       "starting_money": {
         "currency": "Lunars",
         "amount_formula": "4d6x2"
-      }
+      },
+      "combat_styles_source": "references/combat-styles.json (Combat Styles Encyclopedia supersedes AiG for combat styles only)"
     },
     {
       "name": "Esrolian",
@@ -122,34 +125,36 @@
           "name": "Citizen Legionary",
           "weapons": [
             "Shortsword",
-            "Shield",
             "Javelin",
-            "Sling"
+            "Sling",
+            "Target Shield"
           ],
           "traits": [
             "Formation Fighting"
-          ]
+          ],
+          "restrictions": null
         },
         {
           "name": "City-State Phalangite",
           "weapons": [
-            "Longspear/Sarissa",
-            "Bow"
+            "Longspear",
+            "Pike/Sarissa"
           ],
           "traits": [
             "Formation Fighting"
-          ]
+          ],
+          "restrictions": null
         },
         {
           "name": "Clan Protector",
           "weapons": [
             "Shortsword",
-            "Shield",
-            "Shortspear"
+            "Target Shield"
           ],
           "traits": [
             "Daredevil"
-          ]
+          ],
+          "restrictions": null
         }
       ],
       "passions": [
@@ -184,7 +189,8 @@
       "starting_money": {
         "currency": "Lunars",
         "amount_formula": "4d6x15"
-      }
+      },
+      "combat_styles_source": "references/combat-styles.json (Combat Styles Encyclopedia supersedes AiG for combat styles only)"
     },
     {
       "name": "God Forgot",
@@ -211,11 +217,11 @@
       ],
       "combat_styles": [
         {
-          "name": "Horali Militia",
+          "name": "Holar Militia",
           "weapons": [
-            "1H Spear",
-            "Western Infantry Shield",
-            "Sling"
+            "Shortspear",
+            "Sling",
+            "Western Infantry Shield"
           ],
           "traits": [
             "Shield Wall"
@@ -223,28 +229,28 @@
           "restrictions": null
         },
         {
-          "name": "God Forgotten Horali",
+          "name": "Talar Defensive School",
           "weapons": [
-            "Sword",
-            "Shield",
-            "Spear",
-            "Sling"
+            "Shortsword",
+            "Dagger",
+            "Unarmed",
+            "Buckler"
           ],
           "traits": [
-            "Skirmisher"
+            "Impromptu Weapons"
           ],
           "restrictions": null
         },
         {
-          "name": "Talar Defensive School",
+          "name": "God Forgotten Holari",
           "weapons": [
-            "Unarmed",
-            "Shortsword",
-            "Dagger",
-            "Buckler"
+            "Broadsword",
+            "Shortspear",
+            "Sling",
+            "Scutum Shield"
           ],
           "traits": [
-            "Improvised Weapons"
+            "Skirmisher"
           ],
           "restrictions": null
         }
@@ -289,7 +295,8 @@
         "source": "creation-summary table"
       },
       "notes": "Atheist culture. Four castes: Talars (Yellow/Nobility), Zzistori (Blue/Wizards), Horali (Red/Soldiers), Dronars (Brown/Workers). Zzistori must take Shaping as an adjunct to their sorcerous skills. Talar and Zzistori castes are immortal. Gods are not worshipped; Rune Magic unavailable. Spirit Magic viewed as pointless. Folk Magic considered diluted sorcery.",
-      "source_note": "Merged from Mistral LLM extraction where OCR was incomplete"
+      "source_note": "Merged from Mistral LLM extraction where OCR was incomplete",
+      "combat_styles_source": "references/combat-styles.json (Combat Styles Encyclopedia supersedes AiG for combat styles only)"
     },
     {
       "name": "Lunar Heartland",
@@ -303,105 +310,101 @@
       ],
       "combat_styles": [
         {
-          "name": "Dara Happan Urbanite",
-          "weapons": [
-            "Club",
-            "Dagger",
-            "Shortsword",
-            "Buckler"
-          ],
-          "traits": [
-            "Defensive Minded"
-          ],
-          "restrictions": null
-        },
-        {
-          "name": "Dart Contestant",
-          "weapons": [
-            "Dart",
-            "Dagger",
-            "Shortsword"
-          ],
-          "traits": [
-            "Assassination",
-            "Daredevil"
-          ],
-          "restrictions": "only available to Agent career"
-        },
-        {
-          "name": "Sagittan Peltast",
-          "weapons": [
-            "Composite Bow",
-            "Sling",
-            "Pelorian Peltast Shield",
-            "Dagger"
-          ],
-          "traits": [
-            "Ranged Marksman",
-            "Skirmishing"
-          ],
-          "restrictions": null
-        },
-        {
           "name": "Lunar Corps Hoplite",
           "weapons": [
-            "1H Spear",
-            "Pelorian Aspis",
+            "Shortspear",
             "Sickle Sword/Khopesh",
-            "Kontos"
+            "Kontos",
+            "Pelorian Aspis"
           ],
           "traits": [
             "Formation Fighting",
             "Shield Wall",
             "Siege Warfare"
           ],
-          "restrictions": "only available to Warrior career"
+          "restrictions": "only available to Warrior career only"
         },
         {
           "name": "Dara Happan Heavy Infantry",
           "weapons": [
             "Kontos",
-            "Dara Happan Hoplon",
             "Shortsword",
-            "Dart"
+            "Dart",
+            "Dara Happan Hoplon"
           ],
           "traits": [
-            "Formation Fighting",
-            "Hoplon Fighting – can use kontos and hoplon together",
             "Intimidating Scream"
+          ],
+          "restrictions": "only available to Warrior career only"
+        },
+        {
+          "name": "Dara Happan Urbanite",
+          "weapons": [
+            "Club",
+            "Shortsword",
+            "Dagger",
+            "Buckler"
+          ],
+          "traits": [
+            "Impromptu Weapons"
           ],
           "restrictions": null
         },
         {
+          "name": "Dart Contestant",
+          "weapons": [
+            "Shortsword",
+            "Dart",
+            "Dagger"
+          ],
+          "traits": [
+            "Assassination",
+            "Daredevil"
+          ],
+          "restrictions": "only available to Agent career only"
+        },
+        {
           "name": "Pelorian Cavalry",
           "weapons": [
-            "Composite Bow",
             "Kontos",
-            "Pelorian Aspis",
             "Sickle Sword/Khopesh",
+            "Recurve Bow",
+            "Pelorian Aspis",
             "Pelorian Peltast Shield"
           ],
           "traits": [
-            "Beast-back Lancer",
-            "Mounted Combat",
-            "Mounted Skirmishing"
+            "Pelorian Cavalry",
+            "Mounted Skirmisher"
           ],
-          "restrictions": null
+          "restrictions": "only available to Warrior career only"
         },
         {
           "name": "Pelorian Noble",
           "weapons": [
             "Sickle Sword/Khopesh",
-            "1H Spear",
-            "Pelorian Aspis",
-            "Composite Bow"
+            "Shortspear",
+            "Recurve Bow",
+            "Pelorian Aspis"
           ],
           "traits": [
             "Formation Fighting",
             "Mounted Combat",
             "Ranged Marksman"
           ],
-          "restrictions": "only available to those of Aristocracy or Ruling class"
+          "restrictions": "only available to Aristocracy or Ruling class only"
+        },
+        {
+          "name": "Sagittan Peltast",
+          "weapons": [
+            "Recurve Bow",
+            "Sling",
+            "Dagger",
+            "Pelorian Peltast Shield"
+          ],
+          "traits": [
+            "Sagittan Peltast"
+          ],
+          "restrictions": "only available to Warrior career only"
         }
       ],
       "passions": [
@@ -439,7 +442,8 @@
         "source": "creation-summary table"
       },
       "notes": "Two cultural subtypes: Dara Happan (urban, Solar) and Lodrilli (rural, agricultural). Society divided into Nobles, Witnesses and Officers, Headmen, Workers and Slaves. Lunar Magic waxes and wanes with Red Moon phases. OCR says 'As per Civilised, RUNEQUEST page 21/22' for standard/professional skills. The footnote markers (*/**/***) map: (*) Agent career only, (**) Warrior career only, (***) Aristocracy or Ruling class only.",
-      "source_note": "Merged from Mistral LLM extraction where OCR was incomplete"
+      "source_note": "Merged from Mistral LLM extraction where OCR was incomplete",
+      "combat_styles_source": "references/combat-styles.json (Combat Styles Encyclopedia supersedes AiG for combat styles only)"
     },
     {
       "name": "Praxian",
@@ -455,10 +459,10 @@
         {
           "name": "Agimori",
           "weapons": [
-            "1H Spear",
+            "Longspear",
             "Club",
-            "Doraddi War Shield",
-            "Javelin"
+            "Javelin",
+            "Doraddi War Shield"
           ],
           "traits": [
             "Batter Aside",
@@ -470,10 +474,9 @@
         {
           "name": "Baboon",
           "weapons": [
-            "Thrown Stone",
+            "Longspear",
             "Sling",
-            "1H Spear",
-            "2H Spear"
+            "Thrown Stone"
           ],
           "traits": [
             "Daredevil",
@@ -485,10 +488,10 @@
         {
           "name": "Basmoli",
           "weapons": [
-            "1H Spear",
-            "2H Spear",
-            "Dagger",
-            "Javelin"
+            "Shortspear",
+            "Longspear",
+            "Javelin",
+            "Dagger"
           ],
           "traits": [
             "Blind Fighting",
@@ -500,41 +503,39 @@
         {
           "name": "Bison",
           "weapons": [
-            "1H Axe",
-            "Javelin",
+            "Long Axe",
+            "Broadsword",
             "Lance",
-            "1H Sword",
+            "Javelin",
             "Praxian Shield"
           ],
           "traits": [
-            "Beast-back Lancer",
-            "Mounted Combat",
-            "Shield Splitter"
+            "Bison Tribe Combat Style"
           ],
           "restrictions": null
         },
         {
           "name": "Bolo Lizard",
           "weapons": [
+            "Shortspear",
             "Bolas",
             "Dagger",
-            "1H Spear",
             "Praxian Shield"
           ],
           "traits": [
             "Mancatcher",
             "Mounted Combat",
-            "Skirmishing"
+            "Skirmisher"
           ],
           "restrictions": null
         },
         {
           "name": "Cannibal Cult",
           "weapons": [
-            "Dagger",
             "Club",
             "Net",
-            "Whip"
+            "Whip",
+            "Dagger"
           ],
           "traits": [
             "Assassination",
@@ -546,10 +547,10 @@
         {
           "name": "High Llama",
           "weapons": [
-            "Javelin",
-            "Lance",
             "Long Axe",
-            "2H Spear",
+            "Longspear",
+            "Lance",
+            "Javelin",
             "Praxian Shield"
           ],
           "traits": [
@@ -562,8 +563,8 @@
         {
           "name": "Impala",
           "weapons": [
-            "1H Axe",
-            "Composite Bow",
+            "Long Axe",
+            "Recurve Bow",
             "Dart",
             "Praxian Shield"
           ],
@@ -577,15 +578,16 @@
         {
           "name": "Morokanth",
           "weapons": [
-            "Claws",
             "Club",
-            "1H Spear",
-            "2H Spear",
+            "Shortspear",
+            "Longspear",
+            "Unarmed",
             "Praxian Shield"
           ],
           "traits": [
             "Batter Aside",
-            "Do or Die (Claws)",
+            "Do or Die",
+            "Morokanth Fu",
             "Shield Splitter"
           ],
           "restrictions": null
@@ -593,57 +595,56 @@
         {
           "name": "Ostrich",
           "weapons": [
+            "Shortspear",
             "Boomerang",
             "Dart",
             "Sling",
-            "1H Spear",
             "Praxian Shield"
           ],
           "traits": [
             "Mounted Combat",
             "Ranged Marksman",
-            "Skirmishing"
+            "Skirmisher"
           ],
           "restrictions": null
         },
         {
           "name": "Pol-Joni",
           "weapons": [
-            "1H Spear",
-            "1H Axe",
-            "Short Bow",
+            "Shortspear",
+            "Long Axe",
             "Praxian Shield"
           ],
           "traits": [
             "Assassination",
             "Mounted Combat",
-            "Skirmishing"
+            "Skirmisher"
           ],
           "restrictions": null,
-          "notes": "or select weapons from an alternate Praxian tribe or Orlanthi combat style"
+          "notes": "May select weapons from an alternate Praxian tribe or Orlanthi combat style."
         },
         {
           "name": "Rhino",
           "weapons": [
-            "Javelin",
-            "Lance",
             "Long Axe",
             "Mace",
+            "Lance",
+            "Javelin",
             "Praxian Shield"
           ],
           "traits": [
             "Beast-back Lancer",
-            "Intimidating Scream",
-            "Mounted Combat"
+            "Mounted Combat",
+            "Intimidating Scream"
           ],
           "restrictions": null
         },
         {
           "name": "Sable",
           "weapons": [
-            "Composite Bow",
-            "Lance",
             "Scimitar",
+            "Lance",
+            "Recurve Bow",
             "Praxian Shield"
           ],
           "traits": [
@@ -656,25 +657,24 @@
         {
           "name": "Unicorn",
           "weapons": [
-            "Bow",
-            "Dart",
             "Lance",
-            "Shortsword",
+            "Recurve Bow",
+            "Dart",
             "Pelorian Peltast Shield"
           ],
           "traits": [
             "Beast-back Lancer",
-            "Kuschile Archery",
-            "Mounted Combat"
+            "Mounted Combat",
+            "Kuschile Archery"
           ],
           "restrictions": null
         },
         {
-          "name": "Zebra (Pavis Survivors)",
+          "name": "Zebra",
           "weapons": [
-            "Composite Bow",
-            "1H Spear",
+            "Shortspear",
             "Broadsword",
+            "Recurve Bow",
             "Orlanthi Round Shield"
           ],
           "traits": [
@@ -725,12 +725,13 @@
         "source": "creation-summary table"
       },
       "notes": "Combat styles are tribal — each tribe has its own style. Riding beast tribes use traits like Skirmisher when mounted but not afoot. Men-and-a-half use Taller SIZ modification; Impala, Bolo Lizard and Ostrich use Smaller modification (p.24). Metal goods highly prized. Horses are taboo. Five Great Tribes: Bison, High Llama, Impala, Sable, Morokanth.",
-      "source_note": "Merged from Mistral LLM extraction where OCR was incomplete"
+      "source_note": "Merged from Mistral LLM extraction where OCR was incomplete",
+      "combat_styles_source": "references/combat-styles.json (Combat Styles Encyclopedia supersedes AiG for combat styles only)"
     },
     {
-      "name": "Provincial Lunar/Tarsh",
+      "name": "Lunar Provincial",
       "page": "p.35-37",
-      "culture_type": "Barbarian",
+      "culture_type": "Civilised",
       "standard_skills": [
         "Conceal",
         "Deceit",
@@ -752,61 +753,61 @@
       ],
       "combat_styles": [
         {
-          "name": "Lunar Corps Hoplite",
-          "weapons": [
-            "1H Spear",
-            "Pelorian Aspis",
-            "Sickle Sword/Khopesh"
-          ],
-          "traits": [
-            "Formation Fighting",
-            "Shield Wall",
-            "Siege Warfare"
-          ],
-          "restrictions": "only available to Warrior career"
-        },
-        {
-          "name": "Pelorian Cavalry",
-          "weapons": [
-            "Composite Bow",
-            "Pelorian Aspis",
-            "Sickle Sword/Khopesh",
-            "Kontos",
-            "Pelorian Peltast Shield"
-          ],
-          "traits": [
-            "Beast-back Lancer",
-            "Mounted Combat",
-            "Mounted Skirmishing"
-          ],
-          "restrictions": "only available to Warrior career"
-        },
-        {
           "name": "Colonial Noble",
           "weapons": [
-            "1H Spear",
-            "Pelorian Aspis",
+            "Shortspear",
             "Sickle Sword/Khopesh",
-            "Composite Bow"
+            "Recurve Bow",
+            "Pelorian Aspis"
           ],
           "traits": [
             "Formation Fighting",
             "Mounted Combat",
             "Ranged Marksman"
           ],
-          "restrictions": "only available to those of Aristocracy or Ruling class"
+          "restrictions": "only available to Aristocracy or Ruling class only"
         },
         {
           "name": "Colonial Survivalist",
           "weapons": [
             "Shortsword",
-            "Dagger",
-            "Sling"
+            "Sling",
+            "Dagger"
           ],
           "traits": [
             "Hidden Weapons"
           ],
           "restrictions": null
+        },
+        {
+          "name": "Lunar Corps Hoplite",
+          "weapons": [
+            "Shortspear",
+            "Sickle Sword/Khopesh",
+            "Kontos",
+            "Pelorian Aspis"
+          ],
+          "traits": [
+            "Formation Fighting",
+            "Shield Wall",
+            "Siege Warfare"
+          ],
+          "restrictions": "only available to Warrior career only"
+        },
+        {
+          "name": "Pelorian Cavalry",
+          "weapons": [
+            "Kontos",
+            "Sickle Sword/Khopesh",
+            "Recurve Bow",
+            "Pelorian Aspis",
+            "Pelorian Peltast Shield"
+          ],
+          "traits": [
+            "Pelorian Cavalry",
+            "Mounted Skirmisher"
+          ],
+          "restrictions": "only available to Warrior career only"
         }
       ],
       "passions": [
@@ -844,10 +845,16 @@
         "source": "creation-summary table"
       },
       "notes": "Provincial Lunars far from heartland. Worship Seven Mothers. Recognize local gods. Footnote markers: (**) Warrior career only, (***) Aristocracy or Ruling class only. Tarshite characters choose either Lunar Provincial or Sartarite culture.",
-      "source_note": "Merged from Mistral LLM extraction where OCR was incomplete"
+      "source_note": "Merged from Mistral LLM extraction where OCR was incomplete",
+      "aliases": [
+        "Provincial Lunar/Tarsh",
+        "Tarshite"
+      ],
+      "careers": "Any Civilised. Tarshite characters choose either Lunar Provincial or Sartarite culture.",
+      "combat_styles_source": "references/combat-styles.json (Combat Styles Encyclopedia supersedes AiG for combat styles only)"
     },
     {
-      "name": "Sartarite/Heortling",
+      "name": "Sartarite (Heortling)",
       "page": "p.37-39",
       "culture_type": "Barbarian",
       "standard_skills": [
@@ -858,12 +865,27 @@
       ],
       "combat_styles": [
         {
+          "name": "Alynx Brother",
+          "weapons": [
+            "Shortspear",
+            "Javelin",
+            "Dagger"
+          ],
+          "traits": [
+            "Daredevil",
+            "Do or Die",
+            "Trained Beast"
+          ],
+          "restrictions": "only available to Herder, Hunter or Scout career only"
+        },
+        {
           "name": "Hill Clan Levy",
           "weapons": [
-            "1H Axe",
-            "1H Spear",
-            "Orlanthi Round Shield",
-            "Longbow or Javelin"
+            "Long Axe",
+            "Shortspear",
+            "Long Bow",
+            "Javelin",
+            "Orlanthi Round Shield"
           ],
           "traits": [
             "Intimidating Scream",
@@ -872,91 +894,62 @@
           "restrictions": null
         },
         {
-          "name": "Upland Crofter",
-          "weapons": [
-            "Sling",
-            "1H Spear",
-            "Orlanthi Round Shield"
-          ],
-          "traits": [
-            "Ranged Marksman",
-            "Skirmishing"
-          ],
-          "restrictions": "only available to Herder, Hunter or Scout career"
-        },
-        {
-          "name": "Alynx Brother",
-          "weapons": [
-            "Dagger",
-            "1H Spear",
-            "Javelin"
-          ],
-          "traits": [
-            "Daredevil",
-            "Do or Die",
-            "Trained Beast"
-          ],
-          "restrictions": "only available to Herder, Hunter or Scout career"
-        },
-        {
           "name": "Loyal Housecarl",
           "weapons": [
             "Broadsword",
-            "1H Spear",
-            "Orlanthi Scutum",
-            "Greataxe"
+            "Shortspear",
+            "Great Axe",
+            "Orlanthi Scutum"
           ],
           "traits": [
             "Batter Aside",
             "Intimidating Scream",
             "Shield Wall"
           ],
-          "restrictions": "only available to Warrior career"
+          "restrictions": "only available to Warrior career only"
         },
         {
           "name": "Sartarite Noble",
           "weapons": [
             "Broadsword",
-            "1H Spear",
-            "Orlanthi Scutum",
-            "Javelin"
+            "Shortspear",
+            "Javelin",
+            "Orlanthi Scutum"
           ],
           "traits": [
             "Intimidating Scream",
             "Mounted Combat",
             "Shield Wall"
           ],
-          "restrictions": "only available to those of Gentry or Ruling class"
+          "restrictions": "only available to Gentry or Ruling class only"
         },
         {
-          "name": "Esrolian Cohort",
+          "name": "Upland Crofter",
           "weapons": [
-            "Greataxe",
-            "Shortsword",
-            "Orlanthi Scutum",
-            "Javelin"
+            "Shortspear",
+            "Sling",
+            "Orlanthi Round Shield"
           ],
           "traits": [
-            "Formation Fighting",
-            "Shield Splitter",
-            "Shield Wall"
+            "Ranged Marksman",
+            "Skirmisher"
           ],
-          "restrictions": "only available to those of Gentry or Ruling class"
+          "restrictions": "only available to Herder, Hunter or Scout career only"
         },
         {
           "name": "Tarshite Militia",
           "weapons": [
             "Shortsword",
-            "1H Spear",
-            "Peltast Shield",
-            "Javelin"
+            "Shortspear",
+            "Javelin",
+            "Peltast Shield"
           ],
           "traits": [
             "Defensive Minded",
             "Formation Fighting",
             "Siege Warfare"
           ],
-          "restrictions": "only available to those of Gentry or Ruling class"
+          "restrictions": "only available to Warrior career only"
         }
       ],
       "passions": [
@@ -999,7 +992,12 @@
         "source": "creation-summary table"
       },
       "careers": "Any Barbarian. Note: If a player chooses to play an Orlanthi hailing from a city such as Boldhome, Nochet or similar, then substitute the Barbarian skill and career choices with Civilised instead.",
-      "notes": "Social Status uses Barbarian table from RUNEQUEST p.31. Rank names: Outcast, Thrall (Slave), Carl or Cottar (Freeman), Thane (Gentry), Chieftain (Ruling). Footnote markers: (*) Herder/Hunter/Scout career, (**) Warrior career, (***) Gentry or Ruling class. OCR has typo 'Spcar' for Spear in Alynx Brother. Esrolian Cohort and Tarshite Militia listed under Sartarite combat styles (representing regional variants)."
+      "notes": "Social Status uses Barbarian table from RUNEQUEST p.31. Rank names: Outcast, Thrall (Slave), Carl or Cottar (Freeman), Thane (Gentry), Chieftain (Ruling). Footnote markers: (*) Herder/Hunter/Scout career, (**) Warrior career, (***) Gentry or Ruling class. OCR has typo 'Spcar' for Spear in Alynx Brother. Esrolian Cohort and Tarshite Militia listed under Sartarite combat styles (representing regional variants).",
+      "aliases": [
+        "Sartarite/Heortling",
+        "Heortling"
+      ],
+      "combat_styles_source": "references/combat-styles.json (Combat Styles Encyclopedia supersedes AiG for combat styles only)"
     },
     {
       "name": "Telmori Hsunchen",
@@ -1028,28 +1026,27 @@
           "name": "Telmori Hunter",
           "weapons": [
             "Club",
-            "1H Spear",
-            "2H Spear",
-            "Javelin",
+            "Shortspear",
+            "Longspear",
             "Short Bow"
           ],
           "traits": [
             "Intimidating Scream",
-            "Trained Beast (Wolf)"
+            "Trained Beast"
           ],
           "restrictions": null
         },
         {
           "name": "Wolf Hunter",
           "weapons": [
-            "Teeth and Claws"
+            "Unarmed"
           ],
           "traits": [
             "Intimidating Scream",
             "Mancatcher"
           ],
           "restrictions": null,
-          "notes": "Can be used in either human or lupine forms. In wolf form also gains Unarmed Prowess trait."
+          "notes": "Can be used in either human or lupine forms; wolf form also gains Unarmed Prowess."
         }
       ],
       "passions": [
@@ -1087,7 +1084,10 @@
         "source": "creation-summary table"
       },
       "notes": "Hsunchen (Beast People) — Neolithic hunter-gatherers. Totemic wolf identity. Cursed Strain in Dragon Pass: every Wildday (full Lunar Moon) they metamorphose into full lupine form (Lycanthropy rules from RUNEQUEST p.396). Nysalor blessed their wolf-form hides to be impervious to bronze, bone, stone, wood, flesh or claw. Later cursed by Talor the Laughing Warrior. Practice Animism through Korgatsu Spirit Tradition.",
-      "source_note": "Merged from Mistral LLM extraction where OCR was incomplete"
+      "source_note": "Merged from Mistral LLM extraction where OCR was incomplete",
+      "combat_styles_source": "references/combat-styles.json (Combat Styles Encyclopedia supersedes AiG for combat styles only)"
     }
-  ]
+  ],
+  "validated_at": "2026-05-21",
+  "validation_method": "PDF page render/OCR validation against Adventures in Glorantha GenCon preview p.26-41; combat-style rows superseded by Combat Styles Encyclopedia via references/combat-styles.json."
 }

@@ -3,7 +3,7 @@
   "extracted_at": "2026-05-17",
   "page": "p.59-62",
   "note": "AiG Magic overview chapter. Contains system descriptions (how each magic type works in Glorantha) and general casting rules that modify Mythras Core mechanics. The 'Changes to Casting Skills' section is critical — it defines how Rune Affinities replace standard Mythras casting skills.",
-  "verified": false,
+  "verified": true,
   "introduction": "Magic\n\nGlorantha's magic is introduced in this chapter, with the chapters following it describing the specific magical approaches in greater detail.\n\nGloranthans practise many different types of magic which anyone can learn, provided they are of the correct species, ethnic culture or members of a cult which teaches it. These arts are called Folk Magic, Spirit Magic, Rune Magic, Sorcery and Lunar Magic. The incomprehensible art of Mysticism is primarily reserved for the Draconic races.\n\nAs described in chapter XX, all magic is drawn from the Runes; the fundamental building blocks of Gloranthan reality. Certain cultures and species possess inherent bonds to certain Runes, called Rune Affinities, which often limit the cults, traditions and schools which they may join — and in turn restrict the particular spells or spirits which they can then master.",
   "system_descriptions": {
     "Folk Magic": {
@@ -55,7 +55,7 @@
     },
     "Changes to Casting Skills": {
       "heading": "Changes to Casting Skills",
-      "text": "Since access to magic in Glorantha is via the Runes, the skills required to cast and manipulate some forms of magic have been revised to take into account the importance of Rune Affinities (see Chapter XX).\n\nCareful study of these new rules will be required to avoid confusion.",
+      "text": "Since access to magic in Glorantha is via the Runes, the skills required to cast and manipulate some forms of magic have been revised to take into account the importance of Rune Affinities (see Chapter XX). For Rune Magic, Devotion is replaced by the worshipper's affinity with one of the deity's Runes. For Sorcery, Invocation is replaced by whichever Rune Affinity is linked to that spell, further modified by the Four Principles (Combine/Separate, Command/Summon, Dismiss, Tap); Shaping is replaced by the sorcerer's Law Rune affinity. Careful study of these new rules will be required to avoid confusion.",
       "page": "p.60"
     },
     "Spells Available per Temple or Teacher": {
@@ -95,7 +95,7 @@
     },
     "Restrictions on Casting": {
       "heading": "Restrictions on Casting",
-      "text": "Magic requires freedom of movement and mind to be able to cast a spell. A caster suffers one additional difficulty grade to their casting skill for each of the following:\n\nA spell automatically fails if the caster:\n\nThere are no penalties for casting in close combat, as many spells are intended for battle. Games Masters may need to apply the above restrictions on a case by case basis according to the species or abilities of the caster.",
+      "text": "Magic requires freedom of movement and mind to be able to cast a spell. A caster suffers one additional difficulty grade for each relevant restriction, including mental impairment, physical constriction, verbal restraint, and pain. A spell automatically fails if the caster cannot move where movement is required, is unconscious or otherwise incapable of concentration, or cannot sense the target. There are no penalties for casting in close combat, as many spells are intended for battle. Games Masters may need to apply the above restrictions on a case by case basis according to the species or abilities of the caster.",
       "page": "p.61"
     },
     "Stacking Magic": {
@@ -108,5 +108,6 @@
       "text": "The new magical rules presented in Adventures in Glorantha are intended for starting fresh campaigns using the RuneQuest 6th Edition rules as base. Game Masters converting over legacy games may find themselves more comfortable simply converting over effects of existing spells from previous versions of RuneQuest and avoid the mechanical changes necessary to readjust to the current view of Gloranthan practice.\n\nIn other words, if you are unhappy with the new way of doing things, then feel free to ignore the new rules as you wish. Your Glorantha Will Vary!",
       "page": "p.62"
     }
-  }
+  },
+  "validated_at": "2026-05-21"
 }

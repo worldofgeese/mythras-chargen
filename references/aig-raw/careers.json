@@ -1,7 +1,7 @@
 {
   "source": "Adventures in Glorantha (GenCon 2015 Preview)",
   "extracted_at": "2026-04-02",
-  "note": "Career categories by culture. From culture descriptions and creation-summary step 8.",
+  "note": "Career categories by culture. Vision-validated against AiG p.26-41; God Forgot is caste-based, Lunar Provincial is Civilised, and Tarshite characters choose Lunar Provincial or Sartarite.",
   "careers_by_culture": [
     {
       "culture": "Balazaring",
@@ -17,9 +17,43 @@
     },
     {
       "culture": "God Forgot",
-      "career_category": "All Civilised",
-      "reference": "RuneQuest page 40",
-      "source": "Inferred from culture_type Civilised; mechanical section not in OCR"
+      "career_category": "Caste-based",
+      "reference": "Adventures in Glorantha p.31; RuneQuest career lists by caste",
+      "source": "Dronars: Beast Handler, Courtesan, Crafter, Entertainer, Farmer, Fisher, Herder, Hunter, Merchant, Miner, Sailor, Scout, Thief. Holars/Horali: Warrior. Zzistori: Sorcerer. Talar: Agent, Alchemist, Courtier, Official, Scholar, Warrior.",
+      "castes": {
+        "Dronar": [
+          "Beast Handler",
+          "Courtesan",
+          "Crafter",
+          "Entertainer",
+          "Farmer",
+          "Fisher",
+          "Herder",
+          "Hunter",
+          "Merchant",
+          "Miner",
+          "Sailor",
+          "Scout",
+          "Thief"
+        ],
+        "Holar": [
+          "Warrior"
+        ],
+        "Horali": [
+          "Warrior"
+        ],
+        "Zzistori": [
+          "Sorcerer"
+        ],
+        "Talar": [
+          "Agent",
+          "Alchemist",
+          "Courtier",
+          "Official",
+          "Scholar",
+          "Warrior"
+        ]
+      }
     },
     {
       "culture": "Lunar Heartland",
@@ -34,16 +68,24 @@
       "source": "Inferred from culture_type Nomad; mechanical section not in OCR"
     },
     {
-      "culture": "Provincial Lunar/Tarsh",
-      "career_category": "All Barbarian",
-      "reference": "RuneQuest page 40",
-      "source": "Inferred from culture_type Barbarian; mechanical section not in OCR"
+      "culture": "Lunar Provincial",
+      "aliases": [
+        "Provincial Lunar/Tarsh",
+        "Tarshite"
+      ],
+      "career_category": "Any Civilised",
+      "reference": "Adventures in Glorantha p.34, p.39; RuneQuest page 40",
+      "source": "Lunar Provincial uses Any Civilised careers. Tarshite characters choose either Lunar Provincial or Sartarite culture."
     },
     {
-      "culture": "Sartarite/Heortling",
+      "culture": "Sartarite (Heortling)",
       "career_category": "All Barbarian",
       "reference": "RuneQuest page 40",
-      "source": "Inferred from culture_type Barbarian; mechanical section not in OCR"
+      "source": "Inferred from culture_type Barbarian; mechanical section not in OCR",
+      "aliases": [
+        "Sartarite/Heortling",
+        "Heortling"
+      ]
     },
     {
       "culture": "Telmori Hsunchen",
@@ -51,5 +93,7 @@
       "reference": "RuneQuest page 40",
       "source": "Inferred from culture_type Primitive; mechanical section not in OCR"
     }
-  ]
+  ],
+  "validated_at": "2026-05-21",
+  "validation_method": "PDF page render/OCR validation against Adventures in Glorantha GenCon preview p.26-41."
 }

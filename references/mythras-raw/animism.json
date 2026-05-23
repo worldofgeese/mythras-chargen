@@ -19,10 +19,30 @@
           "high_shaman": "Can drag the soul of another person into the Spirit World"
         },
         "preparation_time": {
-          "follower": {"observe": "1 Hour", "converse": null, "project_or_draw": null, "drag_souls": null},
-          "spirit_worshipper": {"observe": "1 Minute", "converse": "1 Hour", "project_or_draw": null, "drag_souls": null},
-          "shaman": {"observe": "1 Round", "converse": "1 Minute", "project_or_draw": "1 Hour", "drag_souls": null},
-          "high_shaman": {"observe": "1 Action", "converse": "1 Round", "project_or_draw": "1 Minute", "drag_souls": "1 Hour"}
+          "follower": {
+            "observe": "1 Hour",
+            "converse": null,
+            "project_or_draw": null,
+            "drag_souls": null
+          },
+          "spirit_worshipper": {
+            "observe": "1 Minute",
+            "converse": "1 Hour",
+            "project_or_draw": null,
+            "drag_souls": null
+          },
+          "shaman": {
+            "observe": "1 Round",
+            "converse": "1 Minute",
+            "project_or_draw": "1 Hour",
+            "drag_souls": null
+          },
+          "high_shaman": {
+            "observe": "1 Action",
+            "converse": "1 Round",
+            "project_or_draw": "1 Minute",
+            "drag_souls": "1 Hour"
+          }
         }
       },
       "binding": {
@@ -35,7 +55,7 @@
       "note": "Per Hannu (2026-05-16): 'For animism replaced binding with spirit rune affinity'. In AiG/Glorantha, the Spirit Rune affinity replaces both Trance and Binding. Spirit Rune allows seeing/communicating with spirits (replaces Trance) and commanding spirits uses the Rune Affinity shared with the spirit (replaces Binding).",
       "binding_replacement": "Spirit Rune affinity (for commanding spirits, use the Rune Affinity shared with the spirit)",
       "trance_replacement": "Spirit Rune affinity (for perceiving and entering the Spirit World)",
-      "source": "AiG p.134 (Spirit Magic chapter), Hannu Discord 2026-05-16"
+      "source": "AiG p.136-137 (Spirit Magic core skills), Hannu Discord 2026-05-16"
     },
     "ranks": {
       "page": "p.131-132, p.196 (Cults chapter)",
@@ -70,12 +90,36 @@
     "page": "p.133",
     "description": "Spirit Intensity determines POW range. Intensity 6+ spirits are beyond the control of a lone animist.",
     "table": [
-      {"intensity": 0, "pow_roll": "1d6", "pow_range": "1-6"},
-      {"intensity": 1, "pow_roll": "1d6+6", "pow_range": "7-12"},
-      {"intensity": 2, "pow_roll": "1d6+12", "pow_range": "13-18"},
-      {"intensity": 3, "pow_roll": "1d6+18", "pow_range": "19-24"},
-      {"intensity": 4, "pow_roll": "1d6+24", "pow_range": "25-30"},
-      {"intensity": 5, "pow_roll": "1d6+30", "pow_range": "31-36"}
+      {
+        "intensity": 0,
+        "pow_roll": "1d6",
+        "pow_range": "1-6"
+      },
+      {
+        "intensity": 1,
+        "pow_roll": "1d6+6",
+        "pow_range": "7-12"
+      },
+      {
+        "intensity": 2,
+        "pow_roll": "1d6+12",
+        "pow_range": "13-18"
+      },
+      {
+        "intensity": 3,
+        "pow_roll": "1d6+18",
+        "pow_range": "19-24"
+      },
+      {
+        "intensity": 4,
+        "pow_roll": "1d6+24",
+        "pow_range": "25-30"
+      },
+      {
+        "intensity": 5,
+        "pow_roll": "1d6+30",
+        "pow_range": "31-36"
+      }
     ],
     "scaling": "+1 intensity = +6 POW"
   },
@@ -104,89 +148,135 @@
     "types": [
       {
         "name": "Nature Spirits (Animal)",
-        "characteristics": {"ins": "As the species", "pow": "As per Intensity", "cha": "Equal to INS"},
-        "abilities": ["One or more of: Bless, Demesne, Domination, Endowment"],
+        "characteristics": {
+          "ins": "As the species",
+          "pow": "As per Intensity",
+          "cha": "Equal to INS"
+        },
+        "abilities": [
+          "One or more of: Bless, Demesne, Domination, Endowment"
+        ],
         "description": "Entities of the world's natural flora and fauna. Frequently the subject of totemic veneration.",
         "page": "p.144"
       },
       {
         "name": "Nature Spirits (Regional)",
-        "characteristics": {"ins": "1d6", "pow": "As per Intensity", "cha": "3d6"},
-        "abilities": ["One or more of: Bless, Demesne, Domination, Endowment"],
+        "characteristics": {
+          "ins": "1d6",
+          "pow": "As per Intensity",
+          "cha": "3d6"
+        },
+        "abilities": [
+          "One or more of: Bless, Demesne, Domination, Endowment"
+        ],
         "description": "Spirits of places - groves, springs, mountains.",
         "page": "p.144"
       },
       {
         "name": "Ancestor Spirits",
-        "characteristics": {"int": "3d6", "pow": "As per Intensity", "cha": "3d6"},
-        "abilities": ["Eternal", "plus one or more of: Discorporate, Sagacity, Spellcasting, Subjugate"],
+        "characteristics": {
+          "int": "3d6",
+          "pow": "As per Intensity",
+          "cha": "3d6"
+        },
+        "abilities": [
+          "Eternal",
+          "plus one or more of: Discorporate, Sagacity, Spellcasting, Subjugate"
+        ],
         "description": "Souls of family members who reside in the Spirit World after death.",
         "page": "p.145"
       },
       {
         "name": "Bane Spirits",
-        "abilities": ["Curse-related abilities"],
+        "abilities": [
+          "Curse-related abilities"
+        ],
         "description": "Spirits that inflict curses and misfortune.",
         "page": "p.148"
       },
       {
         "name": "Death Spirits",
-        "abilities": ["Life-draining abilities"],
+        "abilities": [
+          "Life-draining abilities"
+        ],
         "description": "Spirits that can kill or drain life force.",
         "page": "p.149"
       },
       {
         "name": "Disease Spirits",
-        "abilities": ["Disease-inflicting abilities"],
+        "abilities": [
+          "Disease-inflicting abilities"
+        ],
         "description": "Spirits that carry and inflict diseases.",
         "page": "p.148-149"
       },
       {
         "name": "Elemental Spirits",
-        "abilities": ["Animate (specific element)", "Manifest as elemental"],
+        "abilities": [
+          "Animate (specific element)",
+          "Manifest as elemental"
+        ],
         "description": "Spirits of the classical elements that can manifest physically.",
         "page": "p.144"
       },
       {
         "name": "Fetches",
-        "abilities": ["Personal guardian spirit bonded to a shaman"],
+        "abilities": [
+          "Personal guardian spirit bonded to a shaman"
+        ],
         "description": "A shaman's personal spirit companion, gained during initiation.",
         "page": "p.150"
       },
       {
         "name": "Guardian Spirits",
-        "abilities": ["Protective abilities"],
+        "abilities": [
+          "Protective abilities"
+        ],
         "description": "Spirits that guard and protect their binder.",
         "page": "p.150-151"
       },
       {
         "name": "Healing/Medicine Spirits",
-        "characteristics": {"ins": "1d6+6", "pow": "As per Intensity", "cha": "1d6+6"},
-        "abilities": ["Healing abilities"],
+        "characteristics": {
+          "ins": "1d6+6",
+          "pow": "As per Intensity",
+          "cha": "1d6+6"
+        },
+        "abilities": [
+          "Healing abilities"
+        ],
         "description": "Spirits that can cure disease and heal wounds.",
         "page": "p.152"
       },
       {
         "name": "Passion Spirits",
-        "abilities": ["Invoke overwhelming passions or mental states"],
+        "abilities": [
+          "Invoke overwhelming passions or mental states"
+        ],
         "description": "Spirits that can induce love, fear, hate, madness, violence, etc.",
         "page": "p.146"
       },
       {
         "name": "Predator Spirits",
-        "abilities": ["Physical attack abilities"],
+        "abilities": [
+          "Physical attack abilities"
+        ],
         "description": "Aggressive spirits that can physically harm targets.",
         "page": "p.153"
       },
       {
         "name": "Shape-shifting Spirits",
-        "abilities": ["Grant ability to change form into cult totem animal"],
+        "abilities": [
+          "Grant ability to change form into cult totem animal"
+        ],
         "description": "Spirits that allow the animist to take animal form.",
         "page": "p.153-154"
       },
       {
         "name": "Sickness Spirits",
-        "abilities": ["Inflict specific sicknesses and conditions"],
+        "abilities": [
+          "Inflict specific sicknesses and conditions"
+        ],
         "description": "Spirits that cause ongoing illness rather than acute disease.",
         "page": "p.154"
       }
@@ -235,6 +325,14 @@
   "spirit_combat": {
     "page": "p.138-141",
     "description": "Resolved similarly to physical combat but uses Spectral Combat skill (50%+POW+CHA). Damage reduces Magic Points. At 0 MP, the loser is at the mercy of the victor.",
-    "special_effects": ["Bypass Charm", "Dominate", "Evade", "Flee", "Overpower", "Possess", "Sap"]
+    "special_effects": [
+      "Bypass Charm",
+      "Dominate",
+      "Evade",
+      "Flee",
+      "Overpower",
+      "Possess",
+      "Sap"
+    ]
   }
 }

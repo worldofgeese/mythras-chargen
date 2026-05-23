@@ -35,8 +35,8 @@
 | God Forgot | Civilised | p.29-31 | — |
 | Lunar Heartland | Civilised | p.31-33 | — |
 | Praxian | Nomad | p.33-35 | — |
-| Provincial Lunar/Tarsh | Civilised | p.35-37 | — |
-| Sartarite/Heortling | Barbarian | p.37-39 | — |
+| Lunar Provincial (Tarshite) | Civilised | p.35-37 | Tarshite characters choose Lunar Provincial or Sartarite |
+| Sartarite (Heortling) | Barbarian | p.37-39 | — |
 | Telmori Hsunchen | Primitive | p.39-41 | — |
 
 ### Chapter Layout
