@@ -8496,15 +8496,15 @@ function getSorceryMagicPoints(source, character = CharacterData) {
   return source?.magicPoints ?? source?.resourceValue ?? character?.sorceryResource ?? getCharacterMagicPoints(character);
 }
 
-function getUnknownSorcerySpellNames(spells) {
+function getUnknownSorcerySpellNames(spells, availableItems = null) {
   if (!Array.isArray(spells)) return [];
-  const knownSpells = new Set(SORCERY_SPELLS.map(([name]) => name));
+  const knownSpells = new Set(Array.isArray(availableItems) ? availableItems : SORCERY_SPELLS.map(([name]) => name));
   return spells.filter(spell => typeof spell !== 'string' || !knownSpells.has(spell));
 }
 
-function getUnknownBoundSpiritNames(spirits) {
+function getUnknownBoundSpiritNames(spirits, availableItems = null) {
   if (!Array.isArray(spirits)) return [];
-  const knownSpirits = new Set(STARTING_SPIRITS.map(spirit => spirit.name));
+  const knownSpirits = new Set(Array.isArray(availableItems) ? availableItems : STARTING_SPIRITS.map(spirit => spirit.name));
   return spirits
     .map(getBoundSpiritName)
     .filter(name => typeof name !== 'string' || !knownSpirits.has(name));
@@ -8698,15 +8698,19 @@ function getSorcerySpellsWithoutSourceError(spells, source) {
 
 function getUnsupportedMagicSelectionErrors(cultName, cultType, selections = {}) {
   const types = Array.isArray(cultType?.types) ? cultType.types : [];
+  const providers = Array.isArray(selections.providers) ? selections.providers : null;
+  const hasProvider = system => providers
+    ? providers.some(provider => provider.system === system)
+    : types.includes(system === 'animism' ? 'animist' : system);
   const miracles = Array.isArray(selections.miracles) ? selections.miracles : [];
   const boundSpirits = Array.isArray(selections.boundSpirits) ? selections.boundSpirits : [];
   const context = cultName ? ` (selected ${cultName})` : '';
   const errors = [];
-  if (miracles.length > 0 && !types.includes('theist')) {
+  if (miracles.length > 0 && !hasProvider('theist')) {
     errors.push(`miracles requires a theist cult${context}`);
   }
-  if (boundSpirits.length > 0 && !types.includes('animist')) {
-    errors.push(`boundSpirits requires an animist cult${context}`);
+  if (boundSpirits.length > 0 && !hasProvider('animism')) {
+    errors.push(`boundSpirits requires an animist cult or provider${context}`);
   }
   return errors;
 }
@@ -8756,6 +8760,12 @@ function getSorcerySourceSelectionError(snapshot, previousSource, currentCharact
     const sourceErrors = getSorcerySourceSchoolErrors(currentCharacter, source);
     if (sourceErrors.length > 0) return sourceErrors.join('; ');
   }
+  if (previousSource && source && previousSource.id !== source.id && hadSorcerySpells) {
+    const affectedSpells = previousSpells;
+    return options.lostSpellsMessage
+      ? options.lostSpellsMessage(affectedSpells)
+      : `Changing sorcery source would clear selected sorcery spells: ${affectedSpells.join(', ')}`;
+  }
   if (previousSource && hadSorcerySpells) {
     const lostSpells = previousSpells.filter(spell => !currentSpells.includes(spell));
     if (lostSpells.length > 0) {
@@ -8763,6 +8773,38 @@ function getSorcerySourceSelectionError(snapshot, previousSource, currentCharact
         ? options.lostSpellsMessage(lostSpells)
         : `Changing sorcery source would clear selected sorcery spells: ${lostSpells.join(', ')}`;
     }
+  }
+  return null;
+}
+
+function getHigherMagicProviderSelectionLossError(snapshot, providers, options = {}) {
+  const activeProviders = Array.isArray(providers) ? providers : [];
+  const hasSystem = system => activeProviders.some(provider => provider.system === system);
+  const currentCharacter = options.currentCharacter || CharacterData;
+  const sorcerySpells = Array.isArray(currentCharacter?.sorcerySpells)
+    ? currentCharacter.sorcerySpells
+    : (Array.isArray(snapshot?.sorcerySpells) ? snapshot.sorcerySpells : []);
+  const boundSpirits = Array.isArray(currentCharacter?.boundSpirits)
+    ? currentCharacter.boundSpirits.map(getBoundSpiritName).filter(Boolean)
+    : (Array.isArray(snapshot?.boundSpirits) ? snapshot.boundSpirits.map(getBoundSpiritName).filter(Boolean) : []);
+  const mysticismTalents = Array.isArray(currentCharacter?.mysticismTalents)
+    ? currentCharacter.mysticismTalents
+    : (Array.isArray(snapshot?.mysticismTalents) ? snapshot.mysticismTalents : []);
+
+  if (!hasSystem('sorcery') && sorcerySpells.length > 0) {
+    return options.lostSpellsMessage
+      ? options.lostSpellsMessage(sorcerySpells)
+      : `Changing magic providers would clear selected sorcery spells: ${sorcerySpells.join(', ')}`;
+  }
+  if (!hasSystem('animism') && boundSpirits.length > 0) {
+    return options.lostBoundSpiritsMessage
+      ? options.lostBoundSpiritsMessage(boundSpirits)
+      : `Changing magic providers would clear selected bound spirits: ${boundSpirits.join(', ')}`;
+  }
+  if (!hasSystem('mysticism') && mysticismTalents.length > 0) {
+    return options.lostMysticismTalentsMessage
+      ? options.lostMysticismTalentsMessage(mysticismTalents)
+      : `Changing magic providers would clear selected mysticism talents: ${mysticismTalents.join(', ')}`;
   }
   return null;
 }
@@ -8783,7 +8825,7 @@ function restoreTrustedCharacterSnapshot(snapshot) {
 
 function getSorcerySourceSchoolErrors(character, source) {
   if (!source) return [];
-  const school = source.isCultBacked ? source.cultName : (source.school || source.sourceLabel);
+  const school = source.isCultBacked ? source.cultName : source.school;
   if (!school) return [];
   const selectedSkills = Array.isArray(character?.selectedProfessionalSkills) ? character.selectedProfessionalSkills : [];
   const skillNames = selectedSkills.map(skill => {
@@ -8979,12 +9021,32 @@ function createCareerBackedMagicProvider(provider, character = CharacterData) {
   };
 }
 
+function skillSatisfiesCareerMagicProviderRequirement(selectedSkill, requiredSkill) {
+  const selected = String(selectedSkill || '').trim();
+  const required = String(requiredSkill || '').trim();
+  if (!selected || !required) return false;
+  const requiredPlaceholder = parsePlaceholderSkill(required);
+  if (!requiredPlaceholder) return selected === required;
+  if (needsDisambiguation(selected)) return false;
+  const requiredCategory = requiredPlaceholder.category.toLowerCase();
+  return selected.toLowerCase().startsWith(`${requiredCategory} (`);
+}
+
+function hasCareerMagicProviderRequiredSkills(provider, character = CharacterData) {
+  const requirements = Array.isArray(provider?.career_skill_requirements) ? provider.career_skill_requirements : [];
+  if (requirements.length === 0) return true;
+  const selectedSkills = Array.isArray(character?.selectedProfessionalSkills) ? character.selectedProfessionalSkills : [];
+  return requirements.every(requiredSkill =>
+    selectedSkills.some(selectedSkill => skillSatisfiesCareerMagicProviderRequirement(selectedSkill, requiredSkill))
+  );
+}
+
 function resolveCareerBackedHigherMagicProviders(character = CharacterData) {
   const career = character?.career;
   if (!career) return [];
 
   return (CORE_CAREER_MAGIC_PROVIDERS.providers || [])
-    .filter(provider => provider.eligibility?.career === career)
+    .filter(provider => provider.eligibility?.career === career && hasCareerMagicProviderRequiredSkills(provider, character))
     .map(provider => createCareerBackedMagicProvider(provider, character));
 }
 
@@ -9098,6 +9160,7 @@ const CharacterData = {
   boundSpirits: [],  // Selected animist starting spirits
   sorceryResource: 0,  // Magic Points (= POW) for Sorcery cults (ADR-0006)
   sorcerySpells: [],  // Selected sorcery starting spells
+  mysticismTalents: [],  // Reserved until a verified Mysticism talent catalog is available
 
   // Step 10: Career Skills
   careerSkills: {},
@@ -9234,6 +9297,7 @@ const CharacterData = {
       boundSpirits: this.cloneForSerialization(this.boundSpirits, []),
       sorceryResource: this.sorceryResource,
       sorcerySpells: [...(this.sorcerySpells || [])],
+      mysticismTalents: [...(this.mysticismTalents || [])],
       careerSkills: {...(this.careerSkills || {})},
       careerFolkMagic: [...(this.careerFolkMagic || [])],
       selectedProfessionalSkills: [...(this.selectedProfessionalSkills || [])],
@@ -9412,7 +9476,7 @@ const CharacterData = {
 	      'culture', 'homeland', 'culturalSkills', 'runeAffinities', 'folkMagicSpells',
 	      'passions', 'age', 'gender', 'family', 'backgroundEvents', 'career',
 	      'cult', 'cultType', 'miracles', 'devotionalPool', 'boundSpiritSlots',
-	      'boundSpirits', 'sorceryResource', 'sorcerySpells', 'careerSkills',
+	      'boundSpirits', 'sorceryResource', 'sorcerySpells', 'mysticismTalents', 'careerSkills',
 	      'careerFolkMagic', 'selectedProfessionalSkills', 'bonusSkills',
 	      'hobbySkillName', 'socialClass', 'socialClassMoneyMod', 'startingMoney',
 	      'equipment', 'weapons', 'armor', 'combatStyles', 'notes', 'background',
@@ -9465,7 +9529,7 @@ const CharacterData = {
     }
 
     const arrayFields = [
-      'folkMagicSpells', 'passions', 'miracles', 'boundSpirits', 'sorcerySpells',
+      'folkMagicSpells', 'passions', 'miracles', 'boundSpirits', 'sorcerySpells', 'mysticismTalents',
       'careerFolkMagic', 'selectedProfessionalSkills', 'equipment', 'weapons',
       'armor', 'combatStyles', 'companions'
     ];
@@ -11511,6 +11575,12 @@ App.toggleSorcerySpell = function(spellName, inputEl) {
       this.showToast(error, 'error');
       return {success: false, error};
     }
+    if (!Array.isArray(activeSource.availableItems) || !activeSource.availableItems.includes(spellName)) {
+      if (inputEl) inputEl.checked = false;
+      const error = `Spell '${spellName}' is not available from ${activeSource.sourceLabel || 'the active sorcery source'}`;
+      this.showToast(error, 'error');
+      return {success: false, error};
+    }
     const sourceErrors = getSorcerySourceSchoolErrors(CharacterData, activeSource);
     if (sourceErrors.length > 0) {
       if (inputEl) inputEl.checked = false;
@@ -11531,22 +11601,36 @@ App.toggleSorcerySpell = function(spellName, inputEl) {
 
 App.toggleBoundSpirit = function(spiritName, inputEl) {
   if (!CharacterData.boundSpirits) CharacterData.boundSpirits = [];
-  const idx = CharacterData.boundSpirits.findIndex(s => s.name === spiritName);
-  const spiritSlots = CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2);
+  const idx = CharacterData.boundSpirits.findIndex(s => getBoundSpiritName(s) === spiritName);
+  const activeAnimismProvider = this.resolveHigherMagicProviderBySystem('animism', CharacterData);
+  const spiritSlots = activeAnimismProvider?.itemLimit || CharacterData.boundSpiritSlots || 0;
   const maxStarting = Math.min(3, spiritSlots);
 
   if (idx > -1) {
     CharacterData.boundSpirits.splice(idx, 1);
   } else {
+    if (!activeAnimismProvider) {
+      if (inputEl) inputEl.checked = false;
+      const error = 'Select an active animism provider before choosing bound spirits';
+      this.showToast(error, 'error');
+      return {success: false, error};
+    }
+    if (!Array.isArray(activeAnimismProvider.availableItems) || !activeAnimismProvider.availableItems.includes(spiritName)) {
+      if (inputEl) inputEl.checked = false;
+      const error = `Spirit '${spiritName}' is not available from ${activeAnimismProvider.sourceLabel || 'the active animism provider'}`;
+      this.showToast(error, 'error');
+      return {success: false, error};
+    }
     if (CharacterData.boundSpirits.length >= maxStarting) {
       if (inputEl) inputEl.checked = false;
       this.showToast(`Maximum ${maxStarting} starting spirits`, 'error');
-      return;
+      return {success: false, error: `Maximum ${maxStarting} starting spirits`};
     }
     CharacterData.boundSpirits.push({name: spiritName});
   }
   this.saveToLocalStorage();
   this.rerenderPreservingScroll();
+  return {success: true, spirits: CharacterData.boundSpirits.map(s => getBoundSpiritName(s))};
 };
 
 App.toggleCareerFolkMagicSpell = function(spell, checked, inputEl) {
@@ -11894,13 +11978,23 @@ App.selectCareer = function(careerName) {
     // Reset professional skill selection on career change (BUG-013)
     CharacterData.selectedProfessionalSkills = [];
 
-    const activeSorcerySource = this.normalizeSorceryState(CharacterData);
+    const activeHigherMagicProviders = this.resolveHigherMagicProviders(CharacterData);
+    const providerLossError = getHigherMagicProviderSelectionLossError(careerSnapshot, activeHigherMagicProviders, {
+      lostSpellsMessage: lostSpells => `Changing career would clear selected sorcery spells: ${lostSpells.join(', ')}`,
+      lostBoundSpiritsMessage: lostSpirits => `Changing career would clear selected bound spirits: ${lostSpirits.join(', ')}`,
+      lostMysticismTalentsMessage: lostTalents => `Changing career would clear selected mysticism talents: ${lostTalents.join(', ')}`
+    });
+    if (providerLossError) {
+      return rejectCareerChange(providerLossError);
+    }
+    const activeSorcerySource = activeHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
     const sourceError = getSorcerySourceSelectionError(careerSnapshot, previousSorcerySource, CharacterData, activeSorcerySource, {
       lostSpellsMessage: lostSpells => `Changing career would clear selected sorcery spells: ${lostSpells.join(', ')}`
     });
     if (sourceError) {
       return rejectCareerChange(sourceError);
     }
+    this.normalizeHigherMagicState(CharacterData);
     this.saveToLocalStorage();
     this.renderCurrentStep();
     return {success: true};
@@ -11909,6 +12003,19 @@ App.selectCareer = function(careerName) {
 };
 
 App.toggleProfessionalSkill = function(skillName, checked, sourceElement) {
+  const skillSnapshot = createTrustedCharacterSnapshot();
+  const previousSorcerySource = this.resolveActiveSorcerySource(CharacterData);
+  const restoreSkillSnapshot = () => {
+    restoreTrustedCharacterSnapshot(skillSnapshot);
+    if (sourceElement) sourceElement.checked = !checked;
+    this.saveToLocalStorage();
+    this.renderCurrentStep();
+  };
+  const rejectSkillChange = error => {
+    restoreSkillSnapshot();
+    alert(error);
+    return false;
+  };
   if (!CharacterData.selectedProfessionalSkills) {
     CharacterData.selectedProfessionalSkills = [];
   }
@@ -11958,6 +12065,20 @@ App.toggleProfessionalSkill = function(skillName, checked, sourceElement) {
     if (dependentSecondary) removeProfessionalSelection(dependentSecondary);
   }
 
+  const activeHigherMagicProviders = this.resolveHigherMagicProviders(CharacterData);
+  const providerLossError = getHigherMagicProviderSelectionLossError(skillSnapshot, activeHigherMagicProviders, {
+    lostSpellsMessage: lostSpells => `Changing professional skills would clear selected sorcery spells: ${lostSpells.join(', ')}`,
+    lostBoundSpiritsMessage: lostSpirits => `Changing professional skills would clear selected bound spirits: ${lostSpirits.join(', ')}`,
+    lostMysticismTalentsMessage: lostTalents => `Changing professional skills would clear selected mysticism talents: ${lostTalents.join(', ')}`
+  });
+  if (providerLossError) return rejectSkillChange(providerLossError);
+  const activeSorcerySource = activeHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
+  const sourceError = getSorcerySourceSelectionError(skillSnapshot, previousSorcerySource, CharacterData, activeSorcerySource, {
+    lostSpellsMessage: lostSpells => `Changing professional skills would clear selected sorcery spells: ${lostSpells.join(', ')}`
+  });
+  if (sourceError) return rejectSkillChange(sourceError);
+
+  this.normalizeHigherMagicState(CharacterData);
   this.saveToLocalStorage();
   this.renderCurrentStep();
   return true;
@@ -11968,6 +12089,8 @@ App.resolveProfessionalSkill = function(originalName, specialization, sourceElem
   const parsed = parsePlaceholderSkill(originalName);
   if (!parsed) return false;
   const resolvedName = `${parsed.category} (${specialization.trim()})`;
+  const skillSnapshot = createTrustedCharacterSnapshot();
+  const previousSorcerySource = this.resolveActiveSorcerySource(CharacterData);
 
   // Track disambiguation mapping
   if (!CharacterData._disambiguationMap) CharacterData._disambiguationMap = {};
@@ -12011,6 +12134,27 @@ App.resolveProfessionalSkill = function(originalName, specialization, sourceElem
   // Record in disambiguation map
   CharacterData._disambiguationMap[mapKey] = resolvedName;
 
+  const activeHigherMagicProviders = this.resolveHigherMagicProviders(CharacterData);
+  const providerLossError = getHigherMagicProviderSelectionLossError(skillSnapshot, activeHigherMagicProviders, {
+    lostSpellsMessage: lostSpells => `Changing professional skills would clear selected sorcery spells: ${lostSpells.join(', ')}`,
+    lostBoundSpiritsMessage: lostSpirits => `Changing professional skills would clear selected bound spirits: ${lostSpirits.join(', ')}`,
+    lostMysticismTalentsMessage: lostTalents => `Changing professional skills would clear selected mysticism talents: ${lostTalents.join(', ')}`
+  });
+  const activeSorcerySource = activeHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
+  const sourceError = providerLossError || getSorcerySourceSelectionError(skillSnapshot, previousSorcerySource, CharacterData, activeSorcerySource, {
+    lostSpellsMessage: lostSpells => `Changing professional skills would clear selected sorcery spells: ${lostSpells.join(', ')}`
+  });
+  if (sourceError) {
+    restoreTrustedCharacterSnapshot(skillSnapshot);
+    if (sourceElement) {
+      const previousSpec = previousResolution ? (previousResolution.match(/\((.+)\)/) || [])[1] || '' : '';
+      sourceElement.value = previousSpec;
+    }
+    alert(sourceError);
+    return false;
+  }
+
+  this.normalizeHigherMagicState(CharacterData);
   this.saveToLocalStorage();
   // Do NOT re-render here — the input already shows the correct value and re-rendering
   // would destroy focus/cause jarring UX. The state is saved and will render correctly
@@ -12114,7 +12258,8 @@ App.renderSorceryPickerPanel = function(source, options = {}) {
     ? `<p id="sorcery-spell-cap" class="spell-picker__hint spell-picker__cap">${this.escapeHtml(capReachedCopy)} — deselect a selected spell to choose another.</p>`
     : `<p id="sorcery-spell-cap" class="spell-picker__hint">Select up to ${maxSpells} spells from your school's grimoire. Spells with (Substance/Species) require specialization at the table.</p>`;
 
-  const spellListHTML = SORCERY_SPELLS.map(([name, resist, desc]) => {
+  const availableSpellNames = Array.isArray(activeSource.availableItems) ? activeSource.availableItems : [];
+  const spellListHTML = SORCERY_SPELLS.filter(([name]) => availableSpellNames.includes(name)).map(([name, resist, desc]) => {
     const checked = CharacterData.sorcerySpells.includes(name);
     const disabled = capReached && !checked;
     const resistTag = resist ? ` <span class="spirit-ability">[Resist: ${this.escapeHtml(resist)}]</span>` : '';
@@ -12144,6 +12289,67 @@ App.renderSorceryPickerPanel = function(source, options = {}) {
   `;
 };
 
+App.renderAnimismPickerPanel = function(provider, options = {}) {
+  if (!provider) return '';
+  const spiritSlots = provider.itemLimit || CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2);
+  const maxStarting = Math.min(3, spiritSlots);
+  if (!CharacterData.boundSpirits) CharacterData.boundSpirits = [];
+  const selectedCount = CharacterData.boundSpirits.length;
+  const sourceLabel = provider.sourceLabel || CharacterData.cult || 'Animism';
+  const heading = options.heading || (provider.isCultBacked
+    ? `Spirit Magic (Animist${options.isHybrid ? ' — Shaman Path' : ''})`
+    : sourceLabel);
+  const sourceIntro = provider.isCultBacked
+    ? `<p><strong>Source:</strong> ${this.escapeHtml(sourceLabel)}</p>`
+    : `<p><strong>Source:</strong> ${this.escapeHtml(sourceLabel)} <span class="source-coverage-badge" data-status="attested">attested</span></p>`;
+  const availableSpiritNames = Array.isArray(provider.availableItems) ? provider.availableItems : [];
+  const spiritListHTML = STARTING_SPIRITS
+    .filter(spirit => availableSpiritNames.includes(spirit.name))
+    .map(spirit => {
+      const checked = CharacterData.boundSpirits.some(s => getBoundSpiritName(s) === spirit.name);
+      const stats = spirit.pow ? ` POW ${spirit.pow}, CHA ${spirit.cha}` : '';
+      const srcRef = spirit.source ? ` <span class="skill-tooltip" title="${this.escapeHtmlAttr(spirit.source)}">📚</span>` : '';
+      return `<label><input type="checkbox" ${checked ? 'checked' : ''} data-spirit="${this.escapeHtmlAttr(spirit.name)}" onchange="App.toggleBoundSpirit(this.dataset.spirit, this)"> <strong>${this.escapeHtml(spirit.name)}</strong>${srcRef}<br><span class="spirit-ability">[${this.escapeHtml(spirit.type)}]${stats} — ${this.escapeHtml(spirit.ability)}</span></label>`;
+    }).join('');
+
+  return `
+    <div class="magic-panel magic-panel--animist">
+      <h3>${this.escapeHtml(heading)}</h3>
+      ${sourceIntro}
+      <p><strong>Bound Spirit Slots:</strong> ${spiritSlots} (CHA/2 for Spirit Worshipper rank)</p>
+      <p><strong>Casting Skill:</strong> Spirit Rune affinity (replaces Binding per AiG/Hannu)</p>
+    </div>
+    <div class="spell-picker">
+      <h4>Starting Bound Spirits <span style="font-weight:normal">(${selectedCount} / ${maxStarting})</span></h4>
+      <p class="spell-picker__hint">Select up to ${maxStarting} starting spirits (intensity 1-2). Consult GM for provider-specific options.</p>
+      <div class="spell-picker__list">${spiritListHTML}</div>
+      <p class="spell-picker__source">Source: Monster Island spirit template, Mythras Core p.131-154, Bird in the Hand</p>
+    </div>
+  `;
+};
+
+App.renderMysticismProviderPanel = function(provider, options = {}) {
+  if (!provider) return '';
+  const magicPoints = provider.magicPoints ?? getCharacterMagicPoints(CharacterData);
+  const talentLimit = provider.itemLimit || 0;
+  const sourceLabel = provider.sourceLabel || 'Mysticism';
+  const heading = options.heading || sourceLabel;
+  const skills = Array.isArray(provider.skills) && provider.skills.length > 0
+    ? provider.skills.join(' + ')
+    : 'Meditation + Mysticism';
+
+  return `
+    <div class="magic-panel magic-panel--mysticism">
+      <h3>${this.escapeHtml(heading)}</h3>
+      <p><strong>Source:</strong> ${this.escapeHtml(sourceLabel)} <span class="source-coverage-badge" data-status="attested">attested</span></p>
+      <p><strong>Resource:</strong> Magic Points (${magicPoints}) for talent activation</p>
+      <p><strong>Skills:</strong> ${this.escapeHtml(skills)}</p>
+      <p><strong>Starting Talent Limit:</strong> ${talentLimit} (POW/20; Core Mysticism chargen limit)</p>
+      <p class="spell-picker__source">Mysticism v1 is informational only: the source-backed provider is verified, but no verified talent catalog is normalized for picking talents yet.</p>
+    </div>
+  `;
+};
+
 App.renderStep9 = function() {
   if (!CharacterData.career) {
     return this.renderStep8();
@@ -12151,10 +12357,19 @@ App.renderStep9 = function() {
 
   const culture = normalizeCultureName(CharacterData.culture);
   const cultMap = CULTURE_CULT_MAP[culture];
-  const activeSorcerySource = this.normalizeSorceryState(CharacterData);
-  const sourceBackedSorceryHTML = !CharacterData.cult && activeSorcerySource
-    ? this.renderSorceryPickerPanel(activeSorcerySource)
-    : '';
+  const activeHigherMagicProviders = this.resolveHigherMagicProviders(CharacterData);
+  const activeAnimismProvider = activeHigherMagicProviders.find(provider => provider.system === 'animism') || null;
+  const activeSorceryProvider = activeHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
+  if (activeAnimismProvider) CharacterData.boundSpiritSlots = activeAnimismProvider.itemLimit || 0;
+  if (activeSorceryProvider) CharacterData.sorceryResource = activeSorceryProvider.magicPoints || 0;
+  const sourceBackedProviderPanelsHTML = activeHigherMagicProviders
+    .filter(provider => provider.system !== 'theist' && (!CharacterData.cult || !provider.isCultBacked || provider.system === 'mysticism'))
+    .map(provider => {
+      if (provider.system === 'animism') return this.renderAnimismPickerPanel(provider);
+      if (provider.system === 'sorcery') return this.renderSorceryPickerPanel(provider);
+      if (provider.system === 'mysticism') return this.renderMysticismProviderPanel(provider);
+      return '';
+    }).filter(Boolean).join('');
 
   const div = document.createElement('div');
   div.className = 'wizard-step';
@@ -12190,7 +12405,7 @@ App.renderStep9 = function() {
     <div id="cult-requirement-warning"></div>
     <div id="cult-skill-boost-panel"></div>
     <div id="cult-passion-notice" style="margin-top: 10px;"></div>
-    ${sourceBackedSorceryHTML ? `<div id="source-sorcery-picker" style="margin-top: 20px;">${sourceBackedSorceryHTML}</div>` : ''}
+    ${sourceBackedProviderPanelsHTML ? `<div id="available-magic-sources" style="margin-top: 20px;"><h3>Available Magic Sources</h3>${sourceBackedProviderPanelsHTML}</div>` : ''}
     <div id="miracle-picker" style="margin-top: 20px; display: none;"></div>
     <div id="spirit-picker" style="margin-top: 20px; display: none;"></div>
     <div id="sorcery-picker" style="margin-top: 20px; display: none;"></div>
@@ -12248,33 +12463,10 @@ App.renderStep9 = function() {
       // Show animist info + spirit picker for animist cults (separate container so toggleMiracle doesn't wipe it)
       if (cultType.types.includes('animist')) {
         const spiritPickerEl = div.querySelector('#spirit-picker');
-        const spiritSlots = CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2);
-        const maxStarting = Math.min(3, spiritSlots);
-        if (!CharacterData.boundSpirits) CharacterData.boundSpirits = [];
-        const selectedCount = CharacterData.boundSpirits.length;
-
-        const spiritListHTML = STARTING_SPIRITS.map(spirit => {
-          const checked = CharacterData.boundSpirits.some(s => s.name === spirit.name);
-          const stats = spirit.pow ? ` POW ${spirit.pow}, CHA ${spirit.cha}` : '';
-          const srcRef = spirit.source ? ` <span class="skill-tooltip" title="${spirit.source}">📚</span>` : '';
-          return `<label><input type="checkbox" ${checked ? 'checked' : ''} data-spirit="${spirit.name.replace(/"/g, '&quot;')}" onchange="App.toggleBoundSpirit(this.dataset.spirit, this)"> <strong>${spirit.name}</strong>${srcRef}<br><span class="spirit-ability">[${spirit.type}]${stats} — ${spirit.ability}</span></label>`;
-        }).join('');
-
         if (spiritPickerEl) {
-        spiritPickerEl.innerHTML = `
-          <div class="magic-panel magic-panel--animist">
-            <h3>Spirit Magic (Animist${cultType.isHybrid ? ' \u2014 Shaman Path' : ''})</h3>
-            <p><strong>Bound Spirit Slots:</strong> ${spiritSlots} (CHA/2 for Spirit Worshipper rank)</p>
-            <p><strong>Casting Skill:</strong> Spirit Rune affinity (replaces Binding per AiG/Hannu)</p>
-          </div>
-          <div class="spell-picker">
-            <h4>Starting Bound Spirits <span style="font-weight:normal">(${selectedCount} / ${maxStarting})</span></h4>
-            <p class="spell-picker__hint">Select up to ${maxStarting} starting spirits (intensity 1-2). Consult GM for cult-specific options.</p>
-            <div class="spell-picker__list">${spiritListHTML}</div>
-            <p class="spell-picker__source">Source: Monster Island spirit template, Mythras Core p.131-154, Bird in the Hand</p>
-          </div>
-        `;
-        spiritPickerEl.style.display = 'block';
+          const animismProvider = activeHigherMagicProviders.find(provider => provider.system === 'animism');
+          spiritPickerEl.innerHTML = this.renderAnimismPickerPanel(animismProvider, { isHybrid: cultType.isHybrid });
+          spiritPickerEl.style.display = 'block';
         }
       }
 
@@ -12288,19 +12480,6 @@ App.renderStep9 = function() {
         }
       }
 
-      // Show mysticism stub (appended to sorcery-picker since mysticism cults are rare)
-      if (cultType.types.includes('mysticism')) {
-        const mysticismEl = div.querySelector('#sorcery-picker') || pickerEl;
-        mysticismEl.insertAdjacentHTML('beforeend', `
-          <div class="magic-panel magic-panel--mysticism">
-            <h3>Mysticism</h3>
-            <p><strong>System:</strong> Meditation + Path talents (Mythras Core p.155-161)</p>
-            <p><strong>Resource:</strong> Concentration (no external resource consumed)</p>
-            <p style="font-size:0.85em;color:#555;font-style:italic;margin-top:8px">Max active talent Intensity = Meditation skill / 10</p>
-          </div>
-        `);
-        mysticismEl.style.display = 'block';
-      }
     }
   }
 
@@ -12378,6 +12557,7 @@ App.selectCult = function(cultName, options = {}) {
   const selectionSnapshot = createTrustedCharacterSnapshot();
   const previousCult = CharacterData.cult;
   const previousSorcerySource = this.resolveActiveSorcerySource(CharacterData);
+  const previousHigherMagicProviders = this.resolveHigherMagicProviders(CharacterData);
   const restoreSelectionSnapshot = () => {
     restoreTrustedCharacterSnapshot(selectionSnapshot);
     this.saveToLocalStorage();
@@ -12406,7 +12586,10 @@ App.selectCult = function(cultName, options = {}) {
     return {success: false, pendingConfirmation: true};
   }
   CharacterData.cult = cultName;
-  if (previousCult && previousCult !== cultName) this.clearCultMagicSelections();
+  if (previousCult && previousCult !== cultName) {
+    CharacterData.miracles = [];
+    CharacterData.mysticismTalents = [];
+  }
 
   // ADR-0006: Calculate magic resources based on detected cult type
   if (cultName) {
@@ -12434,10 +12617,6 @@ App.selectCult = function(cultName, options = {}) {
     } else {
       CharacterData.sorceryResource = 0;
     }
-    if (!previousSorcerySource || previousSorcerySource.sourceLabel !== cultName) {
-      CharacterData.sorcerySpells = [];
-    }
-
     // Soft validation: update requirement warning + boost panel (deferred until DOM is ready)
     if (cult && cult.cultSkills) {
       setTimeout(() => App.updateCultRequirementUI(), 0);
@@ -12448,12 +12627,31 @@ App.selectCult = function(cultName, options = {}) {
     CharacterData.sorceryResource = 0;
     CharacterData.cultType = null;
     CharacterData.miracles = [];
-    CharacterData.boundSpirits = [];
-    if (previousCult) CharacterData.sorcerySpells = [];
   }
-  const activeSorcerySource = this.normalizeSorceryState(CharacterData);
+  const activeHigherMagicProviders = this.resolveHigherMagicProviders(CharacterData);
+  if (previousCult && previousCult !== cultName) {
+    const previousAnimismProvider = previousHigherMagicProviders.find(provider => provider.system === 'animism') || null;
+    const activeAnimismProvider = activeHigherMagicProviders.find(provider => provider.system === 'animism') || null;
+    if (previousAnimismProvider?.isCultBacked && previousAnimismProvider.id !== activeAnimismProvider?.id) {
+      CharacterData.boundSpirits = [];
+    }
+    if (!previousSorcerySource) {
+      CharacterData.sorcerySpells = [];
+    }
+  }
+  const providerLossError = getHigherMagicProviderSelectionLossError(selectionSnapshot, activeHigherMagicProviders, {
+    lostSpellsMessage: lostSpells => `Changing cult would clear selected sorcery spells: ${lostSpells.join(', ')}`,
+    lostBoundSpiritsMessage: lostSpirits => `Changing cult would clear selected bound spirits: ${lostSpirits.join(', ')}`,
+    lostMysticismTalentsMessage: lostTalents => `Changing cult would clear selected mysticism talents: ${lostTalents.join(', ')}`
+  });
+  if (providerLossError) {
+    restoreSelectionSnapshot();
+    return {success: false, error: providerLossError};
+  }
+  const activeSorcerySource = activeHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
   const sourceError = sourceSelectionError(activeSorcerySource);
   if (sourceError) return sourceError;
+  this.normalizeHigherMagicState(CharacterData);
 
   // Resolve cult-bound placeholder skills (ADR-005)
   resolveCultBoundPlaceholders(CharacterData, cultName);
@@ -12502,6 +12700,7 @@ App.clearCultMagicSelections = function() {
   CharacterData.miracles = [];
   CharacterData.boundSpirits = [];
   CharacterData.sorcerySpells = [];
+  CharacterData.mysticismTalents = [];
 };
 
 App.clearCultSelection = function() {
@@ -12511,7 +12710,7 @@ App.clearCultSelection = function() {
   CharacterData.boundSpiritSlots = 0;
   CharacterData.sorceryResource = 0;
   this.clearCultMagicSelections();
-  this.normalizeSorceryState(CharacterData);
+  this.normalizeHigherMagicState(CharacterData);
 };
 
 /**
@@ -13081,10 +13280,17 @@ App.getAvailableInitiateMiracleNames = function(cultName) {
 
 App.getStep9ValidationErrors = function() {
   const errors = [];
-  const activeSorcerySource = App.normalizeSorceryState(CharacterData);
+  const activeHigherMagicProviders = App.resolveHigherMagicProviders(CharacterData);
+  const activeSorcerySource = activeHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
+  const activeAnimismProvider = activeHigherMagicProviders.find(provider => provider.system === 'animism') || null;
+  const activeMysticismProvider = activeHigherMagicProviders.find(provider => provider.system === 'mysticism') || null;
+  const addProviderlessSorcerySelectionErrors = () => {
+    const noSourceSpellError = getSorcerySpellsWithoutSourceError(CharacterData.sorcerySpells || [], activeSorcerySource);
+    if (noSourceSpellError) errors.push(noSourceSpellError);
+  };
   const addSorcerySelectionErrors = (source) => {
     const selectedSorcerySpells = CharacterData.sorcerySpells || [];
-    const unknownSorcerySpells = getUnknownSorcerySpellNames(selectedSorcerySpells);
+    const unknownSorcerySpells = getUnknownSorcerySpellNames(selectedSorcerySpells, source?.availableItems);
     const duplicateSorcerySpells = getDuplicateSelectionNames(selectedSorcerySpells);
     const selectedSpells = selectedSorcerySpells.length;
     const spellLimit = source?.startingSpellLimit || 3;
@@ -13098,16 +13304,48 @@ App.getStep9ValidationErrors = function() {
       errors.push(`Please select no more than ${spellLimit} sorcery spells`);
     }
   };
+  const addAnimismSelectionErrors = (provider) => {
+    const selectedSpiritEntries = CharacterData.boundSpirits || [];
+    const unknownSpirits = getUnknownBoundSpiritNames(selectedSpiritEntries, provider?.availableItems);
+    const duplicateSpirits = getDuplicateSelectionNames(selectedSpiritEntries, getBoundSpiritName);
+    const selectedSpirits = selectedSpiritEntries.length;
+    const spiritLimit = Math.min(3, provider?.itemLimit || CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2));
+    if (unknownSpirits.length > 0) {
+      errors.push(`Unknown bound spirit(s): ${unknownSpirits.join(', ')}`);
+    } else if (duplicateSpirits.length > 0) {
+      errors.push(`Duplicate bound spirit(s): ${duplicateSpirits.join(', ')}`);
+    } else if (selectedSpirits > spiritLimit) {
+      errors.push(`Please select no more than ${spiritLimit} bound spirits`);
+    } else if (selectedSpirits === 0 && provider?.isCultBacked) {
+      errors.push('Please select at least one bound spirit');
+    }
+  };
+  const addMysticismSelectionErrors = (provider) => {
+    const selectedTalents = CharacterData.mysticismTalents || [];
+    if (selectedTalents.length === 0) return;
+    if (!provider) {
+      errors.push('mysticismTalents requires an active mysticism provider');
+      return;
+    }
+    errors.push('Mysticism talent selection requires a verified talent catalog; Core Mysticism is informational only in this version');
+  };
 
   if (!CharacterData.cult) {
     errors.push(...getUnsupportedMagicSelectionErrors(null, null, {
       miracles: CharacterData.miracles,
-      boundSpirits: CharacterData.boundSpirits
+      boundSpirits: CharacterData.boundSpirits,
+      providers: activeHigherMagicProviders
     }));
+    if (activeAnimismProvider) {
+      addAnimismSelectionErrors(activeAnimismProvider);
+    }
     if (activeSorcerySource) {
       addSorcerySelectionErrors(activeSorcerySource);
       errors.push(...getSorcerySourceSchoolErrors(CharacterData, activeSorcerySource));
+    } else {
+      addProviderlessSorcerySelectionErrors();
     }
+    addMysticismSelectionErrors(activeMysticismProvider);
     return errors;
   }
 
@@ -13117,7 +13355,8 @@ App.getStep9ValidationErrors = function() {
   errors.push(...App.getCultInitiationGateErrors({ deferSorcery: true }));
   errors.push(...getUnsupportedMagicSelectionErrors(CharacterData.cult, cultType, {
     miracles: CharacterData.miracles,
-    boundSpirits: CharacterData.boundSpirits
+    boundSpirits: CharacterData.boundSpirits,
+    providers: activeHigherMagicProviders
   }));
 
   if (cultType.types.includes('theist')) {
@@ -13141,27 +13380,17 @@ App.getStep9ValidationErrors = function() {
     }
   }
 
-  if (cultType.types.includes('animist')) {
-    const selectedSpiritEntries = CharacterData.boundSpirits || [];
-    const unknownSpirits = getUnknownBoundSpiritNames(selectedSpiritEntries);
-    const duplicateSpirits = getDuplicateSelectionNames(selectedSpiritEntries, getBoundSpiritName);
-    const selectedSpirits = selectedSpiritEntries.length;
-    const spiritLimit = CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2);
-    if (unknownSpirits.length > 0) {
-      errors.push(`Unknown bound spirit(s): ${unknownSpirits.join(', ')}`);
-    } else if (duplicateSpirits.length > 0) {
-      errors.push(`Duplicate bound spirit(s): ${duplicateSpirits.join(', ')}`);
-    } else if (selectedSpirits > spiritLimit) {
-      errors.push(`Please select no more than ${spiritLimit} bound spirits`);
-    } else if (selectedSpirits === 0) {
-      errors.push('Please select at least one bound spirit');
-    }
+  if (activeAnimismProvider && (cultType.types.includes('animist') || (CharacterData.boundSpirits || []).length > 0)) {
+    addAnimismSelectionErrors(activeAnimismProvider);
   }
 
-  if (cultType.types.includes('sorcery')) {
+  if (activeSorcerySource && (cultType.types.includes('sorcery') || (CharacterData.sorcerySpells || []).length > 0 || !activeSorcerySource.isCultBacked)) {
     addSorcerySelectionErrors(activeSorcerySource);
     errors.push(...getSorcerySourceSchoolErrors(CharacterData, activeSorcerySource));
+  } else if (!activeSorcerySource) {
+    addProviderlessSorcerySelectionErrors();
   }
+  addMysticismSelectionErrors(activeMysticismProvider);
 
   return errors;
 };
@@ -15346,7 +15575,10 @@ App.renderPlayMagic = function() {
   const folkMagicBase = CharacterData.attributes.folkMagicBase;
   const allSpells = [...new Set([...CharacterData.folkMagicSpells, ...CharacterData.careerFolkMagic])];
   const esc = value => this.escapeHtml(value);
-  const activeSorcerySource = this.normalizeSorceryState(CharacterData);
+  const activeHigherMagicProviders = this.resolveHigherMagicProviders(CharacterData);
+  const activeSorcerySource = activeHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
+  const activeAnimismProvider = activeHigherMagicProviders.find(provider => provider.system === 'animism') || null;
+  const activeMysticismProvider = activeHigherMagicProviders.find(provider => provider.system === 'mysticism') || null;
   const renderSorceryInfo = (source, cultType = {}) => {
     if (!source) return '';
     const magicPoints = getSorceryMagicPoints(source, CharacterData);
@@ -15373,6 +15605,41 @@ App.renderPlayMagic = function() {
       <p style="font-size: 0.9em;"><strong>Shaping:</strong> Shaping skill</p>
       <p style="font-size: 0.9em;"><strong>Intensity:</strong> Invocation / 10 &nbsp;|&nbsp; <strong>Shaping Points:</strong> Shaping / 10</p>
       <p style="font-size: 0.8em; color: #666;">Source: ${esc(pageCopy)}. Sorcery spells do not use a rune map in this tool.</p>
+    `;
+  };
+  const renderAnimismInfo = (provider, cultType = {}) => {
+    if (!provider) return '';
+    const spiritSlots = provider.itemLimit || CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2);
+    const boundSpirits = CharacterData.boundSpirits || [];
+    const sourceLabel = provider.sourceLabel || CharacterData.cult || 'Animism';
+    const heading = provider.isCultBacked
+      ? `Spirit Magic (Animist${cultType.isHybrid ? ' — Shaman Path' : ''})`
+      : `Spirit Magic — ${sourceLabel}`;
+    return `
+      <h3>${esc(heading)}</h3>
+      ${this.renderProvenanceBadgesForConstants(['STARTING_SPIRITS'])}
+      <p style="font-size: 0.9em;"><strong>Source:</strong> ${esc(sourceLabel)}</p>
+      <p style="font-size: 0.9em;"><strong>Bound Spirit Slots:</strong> ${spiritSlots} (CHA/2 for Spirit Worshipper rank)</p>
+      ${boundSpirits.length > 0 ? `
+        <p style="font-size: 0.9em;"><strong>Selected Spirits:</strong></p>
+        <ul data-testid="bound-spirits-list">
+          ${boundSpirits.map(spirit => `<li data-testid="bound-spirit-name">${esc(getBoundSpiritName(spirit))}</li>`).join('')}
+        </ul>
+      ` : '<p style="font-size: 0.85em; color: #666;">No starting spirits selected.</p>'}
+      <p style="font-size: 0.9em;"><strong>Casting:</strong> Spirit Rune affinity (replaces Binding per AiG/Hannu)</p>
+      <p style="font-size: 0.85em; color: #555; font-style: italic;">Spirit selection at chargen: consult GM for available spirits from cult tradition. Typical starting spirits: 2-3 intensity 1-2 nature spirits in fetishes.</p>
+      <p style="font-size: 0.8em; color: #666;">Source: Mythras Core p.131-154, Monster Island spirit cult template, Hannu adaptation</p>
+    `;
+  };
+  const renderMysticismInfo = (provider) => {
+    if (!provider) return '';
+    const sourceLabel = provider.sourceLabel || CharacterData.cult || 'Mysticism';
+    const magicPoints = provider.magicPoints ?? getCharacterMagicPoints(CharacterData);
+    return `
+      <h3>Mysticism — ${esc(sourceLabel)}</h3>
+      <p style="font-size: 0.9em;"><strong>System:</strong> Meditation + Mysticism talents (Mythras Core p.155-161)</p>
+      <p style="font-size: 0.9em;"><strong>Resource:</strong> Magic Points (${magicPoints}) when talents are activated</p>
+      <p style="font-size: 0.85em; color: #555; font-style: italic;">Mysticism uses raw Mythras Core rules. Max active talent Intensity = Meditation skill / 10. Talent picking awaits a verified talent catalog.</p>
     `;
   };
 
@@ -15467,22 +15734,7 @@ App.renderPlayMagic = function() {
 
     // Animist spirit magic display (ADR-0006)
     if (cultType.types.includes('animist')) {
-      const spiritSlots = CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2);
-      const boundSpirits = CharacterData.boundSpirits || [];
-      miraclesInfo += `
-        <h3>Spirit Magic (Animist${cultType.isHybrid ? ' — Shaman Path' : ''})</h3>
-        ${this.renderProvenanceBadgesForConstants(['STARTING_SPIRITS'])}
-        <p style="font-size: 0.9em;"><strong>Bound Spirit Slots:</strong> ${spiritSlots} (CHA/2 for Spirit Worshipper rank)</p>
-        ${boundSpirits.length > 0 ? `
-          <p style="font-size: 0.9em;"><strong>Selected Spirits:</strong></p>
-          <ul data-testid="bound-spirits-list">
-            ${boundSpirits.map(spirit => `<li data-testid="bound-spirit-name">${esc(spirit.name || spirit)}</li>`).join('')}
-          </ul>
-        ` : '<p style="font-size: 0.85em; color: #666;">No starting spirits selected.</p>'}
-        <p style="font-size: 0.9em;"><strong>Casting:</strong> Spirit Rune affinity (replaces Binding per AiG/Hannu)</p>
-        <p style="font-size: 0.85em; color: #555; font-style: italic;">Spirit selection at chargen: consult GM for available spirits from cult tradition. Typical starting spirits: 2-3 intensity 1-2 nature spirits in fetishes.</p>
-        <p style="font-size: 0.8em; color: #666;">Source: Mythras Core p.131-154, Monster Island spirit cult template, Hannu adaptation</p>
-      `;
+      miraclesInfo += renderAnimismInfo(activeAnimismProvider, cultType);
     }
 
     // Sorcery display (ADR-0006)
@@ -15492,15 +15744,17 @@ App.renderPlayMagic = function() {
 
     // Mysticism stub (ADR-0006)
     if (cultType.types.includes('mysticism')) {
-      miraclesInfo += `
-        <h3>Mysticism</h3>
-        <p style="font-size: 0.9em;"><strong>System:</strong> Meditation + Path talents (Mythras Core p.155-161)</p>
-        <p style="font-size: 0.9em;"><strong>Resource:</strong> Concentration (no external resource consumed)</p>
-        <p style="font-size: 0.85em; color: #555; font-style: italic;">Mysticism uses raw Mythras Core rules. Max active talent Intensity = Meditation skill / 10.</p>
-      `;
+      miraclesInfo += renderMysticismInfo(activeMysticismProvider);
     }
-  } else if (activeSorcerySource) {
+  }
+  if (activeAnimismProvider && !activeAnimismProvider.isCultBacked) {
+    miraclesInfo += renderAnimismInfo(activeAnimismProvider, { primary: 'animism', types: ['animism'], isHybrid: false });
+  }
+  if (activeSorcerySource && (!CharacterData.cult || !activeSorcerySource.isCultBacked)) {
     miraclesInfo += renderSorceryInfo(activeSorcerySource, { primary: 'sorcery', types: ['sorcery'], isHybrid: false });
+  }
+  if (activeMysticismProvider && !activeMysticismProvider.isCultBacked) {
+    miraclesInfo += renderMysticismInfo(activeMysticismProvider);
   }
 
   container.innerHTML = `
@@ -15928,8 +16182,49 @@ App.exportSinglePagePDF = async function() {
       }
     }
 
-    // ADR-0006: Magic system display based on cult type
-    const pdfActiveSorcerySource = App.normalizeSorceryState(CharacterData);
+    // ADR-0006: Magic system display based on active higher-magic providers
+    const pdfActiveHigherMagicProviders = App.resolveHigherMagicProviders(CharacterData);
+    const pdfActiveSorcerySource = pdfActiveHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
+    const pdfActiveAnimismProvider = pdfActiveHigherMagicProviders.find(provider => provider.system === 'animism') || null;
+    const pdfActiveMysticismProvider = pdfActiveHigherMagicProviders.find(provider => provider.system === 'mysticism') || null;
+    const drawPdfAnimism = (provider, label, cultType = {}) => {
+      if (!provider || y <= 50) return;
+      const spiritSlots = provider.itemLimit || CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2);
+      const spirits = CharacterData.boundSpirits || [];
+      const sourceLabel = provider.sourceLabel || label || 'Animism';
+      const heading = provider.isCultBacked
+        ? `SPIRIT MAGIC (${label}) — Bound Spirit Slots: ${spirits.length}/${spiritSlots}`
+        : `SPIRIT MAGIC (${sourceLabel}) — Bound Spirit Slots: ${spirits.length}/${spiritSlots}`;
+      txt(heading, L, y, { bold: true, size: 7 });
+      y -= 8;
+      txt(`Casting: Spirit Rune affinity | ${cultType.isHybrid ? 'Shaman Path | ' : ''}Slots = CHA/2`, L, y, { size: 5.5 });
+      y -= 8;
+      if (spirits.length > 0) {
+        txt('Bound Spirits:', L, y, { bold: true, size: 6 });
+        y -= 7;
+        spirits.forEach(spirit => {
+          if (y < 30) return;
+          const spiritName = getBoundSpiritName(spirit);
+          const data = STARTING_SPIRITS.find(s => s.name === spiritName);
+          const ability = data ? ` — ${data.ability}` : '';
+          const stats = data && data.pow ? ` (POW ${data.pow})` : '';
+          drawWrappedText(`• ${spiritName}${stats}${ability}`, L + 4, W - 8, { size: 5.5, lineHeight: 6 });
+        });
+      } else {
+        txt('No spirits bound (select in wizard Step 9)', L, y, { size: 5.5 });
+        y -= 7;
+      }
+      y -= 4;
+    };
+    const drawPdfMysticism = (provider, label) => {
+      if (!provider || y <= 50) return;
+      const sourceLabel = provider.sourceLabel || label || 'Mysticism';
+      const magicPoints = provider.magicPoints ?? getCharacterMagicPoints(CharacterData);
+      txt(`MYSTICISM (${sourceLabel}) — Meditation + Mysticism`, L, y, { bold: true, size: 7 });
+      y -= 8;
+      txt(`Resource: Magic Points (${magicPoints}) on activation | Max Intensity = Meditation/10`, L, y, { size: 5.5 });
+      y -= 10;
+    };
     if (CharacterData.cult && y > 50) {
       const pdfCult = CULTS_DATA.find(c => c.name === CharacterData.cult);
       const pdfCultType = CharacterData.cultType || detectCultType(pdfCult);
@@ -15957,27 +16252,7 @@ App.exportSinglePagePDF = async function() {
 
       // Animist Spirit Magic
       if (pdfCultType.types.includes('animist') && y > 50) {
-        const spiritSlots = CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2);
-        const spirits = CharacterData.boundSpirits || [];
-        txt(`SPIRIT MAGIC (${CharacterData.cult}) — Bound Spirit Slots: ${spirits.length}/${spiritSlots}`, L, y, { bold: true, size: 7 });
-        y -= 8;
-        txt('Casting: Spirit Rune affinity | Rank: Spirit Worshipper | Slots = CHA/2', L, y, { size: 5.5 });
-        y -= 8;
-        if (spirits.length > 0) {
-          txt('Bound Spirits:', L, y, { bold: true, size: 6 });
-          y -= 7;
-	          spirits.forEach(spirit => {
-	            if (y < 30) return;
-	            const data = STARTING_SPIRITS.find(s => s.name === spirit.name);
-	            const ability = data ? ` — ${data.ability}` : '';
-	            const stats = data && data.pow ? ` (POW ${data.pow})` : '';
-	            drawWrappedText(`• ${spirit.name}${stats}${ability}`, L + 4, W - 8, { size: 5.5, lineHeight: 6 });
-	          });
-        } else {
-          txt('No spirits bound (select in wizard Step 9)', L, y, { size: 5.5 });
-          y -= 7;
-        }
-        y -= 4;
+        drawPdfAnimism(pdfActiveAnimismProvider, CharacterData.cult, pdfCultType);
       }
 
       // Sorcery
@@ -16005,11 +16280,12 @@ App.exportSinglePagePDF = async function() {
 
       // Mysticism
       if (pdfCultType.types.includes('mysticism') && y > 50) {
-        txt(`MYSTICISM (${CharacterData.cult}) — Meditation + Path`, L, y, { bold: true, size: 7 });
-        y -= 8;
-        txt('Resource: Concentration (no MP cost) | Max Intensity = Meditation/10', L, y, { size: 5.5 });
-        y -= 10;
+        drawPdfMysticism(pdfActiveMysticismProvider, CharacterData.cult);
       }
+    }
+
+    if (pdfActiveAnimismProvider && !pdfActiveAnimismProvider.isCultBacked) {
+      drawPdfAnimism(pdfActiveAnimismProvider, pdfActiveAnimismProvider.sourceLabel, { primary: 'animism', types: ['animism'], isHybrid: false });
     }
 
     if (!CharacterData.cult && pdfActiveSorcerySource && y > 50) {
@@ -16035,6 +16311,35 @@ App.exportSinglePagePDF = async function() {
         });
       }
       y -= 4;
+    }
+
+    if (CharacterData.cult && pdfActiveSorcerySource && !pdfActiveSorcerySource.isCultBacked && y > 50) {
+      const mp = getSorceryMagicPoints(pdfActiveSorcerySource, CharacterData);
+      const sourceLabel = pdfActiveSorcerySource.sourceLabel || 'Sorcery';
+      const sourcePages = App.formatSorcerySourcePages(pdfActiveSorcerySource);
+      txt(`SORCERY (${sourceLabel}) — Magic Points: ${mp}`, L, y, { bold: true, size: 7 });
+      y -= 8;
+      txt('Casting: Invocation skill | Shaping: Shaping skill | Intensity = Invocation/10', L, y, { size: 5.5 });
+      y -= 8;
+      txt(`Source: ${sourcePages}`, L, y, { size: 5.5 });
+      y -= 8;
+      const spells = CharacterData.sorcerySpells || [];
+      if (spells.length > 0) {
+        txt('Spells:', L, y, { bold: true, size: 6 });
+        y -= 7;
+        spells.forEach(spellName => {
+          if (y < 30) return;
+          const spellData = SORCERY_SPELLS.find(s => s[0] === spellName);
+          const desc = spellData && spellData[2] ? ` — ${spellData[2]}` : '';
+          const resist = spellData && spellData[1] ? ` [${spellData[1]}]` : '';
+          drawWrappedText(`• ${spellName}${resist}${desc}`, L + 4, W - 8, { size: 5.5, lineHeight: 6 });
+        });
+      }
+      y -= 4;
+    }
+
+    if (pdfActiveMysticismProvider && !pdfActiveMysticismProvider.isCultBacked) {
+      drawPdfMysticism(pdfActiveMysticismProvider, pdfActiveMysticismProvider.sourceLabel);
     }
 
     // Folk Magic
@@ -16145,7 +16450,7 @@ App.agent = {};
 App.agent.getState = function() {
   try {
     const skills = App.compileAllSkills ? App.compileAllSkills() : [];
-    const activeSorcerySource = App.normalizeSorceryState(CharacterData);
+    const activeSorcerySource = App.resolveActiveSorcerySource(CharacterData);
     const compiledSkills = skills.map(s => ({
       name: s.name,
       total: s.base + s.cultural + s.career + s.bonus,
@@ -16173,6 +16478,7 @@ App.agent.getState = function() {
       sorcerySourceType: activeSorcerySource?.sourceType || null,
       sorceryResource: activeSorcerySource?.magicPoints || CharacterData.sorceryResource || 0,
       sorcerySpells: [...(CharacterData.sorcerySpells || [])],
+      mysticismTalents: [...(CharacterData.mysticismTalents || [])],
       socialClass: CharacterData.socialClass || null,
       skills: compiledSkills,
       passions: [...(CharacterData.passions || [])],
@@ -16262,12 +16568,15 @@ App.agent.getOptions = function(step) {
         // Cults filtered by CULTURE_CULT_MAP
         const culture = normalizeCultureName(CharacterData.culture);
         const cultMap = CULTURE_CULT_MAP[culture];
-        const noCultSorcerySource = App.resolveCultureBackedSorcerySource({...CharacterData, cult: null});
+        const noCultCharacter = {...CharacterData, cult: null, cultType: null};
+        const noCultProviders = App.resolveHigherMagicProviders(noCultCharacter);
+        const noCultSorcerySource = noCultProviders.find(provider => provider.system === 'sorcery') || null;
         const noCult = {
           name: null,
           label: 'No Cult',
           activeSorcerySource: noCultSorcerySource ? {...noCultSorcerySource} : null,
-          sorcerySpellLimit: noCultSorcerySource?.startingSpellLimit || null
+          sorcerySpellLimit: noCultSorcerySource?.startingSpellLimit || null,
+          higherMagicProviders: noCultProviders.map(provider => ({...provider}))
         };
         if (!cultMap) return {noCult, primaryCults: [], secondaryCults: [], sourceBackedSorcery: noCult.activeSorcerySource, note: 'No cult map for culture'};
         const mapCult = (name) => {
@@ -16667,7 +16976,17 @@ App.agent.setStep = function(step, data) {
         // Set professional skills
         CharacterData.selectedProfessionalSkills = resolvedPro;
         resolvedPro.forEach(skill => { CharacterData.careerSkills[skill] = 0; });
-        const activeSorcerySource = App.normalizeSorceryState(CharacterData);
+        const activeHigherMagicProviders = App.resolveHigherMagicProviders(CharacterData);
+        const providerLossError = getHigherMagicProviderSelectionLossError(step8Snapshot, activeHigherMagicProviders, {
+          lostSpellsMessage: lostSpells => `Changing career would clear selected sorcery spells: ${lostSpells.join(', ')}`,
+          lostBoundSpiritsMessage: lostSpirits => `Changing career would clear selected bound spirits: ${lostSpirits.join(', ')}`,
+          lostMysticismTalentsMessage: lostTalents => `Changing career would clear selected mysticism talents: ${lostTalents.join(', ')}`
+        });
+        if (providerLossError) {
+          restoreStep8Snapshot();
+          return {success: false, errors: [providerLossError], state: App.agent.getState()};
+        }
+        const activeSorcerySource = activeHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
         const sourceError = getSorcerySourceSelectionError(step8Snapshot, previousSorcerySource, CharacterData, activeSorcerySource, {
           lostSpellsMessage: lostSpells => `Changing career would clear selected sorcery spells: ${lostSpells.join(', ')}`
         });
@@ -16675,6 +16994,7 @@ App.agent.setStep = function(step, data) {
           restoreStep8Snapshot();
           return {success: false, errors: [sourceError], state: App.agent.getState()};
         }
+        App.normalizeHigherMagicState(CharacterData);
 
         App.currentStep = 8;
         App.renderCurrentStep();
@@ -16693,7 +17013,7 @@ App.agent.setStep = function(step, data) {
         }
         const deferStep9Validation = internalDeferredStep9Payloads.has(data);
         internalDeferredStep9Payloads.delete(data);
-        const inheritedStep9Fields = ['cult', 'miracles', 'boundSpirits', 'spirits', 'sorcerySpells', 'spells']
+        const inheritedStep9Fields = ['cult', 'miracles', 'boundSpirits', 'spirits', 'sorcerySpells', 'spells', 'mysticismTalents']
           .filter(field => field in rawData && !Object.prototype.hasOwnProperty.call(rawData, field));
         if (inheritedStep9Fields.length > 0) {
           errors.push(`Step 9 data object must use own fields only: ${inheritedStep9Fields.join(', ')}`);
@@ -16716,7 +17036,7 @@ App.agent.setStep = function(step, data) {
           errors.push(sorcerySpellPayloadError);
           return {success: false, errors, state: App.agent.getState()};
         }
-        const magicArrayPayloadError = getArrayPayloadError(data, ['miracles', 'boundSpirits', 'spirits']);
+        const magicArrayPayloadError = getArrayPayloadError(data, ['miracles', 'boundSpirits', 'spirits', 'mysticismTalents']);
         if (magicArrayPayloadError) {
           errors.push(magicArrayPayloadError);
           return {success: false, errors, state: App.agent.getState()};
@@ -16743,11 +17063,23 @@ App.agent.setStep = function(step, data) {
         const requestedBoundSpirits = Array.isArray(data.boundSpirits)
           ? data.boundSpirits
           : [];
+        const requestedMysticismTalents = Array.isArray(data.mysticismTalents)
+          ? data.mysticismTalents
+          : [];
+        if (!Object.prototype.hasOwnProperty.call(data, 'boundSpirits') && (step9Snapshot.boundSpirits || []).length > 0) {
+          const lostSpirits = step9Snapshot.boundSpirits.map(getBoundSpiritName).filter(Boolean);
+          return {success: false, errors: [`Updating magic selection would clear selected bound spirits: ${lostSpirits.join(', ')}`], state: App.agent.getState()};
+        }
+        if (!Object.prototype.hasOwnProperty.call(data, 'mysticismTalents') && (step9Snapshot.mysticismTalents || []).length > 0) {
+          return {success: false, errors: [`Updating magic selection would clear selected mysticism talents: ${step9Snapshot.mysticismTalents.join(', ')}`], state: App.agent.getState()};
+        }
         const finishStep9Selection = () => {
-          const activeSorcerySource = App.normalizeSorceryState(CharacterData);
+          const activeHigherMagicProviders = App.normalizeHigherMagicState(CharacterData);
+          const activeSorcerySource = activeHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
           const unsupportedMagicErrors = getUnsupportedMagicSelectionErrors(CharacterData.cult, CharacterData.cultType, {
-            miracles: CharacterData.miracles,
-            boundSpirits: CharacterData.boundSpirits
+            miracles: requestedMiracles.length > 0 ? requestedMiracles : CharacterData.miracles,
+            boundSpirits: requestedBoundSpirits.length > 0 ? requestedBoundSpirits : CharacterData.boundSpirits,
+            providers: activeHigherMagicProviders
           });
           if (unsupportedMagicErrors.length > 0) {
             restoreStep9Snapshot();
@@ -16779,21 +17111,15 @@ App.agent.setStep = function(step, data) {
         };
         const cultName = data.cult;
         if (cultName === null || cultName === undefined) {
-          const unsupportedMagicErrors = getUnsupportedMagicSelectionErrors(null, null, {
-            miracles: requestedMiracles,
-            boundSpirits: requestedBoundSpirits
-          });
-          if (unsupportedMagicErrors.length > 0) {
-            return {success: false, errors: unsupportedMagicErrors, state: App.agent.getState()};
-          }
           // No-cult path
           CharacterData.cult = null;
           CharacterData.cultType = null;
           CharacterData.devotionalPool = 0;
           CharacterData.boundSpiritSlots = 0;
-          CharacterData.miracles = [];
-          CharacterData.boundSpirits = [];
+          CharacterData.miracles = [...requestedMiracles];
+          CharacterData.boundSpirits = [...requestedBoundSpirits];
           CharacterData.sorcerySpells = [...requestedSorcerySpells];
+          CharacterData.mysticismTalents = [...requestedMysticismTalents];
           return finishStep9Selection();
         }
         if (typeof cultName !== 'string') {
@@ -16808,9 +17134,15 @@ App.agent.setStep = function(step, data) {
         // ADR-0006: Calculate resources based on cult type
         const agentCultType = detectCultType(cult);
         const devPool = agentCultType.types.includes('theist') ? Math.floor(CharacterData.characteristics.POW / 2) : 0;
+        const prospectiveProviders = App.resolveHigherMagicProviders({
+          ...CharacterData,
+          cult: cultName,
+          cultType: agentCultType
+        });
         const unsupportedMagicErrors = getUnsupportedMagicSelectionErrors(cultName, agentCultType, {
           miracles: requestedMiracles,
-          boundSpirits: requestedBoundSpirits
+          boundSpirits: requestedBoundSpirits,
+          providers: prospectiveProviders
         });
         if (unsupportedMagicErrors.length > 0) {
           return {success: false, errors: unsupportedMagicErrors, state: App.agent.getState()};
@@ -16825,6 +17157,7 @@ App.agent.setStep = function(step, data) {
         CharacterData.miracles = [...requestedMiracles];
         CharacterData.boundSpirits = [...requestedBoundSpirits];
         CharacterData.sorcerySpells = [...requestedSorcerySpells];
+        CharacterData.mysticismTalents = [...requestedMysticismTalents];
 
         resolveCultBoundPlaceholders(CharacterData, cultName, {
           includeSelectedProfessionalSkills: true
@@ -17086,7 +17419,9 @@ App.agent.getUIState = function() {
  */
 App.agent.getMagicState = function() {
   try {
-    const activeSorcerySource = App.normalizeSorceryState(CharacterData);
+    const activeHigherMagicProviders = App.resolveHigherMagicProviders(CharacterData);
+    const activeSorcerySource = activeHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
+    const activeAnimismProvider = activeHigherMagicProviders.find(provider => provider.system === 'animism') || null;
     const cult = CULTS_DATA.find(c => c.name === CharacterData.cult);
     const cultType = cult ? detectCultType(cult) : {primary: null, types: [], isHybrid: false};
     const cultMiracles = (CharacterData.cult && MIRACLES_DATA.cults[CharacterData.cult])
@@ -17096,23 +17431,26 @@ App.agent.getMagicState = function() {
     return {
       cultType: cultType,
       cultName: CharacterData.cult || null,
+      higherMagicProviders: activeHigherMagicProviders.map(provider => ({...provider})),
       activeSorcerySource: activeSorcerySource ? {...activeSorcerySource} : null,
       sorcerySource: activeSorcerySource ? {...activeSorcerySource} : null,
       sorcerySourceLabel: activeSorcerySource?.sourceLabel || null,
       sorcerySourceType: activeSorcerySource?.sourceType || null,
       devotionalPool: CharacterData.devotionalPool || 0,
-      boundSpiritSlots: CharacterData.boundSpiritSlots || 0,
+      boundSpiritSlots: activeAnimismProvider?.itemLimit || CharacterData.boundSpiritSlots || 0,
       sorceryResource: activeSorcerySource?.magicPoints || CharacterData.sorceryResource || 0,
       selectedMiracles: [...(CharacterData.miracles || [])],
       selectedSpells: [...(CharacterData.sorcerySpells || [])],
       selectedSpirits: [...(CharacterData.boundSpirits || [])],
+      selectedTalents: [...(CharacterData.mysticismTalents || [])],
       availableMiracles: cultMiracles,
-      availableSpells: SORCERY_SPELLS.map(s => s[0]),
-      availableSpirits: STARTING_SPIRITS.map(s => s.name),
+      availableSpells: activeSorcerySource?.availableItems ? [...activeSorcerySource.availableItems] : [],
+      availableSpirits: activeAnimismProvider?.availableItems ? [...activeAnimismProvider.availableItems] : [],
       limits: {
         miracles: App.getEffectiveInitiateMiracleLimit(CharacterData.cult),
         sorcerySpells: activeSorcerySource?.startingSpellLimit || 3,
-        spirits: CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2)
+        spirits: activeAnimismProvider?.itemLimit || CharacterData.boundSpiritSlots || 0,
+        startingSpirits: Math.min(3, activeAnimismProvider?.itemLimit || CharacterData.boundSpiritSlots || 0)
       }
     };
   } catch (e) {
@@ -17131,6 +17469,7 @@ App.agent.getMagicState = function() {
 App.agent.selectCult = function(name) {
   const selectionSnapshot = createTrustedCharacterSnapshot();
   const previousSorcerySource = App.resolveActiveSorcerySource(CharacterData);
+  const previousHigherMagicProviders = App.resolveHigherMagicProviders(CharacterData);
   const restoreSelectionSnapshot = () => {
     restoreTrustedCharacterSnapshot(selectionSnapshot);
     App.saveToLocalStorage();
@@ -17145,17 +17484,34 @@ App.agent.selectCult = function(name) {
   };
   try {
     if (name === null || name === undefined) {
-      const previousCult = CharacterData.cult;
       CharacterData.cult = null;
       CharacterData.cultType = null;
       CharacterData.devotionalPool = 0;
       CharacterData.boundSpiritSlots = 0;
       CharacterData.miracles = [];
-      CharacterData.boundSpirits = [];
-      if (previousCult) CharacterData.sorcerySpells = [];
-      const activeSorcerySource = App.normalizeSorceryState(CharacterData);
+      CharacterData.mysticismTalents = [];
+      const activeHigherMagicProviders = App.resolveHigherMagicProviders(CharacterData);
+      const previousAnimismProvider = previousHigherMagicProviders.find(provider => provider.system === 'animism') || null;
+      const activeAnimismProvider = activeHigherMagicProviders.find(provider => provider.system === 'animism') || null;
+      if (previousAnimismProvider?.isCultBacked && previousAnimismProvider.id !== activeAnimismProvider?.id) {
+        CharacterData.boundSpirits = [];
+      }
+      if (!previousSorcerySource) {
+        CharacterData.sorcerySpells = [];
+      }
+      const providerLossError = getHigherMagicProviderSelectionLossError(selectionSnapshot, activeHigherMagicProviders, {
+        lostSpellsMessage: lostSpells => `Changing cult would clear selected sorcery spells: ${lostSpells.join(', ')}`,
+        lostBoundSpiritsMessage: lostSpirits => `Changing cult would clear selected bound spirits: ${lostSpirits.join(', ')}`,
+        lostMysticismTalentsMessage: lostTalents => `Changing cult would clear selected mysticism talents: ${lostTalents.join(', ')}`
+      });
+      if (providerLossError) {
+        restoreSelectionSnapshot();
+        return {success: false, error: providerLossError, magicState: App.agent.getMagicState()};
+      }
+      const activeSorcerySource = activeHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
       const sourceError = sourceSelectionError(activeSorcerySource);
       if (sourceError) return sourceError;
+      App.normalizeHigherMagicState(CharacterData);
       App.saveToLocalStorage();
       return {success: true, magicState: App.agent.getMagicState()};
     }
@@ -17181,11 +17537,32 @@ App.agent.selectCult = function(name) {
     } else {
       CharacterData.sorceryResource = 0;
     }
-    // Clear previous selections on cult change
-    if (previousCult !== name) App.clearCultMagicSelections();
-    const activeSorcerySource = App.resolveActiveSorcerySource(CharacterData);
+    if (previousCult !== name) {
+      CharacterData.miracles = [];
+      CharacterData.mysticismTalents = [];
+    }
+    const activeHigherMagicProviders = App.resolveHigherMagicProviders(CharacterData);
+    const previousAnimismProvider = previousHigherMagicProviders.find(provider => provider.system === 'animism') || null;
+    const activeAnimismProvider = activeHigherMagicProviders.find(provider => provider.system === 'animism') || null;
+    if (previousCult !== name && previousAnimismProvider?.isCultBacked && previousAnimismProvider.id !== activeAnimismProvider?.id) {
+      CharacterData.boundSpirits = [];
+    }
+    if (previousCult !== name && !previousSorcerySource) {
+      CharacterData.sorcerySpells = [];
+    }
+    const providerLossError = getHigherMagicProviderSelectionLossError(selectionSnapshot, activeHigherMagicProviders, {
+      lostSpellsMessage: lostSpells => `Changing cult would clear selected sorcery spells: ${lostSpells.join(', ')}`,
+      lostBoundSpiritsMessage: lostSpirits => `Changing cult would clear selected bound spirits: ${lostSpirits.join(', ')}`,
+      lostMysticismTalentsMessage: lostTalents => `Changing cult would clear selected mysticism talents: ${lostTalents.join(', ')}`
+    });
+    if (providerLossError) {
+      restoreSelectionSnapshot();
+      return {success: false, error: providerLossError, magicState: App.agent.getMagicState()};
+    }
+    const activeSorcerySource = activeHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
     const sourceError = sourceSelectionError(activeSorcerySource);
     if (sourceError) return sourceError;
+    App.normalizeHigherMagicState(CharacterData);
     App.saveToLocalStorage();
     return {success: true, magicState: App.agent.getMagicState()};
   } catch (e) {
@@ -17217,6 +17594,9 @@ App.agent.toggleSpell = function(name) {
       if (!activeSorcerySource) {
         return {success: false, error: 'Select a sorcery source before choosing sorcery spells', selected: spells.length, limit, spells: [...spells]};
       }
+      if (!Array.isArray(activeSorcerySource.availableItems) || !activeSorcerySource.availableItems.includes(name)) {
+        return {success: false, error: `Spell '${name}' is not available from ${activeSorcerySource.sourceLabel || 'the active sorcery source'}`, selected: spells.length, limit, spells: [...spells]};
+      }
       const sourceErrors = getSorcerySourceSchoolErrors(CharacterData, activeSorcerySource);
       if (sourceErrors.length > 0) {
         return {success: false, error: sourceErrors[0], selected: spells.length, limit, spells: [...spells]};
@@ -17238,11 +17618,15 @@ App.agent.toggleSpell = function(name) {
 App.agent.toggleSpirit = function(name) {
   try {
     const spirits = CharacterData.boundSpirits || [];
+    const activeAnimismProvider = App.resolveHigherMagicProviderBySystem('animism', CharacterData);
     const idx = spirits.findIndex(s => (typeof s === 'string' ? s : s.name) === name);
     if (idx >= 0) {
       spirits.splice(idx, 1);
     } else {
-      const limit = CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2);
+      if (!activeAnimismProvider) {
+        return {success: false, error: 'Select an active animism provider before choosing bound spirits', used: spirits.length, limit: 0, spirits: spirits.map(s => typeof s === 'string' ? s : s.name)};
+      }
+      const limit = Math.min(3, activeAnimismProvider.itemLimit || CharacterData.boundSpiritSlots || 0);
       if (spirits.length >= limit) {
         return {success: false, error: `Spirit slot limit reached (${limit}). Unbind one first.`, used: spirits.length, limit};
       }
@@ -17251,11 +17635,14 @@ App.agent.toggleSpirit = function(name) {
       if (!spiritData) {
         return {success: false, error: `Spirit '${name}' not found in STARTING_SPIRITS`};
       }
+      if (!Array.isArray(activeAnimismProvider.availableItems) || !activeAnimismProvider.availableItems.includes(name)) {
+        return {success: false, error: `Spirit '${name}' is not available from ${activeAnimismProvider.sourceLabel || 'the active animism provider'}`, used: spirits.length, limit};
+      }
       spirits.push({name: spiritData.name, type: spiritData.type, ability: spiritData.ability});
     }
     CharacterData.boundSpirits = spirits;
     App.saveToLocalStorage();
-    const limit = CharacterData.boundSpiritSlots || Math.floor((CharacterData.characteristics.CHA || 0) / 2);
+    const limit = Math.min(3, activeAnimismProvider?.itemLimit || CharacterData.boundSpiritSlots || 0);
     return {success: true, used: spirits.length, limit, spirits: spirits.map(s => typeof s === 'string' ? s : s.name)};
   } catch (e) {
     return {success: false, error: e.message};

@@ -1984,6 +1984,9 @@ section('Higher Magic Provider Resolution');
 {
   const { App: AppObj, CORE_CAREER_MAGIC_PROVIDERS } = App;
   const baseCharacteristics = { STR: 10, CON: 11, SIZ: 10, DEX: 10, INT: 15, POW: 14, CHA: 8 };
+  const shamanProviderSkills = ['Binding (Waha)', 'Trance', 'Healing'];
+  const sorcererProviderSkills = ['Invocation (Core Sorcery)', 'Shaping', 'Lore (Sorcery)'];
+  const mysticProviderSkills = ['Meditation', 'Mysticism', 'Musicianship'];
   const character = (overrides = {}) => ({
     culture: 'Sartarite (Heortling)',
     career: 'Warrior',
@@ -1991,6 +1994,7 @@ section('Higher Magic Provider Resolution');
     characteristics: { ...baseCharacteristics },
     sorcerySpells: [],
     boundSpirits: [],
+    selectedProfessionalSkills: [],
     ...overrides
   });
   const providersFor = overrides => AppObj.resolveHigherMagicProviders(character(overrides));
@@ -2018,12 +2022,12 @@ section('Higher Magic Provider Resolution');
     const waha = providersFor({ culture: 'Praxian', career: 'Shaman', cult: 'Waha' });
     const arkat = providersFor({ culture: 'God Forgot', career: 'Sorcerer', cult: 'Arkat' });
     const zzistori = providersFor({ culture: 'God Forgot', career: 'Sorcerer', cult: null });
-    const shamanNoCult = providersFor({ career: 'Shaman', cult: null });
-    const sorcererNoCult = providersFor({ career: 'Sorcerer', cult: null });
-    const mysticNoCult = providersFor({ career: 'Mystic', cult: null });
-    const shamanOrlanth = providersFor({ career: 'Shaman', cult: 'Orlanth' });
-    const sorcererOrlanth = providersFor({ career: 'Sorcerer', cult: 'Orlanth' });
-    const mysticOrlanth = providersFor({ career: 'Mystic', cult: 'Orlanth' });
+    const shamanNoCult = providersFor({ career: 'Shaman', cult: null, selectedProfessionalSkills: shamanProviderSkills });
+    const sorcererNoCult = providersFor({ career: 'Sorcerer', cult: null, selectedProfessionalSkills: sorcererProviderSkills });
+    const mysticNoCult = providersFor({ career: 'Mystic', cult: null, selectedProfessionalSkills: mysticProviderSkills });
+    const shamanOrlanth = providersFor({ career: 'Shaman', cult: 'Orlanth', selectedProfessionalSkills: shamanProviderSkills });
+    const sorcererOrlanth = providersFor({ career: 'Sorcerer', cult: 'Orlanth', selectedProfessionalSkills: sorcererProviderSkills });
+    const mysticOrlanth = providersFor({ career: 'Mystic', cult: 'Orlanth', selectedProfessionalSkills: mysticProviderSkills });
     const warriorNoCult = providersFor({ career: 'Warrior', cult: null });
 
     if (providerBySystem(dakaFal, 'animism')?.sourceKind !== 'cult') {
@@ -2057,7 +2061,7 @@ section('Higher Magic Provider Resolution');
       providerProblems.push(`Warrior with No Cult must fail closed, got ${providerIds(warriorNoCult).join(', ')}`);
     }
 
-    const shamanState = character({ career: 'Shaman', cult: null, boundSpiritSlots: 0 });
+    const shamanState = character({ career: 'Shaman', cult: null, boundSpiritSlots: 0, selectedProfessionalSkills: shamanProviderSkills });
     const shamanProviders = AppObj.normalizeHigherMagicState(shamanState);
     if (!hasProvider(shamanProviders, 'core-career-shaman-animism') || shamanState.boundSpiritSlots !== 4) {
       providerProblems.push('normalizeHigherMagicState must project Core Shaman Animism into bound spirit slots');
@@ -2077,7 +2081,7 @@ section('Higher Magic Provider Resolution');
         staleState.boundSpirits.length !== 0) {
       providerProblems.push('normalizeHigherMagicState must clear stale higher-magic selections when no provider applies');
     }
-    if (AppObj.resolveActiveSorcerySource(character({ culture: 'God Forgot', career: 'Sorcerer', cult: null }))?.sourceLabel !== 'Zzistori School (God Forgot sorcery)') {
+    if (AppObj.resolveActiveSorcerySource(character({ culture: 'God Forgot', career: 'Sorcerer', cult: null, selectedProfessionalSkills: sorcererProviderSkills }))?.sourceLabel !== 'Zzistori School (God Forgot sorcery)') {
       providerProblems.push('resolveActiveSorcerySource must remain a compatibility wrapper over provider resolution');
     }
   }
@@ -3211,6 +3215,104 @@ asyncTest('exportSinglePagePDF() Arkat sorcery label capture failed', async () =
   } else {
     fail('exportSinglePagePDF() regressed Arkat cult-backed sorcery labeling',
       text.split('\n').filter(line => /SORCERY|Magic Points|Arkat|Zzistori|Devotional/.test(line)).join(' | '));
+  }
+});
+
+// Test 3.7: PDF renders no-cult core career Animism and Mysticism providers
+asyncTest('exportSinglePagePDF() core career provider magic capture failed', async () => {
+  if (!App.App || !App.App.exportSinglePagePDF) return;
+
+  const shamanCharacteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 13, POW: 14, CHA: 8 };
+  const shamanPdf = await captureSinglePagePdf(createPdfTestCharacter({
+    name: 'PDF Core Shaman',
+    culture: 'Praxian',
+    homeland: 'Prax',
+    career: 'Shaman',
+    cult: null,
+    cultType: null,
+    characteristics: shamanCharacteristics,
+    attributes: App.Calc.calculateAllAttributes(shamanCharacteristics),
+    selectedProfessionalSkills: ['Binding (Waha)', 'Trance', 'Healing'],
+    miracles: [],
+    devotionalPool: 0,
+    boundSpiritSlots: 4,
+    boundSpirits: ['Ancestor Spirit — Sagacity (Int 1)'],
+    sorcerySpells: [],
+    folkMagicSpells: [],
+    careerFolkMagic: [],
+    weapons: [],
+    equipment: [],
+    armor: [],
+    passions: [],
+    combatStyles: []
+  }));
+
+  const mysticCharacteristics = { STR: 8, CON: 8, SIZ: 8, DEX: 8, INT: 15, POW: 20, CHA: 8 };
+  const mysticPdf = await captureSinglePagePdf(createPdfTestCharacter({
+    name: 'PDF Core Mystic',
+    culture: 'Sartarite (Heortling)',
+    homeland: 'Boldhome',
+    career: 'Mystic',
+    cult: null,
+    cultType: null,
+    characteristics: mysticCharacteristics,
+    attributes: App.Calc.calculateAllAttributes(mysticCharacteristics),
+    selectedProfessionalSkills: ['Meditation', 'Mysticism', 'Musicianship'],
+    miracles: [],
+    devotionalPool: 0,
+    boundSpirits: [],
+    sorcerySpells: [],
+    folkMagicSpells: [],
+    careerFolkMagic: [],
+    weapons: [],
+    equipment: [],
+    armor: [],
+    passions: [],
+    combatStyles: []
+  }));
+
+  const sorcererCharacteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 12, CHA: 8 };
+  const sorcererPdf = await captureSinglePagePdf(createPdfTestCharacter({
+    name: 'PDF Orlanth Sorcerer',
+    culture: 'Sartarite (Heortling)',
+    homeland: 'Boldhome',
+    career: 'Sorcerer',
+    cult: 'Orlanth',
+    cultType: { primary: 'theist', types: ['theist'], isHybrid: false },
+    characteristics: sorcererCharacteristics,
+    attributes: App.Calc.calculateAllAttributes(sorcererCharacteristics),
+    selectedProfessionalSkills: ['Invocation (Core Sorcery)', 'Shaping', 'Literacy'],
+    miracles: [],
+    devotionalPool: 0,
+    boundSpirits: [],
+    sorceryResource: 12,
+    sorcerySpells: ['Holdfast'],
+    folkMagicSpells: [],
+    careerFolkMagic: [],
+    weapons: [],
+    equipment: [],
+    armor: [],
+    passions: [],
+    combatStyles: []
+  }));
+
+  const shamanText = shamanPdf.text;
+  const mysticText = mysticPdf.text;
+  const sorcererText = sorcererPdf.text;
+  if (shamanText.includes('SPIRIT MAGIC (Core Animism via Shaman career)') &&
+      shamanText.includes('Ancestor Spirit — Sagacity') &&
+      mysticText.includes('MYSTICISM (Core Mysticism via Mystic career)') &&
+      mysticText.includes('Magic Points (20) on activation') &&
+      sorcererText.includes('SORCERY (Core Sorcery via Sorcerer career)') &&
+      sorcererText.includes('Holdfast')) {
+    pass('exportSinglePagePDF() renders no-cult core Animism and Mysticism providers');
+  } else {
+    fail('exportSinglePagePDF() omits no-cult core career provider magic',
+      JSON.stringify({
+        shamanMagic: shamanText.split('\n').filter(line => /SPIRIT|Ancestor|Core Animism/.test(line)).join(' | '),
+        mysticMagic: mysticText.split('\n').filter(line => /MYSTICISM|Magic Points|Core Mysticism/.test(line)).join(' | '),
+        sorceryMagic: sorcererText.split('\n').filter(line => /SORCERY|Holdfast|Core Sorcery/.test(line)).join(' | ')
+      }));
   }
 });
 
@@ -7205,12 +7307,14 @@ section('Cult Data Tests');
       CD.career = testCase.career;
       CD.cult = testCase.cult;
       CD.cultType = null;
+      CD.selectedProfessionalSkills = [];
       return { label: testCase.label, source: AppRef.resolveActiveSorcerySource(CD) };
     });
     CD.culture = 'Praxian';
     CD.career = 'Sorcerer';
     CD.cult = null;
     CD.cultType = null;
+    CD.selectedProfessionalSkills = ['Invocation (Core Sorcery)', 'Shaping', 'Lore (Sorcery)'];
     const nonGodForgotSorcererSource = AppRef.resolveActiveSorcerySource(CD);
     const nonGodForgotUsesCoreSorcery = nonGodForgotSorcererSource?.id === 'core-career-sorcerer-sorcery' &&
       nonGodForgotSorcererSource?.sourceKind === 'core-career' &&
@@ -7220,6 +7324,7 @@ section('Cult Data Tests');
     CD.career = 'Sorcerer';
     CD.cult = 'Arkat';
     CD.cultType = detectCultType(CULTS_DATA.find(cult => cult.name === 'Arkat'));
+    CD.selectedProfessionalSkills = ['Invocation (Arkat)', 'Shaping', 'Lore (Sorcery)'];
     const arkatSource = AppRef.resolveActiveSorcerySource(CD);
     const arkatIsCultBacked = arkatSource?.sourceLabel === 'Arkat' &&
       arkatSource?.cultName === 'Arkat' &&

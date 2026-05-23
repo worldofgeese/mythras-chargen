@@ -294,6 +294,396 @@ assert(ae2DuplicateSpirits.before.cultName === 'Daka Fal' &&
   'AE2 invalid: App.agent.setStep(9) rejects duplicate bound spirits without mutating');
 
 // ═══════════════════════════════════════════════════════════════
+console.log('\n\x1b[36m═══ U4: Core Shaman Animism Provider ═══\x1b[0m\n');
+// ═══════════════════════════════════════════════════════════════
+
+reload();
+
+const u4ShamanNoCult = evalPageJSON(`JSON.stringify((() => {
+  App.agent.setStep(1, {name:'No Cult Shaman', concept:'Core animism provider'});
+  App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:13,POW:14,CHA:8}});
+  App.agent.setStep(4, {culture:'Praxian', homeland:'Prax'});
+  const step8 = App.agent.setStep(8, {career:'Shaman', professionalSkills:[{name:'Binding (Cult, Totem or Tradition)', specialization:'Waha'}, 'Trance', 'Healing']});
+  const options = App.agent.getOptions(9);
+  const step9 = App.agent.setStep(9, {cult:null, boundSpirits:['Ancestor Spirit — Sagacity (Int 1)']});
+  App.currentStep = 9;
+  App.renderCurrentStep();
+  const html = document.body.innerText;
+  const magic = App.agent.getMagicState();
+  return {step8, options, step9, magic, html};
+})())`);
+assert(u4ShamanNoCult.step8.success === true &&
+  u4ShamanNoCult.options.noCult?.higherMagicProviders?.some(provider => provider.id === 'core-career-shaman-animism') &&
+  u4ShamanNoCult.step9.success === true &&
+  u4ShamanNoCult.magic.cultName === null &&
+  u4ShamanNoCult.magic.boundSpiritSlots === 4 &&
+  u4ShamanNoCult.magic.selectedSpirits.some(spirit => (typeof spirit === 'string' ? spirit : spirit.name) === 'Ancestor Spirit — Sagacity (Int 1)') &&
+  /Available Magic Sources/i.test(u4ShamanNoCult.html) &&
+  /Core Animism via Shaman career/i.test(u4ShamanNoCult.html) &&
+  /Starting Bound Spirits/i.test(u4ShamanNoCult.html),
+  'U4: No Cult Shaman exposes Core Animism source, spirit slots, and provider-scoped spirit selection');
+
+reload();
+
+const u4StringSpiritDeselect = evalPageJSON(`JSON.stringify((() => {
+  App.agent.setStep(1, {name:'Spirit Deselect Shaman', concept:'String spirit round-trip'});
+  App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:13,POW:14,CHA:8}});
+  App.agent.setStep(4, {culture:'Praxian', homeland:'Prax'});
+  App.agent.setStep(8, {career:'Shaman', professionalSkills:[{name:'Binding (Cult, Totem or Tradition)', specialization:'Waha'}, 'Trance', 'Healing']});
+  App.agent.setStep(9, {cult:null, boundSpirits:['Ancestor Spirit — Sagacity (Int 1)']});
+  App.currentStep = 9;
+  App.renderCurrentStep();
+  const input = document.querySelector('input[data-spirit="Ancestor Spirit — Sagacity (Int 1)"]');
+  const checkedBefore = Boolean(input?.checked);
+  const toggle = App.toggleBoundSpirit('Ancestor Spirit — Sagacity (Int 1)', input);
+  return {checkedBefore, toggle, magic: App.agent.getMagicState()};
+})())`);
+assert(u4StringSpiritDeselect.checkedBefore === true &&
+  u4StringSpiritDeselect.toggle.success === true &&
+  u4StringSpiritDeselect.magic.selectedSpirits.length === 0,
+  'U4: bound spirits stored as strings can be deselected from the provider picker');
+
+reload();
+
+const u4SpiritStartingCap = evalPageJSON(`JSON.stringify((() => {
+  App.agent.setStep(1, {name:'Spirit Cap Shaman', concept:'Starting spirit cap'});
+  App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:13,POW:14,CHA:8}});
+  App.agent.setStep(4, {culture:'Praxian', homeland:'Prax'});
+  App.agent.setStep(8, {career:'Shaman', professionalSkills:[{name:'Binding (Cult, Totem or Tradition)', specialization:'Waha'}, 'Trance', 'Healing']});
+  App.agent.setStep(9, {cult:null});
+  const names = [
+    'Ancestor Spirit — Sagacity (Int 1)',
+    'Nature Spirit — Camouflage (Int 2)',
+    'Nature Spirit — Grappler (Int 2)',
+    'Nature Spirit — Venomous (Int 2)'
+  ];
+  const toggles = names.map(name => App.agent.toggleSpirit(name));
+  return {toggles, magic: App.agent.getMagicState()};
+})())`);
+assert(u4SpiritStartingCap.toggles.slice(0, 3).every(result => result.success === true) &&
+  u4SpiritStartingCap.toggles[3].success === false &&
+  /limit reached \(3\)/i.test(u4SpiritStartingCap.toggles[3].error || '') &&
+  u4SpiritStartingCap.magic.selectedSpirits.length === 3 &&
+  u4SpiritStartingCap.magic.limits.startingSpirits === 3 &&
+  u4SpiritStartingCap.magic.limits.spirits === 4,
+  'U4: agent spirit toggles enforce the same 3-spirit starting cap as the picker');
+
+reload();
+
+const u4AnimismSkillLossGuard = evalPageJSON(`JSON.stringify((() => {
+  App.agent.setStep(1, {name:'Guarded Shaman', concept:'Protect selected spirits'});
+  App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:13,POW:14,CHA:8}});
+  App.agent.setStep(4, {culture:'Praxian', homeland:'Prax'});
+  App.agent.setStep(8, {career:'Shaman', professionalSkills:[{name:'Binding (Cult, Totem or Tradition)', specialization:'Waha'}, 'Trance', 'Healing']});
+  App.agent.setStep(9, {cult:null, boundSpirits:['Ancestor Spirit — Sagacity (Int 1)']});
+  const agentChange = App.agent.setStep(8, {career:'Shaman', professionalSkills:['Trance', 'Healing', 'Oratory']});
+  const afterAgent = App.agent.getMagicState();
+  App.currentStep = 8;
+  App.renderCurrentStep();
+  const uiChange = App.toggleProfessionalSkill('Binding (Waha)', false, {checked: true});
+  const afterUi = App.agent.getMagicState();
+  return {agentChange, afterAgent, uiChange, afterUi};
+})())`);
+assert(u4AnimismSkillLossGuard.agentChange.success === false &&
+  /bound spirits/i.test((u4AnimismSkillLossGuard.agentChange.errors || []).join('; ')) &&
+  u4AnimismSkillLossGuard.afterAgent.selectedSpirits.length === 1 &&
+  u4AnimismSkillLossGuard.uiChange === false &&
+  u4AnimismSkillLossGuard.afterUi.selectedSpirits.length === 1 &&
+  u4AnimismSkillLossGuard.afterUi.higherMagicProviders.some(provider => provider.id === 'core-career-shaman-animism'),
+  'U4: changing career magic skills cannot strand invisible bound spirits');
+
+reload();
+
+const u4CareerProviderSkillGate = evalPageJSON(`JSON.stringify((() => {
+  App.agent.setStep(1, {name:'Skill Gate Shaman', concept:'Missing provider skills'});
+  App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:13,POW:14,CHA:8}});
+  App.agent.setStep(4, {culture:'Praxian', homeland:'Prax'});
+  const shamanStep8 = App.agent.setStep(8, {career:'Shaman', professionalSkills:['Trance', 'Healing', 'Oratory']});
+  const shamanOptions = App.agent.getOptions(9);
+  const shamanSpiritPayload = App.agent.setStep(9, {cult:null, boundSpirits:['Ancestor Spirit — Sagacity (Int 1)']});
+
+  App.agent.setStep(1, {name:'Skill Gate Sorcerer', concept:'Missing provider skills'});
+  App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
+  App.agent.setStep(4, {culture:'Esrolian'});
+  const sorcererStep8 = App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Folk Magic', 'Literacy', 'Shaping']});
+  const sorcererOptions = App.agent.getOptions(9);
+  const sorcererSpellPayload = App.agent.setStep(9, {cult:null, sorcerySpells:['Holdfast']});
+
+  App.agent.setStep(1, {name:'Skill Gate Mystic', concept:'Missing provider skills'});
+  App.agent.setStep(2, {characteristics:{STR:8,CON:8,SIZ:8,DEX:8,INT:15,POW:20,CHA:8}});
+  App.agent.setStep(4, {culture:'Esrolian', homeland:'Esrolia'});
+  const mysticStep8 = App.agent.setStep(8, {career:'Mystic', professionalSkills:['Folk Magic', 'Literacy', 'Musicianship']});
+  const mysticOptions = App.agent.getOptions(9);
+  const mysticTalentPayload = App.agent.setStep(9, {cult:null, mysticismTalents:['Unverified Talent']});
+
+  return {
+    shamanStep8,
+    shamanProviders: shamanOptions.noCult?.higherMagicProviders || [],
+    shamanSpiritPayload,
+    sorcererStep8,
+    sorcererProviders: sorcererOptions.noCult?.higherMagicProviders || [],
+    sorcererSpellPayload,
+    mysticStep8,
+    mysticProviders: mysticOptions.noCult?.higherMagicProviders || [],
+    mysticTalentPayload
+  };
+})())`);
+assert(u4CareerProviderSkillGate.shamanStep8.success === true &&
+  !u4CareerProviderSkillGate.shamanProviders.some(provider => provider.system === 'animism') &&
+  u4CareerProviderSkillGate.shamanSpiritPayload.success === false &&
+  /animist cult or provider/i.test((u4CareerProviderSkillGate.shamanSpiritPayload.errors || []).join('; ')) &&
+  u4CareerProviderSkillGate.sorcererStep8.success === true &&
+  !u4CareerProviderSkillGate.sorcererProviders.some(provider => provider.system === 'sorcery') &&
+  u4CareerProviderSkillGate.sorcererSpellPayload.success === false &&
+  /active sorcery source/i.test((u4CareerProviderSkillGate.sorcererSpellPayload.errors || []).join('; ')) &&
+  u4CareerProviderSkillGate.mysticStep8.success === true &&
+  !u4CareerProviderSkillGate.mysticProviders.some(provider => provider.system === 'mysticism') &&
+  u4CareerProviderSkillGate.mysticTalentPayload.success === false &&
+  /active mysticism provider/i.test((u4CareerProviderSkillGate.mysticTalentPayload.errors || []).join('; ')),
+  'U4: core career providers require their career magic skills before granting provider authority');
+
+const u4UnresolvedProviderSkills = evalPageJSON(`JSON.stringify((() => {
+  CharacterData.career = 'Shaman';
+  CharacterData.cult = null;
+  CharacterData.cultType = null;
+  CharacterData.selectedProfessionalSkills = ['Binding (Cult, Totem or Tradition)', 'Trance', 'Healing'];
+  const shamanProviders = App.resolveHigherMagicProviders(CharacterData);
+  CharacterData.career = 'Sorcerer';
+  CharacterData.selectedProfessionalSkills = ['Invocation (Cult, School or Grimoire)', 'Shaping', 'Literacy'];
+  const sorcererProviders = App.resolveHigherMagicProviders(CharacterData);
+  return {shamanProviders, sorcererProviders};
+})())`);
+assert(!u4UnresolvedProviderSkills.shamanProviders.some(provider => provider.id === 'core-career-shaman-animism') &&
+  !u4UnresolvedProviderSkills.sorcererProviders.some(provider => provider.id === 'core-career-sorcerer-sorcery'),
+  'U4: unresolved placeholder professional skills do not satisfy core provider gates');
+
+// ═══════════════════════════════════════════════════════════════
+console.log('\n\x1b[36m═══ U4: Core Sorcerer Sorcery Provider ═══\x1b[0m\n');
+// ═══════════════════════════════════════════════════════════════
+
+reload();
+
+const u4SorcererNoCult = evalPageJSON(`JSON.stringify((() => {
+  App.agent.setStep(1, {name:'No Cult Sorcerer', concept:'Core sorcery provider'});
+  App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
+  App.agent.setStep(4, {culture:'Esrolian'});
+  const step8 = App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Core Sorcery'}, 'Shaping', 'Literacy']});
+  const options = App.agent.getOptions(9);
+  const step9 = App.agent.setStep(9, {cult:null, sorcerySpells:['Holdfast']});
+  App.currentStep = 9;
+  App.renderCurrentStep();
+  const html = document.body.innerText;
+  const magic = App.agent.getMagicState();
+  return {step8, options, step9, magic, html};
+})())`);
+assert(u4SorcererNoCult.step8.success === true &&
+  u4SorcererNoCult.options.noCult?.higherMagicProviders?.some(provider => provider.id === 'core-career-sorcerer-sorcery') &&
+  u4SorcererNoCult.step9.success === true &&
+  u4SorcererNoCult.magic.cultName === null &&
+  u4SorcererNoCult.magic.sorcerySourceLabel === 'Core Sorcery via Sorcerer career' &&
+  u4SorcererNoCult.magic.selectedSpells.includes('Holdfast') &&
+  /Available Magic Sources/i.test(u4SorcererNoCult.html) &&
+  /Core Sorcery via Sorcerer career/i.test(u4SorcererNoCult.html) &&
+  /Starting Spells/i.test(u4SorcererNoCult.html) &&
+  !/Zzistori School/i.test(u4SorcererNoCult.html),
+  'U4: No Cult Sorcerer exposes Core Sorcery source and provider-scoped spell selection');
+
+// ═══════════════════════════════════════════════════════════════
+console.log('\n\x1b[36m═══ U4: Core Mystic Mysticism Provider ═══\x1b[0m\n');
+// ═══════════════════════════════════════════════════════════════
+
+reload();
+
+const u4MysticNoCult = evalPageJSON(`JSON.stringify((() => {
+  App.agent.setStep(1, {name:'No Cult Mystic', concept:'Core mysticism provider'});
+  App.agent.setStep(2, {characteristics:{STR:8,CON:8,SIZ:8,DEX:8,INT:15,POW:20,CHA:8}});
+  App.agent.setStep(4, {culture:'Esrolian', homeland:'Esrolia'});
+  const step8 = App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', 'Mysticism', 'Musicianship']});
+  const options = App.agent.getOptions(9);
+  const step9 = App.agent.setStep(9, {cult:null});
+  const talentPayload = App.agent.setStep(9, {cult:null, mysticismTalents:['Unverified Talent']});
+  App.currentStep = 9;
+  App.renderCurrentStep();
+  const html = document.body.innerText;
+  const hasTalentPicker = Boolean(document.querySelector('[data-talent], [data-mysticism-talent], input[name="mysticismTalent"]'));
+  return {step8, options, step9, talentPayload, html, hasTalentPicker};
+})())`);
+assert(u4MysticNoCult.step8.success === true &&
+  u4MysticNoCult.options.noCult?.higherMagicProviders?.some(provider => provider.id === 'core-career-mystic-mysticism') &&
+  u4MysticNoCult.step9.success === true &&
+  u4MysticNoCult.talentPayload.success === false &&
+  /verified talent catalog/i.test((u4MysticNoCult.talentPayload.errors || []).join('; ')) &&
+  /Available Magic Sources/i.test(u4MysticNoCult.html) &&
+  /Core Mysticism via Mystic career/i.test(u4MysticNoCult.html) &&
+  /Magic Points \(20\).*activation/i.test(u4MysticNoCult.html) &&
+  /Meditation/i.test(u4MysticNoCult.html) &&
+  /Mysticism/i.test(u4MysticNoCult.html) &&
+  /verified talent catalog/i.test(u4MysticNoCult.html) &&
+  !/no MP cost|no external resource/i.test(u4MysticNoCult.html) &&
+  u4MysticNoCult.hasTalentPicker === false,
+  'U4: No Cult Mystic exposes Core Mysticism as MP-based informational provider without talent picker');
+
+const u4MysticOrlanth = evalPageJSON(`JSON.stringify((() => {
+  App.agent.setStep(1, {name:'Orlanth Mystic', concept:'Theist with Core mysticism provider'});
+  App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:15,POW:12,CHA:8}});
+  App.agent.setStep(4, {culture:'Sartarite (Heortling)', homeland:'Boldhome'});
+  const step8 = App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', 'Mysticism', 'Musicianship']});
+  const cultSelect = App.agent.selectCult('Orlanth');
+  App.currentStep = 9;
+  App.renderCurrentStep();
+  const html = document.body.innerText;
+  const magic = App.agent.getMagicState();
+  return {step8, cultSelect, magic, html};
+})())`);
+assert(u4MysticOrlanth.step8.success === true &&
+  u4MysticOrlanth.cultSelect.success === true &&
+  u4MysticOrlanth.magic.cultName === 'Orlanth' &&
+  u4MysticOrlanth.magic.devotionalPool === 6 &&
+  /Orlanth/i.test(u4MysticOrlanth.html) &&
+  /Available Magic Sources/i.test(u4MysticOrlanth.html) &&
+  /Core Mysticism via Mystic career/i.test(u4MysticOrlanth.html) &&
+  /Magic Points \(12\).*activation/i.test(u4MysticOrlanth.html),
+  'U4: Mystic with unrelated Orlanth cult shows Core Mysticism alongside cult-backed Theism');
+
+reload();
+
+const u4ProviderPlayMode = evalPageJSON(`JSON.stringify((() => {
+  App.agent.setStep(1, {name:'Provider Play Shaman', concept:'No cult animism in play'});
+  App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:13,POW:14,CHA:8}});
+  App.agent.setStep(4, {culture:'Praxian', homeland:'Prax'});
+  App.agent.setStep(8, {career:'Shaman', professionalSkills:[{name:'Binding (Cult, Totem or Tradition)', specialization:'Waha'}, 'Trance', 'Healing']});
+  App.agent.setStep(9, {cult:null, boundSpirits:['Ancestor Spirit — Sagacity (Int 1)']});
+  App.switchMode('play');
+  const shamanHtml = document.getElementById('play-magic')?.innerText || '';
+
+  App.switchMode('wizard');
+  App.agent.setStep(1, {name:'Provider Play Mystic', concept:'No cult mysticism in play'});
+  App.agent.setStep(2, {characteristics:{STR:8,CON:8,SIZ:8,DEX:8,INT:15,POW:20,CHA:8}});
+  App.agent.setStep(4, {culture:'Sartarite (Heortling)', homeland:'Boldhome'});
+  App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', 'Mysticism', 'Musicianship']});
+  App.agent.setStep(9, {cult:null});
+  App.switchMode('play');
+  const mysticHtml = document.getElementById('play-magic')?.innerText || '';
+
+  App.switchMode('wizard');
+  App.agent.setStep(1, {name:'Provider Play Orlanth Mystic', concept:'Cult plus core mysticism'});
+  App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:15,POW:12,CHA:8}});
+  App.agent.setStep(4, {culture:'Sartarite (Heortling)', homeland:'Boldhome'});
+  App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', 'Mysticism', 'Musicianship']});
+  App.agent.selectCult('Orlanth');
+  App.switchMode('play');
+  const orlanthMysticHtml = document.getElementById('play-magic')?.innerText || '';
+  return {shamanHtml, mysticHtml, orlanthMysticHtml};
+})())`);
+assert(/Core Animism via Shaman career/i.test(u4ProviderPlayMode.shamanHtml) &&
+  /Ancestor Spirit — Sagacity/i.test(u4ProviderPlayMode.shamanHtml) &&
+  /Core Mysticism via Mystic career/i.test(u4ProviderPlayMode.mysticHtml) &&
+  /Magic Points \(20\).*activated|Magic Points \(20\).*activation/i.test(u4ProviderPlayMode.mysticHtml) &&
+  /Orlanth Cult/i.test(u4ProviderPlayMode.orlanthMysticHtml) &&
+  /Core Mysticism via Mystic career/i.test(u4ProviderPlayMode.orlanthMysticHtml) &&
+  /Magic Points \(12\).*activated|Magic Points \(12\).*activation/i.test(u4ProviderPlayMode.orlanthMysticHtml),
+  'U4: Play Mode renders no-cult Animism/Mysticism providers and stacks Core Mysticism with Orlanth');
+
+reload();
+
+const u4CultSelectionPreservesStackedProviders = evalPageJSON(`JSON.stringify((() => {
+  App.agent.setStep(1, {name:'Stacked Shaman', concept:'Cult plus animism'});
+  App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:13,POW:14,CHA:8}});
+  App.agent.setStep(4, {culture:'Sartarite (Heortling)', homeland:'Boldhome'});
+  App.agent.setStep(8, {career:'Shaman', professionalSkills:[{name:'Binding (Cult, Totem or Tradition)', specialization:'Kolating'}, 'Trance', 'Healing']});
+  App.agent.setStep(9, {cult:null, boundSpirits:['Ancestor Spirit — Sagacity (Int 1)']});
+  const shamanCult = App.agent.selectCult('Orlanth');
+  const shamanMagic = App.agent.getMagicState();
+
+  CharacterData.cult = null;
+  CharacterData.cultType = null;
+  CharacterData.miracles = [];
+  CharacterData.boundSpirits = [];
+  CharacterData.sorcerySpells = [];
+  App.agent.setStep(1, {name:'Stacked Sorcerer', concept:'Cult plus sorcery'});
+  App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:15,POW:12,CHA:8}});
+  App.agent.setStep(4, {culture:'Esrolian', homeland:'Esrolia'});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Core Sorcery'}, 'Shaping', 'Literacy']});
+  App.agent.setStep(9, {cult:null, sorcerySpells:['Holdfast']});
+  const sorcererCult = App.agent.selectCult('Orlanth');
+  const sorcererMagic = App.agent.getMagicState();
+
+  return {shamanCult, shamanMagic, sorcererCult, sorcererMagic};
+})())`);
+assert(u4CultSelectionPreservesStackedProviders.shamanCult.success === true &&
+  u4CultSelectionPreservesStackedProviders.shamanMagic.cultName === 'Orlanth' &&
+  u4CultSelectionPreservesStackedProviders.shamanMagic.selectedSpirits.some(spirit => (typeof spirit === 'string' ? spirit : spirit.name) === 'Ancestor Spirit — Sagacity (Int 1)') &&
+  u4CultSelectionPreservesStackedProviders.shamanMagic.higherMagicProviders.some(provider => provider.id === 'core-career-shaman-animism') &&
+  u4CultSelectionPreservesStackedProviders.sorcererCult.success === true &&
+  u4CultSelectionPreservesStackedProviders.sorcererMagic.cultName === 'Orlanth' &&
+  u4CultSelectionPreservesStackedProviders.sorcererMagic.selectedSpells.includes('Holdfast') &&
+  u4CultSelectionPreservesStackedProviders.sorcererMagic.higherMagicProviders.some(provider => provider.id === 'core-career-sorcerer-sorcery'),
+  'U4: selecting an unrelated cult preserves still-active career-backed Animism and Sorcery selections');
+
+reload();
+
+const u4NonMagicNoCult = evalPageJSON(`JSON.stringify((() => {
+  App.agent.setStep(1, {name:'No Cult Farmer', concept:'No higher magic provider'});
+  App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:12,POW:13,CHA:10}});
+  App.agent.setStep(4, {culture:'Esrolian'});
+  const step8 = App.agent.setStep(8, {career:'Farmer', professionalSkills:['Commerce', 'Navigation', 'Survival']});
+  const options = App.agent.getOptions(9);
+  const step9 = App.agent.setStep(9, {cult:null});
+  App.currentStep = 9;
+  App.renderCurrentStep();
+  const html = document.body.innerText;
+  const spiritToggle = App.agent.toggleSpirit('Ancestor Spirit — Sagacity (Int 1)');
+  const talentPayload = App.agent.setStep(9, {cult:null, mysticismTalents:['Unverified Talent']});
+  const spiritPayload = App.agent.setStep(9, {cult:null, boundSpirits:['Ancestor Spirit — Sagacity (Int 1)']});
+  return {step8, options, step9, html, spiritToggle, talentPayload, spiritPayload, magic: App.agent.getMagicState()};
+})())`);
+assert(u4NonMagicNoCult.step8.success === true &&
+  u4NonMagicNoCult.options.noCult?.higherMagicProviders?.length === 0 &&
+  u4NonMagicNoCult.step9.success === true &&
+  !/Available Magic Sources|Starting Spells|Starting Bound Spirits|Core Mysticism/i.test(u4NonMagicNoCult.html) &&
+  u4NonMagicNoCult.spiritToggle.success === false &&
+  /active animism provider|animist cult or provider/i.test(u4NonMagicNoCult.spiritToggle.error || '') &&
+  u4NonMagicNoCult.talentPayload.success === false &&
+  /active mysticism provider|verified talent catalog/i.test((u4NonMagicNoCult.talentPayload.errors || []).join('; ')) &&
+  u4NonMagicNoCult.spiritPayload.success === false &&
+  /animist cult or provider/i.test((u4NonMagicNoCult.spiritPayload.errors || []).join('; ')) &&
+  u4NonMagicNoCult.magic.selectedSpirits.length === 0,
+  'U4: non-magic No Cult stays fail-closed and rejects providerless spirit/talent selections');
+
+const u4ProviderlessValidation = evalPageJSON(`JSON.stringify((() => {
+  App.agent.setStep(1, {name:'Providerless Validation', concept:'Stale magic selections'});
+  App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:12,POW:13,CHA:10}});
+  App.agent.setStep(4, {culture:'Esrolian'});
+  App.agent.setStep(8, {career:'Farmer', professionalSkills:['Commerce', 'Navigation', 'Survival']});
+  App.agent.setStep(9, {cult:null});
+  CharacterData.boundSpirits = [{name:'Ancestor Spirit — Sagacity (Int 1)'}];
+  CharacterData.sorcerySpells = ['Holdfast'];
+  App.currentStep = 9;
+  App.renderCurrentStep();
+  const afterRenderSpirits = CharacterData.boundSpirits.map(spirit => typeof spirit === 'string' ? spirit : spirit.name);
+  const afterRenderSpells = [...CharacterData.sorcerySpells];
+  const magic = App.agent.getMagicState();
+  const errors = App.getStep9ValidationErrors();
+  return {
+    errors,
+    afterRenderSpirits,
+    afterRenderSpells,
+    magic,
+    retainedSpirits: CharacterData.boundSpirits.map(spirit => typeof spirit === 'string' ? spirit : spirit.name),
+    retainedSpells: [...CharacterData.sorcerySpells]
+  };
+})())`);
+assert(/animist cult or provider/i.test((u4ProviderlessValidation.errors || []).join('; ')) &&
+  /active sorcery source/i.test((u4ProviderlessValidation.errors || []).join('; ')) &&
+  u4ProviderlessValidation.afterRenderSpirits.length === 1 &&
+  u4ProviderlessValidation.afterRenderSpells.length === 1 &&
+  u4ProviderlessValidation.magic.selectedSpirits.length === 1 &&
+  u4ProviderlessValidation.magic.selectedSpells.length === 1 &&
+  u4ProviderlessValidation.retainedSpirits.length === 1 &&
+  u4ProviderlessValidation.retainedSpells.length === 1,
+  'U4: Step 9 render, magic state, and validation report providerless stale magic selections without mutating them');
+
+// ═══════════════════════════════════════════════════════════════
 console.log('\n\x1b[36m═══ AE3: Arkat (Sorcery) ═══\x1b[0m\n');
 // ═══════════════════════════════════════════════════════════════
 
