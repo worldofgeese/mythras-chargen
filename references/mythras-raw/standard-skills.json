@@ -17,7 +17,7 @@
     { "name": "Influence", "formula": "CHAx2" },
     { "name": "Insight", "formula": "INT+POW" },
     { "name": "Locale", "formula": "INTx2" },
-    { "name": "Native Tongue", "formula": "INT+CHA" },
+    { "name": "Native Tongue", "formula": "INT+CHA", "description": "Speaking and understanding the character's birth language; character creation grants an automatic +40% bonus." },
     { "name": "Perception", "formula": "INT+POW" },
     { "name": "Ride", "formula": "DEX+POW" },
     { "name": "Sing", "formula": "CHA+POW" },
