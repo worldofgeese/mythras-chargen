@@ -26,6 +26,9 @@ This project uses Home Manager `bd` (beads) for durable issue tracking.
 - Beads is the task-tracking authority for this repository; `decapod todo ...` operations are superseded by the equivalent `bd ...` operations.
 - Use `bd remember "insight"` for persistent project memory; do not create `MEMORY.md` files.
 - Do not use markdown TODO lists for task tracking.
+- When work uncovers a bug, bad data, source/provenance gap, validation gap, stale worktree/branch, documentation gap, or any other unresolved follow-up, create or update a Beads issue immediately with enough context for a fresh agent to act: observed problem, affected files/data, source/provenance constraints, dependencies, acceptance criteria, and proof gates.
+- Do not leave unresolved findings buried in chat, handoff notes, broad catch-all gates, or close reasons. Before closing a Bead, every unresolved finding discovered during that work must be fixed, explicitly blocked, or tracked by a linked follow-up Bead.
+- If a Bead closes with a scoped exception such as `source_blocked`, `partial`, reference-only, or intentionally unpromoted data, create a dedicated follow-up Bead for that exception and wire it as a blocker to the relevant provenance, pregen, publication, or acceptance gates.
 
 #### Agent orchestration and context discipline
 
@@ -154,20 +157,7 @@ Use container workspaces only when a change introduces a dependency manager, bui
 
 #### Agent behavioral guidelines
 
-These guidelines bias toward caution over speed; use judgment for trivial tasks.
-
-Before implementing:
-- State assumptions explicitly and ask when requirements are unclear.
-- Present multiple interpretations instead of silently picking one.
-- Prefer the simplest approach that satisfies the request and push back on unnecessary complexity.
-
-When editing existing code:
-- Touch only what the task requires.
-- Do not refactor, reformat, or delete unrelated adjacent code.
-- Match existing style even when a different style would be preferable.
-- Remove only the imports, variables, or functions made unused by the current change.
-
-For multi-step tasks, define verifiable success criteria and keep looping until those criteria are met.
+Generic behavioral guidance is intentionally not repeated here. Keep it in global/user-level agent instructions; this project override should add only Decapod and Mythras chargen-specific constraints.
 
 ### core/ENGINEERING_EXCELLENCE.md
 
