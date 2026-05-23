@@ -139,13 +139,16 @@
         "Play Mode combat",
         "PDF export combat styles"
       ],
-      "status": "verified",
-      "summary": "AiG culture data is linked to CSE combat style IDs; app-facing CSE combat-style rows now have bounded PDF-text row extraction and independent rendered-page OCR title verification artifacts.",
+      "status": "partial",
+      "summary": "CSE combat-style rows are verified; AiG culture and homeland rows remain legacy inputs except for bounded magic-access evidence slices tracked separately.",
       "references": [
         {
           "path": "references/aig-raw/cultures.json",
           "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-          "citation": "p.26-41"
+          "citation": "p.26-41",
+          "verified": false,
+          "coverage_state": "source_blocked",
+          "page_manifest_path": "references/sources/pages/aig.json"
         },
         {
           "path": "references/combat-styles.json",
@@ -174,7 +177,9 @@
           }
         }
       ],
-      "blockers": []
+      "blockers": [
+        "AiG culture/homeland details on p.26-41 still need bounded extraction and independent verification before CULTURES_DATA can be promoted from source_blocked."
+      ]
     },
     {
       "id": "social-class",
@@ -436,13 +441,32 @@
       "displaySurfaces": [
         "Step 4 Culture Magic Fit"
       ],
-      "status": "verified",
-      "summary": "Culture magic guidance mirrors the AiG culture magic profile JSON and carries citations on each profile.",
+      "status": "partial",
+      "summary": "Culture magic guidance mirrors the AiG culture magic profile JSON; only the God Forgot Zzistori source-access slice has bounded extraction and independent verification evidence.",
       "references": [
         {
           "path": "references/aig-raw/culture-magic-profiles-aig.json",
           "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-          "citation": "p.26-41, p.59-62, p.136-137"
+          "citation": "p.26-41, p.59-62, p.136-137",
+          "verified": false,
+          "coverage_state": "source_blocked",
+          "source_ref": {
+            "source_id": "aig",
+            "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+            "page_manifest_path": "references/sources/pages/aig.json",
+            "evidence_state": "bounded_extraction_independent_vision_verified_with_promotion_cautions",
+            "scope": "God Forgot Zzistori culture-backed sorcery access only",
+            "pdf_pages": [
+              31,
+              60
+            ],
+            "evidence_paths": [
+              "references/sources/evidence/aig/page-0031-extraction.json",
+              "references/sources/evidence/aig/page-0031-verification.json",
+              "references/sources/evidence/aig/page-0060-extraction.json",
+              "references/sources/evidence/aig/page-0060-verification.json"
+            ]
+          }
         },
         {
           "path": "references/mythras-raw/sorcery.json",
@@ -450,7 +474,10 @@
           "citation": "p.162-178"
         }
       ],
-      "blockers": []
+      "blockers": [
+        "Remaining culture profile pages and summaries still need independent vision verification before CULTURE_MAGIC_PROFILES can be promoted from source_blocked.",
+        "Verification artifacts for AiG p.31 and p.60 include promotion cautions, so they support the bounded Zzistori source-access slice rather than full-constant acceptance."
+      ]
     }
   ]
 }

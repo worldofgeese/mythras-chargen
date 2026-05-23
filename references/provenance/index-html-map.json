@@ -108,12 +108,12 @@
       "source_ids": [
         "aig"
       ],
-      "rationale": "AiG culture constants await U5/U8 verified extraction.",
+      "rationale": "AiG culture constants await U5/U8 verified extraction for the culture pages; CSE combat-style attachments are verified separately.",
       "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-      "source_state": "permission_pending",
+      "source_state": "source_blocked_pending_culture_vision_evidence",
       "page_coverage": "references/sources/pages/aig.json",
       "page_index": "references/aig-raw/page-index.json",
-      "blocked_reason": "AiG source revision and all-page blocked records exist, but no independent vision verification artifacts exist."
+      "blocked_reason": "AiG culture/homeland rows remain incomplete because pages p.26-41 have not all received bounded extraction and independent vision verification."
     },
     {
       "constant_name": "CULTURE_BUILDS",
@@ -141,12 +141,41 @@
       "source_ids": [
         "aig"
       ],
-      "rationale": "Magic profiles await verified AiG rebuild.",
+      "rationale": "Magic profiles await verified AiG rebuild; God Forgot Zzistori source access has bounded evidence but the full profile constant remains blocked.",
       "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-      "source_state": "permission_pending",
+      "source_state": "source_blocked_with_bounded_verified_slices",
       "page_coverage": "references/sources/pages/aig.json",
       "page_index": "references/aig-raw/page-index.json",
-      "blocked_reason": "AiG source revision and all-page blocked records exist, but no independent vision verification artifacts exist."
+      "blocked_reason": "Full culture magic profile promotion remains blocked because remaining culture profile pages and summaries still need independent vision verification.",
+      "verified_slices": [
+        {
+          "fact_id": "app:CULTURE_MAGIC_PROFILES:God Forgot:sorcery.sourceAccess",
+          "status": "bounded_verified_with_cautions",
+          "source_id": "aig",
+          "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+          "page_manifest_path": "references/sources/pages/aig.json",
+          "pdf_pages": [
+            31,
+            60
+          ],
+          "block_ids": [
+            "aig-p031-b001",
+            "aig-p031-b003",
+            "aig-p031-b004",
+            "aig-p060-b003",
+            "aig-p060-b006"
+          ],
+          "evidence_paths": [
+            "references/sources/evidence/aig/page-0031-extraction.json",
+            "references/sources/evidence/aig/page-0031-verification.json",
+            "references/sources/evidence/aig/page-0060-extraction.json",
+            "references/sources/evidence/aig/page-0060-verification.json"
+          ],
+          "promotion_cautions": [
+            "Evidence supports the Zzistori source-access slice only; the full CULTURE_MAGIC_PROFILES constant remains source_blocked."
+          ]
+        }
+      ]
     },
     {
       "constant_name": "CAREERS_DATA",

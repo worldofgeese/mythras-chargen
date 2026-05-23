@@ -1446,14 +1446,13 @@ runCommandTest('Render workflow can list sources without rendering pages',
       }));
   }
 
-  const aigAuthorityFiles = [
+  const fullyBlockedAigAuthorityFiles = [
     'references/aig-raw/cultures.json',
-    'references/aig-raw/culture-magic-profiles-aig.json',
     'references/aig-raw/folk-magic-aig.json',
     'references/aig-raw/rune-magic-aig.json',
     'references/aig-raw/spirit-magic-aig.json'
   ];
-  const authorityProblems = aigAuthorityFiles.flatMap(relPath => {
+  const authorityProblems = fullyBlockedAigAuthorityFiles.flatMap(relPath => {
     const doc = JSON.parse(fs.readFileSync(path.join(__dirname, relPath), 'utf8'));
     const problems = [];
     if (doc.source_id !== 'aig') problems.push(`${relPath}: source_id`);
@@ -1464,7 +1463,45 @@ runCommandTest('Render workflow can list sources without rendering pages',
     if (!Array.isArray(doc.source_blockers) || doc.source_blockers.length === 0) problems.push(`${relPath}: source_blockers`);
     return problems;
   });
-  const culturesRef = JSON.parse(fs.readFileSync(path.join(__dirname, 'references/aig-raw/cultures.json'), 'utf8'));
+  const cultureMagicProfilesRef = readJson('references/aig-raw/culture-magic-profiles-aig.json');
+  const zzistoriAccess = cultureMagicProfilesRef.profiles?.['God Forgot']?.sorcery?.sourceAccess;
+  const zzistoriSourceRef = zzistoriAccess?.source_ref || {};
+  const expectedZzistoriEvidencePaths = [
+    'references/sources/evidence/aig/page-0031-extraction.json',
+    'references/sources/evidence/aig/page-0031-verification.json',
+    'references/sources/evidence/aig/page-0060-extraction.json',
+    'references/sources/evidence/aig/page-0060-verification.json'
+  ];
+  const expectedZzistoriPdfPages = [31, 60];
+  const expectedZzistoriBlockIds = [
+    'aig-p031-b001',
+    'aig-p031-b003',
+    'aig-p031-b004',
+    'aig-p060-b003',
+    'aig-p060-b006'
+  ];
+  const exactArray = (actual, expected) => JSON.stringify(actual || []) === JSON.stringify(expected);
+  const zzistoriSourceProblems = [];
+  if (cultureMagicProfilesRef.source_id !== 'aig') zzistoriSourceProblems.push('culture-magic-profiles: source_id');
+  if (cultureMagicProfilesRef.source_revision_id !== legacyAigRevision) zzistoriSourceProblems.push('culture-magic-profiles: source_revision_id');
+  if (cultureMagicProfilesRef.authority_state !== 'source_blocked') zzistoriSourceProblems.push('culture-magic-profiles: authority_state');
+  if (!Array.isArray(cultureMagicProfilesRef.source_blockers) ||
+      !cultureMagicProfilesRef.source_blockers.some(blocker => /remaining culture profile pages/i.test(blocker))) {
+    zzistoriSourceProblems.push('culture-magic-profiles: explicit remaining-profile blocker');
+  }
+  if (zzistoriSourceRef.source_id !== 'aig') zzistoriSourceProblems.push('zzistori source_ref: source_id');
+  if (zzistoriSourceRef.source_revision_id !== aigRevision) zzistoriSourceProblems.push('zzistori source_ref: source_revision_id');
+  if (zzistoriSourceRef.page_manifest_path !== 'references/sources/pages/aig.json') zzistoriSourceProblems.push('zzistori source_ref: page_manifest_path');
+  if (!exactArray(zzistoriSourceRef.pdf_pages, expectedZzistoriPdfPages)) zzistoriSourceProblems.push('zzistori source_ref: pdf_pages');
+  if (!exactArray(zzistoriSourceRef.block_ids, expectedZzistoriBlockIds)) zzistoriSourceProblems.push('zzistori source_ref: block_ids');
+  if (!exactArray(zzistoriSourceRef.evidence_paths, expectedZzistoriEvidencePaths)) zzistoriSourceProblems.push('zzistori source_ref: evidence_paths');
+  if (zzistoriSourceRef.evidence_state !== 'bounded_extraction_independent_vision_verified_with_promotion_cautions') {
+    zzistoriSourceProblems.push('zzistori source_ref: evidence_state');
+  }
+  for (const evidencePath of expectedZzistoriEvidencePaths) {
+    if (!fs.existsSync(path.join(__dirname, evidencePath))) zzistoriSourceProblems.push(`zzistori source_ref: missing file ${evidencePath}`);
+  }
+  const culturesRef = readJson('references/aig-raw/cultures.json');
   const cultureNames = (culturesRef.cultures || []).map(culture => culture.name);
   const cultureSourceRefs = culturesRef.culture_source_refs || {};
   const culturesWithoutBlockedRefs = cultureNames.filter(name =>
@@ -1474,20 +1511,69 @@ runCommandTest('Render workflow can list sources without rendering pages',
     cultureSourceRefs[name].pdf_pages.length === 0
   );
   const aigMapEntries = new Map((indexMap.entries || []).map(entry => [entry.constant_name, entry]));
-  const aigInlineProblems = ['CULTURES_DATA', 'CULTURE_MAGIC_PROFILES'].filter(name =>
-    aigMapEntries.get(name)?.status !== 'source_blocked' ||
-    aigMapEntries.get(name)?.source_revision_id !== legacyAigRevision ||
-    aigMapEntries.get(name)?.source_state !== 'permission_pending' ||
-    aigMapEntries.get(name)?.page_coverage !== 'references/sources/pages/aig.json'
-  );
+  const aigInlineProblems = ['CULTURES_DATA', 'CULTURE_MAGIC_PROFILES'].flatMap(name => {
+    const entry = aigMapEntries.get(name) || {};
+    const problems = [];
+    if (entry.status !== 'source_blocked') problems.push(`${name}: status`);
+    if (entry.source_revision_id !== legacyAigRevision) problems.push(`${name}: source_revision_id`);
+    if (entry.page_coverage !== 'references/sources/pages/aig.json') problems.push(`${name}: page_coverage`);
+    if (typeof entry.blocked_reason !== 'string' || !/remaining|incomplete|pending/i.test(entry.blocked_reason)) {
+      problems.push(`${name}: explicit blocked_reason`);
+    }
+    const expectedSourceState = name === 'CULTURE_MAGIC_PROFILES'
+      ? 'source_blocked_with_bounded_verified_slices'
+      : 'source_blocked_pending_culture_vision_evidence';
+    if (entry.source_state !== expectedSourceState) problems.push(`${name}: source_state`);
+    if (name === 'CULTURE_MAGIC_PROFILES') {
+      const slices = Array.isArray(entry.verified_slices) ? entry.verified_slices : [];
+      const hasZzistoriSlice = slices.some(slice =>
+        slice.fact_id === 'app:CULTURE_MAGIC_PROFILES:God Forgot:sorcery.sourceAccess' &&
+        slice.source_revision_id === aigRevision &&
+        slice.page_manifest_path === 'references/sources/pages/aig.json' &&
+        exactArray(slice.pdf_pages, expectedZzistoriPdfPages) &&
+        exactArray(slice.block_ids, expectedZzistoriBlockIds) &&
+        exactArray(slice.evidence_paths, expectedZzistoriEvidencePaths)
+      );
+      if (!hasZzistoriSlice) problems.push(`${name}: missing Zzistori verified slice`);
+    }
+    return problems;
+  });
+  const indexCoverage = readJson('references/provenance/index-html-coverage.json');
+  const coverageById = new Map((indexCoverage.entries || []).map(entry => [entry.id, entry]));
+  const cultureMagicCoverage = coverageById.get('culture-magic-profiles') || {};
+  const cultureMagicCoverageRef = (cultureMagicCoverage.references || []).find(ref => ref.path === 'references/aig-raw/culture-magic-profiles-aig.json') || {};
+  const coverageProblems = [];
+  if (cultureMagicCoverage.status !== 'partial') coverageProblems.push('culture-magic-profiles coverage: status');
+  if (!Array.isArray(cultureMagicCoverage.blockers) ||
+      !cultureMagicCoverage.blockers.some(blocker => /remaining culture profile pages/i.test(blocker))) {
+    coverageProblems.push('culture-magic-profiles coverage: explicit blocker');
+  }
+  const coverageSourceRef = cultureMagicCoverageRef.source_ref || {};
+  if (coverageSourceRef.source_id !== zzistoriSourceRef.source_id ||
+      coverageSourceRef.source_revision_id !== zzistoriSourceRef.source_revision_id ||
+      coverageSourceRef.page_manifest_path !== zzistoriSourceRef.page_manifest_path ||
+      coverageSourceRef.evidence_state !== zzistoriSourceRef.evidence_state ||
+      coverageSourceRef.scope !== zzistoriSourceRef.scope ||
+      !exactArray(coverageSourceRef.pdf_pages, expectedZzistoriPdfPages) ||
+      !exactArray(coverageSourceRef.evidence_paths, expectedZzistoriEvidencePaths)) {
+    coverageProblems.push('culture-magic-profiles coverage: source_ref evidence');
+  }
+  const culturesCoverage = coverageById.get('cultures-combat-styles') || {};
+  if (culturesCoverage.status !== 'partial' ||
+      !Array.isArray(culturesCoverage.blockers) ||
+      !culturesCoverage.blockers.some(blocker => /AiG culture\/homeland details/i.test(blocker))) {
+    coverageProblems.push('cultures-combat-styles coverage: explicit AiG blocker');
+  }
   if (authorityProblems.length === 0 &&
+      zzistoriSourceProblems.length === 0 &&
       cultureNames.length === 8 &&
       culturesWithoutBlockedRefs.length === 0 &&
-      aigInlineProblems.length === 0) {
-    pass('AiG culture authority is wired to blocked source revision and provenance state');
+      aigInlineProblems.length === 0 &&
+      coverageProblems.length === 0) {
+    pass('AiG culture authority is wired to bounded evidence and explicit source blockers');
   } else {
     fail('AiG culture authority source revision wiring is incomplete',
-      JSON.stringify({ authorityProblems, cultureCount: cultureNames.length, culturesWithoutBlockedRefs, aigInlineProblems }));
+      JSON.stringify({ authorityProblems, zzistoriSourceProblems, cultureCount: cultureNames.length, culturesWithoutBlockedRefs, aigInlineProblems, coverageProblems }));
   }
 
   const sourceStates = sourceSchema.lifecycle_states.source_revisions;
@@ -7636,8 +7722,7 @@ section('Cult Data Tests');
   const hasSchoolLabel = access?.sourceLabel === 'Zzistori School (God Forgot sorcery)';
   const isSchoolNotCult = access?.accessType === 'culture-backed school' &&
     access?.cultRequired === false &&
-    access?.defaultCult === null &&
-    access?.defaultCult !== 'Arkat';
+    access?.defaultCult === null;
   const hasSorcererPrereq = access?.careerPrerequisite === 'Sorcerer';
   const hasRawSorceryMechanics = access?.resource === 'Magic Points' &&
     access?.startingSpellLimit === 3 &&
@@ -8719,7 +8804,7 @@ section('Index Provenance Coverage');
     const combatHtml = _sandbox.document.getElementById('play-combat').innerHTML;
     const magicHtml = _sandbox.document.getElementById('play-magic').innerHTML;
     const equipmentHtml = _sandbox.document.getElementById('play-equipment').innerHTML;
-    const hasCombatBadges = combatHtml.includes('Cultures, homelands, and combat styles: verified') &&
+    const hasCombatBadges = combatHtml.includes('Cultures, homelands, and combat styles: partial') &&
       combatHtml.includes('Weapons, prices, equipment, and starting kit: attested');
     const hasMagicBadges = magicHtml.includes('Theist miracle lists and rune access: partial') &&
       magicHtml.includes('Starting spirit options and animist guidance: verified') &&
