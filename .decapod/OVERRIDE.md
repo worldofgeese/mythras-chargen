@@ -35,10 +35,10 @@ The headed/orchestrator agent is for planning, synthesis, high-complexity decisi
 - Fiercely protect the orchestrator context window: dispatch to subagents whenever tasks are sufficiently scoped, especially for implementation units, review passes, source investigations, and independent verification.
 - Vision-mode extraction or verification must be delegated to vision-capable subagents whenever possible; use separate extractor/verifier contexts for independent verification and keep the orchestrator focused on synthesis, integration, and proof review.
 - When approaching roughly 80% of the context window, stop expanding scope and create a handoff with the `handoff` skill before continuing.
-- Use `/lfg` as the default workhorse pipeline for scoped implementation when available.
+- Use `/lfg` as the default workhorse pipeline for scoped implementation when available. `/lfg` includes `/ce-work`; whenever `/lfg` invokes `/ce-work`, that execution phase must use the `/tdd` skill/test-first posture.
 - Exceptions to the `/lfg` default:
   - Use the full Beads workflow directly when the task is tracker/governance/coordination work or when Beads create/update/close operations are integral throughout the task.
-  - Use `/ce-work` for execution of approved plans or implementation units where the `ce-work` workflow is the requested or better-fitting executor.
+  - Use `/ce-work` directly only for execution of approved plans or implementation units where the `ce-work` workflow is explicitly requested or clearly better-fitting than the full `/lfg` pipeline; direct `/ce-work` also uses `/tdd` for feature/bug implementation unless the work is non-code coordination.
 - Practice merge-as-you-go discipline: as each Bead is claimed, built, proofed, and closed, use `/compound-engineering:ce-commit` (or the platform-listed `ce-commit` skill) to commit the scoped work, push it, and merge it back to `main` before accumulating unrelated Beads.
 - After completed branches are merged, and before claiming more unrelated work, use `/compound-engineering:ce-clean-gone-branches` (or the platform-listed `ce-clean-gone-branches` skill) to prune gone local branches and their associated worktrees. Do not leave completed Decapod worktrees or merged branches behind.
 - These orchestration rules do not replace Decapod initialization, Beads task authority, isolated worktrees, proof gates, or Copyparty obligations.
