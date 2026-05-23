@@ -555,21 +555,27 @@ runCommandTest('Render workflow can list sources without rendering pages',
       id: 'core-career-shaman-animism',
       system: 'animism',
       career: 'Shaman',
-      sourceFile: 'references/mythras-raw/animism.json',
-      requiredSkills: ['Binding (Cult, Totem or Tradition)', 'Trance']
+      sourceFiles: [
+        'references/mythras-raw/animism.json',
+        'references/spirits-raw/monster-island.json',
+        'references/spirits-raw/bird-in-hand.json'
+      ],
+      requiredSkills: ['Binding (Cult, Totem or Tradition)', 'Trance'],
+      summaryIncludes: ['Mythras Core Shaman career', 'app Animism uses Mythras Core, Monster Island, and A Bird in the Hand'],
+      summaryExcludes: ['used by Core Animism']
     },
     {
       id: 'core-career-sorcerer-sorcery',
       system: 'sorcery',
       career: 'Sorcerer',
-      sourceFile: 'references/mythras-raw/sorcery.json',
+      sourceFiles: ['references/mythras-raw/sorcery.json'],
       requiredSkills: ['Invocation (Cult, School or Grimoire)', 'Shaping']
     },
     {
       id: 'core-career-mystic-mysticism',
       system: 'mysticism',
       career: 'Mystic',
-      sourceFile: 'references/mythras-raw/mysticism.json',
+      sourceFiles: ['references/mythras-raw/mysticism.json'],
       requiredSkills: ['Meditation', 'Mysticism']
     }
   ];
@@ -599,6 +605,16 @@ runCommandTest('Render workflow can list sources without rendering pages',
     if (provider.app_access?.state !== 'source_backed_provider_verified') {
       coreProviderProblems.push(`${expectedProvider.id} app_access state is ${provider.app_access?.state}`);
     }
+    for (const text of (expectedProvider.summaryIncludes || [])) {
+      if (!provider.app_access?.summary?.includes(text)) {
+        coreProviderProblems.push(`${expectedProvider.id} app_access summary missing ${text}`);
+      }
+    }
+    for (const text of (expectedProvider.summaryExcludes || [])) {
+      if (provider.app_access?.summary?.includes(text)) {
+        coreProviderProblems.push(`${expectedProvider.id} app_access summary still says ${text}`);
+      }
+    }
     if (provider.precedence?.same_system !== 'selected-cult-provider-supersedes-core-career-provider') {
       coreProviderProblems.push(`${expectedProvider.id} missing same-system precedence`);
     }
@@ -618,12 +634,21 @@ runCommandTest('Render workflow can list sources without rendering pages',
       }
     }
     const careerRef = provider.source_refs?.find(ref => ref.source_file === 'references/mythras-raw/careers-detail.json');
-    const magicRef = provider.source_refs?.find(ref => ref.source_file === expectedProvider.sourceFile);
     if (careerRef?.json_path !== `$.careers[?(@.name=='${expectedProvider.career}')]`) {
       coreProviderProblems.push(`${expectedProvider.id} career source_ref missing career JSON path`);
     }
-    if (magicRef?.verified !== true || !magicRef?.json_path?.startsWith('$.chargen_rules')) {
-      coreProviderProblems.push(`${expectedProvider.id} magic source_ref missing verified chargen rules path`);
+    for (const sourceFile of expectedProvider.sourceFiles) {
+      const sourceRef = provider.source_refs?.find(ref => ref.source_file === sourceFile);
+      if (sourceRef?.verified !== true || !sourceRef?.json_path?.startsWith('$')) {
+        coreProviderProblems.push(`${expectedProvider.id} missing verified source_ref for ${sourceFile}`);
+      }
+    }
+    const extraAppSourceRefs = (provider.source_refs || [])
+      .filter(ref => ref.source_file !== 'references/mythras-raw/careers-detail.json')
+      .map(ref => ref.source_file)
+      .filter(sourceFile => !expectedProvider.sourceFiles.includes(sourceFile));
+    if (extraAppSourceRefs.length > 0) {
+      coreProviderProblems.push(`${expectedProvider.id} has unexpected app source refs: ${extraAppSourceRefs.join(', ')}`);
     }
   }
   if (coreProviderProblems.length === 0) {

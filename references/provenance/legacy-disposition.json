@@ -159,10 +159,12 @@
       "disposition": "governed-now",
       "required_scope": true,
       "source_ids": [
-        "mythras-core"
+        "mythras-core",
+        "monster-island",
+        "bird-in-hand"
       ],
       "scan_for_unverified": true,
-      "rationale": "Core career-backed magic provider metadata is derived from source-governed Mythras Core career data and verified magic rules."
+      "rationale": "Core career-backed magic provider metadata is derived from source-governed career data and each system's app source chain: Animism uses Mythras Core, Monster Island, and A Bird in the Hand; Sorcery and Mysticism use Mythras Core."
     },
     {
       "id": "mythras-raw",
