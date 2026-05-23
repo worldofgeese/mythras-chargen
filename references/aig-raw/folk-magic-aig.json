@@ -1,8 +1,8 @@
 {
   "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-  "extracted_at": "2026-05-17",
+  "extracted_at": "2026-05-21",
   "page": "p.63-68",
-  "note": "AiG Folk Magic chapter (p.63-68) lists 45 Glorantha-specific/modified spells. Standard Mythras Core spells (Bladesharp, Heal, Alarm, etc.) are referenced by name in culture spell lists but not redefined here — see references/mythras-raw/folk-magic-spells.json for the core spell definitions. Culture-specific assignments from AiG culture chapters (p.26-41) preserved in spells_from_cultures.",
+  "note": "AiG Folk Magic chapter (p.63-68) lists Glorantha-specific/modified spells. Standard Mythras Core spells (Bladesharp, Heal, Alarm, etc.) are referenced by name in culture spell lists but not redefined here — see references/mythras-raw/folk-magic-spells.json for the core spell definitions. Culture-specific assignments from AiG culture chapters (p.26-41) are normalized from references/aig-raw/cultures.json for all eight chargen cultures.",
   "core_reference": "Mythras/RuneQuest 6th Edition Folk Magic spell list",
   "verified": false,
   "spells": [
@@ -403,14 +403,89 @@
       "Lock",
       "Perfume",
       "Repair"
+    ],
+    "God Forgot": [
+      "Alarm",
+      "Avert",
+      "Bladesharp",
+      "Bludgeon",
+      "Find Truth",
+      "Heal",
+      "Perfume",
+      "Pierce",
+      "Preserve",
+      "Protection"
+    ],
+    "Lunar Heartland": [
+      "Avert",
+      "Bladesharp",
+      "Calculate",
+      "Firearrow",
+      "Glamour",
+      "Heal",
+      "Light",
+      "Pierce",
+      "Polish",
+      "Protection"
+    ],
+    "Praxian": [
+      "Appraise",
+      "Beastcall (Tribal Beast)",
+      "Bladesharp",
+      "Cleanse",
+      "Deflect",
+      "Dry",
+      "Fanaticism",
+      "Find (Water, Food, Shelter)",
+      "Heal",
+      "Preserve"
+    ],
+    "Lunar Provincial": [
+      "Alarm",
+      "Appraise",
+      "Bladesharp",
+      "Calm",
+      "Cleanse",
+      "Dry",
+      "Find Safe Shelter",
+      "Incognito",
+      "Ignite",
+      "Preserve"
+    ],
+    "Sartarite (Heortling)": [
+      "Avert",
+      "Beastcall (Alynx or Herd Animal)",
+      "Bladesharp",
+      "Coordination",
+      "Fanaticism",
+      "Find Herd Animal",
+      "Mindspeech",
+      "Mobility",
+      "Pet",
+      "Protection"
+    ],
+    "Telmori Hsunchen": [
+      "Beastcall (Wolf)",
+      "Bladesharp",
+      "Cleanse",
+      "Deflect",
+      "Find Prey",
+      "Find Food",
+      "Heat",
+      "Ignite",
+      "Pathway",
+      "Pierce"
     ]
   },
-  "missing_cultures": [
-    "God Forgot",
-    "Lunar Heartland",
-    "Praxian",
-    "Provincial Lunar/Tarsh",
-    "Sartarite/Heortling",
-    "Telmori Hsunchen"
-  ]
+  "missing_cultures": [],
+  "culture_source_pages": {
+    "Balazaring": "p.26-28",
+    "Esrolian": "p.28-29",
+    "God Forgot": "p.29-30",
+    "Lunar Heartland": "p.30-32",
+    "Praxian": "p.32-35",
+    "Lunar Provincial": "p.35-37",
+    "Sartarite (Heortling)": "p.37-39",
+    "Telmori Hsunchen": "p.39-41"
+  }
 }

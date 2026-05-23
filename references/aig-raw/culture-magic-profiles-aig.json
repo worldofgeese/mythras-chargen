@@ -1,0 +1,188 @@
+{
+  "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+  "source_file": "RuneQuest_TDM_Sixth_Edition_Adventures_in_Glorantha_Special_GenCon.pdf",
+  "extracted_at": "2026-05-21",
+  "page": "p.26-41, p.60-62",
+  "extraction_method": "Culture sections were normalized from references/aig-raw/cultures.json and spot-checked with rendered PDF/OCR for pre-Magic culture text and the Magic chapter overview. Lunar Magic is named in the preview overview, but the Lunar Magic chapter is not included in the GenCon preview.",
+  "profiles": {
+    "Balazaring": {
+      "summary": "Hunter-clan Balazarings keep indigenous spirit religion while citadel communities also draw on Yelmalio, Orlanthi, and Seven Mothers worship.",
+      "folk_magic": true,
+      "higher_magic": [
+        "Spirit Magic",
+        "Rune Magic (citadels)"
+      ],
+      "cult_fit": [
+        "Foundchild",
+        "Yelmalio",
+        "Daka Fal",
+        "Orlanth",
+        "Waha",
+        "Eiritha"
+      ],
+      "limitations": [
+        "Divine magic and sorcery are feared by ordinary clan Balazarings; cult access is strongest in and around the citadels."
+      ],
+      "source_citations": [
+        "AiG p.26-28 culture section",
+        "AiG p.60-62 Magic overview"
+      ]
+    },
+    "Esrolian": {
+      "summary": "Esrolian characters sit in an earth-goddess theist society with temple politics, city cults, and local spirit traditions.",
+      "folk_magic": true,
+      "higher_magic": [
+        "Rune Magic",
+        "Spirit Magic"
+      ],
+      "cult_fit": [
+        "Ernalda",
+        "Babeester Gor",
+        "Chalana Arroy",
+        "Issaries",
+        "Lhankor Mhy",
+        "Ty Kora Tek"
+      ],
+      "limitations": [
+        "Sorcery is not a normal Esrolian cultural path."
+      ],
+      "source_citations": [
+        "AiG p.28-29 culture section",
+        "AiG p.60-62 Magic overview"
+      ]
+    },
+    "God Forgot": {
+      "summary": "God Forgot is an explicitly atheist Western society where the Zzistori caste preserves sorcery and treats common folk magic as diluted sorcery.",
+      "folk_magic": true,
+      "higher_magic": [
+        "Sorcery"
+      ],
+      "cult_fit": [
+        "No cult",
+        "Arkat (rare/secondary sorcery access)"
+      ],
+      "limitations": [
+        "Rune Magic unavailable",
+        "Spirit Magic viewed as pointless",
+        "Folk Magic is treated as diluted sorcery",
+        "Default chargen cult access should be No cult; Arkat is a rare secondary sorcery route rather than ordinary worship."
+      ],
+      "source_citations": [
+        "AiG p.29-30 culture section",
+        "AiG p.60-62 Magic overview"
+      ]
+    },
+    "Lunar Heartland": {
+      "summary": "Heartland Lunars combine older Solar theism with Seven Mothers and Red Goddess Lunar identity; Lunar Magic waxes and wanes with the Red Moon.",
+      "folk_magic": true,
+      "higher_magic": [
+        "Rune Magic",
+        "Lunar Magic"
+      ],
+      "cult_fit": [
+        "Seven Mothers",
+        "Etyries",
+        "Yelm",
+        "Lodril",
+        "Dendara",
+        "Buserian"
+      ],
+      "limitations": [
+        "Lunar Magic is named in the GenCon preview, but its chapter is absent; the chargen should expose it as setting context rather than implemented magic rules."
+      ],
+      "source_citations": [
+        "AiG p.30-32 culture section",
+        "AiG p.60-62 Magic overview"
+      ]
+    },
+    "Lunar Provincial": {
+      "summary": "Provincial Lunars, including Tarshites, have Seven Mothers/Lunar access while continuing to recognize local gods and frontier cult ties.",
+      "folk_magic": true,
+      "higher_magic": [
+        "Rune Magic",
+        "Lunar Magic"
+      ],
+      "cult_fit": [
+        "Seven Mothers",
+        "Etyries",
+        "Orlanth",
+        "Ernalda",
+        "Humakt",
+        "Yelmalio"
+      ],
+      "limitations": [
+        "Lunar Magic is named in the GenCon preview, but its chapter is absent; the chargen should expose it as setting context rather than implemented magic rules."
+      ],
+      "source_citations": [
+        "AiG p.35-37 culture section",
+        "AiG p.60-62 Magic overview"
+      ]
+    },
+    "Praxian": {
+      "summary": "Praxian beast riders are strongly animist, centered on tribal beasts, Waha, Eiritha, Storm Bull, ancestors, and Wasteland spirits.",
+      "folk_magic": true,
+      "higher_magic": [
+        "Spirit Magic",
+        "Rune Magic"
+      ],
+      "cult_fit": [
+        "Waha",
+        "Eiritha",
+        "Storm Bull",
+        "Foundchild",
+        "Daka Fal",
+        "Tribal beast spirits"
+      ],
+      "limitations": [
+        "Horses are taboo and water is feared; magic choices should reinforce Praxian beast-rider and spirit-tradition identity."
+      ],
+      "source_citations": [
+        "AiG p.32-35 culture section",
+        "AiG p.60-62 Magic overview"
+      ]
+    },
+    "Sartarite (Heortling)": {
+      "summary": "Sartarite Heortlings are first and foremost Orlanthi theists; they honor ancestors and local spirits but are not primarily animists.",
+      "folk_magic": true,
+      "higher_magic": [
+        "Rune Magic"
+      ],
+      "cult_fit": [
+        "Orlanth",
+        "Ernalda",
+        "Humakt",
+        "Issaries",
+        "Lhankor Mhy",
+        "Chalana Arroy"
+      ],
+      "limitations": [
+        "Sorcery is mistrusted and mysticism is not a normal Sartarite cultural path."
+      ],
+      "source_citations": [
+        "AiG p.37-39 culture section",
+        "AiG p.60-62 Magic overview"
+      ]
+    },
+    "Telmori Hsunchen": {
+      "summary": "Telmori are wolf Hsunchen who practice animism through the Korgatsu Spirit Tradition and maintain close ties to Telmor and wolf spirits.",
+      "folk_magic": true,
+      "higher_magic": [
+        "Spirit Magic"
+      ],
+      "cult_fit": [
+        "Telmor",
+        "Korgatsu Spirit Tradition",
+        "Wolf spirits",
+        "Foundchild",
+        "Odayla"
+      ],
+      "limitations": [
+        "Their full-moon wolf transformation and Hsunchen identity make spirit tradition more central than ordinary temple theism."
+      ],
+      "source_citations": [
+        "AiG p.39-41 culture section",
+        "AiG p.60-62 Magic overview"
+      ]
+    }
+  }
+}

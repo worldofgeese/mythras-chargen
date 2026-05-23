@@ -204,6 +204,7 @@ function loadApp() {
         CAREERS_DATA: typeof CAREERS_DATA !== 'undefined' ? CAREERS_DATA : null,
         CULTS_DATA: typeof CULTS_DATA !== 'undefined' ? CULTS_DATA : null,
         CULTURE_CULT_MAP: typeof CULTURE_CULT_MAP !== 'undefined' ? CULTURE_CULT_MAP : null,
+        CULTURE_MAGIC_PROFILES: typeof CULTURE_MAGIC_PROFILES !== 'undefined' ? CULTURE_MAGIC_PROFILES : null,
         isAnySkill: typeof isAnySkill !== 'undefined' ? isAnySkill : null,
         isPlaceholderSkill: typeof isPlaceholderSkill !== 'undefined' ? isPlaceholderSkill : null,
         needsDisambiguation: typeof needsDisambiguation !== 'undefined' ? needsDisambiguation : null,
@@ -5345,6 +5346,23 @@ section('Step 9 Initiation Gate');
   const { CULTURE_BUILDS: CultureBuilds, CULTURES_DATA: CulturesData } = loadApp();
 
   if (CultureBuilds && CulturesData) {
+    const missingCultures = CulturesData
+      .map(culture => culture.name)
+      .filter(cultureName => !CultureBuilds[cultureName] || CultureBuilds[cultureName].length < 2);
+    if (missingCultures.length === 0) {
+      pass('All AiG cultures have at least two Step 4 suggested builds');
+    } else {
+      fail('Step 4 suggested builds are missing or thin for cultures', missingCultures.join(', '));
+    }
+  } else {
+    fail('Suggested build data not available to tests');
+  }
+}
+
+{
+  const { CULTURE_BUILDS: CultureBuilds, CULTURES_DATA: CulturesData } = loadApp();
+
+  if (CultureBuilds && CulturesData) {
     const missing = [];
     Object.entries(CultureBuilds).forEach(([cultureName, builds]) => {
       const culture = CulturesData.find(c => c.name === cultureName);
@@ -5363,6 +5381,83 @@ section('Step 9 Initiation Gate');
     }
   } else {
     fail('Suggested build data not available to tests');
+  }
+}
+
+{
+  const { CULTURES_DATA: CulturesData } = loadApp();
+  const expectedCultures = CulturesData.map(culture => culture.name).sort();
+  const combatRefPath = path.join(__dirname, 'references', 'aig-raw', 'combat-styles-aig.json');
+  const folkRefPath = path.join(__dirname, 'references', 'aig-raw', 'folk-magic-aig.json');
+  const combatRef = JSON.parse(fs.readFileSync(combatRefPath, 'utf8'));
+  const folkRef = JSON.parse(fs.readFileSync(folkRefPath, 'utf8'));
+  const combatCultures = [...new Set((combatRef.combat_styles || []).map(style => style.culture))].sort();
+  const folkCultures = Object.keys(folkRef.spells_from_cultures || {}).sort();
+  const combatComplete = JSON.stringify(combatCultures) === JSON.stringify(expectedCultures) &&
+    Array.isArray(combatRef.missing_cultures) &&
+    combatRef.missing_cultures.length === 0 &&
+    (combatRef.combat_styles || []).every(style => style.source_page && style.weapons?.length && style.traits?.length);
+  const folkComplete = JSON.stringify(folkCultures) === JSON.stringify(expectedCultures) &&
+    Array.isArray(folkRef.missing_cultures) &&
+    folkRef.missing_cultures.length === 0 &&
+    Object.values(folkRef.spells_from_cultures || {}).every(spells => Array.isArray(spells) && spells.length >= 10);
+
+  if (combatComplete && folkComplete) {
+    pass('AiG combat-style and culture folk-magic reference coverage includes all eight cultures');
+  } else {
+    fail('AiG culture reference coverage is incomplete',
+      JSON.stringify({ expectedCultures, combatCultures, combatMissing: combatRef.missing_cultures, folkCultures, folkMissing: folkRef.missing_cultures }));
+  }
+}
+
+{
+  const { CULTURES_DATA: CulturesData } = loadApp();
+  const cultureRefPath = path.join(__dirname, 'references', 'aig-raw', 'cultures.json');
+  const cultureRef = JSON.parse(fs.readFileSync(cultureRefPath, 'utf8'));
+  const appName = name => ({
+    'Provincial Lunar/Tarsh': 'Lunar Provincial',
+    'Sartarite/Heortling': 'Sartarite (Heortling)'
+  }[name] || name);
+  const refTypes = Object.fromEntries((cultureRef.cultures || []).map(culture => [appName(culture.name), culture.culture_type]));
+  const mismatches = CulturesData
+    .filter(culture => refTypes[culture.name] && refTypes[culture.name] !== culture.type)
+    .map(culture => `${culture.name}: app=${culture.type}, reference=${refTypes[culture.name]}`);
+
+  if (mismatches.length === 0) {
+    pass('AiG culture type labels match the normalized source reference');
+  } else {
+    fail('AiG culture type labels drifted between app and reference data', mismatches.join('; '));
+  }
+}
+
+{
+  const { CULTURE_MAGIC_PROFILES: InlineProfiles, CULTURES_DATA: CulturesData } = loadApp();
+  const refPath = path.join(__dirname, 'references', 'aig-raw', 'culture-magic-profiles-aig.json');
+  const ref = JSON.parse(fs.readFileSync(refPath, 'utf8'));
+  const refProfiles = ref.profiles || {};
+  const expectedCultures = CulturesData.map(culture => culture.name).sort();
+  const inlineKeys = Object.keys(InlineProfiles || {}).sort();
+  const refKeys = Object.keys(refProfiles).sort();
+  const missingSignals = [];
+  if (!refProfiles['God Forgot']?.higher_magic?.includes('Sorcery')) missingSignals.push('God Forgot Sorcery');
+  if (!refProfiles['God Forgot']?.limitations?.some(text => /Rune Magic unavailable/i.test(text))) missingSignals.push('God Forgot Rune Magic unavailable');
+  if (!refProfiles['Praxian']?.higher_magic?.includes('Spirit Magic')) missingSignals.push('Praxian Spirit Magic');
+  if (!refProfiles['Telmori Hsunchen']?.higher_magic?.includes('Spirit Magic')) missingSignals.push('Telmori Spirit Magic');
+  if (!refProfiles['Lunar Heartland']?.higher_magic?.includes('Lunar Magic')) missingSignals.push('Lunar Heartland Lunar Magic');
+  const complete = InlineProfiles &&
+    JSON.stringify(inlineKeys) === JSON.stringify(expectedCultures) &&
+    JSON.stringify(refKeys) === JSON.stringify(expectedCultures) &&
+    JSON.stringify(InlineProfiles) === JSON.stringify(refProfiles) &&
+    ref.source_file &&
+    ref.extraction_method &&
+    Object.values(refProfiles).every(profile => profile.source_citations?.length > 0 && profile.summary && profile.folk_magic === true) &&
+    missingSignals.length === 0;
+
+  if (complete) {
+    pass('Culture magic profiles are attested, complete, and match inline app data');
+  } else {
+    fail('Culture magic profiles are missing, incomplete, or out of sync',
+      JSON.stringify({ inlineKeys, refKeys, expectedCultures, missingSignals, hasSourceFile: Boolean(ref.source_file), hasMethod: Boolean(ref.extraction_method) }));
   }
 }
 

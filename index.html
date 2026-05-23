@@ -908,6 +908,8 @@ function detectCultType(cult) {
 
 const CULTURE_CULT_MAP = {"Sartarite (Heortling)":{"primary":["Orlanth","Ernalda","Humakt","Issaries","Lhankor Mhy","Chalana Arroy"],"secondary":["Storm Bull","Eurmal","Odayla","Babeester Gor","Maran Gor","Vinga","Barntar","Heler","Yinkin","Elmal","Ty Kora Tek","Engizi","Asrelia","Donandar","Lanbril","Foundchild"]},"Esrolian":{"primary":["Ernalda","Babeester Gor","Chalana Arroy","Issaries","Lhankor Mhy","Ty Kora Tek"],"secondary":["Orlanth","Humakt","Asrelia","Maran Gor","Donandar","Eurmal","Lanbril","Grain Goddesses","Uleria","Argan Argar"]},"Lunar Heartland":{"primary":["7 Mothers - Yanafal Tarnils","7 Mothers - Irrippi Ontor","7 Mothers - Jakaleel","7 Mothers - Danfive Xaron","7 Mothers - Teelo Norri","7 Mothers - Queen Deezola","7 Mothers - She Who Waits","Etyries"],"secondary":["Yelm","Lodril","Dendara","Buserian","Shargash","Polaris","Lanbril","Uleria","Chalana Arroy","Lokarnos"]},"Lunar Provincial":{"primary":["7 Mothers - Yanafal Tarnils","7 Mothers - Irrippi Ontor","Etyries"],"secondary":["Orlanth","Ernalda","Humakt","Issaries","Yelmalio","Chalana Arroy","Lhankor Mhy","Lanbril","7 Mothers - Jakaleel","7 Mothers - Danfive Xaron","7 Mothers - Teelo Norri","7 Mothers - Queen Deezola"]},"Praxian":{"primary":["Waha","Eiritha","Storm Bull","Foundchild","Daka Fal"],"secondary":["Chalana Arroy","Issaries","Humakt","Lanbril","Zorak Zoran","Pavis","Zola Fel","Basmol","Gagarth","Yelmalio"]},"Balazaring":{"primary":["Foundchild","Yelmalio","Daka Fal"],"secondary":["Storm Bull","Chalana Arroy","Orlanth","Waha","Eiritha","Odayla"]},"God Forgot":{"primary":[],"secondary":["Lhankor Mhy","Issaries","Chalana Arroy","Dormal","Arkat"],"note":"God Forgot is explicitly atheistic/secularist. Cults are rare — 'No cult' is the expected default here."},"Telmori Hsunchen":{"primary":["Telmor"],"secondary":["Storm Bull","Foundchild","Odayla","Orlanth"],"note":"Telmori primarily worship their wolf ancestor Telmor. Telmor cult data is in Hsunchen pantheon."}};
 
+const CULTURE_MAGIC_PROFILES = {"Balazaring":{"summary":"Hunter-clan Balazarings keep indigenous spirit religion while citadel communities also draw on Yelmalio, Orlanthi, and Seven Mothers worship.","folk_magic":true,"higher_magic":["Spirit Magic","Rune Magic (citadels)"],"cult_fit":["Foundchild","Yelmalio","Daka Fal","Orlanth","Waha","Eiritha"],"limitations":["Divine magic and sorcery are feared by ordinary clan Balazarings; cult access is strongest in and around the citadels."],"source_citations":["AiG p.26-28 culture section","AiG p.60-62 Magic overview"]},"Esrolian":{"summary":"Esrolian characters sit in an earth-goddess theist society with temple politics, city cults, and local spirit traditions.","folk_magic":true,"higher_magic":["Rune Magic","Spirit Magic"],"cult_fit":["Ernalda","Babeester Gor","Chalana Arroy","Issaries","Lhankor Mhy","Ty Kora Tek"],"limitations":["Sorcery is not a normal Esrolian cultural path."],"source_citations":["AiG p.28-29 culture section","AiG p.60-62 Magic overview"]},"God Forgot":{"summary":"God Forgot is an explicitly atheist Western society where the Zzistori caste preserves sorcery and treats common folk magic as diluted sorcery.","folk_magic":true,"higher_magic":["Sorcery"],"cult_fit":["No cult","Arkat (rare/secondary sorcery access)"],"limitations":["Rune Magic unavailable","Spirit Magic viewed as pointless","Folk Magic is treated as diluted sorcery","Default chargen cult access should be No cult; Arkat is a rare secondary sorcery route rather than ordinary worship."],"source_citations":["AiG p.29-30 culture section","AiG p.60-62 Magic overview"]},"Lunar Heartland":{"summary":"Heartland Lunars combine older Solar theism with Seven Mothers and Red Goddess Lunar identity; Lunar Magic waxes and wanes with the Red Moon.","folk_magic":true,"higher_magic":["Rune Magic","Lunar Magic"],"cult_fit":["Seven Mothers","Etyries","Yelm","Lodril","Dendara","Buserian"],"limitations":["Lunar Magic is named in the GenCon preview, but its chapter is absent; the chargen should expose it as setting context rather than implemented magic rules."],"source_citations":["AiG p.30-32 culture section","AiG p.60-62 Magic overview"]},"Lunar Provincial":{"summary":"Provincial Lunars, including Tarshites, have Seven Mothers/Lunar access while continuing to recognize local gods and frontier cult ties.","folk_magic":true,"higher_magic":["Rune Magic","Lunar Magic"],"cult_fit":["Seven Mothers","Etyries","Orlanth","Ernalda","Humakt","Yelmalio"],"limitations":["Lunar Magic is named in the GenCon preview, but its chapter is absent; the chargen should expose it as setting context rather than implemented magic rules."],"source_citations":["AiG p.35-37 culture section","AiG p.60-62 Magic overview"]},"Praxian":{"summary":"Praxian beast riders are strongly animist, centered on tribal beasts, Waha, Eiritha, Storm Bull, ancestors, and Wasteland spirits.","folk_magic":true,"higher_magic":["Spirit Magic","Rune Magic"],"cult_fit":["Waha","Eiritha","Storm Bull","Foundchild","Daka Fal","Tribal beast spirits"],"limitations":["Horses are taboo and water is feared; magic choices should reinforce Praxian beast-rider and spirit-tradition identity."],"source_citations":["AiG p.32-35 culture section","AiG p.60-62 Magic overview"]},"Sartarite (Heortling)":{"summary":"Sartarite Heortlings are first and foremost Orlanthi theists; they honor ancestors and local spirits but are not primarily animists.","folk_magic":true,"higher_magic":["Rune Magic"],"cult_fit":["Orlanth","Ernalda","Humakt","Issaries","Lhankor Mhy","Chalana Arroy"],"limitations":["Sorcery is mistrusted and mysticism is not a normal Sartarite cultural path."],"source_citations":["AiG p.37-39 culture section","AiG p.60-62 Magic overview"]},"Telmori Hsunchen":{"summary":"Telmori are wolf Hsunchen who practice animism through the Korgatsu Spirit Tradition and maintain close ties to Telmor and wolf spirits.","folk_magic":true,"higher_magic":["Spirit Magic"],"cult_fit":["Telmor","Korgatsu Spirit Tradition","Wolf spirits","Foundchild","Odayla"],"limitations":["Their full-moon wolf transformation and Hsunchen identity make spirit tradition more central than ordinary temple theism."],"source_citations":["AiG p.39-41 culture section","AiG p.60-62 Magic overview"]}};
+
 // =============================================================================
 // FIX 1: Background Equipment Table (Mythras Core p.33-34)
 // =============================================================================
@@ -1602,6 +1604,16 @@ const CULTURE_BUILDS = {
   "Balazaring": [
     { name: "Hawk Hunter", stats: "High DEX, CON", career: "Hunter", style: "Hawk Slayer", tip: "Hunts with trained hawks in the wild hills. Expert with longspear." },
     { name: "Clan Raider", stats: "High STR, DEX", career: "Warrior", style: "Hunter Raider", tip: "Fast and vicious. Raids neighbouring clans for cattle and glory." }
+  ],
+  "God Forgot": [
+    { name: "Zzistori Sorcerer", stats: "High INT, POW", career: "Sorcerer", style: "Talar Defensive School", tip: "Atheist scholar-magician who treats folk magic as diluted sorcery and avoids ordinary cult worship." },
+    { name: "Horali Shieldman", stats: "High STR, CON", career: "Warrior", style: "Horali Militia", tip: "Caste soldier trained to defend the island with spear, shield wall, and sling." },
+    { name: "Talar Envoy", stats: "High CHA, INT", career: "Official", style: "Talar Defensive School", tip: "Secular caste leader who wins with courtesy, law, and a concealed blade when talks fail." }
+  ],
+  "Lunar Provincial": [
+    { name: "Tarshite Hoplite", stats: "High STR, CON", career: "Warrior", style: "Lunar Corps Hoplite", tip: "Provincial line soldier carrying Heartland discipline into contested frontier lands." },
+    { name: "Seven Mothers Missionary", stats: "High POW, CHA", career: "Priest", style: "Colonial Survivalist", tip: "Lunar cult advocate who survives among local gods, suspicious clans, and imperial politics." },
+    { name: "Colonial Noble", stats: "High CHA, DEX", career: "Courtier", style: "Colonial Noble", tip: "Mounted Lunar aristocrat balancing local alliances with imperial expectations." }
   ],
   "Telmori Hsunchen": [
     { name: "Wolf Pack Alpha", stats: "High STR, POW", career: "Warrior", style: "Wolf Hunter", tip: "Fights alongside wolves. Can shapeshift during the full moon." },
@@ -3740,6 +3752,25 @@ App.evaluateFormula = function(formula) {
   return Calc.safeEvalDiceFormula(formula, CharacterData.characteristics);
 };
 
+App.renderCultureMagicProfile = function(cultureName) {
+  const profile = CULTURE_MAGIC_PROFILES[cultureName];
+  if (!profile) return '';
+  const esc = value => this.escapeHtml(value);
+  const renderList = values => (values || []).map(value => `<li>${esc(value)}</li>`).join('');
+
+  return `
+      <h4>Magic and Cult Fit</h4>
+      <div style="background:#fff; border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+        <p>${esc(profile.summary)}</p>
+        <p><strong>Folk Magic:</strong> ${profile.folk_magic ? 'Common culture option' : 'Not a normal culture option'}</p>
+        <p><strong>Higher Magic:</strong> ${(profile.higher_magic || []).map(esc).join(', ') || 'None listed'}</p>
+        ${(profile.cult_fit || []).length ? `<p><strong>Best cult/tradition fit:</strong></p><ul>${renderList(profile.cult_fit)}</ul>` : ''}
+        ${(profile.limitations || []).length ? `<p><strong>Caveats:</strong></p><ul>${renderList(profile.limitations)}</ul>` : ''}
+        ${(profile.source_citations || []).length ? `<p style="color:#666; font-size:0.9em;"><strong>Source:</strong> ${(profile.source_citations || []).map(esc).join('; ')}</p>` : ''}
+      </div>
+  `;
+};
+
 App.renderCultureDetails = function() {
   const culture = CULTURES_DATA.find(c => c.name === CharacterData.culture);
   if (!culture) return '';
@@ -3776,6 +3807,8 @@ App.renderCultureDetails = function() {
       
       <h4>Folk Magic Options</h4>
       <p>${culture.folkMagic.join(', ')}</p>
+
+      ${this.renderCultureMagicProfile(culture.name)}
     </div>
 
     ${this.renderCultureBuilds(culture.name)}

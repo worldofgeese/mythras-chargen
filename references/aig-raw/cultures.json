@@ -730,7 +730,7 @@
     {
       "name": "Provincial Lunar/Tarsh",
       "page": "p.35-37",
-      "culture_type": "Barbarian",
+      "culture_type": "Civilised",
       "standard_skills": [
         "Conceal",
         "Deceit",
@@ -843,7 +843,7 @@
         "amount_formula": "4d6x5",
         "source": "creation-summary table"
       },
-      "notes": "Provincial Lunars far from heartland. Worship Seven Mothers. Recognize local gods. Footnote markers: (**) Warrior career only, (***) Aristocracy or Ruling class only. Tarshite characters choose either Lunar Provincial or Sartarite culture.",
+      "notes": "Provincial Lunars far from heartland. AiG lists all Civilised careers for this culture. Worship Seven Mothers. Recognize local gods. Footnote markers: (**) Warrior career only, (***) Aristocracy or Ruling class only. Tarshite characters choose either Lunar Provincial or Sartarite culture.",
       "source_note": "Merged from Mistral LLM extraction where OCR was incomplete"
     },
     {

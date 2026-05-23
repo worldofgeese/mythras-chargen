@@ -1,51 +1,735 @@
 {
   "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-  "extracted_at": "2026-04-02",
-  "note": "Named combat styles from culture sections. Only Balazaring and Esrolian had complete data in OCR source.",
+  "extracted_at": "2026-05-21",
+  "page": "p.26-41",
+  "note": "Normalized from references/aig-raw/cultures.json all-culture extraction, cross-checked against equipment-aig.json visual extraction. Culture names use chargen app labels where they differ from AiG headings.",
+  "verified": false,
   "combat_styles": [
     {
       "culture": "Balazaring",
+      "source_culture_heading": "Balazaring",
+      "source_page": "p.26-28",
       "name": "Hunter Raider",
-      "weapons": ["Spear", "Bow", "Sling"],
-      "traits": ["Skirmisher"]
+      "weapons": [
+        "Spear",
+        "Bow",
+        "Sling"
+      ],
+      "traits": [
+        "Skirmisher"
+      ]
     },
     {
       "culture": "Balazaring",
+      "source_culture_heading": "Balazaring",
+      "source_page": "p.26-28",
       "name": "Pony Cavalry",
-      "weapons": ["Spear", "Bow"],
-      "traits": ["Mounted"]
+      "weapons": [
+        "Spear",
+        "Bow"
+      ],
+      "traits": [
+        "Mounted"
+      ]
     },
     {
       "culture": "Balazaring",
+      "source_culture_heading": "Balazaring",
+      "source_page": "p.26-28",
       "name": "Hawk Slayer",
-      "weapons": ["Longspear"],
-      "traits": ["Mounted"]
+      "weapons": [
+        "Longspear"
+      ],
+      "traits": [
+        "Mounted"
+      ]
     },
     {
       "culture": "Esrolian",
+      "source_culture_heading": "Esrolian",
+      "source_page": "p.28-29",
       "name": "Citizen Legionary",
-      "weapons": ["Shortsword", "Shield", "Javelin", "Sling"],
-      "traits": ["Formation Fighting"]
+      "weapons": [
+        "Shortsword",
+        "Shield",
+        "Javelin",
+        "Sling"
+      ],
+      "traits": [
+        "Formation Fighting"
+      ]
     },
     {
       "culture": "Esrolian",
+      "source_culture_heading": "Esrolian",
+      "source_page": "p.28-29",
       "name": "City-State Phalangite",
-      "weapons": ["Longspear/Sarissa", "Bow"],
-      "traits": ["Formation Fighting"]
+      "weapons": [
+        "Longspear/Sarissa",
+        "Bow"
+      ],
+      "traits": [
+        "Formation Fighting"
+      ]
     },
     {
       "culture": "Esrolian",
+      "source_culture_heading": "Esrolian",
+      "source_page": "p.28-29",
       "name": "Clan Protector",
-      "weapons": ["Shortsword", "Shield", "Shortspear"],
-      "traits": ["Daredevil"]
+      "weapons": [
+        "Shortsword",
+        "Shield",
+        "Shortspear"
+      ],
+      "traits": [
+        "Daredevil"
+      ]
+    },
+    {
+      "culture": "God Forgot",
+      "source_culture_heading": "God Forgot",
+      "source_page": "p.29-30",
+      "name": "Horali Militia",
+      "weapons": [
+        "1H Spear",
+        "Western Infantry Shield",
+        "Sling"
+      ],
+      "traits": [
+        "Shield Wall"
+      ]
+    },
+    {
+      "culture": "God Forgot",
+      "source_culture_heading": "God Forgot",
+      "source_page": "p.29-30",
+      "name": "God Forgotten Horali",
+      "weapons": [
+        "Sword",
+        "Shield",
+        "Spear",
+        "Sling"
+      ],
+      "traits": [
+        "Skirmisher"
+      ]
+    },
+    {
+      "culture": "God Forgot",
+      "source_culture_heading": "God Forgot",
+      "source_page": "p.29-30",
+      "name": "Talar Defensive School",
+      "weapons": [
+        "Unarmed",
+        "Shortsword",
+        "Dagger",
+        "Buckler"
+      ],
+      "traits": [
+        "Improvised Weapons"
+      ]
+    },
+    {
+      "culture": "Lunar Heartland",
+      "source_culture_heading": "Lunar Heartland",
+      "source_page": "p.30-32",
+      "name": "Dara Happan Urbanite",
+      "weapons": [
+        "Club",
+        "Dagger",
+        "Shortsword",
+        "Buckler"
+      ],
+      "traits": [
+        "Defensive Minded"
+      ]
+    },
+    {
+      "culture": "Lunar Heartland",
+      "source_culture_heading": "Lunar Heartland",
+      "source_page": "p.30-32",
+      "name": "Dart Contestant",
+      "weapons": [
+        "Dart",
+        "Dagger",
+        "Shortsword"
+      ],
+      "traits": [
+        "Assassination",
+        "Daredevil"
+      ],
+      "restrictions": "only available to Agent career"
+    },
+    {
+      "culture": "Lunar Heartland",
+      "source_culture_heading": "Lunar Heartland",
+      "source_page": "p.30-32",
+      "name": "Sagittan Peltast",
+      "weapons": [
+        "Composite Bow",
+        "Sling",
+        "Pelorian Peltast Shield",
+        "Dagger"
+      ],
+      "traits": [
+        "Ranged Marksman",
+        "Skirmishing"
+      ]
+    },
+    {
+      "culture": "Lunar Heartland",
+      "source_culture_heading": "Lunar Heartland",
+      "source_page": "p.30-32",
+      "name": "Lunar Corps Hoplite",
+      "weapons": [
+        "1H Spear",
+        "Pelorian Aspis",
+        "Sickle Sword/Khopesh",
+        "Kontos"
+      ],
+      "traits": [
+        "Formation Fighting",
+        "Shield Wall",
+        "Siege Warfare"
+      ],
+      "restrictions": "only available to Warrior career"
+    },
+    {
+      "culture": "Lunar Heartland",
+      "source_culture_heading": "Lunar Heartland",
+      "source_page": "p.30-32",
+      "name": "Dara Happan Heavy Infantry",
+      "weapons": [
+        "Kontos",
+        "Dara Happan Hoplon",
+        "Shortsword",
+        "Dart"
+      ],
+      "traits": [
+        "Formation Fighting",
+        "Hoplon Fighting – can use kontos and hoplon together",
+        "Intimidating Scream"
+      ]
+    },
+    {
+      "culture": "Lunar Heartland",
+      "source_culture_heading": "Lunar Heartland",
+      "source_page": "p.30-32",
+      "name": "Pelorian Cavalry",
+      "weapons": [
+        "Composite Bow",
+        "Kontos",
+        "Pelorian Aspis",
+        "Sickle Sword/Khopesh",
+        "Pelorian Peltast Shield"
+      ],
+      "traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Mounted Skirmishing"
+      ]
+    },
+    {
+      "culture": "Lunar Heartland",
+      "source_culture_heading": "Lunar Heartland",
+      "source_page": "p.30-32",
+      "name": "Pelorian Noble",
+      "weapons": [
+        "Sickle Sword/Khopesh",
+        "1H Spear",
+        "Pelorian Aspis",
+        "Composite Bow"
+      ],
+      "traits": [
+        "Formation Fighting",
+        "Mounted Combat",
+        "Ranged Marksman"
+      ],
+      "restrictions": "only available to those of Aristocracy or Ruling class"
+    },
+    {
+      "culture": "Praxian",
+      "source_culture_heading": "Praxian",
+      "source_page": "p.32-35",
+      "name": "Agimori",
+      "weapons": [
+        "1H Spear",
+        "Club",
+        "Doraddi War Shield",
+        "Javelin"
+      ],
+      "traits": [
+        "Batter Aside",
+        "Knockout Blow",
+        "Shield Splitter"
+      ]
+    },
+    {
+      "culture": "Praxian",
+      "source_culture_heading": "Praxian",
+      "source_page": "p.32-35",
+      "name": "Baboon",
+      "weapons": [
+        "Thrown Stone",
+        "Sling",
+        "1H Spear",
+        "2H Spear"
+      ],
+      "traits": [
+        "Daredevil",
+        "Intimidating Scream",
+        "Swashbuckling"
+      ]
+    },
+    {
+      "culture": "Praxian",
+      "source_culture_heading": "Praxian",
+      "source_page": "p.32-35",
+      "name": "Basmoli",
+      "weapons": [
+        "1H Spear",
+        "2H Spear",
+        "Dagger",
+        "Javelin"
+      ],
+      "traits": [
+        "Blind Fighting",
+        "Daredevil",
+        "Ranged Marksman"
+      ]
+    },
+    {
+      "culture": "Praxian",
+      "source_culture_heading": "Praxian",
+      "source_page": "p.32-35",
+      "name": "Bison",
+      "weapons": [
+        "1H Axe",
+        "Javelin",
+        "Lance",
+        "1H Sword",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Shield Splitter"
+      ]
+    },
+    {
+      "culture": "Praxian",
+      "source_culture_heading": "Praxian",
+      "source_page": "p.32-35",
+      "name": "Bolo Lizard",
+      "weapons": [
+        "Bolas",
+        "Dagger",
+        "1H Spear",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Mancatcher",
+        "Mounted Combat",
+        "Skirmishing"
+      ]
+    },
+    {
+      "culture": "Praxian",
+      "source_culture_heading": "Praxian",
+      "source_page": "p.32-35",
+      "name": "Cannibal Cult",
+      "weapons": [
+        "Dagger",
+        "Club",
+        "Net",
+        "Whip"
+      ],
+      "traits": [
+        "Assassination",
+        "Knockout Blow",
+        "Mancatcher"
+      ]
+    },
+    {
+      "culture": "Praxian",
+      "source_culture_heading": "Praxian",
+      "source_page": "p.32-35",
+      "name": "High Llama",
+      "weapons": [
+        "Javelin",
+        "Lance",
+        "Long Axe",
+        "2H Spear",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Mounted Combat",
+        "Throw Weapons",
+        "Trained Beast"
+      ]
+    },
+    {
+      "culture": "Praxian",
+      "source_culture_heading": "Praxian",
+      "source_page": "p.32-35",
+      "name": "Impala",
+      "weapons": [
+        "1H Axe",
+        "Composite Bow",
+        "Dart",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Mounted Combat",
+        "Prancing",
+        "Ranged Marksman"
+      ]
+    },
+    {
+      "culture": "Praxian",
+      "source_culture_heading": "Praxian",
+      "source_page": "p.32-35",
+      "name": "Morokanth",
+      "weapons": [
+        "Claws",
+        "Club",
+        "1H Spear",
+        "2H Spear",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Batter Aside",
+        "Do or Die (Claws)",
+        "Shield Splitter"
+      ]
+    },
+    {
+      "culture": "Praxian",
+      "source_culture_heading": "Praxian",
+      "source_page": "p.32-35",
+      "name": "Ostrich",
+      "weapons": [
+        "Boomerang",
+        "Dart",
+        "Sling",
+        "1H Spear",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Mounted Combat",
+        "Ranged Marksman",
+        "Skirmishing"
+      ]
+    },
+    {
+      "culture": "Praxian",
+      "source_culture_heading": "Praxian",
+      "source_page": "p.32-35",
+      "name": "Pol-Joni",
+      "weapons": [
+        "1H Spear",
+        "1H Axe",
+        "Short Bow",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Assassination",
+        "Mounted Combat",
+        "Skirmishing"
+      ],
+      "notes": "or select weapons from an alternate Praxian tribe or Orlanthi combat style"
+    },
+    {
+      "culture": "Praxian",
+      "source_culture_heading": "Praxian",
+      "source_page": "p.32-35",
+      "name": "Rhino",
+      "weapons": [
+        "Javelin",
+        "Lance",
+        "Long Axe",
+        "Mace",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Beast-back Lancer",
+        "Intimidating Scream",
+        "Mounted Combat"
+      ]
+    },
+    {
+      "culture": "Praxian",
+      "source_culture_heading": "Praxian",
+      "source_page": "p.32-35",
+      "name": "Sable",
+      "weapons": [
+        "Composite Bow",
+        "Lance",
+        "Scimitar",
+        "Praxian Shield"
+      ],
+      "traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Ranged Marksman"
+      ]
+    },
+    {
+      "culture": "Praxian",
+      "source_culture_heading": "Praxian",
+      "source_page": "p.32-35",
+      "name": "Unicorn",
+      "weapons": [
+        "Bow",
+        "Dart",
+        "Lance",
+        "Shortsword",
+        "Pelorian Peltast Shield"
+      ],
+      "traits": [
+        "Beast-back Lancer",
+        "Kuschile Archery",
+        "Mounted Combat"
+      ]
+    },
+    {
+      "culture": "Praxian",
+      "source_culture_heading": "Praxian",
+      "source_page": "p.32-35",
+      "name": "Zebra (Pavis Survivors)",
+      "weapons": [
+        "Composite Bow",
+        "1H Spear",
+        "Broadsword",
+        "Orlanthi Round Shield"
+      ],
+      "traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Trained Beast"
+      ]
+    },
+    {
+      "culture": "Lunar Provincial",
+      "source_culture_heading": "Provincial Lunar/Tarsh",
+      "source_page": "p.35-37",
+      "name": "Lunar Corps Hoplite",
+      "weapons": [
+        "1H Spear",
+        "Pelorian Aspis",
+        "Sickle Sword/Khopesh"
+      ],
+      "traits": [
+        "Formation Fighting",
+        "Shield Wall",
+        "Siege Warfare"
+      ],
+      "restrictions": "only available to Warrior career"
+    },
+    {
+      "culture": "Lunar Provincial",
+      "source_culture_heading": "Provincial Lunar/Tarsh",
+      "source_page": "p.35-37",
+      "name": "Pelorian Cavalry",
+      "weapons": [
+        "Composite Bow",
+        "Pelorian Aspis",
+        "Sickle Sword/Khopesh",
+        "Kontos",
+        "Pelorian Peltast Shield"
+      ],
+      "traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Mounted Skirmishing"
+      ],
+      "restrictions": "only available to Warrior career"
+    },
+    {
+      "culture": "Lunar Provincial",
+      "source_culture_heading": "Provincial Lunar/Tarsh",
+      "source_page": "p.35-37",
+      "name": "Colonial Noble",
+      "weapons": [
+        "1H Spear",
+        "Pelorian Aspis",
+        "Sickle Sword/Khopesh",
+        "Composite Bow"
+      ],
+      "traits": [
+        "Formation Fighting",
+        "Mounted Combat",
+        "Ranged Marksman"
+      ],
+      "restrictions": "only available to those of Aristocracy or Ruling class"
+    },
+    {
+      "culture": "Lunar Provincial",
+      "source_culture_heading": "Provincial Lunar/Tarsh",
+      "source_page": "p.35-37",
+      "name": "Colonial Survivalist",
+      "weapons": [
+        "Shortsword",
+        "Dagger",
+        "Sling"
+      ],
+      "traits": [
+        "Hidden Weapons"
+      ]
+    },
+    {
+      "culture": "Sartarite (Heortling)",
+      "source_culture_heading": "Sartarite/Heortling",
+      "source_page": "p.37-39",
+      "name": "Hill Clan Levy",
+      "weapons": [
+        "1H Axe",
+        "1H Spear",
+        "Orlanthi Round Shield",
+        "Longbow or Javelin"
+      ],
+      "traits": [
+        "Intimidating Scream",
+        "Throw Weapons"
+      ]
+    },
+    {
+      "culture": "Sartarite (Heortling)",
+      "source_culture_heading": "Sartarite/Heortling",
+      "source_page": "p.37-39",
+      "name": "Upland Crofter",
+      "weapons": [
+        "Sling",
+        "1H Spear",
+        "Orlanthi Round Shield"
+      ],
+      "traits": [
+        "Ranged Marksman",
+        "Skirmishing"
+      ],
+      "restrictions": "only available to Herder, Hunter or Scout career"
+    },
+    {
+      "culture": "Sartarite (Heortling)",
+      "source_culture_heading": "Sartarite/Heortling",
+      "source_page": "p.37-39",
+      "name": "Alynx Brother",
+      "weapons": [
+        "Dagger",
+        "1H Spear",
+        "Javelin"
+      ],
+      "traits": [
+        "Daredevil",
+        "Do or Die",
+        "Trained Beast"
+      ],
+      "restrictions": "only available to Herder, Hunter or Scout career"
+    },
+    {
+      "culture": "Sartarite (Heortling)",
+      "source_culture_heading": "Sartarite/Heortling",
+      "source_page": "p.37-39",
+      "name": "Loyal Housecarl",
+      "weapons": [
+        "Broadsword",
+        "1H Spear",
+        "Orlanthi Scutum",
+        "Greataxe"
+      ],
+      "traits": [
+        "Batter Aside",
+        "Intimidating Scream",
+        "Shield Wall"
+      ],
+      "restrictions": "only available to Warrior career"
+    },
+    {
+      "culture": "Sartarite (Heortling)",
+      "source_culture_heading": "Sartarite/Heortling",
+      "source_page": "p.37-39",
+      "name": "Sartarite Noble",
+      "weapons": [
+        "Broadsword",
+        "1H Spear",
+        "Orlanthi Scutum",
+        "Javelin"
+      ],
+      "traits": [
+        "Intimidating Scream",
+        "Mounted Combat",
+        "Shield Wall"
+      ],
+      "restrictions": "only available to those of Gentry or Ruling class"
+    },
+    {
+      "culture": "Sartarite (Heortling)",
+      "source_culture_heading": "Sartarite/Heortling",
+      "source_page": "p.37-39",
+      "name": "Esrolian Cohort",
+      "weapons": [
+        "Greataxe",
+        "Shortsword",
+        "Orlanthi Scutum",
+        "Javelin"
+      ],
+      "traits": [
+        "Formation Fighting",
+        "Shield Splitter",
+        "Shield Wall"
+      ],
+      "restrictions": "only available to those of Gentry or Ruling class"
+    },
+    {
+      "culture": "Sartarite (Heortling)",
+      "source_culture_heading": "Sartarite/Heortling",
+      "source_page": "p.37-39",
+      "name": "Tarshite Militia",
+      "weapons": [
+        "Shortsword",
+        "1H Spear",
+        "Peltast Shield",
+        "Javelin"
+      ],
+      "traits": [
+        "Defensive Minded",
+        "Formation Fighting",
+        "Siege Warfare"
+      ],
+      "restrictions": "only available to those of Gentry or Ruling class"
+    },
+    {
+      "culture": "Telmori Hsunchen",
+      "source_culture_heading": "Telmori Hsunchen",
+      "source_page": "p.39-41",
+      "name": "Telmori Hunter",
+      "weapons": [
+        "Club",
+        "1H Spear",
+        "2H Spear",
+        "Javelin",
+        "Short Bow"
+      ],
+      "traits": [
+        "Intimidating Scream",
+        "Trained Beast (Wolf)"
+      ]
+    },
+    {
+      "culture": "Telmori Hsunchen",
+      "source_culture_heading": "Telmori Hsunchen",
+      "source_page": "p.39-41",
+      "name": "Wolf Hunter",
+      "weapons": [
+        "Teeth and Claws"
+      ],
+      "traits": [
+        "Intimidating Scream",
+        "Mancatcher"
+      ],
+      "notes": "Can be used in either human or lupine forms. In wolf form also gains Unarmed Prowess trait."
     }
   ],
-  "missing_cultures": [
-    "God Forgot",
-    "Lunar Heartland",
-    "Praxian",
-    "Provincial Lunar/Tarsh",
-    "Sartarite/Heortling",
-    "Telmori Hsunchen"
-  ]
+  "missing_cultures": []
 }
