@@ -5764,6 +5764,50 @@ fixtures.forEach(fixtureInfo => {
   }
 }
 
+// Test 6.8a: Provider-backed Animism imports preserve bound spirits without a cult
+{
+  const { CharacterData: CD } = loadApp();
+  if (CD && CD.toJSON && CD.fromJSON) {
+    const payload = {
+      ...createTestCharacter('Praxian'),
+      name: 'Imported Core Shaman',
+      career: 'Shaman',
+      cult: null,
+      cultType: null,
+      characteristics: { STR: 10, CON: 11, SIZ: 10, DEX: 10, INT: 13, POW: 14, CHA: 10 },
+      selectedProfessionalSkills: ['Binding (Waha)', 'Trance', 'Healing'],
+      careerSkills: { 'Binding (Waha)': 10, Trance: 10, Healing: 10 },
+      boundSpiritSlots: 5,
+      boundSpirits: [{ name: 'Ancestor Spirit — Sagacity (Int 1)' }],
+      miracles: [],
+      devotionalPool: 0,
+      sorceryResource: 0,
+      sorcerySpells: []
+    };
+
+    const importErrors = CD.validatePlainObject(payload);
+    const importSuccess = CD.fromJSON(JSON.stringify(payload));
+    const serialized = CD.toJSON();
+    const roundTripSuccess = CD.fromJSON(serialized);
+    const preserved = importErrors.length === 0 &&
+      importSuccess &&
+      roundTripSuccess &&
+      CD.cult === null &&
+      CD.career === 'Shaman' &&
+      CD.boundSpiritSlots === 5 &&
+      CD.boundSpirits?.[0]?.name === 'Ancestor Spirit — Sagacity (Int 1)';
+
+    if (preserved) {
+      pass('Provider-backed Animism import preserves no-cult Shaman bound spirits');
+    } else {
+      fail('Provider-backed Animism import rejects or drops no-cult Shaman bound spirits',
+        JSON.stringify({ importErrors, importSuccess, roundTripSuccess, serializedSpirits: serialized.boundSpirits, currentSpirits: CD.boundSpirits }));
+    }
+  } else {
+    fail('CharacterData JSON methods not available for provider-backed Animism import test');
+  }
+}
+
 // Test 6.9: localStorage round-trip uses the same complete character snapshot
 {
   const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();

@@ -9561,13 +9561,15 @@ const CharacterData = {
     if (duplicateBoundSpirits.length > 0) {
       errors.push(`Duplicate bound spirit(s): ${duplicateBoundSpirits.join(', ')}`);
     }
-    const importedSorcerySource = resolveActiveSorcerySource(data);
     const importedSorcerySpells = Array.isArray(data.sorcerySpells) ? data.sorcerySpells : [];
     const importedCult = typeof data.cult === 'string' ? CULTS_DATA.find(cult => cult.name === data.cult) : null;
     const importedCultType = importedCult ? detectCultType(importedCult) : null;
+    const importedHigherMagicProviders = resolveHigherMagicProviders(data);
+    const importedSorcerySource = importedHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
     errors.push(...getUnsupportedMagicSelectionErrors(data.cult || null, importedCultType, {
       miracles: data.miracles,
-      boundSpirits: data.boundSpirits
+      boundSpirits: data.boundSpirits,
+      providers: importedHigherMagicProviders
     }));
     const noSourceSpellError = getSorcerySpellsWithoutSourceError(data.sorcerySpells, importedSorcerySource);
     if (noSourceSpellError) {
