@@ -546,6 +546,93 @@ runCommandTest('Render workflow can list sources without rendering pages',
     pass('Mythras Core Mysticism evidence artifacts are bounded, independent, and budgeted');
   }
   const mysticismRaw = readJson('references/mythras-raw/mysticism.json');
+  const coreCareerMagicProviders = readJson('references/mythras-raw/core-career-magic-providers.json');
+  const coreCareersDetail = readJson('references/mythras-raw/careers-detail.json');
+  const coreProviderCareers = new Map((coreCareersDetail.careers || []).map(career => [career.name, career]));
+  const coreProvidersById = new Map((coreCareerMagicProviders.providers || []).map(provider => [provider.id, provider]));
+  const expectedCoreProviders = [
+    {
+      id: 'core-career-shaman-animism',
+      system: 'animism',
+      career: 'Shaman',
+      sourceFile: 'references/mythras-raw/animism.json',
+      requiredSkills: ['Binding (Cult, Totem or Tradition)', 'Trance']
+    },
+    {
+      id: 'core-career-sorcerer-sorcery',
+      system: 'sorcery',
+      career: 'Sorcerer',
+      sourceFile: 'references/mythras-raw/sorcery.json',
+      requiredSkills: ['Invocation (Cult, School or Grimoire)', 'Shaping']
+    },
+    {
+      id: 'core-career-mystic-mysticism',
+      system: 'mysticism',
+      career: 'Mystic',
+      sourceFile: 'references/mythras-raw/mysticism.json',
+      requiredSkills: ['Meditation', 'Mysticism']
+    }
+  ];
+  const coreProviderProblems = [];
+  if (coreCareerMagicProviders.verified !== true) {
+    coreProviderProblems.push('core-career provider metadata is not verified');
+  }
+  if (coreCareerMagicProviders.authority_state !== 'app_access_provider_metadata') {
+    coreProviderProblems.push(`authority_state is ${coreCareerMagicProviders.authority_state}`);
+  }
+  for (const expectedProvider of expectedCoreProviders) {
+    const provider = coreProvidersById.get(expectedProvider.id);
+    const career = coreProviderCareers.get(expectedProvider.career);
+    if (!provider) {
+      coreProviderProblems.push(`missing provider ${expectedProvider.id}`);
+      continue;
+    }
+    if (provider.system !== expectedProvider.system) {
+      coreProviderProblems.push(`${expectedProvider.id} system is ${provider.system}`);
+    }
+    if (provider.source_kind !== 'core-career') {
+      coreProviderProblems.push(`${expectedProvider.id} source_kind is ${provider.source_kind}`);
+    }
+    if (provider.eligibility?.career !== expectedProvider.career) {
+      coreProviderProblems.push(`${expectedProvider.id} career eligibility is ${provider.eligibility?.career}`);
+    }
+    if (provider.app_access?.state !== 'source_backed_provider_verified') {
+      coreProviderProblems.push(`${expectedProvider.id} app_access state is ${provider.app_access?.state}`);
+    }
+    if (provider.precedence?.same_system !== 'selected-cult-provider-supersedes-core-career-provider') {
+      coreProviderProblems.push(`${expectedProvider.id} missing same-system precedence`);
+    }
+    if (provider.precedence?.unrelated_systems !== 'stack') {
+      coreProviderProblems.push(`${expectedProvider.id} missing unrelated-system stacking rule`);
+    }
+    if (!career) {
+      coreProviderProblems.push(`${expectedProvider.id} cites missing career ${expectedProvider.career}`);
+      continue;
+    }
+    for (const requiredSkill of expectedProvider.requiredSkills) {
+      if (!career.professionalSkills?.includes(requiredSkill)) {
+        coreProviderProblems.push(`${expectedProvider.id} career source missing ${requiredSkill}`);
+      }
+      if (!provider.career_skill_requirements?.includes(requiredSkill)) {
+        coreProviderProblems.push(`${expectedProvider.id} provider requirements missing ${requiredSkill}`);
+      }
+    }
+    const careerRef = provider.source_refs?.find(ref => ref.source_file === 'references/mythras-raw/careers-detail.json');
+    const magicRef = provider.source_refs?.find(ref => ref.source_file === expectedProvider.sourceFile);
+    if (careerRef?.json_path !== `$.careers[?(@.name=='${expectedProvider.career}')]`) {
+      coreProviderProblems.push(`${expectedProvider.id} career source_ref missing career JSON path`);
+    }
+    if (magicRef?.verified !== true || !magicRef?.json_path?.startsWith('$.chargen_rules')) {
+      coreProviderProblems.push(`${expectedProvider.id} magic source_ref missing verified chargen rules path`);
+    }
+  }
+  if (coreProviderProblems.length === 0) {
+    pass('Mythras Core career-backed magic providers are source-backed app access metadata');
+  } else {
+    fail('Mythras Core career-backed magic provider metadata is incomplete',
+      JSON.stringify(coreProviderProblems));
+  }
+
   const mysticismDisposition = legacy.dispositions.find(disposition =>
     disposition.id === 'mythras-core-mysticism' ||
     (disposition.paths || []).includes('references/mythras-raw/mysticism.json'));
@@ -609,29 +696,31 @@ runCommandTest('Render workflow can list sources without rendering pages',
   const expectedMysticismFields = new Map([
     ['skills.mysticism.base', [mysticismRaw.chargen_rules?.skills?.mysticism?.base, 'POW+CON']],
     ['skills.meditation.base', [mysticismRaw.chargen_rules?.skills?.meditation?.base, 'INT+CON']],
-    ['starting_at_chargen.app_provider_status', [mysticismRaw.chargen_rules?.starting_at_chargen?.app_provider_status, 'blocked_no_verified_provider']],
-    ['authority_state', [mysticismRaw.authority_state, 'reference_authoritative_not_app_promoted']]
+    ['starting_at_chargen.app_provider_status', [mysticismRaw.chargen_rules?.starting_at_chargen?.app_provider_status, 'source_backed_provider_verified']],
+    ['authority_state', [mysticismRaw.authority_state, 'reference_authoritative_app_provider_backed']]
   ]);
   for (const [label, [actual, expected]] of expectedMysticismFields.entries()) {
     if (actual !== expected) explicitMysticismFieldProblems.push(`${label} is ${actual}`);
   }
   const mysticismAcceptedFactsVerified = mysticismRaw.verified === true &&
     mysticismRaw.core_rules_verified === true &&
-    mysticismRaw.app_access_state === 'blocked_no_verified_provider' &&
+    mysticismRaw.app_access_state === 'source_backed_provider_verified' &&
+    mysticismRaw.app_access_provider_ref === 'references/mythras-raw/core-career-magic-providers.json#core-career-mystic-mysticism' &&
     explicitMysticismFieldProblems.length === 0 &&
     mysticismProvenanceErrors.length === 0 &&
     mysticismSourceRefProblems.length === 0;
   if (!mysticismAcceptedFactsVerified) {
-    fail(`Mysticism raw data must be verified, source-ref governed, and app-blocked until provider evidence exists: ${[
+    fail(`Mysticism raw data must be verified, source-ref governed, and linked to the Core Mystic career provider: ${[
       mysticismRaw.verified !== true ? 'verified is not true' : null,
       mysticismRaw.core_rules_verified !== true ? 'core_rules_verified is not true' : null,
-      mysticismRaw.app_access_state !== 'blocked_no_verified_provider' ? `app_access_state is ${mysticismRaw.app_access_state}` : null,
+      mysticismRaw.app_access_state !== 'source_backed_provider_verified' ? `app_access_state is ${mysticismRaw.app_access_state}` : null,
+      mysticismRaw.app_access_provider_ref !== 'references/mythras-raw/core-career-magic-providers.json#core-career-mystic-mysticism' ? `app_access_provider_ref is ${mysticismRaw.app_access_provider_ref}` : null,
       ...explicitMysticismFieldProblems,
       ...mysticismProvenanceErrors,
       ...mysticismSourceRefProblems
     ].filter(Boolean).join('; ')}`);
   } else {
-    pass('Mysticism raw data is verified from Mythras Core but remains blocked from app access without a provider');
+    pass('Mysticism raw data is verified from Mythras Core and linked to the Core Mystic career provider');
   }
 
   const { detectCultType: appDetectCultType } = loadApp();
@@ -643,9 +732,9 @@ runCommandTest('Render workflow can list sources without rendering pages',
       Array.isArray(blockedMysticismOnlyCultType.types) &&
       !blockedMysticismOnlyCultType.types.includes('mysticism') &&
       blockedMysticismOnlyCultType.blockedTypes?.includes('mysticism')) {
-    pass('App magic detection keeps Mysticism blocked until provider access is source-verified');
+    pass('App magic detection keeps fake Mysticism cult data blocked without a provider context');
   } else {
-    fail('App magic detection must not expose Mysticism while provider access is unverified',
+    fail('App magic detection must not expose fake Mysticism cult data without provider context',
       JSON.stringify(blockedMysticismOnlyCultType));
   }
 

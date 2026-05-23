@@ -149,8 +149,20 @@
         "mythras-core"
       ],
       "scan_for_unverified": true,
-      "rationale": "Mythras Core Mysticism is now bounded by page-work evidence and remains reference-only until a source-backed app access provider is verified.",
+      "rationale": "Mythras Core Mysticism is bounded by page-work evidence and app access is linked to the derived Core Mystic career provider metadata.",
       "enforce_source_refs": true
+    },
+    {
+      "id": "mythras-core-career-magic-providers",
+      "path": "references/mythras-raw/core-career-magic-providers.json",
+      "artifact_class": "normalized_authority_json",
+      "disposition": "governed-now",
+      "required_scope": true,
+      "source_ids": [
+        "mythras-core"
+      ],
+      "scan_for_unverified": true,
+      "rationale": "Core career-backed magic provider metadata is derived from source-governed Mythras Core career data and verified magic rules."
     },
     {
       "id": "mythras-raw",

@@ -1,0 +1,108 @@
+{
+  "source": "Mythras Core Rulebook (3rd Printing, 2018)",
+  "derived_artifact": "Core career-backed magic provider metadata for app access",
+  "verified": true,
+  "authority_state": "app_access_provider_metadata",
+  "derivation_note": "These provider records derive app access from Mythras Core career skill lists and the corresponding verified magic rule extracts. They do not claim that the magic chapters themselves name careers as providers.",
+  "providers": [
+    {
+      "id": "core-career-shaman-animism",
+      "label": "Core Animism via Shaman career",
+      "system": "animism",
+      "source_kind": "core-career",
+      "eligibility": {
+        "career": "Shaman"
+      },
+      "career_skill_requirements": [
+        "Binding (Cult, Totem or Tradition)",
+        "Trance"
+      ],
+      "app_access": {
+        "state": "source_backed_provider_verified",
+        "summary": "A character selecting the Mythras Core Shaman career has the Animism professional skills used by Core Animism."
+      },
+      "precedence": {
+        "same_system": "selected-cult-provider-supersedes-core-career-provider",
+        "unrelated_systems": "stack"
+      },
+      "source_refs": [
+        {
+          "source_file": "references/mythras-raw/careers-detail.json",
+          "json_path": "$.careers[?(@.name=='Shaman')]",
+          "verified": true
+        },
+        {
+          "source_file": "references/mythras-raw/animism.json",
+          "json_path": "$.chargen_rules",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "core-career-sorcerer-sorcery",
+      "label": "Core Sorcery via Sorcerer career",
+      "system": "sorcery",
+      "source_kind": "core-career",
+      "eligibility": {
+        "career": "Sorcerer"
+      },
+      "career_skill_requirements": [
+        "Invocation (Cult, School or Grimoire)",
+        "Shaping"
+      ],
+      "app_access": {
+        "state": "source_backed_provider_verified",
+        "summary": "A character selecting the Mythras Core Sorcerer career has the Invocation and Shaping professional skills used by Core Sorcery."
+      },
+      "precedence": {
+        "same_system": "selected-cult-provider-supersedes-core-career-provider",
+        "unrelated_systems": "stack"
+      },
+      "source_refs": [
+        {
+          "source_file": "references/mythras-raw/careers-detail.json",
+          "json_path": "$.careers[?(@.name=='Sorcerer')]",
+          "verified": true
+        },
+        {
+          "source_file": "references/mythras-raw/sorcery.json",
+          "json_path": "$.chargen_rules",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "core-career-mystic-mysticism",
+      "label": "Core Mysticism via Mystic career",
+      "system": "mysticism",
+      "source_kind": "core-career",
+      "eligibility": {
+        "career": "Mystic"
+      },
+      "career_skill_requirements": [
+        "Meditation",
+        "Mysticism"
+      ],
+      "app_access": {
+        "state": "source_backed_provider_verified",
+        "summary": "A character selecting the Mythras Core Mystic career has the Meditation and Mysticism professional skills used by Core Mysticism."
+      },
+      "precedence": {
+        "same_system": "selected-cult-provider-supersedes-core-career-provider",
+        "unrelated_systems": "stack"
+      },
+      "source_refs": [
+        {
+          "source_file": "references/mythras-raw/careers-detail.json",
+          "json_path": "$.careers[?(@.name=='Mystic')]",
+          "verified": true
+        },
+        {
+          "source_file": "references/mythras-raw/mysticism.json",
+          "json_path": "$.chargen_rules",
+          "verified": true
+        }
+      ]
+    }
+  ]
+}
