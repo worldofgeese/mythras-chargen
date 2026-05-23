@@ -1,0 +1,72 @@
+{
+  "artifact_id": "cse-page-0386-extraction-row-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "rendered-page-ocr-pdftext-row-crosscheck.v1",
+  "source_id": "cse",
+  "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+  "pdf_page": 386,
+  "printed_page_label": "386",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/cse/page-0386.png",
+    "image_sha256": "6f90f8360d5b1e6e25234fb840de3e7d87e0c827453f26987bb515d0014ec389",
+    "dimensions": {
+      "width": 2481,
+      "height": 3508
+    }
+  },
+  "prompt_id": "automated-cse-row-pdftext-extraction.v1",
+  "prompt_hash": "54b4645403c509dbe1f54d90fcd6fa00fa3f19d03e2a44b92183a0e3111babd9",
+  "extractor_prompt_id": "automated-cse-row-pdftext-extraction.v1",
+  "extractor_run_id": "cse-app-facing-combat-style-row-evidence-2026-05-23",
+  "tool_identity": "pdftotext 24.x text layer; rendered by pdftoppm per source manifest",
+  "schema_version": 1,
+  "extraction_method": "bounded PDF text-layer row facts with rendered-page identity",
+  "text_layer": {
+    "method": "pdftotext -layout",
+    "sha256": "25c18f804205df9564376bc7153489e111a610f34535fd744bfcc1854df50a02",
+    "char_count": 2531,
+    "non_empty": true
+  },
+  "blocks": [
+    {
+      "block_id": "cse-p0386-row-esrolian-citizen-legionary",
+      "block_type": "combat_style_row",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Esrolian Citizen Legionary; traits: Formation Fighting*; weapons: Shortsword, Javelin, Sling, Target Shield.",
+      "excerpt_hash": "7a1322d612bddd0957954ee5a49c74ffacd1fc075cf78c04b6ff0e8597a8323c",
+      "confidence": "pdf_text_layer_with_rendered_ocr_title_crosscheck",
+      "facts": {
+        "page": 386,
+        "row_index": 3,
+        "source_name": "Esrolian Citizen Legionary",
+        "app_culture": "Esrolian",
+        "app_name": "Citizen Legionary",
+        "source_weapons": [
+          "Shortsword",
+          "Javelin",
+          "Sling",
+          "Target Shield"
+        ],
+        "app_weapons": [
+          "Shortsword",
+          "Javelin",
+          "Sling",
+          "Target Shield"
+        ],
+        "printed_traits": [
+          "Formation Fighting*"
+        ],
+        "normalized_traits": [
+          "Formation Fighting"
+        ],
+        "value_hash": "a26ee17f7e1b1d4eb49652db0d3c83ed8fd5c412ad98fd7a043c1d94350a053b"
+      }
+    }
+  ]
+}

@@ -29,7 +29,7 @@
     },
     {
       "constant_name": "COMBAT_STYLES_DATA",
-      "status": "source_blocked",
+      "status": "normalized",
       "disposition": "governed-now",
       "source_files": [
         "references/combat-styles.json"
@@ -37,7 +37,7 @@
       "source_ids": [
         "cse"
       ],
-      "rationale": "Inline combat styles map to CSE-derived normalized records. The CSE PDF is player-visible, but page/block attestation remains blocked until rendered pages and independent vision verification exist.",
+      "rationale": "Inline combat styles map to CSE-derived normalized records with app-facing row fields verified against PDF text rows plus rendered page hashes and independent rendered-page OCR title checks.",
       "normalized_file": "references/combat-styles.json",
       "normalized_path": "$.styles",
       "source_refs": [
@@ -45,14 +45,56 @@
           "source_id": "cse",
           "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
           "page_manifest_path": "references/sources/pages/cse.json",
-          "coverage_state": "blocked",
-          "evidence_state": "legacy_page_citation_pending_vision_verification"
+          "coverage_state": "verified",
+          "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
+          "evidence_workflow": "rendered-page-ocr-pdftext-row-crosscheck.v1",
+          "pages": [
+            146,
+            147,
+            148,
+            168,
+            169,
+            170,
+            171,
+            172,
+            173,
+            174,
+            175,
+            186,
+            187,
+            188,
+            189,
+            190,
+            191,
+            192,
+            193,
+            194,
+            386,
+            387,
+            388,
+            390,
+            391,
+            392,
+            928,
+            930,
+            931,
+            932,
+            936,
+            937,
+            939,
+            940,
+            941,
+            943,
+            944,
+            945,
+            946,
+            947,
+            948
+          ]
         }
       ],
-      "blocked_by": [
-        "Published CSE PDF identity and page count are recorded, but rendered page/block evidence is not committed.",
-        "Legacy CSE hash/page citations cannot be promoted without independent vision verification."
-      ]
+      "fact_id": "app:COMBAT_STYLES_DATA:cse",
+      "canonical_value_hash": "0e30acc46986e16662c8a7bf92665ff0e1589c60694933b9fb4b35eadd406cff"
     },
     {
       "constant_name": "CULTURES_DATA",

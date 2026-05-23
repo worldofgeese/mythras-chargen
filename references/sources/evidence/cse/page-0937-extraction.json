@@ -1,0 +1,76 @@
+{
+  "artifact_id": "cse-page-0937-extraction-row-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "rendered-page-ocr-pdftext-row-crosscheck.v1",
+  "source_id": "cse",
+  "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+  "pdf_page": 937,
+  "printed_page_label": "937",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/cse/page-0937.png",
+    "image_sha256": "1e3f0943b484cbc640b36a88dc457590880c39e3a9d442a1f0d016aa976da7f6",
+    "dimensions": {
+      "width": 2481,
+      "height": 3508
+    }
+  },
+  "prompt_id": "automated-cse-row-pdftext-extraction.v1",
+  "prompt_hash": "54b4645403c509dbe1f54d90fcd6fa00fa3f19d03e2a44b92183a0e3111babd9",
+  "extractor_prompt_id": "automated-cse-row-pdftext-extraction.v1",
+  "extractor_run_id": "cse-app-facing-combat-style-row-evidence-2026-05-23",
+  "tool_identity": "pdftotext 24.x text layer; rendered by pdftoppm per source manifest",
+  "schema_version": 1,
+  "extraction_method": "bounded PDF text-layer row facts with rendered-page identity",
+  "text_layer": {
+    "method": "pdftotext -layout",
+    "sha256": "5f74c27e9a09577df4aa3e7e7d1be32814cc5a5a80a33492d81c54a861d1ccf5",
+    "char_count": 3509,
+    "non_empty": true
+  },
+  "blocks": [
+    {
+      "block_id": "cse-p0937-row-cannibal-cult",
+      "block_type": "combat_style_row",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Cannibal Cult; traits: Assassination, Knockout Blow, Mancatcher; weapons: Club, Net, Whip, Dagger.",
+      "excerpt_hash": "f71dd96764f380c8c5963f3e50cc72db80e98d453499a2757fd8792f894c70e7",
+      "confidence": "pdf_text_layer_with_rendered_ocr_title_crosscheck",
+      "facts": {
+        "page": 937,
+        "row_index": 31,
+        "source_name": "Cannibal Cult",
+        "app_culture": "Praxian",
+        "app_name": "Cannibal Cult",
+        "source_weapons": [
+          "Club",
+          "Net",
+          "Whip",
+          "Dagger"
+        ],
+        "app_weapons": [
+          "Club",
+          "Net",
+          "Whip",
+          "Dagger"
+        ],
+        "printed_traits": [
+          "Assassination",
+          "Knockout Blow",
+          "Mancatcher"
+        ],
+        "normalized_traits": [
+          "Assassination",
+          "Knockout Blow",
+          "Mancatcher"
+        ],
+        "value_hash": "62aa68da633edcb0ef688ddaf999273024dc065bdfc0a5709a313d916cf366d0"
+      }
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "artifact_id": "cse-page-0943-extraction-row-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "rendered-page-ocr-pdftext-row-crosscheck.v1",
+  "source_id": "cse",
+  "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+  "pdf_page": 943,
+  "printed_page_label": "943",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/cse/page-0943.png",
+    "image_sha256": "309f6d8119a33b8e56343ff4dd4e49d95ce137b388dcc59982514bc990a25ca1",
+    "dimensions": {
+      "width": 2481,
+      "height": 3508
+    }
+  },
+  "prompt_id": "automated-cse-row-pdftext-extraction.v1",
+  "prompt_hash": "54b4645403c509dbe1f54d90fcd6fa00fa3f19d03e2a44b92183a0e3111babd9",
+  "extractor_prompt_id": "automated-cse-row-pdftext-extraction.v1",
+  "extractor_run_id": "cse-app-facing-combat-style-row-evidence-2026-05-23",
+  "tool_identity": "pdftotext 24.x text layer; rendered by pdftoppm per source manifest",
+  "schema_version": 1,
+  "extraction_method": "bounded PDF text-layer row facts with rendered-page identity",
+  "text_layer": {
+    "method": "pdftotext -layout",
+    "sha256": "345ed7c4bb0f4e3fff2f87b80e1e5e85c495fe69931b7c0c48450aadc76f989f",
+    "char_count": 2949,
+    "non_empty": true
+  },
+  "blocks": [
+    {
+      "block_id": "cse-p0943-row-ostrich",
+      "block_type": "combat_style_row",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Ostrich; traits: Mounted Combat, Ranged Marksman, Skirmisher; weapons: Short Spear, Boomerang, Dart, Sling, Praxian Shield.",
+      "excerpt_hash": "b68173a1b8676f2b56b37e7f47a160f52d1216139577b003c4bb02ef4671af42",
+      "confidence": "pdf_text_layer_with_rendered_ocr_title_crosscheck",
+      "facts": {
+        "page": 943,
+        "row_index": 35,
+        "source_name": "Ostrich",
+        "app_culture": "Praxian",
+        "app_name": "Ostrich",
+        "source_weapons": [
+          "Short Spear",
+          "Boomerang",
+          "Dart",
+          "Sling",
+          "Praxian Shield"
+        ],
+        "app_weapons": [
+          "Shortspear",
+          "Boomerang",
+          "Dart",
+          "Sling",
+          "Praxian Shield"
+        ],
+        "printed_traits": [
+          "Mounted Combat",
+          "Ranged Marksman",
+          "Skirmisher"
+        ],
+        "normalized_traits": [
+          "Mounted Combat",
+          "Ranged Marksman",
+          "Skirmisher"
+        ],
+        "value_hash": "6bc90105ed6239daf42ea32cdda9c1b2715a8e239949d6e66a597238652f38b7"
+      }
+    }
+  ]
+}

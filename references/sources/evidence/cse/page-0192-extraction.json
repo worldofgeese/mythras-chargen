@@ -1,0 +1,76 @@
+{
+  "artifact_id": "cse-page-0192-extraction-row-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "rendered-page-ocr-pdftext-row-crosscheck.v1",
+  "source_id": "cse",
+  "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+  "pdf_page": 192,
+  "printed_page_label": "192",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/cse/page-0192.png",
+    "image_sha256": "6435cb561c97f23513b651412da4ff42d7da2d57e29357be63a9dafbf2e5e60b",
+    "dimensions": {
+      "width": 2481,
+      "height": 3508
+    }
+  },
+  "prompt_id": "automated-cse-row-pdftext-extraction.v1",
+  "prompt_hash": "54b4645403c509dbe1f54d90fcd6fa00fa3f19d03e2a44b92183a0e3111babd9",
+  "extractor_prompt_id": "automated-cse-row-pdftext-extraction.v1",
+  "extractor_run_id": "cse-app-facing-combat-style-row-evidence-2026-05-23",
+  "tool_identity": "pdftotext 24.x text layer; rendered by pdftoppm per source manifest",
+  "schema_version": 1,
+  "extraction_method": "bounded PDF text-layer row facts with rendered-page identity",
+  "text_layer": {
+    "method": "pdftotext -layout",
+    "sha256": "27e42d8b7a4b101590d07b93d39df7643f00081460731a36ae5ac220a080cb85",
+    "char_count": 3587,
+    "non_empty": true
+  },
+  "blocks": [
+    {
+      "block_id": "cse-p0192-row-lunar-pelorian-cavalry",
+      "block_type": "combat_style_row",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Lunar Pelorian Cavalry; traits: Pelorian Cavalry, Mounted Skirmisher; weapons: Kontos, Sickle Sword, Recurve Bow, Pelorian Aspis, Pelorian Peltast Shield.",
+      "excerpt_hash": "c85aec1a93b0e4b8c775c805571dc8a99806077b79355d686280284de42bf1c5",
+      "confidence": "pdf_text_layer_with_rendered_ocr_title_crosscheck",
+      "facts": {
+        "page": 192,
+        "row_index": 15,
+        "source_name": "Lunar Pelorian Cavalry",
+        "app_culture": "Lunar Heartland",
+        "app_name": "Pelorian Cavalry",
+        "source_weapons": [
+          "Kontos",
+          "Sickle Sword",
+          "Recurve Bow",
+          "Pelorian Aspis",
+          "Pelorian Peltast Shield"
+        ],
+        "app_weapons": [
+          "Kontos",
+          "Sickle Sword/Khopesh",
+          "Recurve Bow",
+          "Pelorian Aspis",
+          "Pelorian Peltast Shield"
+        ],
+        "printed_traits": [
+          "Pelorian Cavalry",
+          "Mounted Skirmisher"
+        ],
+        "normalized_traits": [
+          "Pelorian Cavalry",
+          "Mounted Skirmisher"
+        ],
+        "value_hash": "20252fe6a90738c9c27e8d558bf9ad2ece83488f520dc73260b1ae7dad8ab9b0"
+      }
+    }
+  ]
+}

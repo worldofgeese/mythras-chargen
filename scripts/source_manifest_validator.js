@@ -268,12 +268,36 @@ function validatePageCoverage(pageDoc, manifestById, schema, relPath, root = ROO
     }
     if (page.contributes === false && !page.exclusion_reason) add(errors, label, 'non-contributing page requires exclusion_reason');
   }
-  if (Number.isInteger(expectedPageCount) && (pageDoc.pages || []).length > 0) {
+  const requiresAllPageScaffold = pageDoc.requires_all_page_scaffold === true ||
+    (typeof pageDoc.coverage_mode === 'string' && pageDoc.coverage_mode.includes('all-page-scaffold'));
+  const sparseSubset = Number.isInteger(expectedPageCount) && (pageDoc.pages || []).length > 0 &&
+    (pageDoc.pages || []).length !== expectedPageCount;
+  const sparseVerified = sparseSubset && !requiresAllPageScaffold &&
+    ['verified', 'normalized', 'accepted'].includes(pageDoc.coverage_state);
+  if (Number.isInteger(expectedPageCount) && (pageDoc.pages || []).length > 0 && requiresAllPageScaffold) {
     if ((pageDoc.pages || []).length !== expectedPageCount) {
       add(errors, relPath, `expected ${expectedPageCount} page records, found ${(pageDoc.pages || []).length}`);
     }
     for (let page = 1; page <= expectedPageCount; page++) {
       if (!seenPages.has(page)) add(errors, relPath, `missing pdf_page ${page}`);
+    }
+  }
+  if (sparseVerified) {
+    if (!Array.isArray(pageDoc.target_pages) || pageDoc.target_pages.length === 0) {
+      add(errors, relPath, 'sparse verified coverage requires non-empty target_pages[]');
+    } else {
+      const targetPages = new Set();
+      for (const page of pageDoc.target_pages) {
+        if (!Number.isInteger(page) || page <= 0) add(errors, relPath, `invalid target pdf_page ${page}`);
+        if (targetPages.has(page)) add(errors, relPath, `duplicate target pdf_page ${page}`);
+        targetPages.add(page);
+      }
+      for (const page of targetPages) {
+        if (!seenPages.has(page)) add(errors, relPath, `target pdf_page ${page} is missing from pages[]`);
+      }
+      for (const page of seenPages) {
+        if (!targetPages.has(page)) add(errors, relPath, `sparse page record ${page} is not declared in target_pages[]`);
+      }
     }
   }
 

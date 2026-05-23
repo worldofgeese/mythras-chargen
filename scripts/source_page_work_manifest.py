@@ -59,7 +59,22 @@ def validate() -> list[str]:
                 errors.append(f"{label}: source_revision_id mismatch")
             if record.get("work_state") in {"normalized", "accepted"} and not record.get("derived_facts"):
                 errors.append(f"{label}: normalized/accepted page requires derived_facts")
-        if isinstance(expected_page_count, int) and page_doc.get("pages"):
+        coverage_mode = page_doc.get("coverage_mode")
+        requires_all_page_scaffold = page_doc.get("requires_all_page_scaffold") is True or (
+            isinstance(coverage_mode, str) and "all-page-scaffold" in coverage_mode
+        )
+        sparse_subset = (
+            isinstance(expected_page_count, int)
+            and bool(page_doc.get("pages"))
+            and len(page_doc.get("pages", [])) != expected_page_count
+        )
+        sparse_verified = (
+            sparse_subset
+            and
+            not requires_all_page_scaffold
+            and page_doc.get("coverage_state") in {"verified", "normalized", "accepted"}
+        )
+        if isinstance(expected_page_count, int) and page_doc.get("pages") and requires_all_page_scaffold:
             if len(page_doc.get("pages", [])) != expected_page_count:
                 errors.append(
                     f"{page_path.relative_to(ROOT)}: expected {expected_page_count} page records, "
@@ -68,6 +83,24 @@ def validate() -> list[str]:
             for page in range(1, expected_page_count + 1):
                 if page not in seen_pages:
                     errors.append(f"{source_id}: missing pdf_page {page}")
+        if sparse_verified:
+            target_pages = page_doc.get("target_pages")
+            if not isinstance(target_pages, list) or not target_pages:
+                errors.append(f"{source_id}: sparse verified coverage requires non-empty target_pages[]")
+            else:
+                target_seen: set[int] = set()
+                for page in target_pages:
+                    if not isinstance(page, int) or page <= 0:
+                        errors.append(f"{source_id}: invalid target pdf_page {page}")
+                    if page in target_seen:
+                        errors.append(f"{source_id}: duplicate target pdf_page {page}")
+                    target_seen.add(page)
+                for page in target_seen:
+                    if page not in seen_pages:
+                        errors.append(f"{source_id}: target pdf_page {page} is missing from pages[]")
+                for page in seen_pages:
+                    if page not in target_seen:
+                        errors.append(f"{source_id}: sparse page record {page} is not declared in target_pages[]")
     return errors
 
 

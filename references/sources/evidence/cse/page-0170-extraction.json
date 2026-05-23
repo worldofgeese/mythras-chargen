@@ -1,0 +1,76 @@
+{
+  "artifact_id": "cse-page-0170-extraction-row-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "rendered-page-ocr-pdftext-row-crosscheck.v1",
+  "source_id": "cse",
+  "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+  "pdf_page": 170,
+  "printed_page_label": "170",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/cse/page-0170.png",
+    "image_sha256": "fa551276cd181a2f060b89a9aeaa044421c912761a97219a40ea9ef2473485f4",
+    "dimensions": {
+      "width": 2481,
+      "height": 3508
+    }
+  },
+  "prompt_id": "automated-cse-row-pdftext-extraction.v1",
+  "prompt_hash": "54b4645403c509dbe1f54d90fcd6fa00fa3f19d03e2a44b92183a0e3111babd9",
+  "extractor_prompt_id": "automated-cse-row-pdftext-extraction.v1",
+  "extractor_run_id": "cse-app-facing-combat-style-row-evidence-2026-05-23",
+  "tool_identity": "pdftotext 24.x text layer; rendered by pdftoppm per source manifest",
+  "schema_version": 1,
+  "extraction_method": "bounded PDF text-layer row facts with rendered-page identity",
+  "text_layer": {
+    "method": "pdftotext -layout",
+    "sha256": "ba535d9046c8a96197553a12f8b7a81f8156b187dfc71de6f944cc31020e6800",
+    "char_count": 3240,
+    "non_empty": true
+  },
+  "blocks": [
+    {
+      "block_id": "cse-p0170-row-sartarite-loyal-housecarl",
+      "block_type": "combat_style_row",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Sartarite Loyal Housecarl; traits: Batter Aside, Intimidating Scream, Shield Wall*; weapons: Broadsword, Short Spear, Great Axe, Orlanthi Scutum.",
+      "excerpt_hash": "3c47b0a625c29149a08769dcfaf73bab1e86862104b777fe4d02218884ddc74a",
+      "confidence": "pdf_text_layer_with_rendered_ocr_title_crosscheck",
+      "facts": {
+        "page": 170,
+        "row_index": 20,
+        "source_name": "Sartarite Loyal Housecarl",
+        "app_culture": "Sartarite (Heortling)",
+        "app_name": "Loyal Housecarl",
+        "source_weapons": [
+          "Broadsword",
+          "Short Spear",
+          "Great Axe",
+          "Orlanthi Scutum"
+        ],
+        "app_weapons": [
+          "Broadsword",
+          "Shortspear",
+          "Great Axe",
+          "Orlanthi Scutum"
+        ],
+        "printed_traits": [
+          "Batter Aside",
+          "Intimidating Scream",
+          "Shield Wall*"
+        ],
+        "normalized_traits": [
+          "Batter Aside",
+          "Intimidating Scream",
+          "Shield Wall"
+        ],
+        "value_hash": "64b699885a1b7cfd8c580787428d7b798871a32e10dabd3a5ce003079dff3a72"
+      }
+    }
+  ]
+}

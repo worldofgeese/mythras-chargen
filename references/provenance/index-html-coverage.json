@@ -138,7 +138,7 @@
         "PDF export combat styles"
       ],
       "status": "verified",
-      "summary": "AiG culture data is linked to CSE combat style IDs; tests require inline combat styles to match the CSE reference JSON.",
+      "summary": "AiG culture data is linked to CSE combat style IDs; app-facing CSE combat-style rows now have bounded PDF-text row extraction and independent rendered-page OCR title verification artifacts.",
       "references": [
         {
           "path": "references/aig-raw/cultures.json",
@@ -148,12 +148,28 @@
         {
           "path": "references/combat-styles.json",
           "source": "Combat Styles Encyclopedia",
-          "citation": "style page refs in each row"
+          "citation": "style page refs in each row",
+          "verified": true,
+          "source_ref": {
+            "source_id": "cse",
+            "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+            "page_manifest_path": "references/sources/pages/cse.json",
+            "coverage_state": "verified",
+            "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck"
+          }
         },
         {
           "path": "references/cse-raw/combat-styles-cse.json",
           "source": "Combat Styles Encyclopedia raw extraction",
-          "citation": "style page refs in each row"
+          "citation": "style page refs in each row",
+          "verified": true,
+          "source_ref": {
+            "source_id": "cse",
+            "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+            "page_manifest_path": "references/sources/pages/cse.json",
+            "coverage_state": "verified",
+            "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck"
+          }
         }
       ],
       "blockers": []

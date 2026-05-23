@@ -3,24 +3,1949 @@
   "schema": "references/sources/schema.json#/schemas/page_coverage",
   "source_id": "cse",
   "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
-  "coverage_state": "blocked",
-  "coverage_mode": "blocked-pending-vision-page-evidence",
+  "coverage_state": "verified",
+  "coverage_mode": "targeted-app-facing-combat-style-row-evidence",
   "expected_page_count": 1109,
-  "pages": [],
+  "pages": [
+    {
+      "pdf_page": 146,
+      "printed_page_label": "146",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0146.png",
+        "image_sha256": "9c4feb222c1d25e01894850593d28a7757ff0fe59fa2418f79bc2e2cc80db816",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0146-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0146-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:balazaring-hawk-slayer:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 0,
+          "source_name": "Balazaring Hawk Slayer",
+          "app_name": "Hawk Slayer",
+          "app_culture": "Balazaring",
+          "block_ids": [
+            "cse-p0146-row-balazaring-hawk-slayer"
+          ],
+          "value_hash": "679a47c3683225afe663a0785ae0c4dfabf42e2e73b72b50032e95ff683e5969"
+        }
+      ]
+    },
+    {
+      "pdf_page": 147,
+      "printed_page_label": "147",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0147.png",
+        "image_sha256": "79c0427c611bfd22a2a8f6d96aa819f5aaaf2befa270d0c36a6d9eb6e188d277",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0147-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0147-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:balazaring-hunter-raider:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 1,
+          "source_name": "Balazaring Hunter Raider",
+          "app_name": "Hunter Raider",
+          "app_culture": "Balazaring",
+          "block_ids": [
+            "cse-p0147-row-balazaring-hunter-raider"
+          ],
+          "value_hash": "6ae53e059ed624e05b39c837d27bf5d7e73278d6dda0f0c0e3fb17908722dbf5"
+        }
+      ]
+    },
+    {
+      "pdf_page": 148,
+      "printed_page_label": "148",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0148.png",
+        "image_sha256": "625c78500c73732f52d665acfc073e1a885f7f1aaa6251d32ccf29bacef96d04",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0148-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0148-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:balazaring-pony-cavalry:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 2,
+          "source_name": "Balazaring Pony Cavalry",
+          "app_name": "Pony Cavalry",
+          "app_culture": "Balazaring",
+          "block_ids": [
+            "cse-p0148-row-balazaring-pony-cavalry"
+          ],
+          "value_hash": "7a4ea43c1e8457f4327b8d4da90e78207eb0fa48ccfb2dee93300e4f45d5cb57"
+        }
+      ]
+    },
+    {
+      "pdf_page": 168,
+      "printed_page_label": "168",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0168.png",
+        "image_sha256": "70e6f3c621522104ec440c112b558d516f543275015ff380a90facfa0cbce21a",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0168-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0168-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:sartarite-alynx-brother:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 18,
+          "source_name": "Sartarite Alynx Brother",
+          "app_name": "Alynx Brother",
+          "app_culture": "Sartarite (Heortling)",
+          "block_ids": [
+            "cse-p0168-row-sartarite-alynx-brother"
+          ],
+          "value_hash": "40fb572c2fb4cd9b086527bc07803cdd7d29ed1874323731228ce9846fdd8d00"
+        }
+      ]
+    },
+    {
+      "pdf_page": 169,
+      "printed_page_label": "169",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0169.png",
+        "image_sha256": "c8a40ee08c5e6576917dbf734220d40dccf51b42231435978cb2a10b55c62d76",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0169-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0169-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:sartarite-hill-clan-levy:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 19,
+          "source_name": "Sartarite Hill Clan Levy",
+          "app_name": "Hill Clan Levy",
+          "app_culture": "Sartarite (Heortling)",
+          "block_ids": [
+            "cse-p0169-row-sartarite-hill-clan-levy"
+          ],
+          "value_hash": "e0d3db5342ae162c0569b390dcee36131ee42678b8b47ea0ad8f2129c6945537"
+        }
+      ]
+    },
+    {
+      "pdf_page": 170,
+      "printed_page_label": "170",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0170.png",
+        "image_sha256": "fa551276cd181a2f060b89a9aeaa044421c912761a97219a40ea9ef2473485f4",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0170-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0170-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:sartarite-loyal-housecarl:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 20,
+          "source_name": "Sartarite Loyal Housecarl",
+          "app_name": "Loyal Housecarl",
+          "app_culture": "Sartarite (Heortling)",
+          "block_ids": [
+            "cse-p0170-row-sartarite-loyal-housecarl"
+          ],
+          "value_hash": "64b699885a1b7cfd8c580787428d7b798871a32e10dabd3a5ce003079dff3a72"
+        }
+      ]
+    },
+    {
+      "pdf_page": 171,
+      "printed_page_label": "171",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0171.png",
+        "image_sha256": "0a75470754bb3ad5e796f4b2d78dc9f2aefebab655cba8eb4512801a71b4e76d",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0171-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0171-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:sartarite-noble:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 21,
+          "source_name": "Sartarite Noble",
+          "app_name": "Sartarite Noble",
+          "app_culture": "Sartarite (Heortling)",
+          "block_ids": [
+            "cse-p0171-row-sartarite-noble"
+          ],
+          "value_hash": "a7ea224b244e03ad7961a82c5cede003b377fa1933066d00f0ac56724ff04827"
+        }
+      ]
+    },
+    {
+      "pdf_page": 172,
+      "printed_page_label": "172",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0172.png",
+        "image_sha256": "c7ff0452c725dbd80703d1c3f098015fdf12a119f8e7be418966733bca338a29",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0172-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0172-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:sartarite-upland-crofter:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 22,
+          "source_name": "Sartarite Upland Crofter",
+          "app_name": "Upland Crofter",
+          "app_culture": "Sartarite (Heortling)",
+          "block_ids": [
+            "cse-p0172-row-sartarite-upland-crofter"
+          ],
+          "value_hash": "25a0beeef61bd52b55135ad3b4a6ee79cb4c5b9bc3e14218f4b19b3b7ded6b35"
+        }
+      ]
+    },
+    {
+      "pdf_page": 173,
+      "printed_page_label": "173",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0173.png",
+        "image_sha256": "399445a1119b63c0677a88c8621a4aefb0a4df6b49254d6b893ec3faface39fd",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0173-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0173-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:tarshite-militia:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 23,
+          "source_name": "Tarshite Militia",
+          "app_name": "Tarshite Militia",
+          "app_culture": "Sartarite (Heortling)",
+          "block_ids": [
+            "cse-p0173-row-tarshite-militia"
+          ],
+          "value_hash": "1da2749a08b17f06d3b22ca104d4671c582580c172dfa28b2365c1a711cef662"
+        }
+      ]
+    },
+    {
+      "pdf_page": 174,
+      "printed_page_label": "174",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0174.png",
+        "image_sha256": "f5825aed477c5dd06c4cc401ed5e7a7608decbb02f56b69eb86190e46f1000f5",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0174-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0174-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:telmori-hunter:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 24,
+          "source_name": "Telmori Hunter",
+          "app_name": "Telmori Hunter",
+          "app_culture": "Telmori Hsunchen",
+          "block_ids": [
+            "cse-p0174-row-telmori-hunter"
+          ],
+          "value_hash": "0845b9179783337914d7516e0fb70cafce5f63a2a1db4f2be6682674ef963bd7"
+        }
+      ]
+    },
+    {
+      "pdf_page": 175,
+      "printed_page_label": "175",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0175.png",
+        "image_sha256": "fdba39b90059d1b6e76c841a33aed0ce5942efeeb4020c2f710b39f4e289dac9",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0175-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0175-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:telmori-wolf-hunter:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 25,
+          "source_name": "Telmori Wolf Hunter",
+          "app_name": "Wolf Hunter",
+          "app_culture": "Telmori Hsunchen",
+          "block_ids": [
+            "cse-p0175-row-telmori-wolf-hunter"
+          ],
+          "value_hash": "6398d5a385c90ce26d0c9b4ef10c33ec8e612ae153e823e99fa7c6ebb60bfdc1"
+        }
+      ]
+    },
+    {
+      "pdf_page": 186,
+      "printed_page_label": "186",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0186.png",
+        "image_sha256": "f24e80df88879b491ddad39c0e392ea39593dfbab8efed72d7e921f6c3d2135a",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0186-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0186-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:lunar-colonial-noble:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 9,
+          "source_name": "Lunar Colonial Noble",
+          "app_name": "Colonial Noble",
+          "app_culture": "Lunar Provincial",
+          "block_ids": [
+            "cse-p0186-row-lunar-colonial-noble"
+          ],
+          "value_hash": "dd494eab73b006371624fa1167aae22aa715647206e39d590264999af22fa39f"
+        }
+      ]
+    },
+    {
+      "pdf_page": 187,
+      "printed_page_label": "187",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0187.png",
+        "image_sha256": "bcef957033a34967a3fed201ed1a1ee3980a943571eba082c83775033f9bf177",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0187-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0187-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:lunar-colonial-survivalist:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 10,
+          "source_name": "Lunar Colonial Survivalist",
+          "app_name": "Colonial Survivalist",
+          "app_culture": "Lunar Provincial",
+          "block_ids": [
+            "cse-p0187-row-lunar-colonial-survivalist"
+          ],
+          "value_hash": "54a90f85c17fcb04e6ed05eff75acf75c5569c63863baf5f4866ac615e5dad49"
+        }
+      ]
+    },
+    {
+      "pdf_page": 188,
+      "printed_page_label": "188",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0188.png",
+        "image_sha256": "67933b27d41dd8cef880fbaa0f23fee52bb950c50eb38111658f5618014a1a44",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0188-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0188-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:lunar-corps-hoplite:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 11,
+          "source_name": "Lunar Corps Hoplite",
+          "app_name": "Lunar Corps Hoplite",
+          "app_culture": "Lunar Heartland",
+          "block_ids": [
+            "cse-p0188-row-lunar-corps-hoplite"
+          ],
+          "value_hash": "d9ac2fad711bf9075d29569391263d8147da06c6c39136d1483a24c86432af3d"
+        }
+      ]
+    },
+    {
+      "pdf_page": 189,
+      "printed_page_label": "189",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0189.png",
+        "image_sha256": "e6c635381218b364c0a5ed3f4fb44a2f4b33d8c63bf897467ec7345cf02ed79e",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0189-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0189-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:lunar-dara-happan-heavy-infantry:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 12,
+          "source_name": "Lunar Dara Happan Heavy Infantry",
+          "app_name": "Dara Happan Heavy Infantry",
+          "app_culture": "Lunar Heartland",
+          "block_ids": [
+            "cse-p0189-row-lunar-dara-happan-heavy-infantry"
+          ],
+          "value_hash": "f330625a70cb693a46219561e9b053a708003031cb40977f49c3c8b22296a4b7"
+        }
+      ]
+    },
+    {
+      "pdf_page": 190,
+      "printed_page_label": "190",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0190.png",
+        "image_sha256": "521f53598f4f8313a0f49f8e9db770758d59fcb5c4ce5a01dc6600717a0b18d6",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0190-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0190-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:lunar-dara-happan-urbanite:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 13,
+          "source_name": "Lunar Dara Happan Urbanite",
+          "app_name": "Dara Happan Urbanite",
+          "app_culture": "Lunar Heartland",
+          "block_ids": [
+            "cse-p0190-row-lunar-dara-happan-urbanite"
+          ],
+          "value_hash": "1fce6ab22d7ee552e59c5e0856a15408c0132f7e28c27aff7bf40e16f0b1deb5"
+        }
+      ]
+    },
+    {
+      "pdf_page": 191,
+      "printed_page_label": "191",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0191.png",
+        "image_sha256": "9a0979e0091895bf20384c6722cfb40d0f4945f27b02ac757b1b74f768de2ed5",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0191-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0191-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:lunar-dart-contestant:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 14,
+          "source_name": "Lunar Dart Contestant",
+          "app_name": "Dart Contestant",
+          "app_culture": "Lunar Heartland",
+          "block_ids": [
+            "cse-p0191-row-lunar-dart-contestant"
+          ],
+          "value_hash": "97c57f10b6778781649bd31798b2298e06993318001a1e633b97f93f63636a36"
+        }
+      ]
+    },
+    {
+      "pdf_page": 192,
+      "printed_page_label": "192",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0192.png",
+        "image_sha256": "6435cb561c97f23513b651412da4ff42d7da2d57e29357be63a9dafbf2e5e60b",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0192-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0192-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:lunar-pelorian-cavalry:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 15,
+          "source_name": "Lunar Pelorian Cavalry",
+          "app_name": "Pelorian Cavalry",
+          "app_culture": "Lunar Heartland",
+          "block_ids": [
+            "cse-p0192-row-lunar-pelorian-cavalry"
+          ],
+          "value_hash": "20252fe6a90738c9c27e8d558bf9ad2ece83488f520dc73260b1ae7dad8ab9b0"
+        }
+      ]
+    },
+    {
+      "pdf_page": 193,
+      "printed_page_label": "193",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0193.png",
+        "image_sha256": "894e18fb60c0ceb77904a1cf7e3abf8e1883346e88210e24278834a5a3d4be19",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0193-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0193-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:lunar-pelorian-noble:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 16,
+          "source_name": "Lunar Pelorian Noble",
+          "app_name": "Pelorian Noble",
+          "app_culture": "Lunar Heartland",
+          "block_ids": [
+            "cse-p0193-row-lunar-pelorian-noble"
+          ],
+          "value_hash": "0b722b66ea73c5224ce5f29ef081fcddc747c5003f6aaf301c2d66ae5a2d0b24"
+        }
+      ]
+    },
+    {
+      "pdf_page": 194,
+      "printed_page_label": "194",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0194.png",
+        "image_sha256": "0f44781d51b92bb38dec4052943643e7d0ea66ea3ed9cacbbc89d020abd20467",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0194-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0194-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:lunar-sagittan-peltast:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 17,
+          "source_name": "Lunar Sagittan Peltast",
+          "app_name": "Sagittan Peltast",
+          "app_culture": "Lunar Heartland",
+          "block_ids": [
+            "cse-p0194-row-lunar-sagittan-peltast"
+          ],
+          "value_hash": "157ee9e40da6acca775c8b8a1f2724849d73b869d4ad52cb6480c048df47b1e1"
+        }
+      ]
+    },
+    {
+      "pdf_page": 386,
+      "printed_page_label": "386",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0386.png",
+        "image_sha256": "6f90f8360d5b1e6e25234fb840de3e7d87e0c827453f26987bb515d0014ec389",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0386-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0386-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:esrolian-citizen-legionary:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 3,
+          "source_name": "Esrolian Citizen Legionary",
+          "app_name": "Citizen Legionary",
+          "app_culture": "Esrolian",
+          "block_ids": [
+            "cse-p0386-row-esrolian-citizen-legionary"
+          ],
+          "value_hash": "a26ee17f7e1b1d4eb49652db0d3c83ed8fd5c412ad98fd7a043c1d94350a053b"
+        }
+      ]
+    },
+    {
+      "pdf_page": 387,
+      "printed_page_label": "387",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0387.png",
+        "image_sha256": "e524f8b2fb18854ce3d263df8d63f7df46cb6c403f59a723ec3c9e4f41d3bf4a",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0387-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0387-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:esrolian-city-state-phalangite:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 4,
+          "source_name": "Esrolian City-State Phalangite",
+          "app_name": "City-State Phalangite",
+          "app_culture": "Esrolian",
+          "block_ids": [
+            "cse-p0387-row-esrolian-city-state-phalangite"
+          ],
+          "value_hash": "a5a83b36cf7cac3b4110bc972b60e9a9af9fda5c9a3028d8800996280ab3ddad"
+        }
+      ]
+    },
+    {
+      "pdf_page": 388,
+      "printed_page_label": "388",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0388.png",
+        "image_sha256": "fccb83281909c46702b828dd95fe4586628a945232a7150dcf88705752e7a378",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0388-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0388-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:esrolian-clan-protector:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 5,
+          "source_name": "Esrolian Clan Protector",
+          "app_name": "Clan Protector",
+          "app_culture": "Esrolian",
+          "block_ids": [
+            "cse-p0388-row-esrolian-clan-protector"
+          ],
+          "value_hash": "774b0c788e85e6b5c1cb30105805defe7e794d5b2287132183ded91d188860f9"
+        }
+      ]
+    },
+    {
+      "pdf_page": 390,
+      "printed_page_label": "390",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0390.png",
+        "image_sha256": "992e790aab1a42947de30cd4d698e07030a96a4380da5b600fa82e19294f8e64",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0390-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0390-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:god-forgot-holar-militia:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 6,
+          "source_name": "God Forgot Holar Militia",
+          "app_name": "Holar Militia",
+          "app_culture": "God Forgot",
+          "block_ids": [
+            "cse-p0390-row-god-forgot-holar-militia"
+          ],
+          "value_hash": "cedc2b81c1fc479b7c7fee5a96075dc1c0011470f8c3e5befdd6645563a3185d"
+        }
+      ]
+    },
+    {
+      "pdf_page": 391,
+      "printed_page_label": "391",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0391.png",
+        "image_sha256": "53bb7ac3317f69a3770532b093fd9d0a5cfc5166ebdff6e84fb8511777ed6a45",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0391-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0391-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:god-forgot-talar-defensive-school:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 7,
+          "source_name": "God Forgot Talar Defensive School",
+          "app_name": "Talar Defensive School",
+          "app_culture": "God Forgot",
+          "block_ids": [
+            "cse-p0391-row-god-forgot-talar-defensive-school"
+          ],
+          "value_hash": "129b7b5a353997f4d4e12344b3665a6a0fbad318c50910e5017632f4108f1fcc"
+        }
+      ]
+    },
+    {
+      "pdf_page": 392,
+      "printed_page_label": "392",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0392.png",
+        "image_sha256": "b45d0584cc7a6727140cc4fac032918f16b08c5c2a7ab7d894bc32126a9b19a4",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0392-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0392-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:god-forgotten-holari:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 8,
+          "source_name": "God Forgotten Holari",
+          "app_name": "God Forgotten Holari",
+          "app_culture": "God Forgot",
+          "block_ids": [
+            "cse-p0392-row-god-forgotten-holari"
+          ],
+          "value_hash": "eef459d033496bc7e915f509186306130bf2a72d22f3a6da108d7793f444aef9"
+        }
+      ]
+    },
+    {
+      "pdf_page": 928,
+      "printed_page_label": "928",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0928.png",
+        "image_sha256": "f26d71fc695771ed0e561d1af1251fb8540e961ffadd2e323625c42e16f19c96",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0928-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0928-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:agimori:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 26,
+          "source_name": "Agimori",
+          "app_name": "Agimori",
+          "app_culture": "Praxian",
+          "block_ids": [
+            "cse-p0928-row-agimori"
+          ],
+          "value_hash": "fa4a3e433001f0da14da7e32322428968e5cb336a618fe55bc4be73fcf4a9d93"
+        }
+      ]
+    },
+    {
+      "pdf_page": 930,
+      "printed_page_label": "930",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0930.png",
+        "image_sha256": "31884c5851b53d5a192266d8250d9b0e9917bb31726082a3cb4341b23d01a29c",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0930-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0930-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:baboon:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 27,
+          "source_name": "Baboon",
+          "app_name": "Baboon",
+          "app_culture": "Praxian",
+          "block_ids": [
+            "cse-p0930-row-baboon"
+          ],
+          "value_hash": "e985c4357ccca619a4b7fe28b607f6461c3eebcd15b78165ac1a0020c002d977"
+        }
+      ]
+    },
+    {
+      "pdf_page": 931,
+      "printed_page_label": "931",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0931.png",
+        "image_sha256": "03fc91ae44202b6c0c0daabb7f9bd7bb1c814450f39afc389b25cd6a5533aab3",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0931-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0931-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:basmoli:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 28,
+          "source_name": "Basmoli",
+          "app_name": "Basmoli",
+          "app_culture": "Praxian",
+          "block_ids": [
+            "cse-p0931-row-basmoli"
+          ],
+          "value_hash": "d530fabe9c1f8b76dfa022cfc01349eab50615d5a36e5e5b67ce660e75ec440c"
+        }
+      ]
+    },
+    {
+      "pdf_page": 932,
+      "printed_page_label": "932",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0932.png",
+        "image_sha256": "dc8279f83cdac0defd240e4ca55513566392faf8387189a75be7b86ab62f7bbe",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0932-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0932-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:bison:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 29,
+          "source_name": "Bison",
+          "app_name": "Bison",
+          "app_culture": "Praxian",
+          "block_ids": [
+            "cse-p0932-row-bison"
+          ],
+          "value_hash": "5a2b94d382063325b9df9d16c9e9764520df1387af9170e6a2cead23e200d424"
+        }
+      ]
+    },
+    {
+      "pdf_page": 936,
+      "printed_page_label": "936",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0936.png",
+        "image_sha256": "4619d56616c88caf9d9758b7759c4ebe863de9a39ca7012ac8d2a7b487d3d907",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0936-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0936-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:bolo-lizard:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 30,
+          "source_name": "Bolo Lizard",
+          "app_name": "Bolo Lizard",
+          "app_culture": "Praxian",
+          "block_ids": [
+            "cse-p0936-row-bolo-lizard"
+          ],
+          "value_hash": "884919b586812f75929127b95b6c6313b8a70a1b811d233a3a1877ec1fbac23d"
+        }
+      ]
+    },
+    {
+      "pdf_page": 937,
+      "printed_page_label": "937",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0937.png",
+        "image_sha256": "1e3f0943b484cbc640b36a88dc457590880c39e3a9d442a1f0d016aa976da7f6",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0937-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0937-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:cannibal-cult:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 31,
+          "source_name": "Cannibal Cult",
+          "app_name": "Cannibal Cult",
+          "app_culture": "Praxian",
+          "block_ids": [
+            "cse-p0937-row-cannibal-cult"
+          ],
+          "value_hash": "62aa68da633edcb0ef688ddaf999273024dc065bdfc0a5709a313d916cf366d0"
+        }
+      ]
+    },
+    {
+      "pdf_page": 939,
+      "printed_page_label": "939",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0939.png",
+        "image_sha256": "d49d54f90b11b77cae58459e2d4074439b5711a2b56f96cf0da66917fe835b6c",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0939-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0939-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:high-llama:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 32,
+          "source_name": "High Llama",
+          "app_name": "High Llama",
+          "app_culture": "Praxian",
+          "block_ids": [
+            "cse-p0939-row-high-llama"
+          ],
+          "value_hash": "e6f2126909ff204c73ec857f104110256db842e04e4ff4cd8f4b569a00867a1c"
+        }
+      ]
+    },
+    {
+      "pdf_page": 940,
+      "printed_page_label": "940",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0940.png",
+        "image_sha256": "684ff1325438554b79ccb46c4b3534492108393c5a31d4c7fdbb8f21019eff27",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0940-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0940-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:impala:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 33,
+          "source_name": "Impala",
+          "app_name": "Impala",
+          "app_culture": "Praxian",
+          "block_ids": [
+            "cse-p0940-row-impala"
+          ],
+          "value_hash": "ce19a3ccdbbad67f5c198059e1d39fc47f6ad9bcbaca7c2ca3f7ca159e5ebc86"
+        }
+      ]
+    },
+    {
+      "pdf_page": 941,
+      "printed_page_label": "941",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0941.png",
+        "image_sha256": "cd9e0b9f3a77543a38880afa6fafc4da60d2e5387a1f2518ef620c1fb382745d",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0941-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0941-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:morokanth:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 34,
+          "source_name": "Morokanth",
+          "app_name": "Morokanth",
+          "app_culture": "Praxian",
+          "block_ids": [
+            "cse-p0941-row-morokanth"
+          ],
+          "value_hash": "aa850ae0f6fa131ba95b39b5cbc1c0ff21b9d708df42746ca144d2946f31883c"
+        }
+      ]
+    },
+    {
+      "pdf_page": 943,
+      "printed_page_label": "943",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0943.png",
+        "image_sha256": "309f6d8119a33b8e56343ff4dd4e49d95ce137b388dcc59982514bc990a25ca1",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0943-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0943-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:ostrich:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 35,
+          "source_name": "Ostrich",
+          "app_name": "Ostrich",
+          "app_culture": "Praxian",
+          "block_ids": [
+            "cse-p0943-row-ostrich"
+          ],
+          "value_hash": "6bc90105ed6239daf42ea32cdda9c1b2715a8e239949d6e66a597238652f38b7"
+        }
+      ]
+    },
+    {
+      "pdf_page": 944,
+      "printed_page_label": "944",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0944.png",
+        "image_sha256": "813b50ff33cfcb4d1e6fd4d7aaf3c45e9c9f5b7903ded13b910aea912260f2a9",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0944-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0944-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:pol-joni:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 36,
+          "source_name": "Pol-Joni",
+          "app_name": "Pol-Joni",
+          "app_culture": "Praxian",
+          "block_ids": [
+            "cse-p0944-row-pol-joni"
+          ],
+          "value_hash": "3894d3abfd7d0eeeb835aa7dc305493dada9a0b8a7873ec1538cb712f9b4250b"
+        }
+      ]
+    },
+    {
+      "pdf_page": 945,
+      "printed_page_label": "945",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0945.png",
+        "image_sha256": "2f1622c88755c5db28480b2bdb737880b4877dbfba726f170889196f94ebaa62",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0945-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0945-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:rhino:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 37,
+          "source_name": "Rhino",
+          "app_name": "Rhino",
+          "app_culture": "Praxian",
+          "block_ids": [
+            "cse-p0945-row-rhino"
+          ],
+          "value_hash": "0a144c3f632bb918bbcc675d428f692c18a9a43f8be6dc713a6705802691f78e"
+        }
+      ]
+    },
+    {
+      "pdf_page": 946,
+      "printed_page_label": "946",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0946.png",
+        "image_sha256": "95998a885bd7330ece971f89e181e76016b479f9e0454e61630475ba6dec87cd",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0946-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0946-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:sable:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 38,
+          "source_name": "Sable",
+          "app_name": "Sable",
+          "app_culture": "Praxian",
+          "block_ids": [
+            "cse-p0946-row-sable"
+          ],
+          "value_hash": "373651eb9ccd860b5a30f545ebdc3e5bea944aa0181b007adc793ed1cb8d00a7"
+        }
+      ]
+    },
+    {
+      "pdf_page": 947,
+      "printed_page_label": "947",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0947.png",
+        "image_sha256": "5e64bfc7d8943da8eadb6b142d9465444ac814fe388fb061dfb379d91ac548ec",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0947-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0947-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:unicorn:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 39,
+          "source_name": "Unicorn",
+          "app_name": "Unicorn",
+          "app_culture": "Praxian",
+          "block_ids": [
+            "cse-p0947-row-unicorn"
+          ],
+          "value_hash": "b1ab9241ae23411ed3a1e24fc08b8675876882e4546544505801bc1d2447e848"
+        }
+      ]
+    },
+    {
+      "pdf_page": 948,
+      "printed_page_label": "948",
+      "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+      "work_state": "verified",
+      "contributes": true,
+      "app_facing_groups": [
+        "combat-styles"
+      ],
+      "app_facing_labels": [
+        "CSE app-facing combat style names, weapons, and traits"
+      ],
+      "render": {
+        "status": "rendered",
+        "cache_path": ".cache/source-pages/cse/page-0948.png",
+        "image_sha256": "d536dc02ce197709b356f26391e4e7f58c3bf94c237b165db153fddedbb4c5d6",
+        "dimensions": {
+          "width": 2481,
+          "height": 3508
+        }
+      },
+      "extraction": {
+        "artifact_path": "references/sources/evidence/cse/page-0948-extraction.json",
+        "block_count": 1,
+        "method": "bounded-pdftext-row-facts"
+      },
+      "verification": {
+        "artifact_path": "references/sources/evidence/cse/page-0948-verification.json",
+        "independent": true,
+        "method": "pdftext-row-with-rendered-page-ocr-title-crosscheck"
+      },
+      "derived_facts": [
+        {
+          "fact_id": "ref:cse:zebra:combat-style-row",
+          "kind": "combat_style_row",
+          "source_file": "references/cse-raw/combat-styles-cse.json",
+          "row_index": 40,
+          "source_name": "Zebra",
+          "app_name": "Zebra",
+          "app_culture": "Praxian",
+          "block_ids": [
+            "cse-p0948-row-zebra"
+          ],
+          "value_hash": "63a7ee10e0f29ab8b1bc867a3f221af0c7c5ae87b28e8cf0d4753b9809ec2e3e"
+        }
+      ]
+    }
+  ],
   "known_ranges": [
     {
       "label": "legacy CSE combat-style row citations",
       "pages": "146-148, 168-175, 186-194, 386-388, 390-392, 928, 930-932, 936-937, 939-941, 943-948",
-      "state": "blocked",
-      "reason": "Row-level page numbers exist in legacy JSON, but rendered page/block evidence and independent verification are not yet committed for these CSE facts.",
+      "state": "verified",
+      "reason": "App-facing CSE combat-style rows now have bounded PDF-text row extraction, rendered page hashes, and independent rendered-page OCR title verification artifacts.",
       "source_file": "references/cse-raw/combat-styles-cse.json"
     }
   ],
-  "blockers": [
-    "CSE source PDF is published/player-visible, but rendered page images and page/block evidence have not been generated.",
-    "Legacy row citations cannot be promoted until independent vision verification exists for contributing pages."
-  ],
-  "notes": "U2 records the published CSE source identity and page count only. Legacy CSE page citations remain blocked metadata until page images, block evidence, extraction, and independent verification are committed.",
+  "blockers": [],
+  "notes": "App-facing CSE combat style rows have rendered page hashes, bounded PDF-text row extraction artifacts, and independent rendered-page OCR title verification artifacts. Source PDFs and page images remain ignored local artifacts.",
   "source_access": {
     "public_copyparty_source": {
       "status": "available",
@@ -29,6 +1954,57 @@
       "sha256": "106d7ad39e8b63d39cc6a5e79db7ec2f031b165b5c05017113bc13f2469841a6",
       "size_bytes": 2831310,
       "page_count": 1109
+    },
+    "local_ignored_source": {
+      "status": "available",
+      "path": "references/sources/pdfs/Combat Styles Encyclopedia.pdf",
+      "sha256": "106d7ad39e8b63d39cc6a5e79db7ec2f031b165b5c05017113bc13f2469841a6",
+      "size_bytes": 2831310,
+      "page_count": 1109,
+      "git_tracked": false
     }
-  }
+  },
+  "target_pages": [
+    146,
+    147,
+    148,
+    168,
+    169,
+    170,
+    171,
+    172,
+    173,
+    174,
+    175,
+    186,
+    187,
+    188,
+    189,
+    190,
+    191,
+    192,
+    193,
+    194,
+    386,
+    387,
+    388,
+    390,
+    391,
+    392,
+    928,
+    930,
+    931,
+    932,
+    936,
+    937,
+    939,
+    940,
+    941,
+    943,
+    944,
+    945,
+    946,
+    947,
+    948
+  ]
 }

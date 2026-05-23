@@ -1557,23 +1557,110 @@ runCommandTest('Render workflow can list sources without rendering pages',
   }
 
   const cseIndexEntry = (indexMap.entries || []).find(entry => entry.constant_name === 'COMBAT_STYLES_DATA');
-  if (cseCoverage.coverage_state === 'blocked' &&
-      cseCoverage.pages.length === 0 &&
+  const cseRowPages = new Set(cseRaw.rows.map(row => row.page));
+  const allCseRowsVerified = cseRaw.rows.every(row =>
+    row.source_ref?.coverage_state === 'verified' &&
+    row.source_ref?.block_id &&
+    row.source_ref?.extraction_path &&
+    row.source_ref?.verification_path
+  );
+  const allCseStyleCitationsVerified = cseAuthority.styles.every(style =>
+    style.citation?.coverage_state === 'verified' &&
+    style.citation?.block_state === 'verified' &&
+    style.citation?.block_id &&
+    style.citation?.extraction_path &&
+    style.citation?.verification_path
+  );
+  const cseTargetPages = new Set(cseCoverage.target_pages || []);
+  const cseVerifiedPages = cseCoverage.pages.filter(page => cseTargetPages.has(page.pdf_page));
+  const cseTargetPagesMatchRows = cseTargetPages.size === cseRowPages.size &&
+    [...cseRowPages].every(page => cseTargetPages.has(page));
+  const cseKnownRangesPromoted = (cseCoverage.known_ranges || [])
+    .filter(range => range.label === 'legacy CSE combat-style row citations')
+    .every(range => range.state === 'verified');
+  let cseArtifactChecksPass = true;
+  for (const [rowIndex, row] of cseRaw.rows.entries()) {
+    try {
+      const extraction = JSON.parse(fs.readFileSync(path.join(__dirname, row.source_ref.extraction_path), 'utf8'));
+      const verification = JSON.parse(fs.readFileSync(path.join(__dirname, row.source_ref.verification_path), 'utf8'));
+      const block = extraction.blocks?.find(item => item.block_id === row.source_ref.block_id);
+      const rowCheck = verification.row_checks?.find(item => item.block_id === row.source_ref.block_id);
+      const expectedProjection = {
+        page: row.page,
+        source_name: row.source_name,
+        app_culture: row.app_culture,
+        app_name: row.app_name,
+        source_weapons: row.source_weapons,
+        app_weapons: row.app_weapons,
+        printed_traits: row.printed_traits,
+        normalized_traits: row.normalized_traits
+      };
+      const blockFactsMatch = block?.facts?.source_name === row.source_name &&
+        block?.facts?.page === row.page &&
+        block?.facts?.row_index === rowIndex &&
+        block?.facts?.app_culture === row.app_culture &&
+        JSON.stringify(block?.facts?.source_weapons) === JSON.stringify(row.source_weapons) &&
+        JSON.stringify(block?.facts?.printed_traits) === JSON.stringify(row.printed_traits) &&
+        block?.facts?.app_name === row.app_name &&
+        JSON.stringify(block?.facts?.app_weapons) === JSON.stringify(row.app_weapons) &&
+        JSON.stringify(block?.facts?.normalized_traits) === JSON.stringify(row.normalized_traits) &&
+        block?.facts?.value_hash === provenanceValidator.valueHash(expectedProjection) &&
+        block?.facts?.value_hash === provenanceValidator.valueHash({
+          page: block.facts.page,
+          source_name: block.facts.source_name,
+          app_culture: block.facts.app_culture,
+          app_name: block.facts.app_name,
+          source_weapons: block.facts.source_weapons,
+          app_weapons: block.facts.app_weapons,
+          printed_traits: block.facts.printed_traits,
+          normalized_traits: block.facts.normalized_traits
+        });
+      if (!block ||
+          !blockFactsMatch ||
+          !verification.verified_blocks?.includes(row.source_ref.block_id) ||
+          rowCheck?.text_layer_tokens_match_cse_verified_fields !== true ||
+          rowCheck?.rendered_ocr_contains_source_name !== true) {
+        cseArtifactChecksPass = false;
+        break;
+      }
+    } catch (error) {
+      cseArtifactChecksPass = false;
+      break;
+    }
+  }
+  if (cseCoverage.coverage_state === 'verified' &&
+      cseCoverage.pages.length === cseRowPages.size &&
+      cseTargetPages.size === cseRowPages.size &&
+      cseTargetPagesMatchRows &&
+      cseVerifiedPages.length === cseRowPages.size &&
+      cseVerifiedPages.every(page => page.work_state === 'verified' && page.extraction?.artifact_path && page.verification?.artifact_path) &&
+      cseKnownRangesPromoted &&
       Array.isArray(cseCoverage.blockers) &&
-      cseCoverage.blockers.some(blocker => blocker.includes('vision')) &&
-      cseRaw.attestation_state === 'source_blocked' &&
-      cseAuthority.authority?.attestation_state === 'source_blocked' &&
-      cseIndexEntry?.status === 'source_blocked') {
-    pass('CSE facts remain source-blocked until page/block evidence exists');
+      cseCoverage.blockers.length === 0 &&
+      cseRaw.attestation_state === 'verified' &&
+      cseAuthority.authority?.attestation_state === 'verified' &&
+      cseAuthority.authority?.field_attestation?.app_derived_fields_not_cse_verified?.includes('restriction') &&
+      cseIndexEntry?.status === 'normalized' &&
+      allCseRowsVerified &&
+      allCseStyleCitationsVerified &&
+      cseArtifactChecksPass) {
+    pass('CSE names, weapons, and traits are verified by bounded row evidence');
   } else {
-    fail('CSE facts were promoted without page/block evidence',
+    fail('CSE facts are missing verified page/block evidence',
       JSON.stringify({
         coverageState: cseCoverage.coverage_state,
         pageCount: cseCoverage.pages?.length,
+        targetPageCount: cseTargetPages.size,
+        expectedPageCount: cseRowPages.size,
         blockers: cseCoverage.blockers,
         rawAttestation: cseRaw.attestation_state,
         authorityAttestation: cseAuthority.authority?.attestation_state,
-        indexStatus: cseIndexEntry?.status
+        indexStatus: cseIndexEntry?.status,
+        cseTargetPagesMatchRows,
+        cseKnownRangesPromoted,
+        cseArtifactChecksPass,
+        allCseRowsVerified,
+        allCseStyleCitationsVerified
       }));
   }
 

@@ -1,0 +1,74 @@
+{
+  "artifact_id": "cse-page-0944-extraction-row-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "rendered-page-ocr-pdftext-row-crosscheck.v1",
+  "source_id": "cse",
+  "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+  "pdf_page": 944,
+  "printed_page_label": "944",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/cse/page-0944.png",
+    "image_sha256": "813b50ff33cfcb4d1e6fd4d7aaf3c45e9c9f5b7903ded13b910aea912260f2a9",
+    "dimensions": {
+      "width": 2481,
+      "height": 3508
+    }
+  },
+  "prompt_id": "automated-cse-row-pdftext-extraction.v1",
+  "prompt_hash": "54b4645403c509dbe1f54d90fcd6fa00fa3f19d03e2a44b92183a0e3111babd9",
+  "extractor_prompt_id": "automated-cse-row-pdftext-extraction.v1",
+  "extractor_run_id": "cse-app-facing-combat-style-row-evidence-2026-05-23",
+  "tool_identity": "pdftotext 24.x text layer; rendered by pdftoppm per source manifest",
+  "schema_version": 1,
+  "extraction_method": "bounded PDF text-layer row facts with rendered-page identity",
+  "text_layer": {
+    "method": "pdftotext -layout",
+    "sha256": "b26a4780c9c2a081a198045e7856e633290bee954f85aeb570133b6a1edccf9f",
+    "char_count": 2580,
+    "non_empty": true
+  },
+  "blocks": [
+    {
+      "block_id": "cse-p0944-row-pol-joni",
+      "block_type": "combat_style_row",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Pol-Joni; traits: Assassination, Mounted Combat, Skirmisher; weapons: Short Spear, Long Axe 1H, Praxian Shield.",
+      "excerpt_hash": "0c7a28df447c455670903fe48ff270f23bb5ce9a2fef021994dd187287ac9492",
+      "confidence": "pdf_text_layer_with_rendered_ocr_title_crosscheck",
+      "facts": {
+        "page": 944,
+        "row_index": 36,
+        "source_name": "Pol-Joni",
+        "app_culture": "Praxian",
+        "app_name": "Pol-Joni",
+        "source_weapons": [
+          "Short Spear",
+          "Long Axe 1H",
+          "Praxian Shield"
+        ],
+        "app_weapons": [
+          "Shortspear",
+          "Long Axe",
+          "Praxian Shield"
+        ],
+        "printed_traits": [
+          "Assassination",
+          "Mounted Combat",
+          "Skirmisher"
+        ],
+        "normalized_traits": [
+          "Assassination",
+          "Mounted Combat",
+          "Skirmisher"
+        ],
+        "value_hash": "3894d3abfd7d0eeeb835aa7dc305493dada9a0b8a7873ec1538cb712f9b4250b"
+      }
+    }
+  ]
+}

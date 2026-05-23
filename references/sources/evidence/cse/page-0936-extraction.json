@@ -1,0 +1,76 @@
+{
+  "artifact_id": "cse-page-0936-extraction-row-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "rendered-page-ocr-pdftext-row-crosscheck.v1",
+  "source_id": "cse",
+  "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+  "pdf_page": 936,
+  "printed_page_label": "936",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/cse/page-0936.png",
+    "image_sha256": "4619d56616c88caf9d9758b7759c4ebe863de9a39ca7012ac8d2a7b487d3d907",
+    "dimensions": {
+      "width": 2481,
+      "height": 3508
+    }
+  },
+  "prompt_id": "automated-cse-row-pdftext-extraction.v1",
+  "prompt_hash": "54b4645403c509dbe1f54d90fcd6fa00fa3f19d03e2a44b92183a0e3111babd9",
+  "extractor_prompt_id": "automated-cse-row-pdftext-extraction.v1",
+  "extractor_run_id": "cse-app-facing-combat-style-row-evidence-2026-05-23",
+  "tool_identity": "pdftotext 24.x text layer; rendered by pdftoppm per source manifest",
+  "schema_version": 1,
+  "extraction_method": "bounded PDF text-layer row facts with rendered-page identity",
+  "text_layer": {
+    "method": "pdftotext -layout",
+    "sha256": "5245e6ccd566d52f6d7acea5e93e42aa5ef0d9b1bac8620d33c904ea18468c1a",
+    "char_count": 2950,
+    "non_empty": true
+  },
+  "blocks": [
+    {
+      "block_id": "cse-p0936-row-bolo-lizard",
+      "block_type": "combat_style_row",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Bolo Lizard; traits: Mancatcher, Mounted Combat, Skirmisher; weapons: Short Spear, Bolas, Dagger, Praxian Shield.",
+      "excerpt_hash": "fed54752ca2d3ee630e726f598a5613413940836188566cf10cbf13ce6edc0ca",
+      "confidence": "pdf_text_layer_with_rendered_ocr_title_crosscheck",
+      "facts": {
+        "page": 936,
+        "row_index": 30,
+        "source_name": "Bolo Lizard",
+        "app_culture": "Praxian",
+        "app_name": "Bolo Lizard",
+        "source_weapons": [
+          "Short Spear",
+          "Bolas",
+          "Dagger",
+          "Praxian Shield"
+        ],
+        "app_weapons": [
+          "Shortspear",
+          "Bolas",
+          "Dagger",
+          "Praxian Shield"
+        ],
+        "printed_traits": [
+          "Mancatcher",
+          "Mounted Combat",
+          "Skirmisher"
+        ],
+        "normalized_traits": [
+          "Mancatcher",
+          "Mounted Combat",
+          "Skirmisher"
+        ],
+        "value_hash": "884919b586812f75929127b95b6c6313b8a70a1b811d233a3a1877ec1fbac23d"
+      }
+    }
+  ]
+}

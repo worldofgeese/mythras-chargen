@@ -1,0 +1,62 @@
+{
+  "artifact_id": "cse-page-0386-verification-row-2026-05-23",
+  "artifact_kind": "verification",
+  "workflow_id": "rendered-page-ocr-pdftext-row-crosscheck.v1",
+  "source_id": "cse",
+  "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+  "pdf_page": 386,
+  "printed_page_label": "386",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/cse/page-0386.png",
+    "image_sha256": "6f90f8360d5b1e6e25234fb840de3e7d87e0c827453f26987bb515d0014ec389",
+    "dimensions": {
+      "width": 2481,
+      "height": 3508
+    }
+  },
+  "prompt_id": "automated-cse-rendered-ocr-row-crosscheck.v1",
+  "prompt_hash": "218a3611cbc3300ca651c3d4e8bb668bd48b0fe2b5f20d2e30add41d974c848d",
+  "extractor_prompt_id": "automated-cse-row-pdftext-extraction.v1",
+  "extractor_run_id": "cse-app-facing-combat-style-row-evidence-2026-05-23",
+  "verifier_prompt_id": "automated-cse-rendered-ocr-row-crosscheck.v1",
+  "verifier_run_id": "cse-app-facing-combat-style-row-verification-2026-05-23",
+  "tool_identity": "tesseract 5.3.0; independent rendered-page OCR cross-check",
+  "independent": true,
+  "independence": {
+    "read_extractor_output": false,
+    "read_extractor_scratch": false,
+    "read_extractor_rationale": false,
+    "independent_tool_paths": [
+      "pdftoppm rendered PNG plus tesseract OCR",
+      "pdftotext text-layer row facts"
+    ]
+  },
+  "agreement": "pass_pdftext_row_with_rendered_ocr_title_crosscheck",
+  "verified_findings": [
+    "rendered PNG hash is recorded in the page manifest and both evidence artifacts",
+    "PDF text layer contains the CSE combat-style row title and app-visible fields used by the row",
+    "Tesseract OCR over the rendered page independently finds the CSE combat-style row title"
+  ],
+  "verified_blocks": [
+    "cse-p0386-row-esrolian-citizen-legionary"
+  ],
+  "row_checks": [
+    {
+      "block_id": "cse-p0386-row-esrolian-citizen-legionary",
+      "source_name": "Esrolian Citizen Legionary",
+      "text_layer_contains_source_name": true,
+      "text_layer_tokens_match_cse_verified_fields": true,
+      "rendered_ocr_contains_source_name": true,
+      "value_hash": "a26ee17f7e1b1d4eb49652db0d3c83ed8fd5c412ad98fd7a043c1d94350a053b"
+    }
+  ],
+  "ocr_text": {
+    "method": "tesseract rendered PNG --psm 6",
+    "sha256": "c67e02e9a1d8deb177f5293c27ff5332aaba763efa4bf47a0be186e5f3258c20",
+    "char_count": 2154,
+    "non_empty": true
+  },
+  "promotion_cautions": [
+    "CSE rows are promoted only for app-facing combat-style names, weapons, and traits listed in references/cse-raw/combat-styles-cse.json."
+  ]
+}

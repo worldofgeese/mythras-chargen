@@ -1,0 +1,76 @@
+{
+  "artifact_id": "cse-page-0931-extraction-row-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "rendered-page-ocr-pdftext-row-crosscheck.v1",
+  "source_id": "cse",
+  "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+  "pdf_page": 931,
+  "printed_page_label": "931",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/cse/page-0931.png",
+    "image_sha256": "03fc91ae44202b6c0c0daabb7f9bd7bb1c814450f39afc389b25cd6a5533aab3",
+    "dimensions": {
+      "width": 2481,
+      "height": 3508
+    }
+  },
+  "prompt_id": "automated-cse-row-pdftext-extraction.v1",
+  "prompt_hash": "54b4645403c509dbe1f54d90fcd6fa00fa3f19d03e2a44b92183a0e3111babd9",
+  "extractor_prompt_id": "automated-cse-row-pdftext-extraction.v1",
+  "extractor_run_id": "cse-app-facing-combat-style-row-evidence-2026-05-23",
+  "tool_identity": "pdftotext 24.x text layer; rendered by pdftoppm per source manifest",
+  "schema_version": 1,
+  "extraction_method": "bounded PDF text-layer row facts with rendered-page identity",
+  "text_layer": {
+    "method": "pdftotext -layout",
+    "sha256": "d64d08c2e7c62cba0bb9d764dcf2075bcf01d597ef003142d3077bb7be81558c",
+    "char_count": 2730,
+    "non_empty": true
+  },
+  "blocks": [
+    {
+      "block_id": "cse-p0931-row-basmoli",
+      "block_type": "combat_style_row",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Basmoli; traits: Blind Fighting, Daredevil, Ranged Marksman; weapons: Short Spear, Longspear, Javelin, Dagger.",
+      "excerpt_hash": "d9f29fff743b9b0e9a2307a935e7d55cf2653bb08a63a4be3339f4eeff8e55d8",
+      "confidence": "pdf_text_layer_with_rendered_ocr_title_crosscheck",
+      "facts": {
+        "page": 931,
+        "row_index": 28,
+        "source_name": "Basmoli",
+        "app_culture": "Praxian",
+        "app_name": "Basmoli",
+        "source_weapons": [
+          "Short Spear",
+          "Longspear",
+          "Javelin",
+          "Dagger"
+        ],
+        "app_weapons": [
+          "Shortspear",
+          "Longspear",
+          "Javelin",
+          "Dagger"
+        ],
+        "printed_traits": [
+          "Blind Fighting",
+          "Daredevil",
+          "Ranged Marksman"
+        ],
+        "normalized_traits": [
+          "Blind Fighting",
+          "Daredevil",
+          "Ranged Marksman"
+        ],
+        "value_hash": "d530fabe9c1f8b76dfa022cfc01349eab50615d5a36e5e5b67ce660e75ec440c"
+      }
+    }
+  ]
+}

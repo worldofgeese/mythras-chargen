@@ -8,28 +8,179 @@
     ],
     "generatedFrom": "references/cse-raw/combat-styles-cse.json",
     "sha256": "106d7ad39e8b63d39cc6a5e79db7ec2f031b165b5c05017113bc13f2469841a6",
-    "validated_at": "2026-05-21",
+    "validated_at": "2026-05-23",
     "source_ref": {
       "source_id": "cse",
       "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
       "manifest_path": "references/sources/manifest.json",
       "page_manifest_path": "references/sources/pages/cse.json",
-      "coverage_state": "blocked",
-      "evidence_state": "published_source_legacy_page_citations_only",
-      "gaps": [
-        "published CSE PDF has not been rendered into page images",
-        "legacy row citations have not been independently verified against page/block evidence",
-        "no page image hashes or independent verifier artifacts are committed"
+      "coverage_state": "verified",
+      "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
+      "evidence_workflow": "rendered-page-ocr-pdftext-row-crosscheck.v1",
+      "verified_fields": [
+        "source_name",
+        "source_weapons",
+        "printed_traits"
+      ],
+      "normalized_fields": [
+        "app_name",
+        "app_weapons",
+        "normalized_traits"
+      ],
+      "app_derived_fields_not_cse_verified": [
+        "restriction",
+        "notes"
+      ],
+      "pages": [
+        146,
+        147,
+        148,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        386,
+        387,
+        388,
+        390,
+        391,
+        392,
+        928,
+        930,
+        931,
+        932,
+        936,
+        937,
+        939,
+        940,
+        941,
+        943,
+        944,
+        945,
+        946,
+        947,
+        948
+      ],
+      "evidence_paths": [
+        "references/sources/evidence/cse/page-0146-extraction.json",
+        "references/sources/evidence/cse/page-0146-verification.json",
+        "references/sources/evidence/cse/page-0147-extraction.json",
+        "references/sources/evidence/cse/page-0147-verification.json",
+        "references/sources/evidence/cse/page-0148-extraction.json",
+        "references/sources/evidence/cse/page-0148-verification.json",
+        "references/sources/evidence/cse/page-0168-extraction.json",
+        "references/sources/evidence/cse/page-0168-verification.json",
+        "references/sources/evidence/cse/page-0169-extraction.json",
+        "references/sources/evidence/cse/page-0169-verification.json",
+        "references/sources/evidence/cse/page-0170-extraction.json",
+        "references/sources/evidence/cse/page-0170-verification.json",
+        "references/sources/evidence/cse/page-0171-extraction.json",
+        "references/sources/evidence/cse/page-0171-verification.json",
+        "references/sources/evidence/cse/page-0172-extraction.json",
+        "references/sources/evidence/cse/page-0172-verification.json",
+        "references/sources/evidence/cse/page-0173-extraction.json",
+        "references/sources/evidence/cse/page-0173-verification.json",
+        "references/sources/evidence/cse/page-0174-extraction.json",
+        "references/sources/evidence/cse/page-0174-verification.json",
+        "references/sources/evidence/cse/page-0175-extraction.json",
+        "references/sources/evidence/cse/page-0175-verification.json",
+        "references/sources/evidence/cse/page-0186-extraction.json",
+        "references/sources/evidence/cse/page-0186-verification.json",
+        "references/sources/evidence/cse/page-0187-extraction.json",
+        "references/sources/evidence/cse/page-0187-verification.json",
+        "references/sources/evidence/cse/page-0188-extraction.json",
+        "references/sources/evidence/cse/page-0188-verification.json",
+        "references/sources/evidence/cse/page-0189-extraction.json",
+        "references/sources/evidence/cse/page-0189-verification.json",
+        "references/sources/evidence/cse/page-0190-extraction.json",
+        "references/sources/evidence/cse/page-0190-verification.json",
+        "references/sources/evidence/cse/page-0191-extraction.json",
+        "references/sources/evidence/cse/page-0191-verification.json",
+        "references/sources/evidence/cse/page-0192-extraction.json",
+        "references/sources/evidence/cse/page-0192-verification.json",
+        "references/sources/evidence/cse/page-0193-extraction.json",
+        "references/sources/evidence/cse/page-0193-verification.json",
+        "references/sources/evidence/cse/page-0194-extraction.json",
+        "references/sources/evidence/cse/page-0194-verification.json",
+        "references/sources/evidence/cse/page-0386-extraction.json",
+        "references/sources/evidence/cse/page-0386-verification.json",
+        "references/sources/evidence/cse/page-0387-extraction.json",
+        "references/sources/evidence/cse/page-0387-verification.json",
+        "references/sources/evidence/cse/page-0388-extraction.json",
+        "references/sources/evidence/cse/page-0388-verification.json",
+        "references/sources/evidence/cse/page-0390-extraction.json",
+        "references/sources/evidence/cse/page-0390-verification.json",
+        "references/sources/evidence/cse/page-0391-extraction.json",
+        "references/sources/evidence/cse/page-0391-verification.json",
+        "references/sources/evidence/cse/page-0392-extraction.json",
+        "references/sources/evidence/cse/page-0392-verification.json",
+        "references/sources/evidence/cse/page-0928-extraction.json",
+        "references/sources/evidence/cse/page-0928-verification.json",
+        "references/sources/evidence/cse/page-0930-extraction.json",
+        "references/sources/evidence/cse/page-0930-verification.json",
+        "references/sources/evidence/cse/page-0931-extraction.json",
+        "references/sources/evidence/cse/page-0931-verification.json",
+        "references/sources/evidence/cse/page-0932-extraction.json",
+        "references/sources/evidence/cse/page-0932-verification.json",
+        "references/sources/evidence/cse/page-0936-extraction.json",
+        "references/sources/evidence/cse/page-0936-verification.json",
+        "references/sources/evidence/cse/page-0937-extraction.json",
+        "references/sources/evidence/cse/page-0937-verification.json",
+        "references/sources/evidence/cse/page-0939-extraction.json",
+        "references/sources/evidence/cse/page-0939-verification.json",
+        "references/sources/evidence/cse/page-0940-extraction.json",
+        "references/sources/evidence/cse/page-0940-verification.json",
+        "references/sources/evidence/cse/page-0941-extraction.json",
+        "references/sources/evidence/cse/page-0941-verification.json",
+        "references/sources/evidence/cse/page-0943-extraction.json",
+        "references/sources/evidence/cse/page-0943-verification.json",
+        "references/sources/evidence/cse/page-0944-extraction.json",
+        "references/sources/evidence/cse/page-0944-verification.json",
+        "references/sources/evidence/cse/page-0945-extraction.json",
+        "references/sources/evidence/cse/page-0945-verification.json",
+        "references/sources/evidence/cse/page-0946-extraction.json",
+        "references/sources/evidence/cse/page-0946-verification.json",
+        "references/sources/evidence/cse/page-0947-extraction.json",
+        "references/sources/evidence/cse/page-0947-verification.json",
+        "references/sources/evidence/cse/page-0948-extraction.json",
+        "references/sources/evidence/cse/page-0948-verification.json"
       ],
       "known_hash_sha256": "106d7ad39e8b63d39cc6a5e79db7ec2f031b165b5c05017113bc13f2469841a6",
-      "published_source_url": "https://copyparty.hound-celsius.ts.net/sources/books/Combat%20Styles%20Encyclopedia.pdf"
+      "published_source_url": "https://copyparty.hound-celsius.ts.net/sources/books/Combat%20Styles%20Encyclopedia.pdf",
+      "notes": "Evidence artifacts contain bounded row facts only; full page text, source PDF, and rendered page images remain uncommitted."
     },
-    "attestation_state": "source_blocked",
-    "attestation_gaps": [
-      "published CSE PDF has not been rendered into page images",
-      "legacy row citations have not been independently verified against page/block evidence",
-      "no page image hashes or independent verifier artifacts are committed"
-    ]
+    "attestation_state": "verified",
+    "attestation_gaps": [],
+    "field_attestation": {
+      "cse_verified_fields": [
+        "source_name",
+        "source_weapons",
+        "printed_traits"
+      ],
+      "app_normalized_fields": [
+        "app_name",
+        "app_weapons",
+        "normalized_traits"
+      ],
+      "app_derived_fields_not_cse_verified": [
+        "restriction",
+        "notes"
+      ],
+      "note": "CSE evidence promotes app-facing combat style names, weapons, and traits only. Restrictions and notes remain app-derived fields for later global provenance classification."
+    }
   },
   "cultureAliases": {
     "Sartarite/Heortling": "Sartarite (Heortling)",
@@ -67,11 +218,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 146,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0146-row-balazaring-hawk-slayer",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0146-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0146-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -102,11 +266,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 147,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0147-row-balazaring-hunter-raider",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0147-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0147-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -137,11 +314,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 148,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0148-row-balazaring-pony-cavalry",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0148-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0148-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -176,11 +366,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 386,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0386-row-esrolian-citizen-legionary",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0386-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0386-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -211,11 +414,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 387,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0387-row-esrolian-city-state-phalangite",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0387-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0387-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -246,11 +462,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 388,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0388-row-esrolian-clan-protector",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0388-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0388-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -283,11 +512,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 390,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0390-row-god-forgot-holar-militia",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0390-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0390-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -322,11 +564,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 391,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0391-row-god-forgot-talar-defensive-school",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0391-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0391-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -361,11 +616,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 392,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0392-row-god-forgotten-holari",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0392-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0392-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -404,11 +672,26 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 186,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0186-row-lunar-colonial-noble",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0186-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0186-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": [
+          "restriction"
+        ]
       }
     },
     {
@@ -441,11 +724,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 187,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0187-row-lunar-colonial-survivalist",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0187-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0187-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -484,11 +780,26 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 188,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0188-row-lunar-corps-hoplite",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0188-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0188-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": [
+          "restriction"
+        ]
       }
     },
     {
@@ -527,11 +838,26 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 188,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0188-row-lunar-corps-hoplite",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0188-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0188-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": [
+          "restriction"
+        ]
       }
     },
     {
@@ -566,11 +892,26 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 189,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0189-row-lunar-dara-happan-heavy-infantry",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0189-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0189-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": [
+          "restriction"
+        ]
       }
     },
     {
@@ -605,11 +946,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 190,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0190-row-lunar-dara-happan-urbanite",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0190-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0190-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -644,11 +998,26 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 191,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0191-row-lunar-dart-contestant",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0191-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0191-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": [
+          "restriction"
+        ]
       }
     },
     {
@@ -687,11 +1056,26 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 192,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0192-row-lunar-pelorian-cavalry",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0192-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0192-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": [
+          "restriction"
+        ]
       }
     },
     {
@@ -730,11 +1114,26 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 192,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0192-row-lunar-pelorian-cavalry",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0192-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0192-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": [
+          "restriction"
+        ]
       }
     },
     {
@@ -773,11 +1172,26 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 193,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0193-row-lunar-pelorian-noble",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0193-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0193-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": [
+          "restriction"
+        ]
       }
     },
     {
@@ -812,11 +1226,26 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 194,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0194-row-lunar-sagittan-peltast",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0194-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0194-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": [
+          "restriction"
+        ]
       }
     },
     {
@@ -853,11 +1282,26 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 168,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0168-row-sartarite-alynx-brother",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0168-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0168-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": [
+          "restriction"
+        ]
       }
     },
     {
@@ -896,11 +1340,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 169,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0169-row-sartarite-hill-clan-levy",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0169-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0169-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -939,11 +1396,26 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 170,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0170-row-sartarite-loyal-housecarl",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0170-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0170-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": [
+          "restriction"
+        ]
       }
     },
     {
@@ -982,11 +1454,26 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 171,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0171-row-sartarite-noble",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0171-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0171-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": [
+          "restriction"
+        ]
       }
     },
     {
@@ -1021,11 +1508,26 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 172,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0172-row-sartarite-upland-crofter",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0172-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0172-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": [
+          "restriction"
+        ]
       }
     },
     {
@@ -1064,11 +1566,26 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 173,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0173-row-tarshite-militia",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0173-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0173-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": [
+          "restriction"
+        ]
       }
     },
     {
@@ -1105,11 +1622,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 174,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0174-row-telmori-hunter",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0174-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0174-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -1140,11 +1670,26 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 175,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0175-row-telmori-wolf-hunter",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0175-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0175-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": [
+          "notes"
+        ]
       }
     },
     {
@@ -1183,11 +1728,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 928,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0928-row-agimori",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0928-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0928-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -1224,11 +1782,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 930,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0930-row-baboon",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0930-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0930-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -1267,11 +1838,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 931,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0931-row-basmoli",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0931-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0931-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -1308,11 +1892,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 932,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0932-row-bison",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0932-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0932-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -1351,11 +1948,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 936,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0936-row-bolo-lizard",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0936-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0936-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -1394,11 +2004,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 937,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0937-row-cannibal-cult",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0937-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0937-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -1439,11 +2062,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 939,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0939-row-high-llama",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0939-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0939-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -1482,11 +2118,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 940,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0940-row-impala",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0940-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0940-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -1529,11 +2178,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 941,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0941-row-morokanth",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0941-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0941-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -1574,11 +2236,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 943,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0943-row-ostrich",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0943-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0943-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -1615,11 +2290,26 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 944,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0944-row-pol-joni",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0944-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0944-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": [
+          "notes"
+        ]
       }
     },
     {
@@ -1660,11 +2350,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 945,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0945-row-rhino",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0945-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0945-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -1703,11 +2406,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 946,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0946-row-sable",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0946-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0946-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -1746,11 +2462,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 947,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0947-row-unicorn",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0947-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0947-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {
@@ -1789,11 +2518,24 @@
         "source_id": "cse",
         "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
         "page_manifest_path": "references/sources/pages/cse.json",
-        "coverage_state": "blocked",
-        "evidence_state": "legacy_page_citation_pending_vision_verification",
+        "coverage_state": "verified",
+        "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
         "pdf_page": 948,
-        "block_id": null,
-        "block_state": "blocked_no_page_evidence"
+        "block_id": "cse-p0948-row-zebra",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/cse/page-0948-extraction.json",
+        "verification_path": "references/sources/evidence/cse/page-0948-verification.json",
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     }
   ]

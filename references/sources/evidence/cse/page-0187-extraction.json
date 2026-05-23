@@ -1,0 +1,70 @@
+{
+  "artifact_id": "cse-page-0187-extraction-row-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "rendered-page-ocr-pdftext-row-crosscheck.v1",
+  "source_id": "cse",
+  "source_revision_id": "cse:combat-styles-encyclopedia-pdf:106d7ad39e8b:2026-05-21",
+  "pdf_page": 187,
+  "printed_page_label": "187",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/cse/page-0187.png",
+    "image_sha256": "bcef957033a34967a3fed201ed1a1ee3980a943571eba082c83775033f9bf177",
+    "dimensions": {
+      "width": 2481,
+      "height": 3508
+    }
+  },
+  "prompt_id": "automated-cse-row-pdftext-extraction.v1",
+  "prompt_hash": "54b4645403c509dbe1f54d90fcd6fa00fa3f19d03e2a44b92183a0e3111babd9",
+  "extractor_prompt_id": "automated-cse-row-pdftext-extraction.v1",
+  "extractor_run_id": "cse-app-facing-combat-style-row-evidence-2026-05-23",
+  "tool_identity": "pdftotext 24.x text layer; rendered by pdftoppm per source manifest",
+  "schema_version": 1,
+  "extraction_method": "bounded PDF text-layer row facts with rendered-page identity",
+  "text_layer": {
+    "method": "pdftotext -layout",
+    "sha256": "f94dfdb3c82f7a9649267767cbf1f390eefb8c7768d7d27f25ddde073e393a7a",
+    "char_count": 2216,
+    "non_empty": true
+  },
+  "blocks": [
+    {
+      "block_id": "cse-p0187-row-lunar-colonial-survivalist",
+      "block_type": "combat_style_row",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Lunar Colonial Survivalist; traits: Hidden Weapons; weapons: Shortsword, Sling, Dagger.",
+      "excerpt_hash": "9e25500a072817e3c233ca00a722de59b32596697bd2ae0dcce668c5e4c3098e",
+      "confidence": "pdf_text_layer_with_rendered_ocr_title_crosscheck",
+      "facts": {
+        "page": 187,
+        "row_index": 10,
+        "source_name": "Lunar Colonial Survivalist",
+        "app_culture": "Lunar Provincial",
+        "app_name": "Colonial Survivalist",
+        "source_weapons": [
+          "Shortsword",
+          "Sling",
+          "Dagger"
+        ],
+        "app_weapons": [
+          "Shortsword",
+          "Sling",
+          "Dagger"
+        ],
+        "printed_traits": [
+          "Hidden Weapons"
+        ],
+        "normalized_traits": [
+          "Hidden Weapons"
+        ],
+        "value_hash": "54a90f85c17fcb04e6ed05eff75acf75c5569c63863baf5f4866ac615e5dad49"
+      }
+    }
+  ]
+}

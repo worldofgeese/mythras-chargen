@@ -190,9 +190,9 @@
       "acquired_at": "2026-05-21",
       "permission_basis": {
         "status": "confirmed",
-        "note": "User supplied the source PDF for project use; source identity and player-visible publication are recorded while fact/page acceptance remains blocked pending vision verification."
+        "note": "User supplied the source PDF for project use; source identity and player-visible publication are recorded, and app-facing combat-style rows now have bounded rendered-page OCR/PDF-text verification."
       },
-      "precedence": "CSE is the combat-style definition authority for names, weapons, and traits. Current normalized combat-style facts remain source_blocked until rendered page/block evidence and independent vision verification exist.",
+      "precedence": "CSE is the combat-style definition authority for app-facing combat style names, weapons, and traits. App-facing rows are promoted only where bounded rendered-page extraction and independent OCR verification artifacts exist.",
       "render_contract": {
         "renderer": "pdftoppm",
         "renderer_version": "runtime-detected",
@@ -209,11 +209,8 @@
       },
       "blocks": [],
       "blockers": [],
-      "acceptance_state": "blocked_pending_vision_verification",
-      "acceptance_blockers": [
-        "Published/player-visible source PDF is available, but no rendered page images or page/block evidence are committed.",
-        "Legacy CSE row citations have not been independently verified against rendered page evidence."
-      ],
+      "acceptance_state": "app_facing_row_evidence_verified",
+      "acceptance_blockers": [],
       "source_access": {
         "local_supplied_source": {
           "status": "available_outside_repo",
@@ -232,14 +229,25 @@
           "size_bytes": 2831310,
           "page_count": 1109,
           "verification": "curl -fsSL public URL piped to sha256sum matched the supplied source hash"
+        },
+        "local_ignored_source": {
+          "status": "available",
+          "path": "references/sources/pdfs/Combat Styles Encyclopedia.pdf",
+          "sha256": "106d7ad39e8b63d39cc6a5e79db7ec2f031b165b5c05017113bc13f2469841a6",
+          "size_bytes": 2831310,
+          "page_count": 1109,
+          "git_tracked": false
         }
       },
       "observed_source_metadata": {
-        "observed_at": "2026-05-21",
-        "sha256_method": "sha256sum against user-supplied non-git PDF and curl -fsSL public URL stream",
-        "page_count_method": "pdfinfo against user-supplied non-git PDF",
-        "public_url_sha256": "106d7ad39e8b63d39cc6a5e79db7ec2f031b165b5c05017113bc13f2469841a6",
-        "public_url_content_length": 2831310,
+        "observed_at": "2026-05-23",
+        "sha256_method": "sha256sum against ignored local hint hydrated from Copyparty canonical locator",
+        "page_count_method": "pdfinfo against ignored local hint hydrated from Copyparty canonical locator",
+        "canonical_locator_head_status": 200,
+        "canonical_locator_content_length": 2831310,
+        "used_for_app_facing_row_evidence": true,
+        "app_facing_page_coverage_path": "references/sources/pages/cse.json",
+        "evidence_workflow": "rendered-page-ocr-pdftext-row-crosscheck.v1",
         "note": "The source PDF is not committed; references/sources/pdfs/Combat Styles Encyclopedia.pdf remains an ignored local hint."
       }
     },
