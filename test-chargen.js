@@ -9791,15 +9791,47 @@ section('Player Handout Contract');
   ];
   const hasForbiddenClaim = forbiddenClaims.some(pattern => pattern.test(html));
   const hasHouseRuleLabel = /House rule/i.test(html);
-  const hasSystemSpecificRows = /Theism[\s\S]*Rune Affinity[\s\S]*Animism[\s\S]*Spirit Rune[\s\S]*Sorcery[\s\S]*Invocation[\s\S]*Shaping/i.test(html);
-  const explainsTerms = /Rune Affinity[\s\S]*Adventures in Glorantha[\s\S]*Spirit Rune[\s\S]*spirit[\s\S]*Invocation[\s\S]*Shaping[\s\S]*Mythras Core/i.test(html);
+  const hasSystemSpecificRows = /Cult Rune Magic[\s\S]*Rune Affinity[\s\S]*Animism[\s\S]*Spirit Rune[\s\S]*Sorcery[\s\S]*Invocation[\s\S]*Shaping[\s\S]*Mysticism/i.test(html);
+  const explainsTerms = /Rune Affinity[\s\S]*Adventures in Glorantha[\s\S]*Spirit Rune[\s\S]*spirit[\s\S]*Invocation[\s\S]*Shaping[\s\S]*Mythras rulebook/i.test(html);
   const hasPlayerSources = /A-Bird-in-the-Hand\.pdf[\s\S]*Monster-Island\.pdf[\s\S]*drive\.google\.com\/drive\/folders\/1CKNxkpoL4sWfzdbkglQyiYvCBXlmyFIj/i.test(html);
+  const explainsDevotionalPoolLabel = /Devotional Pool\s*\(your cult magic pool\)[\s\S]*POW\/2/i.test(html);
 
-  if (!hasForbiddenClaim && hasHouseRuleLabel && hasSystemSpecificRows && explainsTerms && hasPlayerSources) {
+  if (!hasForbiddenClaim && hasHouseRuleLabel && hasSystemSpecificRows && explainsTerms && hasPlayerSources && explainsDevotionalPoolLabel) {
     pass('Magic handout distinguishes official rules, AiG adaptations, and house rules');
   } else {
     fail('Magic handout overstates or underdocuments house-rule casting model',
-      JSON.stringify({ hasForbiddenClaim, hasHouseRuleLabel, hasSystemSpecificRows, explainsTerms, hasPlayerSources }));
+      JSON.stringify({ hasForbiddenClaim, hasHouseRuleLabel, hasSystemSpecificRows, explainsTerms, hasPlayerSources, explainsDevotionalPoolLabel }));
+  }
+}
+
+// Test: handouts use sheet labels and do not promote unverified Monster Island pages
+{
+  const handoutDir = path.join(__dirname, 'docs', 'handouts');
+  const htmlFiles = fs.readdirSync(handoutDir).filter(f => f.endsWith('.html'));
+  const combinedHtml = htmlFiles.map(file => fs.readFileSync(path.join(handoutDir, file), 'utf8')).join('\n');
+  const hasDevotionalPoolAlias = /Devotional Pool\s*\(your cult magic pool\)/i.test(combinedHtml)
+    || /Devotional Pool\s*\(cult magic pool\)/i.test(combinedHtml);
+  const copiesSheetLabel = /write your Devotional Pool used and available/i.test(combinedHtml);
+  const monsterIslandPromotesPageCitations = /Monster[-\s]Island(?:\.pdf)?[\s\S]{0,220}p\.\d+\b/i.test(combinedHtml);
+  const monsterIslandProblems = [];
+  const gatedMonsterIslandMention = /(GM|GM-approved|GM-assigned|GM-controlled|GM-provided|GM gives|ask the GM|island-specific (?:ruling|exception|magic exceptions?)|exceptions?)/i;
+  for (const file of htmlFiles) {
+    const fileHtml = fs.readFileSync(path.join(handoutDir, file), 'utf8');
+    for (const match of fileHtml.matchAll(/Monster[-\s]Island(?:\.pdf)?/gi)) {
+      const start = Math.max(0, match.index - 120);
+      const end = Math.min(fileHtml.length, match.index + 240);
+      const context = fileHtml.slice(start, end);
+      if (!gatedMonsterIslandMention.test(context)) {
+        monsterIslandProblems.push(`${file}: ungated Monster Island mention near offset ${match.index}`);
+      }
+    }
+  }
+
+  if (hasDevotionalPoolAlias && copiesSheetLabel && !monsterIslandPromotesPageCitations && monsterIslandProblems.length === 0) {
+    pass('Handouts align Devotional Pool label and gate Monster Island exceptions');
+  } else {
+    fail('Handouts mislabel Devotional Pool or over-promote Monster Island exceptions',
+      JSON.stringify({ hasDevotionalPoolAlias, copiesSheetLabel, monsterIslandPromotesPageCitations, monsterIslandProblems }));
   }
 }
 
@@ -10010,10 +10042,20 @@ section('Cult Type Detection (ADR-0006)');
     if (AppObj && AppObj.selectCult && CharacterData) {
       // Set up characteristics for testing
       CharacterData.characteristics = { STR: 14, CON: 12, SIZ: 11, DEX: 12, INT: 10, POW: 14, CHA: 12 };
+      const resetCultTestState = () => {
+        CharacterData.cult = null;
+        CharacterData.cultType = null;
+        CharacterData.miracles = [];
+        CharacterData.boundSpirits = [];
+        CharacterData.sorcerySpells = [];
+        CharacterData.mysticismTalents = [];
+        CharacterData.devotionalPool = 0;
+        CharacterData.boundSpiritSlots = 0;
+        CharacterData.sorceryResource = 0;
+      };
 
       // Clear cult first to avoid confirmation dialog
-      CharacterData.cult = null;
-      CharacterData.miracles = [];
+      resetCultTestState();
 
       // Test: Orlanth (theist) should get devotionalPool = POW/2 = 7
       AppObj.selectCult('Orlanth');
@@ -10022,10 +10064,8 @@ section('Cult Type Detection (ADR-0006)');
       } else {
         fail('Orlanth devotionalPool', `Expected 7, got ${CharacterData.devotionalPool}`);
       }
-
       // Test: Daka Fal (animist) should get devotionalPool = 0, boundSpiritSlots = CHA/2 = 6
-      CharacterData.cult = null;
-      CharacterData.miracles = [];
+      resetCultTestState();
       AppObj.selectCult('Daka Fal');
       if (CharacterData.devotionalPool === 0) {
         pass('Daka Fal (animist): devotionalPool = 0 (no Devotion)');
@@ -10037,10 +10077,8 @@ section('Cult Type Detection (ADR-0006)');
       } else {
         fail('Daka Fal boundSpiritSlots', `Expected 6, got ${CharacterData.boundSpiritSlots}`);
       }
-
       // Test: Arkat (sorcery) should get devotionalPool = 0, sorceryResource = POW = 14
-      CharacterData.cult = null;
-      CharacterData.miracles = [];
+      resetCultTestState();
       AppObj.selectCult('Arkat');
       if (CharacterData.devotionalPool === 0) {
         pass('Arkat (sorcery): devotionalPool = 0 (no Devotion)');
@@ -10052,20 +10090,16 @@ section('Cult Type Detection (ADR-0006)');
       } else {
         fail('Arkat sorceryResource', `Expected 14, got ${CharacterData.sorceryResource}`);
       }
-
       // Test: Waha (hybrid) should get BOTH devotionalPool AND boundSpiritSlots
-      CharacterData.cult = null;
-      CharacterData.miracles = [];
+      resetCultTestState();
       AppObj.selectCult('Waha');
       if (CharacterData.devotionalPool === 7 && CharacterData.boundSpiritSlots === 6) {
         pass('Waha (hybrid): devotionalPool = 7 AND boundSpiritSlots = 6');
       } else {
         fail('Waha hybrid resources', `Expected DP=7, BSS=6, got DP=${CharacterData.devotionalPool}, BSS=${CharacterData.boundSpiritSlots}`);
       }
-
       // Clean up
-      CharacterData.cult = null;
-      CharacterData.miracles = [];
+      resetCultTestState();
       AppObj.selectCult(null);
     } else {
       info('Skipping selectCult resource tests (App.selectCult not available in test env)');
