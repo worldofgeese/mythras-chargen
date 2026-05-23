@@ -39,6 +39,8 @@ The headed/orchestrator agent is for planning, synthesis, high-complexity decisi
 - Exceptions to the `/lfg` default:
   - Use the full Beads workflow directly when the task is tracker/governance/coordination work or when Beads create/update/close operations are integral throughout the task.
   - Use `/ce-work` for execution of approved plans or implementation units where the `ce-work` workflow is the requested or better-fitting executor.
+- Practice merge-as-you-go discipline: as each Bead is claimed, built, proofed, and closed, use `/compound-engineering:ce-commit` (or the platform-listed `ce-commit` skill) to commit the scoped work, push it, and merge it back to `main` before accumulating unrelated Beads.
+- After completed branches are merged, and before claiming more unrelated work, use `/compound-engineering:ce-clean-gone-branches` (or the platform-listed `ce-clean-gone-branches` skill) to prune gone local branches and their associated worktrees. Do not leave completed Decapod worktrees or merged branches behind.
 - These orchestration rules do not replace Decapod initialization, Beads task authority, isolated worktrees, proof gates, or Copyparty obligations.
 
 #### Fan-out and subagent prompts
@@ -141,9 +143,11 @@ For this app, the required proof surfaces are:
 
 Use container workspaces only when a change introduces a dependency manager, build system, external service runtime, or when the human explicitly requests container isolation for a specific task.
 
-#### Commit and publish
+#### Commit, merge, cleanup, and publish
 
 - Commit only verified work with the required Copilot co-author trailer.
+- Do not batch unrelated Beads into long-lived branches. Close the SDLC loop for each Bead or tightly-coupled Bead set: proof, commit with `/compound-engineering:ce-commit`, push, merge to `main`, push `main`, then clean branches/worktrees with `/compound-engineering:ce-clean-gone-branches`.
+- Keep `main` moving as the integration branch for completed Beads; avoid parking verified work only on agent/worktree branches.
 - Push final `main` to both `origin` and `paphos`.
 - Clean up temporary servers with specific PIDs, not name-based process killing.
 
