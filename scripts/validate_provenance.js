@@ -438,6 +438,15 @@ function validateLegacyDisposition(legacy, schema, root = ROOT) {
   const allTrackedFiles = trackedFiles(root);
   const trackedFileSet = new Set(allTrackedFiles);
   const files = allTrackedFiles.filter(isTrackedSourceLike);
+  for (const [index, disposition] of dispositions.entries()) {
+    if (disposition.disposition !== 'governed-now' || !disposition.path || !isTrackedSourceLike(disposition.path)) continue;
+    const fullPath = path.join(root, disposition.path);
+    if (!fs.existsSync(fullPath)) {
+      add(errors, `dispositions[${index}] ${disposition.path}`, 'governed disposition path does not exist');
+    } else if (!trackedFileSet.has(disposition.path)) {
+      add(errors, `dispositions[${index}] ${disposition.path}`, 'governed disposition path is not git-tracked');
+    }
+  }
   for (const filePath of files) {
     const matches = dispositions.filter(disposition => matchesDisposition(filePath, disposition));
     if (matches.length === 0) add(errors, filePath, 'tracked source-like artifact lacks legacy disposition');

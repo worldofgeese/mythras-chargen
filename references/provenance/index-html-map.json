@@ -375,16 +375,13 @@
     },
     {
       "constant_name": "STARTING_SPIRITS",
-      "status": "source_blocked",
-      "disposition": "must-fix-before-acceptance",
+      "status": "accepted",
+      "disposition": "governed-now",
       "source_files": [
-        "references/spirits-raw/bird-in-hand.json",
-        "references/spirits-raw/monster-island.json",
-        "references/mythras-raw/magic-page-references.json"
+        "references/starting-spirits.json"
       ],
       "source_ids": [
         "bird-in-hand",
-        "monster-island",
         "mythras-core"
       ],
       "source_refs": [
@@ -498,7 +495,14 @@
             "references/sources/evidence/bird-in-hand/page-0047-extraction.json",
             "references/sources/evidence/bird-in-hand/page-0047-verification.json"
           ]
-        },
+        }
+      ],
+      "rationale": "STARTING_SPIRITS is regenerated as a bounded app-facing list: exact Bird in Hand examples plus Mythras Core rule-derived starting templates. Monster Island candidate evidence is kept reference-only and AiG spirit magic is outside this app surface.",
+      "fact_id": "app.STARTING_SPIRITS",
+      "canonical_value_hash": "07c8c9ff92a9490ed5c1f2b77ff22bd803bc1bad1fcffa46c4ae979847011b9f",
+      "normalized_file": "references/starting-spirits.json",
+      "normalized_path": "$.app_options",
+      "blocked_candidate_sources": [
         {
           "source_id": "monster-island",
           "source_revision_id": "monster-island:permission-pending:dd79904483ab:2026-05-21",
@@ -538,10 +542,10 @@
             "references/sources/evidence/monster-island/page-0285-verification.json",
             "references/sources/evidence/monster-island/page-0286-extraction.json",
             "references/sources/evidence/monster-island/page-0286-verification.json"
-          ]
+          ],
+          "rationale": "Reference-only spirit evidence remains available but is not app-promoted into STARTING_SPIRITS."
         }
-      ],
-      "rationale": "Starting spirit examples remain source-blocked overall because inline STARTING_SPIRITS has not been regenerated from the verified Core, Bird in Hand, and Monster Island evidence set. Mythras Core base spirit-rule pages 131-154, Bird in Hand pages 43-47, and Monster Island pages 133-140/285-286 now have bounded page evidence."
+      ]
     }
   ]
 }

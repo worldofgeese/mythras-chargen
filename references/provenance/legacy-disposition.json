@@ -154,11 +154,10 @@
       "required_scope": true,
       "source_ids": [
         "mythras-core",
-        "monster-island",
         "bird-in-hand"
       ],
       "scan_for_unverified": true,
-      "rationale": "Core career-backed magic provider metadata is derived from source-governed career data and each system's app source chain: Animism uses Mythras Core, Monster Island, and A Bird in the Hand; Sorcery and Mysticism use Mythras Core."
+      "rationale": "Core career-backed magic provider metadata is derived from source-governed career data and each system's app source chain: Animism uses Mythras Core and A Bird in the Hand; Sorcery and Mysticism use Mythras Core."
     },
     {
       "id": "mythras-raw",
@@ -180,12 +179,25 @@
       "id": "spirits-bird",
       "path": "references/spirits-raw/bird-in-hand.json",
       "artifact_class": "raw_legacy_json",
-      "disposition": "must-fix-before-acceptance",
+      "disposition": "governed-now",
       "required_scope": true,
       "source_ids": [
         "bird-in-hand"
       ],
-      "rationale": "Legacy Bird in Hand spirit examples have partial source refs but remain source-blocked until portable page/block evidence exists.",
+      "rationale": "Bird in Hand target example spirit records have portable page/block evidence and are consumed by references/starting-spirits.json.",
+      "enforce_source_refs": true
+    },
+    {
+      "id": "starting-spirits-authority",
+      "path": "references/starting-spirits.json",
+      "artifact_class": "normalized_authority_json",
+      "disposition": "governed-now",
+      "required_scope": true,
+      "source_ids": [
+        "bird-in-hand",
+        "mythras-core"
+      ],
+      "rationale": "Normalized app-facing starting spirit authority consumed by STARTING_SPIRITS.",
       "enforce_source_refs": true
     },
     {
@@ -485,14 +497,15 @@
     {
       "constant_name": "STARTING_SPIRITS",
       "artifact_class": "app_runtime",
-      "disposition": "must-fix-before-acceptance",
+      "disposition": "governed-now",
       "source_files": [
-        "references/spirits-raw/bird-in-hand.json"
+        "references/starting-spirits.json"
       ],
       "source_ids": [
-        "bird-in-hand"
+        "bird-in-hand",
+        "mythras-core"
       ],
-      "rationale": "Inline starting spirit examples cite legacy Bird in Hand records and Mythras Core pages; they remain source-blocked until normalized spirit authority exists."
+      "rationale": "Inline starting spirit options mirror normalized source-backed starting-spirit authority."
     }
   ],
   "advisory_local_only": [

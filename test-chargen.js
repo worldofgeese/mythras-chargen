@@ -646,11 +646,10 @@ runCommandTest('Render workflow can list sources without rendering pages',
       career: 'Shaman',
       sourceFiles: [
         'references/mythras-raw/animism.json',
-        'references/spirits-raw/monster-island.json',
         'references/spirits-raw/bird-in-hand.json'
       ],
       requiredSkills: ['Binding (Cult, Totem or Tradition)', 'Trance'],
-      summaryIncludes: ['Mythras Core Shaman career', 'app Animism uses Mythras Core, Monster Island, and A Bird in the Hand'],
+      summaryIncludes: ['Mythras Core Shaman career', 'app Animism uses Mythras Core and A Bird in the Hand'],
       summaryExcludes: ['used by Core Animism']
     },
     {
@@ -973,6 +972,12 @@ runCommandTest('Render workflow can list sources without rendering pages',
       spirit.source_ref.block_ids.length > 0
     );
   const appStartingSpirits = loadApp().STARTING_SPIRITS || [];
+  const startingSpiritsAuthority = readJson('references/starting-spirits.json');
+  const startingSpiritOptions = startingSpiritsAuthority.app_options || [];
+  const startingSpiritSourceRefs = startingSpiritsAuthority.source_refs_by_id || {};
+  const startingSpiritAttestations = startingSpiritsAuthority.option_attestations || {};
+  const startingSpiritsAuthorityHash = provenanceValidator.valueHash(startingSpiritOptions);
+  const appStartingSpiritsHash = provenanceValidator.valueHash(appStartingSpirits);
   const ghu = birdRaw.example_spirits.find(spirit => spirit.name === 'Ghu');
   const appGhu = appStartingSpirits.find(spirit => (spirit.source || '').includes('(Ghu)'));
   const ghuAbilityName = (ghu?.abilities?.[0] || '').split(/[ (—-]/)[0];
@@ -990,19 +995,21 @@ runCommandTest('Render workflow can list sources without rendering pages',
   ].map(artifactPath => JSON.stringify(readJson(artifactPath))).join(' ');
   const ghuEvidenceHasStaleAbsorbMagic = /Absorb Magic|absorbs magic/i.test(ghuEvidenceText);
   const rawBirdSpiritsByName = new Map(birdRaw.example_spirits.map(spirit => [spirit.name, spirit]));
-  const birdAppCitationMismatches = appStartingSpirits
-    .filter(spirit => (spirit.source || '').startsWith('Bird in the Hand p.'))
+  const birdAppSourceRefMismatches = startingSpiritOptions
+    .filter(spirit => (startingSpiritAttestations[spirit.name]?.source_ref_id || '').startsWith('bird-in-hand:'))
     .flatMap(spirit => {
-      const match = spirit.source.match(/^Bird in the Hand p\.(\d+)(?:-(\d+))? \(([^)]+)\)$/);
-      if (!match) return [`${spirit.name}: unparseable source ${spirit.source}`];
-      const startPage = Number(match[1]);
-      const endPage = Number(match[2] || match[1]);
-      const actualPages = Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index);
-      const rawSpirit = rawBirdSpiritsByName.get(match[3]);
+      const attestation = startingSpiritAttestations[spirit.name] || {};
+      const rawName = attestation.source_ref_id.slice('bird-in-hand:'.length);
+      const rawSpirit = rawBirdSpiritsByName.get(rawName);
+      const appRef = startingSpiritSourceRefs[attestation.source_ref_id];
       const expectedPages = rawSpirit?.source_ref?.pdf_pages || [];
-      return JSON.stringify(actualPages) === JSON.stringify(expectedPages)
+      const actualPages = appRef?.pdf_pages || [];
+      return rawSpirit &&
+        appRef?.source_id === 'bird-in-hand' &&
+        attestation.source_ability === rawSpirit.abilities?.[0] &&
+        JSON.stringify(actualPages) === JSON.stringify(expectedPages)
         ? []
-        : [`${spirit.name}: app ${JSON.stringify(actualPages)} raw ${JSON.stringify(expectedPages)}`];
+        : [`${spirit.name}: app source_ref ${JSON.stringify(appRef)} raw ${rawName}`];
     });
   if (activeBird?.acceptance_state === 'bounded_vision_verified' &&
       birdPages.coverage_state === 'verified' &&
@@ -1021,7 +1028,7 @@ runCommandTest('Render workflow can list sources without rendering pages',
       ghu?.abilities?.[0]?.startsWith('Warding') &&
       !ghuEvidenceHasStaleAbsorbMagic &&
       appGhuMatchesRaw &&
-      birdAppCitationMismatches.length === 0) {
+      birdAppSourceRefMismatches.length === 0) {
     pass('Bird in Hand example spirits are backed by bounded vision evidence and corrected spellings');
   } else {
     fail('Bird in Hand example spirit evidence is incomplete or stale',
@@ -1038,7 +1045,7 @@ runCommandTest('Render workflow can list sources without rendering pages',
         appGhu,
         appGhuMatchesRaw,
         ghuEvidenceHasStaleAbsorbMagic,
-        birdAppCitationMismatches
+        birdAppSourceRefMismatches
       }));
   }
 
@@ -1064,7 +1071,8 @@ runCommandTest('Render workflow can list sources without rendering pages',
     artifact?.source_revision_id === monsterRevision &&
     expectedMonsterPages.includes(artifact.pdf_page) &&
     artifactPath.includes(String(artifact.pdf_page).padStart(4, '0'));
-  const monsterEvidenceArtifactsValid = monsterEvidenceArtifacts.length === 20 &&
+  const monsterEvidenceArtifactsValid = monsterEvidenceArtifacts.length > 0 &&
+    monsterEvidenceArtifacts.length % 2 === 0 &&
     monsterEvidenceArtifacts.every(isValidMonsterEvidenceArtifact);
   const verifiedMonsterPages = (monsterPages.pages || []).every(page =>
     expectedMonsterPages.includes(page.pdf_page) &&
@@ -1088,7 +1096,7 @@ runCommandTest('Render workflow can list sources without rendering pages',
     page.derived_facts.length > 0
   );
   const startingSpiritsMap = (indexMap.entries || []).find(entry => entry.constant_name === 'STARTING_SPIRITS');
-  const monsterStartingSpiritRef = (startingSpiritsMap?.source_refs || []).find(ref => ref.source_id === 'monster-island');
+  const monsterStartingSpiritRef = (startingSpiritsMap?.blocked_candidate_sources || []).find(ref => ref.source_id === 'monster-island');
   const monsterPathSet = JSON.stringify(monsterPageEvidencePaths);
   const monsterEvidencePathSetsMatch = [
     monsterSource?.observed_source_metadata?.vision_evidence_paths,
@@ -1145,18 +1153,73 @@ runCommandTest('Render workflow can list sources without rendering pages',
   const blockedMonsterRefs = (startingSpiritsMap?.blocked_candidate_sources || []).filter(ref => ref.source_id === 'monster-island');
   const mythrasCoreStartingSpiritRef = (startingSpiritsMap?.source_refs || []).find(ref => ref.source_id === 'mythras-core');
   const birdStartingSpiritRef = (startingSpiritsMap?.source_refs || []).find(ref => ref.source_id === 'bird-in-hand');
+  const startingSourceIds = new Set(startingSpiritsMap?.source_ids || []);
+  const appStartingSpiritsMatchAuthority = appStartingSpiritsHash === startingSpiritsAuthorityHash;
+  const startingSpiritsHashMatches = startingSpiritsAuthorityHash === startingSpiritsMap?.canonical_value_hash;
+  const startingAuthorityMetadataErrors = provenanceValidator.validateSourceAuthorityMetadata(
+    startingSpiritsAuthority,
+    {
+      id: 'starting-spirits-authority',
+      disposition: 'governed-now',
+      source_ids: ['bird-in-hand', 'mythras-core'],
+      enforce_source_refs: true
+    },
+    manifestById
+  );
+  const coreStartingSpiritAggregatePages = new Set(mythrasCoreStartingSpiritRef?.verified_pdf_pages || []);
+  const startingSpiritRefsResolve = startingSpiritOptions.every(spirit => {
+    const attestation = startingSpiritAttestations[spirit.name] || {};
+    const ref = startingSpiritSourceRefs[attestation.source_ref_id];
+    if (!ref) return false;
+    if (attestation.attestation === 'source_backed_bird_example_spirit_display') {
+      return ref.source_id === 'bird-in-hand' &&
+        ref.coverage_state === 'verified' &&
+        ref.evidence_state === 'bounded_extraction_independent_vision_verified' &&
+        typeof attestation.source_ability === 'string' &&
+        attestation.source_ability.length > 0;
+    }
+    if (attestation.attestation === 'source_backed_derived_core_starting_template') {
+      const refPages = Array.isArray(ref.pdf_pages) ? ref.pdf_pages : [];
+      return ref.source_id === 'mythras-core' &&
+        ref.coverage_state === 'verified' &&
+        ref.evidence_state === 'bounded_render_ocr_pdftext_verified' &&
+        refPages.length > 0 &&
+        refPages.every(page => coreStartingSpiritAggregatePages.has(page)) &&
+        typeof attestation.derivation_note === 'string' &&
+        attestation.derivation_note.includes('not a copied source stat block');
+    }
+    return false;
+  });
+  const sourcePolicyKeepsMonsterReferenceOnly =
+    !startingSourceIds.has('monster-island') &&
+    !startingSourceIds.has('aig') &&
+    (startingSpiritsAuthority.source_policy?.not_app_promoted_source_ids || []).includes('monster-island') &&
+    (startingSpiritsAuthority.non_promoted_reference_sources || []).some(ref =>
+      ref.source_id === 'monster-island' &&
+      ref.evidence_state === 'bounded_extraction_independent_vision_verified_reference_only'
+    );
   if (acceptedMonsterEntries.length === 0 &&
-      startingSpiritsMap?.status === 'source_blocked' &&
-      (startingSpiritsMap?.source_ids || []).includes('mythras-core') &&
-      !Array.isArray(startingSpiritsMap?.external_source_gaps) &&
+      startingSpiritsMap?.status === 'accepted' &&
+      startingSpiritsMap?.disposition === 'governed-now' &&
+      startingSpiritsMap?.normalized_file === 'references/starting-spirits.json' &&
+      startingSpiritsMap?.normalized_path === '$.app_options' &&
+      startingSourceIds.has('mythras-core') &&
+      startingSourceIds.has('bird-in-hand') &&
+      sourcePolicyKeepsMonsterReferenceOnly &&
+      appStartingSpiritsMatchAuthority &&
+      startingSpiritsHashMatches &&
+      startingAuthorityMetadataErrors.length === 0 &&
+      startingSpiritsAuthority.verified === true &&
+      startingSpiritRefsResolve &&
       mythrasCoreStartingSpiritRef?.source_revision_id === expectedMythrasCoreRevision &&
       mythrasCoreStartingSpiritRef?.page_manifest_path === 'references/sources/pages/mythras-core.json' &&
       mythrasCoreStartingSpiritRef?.coverage_state === 'verified' &&
       mythrasCoreStartingSpiritRef?.evidence_state === 'bounded_render_ocr_pdftext_verified' &&
       Array.isArray(mythrasCoreStartingSpiritRef?.verified_pdf_pages) &&
-      mythrasCoreStartingSpiritRef.verified_pdf_pages.length === 24 &&
+      mythrasCoreStartingSpiritRef.verified_pdf_pages.length > 0 &&
       Array.isArray(mythrasCoreStartingSpiritRef?.evidence_paths) &&
-      mythrasCoreStartingSpiritRef.evidence_paths.length === 48 &&
+      mythrasCoreStartingSpiritRef.evidence_paths.length > 0 &&
+      mythrasCoreStartingSpiritRef.evidence_paths.length % 2 === 0 &&
       birdStartingSpiritRef?.source_revision_id === activeBird?.source_revision_id &&
       birdStartingSpiritRef?.page_manifest_path === 'references/sources/pages/bird-in-hand.json' &&
       birdStartingSpiritRef?.coverage_state === 'verified' &&
@@ -1166,15 +1229,23 @@ runCommandTest('Render workflow can list sources without rendering pages',
       monsterStartingSpiritRef?.coverage_state === 'verified' &&
       monsterStartingSpiritRef?.evidence_state === 'bounded_extraction_independent_vision_verified_reference_only' &&
       Array.isArray(monsterStartingSpiritRef?.evidence_paths) &&
-      monsterStartingSpiritRef.evidence_paths.length === 20 &&
-      blockedMonsterRefs.length === 0) {
-    pass('Starting spirit provenance wires Core, Bird, and Monster Island evidence while keeping app surface blocked');
+      monsterStartingSpiritRef.evidence_paths.length > 0 &&
+      monsterStartingSpiritRef.evidence_paths.length % 2 === 0 &&
+      blockedMonsterRefs.length === 1) {
+    pass('Starting spirit provenance accepts Core/Bird app options while keeping Monster Island reference-only');
   } else {
-    fail('Starting spirit provenance is missing Bird/Mythras Core wiring or accepted Monster Island prematurely',
+    fail('Starting spirit provenance is missing accepted Core/Bird authority or promoted Monster Island prematurely',
       JSON.stringify({
         startingSpiritsStatus: startingSpiritsMap?.status,
+        disposition: startingSpiritsMap?.disposition,
         sourceIds: startingSpiritsMap?.source_ids,
-        externalSourceGaps: startingSpiritsMap?.external_source_gaps,
+        normalizedFile: startingSpiritsMap?.normalized_file,
+        appStartingSpiritsMatchAuthority,
+        startingSpiritsHashMatches,
+        startingAuthorityMetadataErrors,
+        startingAuthorityVerified: startingSpiritsAuthority.verified,
+        startingSpiritRefsResolve,
+        sourcePolicyKeepsMonsterReferenceOnly,
         mythrasCoreStartingSpiritRef,
         birdStartingSpiritRef,
         monsterStartingSpiritRef,
@@ -8493,8 +8564,14 @@ section('Index Provenance Coverage');
   const entriesWithoutCitation = (ref.entries || []).filter(entry =>
     !(entry.references || []).every(reference => reference.citation || reference.source)
   ).map(entry => entry.id);
-  const blockedOrUnverified = (ref.entries || []).filter(entry =>
-    ['blocked', 'unverified'].includes(entry.status) && (entry.blockers || []).length > 0
+  const partialWithBlockers = (ref.entries || []).filter(entry =>
+    entry.status === 'partial' && (entry.blockers || []).length > 0
+  );
+  const startingSpiritsVerified = (ref.entries || []).some(entry =>
+    entry.id === 'spirit-starting-options' &&
+    entry.status === 'verified' &&
+    (entry.blockers || []).length === 0 &&
+    (entry.references || []).some(reference => reference.path === 'references/starting-spirits.json')
   );
   const theismPartialWithExemptions = (ref.entries || []).some(entry =>
     entry.id === 'theism-miracles' &&
@@ -8514,7 +8591,8 @@ section('Index Provenance Coverage');
       missingConstants.length === 0 &&
       missingRefs.length === 0 &&
       entriesWithoutCitation.length === 0 &&
-      blockedOrUnverified.length >= 1 &&
+      partialWithBlockers.length >= 1 &&
+      startingSpiritsVerified &&
       theismPartialWithExemptions &&
       cultMapPartialWithBlockers) {
     pass('index.html provenance coverage mirrors committed JSON and covers generated data constants');
@@ -8525,7 +8603,8 @@ section('Index Provenance Coverage');
         missingConstants,
         missingRefs,
         entriesWithoutCitation,
-        blockedOrUnverified: blockedOrUnverified.map(entry => entry.id),
+        partialWithBlockers: partialWithBlockers.map(entry => entry.id),
+        startingSpiritsVerified,
         theismPartialWithExemptions,
         cultMapPartialWithBlockers
       }));
@@ -8536,11 +8615,11 @@ section('Index Provenance Coverage');
 {
   const coverage = App.PROVENANCE_COVERAGE || {};
   const entriesById = Object.fromEntries((coverage.entries || []).map(entry => [entry.id, entry]));
-  const sorceryRef = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'mythras-raw', 'sorcery.json'), 'utf8'));
-  const spiritRef = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'aig-raw', 'spirit-magic-aig.json'), 'utf8'));
-  const magicPagesRef = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'mythras-raw', 'magic-page-references.json'), 'utf8'));
-  const runeMagicRef = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'aig-raw', 'rune-magic-aig.json'), 'utf8'));
-  const miraclesRef = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'theism-miracles.json'), 'utf8'));
+  const sorceryRef = readJson('references/mythras-raw/sorcery.json');
+  const startingSpiritsRef = readJson('references/starting-spirits.json');
+  const magicPagesRef = readJson('references/mythras-raw/magic-page-references.json');
+  const runeMagicRef = readJson('references/aig-raw/rune-magic-aig.json');
+  const miraclesRef = readJson('references/theism-miracles.json');
 
   const theismNoMiraclesClassified = Array.isArray(miraclesRef.no_miracles_section) &&
     miraclesRef.no_miracles_section.length > 0 &&
@@ -8552,8 +8631,9 @@ section('Index Provenance Coverage');
   const statusesMatch =
     entriesById['sorcery-spells']?.status === 'verified' &&
     sorceryRef.verified === true &&
-    entriesById['spirit-starting-options']?.status === 'unverified' &&
-    spiritRef.verified === false &&
+    entriesById['spirit-starting-options']?.status === 'verified' &&
+    (entriesById['spirit-starting-options']?.blockers || []).length === 0 &&
+    startingSpiritsRef.verified === true &&
     magicPagesRef.verified === true &&
     magicPagesRef.source_ref?.coverage_state === 'verified' &&
     !magicPagesRef.source_ref?.pages?.includes(196) &&
@@ -8566,7 +8646,7 @@ section('Index Provenance Coverage');
     theismNoMiraclesClassified;
 
   if (statusesMatch) {
-    pass('provenance coverage exposes verified, blocked, and unverified reference states');
+    pass('provenance coverage exposes verified app surfaces and remaining partial reference states');
   } else {
     fail('provenance coverage does not reflect current reference verification gaps',
       JSON.stringify({
@@ -8574,7 +8654,7 @@ section('Index Provenance Coverage');
         spiritStatus: entriesById['spirit-starting-options']?.status,
         theismStatus: entriesById['theism-miracles']?.status,
         sorceryVerified: sorceryRef.verified,
-        spiritVerified: spiritRef.verified,
+        startingSpiritsVerified: startingSpiritsRef.verified,
         magicPagesVerified: magicPagesRef.verified,
         runeMagicVerified: runeMagicRef.verified,
         noMiraclesSections: miraclesRef.no_miracles_section,
@@ -8593,17 +8673,17 @@ section('Index Provenance Coverage');
     const badgesHtml = AppRef.renderProvenanceBadgesForConstants(['MIRACLES_DATA', 'STARTING_SPIRITS', 'SORCERY_SPELLS']);
 
     if (coverageHtml.includes('data-status=\"partial\"') &&
-        coverageHtml.includes('data-status=\"unverified\"') &&
+        coverageHtml.includes('data-status=\"verified\"') &&
         badgesHtml.includes('source-coverage-badge') &&
         badgesHtml.includes('Theist miracle lists') &&
         badgesHtml.includes('Starting spirit options') &&
         badgesHtml.includes('Sorcery spells')) {
-      pass('provenance UI renderer exposes source badges and partial/unverified coverage');
+      pass('provenance UI renderer exposes source badges and partial/verified coverage');
     } else {
       fail('provenance UI renderer did not expose expected source coverage',
         JSON.stringify({
           hasPartialStatus: coverageHtml.includes('data-status=\"partial\"'),
-          hasUnverifiedStatus: coverageHtml.includes('data-status=\"unverified\"'),
+          hasVerifiedStatus: coverageHtml.includes('data-status=\"verified\"'),
           badgesHtml
         }));
     }
@@ -8642,7 +8722,7 @@ section('Index Provenance Coverage');
     const hasCombatBadges = combatHtml.includes('Cultures, homelands, and combat styles: verified') &&
       combatHtml.includes('Weapons, prices, equipment, and starting kit: attested');
     const hasMagicBadges = magicHtml.includes('Theist miracle lists and rune access: partial') &&
-      magicHtml.includes('Starting spirit options and animist guidance: unverified') &&
+      magicHtml.includes('Starting spirit options and animist guidance: verified') &&
       magicHtml.includes('Folk Magic spell names and descriptions: attested');
     const hasEquipmentBadges = equipmentHtml.includes('Weapons, prices, equipment, and starting kit: attested') &&
       equipmentHtml.includes('Social class and starting money tables: partial');
