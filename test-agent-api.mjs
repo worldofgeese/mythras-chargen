@@ -558,6 +558,10 @@ const u4ProviderPlayMode = evalPageJSON(`JSON.stringify((() => {
 
   App.switchMode('wizard');
   App.agent.setStep(1, {name:'Provider Play Mystic', concept:'No cult mysticism in play'});
+  CharacterData.miracles = [];
+  CharacterData.boundSpirits = [];
+  CharacterData.sorcerySpells = [];
+  CharacterData.mysticismTalents = [];
   App.agent.setStep(2, {characteristics:{STR:8,CON:8,SIZ:8,DEX:8,INT:15,POW:20,CHA:8}});
   App.agent.setStep(4, {culture:'Sartarite (Heortling)', homeland:'Boldhome'});
   App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', 'Mysticism', 'Musicianship']});
@@ -567,6 +571,10 @@ const u4ProviderPlayMode = evalPageJSON(`JSON.stringify((() => {
 
   App.switchMode('wizard');
   App.agent.setStep(1, {name:'Provider Play Orlanth Mystic', concept:'Cult plus core mysticism'});
+  CharacterData.miracles = [];
+  CharacterData.boundSpirits = [];
+  CharacterData.sorcerySpells = [];
+  CharacterData.mysticismTalents = [];
   App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:15,POW:12,CHA:8}});
   App.agent.setStep(4, {culture:'Sartarite (Heortling)', homeland:'Boldhome'});
   App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', 'Mysticism', 'Musicianship']});
@@ -781,6 +789,135 @@ assert(u5ProviderIdValidation.unknown.success === false &&
   u5ProviderIdValidation.afterSubset.cultName === null &&
   u5ProviderIdValidation.afterSubset.selectedSpirits.length === 1,
   'U5: Step 9 rejects invalid provider-shaped payload ids and accepts active provider ids');
+
+const u5ProviderSelectionLoss = evalPageJSON(`JSON.stringify((() => {
+  const spiritName = 'Ancestor Spirit — Sagacity (Int 1)';
+  const clearMagicSelections = () => {
+    CharacterData.miracles = [];
+    CharacterData.boundSpirits = [];
+    CharacterData.sorcerySpells = [];
+    CharacterData.mysticismTalents = [];
+  };
+  const setupCultBackedShaman = () => {
+    App.agent.setStep(1, {name:'U5 No Cult Loss', concept:'Cult-backed animism loss'});
+    App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:13,POW:14,CHA:8}});
+    App.agent.setStep(4, {culture:'Praxian', homeland:'Prax'});
+    App.agent.setStep(8, {career:'Shaman', professionalSkills:[{name:'Binding (Cult, Totem or Tradition)', specialization:'Daka Fal'}, 'Trance', 'Healing']});
+    clearMagicSelections();
+    CharacterData.cult = 'Daka Fal';
+    CharacterData.cultType = {primary:'animist', types:['animist'], isHybrid:false};
+    CharacterData.boundSpiritSlots = 4;
+    CharacterData.boundSpirits = [{name:spiritName, type:'Ancestor', ability:'Sagacity'}];
+    App.saveToLocalStorage();
+  };
+  const setupCoreShaman = () => {
+    App.agent.setStep(1, {name:'U5 Culture Preserve', concept:'Career-backed animism preserve'});
+    App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:13,POW:14,CHA:8}});
+    App.agent.setStep(4, {culture:'Praxian', homeland:'Prax'});
+    App.agent.setStep(8, {career:'Shaman', professionalSkills:[{name:'Binding (Cult, Totem or Tradition)', specialization:'Waha'}, 'Trance', 'Healing']});
+    clearMagicSelections();
+    App.agent.setStep(9, {cult:null, boundSpirits:[spiritName]});
+  };
+  const setupCultOnlyAnimist = () => {
+    App.agent.setStep(1, {name:'U5 Culture Loss', concept:'Cult-only animism loss'});
+    App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:13,POW:14,CHA:8}});
+    App.agent.setStep(4, {culture:'Praxian', homeland:'Prax'});
+    clearMagicSelections();
+    CharacterData.career = 'Warrior';
+    CharacterData.selectedProfessionalSkills = [];
+    CharacterData.careerSkills = {};
+    CharacterData.cult = 'Daka Fal';
+    CharacterData.cultType = {primary:'animist', types:['animist'], isHybrid:false};
+    CharacterData.boundSpiritSlots = 4;
+    CharacterData.boundSpirits = [{name:spiritName, type:'Ancestor', ability:'Sagacity'}];
+    App.saveToLocalStorage();
+  };
+
+  setupCultBackedShaman();
+  const agentBeforeNoCult = App.agent.getMagicState();
+  const agentNoCult = App.agent.selectCult(null);
+  const agentAfterNoCult = App.agent.getMagicState();
+
+  setupCultBackedShaman();
+  let confirmationMessage = null;
+  App.showConfirmation = (message) => { confirmationMessage = message; };
+  const uiBeforeNoCult = App.agent.getMagicState();
+  const uiNoCult = App.selectCult(null);
+  const uiAfterNoCult = App.agent.getMagicState();
+
+  setupCoreShaman();
+  const agentBeforeCulture = App.agent.getMagicState();
+  const agentCulture = App.agent.setStep(4, {culture:'Esrolian'});
+  const agentAfterCulture = App.agent.getMagicState();
+
+  setupCoreShaman();
+  const uiBeforeCulture = App.agent.getMagicState();
+  const uiCulture = App.selectCulture('Esrolian');
+  const uiAfterCulture = App.agent.getMagicState();
+
+  setupCultOnlyAnimist();
+  const agentBeforeCultOnlyCulture = App.agent.getMagicState();
+  const agentCultOnlyCulture = App.agent.setStep(4, {culture:'Esrolian'});
+  const agentAfterCultOnlyCulture = App.agent.getMagicState();
+
+  setupCultOnlyAnimist();
+  const uiBeforeCultOnlyCulture = App.agent.getMagicState();
+  const uiCultOnlyCulture = App.selectCulture('Esrolian');
+  const uiAfterCultOnlyCulture = App.agent.getMagicState();
+
+  return {
+    agentBeforeNoCult,
+    agentNoCult,
+    agentAfterNoCult,
+    confirmationMessage,
+    uiBeforeNoCult,
+    uiNoCult,
+    uiAfterNoCult,
+    agentBeforeCulture,
+    agentCulture,
+    agentAfterCulture,
+    uiBeforeCulture,
+    uiCulture,
+    uiAfterCulture,
+    agentBeforeCultOnlyCulture,
+    agentCultOnlyCulture,
+    agentAfterCultOnlyCulture,
+    uiBeforeCultOnlyCulture,
+    uiCultOnlyCulture,
+    uiAfterCultOnlyCulture
+  };
+})())`);
+assert(u5ProviderSelectionLoss.agentBeforeNoCult.selectedSpirits.length === 1 &&
+  u5ProviderSelectionLoss.agentNoCult.success === false &&
+  /clear selected bound spirits/i.test(u5ProviderSelectionLoss.agentNoCult.error || '') &&
+  u5ProviderSelectionLoss.agentAfterNoCult.cultName === 'Daka Fal' &&
+  u5ProviderSelectionLoss.agentAfterNoCult.selectedSpirits.length === 1 &&
+  u5ProviderSelectionLoss.uiBeforeNoCult.selectedSpirits.length === 1 &&
+  u5ProviderSelectionLoss.uiNoCult.pendingConfirmation === true &&
+  /No Cult/i.test(u5ProviderSelectionLoss.confirmationMessage || '') &&
+  u5ProviderSelectionLoss.uiAfterNoCult.cultName === 'Daka Fal' &&
+  u5ProviderSelectionLoss.uiAfterNoCult.selectedSpirits.length === 1 &&
+  u5ProviderSelectionLoss.agentBeforeCulture.selectedSpirits.length === 1 &&
+  u5ProviderSelectionLoss.agentCulture.success === true &&
+  u5ProviderSelectionLoss.agentAfterCulture.cultName === null &&
+  u5ProviderSelectionLoss.agentAfterCulture.selectedSpirits.length === 1 &&
+  u5ProviderSelectionLoss.uiBeforeCulture.selectedSpirits.length === 1 &&
+  u5ProviderSelectionLoss.uiCulture.success === true &&
+  u5ProviderSelectionLoss.uiAfterCulture.cultName === null &&
+  u5ProviderSelectionLoss.uiAfterCulture.selectedSpirits.length === 1 &&
+  u5ProviderSelectionLoss.agentBeforeCultOnlyCulture.selectedSpirits.length === 1 &&
+  u5ProviderSelectionLoss.agentCultOnlyCulture.success === false &&
+  /clear selected bound spirits/i.test((u5ProviderSelectionLoss.agentCultOnlyCulture.errors || []).join('; ')) &&
+  u5ProviderSelectionLoss.agentAfterCultOnlyCulture.cultName === 'Daka Fal' &&
+  u5ProviderSelectionLoss.agentAfterCultOnlyCulture.selectedSpirits.length === 1 &&
+  u5ProviderSelectionLoss.uiBeforeCultOnlyCulture.selectedSpirits.length === 1 &&
+  u5ProviderSelectionLoss.uiCultOnlyCulture.success === false &&
+  /clear selected bound spirits/i.test(u5ProviderSelectionLoss.uiCultOnlyCulture.error || '') &&
+  u5ProviderSelectionLoss.uiAfterCultOnlyCulture.cultName === 'Daka Fal' &&
+  u5ProviderSelectionLoss.uiAfterCultOnlyCulture.selectedSpirits.length === 1,
+  'U5: provider changes do not silently drop bound spirits without rejection or confirmation');
+
+reload();
 
 // ═══════════════════════════════════════════════════════════════
 console.log('\n\x1b[36m═══ AE3: Arkat (Sorcery) ═══\x1b[0m\n');
@@ -1018,6 +1155,8 @@ assert(ae3bGranular.toggle.success === true &&
   ae3bGranular.toggle.limit === 3 &&
   ae3bGranular.magic.selectedSpells.includes('Holdfast'),
   'AE3b granular: toggleSpell uses derived source spell limit');
+
+reload();
 
 const ae3bNoCultSwitch = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Switching Zzistori', concept:'God Forgot school sorcerer'});

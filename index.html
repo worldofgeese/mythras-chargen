@@ -8518,6 +8518,19 @@ function getBoundSpiritName(spirit) {
   return undefined;
 }
 
+function getMagicSelectionNames(entries, getName = entry => entry) {
+  if (!Array.isArray(entries)) return [];
+  return entries
+    .map(getName)
+    .filter(name => typeof name === 'string' && name.length > 0);
+}
+
+function getLostMagicSelectionNames(previousEntries, currentEntries, getName = entry => entry) {
+  const currentNames = new Set(getMagicSelectionNames(currentEntries, getName));
+  return getMagicSelectionNames(previousEntries, getName)
+    .filter(name => !currentNames.has(name));
+}
+
 function getInvalidMiracleEntryErrors(miracles) {
   if (!Array.isArray(miracles)) return [];
   return miracles.flatMap((miracle, index) =>
@@ -8821,30 +8834,40 @@ function getHigherMagicProviderSelectionLossError(snapshot, providers, options =
   const activeProviders = Array.isArray(providers) ? providers : [];
   const hasSystem = system => activeProviders.some(provider => provider.system === system);
   const currentCharacter = options.currentCharacter || CharacterData;
-  const sorcerySpells = Array.isArray(currentCharacter?.sorcerySpells)
-    ? currentCharacter.sorcerySpells
-    : (Array.isArray(snapshot?.sorcerySpells) ? snapshot.sorcerySpells : []);
-  const boundSpirits = Array.isArray(currentCharacter?.boundSpirits)
-    ? currentCharacter.boundSpirits.map(getBoundSpiritName).filter(Boolean)
-    : (Array.isArray(snapshot?.boundSpirits) ? snapshot.boundSpirits.map(getBoundSpiritName).filter(Boolean) : []);
-  const mysticismTalents = Array.isArray(currentCharacter?.mysticismTalents)
-    ? currentCharacter.mysticismTalents
-    : (Array.isArray(snapshot?.mysticismTalents) ? snapshot.mysticismTalents : []);
+  const previousSorcerySpells = getMagicSelectionNames(snapshot?.sorcerySpells);
+  const currentSorcerySpells = Array.isArray(currentCharacter?.sorcerySpells)
+    ? getMagicSelectionNames(currentCharacter.sorcerySpells)
+    : previousSorcerySpells;
+  const previousBoundSpirits = getMagicSelectionNames(snapshot?.boundSpirits, getBoundSpiritName);
+  const currentBoundSpirits = Array.isArray(currentCharacter?.boundSpirits)
+    ? getMagicSelectionNames(currentCharacter.boundSpirits, getBoundSpiritName)
+    : previousBoundSpirits;
+  const previousMysticismTalents = getMagicSelectionNames(snapshot?.mysticismTalents);
+  const currentMysticismTalents = Array.isArray(currentCharacter?.mysticismTalents)
+    ? getMagicSelectionNames(currentCharacter.mysticismTalents)
+    : previousMysticismTalents;
 
-  if (!hasSystem('sorcery') && sorcerySpells.length > 0) {
+  const lostSorcerySpells = getLostMagicSelectionNames(previousSorcerySpells, currentSorcerySpells);
+  const lostBoundSpirits = getLostMagicSelectionNames(previousBoundSpirits, currentBoundSpirits);
+  const lostMysticismTalents = getLostMagicSelectionNames(previousMysticismTalents, currentMysticismTalents);
+
+  if (previousSorcerySpells.length > 0 && (!hasSystem('sorcery') || lostSorcerySpells.length > 0)) {
+    const affectedSpells = lostSorcerySpells.length > 0 ? lostSorcerySpells : previousSorcerySpells;
     return options.lostSpellsMessage
-      ? options.lostSpellsMessage(sorcerySpells)
-      : `Changing magic providers would clear selected sorcery spells: ${sorcerySpells.join(', ')}`;
+      ? options.lostSpellsMessage(affectedSpells)
+      : `Changing magic providers would clear selected sorcery spells: ${affectedSpells.join(', ')}`;
   }
-  if (!hasSystem('animism') && boundSpirits.length > 0) {
+  if (previousBoundSpirits.length > 0 && (!hasSystem('animism') || lostBoundSpirits.length > 0)) {
+    const affectedSpirits = lostBoundSpirits.length > 0 ? lostBoundSpirits : previousBoundSpirits;
     return options.lostBoundSpiritsMessage
-      ? options.lostBoundSpiritsMessage(boundSpirits)
-      : `Changing magic providers would clear selected bound spirits: ${boundSpirits.join(', ')}`;
+      ? options.lostBoundSpiritsMessage(affectedSpirits)
+      : `Changing magic providers would clear selected bound spirits: ${affectedSpirits.join(', ')}`;
   }
-  if (!hasSystem('mysticism') && mysticismTalents.length > 0) {
+  if (previousMysticismTalents.length > 0 && (!hasSystem('mysticism') || lostMysticismTalents.length > 0)) {
+    const affectedTalents = lostMysticismTalents.length > 0 ? lostMysticismTalents : previousMysticismTalents;
     return options.lostMysticismTalentsMessage
-      ? options.lostMysticismTalentsMessage(mysticismTalents)
-      : `Changing magic providers would clear selected mysticism talents: ${mysticismTalents.join(', ')}`;
+      ? options.lostMysticismTalentsMessage(affectedTalents)
+      : `Changing magic providers would clear selected mysticism talents: ${affectedTalents.join(', ')}`;
   }
   return null;
 }
@@ -9606,6 +9629,7 @@ const CharacterData = {
     const importedCultType = importedCult ? detectCultType(importedCult) : null;
     const importedHigherMagicProviders = resolveHigherMagicProviders(data);
     const importedSorcerySource = importedHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
+    const importedAnimismProvider = importedHigherMagicProviders.find(provider => provider.system === 'animism') || null;
     errors.push(...getUnsupportedMagicSelectionErrors(data.cult || null, importedCultType, {
       miracles: data.miracles,
       boundSpirits: data.boundSpirits,
@@ -9620,6 +9644,28 @@ const CharacterData = {
     }
     if (importedSorcerySpells.length > 0) {
       errors.push(...getSorcerySourceSchoolErrors(data, importedSorcerySource));
+    }
+    const importedBoundSpirits = Array.isArray(data.boundSpirits) ? data.boundSpirits : [];
+    if (importedAnimismProvider && importedBoundSpirits.length > 0) {
+      if (!importedAnimismProvider.isCultBacked) {
+        const unknownBoundSpirits = getUnknownBoundSpiritNames(importedBoundSpirits, importedAnimismProvider.availableItems);
+        if (unknownBoundSpirits.length > 0) {
+          errors.push(`Unknown bound spirit(s): ${unknownBoundSpirits.join(', ')}`);
+        }
+      }
+      const providerBoundSpiritLimit = Number.isFinite(importedAnimismProvider.itemLimit)
+        ? importedAnimismProvider.itemLimit
+        : Math.floor((Number(data.characteristics?.CHA) || 0) / 2);
+      const boundSpiritLimit = Math.min(
+        3,
+        providerBoundSpiritLimit
+      );
+      if (importedBoundSpirits.length > boundSpiritLimit) {
+        errors.push(`bound spirits exceeds ${boundSpiritLimit} bound spirits`);
+      }
+    }
+    if (Array.isArray(data.mysticismTalents) && data.mysticismTalents.length > 0) {
+      errors.push('Mysticism talent selection requires a verified talent catalog; Core Mysticism is informational only in this version');
     }
 
     if (Array.isArray(data.selectedProfessionalSkills)) {
@@ -9709,6 +9755,7 @@ const CharacterData = {
     this.boundSpirits = Array.isArray(data.boundSpirits) ? data.boundSpirits : [];
     this.sorceryResource = data.sorceryResource || 0;
     this.sorcerySpells = Array.isArray(data.sorcerySpells) ? data.sorcerySpells : [];
+    this.mysticismTalents = Array.isArray(data.mysticismTalents) ? data.mysticismTalents : [];
     this.careerSkills = data.careerSkills || {};
     this.careerFolkMagic = Array.isArray(data.careerFolkMagic) ? data.careerFolkMagic : [];
     this.selectedProfessionalSkills = Array.isArray(data.selectedProfessionalSkills) ? data.selectedProfessionalSkills : [];
@@ -9726,7 +9773,7 @@ const CharacterData = {
     this.hitPoints = data.hitPoints || {};
     this.companions = this.sanitizeCompanions(data.companions);
     this._disambiguationMap = data._disambiguationMap || {};
-    normalizeSorceryState(this);
+    normalizeHigherMagicState(this);
     return true;
   },
 
@@ -10185,7 +10232,8 @@ const App = {
       </div>`;
     document.body.appendChild(panel);
     this._pendingConfirm = { onConfirm, onCancel };
-    panel.querySelector('[data-testid="confirm-ok"]').focus();
+    const okButton = panel.querySelector('[data-testid="confirm-ok"]');
+    if (okButton && typeof okButton.focus === 'function') okButton.focus();
   },
 
   dismissConfirmation(confirmed) {
@@ -11000,7 +11048,16 @@ App.selectCulture = function(cultureName) {
         });
       }
     }
-    const activeSorcerySource = this.normalizeSorceryState(CharacterData);
+    const activeHigherMagicProviders = this.normalizeHigherMagicState(CharacterData);
+    const providerLossError = getHigherMagicProviderSelectionLossError(cultureSnapshot, activeHigherMagicProviders, {
+      lostSpellsMessage: lostSpells => `Changing culture would clear selected sorcery spells: ${lostSpells.join(', ')}`,
+      lostBoundSpiritsMessage: lostSpirits => `Changing culture would clear selected bound spirits: ${lostSpirits.join(', ')}`,
+      lostMysticismTalentsMessage: lostTalents => `Changing culture would clear selected mysticism talents: ${lostTalents.join(', ')}`
+    });
+    if (providerLossError) {
+      return rejectCultureChange(providerLossError);
+    }
+    const activeSorcerySource = activeHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
     const sourceError = getSorcerySourceSelectionError(cultureSnapshot, previousSorcerySource, CharacterData, activeSorcerySource, {
       lostSpellsMessage: lostSpells => `Changing culture would clear selected sorcery spells: ${lostSpells.join(', ')}`
     });
@@ -12620,13 +12677,28 @@ App.selectCult = function(cultName, options = {}) {
     return {success: false, error: `Cult '${cultName}' not found`};
   }
   // BUG-012: If a cult is already selected and user clicks a different one, ask for confirmation
-  if (cultName && CharacterData.cult && CharacterData.cult !== cultName && !options.skipConfirmation) {
+  const hasSourceBackedSorcerySelection = previousSorcerySource &&
+    Array.isArray(CharacterData.sorcerySpells) &&
+    CharacterData.sorcerySpells.length > 0;
+  const hasSelectedMiracles = Array.isArray(CharacterData.miracles) && CharacterData.miracles.length > 0;
+  const hasSelectedBoundSpirits = Array.isArray(CharacterData.boundSpirits) && CharacterData.boundSpirits.length > 0;
+  const hasSelectedMysticismTalents = Array.isArray(CharacterData.mysticismTalents) && CharacterData.mysticismTalents.length > 0;
+  const hasCultOnlySorcerySelection = !hasSourceBackedSorcerySelection &&
+    Array.isArray(CharacterData.sorcerySpells) &&
+    CharacterData.sorcerySpells.length > 0;
+  const hasClearableCultSelections = hasSelectedMiracles ||
+    hasSelectedBoundSpirits ||
+    hasSelectedMysticismTalents ||
+    hasCultOnlySorcerySelection;
+  if (CharacterData.cult && CharacterData.cult !== cultName && !options.skipConfirmation && hasClearableCultSelections) {
+    const nextCultLabel = cultName || 'No Cult';
     this.showConfirmation(
-      `Change cult from ${CharacterData.cult} to ${cultName}? This will clear your selected miracles, spirits, and sorcery spells.`,
-      () => this.selectCult(cultName, {skipConfirmation: true})
+      `Change cult from ${CharacterData.cult} to ${nextCultLabel}? This will clear your selected miracles, spirits, and sorcery spells.`,
+      () => this.selectCult(cultName, {skipConfirmation: true, allowMagicSelectionLoss: true})
     );
     return {success: false, pendingConfirmation: true};
   }
+  const confirmedCultSelectionLoss = previousCult && previousCult !== cultName && options.allowMagicSelectionLoss;
   CharacterData.cult = cultName;
   if (previousCult && previousCult !== cultName) {
     CharacterData.miracles = [];
@@ -12681,7 +12753,7 @@ App.selectCult = function(cultName, options = {}) {
       CharacterData.sorcerySpells = [];
     }
   }
-  const providerLossError = getHigherMagicProviderSelectionLossError(selectionSnapshot, activeHigherMagicProviders, {
+  const providerLossError = confirmedCultSelectionLoss ? null : getHigherMagicProviderSelectionLossError(selectionSnapshot, activeHigherMagicProviders, {
     lostSpellsMessage: lostSpells => `Changing cult would clear selected sorcery spells: ${lostSpells.join(', ')}`,
     lostBoundSpiritsMessage: lostSpirits => `Changing cult would clear selected bound spirits: ${lostSpirits.join(', ')}`,
     lostMysticismTalentsMessage: lostTalents => `Changing cult would clear selected mysticism talents: ${lostTalents.join(', ')}`
@@ -12738,20 +12810,11 @@ App.selectCult = function(cultName, options = {}) {
   return {success: true};
 };
 
-App.clearCultMagicSelections = function() {
-  CharacterData.miracles = [];
-  CharacterData.boundSpirits = [];
-  CharacterData.sorcerySpells = [];
-  CharacterData.mysticismTalents = [];
-};
-
 App.clearCultSelection = function() {
   CharacterData.cult = null;
   CharacterData.cultType = null;
   CharacterData.devotionalPool = 0;
-  CharacterData.boundSpiritSlots = 0;
-  CharacterData.sorceryResource = 0;
-  this.clearCultMagicSelections();
+  CharacterData.miracles = [];
   this.normalizeHigherMagicState(CharacterData);
 };
 
@@ -16825,7 +16888,18 @@ App.agent.setStep = function(step, data) {
             CharacterData.startingMoney = moneyTotal * multiplier;
           }
         }
-        const activeSorcerySource = App.normalizeSorceryState(CharacterData);
+        const activeHigherMagicProviders = App.normalizeHigherMagicState(CharacterData);
+        const providerLossError = getHigherMagicProviderSelectionLossError(step4Snapshot, activeHigherMagicProviders, {
+          lostSpellsMessage: lostSpells => `Changing culture would clear selected sorcery spells: ${lostSpells.join(', ')}`,
+          lostBoundSpiritsMessage: lostSpirits => `Changing culture would clear selected bound spirits: ${lostSpirits.join(', ')}`,
+          lostMysticismTalentsMessage: lostTalents => `Changing culture would clear selected mysticism talents: ${lostTalents.join(', ')}`
+        });
+        if (providerLossError) {
+          restoreStep4Snapshot();
+          errors.push(providerLossError);
+          return {success: false, errors, state: App.agent.getState()};
+        }
+        const activeSorcerySource = activeHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
         const previousSpells = Array.isArray(step4Snapshot.sorcerySpells) ? step4Snapshot.sorcerySpells : [];
         if (previousSorcerySource && previousSpells.length > 0) {
           const currentSpells = Array.isArray(CharacterData.sorcerySpells) ? CharacterData.sorcerySpells : [];

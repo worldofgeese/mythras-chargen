@@ -5730,11 +5730,12 @@ fixtures.forEach(fixtureInfo => {
     CD.sorcerySpells = [];
     CD.companions = [];
     const roundTripSuccess = CD.fromJSON(serialized);
+    const normalizedBoundSpiritSlots = Math.floor(CD.characteristics.CHA / 2);
 
     const preserved =
       roundTripSuccess &&
       CD.cultType && CD.cultType.primary === 'animist' &&
-      CD.boundSpiritSlots === 5 &&
+      CD.boundSpiritSlots === normalizedBoundSpiritSlots &&
       CD.boundSpirits && CD.boundSpirits[0] && CD.boundSpirits[0].name === 'Ancestor Spirit' &&
       CD.sorceryResource === 0 &&
       CD.sorcerySpells && CD.sorcerySpells.length === 0 &&
@@ -5749,7 +5750,7 @@ fixtures.forEach(fixtureInfo => {
     });
     const staleRejected = staleSuccess === false &&
       CD.name === 'Before Stale Round Trip' &&
-      CD.boundSpiritSlots === 5 &&
+      CD.boundSpiritSlots === normalizedBoundSpiritSlots &&
       CD.boundSpirits && CD.boundSpirits[0] && CD.boundSpirits[0].name === 'Ancestor Spirit' &&
       CD.sorcerySpells && CD.sorcerySpells.length === 0 &&
       CD.companions && CD.companions[0] && CD.companions[0].name === 'Greywind';
@@ -5797,11 +5798,108 @@ fixtures.forEach(fixtureInfo => {
       CD.boundSpiritSlots === 5 &&
       CD.boundSpirits?.[0]?.name === 'Ancestor Spirit — Sagacity (Int 1)';
 
-    if (preserved) {
-      pass('Provider-backed Animism import preserves no-cult Shaman bound spirits');
+    CD.name = 'Before Unknown Core Spirit Import';
+    const unknownSpiritPayload = {
+      ...payload,
+      name: 'Unknown Core Spirit Import',
+      boundSpirits: ['Bogus Spirit']
+    };
+    const unknownSpiritErrors = CD.validatePlainObject(unknownSpiritPayload);
+    const unknownSpiritSuccess = CD.fromJSON(JSON.stringify(unknownSpiritPayload));
+    const unknownSpiritRejected = unknownSpiritErrors.some(error => /Unknown bound spirit/i.test(error)) &&
+      unknownSpiritSuccess === false &&
+      CD.name === 'Before Unknown Core Spirit Import';
+
+    CD.name = 'Before Over Limit Core Spirit Import';
+    const overLimitSpiritPayload = {
+      ...payload,
+      name: 'Over Limit Core Spirit Import',
+      boundSpirits: [
+        'Ancestor Spirit — Sagacity (Int 1)',
+        'Ancestor Spirit — Sagacity (Int 2)',
+        'Guardian Spirit (Int 1)',
+        'Magic Spirit (Int 1)'
+      ]
+    };
+    const overLimitSpiritErrors = CD.validatePlainObject(overLimitSpiritPayload);
+    const overLimitSpiritSuccess = CD.fromJSON(JSON.stringify(overLimitSpiritPayload));
+    const overLimitSpiritRejected = overLimitSpiritErrors.some(error => /bound spirits/i.test(error) && /3/i.test(error)) &&
+      overLimitSpiritSuccess === false &&
+      CD.name === 'Before Over Limit Core Spirit Import';
+
+    CD.name = 'Before Zero Slot Core Spirit Import';
+    const zeroSlotSpiritPayload = {
+      ...payload,
+      name: 'Zero Slot Core Spirit Import',
+      characteristics: { STR: 10, CON: 11, SIZ: 10, DEX: 10, INT: 13, POW: 14, CHA: 0 },
+      boundSpiritSlots: 3,
+      boundSpirits: ['Ancestor Spirit — Sagacity (Int 1)']
+    };
+    const zeroSlotSpiritErrors = CD.validatePlainObject(zeroSlotSpiritPayload);
+    const zeroSlotSpiritSuccess = CD.fromJSON(JSON.stringify(zeroSlotSpiritPayload));
+    const zeroSlotSpiritRejected = zeroSlotSpiritErrors.some(error => /bound spirits/i.test(error) && /0/i.test(error)) &&
+      zeroSlotSpiritSuccess === false &&
+      CD.name === 'Before Zero Slot Core Spirit Import';
+
+    CD.mysticismTalents = ['Stale Imported Talent'];
+    const emptyMysticismSuccess = CD.fromJSON(JSON.stringify({
+      ...createTestCharacter('Sartarite (Heortling)'),
+      name: 'Empty Mysticism Import',
+      career: 'Mystic',
+      characteristics: { STR: 8, CON: 8, SIZ: 8, DEX: 8, INT: 15, POW: 20, CHA: 8 },
+      selectedProfessionalSkills: ['Meditation', 'Mysticism', 'Musicianship'],
+      careerSkills: { Meditation: 10, Mysticism: 10, Musicianship: 10 },
+      cult: null,
+      cultType: null,
+      miracles: [],
+      boundSpirits: [],
+      sorcerySpells: [],
+      mysticismTalents: []
+    }));
+    const emptyMysticismClearsStale = emptyMysticismSuccess && Array.isArray(CD.mysticismTalents) && CD.mysticismTalents.length === 0;
+
+    CD.name = 'Before Unsupported Mysticism Import';
+    const unsupportedMysticismPayload = {
+      ...createTestCharacter('Sartarite (Heortling)'),
+      name: 'Unsupported Mysticism Import',
+      career: 'Mystic',
+      characteristics: { STR: 8, CON: 8, SIZ: 8, DEX: 8, INT: 15, POW: 20, CHA: 8 },
+      selectedProfessionalSkills: ['Meditation', 'Mysticism', 'Musicianship'],
+      careerSkills: { Meditation: 10, Mysticism: 10, Musicianship: 10 },
+      cult: null,
+      cultType: null,
+      miracles: [],
+      boundSpirits: [],
+      sorcerySpells: [],
+      mysticismTalents: ['Unverified Talent']
+    };
+    const unsupportedMysticismErrors = CD.validatePlainObject(unsupportedMysticismPayload);
+    const unsupportedMysticismSuccess = CD.fromJSON(JSON.stringify(unsupportedMysticismPayload));
+    const unsupportedMysticismRejected = unsupportedMysticismErrors.some(error => /Mysticism talent selection requires a verified talent catalog/i.test(error)) &&
+      unsupportedMysticismSuccess === false &&
+      CD.name === 'Before Unsupported Mysticism Import';
+
+    if (preserved && unknownSpiritRejected && overLimitSpiritRejected && zeroSlotSpiritRejected && emptyMysticismClearsStale && unsupportedMysticismRejected) {
+      pass('Provider-backed Animism import validates spirits and handles unsupported Mysticism talents explicitly');
     } else {
-      fail('Provider-backed Animism import rejects or drops no-cult Shaman bound spirits',
-        JSON.stringify({ importErrors, importSuccess, roundTripSuccess, serializedSpirits: serialized.boundSpirits, currentSpirits: CD.boundSpirits }));
+      fail('Provider-backed Animism/Mysticism import validation is incomplete',
+        JSON.stringify({
+          importErrors,
+          importSuccess,
+          roundTripSuccess,
+          serializedSpirits: serialized.boundSpirits,
+          currentSpirits: CD.boundSpirits,
+          unknownSpiritErrors,
+          unknownSpiritRejected,
+          overLimitSpiritErrors,
+          overLimitSpiritRejected,
+          zeroSlotSpiritErrors,
+          zeroSlotSpiritRejected,
+          emptyMysticismSuccess,
+          emptyMysticismClearsStale,
+          unsupportedMysticismErrors,
+          unsupportedMysticismRejected
+        }));
     }
   } else {
     fail('CharacterData JSON methods not available for provider-backed Animism import test');
@@ -9011,13 +9109,26 @@ section('Step 9 Initiation Gate');
     AppRef.selectCult('Waha');
     CD.miracles = ['Shield'];
     CD.boundSpirits = [{name: 'Ancestor Spirit — Sagacity (Int 1)'}];
-    AppRef.selectCulture('God Forgot');
+    CD.sorcerySpells = ['Holdfast'];
+    const rejectedChange = AppRef.selectCulture('God Forgot');
+    const rejectedPreserved = rejectedChange?.success === false &&
+      CD.culture === 'Praxian' &&
+      CD.cult === 'Waha' &&
+      CD.miracles.length === 1 &&
+      CD.boundSpirits.length === 1 &&
+      CD.sorcerySpells.length === 1;
+
+    CD.miracles = [];
+    CD.boundSpirits = [];
+    CD.sorcerySpells = [];
+    const clearedChange = AppRef.selectCulture('God Forgot');
     CD.career = 'Warrior';
     AppRef.currentStep = 9;
     const step9 = AppRef.renderStep9();
     const html = step9.innerHTML || '';
 
-    const cleared = CD.cult === null &&
+    const cleared = clearedChange?.success === true &&
+      CD.cult === null &&
       CD.cultType === null &&
       CD.devotionalPool === 0 &&
       CD.boundSpiritSlots === 0 &&
@@ -9033,11 +9144,11 @@ section('Step 9 Initiation Gate');
       !html.includes('Starting Bound Spirits') &&
       !(godForgotMap.secondary || []).includes('Waha');
 
-    if (cleared && godForgotNoCult) {
-      pass('Changing culture clears stale cult magic and leaves God Forgot on no-cult defaults');
+    if (rejectedPreserved && cleared && godForgotNoCult) {
+      pass('Changing culture rejects selected cult magic loss and clears empty stale cult state');
     } else {
-      fail('Culture change left stale cult state or God Forgot cult UI',
-        JSON.stringify({ cleared, godForgotNoCult, cult: CD.cult, devotionalPool: CD.devotionalPool, boundSpiritSlots: CD.boundSpiritSlots }));
+      fail('Culture change mishandled selected cult magic loss or God Forgot cult UI',
+        JSON.stringify({ rejectedPreserved, cleared, godForgotNoCult, rejectedChange, clearedChange, culture: CD.culture, cult: CD.cult, devotionalPool: CD.devotionalPool, boundSpiritSlots: CD.boundSpiritSlots }));
     }
   } else {
     fail('Culture-change cult clearing dependencies not found');
