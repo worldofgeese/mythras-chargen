@@ -402,20 +402,20 @@
         "Play Mode Spirit Magic",
         "PDF export bound spirits"
       ],
-      "status": "unverified",
-      "summary": "Concrete example spirits cite verified Bird in the Hand examples, and Mythras Core animism/base spirit pages now have bounded page evidence; AiG spirit magic and STARTING_SPIRITS regeneration remain open.",
+      "status": "verified",
+      "summary": "STARTING_SPIRITS now mirrors references/starting-spirits.json: exact Bird in Hand example spirit stat blocks plus Mythras Core rule-derived starting templates. Monster Island remains reference-only candidate evidence and AiG spirit magic is not authoritative for this app-facing list.",
       "references": [
+        {
+          "path": "references/starting-spirits.json",
+          "source": "Normalized starting-spirit authority",
+          "citation": "app_options",
+          "verified": true
+        },
         {
           "path": "references/spirits-raw/bird-in-hand.json",
           "source": "A Bird in the Hand",
           "citation": "p.43-47",
           "verified": true
-        },
-        {
-          "path": "references/aig-raw/spirit-magic-aig.json",
-          "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-          "citation": "p.134-151",
-          "verified": false
         },
         {
           "path": "references/mythras-raw/magic-page-references.json",
@@ -425,10 +425,7 @@
           "evidence": "references/provenance/mythras-core-app-facing-pages.json"
         }
       ],
-      "blockers": [
-        "references/aig-raw/spirit-magic-aig.json has verified=false.",
-        "STARTING_SPIRITS has not yet been regenerated from the verified Core/Bird/Monster evidence set."
-      ]
+      "blockers": []
     },
     {
       "id": "culture-magic-profiles",

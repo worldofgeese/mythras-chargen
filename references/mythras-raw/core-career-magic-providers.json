@@ -1,5 +1,5 @@
 {
-  "source": "Mythras Core Rulebook (3rd Printing, 2018), Monster Island, and A Bird in the Hand",
+  "source": "Mythras Core Rulebook (3rd Printing, 2018) and A Bird in the Hand",
   "derived_artifact": "Core career-backed magic provider metadata for app access",
   "verified": true,
   "authority_state": "app_access_provider_metadata",
@@ -19,7 +19,7 @@
       ],
       "app_access": {
         "state": "source_backed_provider_verified",
-        "summary": "A character selecting the Mythras Core Shaman career has the career skills for Animism access; app Animism uses Mythras Core, Monster Island, and A Bird in the Hand."
+        "summary": "A character selecting the Mythras Core Shaman career has the career skills for Animism access; app Animism uses Mythras Core and A Bird in the Hand."
       },
       "precedence": {
         "same_system": "selected-cult-provider-supersedes-core-career-provider",
@@ -36,13 +36,6 @@
           "json_path": "$.chargen_rules",
           "source_id": "mythras-core",
           "source_role": "core_animism_mechanics",
-          "verified": true
-        },
-        {
-          "source_file": "references/spirits-raw/monster-island.json",
-          "json_path": "$.spirit_cult_template",
-          "source_id": "monster-island",
-          "source_role": "animism_tradition_template_and_spirit_generation_reference",
           "verified": true
         },
         {
