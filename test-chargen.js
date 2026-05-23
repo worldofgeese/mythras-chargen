@@ -8074,6 +8074,87 @@ section('Cult Data Tests');
   }
 }
 
+// Test: app-facing magic cult roster has explicit raw-only decisions
+{
+  const roster = readJson('references/provenance/magic-cult-roster.json');
+  const { CULTS_DATA: CultsData, CULTURE_CULT_MAP: CultureCultMap, detectCultType } = loadApp();
+  const rawRoot = readJson('references/cults-raw/cults.json');
+  const rawCults = Array.isArray(rawRoot) ? rawRoot : rawRoot.cults || [];
+  const mappedCultNames = new Set(Object.values(CultureCultMap || {})
+    .flatMap(entry => [
+      ...(entry.primary || []),
+      ...(entry.secondary || []),
+      ...(entry.associated || []),
+      ...(entry.other || []),
+      ...(entry.available || [])
+    ]));
+  const sortedUnique = values => [...new Set(values)].sort((a, b) => a.localeCompare(b));
+  const hasMagicSkill = (cult, patterns) => (cult.cultSkills || []).some(skill =>
+    patterns.some(pattern => pattern.test(skill))
+  );
+  const rawAnimism = sortedUnique(rawCults
+    .filter(cult => hasMagicSkill(cult, [/^Trance/i, /^Binding/i]))
+    .map(cult => cult.name));
+  const rawSorcery = sortedUnique(rawCults
+    .filter(cult => hasMagicSkill(cult, [/^Invocation/i, /^Shaping/i]))
+    .map(cult => cult.name));
+  const appBySystem = { animism: [], sorcery: [] };
+  for (const cult of CultsData || []) {
+    const types = detectCultType(cult)?.types || [];
+    if (types.includes('animist')) appBySystem.animism.push(cult.name);
+    if (types.includes('sorcery')) appBySystem.sorcery.push(cult.name);
+  }
+  appBySystem.animism = sortedUnique(appBySystem.animism);
+  appBySystem.sorcery = sortedUnique(appBySystem.sorcery);
+  const rosterAppAnimism = (roster.appFacing?.animism || []).map(entry => entry.name);
+  const rosterAppSorcery = (roster.appFacing?.sorcery || []).map(entry => entry.name);
+  const rosterRawOnly = new Map((roster.rawOnlyDecisions || []).map(entry => [entry.name, entry]));
+  const rawOnlyActual = sortedUnique([...rawAnimism, ...rawSorcery].filter(name =>
+    !appBySystem.animism.includes(name) && !appBySystem.sorcery.includes(name)
+  ));
+  const rawOnlyMissingDecisions = rawOnlyActual.filter(name => !rosterRawOnly.has(name));
+  const spuriousRawOnlyDecisions = (roster.rawOnlyDecisions || [])
+    .filter(entry => appBySystem.animism.includes(entry.name) || appBySystem.sorcery.includes(entry.name))
+    .map(entry => entry.name);
+  const appCultureSelectableMatches = ['animism', 'sorcery'].every(system =>
+    (roster.appFacing?.[system] || []).every(entry => entry.cultureSelectable === mappedCultNames.has(entry.name))
+  );
+  const ompalamDecision = rosterRawOnly.get('Ompalam');
+  const wahaSupersededNote = (roster.supersededRawNotes || []).some(entry =>
+    entry.name === 'Waha' && (entry.note || '').includes('updated vision-verified Waha one-pager')
+  );
+
+  if (JSON.stringify(roster.rawDetected?.animism || []) === JSON.stringify(rawAnimism) &&
+      JSON.stringify(roster.rawDetected?.sorcery || []) === JSON.stringify(rawSorcery) &&
+      JSON.stringify(rosterAppAnimism) === JSON.stringify(appBySystem.animism) &&
+      JSON.stringify(rosterAppSorcery) === JSON.stringify(appBySystem.sorcery) &&
+      rawOnlyMissingDecisions.length === 0 &&
+      spuriousRawOnlyDecisions.length === 0 &&
+      appCultureSelectableMatches &&
+      ompalamDecision?.systems?.includes('sorcery') &&
+      ompalamDecision?.decision === 'not_app_facing_current_scope' &&
+      wahaSupersededNote) {
+    pass('Magic cult roster parity records app-facing providers and raw-only decisions');
+  } else {
+    fail('Magic cult roster parity is incomplete',
+      JSON.stringify({
+        rosterRawAnimism: roster.rawDetected?.animism,
+        rawAnimism,
+        rosterRawSorcery: roster.rawDetected?.sorcery,
+        rawSorcery,
+        rosterAppAnimism,
+        appAnimism: appBySystem.animism,
+        rosterAppSorcery,
+        appSorcery: appBySystem.sorcery,
+        rawOnlyMissingDecisions,
+        spuriousRawOnlyDecisions,
+        appCultureSelectableMatches,
+        ompalamDecision,
+        wahaSupersededNote
+      }));
+  }
+}
+
 section('Index Provenance Coverage');
 
 // Test: index.html provenance coverage mirrors committed reference JSON

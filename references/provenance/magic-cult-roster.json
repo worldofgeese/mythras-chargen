@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-05-23",
+  "source": "Magic cult roster parity audit",
+  "scope": "Animism and sorcery cults detected from current app-facing CULTS_DATA and raw cult source rows",
+  "classification": {
+    "animism": "A cult is animism-capable when cultSkills contains a Binding* or Trance* skill.",
+    "sorcery": "A cult is sorcery-capable when cultSkills contains an Invocation* or Shaping* skill.",
+    "appFacing": "A cult is app-facing when it is present in index.html CULTS_DATA.",
+    "cultureSelectable": "A cult is culture-selectable when it is present in an index.html CULTURE_CULT_MAP primary or secondary list."
+  },
+  "appFacing": {
+    "animism": [
+      { "name": "7 Mothers - Jakaleel", "cultureSelectable": true },
+      { "name": "Daka Fal", "cultureSelectable": true },
+      { "name": "Eiritha", "cultureSelectable": true },
+      { "name": "Gagarth", "cultureSelectable": true },
+      { "name": "Hearth Mother", "cultureSelectable": false },
+      { "name": "Hungry Ghosts", "cultureSelectable": false },
+      { "name": "Kyger Litor", "cultureSelectable": false },
+      { "name": "Storm Bull", "cultureSelectable": true },
+      { "name": "Waha", "cultureSelectable": true, "sourceAuthority": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21" }
+    ],
+    "sorcery": [
+      { "name": "Arkat", "cultureSelectable": true },
+      { "name": "Pavis", "cultureSelectable": true }
+    ]
+  },
+  "rawDetected": {
+    "animism": [
+      "7 Mothers - Jakaleel",
+      "Aldrya - Shaman",
+      "Atyar",
+      "Bagog",
+      "Blackfang",
+      "Daka Fal",
+      "Eiritha",
+      "El-Jazuli",
+      "Gagarth",
+      "Hearth Mother",
+      "Hungry Ghosts",
+      "Hungry Jack",
+      "Jokotu the Murderer",
+      "Kyger Litor",
+      "Lemure",
+      "Mallia",
+      "Pamalt",
+      "Storm Bull",
+      "Than",
+      "Thanatar",
+      "Thed",
+      "Vakalta",
+      "Waha"
+    ],
+    "sorcery": [
+      "Arkat",
+      "Ompalam",
+      "Pavis"
+    ]
+  },
+  "rawOnlyDecisions": [
+    { "name": "Aldrya - Shaman", "systems": ["animism"], "decision": "not_app_facing_current_scope", "reason": "Raw Elf one-pager row is not present in current CULTS_DATA or CULTURE_CULT_MAP; promotion requires cult source-fidelity review and product scope." },
+    { "name": "Atyar", "systems": ["animism"], "decision": "not_app_facing_current_scope", "reason": "Raw Chaos rows are not present in current CULTS_DATA or supported culture mapping; promotion requires cult source-fidelity review and product scope." },
+    { "name": "Bagog", "systems": ["animism"], "decision": "not_app_facing_current_scope", "reason": "Raw Chaos row is not present in current CULTS_DATA or supported culture mapping; promotion requires cult source-fidelity review and product scope." },
+    { "name": "Blackfang", "systems": ["animism"], "decision": "not_app_facing_current_scope", "reason": "Raw Independent row is not present in current CULTS_DATA or supported culture mapping; promotion requires cult source-fidelity review and product scope." },
+    { "name": "El-Jazuli", "systems": ["animism"], "decision": "not_app_facing_current_scope", "reason": "Raw Ompalam-pantheon row is not present in current CULTS_DATA or supported culture mapping; promotion requires cult source-fidelity review and product scope." },
+    { "name": "Hungry Jack", "systems": ["animism"], "decision": "not_app_facing_current_scope", "reason": "Raw Chaos row is not present in current CULTS_DATA or supported culture mapping; promotion requires cult source-fidelity review and product scope." },
+    { "name": "Jokotu the Murderer", "systems": ["animism"], "decision": "not_app_facing_current_scope", "reason": "Raw Ompalam-pantheon row is not present in current CULTS_DATA or supported culture mapping; promotion requires cult source-fidelity review and product scope." },
+    { "name": "Lemure", "systems": ["animism"], "decision": "not_app_facing_current_scope", "reason": "Raw Chaos rows are not present in current CULTS_DATA or supported culture mapping; promotion requires cult source-fidelity review and product scope." },
+    { "name": "Mallia", "systems": ["animism"], "decision": "not_app_facing_current_scope", "reason": "Raw Chaos rows are not present in current CULTS_DATA or supported culture mapping; promotion requires cult source-fidelity review and product scope." },
+    { "name": "Ompalam", "systems": ["sorcery"], "decision": "not_app_facing_current_scope", "reason": "Raw Ompalam sorcery rows are not present in current CULTS_DATA or supported culture mapping; promotion requires cult source-fidelity review and product scope." },
+    { "name": "Pamalt", "systems": ["animism"], "decision": "not_app_facing_current_scope", "reason": "Raw Pamalt row is not present in current CULTS_DATA or supported culture mapping; promotion requires cult source-fidelity review and product scope." },
+    { "name": "Than", "systems": ["animism"], "decision": "not_app_facing_current_scope", "reason": "Raw Chaos rows are not present in current CULTS_DATA or supported culture mapping; promotion requires cult source-fidelity review and product scope." },
+    { "name": "Thanatar", "systems": ["animism"], "decision": "not_app_facing_current_scope", "reason": "Raw Chaos rows are not present in current CULTS_DATA or supported culture mapping; promotion requires cult source-fidelity review and product scope." },
+    { "name": "Thed", "systems": ["animism"], "decision": "not_app_facing_current_scope", "reason": "Raw Chaos rows are not present in current CULTS_DATA or supported culture mapping; promotion requires cult source-fidelity review and product scope." },
+    { "name": "Vakalta", "systems": ["animism"], "decision": "not_app_facing_current_scope", "reason": "Raw Chaos row is not present in current CULTS_DATA or supported culture mapping; promotion requires cult source-fidelity review and product scope." }
+  ],
+  "supersededRawNotes": [
+    {
+      "name": "Waha",
+      "systems": ["animism"],
+      "note": "Legacy raw Waha rows still detect as animism-capable, but app-facing Waha data is governed by the updated vision-verified Waha one-pager source revision recorded in references/sources/manifest.json."
+    }
+  ],
+  "followUps": [
+    "mythras-chargen-2yg7.14 must decide whether any raw-only cult source rows become app-facing after cult one-pager vision verification.",
+    "mythras-chargen-2yg7.17 must keep this roster, CULTS_DATA, CULTURE_CULT_MAP, and provenance coverage in sync before claiming full fidelity."
+  ]
+}
