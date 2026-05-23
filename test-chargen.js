@@ -261,6 +261,7 @@ function loadApp() {
         CULTURE_BUILDS: typeof CULTURE_BUILDS !== 'undefined' ? CULTURE_BUILDS : null,
         CULTURE_BUILD_SPECS: typeof CULTURE_BUILD_SPECS !== 'undefined' ? CULTURE_BUILD_SPECS : null,
         CULTURE_MAGIC_PROFILES: typeof CULTURE_MAGIC_PROFILES !== 'undefined' ? CULTURE_MAGIC_PROFILES : null,
+        CORE_CAREER_MAGIC_PROVIDERS: typeof CORE_CAREER_MAGIC_PROVIDERS !== 'undefined' ? CORE_CAREER_MAGIC_PROVIDERS : null,
         WEAPONS_DATA,
         WEAPON_ALIASES: typeof WEAPON_ALIASES !== 'undefined' ? WEAPON_ALIASES : null,
         DATA_INDEXES: typeof DATA_INDEXES !== 'undefined' ? DATA_INDEXES : null,
@@ -1978,6 +1979,115 @@ runCommandTest('Render workflow can list sources without rendering pages',
 section('Loading Application');
 const App = loadApp();
 info(`Loaded ${App.SKILLS_DATA.length} skills, ${App.WEAPONS_DATA.length} weapons, ${App.CULTURES_DATA.length} cultures`);
+
+section('Higher Magic Provider Resolution');
+{
+  const { App: AppObj, CORE_CAREER_MAGIC_PROVIDERS } = App;
+  const baseCharacteristics = { STR: 10, CON: 11, SIZ: 10, DEX: 10, INT: 15, POW: 14, CHA: 8 };
+  const character = (overrides = {}) => ({
+    culture: 'Sartarite (Heortling)',
+    career: 'Warrior',
+    cult: null,
+    characteristics: { ...baseCharacteristics },
+    sorcerySpells: [],
+    boundSpirits: [],
+    ...overrides
+  });
+  const providersFor = overrides => AppObj.resolveHigherMagicProviders(character(overrides));
+  const providerBySystem = (providers, system) => providers.find(provider => provider.system === system);
+  const providerIds = providers => providers.map(provider => provider.id).sort();
+  const hasProvider = (providers, id) => providerIds(providers).includes(id);
+  const providerProblems = [];
+
+  if (!Array.isArray(CORE_CAREER_MAGIC_PROVIDERS?.providers) ||
+      CORE_CAREER_MAGIC_PROVIDERS.providers.length !== 3) {
+    providerProblems.push('CORE_CAREER_MAGIC_PROVIDERS inline constant is missing the three source-backed career providers');
+  }
+  if (typeof AppObj.resolveHigherMagicProviders !== 'function') {
+    providerProblems.push('App.resolveHigherMagicProviders is not exported');
+  }
+  if (typeof AppObj.resolveHigherMagicProviderBySystem !== 'function') {
+    providerProblems.push('App.resolveHigherMagicProviderBySystem is not exported');
+  }
+  if (typeof AppObj.normalizeHigherMagicState !== 'function') {
+    providerProblems.push('App.normalizeHigherMagicState is not exported');
+  }
+
+  if (providerProblems.length === 0) {
+    const dakaFal = providersFor({ culture: 'Praxian', career: 'Shaman', cult: 'Daka Fal' });
+    const waha = providersFor({ culture: 'Praxian', career: 'Shaman', cult: 'Waha' });
+    const arkat = providersFor({ culture: 'God Forgot', career: 'Sorcerer', cult: 'Arkat' });
+    const zzistori = providersFor({ culture: 'God Forgot', career: 'Sorcerer', cult: null });
+    const shamanNoCult = providersFor({ career: 'Shaman', cult: null });
+    const sorcererNoCult = providersFor({ career: 'Sorcerer', cult: null });
+    const mysticNoCult = providersFor({ career: 'Mystic', cult: null });
+    const shamanOrlanth = providersFor({ career: 'Shaman', cult: 'Orlanth' });
+    const sorcererOrlanth = providersFor({ career: 'Sorcerer', cult: 'Orlanth' });
+    const mysticOrlanth = providersFor({ career: 'Mystic', cult: 'Orlanth' });
+    const warriorNoCult = providersFor({ career: 'Warrior', cult: null });
+
+    if (providerBySystem(dakaFal, 'animism')?.sourceKind !== 'cult') {
+      providerProblems.push('Daka Fal must resolve cult-backed Animism');
+    }
+    if (providerBySystem(waha, 'theist')?.sourceKind !== 'cult' ||
+        providerBySystem(waha, 'animism')?.sourceKind !== 'cult' ||
+        hasProvider(waha, 'core-career-shaman-animism')) {
+      providerProblems.push('Waha must resolve hybrid cult Theism+Animism and supersede Core Shaman Animism');
+    }
+    if (providerBySystem(arkat, 'sorcery')?.sourceKind !== 'cult' ||
+        hasProvider(arkat, 'core-career-sorcerer-sorcery')) {
+      providerProblems.push('Arkat must resolve cult Sorcery and supersede Core Sorcerer Sorcery');
+    }
+    if (providerBySystem(zzistori, 'sorcery')?.sourceKind !== 'culture-backed school' ||
+        providerBySystem(zzistori, 'sorcery')?.sourceLabel !== 'Zzistori School (God Forgot sorcery)' ||
+        hasProvider(zzistori, 'core-career-sorcerer-sorcery')) {
+      providerProblems.push('God Forgot Sorcerer with No Cult must preserve Zzistori school precedence');
+    }
+    if (!hasProvider(shamanNoCult, 'core-career-shaman-animism') ||
+        !hasProvider(sorcererNoCult, 'core-career-sorcerer-sorcery') ||
+        !hasProvider(mysticNoCult, 'core-career-mystic-mysticism')) {
+      providerProblems.push('No Cult Shaman/Sorcerer/Mystic must resolve their Core career providers');
+    }
+    if (!(hasProvider(shamanOrlanth, 'cult-orlanth-theist') && hasProvider(shamanOrlanth, 'core-career-shaman-animism')) ||
+        !(hasProvider(sorcererOrlanth, 'cult-orlanth-theist') && hasProvider(sorcererOrlanth, 'core-career-sorcerer-sorcery')) ||
+        !(hasProvider(mysticOrlanth, 'cult-orlanth-theist') && hasProvider(mysticOrlanth, 'core-career-mystic-mysticism'))) {
+      providerProblems.push('Magic careers with unrelated Orlanth cult must stack cult Theism with Core career providers');
+    }
+    if (warriorNoCult.length !== 0) {
+      providerProblems.push(`Warrior with No Cult must fail closed, got ${providerIds(warriorNoCult).join(', ')}`);
+    }
+
+    const shamanState = character({ career: 'Shaman', cult: null, boundSpiritSlots: 0 });
+    const shamanProviders = AppObj.normalizeHigherMagicState(shamanState);
+    if (!hasProvider(shamanProviders, 'core-career-shaman-animism') || shamanState.boundSpiritSlots !== 4) {
+      providerProblems.push('normalizeHigherMagicState must project Core Shaman Animism into bound spirit slots');
+    }
+    const staleState = character({
+      career: 'Warrior',
+      cult: null,
+      sorceryResource: 14,
+      sorcerySpells: ['Holdfast'],
+      boundSpiritSlots: 4,
+      boundSpirits: ['Ancestor Spirit — Sagacity (Int 1)']
+    });
+    AppObj.normalizeHigherMagicState(staleState);
+    if (staleState.sorceryResource !== 0 ||
+        staleState.sorcerySpells.length !== 0 ||
+        staleState.boundSpiritSlots !== 0 ||
+        staleState.boundSpirits.length !== 0) {
+      providerProblems.push('normalizeHigherMagicState must clear stale higher-magic selections when no provider applies');
+    }
+    if (AppObj.resolveActiveSorcerySource(character({ culture: 'God Forgot', career: 'Sorcerer', cult: null }))?.sourceLabel !== 'Zzistori School (God Forgot sorcery)') {
+      providerProblems.push('resolveActiveSorcerySource must remain a compatibility wrapper over provider resolution');
+    }
+  }
+
+  if (providerProblems.length === 0) {
+    pass('Higher magic provider resolver handles cult, culture, and Core career providers with precedence');
+  } else {
+    fail('Higher magic provider resolver is incomplete', JSON.stringify(providerProblems));
+  }
+}
 
 section('Waha Source Authority');
 {
@@ -7087,7 +7197,7 @@ section('Cult Data Tests');
 
   if (AppRef && typeof AppRef.resolveActiveSorcerySource === 'function' && CD?.fromJSON && CD?.toJSON) {
     const noSourceCases = [
-      { label: 'non-God-Forgot No Cult', culture: 'Praxian', career: 'Sorcerer', cult: null },
+      { label: 'non-God-Forgot non-Sorcerer No Cult', culture: 'Praxian', career: 'Warrior', cult: null },
       { label: 'God Forgot non-Sorcerer No Cult', culture: 'God Forgot', career: 'Warrior', cult: null }
     ];
     const noSourceResults = noSourceCases.map(testCase => {
@@ -7097,6 +7207,14 @@ section('Cult Data Tests');
       CD.cultType = null;
       return { label: testCase.label, source: AppRef.resolveActiveSorcerySource(CD) };
     });
+    CD.culture = 'Praxian';
+    CD.career = 'Sorcerer';
+    CD.cult = null;
+    CD.cultType = null;
+    const nonGodForgotSorcererSource = AppRef.resolveActiveSorcerySource(CD);
+    const nonGodForgotUsesCoreSorcery = nonGodForgotSorcererSource?.id === 'core-career-sorcerer-sorcery' &&
+      nonGodForgotSorcererSource?.sourceKind === 'core-career' &&
+      nonGodForgotSorcererSource?.sourceLabel !== 'Zzistori School (God Forgot sorcery)';
 
     CD.culture = 'God Forgot';
     CD.career = 'Sorcerer';
@@ -7105,7 +7223,7 @@ section('Cult Data Tests');
     const arkatSource = AppRef.resolveActiveSorcerySource(CD);
     const arkatIsCultBacked = arkatSource?.sourceLabel === 'Arkat' &&
       arkatSource?.cultName === 'Arkat' &&
-      arkatSource?.sourceKind === 'cult-backed cult' &&
+      arkatSource?.sourceKind === 'cult' &&
       arkatSource?.sourceType === 'cult-backed sorcery' &&
       arkatSource?.sourceLabel !== 'Zzistori School (God Forgot sorcery)';
     const godForgotCultNames = [
@@ -7520,13 +7638,16 @@ section('Cult Data Tests');
     }));
     const rejectsUnsupportedSource = unsupportedSuccess === false && CD.name === 'Before Unsupported Source';
 
-    const scopedCorrectly = noSourceResults.every(result => result.source === null) && arkatIsCultBacked && noZzistoriCultMapEntry;
+    const scopedCorrectly = noSourceResults.every(result => result.source === null) &&
+      nonGodForgotUsesCoreSorcery &&
+      arkatIsCultBacked &&
+      noZzistoriCultMapEntry;
 
     if (scopedCorrectly && staleRejected && validPreserved && validEnvelopePreserved && inheritedImportRejected && inheritedUnknownRejected && hiddenInheritedRejected && nullPrototypeRejected && inheritedNestedRejected && hiddenNestedRejected && inheritedCompanionRejected && inheritedArrayObjectRejected && aliasMagicRejected && unknownReferencesRejected && inheritedEnvelopeRejected && duplicateMagicRejected && inheritedArrayRejected && inheritedArrayAfterLengthRejected && inheritedMagicArrayRejected && incompatibleMiracleRejected && incompatibleSpiritRejected && malformedMiracleRejected && malformedSpiritRejected && inheritedSpiritEntryRejected && inheritedSpiritFieldsRejected && zeroSpellMismatchPreserved && noPersistedSource && rejectsUnsupportedSource) {
       pass('Derived Zzistori sorcery is scoped and import normalization guards persisted state');
     } else {
       fail('Derived Zzistori sorcery resolver or import guards are incorrect',
-        JSON.stringify({ noSourceResults, arkatSource, godForgotCultNames, staleRejected, staleErrors, validSource, validPreserved, validEnvelopePreserved, inheritedImportErrors, inheritedImportRejected, inheritedUnknownErrors, inheritedUnknownRejected, hiddenInheritedErrors, hiddenInheritedRejected, nullPrototypeErrors, nullPrototypeRejected, inheritedNestedErrors, inheritedNestedRejected, hiddenNestedErrors, hiddenNestedRejected, inheritedCompanionErrors, inheritedCompanionRejected, inheritedArrayObjectErrors, inheritedArrayObjectRejected, aliasMagicErrors, aliasMagicRejected, unknownReferenceResults, unknownReferencesRejected, inheritedEnvelopeErrors, inheritedEnvelopeRejected, duplicateMagicErrors, duplicateMagicRejected, inheritedArrayErrors, inheritedArrayRejected, inheritedArrayAfterLengthErrors, inheritedArrayAfterLengthRejected, inheritedMiracleArrayErrors, inheritedSpiritArrayErrors, inheritedMagicArrayRejected, incompatibleMiracleErrors, incompatibleMiracleRejected, incompatibleSpiritErrors, incompatibleSpiritRejected, malformedMiracleErrors, malformedMiracleRejected, malformedSpiritErrors, malformedSpiritRejected, inheritedSpiritEntryErrors, inheritedSpiritEntryRejected, inheritedSpiritFieldsErrors, inheritedSpiritFieldsRejected, zeroSpellSource, zeroSpellMismatchPreserved, serialized, rejectsUnsupportedSource }));
+        JSON.stringify({ noSourceResults, nonGodForgotSorcererSource, nonGodForgotUsesCoreSorcery, arkatSource, godForgotCultNames, staleRejected, staleErrors, validSource, validPreserved, validEnvelopePreserved, inheritedImportErrors, inheritedImportRejected, inheritedUnknownErrors, inheritedUnknownRejected, hiddenInheritedErrors, hiddenInheritedRejected, nullPrototypeErrors, nullPrototypeRejected, inheritedNestedErrors, inheritedNestedRejected, hiddenNestedErrors, hiddenNestedRejected, inheritedCompanionErrors, inheritedCompanionRejected, inheritedArrayObjectErrors, inheritedArrayObjectRejected, aliasMagicErrors, aliasMagicRejected, unknownReferenceResults, unknownReferencesRejected, inheritedEnvelopeErrors, inheritedEnvelopeRejected, duplicateMagicErrors, duplicateMagicRejected, inheritedArrayErrors, inheritedArrayRejected, inheritedArrayAfterLengthErrors, inheritedArrayAfterLengthRejected, inheritedMiracleArrayErrors, inheritedSpiritArrayErrors, inheritedMagicArrayRejected, incompatibleMiracleErrors, incompatibleMiracleRejected, incompatibleSpiritErrors, incompatibleSpiritRejected, malformedMiracleErrors, malformedMiracleRejected, malformedSpiritErrors, malformedSpiritRejected, inheritedSpiritEntryErrors, inheritedSpiritEntryRejected, inheritedSpiritFieldsErrors, inheritedSpiritFieldsRejected, zeroSpellSource, zeroSpellMismatchPreserved, serialized, rejectsUnsupportedSource }));
     }
   } else {
     fail('Derived sorcery resolver and CharacterData JSON helpers are available for import guard tests');

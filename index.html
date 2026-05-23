@@ -4364,6 +4364,131 @@ const STARTING_SPIRITS = [
   {name: 'Domination Spirit — Insects (Int 1)', type: 'Nature (Command)', intensity: 1, pow: 10, cha: 8, ability: 'Domination (commands creatures of the specified species within range)', source: 'Mythras Core p.146'}
 ];
 
+const CORE_CAREER_MAGIC_PROVIDERS = {
+  "source": "Mythras Core Rulebook (3rd Printing, 2018), Monster Island, and A Bird in the Hand",
+  "derived_artifact": "Core career-backed magic provider metadata for app access",
+  "verified": true,
+  "authority_state": "app_access_provider_metadata",
+  "derivation_note": "These provider records derive app access from Mythras Core career skill lists and the corresponding app magic source chains. They do not claim that the magic chapters themselves name careers as providers.",
+  "providers": [
+    {
+      "id": "core-career-shaman-animism",
+      "label": "Core Animism via Shaman career",
+      "system": "animism",
+      "source_kind": "core-career",
+      "eligibility": {
+        "career": "Shaman"
+      },
+      "career_skill_requirements": [
+        "Binding (Cult, Totem or Tradition)",
+        "Trance"
+      ],
+      "app_access": {
+        "state": "source_backed_provider_verified",
+        "summary": "A character selecting the Mythras Core Shaman career has the career skills for Animism access; app Animism uses Mythras Core, Monster Island, and A Bird in the Hand."
+      },
+      "precedence": {
+        "same_system": "selected-cult-provider-supersedes-core-career-provider",
+        "unrelated_systems": "stack"
+      },
+      "source_refs": [
+        {
+          "source_file": "references/mythras-raw/careers-detail.json",
+          "json_path": "$.careers[?(@.name=='Shaman')]",
+          "verified": true
+        },
+        {
+          "source_file": "references/mythras-raw/animism.json",
+          "json_path": "$.chargen_rules",
+          "source_id": "mythras-core",
+          "source_role": "core_animism_mechanics",
+          "verified": true
+        },
+        {
+          "source_file": "references/spirits-raw/monster-island.json",
+          "json_path": "$.spirit_cult_template",
+          "source_id": "monster-island",
+          "source_role": "animism_tradition_template_and_spirit_generation_reference",
+          "verified": true
+        },
+        {
+          "source_file": "references/spirits-raw/bird-in-hand.json",
+          "json_path": "$.example_spirits",
+          "source_id": "bird-in-hand",
+          "source_role": "target_example_spirit_stat_blocks",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "core-career-sorcerer-sorcery",
+      "label": "Core Sorcery via Sorcerer career",
+      "system": "sorcery",
+      "source_kind": "core-career",
+      "eligibility": {
+        "career": "Sorcerer"
+      },
+      "career_skill_requirements": [
+        "Invocation (Cult, School or Grimoire)",
+        "Shaping"
+      ],
+      "app_access": {
+        "state": "source_backed_provider_verified",
+        "summary": "A character selecting the Mythras Core Sorcerer career has the Invocation and Shaping professional skills used by Core Sorcery."
+      },
+      "precedence": {
+        "same_system": "selected-cult-provider-supersedes-core-career-provider",
+        "unrelated_systems": "stack"
+      },
+      "source_refs": [
+        {
+          "source_file": "references/mythras-raw/careers-detail.json",
+          "json_path": "$.careers[?(@.name=='Sorcerer')]",
+          "verified": true
+        },
+        {
+          "source_file": "references/mythras-raw/sorcery.json",
+          "json_path": "$.chargen_rules",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "core-career-mystic-mysticism",
+      "label": "Core Mysticism via Mystic career",
+      "system": "mysticism",
+      "source_kind": "core-career",
+      "eligibility": {
+        "career": "Mystic"
+      },
+      "career_skill_requirements": [
+        "Meditation",
+        "Mysticism"
+      ],
+      "app_access": {
+        "state": "source_backed_provider_verified",
+        "summary": "A character selecting the Mythras Core Mystic career has the Meditation and Mysticism professional skills used by Core Mysticism."
+      },
+      "precedence": {
+        "same_system": "selected-cult-provider-supersedes-core-career-provider",
+        "unrelated_systems": "stack"
+      },
+      "source_refs": [
+        {
+          "source_file": "references/mythras-raw/careers-detail.json",
+          "json_path": "$.careers[?(@.name=='Mystic')]",
+          "verified": true
+        },
+        {
+          "source_file": "references/mythras-raw/mysticism.json",
+          "json_path": "$.chargen_rules",
+          "verified": true
+        }
+      ]
+    }
+  ]
+};
+
 const CULTURE_BUILDS = {
   "Praxian": [
     {
@@ -8689,6 +8814,93 @@ function formatSorcerySourcePages(source) {
   return 'Mythras Core p.162, p.166-177';
 }
 
+function slugifyMagicProviderPart(value) {
+  return String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '') || 'unknown';
+}
+
+function getMagicProviderItemLimit(system, character = CharacterData) {
+  if (system === 'animism') return Math.floor((Number(character?.characteristics?.CHA) || 0) / 2);
+  if (system === 'sorcery') return 3;
+  if (system === 'mysticism') return Math.max(0, Math.floor((Number(character?.characteristics?.POW) || 0) / 20));
+  if (system === 'theist') return Math.floor((Number(character?.characteristics?.POW) || 0) / 2);
+  return 0;
+}
+
+function getMagicProviderResource(system, character = CharacterData) {
+  if (system === 'theist') {
+    return { resource: 'Devotional Pool', resourceValue: getMagicProviderItemLimit(system, character), magicPoints: null };
+  }
+  if (system === 'animism') {
+    return { resource: 'Bound Spirit Slots', resourceValue: getMagicProviderItemLimit(system, character), magicPoints: null };
+  }
+  const magicPoints = getCharacterMagicPoints(character);
+  return { resource: 'Magic Points', resourceValue: magicPoints, magicPoints };
+}
+
+function getMagicProviderSelectionField(system) {
+  if (system === 'theist') return 'miracles';
+  if (system === 'animism') return 'boundSpirits';
+  if (system === 'sorcery') return 'sorcerySpells';
+  if (system === 'mysticism') return 'mysticismTalents';
+  return null;
+}
+
+function getMagicProviderAvailableItems(system, cultName = null) {
+  if (system === 'theist' && cultName) return [...(MIRACLES_DATA.cults[cultName]?.miracles || [])];
+  if (system === 'animism') return STARTING_SPIRITS.map(spirit => spirit.name);
+  if (system === 'sorcery') return SORCERY_SPELLS.map(spell => spell[0]);
+  return [];
+}
+
+function normalizeCultTypeToMagicProviderSystem(type) {
+  if (type === 'animist') return 'animism';
+  return type;
+}
+
+function createCultBackedMagicProvider(character, cult, cultType, system) {
+  const resource = getMagicProviderResource(system, character);
+  const itemLimit = getMagicProviderItemLimit(system, character);
+  return {
+    id: `cult-${slugifyMagicProviderPart(cult.name)}-${system}`,
+    system,
+    label: `${cult.name} (${system})`,
+    sourceLabel: cult.name,
+    sourceType: `cult-backed ${system}`,
+    sourceKind: 'cult',
+    accessType: `cult-backed ${system}`,
+    precedence: 100,
+    isCultBacked: true,
+    cultName: cult.name,
+    cultType,
+    cultRequired: true,
+    resource: resource.resource,
+    resourceValue: resource.resourceValue,
+    magicPoints: resource.magicPoints,
+    skills: [...(cult.cultSkills || [])],
+    selectionField: getMagicProviderSelectionField(system),
+    itemLimit,
+    startingSpellLimit: system === 'sorcery' ? itemLimit : undefined,
+    availableItems: getMagicProviderAvailableItems(system, cult.name),
+    pages: [...(cult.sourcePages || [])],
+    sourceRefs: []
+  };
+}
+
+function resolveCultBackedHigherMagicProviders(character = CharacterData) {
+  if (!character?.cult) return [];
+
+  const cult = CULTS_DATA.find(c => c.name === character.cult);
+  const cultType = detectCultType(cult);
+  const types = Array.isArray(cultType?.types) ? cultType.types : [];
+  return types
+    .map(normalizeCultTypeToMagicProviderSystem)
+    .map(system => createCultBackedMagicProvider(character, cult, cultType, system));
+}
+
 function resolveCultureBackedSorcerySource(character = CharacterData) {
   if (!character || character.cult) return null;
 
@@ -8700,11 +8912,14 @@ function resolveCultureBackedSorcerySource(character = CharacterData) {
 
   const magicPoints = getCharacterMagicPoints(character);
   return {
+    id: `culture-${slugifyMagicProviderPart(culture)}-${slugifyMagicProviderPart(access.school || access.sourceLabel)}-sorcery`,
+    system: 'sorcery',
     sourceLabel: access.sourceLabel,
     label: access.sourceLabel,
     sourceType: access.accessType || 'culture-backed school',
     sourceKind: 'culture-backed school',
     accessType: access.accessType || 'culture-backed school',
+    precedence: 60,
     school: access.school || null,
     cultRequired: false,
     cultName: null,
@@ -8714,43 +8929,112 @@ function resolveCultureBackedSorcerySource(character = CharacterData) {
     resourceValue: magicPoints,
     magicPoints,
     skills: [...(access.skills || [])],
+    selectionField: 'sorcerySpells',
+    itemLimit: access.startingSpellLimit || 3,
     startingSpellLimit: access.startingSpellLimit || 3,
+    availableItems: getMagicProviderAvailableItems('sorcery'),
     spellListSource: access.spellListSource || null,
-    pages: [...(access.pages || [])]
+    pages: [...(access.pages || [])],
+    sourceRefs: []
   };
 }
 
+function resolveCultureBackedHigherMagicProviders(character = CharacterData) {
+  return [resolveCultureBackedSorcerySource(character)].filter(Boolean);
+}
+
 function resolveCultBackedSorcerySource(character = CharacterData) {
-  if (!character?.cult) return null;
+  return resolveCultBackedHigherMagicProviders(character)
+    .find(provider => provider.system === 'sorcery') || null;
+}
 
-  const cult = CULTS_DATA.find(c => c.name === character.cult);
-  const cultType = detectCultType(cult);
-  if (!cultType?.types?.includes('sorcery')) return null;
-
-  const magicPoints = getCharacterMagicPoints(character);
+function createCareerBackedMagicProvider(provider, character = CharacterData) {
+  const system = provider.system;
+  const resource = getMagicProviderResource(system, character);
+  const itemLimit = getMagicProviderItemLimit(system, character);
   return {
-    sourceLabel: character.cult,
-    label: character.cult,
-    sourceType: 'cult-backed sorcery',
-    sourceKind: 'cult-backed cult',
-    accessType: 'cult-backed sorcery',
-    school: null,
-    cultRequired: true,
-    cultName: character.cult,
-    cultType,
-    isCultBacked: true,
-    resource: 'Magic Points',
-    resourceValue: magicPoints,
-    magicPoints,
-    skills: ['Invocation', 'Shaping'],
-    startingSpellLimit: 3,
-    spellListSource: null,
+    id: provider.id,
+    system,
+    label: provider.label,
+    sourceLabel: provider.label,
+    sourceType: provider.source_kind,
+    sourceKind: provider.source_kind,
+    accessType: provider.source_kind,
+    precedence: 30,
+    isCultBacked: false,
+    cultName: null,
+    cultType: null,
+    cultRequired: false,
+    resource: resource.resource,
+    resourceValue: resource.resourceValue,
+    magicPoints: resource.magicPoints,
+    skills: [...(provider.career_skill_requirements || [])],
+    selectionField: getMagicProviderSelectionField(system),
+    itemLimit,
+    startingSpellLimit: system === 'sorcery' ? itemLimit : undefined,
+    availableItems: getMagicProviderAvailableItems(system),
+    sourceRefs: [...(provider.source_refs || [])],
+    appAccess: provider.app_access || null,
     pages: []
   };
 }
 
+function resolveCareerBackedHigherMagicProviders(character = CharacterData) {
+  const career = character?.career;
+  if (!career) return [];
+
+  return (CORE_CAREER_MAGIC_PROVIDERS.providers || [])
+    .filter(provider => provider.eligibility?.career === career)
+    .map(provider => createCareerBackedMagicProvider(provider, character));
+}
+
+function resolveHigherMagicProviders(character = CharacterData) {
+  const candidates = [
+    ...resolveCultBackedHigherMagicProviders(character),
+    ...resolveCultureBackedHigherMagicProviders(character),
+    ...resolveCareerBackedHigherMagicProviders(character)
+  ];
+  const bySystem = new Map();
+  for (const provider of candidates) {
+    const existing = bySystem.get(provider.system);
+    if (!existing || (provider.precedence || 0) > (existing.precedence || 0)) {
+      bySystem.set(provider.system, provider);
+    }
+  }
+  return Array.from(bySystem.values());
+}
+
+function resolveHigherMagicProviderBySystem(system, character = CharacterData) {
+  return resolveHigherMagicProviders(character)
+    .find(provider => provider.system === system) || null;
+}
+
 function resolveActiveSorcerySource(character = CharacterData) {
-  return resolveCultBackedSorcerySource(character) || resolveCultureBackedSorcerySource(character);
+  return resolveHigherMagicProviderBySystem('sorcery', character);
+}
+
+function normalizeHigherMagicState(character = CharacterData) {
+  const providers = resolveHigherMagicProviders(character);
+  const animismProvider = providers.find(provider => provider.system === 'animism');
+  const sorceryProvider = providers.find(provider => provider.system === 'sorcery');
+
+  if (animismProvider) {
+    character.boundSpiritSlots = animismProvider.itemLimit || 0;
+    character.boundSpirits = Array.isArray(character.boundSpirits) ? character.boundSpirits : [];
+  } else {
+    character.boundSpiritSlots = 0;
+    character.boundSpirits = [];
+  }
+
+  if (sorceryProvider) {
+    character.sorceryResource = sorceryProvider.magicPoints || 0;
+    character.sorcerySpells = Array.isArray(character.sorcerySpells) ? character.sorcerySpells : [];
+  } else {
+    character.sorceryResource = 0;
+    character.sorcerySpells = [];
+  }
+
+  return providers;
 }
 
 function normalizeSorceryState(character = CharacterData) {
@@ -9451,6 +9735,12 @@ const App = {
   autosaveDelayMs: 250,
   _autosaveTimer: null,
   normalizeCultureName,
+  resolveHigherMagicProviders,
+  resolveHigherMagicProviderBySystem,
+  resolveCultBackedHigherMagicProviders,
+  resolveCultureBackedHigherMagicProviders,
+  resolveCareerBackedHigherMagicProviders,
+  normalizeHigherMagicState,
   resolveActiveSorcerySource,
   resolveCultureBackedSorcerySource,
   resolveCultBackedSorcerySource,
