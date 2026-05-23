@@ -160,21 +160,26 @@
     },
     {
       "constant_name": "CULTS_DATA",
-      "status": "verified",
+      "status": "pending_fact_map",
       "disposition": "migrate-in-this-plan",
-      "fact_id": "app:CULTS_DATA:waha",
-      "canonical_value_hash": "8ecacacec330be1196a3d54f5ea6e9bfd9426532255c047e4f1ed60fe90ed0ba",
+      "fact_id": "app:CULTS_DATA:mixed-waha-verified-legacy-rows",
+      "canonical_value_hash": "923aa29c20bf17f828f4ed05028be3db0198e3311bfeded027629cbbeeb34f51",
       "normalized_file": "references/cults-raw/praxian/waha.json",
       "normalized_path": "$",
       "source_files": [
+        "references/cults-raw/praxian/waha.json",
         "references/cults-raw/cults.json"
       ],
-      "source_ids": [
-        "waha"
+      "verified_source_slices": [
+        {
+          "source_id": "waha",
+          "normalized_file": "references/cults-raw/praxian/waha.json",
+          "normalized_path": "$"
+        }
       ],
-      "rationale": "Waha app-facing cult facts are backed by bounded GPT-5.5 vision extraction, independent Opus verification, and focused spelling adjudication. The source spelling Aveert is recorded as normalized to canonical Avert.",
+      "rationale": "CULTS_DATA is mixed-authority: Waha app-facing cult facts are backed by bounded GPT-5.5 vision extraction, independent Opus verification, and focused spelling adjudication; non-Waha cult rows remain legacy references pending per-cult promotion. The source spelling Aveert is recorded as normalized to canonical Avert.",
       "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
-      "source_state": "bounded_vision_verified",
+      "source_state": "mixed_waha_verified_with_legacy_cult_rows",
       "page_coverage": "references/sources/pages/waha.json",
       "source_refs": [
         {
@@ -223,10 +228,14 @@
       "source_files": [
         "references/culture-cult-map.json"
       ],
-      "source_ids": [
-        "waha"
+      "verified_source_slices": [
+        {
+          "source_id": "waha",
+          "path": "references/culture-cult-map.json#source_disposition.waha_praxian_entry"
+        }
       ],
-      "rationale": "Culture/cult map has reviewed citations and is in current governance."
+      "rationale": "Culture/cult map has reviewed citations, Waha bounded vision evidence, and explicit legacy mapping exemptions for non-Waha memberships.",
+      "source_disposition_path": "references/culture-cult-map.json#source_disposition"
     },
     {
       "constant_name": "DISAMBIGUATION_LISTS",
@@ -240,21 +249,38 @@
     },
     {
       "constant_name": "MIRACLES_DATA",
-      "status": "verified",
+      "status": "pending_fact_map",
       "disposition": "governed-now",
-      "fact_id": "app:MIRACLES_DATA:waha",
-      "canonical_value_hash": "92493634bb9abd3bf6233961f712304fc8eda9e3668959b0a6c148444414c22f",
-      "normalized_file": "references/cults-raw/praxian/waha.json",
-      "normalized_path": "$.miracles",
+      "fact_id": "app:MIRACLES_DATA:mixed-waha-verified-legacy-exemptions",
+      "canonical_value_hash": "0e7b8380cc1ea7b01eeb0f5e74ec5d8065357b20fe07c8cf3aacbd6e0bd65071",
+      "normalized_file": "references/theism-miracles.json",
+      "normalized_path": "$.cults",
       "source_files": [
-        "references/theism-miracles.json"
+        "references/theism-miracles.json",
+        "references/cults-raw/praxian/waha.json"
       ],
-      "source_ids": [
-        "waha"
+      "verified_source_slices": [
+        {
+          "source_id": "waha",
+          "path": "references/theism-miracles.json#cults.Waha.source_ref"
+        }
       ],
-      "rationale": "Waha miracle facts are backed by bounded GPT-5.5 vision extraction, independent Opus verification, and focused spelling adjudication for the Discorporation reading.",
+      "rationale": "MIRACLES_DATA is mixed-authority: Waha miracle names/rank sections/associate sources are backed by bounded GPT-5.5 vision extraction, independent Opus verification, and focused spelling adjudication; Waha per-miracle rune arrays are derived from verified cult runes; non-Waha miracle rows are explicit legacy normalized exemptions in references/theism-miracles.json.",
       "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
-      "source_state": "bounded_vision_verified",
+      "source_state": "mixed_waha_verified_with_derived_runes_and_legacy_exemptions",
+      "verified_slice": {
+        "normalized_file": "references/cults-raw/praxian/waha.json",
+        "normalized_path": "$.miracles",
+        "verified_fields": [
+          "miracle_names",
+          "rank_sections",
+          "associate_sources"
+        ],
+        "derived_fields": [
+          "miracles[].runes",
+          "miracles[].rune_attestation"
+        ]
+      },
       "page_coverage": "references/sources/pages/waha.json",
       "source_refs": [
         {
@@ -265,7 +291,13 @@
           "page_manifest_path": "references/sources/pages/waha.json",
           "coverage_state": "verified",
           "evidence_state": "bounded_extraction_independent_verification",
-          "public_pdf_url": "https://copyparty.hound-celsius.ts.net/sources/books/Waha.pdf"
+          "public_pdf_url": "https://copyparty.hound-celsius.ts.net/sources/books/Waha.pdf",
+          "evidence_paths": [
+            "references/sources/evidence/waha/page-0001-extraction.json",
+            "references/sources/evidence/waha/page-0001-verification.json",
+            "references/sources/evidence/waha/page-0002-extraction.json",
+            "references/sources/evidence/waha/page-0002-verification.json"
+          ]
         },
         {
           "source_id": "waha",
@@ -274,7 +306,13 @@
           "block_id": "waha-p1-b007",
           "page_manifest_path": "references/sources/pages/waha.json",
           "coverage_state": "verified",
-          "evidence_state": "bounded_extraction_independent_verification"
+          "evidence_state": "bounded_extraction_independent_verification",
+          "evidence_paths": [
+            "references/sources/evidence/waha/page-0001-extraction.json",
+            "references/sources/evidence/waha/page-0001-verification.json",
+            "references/sources/evidence/waha/page-0002-extraction.json",
+            "references/sources/evidence/waha/page-0002-verification.json"
+          ]
         },
         {
           "source_id": "waha",
@@ -283,8 +321,18 @@
           "block_id": "waha-p1-b008",
           "page_manifest_path": "references/sources/pages/waha.json",
           "coverage_state": "verified",
-          "evidence_state": "bounded_extraction_independent_verification"
+          "evidence_state": "bounded_extraction_independent_verification",
+          "evidence_paths": [
+            "references/sources/evidence/waha/page-0001-extraction.json",
+            "references/sources/evidence/waha/page-0001-verification.json",
+            "references/sources/evidence/waha/page-0002-extraction.json",
+            "references/sources/evidence/waha/page-0002-verification.json"
+          ]
         }
+      ],
+      "blockers": [
+        "Non-Waha miracle rows need per-cult bounded extraction and independent verification before MIRACLES_DATA can be promoted from partial to verified.",
+        "Waha per-miracle rune arrays remain derived app data until a source explicitly lists per-miracle rune requirements."
       ]
     },
     {

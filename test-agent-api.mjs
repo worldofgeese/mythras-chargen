@@ -2049,7 +2049,7 @@ console.log('\n\x1b[36m═══ AE4: Waha (Hybrid Theist+Animist) ═══\x1b
 
 reload();
 
-evalPageJSON(`JSON.stringify(App.agent.buildCharacter({step1:{name:'Biturian Varosh',concept:'Beast rider khan'},step2:{characteristics:{STR:13,CON:12,SIZ:10,DEX:10,INT:9,POW:12,CHA:9}},step4:{culture:'Praxian',homeland:'Prax'},step5:{culturalSkills:{Athletics:15,Endurance:15,'First Aid':10,Locale:10,Perception:15,Ride:15,Stealth:10,Navigate:10},runeAffinities:{primary:'Beast',secondary:'Man',tertiary:'Spirit'},folkMagicSpells:['Bladesharp','Heal','Fanaticism']},step6:{passions:[{type:'Devotion',subject:'Waha',value:47},{type:'Loyalty',subject:'Bison Tribe',value:47}]},step7:{age:21,gender:'Male',family:'Bison Riders'},step8:{career:'Warrior',professionalSkills:[{name:'Lore (any)',specialization:'Tactics'},{name:'Survival'},{name:'Oratory'}]},step9:{cult:'Waha',miracles:['Extension','Find (Specific Thing)','Divination','Chastise','Alter Creature'],boundSpirits:[{name:'Nature Spirit — Camouflage (Int 2)',type:'Nature',ability:'Camouflage'}]},step10:{careerSkills:{Athletics:15,Endurance:15,Perception:10,Ride:15,'First Aid':10,Stealth:10,Survival:15,Locale:10},careerFolkMagic:['Vigour','Calm']},step11:{bonusSkills:{Athletics:15,Endurance:15,Perception:15,Ride:15,Stealth:15,Survival:15,Locale:15,'Lore (Tactics)':15,Willpower:15,Oratory:15}},step12:{socialClass:'Freeman'}}))`);
+evalPageJSON(`JSON.stringify(App.agent.buildCharacter({step1:{name:'Biturian Varosh',concept:'Beast rider khan'},step2:{characteristics:{STR:13,CON:12,SIZ:10,DEX:10,INT:9,POW:12,CHA:9}},step4:{culture:'Praxian',homeland:'Prax'},step5:{culturalSkills:{Athletics:15,Endurance:15,'First Aid':10,Locale:10,Perception:15,Ride:15,Stealth:10,Navigate:10},runeAffinities:{primary:'Beast',secondary:'Man',tertiary:'Spirit'},folkMagicSpells:['Bladesharp','Heal','Fanaticism']},step6:{passions:[{type:'Devotion',subject:'Waha',value:47},{type:'Loyalty',subject:'Bison Tribe',value:47}]},step7:{age:21,gender:'Male',family:'Bison Riders'},step8:{career:'Warrior',professionalSkills:[{name:'Lore (any)',specialization:'Tactics'},{name:'Survival'},{name:'Oratory'}]},step9:{cult:'Waha',miracles:['Find (Specific Thing)','Axis Mundi','Command Cult Spirit','Discorporation','Dismiss Gnome','Dismiss Magic'],boundSpirits:[{name:'Nature Spirit — Camouflage (Int 2)',type:'Nature',ability:'Camouflage'}]},step10:{careerSkills:{Athletics:15,Endurance:15,Perception:10,Ride:15,'First Aid':10,Stealth:10,Survival:15,Locale:10},careerFolkMagic:['Vigour','Calm']},step11:{bonusSkills:{Athletics:15,Endurance:15,Perception:15,Ride:15,Stealth:15,Survival:15,Locale:15,'Lore (Tactics)':15,Willpower:15,Oratory:15}},step12:{socialClass:'Freeman'}}))`);
 const ae4 = evalPageJSON(`JSON.stringify(App.agent.getMagicState())`);
 
 assert(ae4.cultType.primary === 'theist', 'AE4: Waha primary type is theist');
@@ -2059,7 +2059,7 @@ assert(ae4.cultType.types.includes('animist'), 'AE4: Waha has animist type');
 assert(ae4.devotionalPool === 6, 'AE4: Devotional Pool = POW/2 = 6');
 assert(ae4.boundSpiritSlots === 4, 'AE4: Bound Spirit Slots = CHA/2 = 4');
 assert(ae4.sorceryResource === 0, 'AE4: No sorcery resource');
-assert(ae4.selectedMiracles.length === 5, 'AE4: 5 available miracles selected (theist path)');
+assert(ae4.selectedMiracles.length === 6, 'AE4: 6 available miracles selected (theist path)');
 assert(ae4.selectedSpirits.length === 1, 'AE4: 1 bound spirit selected (animist path)');
 assert(ae4.limits.spirits === 4, 'AE4: Spirit slot limit = CHA/2 = 4');
 

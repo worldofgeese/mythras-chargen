@@ -2279,6 +2279,7 @@ section('Waha Source Authority');
   const praxianWaha = readJson('references/cults-raw/praxian/waha.json');
   const stormWaha = readJson('references/cults-raw/storm/waha.json');
   const aggregateCults = readJson('references/cults-raw/cults.json');
+  const legacyDisposition = readJson('references/provenance/legacy-disposition.json');
   const indexMap = readJson('references/provenance/index-html-map.json');
   const aggregateWaha = aggregateCults.filter(cult => cult.name === 'Waha');
   const appWaha = App.CULTS_DATA.filter(cult => cult.name === 'Waha');
@@ -2286,6 +2287,11 @@ section('Waha Source Authority');
   const wahaCoverage = readJson('references/sources/pages/waha.json');
   const wahaIndexEntry = (indexMap.entries || []).find(entry => entry.constant_name === 'CULTS_DATA');
   const wahaMiraclesEntry = (indexMap.entries || []).find(entry => entry.constant_name === 'MIRACLES_DATA');
+  const broadLegacyWahaSourceIds = [
+    ...(legacyDisposition.dispositions || []),
+    ...(legacyDisposition.app_constants || [])
+  ].filter(entry => (entry.source_ids || []).includes('waha'));
+  const broadIndexWahaSourceIds = (indexMap.entries || []).filter(entry => (entry.source_ids || []).includes('waha'));
   const aggregateBlocked = aggregateWaha.length >= 2 && aggregateWaha.every(cult => cult.doNotUseForAppGeneration === true);
   const pagesVerified = wahaCoverage.coverage_state === 'verified' &&
     wahaCoverage.pages.every(page =>
@@ -2311,8 +2317,13 @@ section('Waha Source Authority');
       praxianWaha.sourceAuthority?.blocked_by?.length === 0 &&
       sourceSpelling &&
       pagesVerified &&
-      wahaIndexEntry?.status === 'verified' &&
-      wahaMiraclesEntry?.status === 'verified' &&
+      broadLegacyWahaSourceIds.length === 0 &&
+      broadIndexWahaSourceIds.length === 0 &&
+      wahaIndexEntry?.status === 'pending_fact_map' &&
+      wahaIndexEntry?.source_state === 'mixed_waha_verified_with_legacy_cult_rows' &&
+      wahaIndexEntry?.verified_source_slices?.some(slice => slice.source_id === 'waha' && slice.normalized_file === 'references/cults-raw/praxian/waha.json') &&
+      wahaMiraclesEntry?.status === 'pending_fact_map' &&
+      wahaMiraclesEntry?.source_state === 'mixed_waha_verified_with_derived_runes_and_legacy_exemptions' &&
       stormWaha.recordStatus === 'superseded' &&
       stormWaha.doNotUseForAppGeneration === true &&
       stormWaha.sourceRevisionId === expectedWahaRevision &&
@@ -2337,6 +2348,9 @@ section('Waha Source Authority');
         coverageState: wahaCoverage.coverage_state,
         pageStates: wahaCoverage.pages.map(page => ({ page: page.pdf_page, state: page.work_state, independent: page.verification?.independent })),
         indexStatus: wahaIndexEntry?.status,
+        indexSourceState: wahaIndexEntry?.source_state,
+        broadLegacyWahaSourceIds: broadLegacyWahaSourceIds.map(entry => entry.id || entry.constant_name),
+        broadIndexWahaSourceIds: broadIndexWahaSourceIds.map(entry => entry.constant_name),
         miraclesStatus: wahaMiraclesEntry?.status,
         stormStatus: stormWaha.recordStatus,
         stormDoNotUse: stormWaha.doNotUseForAppGeneration,
@@ -8227,6 +8241,110 @@ section('Cult Data Tests');
   }
 }
 
+// Test: miracle provenance has no stale OCR process blockers and Waha mirrors verified source evidence
+{
+  const miraclesRef = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'theism-miracles.json'), 'utf8'));
+  const wahaRaw = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'cults-raw', 'praxian', 'waha.json'), 'utf8'));
+  const expectedWahaRevision = 'waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21';
+  const findProcessFlags = value => Array.from(
+    JSON.stringify(value).matchAll(/"(split_from_garbled|rune_inferred)"\s*:/g),
+    match => match[1]
+  );
+  const wahaExpectedNames = [
+    ...(wahaRaw.miracles?.initiate || []),
+    ...Object.values(wahaRaw.miracles?.associate || {}).flat(),
+    ...(wahaRaw.miracles?.runeLord || []),
+    ...(wahaRaw.miracles?.highPriest || [])
+  ];
+  const wahaRef = miraclesRef.cults?.Waha || {};
+  const wahaRefNames = (wahaRef.miracles || []).map(miracle => miracle.name);
+  const missingWahaMiracles = wahaExpectedNames.filter(name => !wahaRefNames.includes(name));
+  const extraWahaMiracles = wahaRefNames.filter(name => !wahaExpectedNames.includes(name));
+  const wahaRunesMarkedDerived = (wahaRef.miracles || []).every(miracle =>
+    typeof miracle.rune_attestation === 'string' &&
+    /derived_from_verified_waha_cult_runes|common_miracle_any_rune_app_rule/.test(miracle.rune_attestation));
+  const wahaEvidencePaths = wahaRef.source_ref?.evidence_paths || [];
+  const missingEvidence = wahaEvidencePaths.filter(evidencePath => !fs.existsSync(path.join(__dirname, evidencePath)));
+  const noMiraclesDispositions = miraclesRef.no_miracles_section_disposition || [];
+  const noMiracleNames = new Set(miraclesRef.no_miracles_section || []);
+
+  if (miraclesRef.stats?.verification_needed === 0 &&
+      miraclesRef.stats?.remaining_blocking_unverified === 0 &&
+      miraclesRef.stats?.remaining_unverified === miraclesRef.stats?.legacy_exemption_count &&
+      miraclesRef.stats?.remaining_legacy_exemptions === miraclesRef.stats?.legacy_exemption_count &&
+      miraclesRef.stats?.legacy_exemption_count === miraclesRef.source_disposition?.legacy_onepager_miracles?.former_verification_needed_summary?.length &&
+      Array.isArray(miraclesRef.verification_needed) &&
+      miraclesRef.verification_needed.length === 0 &&
+      findProcessFlags(miraclesRef).length === 0 &&
+      findProcessFlags(App.MIRACLES_DATA).length === 0 &&
+      miraclesRef.source_disposition?.overall_status === 'legacy_normalized_with_explicit_exemptions' &&
+      miraclesRef.source_disposition?.waha?.source_revision_id === expectedWahaRevision &&
+      wahaRef.sourceRevisionId === expectedWahaRevision &&
+      wahaRef.verificationState === 'vision_verified_with_derived_runes' &&
+      wahaRef.source_ref?.evidence_state === 'bounded_extraction_independent_vision_verified' &&
+      /per_miracle_runes_derived/.test(wahaRef.source_ref?.app_fact_scope || '') &&
+      wahaRef.source_ref?.coverage_scope === 'direct_fields_verified_with_derived_per_miracle_runes' &&
+      wahaRunesMarkedDerived &&
+      wahaEvidencePaths.length >= 4 &&
+      missingEvidence.length === 0 &&
+      missingWahaMiracles.length === 0 &&
+      extraWahaMiracles.length === 0 &&
+      noMiraclesDispositions.length === noMiracleNames.size &&
+      noMiraclesDispositions.every(entry => noMiracleNames.has(entry.name) && entry.disposition === 'explicit_non_blocking_exemption')) {
+    pass('miracle provenance classifies legacy rows explicitly and Waha mirrors verified one-pager miracles');
+  } else {
+    fail('miracle provenance still has stale blockers or Waha drift',
+      JSON.stringify({
+        stats: miraclesRef.stats,
+        verificationNeededLength: miraclesRef.verification_needed?.length,
+        processFlags: findProcessFlags(miraclesRef).slice(0, 10),
+        inlineProcessFlags: findProcessFlags(App.MIRACLES_DATA).slice(0, 10),
+        sourceDisposition: miraclesRef.source_disposition?.overall_status,
+        wahaRevision: wahaRef.sourceRevisionId,
+        wahaEvidenceState: wahaRef.source_ref?.evidence_state,
+        wahaRunesMarkedDerived,
+        missingEvidence,
+        missingWahaMiracles,
+        extraWahaMiracles,
+        noMiraclesDispositions
+      }));
+  }
+}
+
+// Test: culture-cult-map records explicit legacy exemptions with Waha evidence
+{
+  const cultureMapRef = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'culture-cult-map.json'), 'utf8'));
+  const expectedWahaRevision = 'waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21';
+  const evidencePaths = cultureMapRef.source_disposition?.waha_praxian_entry?.evidence_paths || [];
+  const missingEvidence = evidencePaths.filter(evidencePath => !fs.existsSync(path.join(__dirname, evidencePath)));
+
+  if (cultureMapRef.source_disposition?.overall_status === 'mixed_waha_verified_with_legacy_mapping_exemptions' &&
+      cultureMapRef.source_disposition?.waha_praxian_entry?.source_revision_id === expectedWahaRevision &&
+      cultureMapRef.source_disposition?.waha_praxian_entry?.mapped_culture === 'Praxian' &&
+      cultureMapRef.source_disposition?.waha_praxian_entry?.mapped_bucket === 'primary' &&
+      cultureMapRef.source_disposition?.verified_entries?.some(entry =>
+        entry.culture === 'Praxian' &&
+        entry.bucket === 'primary' &&
+        entry.cult === 'Waha' &&
+        entry.source_disposition === 'waha_praxian_entry') &&
+      cultureMapRef.source_disposition?.legacy_mapping_exemption?.status === 'non_waha_area_derived_legacy_exemption' &&
+      cultureMapRef.source_disposition?.legacy_mapping_exemption?.excludes_verified_entries?.some(entry =>
+        entry.culture === 'Praxian' &&
+        entry.bucket === 'primary' &&
+        entry.cult === 'Waha' &&
+        entry.source_disposition === 'waha_praxian_entry') &&
+      evidencePaths.length >= 4 &&
+      missingEvidence.length === 0) {
+    pass('culture-cult-map has Waha evidence and explicit legacy mapping exemptions');
+  } else {
+    fail('culture-cult-map source disposition is incomplete',
+      JSON.stringify({
+        sourceDisposition: cultureMapRef.source_disposition,
+        missingEvidence
+      }));
+  }
+}
+
 // Test: changed reference data has explicit page citations
 {
   const miraclesRef = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'theism-miracles.json'), 'utf8'));
@@ -8242,6 +8360,7 @@ section('Cult Data Tests');
   if (miraclesRef.page_citations?.miracle_lists &&
       reviewedCorrections.Orlanth &&
       reviewedCorrections.Yelmalio &&
+      miraclesRef.source_disposition?.overall_status === 'legacy_normalized_with_explicit_exemptions' &&
       !missingCultCitation) {
     pass('Reference miracle and cult raw data include page citations');
   } else {
@@ -8249,6 +8368,7 @@ section('Cult Data Tests');
       JSON.stringify({
         hasMiracleListCitation: Boolean(miraclesRef.page_citations?.miracle_lists),
         reviewedCorrectionKeys: Object.keys(reviewedCorrections),
+        sourceDisposition: miraclesRef.source_disposition?.overall_status,
         missingCultCitation: missingCultCitation ? missingCultCitation.name : null
       }));
   }
@@ -8376,13 +8496,27 @@ section('Index Provenance Coverage');
   const blockedOrUnverified = (ref.entries || []).filter(entry =>
     ['blocked', 'unverified'].includes(entry.status) && (entry.blockers || []).length > 0
   );
+  const theismPartialWithExemptions = (ref.entries || []).some(entry =>
+    entry.id === 'theism-miracles' &&
+    entry.status === 'partial' &&
+    (entry.blockers || []).length > 0 &&
+    /explicit legacy normalized exemptions/.test(entry.summary || '')
+  );
+  const cultMapPartialWithBlockers = (ref.entries || []).some(entry =>
+    entry.id === 'cults-and-cult-map' &&
+    entry.status === 'partial' &&
+    (entry.blockers || []).length > 0 &&
+    /Non-Waha cult rows/.test((entry.blockers || []).join(' '))
+  );
 
   if (inline &&
       JSON.stringify(inline) === JSON.stringify(ref) &&
       missingConstants.length === 0 &&
       missingRefs.length === 0 &&
       entriesWithoutCitation.length === 0 &&
-      blockedOrUnverified.length >= 2) {
+      blockedOrUnverified.length >= 1 &&
+      theismPartialWithExemptions &&
+      cultMapPartialWithBlockers) {
     pass('index.html provenance coverage mirrors committed JSON and covers generated data constants');
   } else {
     fail('index.html provenance coverage contract is incomplete',
@@ -8391,7 +8525,9 @@ section('Index Provenance Coverage');
         missingConstants,
         missingRefs,
         entriesWithoutCitation,
-        blockedOrUnverified: blockedOrUnverified.map(entry => entry.id)
+        blockedOrUnverified: blockedOrUnverified.map(entry => entry.id),
+        theismPartialWithExemptions,
+        cultMapPartialWithBlockers
       }));
   }
 }
@@ -8406,6 +8542,13 @@ section('Index Provenance Coverage');
   const runeMagicRef = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'aig-raw', 'rune-magic-aig.json'), 'utf8'));
   const miraclesRef = JSON.parse(fs.readFileSync(path.join(__dirname, 'references', 'theism-miracles.json'), 'utf8'));
 
+  const theismNoMiraclesClassified = Array.isArray(miraclesRef.no_miracles_section) &&
+    miraclesRef.no_miracles_section.length > 0 &&
+    Array.isArray(miraclesRef.no_miracles_section_disposition) &&
+    miraclesRef.no_miracles_section_disposition.length === miraclesRef.no_miracles_section.length &&
+    miraclesRef.no_miracles_section_disposition.every(entry =>
+      miraclesRef.no_miracles_section.includes(entry.name) &&
+      entry.disposition === 'explicit_non_blocking_exemption');
   const statusesMatch =
     entriesById['sorcery-spells']?.status === 'verified' &&
     sorceryRef.verified === true &&
@@ -8415,10 +8558,12 @@ section('Index Provenance Coverage');
     magicPagesRef.source_ref?.coverage_state === 'verified' &&
     !magicPagesRef.source_ref?.pages?.includes(196) &&
     magicPagesRef.boundary_pages?.some(page => page.page === 196 && page.role === 'non_app_facing_mysticism_boundary') &&
-    entriesById['theism-miracles']?.status === 'blocked' &&
+    entriesById['theism-miracles']?.status === 'partial' &&
+    (entriesById['theism-miracles']?.blockers || []).length > 0 &&
+    (entriesById['cults-and-cult-map']?.blockers || []).length > 0 &&
     runeMagicRef.verified === false &&
-    Array.isArray(miraclesRef.no_miracles_section) &&
-    miraclesRef.no_miracles_section.length > 0;
+    miraclesRef.source_disposition?.overall_status === 'legacy_normalized_with_explicit_exemptions' &&
+    theismNoMiraclesClassified;
 
   if (statusesMatch) {
     pass('provenance coverage exposes verified, blocked, and unverified reference states');
@@ -8432,12 +8577,14 @@ section('Index Provenance Coverage');
         spiritVerified: spiritRef.verified,
         magicPagesVerified: magicPagesRef.verified,
         runeMagicVerified: runeMagicRef.verified,
-        noMiraclesSections: miraclesRef.no_miracles_section
+        noMiraclesSections: miraclesRef.no_miracles_section,
+        sourceDisposition: miraclesRef.source_disposition?.overall_status,
+        theismNoMiraclesClassified
       }));
   }
 }
 
-// Test: provenance UI renderer surfaces badges and blocked proof text
+// Test: provenance UI renderer surfaces badges and partial/unverified proof text
 {
   const { App: AppRef, _sandbox } = loadApp();
   if (AppRef && AppRef.renderProvenanceCoverage && AppRef.renderProvenanceBadgesForConstants) {
@@ -8445,19 +8592,17 @@ section('Index Provenance Coverage');
     const coverageHtml = _sandbox.document.getElementById('source-coverage-content').innerHTML;
     const badgesHtml = AppRef.renderProvenanceBadgesForConstants(['MIRACLES_DATA', 'STARTING_SPIRITS', 'SORCERY_SPELLS']);
 
-    if (coverageHtml.includes('Blocked source proof') &&
-        coverageHtml.includes('data-status=\"blocked\"') &&
+    if (coverageHtml.includes('data-status=\"partial\"') &&
         coverageHtml.includes('data-status=\"unverified\"') &&
         badgesHtml.includes('source-coverage-badge') &&
         badgesHtml.includes('Theist miracle lists') &&
         badgesHtml.includes('Starting spirit options') &&
         badgesHtml.includes('Sorcery spells')) {
-      pass('provenance UI renderer exposes source badges and blocked/unverified coverage');
+      pass('provenance UI renderer exposes source badges and partial/unverified coverage');
     } else {
       fail('provenance UI renderer did not expose expected source coverage',
         JSON.stringify({
-          hasBlockedProof: coverageHtml.includes('Blocked source proof'),
-          hasBlockedStatus: coverageHtml.includes('data-status=\"blocked\"'),
+          hasPartialStatus: coverageHtml.includes('data-status=\"partial\"'),
           hasUnverifiedStatus: coverageHtml.includes('data-status=\"unverified\"'),
           badgesHtml
         }));
@@ -8496,7 +8641,7 @@ section('Index Provenance Coverage');
     const equipmentHtml = _sandbox.document.getElementById('play-equipment').innerHTML;
     const hasCombatBadges = combatHtml.includes('Cultures, homelands, and combat styles: verified') &&
       combatHtml.includes('Weapons, prices, equipment, and starting kit: attested');
-    const hasMagicBadges = magicHtml.includes('Theist miracle lists and rune access: blocked') &&
+    const hasMagicBadges = magicHtml.includes('Theist miracle lists and rune access: partial') &&
       magicHtml.includes('Starting spirit options and animist guidance: unverified') &&
       magicHtml.includes('Folk Magic spell names and descriptions: attested');
     const hasEquipmentBadges = equipmentHtml.includes('Weapons, prices, equipment, and starting kit: attested') &&

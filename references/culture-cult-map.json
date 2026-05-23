@@ -190,5 +190,49 @@
       ],
       "note": "Seven Mothers is preserved as a player-facing/source label; choose an individual 7 Mothers subcult record for app mechanics."
     }
+  },
+  "source_disposition": {
+    "overall_status": "mixed_waha_verified_with_legacy_mapping_exemptions",
+    "app_facing_status": "partial",
+    "waha_praxian_entry": {
+      "status": "bounded_vision_verified_for_cult_record",
+      "source_id": "waha",
+      "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
+      "page_manifest_path": "references/sources/pages/waha.json",
+      "evidence_paths": [
+        "references/sources/evidence/waha/page-0001-extraction.json",
+        "references/sources/evidence/waha/page-0001-verification.json",
+        "references/sources/evidence/waha/page-0002-extraction.json",
+        "references/sources/evidence/waha/page-0002-verification.json"
+      ],
+      "mapped_culture": "Praxian",
+      "mapped_bucket": "primary"
+    },
+    "legacy_mapping_exemption": {
+      "status": "non_waha_area_derived_legacy_exemption",
+      "applies_to_fields": [
+        "cultures.*.primary except cultures.Praxian.primary[Waha]",
+        "cultures.*.secondary",
+        "culture_aliases",
+        "cult_display_groups"
+      ],
+      "excludes_verified_entries": [
+        {
+          "culture": "Praxian",
+          "bucket": "primary",
+          "cult": "Waha",
+          "source_disposition": "waha_praxian_entry"
+        }
+      ],
+      "reason": "Non-Waha culture/cult membership remains the reviewed legacy map from tracked one-pager area sections plus AiG culture descriptions; Waha/Praxian primary mapping is split out as verified evidence, and the rest remains partial provenance until AiG and per-cult page/block evidence are promoted."
+    },
+    "verified_entries": [
+      {
+        "culture": "Praxian",
+        "bucket": "primary",
+        "cult": "Waha",
+        "source_disposition": "waha_praxian_entry"
+      }
+    ]
   }
 }

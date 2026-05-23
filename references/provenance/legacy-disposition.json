@@ -123,9 +123,6 @@
       "artifact_class": "source_pdf",
       "disposition": "migrate-in-this-plan",
       "required_scope": true,
-      "source_ids": [
-        "waha"
-      ],
       "rationale": "Tracked cult one-pagers are source PDFs; later units should untrack/manifest or explicitly exempt each active source."
     },
     {
@@ -134,9 +131,6 @@
       "artifact_class": "raw_legacy_json",
       "disposition": "migrate-in-this-plan",
       "required_scope": true,
-      "source_ids": [
-        "waha"
-      ],
       "rationale": "Cult raw JSON is legacy extraction output scoped to later Waha/cult reconciliation units."
     },
     {
@@ -243,11 +237,14 @@
       "artifact_class": "normalized_authority_json",
       "disposition": "governed-now",
       "required_scope": true,
-      "source_ids": [
-        "waha"
+      "verified_source_slices": [
+        {
+          "source_id": "waha",
+          "path": "source_disposition.waha_praxian_entry"
+        }
       ],
       "scan_for_unverified": true,
-      "rationale": "Current app-facing culture/cult map with reviewed page citations."
+      "rationale": "Current app-facing culture/cult map has Waha Praxian membership split out as bounded vision evidence plus source_disposition explicit exemptions for non-Waha mappings."
     },
     {
       "id": "disambiguation-lists",
@@ -300,11 +297,14 @@
       "artifact_class": "normalized_authority_json",
       "disposition": "governed-now",
       "required_scope": true,
-      "source_ids": [
-        "waha"
+      "verified_source_slices": [
+        {
+          "source_id": "waha",
+          "path": "source_disposition.waha"
+        }
       ],
       "scan_for_unverified": true,
-      "rationale": "Current miracle authority with OCR cleanup tests; later Waha source evidence will narrow fact-level provenance."
+      "rationale": "Current miracle authority has Waha bounded vision evidence for names/rank sections/associate sources, Waha per-miracle runes marked as derived app facts, and explicit legacy exemptions for non-Waha normalized one-pager rows; stale OCR process markers are not retained as blockers."
     },
     {
       "id": "weapons-attestation",
@@ -401,8 +401,11 @@
       "source_files": [
         "references/cults-raw/cults.json"
       ],
-      "source_ids": [
-        "waha"
+      "verified_source_slices": [
+        {
+          "source_id": "waha",
+          "path": "references/cults-raw/praxian/waha.json"
+        }
       ],
       "rationale": "Cult constants await later cult/Waha provenance tightening."
     },
@@ -413,10 +416,13 @@
       "source_files": [
         "references/culture-cult-map.json"
       ],
-      "source_ids": [
-        "waha"
+      "verified_source_slices": [
+        {
+          "source_id": "waha",
+          "path": "source_disposition.waha_praxian_entry"
+        }
       ],
-      "rationale": "Culture/cult map has reviewed citations and is in current governance."
+      "rationale": "Culture/cult map mirrors reviewed reference data with Waha source evidence split out from explicit non-Waha legacy mapping exemptions."
     },
     {
       "constant_name": "DISAMBIGUATION_LISTS",
@@ -434,10 +440,13 @@
       "source_files": [
         "references/theism-miracles.json"
       ],
-      "source_ids": [
-        "waha"
+      "verified_source_slices": [
+        {
+          "source_id": "waha",
+          "path": "cults.Waha.source_ref"
+        }
       ],
-      "rationale": "Miracle constants are governed by current cleaned miracle authority."
+      "rationale": "Miracle constants mirror references/theism-miracles.json: Waha names/rank sections/associate sources are bounded vision verified, Waha per-miracle runes are marked as derived app facts, and non-Waha rows are explicit legacy normalized exemptions."
     },
     {
       "constant_name": "WEAPON_ALIASES",

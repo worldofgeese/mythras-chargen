@@ -87,7 +87,9 @@
           "citation": "p.33-34"
         }
       ],
-      "blockers": []
+      "blockers": [
+        "Non-Waha cult rows and culture/cult memberships still need per-cult one-pager and AiG page/block evidence before this coverage can be verified."
+      ]
     },
     {
       "id": "runes",
@@ -251,7 +253,7 @@
         "Play Mode cult summary"
       ],
       "status": "partial",
-      "summary": "Cult data carries sourceCitation/sourcePages in raw JSON and the culture map carries page_citations, but OCR-derived cult rows are still normalized for play.",
+      "summary": "Waha cult facts and the Praxian Waha mapping are backed by the current bounded vision-verified one-pager. Non-Waha cult rows and culture/cult memberships are retained as explicit legacy mapping exemptions pending per-cult and AiG page/block evidence.",
       "references": [
         {
           "path": "references/cults-raw/cults.json",
@@ -261,7 +263,7 @@
         {
           "path": "references/culture-cult-map.json",
           "source": "Derived from CultOnePagers2019 areas + AiG culture descriptions",
-          "citation": "page_citations"
+          "citation": "page_citations plus source_disposition explicit exemptions"
         },
         {
           "path": "references/theism-miracles.json",
@@ -270,7 +272,7 @@
         }
       ],
       "blockers": [
-        "Keep cult OCR normalization and per-cult page citations synchronized through scripts/ingest-cults.py."
+        "Non-Waha cult rows and culture/cult memberships still need per-cult one-pager and AiG page/block evidence before this coverage can be verified."
       ]
     },
     {
@@ -345,13 +347,14 @@
         "Play Mode Theist Miracles",
         "PDF export miracles"
       ],
-      "status": "blocked",
-      "summary": "Most miracle rows are normalized from cult one-pagers, but current reference JSON still records cults with no miracles section.",
+      "status": "partial",
+      "summary": "Waha miracle names and rank/associate sections are backed by bounded vision extraction and independent verification; Waha rune arrays are app-derived from verified cult runes/common miracle rules. Non-Waha miracle rows are retained as explicit legacy normalized exemptions.",
       "references": [
         {
           "path": "references/theism-miracles.json",
-          "source": "Notes from Pavis Cult One-Pagers (2019 v5.2)",
-          "citation": "individual cult PDF miracle lists"
+          "source": "Notes from Pavis Cult One-Pagers with Waha 2026 one-pager override",
+          "citation": "source_disposition plus per-cult miracle lists; Waha p.1 bounded evidence",
+          "verified": false
         },
         {
           "path": "references/aig-raw/rune-magic-aig.json",
@@ -361,8 +364,8 @@
         }
       ],
       "blockers": [
-        "references/theism-miracles.json currently lists Hearth Mother (Praxian) and Gerak Kag (Darkness) under no_miracles_section.",
-        "references/aig-raw/rune-magic-aig.json has verified=false."
+        "Non-Waha miracle rows need per-cult bounded extraction and independent verification before MIRACLES_DATA can be promoted from partial to verified.",
+        "Waha per-miracle rune arrays remain derived app data until a source explicitly lists per-miracle rune requirements."
       ]
     },
     {
