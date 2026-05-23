@@ -684,6 +684,105 @@ assert(/animist cult or provider/i.test((u4ProviderlessValidation.errors || []).
   'U4: Step 9 render, magic state, and validation report providerless stale magic selections without mutating them');
 
 // ═══════════════════════════════════════════════════════════════
+console.log('\n\x1b[36m═══ U5: Provider Parity State/API ═══\x1b[0m\n');
+// ═══════════════════════════════════════════════════════════════
+
+reload();
+
+const u5ProviderStateParity = evalPageJSON(`JSON.stringify((() => {
+  App.agent.setStep(1, {name:'U5 State Shaman', concept:'Provider state parity'});
+  App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:13,POW:14,CHA:8}});
+  App.agent.setStep(4, {culture:'Praxian', homeland:'Prax'});
+  App.agent.setStep(8, {career:'Shaman', professionalSkills:[{name:'Binding (Cult, Totem or Tradition)', specialization:'Waha'}, 'Trance', 'Healing']});
+  App.agent.setStep(9, {cult:null, boundSpirits:['Ancestor Spirit — Sagacity (Int 1)']});
+  const shamanState = App.agent.getState();
+
+  CharacterData.miracles = [];
+  CharacterData.boundSpirits = [];
+  CharacterData.sorcerySpells = [];
+  CharacterData.mysticismTalents = [];
+  App.agent.setStep(1, {name:'U5 State Sorcerer', concept:'Provider state parity'});
+  App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
+  App.agent.setStep(4, {culture:'Esrolian'});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Core Sorcery'}, 'Shaping', 'Literacy']});
+  App.agent.setStep(9, {cult:null, sorcerySpells:['Holdfast']});
+  const sorcererState = App.agent.getState();
+
+  CharacterData.miracles = [];
+  CharacterData.boundSpirits = [];
+  CharacterData.sorcerySpells = [];
+  CharacterData.mysticismTalents = [];
+  App.agent.setStep(1, {name:'U5 State Mystic', concept:'Provider state parity'});
+  App.agent.setStep(2, {characteristics:{STR:8,CON:8,SIZ:8,DEX:8,INT:15,POW:20,CHA:8}});
+  App.agent.setStep(4, {culture:'Esrolian', homeland:'Esrolia'});
+  App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', 'Mysticism', 'Musicianship']});
+  App.agent.setStep(9, {cult:null});
+  const mysticState = App.agent.getState();
+
+  return {shamanState, sorcererState, mysticState};
+})())`);
+assert(u5ProviderStateParity.shamanState.higherMagicProviders?.some(provider => provider.id === 'core-career-shaman-animism') &&
+  u5ProviderStateParity.shamanState.magic?.higherMagicProviders?.some(provider => provider.id === 'core-career-shaman-animism') &&
+  u5ProviderStateParity.shamanState.boundSpiritSlots === 4 &&
+  u5ProviderStateParity.shamanState.boundSpirits?.some(spirit => (typeof spirit === 'string' ? spirit : spirit.name) === 'Ancestor Spirit — Sagacity (Int 1)') &&
+  u5ProviderStateParity.shamanState.magic.selectedSpirits.length === 1 &&
+  u5ProviderStateParity.sorcererState.higherMagicProviders?.some(provider => provider.id === 'core-career-sorcerer-sorcery') &&
+  u5ProviderStateParity.sorcererState.activeSorcerySource?.id === 'core-career-sorcerer-sorcery' &&
+  u5ProviderStateParity.sorcererState.sorcerySpells?.includes('Holdfast') &&
+  u5ProviderStateParity.sorcererState.magic.selectedSpells.includes('Holdfast') &&
+  u5ProviderStateParity.mysticState.higherMagicProviders?.some(provider => provider.id === 'core-career-mystic-mysticism') &&
+  u5ProviderStateParity.mysticState.magic?.higherMagicProviders?.some(provider => provider.id === 'core-career-mystic-mysticism') &&
+  Array.isArray(u5ProviderStateParity.mysticState.mysticismTalents) &&
+  u5ProviderStateParity.mysticState.magic.higherMagicProviders.some(provider => provider.system === 'mysticism'),
+  'U5: getState exposes provider-shaped magic state while preserving legacy fields');
+
+const u5ProviderIdValidation = evalPageJSON(`JSON.stringify((() => {
+  App.agent.setStep(1, {name:'U5 Provider IDs', concept:'Provider-shaped Step 9 payloads'});
+  App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:13,POW:14,CHA:8}});
+  App.agent.setStep(4, {culture:'Praxian', homeland:'Prax'});
+  CharacterData.miracles = [];
+  CharacterData.boundSpirits = [];
+  CharacterData.sorcerySpells = [];
+  CharacterData.mysticismTalents = [];
+  App.agent.setStep(8, {career:'Shaman', professionalSkills:[{name:'Binding (Cult, Totem or Tradition)', specialization:'Waha'}, 'Trance', 'Healing']});
+  const unknown = App.agent.setStep(9, {cult:null, higherMagicProviderIds:['bogus-provider'], boundSpirits:['Ancestor Spirit — Sagacity (Int 1)']});
+  const afterUnknown = App.agent.getMagicState();
+  const duplicate = App.agent.setStep(9, {cult:null, higherMagicProviderIds:['core-career-shaman-animism', 'core-career-shaman-animism'], boundSpirits:['Ancestor Spirit — Sagacity (Int 1)']});
+  const inheritedIds = ['core-career-shaman-animism'];
+  Object.setPrototypeOf(inheritedIds, {1: 'bogus-provider'});
+  const inherited = App.agent.setStep(9, {cult:null, higherMagicProviderIds: inheritedIds, boundSpirits: []});
+  const brokenPrototypeIds = ['core-career-shaman-animism'];
+  Object.setPrototypeOf(brokenPrototypeIds, {});
+  const brokenPrototype = App.agent.setStep(9, {cult:null, higherMagicProviderIds: brokenPrototypeIds, boundSpirits:['Ancestor Spirit — Sagacity (Int 1)']});
+  CharacterData.boundSpirits = [];
+  const empty = App.agent.setStep(9, {cult:null, higherMagicProviderIds: [], boundSpirits: []});
+  const valid = App.agent.setStep(9, {cult:null, higherMagicProviderIds:['core-career-shaman-animism'], boundSpirits:['Ancestor Spirit — Sagacity (Int 1)']});
+  const afterValid = App.agent.getMagicState();
+  const miracle = App.getAvailableInitiateMiracleNames('Orlanth')[0] || 'Shield';
+  const subset = App.agent.setStep(9, {cult:'Orlanth', higherMagicProviderIds:['core-career-shaman-animism'], miracles:[miracle], boundSpirits:[]});
+  const afterSubset = App.agent.getMagicState();
+  return {unknown, afterUnknown, duplicate, inherited, brokenPrototype, empty, valid, afterValid, subset, afterSubset};
+})())`);
+assert(u5ProviderIdValidation.unknown.success === false &&
+  /higher magic provider id/i.test((u5ProviderIdValidation.unknown.errors || []).join('; ')) &&
+  u5ProviderIdValidation.afterUnknown.selectedSpirits.length === 0 &&
+  u5ProviderIdValidation.duplicate.success === false &&
+  /Duplicate higher magic provider id/i.test((u5ProviderIdValidation.duplicate.errors || []).join('; ')) &&
+  u5ProviderIdValidation.inherited.success === false &&
+  /higherMagicProviderIds\[1\] must be an own array element/i.test((u5ProviderIdValidation.inherited.errors || []).join('; ')) &&
+  u5ProviderIdValidation.brokenPrototype.success === true &&
+  u5ProviderIdValidation.empty.success === false &&
+  /must include active provider id/i.test((u5ProviderIdValidation.empty.errors || []).join('; ')) &&
+  u5ProviderIdValidation.valid.success === true &&
+  u5ProviderIdValidation.afterValid.higherMagicProviders.some(provider => provider.id === 'core-career-shaman-animism') &&
+  u5ProviderIdValidation.afterValid.selectedSpirits.length === 1 &&
+  u5ProviderIdValidation.subset.success === false &&
+  /must include active provider id/i.test((u5ProviderIdValidation.subset.errors || []).join('; ')) &&
+  u5ProviderIdValidation.afterSubset.cultName === null &&
+  u5ProviderIdValidation.afterSubset.selectedSpirits.length === 1,
+  'U5: Step 9 rejects invalid provider-shaped payload ids and accepts active provider ids');
+
+// ═══════════════════════════════════════════════════════════════
 console.log('\n\x1b[36m═══ AE3: Arkat (Sorcery) ═══\x1b[0m\n');
 // ═══════════════════════════════════════════════════════════════
 

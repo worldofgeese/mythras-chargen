@@ -8559,6 +8559,46 @@ function getDuplicateSelectionNames(entries, getName = entry => entry) {
   return [...duplicates];
 }
 
+function getHigherMagicProviderIdPayloadErrors(providerIds, activeProviders) {
+  const errors = [];
+  const submittedIds = [];
+  let hasInvalidProviderId = false;
+  const duplicateProviderIds = [];
+  const seenProviderIds = new Set();
+  for (let index = 0; index < providerIds.length; index++) {
+    const providerId = providerIds[index];
+    if (typeof providerId !== 'string' || providerId.trim() === '') {
+      hasInvalidProviderId = true;
+      continue;
+    }
+    submittedIds.push(providerId);
+    if (seenProviderIds.has(providerId) && !duplicateProviderIds.includes(providerId)) {
+      duplicateProviderIds.push(providerId);
+    }
+    seenProviderIds.add(providerId);
+  }
+  const activeProviderIds = [];
+  for (let index = 0; index < activeProviders.length; index++) {
+    const providerId = activeProviders[index]?.id;
+    if (providerId) activeProviderIds.push(providerId);
+  }
+
+  if (hasInvalidProviderId) errors.push('higherMagicProviderIds must contain provider id strings');
+  if (duplicateProviderIds.length > 0) errors.push(`Duplicate higher magic provider id(s): ${duplicateProviderIds.join(', ')}`);
+
+  const activeProviderIdSet = new Set(activeProviderIds);
+  const submittedProviderIdSet = new Set(submittedIds);
+  const unknownProviderIds = submittedIds.filter(providerId => !activeProviderIdSet.has(providerId));
+  if (unknownProviderIds.length > 0) {
+    errors.push(`Unknown or inactive higher magic provider id(s): ${unknownProviderIds.join(', ')}`);
+  }
+  const missingProviderIds = activeProviderIds.filter(providerId => !submittedProviderIdSet.has(providerId));
+  if (missingProviderIds.length > 0) {
+    errors.push(`higherMagicProviderIds must include active provider id(s): ${missingProviderIds.join(', ')}`);
+  }
+  return errors;
+}
+
 function isInvocationSkillAllowedForCareer(skillName, career) {
   const normalizedSkillName = String(skillName || '').trim();
   if (!normalizedSkillName || !career || !Array.isArray(career.professionalSkills)) return false;
@@ -16452,7 +16492,9 @@ App.agent = {};
 App.agent.getState = function() {
   try {
     const skills = App.compileAllSkills ? App.compileAllSkills() : [];
-    const activeSorcerySource = App.resolveActiveSorcerySource(CharacterData);
+    const magicState = App.agent.getMagicState();
+    const activeHigherMagicProviders = magicState.higherMagicProviders || [];
+    const activeSorcerySource = magicState.activeSorcerySource || null;
     const compiledSkills = skills.map(s => ({
       name: s.name,
       total: s.base + s.cultural + s.career + s.bonus,
@@ -16473,12 +16515,17 @@ App.agent.getState = function() {
       attributes: {...(CharacterData.attributes || {})},
       career: CharacterData.career || null,
       cult: CharacterData.cult || null,
+      cultType: CharacterData.cultType ? {...CharacterData.cultType} : null,
+      higherMagicProviders: activeHigherMagicProviders.map(provider => ({...provider})),
+      magic: magicState,
       miracles: [...(CharacterData.miracles || [])],
       devotionalPool: CharacterData.devotionalPool || 0,
+      boundSpiritSlots: magicState.boundSpiritSlots || CharacterData.boundSpiritSlots || 0,
+      boundSpirits: [...(CharacterData.boundSpirits || [])],
       activeSorcerySource: activeSorcerySource ? {...activeSorcerySource} : null,
       sorcerySourceLabel: activeSorcerySource?.sourceLabel || null,
       sorcerySourceType: activeSorcerySource?.sourceType || null,
-      sorceryResource: activeSorcerySource?.magicPoints || CharacterData.sorceryResource || 0,
+      sorceryResource: magicState.sorceryResource || CharacterData.sorceryResource || 0,
       sorcerySpells: [...(CharacterData.sorcerySpells || [])],
       mysticismTalents: [...(CharacterData.mysticismTalents || [])],
       socialClass: CharacterData.socialClass || null,
@@ -17015,7 +17062,7 @@ App.agent.setStep = function(step, data) {
         }
         const deferStep9Validation = internalDeferredStep9Payloads.has(data);
         internalDeferredStep9Payloads.delete(data);
-        const inheritedStep9Fields = ['cult', 'miracles', 'boundSpirits', 'spirits', 'sorcerySpells', 'spells', 'mysticismTalents']
+        const inheritedStep9Fields = ['cult', 'miracles', 'boundSpirits', 'spirits', 'sorcerySpells', 'spells', 'mysticismTalents', 'higherMagicProviderIds']
           .filter(field => field in rawData && !Object.prototype.hasOwnProperty.call(rawData, field));
         if (inheritedStep9Fields.length > 0) {
           errors.push(`Step 9 data object must use own fields only: ${inheritedStep9Fields.join(', ')}`);
@@ -17038,7 +17085,7 @@ App.agent.setStep = function(step, data) {
           errors.push(sorcerySpellPayloadError);
           return {success: false, errors, state: App.agent.getState()};
         }
-        const magicArrayPayloadError = getArrayPayloadError(data, ['miracles', 'boundSpirits', 'spirits', 'mysticismTalents']);
+        const magicArrayPayloadError = getArrayPayloadError(data, ['miracles', 'boundSpirits', 'spirits', 'mysticismTalents', 'higherMagicProviderIds']);
         if (magicArrayPayloadError) {
           errors.push(magicArrayPayloadError);
           return {success: false, errors, state: App.agent.getState()};
@@ -17068,6 +17115,8 @@ App.agent.setStep = function(step, data) {
         const requestedMysticismTalents = Array.isArray(data.mysticismTalents)
           ? data.mysticismTalents
           : [];
+        const hasProviderIdAssertion = Object.prototype.hasOwnProperty.call(data, 'higherMagicProviderIds') &&
+          data.higherMagicProviderIds !== undefined;
         if (!Object.prototype.hasOwnProperty.call(data, 'boundSpirits') && (step9Snapshot.boundSpirits || []).length > 0) {
           const lostSpirits = step9Snapshot.boundSpirits.map(getBoundSpiritName).filter(Boolean);
           return {success: false, errors: [`Updating magic selection would clear selected bound spirits: ${lostSpirits.join(', ')}`], state: App.agent.getState()};
@@ -17078,6 +17127,13 @@ App.agent.setStep = function(step, data) {
         const finishStep9Selection = () => {
           const activeHigherMagicProviders = App.normalizeHigherMagicState(CharacterData);
           const activeSorcerySource = activeHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
+          if (hasProviderIdAssertion) {
+            const providerIdErrors = getHigherMagicProviderIdPayloadErrors(data.higherMagicProviderIds || [], activeHigherMagicProviders);
+            if (providerIdErrors.length > 0) {
+              restoreStep9Snapshot();
+              return {success: false, errors: providerIdErrors, state: App.agent.getState()};
+            }
+          }
           const unsupportedMagicErrors = getUnsupportedMagicSelectionErrors(CharacterData.cult, CharacterData.cultType, {
             miracles: requestedMiracles.length > 0 ? requestedMiracles : CharacterData.miracles,
             boundSpirits: requestedBoundSpirits.length > 0 ? requestedBoundSpirits : CharacterData.boundSpirits,
