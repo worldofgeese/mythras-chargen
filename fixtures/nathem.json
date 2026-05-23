@@ -1,19 +1,223 @@
 {
-  "name": "Nathem Son of Nhean",
-  "concept": "Quiet wilderness hunter with bonded shadowcat",
+  "_disambiguationMap": {},
+  "age": 34,
+  "armor": [
+    {
+      "ap": 2,
+      "cost": 0,
+      "locations": "4 location(s)",
+      "name": "Bronze Basic Armour"
+    }
+  ],
+  "attributes": {},
+  "background": "",
+  "backgroundEvents": "",
+  "bonusSkills": {
+    "Athletics": 15,
+    "Brawn": 15,
+    "Combat Style (Hill Clan Levy)": 15,
+    "Endurance": 15,
+    "Evade": 15,
+    "Navigation": 15,
+    "Perception": 15,
+    "Stealth": 15,
+    "Survival": 15,
+    "Track": 15
+  },
+  "boundSpiritSlots": 0,
+  "boundSpirits": [],
+  "career": "Hunter",
+  "careerFolkMagic": [
+    "Detect Life",
+    "Speedart"
+  ],
+  "careerSkills": {
+    "Athletics": 10,
+    "Brawn": 5,
+    "Combat Style (Hill Clan Levy)": 15,
+    "Endurance": 10,
+    "Evade": 10,
+    "Navigation": 15,
+    "Stealth": 5,
+    "Survival": 15,
+    "Track": 15
+  },
+  "charMethod": "point-buy",
   "characteristics": {
-    "STR": 12,
+    "CHA": 7,
     "CON": 14,
-    "SIZ": 11,
     "DEX": 13,
     "INT": 10,
     "POW": 8,
-    "CHA": 7
+    "SIZ": 11,
+    "STR": 12
   },
-  "charMethod": "point-buy",
-  "attributes": {},
-  "culture": "Sartarite (Heortling)",
-  "homeland": "Sartar",
+  "combatStyles": [
+    {
+      "name": "Hill Clan Levy",
+      "notes": "",
+      "skill": 0,
+      "traits": [
+        "Intimidating Scream",
+        "Throw Weapons"
+      ],
+      "weapons": [
+        "1H Axe",
+        "1H Spear",
+        "Orlanthi Round Shield",
+        "Longbow",
+        "Javelin"
+      ]
+    }
+  ],
+  "companions": [
+    {
+      "armor": 0,
+      "attacks": [
+        {
+          "damage": "1d6",
+          "name": "Claw (x2)",
+          "notes": "Both claws strike simultaneously",
+          "skill": 55
+        },
+        {
+          "damage": "1d6",
+          "name": "Bite",
+          "notes": "",
+          "skill": 55
+        },
+        {
+          "damage": "2d6",
+          "name": "Rip",
+          "notes": "After both claws hit, rips with hind claws next round",
+          "skill": 55
+        }
+      ],
+      "characteristics": {
+        "CON": 10,
+        "DEX": 17,
+        "POW": 10,
+        "SIZ": 10,
+        "STR": 13
+      },
+      "damageModifier": "+0",
+      "healingRate": 2,
+      "hitLocations": {
+        "Forequarters": {
+          "ap": 0,
+          "max": 6
+        },
+        "Head": {
+          "ap": 0,
+          "max": 4
+        },
+        "Hindquarters": {
+          "ap": 0,
+          "max": 5
+        },
+        "Left Front Leg": {
+          "ap": 0,
+          "max": 4
+        },
+        "Left Hind Leg": {
+          "ap": 0,
+          "max": 4
+        },
+        "Right Front Leg": {
+          "ap": 0,
+          "max": 4
+        },
+        "Right Hind Leg": {
+          "ap": 0,
+          "max": 4
+        }
+      },
+      "hitPointsTotal": 14,
+      "movement": 10,
+      "name": "Rurik",
+      "notes": "Sacred to Yinkin. Night Vision, Leaper. Stealthy ambush predator (Stealth 80%).",
+      "species": "Shadowcat (bonded)",
+      "strikeRank": 3
+    },
+    {
+      "armor": 0,
+      "attacks": [
+        {
+          "damage": "1d6",
+          "name": "Claw (x2)",
+          "notes": "Both claws strike simultaneously",
+          "skill": 55
+        },
+        {
+          "damage": "1d6",
+          "name": "Bite",
+          "notes": "",
+          "skill": 55
+        },
+        {
+          "damage": "2d6",
+          "name": "Rip",
+          "notes": "After both claws hit, rips with hind claws next round",
+          "skill": 55
+        }
+      ],
+      "characteristics": {
+        "CON": 10,
+        "DEX": 17,
+        "POW": 10,
+        "SIZ": 10,
+        "STR": 13
+      },
+      "damageModifier": "+0",
+      "healingRate": 2,
+      "hitLocations": {
+        "Forequarters": {
+          "ap": 0,
+          "max": 6
+        },
+        "Head": {
+          "ap": 0,
+          "max": 4
+        },
+        "Hindquarters": {
+          "ap": 0,
+          "max": 5
+        },
+        "Left Front Leg": {
+          "ap": 0,
+          "max": 4
+        },
+        "Left Hind Leg": {
+          "ap": 0,
+          "max": 4
+        },
+        "Right Front Leg": {
+          "ap": 0,
+          "max": 4
+        },
+        "Right Hind Leg": {
+          "ap": 0,
+          "max": 4
+        }
+      },
+      "hitPointsTotal": 14,
+      "movement": 10,
+      "name": "Shadowcat",
+      "notes": "Sacred to Yinkin. Night Vision, Leaper. Stealthy ambush predator (Stealth 80%).",
+      "species": "Shadowcat (bonded)",
+      "strikeRank": 3
+    }
+  ],
+  "concept": "Quiet wilderness hunter with bonded shadowcat",
+  "cult": "Odayla",
+  "cultType": {
+    "blockedTypes": [],
+    "isHybrid": false,
+    "primary": "theist",
+    "types": [
+      "theist"
+    ]
+  },
   "culturalSkills": {
     "Athletics": 15,
     "Brawn": 10,
@@ -22,305 +226,116 @@
     "Locale": 5,
     "Perception": 15,
     "Ride": 5,
-    "Willpower": 5,
-    "Survival": 15
+    "Survival": 15,
+    "Willpower": 5
   },
-  "runeAffinities": {
-    "primary": "Storm",
-    "secondary": "Movement",
-    "tertiary": "Beast"
-  },
+  "culture": "Sartarite (Heortling)",
+  "devotionalPool": 0,
+  "equipment": [
+    {
+      "cost": 0,
+      "enc": 1,
+      "name": "Two sets of common undecorated clothes",
+      "quantity": 1
+    },
+    {
+      "cost": 0,
+      "enc": 0,
+      "name": "Transport: Handcart",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Backpack",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Waterskin",
+      "quantity": 1
+    },
+    {
+      "cost": 14,
+      "enc": 2,
+      "name": "Rations (1 week)",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Bedroll",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 0,
+      "name": "Flint & Tinder",
+      "quantity": 1
+    }
+  ],
+  "family": "Hendarli Tribe, Old Tarsh",
   "folkMagicSpells": [
     "Heal",
     "Mobility",
     "Pet"
   ],
-  "passions": [
-    {
-      "name": "Love (Family)",
-      "value": 45,
-      "custom": true
-    },
-    {
-      "name": "Honor",
-      "value": 45,
-      "custom": true
-    },
-    {
-      "name": "Loyalty (Hendarli Tribe)",
-      "value": 45,
-      "custom": true
-    }
-  ],
-  "age": 34,
   "gender": "Male",
-  "family": "Hendarli Tribe, Old Tarsh",
-  "backgroundEvents": "",
-  "career": "Hunter",
-  "careerSkills": {
-    "Athletics": 10,
-    "Brawn": 5,
-    "Endurance": 10,
-    "Evade": 10,
-    "Combat Style (Hill Clan Levy)": 15,
-    "Survival": 15,
-    "Track": 15,
-    "Navigation": 15,
-    "Stealth": 5
-  },
-  "careerFolkMagic": [
-    "Detect Life",
-    "Speedart"
-  ],
-  "bonusSkills": {
-    "Athletics": 15,
-    "Endurance": 15,
-    "Evade": 15,
-    "Perception": 15,
-    "Survival": 15,
-    "Track": 15,
-    "Stealth": 15,
-    "Navigation": 15,
-    "Combat Style (Hill Clan Levy)": 15,
-    "Brawn": 15
-  },
-  "hobbySkillName": null,
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 1,
-  "startingMoney": 110,
-  "equipment": [
-    {
-      "name": "Two sets of common undecorated clothes",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 0
-    },
-    {
-      "name": "Transport: Handcart",
-      "enc": 0,
-      "quantity": 1,
-      "cost": 0
-    },
-    {
-      "name": "Backpack",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Waterskin",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Rations (1 week)",
-      "enc": 2,
-      "quantity": 1,
-      "cost": 14
-    },
-    {
-      "name": "Bedroll",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Flint & Tinder",
-      "enc": 0,
-      "quantity": 1,
-      "cost": 5
-    }
-  ],
-  "weapons": [
-    {
-      "name": "1H Axe",
-      "damage": "1d6+1",
-      "size": "M",
-      "reach": "M",
-      "ap": 4,
-      "hp": 8,
-      "skill": 0,
-      "quantity": 1
-    }
-  ],
-  "armor": [
-    {
-      "name": "Bronze Basic Armour",
-      "ap": 2,
-      "locations": "4 location(s)",
-      "cost": 0
-    }
-  ],
-  "combatStyles": [
-    {
-      "name": "Hill Clan Levy",
-      "weapons": [
-        "1H Axe",
-        "1H Spear",
-        "Orlanthi Round Shield",
-        "Longbow",
-        "Javelin"
-      ],
-      "traits": [
-        "Intimidating Scream",
-        "Throw Weapons"
-      ],
-      "skill": 0,
-      "notes": ""
-    }
-  ],
-  "notes": "",
-  "background": "",
   "hitPoints": {},
-  "companions": [
-    {
-      "name": "Rurik",
-      "species": "Shadowcat (bonded)",
-      "characteristics": {
-        "STR": 13,
-        "CON": 10,
-        "SIZ": 10,
-        "DEX": 17,
-        "POW": 10
-      },
-      "hitLocations": {
-        "Right Hind Leg": {
-          "max": 4,
-          "ap": 0
-        },
-        "Left Hind Leg": {
-          "max": 4,
-          "ap": 0
-        },
-        "Hindquarters": {
-          "max": 5,
-          "ap": 0
-        },
-        "Forequarters": {
-          "max": 6,
-          "ap": 0
-        },
-        "Right Front Leg": {
-          "max": 4,
-          "ap": 0
-        },
-        "Left Front Leg": {
-          "max": 4,
-          "ap": 0
-        },
-        "Head": {
-          "max": 4,
-          "ap": 0
-        }
-      },
-      "attacks": [
-        {
-          "name": "Claw (x2)",
-          "skill": 55,
-          "damage": "1d6",
-          "notes": "Both claws strike simultaneously"
-        },
-        {
-          "name": "Bite",
-          "skill": 55,
-          "damage": "1d6",
-          "notes": ""
-        },
-        {
-          "name": "Rip",
-          "skill": 55,
-          "damage": "2d6",
-          "notes": "After both claws hit, rips with hind claws next round"
-        }
-      ],
-      "armor": 0,
-      "movement": 10,
-      "damageModifier": "+0",
-      "hitPointsTotal": 14,
-      "healingRate": 2,
-      "strikeRank": 3,
-      "notes": "Sacred to Yinkin. Night Vision, Leaper. Stealthy ambush predator (Stealth 80%)."
-    },
-    {
-      "name": "Shadowcat",
-      "species": "Shadowcat (bonded)",
-      "characteristics": {
-        "STR": 13,
-        "CON": 10,
-        "SIZ": 10,
-        "DEX": 17,
-        "POW": 10
-      },
-      "hitLocations": {
-        "Right Hind Leg": {
-          "max": 4,
-          "ap": 0
-        },
-        "Left Hind Leg": {
-          "max": 4,
-          "ap": 0
-        },
-        "Hindquarters": {
-          "max": 5,
-          "ap": 0
-        },
-        "Forequarters": {
-          "max": 6,
-          "ap": 0
-        },
-        "Right Front Leg": {
-          "max": 4,
-          "ap": 0
-        },
-        "Left Front Leg": {
-          "max": 4,
-          "ap": 0
-        },
-        "Head": {
-          "max": 4,
-          "ap": 0
-        }
-      },
-      "attacks": [
-        {
-          "name": "Claw (x2)",
-          "skill": 55,
-          "damage": "1d6",
-          "notes": "Both claws strike simultaneously"
-        },
-        {
-          "name": "Bite",
-          "skill": 55,
-          "damage": "1d6",
-          "notes": ""
-        },
-        {
-          "name": "Rip",
-          "skill": 55,
-          "damage": "2d6",
-          "notes": "After both claws hit, rips with hind claws next round"
-        }
-      ],
-      "armor": 0,
-      "movement": 10,
-      "damageModifier": "+0",
-      "hitPointsTotal": 14,
-      "healingRate": 2,
-      "strikeRank": 3,
-      "notes": "Sacred to Yinkin. Night Vision, Leaper. Stealthy ambush predator (Stealth 80%)."
-    }
-  ],
-  "cult": "Odayla",
+  "hobbySkillName": null,
+  "homeland": "Sartar",
   "miracles": [
     "Draw Beast",
     "Beastmaster",
     "Claws"
   ],
-  "devotionalPool": 0,
+  "mysticismTalents": [],
+  "name": "Nathem Son of Nhean",
+  "notes": "",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Love (Family)",
+      "value": 45
+    },
+    {
+      "custom": true,
+      "name": "Honor",
+      "value": 45
+    },
+    {
+      "custom": true,
+      "name": "Loyalty (Hendarli Tribe)",
+      "value": 45
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Storm",
+    "secondary": "Movement",
+    "tertiary": "Beast"
+  },
+  "schemaVersion": 1,
   "selectedProfessionalSkills": [
     "Survival",
     "Track",
     "Navigation"
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 110,
+  "weapons": [
+    {
+      "ap": 4,
+      "damage": "1d6+1",
+      "hp": 8,
+      "name": "1H Axe",
+      "quantity": 1,
+      "reach": "M",
+      "size": "M",
+      "skill": 0
+    }
   ]
 }

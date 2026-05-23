@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "authority": {
-    "source": "Combat Styles Encyclopedia",
+    "source": "Combat Styles Encyclopedia plus verified Adventures in Glorantha gap-fill",
     "scope": "combat-styles-only",
     "supersedes": [
       "Adventures in Glorantha culture-combat-style rows"
@@ -180,7 +180,31 @@
         "notes"
       ],
       "note": "CSE evidence promotes app-facing combat style names, weapons, and traits only. Restrictions and notes remain app-derived fields for later global provenance classification."
-    }
+    },
+    "primary_source": "Combat Styles Encyclopedia",
+    "supplemental_sources": [
+      {
+        "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+        "scope": "Sartarite Esrolian Cohort style missing from current CSE-derived rows",
+        "source_ref": {
+          "source_id": "aig",
+          "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+          "page_manifest_path": "references/sources/pages/aig.json",
+          "evidence_state": "bounded_extraction_independent_vision_verified",
+          "verification_state": "verified",
+          "pdf_pages": [
+            37
+          ],
+          "block_ids": [
+            "aig-p037-b003"
+          ],
+          "evidence_paths": [
+            "references/sources/evidence/aig/page-0037-extraction.json",
+            "references/sources/evidence/aig/page-0037-verification.json"
+          ]
+        }
+      }
+    ]
   },
   "cultureAliases": {
     "Sartarite/Heortling": "Sartarite (Heortling)",
@@ -1528,6 +1552,67 @@
         "app_derived_fields": [
           "restriction"
         ]
+      }
+    },
+    {
+      "id": "aig:sartarite-heortling:esrolian-cohort",
+      "culture": "Sartarite (Heortling)",
+      "sourceCulture": "Adventures in Glorantha/Sartarite",
+      "sourceName": "Esrolian Cohort",
+      "name": "Esrolian Cohort",
+      "weapons": [
+        "Great Axe",
+        "Shortsword",
+        "Orlanthi Scutum",
+        "Javelin"
+      ],
+      "sourceWeapons": [
+        "Great axe",
+        "Shortsword",
+        "Orlanthi Scutum",
+        "Javelin"
+      ],
+      "traits": [
+        "Formation Fighting",
+        "Shield Splitter",
+        "Shield Wall"
+      ],
+      "printedTraits": [
+        "Formation Fighting",
+        "Shield Splitter",
+        "Shield Wall"
+      ],
+      "restrictions": "Warrior career only",
+      "notes": "AiG-verified gap-fill: this Sartarite style is visible on AiG PDF page 37 but absent from the current CSE-derived row set.",
+      "citation": {
+        "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+        "page": 37,
+        "source_id": "aig",
+        "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+        "page_manifest_path": "references/sources/pages/aig.json",
+        "coverage_state": "verified",
+        "evidence_state": "bounded_extraction_independent_vision_verified",
+        "pdf_page": 37,
+        "block_id": "aig-p037-b003",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/aig/page-0037-extraction.json",
+        "verification_path": "references/sources/evidence/aig/page-0037-verification.json",
+        "evidence_paths": [
+          "references/sources/evidence/aig/page-0037-extraction.json",
+          "references/sources/evidence/aig/page-0037-verification.json"
+        ],
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits",
+          "restriction"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
       }
     },
     {

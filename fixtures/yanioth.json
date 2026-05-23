@@ -1,199 +1,214 @@
 {
-  "name": "Yanioth Vareena's Daughter",
-  "concept": "Earth priestess, healer, half-sister to Vasana",
-  "characteristics": {
-    "STR": 7,
-    "CON": 9,
-    "SIZ": 10,
-    "DEX": 10,
-    "INT": 13,
-    "POW": 12,
-    "CHA": 14
-  },
-  "charMethod": "point-buy",
-  "attributes": {},
-  "culture": "Sartarite (Heortling)",
-  "homeland": "Sartar",
-  "culturalSkills": {
-    "Athletics": 5,
-    "Brawn": 0,
-    "Endurance": 10,
-    "Evade": 5,
-    "Locale": 10,
-    "Perception": 15,
-    "Ride": 10,
-    "Willpower": 15,
-    "Healing": 15,
-    "Survival": 15
-  },
-  "runeAffinities": {
-    "primary": "Earth",
-    "secondary": "Fertility",
-    "tertiary": "Beast"
-  },
-  "folkMagicSpells": [
-    "Heal",
-    "Mobility",
-    "Protection"
-  ],
-  "passions": [
+  "_disambiguationMap": {},
+  "age": 23,
+  "armor": [
     {
-      "name": "Devotion (Ernalda)",
-      "value": 56,
-      "custom": true
-    },
-    {
-      "name": "Love (Family)",
-      "value": 56,
-      "custom": true
-    },
-    {
-      "name": "Loyalty (Colymar Tribe)",
-      "value": 56,
-      "custom": true
+      "ap": 3,
+      "cost": 0,
+      "locations": "4 location(s)",
+      "name": "Bronze Basic Armour"
     }
   ],
-  "age": 23,
-  "gender": "Female",
-  "family": "Ernaldori clan, Colymar Tribe",
+  "attributes": {},
+  "background": "",
   "backgroundEvents": "",
-  "career": "Priest",
-  "careerSkills": {
-    "Endurance": 5,
-    "Willpower": 15,
-    "Combat Style (Hill Clan Levy)": 5,
+  "bonusSkills": {
     "Devotion (Ernalda)": 15,
+    "Endurance": 15,
     "Exhort": 15,
-    "Oratory": 15,
     "Folk Magic": 15,
-    "Literacy": 15
+    "Healing": 15,
+    "Locale": 15,
+    "Oratory": 15,
+    "Perception": 15,
+    "Survival": 15,
+    "Willpower": 15
   },
+  "boundSpiritSlots": 0,
+  "boundSpirits": [],
+  "career": "Priest",
   "careerFolkMagic": [
     "Heal",
     "Vigour"
   ],
-  "bonusSkills": {
-    "Perception": 15,
-    "Healing": 15,
-    "Willpower": 15,
+  "careerSkills": {
+    "Combat Style (Hill Clan Levy)": 5,
     "Devotion (Ernalda)": 15,
+    "Endurance": 5,
     "Exhort": 15,
-    "Oratory": 15,
     "Folk Magic": 15,
-    "Locale": 15,
-    "Endurance": 15,
-    "Survival": 15
+    "Literacy": 15,
+    "Oratory": 15,
+    "Willpower": 15
   },
-  "hobbySkillName": null,
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 1,
-  "startingMoney": 150,
-  "equipment": [
-    {
-      "name": "Two sets of common undecorated clothes",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 0
-    },
-    {
-      "name": "Transport: Raft",
-      "enc": 0,
-      "quantity": 1,
-      "cost": 0
-    },
-    {
-      "name": "Backpack",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Waterskin",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Rations (1 week)",
-      "enc": 2,
-      "quantity": 1,
-      "cost": 14
-    },
-    {
-      "name": "Bedroll",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Flint & Tinder",
-      "enc": 0,
-      "quantity": 1,
-      "cost": 5
-    }
-  ],
-  "weapons": [
-    {
-      "name": "1H Axe",
-      "damage": "1d6+1",
-      "size": "M",
-      "reach": "M",
-      "ap": 4,
-      "hp": 8,
-      "skill": 0,
-      "quantity": 1
-    },
-    {
-      "name": "Longbow",
-      "damage": "1d8",
-      "size": "L",
-      "reach": "-",
-      "ap": 4,
-      "hp": 7,
-      "skill": 0,
-      "quantity": 1
-    }
-  ],
-  "armor": [
-    {
-      "name": "Bronze Basic Armour",
-      "ap": 3,
-      "locations": "4 location(s)",
-      "cost": 0
-    }
-  ],
+  "charMethod": "point-buy",
+  "characteristics": {
+    "CHA": 14,
+    "CON": 9,
+    "DEX": 10,
+    "INT": 13,
+    "POW": 12,
+    "SIZ": 10,
+    "STR": 7
+  },
   "combatStyles": [
     {
       "name": "Hill Clan Levy",
+      "notes": "",
+      "skill": 0,
+      "traits": [
+        "Intimidating Scream",
+        "Throw Weapons"
+      ],
       "weapons": [
         "1H Axe",
         "1H Spear",
         "Orlanthi Round Shield",
         "Longbow",
         "Javelin"
-      ],
-      "traits": [
-        "Intimidating Scream",
-        "Throw Weapons"
-      ],
-      "skill": 0,
-      "notes": ""
+      ]
     }
   ],
-  "notes": "",
-  "background": "",
-  "hitPoints": {},
   "companions": [],
+  "concept": "Earth priestess, healer, half-sister to Vasana",
   "cult": "Ernalda",
+  "cultType": {
+    "blockedTypes": [],
+    "isHybrid": false,
+    "primary": "theist",
+    "types": [
+      "theist"
+    ]
+  },
+  "culturalSkills": {
+    "Athletics": 5,
+    "Brawn": 0,
+    "Endurance": 10,
+    "Evade": 5,
+    "Healing": 15,
+    "Locale": 10,
+    "Perception": 15,
+    "Ride": 10,
+    "Survival": 15,
+    "Willpower": 15
+  },
+  "culture": "Sartarite (Heortling)",
+  "devotionalPool": 0,
+  "equipment": [
+    {
+      "cost": 0,
+      "enc": 1,
+      "name": "Two sets of common undecorated clothes",
+      "quantity": 1
+    },
+    {
+      "cost": 0,
+      "enc": 0,
+      "name": "Transport: Raft",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Backpack",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Waterskin",
+      "quantity": 1
+    },
+    {
+      "cost": 14,
+      "enc": 2,
+      "name": "Rations (1 week)",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Bedroll",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 0,
+      "name": "Flint & Tinder",
+      "quantity": 1
+    }
+  ],
+  "family": "Ernaldori clan, Colymar Tribe",
+  "folkMagicSpells": [
+    "Heal",
+    "Mobility",
+    "Protection"
+  ],
+  "gender": "Female",
+  "hitPoints": {},
+  "hobbySkillName": null,
+  "homeland": "Sartar",
   "miracles": [
     "Heal Body",
     "Inviolable",
     "Charisma"
   ],
-  "devotionalPool": 0,
+  "mysticismTalents": [],
+  "name": "Yanioth Vareena's Daughter",
+  "notes": "",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Devotion (Ernalda)",
+      "value": 56
+    },
+    {
+      "custom": true,
+      "name": "Love (Family)",
+      "value": 56
+    },
+    {
+      "custom": true,
+      "name": "Loyalty (Colymar Tribe)",
+      "value": 56
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Earth",
+    "secondary": "Fertility",
+    "tertiary": "Beast"
+  },
+  "schemaVersion": 1,
   "selectedProfessionalSkills": [
     "Devotion (Ernalda)",
     "Exhort",
     "Oratory"
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 150,
+  "weapons": [
+    {
+      "ap": 4,
+      "damage": "1d6+1",
+      "hp": 8,
+      "name": "1H Axe",
+      "quantity": 1,
+      "reach": "M",
+      "size": "M",
+      "skill": 0
+    },
+    {
+      "ap": 4,
+      "damage": "1d8",
+      "hp": 7,
+      "name": "Longbow",
+      "quantity": 1,
+      "reach": "-",
+      "size": "L",
+      "skill": 0
+    }
   ]
 }

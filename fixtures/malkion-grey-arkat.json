@@ -1,135 +1,179 @@
 {
-  "name": "Malkion the Grey",
-  "concept": "Arkat sorcerer-philosopher from the Invisible God tradition",
-  "characteristics": {
-    "STR": 8,
-    "CON": 10,
-    "SIZ": 10,
-    "DEX": 9,
-    "INT": 16,
-    "POW": 13,
-    "CHA": 9
-  },
-  "charMethod": "point-buy",
+  "_disambiguationMap": {},
+  "age": 25,
+  "armor": [],
   "attributes": {
     "actionPoints": 3,
+    "damageModifier": "-1d2",
+    "encumbrance": {
+      "burdened": 17,
+      "noMovement": 32,
+      "overloaded": 25,
+      "unencumbered": 16
+    },
     "experienceModifier": 0,
+    "folkMagicBase": 52,
     "healingRate": 2,
+    "hitPoints": {
+      "Abdomen": 5,
+      "Chest": 6,
+      "Head": 4,
+      "Left Arm": 3,
+      "Left Leg": 4,
+      "Right Arm": 3,
+      "Right Leg": 4
+    },
+    "initiativeBonus": 12,
     "luckPoints": 3,
     "magicPoints": 13,
-    "initiativeBonus": 12,
-    "damageModifier": "-1d2",
-    "hitPoints": {
-      "Head": 4,
-      "Chest": 6,
-      "Abdomen": 5,
-      "Right Arm": 3,
-      "Left Arm": 3,
-      "Right Leg": 4,
-      "Left Leg": 4
-    },
-    "encumbrance": {
-      "unencumbered": 16,
-      "burdened": 17,
-      "overloaded": 25,
-      "noMovement": 32
-    },
+    "movementRate": 6,
     "runeAffinities": {
       "primary": 56,
       "secondary": 46,
       "tertiary": 36
-    },
-    "folkMagicBase": 52,
-    "movementRate": 6
+    }
   },
-  "culture": "God Forgot",
-  "homeland": "God Forgot",
+  "background": "",
+  "backgroundEvents": "",
+  "bonusSkills": {
+    "Athletics": 15,
+    "Endurance": 15,
+    "First Aid": 15,
+    "Influence": 15,
+    "Insight": 15,
+    "Locale": 15,
+    "Lore (Philosophy)": 15,
+    "Lore (Sorcery)": 15,
+    "Perception": 15,
+    "Willpower": 15
+  },
+  "boundSpiritSlots": 0,
+  "boundSpirits": [],
+  "career": "Scholar",
+  "careerFolkMagic": [
+    "Appraise",
+    "Befuddle"
+  ],
+  "careerSkills": {
+    "Athletics": 5,
+    "Customs": 0,
+    "Endurance": 10,
+    "First Aid": 10,
+    "Influence": 15,
+    "Insight": 15,
+    "Language (Brithini)": 0,
+    "Locale": 15,
+    "Lore (Philosophy)": 0,
+    "Lore (Sorcery)": 0,
+    "Native Tongue": 0,
+    "Perception": 15,
+    "Willpower": 15
+  },
+  "charMethod": "point-buy",
+  "characteristics": {
+    "CHA": 9,
+    "CON": 10,
+    "DEX": 9,
+    "INT": 16,
+    "POW": 13,
+    "SIZ": 10,
+    "STR": 8
+  },
+  "combatStyles": [],
+  "companions": [],
+  "concept": "Arkat sorcerer-philosopher from the Invisible God tradition",
+  "cult": "Arkat",
+  "cultType": {
+    "blockedTypes": [],
+    "isHybrid": false,
+    "primary": "sorcery",
+    "types": [
+      "sorcery"
+    ]
+  },
   "culturalSkills": {
     "Athletics": 5,
     "Endurance": 10,
     "First Aid": 15,
+    "Influence": 15,
+    "Insight": 10,
     "Locale": 15,
     "Perception": 15,
-    "Willpower": 15,
-    "Influence": 15,
-    "Insight": 10
+    "Willpower": 15
   },
-  "runeAffinities": {
-    "primary": "Law",
-    "secondary": "Truth",
-    "tertiary": "Stasis"
-  },
+  "culture": "God Forgot",
+  "devotionalPool": 0,
+  "equipment": [],
+  "family": "Scholastic order",
   "folkMagicSpells": [
     "Avert",
     "Calculate",
     "Calm"
   ],
-  "passions": [
-    {
-      "name": "Loyalty (Invisible God)",
-      "value": 65,
-      "custom": true
-    },
-    {
-      "name": "Hate (Chaos)",
-      "value": 60,
-      "custom": true
-    }
-  ],
-  "age": 25,
   "gender": "Male",
-  "family": "Scholastic order",
-  "backgroundEvents": "",
-  "career": "Scholar",
-  "careerSkills": {
-    "Customs": 0,
-    "Influence": 15,
-    "Insight": 15,
-    "Locale": 15,
-    "Native Tongue": 0,
-    "Perception": 15,
-    "Willpower": 15,
-    "Lore (Sorcery)": 0,
-    "Lore (Philosophy)": 0,
-    "Language (Brithini)": 0,
-    "First Aid": 10,
-    "Endurance": 10,
-    "Athletics": 5
-  },
-  "careerFolkMagic": [
-    "Appraise",
-    "Befuddle"
-  ],
-  "bonusSkills": {
-    "Willpower": 15,
-    "Perception": 15,
-    "Locale": 15,
-    "Influence": 15,
-    "Insight": 15,
-    "First Aid": 15,
-    "Endurance": 15,
-    "Athletics": 15,
-    "Lore (Sorcery)": 15,
-    "Lore (Philosophy)": 15
+  "hitPoints": {
+    "Abdomen": {
+      "current": 5,
+      "max": 5
+    },
+    "Chest": {
+      "current": 6,
+      "max": 6
+    },
+    "Head": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Arm": {
+      "current": 3,
+      "max": 3
+    },
+    "Left Leg": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Arm": {
+      "current": 3,
+      "max": 3
+    },
+    "Right Leg": {
+      "current": 4,
+      "max": 4
+    }
   },
   "hobbySkillName": null,
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 1,
-  "startingMoney": 70,
-  "equipment": [],
-  "weapons": [],
-  "armor": [],
-  "combatStyles": [],
-  "notes": "",
-  "background": "",
-  "hitPoints": {},
-  "companions": [],
-  "cult": "Arkat",
+  "homeland": "God Forgot",
   "miracles": [],
-  "devotionalPool": 0,
+  "mysticismTalents": [],
+  "name": "Malkion the Grey",
+  "notes": "",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Loyalty (Invisible God)",
+      "value": 65
+    },
+    {
+      "custom": true,
+      "name": "Hate (Chaos)",
+      "value": 60
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Law",
+    "secondary": "Truth",
+    "tertiary": "Stasis"
+  },
+  "schemaVersion": 1,
   "selectedProfessionalSkills": [
     "Lore (Sorcery)",
     "Lore (Philosophy)",
     "Language (Brithini)"
-  ]
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 13,
+  "sorcerySpells": [],
+  "startingMoney": 70,
+  "weapons": []
 }

@@ -1,17 +1,34 @@
 {
   "schemaVersion": 1,
   "schema": "references/provenance/schema.json#/validation_report_schema",
-  "report_type": "foundation-provenance-scaffold",
+  "report_type": "final-app-provenance-gate",
   "generated_by": "scripts/validate_provenance.js",
-  "generated_at": "2026-05-21T00:00:00Z",
-  "status": "scaffold",
+  "generated_at": "2026-05-23T00:00:00Z",
+  "status": "accepted",
   "inputs": {
-    "tree_hash": null,
-    "note": "This committed scaffold is not acceptance evidence. Regenerate with scripts/validate_provenance.js before relying on results."
+    "tree_hash": "8c26fc6f597559af2587212328fedab5e7234fa91e637c7fe5aec75d8c5a2d13",
+    "hash_algorithm": "sha256",
+    "hashed_paths": [
+      "index.html",
+      "references/provenance/schema.json",
+      "references/provenance/legacy-disposition.json",
+      "references/provenance/index-html-map.json",
+      "references/provenance/index-html-coverage.json"
+    ]
   },
   "summary": {
     "legacy_disposition_required": true,
-    "fact_level_entries_pending": true,
-    "full_source_extraction_included": false
+    "fact_level_entries_pending": false,
+    "full_source_extraction_included": false,
+    "final_app_constant_states": [
+      "verified",
+      "normalized",
+      "accepted",
+      "superseded"
+    ],
+    "final_coverage_states": [
+      "verified"
+    ],
+    "decapod_validate": "blocked by https://github.com/DecapodLabs/decapod/issues/579"
   }
 }

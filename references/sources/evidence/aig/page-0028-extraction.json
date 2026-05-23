@@ -1,0 +1,81 @@
+{
+  "artifact_id": "aig-page-0028-extraction-copilot-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 28,
+  "printed_page_label": "27",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0028.png",
+    "image_sha256": "0df5ab841bea5ede31d928f7d9756fa0d13576e968a59d0b1463bb60c7317e5d",
+    "dimensions": {
+      "width": 1656,
+      "height": 2159
+    }
+  },
+  "tool_identity": "Claude Opus 4.7 vision extraction subagents via GitHub Copilot CLI",
+  "schema_version": 1,
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-culture-extract-e",
+  "blocks": [
+    {
+      "block_id": "aig-p028-b001",
+      "block_type": "stat_block",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Balazaring culture stats.",
+      "excerpt_hash": "a8db8731d73bb3a94392787defc09aab5fd4ed508f453e5ddaea31b7af0254b1",
+      "facts": {
+        "verified": true,
+        "app_fields": {
+          "name": "Balazaring",
+          "starting_money": "4d6x2",
+          "passions": [
+            {
+              "type": "Loyalty",
+              "focus": "Clan",
+              "base_value": "POW+CHA+30%"
+            },
+            {
+              "type": "Loyalty",
+              "focus": "City",
+              "base_value": "POW+CHA+30%"
+            },
+            {
+              "type": "Love or Hate",
+              "focus": "character's choice",
+              "base_value": "POW+CHA+30%"
+            }
+          ],
+          "combat_style_ids": [
+            "cse:balazaring:hawk-slayer",
+            "cse:balazaring:hunter-raider",
+            "cse:balazaring:pony-cavalry"
+          ]
+        }
+      }
+    },
+    {
+      "block_id": "aig-p028-b002",
+      "block_type": "heading",
+      "reading_order": 2,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Esrolian Culture begins.",
+      "excerpt_hash": "3626c279c08d61a516ab7b7fb254badc806322a400dc9435aae2adf604c93d5b",
+      "facts": {
+        "verified": true
+      }
+    }
+  ]
+}

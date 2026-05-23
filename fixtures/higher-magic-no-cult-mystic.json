@@ -1,0 +1,172 @@
+{
+  "_disambiguationMap": {},
+  "age": 22,
+  "armor": [],
+  "attributes": {
+    "actionPoints": 2,
+    "damageModifier": "-1d2",
+    "encumbrance": {
+      "burdened": 17,
+      "noMovement": 32,
+      "overloaded": 25,
+      "unencumbered": 16
+    },
+    "experienceModifier": 0,
+    "folkMagicBase": 58,
+    "healingRate": 2,
+    "hitPoints": {
+      "Abdomen": 5,
+      "Chest": 6,
+      "Head": 4,
+      "Left Arm": 3,
+      "Left Leg": 4,
+      "Right Arm": 3,
+      "Right Leg": 4
+    },
+    "initiativeBonus": 11,
+    "luckPoints": 4,
+    "magicPoints": 20,
+    "movementRate": 6,
+    "runeAffinities": {
+      "primary": 70,
+      "secondary": 60,
+      "tertiary": 50
+    }
+  },
+  "background": "",
+  "backgroundEvents": "",
+  "bonusSkills": {
+    "Customs": 15,
+    "Dance": 15,
+    "Influence": 0,
+    "Insight": 15,
+    "Locale": 15,
+    "Meditation": 15,
+    "Musicianship": 15,
+    "Mysticism": 15,
+    "Perception": 15,
+    "Sing": 15,
+    "Willpower": 15
+  },
+  "boundSpiritSlots": 0,
+  "boundSpirits": [],
+  "career": "Mystic",
+  "careerFolkMagic": [
+    "Vigour",
+    "Coordination"
+  ],
+  "careerSkills": {
+    "Athletics": 0,
+    "Combat Style (Citizen Legionary)": 0,
+    "Dance": 15,
+    "Endurance": 0,
+    "Evade": 0,
+    "Insight": 15,
+    "Meditation": 15,
+    "Musicianship": 15,
+    "Mysticism": 15,
+    "Perception": 0,
+    "Sing": 10,
+    "Willpower": 15
+  },
+  "charMethod": "point-buy",
+  "characteristics": {
+    "CHA": 8,
+    "CON": 8,
+    "DEX": 8,
+    "INT": 15,
+    "POW": 20,
+    "SIZ": 8,
+    "STR": 8
+  },
+  "combatStyles": [],
+  "companions": [],
+  "concept": "No-cult Mystic using the Core Mysticism career provider",
+  "cult": null,
+  "cultType": null,
+  "culturalSkills": {
+    "Customs": 15,
+    "Dance": 10,
+    "Influence": 10,
+    "Insight": 15,
+    "Locale": 15,
+    "Perception": 10,
+    "Sing": 10,
+    "Willpower": 15
+  },
+  "culture": "Esrolian",
+  "devotionalPool": 0,
+  "equipment": [],
+  "family": "Temple attendants",
+  "folkMagicSpells": [
+    "Calm",
+    "Coordination",
+    "Heal"
+  ],
+  "gender": "Nonbinary",
+  "hitPoints": {
+    "Abdomen": {
+      "current": 5,
+      "max": 5
+    },
+    "Chest": {
+      "current": 6,
+      "max": 6
+    },
+    "Head": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Arm": {
+      "current": 3,
+      "max": 3
+    },
+    "Left Leg": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Arm": {
+      "current": 3,
+      "max": 3
+    },
+    "Right Leg": {
+      "current": 4,
+      "max": 4
+    }
+  },
+  "hobbySkillName": null,
+  "homeland": "Esrolia",
+  "miracles": [],
+  "mysticismTalents": [],
+  "name": "Sereth Breath-Watcher",
+  "notes": "Fixture regenerated through the browser runtime for higher-magic provider coverage.",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Respect (Inner Discipline)",
+      "value": 47
+    },
+    {
+      "custom": true,
+      "name": "Loyalty (Meditation Circle)",
+      "value": 47
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Harmony",
+    "secondary": "Truth",
+    "tertiary": "Movement"
+  },
+  "schemaVersion": 1,
+  "selectedProfessionalSkills": [
+    "Meditation",
+    "Mysticism",
+    "Musicianship"
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 195,
+  "weapons": []
+}

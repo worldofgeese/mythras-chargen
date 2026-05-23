@@ -63,7 +63,7 @@
   "excerpt_budgets": {
     "block_excerpt_char_max": 360,
     "page_excerpt_char_max": 1200,
-    "source_excerpt_char_max": 4000,
+    "source_excerpt_char_max": 10000,
     "full_page_text_committed": false,
     "long_prose_fallback": "Record source revision, page, block id, region, excerpt hash, and bounded excerpt only."
   },

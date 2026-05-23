@@ -1,48 +1,128 @@
 {
-  "name": "Berena Basketweaver",
-  "concept": "Regression test: Multiple Craft disambiguations + Language disambiguation. Tests: Craft (Primary)/Craft (Secondary) independence, deselecting one doesn't remove the other, needsDisambiguation correctly identifies (any) skills, boost panel skips ambiguous skills",
-  "characteristics": {"STR": 10, "CON": 11, "SIZ": 11, "DEX": 14, "INT": 15, "POW": 12, "CHA": 12},
-  "charMethod": "points",
-  "culture": "Sartarite (Heortling)",
-  "homeland": "Sartar",
-  "culturalSkills": {"Customs": 15, "Influence": 10, "Insight": 10, "Native Tongue": 15, "Locale": 10, "Willpower": 10, "Sing": 15, "Dance": 15},
-  "runeAffinities": {"primary": "Earth", "secondary": "Harmony", "tertiary": "Fertility"},
-  "folkMagicSpells": ["Repair", "Polish", "Preserve"],
-  "passions": [
-    {"name": "Love of Craft", "value": 70},
-    {"name": "Loyal to Clan", "value": 60}
-  ],
-  "age": 24,
-  "gender": "female",
-  "family": "Crafting family, eldest daughter",
-  "backgroundEvents": [],
-  "career": "Crafter",
-  "careerSkills": {"Art (Weaving)": 15, "Craft (Basketry)": 15, "Commerce": 15, "Customs": 10, "Influence": 15, "Willpower": 15, "Insight": 15},
-  "careerFolkMagic": ["Repair", "Tidy"],
-  "selectedProfessionalSkills": ["Art (any)", "Craft (Primary)", "Craft (Secondary)"],
-  "bonusSkills": {"Craft (Basketry)": 15, "Art (Weaving)": 10, "Commerce": 10},
-  "hobbySkillName": "Language (Tradetalk)",
   "_disambiguationMap": {
     "Art (any)": "Art (Weaving)",
     "Craft (Primary)": "Craft (Basketry)",
     "Craft (Secondary)": "Craft (Leatherwork)"
   },
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 0,
-  "startingMoney": 80,
-  "equipment": ["Basket-weaving frame", "Leather scraps", "Market stall permit"],
-  "weapons": ["Knife"],
+  "age": 24,
   "armor": [],
-  "combatStyles": [{"name": "Militia Training", "weapons": ["Short Spear", "Shield"]}],
-  "notes": "REGRESSION: Tests disambiguation. _disambiguationMap tracks 3 resolutions. Craft (Primary)=Basketry and Craft (Secondary)=Leatherwork must be independent — deselecting one must NOT remove the other. Language (any) in cult skills should trigger promptSkillDisambiguation with culture-aware options (Heortling, Tradetalk, Stormspeech for Sartarite).",
+  "attributes": {},
   "background": "",
-  "hitPoints": {},
-  "companions": [],
-  "cult": "Ernalda",
-  "cultType": {"primary": "theist", "types": ["theist"], "isHybrid": false},
-  "miracles": ["Extension", "Find (Specific Thing)", "Divination", "Chastise"],
-  "boundSpirits": [],
-  "devotionalPool": 6,
+  "backgroundEvents": "",
+  "bonusSkills": {
+    "Art (Weaving)": 10,
+    "Commerce": 10,
+    "Craft (Basketry)": 15
+  },
   "boundSpiritSlots": 0,
-  "sorcerySpells": []
+  "boundSpirits": [],
+  "career": "Crafter",
+  "careerFolkMagic": [
+    "Repair",
+    "Tidy"
+  ],
+  "careerSkills": {
+    "Art (Weaving)": 15,
+    "Commerce": 15,
+    "Craft (Basketry)": 15,
+    "Customs": 10,
+    "Influence": 15,
+    "Insight": 15,
+    "Willpower": 15
+  },
+  "charMethod": "points",
+  "characteristics": {
+    "CHA": 12,
+    "CON": 11,
+    "DEX": 14,
+    "INT": 15,
+    "POW": 12,
+    "SIZ": 11,
+    "STR": 10
+  },
+  "combatStyles": [
+    {
+      "name": "Militia Training",
+      "weapons": [
+        "Short Spear",
+        "Shield"
+      ]
+    }
+  ],
+  "companions": [],
+  "concept": "Regression test: Multiple Craft disambiguations + Language disambiguation. Tests: Craft (Primary)/Craft (Secondary) independence, deselecting one doesn't remove the other, needsDisambiguation correctly identifies (any) skills, boost panel skips ambiguous skills",
+  "cult": "Ernalda",
+  "cultType": {
+    "blockedTypes": [],
+    "isHybrid": false,
+    "primary": "theist",
+    "types": [
+      "theist"
+    ]
+  },
+  "culturalSkills": {
+    "Customs": 15,
+    "Dance": 15,
+    "Influence": 10,
+    "Insight": 10,
+    "Locale": 10,
+    "Native Tongue": 15,
+    "Sing": 15,
+    "Willpower": 10
+  },
+  "culture": "Sartarite (Heortling)",
+  "devotionalPool": 6,
+  "equipment": [
+    "Basket-weaving frame",
+    "Leather scraps",
+    "Market stall permit"
+  ],
+  "family": "Crafting family, eldest daughter",
+  "folkMagicSpells": [
+    "Repair",
+    "Polish",
+    "Preserve"
+  ],
+  "gender": "female",
+  "hitPoints": {},
+  "hobbySkillName": "Language (Tradetalk)",
+  "homeland": "Sartar",
+  "miracles": [
+    "Extension",
+    "Find (Specific Thing)",
+    "Divination",
+    "Chastise"
+  ],
+  "mysticismTalents": [],
+  "name": "Berena Basketweaver",
+  "notes": "REGRESSION: Tests disambiguation. _disambiguationMap tracks 3 resolutions. Craft (Primary)=Basketry and Craft (Secondary)=Leatherwork must be independent — deselecting one must NOT remove the other. Language (any) in cult skills should trigger promptSkillDisambiguation with culture-aware options (Heortling, Tradetalk, Stormspeech for Sartarite).",
+  "passions": [
+    {
+      "name": "Love of Craft",
+      "value": 70
+    },
+    {
+      "name": "Loyal to Clan",
+      "value": 60
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Earth",
+    "secondary": "Harmony",
+    "tertiary": "Fertility"
+  },
+  "schemaVersion": 1,
+  "selectedProfessionalSkills": [
+    "Art (any)",
+    "Craft (Primary)",
+    "Craft (Secondary)"
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 80,
+  "weapons": [
+    "Knife"
+  ]
 }

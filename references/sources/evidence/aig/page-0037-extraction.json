@@ -1,0 +1,137 @@
+{
+  "artifact_id": "aig-page-0037-extraction-copilot-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 37,
+  "printed_page_label": null,
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0037.png",
+    "image_sha256": "9ee1561ff7419bdef32c5cab81127f6e181127c1ab211103d9d082afd27c957e",
+    "dimensions": {
+      "width": 1662,
+      "height": 2161
+    }
+  },
+  "tool_identity": "Claude Opus 4.7 vision extraction subagents via GitHub Copilot CLI",
+  "schema_version": 1,
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-extract-36-38",
+  "blocks": [
+    {
+      "block_id": "aig-p037-b001",
+      "block_type": "paragraph",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Sartarite Magic: theist, minor shamans.",
+      "excerpt_hash": "1350c4291ca0b2aafd523655476acf21c14274c0dd5434a9db2204603d12e86b",
+      "facts": {
+        "verified": true
+      }
+    },
+    {
+      "block_id": "aig-p037-b002",
+      "block_type": "stat_block",
+      "reading_order": 2,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Sartarite skills and careers.",
+      "excerpt_hash": "54b62ac284587ed5f372cb0c8fbd6b165bb71072cabab4abbaa2b8fce5c95359",
+      "facts": {
+        "verified": true,
+        "app_fields": {
+          "name": "Sartarite (Heortling)",
+          "careers": "Any Barbarian. Note: If a player chooses to play an Orlanthi hailing from a city such as Boldhome, Nochet or similar, then substitute the Barbarian skill and career choices with Civilised instead.",
+          "starting_money": "4d6x10",
+          "passions": [
+            {
+              "type": "Loyalty",
+              "focus": "Clan",
+              "formula": "formula not printed"
+            },
+            {
+              "type": "Love",
+              "focus": "Freedom",
+              "formula": "formula not printed"
+            },
+            {
+              "type": "Hate",
+              "focus": "Opposing Clan",
+              "formula": "formula not printed"
+            },
+            {
+              "type": "Hate",
+              "focus": "Oppression (or Lunars)",
+              "formula": "formula not printed"
+            }
+          ],
+          "combat_style_ids": [
+            "cse:sartarite-heortling:alynx-brother",
+            "cse:sartarite-heortling:hill-clan-levy",
+            "cse:sartarite-heortling:loyal-housecarl",
+            "cse:sartarite-heortling:sartarite-noble",
+            "cse:sartarite-heortling:upland-crofter",
+            "aig:sartarite-heortling:esrolian-cohort",
+            "cse:sartarite-heortling:tarshite-militia"
+          ]
+        }
+      }
+    },
+    {
+      "block_id": "aig-p037-b003",
+      "block_type": "stat_block",
+      "reading_order": 3,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Sartarite combat styles include Esrolian Cohort: Great Axe, Shortsword, Orlanthi Scutum, Javelin; Formation Fighting, Shield Splitter, Shield Wall; Warrior only.",
+      "excerpt_hash": "89d49af3c27c0c5abfbe1521a60afb7e581974eb795795156ecdf895c3111f7f",
+      "facts": {
+        "combat_style": {
+          "source_name": "Esrolian Cohort",
+          "weapons": [
+            "Great Axe",
+            "Shortsword",
+            "Orlanthi Scutum",
+            "Javelin"
+          ],
+          "traits": [
+            "Formation Fighting",
+            "Shield Splitter",
+            "Shield Wall"
+          ],
+          "restrictions": "Warrior career only"
+        }
+      }
+    },
+    {
+      "block_id": "aig-p037-b004",
+      "block_type": "stat_block",
+      "reading_order": 4,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Sartarite folk magic list.",
+      "excerpt_hash": "e41a1c3db9ab3f1f05bc43566fd2228dd9e3a1faa29dc1bbef0554d15eed1a4a",
+      "facts": {
+        "verified": true
+      }
+    }
+  ]
+}

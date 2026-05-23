@@ -1,0 +1,196 @@
+{
+  "_disambiguationMap": {
+    "career:Binding (Cult, Totem or Tradition)": "Binding (Waha)"
+  },
+  "age": 22,
+  "armor": [],
+  "attributes": {
+    "actionPoints": 2,
+    "damageModifier": "+0",
+    "encumbrance": {
+      "burdened": 23,
+      "noMovement": 44,
+      "overloaded": 34,
+      "unencumbered": 22
+    },
+    "experienceModifier": 0,
+    "folkMagicBase": 50,
+    "healingRate": 2,
+    "hitPoints": {
+      "Abdomen": 6,
+      "Chest": 7,
+      "Head": 5,
+      "Left Arm": 4,
+      "Left Leg": 5,
+      "Right Arm": 4,
+      "Right Leg": 5
+    },
+    "initiativeBonus": 11,
+    "luckPoints": 2,
+    "magicPoints": 12,
+    "movementRate": 6,
+    "runeAffinities": {
+      "primary": 54,
+      "secondary": 44,
+      "tertiary": 34
+    }
+  },
+  "background": "",
+  "backgroundEvents": "",
+  "bonusSkills": {
+    "Binding (Waha)": 15,
+    "Customs": 0,
+    "Dance": 0,
+    "Devotion": 15,
+    "Healing": 15,
+    "Insight": 0,
+    "Locale": 15,
+    "Native Tongue": 0,
+    "Oratory": 0,
+    "Perception": 15,
+    "Ride": 15,
+    "Sing": 15,
+    "Survival": 15,
+    "Trance": 15,
+    "Willpower": 15
+  },
+  "boundSpiritSlots": 4,
+  "boundSpirits": [
+    "Nature Spirit — Camouflage (Int 2)",
+    "Bless Spirit — Initiative (Int 1)"
+  ],
+  "career": "Shaman",
+  "careerFolkMagic": [
+    "Disruption",
+    "Find Spirit"
+  ],
+  "careerSkills": {
+    "Binding (Waha)": 15,
+    "Customs": 15,
+    "Dance": 0,
+    "Deceit": 0,
+    "Healing": 15,
+    "Influence": 0,
+    "Insight": 15,
+    "Locale": 0,
+    "Oratory": 15,
+    "Trance": 15,
+    "Willpower": 10
+  },
+  "charMethod": "point-buy",
+  "characteristics": {
+    "CHA": 8,
+    "CON": 10,
+    "DEX": 10,
+    "INT": 12,
+    "POW": 12,
+    "SIZ": 12,
+    "STR": 11
+  },
+  "combatStyles": [],
+  "companions": [],
+  "concept": "Waha hybrid cultist with Theism plus Animism",
+  "cult": "Waha",
+  "cultType": {
+    "blockedTypes": [],
+    "isHybrid": true,
+    "primary": "theist",
+    "types": [
+      "theist",
+      "animist"
+    ]
+  },
+  "culturalSkills": {
+    "Dance": 5,
+    "Devotion": 15,
+    "Locale": 10,
+    "Native Tongue": 14,
+    "Perception": 11,
+    "Ride": 15,
+    "Sing": 5,
+    "Survival": 10,
+    "Trance": 15
+  },
+  "culture": "Praxian",
+  "devotionalPool": 6,
+  "equipment": [],
+  "family": "Eldest of three siblings",
+  "folkMagicSpells": [
+    "Find Spirit",
+    "Countermagic",
+    "Beastcall(Herdmen)"
+  ],
+  "gender": "Male",
+  "hitPoints": {
+    "Abdomen": {
+      "current": 6,
+      "max": 6
+    },
+    "Chest": {
+      "current": 7,
+      "max": 7
+    },
+    "Head": {
+      "current": 5,
+      "max": 5
+    },
+    "Left Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Leg": {
+      "current": 5,
+      "max": 5
+    },
+    "Right Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Leg": {
+      "current": 5,
+      "max": 5
+    }
+  },
+  "hobbySkillName": null,
+  "homeland": "Prax",
+  "miracles": [
+    "Find (Specific Thing)",
+    "Axis Mundi",
+    "Divination",
+    "Spirit Block",
+    "Summon Cult Spirit",
+    "Command Cult Spirit"
+  ],
+  "mysticismTalents": [],
+  "name": "Karrg Beast-Talker",
+  "notes": "Fixture regenerated through the browser runtime for higher-magic provider coverage.",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Loyalty (High Llama Tribe)",
+      "value": 47
+    },
+    {
+      "custom": true,
+      "name": "Loyalty (Waha)",
+      "value": 47
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Beast",
+    "secondary": "Death",
+    "tertiary": "Spirit"
+  },
+  "schemaVersion": 1,
+  "selectedProfessionalSkills": [
+    "Binding (Waha)",
+    "Trance",
+    "Healing"
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 60,
+  "weapons": []
+}

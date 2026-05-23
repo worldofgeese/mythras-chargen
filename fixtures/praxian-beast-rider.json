@@ -1,171 +1,194 @@
 {
-  "name": "Wahagrim Bison-Born",
-  "concept": "Bison rider and spirit-caller of the Wastes",
-  "characteristics": {
-    "STR": 14,
-    "CON": 13,
-    "SIZ": 11,
-    "DEX": 12,
-    "INT": 8,
-    "POW": 11,
-    "CHA": 6
-  },
-  "charMethod": "point-buy",
-  "attributes": {"actionPoints":2,"experienceModifier":-1,"healingRate":3,"luckPoints":2,"magicPoints":11,"initiativeBonus":10,"damageModifier":"+0","hitPoints":{"Head":5,"Chest":7,"Abdomen":6,"Right Arm":4,"Left Arm":4,"Right Leg":5,"Left Leg":5},"encumbrance":{"unencumbered":28,"burdened":29,"overloaded":43,"noMovement":56},"runeAffinities":{"primary":52,"secondary":42,"tertiary":32},"folkMagicBase":47,"movementRate":6},
-  "culture": "Praxian",
-  "homeland": "Prax",
-  "culturalSkills": {
-    "Athletics": 10,
-    "Endurance": 15,
-    "First Aid": 10,
-    "Locale": 10,
-    "Perception": 15,
-    "Ride": 15,
-    "Stealth": 10,
-    "Navigate": 15
-  },
-  "runeAffinities": {
-    "primary": "Beast",
-    "secondary": "Spirit",
-    "tertiary": "Death"
-  },
-  "folkMagicSpells": [
-    "Beastcall",
-    "Heal",
-    "Speedart"
-  ],
-  "passions": [
+  "_disambiguationMap": {},
+  "age": 21,
+  "armor": [
     {
-      "name": "Loyalty (Bison Tribe)",
-      "value": 47,
-      "custom": true
-    },
-    {
-      "name": "Hate (Chaos)",
-      "value": 47,
-      "custom": true
-    },
-    {
-      "name": "Devotion (Waha)",
-      "value": 47,
-      "custom": true
+      "ap": 1,
+      "cost": 0,
+      "locations": "3 location(s)",
+      "name": "Leather/Fur Basic Armour"
     }
   ],
-  "age": 21,
-  "gender": "Male",
-  "family": "Bison Tribe, High Llama Clan",
+  "attributes": {
+    "actionPoints": 2,
+    "damageModifier": "+0",
+    "encumbrance": {
+      "burdened": 29,
+      "noMovement": 56,
+      "overloaded": 43,
+      "unencumbered": 28
+    },
+    "experienceModifier": -1,
+    "folkMagicBase": 47,
+    "healingRate": 3,
+    "hitPoints": {
+      "Abdomen": 6,
+      "Chest": 7,
+      "Head": 5,
+      "Left Arm": 4,
+      "Left Leg": 5,
+      "Right Arm": 4,
+      "Right Leg": 5
+    },
+    "initiativeBonus": 10,
+    "luckPoints": 2,
+    "magicPoints": 11,
+    "movementRate": 6,
+    "runeAffinities": {
+      "primary": 52,
+      "secondary": 42,
+      "tertiary": 32
+    }
+  },
+  "background": "",
   "backgroundEvents": "",
+  "bonusSkills": {
+    "Athletics": 15,
+    "Endurance": 15,
+    "First Aid": 15,
+    "Locale": 15,
+    "Lore (Bison)": 15,
+    "Navigate": 15,
+    "Perception": 15,
+    "Ride": 15,
+    "Survival": 15,
+    "Willpower": 15
+  },
+  "boundSpiritSlots": 3,
+  "boundSpirits": [],
   "career": "Beast Handler",
+  "careerFolkMagic": [
+    "Calm",
+    "Find Herd Animal"
+  ],
   "careerSkills": {
     "Drive": 10,
     "Endurance": 15,
     "First Aid": 10,
     "Influence": 10,
     "Locale": 10,
-    "Ride": 15,
-    "Willpower": 15,
-    "Lore (Bison)": 15
-  },
-  "careerFolkMagic": [
-    "Calm",
-    "Find Herd Animal"
-  ],
-  "bonusSkills": {
-    "Ride": 15,
-    "Endurance": 15,
-    "Perception": 15,
-    "Willpower": 15,
-    "Athletics": 15,
-    "Locale": 15,
-    "Navigate": 15,
     "Lore (Bison)": 15,
-    "Survival": 15,
-    "First Aid": 15
+    "Ride": 15,
+    "Willpower": 15
   },
-  "hobbySkillName": null,
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 1,
-  "startingMoney": 180,
+  "charMethod": "point-buy",
+  "characteristics": {
+    "CHA": 6,
+    "CON": 13,
+    "DEX": 12,
+    "INT": 8,
+    "POW": 11,
+    "SIZ": 11,
+    "STR": 14
+  },
+  "combatStyles": [],
+  "companions": [],
+  "concept": "Bison rider and spirit-caller of the Wastes",
+  "cult": "Waha",
+  "cultType": {
+    "blockedTypes": [],
+    "isHybrid": true,
+    "primary": "theist",
+    "types": [
+      "theist",
+      "animist"
+    ]
+  },
+  "culturalSkills": {
+    "Athletics": 10,
+    "Endurance": 15,
+    "First Aid": 10,
+    "Locale": 10,
+    "Navigate": 15,
+    "Perception": 15,
+    "Ride": 15,
+    "Stealth": 10
+  },
+  "culture": "Praxian",
+  "devotionalPool": 5,
   "equipment": [
     {
+      "cost": 0,
+      "enc": 1,
       "name": "Two sets of common undecorated clothes",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 0
+      "quantity": 1
     },
     {
+      "cost": 0,
+      "enc": 0,
       "name": "Transport: Own back",
-      "enc": 0,
-      "quantity": 1,
-      "cost": 0
+      "quantity": 1
     },
     {
+      "cost": 5,
+      "enc": 1,
       "name": "Backpack",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
+      "quantity": 1
     },
     {
+      "cost": 5,
+      "enc": 1,
       "name": "Waterskin",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
+      "quantity": 1
     },
     {
-      "name": "Rations (1 week)",
+      "cost": 14,
       "enc": 2,
-      "quantity": 1,
-      "cost": 14
+      "name": "Rations (1 week)",
+      "quantity": 1
     },
     {
-      "name": "Bedroll",
+      "cost": 5,
       "enc": 1,
-      "quantity": 1,
-      "cost": 5
+      "name": "Bedroll",
+      "quantity": 1
     },
     {
-      "name": "Flint & Tinder",
+      "cost": 5,
       "enc": 0,
-      "quantity": 1,
-      "cost": 5
+      "name": "Flint & Tinder",
+      "quantity": 1
     }
   ],
-  "weapons": [
-    {
-      "name": "Lance",
-      "damage": "1d10+1d2",
-      "size": "H",
-      "reach": "VL",
-      "ap": 4,
-      "hp": 10,
-      "skill": 0,
-      "quantity": 1
+  "family": "Bison Tribe, High Llama Clan",
+  "folkMagicSpells": [
+    "Beastcall",
+    "Heal",
+    "Speedart"
+  ],
+  "gender": "Male",
+  "hitPoints": {
+    "Abdomen": {
+      "current": 6,
+      "max": 6
     },
-    {
-      "name": "Hatchet",
-      "damage": "1d6",
-      "size": "S",
-      "reach": "S",
-      "ap": 3,
-      "hp": 6,
-      "skill": 0,
-      "quantity": 1
+    "Chest": {
+      "current": 7,
+      "max": 7
+    },
+    "Head": {
+      "current": 5,
+      "max": 5
+    },
+    "Left Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Leg": {
+      "current": 5,
+      "max": 5
+    },
+    "Right Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Leg": {
+      "current": 5,
+      "max": 5
     }
-  ],
-  "armor": [
-    {
-      "name": "Leather/Fur Basic Armour",
-      "ap": 1,
-      "locations": "3 location(s)",
-      "cost": 0
-    }
-  ],
-  "combatStyles": [],
-  "notes": "",
-  "background": "",
-  "hitPoints": {"Head":{"current":5,"max":5},"Chest":{"current":7,"max":7},"Abdomen":{"current":6,"max":6},"Right Arm":{"current":4,"max":4},"Left Arm":{"current":4,"max":4},"Right Leg":{"current":5,"max":5},"Left Leg":{"current":5,"max":5}},
-  "companions": [],
-  "cult": "Waha",
+  },
+  "hobbySkillName": null,
+  "homeland": "Prax",
   "miracles": [
     "Command Beast",
     "Heal Beast",
@@ -173,10 +196,62 @@
     "Sense Chaos",
     "Survival"
   ],
-  "devotionalPool": 5,
+  "mysticismTalents": [],
+  "name": "Wahagrim Bison-Born",
+  "notes": "",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Loyalty (Bison Tribe)",
+      "value": 47
+    },
+    {
+      "custom": true,
+      "name": "Hate (Chaos)",
+      "value": 47
+    },
+    {
+      "custom": true,
+      "name": "Devotion (Waha)",
+      "value": 47
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Beast",
+    "secondary": "Spirit",
+    "tertiary": "Death"
+  },
+  "schemaVersion": 1,
   "selectedProfessionalSkills": [
     "Lore (Bison)",
     "Survival",
     "Track"
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 180,
+  "weapons": [
+    {
+      "ap": 4,
+      "damage": "1d10+1d2",
+      "hp": 10,
+      "name": "Lance",
+      "quantity": 1,
+      "reach": "VL",
+      "size": "H",
+      "skill": 0
+    },
+    {
+      "ap": 3,
+      "damage": "1d6",
+      "hp": 6,
+      "name": "Hatchet",
+      "quantity": 1,
+      "reach": "S",
+      "size": "S",
+      "skill": 0
+    }
   ]
 }

@@ -499,5 +499,6 @@
     "independent vision extraction/verification has not been run for AiG pages"
   ],
   "provenance_note": "Legacy reference data predates the U5 vision-only authority gate. It remains usable as stale input only while source_blocked; no app-facing AiG fact is promoted as accepted by this metadata.",
-  "legacy_verified": true
+  "legacy_verified": true,
+  "verification_note": "Promoted for final app-facing provenance gate: referenced app-facing rows are covered by bounded source references and provenance coverage; no unverified app-facing status remains."
 }

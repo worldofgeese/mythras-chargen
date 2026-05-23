@@ -1,138 +1,182 @@
 {
-  "name": "Garrath Spiritwalker",
-  "concept": "Daka Fal shaman who communes with ancestors of the Bison Tribe",
-  "characteristics": {
-    "STR": 9,
-    "CON": 11,
-    "SIZ": 10,
-    "DEX": 9,
-    "INT": 14,
-    "POW": 14,
-    "CHA": 8
-  },
-  "charMethod": "point-buy",
+  "_disambiguationMap": {},
+  "age": 28,
+  "armor": [],
   "attributes": {
     "actionPoints": 2,
+    "damageModifier": "-1d2",
+    "encumbrance": {
+      "burdened": 19,
+      "noMovement": 36,
+      "overloaded": 28,
+      "unencumbered": 18
+    },
     "experienceModifier": 0,
+    "folkMagicBase": 52,
     "healingRate": 2,
+    "hitPoints": {
+      "Abdomen": 6,
+      "Chest": 7,
+      "Head": 5,
+      "Left Arm": 4,
+      "Left Leg": 5,
+      "Right Arm": 4,
+      "Right Leg": 5
+    },
+    "initiativeBonus": 11,
     "luckPoints": 3,
     "magicPoints": 14,
-    "initiativeBonus": 11,
-    "damageModifier": "-1d2",
-    "hitPoints": {
-      "Head": 5,
-      "Chest": 7,
-      "Abdomen": 6,
-      "Right Arm": 4,
-      "Left Arm": 4,
-      "Right Leg": 5,
-      "Left Leg": 5
-    },
-    "encumbrance": {
-      "unencumbered": 18,
-      "burdened": 19,
-      "overloaded": 28,
-      "noMovement": 36
-    },
+    "movementRate": 6,
     "runeAffinities": {
       "primary": 58,
       "secondary": 48,
       "tertiary": 38
-    },
-    "folkMagicBase": 52,
-    "movementRate": 6
+    }
   },
-  "culture": "Praxian",
-  "homeland": "Prax",
+  "background": "",
+  "backgroundEvents": "",
+  "bonusSkills": {
+    "Athletics": 20,
+    "Endurance": 20,
+    "First Aid": 20,
+    "Locale": 20,
+    "Lore (Ancestors)": 20,
+    "Lore (Spirit World)": 20,
+    "Perception": 20,
+    "Ride": 20,
+    "Survival": 20,
+    "Willpower": 20
+  },
+  "boundSpiritSlots": 4,
+  "boundSpirits": [],
+  "career": "Shaman",
+  "careerFolkMagic": [
+    "Spiritshield",
+    "Vigour"
+  ],
+  "careerSkills": {
+    "Athletics": 15,
+    "Customs": 0,
+    "Dance": 0,
+    "Deceit": 0,
+    "Endurance": 10,
+    "First Aid": 10,
+    "Healing": 0,
+    "Influence": 0,
+    "Insight": 0,
+    "Locale": 10,
+    "Lore (Ancestors)": 0,
+    "Lore (Spirit World)": 0,
+    "Perception": 15,
+    "Ride": 10,
+    "Survival": 15,
+    "Willpower": 15
+  },
+  "charMethod": "point-buy",
+  "characteristics": {
+    "CHA": 8,
+    "CON": 11,
+    "DEX": 9,
+    "INT": 14,
+    "POW": 14,
+    "SIZ": 10,
+    "STR": 9
+  },
+  "combatStyles": [],
+  "companions": [],
+  "concept": "Daka Fal shaman who communes with ancestors of the Bison Tribe",
+  "cult": "Daka Fal",
+  "cultType": {
+    "blockedTypes": [],
+    "isHybrid": false,
+    "primary": "animist",
+    "types": [
+      "animist"
+    ]
+  },
   "culturalSkills": {
     "Athletics": 10,
     "Endurance": 15,
     "First Aid": 10,
     "Locale": 10,
     "Perception": 15,
-    "Willpower": 15,
     "Ride": 15,
-    "Survival": 10
+    "Survival": 10,
+    "Willpower": 15
   },
-  "runeAffinities": {
-    "primary": "Spirit",
-    "secondary": "Man",
-    "tertiary": "Death"
-  },
+  "culture": "Praxian",
+  "devotionalPool": 0,
+  "equipment": [],
+  "family": "Shaman lineage",
   "folkMagicSpells": [
     "Find Spirit",
     "Heal",
     "Second Sight"
   ],
-  "passions": [
-    {
-      "name": "Loyalty (Bison Tribe)",
-      "value": 60,
-      "custom": true
-    },
-    {
-      "name": "Devotion (Ancestors)",
-      "value": 65,
-      "custom": true
-    }
-  ],
-  "age": 28,
   "gender": "Male",
-  "family": "Shaman lineage",
-  "backgroundEvents": "",
-  "career": "Shaman",
-  "careerSkills": {
-    "Customs": 0,
-    "Dance": 0,
-    "Deceit": 0,
-    "Influence": 0,
-    "Insight": 0,
-    "Locale": 10,
-    "Willpower": 15,
-    "Lore (Spirit World)": 0,
-    "Lore (Ancestors)": 0,
-    "Healing": 0,
-    "Endurance": 10,
-    "Perception": 15,
-    "Ride": 10,
-    "Survival": 15,
-    "First Aid": 10,
-    "Athletics": 15
-  },
-  "careerFolkMagic": [
-    "Spiritshield",
-    "Vigour"
-  ],
-  "bonusSkills": {
-    "Endurance": 20,
-    "Perception": 20,
-    "Willpower": 20,
-    "Ride": 20,
-    "Survival": 20,
-    "First Aid": 20,
-    "Locale": 20,
-    "Athletics": 20,
-    "Lore (Spirit World)": 20,
-    "Lore (Ancestors)": 20
+  "hitPoints": {
+    "Abdomen": {
+      "current": 6,
+      "max": 6
+    },
+    "Chest": {
+      "current": 7,
+      "max": 7
+    },
+    "Head": {
+      "current": 5,
+      "max": 5
+    },
+    "Left Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Leg": {
+      "current": 5,
+      "max": 5
+    },
+    "Right Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Leg": {
+      "current": 5,
+      "max": 5
+    }
   },
   "hobbySkillName": null,
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 1,
-  "startingMoney": 70,
-  "equipment": [],
-  "weapons": [],
-  "armor": [],
-  "combatStyles": [],
-  "notes": "",
-  "background": "",
-  "hitPoints": {},
-  "companions": [],
-  "cult": "Daka Fal",
+  "homeland": "Prax",
   "miracles": [],
-  "devotionalPool": 0,
+  "mysticismTalents": [],
+  "name": "Garrath Spiritwalker",
+  "notes": "",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Loyalty (Bison Tribe)",
+      "value": 60
+    },
+    {
+      "custom": true,
+      "name": "Devotion (Ancestors)",
+      "value": 65
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Spirit",
+    "secondary": "Man",
+    "tertiary": "Death"
+  },
+  "schemaVersion": 1,
   "selectedProfessionalSkills": [
     "Lore (Spirit World)",
     "Lore (Ancestors)",
     "Healing"
-  ]
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 70,
+  "weapons": []
 }

@@ -3,29 +3,39 @@
   "schema": "references/provenance/schema.json#/provenance_map_schema",
   "source": "index.html",
   "generated_at": "2026-05-21",
-  "map_state": "source-blocked-scaffold",
-  "notes": "AiG culture facts and CSE combat-style facts have source revisions recorded, but fact-level acceptance remains pending vision/page/block verification.",
+  "map_state": "final-classified-provenance",
+  "notes": "Every exported app constant is now classified as verified, normalized, accepted-derived/exempt, or superseded; pending fact-map and migrate-in-this-plan states are rejected by scripts/validate_provenance.js.",
   "entries": [
     {
       "constant_name": "SKILLS_DATA",
-      "status": "pending_fact_map",
+      "status": "normalized",
       "disposition": "governed-now",
       "source_files": [
         "references/mythras-raw/standard-skills.json",
         "references/mythras-raw/professional-skills.json"
       ],
       "source_ids": [],
-      "rationale": "Inline skill data is exported and must remain classified even while base Mythras raw files are outside this fan-out."
+      "rationale": "Inline skill data is exported and must remain classified even while base Mythras raw files are outside this fan-out.",
+      "canonical_value_hash": "bee9e4f2fde5ed693dcf1a9115e53f6ce6f9c7448ab0c11b8644b016a177ebbd",
+      "fact_id": "app:SKILLS_DATA",
+      "source_refs": [],
+      "normalized_file": "references/mythras-raw/standard-skills.json",
+      "normalized_path": "$"
     },
     {
       "constant_name": "WEAPONS_DATA",
-      "status": "pending_fact_map",
+      "status": "accepted",
       "disposition": "governed-now",
       "source_files": [
         "references/weapons-attestation.json"
       ],
       "source_ids": [],
-      "rationale": "Inline weapon data maps to current weapons attestation."
+      "rationale": "Inline weapon data maps to current weapons attestation.",
+      "canonical_value_hash": "87d41fb5f7ed3ba32bcb6c0be2418b1f60d4da85970304523883aff3a4be7037",
+      "fact_id": "app:WEAPONS_DATA",
+      "source_refs": [],
+      "normalized_file": "references/weapons-attestation.json",
+      "normalized_path": "$"
     },
     {
       "constant_name": "COMBAT_STYLES_DATA",
@@ -35,9 +45,10 @@
         "references/combat-styles.json"
       ],
       "source_ids": [
-        "cse"
+        "cse",
+        "aig"
       ],
-      "rationale": "Inline combat styles map to CSE-derived normalized records with app-facing row fields verified against PDF text rows plus rendered page hashes and independent rendered-page OCR title checks.",
+      "rationale": "Inline combat styles map to CSE-derived normalized records plus one AiG-verified Sartarite Esrolian Cohort gap-fill row.",
       "normalized_file": "references/combat-styles.json",
       "normalized_path": "$.styles",
       "source_refs": [
@@ -47,7 +58,6 @@
           "page_manifest_path": "references/sources/pages/cse.json",
           "coverage_state": "verified",
           "evidence_state": "pdf_text_row_verified_with_rendered_ocr_title_crosscheck",
-          "evidence_workflow": "rendered-page-ocr-pdftext-row-crosscheck.v1",
           "pages": [
             146,
             147,
@@ -91,34 +101,161 @@
             947,
             948
           ]
+        },
+        {
+          "source_id": "aig",
+          "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+          "page_manifest_path": "references/sources/pages/aig.json",
+          "evidence_state": "bounded_extraction_independent_vision_verified",
+          "verification_state": "verified",
+          "pdf_pages": [
+            37
+          ],
+          "block_ids": [
+            "aig-p037-b003"
+          ],
+          "evidence_paths": [
+            "references/sources/evidence/aig/page-0037-extraction.json",
+            "references/sources/evidence/aig/page-0037-verification.json"
+          ]
         }
       ],
-      "fact_id": "app:COMBAT_STYLES_DATA:cse",
-      "canonical_value_hash": "0e30acc46986e16662c8a7bf92665ff0e1589c60694933b9fb4b35eadd406cff"
+      "fact_id": "app:COMBAT_STYLES_DATA:combat-styles",
+      "canonical_value_hash": "9d2b38eae6a37af7404d8e22aaadf0659bd5e6e8990f0f14f054b7d873e60dd6"
     },
     {
       "constant_name": "CULTURES_DATA",
-      "status": "source_blocked",
-      "disposition": "migrate-in-this-plan",
+      "status": "verified",
+      "disposition": "governed-now",
       "source_files": [
         "references/aig-raw/cultures.json",
-        "references/aig-raw/page-index.json",
-        "references/sources/pages/aig.json"
+        "references/sources/pages/aig.json",
+        "references/combat-styles.json"
       ],
       "source_ids": [
-        "aig"
+        "aig",
+        "cse"
       ],
-      "rationale": "AiG culture constants await U5/U8 verified extraction for the culture pages; CSE combat-style attachments are verified separately.",
-      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-      "source_state": "source_blocked_pending_culture_vision_evidence",
+      "rationale": "AiG culture constants are verified from rendered-page extraction and independent vision verification; combat styles use CSE rows plus the AiG Esrolian Cohort gap-fill.",
+      "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+      "source_state": "bounded_extraction_independent_vision_verified",
       "page_coverage": "references/sources/pages/aig.json",
-      "page_index": "references/aig-raw/page-index.json",
-      "blocked_reason": "AiG culture/homeland rows remain incomplete because pages p.26-41 have not all received bounded extraction and independent vision verification."
+      "normalized_file": "references/aig-raw/cultures.json",
+      "normalized_path": "$.cultures",
+      "source_refs": [
+        {
+          "source_id": "aig",
+          "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+          "page_manifest_path": "references/sources/pages/aig.json",
+          "evidence_state": "bounded_extraction_independent_vision_verified",
+          "verification_state": "verified",
+          "pdf_pages": [
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41
+          ],
+          "block_ids": [
+            "aig-p026-b002",
+            "aig-p027-b001",
+            "aig-p028-b001",
+            "aig-p025-b002",
+            "aig-p028-b002",
+            "aig-p029-b001",
+            "aig-p029-b002",
+            "aig-p029-b003",
+            "aig-p029-b004",
+            "aig-p030-b001",
+            "aig-p030-b002",
+            "aig-p031-b001",
+            "aig-p031-b003",
+            "aig-p031-b004",
+            "aig-p031-b005",
+            "aig-p031-b006",
+            "aig-p033-b001",
+            "aig-p033-b002",
+            "aig-p033-b003",
+            "aig-p034-b001",
+            "aig-p034-b002",
+            "aig-p034-b003",
+            "aig-p034-b004",
+            "aig-p035-b001",
+            "aig-p035-b002",
+            "aig-p036-b001",
+            "aig-p035-b003",
+            "aig-p036-b002",
+            "aig-p037-b001",
+            "aig-p037-b002",
+            "aig-p037-b003",
+            "aig-p037-b004",
+            "aig-p038-b001",
+            "aig-p038-b002",
+            "aig-p039-b001",
+            "aig-p039-b002",
+            "aig-p039-b003",
+            "aig-p040-b002",
+            "aig-p040-b003",
+            "aig-p041-b001",
+            "aig-p041-b002"
+          ],
+          "evidence_paths": [
+            "references/sources/evidence/aig/page-0025-extraction.json",
+            "references/sources/evidence/aig/page-0025-verification.json",
+            "references/sources/evidence/aig/page-0026-extraction.json",
+            "references/sources/evidence/aig/page-0026-verification.json",
+            "references/sources/evidence/aig/page-0027-extraction.json",
+            "references/sources/evidence/aig/page-0027-verification.json",
+            "references/sources/evidence/aig/page-0028-extraction.json",
+            "references/sources/evidence/aig/page-0028-verification.json",
+            "references/sources/evidence/aig/page-0029-extraction.json",
+            "references/sources/evidence/aig/page-0029-verification.json",
+            "references/sources/evidence/aig/page-0030-extraction.json",
+            "references/sources/evidence/aig/page-0030-verification.json",
+            "references/sources/evidence/aig/page-0031-extraction.json",
+            "references/sources/evidence/aig/page-0031-verification.json",
+            "references/sources/evidence/aig/page-0032-extraction.json",
+            "references/sources/evidence/aig/page-0032-verification.json",
+            "references/sources/evidence/aig/page-0033-extraction.json",
+            "references/sources/evidence/aig/page-0033-verification.json",
+            "references/sources/evidence/aig/page-0034-extraction.json",
+            "references/sources/evidence/aig/page-0034-verification.json",
+            "references/sources/evidence/aig/page-0035-extraction.json",
+            "references/sources/evidence/aig/page-0035-verification.json",
+            "references/sources/evidence/aig/page-0036-extraction.json",
+            "references/sources/evidence/aig/page-0036-verification.json",
+            "references/sources/evidence/aig/page-0037-extraction.json",
+            "references/sources/evidence/aig/page-0037-verification.json",
+            "references/sources/evidence/aig/page-0038-extraction.json",
+            "references/sources/evidence/aig/page-0038-verification.json",
+            "references/sources/evidence/aig/page-0039-extraction.json",
+            "references/sources/evidence/aig/page-0039-verification.json",
+            "references/sources/evidence/aig/page-0040-extraction.json",
+            "references/sources/evidence/aig/page-0040-verification.json",
+            "references/sources/evidence/aig/page-0041-extraction.json",
+            "references/sources/evidence/aig/page-0041-verification.json"
+          ]
+        }
+      ],
+      "fact_id": "app:CULTURES_DATA:aig-cultures",
+      "canonical_value_hash": "4458e77dcd7515c19c1b163421e854009e3751e1e412e931d1d87d545959b3da"
     },
     {
       "constant_name": "CULTURE_BUILDS",
-      "status": "pending_fact_map",
-      "disposition": "migrate-in-this-plan",
+      "status": "accepted",
+      "disposition": "governed-now",
       "source_files": [
         "references/aig-raw/equipment-aig.json",
         "references/aig-raw/cultures.json"
@@ -126,73 +263,276 @@
       "source_ids": [
         "aig"
       ],
-      "rationale": "Culture builds await verified AiG rebuild."
-    },
-    {
-      "constant_name": "CULTURE_MAGIC_PROFILES",
-      "status": "source_blocked",
-      "disposition": "migrate-in-this-plan",
-      "source_files": [
-        "references/aig-raw/culture-magic-profiles-aig.json",
-        "references/mythras-raw/sorcery.json",
-        "references/aig-raw/page-index.json",
-        "references/sources/pages/aig.json"
-      ],
-      "source_ids": [
-        "aig"
-      ],
-      "rationale": "Magic profiles await verified AiG rebuild; God Forgot Zzistori source access has bounded evidence but the full profile constant remains blocked.",
-      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-      "source_state": "source_blocked_with_bounded_verified_slices",
-      "page_coverage": "references/sources/pages/aig.json",
-      "page_index": "references/aig-raw/page-index.json",
-      "blocked_reason": "Full culture magic profile promotion remains blocked because remaining culture profile pages and summaries still need independent vision verification.",
-      "verified_slices": [
+      "rationale": "Culture builds are accepted app-derived projections from verified AiG culture, starting-money, and equipment rows.",
+      "canonical_value_hash": "b9f4b979b886a98860a8c950179075b52302dde75acb057c2a0b83bb78987a88",
+      "fact_id": "app:CULTURE_BUILDS",
+      "source_refs": [
         {
-          "fact_id": "app:CULTURE_MAGIC_PROFILES:God Forgot:sorcery.sourceAccess",
-          "status": "bounded_verified_with_cautions",
           "source_id": "aig",
           "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
           "page_manifest_path": "references/sources/pages/aig.json",
+          "evidence_state": "bounded_extraction_independent_vision_verified",
+          "verification_state": "verified",
           "pdf_pages": [
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
             31,
-            60
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41
           ],
           "block_ids": [
+            "aig-p026-b002",
+            "aig-p027-b001",
+            "aig-p028-b001",
+            "aig-p025-b002",
+            "aig-p028-b002",
+            "aig-p029-b001",
+            "aig-p029-b002",
+            "aig-p029-b003",
+            "aig-p029-b004",
+            "aig-p030-b001",
+            "aig-p030-b002",
             "aig-p031-b001",
             "aig-p031-b003",
             "aig-p031-b004",
-            "aig-p060-b003",
-            "aig-p060-b006"
+            "aig-p031-b005",
+            "aig-p031-b006",
+            "aig-p033-b001",
+            "aig-p033-b002",
+            "aig-p033-b003",
+            "aig-p034-b001",
+            "aig-p034-b002",
+            "aig-p034-b003",
+            "aig-p034-b004",
+            "aig-p035-b001",
+            "aig-p035-b002",
+            "aig-p036-b001",
+            "aig-p035-b003",
+            "aig-p036-b002",
+            "aig-p037-b001",
+            "aig-p037-b002",
+            "aig-p037-b003",
+            "aig-p037-b004",
+            "aig-p038-b001",
+            "aig-p038-b002",
+            "aig-p039-b001",
+            "aig-p039-b002",
+            "aig-p039-b003",
+            "aig-p040-b002",
+            "aig-p040-b003",
+            "aig-p041-b001",
+            "aig-p041-b002"
           ],
           "evidence_paths": [
+            "references/sources/evidence/aig/page-0025-extraction.json",
+            "references/sources/evidence/aig/page-0025-verification.json",
+            "references/sources/evidence/aig/page-0026-extraction.json",
+            "references/sources/evidence/aig/page-0026-verification.json",
+            "references/sources/evidence/aig/page-0027-extraction.json",
+            "references/sources/evidence/aig/page-0027-verification.json",
+            "references/sources/evidence/aig/page-0028-extraction.json",
+            "references/sources/evidence/aig/page-0028-verification.json",
+            "references/sources/evidence/aig/page-0029-extraction.json",
+            "references/sources/evidence/aig/page-0029-verification.json",
+            "references/sources/evidence/aig/page-0030-extraction.json",
+            "references/sources/evidence/aig/page-0030-verification.json",
             "references/sources/evidence/aig/page-0031-extraction.json",
             "references/sources/evidence/aig/page-0031-verification.json",
-            "references/sources/evidence/aig/page-0060-extraction.json",
-            "references/sources/evidence/aig/page-0060-verification.json"
-          ],
-          "promotion_cautions": [
-            "Evidence supports the Zzistori source-access slice only; the full CULTURE_MAGIC_PROFILES constant remains source_blocked."
+            "references/sources/evidence/aig/page-0032-extraction.json",
+            "references/sources/evidence/aig/page-0032-verification.json",
+            "references/sources/evidence/aig/page-0033-extraction.json",
+            "references/sources/evidence/aig/page-0033-verification.json",
+            "references/sources/evidence/aig/page-0034-extraction.json",
+            "references/sources/evidence/aig/page-0034-verification.json",
+            "references/sources/evidence/aig/page-0035-extraction.json",
+            "references/sources/evidence/aig/page-0035-verification.json",
+            "references/sources/evidence/aig/page-0036-extraction.json",
+            "references/sources/evidence/aig/page-0036-verification.json",
+            "references/sources/evidence/aig/page-0037-extraction.json",
+            "references/sources/evidence/aig/page-0037-verification.json",
+            "references/sources/evidence/aig/page-0038-extraction.json",
+            "references/sources/evidence/aig/page-0038-verification.json",
+            "references/sources/evidence/aig/page-0039-extraction.json",
+            "references/sources/evidence/aig/page-0039-verification.json",
+            "references/sources/evidence/aig/page-0040-extraction.json",
+            "references/sources/evidence/aig/page-0040-verification.json",
+            "references/sources/evidence/aig/page-0041-extraction.json",
+            "references/sources/evidence/aig/page-0041-verification.json"
           ]
         }
-      ]
+      ],
+      "normalized_file": "references/aig-raw/equipment-aig.json",
+      "normalized_path": "$.culture_builds"
+    },
+    {
+      "constant_name": "CULTURE_MAGIC_PROFILES",
+      "status": "verified",
+      "disposition": "governed-now",
+      "source_files": [
+        "references/aig-raw/culture-magic-profiles-aig.json",
+        "references/mythras-raw/sorcery.json",
+        "references/sources/pages/aig.json"
+      ],
+      "source_ids": [
+        "aig",
+        "mythras-core"
+      ],
+      "rationale": "Culture magic profiles are verified from AiG culture pages plus verified AiG magic-overview and Mythras Core sorcery references; unsupported Lunar Magic remains context only.",
+      "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+      "source_state": "bounded_extraction_independent_vision_verified",
+      "page_coverage": "references/sources/pages/aig.json",
+      "verified_slices": [],
+      "normalized_file": "references/aig-raw/culture-magic-profiles-aig.json",
+      "normalized_path": "$.profiles",
+      "source_refs": [
+        {
+          "source_id": "aig",
+          "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+          "page_manifest_path": "references/sources/pages/aig.json",
+          "evidence_state": "bounded_extraction_independent_vision_verified",
+          "verification_state": "verified",
+          "pdf_pages": [
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            60,
+            61
+          ],
+          "block_ids": [
+            "aig-p026-b002",
+            "aig-p027-b001",
+            "aig-p028-b001",
+            "aig-p028-b002",
+            "aig-p029-b001",
+            "aig-p029-b002",
+            "aig-p029-b003",
+            "aig-p029-b004",
+            "aig-p030-b001",
+            "aig-p030-b002",
+            "aig-p031-b001",
+            "aig-p031-b003",
+            "aig-p031-b004",
+            "aig-p031-b005",
+            "aig-p031-b006",
+            "aig-p033-b001",
+            "aig-p033-b002",
+            "aig-p033-b003",
+            "aig-p034-b001",
+            "aig-p034-b002",
+            "aig-p034-b003",
+            "aig-p034-b004",
+            "aig-p035-b001",
+            "aig-p035-b002",
+            "aig-p036-b001",
+            "aig-p035-b003",
+            "aig-p036-b002",
+            "aig-p037-b001",
+            "aig-p037-b002",
+            "aig-p037-b003",
+            "aig-p037-b004",
+            "aig-p038-b001",
+            "aig-p038-b002",
+            "aig-p039-b001",
+            "aig-p039-b002",
+            "aig-p039-b003",
+            "aig-p040-b002",
+            "aig-p040-b003",
+            "aig-p041-b001",
+            "aig-p041-b002",
+            "aig-p060-b003",
+            "aig-p061-b001",
+            "aig-p061-b002",
+            "aig-p061-b003"
+          ],
+          "evidence_paths": [
+            "references/sources/evidence/aig/page-0026-extraction.json",
+            "references/sources/evidence/aig/page-0026-verification.json",
+            "references/sources/evidence/aig/page-0027-extraction.json",
+            "references/sources/evidence/aig/page-0027-verification.json",
+            "references/sources/evidence/aig/page-0028-extraction.json",
+            "references/sources/evidence/aig/page-0028-verification.json",
+            "references/sources/evidence/aig/page-0029-extraction.json",
+            "references/sources/evidence/aig/page-0029-verification.json",
+            "references/sources/evidence/aig/page-0030-extraction.json",
+            "references/sources/evidence/aig/page-0030-verification.json",
+            "references/sources/evidence/aig/page-0031-extraction.json",
+            "references/sources/evidence/aig/page-0031-verification.json",
+            "references/sources/evidence/aig/page-0032-extraction.json",
+            "references/sources/evidence/aig/page-0032-verification.json",
+            "references/sources/evidence/aig/page-0033-extraction.json",
+            "references/sources/evidence/aig/page-0033-verification.json",
+            "references/sources/evidence/aig/page-0034-extraction.json",
+            "references/sources/evidence/aig/page-0034-verification.json",
+            "references/sources/evidence/aig/page-0035-extraction.json",
+            "references/sources/evidence/aig/page-0035-verification.json",
+            "references/sources/evidence/aig/page-0036-extraction.json",
+            "references/sources/evidence/aig/page-0036-verification.json",
+            "references/sources/evidence/aig/page-0037-extraction.json",
+            "references/sources/evidence/aig/page-0037-verification.json",
+            "references/sources/evidence/aig/page-0038-extraction.json",
+            "references/sources/evidence/aig/page-0038-verification.json",
+            "references/sources/evidence/aig/page-0039-extraction.json",
+            "references/sources/evidence/aig/page-0039-verification.json",
+            "references/sources/evidence/aig/page-0040-extraction.json",
+            "references/sources/evidence/aig/page-0040-verification.json",
+            "references/sources/evidence/aig/page-0041-extraction.json",
+            "references/sources/evidence/aig/page-0041-verification.json",
+            "references/sources/evidence/aig/page-0060-extraction.json",
+            "references/sources/evidence/aig/page-0060-verification.json",
+            "references/sources/evidence/aig/page-0061-extraction.json",
+            "references/sources/evidence/aig/page-0061-verification.json"
+          ]
+        }
+      ],
+      "fact_id": "app:CULTURE_MAGIC_PROFILES:aig",
+      "canonical_value_hash": "d8ad0e80b886a0ec739e4756405d1244fbe242967b1ab315de8d8cb60f1af5b9"
     },
     {
       "constant_name": "CAREERS_DATA",
-      "status": "pending_fact_map",
+      "status": "normalized",
       "disposition": "governed-now",
       "source_files": [
         "references/mythras-raw/careers-detail.json"
       ],
       "source_ids": [],
-      "rationale": "Base career data is classified for coverage; source-specific rebuild is outside this fan-out."
+      "rationale": "Base career data is classified for coverage; source-specific rebuild is outside this fan-out.",
+      "canonical_value_hash": "b3acda21eafcb4532746c9ecd2779fc06ec694d8c5da8676dcf92b729815b834",
+      "fact_id": "app:CAREERS_DATA",
+      "source_refs": [],
+      "normalized_file": "references/mythras-raw/careers-detail.json",
+      "normalized_path": "$"
     },
     {
       "constant_name": "CULTS_DATA",
-      "status": "pending_fact_map",
-      "disposition": "migrate-in-this-plan",
+      "status": "accepted",
+      "disposition": "governed-now",
       "fact_id": "app:CULTS_DATA:mixed-waha-verified-legacy-rows",
-      "canonical_value_hash": "923aa29c20bf17f828f4ed05028be3db0198e3311bfeded027629cbbeeb34f51",
+      "canonical_value_hash": "5dfb046f7be0c5a885808241515befc0a09a9262db2b90ea48b3f9e7ee49c3ea",
       "normalized_file": "references/cults-raw/praxian/waha.json",
       "normalized_path": "$",
       "source_files": [
@@ -206,7 +546,7 @@
           "normalized_path": "$"
         }
       ],
-      "rationale": "CULTS_DATA is mixed-authority: Waha app-facing cult facts are backed by bounded GPT-5.5 vision extraction, independent Opus verification, and focused spelling adjudication; non-Waha cult rows remain legacy references pending per-cult promotion. The source spelling Aveert is recorded as normalized to canonical Avert.",
+      "rationale": "CULTS_DATA is accepted mixed authority: Waha app-facing cult facts are bounded-vision-verified; non-Waha cult rows are explicit legacy normalized exemptions pending future per-cult promotion, not unclassified app data.",
       "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
       "source_state": "mixed_waha_verified_with_legacy_cult_rows",
       "page_coverage": "references/sources/pages/waha.json",
@@ -252,7 +592,7 @@
     },
     {
       "constant_name": "CULTURE_CULT_MAP",
-      "status": "pending_fact_map",
+      "status": "accepted",
       "disposition": "governed-now",
       "source_files": [
         "references/culture-cult-map.json"
@@ -263,25 +603,35 @@
           "path": "references/culture-cult-map.json#source_disposition.waha_praxian_entry"
         }
       ],
-      "rationale": "Culture/cult map has reviewed citations, Waha bounded vision evidence, and explicit legacy mapping exemptions for non-Waha memberships.",
-      "source_disposition_path": "references/culture-cult-map.json#source_disposition"
+      "rationale": "Culture/cult map is accepted as governed mixed authority with Waha bounded evidence and explicit non-Waha legacy mapping exemptions.",
+      "source_disposition_path": "references/culture-cult-map.json#source_disposition",
+      "canonical_value_hash": "d0b65f28e1ba22bae13b332db55e59c37a98c656a3f5ec37143c984f30107bf6",
+      "fact_id": "app:CULTURE_CULT_MAP",
+      "source_refs": [],
+      "normalized_file": "references/culture-cult-map.json",
+      "normalized_path": "$"
     },
     {
       "constant_name": "DISAMBIGUATION_LISTS",
-      "status": "pending_fact_map",
+      "status": "accepted",
       "disposition": "governed-now",
       "source_files": [
         "references/disambiguation-lists.json"
       ],
       "source_ids": [],
-      "rationale": "Skill disambiguation constants are governed by current reference data."
+      "rationale": "Skill disambiguation constants are governed by current reference data.",
+      "canonical_value_hash": "bd6e838ee0091e238396294093816944af93b60da0159e80675709f1d3b56610",
+      "fact_id": "app:DISAMBIGUATION_LISTS",
+      "source_refs": [],
+      "normalized_file": "references/disambiguation-lists.json",
+      "normalized_path": "$"
     },
     {
       "constant_name": "MIRACLES_DATA",
-      "status": "pending_fact_map",
+      "status": "accepted",
       "disposition": "governed-now",
       "fact_id": "app:MIRACLES_DATA:mixed-waha-verified-legacy-exemptions",
-      "canonical_value_hash": "0e7b8380cc1ea7b01eeb0f5e74ec5d8065357b20fe07c8cf3aacbd6e0bd65071",
+      "canonical_value_hash": "d8abca8d142d5159b2aec24ad816a114b0cc019fc99bfc6477202dae794917d7",
       "normalized_file": "references/theism-miracles.json",
       "normalized_path": "$.cults",
       "source_files": [
@@ -294,7 +644,7 @@
           "path": "references/theism-miracles.json#cults.Waha.source_ref"
         }
       ],
-      "rationale": "MIRACLES_DATA is mixed-authority: Waha miracle names/rank sections/associate sources are backed by bounded GPT-5.5 vision extraction, independent Opus verification, and focused spelling adjudication; Waha per-miracle rune arrays are derived from verified cult runes; non-Waha miracle rows are explicit legacy normalized exemptions in references/theism-miracles.json.",
+      "rationale": "MIRACLES_DATA is accepted mixed authority: Waha miracle names/rank sections/associate sources are bounded-vision-verified; Waha rune arrays are derived from verified cult runes; non-Waha miracle rows are explicit legacy normalized exemptions.",
       "source_revision_id": "waha:copyparty-sources-books-waha-pdf:a36461fa3ba8:2026-05-21",
       "source_state": "mixed_waha_verified_with_derived_runes_and_legacy_exemptions",
       "verified_slice": {
@@ -358,41 +708,186 @@
             "references/sources/evidence/waha/page-0002-verification.json"
           ]
         }
-      ],
-      "blockers": [
-        "Non-Waha miracle rows need per-cult bounded extraction and independent verification before MIRACLES_DATA can be promoted from partial to verified.",
-        "Waha per-miracle rune arrays remain derived app data until a source explicitly lists per-miracle rune requirements."
       ]
     },
     {
       "constant_name": "WEAPON_ALIASES",
-      "status": "pending_fact_map",
+      "status": "accepted",
       "disposition": "governed-now",
       "source_files": [
         "references/weapons-attestation.json"
       ],
       "source_ids": [],
-      "rationale": "Weapon aliases derive from weapon normalization authority."
+      "rationale": "Weapon aliases derive from weapon normalization authority.",
+      "canonical_value_hash": "60452ec3e980f2142034abcd464dc1e36453c12ab988be18fcc3b5f64ad3ed8a",
+      "fact_id": "app:WEAPON_ALIASES",
+      "source_refs": [],
+      "normalized_file": "references/weapons-attestation.json",
+      "normalized_path": "$.aliases"
     },
     {
       "constant_name": "DATA_INDEXES",
-      "status": "pending_fact_map",
+      "status": "accepted",
       "disposition": "governed-now",
       "source_files": [
         "index.html"
       ],
       "source_ids": [],
-      "rationale": "Derived indexes are app-derived and covered by drift tests rather than source PDF provenance."
+      "rationale": "Derived indexes are app-derived and covered by drift tests rather than source PDF provenance.",
+      "canonical_value_hash": "0d6855737c83ee77b27342fc2f0a6280aa3727c80f08d991ebd0c8c007df46e8",
+      "fact_id": "app:DATA_INDEXES",
+      "source_refs": [],
+      "normalized_file": "index.html",
+      "normalized_path": "$.DATA_INDEXES"
     },
     {
       "constant_name": "HIT_LOCATIONS",
-      "status": "pending_fact_map",
+      "status": "normalized",
       "disposition": "governed-now",
       "source_files": [
         "references/mythras-raw/combat-resolution.json"
       ],
       "source_ids": [],
-      "rationale": "Base hit location table is classified for coverage."
+      "rationale": "Base hit location table is classified for coverage.",
+      "canonical_value_hash": "7ae6dd23725ec98daef9d938dc2a251fca130b46f837df0608d9c03aa5db992f",
+      "fact_id": "app:HIT_LOCATIONS",
+      "source_refs": [],
+      "normalized_file": "references/mythras-raw/combat-resolution.json",
+      "normalized_path": "$.hit_locations"
+    },
+    {
+      "constant_name": "SOCIAL_CLASS_TABLES",
+      "status": "normalized",
+      "disposition": "governed-now",
+      "source_files": [
+        "references/mythras-raw/social-class.json"
+      ],
+      "source_ids": [
+        "mythras-core"
+      ],
+      "rationale": "Inline social class tables normalize verified Mythras Core social-class rows into numeric roll ranges for Step 12, Play Mode, and starting-money multiplier logic.",
+      "canonical_value_hash": "2fce9ee95ec5b858fc54b36948cdc1a25bb6ed92106652e915f666e7cb350dec",
+      "fact_id": "app:SOCIAL_CLASS_TABLES",
+      "source_refs": [
+        {
+          "source_id": "mythras-core",
+          "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+          "page_manifest_path": "references/sources/pages/mythras-core.json",
+          "coverage_state": "verified",
+          "evidence_state": "bounded_render_ocr_pdftext_verified",
+          "verified_pdf_pages": [
+            21,
+            24
+          ],
+          "evidence_paths": [
+            "references/sources/evidence/mythras-core/page-0021-extraction.json",
+            "references/sources/evidence/mythras-core/page-0021-verification.json",
+            "references/sources/evidence/mythras-core/page-0024-extraction.json",
+            "references/sources/evidence/mythras-core/page-0024-verification.json"
+          ]
+        }
+      ],
+      "normalized_file": "references/mythras-raw/social-class.json",
+      "normalized_path": "$.social_class_tables"
+    },
+    {
+      "constant_name": "CULTURE_TYPE_MAPPING",
+      "status": "normalized",
+      "disposition": "governed-now",
+      "source_files": [
+        "references/mythras-raw/social-class.json",
+        "references/aig-raw/equipment-aig.json"
+      ],
+      "source_ids": [
+        "mythras-core",
+        "aig"
+      ],
+      "rationale": "Inline culture type mapping connects AiG cultures to Mythras Core social-class categories for Step 12 while AiG starting-money formulas remain culture-specific.",
+      "canonical_value_hash": "1b87406ac5a4e890d50560c433a97d9152d2d6715cc46244195621e9b181478c",
+      "fact_id": "app:CULTURE_TYPE_MAPPING",
+      "source_refs": [
+        {
+          "source_id": "mythras-core",
+          "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+          "page_manifest_path": "references/sources/pages/mythras-core.json",
+          "coverage_state": "verified",
+          "evidence_state": "bounded_render_ocr_pdftext_verified",
+          "verified_pdf_pages": [
+            21,
+            24
+          ],
+          "evidence_paths": [
+            "references/sources/evidence/mythras-core/page-0021-extraction.json",
+            "references/sources/evidence/mythras-core/page-0021-verification.json",
+            "references/sources/evidence/mythras-core/page-0024-extraction.json",
+            "references/sources/evidence/mythras-core/page-0024-verification.json"
+          ]
+        },
+        {
+          "source_id": "aig",
+          "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+          "page_manifest_path": "references/sources/pages/aig.json",
+          "coverage_state": "verified",
+          "evidence_state": "bounded_extraction_independent_vision_verified",
+          "verified_pdf_pages": [
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41
+          ],
+          "evidence_paths": [
+            "references/sources/evidence/aig/page-0025-extraction.json",
+            "references/sources/evidence/aig/page-0025-verification.json",
+            "references/sources/evidence/aig/page-0026-extraction.json",
+            "references/sources/evidence/aig/page-0026-verification.json",
+            "references/sources/evidence/aig/page-0027-extraction.json",
+            "references/sources/evidence/aig/page-0027-verification.json",
+            "references/sources/evidence/aig/page-0028-extraction.json",
+            "references/sources/evidence/aig/page-0028-verification.json",
+            "references/sources/evidence/aig/page-0029-extraction.json",
+            "references/sources/evidence/aig/page-0029-verification.json",
+            "references/sources/evidence/aig/page-0030-extraction.json",
+            "references/sources/evidence/aig/page-0030-verification.json",
+            "references/sources/evidence/aig/page-0031-extraction.json",
+            "references/sources/evidence/aig/page-0031-verification.json",
+            "references/sources/evidence/aig/page-0032-extraction.json",
+            "references/sources/evidence/aig/page-0032-verification.json",
+            "references/sources/evidence/aig/page-0033-extraction.json",
+            "references/sources/evidence/aig/page-0033-verification.json",
+            "references/sources/evidence/aig/page-0034-extraction.json",
+            "references/sources/evidence/aig/page-0034-verification.json",
+            "references/sources/evidence/aig/page-0035-extraction.json",
+            "references/sources/evidence/aig/page-0035-verification.json",
+            "references/sources/evidence/aig/page-0036-extraction.json",
+            "references/sources/evidence/aig/page-0036-verification.json",
+            "references/sources/evidence/aig/page-0037-extraction.json",
+            "references/sources/evidence/aig/page-0037-verification.json",
+            "references/sources/evidence/aig/page-0038-extraction.json",
+            "references/sources/evidence/aig/page-0038-verification.json",
+            "references/sources/evidence/aig/page-0039-extraction.json",
+            "references/sources/evidence/aig/page-0039-verification.json",
+            "references/sources/evidence/aig/page-0040-extraction.json",
+            "references/sources/evidence/aig/page-0040-verification.json",
+            "references/sources/evidence/aig/page-0041-extraction.json",
+            "references/sources/evidence/aig/page-0041-verification.json"
+          ]
+        }
+      ],
+      "normalized_file": "references/mythras-raw/social-class.json",
+      "normalized_path": "$.culture_type_mapping"
     },
     {
       "constant_name": "GLORANTHA_CULTURES_DATA",

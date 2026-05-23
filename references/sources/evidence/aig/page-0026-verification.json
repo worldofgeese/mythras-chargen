@@ -1,0 +1,33 @@
+{
+  "artifact_id": "aig-page-0026-verification-copilot-2026-05-23",
+  "artifact_kind": "verification",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 26,
+  "printed_page_label": "25",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0026.png",
+    "image_sha256": "5b96353d814d2901349125958c293e003692052cd2669a189a5a215fe7dcb4f4",
+    "dimensions": {
+      "width": 1656,
+      "height": 2159
+    }
+  },
+  "tool_identity": "Claude Opus 4.7 independent vision verifier subagents via GitHub Copilot CLI",
+  "schema_version": 1,
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-culture-extract-e",
+  "verifier_prompt_id": "vision-verify-bounded-page.v1",
+  "verifier_run_id": "aig-verify-26-30-retry",
+  "independence": {
+    "read_extractor_output": false,
+    "read_extractor_scratch": false,
+    "read_extractor_rationale": false
+  },
+  "agreement": "pass",
+  "verified_blocks": [
+    "aig-p026-b001",
+    "aig-p026-b002"
+  ]
+}

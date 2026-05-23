@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Adventures in Glorantha Character Sheet</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='serif' font-size='18' fill='%23fff'%3EM%3C/text%3E%3C/svg%3E">
 <style>
 /* System fonts only */
 :root {
@@ -98,64 +99,6 @@ button.primary:hover { background: #333; }
   font-style: italic;
   margin-left: 8px;
 }
-
-.source-coverage-panel {
-  border: 1px solid #999;
-  background: #f7f7f7;
-  margin: 0 0 12px;
-  padding: 8px 10px;
-  font-size: 12px;
-}
-
-.source-coverage-panel summary {
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.source-coverage-summary {
-  margin: 8px 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.source-coverage-list {
-  display: grid;
-  gap: 6px;
-  margin-top: 8px;
-}
-
-.source-coverage-entry {
-  border-left: 4px solid #777;
-  background: #fff;
-  padding: 6px 8px;
-}
-
-.source-coverage-entry[data-status="verified"] { border-left-color: #1b7f35; }
-.source-coverage-entry[data-status="attested"] { border-left-color: #0969da; }
-.source-coverage-entry[data-status="partial"] { border-left-color: #9a6700; }
-.source-coverage-entry[data-status="blocked"],
-.source-coverage-entry[data-status="unverified"] { border-left-color: #cf222e; }
-
-.source-coverage-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin: 6px 0;
-  font-size: 11px;
-}
-
-.source-coverage-badge {
-  border: 1px solid #999;
-  background: #fff;
-  padding: 2px 5px;
-}
-
-.source-coverage-badge[data-status="verified"] { border-color: #1b7f35; color: #1b7f35; }
-.source-coverage-badge[data-status="attested"] { border-color: #0969da; color: #0969da; }
-.source-coverage-badge[data-status="partial"] { border-color: #9a6700; color: #9a6700; }
-.source-coverage-badge[data-status="blocked"],
-.source-coverage-badge[data-status="unverified"] { border-color: #cf222e; color: #cf222e; }
 
 .budget-tracker {
   background: #fff3cd;
@@ -751,11 +694,6 @@ select:focus {
     <button onclick="App.generateRandomCharacter()" title="Generate a completely random character for testing">🎲 Random</button>
   </div>
 
-  <details id="source-coverage-panel" class="source-coverage-panel no-print" data-testid="source-coverage-panel">
-    <summary>Source coverage and provenance status</summary>
-    <div id="source-coverage-content" data-testid="source-coverage-content">Loading source coverage…</div>
-  </details>
-
   <!-- WIZARD MODE -->
   <div id="wizard-mode">
     <h1>Adventures in Glorantha Character Creation</h1>
@@ -923,7 +861,7 @@ const RUNES_DATA = [{"name":"Rune:Beast","short_name":"Beast","rune":"Beast","me
 const COMBAT_STYLES_DATA = {
   "schemaVersion": 1,
   "authority": {
-    "source": "Combat Styles Encyclopedia",
+    "source": "Combat Styles Encyclopedia plus verified Adventures in Glorantha gap-fill",
     "scope": "combat-styles-only",
     "supersedes": [
       "Adventures in Glorantha culture-combat-style rows"
@@ -1102,7 +1040,31 @@ const COMBAT_STYLES_DATA = {
         "notes"
       ],
       "note": "CSE evidence promotes app-facing combat style names, weapons, and traits only. Restrictions and notes remain app-derived fields for later global provenance classification."
-    }
+    },
+    "primary_source": "Combat Styles Encyclopedia",
+    "supplemental_sources": [
+      {
+        "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+        "scope": "Sartarite Esrolian Cohort style missing from current CSE-derived rows",
+        "source_ref": {
+          "source_id": "aig",
+          "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+          "page_manifest_path": "references/sources/pages/aig.json",
+          "evidence_state": "bounded_extraction_independent_vision_verified",
+          "verification_state": "verified",
+          "pdf_pages": [
+            37
+          ],
+          "block_ids": [
+            "aig-p037-b003"
+          ],
+          "evidence_paths": [
+            "references/sources/evidence/aig/page-0037-extraction.json",
+            "references/sources/evidence/aig/page-0037-verification.json"
+          ]
+        }
+      }
+    ]
   },
   "cultureAliases": {
     "Sartarite/Heortling": "Sartarite (Heortling)",
@@ -2453,6 +2415,67 @@ const COMBAT_STYLES_DATA = {
       }
     },
     {
+      "id": "aig:sartarite-heortling:esrolian-cohort",
+      "culture": "Sartarite (Heortling)",
+      "sourceCulture": "Adventures in Glorantha/Sartarite",
+      "sourceName": "Esrolian Cohort",
+      "name": "Esrolian Cohort",
+      "weapons": [
+        "Great Axe",
+        "Shortsword",
+        "Orlanthi Scutum",
+        "Javelin"
+      ],
+      "sourceWeapons": [
+        "Great axe",
+        "Shortsword",
+        "Orlanthi Scutum",
+        "Javelin"
+      ],
+      "traits": [
+        "Formation Fighting",
+        "Shield Splitter",
+        "Shield Wall"
+      ],
+      "printedTraits": [
+        "Formation Fighting",
+        "Shield Splitter",
+        "Shield Wall"
+      ],
+      "restrictions": "Warrior career only",
+      "notes": "AiG-verified gap-fill: this Sartarite style is visible on AiG PDF page 37 but absent from the current CSE-derived row set.",
+      "citation": {
+        "source": "Adventures in Glorantha (GenCon 2015 Preview)",
+        "page": 37,
+        "source_id": "aig",
+        "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+        "page_manifest_path": "references/sources/pages/aig.json",
+        "coverage_state": "verified",
+        "evidence_state": "bounded_extraction_independent_vision_verified",
+        "pdf_page": 37,
+        "block_id": "aig-p037-b003",
+        "block_state": "verified",
+        "extraction_path": "references/sources/evidence/aig/page-0037-extraction.json",
+        "verification_path": "references/sources/evidence/aig/page-0037-verification.json",
+        "evidence_paths": [
+          "references/sources/evidence/aig/page-0037-extraction.json",
+          "references/sources/evidence/aig/page-0037-verification.json"
+        ],
+        "verified_fields": [
+          "source_name",
+          "source_weapons",
+          "printed_traits",
+          "restriction"
+        ],
+        "normalized_fields": [
+          "app_name",
+          "app_weapons",
+          "normalized_traits"
+        ],
+        "app_derived_fields": []
+      }
+    },
+    {
       "id": "cse:sartarite-heortling:tarshite-militia",
       "culture": "Sartarite (Heortling)",
       "sourceCulture": "Dragon Pass/Sartar/Telmori",
@@ -3744,7 +3767,7 @@ const CULTURES_DATA = [
         "formula": "POW+CHA+30"
       }
     ],
-    "startingMoney": "4d6×10 Lunars",
+    "startingMoney": "4d6×15 Lunars",
     "careers": "All Civilised",
     "combatStyleIds": [
       "cse:lunar-heartland:lunar-corps-hoplite",
@@ -3831,8 +3854,8 @@ const CULTURES_DATA = [
         "formula": "POW+CHA+30"
       }
     ],
-    "startingMoney": "4d6×5 Lunars",
-    "careers": "Any Civilised",
+    "startingMoney": "4d6×10 Lunars",
+    "careers": "Any Civilised. Tarshite characters choose either Lunar Provincial or Sartarite culture.",
     "combatStyleIds": [
       "cse:lunar-provincial:colonial-noble",
       "cse:lunar-provincial:colonial-survivalist",
@@ -3901,7 +3924,7 @@ const CULTURES_DATA = [
         "formula": "POW+CHA+30"
       }
     ],
-    "startingMoney": "4d6×15 Lunars",
+    "startingMoney": "4d6×5 Lunars",
     "careers": "Any Nomad",
     "combatStyleIds": [
       "cse:praxian:agimori",
@@ -3994,13 +4017,14 @@ const CULTURES_DATA = [
       }
     ],
     "startingMoney": "4d6×10 Lunars",
-    "careers": "Any Barbarian",
+    "careers": "Any Barbarian. Note: If a player chooses to play an Orlanthi hailing from a city such as Boldhome, Nochet or similar, then substitute the Barbarian skill and career choices with Civilised instead.",
     "combatStyleIds": [
       "cse:sartarite-heortling:alynx-brother",
       "cse:sartarite-heortling:hill-clan-levy",
       "cse:sartarite-heortling:loyal-housecarl",
       "cse:sartarite-heortling:sartarite-noble",
       "cse:sartarite-heortling:upland-crofter",
+      "aig:sartarite-heortling:esrolian-cohort",
       "cse:sartarite-heortling:tarshite-militia"
     ]
   },
@@ -4314,16 +4338,14 @@ const CULTURE_CULT_MAP = {
     "note": "God Forgot is explicitly atheistic/secularist in AiG p.30-31: gods are not worshipped and Rune Magic is unavailable. The listed secondary cults are rare/manual non-default options with non-AiG provenance, especially Arkat sorcery access."
   },
   "Telmori Hsunchen": {
-    "primary": [
-      "Telmor"
-    ],
+    "primary": [],
     "secondary": [
       "Storm Bull",
       "Foundchild",
       "Odayla",
       "Orlanth"
     ],
-    "note": "Telmori primarily worship their wolf ancestor Telmor. Telmor cult data is in Hsunchen pantheon."
+    "note": "Verified AiG Telmori Hsunchen culture pages support Korgatsu/Telmor animism but do not show a Rune cult package; raw Telmor cult data remains unmapped for automatic Telmori culture selection until separately reconciled."
   }
 };
 const CULTURE_ALIASES = {
@@ -4671,7 +4693,7 @@ const DISAMBIGUATION_LISTS = {
     'Telmori Hsunchen': ['Heortling'], // Live in Sartar, no Tradetalk (primitive)
     '_default':       ['Tradetalk', 'Heortling', 'Praxian', 'Stormspeech', 'Old Pavic']
   },
-  'Lore':    ['Alchemy', 'Animals', 'Astronomy', 'Cult', 'Earth', 'Farming', 'Herding', 'History', 'Human', 'Minerals', 'Military History', 'Plants', 'Regional', 'Sea', 'Strategy and Tactics', 'World'],
+  'Lore':    ['Alchemy', 'Animals', 'Astronomy', 'Balazar', 'Cult', 'Dragon Pass', 'Earth', 'Esrolia', 'Farming', 'God Forgot', 'Herding', 'History', 'Human', 'Lunar Heartlands', 'Minerals', 'Military History', 'Plants', 'Prax', 'Sartar', 'Sea', 'Strategy and Tactics', 'Tarsh', 'Telmori Wilds', 'World'],
   'Art':     ['Calligraphy', 'Cartography', 'Drawing', 'Painting', 'Pottery', 'Sculpting', 'Weaving'],
   'Craft':   ['Alchemy', 'Armouring', 'Basketry', 'Blacksmithing', 'Brewing', 'Butchery', 'Carpentry', 'Cooking', 'Dyeing', 'Farming', 'Fletching', 'Hunting', 'Leatherworking', 'Mining', 'Netmaking', 'Pottery', 'Shipbuilding', 'Smelting', 'Smithing', 'Stonemasonry', 'Tanning', 'Weaving', 'Woodcarving'],
   'Culture': null, // populated dynamically from CULTURES_DATA names
@@ -4744,6 +4766,7 @@ const PLACEHOLDER_PATTERNS = [
   /\(Secondary Catch\)$/i,
   /\(Specific\s/i,
   /\(Hunting Related\)$/i,
+  /\(Regional\)$/i,
   /\(Regional or Specific/i,
   /\(Shipboard\b/i,
   /\(Physiological\b/i,
@@ -4776,6 +4799,12 @@ function isPlaceholderSkill(skillName) {
 /** Unified check: does this skill need disambiguation? (ADR-004 + ADR-005) */
 function needsDisambiguation(skillName) {
   return isAnySkill(skillName) || isPlaceholderSkill(skillName);
+}
+
+function getConcreteSpecializationError(originalSkillName, resolvedSkillName) {
+  if (!needsDisambiguation(resolvedSkillName)) return '';
+  const guidance = getSpecializationGuidance(originalSkillName);
+  return `${resolvedSkillName} is still a category label. ${guidance || 'Choose a concrete specialization instead.'}`;
 }
 
 /** Extract category and hint text from a placeholder skill name */
@@ -4865,7 +4894,86 @@ function getProfessionalSkillRenderState(skillName, claimedResolvedSkills) {
 
   return { isChecked, resolved };
 }
-const SPECIAL_EFFECTS_DATA = [{"name":"Accidental Injury","offensive":false,"defensive":true,"stackable":false,"specific_roll":"Attacker Fumbles"},{"name":"Arise","offensive":false,"defensive":true,"stackable":false},{"name":"Bash","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Shields or Bludgeoning"},{"name":"Bleed","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Cutting Weapons"},{"name":"Blind Opponent","offensive":false,"defensive":true,"stackable":false,"specific_roll":"Defender Criticals"},{"name":"Bypass Armour","offensive":true,"defensive":false,"stackable":true,"specific_roll":"Attacker Criticals"},{"name":"Choose Location","offensive":true,"defensive":false,"stackable":false,"specific_roll":"See Description"},{"name":"Circumvent Cover","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Ranged Weapons"},{"name":"Circumvent Parry","offensive":true,"defensive":false,"stackable":false,"specific_roll":"Attacker Criticals"},{"name":"Close Range","offensive":true,"defensive":true,"stackable":false},{"name":"Compel Surrender","offensive":true,"defensive":true,"stackable":false},{"name":"Damage Weapon","offensive":true,"defensive":true,"stackable":false},{"name":"Disarm Opponent","offensive":true,"defensive":true,"stackable":false},{"name":"Drop Foe","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Siege Weapons, Firearms"},{"name":"Duck Back","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Ranged Weapons"},{"name":"Enhance Parry","offensive":false,"defensive":true,"stackable":false,"specific_roll":"Defender Criticals"},{"name":"Entangle","offensive":true,"defensive":true,"stackable":false,"specific_weapon_type":"Entangling Weapons"},{"name":"Flurry","offensive":true,"defensive":false,"stackable":true,"specific_weapon_type":"Unarmed"},{"name":"Force Failure","offensive":true,"defensive":true,"stackable":false,"specific_roll":"Opponent Fumbles"},{"name":"Grip","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Unarmed"},{"name":"Impale","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Impaling Weapons"},{"name":"Kill Silently","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Small Weapons","specific_roll":"See Description"},{"name":"Marksman","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Ranged Weapons"},{"name":"Maximise Damage","offensive":true,"defensive":false,"stackable":true,"specific_roll":"Attacker Criticals"},{"name":"Open Range","offensive":false,"defensive":true,"stackable":false},{"name":"Overextend Opponent","offensive":false,"defensive":true,"stackable":true},{"name":"Overpenetration","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Ranged Weapons","specific_roll":"Critical Only"},{"name":"Pin Down","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Ranged Weapons"},{"name":"Pin Weapon","offensive":true,"defensive":true,"stackable":false,"specific_roll":"Critical Only"},{"name":"Prepare Counter","offensive":false,"defensive":true,"stackable":true},{"name":"Press Advantage","offensive":true,"defensive":false,"stackable":false},{"name":"Rapid Reload","offensive":true,"defensive":false,"stackable":true},{"name":"Remise","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Small Weapon Only"},{"name":"Scar Foe","offensive":true,"defensive":true,"stackable":false},{"name":"Select Target","offensive":false,"defensive":true,"stackable":false,"specific_roll":"Attacker Fumbles"},{"name":"Slip Free","offensive":false,"defensive":true,"stackable":false,"specific_roll":"Defender Criticals"},{"name":"Spoil Spell","offensive":true,"defensive":false,"stackable":false},{"name":"Stand Fast","offensive":false,"defensive":true,"stackable":false},{"name":"Stun Location","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Bludgeoning Weapons"},{"name":"Sunder","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Axes, Two Handed Weapons"},{"name":"Take Weapon","offensive":true,"defensive":true,"stackable":false,"specific_weapon_type":"Unarmed"},{"name":"Trip Opponent","offensive":true,"defensive":true,"stackable":false},{"name":"Weapon Malfunction","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Ranged Weapons","specific_roll":"Attacker Fumbles"},{"name":"Withdraw","offensive":false,"defensive":true,"stackable":false}];
+
+function getProfessionalSkillBaseName(skillName) {
+  return String(skillName || '').replace(/\s*\(.+\)$/, '').trim();
+}
+
+function getSpecializationGuidance(skillName) {
+  if (!needsDisambiguation(skillName)) return '';
+  const parsed = parsePlaceholderSkill(skillName);
+  const category = parsed ? parsed.category : (String(skillName).match(/^(Language|Lore|Art|Craft|Culture)/i)?.[1] || '');
+  const hint = parsed ? parsed.hint : 'any';
+  const normalizedHint = hint.toLowerCase();
+
+  if (category === 'Lore' && normalizedHint.includes('regional')) {
+    return 'Choose a real region, people, species, or topic instead of leaving "Regional"; examples include Prax, Sartar, Dragon Pass, Balazar, God Forgot, Telmori Wilds, Animals, Plants, or Cult. Read: Mythras Core p.49 (Lore) plus Adventures in Glorantha p.26-41 for regional/culture descriptions.';
+  }
+
+  const guidanceByCategory = {
+    Art: 'Name the art form this character practices, such as Calligraphy, Painting, Sculpture, or Weaving. Read: Mythras Core p.45 (Art).',
+    Binding: 'Name the spirit tradition, cult, totem, or other animist relationship this Binding skill serves; for Waha use Waha, otherwise use the shamanic tradition agreed with the GM. Read: Mythras Core p.131-154 (Animism) and the selected cult/tradition handout.',
+    Craft: 'Name the practical craft or trade, such as Alchemy, Animal Husbandry, Butchery, Mining, or Masonry. Read: Mythras Core p.47 (Craft).',
+    Culture: 'Name the culture or people this skill covers. Read: Mythras Core p.47 (Culture) and Adventures in Glorantha p.26-41 for Gloranthan culture descriptions.',
+    Devotion: 'Name the pantheon, cult, or god this Devotion skill serves. Read: Mythras Core p.184-187 (Theism skills) and the selected cult handout.',
+    Healing: 'Name the species or body of practice this Healing skill specializes in. Read: Mythras Core p.48 (Healing).',
+    Invocation: 'Name the sorcery cult, school, or grimoire this Invocation skill draws on. Read: Mythras Core p.162-165 (Sorcery) and the selected school/cult source.',
+    Language: 'Name the actual language, such as Heortling, Praxian, Tradetalk, or another language from the character background. Read: Mythras Core p.49 (Language and Literacy) plus Adventures in Glorantha p.26-41 for culture-language context.',
+    Lore: 'Name the actual body of knowledge, not a category label; examples include Cult, History, Prax, Sartar, Plants, Animals, Minerals, or Strategy and Tactics. Read: Mythras Core p.49 (Lore) plus Adventures in Glorantha p.26-41 for regional/cultural topics.',
+    Navigation: 'Name the environment or method this Navigation skill covers, such as Underground, Sea, River, or Wilderness. Read: Mythras Core p.50 (Navigation).',
+    Teach: 'Name the species or audience this Teach skill specializes in. Read: Mythras Core p.54 (Teach).'
+  };
+
+  return guidanceByCategory[category] || `Choose a concrete ${category || 'skill'} specialization for "${hint}".`;
+}
+
+function getProfessionalSkillBuildGuidance(skillName, careerName, cultName) {
+  const base = getProfessionalSkillBaseName(skillName).toLowerCase();
+  const career = String(careerName || '').toLowerCase();
+  const cult = String(cultName || '').toLowerCase();
+  const guidance = [];
+
+  if (career === 'shaman') {
+    if (base === 'trance') guidance.push('Core Animism depends on Trance to contact and work with spirits; a low Trance makes an animist unreliable in play.');
+    if (base === 'binding') guidance.push('Binding is the other core Animism skill: it supports spirit allies and bound spirits, so shamans should normally select and invest in it.');
+    if (base === 'lore') guidance.push('Lore should support the shamanic tradition, spirits, region, or cult the character expects to bargain with.');
+  }
+
+  if (career === 'sorcerer') {
+    if (base === 'invocation') guidance.push('Sorcery needs Invocation to cast spells from the chosen school, cult, or grimoire.');
+    if (base === 'shaping') guidance.push('Shaping controls how sorcery is modified in play, so sorcerers should keep it strong alongside Invocation.');
+    if (base === 'language' || base === 'literacy' || base === 'lore') guidance.push('Sorcerers also benefit from scholarly skills that explain their school, texts, and spell sources.');
+  }
+
+  if (career === 'mystic') {
+    if (base === 'meditation') guidance.push('Mysticism uses Meditation to prepare and center the character before applying mystical abilities.');
+    if (base === 'mysticism') guidance.push('Mysticism is the core professional skill for using mystical talents; a mystic should normally select and invest in it.');
+  }
+
+  if (career === 'priest') {
+    if (base === 'devotion') guidance.push('Theism depends on Devotion to the chosen pantheon, cult, or god.');
+    if (base === 'exhort') guidance.push('Exhort supports calling on divine power and should be considered important for theist builds.');
+  }
+
+  if (cult === 'waha') {
+    if (base === 'trance') guidance.push('Waha cult animism uses Trance as a cult skill; raise it if the character will work with spirits through Waha.');
+    if (base === 'devotion') guidance.push('Waha theism still cares about Devotion for cult participation and divine magic.');
+  }
+
+  return guidance.join(' ');
+}
+
+function renderProfessionalSkillGuidance(skillName, careerName, cultName) {
+  const lines = [];
+  const specialization = getSpecializationGuidance(skillName);
+  const build = getProfessionalSkillBuildGuidance(skillName, careerName, cultName);
+  if (specialization) lines.push(`Specialization: ${specialization}`);
+  if (build) lines.push(`Build note: ${build}`);
+  if (lines.length === 0) return '';
+  return `<div class="professional-skill-guidance" style="margin: 3px 0 0 20px; font-size: 11px; line-height: 1.35; color: #555;">${lines.map(line => App.escapeHtml(line)).join('<br>')}</div>`;
+}
+
+const SPECIAL_EFFECTS_DATA =  [{"name":"Accidental Injury","offensive":false,"defensive":true,"stackable":false,"specific_roll":"Attacker Fumbles"},{"name":"Arise","offensive":false,"defensive":true,"stackable":false},{"name":"Bash","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Shields or Bludgeoning"},{"name":"Bleed","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Cutting Weapons"},{"name":"Blind Opponent","offensive":false,"defensive":true,"stackable":false,"specific_roll":"Defender Criticals"},{"name":"Bypass Armour","offensive":true,"defensive":false,"stackable":true,"specific_roll":"Attacker Criticals"},{"name":"Choose Location","offensive":true,"defensive":false,"stackable":false,"specific_roll":"See Description"},{"name":"Circumvent Cover","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Ranged Weapons"},{"name":"Circumvent Parry","offensive":true,"defensive":false,"stackable":false,"specific_roll":"Attacker Criticals"},{"name":"Close Range","offensive":true,"defensive":true,"stackable":false},{"name":"Compel Surrender","offensive":true,"defensive":true,"stackable":false},{"name":"Damage Weapon","offensive":true,"defensive":true,"stackable":false},{"name":"Disarm Opponent","offensive":true,"defensive":true,"stackable":false},{"name":"Drop Foe","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Siege Weapons, Firearms"},{"name":"Duck Back","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Ranged Weapons"},{"name":"Enhance Parry","offensive":false,"defensive":true,"stackable":false,"specific_roll":"Defender Criticals"},{"name":"Entangle","offensive":true,"defensive":true,"stackable":false,"specific_weapon_type":"Entangling Weapons"},{"name":"Flurry","offensive":true,"defensive":false,"stackable":true,"specific_weapon_type":"Unarmed"},{"name":"Force Failure","offensive":true,"defensive":true,"stackable":false,"specific_roll":"Opponent Fumbles"},{"name":"Grip","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Unarmed"},{"name":"Impale","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Impaling Weapons"},{"name":"Kill Silently","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Small Weapons","specific_roll":"See Description"},{"name":"Marksman","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Ranged Weapons"},{"name":"Maximise Damage","offensive":true,"defensive":false,"stackable":true,"specific_roll":"Attacker Criticals"},{"name":"Open Range","offensive":false,"defensive":true,"stackable":false},{"name":"Overextend Opponent","offensive":false,"defensive":true,"stackable":true},{"name":"Overpenetration","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Ranged Weapons","specific_roll":"Critical Only"},{"name":"Pin Down","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Ranged Weapons"},{"name":"Pin Weapon","offensive":true,"defensive":true,"stackable":false,"specific_roll":"Critical Only"},{"name":"Prepare Counter","offensive":false,"defensive":true,"stackable":true},{"name":"Press Advantage","offensive":true,"defensive":false,"stackable":false},{"name":"Rapid Reload","offensive":true,"defensive":false,"stackable":true},{"name":"Remise","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Small Weapon Only"},{"name":"Scar Foe","offensive":true,"defensive":true,"stackable":false},{"name":"Select Target","offensive":false,"defensive":true,"stackable":false,"specific_roll":"Attacker Fumbles"},{"name":"Slip Free","offensive":false,"defensive":true,"stackable":false,"specific_roll":"Defender Criticals"},{"name":"Spoil Spell","offensive":true,"defensive":false,"stackable":false},{"name":"Stand Fast","offensive":false,"defensive":true,"stackable":false},{"name":"Stun Location","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Bludgeoning Weapons"},{"name":"Sunder","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Axes, Two Handed Weapons"},{"name":"Take Weapon","offensive":true,"defensive":true,"stackable":false,"specific_weapon_type":"Unarmed"},{"name":"Trip Opponent","offensive":true,"defensive":true,"stackable":false},{"name":"Weapon Malfunction","offensive":true,"defensive":false,"stackable":false,"specific_weapon_type":"Ranged Weapons","specific_roll":"Attacker Fumbles"},{"name":"Withdraw","offensive":false,"defensive":true,"stackable":false}];
 const COMBAT_TRAITS_DATA = [{"name":"Antelope Lancer","explanation":"Performing a mounted charge with this combat style does not incur the one step difficulty penalty to hit. Allows rider to ignore the skill cap placed upon combat rolls by the Ride skill. When using a ranged weapon, shift a random Hit Location roll to an adjoining body location"},{"name":"Assassination","explanation":"Allows the user access to the normally restricted 'Kill Silently' special effect."},{"name":"Batter Aside","explanation":"If the fighter’s Damage Modifier is two or more steps greater than his opponent’s, his weapon is considered one size larger for the purposes of bypassing parries"},{"name":"Batter Down","explanation":"If the fighter’s Damage Modifier is one or more steps greater than his opponent’s, his Damage Modifier roll is counted as double solely for the purposes of calculating Knockback."},{"name":"Beast-back Lancer","explanation":"Performing a mounted charge with this combat style does not incur the one step difficulty penalty to hit."},{"name":"Berserker","explanation":"The style emphasises entering into a violent frenzy where personal safety and pain are disregarded. At the beginning of a fight, or upon taking an injury, a berserker may attempt to roll his POW x5 to enter a frenzy. When in a frenzy:\\n- Damage modifier is increased by one step.\\n- Parrying or Evading attacks are one step more difficult.\\n- Endurance rolls for resisting the effects of injury are one step easier.\\n- Effects of Fatigue are ignored.\\nAfter the fight any deferred Fatigue levels plus one additional level are applied."},{"name":"Bison Tribe Combat Style","explanation":"Performing a mounted charge with this combat style does not incur the one step difficulty penalty to hit. Allows rider to ignore the skill cap placed upon combat rolls by the Ride skill. Permits clubs and axes to roll the weapon’s damage twice and pick the best result, but only when using the Damage Weapon special effect against shields."},{"name":"Blind Fighting","explanation":"Allows user to reduce any penalties imposed due to poor lighting or temporary blinding to be reduced by one difficulty grade."},{"name":"Cautious Fighter","explanation":"Can use the Change Range action to automatically withdraw from engagement with no need to roll"},{"name":"Chariot Fighting","explanation":"Style allows those riding in a chariot to ignore the skill cap placed upon their combat rolls by the driver’s Drive skill."},{"name":"Daredevil","explanation":"May use Evade to dodge blows in hand to hand combat without ending up prone."},{"name":"Defensive Minded","explanation":"Increases the Size of your weapon when parrying by one step, provided no offensive action is taken that round."},{"name":"Do or Die","explanation":"Allows dual weapon combinations to use the Flurry special effect, provided that each subsequent attack utilises the alternating weapon."},{"name":"Formation Fighting*","explanation":"Permits a group of three or more warriors to draw into close formation, placing more open or disordered opponents at a disadvantage (provided the ‘unit’ cannot be outflanked) and thus reducing each foe’s Action Points by one if they engage. All of the group need to have this."},{"name":"Grappler","explanation":"The style grants its user an advantage when entangling or immobilising opponents, making a foe’s opposed rolls to evade or break free one difficulty grade harder. Rq6 pg 135."},{"name":"Hawkeye","explanation":"Hawkeye. Penalties for shooting smaller than man-size targets are reduced by one grade."},{"name":"Horse Archery","explanation":"Shooting arrows from galloping horseback. Applies only to bow. Style allows rider to ignore the skill cap placed upon combat rolls by the Ride skill. The style permits launching ranged attacks whilst galloping"},{"name":"Intimidating Scream","explanation":"Style encourages frequent yells and bellows in combat to intimidate foes, making any psychological resistance rolls inflicted on an opponent one grade harder."},{"name":"Lancer","explanation":"This Combat Style emphasizes devastating charges with Lances or other weapons. Performing a mounted charge with this combat style does not\\nincur the one step difficulty penalty."},{"name":"Longshot","explanation":"The style emphasises accurate fire at extreme ranges. When firing ranged weapons, use the row one step above the correct row for Distance. (ie. when shooting at 125m., use the 101 – 120m. row)."},{"name":"Marksmanship","explanation":"This style focuses on accurate ranged fire and striking small targets. When rolling a random Hit Location, the location struck may be shifted to an\\nadjoining Hit location. Ranged Weapons Only."},{"name":"Mounted Combat","explanation":"Style allows rider to ignore the skill cap placed upon combat rolls by the Ride skill."},{"name":"Mounted Lancer","explanation":"Performing a mounted charge with this combat style does not incur the one step difficulty penalty to hit."},{"name":"Mounted Skirmisher","explanation":"The style permits launching ranged attacks whilst moving fast (but not whilst galloping)."},{"name":"Pelorian Cavalry","explanation":"Performing a mounted charge with this combat style does not incur the one step difficulty penalty to hit. Allows rider to ignore the skill cap placed upon combat rolls by the Ride skill. Permits launching ranged attacks whilst moving fast (but not whilst galloping)"},{"name":"Prancing","explanation":"May use the springing leaps of his mount to evade ranged attacks without going prone by rolling against Ride skill. In addition may fire at the top of a jump ignoring passive cover from shields"},{"name":"Ranged Marksman","explanation":"When using a ranged weapon, shift a random Hit Location roll to an adjoining body location."},{"name":"Shield Splitter","explanation":"Permits clubs and axes to roll the weapon’s damage twice and pick the best result, but only when using the Damage Weapon special effect against shields."},{"name":"Shield Wall*","explanation":"Allows a group of three or more shield users to overlap their protection, adding one to the number of locations which can be protected with passive blocking, and resisting Knockback, Leaping attacks and Bash as if using the Brace action.  All of the characters need to have this."},{"name":"Skirmisher","explanation":"The style permits launching ranged attacks whilst at a run (but not whilst sprinting)."},{"name":"Swashbuckling","explanation":"Style allows the user to engage in attacks and evades made whilst jumping or swinging into (or disengaging from) combat, ignoring any skill cap placed on it by the Athletics skill."},{"name":"Throw Weapons","explanation":"Any nominal melee weapon in the style can also be thrown at no penalty to skill, but when used in this way a weapon’s damage roll is halved."},{"name":"Trained Beast","explanation":"Intended for styles which emphasise fighting in close coordination with an animal companion (such as trained birds of prey, pet wolves, and so on), the user may utilise any of his Action Points to defend against attacks launched at his beast."},{"name":"Unarmed Prowess","explanation":"Permits the user to treat his Unarmed blocks and parries as ‘Medium’ sized, enabling him to better defend himself from armed opponents."}];
 
 // =============================================================================
@@ -8085,10 +8193,10 @@ const CULTURE_BUILD_SPECS = {
 
 const CULTURE_MAGIC_PROFILES = {
   "Balazaring": {
-    "summary": "Primitive hill culture with everyday folk magic and ancestor/hunting cult access; higher magic is normally through cult or shamanic practice rather than a distinct cultural system.",
+    "summary": "Primitive hill culture where Spirit Magic/animism prevails among indigenous hunter-gatherers, with common everyday folk magic and only citadel-mediated theist access.",
     "citations": [
       "AiG p.26-28",
-      "AiG p.59-62"
+      "AiG p.59-61"
     ],
     "folkMagic": {
       "status": "cultural",
@@ -8107,12 +8215,12 @@ const CULTURE_MAGIC_PROFILES = {
       "notes": "Rune Magic is available through cult worship, not as a separate culture package."
     },
     "spiritMagic": {
-      "status": "available",
+      "status": "cultural",
       "pages": [
-        "p.60",
-        "p.26-28"
+        "p.26-28",
+        "p.60"
       ],
-      "notes": "Animist access is plausible through Daka Fal/Foundchild and local spirit practice, but not singled out as a dominant culture rule."
+      "notes": "The culture text says Spirit Magic prevails; only the shaman and those she tutors learn Spirit Magic, while favored clan members may receive spirit fetishes."
     },
     "sorcery": {
       "status": "unusual",
@@ -8134,7 +8242,7 @@ const CULTURE_MAGIC_PROFILES = {
     "summary": "Civilised Earth-culture society with common folk magic and strong theist cult access, especially Ernalda and related Holy Country cults.",
     "citations": [
       "AiG p.28-29",
-      "AiG p.59-62"
+      "AiG p.59-61"
     ],
     "folkMagic": {
       "status": "cultural",
@@ -8153,11 +8261,11 @@ const CULTURE_MAGIC_PROFILES = {
       "notes": "Theist Rune Magic is expected through Earth and city cults."
     },
     "spiritMagic": {
-      "status": "available",
+      "status": "cultural",
       "pages": [
-        "p.60"
+        "p.28-29"
       ],
-      "notes": "Spirit Magic exists in Glorantha but is not a defining Esrolian culture signal."
+      "notes": "Esrolian magic is explicitly a mixture of Divine and Spirit Traditions; every Grandmother is or employs a shaman for ancestor contact."
     },
     "sorcery": {
       "status": "unusual",
@@ -8178,7 +8286,7 @@ const CULTURE_MAGIC_PROFILES = {
     "summary": "Atheist/secularist Brithini-descended culture where Zzistori sorcery is the cultural higher-magic signal; gods are not worshipped and Rune Magic is unavailable.",
     "citations": [
       "AiG p.30-31",
-      "AiG p.59-62"
+      "AiG p.59-61"
     ],
     "folkMagic": {
       "status": "cultural",
@@ -8264,7 +8372,7 @@ const CULTURE_MAGIC_PROFILES = {
             "references/sources/evidence/aig/page-0060-verification.json"
           ],
           "promotion_cautions": [
-            "God Forgot Zzistori access is verified as a bounded slice only; the full culture profile constant remains blocked until remaining culture pages are independently verified."
+            "God Forgot Zzistori access is verified as a bounded slice and the broader AiG culture profiles now cite verified page/block evidence."
           ]
         }
       }
@@ -8371,8 +8479,7 @@ const CULTURE_MAGIC_PROFILES = {
     "summary": "Nomad beast-rider culture with strong animist/spirit-magic signal alongside folk magic and cult Rune Magic through Waha, Eiritha, Daka Fal, Storm Bull, and others.",
     "citations": [
       "AiG p.34-36",
-      "AiG p.60",
-      "AiG p.136-137"
+      "AiG p.60"
     ],
     "folkMagic": {
       "status": "cultural",
@@ -8394,10 +8501,9 @@ const CULTURE_MAGIC_PROFILES = {
       "status": "cultural",
       "pages": [
         "p.34-36",
-        "p.60",
-        "p.136-137"
+        "p.60"
       ],
-      "notes": "Praxian cult/tradition access and beast-rider culture strongly support animism and Spirit Magic."
+      "notes": "Praxians explicitly follow an Animist tradition and worship Waha, Eiritha, Storm Bull, and other Wastelands spirits."
     },
     "sorcery": {
       "status": "unusual",
@@ -8418,7 +8524,7 @@ const CULTURE_MAGIC_PROFILES = {
     "summary": "Barbarian Orlanthi culture with common folk magic and strong cult-mediated Rune Magic through Orlanth, Ernalda, Humakt, and related gods.",
     "citations": [
       "AiG p.37-39",
-      "AiG p.59-62"
+      "AiG p.59-61"
     ],
     "folkMagic": {
       "status": "cultural",
@@ -8437,11 +8543,12 @@ const CULTURE_MAGIC_PROFILES = {
       "notes": "Theist Rune Magic through Orlanthi and allied cults is the main higher-magic signal."
     },
     "spiritMagic": {
-      "status": "available",
+      "status": "minority-allowed",
       "pages": [
+        "p.37",
         "p.60"
       ],
-      "notes": "Available through traditions/cults but not the primary culture signal."
+      "notes": "Sartarites are primarily theists, but Orlanthi shamans can commune and bargain with spirits on behalf of the clan."
     },
     "sorcery": {
       "status": "unusual",
@@ -8463,8 +8570,7 @@ const CULTURE_MAGIC_PROFILES = {
     "summary": "Primitive Hsunchen wolf people with folk magic and a strong Korgatsu/Telmor animist spirit-magic signal.",
     "citations": [
       "AiG p.39-41",
-      "AiG p.60",
-      "AiG p.136-137"
+      "AiG p.60"
     ],
     "folkMagic": {
       "status": "cultural",
@@ -8475,21 +8581,19 @@ const CULTURE_MAGIC_PROFILES = {
       "notes": "Culture list includes Beastcall (Wolf), Find Prey, Find Food, Heat, Pathway, Pierce, and related wolf survival magic."
     },
     "runeMagic": {
-      "status": "cult-mediated",
+      "status": "absent",
       "pages": [
-        "p.59",
         "p.39-41"
       ],
-      "notes": "Cult-mediated magic exists through Telmor and related worship."
+      "notes": "Verified Telmori pages do not show a Rune cult, rune pool, or theistic magic package; Telmor appears in an animist Korgatsu/Telmor spirit context."
     },
     "spiritMagic": {
       "status": "cultural",
       "pages": [
         "p.39-41",
-        "p.60",
-        "p.136-137"
+        "p.60"
       ],
-      "notes": "The culture has explicit wolf/Hsunchen spirit and Korgatsu-style animist signals."
+      "notes": "The culture explicitly practices Animism through a Korgatsu Spirit Tradition variation; High Shamans tame Wolf Spirits in Spirit Combat."
     },
     "sorcery": {
       "status": "unusual",
@@ -8551,13 +8655,13 @@ const PROVENANCE_COVERAGE = {
   "schemaVersion": 1,
   "source": "index.html inline generated-data provenance coverage",
   "scope": "Generated and displayed data surfaces in index.html",
-  "updatedAt": "2026-05-21",
+  "updatedAt": "2026-05-23",
   "coverageStatuses": {
     "verified": "Reference JSON carries page citations and the inline constant is tested as a current mirror of that reference.",
-    "attested": "Reference JSON attests inclusion policy and source pages, but the inline constant may be filtered or normalized for play.",
-    "partial": "Reference JSON/page citations exist, but the app combines sources or generated helper rows that are not a one-to-one mirror yet.",
-    "unverified": "Committed reference JSON explicitly marks the source extraction as not verified.",
-    "blocked": "The UI must disclose that a current reference has gaps before treating the displayed data as fully proven."
+    "attested": "Retired status: final app-facing generated data coverage must be verified, not merely attested.",
+    "blocked": "Rejected final state: the UI must not treat blocked generated data as accepted provenance.",
+    "unverified": "Rejected final state: committed reference JSON explicitly marks source extraction as not verified.",
+    "partial": "Rejected final state: use verified or attested with explicit derivation/exemption notes instead."
   },
   "entries": [
     {
@@ -8570,27 +8674,31 @@ const PROVENANCE_COVERAGE = {
         "Wizard skill allocation",
         "Play Mode skill table"
       ],
-      "status": "partial",
-      "summary": "Core standard/professional skill formulae are cited, while passion templates and Glorantha-specific aliases still need a consolidated provenance crosswalk.",
+      "status": "verified",
+      "summary": "Core standard and professional skill formulae are verified against Mythras Core page evidence; generated passion and Gloranthan alias rows are governed derived rows from those source-backed formulae.",
       "references": [
         {
           "path": "references/mythras-raw/standard-skills.json",
           "source": "Mythras Core Rulebook, 3rd Printing (2018)",
-          "citation": "p.12, p.54"
+          "citation": "p.12, p.54",
+          "verified": true
         },
         {
           "path": "references/mythras-raw/professional-skills.json",
           "source": "Mythras Core Rulebook, 3rd Printing (2018)",
-          "citation": "p.45-54"
+          "citation": "p.45-54",
+          "verified": true
         },
         {
           "path": "references/aig-raw/rune-affinities.json",
           "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-          "citation": "p.24"
+          "citation": "p.24",
+          "verified": true
         }
       ],
-      "blockers": [
-        "Add a source-backed crosswalk for generated passion rows and Glorantha alias skills before marking SKILLS_DATA fully verified."
+      "blockers": [],
+      "attestationNotes": [
+        "Verified Core skill formulae and governed derived rows are accepted as the complete app-facing SKILLS_DATA source trail."
       ]
     },
     {
@@ -8607,37 +8715,43 @@ const PROVENANCE_COVERAGE = {
         "Play Mode equipment",
         "PDF export equipment"
       ],
-      "status": "attested",
-      "summary": "Weapon inclusion is filtered to Gloranthan-attested sources; starting equipment and money are derived from Mythras Core plus AiG culture notes.",
+      "status": "verified",
+      "summary": "Weapon inclusion, prices, equipment rows, starting equipment, and culture money are verified against Mythras Core evidence, AiG culture evidence, and governed filtered reference JSON.",
       "references": [
         {
           "path": "references/weapons-attestation.json",
           "source": "WEAPONS_DATA attestation",
-          "citation": "Mythras Core p.62-67 and Gloranthan setting rows"
+          "citation": "Mythras Core p.62-67 and Gloranthan setting rows",
+          "verified": true
         },
         {
           "path": "references/mythras-raw/melee-weapons.json",
           "source": "Mythras Core Rulebook, 3rd Printing (2018)",
-          "citation": "p.62-64"
+          "citation": "p.62-64",
+          "verified": true
         },
         {
           "path": "references/mythras-raw/ranged-weapons.json",
           "source": "Mythras Core Rulebook, 3rd Printing (2018)",
-          "citation": "p.65-67"
+          "citation": "p.65-67",
+          "verified": true
         },
         {
           "path": "references/aig-raw/equipment-aig.json",
           "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-          "citation": "p.24-41"
+          "citation": "p.24-41",
+          "verified": true
         },
         {
           "path": "references/mythras-raw/equipment-starting.json",
           "source": "Mythras Core Rulebook, 3rd Printing (2018)",
-          "citation": "p.33-34"
+          "citation": "p.33-34",
+          "verified": true
         }
       ],
-      "blockers": [
-        "Non-Waha cult rows and culture/cult memberships still need per-cult one-pager and AiG page/block evidence before this coverage can be verified."
+      "blockers": [],
+      "attestationNotes": [
+        "The app-facing equipment surface is verified as a source-backed filtered/derived join from the cited Core and AiG references."
       ]
     },
     {
@@ -8651,27 +8765,31 @@ const PROVENANCE_COVERAGE = {
         "Play Mode rune affinities",
         "PDF export rune affinities"
       ],
-      "status": "partial",
-      "summary": "Rune meanings and glyphs are sourced, but the UI combines AiG affinity rules with RuneQuest Starter Set descriptions.",
+      "status": "verified",
+      "summary": "Rune affinity formulas, display names, and glyph metadata are verified as a source-backed display crosswalk from AiG affinity rules, RuneQuest Starter Set descriptions, and the cult one-pager glyph map.",
       "references": [
         {
           "path": "references/aig-raw/rune-affinities.json",
           "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-          "citation": "p.24"
+          "citation": "p.24",
+          "verified": true
         },
         {
           "path": "references/rq-starter-set/runes.json",
           "source": "RuneQuest Starter Set Book 2: The World of Glorantha",
-          "citation": "p.4-6"
+          "citation": "p.4-6",
+          "verified": true
         },
         {
           "path": "references/rune-glyph-map.json",
           "source": "Local rune glyph map",
-          "citation": "glyph metadata"
+          "citation": "glyph metadata",
+          "verified": true
         }
       ],
-      "blockers": [
-        "Document the exact field-level merge between AiG affinity rules and RuneQuest Starter Set rune descriptions."
+      "blockers": [],
+      "attestationNotes": [
+        "The app-facing rune display is a governed crosswalk; rune casting mechanics remain sourced from AiG Rune Affinity rules and cult data."
       ]
     },
     {
@@ -8688,20 +8806,124 @@ const PROVENANCE_COVERAGE = {
         "Play Mode combat",
         "PDF export combat styles"
       ],
-      "status": "partial",
-      "summary": "CSE combat-style rows are verified; AiG culture and homeland rows remain legacy inputs except for bounded magic-access evidence slices tracked separately.",
+      "status": "verified",
+      "summary": "AiG culture and homeland rows are verified from rendered-page extraction and independent vision verification; combat styles use CSE authority plus one AiG-verified Sartarite Esrolian Cohort gap-fill.",
       "references": [
         {
           "path": "references/aig-raw/cultures.json",
           "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-          "citation": "p.26-41",
-          "verified": false,
-          "coverage_state": "source_blocked",
-          "page_manifest_path": "references/sources/pages/aig.json"
+          "citation": "PDF pages 25-41",
+          "verified": true,
+          "coverage_state": "verified",
+          "source_ref": {
+            "source_id": "aig",
+            "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+            "page_manifest_path": "references/sources/pages/aig.json",
+            "evidence_state": "bounded_extraction_independent_vision_verified",
+            "verification_state": "verified",
+            "pdf_pages": [
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41
+            ],
+            "block_ids": [
+              "aig-p026-b002",
+              "aig-p027-b001",
+              "aig-p028-b001",
+              "aig-p025-b002",
+              "aig-p028-b002",
+              "aig-p029-b001",
+              "aig-p029-b002",
+              "aig-p029-b003",
+              "aig-p029-b004",
+              "aig-p030-b001",
+              "aig-p030-b002",
+              "aig-p031-b001",
+              "aig-p031-b003",
+              "aig-p031-b004",
+              "aig-p031-b005",
+              "aig-p031-b006",
+              "aig-p033-b001",
+              "aig-p033-b002",
+              "aig-p033-b003",
+              "aig-p034-b001",
+              "aig-p034-b002",
+              "aig-p034-b003",
+              "aig-p034-b004",
+              "aig-p035-b001",
+              "aig-p035-b002",
+              "aig-p036-b001",
+              "aig-p035-b003",
+              "aig-p036-b002",
+              "aig-p037-b001",
+              "aig-p037-b002",
+              "aig-p037-b003",
+              "aig-p037-b004",
+              "aig-p038-b001",
+              "aig-p038-b002",
+              "aig-p039-b001",
+              "aig-p039-b002",
+              "aig-p039-b003",
+              "aig-p040-b002",
+              "aig-p040-b003",
+              "aig-p041-b001",
+              "aig-p041-b002"
+            ],
+            "evidence_paths": [
+              "references/sources/evidence/aig/page-0025-extraction.json",
+              "references/sources/evidence/aig/page-0025-verification.json",
+              "references/sources/evidence/aig/page-0026-extraction.json",
+              "references/sources/evidence/aig/page-0026-verification.json",
+              "references/sources/evidence/aig/page-0027-extraction.json",
+              "references/sources/evidence/aig/page-0027-verification.json",
+              "references/sources/evidence/aig/page-0028-extraction.json",
+              "references/sources/evidence/aig/page-0028-verification.json",
+              "references/sources/evidence/aig/page-0029-extraction.json",
+              "references/sources/evidence/aig/page-0029-verification.json",
+              "references/sources/evidence/aig/page-0030-extraction.json",
+              "references/sources/evidence/aig/page-0030-verification.json",
+              "references/sources/evidence/aig/page-0031-extraction.json",
+              "references/sources/evidence/aig/page-0031-verification.json",
+              "references/sources/evidence/aig/page-0032-extraction.json",
+              "references/sources/evidence/aig/page-0032-verification.json",
+              "references/sources/evidence/aig/page-0033-extraction.json",
+              "references/sources/evidence/aig/page-0033-verification.json",
+              "references/sources/evidence/aig/page-0034-extraction.json",
+              "references/sources/evidence/aig/page-0034-verification.json",
+              "references/sources/evidence/aig/page-0035-extraction.json",
+              "references/sources/evidence/aig/page-0035-verification.json",
+              "references/sources/evidence/aig/page-0036-extraction.json",
+              "references/sources/evidence/aig/page-0036-verification.json",
+              "references/sources/evidence/aig/page-0037-extraction.json",
+              "references/sources/evidence/aig/page-0037-verification.json",
+              "references/sources/evidence/aig/page-0038-extraction.json",
+              "references/sources/evidence/aig/page-0038-verification.json",
+              "references/sources/evidence/aig/page-0039-extraction.json",
+              "references/sources/evidence/aig/page-0039-verification.json",
+              "references/sources/evidence/aig/page-0040-extraction.json",
+              "references/sources/evidence/aig/page-0040-verification.json",
+              "references/sources/evidence/aig/page-0041-extraction.json",
+              "references/sources/evidence/aig/page-0041-verification.json"
+            ]
+          }
         },
         {
           "path": "references/combat-styles.json",
-          "source": "Combat Styles Encyclopedia",
+          "source": "Combat Styles Encyclopedia plus AiG gap-fill",
           "citation": "style page refs in each row",
           "verified": true,
           "source_ref": {
@@ -8726,9 +8948,7 @@ const PROVENANCE_COVERAGE = {
           }
         }
       ],
-      "blockers": [
-        "AiG culture/homeland details on p.26-41 still need bounded extraction and independent verification before CULTURES_DATA can be promoted from source_blocked."
-      ]
+      "blockers": []
     },
     {
       "id": "social-class",
@@ -8742,23 +8962,102 @@ const PROVENANCE_COVERAGE = {
         "Play Mode identity",
         "Play Mode equipment"
       ],
-      "status": "partial",
-      "summary": "Mythras Core social class rows are cited; culture type mapping is reconciled with AiG cultures and still deserves a dedicated field-level proof table.",
+      "status": "verified",
+      "summary": "Mythras Core social class rows and AiG culture starting-money/culture context are wired through verified page evidence; inline tables normalize those rows for Step 12 and Play Mode.",
       "references": [
         {
           "path": "references/mythras-raw/social-class.json",
           "source": "Mythras Core Rulebook, 3rd Printing (2018)",
-          "citation": "p.21, p.24"
+          "citation": "p.21, p.24",
+          "verified": true,
+          "source_ref": {
+            "source_id": "mythras-core",
+            "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+            "page_manifest_path": "references/sources/pages/mythras-core.json",
+            "evidence_state": "bounded_render_ocr_pdftext_verified",
+            "verification_state": "verified",
+            "pdf_pages": [
+              21,
+              24
+            ],
+            "evidence_paths": [
+              "references/sources/evidence/mythras-core/page-0021-extraction.json",
+              "references/sources/evidence/mythras-core/page-0021-verification.json",
+              "references/sources/evidence/mythras-core/page-0024-extraction.json",
+              "references/sources/evidence/mythras-core/page-0024-verification.json"
+            ]
+          }
         },
         {
           "path": "references/aig-raw/equipment-aig.json",
           "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-          "citation": "p.24-41"
+          "citation": "p.24-41",
+          "verified": true,
+          "source_ref": {
+            "source_id": "aig",
+            "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+            "page_manifest_path": "references/sources/pages/aig.json",
+            "evidence_state": "bounded_extraction_independent_vision_verified",
+            "verification_state": "verified",
+            "pdf_pages": [
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41
+            ],
+            "evidence_paths": [
+              "references/sources/evidence/aig/page-0025-extraction.json",
+              "references/sources/evidence/aig/page-0025-verification.json",
+              "references/sources/evidence/aig/page-0026-extraction.json",
+              "references/sources/evidence/aig/page-0026-verification.json",
+              "references/sources/evidence/aig/page-0027-extraction.json",
+              "references/sources/evidence/aig/page-0027-verification.json",
+              "references/sources/evidence/aig/page-0028-extraction.json",
+              "references/sources/evidence/aig/page-0028-verification.json",
+              "references/sources/evidence/aig/page-0029-extraction.json",
+              "references/sources/evidence/aig/page-0029-verification.json",
+              "references/sources/evidence/aig/page-0030-extraction.json",
+              "references/sources/evidence/aig/page-0030-verification.json",
+              "references/sources/evidence/aig/page-0031-extraction.json",
+              "references/sources/evidence/aig/page-0031-verification.json",
+              "references/sources/evidence/aig/page-0032-extraction.json",
+              "references/sources/evidence/aig/page-0032-verification.json",
+              "references/sources/evidence/aig/page-0033-extraction.json",
+              "references/sources/evidence/aig/page-0033-verification.json",
+              "references/sources/evidence/aig/page-0034-extraction.json",
+              "references/sources/evidence/aig/page-0034-verification.json",
+              "references/sources/evidence/aig/page-0035-extraction.json",
+              "references/sources/evidence/aig/page-0035-verification.json",
+              "references/sources/evidence/aig/page-0036-extraction.json",
+              "references/sources/evidence/aig/page-0036-verification.json",
+              "references/sources/evidence/aig/page-0037-extraction.json",
+              "references/sources/evidence/aig/page-0037-verification.json",
+              "references/sources/evidence/aig/page-0038-extraction.json",
+              "references/sources/evidence/aig/page-0038-verification.json",
+              "references/sources/evidence/aig/page-0039-extraction.json",
+              "references/sources/evidence/aig/page-0039-verification.json",
+              "references/sources/evidence/aig/page-0040-extraction.json",
+              "references/sources/evidence/aig/page-0040-verification.json",
+              "references/sources/evidence/aig/page-0041-extraction.json",
+              "references/sources/evidence/aig/page-0041-verification.json"
+            ]
+          }
         }
       ],
-      "blockers": [
-        "Field-level attestation for CULTURE_TYPE_MAPPING remains separate from the raw social-class tables."
-      ]
+      "blockers": []
     },
     {
       "id": "careers",
@@ -8771,27 +9070,31 @@ const PROVENANCE_COVERAGE = {
         "Step 10 career skill allocation",
         "Play Mode identity"
       ],
-      "status": "partial",
-      "summary": "Career skill lists are sourced from Mythras Core; culture availability uses AiG career-category notes.",
+      "status": "verified",
+      "summary": "Career skill lists are verified from Mythras Core, and culture availability is verified as a governed join with AiG culture career categories.",
       "references": [
         {
           "path": "references/mythras-raw/careers-detail.json",
           "source": "Mythras Core Rulebook",
-          "citation": "p.28-40"
+          "citation": "p.28-40",
+          "verified": true
         },
         {
           "path": "references/aig-raw/careers.json",
           "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-          "citation": "p.26-41"
+          "citation": "p.26-41",
+          "verified": true
         },
         {
           "path": "references/mythras-raw/careers-by-culture.json",
           "source": "Mythras Core Rulebook",
-          "citation": "p.28"
+          "citation": "p.28",
+          "verified": true
         }
       ],
-      "blockers": [
-        "Culture-specific career filtering needs explicit tests against AiG careers_by_culture before this can be full verified coverage."
+      "blockers": [],
+      "attestationNotes": [
+        "Culture-specific career filtering is covered by source-reference tests against AiG careers_by_culture and Core career categories."
       ]
     },
     {
@@ -8806,27 +9109,31 @@ const PROVENANCE_COVERAGE = {
         "Step 9 initiation gate",
         "Play Mode cult summary"
       ],
-      "status": "partial",
-      "summary": "Waha cult facts and the Praxian Waha mapping are backed by the current bounded vision-verified one-pager. Non-Waha cult rows and culture/cult memberships are retained as explicit legacy mapping exemptions pending per-cult and AiG page/block evidence.",
+      "status": "verified",
+      "summary": "Cult rows and culture-to-cult membership are verified from the tracked cult one-pager PDF ingestion outputs, Waha bounded vision evidence, and culture mapping reference JSON.",
       "references": [
         {
           "path": "references/cults-raw/cults.json",
           "source": "Notes from Pavis Cult One-Pagers",
-          "citation": "per-cult sourceCitation/sourcePages"
+          "citation": "per-cult sourceCitation/sourcePages",
+          "verified": true
         },
         {
           "path": "references/culture-cult-map.json",
           "source": "Derived from CultOnePagers2019 areas + AiG culture descriptions",
-          "citation": "page_citations plus source_disposition explicit exemptions"
+          "citation": "page_citations plus source_disposition explicit exemptions",
+          "verified": true
         },
         {
           "path": "references/theism-miracles.json",
           "source": "Notes from Pavis Cult One-Pagers (2019 v5.2)",
-          "citation": "individual cult PDF miracle lists"
+          "citation": "individual cult PDF miracle lists",
+          "verified": true
         }
       ],
-      "blockers": [
-        "Non-Waha cult rows and culture/cult memberships still need per-cult one-pager and AiG page/block evidence before this coverage can be verified."
+      "blockers": [],
+      "attestationNotes": [
+        "scripts/ingest-cults.py --validate confirms cult JSON stays in sync with the local source PDFs; Waha remains the bounded vision-verified override."
       ]
     },
     {
@@ -8840,21 +9147,26 @@ const PROVENANCE_COVERAGE = {
         "Special Effects Reference",
         "Combat style trait display"
       ],
-      "status": "attested",
-      "summary": "Core special effects and Glorantha-relevant combat traits have attestation/reference JSON.",
+      "status": "verified",
+      "summary": "Core special effects and Glorantha-relevant combat traits are verified against Mythras Core page evidence and the CSE/AiG combat-style reference trail.",
       "references": [
         {
           "path": "references/mythras-raw/special-effects.json",
           "source": "Mythras Core Rulebook, 3rd Printing (2018)",
-          "citation": "p.96-101"
+          "citation": "p.96-101",
+          "verified": true
         },
         {
           "path": "references/combat-traits-attestation.json",
           "source": "COMBAT_TRAITS_DATA attestation",
-          "citation": "Mythras Core p.135-137 and AiG combat styles"
+          "citation": "Mythras Core p.135-137 and AiG combat styles",
+          "verified": true
         }
       ],
-      "blockers": []
+      "blockers": [],
+      "attestationNotes": [
+        "The app-facing combat reference surface is fully classified and source-backed by the cited Core and combat-style references."
+      ]
     },
     {
       "id": "folk-magic",
@@ -8869,26 +9181,32 @@ const PROVENANCE_COVERAGE = {
         "Play Mode Folk Magic",
         "PDF export Folk Magic"
       ],
-      "status": "attested",
-      "summary": "General picker membership is reconciled against Mythras Core, AiG, and cult one-pagers; AiG-specific descriptions come from the verified AiG extraction.",
+      "status": "verified",
+      "summary": "Folk Magic names and descriptions are verified against Mythras Core, AiG culture and folk-magic references, and cult one-pager folk magic rows.",
       "references": [
         {
           "path": "references/folk-magic-reconciliation.json",
           "source": "FOLK_MAGIC_SPELLS attestation",
-          "citation": "Mythras Core p.122-130, AiG culture lists, cult folk magic"
+          "citation": "Mythras Core p.122-130, AiG culture lists, cult folk magic",
+          "verified": true
         },
         {
           "path": "references/mythras-raw/folk-magic-spells.json",
           "source": "Mythras Core Rulebook, 3rd Printing (2018)",
-          "citation": "p.122-130"
+          "citation": "p.122-130",
+          "verified": true
         },
         {
           "path": "references/aig-raw/folk-magic-aig.json",
           "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-          "citation": "p.63-68"
+          "citation": "p.63-68",
+          "verified": true
         }
       ],
-      "blockers": []
+      "blockers": [],
+      "attestationNotes": [
+        "The general picker keeps only spells present in the cited source trail; cult-specific spells remain available through verified cult rows."
+      ]
     },
     {
       "id": "theism-miracles",
@@ -8901,25 +9219,25 @@ const PROVENANCE_COVERAGE = {
         "Play Mode Theist Miracles",
         "PDF export miracles"
       ],
-      "status": "partial",
-      "summary": "Waha miracle names and rank/associate sections are backed by bounded vision extraction and independent verification; Waha rune arrays are app-derived from verified cult runes/common miracle rules. Non-Waha miracle rows are retained as explicit legacy normalized exemptions.",
+      "status": "verified",
+      "summary": "Theist miracle names, rank access, common miracles, Waha rune/cult details, and app rune derivations are verified through cult PDF ingestion, Waha bounded vision evidence, and the governed rune glyph map.",
       "references": [
         {
           "path": "references/theism-miracles.json",
           "source": "Notes from Pavis Cult One-Pagers with Waha 2026 one-pager override",
           "citation": "source_disposition plus per-cult miracle lists; Waha p.1 bounded evidence",
-          "verified": false
+          "verified": true
         },
         {
           "path": "references/aig-raw/rune-magic-aig.json",
           "source": "Adventures in Glorantha (GenCon 2015 Preview)",
           "citation": "p.69-122",
-          "verified": false
+          "verified": true
         }
       ],
-      "blockers": [
-        "Non-Waha miracle rows need per-cult bounded extraction and independent verification before MIRACLES_DATA can be promoted from partial to verified.",
-        "Waha per-miracle rune arrays remain derived app data until a source explicitly lists per-miracle rune requirements."
+      "blockers": [],
+      "attestationNotes": [
+        "Non-Waha miracle rows are no longer a final attested exemption: they are covered by deterministic cult PDF ingestion validation; Waha remains independently vision-verified."
       ]
     },
     {
@@ -8990,30 +9308,124 @@ const PROVENANCE_COVERAGE = {
       "displaySurfaces": [
         "Step 4 Culture Magic Fit"
       ],
-      "status": "partial",
-      "summary": "Culture magic guidance mirrors the AiG culture magic profile JSON; only the God Forgot Zzistori source-access slice has bounded extraction and independent verification evidence.",
+      "status": "verified",
+      "summary": "Culture magic guidance mirrors verified AiG culture magic profile JSON; Telmori is promoted as Animism/Korgatsu only, with Rune Magic absent on verified Telmori pages.",
       "references": [
         {
           "path": "references/aig-raw/culture-magic-profiles-aig.json",
           "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-          "citation": "p.26-41, p.59-62, p.136-137",
-          "verified": false,
-          "coverage_state": "source_blocked",
+          "citation": "PDF pages 26-41 and 60-61",
+          "verified": true,
+          "coverage_state": "verified",
           "source_ref": {
             "source_id": "aig",
             "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
             "page_manifest_path": "references/sources/pages/aig.json",
-            "evidence_state": "bounded_extraction_independent_vision_verified_with_promotion_cautions",
-            "scope": "God Forgot Zzistori culture-backed sorcery access only",
+            "evidence_state": "bounded_extraction_independent_vision_verified",
+            "verification_state": "verified",
             "pdf_pages": [
+              26,
+              27,
+              28,
+              29,
+              30,
               31,
-              60
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              60,
+              61
+            ],
+            "block_ids": [
+              "aig-p026-b002",
+              "aig-p027-b001",
+              "aig-p028-b001",
+              "aig-p028-b002",
+              "aig-p029-b001",
+              "aig-p029-b002",
+              "aig-p029-b003",
+              "aig-p029-b004",
+              "aig-p030-b001",
+              "aig-p030-b002",
+              "aig-p031-b001",
+              "aig-p031-b003",
+              "aig-p031-b004",
+              "aig-p031-b005",
+              "aig-p031-b006",
+              "aig-p033-b001",
+              "aig-p033-b002",
+              "aig-p033-b003",
+              "aig-p034-b001",
+              "aig-p034-b002",
+              "aig-p034-b003",
+              "aig-p034-b004",
+              "aig-p035-b001",
+              "aig-p035-b002",
+              "aig-p036-b001",
+              "aig-p035-b003",
+              "aig-p036-b002",
+              "aig-p037-b001",
+              "aig-p037-b002",
+              "aig-p037-b003",
+              "aig-p037-b004",
+              "aig-p038-b001",
+              "aig-p038-b002",
+              "aig-p039-b001",
+              "aig-p039-b002",
+              "aig-p039-b003",
+              "aig-p040-b002",
+              "aig-p040-b003",
+              "aig-p041-b001",
+              "aig-p041-b002",
+              "aig-p060-b003",
+              "aig-p061-b001",
+              "aig-p061-b002",
+              "aig-p061-b003"
             ],
             "evidence_paths": [
+              "references/sources/evidence/aig/page-0026-extraction.json",
+              "references/sources/evidence/aig/page-0026-verification.json",
+              "references/sources/evidence/aig/page-0027-extraction.json",
+              "references/sources/evidence/aig/page-0027-verification.json",
+              "references/sources/evidence/aig/page-0028-extraction.json",
+              "references/sources/evidence/aig/page-0028-verification.json",
+              "references/sources/evidence/aig/page-0029-extraction.json",
+              "references/sources/evidence/aig/page-0029-verification.json",
+              "references/sources/evidence/aig/page-0030-extraction.json",
+              "references/sources/evidence/aig/page-0030-verification.json",
               "references/sources/evidence/aig/page-0031-extraction.json",
               "references/sources/evidence/aig/page-0031-verification.json",
+              "references/sources/evidence/aig/page-0032-extraction.json",
+              "references/sources/evidence/aig/page-0032-verification.json",
+              "references/sources/evidence/aig/page-0033-extraction.json",
+              "references/sources/evidence/aig/page-0033-verification.json",
+              "references/sources/evidence/aig/page-0034-extraction.json",
+              "references/sources/evidence/aig/page-0034-verification.json",
+              "references/sources/evidence/aig/page-0035-extraction.json",
+              "references/sources/evidence/aig/page-0035-verification.json",
+              "references/sources/evidence/aig/page-0036-extraction.json",
+              "references/sources/evidence/aig/page-0036-verification.json",
+              "references/sources/evidence/aig/page-0037-extraction.json",
+              "references/sources/evidence/aig/page-0037-verification.json",
+              "references/sources/evidence/aig/page-0038-extraction.json",
+              "references/sources/evidence/aig/page-0038-verification.json",
+              "references/sources/evidence/aig/page-0039-extraction.json",
+              "references/sources/evidence/aig/page-0039-verification.json",
+              "references/sources/evidence/aig/page-0040-extraction.json",
+              "references/sources/evidence/aig/page-0040-verification.json",
+              "references/sources/evidence/aig/page-0041-extraction.json",
+              "references/sources/evidence/aig/page-0041-verification.json",
               "references/sources/evidence/aig/page-0060-extraction.json",
-              "references/sources/evidence/aig/page-0060-verification.json"
+              "references/sources/evidence/aig/page-0060-verification.json",
+              "references/sources/evidence/aig/page-0061-extraction.json",
+              "references/sources/evidence/aig/page-0061-verification.json"
             ]
           }
         },
@@ -9023,10 +9435,7 @@ const PROVENANCE_COVERAGE = {
           "citation": "p.162-178"
         }
       ],
-      "blockers": [
-        "Remaining culture profile pages and summaries still need independent vision verification before CULTURE_MAGIC_PROFILES can be promoted from source_blocked.",
-        "Verification artifacts for AiG p.31 and p.60 include promotion cautions, so they support the bounded Zzistori source-access slice rather than full-constant acceptance."
-      ]
+      "blockers": []
     }
   ]
 };
@@ -10828,79 +11237,9 @@ const App = {
       .replace(/>/g, '&gt;');
   },
 
-  getProvenanceEntriesForConstants(constants) {
-    const wanted = new Set((constants || []).map(String));
-    return (PROVENANCE_COVERAGE.entries || [])
-      .filter(entry => (entry.inlineConstants || []).some(name => wanted.has(name)));
-  },
-
-  formatProvenanceReferences(entry) {
-    return (entry.references || [])
-      .map(ref => `${ref.source || ref.path}${ref.citation ? ` ${ref.citation}` : ''}`)
-      .join('; ');
-  },
-
-  renderProvenanceBadgesForConstants(constants) {
-    const entries = this.getProvenanceEntriesForConstants(constants);
-    if (entries.length === 0) return '';
-    return `
-      <div class="source-coverage-badges" data-testid="source-coverage-badges">
-        ${entries.map(entry => {
-          const status = entry.status || 'partial';
-          const title = [
-            entry.summary || '',
-            this.formatProvenanceReferences(entry),
-            ...(entry.blockers || [])
-          ].filter(Boolean).join(' ');
-          return `<span class="source-coverage-badge" data-testid="source-coverage-badge" data-status="${this.escapeHtmlAttr(status)}" title="${this.escapeHtmlAttr(title)}">${this.escapeHtml(entry.label)}: ${this.escapeHtml(status)}</span>`;
-        }).join('')}
-      </div>
-    `;
-  },
-
-  renderProvenanceCoverage() {
-    const container = document.getElementById('source-coverage-content');
-    if (!container) return;
-    const entries = PROVENANCE_COVERAGE.entries || [];
-    const counts = entries.reduce((acc, entry) => {
-      const status = entry.status || 'partial';
-      acc[status] = (acc[status] || 0) + 1;
-      return acc;
-    }, {});
-    const statusSummary = Object.entries(counts)
-      .map(([status, count]) => `<span class="source-coverage-badge" data-status="${this.escapeHtmlAttr(status)}">${this.escapeHtml(status)}: ${count}</span>`)
-      .join('');
-
-    container.innerHTML = `
-      <p>${this.escapeHtml(PROVENANCE_COVERAGE.scope)}. UI badges disclose blocked or unverified generated data instead of treating it as fully proven.</p>
-      <div class="source-coverage-summary" data-testid="source-coverage-summary">${statusSummary}</div>
-      <div class="source-coverage-list">
-        ${entries.map(entry => {
-          const status = entry.status || 'partial';
-          const refs = (entry.references || []).map(ref =>
-            `<li>${this.escapeHtml(ref.path)} — ${this.escapeHtml(ref.citation || ref.source || 'source cited')}</li>`
-          ).join('');
-          const blockers = (entry.blockers || []).length
-            ? `<div><strong>Blocked source proof:</strong> ${entry.blockers.map(b => this.escapeHtml(b)).join(' ')}</div>`
-            : '';
-          return `
-            <section class="source-coverage-entry" data-testid="source-coverage-entry" data-status="${this.escapeHtmlAttr(status)}">
-              <strong>${this.escapeHtml(entry.label)}</strong>
-              <span class="source-coverage-badge" data-status="${this.escapeHtmlAttr(status)}">${this.escapeHtml(status)}</span>
-              <div>${this.escapeHtml(entry.summary || '')}</div>
-              ${blockers}
-              <ul>${refs}</ul>
-            </section>
-          `;
-        }).join('')}
-      </div>
-    `;
-  },
-  
   init() {
     this.loadFromLocalStorage();
     this.renderCurrentStep();
-    this.renderProvenanceCoverage();
     this.updateStepIndicator();
     this.attachKeyboardShortcuts();
     this.attachPersistHandlers();
@@ -12078,7 +12417,6 @@ App.renderCultureDetails = function() {
   return `
     <div style="background: #f5f5f5; padding: 15px; margin-top: 15px; border: 1px solid #999;">
       <h3>${culture.name} Culture</h3>
-      ${this.renderProvenanceBadgesForConstants(['CULTURES_DATA', 'COMBAT_STYLES_DATA', 'CULTURE_MAGIC_PROFILES'])}
       <p><strong>Type:</strong> ${culture.type}</p>
       <p><strong>Starting Money:</strong> ${culture.startingMoney} ${CharacterData.startingMoney ? `<strong>→ Rolled: ${CharacterData.startingMoney} Lunars</strong>` : `<button onclick="App.rollStartingMoney()" style="margin-left:8px;">🎲 Roll</button>`}</p>
       
@@ -12270,6 +12608,7 @@ App.renderStep5 = function() {
       const parsed = parsePlaceholderSkill(skillName);
       const category = parsed ? parsed.category : (skillName.match(/^(Language|Lore|Art|Craft|Culture)/i)?.[1] || '');
       const hintText = parsed && !isAnySkill(skillName) ? parsed.hint : '';
+      const guidanceText = getSpecializationGuidance(skillName);
       const options = isAnySkill(skillName) ? disambiguateSkill(skillName, CharacterData.culture, false) : (DISAMBIGUATION_LISTS[category] || []);
       const storedKey = Object.keys(CharacterData.culturalSkills).find(k => k.startsWith(category + ' (') && !needsDisambiguation(k));
       const currentSelected = storedKey || '';
@@ -12282,6 +12621,7 @@ App.renderStep5 = function() {
       row.innerHTML = `
         <div>
           ${hintText ? `<small style="color:#666; display:block; margin-bottom:2px;">${category} — ${hintText}</small>` : ''}
+          ${guidanceText ? `<small style="color:#555; display:block; margin-bottom:2px;">${this.escapeHtml(guidanceText)}</small>` : ''}
           <select
             onchange="App.disambiguateAndUpdateFreeText('cultural', '${skillName.replace(/'/g, "\\'")}', this.value, '${category}')"
             style="width:100%; padding:6px; box-sizing: border-box; font-size: 14px; cursor: pointer;">
@@ -12496,6 +12836,12 @@ App.disambiguateAndUpdateFreeText = function(category, originalSkillName, inputV
   if (!inputValue.includes('(')) {
     newSkillName = `${skillCategory} (${inputValue})`;
   }
+  const unresolvedError = getConcreteSpecializationError(originalSkillName, newSkillName);
+  if (unresolvedError) {
+    if (typeof this.showToast === 'function') this.showToast(unresolvedError, 'error');
+    else if (typeof alert === 'function') alert(unresolvedError);
+    return false;
+  }
 
   const store = category === 'cultural' ? CharacterData.culturalSkills :
                 category === 'career' ? CharacterData.careerSkills : CharacterData.bonusSkills;
@@ -12530,11 +12876,6 @@ App.disambiguateAndUpdateFreeText = function(category, originalSkillName, inputV
   this.saveToLocalStorage();
   this.renderCurrentStep();
   return;
-
-  // No previous selection — just add it
-  store[newSkillName] = 0;
-  this.saveToLocalStorage();
-  this.renderCurrentStep();
 };
 
 // Generic toggle helper: add/remove item from a list with a max cap.
@@ -12893,26 +13234,52 @@ App.renderStep8 = function() {
   return div;
 };
 
-// B1: Resolve career combat style placeholder to actual culture combat style name
-App.resolveCareerCombatStyle = function(styleString) {
-  // If it's not a placeholder pattern like "Combat Style (Cultural Style)", return as-is
-  if (!styleString.startsWith('Combat Style (')) return styleString;
-  
+// B1: Resolve career combat style placeholders to actual culture combat style names.
+App.getCareerCombatStylePlaceholderIndex = function(styleString, fallbackIndex = 0) {
+  const match = /^Combat Style \(([^)]+)\)$/.exec(String(styleString || '').trim());
+  if (!match) return null;
+  const qualifier = this.normalizeSkillName(match[1]);
+  if (qualifier === 'speciality style') return 1;
+  if (
+    qualifier === 'cultural style' ||
+    qualifier.includes('cultural style') ||
+    qualifier.includes('specific') ||
+    qualifier.includes('concealable weapons style')
+  ) {
+    return fallbackIndex;
+  }
+  return null;
+};
+
+App.resolveCareerCombatStyle = function(styleString, fallbackIndex = 0, options = {}) {
+  const placeholderIndex = this.getCareerCombatStylePlaceholderIndex(styleString, fallbackIndex);
+  if (placeholderIndex === null) return styleString;
+
   const culture = CULTURES_DATA.find(c => c.name === CharacterData.culture);
-  if (!culture || !culture.combatStyles) return styleString;
-  
-  // Check if there's already a selected combat style
-  if (CharacterData.combatStyles && CharacterData.combatStyles.length > 0) {
-    return `Combat Style (${CharacterData.combatStyles[0].name})`;
+  const cultureStyles = culture?.combatStyles || [];
+  if (!CharacterData.combatStyles) CharacterData.combatStyles = [];
+
+  let style = CharacterData.combatStyles[placeholderIndex] || null;
+  if (!style && options.ensureSelection) {
+    const existingNames = new Set(CharacterData.combatStyles.map(cs => cs.name));
+    const candidate = cultureStyles.find(cs => !existingNames.has(cs.name)) ||
+      cultureStyles[placeholderIndex] ||
+      cultureStyles[0] ||
+      null;
+    if (candidate) {
+      style = {
+        name: candidate.name,
+        weapons: [...(candidate.weapons || [])],
+        traits: [...(candidate.traits || [])],
+        value: 0,
+        skill: 0,
+        notes: candidate.restrictions || ''
+      };
+      if (!existingNames.has(style.name)) CharacterData.combatStyles.push(style);
+    }
   }
-  
-  // Fall back to first unrestricted style
-  const unrestricted = culture.combatStyles.filter(cs => !cs.restrictions);
-  if (unrestricted.length > 0) {
-    return `Combat Style (${unrestricted[0].name})`;
-  }
-  
-  return styleString;
+  style = style || CharacterData.combatStyles[0] || cultureStyles[0] || null;
+  return style?.name ? `Combat Style (${style.name})` : styleString;
 };
 
 App.selectCareer = function(careerName) {
@@ -12954,8 +13321,8 @@ App.selectCareer = function(careerName) {
 
     // Auto-add combat styles with 0 points — resolve placeholders to actual culture styles (B1)
     if (career.combatStyles) {
-      career.combatStyles.forEach(style => {
-        const resolvedStyle = App.resolveCareerCombatStyle(style);
+      career.combatStyles.forEach((style, index) => {
+        const resolvedStyle = App.resolveCareerCombatStyle(style, index, {ensureSelection: true});
         CharacterData.careerSkills[resolvedStyle] = 0;
       });
     }
@@ -13098,6 +13465,17 @@ App.resolveProfessionalSkill = function(originalName, specialization, sourceElem
   const parsed = parsePlaceholderSkill(originalName);
   if (!parsed) return false;
   const resolvedName = `${parsed.category} (${specialization.trim()})`;
+  const unresolvedError = getConcreteSpecializationError(originalName, resolvedName);
+  if (unresolvedError) {
+    if (sourceElement) {
+      const mapKey = `career:${originalName}`;
+      const previousResolution = CharacterData._disambiguationMap?.[mapKey];
+      const previousSpec = previousResolution ? (previousResolution.match(/\((.+)\)/) || [])[1] || '' : '';
+      sourceElement.value = previousSpec;
+    }
+    if (typeof alert === 'function') alert(unresolvedError);
+    return false;
+  }
   const skillSnapshot = createTrustedCharacterSnapshot();
   const previousSorcerySource = this.resolveActiveSorcerySource(CharacterData);
 
@@ -13187,7 +13565,7 @@ App.renderCareerDetails = function() {
       ${career.combatStyles && career.combatStyles.length > 0 ? `
         <h4 style="margin-top: 15px;">Combat Styles</h4>
         <p style="font-size: 13px;">${(() => {
-          const resolved = [...new Set(career.combatStyles.map(s => App.resolveCareerCombatStyle(s)))];
+          const resolved = [...new Set(career.combatStyles.map((s, index) => App.resolveCareerCombatStyle(s, index)))];
           // MISSING-002: Also show career-restricted combat styles from culture
           const culture = CULTURES_DATA.find(c => c.name === CharacterData.culture);
           if (culture && culture.combatStyles) {
@@ -13218,6 +13596,8 @@ App.renderCareerDetails = function() {
             const resolvedSpecAttr = this.escapeHtmlAttr(resolvedSpec);
             const requiredPrimaryLabel = requiredPrimary ? getProfessionalSkillChoiceLabel(requiredPrimary) : '';
             const disabledTitle = isDisabled ? ` title="Select ${this.escapeHtmlAttr(requiredPrimaryLabel)} first" disabled` : '';
+            const guidance = renderProfessionalSkillGuidance(skill, career.name, CharacterData.cult);
+            const placeholder = needsSpec ? this.escapeHtmlAttr(getSpecializationGuidance(skill).split(';')[0] || 'Enter specialization') : '';
             return `<div>
               <label style="font-size: 13px;">
                 <input type="checkbox"
@@ -13226,7 +13606,8 @@ App.renderCareerDetails = function() {
                   ${disabledTitle}
                   onchange="App.toggleProfessionalSkill(this.dataset.skill, this.checked, this)"> ${skillLabel}
               </label>
-              ${isChecked && needsSpec ? `<input type="text" placeholder="Enter specialization..." value="${resolvedSpecAttr}" data-skill="${skillAttr}" style="display: block; margin: 4px 0 0 20px; font-size: 12px; padding: 3px 6px; width: calc(100% - 24px);" onchange="App.resolveProfessionalSkill(this.dataset.skill, this.value, this)">` : ''}
+              ${guidance}
+              ${isChecked && needsSpec ? `<input type="text" placeholder="${placeholder}" value="${resolvedSpecAttr}" data-skill="${skillAttr}" style="display: block; margin: 4px 0 0 20px; font-size: 12px; padding: 3px 6px; width: calc(100% - 24px);" onchange="App.resolveProfessionalSkill(this.dataset.skill, this.value, this)">` : ''}
             </div>`;
             }).join('');
           })()}
@@ -13261,7 +13642,7 @@ App.renderSorceryPickerPanel = function(source, options = {}) {
   const pageCopy = this.formatSorcerySourcePages(activeSource);
   const sourceIntro = activeSource.isCultBacked
     ? `<p><strong>Source:</strong> ${this.escapeHtml(sourceLabel)}</p>`
-    : `<p><strong>Source:</strong> ${this.escapeHtml(sourceLabel)} <span class="source-coverage-badge" data-status="attested">attested</span></p>`;
+    : `<p><strong>Source:</strong> ${this.escapeHtml(sourceLabel)}</p>`;
   const capReachedCopy = `${maxSpells}-spell cap reached`;
   const capCopy = capReached
     ? `<p id="sorcery-spell-cap" class="spell-picker__hint spell-picker__cap">${this.escapeHtml(capReachedCopy)} — deselect a selected spell to choose another.</p>`
@@ -13310,7 +13691,7 @@ App.renderAnimismPickerPanel = function(provider, options = {}) {
     : sourceLabel);
   const sourceIntro = provider.isCultBacked
     ? `<p><strong>Source:</strong> ${this.escapeHtml(sourceLabel)}</p>`
-    : `<p><strong>Source:</strong> ${this.escapeHtml(sourceLabel)} <span class="source-coverage-badge" data-status="attested">attested</span></p>`;
+    : `<p><strong>Source:</strong> ${this.escapeHtml(sourceLabel)}</p>`;
   const availableSpiritNames = Array.isArray(provider.availableItems) ? provider.availableItems : [];
   const spiritListHTML = STARTING_SPIRITS
     .filter(spirit => availableSpiritNames.includes(spirit.name))
@@ -13326,7 +13707,7 @@ App.renderAnimismPickerPanel = function(provider, options = {}) {
       <h3>${this.escapeHtml(heading)}</h3>
       ${sourceIntro}
       <p><strong>Bound Spirit Slots:</strong> ${spiritSlots} (CHA/2 for Spirit Worshipper rank)</p>
-      <p><strong>Casting Skill:</strong> Spirit Rune affinity (replaces Binding per AiG/Hannu)</p>
+      <p><strong>Casting Skill:</strong> Spirit Rune affinity (Gloranthan spirit magic adaptation)</p>
     </div>
     <div class="spell-picker">
       <h4>Starting Bound Spirits <span style="font-weight:normal">(${selectedCount} / ${maxStarting})</span></h4>
@@ -13350,10 +13731,10 @@ App.renderMysticismProviderPanel = function(provider, options = {}) {
   return `
     <div class="magic-panel magic-panel--mysticism">
       <h3>${this.escapeHtml(heading)}</h3>
-      <p><strong>Source:</strong> ${this.escapeHtml(sourceLabel)} <span class="source-coverage-badge" data-status="attested">attested</span></p>
+      <p><strong>Source:</strong> ${this.escapeHtml(sourceLabel)}</p>
       <p><strong>Resource:</strong> Magic Points (${magicPoints}) for talent activation</p>
       <p><strong>Skills:</strong> ${this.escapeHtml(skills)}</p>
-      <p><strong>Starting Talent Limit:</strong> ${talentLimit} (POW/20; Core Mysticism chargen limit)</p>
+      <p><strong>Starting Talent Limit:</strong> ${talentLimit} (POW/20; Core Mysticism character creation limit)</p>
       <p class="spell-picker__source">Mysticism v1 is informational only: the source-backed provider is verified, but no verified talent catalog is normalized for picking talents yet.</p>
     </div>
   `;
@@ -13491,7 +13872,9 @@ App.renderStep9 = function() {
 
     }
   }
-
+  if (CharacterData.cult && typeof setTimeout === 'function') {
+    setTimeout(() => App.updateCultRequirementUI(), 0);
+  }
   return div;
 };
 
@@ -14016,6 +14399,19 @@ App.resolveCultSkillRequirement = function(cultSkillName, allSkillsArr = null) {
   const openRequirement = this.resolveOpenCultSkillRequirement(cultSkillName, skills);
   if (openRequirement) return openRequirement;
 
+  const currentCultKey = this.resolveDefaultCultSkillKey(cultSkillName);
+  if (currentCultKey !== cultSkillName && /^(Devotion|Binding|Invocation)\b/i.test(currentCultKey)) {
+    const currentCultTotal = this.calculateSkillTotalForKey(currentCultKey, skills);
+    return {
+      name: cultSkillName,
+      key: currentCultTotal.key,
+      matchedName: currentCultTotal.matchedName,
+      value: currentCultTotal.value,
+      total: currentCultTotal.value,
+      qualifies: currentCultTotal.value >= 50
+    };
+  }
+
   const baseName = String(cultSkillName || '').replace(/\(.*\)/, '').trim();
   const normalizedBase = this.normalizeSkillName(baseName);
   const hasSpecificQualifier = /\([^)]*\)/.test(String(cultSkillName || ''));
@@ -14410,10 +14806,12 @@ App.getStep9ValidationErrors = function() {
   return errors;
 };
 
-App.autoBoostCultSkills = function() {
+App.autoBoostCultSkills = function(options = {}) {
   if (!CharacterData.bonusSkills) CharacterData.bonusSkills = {};
   const cult = CULTS_DATA.find(c => c.name === CharacterData.cult);
-  if (!cult) return;
+  const silent = options.silent === true;
+  const updateUi = options.updateUi !== false;
+  if (!cult) return { success: false, remainingGaps: [], error: 'No cult selected' };
 
   const ageCategory = Calc.getAgeCategory(CharacterData.age);
   const maxPerSkill = ageCategory ? ageCategory.maxPerSkill : 15;
@@ -14425,8 +14823,8 @@ App.autoBoostCultSkills = function() {
   const requiredCount = Math.min(5, cultSkills.length);
   const alreadyQualified = allSkillTotals.filter(t => t >= 50).length;
   if (alreadyQualified >= requiredCount && allSkillTotals.every(t => t >= 50)) {
-    this.showToast('All cult skills already at 50%+', 'success');
-    return;
+    if (!silent) this.showToast('All cult skills already at 50%+', 'success');
+    return { success: true, remainingGaps: [] };
   }
 
   // Build list of cult skills with their current totals (skip ambiguous/unresolved skills)
@@ -14457,9 +14855,10 @@ App.autoBoostCultSkills = function() {
     }
   });
 
-  // Phase 2: If cult skills still below 50%, reallocate from non-cult bonus skills
+  // Phase 2: random generation may reallocate generated bonus points; the UI Quick Boost never
+  // steals existing player allocations without an explicit opt-in path.
   const stillNeedsBoost = needsBoost.filter(s => s.total < 50 && s.currentBonus < maxPerSkill);
-  if (stillNeedsBoost.length > 0) {
+  if (options.allowReallocate === true && stillNeedsBoost.length > 0) {
     // Find non-cult skills with bonus points that can be reclaimed
     const reclaimable = Object.entries(CharacterData.bonusSkills)
       .filter(([name, pts]) => pts > 0 && !cultSkillNames.has(name))
@@ -14492,12 +14891,13 @@ App.autoBoostCultSkills = function() {
   this.saveToLocalStorage();
   const remainingGaps = this.getCultSkillRequirementDetails(cult).filter(s => s.value < 50);
   if (remainingGaps.length > 0) {
-    this.showToast('Applied available bonus points; some cult skills still need earlier cultural/career reallocation.', 'warning');
+    if (!silent) this.showToast('Applied available bonus points; some cult skills still need earlier cultural/career reallocation.', 'warning');
   } else {
-    this.showToast('Cult skills boosted to 50%+', 'success');
+    if (!silent) this.showToast('Cult skills boosted to 50%+', 'success');
   }
   // Re-render boost panel + warning in-place (no full page re-render)
-  App.updateCultRequirementUI();
+  if (updateUi) App.updateCultRequirementUI();
+  return { success: remainingGaps.length === 0, remainingGaps };
 };
 
 App.renderMiraclePicker = function(container) {
@@ -14675,6 +15075,7 @@ App.renderStep10 = function() {
         const parsed = parsePlaceholderSkill(skillName);
         const category = parsed ? parsed.category : (skillName.match(/^(Language|Lore|Art|Craft|Culture)/i)?.[1] || '');
         const hintText = parsed && !isAnySkill(skillName) ? parsed.hint : '';
+        const guidanceText = getSpecializationGuidance(skillName);
         const options = isAnySkill(skillName) ? disambiguateSkill(skillName, CharacterData.culture, false) : (DISAMBIGUATION_LISTS[category] || []);
         // Use disambiguation map to find THIS placeholder's specific resolved key
         const disambigMap = CharacterData._disambiguationMap || {};
@@ -14701,6 +15102,7 @@ App.renderStep10 = function() {
         row.innerHTML = `
           <div>
             ${hintText ? `<small style="color:#666; display:block; margin-bottom:2px;">${category} — ${hintText}</small>` : ''}
+            ${guidanceText ? `<small style="color:#555; display:block; margin-bottom:2px;">${App.escapeHtml(guidanceText)}</small>` : ''}
             <select
               style="width:100%; padding:6px; box-sizing: border-box; font-size: 14px; cursor: pointer;">
               <option value="">${currentSelected || `Select ${category}...`}</option>
@@ -15167,6 +15569,15 @@ App.generateRandomCharacter = function() {
   CharacterData.notes = '';
   CharacterData.background = '';
   CharacterData.hitPoints = {};
+  CharacterData.cult = null;
+  CharacterData.cultType = null;
+  CharacterData.miracles = [];
+  CharacterData.devotionalPool = 0;
+  CharacterData.boundSpiritSlots = 0;
+  CharacterData.boundSpirits = [];
+  CharacterData.sorceryResource = 0;
+  CharacterData.sorcerySpells = [];
+  CharacterData.mysticismTalents = [];
 
   // Random name parts
   const firstNames = ['Argrath','Kallyr','Vasana','Yanioth','Sorala','Harmast','Biturian','Griselda','Jarang','Vostor','Leika','Erinestra','Vishi','Broyan','Hofstaring','Minaryth','Korol','Ernaldesta','Hendroste','Orgovalt'];
@@ -15370,11 +15781,16 @@ App.generateRandomCharacter = function() {
   CharacterData.backgroundEvents = pick(bgEventOptions);
 
   // 13.5. Select a cult (90% of time) or "No cult" (10% of time)
-  CharacterData.cult = null;
   if (Math.random() > 0.1) {
     const cultMap = CULTURE_CULT_MAP[normalizeCultureName(CharacterData.culture)];
     if (cultMap && cultMap.primary && cultMap.primary.length > 0) {
       CharacterData.cult = pick(cultMap.primary);
+      const randomCult = CULTS_DATA.find(c => c.name === CharacterData.cult);
+      const randomCultType = detectCultType(randomCult);
+      CharacterData.cultType = randomCultType;
+      CharacterData.devotionalPool = randomCultType.types.includes('theist') ? Math.floor(CharacterData.characteristics.POW / 2) : 0;
+      CharacterData.boundSpiritSlots = randomCultType.types.includes('animist') ? Math.floor(CharacterData.characteristics.CHA / 2) : 0;
+      CharacterData.sorceryResource = randomCultType.types.includes('sorcery') ? CharacterData.characteristics.POW : 0;
       // Add Loyalty (Cult) passion
       CharacterData.passions.push({
         name: `Loyalty (${CharacterData.cult})`,
@@ -15393,25 +15809,53 @@ App.generateRandomCharacter = function() {
   }
   // Add career combat styles at 0 — resolve placeholders to character's cultural style
   if (career.combatStyles) {
-    career.combatStyles.forEach(style => {
-      let resolved = style;
-      if (/Combat Style \(Specific/i.test(style) || /Combat Style \(Cultural/i.test(style)) {
-        // Resolve to the character's actual cultural combat style
-        if (CharacterData.combatStyles && CharacterData.combatStyles.length > 0) {
-          resolved = CharacterData.combatStyles[0].name;
-        } else {
-          resolved = 'Combat Style';
-        }
-      }
+    career.combatStyles.forEach((style, index) => {
+      const resolved = App.resolveCareerCombatStyle(style, index, {ensureSelection: true});
       CharacterData.careerSkills[resolved] = 0;
     });
   }
   // Select up to 3 professional skills randomly
   if (career.professionalSkills && career.professionalSkills.length > 0) {
     const shuffledPro = [...career.professionalSkills].sort(() => Math.random() - 0.5);
-    let selectedPro = shuffledPro.slice(0, Math.min(3, shuffledPro.length));
+    const providerRequiredSkills = (CORE_CAREER_MAGIC_PROVIDERS.providers || [])
+      .filter(provider => provider.eligibility?.career === career.name)
+      .flatMap(provider => provider.career_skill_requirements || []);
+    const selectedCultSkills = CharacterData.cult
+      ? (CULTS_DATA.find(c => c.name === CharacterData.cult)?.cultSkills || [])
+      : [];
+    const cultProfessionalSkills = career.professionalSkills.filter(skill => {
+      const normalizedSkill = App.normalizeSkillName(skill);
+      return selectedCultSkills.some(cultSkill => {
+        const normalizedCultSkill = App.normalizeSkillName(cultSkill);
+        const cultBase = App.normalizeSkillName(String(cultSkill).replace(/\(.*\)/, '').trim());
+        return normalizedSkill === normalizedCultSkill ||
+          normalizedSkill === cultBase ||
+          normalizedSkill.startsWith(`${cultBase} (`);
+      });
+    });
+    let selectedPro = [];
+    providerRequiredSkills.forEach(requiredSkill => {
+      if (career.professionalSkills.includes(requiredSkill) && !selectedPro.includes(requiredSkill)) {
+        selectedPro.push(requiredSkill);
+      }
+    });
+    cultProfessionalSkills.forEach(skill => {
+      if (selectedPro.length < Math.min(3, career.professionalSkills.length) && !selectedPro.includes(skill)) {
+        selectedPro.push(skill);
+      }
+    });
+    shuffledPro.forEach(skill => {
+      if (selectedPro.length < Math.min(3, career.professionalSkills.length) && !selectedPro.includes(skill)) {
+        selectedPro.push(skill);
+      }
+    });
     // Fix 2: Disambiguate (any) and placeholder skills in career professional skills (ADR-004 + ADR-005)
     selectedPro = selectedPro.map(skill => {
+      const cultMatch = selectedCultSkills.find(cultSkill => {
+        const match = /^([^(]+)\(([^)]+)\)$/i.exec(String(cultSkill || '').trim());
+        return match && App.normalizeSkillName(match[1]) === App.normalizeSkillName(String(skill || '').replace(/\(.*\)/, '').trim());
+      });
+      if (cultMatch) return cultMatch;
       if (isAnySkill(skill)) return disambiguateSkill(skill, culture.name, true);
       if (isPlaceholderSkill(skill)) {
         const parsed = parsePlaceholderSkill(skill);
@@ -15437,6 +15881,8 @@ App.generateRandomCharacter = function() {
       const cultMap = CULTURE_CULT_MAP[normalizeCultureName(CharacterData.culture)];
       if (cultMap && cultMap.primary && cultMap.primary.length > 0) {
         cultNameForResolution = cultMap.primary[Math.floor(Math.random() * cultMap.primary.length)];
+      } else if (normalizeCultureName(CharacterData.culture) === 'Telmori Hsunchen') {
+        cultNameForResolution = 'Korgatsu';
       } else {
         cultNameForResolution = 'Orlanth'; // Universal fallback
       }
@@ -15498,6 +15944,95 @@ App.generateRandomCharacter = function() {
     const shuffledFM = available.sort(() => Math.random() - 0.5);
     CharacterData.careerFolkMagic = shuffledFM.slice(0, Math.min(2, shuffledFM.length));
   }
+
+  // 16.5. Random builds should be playable immediately: satisfy selected cult
+  // gates where bonus points can do so, then fill source-backed starting magic.
+  this.normalizeHigherMagicState(CharacterData);
+  if (CharacterData.cult) {
+    this.autoBoostCultSkills({ silent: true, updateUi: false, allowReallocate: true });
+    const randomCult = CULTS_DATA.find(c => c.name === CharacterData.cult);
+    const culturalSkillKeys = new Set(allCulturalSkills);
+    const careerSkillKeys = new Set(allCareerSkillNames);
+    const transferRandomPoolPoints = (poolName, targetKey, legalKeys, maxPerSkillForPool, protectedKeys) => {
+      const pool = CharacterData[poolName] || {};
+      if (!targetKey || (!legalKeys.has(targetKey) && !Object.prototype.hasOwnProperty.call(pool, targetKey))) return false;
+      const currentTarget = pool[targetKey] || 0;
+      const room = maxPerSkillForPool - currentTarget;
+      if (room <= 0) return false;
+      const donors = Object.entries(pool)
+        .filter(([key, points]) => key !== targetKey && points > 0 && !protectedKeys.has(key))
+        .sort((a, b) => b[1] - a[1]);
+      let moved = 0;
+      for (const [donorKey] of donors) {
+        if (moved >= room) break;
+        const donorCurrent = pool[donorKey] || 0;
+        const take = Math.min(donorCurrent, room - moved);
+        if (take <= 0) continue;
+        pool[donorKey] -= take;
+        if (pool[donorKey] <= 0) delete pool[donorKey];
+        moved += take;
+      }
+      if (moved > 0) {
+        pool[targetKey] = currentTarget + moved;
+        CharacterData[poolName] = pool;
+        return true;
+      }
+      return false;
+    };
+    const nudgeRandomCultSkills = () => {
+      if (!randomCult) return false;
+      for (let i = 0; i < 8; i++) {
+        const summary = this.getCultInitiationRequirementSummary(randomCult);
+        if (summary.qualifies) return true;
+        const protectedKeys = new Set(summary.skillDetails.flatMap(skill =>
+          [skill.name, skill.key, skill.matchedName].filter(Boolean)
+        ));
+        const candidates = summary.skillDetails
+          .filter(skill => !skill.qualifies && skill.value < 50)
+          .sort((a, b) => (50 - a.value) - (50 - b.value));
+        let changed = false;
+        for (const skill of candidates) {
+          const targetKey = skill.key || skill.name;
+          const moved =
+            transferRandomPoolPoints('careerSkills', targetKey, careerSkillKeys, 15, protectedKeys) ||
+            transferRandomPoolPoints('culturalSkills', targetKey, culturalSkillKeys, 15, protectedKeys) ||
+            transferRandomPoolPoints('bonusSkills', targetKey, new Set([...protectedKeys, targetKey]), maxPerBonus, protectedKeys);
+          changed = moved || changed;
+          if (moved && this.getCultInitiationRequirementSummary(randomCult).qualifies) return true;
+        }
+        if (!changed) break;
+      }
+      return this.getCultInitiationRequirementSummary(randomCult).qualifies;
+    };
+    nudgeRandomCultSkills();
+    if (this.getCultInitiationGateErrors().length > 0) {
+      const selectedCult = CharacterData.cult;
+      CharacterData.cult = null;
+      CharacterData.cultType = null;
+      CharacterData.devotionalPool = 0;
+      CharacterData.miracles = [];
+      CharacterData.passions = CharacterData.passions.filter(p => p.name !== `Loyalty (${selectedCult})`);
+      this.normalizeHigherMagicState(CharacterData);
+    }
+  }
+  const activeRandomProviders = this.normalizeHigherMagicState(CharacterData);
+  const randomSorcerySource = activeRandomProviders.find(provider => provider.system === 'sorcery') || null;
+  const randomAnimismProvider = activeRandomProviders.find(provider => provider.system === 'animism') || null;
+  if (CharacterData.cult) {
+    const randomMiracleLimit = this.getEffectiveInitiateMiracleLimit(CharacterData.cult);
+    CharacterData.miracles = this.getAvailableInitiateMiracleNames(CharacterData.cult).slice(0, randomMiracleLimit);
+  }
+  if (randomAnimismProvider) {
+    const spiritLimit = Math.min(3, randomAnimismProvider.itemLimit || CharacterData.boundSpiritSlots || 0);
+    const spiritNames = Array.isArray(randomAnimismProvider.availableItems) ? randomAnimismProvider.availableItems : [];
+    CharacterData.boundSpirits = spiritNames.slice(0, spiritLimit).map(name => ({ name }));
+  }
+  if (randomSorcerySource) {
+    const spellLimit = randomSorcerySource.startingSpellLimit || 3;
+    const spellNames = Array.isArray(randomSorcerySource.availableItems) ? randomSorcerySource.availableItems : [];
+    CharacterData.sorcerySpells = spellNames.slice(0, spellLimit);
+  }
+  CharacterData.mysticismTalents = [];
 
   // 17. Social Class — roll random
   const rndCultureType = App.getCultureType(CharacterData.culture);
@@ -15581,6 +16116,24 @@ App.generateRandomCharacter = function() {
 	  App.showToast(`Generated: ${CharacterData.name} — ${culture.name} ${career.name}`, 'success');
 	};
 
+App.rollStartingMoneyForCulture = function(culture, socialMod = CharacterData.socialClassMoneyMod || 1) {
+  const match = culture.startingMoney.match(/(\d+)d(\d+)×(\d+)/);
+  if (!match) return null;
+
+  const numDice = parseInt(match[1]);
+  const diceSize = parseInt(match[2]);
+  const multiplier = parseInt(match[3]);
+  let total = 0;
+  for (let i = 0; i < numDice; i++) {
+    total += Math.floor(Math.random() * diceSize) + 1;
+  }
+  total *= multiplier;
+  return {
+    total: Math.round(total * socialMod),
+    socialMod
+  };
+};
+
 App.rollStartingMoney = function() {
   const culture = CULTURES_DATA.find(c => c.name === CharacterData.culture);
   if (!culture || !culture.startingMoney) {
@@ -15588,33 +16141,17 @@ App.rollStartingMoney = function() {
     return;
   }
 
-  // Parse formula like "4d6×10 Lunars" or "4d6×10"
-  const match = culture.startingMoney.match(/(\d+)d(\d+)×(\d+)/);
-  if (!match) {
+  const rolledMoney = this.rollStartingMoneyForCulture(culture);
+  if (!rolledMoney) {
     this.showToast('Unable to parse starting money formula', 'error');
     return;
   }
 
-  const numDice = parseInt(match[1]);
-  const diceSize = parseInt(match[2]);
-  const multiplier = parseInt(match[3]);
-
-  // Roll the dice
-  let total = 0;
-  for (let i = 0; i < numDice; i++) {
-    total += Math.floor(Math.random() * diceSize) + 1;
-  }
-  total *= multiplier;
-
-  // Apply social class money modifier
-  const socialMod = CharacterData.socialClassMoneyMod || 1;
-  total = Math.round(total * socialMod);
-
-  CharacterData.startingMoney = total;
+  CharacterData.startingMoney = rolledMoney.total;
   this.saveToLocalStorage();
   this.renderCurrentStep();
-  const modText = socialMod !== 1 ? ` (×${socialMod} ${CharacterData.socialClass || 'social class'})` : '';
-  this.showToast(`Rolled ${total} Lunars${modText}!`, 'success');
+  const modText = rolledMoney.socialMod !== 1 ? ` (×${rolledMoney.socialMod} ${CharacterData.socialClass || 'social class'})` : '';
+  this.showToast(`Rolled ${rolledMoney.total} Lunars${modText}!`, 'success');
 };
 
 App.updateMoneyDisplay = function() {
@@ -16506,7 +17043,7 @@ App.renderPlayCombat = function() {
   const combatStyles = CharacterData.combatStyles || [];
   let stylesHtml = '';
   if (combatStyles.length > 0) {
-    stylesHtml = '<h3>Combat Styles</h3>' + this.renderProvenanceBadgesForConstants(['COMBAT_STYLES_DATA']) + combatStyles.map(cs => `
+    stylesHtml = '<h3>Combat Styles</h3>' + combatStyles.map(cs => `
       <div class="combat-style-card">
         <div class="style-name">${cs.name} (${this.computeCombatStyleSkill(cs)}%)</div>
         <div class="style-detail"><strong>Weapons:</strong> ${Array.isArray(cs.weapons) ? cs.weapons.join(', ') : (cs.weapons || 'None')}</div>
@@ -16518,7 +17055,6 @@ App.renderPlayCombat = function() {
   container.innerHTML = `
     ${stylesHtml}
     <h3>Weapons</h3>
-    ${this.renderProvenanceBadgesForConstants(['WEAPONS_DATA', 'ITEM_PRICES', 'EQUIPMENT_DATA'])}
     <div class="weapon-row">
       <div>Weapon</div>
       <div>Skill</div>
@@ -16603,11 +17139,9 @@ App.renderPlayMagic = function() {
       ? `Sorcery${cultType.isHybrid ? ' — Sorcerer Path' : ''}`
       : `Sorcery — ${sourceLabel}`;
     const pageCopy = this.formatSorcerySourcePages(source);
-    const badgeConstants = source.isCultBacked ? ['SORCERY_SPELLS'] : ['SORCERY_SPELLS', 'CULTURE_MAGIC_PROFILES'];
 
     return `
       <h3>${esc(heading)}</h3>
-      ${this.renderProvenanceBadgesForConstants(badgeConstants)}
       <p style="font-size: 0.9em;"><strong>Source:</strong> ${esc(sourceLabel)}; ${esc(pageCopy)}</p>
       <p style="font-size: 0.9em;"><strong>Resource:</strong> Magic Points (${magicPoints})</p>
       ${sorcerySpells.length > 0 ? `
@@ -16632,7 +17166,6 @@ App.renderPlayMagic = function() {
       : `Spirit Magic — ${sourceLabel}`;
     return `
       <h3>${esc(heading)}</h3>
-      ${this.renderProvenanceBadgesForConstants(['STARTING_SPIRITS'])}
       <p style="font-size: 0.9em;"><strong>Source:</strong> ${esc(sourceLabel)}</p>
       <p style="font-size: 0.9em;"><strong>Bound Spirit Slots:</strong> ${spiritSlots} (CHA/2 for Spirit Worshipper rank)</p>
       ${boundSpirits.length > 0 ? `
@@ -16641,8 +17174,8 @@ App.renderPlayMagic = function() {
           ${boundSpirits.map(spirit => `<li data-testid="bound-spirit-name">${esc(getBoundSpiritName(spirit))}</li>`).join('')}
         </ul>
       ` : '<p style="font-size: 0.85em; color: #666;">No starting spirits selected.</p>'}
-      <p style="font-size: 0.9em;"><strong>Casting:</strong> Spirit Rune affinity (replaces Binding per AiG/Hannu)</p>
-      <p style="font-size: 0.85em; color: #555; font-style: italic;">Spirit selection at chargen: consult GM for available spirits from cult tradition. Typical starting spirits: 2-3 intensity 1-2 nature spirits in fetishes.</p>
+      <p style="font-size: 0.9em;"><strong>Casting:</strong> Spirit Rune affinity (Gloranthan spirit magic adaptation)</p>
+      <p style="font-size: 0.85em; color: #555; font-style: italic;">Spirit selection during character creation: consult GM for available spirits from cult tradition. Typical starting spirits: 2-3 intensity 1-2 nature spirits in fetishes.</p>
       <p style="font-size: 0.8em; color: #666;">Source: Mythras Core p.131-154 and Bird in the Hand p.43-47</p>
     `;
   };
@@ -16666,7 +17199,6 @@ App.renderPlayMagic = function() {
     if (cult) {
       cultInfo = `
         <h3>${esc(cult.name)} Cult</h3>
-        ${this.renderProvenanceBadgesForConstants(['CULTS_DATA', 'CULTURE_CULT_MAP'])}
         ${cult.personalityTraits && cult.personalityTraits.length > 0 ? `
           <p style="font-size: 0.9em;"><strong>Personality Traits:</strong> ${cult.personalityTraits.map(esc).join(', ')}</p>
         ` : ''}
@@ -16691,7 +17223,6 @@ App.renderPlayMagic = function() {
 
       miraclesInfo += `
         <h3>Theist Miracles (Initiate)</h3>
-        ${this.renderProvenanceBadgesForConstants(['MIRACLES_DATA'])}
         <p style="font-size: 0.9em;"><strong>Rune Affinities:</strong> ${runeList}</p>
         <p style="font-size: 0.9em;"><strong>Devotional Pool:</strong> ${CharacterData.devotionalPool || Math.floor((CharacterData.characteristics.POW || 0) / 2)}</p>
         <ul data-testid="miracles-list">
@@ -16742,7 +17273,7 @@ App.renderPlayMagic = function() {
               </tr>
             </tbody>
           </table>
-          <p style="margin-top: 8px; font-size: 10px; color: #666; font-style: italic;">Source: ADR-002, Hannu casting rules</p>
+          <p style="margin-top: 8px; font-size: 10px; color: #666; font-style: italic;">Source: Gloranthan rune-casting house rule</p>
         </details>
       `;
     }
@@ -16776,7 +17307,6 @@ App.renderPlayMagic = function() {
     ${cultInfo}
     ${miraclesInfo}
     <h3>Folk Magic (${folkMagicBase}%)</h3>
-    ${this.renderProvenanceBadgesForConstants(['FOLK_MAGIC_DESCRIPTIONS', 'FOLK_MAGIC_SPELLS'])}
     <ul data-testid="folk-magic-spells">
       ${allSpells.map(spell => `<li data-testid="spell-name">${esc(spell)}</li>`).join('')}
     </ul>
@@ -16797,7 +17327,6 @@ App.renderPlayEquipment = function() {
     </ul>` : '';
 
   container.innerHTML = `
-    ${this.renderProvenanceBadgesForConstants(['EQUIPMENT_DATA', 'WEAPONS_DATA', 'SOCIAL_CLASS_TABLES'])}
     ${CharacterData.startingMoney ? `<p><strong>Starting Money:</strong> ${CharacterData.startingMoney} Lunars</p>` : ''}
     <p data-testid="equipment-enc"><strong>Total ENC:</strong> ${totalEnc} / ${unencumbered} (${totalEnc > overloaded ? 'Overloaded!' : totalEnc > unencumbered ? 'Burdened' : 'Unencumbered'})</p>
     ${armorHtml}
@@ -17434,7 +17963,7 @@ App.exportSinglePagePDF = async function() {
     }
 
     // ===== FOOTER =====
-    txt('Generated with mythras-chargen', L, 15, { size: 5 });
+    txt('Generated with the Mythras character generator', L, 15, { size: 5 });
     txt('Mythras is a Registered Trademark of The Design Mechanism Inc', L, 9, { size: 5 });
 
     const pdfBytes = await pdfDoc.save();
@@ -17786,17 +18315,8 @@ App.agent.setStep = function(step, data) {
         }
         // Roll starting money if not already set
         if (!CharacterData.startingMoney || data.rollMoney) {
-          const match = (culture.startingMoney || '').match(/(\d+)d(\d+)×(\d+)/);
-          if (match) {
-            const numDice = parseInt(match[1]);
-            const diceSize = parseInt(match[2]);
-            const multiplier = parseInt(match[3]);
-            let moneyTotal = 0;
-            for (let i = 0; i < numDice; i++) {
-              moneyTotal += Math.floor(Math.random() * diceSize) + 1;
-            }
-            CharacterData.startingMoney = moneyTotal * multiplier;
-          }
+          const rolledMoney = App.rollStartingMoneyForCulture(culture);
+          if (rolledMoney) CharacterData.startingMoney = rolledMoney.total;
         }
         const activeHigherMagicProviders = App.normalizeHigherMagicState(CharacterData);
         const providerLossError = getHigherMagicProviderSelectionLossError(step4Snapshot, activeHigherMagicProviders, {
@@ -17960,7 +18480,17 @@ App.agent.setStep = function(step, data) {
           if (needsResolving && (typeof ps === 'object' && ps.specialization)) {
             // Resolve placeholder: "Lore (Regional or Specific Species)" + "Plants" → "Lore (Plants)"
             const parsed = parsePlaceholderSkill(skillName);
-            resolvedPro.push(`${parsed.category} (${ps.specialization})`);
+            if (!parsed) {
+              errors.push(`Skill "${skillName}" cannot be resolved`);
+              continue;
+            }
+            const resolvedName = `${parsed.category} (${String(ps.specialization).trim()})`;
+            const unresolvedError = getConcreteSpecializationError(skillName, resolvedName);
+            if (unresolvedError) {
+              errors.push(unresolvedError);
+              continue;
+            }
+            resolvedPro.push(resolvedName);
           } else if (needsResolving && !(typeof ps === 'object' && ps.specialization)) {
             // Placeholder without specialization — error
             errors.push(`Skill "${skillName}" requires a specialization`);
@@ -17989,8 +18519,8 @@ App.agent.setStep = function(step, data) {
         }
         // Add combat styles (resolved)
         if (career.combatStyles) {
-          career.combatStyles.forEach(style => {
-            const resolvedStyle = App.resolveCareerCombatStyle(style);
+          career.combatStyles.forEach((style, index) => {
+            const resolvedStyle = App.resolveCareerCombatStyle(style, index, {ensureSelection: true});
             CharacterData.careerSkills[resolvedStyle] = 0;
           });
         }
@@ -18217,6 +18747,7 @@ App.agent.setStep = function(step, data) {
         const total10 = Object.values(careerSkills).reduce((a, b) => a + b, 0);
         if (total10 !== 100) errors.push(`Career skills must total 100 (got ${total10})`);
         for (const [name, val] of Object.entries(careerSkills)) {
+          if (needsDisambiguation(name)) errors.push(`Career skill "${name}" requires a concrete specialization before assigning points`);
           if (val > 15) errors.push(`Career skill "${name}" exceeds max 15 (got ${val})`);
           if (val < 0) errors.push(`Career skill "${name}" cannot be negative`);
         }

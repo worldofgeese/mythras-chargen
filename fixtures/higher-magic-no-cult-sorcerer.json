@@ -1,0 +1,177 @@
+{
+  "_disambiguationMap": {
+    "career:Invocation (Cult, School or Grimoire)": "Invocation (Core Sorcery)"
+  },
+  "age": 24,
+  "armor": [],
+  "attributes": {
+    "actionPoints": 2,
+    "damageModifier": "-1d2",
+    "encumbrance": {
+      "burdened": 17,
+      "noMovement": 32,
+      "overloaded": 25,
+      "unencumbered": 16
+    },
+    "experienceModifier": 0,
+    "folkMagicBase": 53,
+    "healingRate": 2,
+    "hitPoints": {
+      "Abdomen": 5,
+      "Chest": 6,
+      "Head": 4,
+      "Left Arm": 3,
+      "Left Leg": 4,
+      "Right Arm": 3,
+      "Right Leg": 4
+    },
+    "initiativeBonus": 12,
+    "luckPoints": 3,
+    "magicPoints": 15,
+    "movementRate": 6,
+    "runeAffinities": {
+      "primary": 60,
+      "secondary": 50,
+      "tertiary": 40
+    }
+  },
+  "background": "",
+  "backgroundEvents": "",
+  "bonusSkills": {
+    "Customs": 15,
+    "Dance": 0,
+    "Influence": 15,
+    "Insight": 15,
+    "Invocation (Core Sorcery)": 15,
+    "Literacy": 15,
+    "Locale": 15,
+    "Lore": 15,
+    "Perception": 15,
+    "Shaping": 15,
+    "Sing": 0,
+    "Willpower": 15
+  },
+  "boundSpiritSlots": 0,
+  "boundSpirits": [],
+  "career": "Sorcerer",
+  "careerFolkMagic": [
+    "Glamour",
+    "Mindspeech"
+  ],
+  "careerSkills": {
+    "Customs": 0,
+    "Deceit": 0,
+    "Influence": 10,
+    "Insight": 15,
+    "Invocation (Core Sorcery)": 15,
+    "Literacy": 15,
+    "Locale": 0,
+    "Lore": 15,
+    "Perception": 0,
+    "Shaping": 15,
+    "Willpower": 15
+  },
+  "charMethod": "point-buy",
+  "characteristics": {
+    "CHA": 8,
+    "CON": 10,
+    "DEX": 9,
+    "INT": 15,
+    "POW": 15,
+    "SIZ": 10,
+    "STR": 8
+  },
+  "combatStyles": [],
+  "companions": [],
+  "concept": "No-cult Sorcerer using the Core Sorcery career provider",
+  "cult": null,
+  "cultType": null,
+  "culturalSkills": {
+    "Customs": 15,
+    "Dance": 10,
+    "Influence": 15,
+    "Insight": 10,
+    "Locale": 15,
+    "Perception": 10,
+    "Sing": 10,
+    "Willpower": 15
+  },
+  "culture": "Esrolian",
+  "devotionalPool": 0,
+  "equipment": [],
+  "family": "Scribes of Nochet",
+  "folkMagicSpells": [
+    "Avert",
+    "Calm",
+    "Light"
+  ],
+  "gender": "Female",
+  "hitPoints": {
+    "Abdomen": {
+      "current": 5,
+      "max": 5
+    },
+    "Chest": {
+      "current": 6,
+      "max": 6
+    },
+    "Head": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Arm": {
+      "current": 3,
+      "max": 3
+    },
+    "Left Leg": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Arm": {
+      "current": 3,
+      "max": 3
+    },
+    "Right Leg": {
+      "current": 4,
+      "max": 4
+    }
+  },
+  "hobbySkillName": null,
+  "homeland": "Esrolia",
+  "miracles": [],
+  "mysticismTalents": [],
+  "name": "Erenvald Script-Keeper",
+  "notes": "Fixture regenerated through the browser runtime for higher-magic provider coverage.",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Loyalty (Scroll House)",
+      "value": 47
+    },
+    {
+      "custom": true,
+      "name": "Respect (Learning)",
+      "value": 47
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Law",
+    "secondary": "Truth",
+    "tertiary": "Stasis"
+  },
+  "schemaVersion": 1,
+  "selectedProfessionalSkills": [
+    "Invocation (Core Sorcery)",
+    "Shaping",
+    "Literacy"
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 15,
+  "sorcerySpells": [
+    "Holdfast",
+    "Damage Resistance"
+  ],
+  "startingMoney": 255,
+  "weapons": []
+}

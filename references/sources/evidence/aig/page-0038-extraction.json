@@ -1,0 +1,71 @@
+{
+  "artifact_id": "aig-page-0038-extraction-copilot-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 38,
+  "printed_page_label": "37",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0038.png",
+    "image_sha256": "1243cc8bd0f64b02aa89155fa17a27c4f169bc505b8ecf2d258d406083ff9453",
+    "dimensions": {
+      "width": 1656,
+      "height": 2159
+    }
+  },
+  "tool_identity": "Claude Opus 4.7 vision extraction subagents via GitHub Copilot CLI",
+  "schema_version": 1,
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-extract-36-38",
+  "blocks": [
+    {
+      "block_id": "aig-p038-b001",
+      "block_type": "stat_block",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Sartarite passions.",
+      "excerpt_hash": "c71587381ee0b7d1387a2ae30183971074c6dced922d887e9e6c2455908667c8",
+      "facts": {
+        "verified": true
+      }
+    },
+    {
+      "block_id": "aig-p038-b002",
+      "block_type": "table",
+      "reading_order": 2,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Sartarite social status equivalents.",
+      "excerpt_hash": "4750a3be60f2607419ad1b3fbde6e78044886406e7886a66f5a36aa68b1b31ef",
+      "facts": {
+        "verified": true
+      }
+    },
+    {
+      "block_id": "aig-p038-b003",
+      "block_type": "heading",
+      "reading_order": 3,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Tarsh Cultures begins.",
+      "excerpt_hash": "b280490b59f0d8a578327316b1edfa103245a8b08131e4dbde9fef02b84716ea",
+      "facts": {
+        "verified": true
+      }
+    }
+  ]
+}

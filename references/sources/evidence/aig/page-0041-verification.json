@@ -1,0 +1,41 @@
+{
+  "artifact_id": "aig-page-0041-verification-copilot-2026-05-23",
+  "artifact_kind": "verification",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 41,
+  "printed_page_label": "40",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0041.png",
+    "image_sha256": "a5a8d452d192aa729a5c6f13889f4d87bdd72ea7803adc5310506b4c79fa87a6",
+    "dimensions": {
+      "width": 1658,
+      "height": 2158
+    }
+  },
+  "tool_identity": "Claude Opus 4.7 independent vision verifier subagents via GitHub Copilot CLI",
+  "schema_version": 1,
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-culture-extract-c",
+  "verifier_prompt_id": "vision-verify-bounded-page.v1",
+  "verifier_run_id": "aig-verify-39-41-retry",
+  "independence": {
+    "read_extractor_output": false,
+    "read_extractor_scratch": false,
+    "read_extractor_rationale": false
+  },
+  "agreement": "pass",
+  "verified_blocks": [
+    "aig-p041-b001",
+    "aig-p041-b002",
+    "aig-p041-b003"
+  ],
+  "field_checks": [
+    {
+      "block_id": "aig-p041-b002",
+      "field": "Telmori Hsunchen app_fields",
+      "result": "pass"
+    }
+  ]
+}

@@ -1,233 +1,248 @@
 {
-  "name": "Aranda of Nochet",
-  "concept": "Fearless axe maiden of the death goddess",
+  "_disambiguationMap": {},
+  "age": 21,
+  "armor": [
+    {
+      "ap": 2,
+      "cost": 0,
+      "locations": "4 location(s)",
+      "name": "Bronze Basic Armour"
+    }
+  ],
+  "attributes": {},
+  "background": "",
+  "backgroundEvents": "",
+  "bonusSkills": {
+    "Athletics": 15,
+    "Brawn": 15,
+    "Combat Style (Citizen Legionary)": 15,
+    "Endurance": 15,
+    "Evade": 15,
+    "Healing": 15,
+    "Lore (Strategy and Tactics)": 15,
+    "Perception": 15,
+    "Survival": 15,
+    "Willpower": 15
+  },
+  "boundSpiritSlots": 0,
+  "boundSpirits": [],
+  "career": "Warrior",
+  "careerFolkMagic": [
+    "Demoralise",
+    "Heal"
+  ],
+  "careerSkills": {
+    "Athletics": 15,
+    "Brawn": 15,
+    "Combat Style (Citizen Legionary)": 15,
+    "Endurance": 15,
+    "Evade": 15,
+    "Lore (Strategy and Tactics)": 10,
+    "Survival": 10,
+    "Unarmed": 5
+  },
+  "charMethod": "point-buy",
   "characteristics": {
-    "STR": 14,
+    "CHA": 8,
     "CON": 12,
-    "SIZ": 11,
     "DEX": 13,
     "INT": 8,
     "POW": 9,
-    "CHA": 8
+    "SIZ": 11,
+    "STR": 14
   },
-  "charMethod": "point-buy",
-  "attributes": {},
-  "culture": "Esrolian",
-  "homeland": "Nochet",
+  "combatStyles": [],
+  "companions": [
+    {
+      "armor": 1,
+      "attacks": [
+        {
+          "damage": "1d6+1d12",
+          "name": "Hoof",
+          "notes": "Rear and Plunge",
+          "skill": 42
+        }
+      ],
+      "characteristics": {
+        "CON": 13,
+        "DEX": 10,
+        "POW": 7,
+        "SIZ": 31,
+        "STR": 22
+      },
+      "damageModifier": "+1d12",
+      "healingRate": 2,
+      "hitLocations": {
+        "Forequarters": {
+          "ap": 1,
+          "max": 11
+        },
+        "Head": {
+          "ap": 1,
+          "max": 9
+        },
+        "Hindquarters": {
+          "ap": 1,
+          "max": 10
+        },
+        "Left Front Leg": {
+          "ap": 1,
+          "max": 8
+        },
+        "Left Hind Leg": {
+          "ap": 1,
+          "max": 9
+        },
+        "Right Front Leg": {
+          "ap": 1,
+          "max": 8
+        },
+        "Right Hind Leg": {
+          "ap": 1,
+          "max": 9
+        }
+      },
+      "hitPointsTotal": 20,
+      "movement": 12,
+      "name": "Riding Horse",
+      "notes": "Riding horse. Not trained for combat — will flee unless cornered.",
+      "species": "Riding Horse",
+      "strikeRank": 0
+    }
+  ],
+  "concept": "Fearless axe maiden of the death goddess",
+  "cult": "Babeester Gor",
+  "cultType": {
+    "blockedTypes": [],
+    "isHybrid": false,
+    "primary": "theist",
+    "types": [
+      "theist"
+    ]
+  },
   "culturalSkills": {
     "Athletics": 15,
     "Brawn": 10,
+    "Courtesy": 5,
     "Endurance": 15,
     "Evade": 15,
+    "Healing": 10,
     "Locale": 5,
     "Perception": 10,
-    "Willpower": 15,
-    "Courtesy": 5,
-    "Healing": 10
+    "Willpower": 15
   },
-  "runeAffinities": {
-    "primary": "Earth",
-    "secondary": "Death",
-    "tertiary": "Stasis"
-  },
+  "culture": "Esrolian",
+  "devotionalPool": 0,
+  "equipment": [
+    {
+      "cost": 0,
+      "enc": 1,
+      "name": "Two sets of common undecorated clothes",
+      "quantity": 1
+    },
+    {
+      "cost": 0,
+      "enc": 0,
+      "name": "Transport: Own back",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Backpack",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Waterskin",
+      "quantity": 1
+    },
+    {
+      "cost": 14,
+      "enc": 2,
+      "name": "Rations (1 week)",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Bedroll",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 0,
+      "name": "Flint & Tinder",
+      "quantity": 1
+    }
+  ],
+  "family": "Hulta clan, Nochet",
   "folkMagicSpells": [
     "Bladesharp",
     "Fanaticism",
     "Protection"
   ],
-  "passions": [
-    {
-      "name": "Devotion (Babeester Gor)",
-      "value": 47,
-      "custom": true
-    },
-    {
-      "name": "Honor",
-      "value": 47,
-      "custom": true
-    },
-    {
-      "name": "Loyalty (Nochet)",
-      "value": 47,
-      "custom": true
-    },
-    {
-      "name": "Loyalty (Queen Samastina)",
-      "value": 47,
-      "custom": true
-    }
-  ],
-  "age": 21,
   "gender": "Female",
-  "family": "Hulta clan, Nochet",
-  "backgroundEvents": "",
-  "career": "Warrior",
-  "careerSkills": {
-    "Athletics": 15,
-    "Brawn": 15,
-    "Endurance": 15,
-    "Evade": 15,
-    "Unarmed": 5,
-    "Combat Style (Citizen Legionary)": 15,
-    "Lore (Strategy and Tactics)": 10,
-    "Survival": 10
-  },
-  "careerFolkMagic": [
-    "Demoralise",
-    "Heal"
-  ],
-  "bonusSkills": {
-    "Athletics": 15,
-    "Brawn": 15,
-    "Endurance": 15,
-    "Evade": 15,
-    "Willpower": 15,
-    "Perception": 15,
-    "Combat Style (Citizen Legionary)": 15,
-    "Lore (Strategy and Tactics)": 15,
-    "Survival": 15,
-    "Healing": 15
-  },
-  "hobbySkillName": null,
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 1,
-  "startingMoney": 270,
-  "equipment": [
-    {
-      "name": "Two sets of common undecorated clothes",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 0
-    },
-    {
-      "name": "Transport: Own back",
-      "enc": 0,
-      "quantity": 1,
-      "cost": 0
-    },
-    {
-      "name": "Backpack",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Waterskin",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Rations (1 week)",
-      "enc": 2,
-      "quantity": 1,
-      "cost": 14
-    },
-    {
-      "name": "Bedroll",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Flint & Tinder",
-      "enc": 0,
-      "quantity": 1,
-      "cost": 5
-    }
-  ],
-  "weapons": [
-    {
-      "name": "Dagger",
-      "damage": "1d4+1",
-      "size": "S",
-      "reach": "S",
-      "ap": 6,
-      "hp": 8,
-      "skill": 0,
-      "quantity": 1
-    }
-  ],
-  "armor": [
-    {
-      "name": "Bronze Basic Armour",
-      "ap": 2,
-      "locations": "4 location(s)",
-      "cost": 0
-    }
-  ],
-  "combatStyles": [],
-  "notes": "",
-  "background": "",
   "hitPoints": {},
-  "companions": [
-    {
-      "name": "Riding Horse",
-      "species": "Riding Horse",
-      "characteristics": {
-        "STR": 22,
-        "CON": 13,
-        "SIZ": 31,
-        "DEX": 10,
-        "POW": 7
-      },
-      "hitLocations": {
-        "Right Hind Leg": {
-          "max": 9,
-          "ap": 1
-        },
-        "Left Hind Leg": {
-          "max": 9,
-          "ap": 1
-        },
-        "Hindquarters": {
-          "max": 10,
-          "ap": 1
-        },
-        "Forequarters": {
-          "max": 11,
-          "ap": 1
-        },
-        "Right Front Leg": {
-          "max": 8,
-          "ap": 1
-        },
-        "Left Front Leg": {
-          "max": 8,
-          "ap": 1
-        },
-        "Head": {
-          "max": 9,
-          "ap": 1
-        }
-      },
-      "attacks": [
-        {
-          "name": "Hoof",
-          "skill": 42,
-          "damage": "1d6+1d12",
-          "notes": "Rear and Plunge"
-        }
-      ],
-      "armor": 1,
-      "movement": 12,
-      "damageModifier": "+1d12",
-      "hitPointsTotal": 20,
-      "healingRate": 2,
-      "strikeRank": 0,
-      "notes": "Riding horse. Not trained for combat — will flee unless cornered."
-    }
-  ],
-  "cult": "Babeester Gor",
+  "hobbySkillName": null,
+  "homeland": "Nochet",
   "miracles": [
     "Berserker",
     "Earth Shield",
     "Slash"
   ],
-  "devotionalPool": 0,
+  "mysticismTalents": [],
+  "name": "Aranda of Nochet",
+  "notes": "",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Devotion (Babeester Gor)",
+      "value": 47
+    },
+    {
+      "custom": true,
+      "name": "Honor",
+      "value": 47
+    },
+    {
+      "custom": true,
+      "name": "Loyalty (Nochet)",
+      "value": 47
+    },
+    {
+      "custom": true,
+      "name": "Loyalty (Queen Samastina)",
+      "value": 47
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Earth",
+    "secondary": "Death",
+    "tertiary": "Stasis"
+  },
+  "schemaVersion": 1,
   "selectedProfessionalSkills": [
     "Lore (Strategy and Tactics)",
     "Gambling",
     "Survival"
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 270,
+  "weapons": [
+    {
+      "ap": 6,
+      "damage": "1d4+1",
+      "hp": 8,
+      "name": "Dagger",
+      "quantity": 1,
+      "reach": "S",
+      "size": "S",
+      "skill": 0
+    }
   ]
 }

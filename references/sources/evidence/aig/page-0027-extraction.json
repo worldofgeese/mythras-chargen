@@ -1,0 +1,55 @@
+{
+  "artifact_id": "aig-page-0027-extraction-copilot-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 27,
+  "printed_page_label": "26",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0027.png",
+    "image_sha256": "cbcadc18cf84201371520d3cfbc7fd74b1429e6a985e03cf6e95230bdfb6edbe",
+    "dimensions": {
+      "width": 1658,
+      "height": 2158
+    }
+  },
+  "tool_identity": "Claude Opus 4.7 vision extraction subagents via GitHub Copilot CLI",
+  "schema_version": 1,
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-culture-extract-e",
+  "blocks": [
+    {
+      "block_id": "aig-p027-b001",
+      "block_type": "paragraph",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Balazaring Magic: Spirit Magic prevails.",
+      "excerpt_hash": "868545b12fea6e0c02a73fa7028bdda4002214ef882e3ebca47b62041eee9356",
+      "facts": {
+        "verified": true
+      }
+    },
+    {
+      "block_id": "aig-p027-b002",
+      "block_type": "sidebar",
+      "reading_order": 2,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "New weapons and combat-style traits sidebar.",
+      "excerpt_hash": "c80cd4b6da1b003eee1d9aa332da8c559b2aaded9227a0785dffe5a0ebc4852d",
+      "facts": {
+        "verified": true
+      }
+    }
+  ]
+}

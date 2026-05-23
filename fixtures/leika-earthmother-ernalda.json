@@ -1,131 +1,149 @@
 {
-  "name": "Leika Earthmother",
-  "concept": "Ernalda priestess and healer of the Clearwine Earth Temple",
-  "characteristics": {
-    "STR": 9,
-    "CON": 12,
-    "SIZ": 10,
-    "DEX": 11,
-    "INT": 13,
-    "POW": 13,
-    "CHA": 7
-  },
-  "charMethod": "point-buy",
+  "_disambiguationMap": {},
+  "age": 24,
+  "armor": [],
   "attributes": {
     "actionPoints": 2,
+    "damageModifier": "-1d2",
+    "encumbrance": {
+      "burdened": 19,
+      "noMovement": 36,
+      "overloaded": 28,
+      "unencumbered": 18
+    },
     "experienceModifier": 0,
+    "folkMagicBase": 50,
     "healingRate": 2,
+    "hitPoints": {
+      "Abdomen": 6,
+      "Chest": 7,
+      "Head": 5,
+      "Left Arm": 4,
+      "Left Leg": 5,
+      "Right Arm": 4,
+      "Right Leg": 5
+    },
+    "initiativeBonus": 12,
     "luckPoints": 3,
     "magicPoints": 13,
-    "initiativeBonus": 12,
-    "damageModifier": "-1d2",
-    "hitPoints": {
-      "Head": 5,
-      "Chest": 7,
-      "Abdomen": 6,
-      "Right Arm": 4,
-      "Left Arm": 4,
-      "Right Leg": 5,
-      "Left Leg": 5
-    },
-    "encumbrance": {
-      "unencumbered": 18,
-      "burdened": 19,
-      "overloaded": 28,
-      "noMovement": 36
-    },
+    "movementRate": 6,
     "runeAffinities": {
       "primary": 56,
       "secondary": 46,
       "tertiary": 36
-    },
-    "folkMagicBase": 50,
-    "movementRate": 6
+    }
   },
-  "culture": "Esrolian",
-  "homeland": "Nochet",
+  "background": "",
+  "backgroundEvents": "",
+  "bonusSkills": {
+    "Athletics": 15,
+    "Endurance": 15,
+    "First Aid": 15,
+    "Healing": 15,
+    "Influence": 15,
+    "Insight": 15,
+    "Locale": 15,
+    "Lore (Ernalda)": 15,
+    "Perception": 15,
+    "Willpower": 15
+  },
+  "boundSpiritSlots": 0,
+  "boundSpirits": [],
+  "career": "Priest",
+  "careerFolkMagic": [
+    "Befuddle",
+    "Protection"
+  ],
+  "careerSkills": {
+    "Athletics": 5,
+    "Customs": 0,
+    "Dance": 0,
+    "Deceit": 0,
+    "Endurance": 10,
+    "First Aid": 15,
+    "Healing": 0,
+    "Influence": 15,
+    "Insight": 15,
+    "Locale": 10,
+    "Lore (Ernalda)": 0,
+    "Lore (Herbs)": 0,
+    "Perception": 15,
+    "Willpower": 15
+  },
+  "charMethod": "point-buy",
+  "characteristics": {
+    "CHA": 7,
+    "CON": 12,
+    "DEX": 11,
+    "INT": 13,
+    "POW": 13,
+    "SIZ": 10,
+    "STR": 9
+  },
+  "combatStyles": [],
+  "companions": [],
+  "concept": "Ernalda priestess and healer of the Clearwine Earth Temple",
+  "cult": "Ernalda",
+  "cultType": {
+    "blockedTypes": [],
+    "isHybrid": false,
+    "primary": "theist",
+    "types": [
+      "theist"
+    ]
+  },
   "culturalSkills": {
     "Athletics": 10,
     "Endurance": 10,
     "First Aid": 15,
+    "Influence": 10,
+    "Insight": 10,
     "Locale": 15,
     "Perception": 15,
-    "Willpower": 15,
-    "Influence": 10,
-    "Insight": 10
+    "Willpower": 15
   },
-  "runeAffinities": {
-    "primary": "Earth",
-    "secondary": "Fertility",
-    "tertiary": "Harmony"
-  },
+  "culture": "Esrolian",
+  "devotionalPool": 6,
+  "equipment": [],
+  "family": "Temple household",
   "folkMagicSpells": [
     "Heal",
     "Calm",
     "Vigour"
   ],
-  "passions": [
-    {
-      "name": "Loyalty (Earth Temple)",
-      "value": 65,
-      "custom": true
-    },
-    {
-      "name": "Love (Family)",
-      "value": 60,
-      "custom": true
-    }
-  ],
-  "age": 24,
   "gender": "Female",
-  "family": "Temple household",
-  "backgroundEvents": "",
-  "career": "Priest",
-  "careerSkills": {
-    "Customs": 0,
-    "Dance": 0,
-    "Deceit": 0,
-    "Influence": 15,
-    "Insight": 15,
-    "Locale": 10,
-    "Willpower": 15,
-    "Lore (Ernalda)": 0,
-    "Healing": 0,
-    "Lore (Herbs)": 0,
-    "Perception": 15,
-    "First Aid": 15,
-    "Endurance": 10,
-    "Athletics": 5
-  },
-  "careerFolkMagic": [
-    "Befuddle",
-    "Protection"
-  ],
-  "bonusSkills": {
-    "Willpower": 15,
-    "Perception": 15,
-    "Influence": 15,
-    "Insight": 15,
-    "First Aid": 15,
-    "Locale": 15,
-    "Endurance": 15,
-    "Athletics": 15,
-    "Lore (Ernalda)": 15,
-    "Healing": 15
+  "hitPoints": {
+    "Abdomen": {
+      "current": 6,
+      "max": 6
+    },
+    "Chest": {
+      "current": 7,
+      "max": 7
+    },
+    "Head": {
+      "current": 5,
+      "max": 5
+    },
+    "Left Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Leg": {
+      "current": 5,
+      "max": 5
+    },
+    "Right Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Leg": {
+      "current": 5,
+      "max": 5
+    }
   },
   "hobbySkillName": null,
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 1,
-  "startingMoney": 70,
-  "equipment": [],
-  "weapons": [],
-  "armor": [],
-  "combatStyles": [],
-  "notes": "",
-  "background": "",
-  "hitPoints": {},
-  "companions": [],
-  "cult": "Ernalda",
+  "homeland": "Nochet",
   "miracles": [
     "Bless Crops",
     "Heal Body",
@@ -134,10 +152,36 @@
     "Extension",
     "Divination"
   ],
-  "devotionalPool": 6,
+  "mysticismTalents": [],
+  "name": "Leika Earthmother",
+  "notes": "",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Loyalty (Earth Temple)",
+      "value": 65
+    },
+    {
+      "custom": true,
+      "name": "Love (Family)",
+      "value": 60
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Earth",
+    "secondary": "Fertility",
+    "tertiary": "Harmony"
+  },
+  "schemaVersion": 1,
   "selectedProfessionalSkills": [
     "Lore (Ernalda)",
     "Healing",
     "Lore (Herbs)"
-  ]
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 70,
+  "weapons": []
 }

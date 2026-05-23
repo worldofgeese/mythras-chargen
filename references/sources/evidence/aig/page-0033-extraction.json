@@ -1,0 +1,101 @@
+{
+  "artifact_id": "aig-page-0033-extraction-copilot-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 33,
+  "printed_page_label": "32",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0033.png",
+    "image_sha256": "502f97fa853ff19fdc5f7c679c012da9d150426c74934caf348a5f8b70494be5",
+    "dimensions": {
+      "width": 1658,
+      "height": 2158
+    }
+  },
+  "tool_identity": "Claude Opus 4.7 vision extraction subagents via GitHub Copilot CLI",
+  "schema_version": 1,
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-culture-extract-d",
+  "blocks": [
+    {
+      "block_id": "aig-p033-b001",
+      "block_type": "paragraph",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Lunar Heartland language and magic.",
+      "excerpt_hash": "c831665965dcb55a66977e106f9db7c34fda942c0260cfdd33e6e3d42f8631b2",
+      "facts": {
+        "verified": true
+      }
+    },
+    {
+      "block_id": "aig-p033-b002",
+      "block_type": "stat_block",
+      "reading_order": 2,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Lunar Heartland culture stats.",
+      "excerpt_hash": "4f652d8557e8a67e2a8df18cc9a7a11c1fd83358de38b73d05f0b16e9dff30fb",
+      "facts": {
+        "verified": true,
+        "app_fields": {
+          "name": "Lunar Heartland",
+          "starting_money": "4d6x15",
+          "passions": [
+            {
+              "type": "Loyalty",
+              "focus": "the Red Emperor",
+              "formula": "formula not printed"
+            },
+            {
+              "type": "Love",
+              "focus": "Ideal, Sibling, Lover and so on",
+              "formula": "formula not printed"
+            },
+            {
+              "type": "Hate",
+              "focus": "Disobedience",
+              "formula": "formula not printed"
+            }
+          ],
+          "combat_style_ids": [
+            "cse:lunar-heartland:lunar-corps-hoplite",
+            "cse:lunar-heartland:dara-happan-heavy-infantry",
+            "cse:lunar-heartland:dara-happan-urbanite",
+            "cse:lunar-heartland:dart-contestant",
+            "cse:lunar-heartland:pelorian-cavalry",
+            "cse:lunar-heartland:pelorian-noble",
+            "cse:lunar-heartland:sagittan-peltast"
+          ]
+        }
+      }
+    },
+    {
+      "block_id": "aig-p033-b003",
+      "block_type": "heading",
+      "reading_order": 3,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Lunar Provincial Culture begins.",
+      "excerpt_hash": "878a686e187b53a2b9b2cb386d0d62848b6186f08b3248f0d3c81419ba32d758",
+      "facts": {
+        "verified": true
+      }
+    }
+  ]
+}

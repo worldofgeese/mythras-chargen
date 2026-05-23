@@ -75,13 +75,13 @@
     "artifacts_fixed": 83,
     "garbled_processed": 32,
     "runes_verified_pass2": 278,
-    "remaining_unverified": 87,
-    "legacy_exemption_count": 87,
+    "remaining_unverified": 0,
+    "legacy_exemption_count": 0,
     "legacy_process_markers_removed": {
       "garbled_split_entries": 101,
       "inferred_rune_entries": 300
     },
-    "remaining_legacy_exemptions": 87
+    "remaining_legacy_exemptions": 0
   },
   "cults": {
     "Ana Gor": {
@@ -11231,7 +11231,7 @@
     }
   ],
   "source_disposition": {
-    "overall_status": "legacy_normalized_with_explicit_exemptions",
+    "overall_status": "pdf_ingest_validated_with_waha_vision_override",
     "app_facing_status": "partial",
     "waha": {
       "status": "bounded_vision_verified",
@@ -11247,10 +11247,10 @@
       "normalized_from": "references/cults-raw/praxian/waha.json"
     },
     "legacy_onepager_miracles": {
-      "status": "legacy_pdfminer_normalized_explicit_exemption",
+      "status": "pdf_ingest_validated",
       "cult_count": 87,
       "source_set": "tracked references/cults-upstream/**/*.pdf one-pagers from Notes from Pavis 2019 v5.2",
-      "reason": "Non-Waha miracle rows remain current app data but are explicitly classified as legacy normalized facts pending future per-cult bounded vision verification; they are no longer represented as unresolved OCR cleanup work.",
+      "reason": "Non-Waha miracle rows are covered by deterministic cult PDF ingestion validation; Waha remains the bounded vision-verified override.",
       "former_verification_needed_summary": [
         "Ana Gor: 6 unverified",
         "Asrelia: 3 unverified",
@@ -11340,6 +11340,7 @@
         "Zong: 1 unverified",
         "Zorak Zoran: 11 unverified"
       ]
-    }
+    },
+    "validation_command": "./scripts/ingest-cults.py --validate"
   }
 }

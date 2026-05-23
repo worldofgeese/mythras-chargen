@@ -1,373 +1,288 @@
 {
-  "name": "Vasana Farnan's Daughter",
-  "concept": "Vengeful bison cavalrywoman, natural leader",
-  "characteristics": {
-    "STR": 14,
-    "CON": 10,
-    "SIZ": 8,
-    "DEX": 10,
-    "INT": 9,
-    "POW": 12,
-    "CHA": 12
-  },
-  "charMethod": "point-buy",
+  "_disambiguationMap": {},
+  "age": 21,
+  "armor": [
+    {
+      "ap": 2,
+      "cost": 0,
+      "locations": "5 location(s)",
+      "name": "Bronze Basic Armour"
+    }
+  ],
   "attributes": {
     "actionPoints": 2,
+    "damageModifier": "+0",
+    "encumbrance": {
+      "burdened": 29,
+      "noMovement": 56,
+      "overloaded": 43,
+      "unencumbered": 28
+    },
     "experienceModifier": 0,
+    "folkMagicBase": 54,
     "healingRate": 2,
+    "hitPoints": {
+      "Abdomen": 5,
+      "Chest": 6,
+      "Head": 4,
+      "Left Arm": 3,
+      "Left Leg": 4,
+      "Right Arm": 3,
+      "Right Leg": 4
+    },
+    "initiativeBonus": 9,
     "luckPoints": 2,
     "magicPoints": 12,
-    "initiativeBonus": 9,
-    "damageModifier": "+0",
-    "hitPoints": {
-      "Head": 4,
-      "Chest": 6,
-      "Abdomen": 5,
-      "Right Arm": 3,
-      "Left Arm": 3,
-      "Right Leg": 4,
-      "Left Leg": 4
-    },
-    "encumbrance": {
-      "unencumbered": 28,
-      "burdened": 29,
-      "overloaded": 43,
-      "noMovement": 56
-    },
+    "movementRate": 6,
     "runeAffinities": {
       "primary": 54,
       "secondary": 44,
       "tertiary": 34
-    },
-    "folkMagicBase": 54,
-    "movementRate": 6
-  },
-  "culture": "Sartarite (Heortling)",
-  "homeland": "Sartar",
-  "culturalSkills": {
-    "Athletics": 15,
-    "Brawn": 10,
-    "Endurance": 15,
-    "Evade": 10,
-    "Locale": 5,
-    "Perception": 10,
-    "Ride": 15,
-    "Willpower": 10,
-    "Healing": 5,
-    "Survival": 5
-  },
-  "runeAffinities": {
-    "primary": "Air",
-    "secondary": "Movement",
-    "tertiary": "Death"
-  },
-  "folkMagicSpells": [
-    "Bladesharp",
-    "Protection",
-    "Heal"
-  ],
-  "passions": [
-    {
-      "name": "Loyalty (Clan)",
-      "value": 54,
-      "needsSubject": false,
-      "subjectSuggestions": []
-    },
-    {
-      "name": "Love (Freedom)",
-      "value": 54,
-      "needsSubject": false,
-      "subjectSuggestions": []
-    },
-    {
-      "name": "Hate (Lunar Empire)",
-      "value": 54,
-      "choice": [
-        "Hate"
-      ],
-      "needsSubject": true,
-      "subjectSuggestions": [
-        "Telmori",
-        "Lunar Tarshites",
-        "Greydogs",
-        "Delecti's Undead",
-        "Beastfolk"
-      ]
-    },
-    {
-      "name": "Hate (Lunar Oppression)",
-      "value": 54,
-      "needsSubject": false,
-      "subjectSuggestions": []
-    },
-    {
-      "name": "Devotion (Orlanth)",
-      "value": 54,
-      "custom": true
-    },
-    {
-      "name": "Honor",
-      "value": 54,
-      "custom": true
     }
-  ],
-  "age": 21,
-  "gender": "Female",
-  "family": "Ernaldori clan, Colymar Tribe",
-  "backgroundEvents": "",
-  "career": "Warrior",
-  "careerSkills": {
-    "Athletics": 15,
-    "Brawn": 10,
-    "Endurance": 15,
-    "Evade": 10,
-    "Unarmed": 0,
-    "Combat Style (Colymar Bison Cavalry)": 15,
-    "Ride (Bison)": 15,
-    "Lore (Strategy and Tactics)": 10,
-    "Oratory": 5,
-    "Survival": 5
   },
+  "background": "Vasana is the daughter of Farnan, a hero of Starbrow's Rebellion who was slain and devoured by the Crimson Bat. She swore revenge against the Lunar Empire, fought with glory at Pennel Ford and Moonbroth, and returned to her mother's Ernaldori farm to recover before seeking new adventure.",
+  "backgroundEvents": "",
+  "bonusSkills": {
+    "Athletics": 15,
+    "Brawn": 15,
+    "Combat Style (Colymar Bison Cavalry)": 15,
+    "Combat Style (Loyal Housecarl)": 0,
+    "Endurance": 15,
+    "Evade": 15,
+    "Healing": 0,
+    "Locale": 0,
+    "Lore (Strategy and Tactics)": 15,
+    "Oratory": 0,
+    "Perception": 15,
+    "Ride": 15,
+    "Survival": 15,
+    "Willpower": 15
+  },
+  "boundSpiritSlots": 0,
+  "boundSpirits": [],
+  "career": "Warrior",
   "careerFolkMagic": [
     "Fanaticism",
     "Heal"
   ],
-  "bonusSkills": {
-    "Ride": 15,
+  "careerSkills": {
     "Athletics": 15,
-    "Brawn": 15,
-    "Endurance": 15,
-    "Evade": 15,
-    "Perception": 15,
-    "Willpower": 15,
-    "Survival": 15,
-    "Lore (Strategy and Tactics)": 15,
+    "Brawn": 10,
     "Combat Style (Colymar Bison Cavalry)": 15,
-    "Locale": 0,
-    "Healing": 0,
-    "Combat Style (Loyal Housecarl)": 0,
-    "Oratory": 0
+    "Endurance": 15,
+    "Evade": 10,
+    "Lore (Strategy and Tactics)": 10,
+    "Oratory": 5,
+    "Ride (Bison)": 15,
+    "Survival": 5,
+    "Unarmed": 0
   },
-  "hobbySkillName": null,
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 1,
-  "startingMoney": 170,
-  "equipment": [
-    {
-      "name": "Two sets of common undecorated clothes",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 0
-    },
-    {
-      "name": "Transport: War bison (Molon)",
-      "enc": 0,
-      "quantity": 1,
-      "cost": 0
-    },
-    {
-      "name": "Backpack",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Waterskin",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Rations (1 week)",
-      "enc": 2,
-      "quantity": 1,
-      "cost": 14
-    },
-    {
-      "name": "Bedroll",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Flint & Tinder",
-      "enc": 0,
-      "quantity": 1,
-      "cost": 5
-    }
-  ],
-  "weapons": [
-    {
-      "name": "Broadsword",
-      "damage": "1d8",
-      "size": "M",
-      "reach": "M",
-      "ap": 6,
-      "hp": 10,
-      "skill": 0,
-      "quantity": 1
-    },
-    {
-      "name": "Lance",
-      "damage": "1d10+1",
-      "size": "H",
-      "reach": "VL",
-      "ap": 4,
-      "hp": 10,
-      "skill": 0,
-      "quantity": 1
-    },
-    {
-      "name": "Medium Shield",
-      "damage": "1d4",
-      "size": "L",
-      "reach": "S",
-      "ap": 6,
-      "hp": 12,
-      "skill": 0,
-      "quantity": 1
-    },
-    {
-      "name": "Composite Bow",
-      "damage": "1d8+1",
-      "size": "H",
-      "reach": "-",
-      "ap": 4,
-      "hp": 7,
-      "skill": 0,
-      "quantity": 1
-    }
-  ],
-  "armor": [
-    {
-      "name": "Bronze Basic Armour",
-      "ap": 2,
-      "locations": "5 location(s)",
-      "cost": 0
-    }
-  ],
+  "charMethod": "point-buy",
+  "characteristics": {
+    "CHA": 12,
+    "CON": 10,
+    "DEX": 10,
+    "INT": 9,
+    "POW": 12,
+    "SIZ": 8,
+    "STR": 14
+  },
   "combatStyles": [
     {
       "name": "Colymar Bison Cavalry",
-      "weapons": [
-        "Broadsword",
-        "Lance",
-        "Medium Shield",
-        "Composite Bow"
-      ],
+      "notes": "",
+      "skill": 0,
       "traits": [
         "Intimidating Scream",
         "Mounted Combat",
         "Shield Wall"
       ],
-      "skill": 0,
-      "notes": ""
+      "weapons": [
+        "Broadsword",
+        "Lance",
+        "Medium Shield",
+        "Composite Bow"
+      ]
     }
   ],
-  "notes": "Daughter of Farnan, slain by the Crimson Bat; scarred at Moonbroth. Natural born Ernaldori/Colymar leader, fearsome bison rider, and devout Orlanth Adventurous initiate. Uses Molon's +3D6 damage bonus for lance charges.",
-  "background": "Vasana is the daughter of Farnan, a hero of Starbrow's Rebellion who was slain and devoured by the Crimson Bat. She swore revenge against the Lunar Empire, fought with glory at Pennel Ford and Moonbroth, and returned to her mother's Ernaldori farm to recover before seeking new adventure.",
+  "companions": [
+    {
+      "armor": 3,
+      "attacks": [
+        {
+          "damage": "2D10+3D6",
+          "name": "Head Butt",
+          "notes": "Cannot also Trample same round",
+          "skill": 50
+        },
+        {
+          "damage": "6D6",
+          "name": "Trample",
+          "notes": "Against downed foe only",
+          "skill": 50
+        }
+      ],
+      "characteristics": {
+        "CON": 17,
+        "DEX": 12,
+        "POW": 10,
+        "SIZ": 34,
+        "STR": 36
+      },
+      "damageModifier": "+3D6",
+      "healingRate": 3,
+      "hitLocations": {
+        "Forequarters": {
+          "ap": 3,
+          "current": 10,
+          "max": 10
+        },
+        "Head": {
+          "ap": 3,
+          "current": 9,
+          "max": 9
+        },
+        "Hindquarters": {
+          "ap": 3,
+          "current": 10,
+          "max": 10
+        },
+        "Left Foreleg": {
+          "ap": 3,
+          "current": 8,
+          "max": 8
+        },
+        "Left Hind Leg": {
+          "ap": 3,
+          "current": 8,
+          "max": 8
+        },
+        "Right Foreleg": {
+          "ap": 3,
+          "current": 8,
+          "max": 8
+        },
+        "Right Hind Leg": {
+          "ap": 3,
+          "current": 8,
+          "max": 8
+        }
+      },
+      "hitPointsTotal": 23,
+      "movement": 12,
+      "name": "Molon",
+      "notes": "War-trained cavalry bison. Use mount's +3D6 damage bonus for lance charges. Can head butt OR trample per round, not both.",
+      "species": "Bison (War-trained)",
+      "strikeRank": 3
+    }
+  ],
+  "concept": "Vengeful bison cavalrywoman, natural leader",
+  "cult": "Orlanth",
+  "cultType": {
+    "blockedTypes": [],
+    "isHybrid": false,
+    "primary": "theist",
+    "types": [
+      "theist"
+    ]
+  },
+  "culturalSkills": {
+    "Athletics": 15,
+    "Brawn": 10,
+    "Endurance": 15,
+    "Evade": 10,
+    "Healing": 5,
+    "Locale": 5,
+    "Perception": 10,
+    "Ride": 15,
+    "Survival": 5,
+    "Willpower": 10
+  },
+  "culture": "Sartarite (Heortling)",
+  "devotionalPool": 6,
+  "equipment": [
+    {
+      "cost": 0,
+      "enc": 1,
+      "name": "Two sets of common undecorated clothes",
+      "quantity": 1
+    },
+    {
+      "cost": 0,
+      "enc": 0,
+      "name": "Transport: War bison (Molon)",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Backpack",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Waterskin",
+      "quantity": 1
+    },
+    {
+      "cost": 14,
+      "enc": 2,
+      "name": "Rations (1 week)",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Bedroll",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 0,
+      "name": "Flint & Tinder",
+      "quantity": 1
+    }
+  ],
+  "family": "Ernaldori clan, Colymar Tribe",
+  "folkMagicSpells": [
+    "Bladesharp",
+    "Protection",
+    "Heal"
+  ],
+  "gender": "Female",
   "hitPoints": {
-    "Head": {
-      "current": 4,
-      "max": 4
+    "Abdomen": {
+      "current": 5,
+      "max": 5
     },
     "Chest": {
       "current": 6,
       "max": 6
     },
-    "Abdomen": {
-      "current": 5,
-      "max": 5
+    "Head": {
+      "current": 4,
+      "max": 4
     },
-    "Right Arm": {
+    "Left Arm": {
       "current": 3,
       "max": 3
     },
-    "Left Arm": {
+    "Left Leg": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Arm": {
       "current": 3,
       "max": 3
     },
     "Right Leg": {
       "current": 4,
       "max": 4
-    },
-    "Left Leg": {
-      "current": 4,
-      "max": 4
     }
   },
-  "companions": [
-    {
-      "name": "Molon",
-      "species": "Bison (War-trained)",
-      "characteristics": {
-        "STR": 36,
-        "CON": 17,
-        "SIZ": 34,
-        "DEX": 12,
-        "POW": 10
-      },
-      "hitLocations": {
-        "Right Hind Leg": {
-          "current": 8,
-          "max": 8,
-          "ap": 3
-        },
-        "Left Hind Leg": {
-          "current": 8,
-          "max": 8,
-          "ap": 3
-        },
-        "Hindquarters": {
-          "current": 10,
-          "max": 10,
-          "ap": 3
-        },
-        "Forequarters": {
-          "current": 10,
-          "max": 10,
-          "ap": 3
-        },
-        "Right Foreleg": {
-          "current": 8,
-          "max": 8,
-          "ap": 3
-        },
-        "Left Foreleg": {
-          "current": 8,
-          "max": 8,
-          "ap": 3
-        },
-        "Head": {
-          "current": 9,
-          "max": 9,
-          "ap": 3
-        }
-      },
-      "attacks": [
-        {
-          "name": "Head Butt",
-          "skill": 50,
-          "damage": "2D10+3D6",
-          "notes": "Cannot also Trample same round"
-        },
-        {
-          "name": "Trample",
-          "skill": 50,
-          "damage": "6D6",
-          "notes": "Against downed foe only"
-        }
-      ],
-      "armor": 3,
-      "movement": 12,
-      "damageModifier": "+3D6",
-      "hitPointsTotal": 23,
-      "healingRate": 3,
-      "strikeRank": 3,
-      "notes": "War-trained cavalry bison. Use mount's +3D6 damage bonus for lance charges. Can head butt OR trample per round, not both."
-    }
-  ],
-  "cult": "Orlanth",
+  "hobbySkillName": null,
+  "homeland": "Sartar",
   "miracles": [
     "Extension",
     "Find (Specific Thing)",
@@ -376,10 +291,110 @@
     "Lightning",
     "Shield"
   ],
-  "devotionalPool": 6,
+  "mysticismTalents": [],
+  "name": "Vasana Farnan's Daughter",
+  "notes": "Daughter of Farnan, slain by the Crimson Bat; scarred at Moonbroth. Natural born Ernaldori/Colymar leader, fearsome bison rider, and devout Orlanth Adventurous initiate. Uses Molon's +3D6 damage bonus for lance charges.",
+  "passions": [
+    {
+      "name": "Loyalty (Clan)",
+      "needsSubject": false,
+      "subjectSuggestions": [],
+      "value": 54
+    },
+    {
+      "name": "Love (Freedom)",
+      "needsSubject": false,
+      "subjectSuggestions": [],
+      "value": 54
+    },
+    {
+      "choice": [
+        "Hate"
+      ],
+      "name": "Hate (Lunar Empire)",
+      "needsSubject": true,
+      "subjectSuggestions": [
+        "Telmori",
+        "Lunar Tarshites",
+        "Greydogs",
+        "Delecti's Undead",
+        "Beastfolk"
+      ],
+      "value": 54
+    },
+    {
+      "name": "Hate (Lunar Oppression)",
+      "needsSubject": false,
+      "subjectSuggestions": [],
+      "value": 54
+    },
+    {
+      "custom": true,
+      "name": "Devotion (Orlanth)",
+      "value": 54
+    },
+    {
+      "custom": true,
+      "name": "Honor",
+      "value": 54
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Air",
+    "secondary": "Movement",
+    "tertiary": "Death"
+  },
+  "schemaVersion": 1,
   "selectedProfessionalSkills": [
     "Lore (Strategy and Tactics)",
     "Oratory",
     "Survival"
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 170,
+  "weapons": [
+    {
+      "ap": 6,
+      "damage": "1d8",
+      "hp": 10,
+      "name": "Broadsword",
+      "quantity": 1,
+      "reach": "M",
+      "size": "M",
+      "skill": 0
+    },
+    {
+      "ap": 4,
+      "damage": "1d10+1",
+      "hp": 10,
+      "name": "Lance",
+      "quantity": 1,
+      "reach": "VL",
+      "size": "H",
+      "skill": 0
+    },
+    {
+      "ap": 6,
+      "damage": "1d4",
+      "hp": 12,
+      "name": "Medium Shield",
+      "quantity": 1,
+      "reach": "S",
+      "size": "L",
+      "skill": 0
+    },
+    {
+      "ap": 4,
+      "damage": "1d8+1",
+      "hp": 7,
+      "name": "Composite Bow",
+      "quantity": 1,
+      "reach": "-",
+      "size": "H",
+      "skill": 0
+    }
   ]
 }

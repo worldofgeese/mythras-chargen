@@ -1,0 +1,114 @@
+{
+  "artifact_id": "aig-page-0035-extraction-copilot-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 35,
+  "printed_page_label": "34",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0035.png",
+    "image_sha256": "05ec75260800072fd14ebe075a03e0d8124204222b00b7b208a45d00c79c249d",
+    "dimensions": {
+      "width": 1662,
+      "height": 2161
+    }
+  },
+  "tool_identity": "Claude Opus 4.7 vision extraction subagents via GitHub Copilot CLI",
+  "schema_version": 1,
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-culture-extract-d",
+  "blocks": [
+    {
+      "block_id": "aig-p035-b001",
+      "block_type": "paragraph",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Praxian culture and taboos.",
+      "excerpt_hash": "e1ce46aa8e18c76eb2ec835711a448a79c8db091d874dfcc0053174b22fce9e1",
+      "facts": {
+        "verified": true
+      }
+    },
+    {
+      "block_id": "aig-p035-b002",
+      "block_type": "stat_block",
+      "reading_order": 2,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Praxian culture stats.",
+      "excerpt_hash": "6730d8d12ab2bfd9f3d90e136d97a80cd0e0b2b859c4d149ebf9bd6714508f26",
+      "facts": {
+        "verified": true,
+        "app_fields": {
+          "name": "Praxian",
+          "starting_money": "4d6x5",
+          "passions": [
+            {
+              "type": "Hate",
+              "focus": "Horses",
+              "formula": "formula not printed"
+            },
+            {
+              "type": "Hate",
+              "focus": "Chaos",
+              "formula": "formula not printed"
+            },
+            {
+              "type": "Distrust",
+              "focus": "Foreigners",
+              "formula": "formula not printed"
+            },
+            {
+              "type": "Fear",
+              "focus": "Water",
+              "formula": "formula not printed"
+            }
+          ],
+          "combat_style_ids": [
+            "cse:praxian:agimori",
+            "cse:praxian:baboon",
+            "cse:praxian:basmoli",
+            "cse:praxian:bison",
+            "cse:praxian:bolo-lizard",
+            "cse:praxian:cannibal-cult",
+            "cse:praxian:high-llama",
+            "cse:praxian:impala",
+            "cse:praxian:morokanth",
+            "cse:praxian:ostrich",
+            "cse:praxian:pol-joni",
+            "cse:praxian:rhino",
+            "cse:praxian:sable",
+            "cse:praxian:unicorn",
+            "cse:praxian:zebra"
+          ]
+        }
+      }
+    },
+    {
+      "block_id": "aig-p035-b003",
+      "block_type": "heading",
+      "reading_order": 3,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Sartarite Culture begins.",
+      "excerpt_hash": "ca60fb03ae7a14a6087890a31fbdabfedce510f7427e55f6e817b4f1b06db48f",
+      "facts": {
+        "verified": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "artifact_id": "aig-page-0025-extraction-copilot-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 25,
+  "printed_page_label": "24",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0025.png",
+    "image_sha256": "b4bc1fe56d7db068ba32459fd9c08f62b6c00947bcb324df06d4acfaace1b497",
+    "dimensions": {
+      "width": 1662,
+      "height": 2161
+    }
+  },
+  "tool_identity": "Claude Opus 4.7 vision extraction subagents via GitHub Copilot CLI",
+  "schema_version": 1,
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-extract-24-25",
+  "blocks": [
+    {
+      "block_id": "aig-p025-b001",
+      "block_type": "heading",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Determine Starting Money and Equipment.",
+      "excerpt_hash": "903ac83845a49911503af090c9952bdaf35a5cced3133432d199b32943472564",
+      "facts": {
+        "verified": true
+      }
+    },
+    {
+      "block_id": "aig-p025-b002",
+      "block_type": "table",
+      "reading_order": 2,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Starting money: Balazaring/Telmori 4d6x2; Praxian 4d6x5; Sartarite/Provincial 4d6x10; Esrolian/God Forgot/Heartland 4d6x15.",
+      "excerpt_hash": "6fee15b98636204a9e422acffed03d6bd5abc048aac8a370737950734885862a",
+      "facts": {
+        "starting_money_formulas": {
+          "Balazaring": "4d6x2",
+          "Esrolian": "4d6x15",
+          "God Forgot": "4d6x15",
+          "Lunar Heartland": "4d6x15",
+          "Praxian": "4d6x5",
+          "Lunar Provincial": "4d6x10",
+          "Sartarite (Heortling)": "4d6x10",
+          "Telmori Hsunchen": "4d6x2"
+        }
+      }
+    }
+  ]
+}

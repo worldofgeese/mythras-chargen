@@ -1,143 +1,187 @@
 {
-  "name": "Indrodar Greydog",
-  "concept": "Humakt Sword \u2014 death-sworn warrior who has severed all kin ties",
-  "characteristics": {
-    "STR": 14,
-    "CON": 13,
-    "SIZ": 11,
-    "DEX": 12,
-    "INT": 10,
-    "POW": 9,
-    "CHA": 6
-  },
-  "charMethod": "point-buy",
+  "_disambiguationMap": {},
+  "age": 22,
+  "armor": [],
   "attributes": {
     "actionPoints": 2,
+    "damageModifier": "+0",
+    "encumbrance": {
+      "burdened": 29,
+      "noMovement": 56,
+      "overloaded": 43,
+      "unencumbered": 28
+    },
     "experienceModifier": -1,
+    "folkMagicBase": 45,
     "healingRate": 3,
+    "hitPoints": {
+      "Abdomen": 6,
+      "Chest": 7,
+      "Head": 5,
+      "Left Arm": 4,
+      "Left Leg": 5,
+      "Right Arm": 4,
+      "Right Leg": 5
+    },
+    "initiativeBonus": 11,
     "luckPoints": 2,
     "magicPoints": 9,
-    "initiativeBonus": 11,
-    "damageModifier": "+0",
-    "hitPoints": {
-      "Head": 5,
-      "Chest": 7,
-      "Abdomen": 6,
-      "Right Arm": 4,
-      "Left Arm": 4,
-      "Right Leg": 5,
-      "Left Leg": 5
-    },
-    "encumbrance": {
-      "unencumbered": 28,
-      "burdened": 29,
-      "overloaded": 43,
-      "noMovement": 56
-    },
+    "movementRate": 6,
     "runeAffinities": {
       "primary": 48,
       "secondary": 38,
       "tertiary": 28
-    },
-    "folkMagicBase": 45,
-    "movementRate": 6
+    }
   },
-  "culture": "Sartarite (Heortling)",
-  "homeland": "Sartar",
+  "background": "",
+  "backgroundEvents": "",
+  "bonusSkills": {
+    "Athletics": 15,
+    "Combat Style (Cultural Weapon)": 15,
+    "Combat Style (Greatsword)": 15,
+    "Endurance": 15,
+    "Evade": 15,
+    "First Aid": 15,
+    "Locale": 15,
+    "Lore (Humakt)": 15,
+    "Perception": 15,
+    "Ride": 0,
+    "Willpower": 15
+  },
+  "boundSpiritSlots": 0,
+  "boundSpirits": [],
+  "career": "Warrior",
+  "careerFolkMagic": [
+    "Demoralise",
+    "Fanaticism"
+  ],
+  "careerSkills": {
+    "Athletics": 15,
+    "Brawn": 0,
+    "Combat Style (Cultural Weapon)": 15,
+    "Combat Style (Hill Clan Levy)": 0,
+    "Combat Style (Loyal Housecarl)": 0,
+    "Combat Style (Tribal)": 0,
+    "Endurance": 15,
+    "Evade": 10,
+    "First Aid": 10,
+    "Locale": 5,
+    "Lore (Humakt)": 0,
+    "Perception": 15,
+    "Survival": 0,
+    "Unarmed": 0,
+    "Willpower": 15
+  },
+  "charMethod": "point-buy",
+  "characteristics": {
+    "CHA": 6,
+    "CON": 13,
+    "DEX": 12,
+    "INT": 10,
+    "POW": 9,
+    "SIZ": 11,
+    "STR": 14
+  },
+  "combatStyles": [],
+  "companions": [],
+  "concept": "Humakt Sword — death-sworn warrior who has severed all kin ties",
+  "cult": "Humakt",
+  "cultType": {
+    "blockedTypes": [],
+    "isHybrid": false,
+    "primary": "theist",
+    "types": [
+      "theist"
+    ]
+  },
   "culturalSkills": {
     "Athletics": 15,
+    "Combat Style (Cultural Weapon)": 10,
     "Endurance": 15,
     "First Aid": 10,
     "Locale": 10,
     "Perception": 15,
-    "Willpower": 15,
     "Ride": 10,
-    "Combat Style (Cultural Weapon)": 10
+    "Willpower": 15
   },
-  "runeAffinities": {
-    "primary": "Death",
-    "secondary": "Truth",
-    "tertiary": "Stasis"
-  },
+  "culture": "Sartarite (Heortling)",
+  "devotionalPool": 4,
+  "equipment": [],
+  "family": "Severed all ties (Humakti geas)",
   "folkMagicSpells": [
     "Bladesharp",
     "Disruption",
     "Protection"
   ],
-  "passions": [
-    {
-      "name": "Devotion (Humakt)",
-      "value": 70,
-      "custom": true
-    },
-    {
-      "name": "Hate (Undead)",
-      "value": 65,
-      "custom": true
-    }
-  ],
-  "age": 22,
   "gender": "Male",
-  "family": "Severed all ties (Humakti geas)",
-  "backgroundEvents": "",
-  "career": "Warrior",
-  "careerSkills": {
-    "Athletics": 15,
-    "Brawn": 0,
-    "Endurance": 15,
-    "Evade": 10,
-    "Unarmed": 0,
-    "Combat Style (Hill Clan Levy)": 0,
-    "Combat Style (Loyal Housecarl)": 0,
-    "Lore (Humakt)": 0,
-    "Survival": 0,
-    "Perception": 15,
-    "Willpower": 15,
-    "Combat Style (Cultural Weapon)": 15,
-    "First Aid": 10,
-    "Locale": 5,
-    "Combat Style (Tribal)": 0
-  },
-  "careerFolkMagic": [
-    "Demoralise",
-    "Fanaticism"
-  ],
-  "bonusSkills": {
-    "Athletics": 15,
-    "Endurance": 15,
-    "Perception": 15,
-    "Willpower": 15,
-    "Combat Style (Cultural Weapon)": 15,
-    "Evade": 15,
-    "First Aid": 15,
-    "Locale": 15,
-    "Lore (Humakt)": 15,
-    "Combat Style (Greatsword)": 15,
-    "Ride": 0
+  "hitPoints": {
+    "Abdomen": {
+      "current": 6,
+      "max": 6
+    },
+    "Chest": {
+      "current": 7,
+      "max": 7
+    },
+    "Head": {
+      "current": 5,
+      "max": 5
+    },
+    "Left Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Leg": {
+      "current": 5,
+      "max": 5
+    },
+    "Right Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Leg": {
+      "current": 5,
+      "max": 5
+    }
   },
   "hobbySkillName": null,
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 1,
-  "startingMoney": 70,
-  "equipment": [],
-  "weapons": [],
-  "armor": [],
-  "combatStyles": [],
-  "notes": "",
-  "background": "",
-  "hitPoints": {},
-  "companions": [],
-  "cult": "Humakt",
+  "homeland": "Sartar",
   "miracles": [
     "Detect Truth",
     "True Weapon",
     "Turn Undead",
     "Shield"
   ],
-  "devotionalPool": 4,
+  "mysticismTalents": [],
+  "name": "Indrodar Greydog",
+  "notes": "",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Devotion (Humakt)",
+      "value": 70
+    },
+    {
+      "custom": true,
+      "name": "Hate (Undead)",
+      "value": 65
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Death",
+    "secondary": "Truth",
+    "tertiary": "Stasis"
+  },
+  "schemaVersion": 1,
   "selectedProfessionalSkills": [
     "Combat Style (Tribal)",
     "Lore (Humakt)",
     "Survival"
-  ]
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 70,
+  "weapons": []
 }

@@ -1,10 +1,11 @@
 {
-  "artifact_id": "aig-page-0031-verification-opus-2026-05-22",
+  "artifact_id": "aig-page-0031-verification-copilot-2026-05-23",
   "artifact_kind": "verification",
   "workflow_id": "vision-page-workflow.v1",
   "source_id": "aig",
   "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
   "pdf_page": 31,
+  "printed_page_label": "30",
   "rendered_image": {
     "cache_path": ".cache/source-pages/aig/page-0031.png",
     "image_sha256": "4c6447fa6df0b58e77828d9d1124786da52a41fb8943830f4add382ce9adf561",
@@ -13,11 +14,12 @@
       "height": 2153
     }
   },
+  "tool_identity": "Claude Opus 4.7 independent vision verifier subagents via GitHub Copilot CLI",
+  "schema_version": 1,
   "extractor_prompt_id": "vision-extract-bounded-page.v1",
-  "extractor_run_id": "aig-magic-access-extract-opus-2026-05-22",
+  "extractor_run_id": "aig-culture-extract-f",
   "verifier_prompt_id": "vision-verify-bounded-page.v1",
-  "verifier_run_id": "aig-page-0031-verify-opus-2026-05-22",
-  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI vision subagent",
+  "verifier_run_id": "aig-verify-31-34-retry",
   "independence": {
     "read_extractor_output": false,
     "read_extractor_scratch": false,
@@ -29,14 +31,14 @@
     "aig-p031-b002",
     "aig-p031-b003",
     "aig-p031-b004",
-    "aig-p031-b005"
+    "aig-p031-b005",
+    "aig-p031-b006"
   ],
-  "bounded_excerpts": [
-    "God Forgotten Characters",
-    "Careers",
-    "Folk Magic"
-  ],
-  "promotion_cautions": [
-    "Keep God Forgot and Lunar boundary distinct."
+  "field_checks": [
+    {
+      "block_id": "aig-p031-b005",
+      "field": "God Forgot app_fields",
+      "result": "pass"
+    }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "artifact_id": "aig-page-0032-extraction-opus-2026-05-22",
+  "artifact_id": "aig-page-0032-extraction-copilot-2026-05-23",
   "artifact_kind": "extraction",
   "workflow_id": "vision-page-workflow.v1",
   "source_id": "aig",
@@ -14,28 +14,26 @@
       "height": 2159
     }
   },
+  "tool_identity": "Claude Opus 4.7 vision extraction subagents via GitHub Copilot CLI",
+  "schema_version": 1,
   "extractor_prompt_id": "vision-extract-bounded-page.v1",
   "extractor_run_id": "aig-magic-access-extract-opus-2026-05-22",
-  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI vision subagent",
-  "schema_version": 1,
   "blocks": [
     {
       "block_id": "aig-p032-b001",
       "block_type": "paragraph",
       "reading_order": 1,
       "region": {
-        "x": 0.05,
-        "y": 0.05,
-        "w": 0.9,
-        "h": 0.9
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
       },
-      "bounded_excerpt": "Boundary check: Lunar Heartland continuation only; target content absent.",
+      "bounded_excerpt": "Lunar Heartland boundary narrative.",
+      "excerpt_hash": "0a58a2391176cd919170d292b0cfa3d170fbe7ec0eca3b5b2e3f7cdf4165abf3",
       "facts": {
-        "expected_topic_present": false,
-        "actual_topic": "lunar_heartland_culture_body",
-        "god_forgot_content_present": false
+        "verified": true
       }
     }
-  ],
-  "page_boundary_notes": "Non-contributing boundary page: Lunar Heartland continuation only."
+  ]
 }

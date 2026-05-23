@@ -1,0 +1,71 @@
+{
+  "artifact_id": "aig-page-0039-extraction-copilot-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 39,
+  "printed_page_label": null,
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0039.png",
+    "image_sha256": "8feff9ffa04c4c371749d0ac3c7284cc9692e96940408184d1ea8eb13df1a32f",
+    "dimensions": {
+      "width": 1648,
+      "height": 2153
+    }
+  },
+  "tool_identity": "Claude Opus 4.7 vision extraction subagents via GitHub Copilot CLI",
+  "schema_version": 1,
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-culture-extract-c",
+  "blocks": [
+    {
+      "block_id": "aig-p039-b001",
+      "block_type": "paragraph",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Tarshite overlay changes passions only.",
+      "excerpt_hash": "8e648a74bdafffa80a3cc68f2ac95c9deec7bdfd5e47e1cbd6cd020261a71cc4",
+      "facts": {
+        "verified": true
+      }
+    },
+    {
+      "block_id": "aig-p039-b002",
+      "block_type": "heading",
+      "reading_order": 2,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Telmori Hsunchen Culture begins.",
+      "excerpt_hash": "d39fe0c4596db942fbbfce2b7c4395b9b40eeb9884087fba0536bebdc46ee7fd",
+      "facts": {
+        "verified": true
+      }
+    },
+    {
+      "block_id": "aig-p039-b003",
+      "block_type": "paragraph",
+      "reading_order": 3,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Telmori Primitive Hsunchen context.",
+      "excerpt_hash": "20104c52529aa3c06f6545ae3d3bd2c7d1bf98f7224ac115519f319a2f432dd6",
+      "facts": {
+        "verified": true
+      }
+    }
+  ]
+}

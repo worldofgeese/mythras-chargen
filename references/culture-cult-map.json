@@ -154,16 +154,14 @@
       "note": "God Forgot is explicitly atheistic/secularist in AiG p.30-31: gods are not worshipped and Rune Magic is unavailable. The listed secondary cults are rare/manual non-default options with non-AiG provenance, especially Arkat sorcery access."
     },
     "Telmori Hsunchen": {
-      "primary": [
-        "Telmor"
-      ],
+      "primary": [],
       "secondary": [
         "Storm Bull",
         "Foundchild",
         "Odayla",
         "Orlanth"
       ],
-      "note": "Telmori primarily worship their wolf ancestor Telmor. Telmor cult data is in Hsunchen pantheon."
+      "note": "Verified AiG Telmori Hsunchen culture pages support Korgatsu/Telmor animism but do not show a Rune cult package; raw Telmor cult data remains unmapped for automatic Telmori culture selection until separately reconciled."
     }
   },
   "culture_aliases": {

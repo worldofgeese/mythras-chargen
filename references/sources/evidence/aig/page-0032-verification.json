@@ -1,10 +1,11 @@
 {
-  "artifact_id": "aig-page-0032-verification-opus-2026-05-22",
+  "artifact_id": "aig-page-0032-verification-copilot-2026-05-23",
   "artifact_kind": "verification",
   "workflow_id": "vision-page-workflow.v1",
   "source_id": "aig",
   "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
   "pdf_page": 32,
+  "printed_page_label": "31",
   "rendered_image": {
     "cache_path": ".cache/source-pages/aig/page-0032.png",
     "image_sha256": "440a2737a8f1f7011d0d8361081b00260a915d262442ab45cf862881a183321e",
@@ -13,11 +14,12 @@
       "height": 2159
     }
   },
+  "tool_identity": "Claude Opus 4.7 independent vision verifier subagents via GitHub Copilot CLI",
+  "schema_version": 1,
   "extractor_prompt_id": "vision-extract-bounded-page.v1",
   "extractor_run_id": "aig-magic-access-extract-opus-2026-05-22",
   "verifier_prompt_id": "vision-verify-bounded-page.v1",
   "verifier_run_id": "aig-page-0032-verify-opus-2026-05-22",
-  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI vision subagent",
   "independence": {
     "read_extractor_output": false,
     "read_extractor_scratch": false,
@@ -26,11 +28,5 @@
   "agreement": "pass",
   "verified_blocks": [
     "aig-p032-b001"
-  ],
-  "bounded_excerpts": [
-    "Lunar Heartland Culture"
-  ],
-  "promotion_cautions": [
-    "Boundary page; no target magic-access content."
   ]
 }

@@ -1,132 +1,150 @@
 {
-  "name": "Vargast Windborn",
-  "concept": "Orlanth warrior-thane seeking to prove himself in Dragon Pass",
-  "characteristics": {
-    "STR": 13,
-    "CON": 12,
-    "SIZ": 11,
-    "DEX": 10,
-    "INT": 12,
-    "POW": 10,
-    "CHA": 7
-  },
-  "charMethod": "point-buy",
+  "_disambiguationMap": {},
+  "age": 23,
+  "armor": [],
   "attributes": {
     "actionPoints": 2,
+    "damageModifier": "+0",
+    "encumbrance": {
+      "burdened": 27,
+      "noMovement": 52,
+      "overloaded": 40,
+      "unencumbered": 26
+    },
     "experienceModifier": 0,
+    "folkMagicBase": 47,
     "healingRate": 2,
+    "hitPoints": {
+      "Abdomen": 6,
+      "Chest": 7,
+      "Head": 5,
+      "Left Arm": 4,
+      "Left Leg": 5,
+      "Right Arm": 4,
+      "Right Leg": 5
+    },
+    "initiativeBonus": 11,
     "luckPoints": 2,
     "magicPoints": 10,
-    "initiativeBonus": 11,
-    "damageModifier": "+0",
-    "hitPoints": {
-      "Head": 5,
-      "Chest": 7,
-      "Abdomen": 6,
-      "Right Arm": 4,
-      "Left Arm": 4,
-      "Right Leg": 5,
-      "Left Leg": 5
-    },
-    "encumbrance": {
-      "unencumbered": 26,
-      "burdened": 27,
-      "overloaded": 40,
-      "noMovement": 52
-    },
+    "movementRate": 6,
     "runeAffinities": {
       "primary": 50,
       "secondary": 40,
       "tertiary": 30
-    },
-    "folkMagicBase": 47,
-    "movementRate": 6
+    }
   },
-  "culture": "Sartarite (Heortling)",
-  "homeland": "Sartar",
+  "background": "",
+  "backgroundEvents": "",
+  "bonusSkills": {
+    "Athletics": 15,
+    "Combat Style (Cultural Weapon)": 15,
+    "Endurance": 15,
+    "Evade": 15,
+    "First Aid": 15,
+    "Locale": 15,
+    "Lore (Strategy)": 15,
+    "Perception": 15,
+    "Ride": 15,
+    "Willpower": 15
+  },
+  "boundSpiritSlots": 0,
+  "boundSpirits": [],
+  "career": "Warrior",
+  "careerFolkMagic": [
+    "Demoralise",
+    "Protection"
+  ],
+  "careerSkills": {
+    "Athletics": 15,
+    "Brawn": 0,
+    "Combat Style (Cultural Weapon)": 15,
+    "Combat Style (Hill Clan Levy)": 0,
+    "Combat Style (Loyal Housecarl)": 0,
+    "Combat Style (Tribal)": 0,
+    "Endurance": 15,
+    "Evade": 15,
+    "First Aid": 10,
+    "Lore (Strategy)": 0,
+    "Perception": 10,
+    "Ride": 10,
+    "Survival": 0,
+    "Unarmed": 0,
+    "Willpower": 10
+  },
+  "charMethod": "point-buy",
+  "characteristics": {
+    "CHA": 7,
+    "CON": 12,
+    "DEX": 10,
+    "INT": 12,
+    "POW": 10,
+    "SIZ": 11,
+    "STR": 13
+  },
+  "combatStyles": [],
+  "companions": [],
+  "concept": "Orlanth warrior-thane seeking to prove himself in Dragon Pass",
+  "cult": "Orlanth",
+  "cultType": {
+    "blockedTypes": [],
+    "isHybrid": false,
+    "primary": "theist",
+    "types": [
+      "theist"
+    ]
+  },
   "culturalSkills": {
     "Athletics": 15,
+    "Combat Style (Cultural Weapon)": 10,
     "Endurance": 15,
     "First Aid": 10,
     "Locale": 10,
     "Perception": 15,
-    "Willpower": 15,
     "Ride": 10,
-    "Combat Style (Cultural Weapon)": 10
+    "Willpower": 15
   },
-  "runeAffinities": {
-    "primary": "Air",
-    "secondary": "Movement",
-    "tertiary": "Mastery"
-  },
+  "culture": "Sartarite (Heortling)",
+  "devotionalPool": 5,
+  "equipment": [],
+  "family": "Thane household",
   "folkMagicSpells": [
     "Bladesharp",
     "Heal",
     "Mobility"
   ],
-  "passions": [
-    {
-      "name": "Loyalty (Clan)",
-      "value": 60,
-      "custom": true
-    },
-    {
-      "name": "Love (Freedom)",
-      "value": 55,
-      "custom": true
-    }
-  ],
-  "age": 23,
   "gender": "Male",
-  "family": "Thane household",
-  "backgroundEvents": "",
-  "career": "Warrior",
-  "careerSkills": {
-    "Athletics": 15,
-    "Brawn": 0,
-    "Endurance": 15,
-    "Evade": 15,
-    "Unarmed": 0,
-    "Combat Style (Hill Clan Levy)": 0,
-    "Combat Style (Loyal Housecarl)": 0,
-    "Lore (Strategy)": 0,
-    "Survival": 0,
-    "Perception": 10,
-    "Willpower": 10,
-    "Ride": 10,
-    "Combat Style (Cultural Weapon)": 15,
-    "First Aid": 10,
-    "Combat Style (Tribal)": 0
-  },
-  "careerFolkMagic": [
-    "Demoralise",
-    "Protection"
-  ],
-  "bonusSkills": {
-    "Athletics": 15,
-    "Endurance": 15,
-    "Perception": 15,
-    "Willpower": 15,
-    "Ride": 15,
-    "Combat Style (Cultural Weapon)": 15,
-    "Evade": 15,
-    "First Aid": 15,
-    "Locale": 15,
-    "Lore (Strategy)": 15
+  "hitPoints": {
+    "Abdomen": {
+      "current": 6,
+      "max": 6
+    },
+    "Chest": {
+      "current": 7,
+      "max": 7
+    },
+    "Head": {
+      "current": 5,
+      "max": 5
+    },
+    "Left Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Leg": {
+      "current": 5,
+      "max": 5
+    },
+    "Right Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Leg": {
+      "current": 5,
+      "max": 5
+    }
   },
   "hobbySkillName": null,
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 1,
-  "startingMoney": 70,
-  "equipment": [],
-  "weapons": [],
-  "armor": [],
-  "combatStyles": [],
-  "notes": "",
-  "background": "",
-  "hitPoints": {},
-  "companions": [],
-  "cult": "Orlanth",
+  "homeland": "Sartar",
   "miracles": [
     "Extension",
     "Find (Specific Thing)",
@@ -134,10 +152,36 @@
     "Summon Sylph",
     "Wind Warp"
   ],
-  "devotionalPool": 5,
+  "mysticismTalents": [],
+  "name": "Vargast Windborn",
+  "notes": "",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Loyalty (Clan)",
+      "value": 60
+    },
+    {
+      "custom": true,
+      "name": "Love (Freedom)",
+      "value": 55
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Air",
+    "secondary": "Movement",
+    "tertiary": "Mastery"
+  },
+  "schemaVersion": 1,
   "selectedProfessionalSkills": [
     "Combat Style (Tribal)",
     "Lore (Strategy)",
     "Survival"
-  ]
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 70,
+  "weapons": []
 }

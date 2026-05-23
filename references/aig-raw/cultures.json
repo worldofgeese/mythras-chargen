@@ -63,7 +63,8 @@
       ],
       "starting_money": {
         "currency": "Lunars",
-        "amount_formula": "4d6x2"
+        "amount_formula": "4d6x2",
+        "source": "creation-summary table"
       },
       "combat_styles_source": "references/combat-styles.json (Combat Styles Encyclopedia supersedes AiG for combat styles only)"
     },
@@ -127,7 +128,8 @@
       ],
       "starting_money": {
         "currency": "Lunars",
-        "amount_formula": "4d6x15"
+        "amount_formula": "4d6x15",
+        "source": "creation-summary table"
       },
       "combat_styles_source": "references/combat-styles.json (Combat Styles Encyclopedia supersedes AiG for combat styles only)"
     },
@@ -252,7 +254,7 @@
       ],
       "starting_money": {
         "currency": "Lunars",
-        "amount_formula": "4d6x10",
+        "amount_formula": "4d6x15",
         "source": "creation-summary table"
       },
       "notes": "Two cultural subtypes: Dara Happan (urban, Solar) and Lodrilli (rural, agricultural). Society divided into Nobles, Witnesses and Officers, Headmen, Workers and Slaves. Lunar Magic waxes and wanes with Red Moon phases. OCR says 'As per Civilised, RUNEQUEST page 21/22' for standard/professional skills. The footnote markers (*/**/***) map: (*) Agent career only, (**) Warrior career only, (***) Aristocracy or Ruling class only.",
@@ -322,7 +324,7 @@
       ],
       "starting_money": {
         "currency": "Lunars",
-        "amount_formula": "4d6x15",
+        "amount_formula": "4d6x5",
         "source": "creation-summary table"
       },
       "notes": "Combat styles are tribal — each tribe has its own style. Riding beast tribes use traits like Skirmisher when mounted but not afoot. Men-and-a-half use Taller SIZ modification; Impala, Bolo Lizard and Ostrich use Smaller modification (p.24). Metal goods highly prized. Horses are taboo. Five Great Tribes: Bison, High Llama, Impala, Sable, Morokanth.",
@@ -389,7 +391,7 @@
       ],
       "starting_money": {
         "currency": "Lunars",
-        "amount_formula": "4d6x5",
+        "amount_formula": "4d6x10",
         "source": "creation-summary table"
       },
       "notes": "Provincial Lunars far from heartland. Worship Seven Mothers. Recognize local gods. Footnote markers: (**) Warrior career only, (***) Aristocracy or Ruling class only. Tarshite characters choose either Lunar Provincial or Sartarite culture.",
@@ -417,6 +419,7 @@
         "cse:sartarite-heortling:loyal-housecarl",
         "cse:sartarite-heortling:sartarite-noble",
         "cse:sartarite-heortling:upland-crofter",
+        "aig:sartarite-heortling:esrolian-cohort",
         "cse:sartarite-heortling:tarshite-militia"
       ],
       "passions": [
@@ -528,35 +531,53 @@
       },
       "notes": "Hsunchen (Beast People) — Neolithic hunter-gatherers. Totemic wolf identity. Cursed Strain in Dragon Pass: every Wildday (full Lunar Moon) they metamorphose into full lupine form (Lycanthropy rules from RUNEQUEST p.396). Nysalor blessed their wolf-form hides to be impervious to bronze, bone, stone, wood, flesh or claw. Later cursed by Talor the Laughing Warrior. Practice Animism through Korgatsu Spirit Tradition.",
       "source_note": "Merged from Mistral LLM extraction where OCR was incomplete",
-      "combat_styles_source": "references/combat-styles.json (Combat Styles Encyclopedia supersedes AiG for combat styles only)"
+      "combat_styles_source": "references/combat-styles.json (Combat Styles Encyclopedia supersedes AiG for combat styles only)",
+      "careers": "Any Primitive"
     }
   ],
-  "validated_at": "2026-05-21",
-  "validation_method": "PDF page render/OCR validation against Adventures in Glorantha GenCon preview p.26-41; combat-style rows superseded by Combat Styles Encyclopedia via references/combat-styles.json.",
+  "validated_at": "2026-05-23",
+  "validation_method": "Bounded rendered-page extraction plus independent vision verification for AiG PDF pages 25-41; combat-style rows remain CSE authority except the AiG-verified Sartarite Esrolian Cohort gap-fill.",
   "combat_styles_authority": "references/combat-styles.json",
   "source_id": "aig",
-  "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-  "authority_state": "source_blocked",
-  "authority_disposition": "legacy-stale-until-vision-verified",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "authority_state": "reference_authority",
+  "authority_disposition": "bounded-vision-verified-culture-reference",
   "page_index": "references/aig-raw/page-index.json",
   "page_coverage": "references/sources/pages/aig.json",
-  "source_blockers": [
-    "permission basis is not confirmed",
-    "independent vision extraction/verification has not been run for AiG pages"
-  ],
-  "provenance_note": "Legacy reference data predates the U5 vision-only authority gate. It remains usable as stale input only while source_blocked; no app-facing AiG fact is promoted as accepted by this metadata.",
+  "source_blockers": [],
+  "provenance_note": "AiG culture records used by the app are backed by rendered-page extraction and independent vision verification. Tarshite remains an overlay on Lunar Provincial or Sartarite: political loyalty affects passions/outlook only, not skills.",
   "culture_source_refs": {
     "Balazaring": {
       "source_id": "aig",
-      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-      "page_range": "p.26-28",
+      "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+      "page_manifest_path": "references/sources/pages/aig.json",
+      "evidence_state": "bounded_extraction_independent_vision_verified",
+      "verification_state": "verified",
       "pdf_pages": [
+        25,
         26,
         27,
         28
       ],
-      "verification_state": "blocked",
+      "block_ids": [
+        "aig-p026-b002",
+        "aig-p027-b001",
+        "aig-p028-b001",
+        "aig-p025-b002"
+      ],
+      "evidence_paths": [
+        "references/sources/evidence/aig/page-0025-extraction.json",
+        "references/sources/evidence/aig/page-0025-verification.json",
+        "references/sources/evidence/aig/page-0026-extraction.json",
+        "references/sources/evidence/aig/page-0026-verification.json",
+        "references/sources/evidence/aig/page-0027-extraction.json",
+        "references/sources/evidence/aig/page-0027-verification.json",
+        "references/sources/evidence/aig/page-0028-extraction.json",
+        "references/sources/evidence/aig/page-0028-verification.json"
+      ],
+      "page_range": "PDF pages 25, 26, 27, 28",
       "page_records": [
+        "references/aig-raw/pages/page-025.json",
         "references/aig-raw/pages/page-026.json",
         "references/aig-raw/pages/page-027.json",
         "references/aig-raw/pages/page-028.json"
@@ -564,93 +585,224 @@
     },
     "Esrolian": {
       "source_id": "aig",
-      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-      "page_range": "p.28-29",
+      "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+      "page_manifest_path": "references/sources/pages/aig.json",
+      "evidence_state": "bounded_extraction_independent_vision_verified",
+      "verification_state": "verified",
       "pdf_pages": [
+        25,
         28,
         29
       ],
-      "verification_state": "blocked",
+      "block_ids": [
+        "aig-p028-b002",
+        "aig-p029-b001",
+        "aig-p029-b002",
+        "aig-p029-b003",
+        "aig-p025-b002"
+      ],
+      "evidence_paths": [
+        "references/sources/evidence/aig/page-0025-extraction.json",
+        "references/sources/evidence/aig/page-0025-verification.json",
+        "references/sources/evidence/aig/page-0028-extraction.json",
+        "references/sources/evidence/aig/page-0028-verification.json",
+        "references/sources/evidence/aig/page-0029-extraction.json",
+        "references/sources/evidence/aig/page-0029-verification.json"
+      ],
+      "page_range": "PDF pages 25, 28, 29",
       "page_records": [
+        "references/aig-raw/pages/page-025.json",
         "references/aig-raw/pages/page-028.json",
         "references/aig-raw/pages/page-029.json"
       ]
     },
     "God Forgot": {
       "source_id": "aig",
-      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-      "page_range": "p.29-30",
+      "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+      "page_manifest_path": "references/sources/pages/aig.json",
+      "evidence_state": "bounded_extraction_independent_vision_verified",
+      "verification_state": "verified",
       "pdf_pages": [
+        25,
         29,
-        30
+        30,
+        31
       ],
-      "verification_state": "blocked",
+      "block_ids": [
+        "aig-p029-b004",
+        "aig-p030-b001",
+        "aig-p030-b002",
+        "aig-p031-b001",
+        "aig-p031-b003",
+        "aig-p031-b004",
+        "aig-p031-b005",
+        "aig-p025-b002"
+      ],
+      "evidence_paths": [
+        "references/sources/evidence/aig/page-0025-extraction.json",
+        "references/sources/evidence/aig/page-0025-verification.json",
+        "references/sources/evidence/aig/page-0029-extraction.json",
+        "references/sources/evidence/aig/page-0029-verification.json",
+        "references/sources/evidence/aig/page-0030-extraction.json",
+        "references/sources/evidence/aig/page-0030-verification.json",
+        "references/sources/evidence/aig/page-0031-extraction.json",
+        "references/sources/evidence/aig/page-0031-verification.json"
+      ],
+      "page_range": "PDF pages 25, 29, 30, 31",
       "page_records": [
+        "references/aig-raw/pages/page-025.json",
         "references/aig-raw/pages/page-029.json",
-        "references/aig-raw/pages/page-030.json"
+        "references/aig-raw/pages/page-030.json",
+        "references/aig-raw/pages/page-031.json"
       ]
     },
     "Lunar Heartland": {
       "source_id": "aig",
-      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-      "page_range": "p.30-32",
+      "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+      "page_manifest_path": "references/sources/pages/aig.json",
+      "evidence_state": "bounded_extraction_independent_vision_verified",
+      "verification_state": "verified",
       "pdf_pages": [
-        30,
+        25,
         31,
-        32
+        32,
+        33
       ],
-      "verification_state": "blocked",
+      "block_ids": [
+        "aig-p031-b006",
+        "aig-p033-b001",
+        "aig-p033-b002",
+        "aig-p025-b002"
+      ],
+      "evidence_paths": [
+        "references/sources/evidence/aig/page-0025-extraction.json",
+        "references/sources/evidence/aig/page-0025-verification.json",
+        "references/sources/evidence/aig/page-0031-extraction.json",
+        "references/sources/evidence/aig/page-0031-verification.json",
+        "references/sources/evidence/aig/page-0032-extraction.json",
+        "references/sources/evidence/aig/page-0032-verification.json",
+        "references/sources/evidence/aig/page-0033-extraction.json",
+        "references/sources/evidence/aig/page-0033-verification.json"
+      ],
+      "page_range": "PDF pages 25, 31, 32, 33",
       "page_records": [
-        "references/aig-raw/pages/page-030.json",
+        "references/aig-raw/pages/page-025.json",
         "references/aig-raw/pages/page-031.json",
-        "references/aig-raw/pages/page-032.json"
+        "references/aig-raw/pages/page-032.json",
+        "references/aig-raw/pages/page-033.json"
       ]
     },
     "Praxian": {
       "source_id": "aig",
-      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-      "page_range": "p.32-35",
+      "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+      "page_manifest_path": "references/sources/pages/aig.json",
+      "evidence_state": "bounded_extraction_independent_vision_verified",
+      "verification_state": "verified",
       "pdf_pages": [
-        32,
-        33,
-        34,
-        35
+        25,
+        35,
+        36
       ],
-      "verification_state": "blocked",
+      "block_ids": [
+        "aig-p035-b001",
+        "aig-p035-b002",
+        "aig-p036-b001",
+        "aig-p025-b002"
+      ],
+      "evidence_paths": [
+        "references/sources/evidence/aig/page-0025-extraction.json",
+        "references/sources/evidence/aig/page-0025-verification.json",
+        "references/sources/evidence/aig/page-0035-extraction.json",
+        "references/sources/evidence/aig/page-0035-verification.json",
+        "references/sources/evidence/aig/page-0036-extraction.json",
+        "references/sources/evidence/aig/page-0036-verification.json"
+      ],
+      "page_range": "PDF pages 25, 35, 36",
       "page_records": [
-        "references/aig-raw/pages/page-032.json",
-        "references/aig-raw/pages/page-033.json",
-        "references/aig-raw/pages/page-034.json",
-        "references/aig-raw/pages/page-035.json"
+        "references/aig-raw/pages/page-025.json",
+        "references/aig-raw/pages/page-035.json",
+        "references/aig-raw/pages/page-036.json"
       ]
     },
     "Lunar Provincial": {
       "source_id": "aig",
-      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-      "page_range": "p.35-37",
+      "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+      "page_manifest_path": "references/sources/pages/aig.json",
+      "evidence_state": "bounded_extraction_independent_vision_verified",
+      "verification_state": "verified",
       "pdf_pages": [
-        35,
-        36,
-        37
+        25,
+        33,
+        34
       ],
-      "verification_state": "blocked",
+      "block_ids": [
+        "aig-p033-b003",
+        "aig-p034-b001",
+        "aig-p034-b002",
+        "aig-p034-b003",
+        "aig-p034-b004",
+        "aig-p025-b002"
+      ],
+      "evidence_paths": [
+        "references/sources/evidence/aig/page-0025-extraction.json",
+        "references/sources/evidence/aig/page-0025-verification.json",
+        "references/sources/evidence/aig/page-0033-extraction.json",
+        "references/sources/evidence/aig/page-0033-verification.json",
+        "references/sources/evidence/aig/page-0034-extraction.json",
+        "references/sources/evidence/aig/page-0034-verification.json"
+      ],
+      "page_range": "PDF pages 25, 33, 34",
       "page_records": [
-        "references/aig-raw/pages/page-035.json",
-        "references/aig-raw/pages/page-036.json",
-        "references/aig-raw/pages/page-037.json"
+        "references/aig-raw/pages/page-025.json",
+        "references/aig-raw/pages/page-033.json",
+        "references/aig-raw/pages/page-034.json"
       ]
     },
     "Sartarite (Heortling)": {
       "source_id": "aig",
-      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-      "page_range": "p.37-39",
+      "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+      "page_manifest_path": "references/sources/pages/aig.json",
+      "evidence_state": "bounded_extraction_independent_vision_verified",
+      "verification_state": "verified",
       "pdf_pages": [
+        25,
+        35,
+        36,
         37,
         38,
         39
       ],
-      "verification_state": "blocked",
+      "block_ids": [
+        "aig-p035-b003",
+        "aig-p036-b002",
+        "aig-p037-b001",
+        "aig-p037-b002",
+        "aig-p037-b003",
+        "aig-p037-b004",
+        "aig-p038-b001",
+        "aig-p038-b002",
+        "aig-p039-b001",
+        "aig-p025-b002"
+      ],
+      "evidence_paths": [
+        "references/sources/evidence/aig/page-0025-extraction.json",
+        "references/sources/evidence/aig/page-0025-verification.json",
+        "references/sources/evidence/aig/page-0035-extraction.json",
+        "references/sources/evidence/aig/page-0035-verification.json",
+        "references/sources/evidence/aig/page-0036-extraction.json",
+        "references/sources/evidence/aig/page-0036-verification.json",
+        "references/sources/evidence/aig/page-0037-extraction.json",
+        "references/sources/evidence/aig/page-0037-verification.json",
+        "references/sources/evidence/aig/page-0038-extraction.json",
+        "references/sources/evidence/aig/page-0038-verification.json",
+        "references/sources/evidence/aig/page-0039-extraction.json",
+        "references/sources/evidence/aig/page-0039-verification.json"
+      ],
+      "page_range": "PDF pages 25, 35, 36, 37, 38, 39",
       "page_records": [
+        "references/aig-raw/pages/page-025.json",
+        "references/aig-raw/pages/page-035.json",
+        "references/aig-raw/pages/page-036.json",
         "references/aig-raw/pages/page-037.json",
         "references/aig-raw/pages/page-038.json",
         "references/aig-raw/pages/page-039.json"
@@ -658,15 +810,38 @@
     },
     "Telmori Hsunchen": {
       "source_id": "aig",
-      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-      "page_range": "p.39-41",
+      "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+      "page_manifest_path": "references/sources/pages/aig.json",
+      "evidence_state": "bounded_extraction_independent_vision_verified",
+      "verification_state": "verified",
       "pdf_pages": [
+        25,
         39,
         40,
         41
       ],
-      "verification_state": "blocked",
+      "block_ids": [
+        "aig-p039-b002",
+        "aig-p039-b003",
+        "aig-p040-b002",
+        "aig-p040-b003",
+        "aig-p041-b001",
+        "aig-p041-b002",
+        "aig-p025-b002"
+      ],
+      "evidence_paths": [
+        "references/sources/evidence/aig/page-0025-extraction.json",
+        "references/sources/evidence/aig/page-0025-verification.json",
+        "references/sources/evidence/aig/page-0039-extraction.json",
+        "references/sources/evidence/aig/page-0039-verification.json",
+        "references/sources/evidence/aig/page-0040-extraction.json",
+        "references/sources/evidence/aig/page-0040-verification.json",
+        "references/sources/evidence/aig/page-0041-extraction.json",
+        "references/sources/evidence/aig/page-0041-verification.json"
+      ],
+      "page_range": "PDF pages 25, 39, 40, 41",
       "page_records": [
+        "references/aig-raw/pages/page-025.json",
         "references/aig-raw/pages/page-039.json",
         "references/aig-raw/pages/page-040.json",
         "references/aig-raw/pages/page-041.json"
@@ -683,5 +858,5 @@
     "Sartarite (Heortling)": [],
     "Telmori Hsunchen": []
   },
-  "alias_authority_state": "no additional aliases accepted until source-verified"
+  "alias_authority_state": "Tarshite is a verified overlay, not a standalone culture; other aliases remain display-only."
 }

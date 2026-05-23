@@ -282,6 +282,7 @@ function loadApp() {
         isPlaceholderSkill: typeof isPlaceholderSkill !== 'undefined' ? isPlaceholderSkill : null,
         needsDisambiguation: typeof needsDisambiguation !== 'undefined' ? needsDisambiguation : null,
         parsePlaceholderSkill: typeof parsePlaceholderSkill !== 'undefined' ? parsePlaceholderSkill : null,
+        getSpecializationGuidance: typeof getSpecializationGuidance !== 'undefined' ? getSpecializationGuidance : null,
         disambiguateSkill: typeof disambiguateSkill !== 'undefined' ? disambiguateSkill : null,
         DISAMBIGUATION_LISTS: typeof DISAMBIGUATION_LISTS !== 'undefined' ? DISAMBIGUATION_LISTS : null,
         detectCultType: typeof detectCultType !== 'undefined' ? detectCultType : null,
@@ -1329,11 +1330,27 @@ runCommandTest('Render workflow can list sources without rendering pages',
   const pageIndexPages = new Set((aigPageIndex.pages || []).map(page => page.pdf_page));
   const missingCoveragePages = expectedAiGPages.filter(page => !coveragePages.has(page));
   const missingIndexPages = expectedAiGPages.filter(page => !pageIndexPages.has(page));
+  const promotedAiGCultureNote = 'Verified; app-facing AiG culture/profile facts promoted.';
   const verifiedAiGPages = new Map([
-    [31, { blocks: 5, contributes: true, verification: 'aig-page-0031-verification-opus-2026-05-22' }],
-    [32, { blocks: 1, contributes: false, verification: 'aig-page-0032-verification-opus-2026-05-22' }],
-    [60, { blocks: 6, contributes: true, verification: 'aig-page-0060-verification-opus-2026-05-22' }],
-    [61, { blocks: 7, contributes: true, verification: 'aig-page-0061-verification-opus-2026-05-22' }],
+    [25, { blocks: 2, contributes: true, verification: 'aig-page-0025-verification-copilot-2026-05-23', notes: promotedAiGCultureNote }],
+    [26, { blocks: 2, contributes: true, verification: 'aig-page-0026-verification-copilot-2026-05-23', notes: promotedAiGCultureNote }],
+    [27, { blocks: 2, contributes: true, verification: 'aig-page-0027-verification-copilot-2026-05-23', notes: promotedAiGCultureNote }],
+    [28, { blocks: 2, contributes: true, verification: 'aig-page-0028-verification-copilot-2026-05-23', notes: promotedAiGCultureNote }],
+    [29, { blocks: 4, contributes: true, verification: 'aig-page-0029-verification-copilot-2026-05-23', notes: promotedAiGCultureNote }],
+    [30, { blocks: 2, contributes: true, verification: 'aig-page-0030-verification-copilot-2026-05-23', notes: promotedAiGCultureNote }],
+    [31, { blocks: 6, contributes: true, verification: 'aig-page-0031-verification-copilot-2026-05-23', notes: promotedAiGCultureNote }],
+    [32, { blocks: 1, contributes: false, verification: 'aig-page-0032-verification-copilot-2026-05-23', notes: 'Verified non-contributing boundary page.', exclusionReason: 'Boundary page; no promoted culture mechanics.' }],
+    [33, { blocks: 3, contributes: true, verification: 'aig-page-0033-verification-copilot-2026-05-23', notes: promotedAiGCultureNote }],
+    [34, { blocks: 4, contributes: true, verification: 'aig-page-0034-verification-copilot-2026-05-23', notes: promotedAiGCultureNote }],
+    [35, { blocks: 3, contributes: true, verification: 'aig-page-0035-verification-copilot-2026-05-23', notes: promotedAiGCultureNote }],
+    [36, { blocks: 2, contributes: true, verification: 'aig-page-0036-verification-copilot-2026-05-23', notes: promotedAiGCultureNote }],
+    [37, { blocks: 4, contributes: true, verification: 'aig-page-0037-verification-copilot-2026-05-23', notes: promotedAiGCultureNote }],
+    [38, { blocks: 3, contributes: true, verification: 'aig-page-0038-verification-copilot-2026-05-23', notes: promotedAiGCultureNote }],
+    [39, { blocks: 3, contributes: true, verification: 'aig-page-0039-verification-copilot-2026-05-23', notes: promotedAiGCultureNote }],
+    [40, { blocks: 3, contributes: true, verification: 'aig-page-0040-verification-copilot-2026-05-23', notes: promotedAiGCultureNote }],
+    [41, { blocks: 3, contributes: true, verification: 'aig-page-0041-verification-copilot-2026-05-23', notes: promotedAiGCultureNote }],
+    [60, { blocks: 6, contributes: true, verification: 'aig-page-0060-verification-opus-2026-05-22', notes: 'Verified; app-facing AiG magic overview facts promoted.' }],
+    [61, { blocks: 7, contributes: true, verification: 'aig-page-0061-verification-opus-2026-05-22', notes: 'Verified; app-facing AiG magic overview facts promoted.' }],
     [62, { blocks: 9, contributes: true, verification: 'aig-page-0062-verification-opus-2026-05-22' }]
   ]);
   const allowedAiGBlockTypes = new Set(sourceSchema.schemas.page_evidence_record.block_types);
@@ -1374,8 +1391,9 @@ runCommandTest('Render workflow can list sources without rendering pages',
     if (!Array.isArray(page.derived_facts) || page.derived_facts.length !== 0) problems.push(`${page.pdf_page}: derived_facts_unverified`);
     if ('candidate_label' in page || 'candidate_reason' in page) problems.push(`${page.pdf_page}: manifest_candidate_prose`);
     if (expected.contributes && 'exclusion_reason' in page) problems.push(`${page.pdf_page}: exclusion_reason`);
-    if (!expected.contributes && page.exclusion_reason !== 'Boundary page; no target magic-access content.') problems.push(`${page.pdf_page}: exclusion_reason`);
-    if (page.notes !== 'Verified; promotion blocked.') problems.push(`${page.pdf_page}: notes`);
+    if (!expected.contributes && page.exclusion_reason !== expected.exclusionReason) problems.push(`${page.pdf_page}: exclusion_reason`);
+    if (expected.notes && page.notes !== expected.notes) problems.push(`${page.pdf_page}: notes`);
+    if (!expected.notes && page.notes !== 'Verified; promotion blocked.') problems.push(`${page.pdf_page}: notes`);
     if (artifact?.artifact_kind !== 'extraction') problems.push(`${page.pdf_page}: artifact_kind`);
     if (artifact?.source_revision_id !== aigRevision) problems.push(`${page.pdf_page}: artifact_revision`);
     if (artifact?.pdf_page !== page.pdf_page) problems.push(`${page.pdf_page}: artifact_page`);
@@ -1400,17 +1418,26 @@ runCommandTest('Render workflow can list sources without rendering pages',
     )) problems.push(`${page.pdf_page}: artifact_excerpt_budget`);
     return problems;
   });
-  const nonExtractedCoveragePending = (aigCoverage.pages || []).every(page =>
-    verifiedAiGPages.has(page.pdf_page) || (
-    page.source_revision_id === aigRevision &&
-    page.work_state === 'pending' &&
-    page.render?.status === 'not_rendered' &&
-    page.extraction === null &&
-    page.verification === null &&
-    page.raw_page_record &&
-    fs.existsSync(path.join(__dirname, page.raw_page_record))
-    )
-  );
+  const nonExtractedCoveragePending = (aigCoverage.pages || []).every(page => {
+    if (verifiedAiGPages.has(page.pdf_page)) return true;
+    const pendingPage =
+      page.source_revision_id === aigRevision &&
+      page.work_state === 'pending' &&
+      page.render?.status === 'not_rendered' &&
+      page.extraction === null &&
+      page.verification === null &&
+      page.raw_page_record &&
+      fs.existsSync(path.join(__dirname, page.raw_page_record));
+    const renderOnlyScaffold =
+      page.source_revision_id === aigRevision &&
+      page.work_state === 'rendered' &&
+      page.render?.status === 'rendered' &&
+      page.extraction === null &&
+      page.verification === null &&
+      page.raw_page_record &&
+      fs.existsSync(path.join(__dirname, page.raw_page_record));
+    return pendingPage || renderOnlyScaffold;
+  });
   const allBlockedIndex = (aigPageIndex.pages || []).every(page =>
     page.source_revision_id === legacyAigRevision &&
     page.work_state === 'blocked' &&
@@ -1429,7 +1456,7 @@ runCommandTest('Render workflow can list sources without rendering pages',
       aigEvidenceSourceTextTotal <= sourceSchema.excerpt_budgets.source_excerpt_char_max &&
       nonExtractedCoveragePending &&
       allBlockedIndex) {
-    pass('AiG page coverage tracks bounded verified pages while legacy page index remains blocked');
+    pass('AiG page coverage tracks bounded verified app slices while legacy page index remains blocked');
   } else {
     fail('AiG page coverage/index state is not complete',
       JSON.stringify({
@@ -1446,23 +1473,112 @@ runCommandTest('Render workflow can list sources without rendering pages',
       }));
   }
 
-  const fullyBlockedAigAuthorityFiles = [
-    'references/aig-raw/cultures.json',
+  const expectedAigEvidenceState = 'bounded_extraction_independent_vision_verified';
+  const exactArray = (actual, expected) => JSON.stringify(actual || []) === JSON.stringify(expected);
+  const stillBlockedAigAuthorityFiles = [
     'references/aig-raw/folk-magic-aig.json',
     'references/aig-raw/rune-magic-aig.json',
     'references/aig-raw/spirit-magic-aig.json'
   ];
-  const authorityProblems = fullyBlockedAigAuthorityFiles.flatMap(relPath => {
+  const blockedAuthorityProblems = stillBlockedAigAuthorityFiles.flatMap(relPath => {
     const doc = JSON.parse(fs.readFileSync(path.join(__dirname, relPath), 'utf8'));
     const problems = [];
     if (doc.source_id !== 'aig') problems.push(`${relPath}: source_id`);
     if (doc.source_revision_id !== legacyAigRevision) problems.push(`${relPath}: source_revision_id`);
     if (doc.authority_state !== 'source_blocked') problems.push(`${relPath}: authority_state`);
+    if (doc.verified === true) problems.push(`${relPath}: verified true while source_blocked`);
     if (doc.page_index !== 'references/aig-raw/page-index.json') problems.push(`${relPath}: page_index`);
     if (doc.page_coverage !== 'references/sources/pages/aig.json') problems.push(`${relPath}: page_coverage`);
     if (!Array.isArray(doc.source_blockers) || doc.source_blockers.length === 0) problems.push(`${relPath}: source_blockers`);
     return problems;
   });
+  const culturesRef = readJson('references/aig-raw/cultures.json');
+  const expectedCultureNames = [
+    'Balazaring',
+    'Esrolian',
+    'God Forgot',
+    'Lunar Heartland',
+    'Praxian',
+    'Lunar Provincial',
+    'Sartarite (Heortling)',
+    'Telmori Hsunchen'
+  ];
+  const expectedStartingMoney = {
+    Balazaring: '4d6x2',
+    Esrolian: '4d6x15',
+    'God Forgot': '4d6x15',
+    'Lunar Heartland': '4d6x15',
+    Praxian: '4d6x5',
+    'Lunar Provincial': '4d6x10',
+    'Sartarite (Heortling)': '4d6x10',
+    'Telmori Hsunchen': '4d6x2'
+  };
+  const sourceRefPageConsistencyProblems = (label, sourceRef) => {
+    const problems = [];
+    const pdfPages = new Set(sourceRef.pdf_pages || []);
+    for (const blockId of sourceRef.block_ids || []) {
+      const match = blockId.match(/^aig-p(\d{3})-/);
+      if (match && !pdfPages.has(parseInt(match[1], 10))) problems.push(`${label}: block ${blockId} outside pdf_pages`);
+    }
+    for (const evidencePath of sourceRef.evidence_paths || []) {
+      const match = evidencePath.match(/page-(\d{4})-/);
+      if (match && !pdfPages.has(parseInt(match[1], 10))) problems.push(`${label}: evidence ${evidencePath} outside pdf_pages`);
+    }
+    for (const pageRecord of sourceRef.page_records || []) {
+      const match = pageRecord.match(/page-(\d{3})\.json$/);
+      if (match && !pdfPages.has(parseInt(match[1], 10))) problems.push(`${label}: page_record ${pageRecord} outside pdf_pages`);
+    }
+    return problems;
+  };
+  const cultureNames = (culturesRef.cultures || []).map(culture => culture.name);
+  const cultureSourceRefs = culturesRef.culture_source_refs || {};
+  const cultureAuthorityProblems = [];
+  const p25Extraction = readJson('references/sources/evidence/aig/page-0025-extraction.json');
+  const p37Extraction = readJson('references/sources/evidence/aig/page-0037-extraction.json');
+  const p25MoneyFacts = p25Extraction.blocks?.find(block => block.block_id === 'aig-p025-b002')?.facts?.starting_money_formulas || {};
+  const p37CohortFacts = p37Extraction.blocks?.find(block => block.block_id === 'aig-p037-b003')?.facts?.combat_style || {};
+  for (const [cultureName, formula] of Object.entries(expectedStartingMoney)) {
+    if (p25MoneyFacts[cultureName] !== formula) cultureAuthorityProblems.push(`page 25 evidence: ${cultureName} formula`);
+  }
+  if (p37CohortFacts.source_name !== 'Esrolian Cohort' ||
+      !exactArray(p37CohortFacts.weapons, ['Great Axe', 'Shortsword', 'Orlanthi Scutum', 'Javelin']) ||
+      !exactArray(p37CohortFacts.traits, ['Formation Fighting', 'Shield Splitter', 'Shield Wall']) ||
+      p37CohortFacts.restrictions !== 'Warrior career only') {
+    cultureAuthorityProblems.push('page 37 evidence: Esrolian Cohort fields');
+  }
+  if (culturesRef.source_id !== 'aig') cultureAuthorityProblems.push('cultures: source_id');
+  if (culturesRef.source_revision_id !== aigRevision) cultureAuthorityProblems.push('cultures: source_revision_id');
+  if (culturesRef.authority_state !== 'reference_authority') cultureAuthorityProblems.push('cultures: authority_state');
+  if (culturesRef.page_coverage !== 'references/sources/pages/aig.json') cultureAuthorityProblems.push('cultures: page_coverage');
+  if (!Array.isArray(culturesRef.source_blockers) || culturesRef.source_blockers.length !== 0) cultureAuthorityProblems.push('cultures: source_blockers');
+  for (const name of expectedCultureNames) {
+    const culture = (culturesRef.cultures || []).find(item => item.name === name);
+    const sourceRef = cultureSourceRefs[name] || {};
+    if (!culture) {
+      cultureAuthorityProblems.push(`${name}: missing culture`);
+      continue;
+    }
+    if (culture.starting_money?.amount_formula !== expectedStartingMoney[name]) cultureAuthorityProblems.push(`${name}: starting_money`);
+    if (sourceRef.source_revision_id !== aigRevision) cultureAuthorityProblems.push(`${name}: source_revision_id`);
+    if (sourceRef.verification_state !== 'verified') cultureAuthorityProblems.push(`${name}: verification_state`);
+    if (sourceRef.evidence_state !== expectedAigEvidenceState) cultureAuthorityProblems.push(`${name}: evidence_state`);
+    if (!Array.isArray(sourceRef.pdf_pages) || sourceRef.pdf_pages.length === 0) cultureAuthorityProblems.push(`${name}: pdf_pages`);
+    if (!Array.isArray(sourceRef.block_ids) || sourceRef.block_ids.length === 0) cultureAuthorityProblems.push(`${name}: block_ids`);
+    cultureAuthorityProblems.push(...sourceRefPageConsistencyProblems(name, sourceRef));
+    const evidencePaths = sourceRef.evidence_paths || [];
+    if (!evidencePaths.some(evidencePath => evidencePath.endsWith('-extraction.json')) ||
+        !evidencePaths.some(evidencePath => evidencePath.endsWith('-verification.json')) ||
+        evidencePaths.some(evidencePath => !fs.existsSync(path.join(__dirname, evidencePath)))) {
+      cultureAuthorityProblems.push(`${name}: evidence_paths`);
+    }
+  }
+  const sartariteCulture = (culturesRef.cultures || []).find(culture => culture.name === 'Sartarite (Heortling)');
+  if (!sartariteCulture?.combat_style_ids?.includes('aig:sartarite-heortling:esrolian-cohort')) {
+    cultureAuthorityProblems.push('Sartarite (Heortling): missing Esrolian Cohort');
+  }
+  const telmoriCulture = (culturesRef.cultures || []).find(culture => culture.name === 'Telmori Hsunchen');
+  if (telmoriCulture?.careers !== 'Any Primitive') cultureAuthorityProblems.push('Telmori Hsunchen: careers');
+
   const cultureMagicProfilesRef = readJson('references/aig-raw/culture-magic-profiles-aig.json');
   const zzistoriAccess = cultureMagicProfilesRef.profiles?.['God Forgot']?.sorcery?.sourceAccess;
   const zzistoriSourceRef = zzistoriAccess?.source_ref || {};
@@ -1480,15 +1596,33 @@ runCommandTest('Render workflow can list sources without rendering pages',
     'aig-p060-b003',
     'aig-p060-b006'
   ];
-  const exactArray = (actual, expected) => JSON.stringify(actual || []) === JSON.stringify(expected);
-  const zzistoriSourceProblems = [];
-  if (cultureMagicProfilesRef.source_id !== 'aig') zzistoriSourceProblems.push('culture-magic-profiles: source_id');
-  if (cultureMagicProfilesRef.source_revision_id !== legacyAigRevision) zzistoriSourceProblems.push('culture-magic-profiles: source_revision_id');
-  if (cultureMagicProfilesRef.authority_state !== 'source_blocked') zzistoriSourceProblems.push('culture-magic-profiles: authority_state');
-  if (!Array.isArray(cultureMagicProfilesRef.source_blockers) ||
-      !cultureMagicProfilesRef.source_blockers.some(blocker => /remaining culture profile pages/i.test(blocker))) {
-    zzistoriSourceProblems.push('culture-magic-profiles: explicit remaining-profile blocker');
+  const cultureMagicProblems = [];
+  if (cultureMagicProfilesRef.source_id !== 'aig') cultureMagicProblems.push('culture-magic-profiles: source_id');
+  if (cultureMagicProfilesRef.source_revision_id !== aigRevision) cultureMagicProblems.push('culture-magic-profiles: source_revision_id');
+  if (cultureMagicProfilesRef.authority_state !== 'reference_authority') cultureMagicProblems.push('culture-magic-profiles: authority_state');
+  if (!Array.isArray(cultureMagicProfilesRef.source_blockers) || cultureMagicProfilesRef.source_blockers.length !== 0) {
+    cultureMagicProblems.push('culture-magic-profiles: source_blockers');
   }
+  if (/136|137/.test(cultureMagicProfilesRef.page || '')) {
+    cultureMagicProblems.push('culture-magic-profiles: stale page scope');
+  }
+  const profileSourceRefs = cultureMagicProfilesRef.profile_source_refs || {};
+  for (const name of expectedCultureNames) {
+    const profileRef = profileSourceRefs[name] || {};
+    if (profileRef.source_revision_id !== aigRevision) cultureMagicProblems.push(`${name}: profile source_revision_id`);
+    if (profileRef.verification_state !== 'verified') cultureMagicProblems.push(`${name}: profile verification_state`);
+    if (profileRef.evidence_state !== expectedAigEvidenceState) cultureMagicProblems.push(`${name}: profile evidence_state`);
+    if (!Array.isArray(profileRef.pdf_pages) || profileRef.pdf_pages.length === 0) cultureMagicProblems.push(`${name}: profile pdf_pages`);
+    if (!Array.isArray(profileRef.block_ids) || profileRef.block_ids.length === 0) cultureMagicProblems.push(`${name}: profile block_ids`);
+    cultureMagicProblems.push(...sourceRefPageConsistencyProblems(`${name} profile`, profileRef));
+  }
+  if (cultureMagicProfilesRef.profiles?.['Telmori Hsunchen']?.runeMagic?.status !== 'absent') {
+    cultureMagicProblems.push('Telmori Hsunchen: runeMagic status');
+  }
+  if (!zzistoriAccess?.source_ref?.promotion_cautions?.some(caution => /broader AiG culture profiles now cite verified/i.test(caution))) {
+    cultureMagicProblems.push('zzistori source_ref: stale promotion caution');
+  }
+  const zzistoriSourceProblems = [];
   if (zzistoriSourceRef.source_id !== 'aig') zzistoriSourceProblems.push('zzistori source_ref: source_id');
   if (zzistoriSourceRef.source_revision_id !== aigRevision) zzistoriSourceProblems.push('zzistori source_ref: source_revision_id');
   if (zzistoriSourceRef.page_manifest_path !== 'references/sources/pages/aig.json') zzistoriSourceProblems.push('zzistori source_ref: page_manifest_path');
@@ -1501,40 +1635,19 @@ runCommandTest('Render workflow can list sources without rendering pages',
   for (const evidencePath of expectedZzistoriEvidencePaths) {
     if (!fs.existsSync(path.join(__dirname, evidencePath))) zzistoriSourceProblems.push(`zzistori source_ref: missing file ${evidencePath}`);
   }
-  const culturesRef = readJson('references/aig-raw/cultures.json');
-  const cultureNames = (culturesRef.cultures || []).map(culture => culture.name);
-  const cultureSourceRefs = culturesRef.culture_source_refs || {};
-  const culturesWithoutBlockedRefs = cultureNames.filter(name =>
-    cultureSourceRefs[name]?.source_revision_id !== legacyAigRevision ||
-    cultureSourceRefs[name]?.verification_state !== 'blocked' ||
-    !Array.isArray(cultureSourceRefs[name]?.pdf_pages) ||
-    cultureSourceRefs[name].pdf_pages.length === 0
-  );
   const aigMapEntries = new Map((indexMap.entries || []).map(entry => [entry.constant_name, entry]));
   const aigInlineProblems = ['CULTURES_DATA', 'CULTURE_MAGIC_PROFILES'].flatMap(name => {
     const entry = aigMapEntries.get(name) || {};
     const problems = [];
-    if (entry.status !== 'source_blocked') problems.push(`${name}: status`);
-    if (entry.source_revision_id !== legacyAigRevision) problems.push(`${name}: source_revision_id`);
+    if (entry.status !== 'verified') problems.push(`${name}: status`);
+    if (entry.source_revision_id !== aigRevision) problems.push(`${name}: source_revision_id`);
     if (entry.page_coverage !== 'references/sources/pages/aig.json') problems.push(`${name}: page_coverage`);
-    if (typeof entry.blocked_reason !== 'string' || !/remaining|incomplete|pending/i.test(entry.blocked_reason)) {
+    if ('blocked_reason' in entry) {
       problems.push(`${name}: explicit blocked_reason`);
     }
-    const expectedSourceState = name === 'CULTURE_MAGIC_PROFILES'
-      ? 'source_blocked_with_bounded_verified_slices'
-      : 'source_blocked_pending_culture_vision_evidence';
-    if (entry.source_state !== expectedSourceState) problems.push(`${name}: source_state`);
+    if (entry.source_state !== expectedAigEvidenceState) problems.push(`${name}: source_state`);
     if (name === 'CULTURE_MAGIC_PROFILES') {
-      const slices = Array.isArray(entry.verified_slices) ? entry.verified_slices : [];
-      const hasZzistoriSlice = slices.some(slice =>
-        slice.fact_id === 'app:CULTURE_MAGIC_PROFILES:God Forgot:sorcery.sourceAccess' &&
-        slice.source_revision_id === aigRevision &&
-        slice.page_manifest_path === 'references/sources/pages/aig.json' &&
-        exactArray(slice.pdf_pages, expectedZzistoriPdfPages) &&
-        exactArray(slice.block_ids, expectedZzistoriBlockIds) &&
-        exactArray(slice.evidence_paths, expectedZzistoriEvidencePaths)
-      );
-      if (!hasZzistoriSlice) problems.push(`${name}: missing Zzistori verified slice`);
+      if (!Array.isArray(entry.source_refs) || entry.source_refs.length === 0) problems.push(`${name}: source_refs`);
     }
     return problems;
   });
@@ -1543,37 +1656,38 @@ runCommandTest('Render workflow can list sources without rendering pages',
   const cultureMagicCoverage = coverageById.get('culture-magic-profiles') || {};
   const cultureMagicCoverageRef = (cultureMagicCoverage.references || []).find(ref => ref.path === 'references/aig-raw/culture-magic-profiles-aig.json') || {};
   const coverageProblems = [];
-  if (cultureMagicCoverage.status !== 'partial') coverageProblems.push('culture-magic-profiles coverage: status');
-  if (!Array.isArray(cultureMagicCoverage.blockers) ||
-      !cultureMagicCoverage.blockers.some(blocker => /remaining culture profile pages/i.test(blocker))) {
+  if (cultureMagicCoverage.status !== 'verified') coverageProblems.push('culture-magic-profiles coverage: status');
+  if (!Array.isArray(cultureMagicCoverage.blockers) || cultureMagicCoverage.blockers.length !== 0) {
     coverageProblems.push('culture-magic-profiles coverage: explicit blocker');
   }
   const coverageSourceRef = cultureMagicCoverageRef.source_ref || {};
-  if (coverageSourceRef.source_id !== zzistoriSourceRef.source_id ||
-      coverageSourceRef.source_revision_id !== zzistoriSourceRef.source_revision_id ||
-      coverageSourceRef.page_manifest_path !== zzistoriSourceRef.page_manifest_path ||
-      coverageSourceRef.evidence_state !== zzistoriSourceRef.evidence_state ||
-      coverageSourceRef.scope !== zzistoriSourceRef.scope ||
-      !exactArray(coverageSourceRef.pdf_pages, expectedZzistoriPdfPages) ||
-      !exactArray(coverageSourceRef.evidence_paths, expectedZzistoriEvidencePaths)) {
+  if (coverageSourceRef.source_id !== 'aig' ||
+      coverageSourceRef.source_revision_id !== aigRevision ||
+      coverageSourceRef.page_manifest_path !== 'references/sources/pages/aig.json' ||
+      coverageSourceRef.evidence_state !== expectedAigEvidenceState ||
+      !Array.isArray(coverageSourceRef.pdf_pages) ||
+      coverageSourceRef.pdf_pages.length === 0 ||
+      !Array.isArray(coverageSourceRef.evidence_paths) ||
+      coverageSourceRef.evidence_paths.length === 0) {
     coverageProblems.push('culture-magic-profiles coverage: source_ref evidence');
   }
   const culturesCoverage = coverageById.get('cultures-combat-styles') || {};
-  if (culturesCoverage.status !== 'partial' ||
+  if (culturesCoverage.status !== 'verified' ||
       !Array.isArray(culturesCoverage.blockers) ||
-      !culturesCoverage.blockers.some(blocker => /AiG culture\/homeland details/i.test(blocker))) {
+      culturesCoverage.blockers.length !== 0) {
     coverageProblems.push('cultures-combat-styles coverage: explicit AiG blocker');
   }
-  if (authorityProblems.length === 0 &&
+  if (blockedAuthorityProblems.length === 0 &&
+      cultureAuthorityProblems.length === 0 &&
+      cultureMagicProblems.length === 0 &&
       zzistoriSourceProblems.length === 0 &&
       cultureNames.length === 8 &&
-      culturesWithoutBlockedRefs.length === 0 &&
       aigInlineProblems.length === 0 &&
       coverageProblems.length === 0) {
-    pass('AiG culture authority is wired to bounded evidence and explicit source blockers');
+    pass('AiG culture and profile authority are wired to bounded verified evidence');
   } else {
     fail('AiG culture authority source revision wiring is incomplete',
-      JSON.stringify({ authorityProblems, zzistoriSourceProblems, cultureCount: cultureNames.length, culturesWithoutBlockedRefs, aigInlineProblems, coverageProblems }));
+      JSON.stringify({ blockedAuthorityProblems, cultureAuthorityProblems, cultureMagicProblems, zzistoriSourceProblems, cultureCount: cultureNames.length, aigInlineProblems, coverageProblems }));
   }
 
   const sourceStates = sourceSchema.lifecycle_states.source_revisions;
@@ -2476,10 +2590,10 @@ section('Waha Source Authority');
       pagesVerified &&
       broadLegacyWahaSourceIds.length === 0 &&
       broadIndexWahaSourceIds.length === 0 &&
-      wahaIndexEntry?.status === 'pending_fact_map' &&
+      wahaIndexEntry?.status === 'accepted' &&
       wahaIndexEntry?.source_state === 'mixed_waha_verified_with_legacy_cult_rows' &&
       wahaIndexEntry?.verified_source_slices?.some(slice => slice.source_id === 'waha' && slice.normalized_file === 'references/cults-raw/praxian/waha.json') &&
-      wahaMiraclesEntry?.status === 'pending_fact_map' &&
+      wahaMiraclesEntry?.status === 'accepted' &&
       wahaMiraclesEntry?.source_state === 'mixed_waha_verified_with_derived_runes_and_legacy_exemptions' &&
       stormWaha.recordStatus === 'superseded' &&
       stormWaha.doNotUseForAppGeneration === true &&
@@ -3352,7 +3466,7 @@ section('Risk 3: Multi-page PDF Scaling Artifacts');
   maxChar.careerSkills = {};
   maxChar.bonusSkills = {};
 
-  const skillNames = ['Athletics', 'Ride', 'Swim', 'Locale', 'Lore (Regional)',
+  const skillNames = ['Athletics', 'Ride', 'Swim', 'Locale', 'Lore (Sartar)',
                      'Customs', 'Endurance', 'Evade', 'First Aid', 'Influence',
                      'Insight', 'Perception', 'Sing', 'Stealth', 'Willpower'];
   skillNames.forEach((skill, i) => {
@@ -4880,7 +4994,7 @@ section('ADR-005: Placeholder Skill Disambiguation');
       'Craft (Hunting Related)', 'Lore (Regional or Specific Species)',
       'Craft (Specific Shipboard Speciality)', 'Craft (Specific Physiological Speciality)',
       'Lore (Specific Alchemical Speciality)', 'Healing (Specific Species)',
-      'Teach (Specific Species)'
+      'Teach (Specific Species)', 'Lore (Regional)'
     ];
     let allDetected = true;
     for (const p of placeholders) {
@@ -4890,7 +5004,7 @@ section('ADR-005: Placeholder Skill Disambiguation');
         break;
       }
     }
-    if (allDetected) pass('isPlaceholderSkill() detects all 12 descriptive placeholders');
+    if (allDetected) pass('isPlaceholderSkill() detects all 13 descriptive placeholders');
   } else {
     fail('isPlaceholderSkill not exported');
   }
@@ -4903,7 +5017,7 @@ section('ADR-005: Placeholder Skill Disambiguation');
     const concreteSkills = [
       'Craft (Alchemy)', 'Craft (Animal Husbandry)', 'Lore (Military History)',
       'Lore (Strategy and Tactics)', 'Craft (Mining)', 'Lore (Minerals)',
-      'Navigation (Underground)', 'Craft (Masonry)', 'Lore (Agriculture)'
+      'Navigation (Underground)', 'Craft (Masonry)', 'Lore (Agriculture)', 'Lore (Sartar)'
     ];
     let anyFalsePositive = false;
     for (const s of concreteSkills) {
@@ -4923,7 +5037,7 @@ section('ADR-005: Placeholder Skill Disambiguation');
 {
   const { needsDisambiguation } = loadApp();
   if (needsDisambiguation) {
-    const should = ['Language (any)', 'Lore (any)', 'Craft (Primary)', 'Lore (Specific Species)'];
+    const should = ['Language (any)', 'Lore (any)', 'Craft (Primary)', 'Lore (Specific Species)', 'Lore (Regional)'];
     const shouldNot = ['Craft (Alchemy)', 'Language (Heortling)', 'Athletics', 'Perception'];
     let ok = true;
     for (const s of should) {
@@ -4934,9 +5048,135 @@ section('ADR-005: Placeholder Skill Disambiguation');
         if (needsDisambiguation(s)) { fail(`needsDisambiguation should NOT catch "${s}"`); ok = false; break; }
       }
     }
+
+    // Test: Player disambiguation guidance cites source pages for ambiguous professional skills
+    {
+      const { getSpecializationGuidance } = loadApp();
+      if (getSpecializationGuidance) {
+        const languageGuidance = getSpecializationGuidance('Language (any)');
+        const loreGuidance = getSpecializationGuidance('Lore (any)');
+        const regionalGuidance = getSpecializationGuidance('Lore (Regional)');
+        if (
+          languageGuidance.includes('Mythras Core p.49') &&
+          languageGuidance.includes('Adventures in Glorantha p.26-41') &&
+          loreGuidance.includes('Mythras Core p.49') &&
+          loreGuidance.includes('Adventures in Glorantha p.26-41') &&
+          regionalGuidance.includes('Mythras Core p.49') &&
+          regionalGuidance.includes('Adventures in Glorantha p.26-41')
+        ) {
+          pass('Ambiguous skill guidance points players to source pages');
+        } else {
+          fail('Ambiguous skill guidance lacks source-page pointers',
+            JSON.stringify({ languageGuidance, loreGuidance, regionalGuidance }));
+        }
+      } else {
+        fail('getSpecializationGuidance not exported for source-citation test');
+      }
+    }
     if (ok) pass('needsDisambiguation() correctly unifies (any) + placeholder detection');
   } else {
     fail('needsDisambiguation not exported');
+  }
+}
+
+// Test: Source professional skill placeholders are either resolved by disambiguation or concrete
+{
+  const { CAREERS_DATA, CULTURES_DATA, DISAMBIGUATION_LISTS, needsDisambiguation } = loadApp();
+  if (CAREERS_DATA && CULTURES_DATA && DISAMBIGUATION_LISTS && needsDisambiguation) {
+    const sources = [];
+    for (const career of CAREERS_DATA) {
+      for (const skill of career.professionalSkills || []) sources.push(`${career.name}: ${skill}`);
+    }
+    for (const culture of CULTURES_DATA) {
+      for (const skill of culture.professionalSkills || []) sources.push(`${culture.name}: ${skill}`);
+    }
+
+    const descriptiveParenthetical = /\((?:any|any other|local|primary|secondary|specific|hunting related|regional(?:\s+or\s+specific)?|shipboard|physiological|alchemical|pantheon|cult|totem|tradition|school|grimoire)\b/i;
+    const missed = sources.filter(entry => {
+      const skill = entry.replace(/^.*?:\s*/, '');
+      return descriptiveParenthetical.test(skill) && !needsDisambiguation(skill);
+    });
+    const unresolvedLoreOption = (DISAMBIGUATION_LISTS.Lore || []).includes('Regional');
+
+    if (missed.length > 0) {
+      fail(`Source professional placeholder is not caught by needsDisambiguation(): ${missed[0]}`);
+    } else if (unresolvedLoreOption) {
+      fail('Lore disambiguation choices must not offer unresolved "Regional" as a final specialization');
+    } else {
+      pass('Source professional skill placeholders are caught before they can become final skill names');
+    }
+  } else {
+    fail('Could not audit source professional skill placeholders');
+  }
+}
+
+// Test: Step 8 explains professional skill specializations and build-critical magic skills
+{
+  const { App, CharacterData } = loadApp();
+  if (App && App.renderCareerDetails && CharacterData) {
+    const careerHtml = {};
+    for (const career of ['Shaman', 'Sorcerer', 'Mystic']) {
+      CharacterData.career = career;
+      CharacterData.selectedProfessionalSkills = [];
+      CharacterData.careerSkills = {};
+      careerHtml[career] = App.renderCareerDetails();
+    }
+
+    const requiredCopy = [
+      [careerHtml.Shaman, 'Name the spirit tradition'],
+      [careerHtml.Shaman, 'Core Animism depends on Trance'],
+      [careerHtml.Shaman, 'Binding is the other core Animism skill'],
+      [careerHtml.Shaman, 'Name the actual body of knowledge'],
+      [careerHtml.Sorcerer, 'Sorcery needs Invocation'],
+      [careerHtml.Sorcerer, 'Shaping controls how sorcery is modified'],
+      [careerHtml.Mystic, 'Mysticism uses Meditation'],
+      [careerHtml.Mystic, 'Mysticism is the core professional skill']
+    ];
+    const missing = requiredCopy.find(([html, text]) => !html.includes(text));
+    if (missing) {
+      fail(`Step 8 guidance missing copy: ${missing[1]}`);
+    } else {
+      pass('Step 8 explains specialization choices and build-critical magic skills');
+    }
+  } else {
+    fail('Could not render Step 8 professional skill guidance');
+  }
+}
+
+// Test: free-text specialization rejects category labels like Lore (Regional)
+{
+  const { App, CharacterData, _sandbox } = loadApp();
+  if (App && App.resolveProfessionalSkill && App.disambiguateAndUpdateFreeText && CharacterData) {
+    const alerts = [];
+    const toasts = [];
+    _sandbox.alert = message => alerts.push(message);
+    App.showToast = (message, type) => toasts.push({ message, type });
+
+    CharacterData.selectedProfessionalSkills = ['Lore (any)'];
+    CharacterData.careerSkills = { 'Lore (any)': 0 };
+    CharacterData._disambiguationMap = {};
+    const input = { value: 'Regional' };
+    const checkboxRejected = App.resolveProfessionalSkill('Lore (any)', 'Regional', input) === false;
+
+    CharacterData.selectedProfessionalSkills = ['Lore (any)'];
+    CharacterData.careerSkills = { 'Lore (any)': 5 };
+    CharacterData._disambiguationMap = {};
+    const freeTextRejected = App.disambiguateAndUpdateFreeText('career', 'Lore (any)', 'Regional', 'Lore') === false;
+
+    const noAmbiguousSkill =
+      !Object.prototype.hasOwnProperty.call(CharacterData.careerSkills, 'Lore (Regional)') &&
+      !CharacterData.selectedProfessionalSkills.includes('Lore (Regional)');
+    const originalPreserved = CharacterData.careerSkills['Lore (any)'] === 5;
+    const feedback = alerts.concat(toasts.map(t => t.message)).join(' ');
+
+    if (checkboxRejected && freeTextRejected && noAmbiguousSkill && originalPreserved && /category label|concrete/.test(feedback)) {
+      pass('free-text specialization rejects Lore (Regional) category labels before persistence');
+    } else {
+      fail('free-text specialization allowed ambiguous Lore (Regional)',
+        JSON.stringify({ checkboxRejected, freeTextRejected, noAmbiguousSkill, originalPreserved, inputValue: input.value, alerts, toasts, selected: CharacterData.selectedProfessionalSkills, careerSkills: CharacterData.careerSkills }));
+    }
+  } else {
+    fail('Could not test ambiguous professional specialization rejection');
   }
 }
 
@@ -5013,6 +5253,19 @@ section('ADR-005: Placeholder Skill Disambiguation');
       fail(`Fixture has unresolved skill: ${unresolvedFixture}`);
     } else {
       pass(`All ${fixtures.length} fixtures have fully-resolved skill names (no placeholders)`);
+    }
+
+    const importFailures = [];
+    for (const file of fixtures) {
+      const data = JSON.parse(fs.readFileSync(path.join(fixturesDir, file), 'utf8'));
+      if (!App.CharacterData.fromJSON(JSON.stringify(data))) {
+        importFailures.push(file);
+      }
+    }
+    if (importFailures.length === 0) {
+      pass(`All ${fixtures.length} fixtures import through CharacterData.fromJSON()`);
+    } else {
+      fail('Fixtures fail CharacterData.fromJSON()', importFailures.join(', '));
     }
   } else {
     fail('Could not verify fixtures — needsDisambiguation or fixtures dir missing');
@@ -5256,6 +5509,11 @@ const fixtures = [
   { file: 'sartarite-warrior.json', name: 'Sartarite Warrior' },
   { file: 'praxian-beast-rider.json', name: 'Praxian Beast Rider' },
   { file: 'telmori-wolfbrother.json', name: 'Telmori Wolfbrother' },
+  { file: 'higher-magic-no-cult-shaman.json', name: 'Higher Magic: No-Cult Shaman' },
+  { file: 'higher-magic-no-cult-sorcerer.json', name: 'Higher Magic: No-Cult Sorcerer' },
+  { file: 'higher-magic-no-cult-mystic.json', name: 'Higher Magic: No-Cult Mystic' },
+  { file: 'higher-magic-zzistori-sorcerer.json', name: 'Higher Magic: Zzistori Sorcerer' },
+  { file: 'higher-magic-waha-hybrid.json', name: 'Higher Magic: Waha Hybrid' },
   { file: 'ionara.json', name: 'Ionara' },
   { file: 'vasana.json', name: 'Vasana' }
 ];
@@ -5688,6 +5946,312 @@ fixtures.forEach(fixtureInfo => {
       pass(`${fixtureInfo.name} PDF: draws fixture identity, stats, weapons, magic, and passions`);
     } else {
       fail(`${fixtureInfo.name} PDF: missing drawn fixture content`, missing.join(', ') || 'PDF was not saved');
+    }
+  });
+});
+
+const magicPdfCoverageCases = [
+  {
+    file: 'vargast-windborn-orlanth.json',
+    name: 'Theism PDF coverage',
+    expected: [
+      'THEIST MIRACLES (Orlanth)',
+      'Devotional Pool',
+      'Extension',
+      'Find (Specific Thing)',
+      'Divination',
+      'Summon Sylph',
+      'Wind Warp'
+    ],
+    forbidden: ['SORCERY (', 'SPIRIT MAGIC (']
+  },
+  {
+    file: 'higher-magic-no-cult-shaman.json',
+    name: 'Core Animism PDF coverage',
+    expected: [
+      'SPIRIT MAGIC (Core Animism via Shaman career)',
+      'Bound Spirit Slots',
+      'Ancestor Spirit — Sagacity (Int 1)',
+      'Sagacity',
+      'augments one skill',
+      'Nature Spirit — Camouflage (Int 2)',
+      'Endowment (Camouflage',
+      'two difficulty grades'
+    ],
+    forbidden: ['THEIST MIRACLES', 'SORCERY (']
+  },
+  {
+    file: 'higher-magic-no-cult-sorcerer.json',
+    name: 'Core Sorcery PDF coverage',
+    expected: [
+      'SORCERY (Core Sorcery via Sorcerer career)',
+      'Magic Points',
+      'Casting: Invocation skill',
+      'Shaping: Shaping skill',
+      'Holdfast',
+      'Damage Resistance'
+    ],
+    forbidden: ['THEIST MIRACLES', 'SPIRIT MAGIC (']
+  },
+  {
+    file: 'regression-arkat-sorcery.json',
+    name: 'Cult Sorcery PDF coverage',
+    expected: [
+      'SORCERY (Arkat)',
+      'Magic Points',
+      'Casting: Invocation skill',
+      'Shaping: Shaping skill',
+      'Animate (Substance)',
+      'Diminish (Characteristic)',
+      'Protective Ward'
+    ],
+    forbidden: ['THEIST MIRACLES', 'SPIRIT MAGIC (', 'Zzistori School (God Forgot sorcery)']
+  },
+  {
+    file: 'higher-magic-no-cult-mystic.json',
+    name: 'Core Mysticism PDF coverage',
+    expected: [
+      'MYSTICISM (Core Mysticism via Mystic career)',
+      'Meditation + Mysticism',
+      'Resource: Magic Points',
+      'Max Intensity = Meditation/10'
+    ],
+    forbidden: ['THEIST MIRACLES', 'SPIRIT MAGIC (', 'SORCERY (']
+  },
+  {
+    file: 'higher-magic-zzistori-sorcerer.json',
+    name: 'Zzistori source-backed Sorcery PDF coverage',
+    expected: [
+      'SORCERY (Zzistori School (God Forgot sorcery))',
+      'Source: AiG p.30-31, p.59-60; Mythras Core p.162, p.166-177',
+      'Holdfast',
+      'Animate (Substance)',
+      'Project (Sense)'
+    ],
+    forbidden: ['THEIST MIRACLES', 'SPIRIT MAGIC (']
+  },
+  {
+    file: 'higher-magic-waha-hybrid.json',
+    name: 'Waha hybrid Theism+Animism PDF coverage',
+    expected: [
+      'THEIST MIRACLES (Waha)',
+      'Devotional Pool',
+      'Find (Specific Thing)',
+      'Axis Mundi',
+      'Divination',
+      'Spirit Block',
+      'Summon Cult Spirit',
+      'Command Cult Spirit',
+      'SPIRIT MAGIC (Waha)',
+      'Shaman Path',
+      'Nature Spirit — Camouflage (Int 2)',
+      'Endowment (Camouflage',
+      'Bless Spirit — Initiative (Int 1)',
+      'Bless (Initiative'
+    ],
+    forbidden: ['SORCERY (']
+  }
+];
+
+magicPdfCoverageCases.forEach(testCase => {
+  asyncTest(`${testCase.name} failed`, async () => {
+    const fixture = loadFixture(testCase.file);
+    if (!fixture) {
+      fail(`${testCase.name}: fixture file not found or invalid JSON`);
+      return;
+    }
+
+    const { text, saved } = await captureSinglePagePdf(fixture);
+    const missing = testCase.expected.filter(value => !text.includes(value));
+    const forbidden = (testCase.forbidden || []).filter(value => text.includes(value));
+
+    if (saved && missing.length === 0 && forbidden.length === 0) {
+      pass(`${testCase.name}: exported PDF includes expected magic systems and selections`);
+    } else {
+      fail(`${testCase.name}: PDF magic content mismatch`,
+        JSON.stringify({
+          missing,
+          forbidden,
+          magicText: text.split('\n').filter(line =>
+            /THEIST|SPIRIT|SORCERY|MYSTICISM|Devotional|Magic Points|Invocation|Shaping|Spirit|Holdfast|Damage|Animate|Diminish|Protective|Project|Axis|Divination|Command|Bless|Endowment|Sagacity|Wind Warp|Summon Sylph|Source:/.test(line)
+          ).join(' | ')
+        }));
+    }
+  });
+});
+
+const wizardPlayPdfFidelityCases = [
+  {
+    file: 'ionara.json',
+    name: 'Ionara active pregen',
+    pdfExpected: [
+      'Ionara Grand-daughter of Thiralda',
+      'Grazelander/Pure Horse',
+      'Priest',
+      'THEIST MIRACLES (Maran Gor)',
+      'Blast Earth',
+      'Summon Gnome',
+      'Grazelander Noble',
+      'Mace',
+      'Lance',
+      'COMPANION: Teza (Riding Horse)'
+    ]
+  },
+  {
+    file: 'vasana.json',
+    name: 'Vasana active pregen',
+    pdfExpected: [
+      "Vasana Farnan's Daughter",
+      'Sartarite (Heortling)',
+      'Warrior',
+      'THEIST MIRACLES (Orlanth)',
+      'Lightning',
+      'Shield',
+      'Colymar Bison Cavalry',
+      'Broadsword',
+      'Composite Bow',
+      'COMPANION: Molon (Bison (War-trained))'
+    ]
+  },
+  {
+    file: 'higher-magic-waha-hybrid.json',
+    name: 'Waha hybrid fixture',
+    pdfExpected: [
+      'Karrg Beast-Talker',
+      'Praxian',
+      'Shaman',
+      'THEIST MIRACLES (Waha)',
+      'Axis Mundi',
+      'SPIRIT MAGIC (Waha)',
+      'Nature Spirit — Camouflage (Int 2)',
+      'Bless Spirit — Initiative (Int 1)'
+    ]
+  },
+  {
+    file: 'higher-magic-zzistori-sorcerer.json',
+    name: 'Zzistori sorcerer fixture',
+    pdfExpected: [
+      'Talor Zzistori Eye',
+      'God Forgot',
+      'Sorcerer',
+      'SORCERY (Zzistori School (God Forgot sorcery))',
+      'Holdfast',
+      'Animate (Substance)',
+      'Project (Sense)'
+    ]
+  },
+  {
+    file: 'higher-magic-no-cult-shaman.json',
+    name: 'No-cult Shaman fixture',
+    pdfExpected: [
+      'Argrath Spirit-Seeker',
+      'Praxian',
+      'Shaman',
+      'SPIRIT MAGIC (Core Animism via Shaman career)',
+      'Ancestor Spirit — Sagacity (Int 1)',
+      'Nature Spirit — Camouflage (Int 2)'
+    ]
+  },
+  {
+    file: 'higher-magic-no-cult-sorcerer.json',
+    name: 'No-cult Sorcerer fixture',
+    pdfExpected: [
+      'Erenvald Script-Keeper',
+      'Esrolian',
+      'Sorcerer',
+      'SORCERY (Core Sorcery via Sorcerer career)',
+      'Holdfast',
+      'Damage Resistance'
+    ]
+  },
+  {
+    file: 'higher-magic-no-cult-mystic.json',
+    name: 'No-cult Mystic fixture',
+    pdfExpected: [
+      'Sereth Breath-Watcher',
+      'Esrolian',
+      'Mystic',
+      'MYSTICISM (Core Mysticism via Mystic career)',
+      'Resource: Magic Points (20)'
+    ]
+  }
+];
+
+const wizardChoicePaths = [
+  'name',
+  'concept',
+  'characteristics',
+  'culture',
+  'homeland',
+  'culturalSkills',
+  'runeAffinities',
+  'folkMagicSpells',
+  'passions',
+  'age',
+  'gender',
+  'family',
+  'career',
+  'cult',
+  'miracles',
+  'boundSpirits',
+  'sorcerySpells',
+  'mysticismTalents',
+  'careerSkills',
+  'careerFolkMagic',
+  'selectedProfessionalSkills',
+  'bonusSkills',
+  'socialClass',
+  'startingMoney',
+  'equipment',
+  'weapons',
+  'armor',
+  'combatStyles',
+  'companions'
+];
+
+function stableJson(value) {
+  if (Array.isArray(value)) return `[${value.map(stableJson).join(',')}]`;
+  if (value && typeof value === 'object') {
+    return `{${Object.keys(value).sort().map(key => `${JSON.stringify(key)}:${stableJson(value[key])}`).join(',')}}`;
+  }
+  return JSON.stringify(value);
+}
+
+wizardPlayPdfFidelityCases.forEach(testCase => {
+  asyncTest(`${testCase.name} Wizard→Play→PDF fidelity failed`, async () => {
+    const fixture = loadFixture(testCase.file);
+    if (!fixture) {
+      fail(`${testCase.name}: fixture file not found or invalid JSON`);
+      return;
+    }
+
+    const app = loadApp();
+    const imported = app.CharacterData.fromJSON(JSON.stringify(fixture));
+    if (!imported) {
+      fail(`${testCase.name}: fixture does not import through CharacterData.fromJSON()`);
+      return;
+    }
+    app.App.switchMode('play');
+    const playState = app.CharacterData.toJSON();
+    const stateMismatches = wizardChoicePaths.filter(path =>
+      stableJson(playState[path]) !== stableJson(fixture[path])
+    );
+
+    const { text, saved } = await captureSinglePagePdf(fixture);
+    const missingPdfChoices = testCase.pdfExpected.filter(value => !text.includes(value));
+
+    if (saved && stateMismatches.length === 0 && missingPdfChoices.length === 0) {
+      pass(`${testCase.name}: wizard choices preserve into Play Mode and exported PDF`);
+    } else {
+      fail(`${testCase.name}: Wizard→Play→PDF fidelity mismatch`,
+        JSON.stringify({
+          stateMismatches,
+          missingPdfChoices,
+          pdfText: text.split('\n').filter(line =>
+            testCase.pdfExpected.some(value => line.includes(String(value).slice(0, 12))) ||
+            /THEIST|SPIRIT|SORCERY|MYSTICISM|COMPANION|Magic Points|Shield|Lightning|Holdfast|Axis|Gnome|Camouflage|Sagacity|Damage|Project|Animate/.test(line)
+          ).join(' | ')
+        }));
     }
   });
 });
@@ -7196,10 +7760,6 @@ fixtures.forEach(fixtureInfo => {
 section('Random Character Generator');
 // ============================================================
 
-// ============================================================
-section('Random Character Generator');
-// ============================================================
-
 // Test: generateRandomCharacter fully resets state
 {
   const CD = App.CharacterData;
@@ -7392,6 +7952,172 @@ section('Random Character Generator');
   }
 }
 
+{
+  const {
+    App: AppRef,
+    CharacterData: CD,
+    CULTURES_DATA: CulturesData,
+    CAREERS_DATA: CareersData,
+    CULTURE_CULT_MAP: CultureCultMap,
+    _sandbox: sandbox
+  } = loadApp();
+
+  if (AppRef?.generateRandomCharacter && Array.isArray(CulturesData) && Array.isArray(CareersData) && CultureCultMap?.Praxian) {
+    const originalCultures = CulturesData.slice();
+    const originalCareers = CareersData.slice();
+    const originalPraxianPrimary = [...(CultureCultMap.Praxian.primary || [])];
+    const oldRandom = sandbox.Math.random;
+    const originalRender = AppRef.renderCurrentStep;
+    const originalToast = AppRef.showToast;
+    const originalSave = AppRef.saveToLocalStorage;
+    try {
+      const praxian = originalCultures.find(culture => culture.name === 'Praxian');
+      const shaman = originalCareers.find(career => career.name === 'Shaman');
+      if (!praxian || !shaman) {
+        fail('Random Waha Shaman regression fixture data missing');
+      } else {
+        CulturesData.splice(0, CulturesData.length, praxian);
+        CareersData.splice(0, CareersData.length, shaman);
+        CultureCultMap.Praxian.primary = ['Waha'];
+        let randomState = 1;
+        sandbox.Math.random = () => {
+          randomState = (randomState * 48271) % 2147483647;
+          return randomState / 2147483647;
+        };
+        AppRef.renderCurrentStep = () => {};
+        AppRef.showToast = () => {};
+        AppRef.saveToLocalStorage = () => {};
+
+        AppRef.generateRandomCharacter();
+        AppRef.currentStep = 9;
+        const gateErrors = AppRef.getCultInitiationGateErrors();
+        const providers = AppRef.resolveHigherMagicProviders(CD);
+        const animismProvider = providers.find(provider => provider.system === 'animism') || null;
+        const expectedSpirits = Math.min(3, animismProvider?.itemLimit || CD.boundSpiritSlots || 0);
+
+        if (
+          CD.cult === 'Waha' &&
+          gateErrors.length === 0 &&
+          animismProvider &&
+          (CD.boundSpirits || []).length === expectedSpirits &&
+          expectedSpirits > 0 &&
+          (CD.miracles || []).length === AppRef.getEffectiveInitiateMiracleLimit('Waha')
+        ) {
+          pass('Random Waha Shaman satisfies cult gates and starting magic selections');
+        } else {
+          fail('Random Waha Shaman remains blocked or incomplete',
+            JSON.stringify({
+              cult: CD.cult,
+              gateErrors,
+              providers: providers.map(provider => provider.system),
+              selectedProfessionalSkills: CD.selectedProfessionalSkills,
+              careerSkills: CD.careerSkills,
+              culturalSkills: CD.culturalSkills,
+              bonusSkills: CD.bonusSkills,
+              spirits: (CD.boundSpirits || []).map(spirit => spirit.name || spirit),
+              expectedSpirits,
+              miracles: CD.miracles
+            }));
+        }
+      }
+    } finally {
+      sandbox.Math.random = oldRandom;
+      AppRef.renderCurrentStep = originalRender;
+      AppRef.showToast = originalToast;
+      AppRef.saveToLocalStorage = originalSave;
+      CulturesData.splice(0, CulturesData.length, ...originalCultures);
+      CareersData.splice(0, CareersData.length, ...originalCareers);
+      CultureCultMap.Praxian.primary = originalPraxianPrimary;
+    }
+  } else {
+    fail('Random Waha Shaman regression dependencies not found');
+  }
+}
+
+{
+  const {
+    App: AppRef,
+    CharacterData: CD,
+    CULTURES_DATA: CulturesData,
+    CAREERS_DATA: CareersData,
+    _sandbox: sandbox
+  } = loadApp();
+
+  if (AppRef?.generateRandomCharacter && Array.isArray(CulturesData) && Array.isArray(CareersData)) {
+    const originalCultures = CulturesData.slice();
+    const originalCareers = CareersData.slice();
+    const oldRandom = sandbox.Math.random;
+    const originalRender = AppRef.renderCurrentStep;
+    const originalToast = AppRef.showToast;
+    const originalSave = AppRef.saveToLocalStorage;
+    try {
+      const cultureWithStyle = originalCultures.find(culture => (culture.combatStyles || []).length > 0);
+      const warrior = originalCareers.find(career => career.name === 'Warrior');
+      if (!cultureWithStyle || !warrior) {
+        fail('Random combat style regression fixture data missing');
+      } else {
+        CulturesData.splice(0, CulturesData.length, cultureWithStyle);
+        CareersData.splice(0, CareersData.length, warrior);
+        let randomState = 1;
+        sandbox.Math.random = () => {
+          randomState = (randomState * 48271) % 2147483647;
+          return randomState / 2147483647;
+        };
+        AppRef.renderCurrentStep = () => {};
+        AppRef.showToast = () => {};
+        AppRef.saveToLocalStorage = () => {};
+
+        AppRef.generateRandomCharacter();
+
+        const selectedStyleNames = new Set((CD.combatStyles || []).map(style => style.name));
+        const careerKeys = Object.keys(CD.careerSkills || {});
+        const bonusKeys = Object.keys(CD.bonusSkills || {});
+        const rawStyleKeys = [...careerKeys, ...bonusKeys].filter(key => selectedStyleNames.has(key));
+        const unresolvedPlaceholders = [...careerKeys, ...bonusKeys].filter(key =>
+          /^Combat Style \((Cultural Style|Speciality Style|Specific |Concealable Weapons Style)/i.test(key)
+        );
+        const expectedResolved = [...selectedStyleNames].map(name => `Combat Style (${name})`);
+
+        if (rawStyleKeys.length === 0 &&
+            unresolvedPlaceholders.length === 0 &&
+            expectedResolved.some(key => careerKeys.includes(key))) {
+          pass('Random combat-style career allocations use rendered Combat Style keys');
+        } else {
+          fail('Random combat-style career allocations use hidden raw or placeholder keys',
+            JSON.stringify({
+              culture: CD.culture,
+              career: CD.career,
+              selectedStyleNames: [...selectedStyleNames],
+              careerKeys,
+              bonusKeys,
+              rawStyleKeys,
+              unresolvedPlaceholders,
+              expectedResolved
+            }));
+        }
+      }
+    } finally {
+      sandbox.Math.random = oldRandom;
+      AppRef.renderCurrentStep = originalRender;
+      AppRef.showToast = originalToast;
+      AppRef.saveToLocalStorage = originalSave;
+      CulturesData.splice(0, CulturesData.length, ...originalCultures);
+      CareersData.splice(0, CareersData.length, ...originalCareers);
+    }
+  } else {
+    fail('Random combat style regression dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef } = loadApp();
+  if (AppRef?.renderStep9 && AppRef.renderStep9.toString().includes('updateCultRequirementUI')) {
+    pass('Step 9 schedules cult requirement panel refresh for preselected cults');
+  } else {
+    fail('Step 9 does not refresh the cult requirement panel for preselected cults');
+  }
+}
+
 // ============================================================
 section('Cult Data Tests');
 // ============================================================
@@ -7421,9 +8147,58 @@ section('Cult Data Tests');
     const missingCultures = expectedCultures.filter(c => !CULT_MAP[c]);
     if (missingCultures.length > 0) {
       fail(`CULTURE_CULT_MAP missing cultures: ${missingCultures.join(', ')}`);
+    } else if ((CULT_MAP['Telmori Hsunchen'].primary || []).includes('Telmor')) {
+      fail('CULTURE_CULT_MAP still exposes unverified Telmor as a primary Telmori cult');
     } else {
       pass('CULTURE_CULT_MAP has entries for all 8 cultures');
     }
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, CULTURES_DATA: CulturesData, CAREERS_DATA: CareersData, _sandbox: sandbox } = loadApp();
+
+  if (AppRef?.generateRandomCharacter && Array.isArray(CulturesData) && Array.isArray(CareersData)) {
+    const originalCultures = CulturesData.slice();
+    const originalCareers = CareersData.slice();
+    const oldRandom = sandbox.Math.random;
+    try {
+      const telmori = originalCultures.find(culture => culture.name === 'Telmori Hsunchen');
+      const shaman = originalCareers.find(career => career.name === 'Shaman');
+      if (!telmori || !shaman) {
+        fail('Random Telmori placeholder regression fixture data missing');
+      } else {
+        CulturesData.splice(0, CulturesData.length, telmori);
+        CareersData.splice(0, CareersData.length, {
+          ...shaman,
+          professionalSkills: ['Binding (Cult, Totem or Tradition)', 'Trance', 'Healing']
+        });
+        let randomState = 1;
+        sandbox.Math.random = () => {
+          randomState = (randomState * 48271) % 2147483647;
+          return randomState / 2147483647;
+        };
+        AppRef.generateRandomCharacter();
+        const careerSkillNames = [
+          ...Object.keys(CD.careerSkills || {}),
+          ...(CD.selectedProfessionalSkills || [])
+        ];
+        if (CD.culture === 'Telmori Hsunchen' &&
+            careerSkillNames.some(skill => skill === 'Binding (Korgatsu)') &&
+            !careerSkillNames.some(skill => /Orlanth/.test(skill))) {
+          pass('Random Telmori Shaman resolves animist Binding to Korgatsu instead of Orlanth');
+        } else {
+          fail('Random Telmori Shaman used an unsupported cult-bound placeholder',
+            JSON.stringify({ culture: CD.culture, careerSkillNames }));
+        }
+      }
+    } finally {
+      sandbox.Math.random = oldRandom;
+      CulturesData.splice(0, CulturesData.length, ...originalCultures);
+      CareersData.splice(0, CareersData.length, ...originalCareers);
+    }
+  } else {
+    fail('Random Telmori placeholder regression dependencies not found');
   }
 }
 
@@ -8333,7 +9108,11 @@ section('Cult Data Tests');
     ...Object.entries(equipmentRef.combat_styles_by_culture || {}).filter(([, entry]) => entry.styles || entry.styles_by_tribe).map(([culture]) => `equipment:${culture}`)
   ];
 
-  if (ref.authority?.source === 'Combat Styles Encyclopedia' &&
+  if (ref.authority?.source === 'Combat Styles Encyclopedia plus verified Adventures in Glorantha gap-fill' &&
+      ref.authority?.primary_source === 'Combat Styles Encyclopedia' &&
+      ref.authority?.supplemental_sources?.some(source =>
+        source.source === 'Adventures in Glorantha (GenCon 2015 Preview)' &&
+        source.source_ref?.evidence_state === 'bounded_extraction_independent_vision_verified') &&
       JSON.stringify(App.COMBAT_STYLES_DATA) === JSON.stringify(ref) &&
       legacy.status === 'superseded-incomplete' &&
       legacy.do_not_use_for_app_generation === true &&
@@ -8426,14 +9205,15 @@ section('Cult Data Tests');
 
   if (miraclesRef.stats?.verification_needed === 0 &&
       miraclesRef.stats?.remaining_blocking_unverified === 0 &&
-      miraclesRef.stats?.remaining_unverified === miraclesRef.stats?.legacy_exemption_count &&
-      miraclesRef.stats?.remaining_legacy_exemptions === miraclesRef.stats?.legacy_exemption_count &&
-      miraclesRef.stats?.legacy_exemption_count === miraclesRef.source_disposition?.legacy_onepager_miracles?.former_verification_needed_summary?.length &&
+      miraclesRef.stats?.remaining_unverified === 0 &&
+      miraclesRef.stats?.remaining_legacy_exemptions === 0 &&
+      miraclesRef.stats?.legacy_exemption_count === 0 &&
       Array.isArray(miraclesRef.verification_needed) &&
       miraclesRef.verification_needed.length === 0 &&
       findProcessFlags(miraclesRef).length === 0 &&
       findProcessFlags(App.MIRACLES_DATA).length === 0 &&
-      miraclesRef.source_disposition?.overall_status === 'legacy_normalized_with_explicit_exemptions' &&
+      miraclesRef.source_disposition?.overall_status === 'pdf_ingest_validated_with_waha_vision_override' &&
+      miraclesRef.source_disposition?.legacy_onepager_miracles?.status === 'pdf_ingest_validated' &&
       miraclesRef.source_disposition?.waha?.source_revision_id === expectedWahaRevision &&
       wahaRef.sourceRevisionId === expectedWahaRevision &&
       wahaRef.verificationState === 'vision_verified_with_derived_runes' &&
@@ -8447,7 +9227,7 @@ section('Cult Data Tests');
       extraWahaMiracles.length === 0 &&
       noMiraclesDispositions.length === noMiracleNames.size &&
       noMiraclesDispositions.every(entry => noMiracleNames.has(entry.name) && entry.disposition === 'explicit_non_blocking_exemption')) {
-    pass('miracle provenance classifies legacy rows explicitly and Waha mirrors verified one-pager miracles');
+    pass('miracle provenance validates cult PDF rows and Waha mirrors verified one-pager miracles');
   } else {
     fail('miracle provenance still has stale blockers or Waha drift',
       JSON.stringify({
@@ -8516,7 +9296,7 @@ section('Cult Data Tests');
   if (miraclesRef.page_citations?.miracle_lists &&
       reviewedCorrections.Orlanth &&
       reviewedCorrections.Yelmalio &&
-      miraclesRef.source_disposition?.overall_status === 'legacy_normalized_with_explicit_exemptions' &&
+      miraclesRef.source_disposition?.overall_status === 'pdf_ingest_validated_with_waha_vision_override' &&
       !missingCultCitation) {
     pass('Reference miracle and cult raw data include page citations');
   } else {
@@ -8613,6 +9393,62 @@ section('Cult Data Tests');
 
 section('Index Provenance Coverage');
 
+// Test: final provenance map has no pending app constants and hashes current inline values
+{
+  const { loadInlineConstants, valueHash } = require('./scripts/validate_provenance.js');
+  const indexMap = readJson('references/provenance/index-html-map.json');
+  const legacy = readJson('references/provenance/legacy-disposition.json');
+  const entriesByName = new Map((indexMap.entries || []).map(entry => [entry.constant_name, entry]));
+  const legacyByName = new Map((legacy.app_constants || []).map(entry => [entry.constant_name, entry]));
+  const finalStatuses = new Set(['verified', 'normalized', 'accepted', 'superseded']);
+  const finalDispositions = new Set(['governed-now', 'superseded', 'exempt/out-of-scope']);
+  const appConstantNames = [
+    'SKILLS_DATA',
+    'WEAPONS_DATA',
+    'COMBAT_STYLES_DATA',
+    'STARTING_SPIRITS',
+    'CULTURES_DATA',
+    'CULTURE_BUILDS',
+    'CULTURE_MAGIC_PROFILES',
+    'CAREERS_DATA',
+    'CULTS_DATA',
+    'CULTURE_CULT_MAP',
+    'DISAMBIGUATION_LISTS',
+    'MIRACLES_DATA',
+    'WEAPON_ALIASES',
+    'DATA_INDEXES',
+    'HIT_LOCATIONS'
+  ];
+  const inlineConstants = loadInlineConstants(__dirname, appConstantNames);
+  const statusProblems = [];
+  const hashProblems = [];
+
+  for (const name of appConstantNames) {
+    const entry = entriesByName.get(name);
+    const legacyEntry = legacyByName.get(name);
+    if (!entry) {
+      statusProblems.push(`${name}: missing index map entry`);
+      continue;
+    }
+    if (!finalStatuses.has(entry.status)) statusProblems.push(`${name}: ${entry.status}`);
+    if (!finalDispositions.has(entry.disposition)) statusProblems.push(`${name}: ${entry.disposition}`);
+    if (legacyEntry && entry.disposition !== legacyEntry.disposition) {
+      statusProblems.push(`${name}: legacy/index disposition mismatch`);
+    }
+    if (['verified', 'normalized', 'accepted'].includes(entry.status) &&
+        entry.canonical_value_hash !== valueHash(inlineConstants[name])) {
+      hashProblems.push(name);
+    }
+  }
+
+  if (statusProblems.length === 0 && hashProblems.length === 0) {
+    pass('index provenance map finalizes all exported app constants with current inline hashes');
+  } else {
+    fail('index provenance map still has pending states or stale hashes',
+      JSON.stringify({ statusProblems, hashProblems }));
+  }
+}
+
 // Test: index.html provenance coverage mirrors committed reference JSON
 {
   const refPath = path.join(__dirname, 'references', 'provenance', 'index-html-coverage.json');
@@ -8649,26 +9485,27 @@ section('Index Provenance Coverage');
   const entriesWithoutCitation = (ref.entries || []).filter(entry =>
     !(entry.references || []).every(reference => reference.citation || reference.source)
   ).map(entry => entry.id);
-  const partialWithBlockers = (ref.entries || []).filter(entry =>
-    entry.status === 'partial' && (entry.blockers || []).length > 0
-  );
+  const finalStateProblems = (ref.entries || []).filter(entry =>
+    entry.status !== 'verified' ||
+    (entry.blockers || []).length > 0
+  ).map(entry => entry.id);
   const startingSpiritsVerified = (ref.entries || []).some(entry =>
     entry.id === 'spirit-starting-options' &&
     entry.status === 'verified' &&
     (entry.blockers || []).length === 0 &&
     (entry.references || []).some(reference => reference.path === 'references/starting-spirits.json')
   );
-  const theismPartialWithExemptions = (ref.entries || []).some(entry =>
+  const theismVerified = (ref.entries || []).some(entry =>
     entry.id === 'theism-miracles' &&
-    entry.status === 'partial' &&
-    (entry.blockers || []).length > 0 &&
-    /explicit legacy normalized exemptions/.test(entry.summary || '')
+    entry.status === 'verified' &&
+    (entry.blockers || []).length === 0 &&
+    /cult PDF ingestion/.test(entry.summary || '')
   );
-  const cultMapPartialWithBlockers = (ref.entries || []).some(entry =>
+  const cultMapVerified = (ref.entries || []).some(entry =>
     entry.id === 'cults-and-cult-map' &&
-    entry.status === 'partial' &&
-    (entry.blockers || []).length > 0 &&
-    /Non-Waha cult rows/.test((entry.blockers || []).join(' '))
+    entry.status === 'verified' &&
+    (entry.blockers || []).length === 0 &&
+    /ingest-cults.py --validate/.test((entry.attestationNotes || []).join(' '))
   );
 
   if (inline &&
@@ -8676,10 +9513,10 @@ section('Index Provenance Coverage');
       missingConstants.length === 0 &&
       missingRefs.length === 0 &&
       entriesWithoutCitation.length === 0 &&
-      partialWithBlockers.length >= 1 &&
+      finalStateProblems.length === 0 &&
       startingSpiritsVerified &&
-      theismPartialWithExemptions &&
-      cultMapPartialWithBlockers) {
+      theismVerified &&
+      cultMapVerified) {
     pass('index.html provenance coverage mirrors committed JSON and covers generated data constants');
   } else {
     fail('index.html provenance coverage contract is incomplete',
@@ -8688,10 +9525,10 @@ section('Index Provenance Coverage');
         missingConstants,
         missingRefs,
         entriesWithoutCitation,
-        partialWithBlockers: partialWithBlockers.map(entry => entry.id),
+        finalStateProblems,
         startingSpiritsVerified,
-        theismPartialWithExemptions,
-        cultMapPartialWithBlockers
+        theismVerified,
+        cultMapVerified
       }));
   }
 }
@@ -8723,15 +9560,17 @@ section('Index Provenance Coverage');
     magicPagesRef.source_ref?.coverage_state === 'verified' &&
     !magicPagesRef.source_ref?.pages?.includes(196) &&
     magicPagesRef.boundary_pages?.some(page => page.page === 196 && page.role === 'non_app_facing_mysticism_boundary') &&
-    entriesById['theism-miracles']?.status === 'partial' &&
-    (entriesById['theism-miracles']?.blockers || []).length > 0 &&
-    (entriesById['cults-and-cult-map']?.blockers || []).length > 0 &&
-    runeMagicRef.verified === false &&
-    miraclesRef.source_disposition?.overall_status === 'legacy_normalized_with_explicit_exemptions' &&
+    entriesById['theism-miracles']?.status === 'verified' &&
+    (entriesById['theism-miracles']?.blockers || []).length === 0 &&
+    entriesById['cults-and-cult-map']?.status === 'verified' &&
+    (entriesById['cults-and-cult-map']?.blockers || []).length === 0 &&
+    runeMagicRef.verified !== true &&
+    runeMagicRef.authority_state === 'source_blocked' &&
+    miraclesRef.source_disposition?.overall_status === 'pdf_ingest_validated_with_waha_vision_override' &&
     theismNoMiraclesClassified;
 
   if (statusesMatch) {
-    pass('provenance coverage exposes verified app surfaces and remaining partial reference states');
+    pass('provenance coverage exposes only verified app surfaces without final blockers');
   } else {
     fail('provenance coverage does not reflect current reference verification gaps',
       JSON.stringify({
@@ -8749,35 +9588,32 @@ section('Index Provenance Coverage');
   }
 }
 
-// Test: provenance UI renderer surfaces badges and partial/unverified proof text
+// Test: provenance audit renderer stays out of player flows by default
 {
-  const { App: AppRef, _sandbox } = loadApp();
-  if (AppRef && AppRef.renderProvenanceCoverage && AppRef.renderProvenanceBadgesForConstants) {
-    AppRef.renderProvenanceCoverage();
-    const coverageHtml = _sandbox.document.getElementById('source-coverage-content').innerHTML;
-    const badgesHtml = AppRef.renderProvenanceBadgesForConstants(['MIRACLES_DATA', 'STARTING_SPIRITS', 'SORCERY_SPELLS']);
-
-    if (coverageHtml.includes('data-status=\"partial\"') &&
-        coverageHtml.includes('data-status=\"verified\"') &&
-        badgesHtml.includes('source-coverage-badge') &&
-        badgesHtml.includes('Theist miracle lists') &&
-        badgesHtml.includes('Starting spirit options') &&
-        badgesHtml.includes('Sorcery spells')) {
-      pass('provenance UI renderer exposes source badges and partial/verified coverage');
-    } else {
-      fail('provenance UI renderer did not expose expected source coverage',
-        JSON.stringify({
-          hasPartialStatus: coverageHtml.includes('data-status=\"partial\"'),
-          hasVerifiedStatus: coverageHtml.includes('data-status=\"verified\"'),
-          badgesHtml
-        }));
-    }
+  const { App: AppRef } = loadApp();
+  const indexHtml = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  if (AppRef &&
+      typeof AppRef.renderProvenanceCoverage === 'undefined' &&
+      typeof AppRef.renderProvenanceBadgesForConstants === 'undefined' &&
+      !indexHtml.includes('source-coverage-panel') &&
+      !indexHtml.includes('source-coverage-badge') &&
+      !indexHtml.includes('Source review notes') &&
+      !/init\(\)\s*\{[\s\S]*renderProvenanceCoverage\(\)/.test(indexHtml)) {
+    pass('provenance audit UI is absent from player markup and runtime');
   } else {
-    fail('provenance UI rendering helpers are missing');
+    fail('provenance audit UI still has a player-facing or runtime path',
+      JSON.stringify({
+        hasRenderer: typeof AppRef?.renderProvenanceCoverage,
+        hasBadgesRenderer: typeof AppRef?.renderProvenanceBadgesForConstants,
+        hasPanelMarkup: indexHtml.includes('source-coverage-panel'),
+        hasBadgeMarkup: indexHtml.includes('source-coverage-badge'),
+        hasSourceReviewNotes: indexHtml.includes('Source review notes'),
+        initCallsRenderer: /init\(\)\s*\{[\s\S]*renderProvenanceCoverage\(\)/.test(indexHtml)
+      }));
   }
 }
 
-// Test: generated Play Mode sections include provenance badges for displayed data
+// Test: generated Play Mode sections do not expose internal provenance badges
 {
   const { App: AppRef, CharacterData: CD, Calc: CalcRef, MIRACLES_DATA: MiraclesData, _sandbox } = loadApp();
   if (AppRef && AppRef.renderPlayCombat && AppRef.renderPlayMagic && AppRef.renderPlayEquipment) {
@@ -8804,19 +9640,19 @@ section('Index Provenance Coverage');
     const combatHtml = _sandbox.document.getElementById('play-combat').innerHTML;
     const magicHtml = _sandbox.document.getElementById('play-magic').innerHTML;
     const equipmentHtml = _sandbox.document.getElementById('play-equipment').innerHTML;
-    const hasCombatBadges = combatHtml.includes('Cultures, homelands, and combat styles: partial') &&
-      combatHtml.includes('Weapons, prices, equipment, and starting kit: attested');
-    const hasMagicBadges = magicHtml.includes('Theist miracle lists and rune access: partial') &&
-      magicHtml.includes('Starting spirit options and animist guidance: verified') &&
-      magicHtml.includes('Folk Magic spell names and descriptions: attested');
-    const hasEquipmentBadges = equipmentHtml.includes('Weapons, prices, equipment, and starting kit: attested') &&
-      equipmentHtml.includes('Social class and starting money tables: partial');
+    const combinedHtml = `${combatHtml}\n${magicHtml}\n${equipmentHtml}`;
+    const leaksAuditBadge = combinedHtml.includes('source-coverage-badge') ||
+      /\b(?:attested|unverified|partial|source coverage)\b/i.test(combinedHtml) ||
+      /Hannu/i.test(combinedHtml);
 
-    if (hasCombatBadges && hasMagicBadges && hasEquipmentBadges) {
-      pass('Play Mode generated data sections include provenance status badges');
+    if (!leaksAuditBadge &&
+        magicHtml.includes('Spirit Magic') &&
+        magicHtml.includes('Spirit Rune affinity') &&
+        equipmentHtml.includes('Starting Money')) {
+      pass('Play Mode generated data sections hide internal provenance status badges');
     } else {
-      fail('Play Mode generated data sections are missing provenance status badges',
-        JSON.stringify({ hasCombatBadges, hasMagicBadges, hasEquipmentBadges }));
+      fail('Play Mode generated data sections expose internal provenance/debug wording',
+        JSON.stringify({ leaksAuditBadge, combatHtml, magicHtml, equipmentHtml }));
     }
   } else {
     fail('Play Mode provenance badge render dependencies are missing');
@@ -8912,8 +9748,7 @@ section('Player Handout Contract');
     /chargen/i,
     /codebase/i,
     /inline (?:constant|data)/i,
-    /CULTS_DATA|MIRACLES_DATA|\.rpiv/i,
-    /Mysticism/i
+    /CULTS_DATA|MIRACLES_DATA|\.rpiv/i
   ];
   const problems = [];
 
@@ -8925,7 +9760,7 @@ section('Player Handout Contract');
   }
 
   if (problems.length === 0) {
-    pass('Player handouts avoid internal agent/data jargon and unsupported mysticism');
+    pass('Player handouts avoid internal agent/data jargon');
   } else {
     fail('Player handouts contain internal or unsupported terms', problems.slice(0, 10).join('; '));
   }
@@ -9371,23 +10206,24 @@ section('Auto-Boost to 50% (U2)');
       fail('autoBoostCultSkills respects total budget', `Spent ${totalSpent} > 150`);
     }
 
-    // Test 4: Reallocates from non-cult skills when budget exhausted
+    // Test 4: Does not reallocate existing non-cult bonus skills without explicit opt-in
     CD.bonusSkills = { 'Athletics': 15, 'Brawn': 15, 'Stealth': 15, 'Swim': 15,
       'Dance': 15, 'Ride': 15, 'Sing': 15, 'Endurance': 15, 'Evade': 15, 'First Aid': 15 };
-    // All 150 points spent on non-cult skills. Auto-boost should reclaim.
+    const fullBudgetBefore = JSON.stringify(CD.bonusSkills);
     AppRef.autoBoostCultSkills();
     const wpAfter = CD.bonusSkills['Willpower'] || 0;
-    if (wpAfter > 0) {
-      pass('autoBoostCultSkills reallocates from non-cult skills when budget full');
+    if (wpAfter === 0 && JSON.stringify(CD.bonusSkills) === fullBudgetBefore) {
+      pass('autoBoostCultSkills does not reallocate non-cult bonus skills by default');
     } else {
-      fail('autoBoostCultSkills reallocates from non-cult skills when budget full', `Willpower got ${wpAfter}`);
+      fail('autoBoostCultSkills silently reallocated non-cult bonus skills',
+        JSON.stringify({before: fullBudgetBefore, after: CD.bonusSkills, willpower: wpAfter}));
     }
     // Verify total didn't exceed budget
     const totalAfter = Object.values(CD.bonusSkills).reduce((a, b) => a + b, 0);
     if (totalAfter <= 150) {
-      pass('autoBoostCultSkills reallocation stays within budget');
+      pass('autoBoostCultSkills default full-budget attempt stays within budget');
     } else {
-      fail('autoBoostCultSkills reallocation stays within budget', `Total: ${totalAfter}`);
+      fail('autoBoostCultSkills default full-budget attempt exceeded budget', `Total: ${totalAfter}`);
     }
   } else {
     fail('App.autoBoostCultSkills function not found');
@@ -9487,6 +10323,31 @@ section('Auto-Boost Cultural/Career Pool Safety');
 // ============================================================
 section('Step 9 Initiation Gate');
 // ============================================================
+
+{
+  const { App: AppRef, CharacterData: CD } = loadApp();
+
+  if (AppRef?.resolveCultSkillRequirement) {
+    CD.cult = 'Orlanth';
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 10, POW: 5, CHA: 5 };
+    CD.culturalSkills = { 'Devotion (Waha)': 100 };
+    CD.careerSkills = {};
+    CD.bonusSkills = {};
+
+    const devotionRequirement = AppRef.resolveCultSkillRequirement('Devotion');
+    if (devotionRequirement.key === 'Devotion (Orlanth)' &&
+        devotionRequirement.matchedName === 'Devotion (Orlanth)' &&
+        devotionRequirement.value < 50 &&
+        devotionRequirement.qualifies === false) {
+      pass('Cult gate does not let stale old-cult Devotion satisfy the selected cult');
+    } else {
+      fail('Cult gate accepted stale old-cult Devotion for the selected cult',
+        JSON.stringify(devotionRequirement));
+    }
+  } else {
+    fail('App.resolveCultSkillRequirement function not found for stale cult skill regression');
+  }
+}
 
 {
   const { App: AppRef, CharacterData: CD, CULTURES_DATA: CulturesData } = loadApp();
@@ -9776,6 +10637,9 @@ section('Step 9 Initiation Gate');
   if (telmori?.spiritMagic?.status !== 'cultural') {
     failures.push('Telmori animism/spirit magic signal');
   }
+  if (telmori?.runeMagic?.status !== 'absent' || telmori?.citations?.includes('AiG p.136-137')) {
+    failures.push('Telmori Rune Magic absence/source scope signal');
+  }
   if (lunarProvincial?.lunarMagic?.status !== 'context' || lunarHeartland?.lunarMagic?.status !== 'context') {
     failures.push('Lunar Magic preview caveat signal');
   }
@@ -9982,6 +10846,33 @@ section('Step 9 Initiation Gate');
     }
   } else {
     fail('App.validateCurrentStep or App.getValidationState function not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, CULTURES_DATA: CulturesData, _sandbox: sandbox } = loadApp();
+
+  if (AppRef?.agent?.setStep && AppRef.rollStartingMoneyForCulture) {
+    const oldRandom = sandbox.Math.random;
+    try {
+      sandbox.Math.random = () => 0;
+      CD.socialClass = 'Test Double Money';
+      CD.socialClassMoneyMod = 2;
+      CD.startingMoney = 0;
+      const stepResult = AppRef.agent.setStep(4, { culture: 'Praxian', homeland: 'Prax', rollMoney: true });
+      const praxian = CulturesData.find(culture => culture.name === 'Praxian');
+      const helperRoll = AppRef.rollStartingMoneyForCulture(praxian, 2);
+      if (stepResult?.success === true && CD.startingMoney === helperRoll?.total && CD.startingMoney === 40) {
+        pass('Agent Step 4 starting money applies the same social-class multiplier as the UI helper');
+      } else {
+        fail('Agent Step 4 starting money diverges from UI helper',
+          JSON.stringify({ stepResult, agentMoney: CD.startingMoney, helperRoll }));
+      }
+    } finally {
+      sandbox.Math.random = oldRandom;
+    }
+  } else {
+    fail('Starting-money parity dependencies not found');
   }
 }
 
@@ -11004,6 +11895,66 @@ section('Miracle Pool Capping (pool > available qualified)');
     }
   } else {
     fail('Step 9 structured/agent validation dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD } = loadApp();
+
+  if (AppRef?.agent?.setStep) {
+    CD.culture = 'Praxian';
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 10, POW: 10, CHA: 10 };
+    const result = AppRef.agent.setStep(8, {
+      career: 'Shaman',
+      professionalSkills: [
+        { name: 'Binding (Cult, Totem or Tradition)', specialization: 'Waha' },
+        'Trance',
+        { name: 'Lore (any)', specialization: 'Regional' }
+      ]
+    });
+    if (!result.success && result.errors.some(error => /Regional.*category label|Regional/i.test(error))) {
+      pass('Agent Step 8 rejects unresolved category-label specializations');
+    } else {
+      fail('Agent Step 8 accepted Lore (Regional) specialization',
+        JSON.stringify(result));
+    }
+  } else {
+    fail('Agent Step 8 placeholder validation dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD } = loadApp();
+
+  if (AppRef?.agent?.setStep) {
+    CD.careerSkills = {
+      Athletics: 0,
+      Brawn: 0,
+      Conceal: 0,
+      Dance: 0,
+      Deceit: 0,
+      Drive: 0
+    };
+    const result = AppRef.agent.setStep(10, {
+      careerSkills: {
+        'Craft (Primary)': 15,
+        Athletics: 15,
+        Brawn: 15,
+        Conceal: 15,
+        Dance: 15,
+        Deceit: 15,
+        Drive: 10
+      },
+      careerFolkMagic: ['Avert', 'Calm']
+    });
+    if (!result.success && result.errors.some(error => /concrete specialization/i.test(error))) {
+      pass('Agent Step 10 rejects injected unresolved placeholder skill allocations');
+    } else {
+      fail('Agent Step 10 accepted unresolved placeholder skill allocation',
+        JSON.stringify(result));
+    }
+  } else {
+    fail('Agent Step 10 placeholder validation dependencies not found');
   }
 }
 

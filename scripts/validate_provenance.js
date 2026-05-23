@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const childProcess = require('child_process');
 const crypto = require('crypto');
+const vm = require('vm');
 
 const ROOT = path.resolve(__dirname, '..');
 const EXPORTED_APP_CONSTANTS = [
@@ -21,6 +22,8 @@ const EXPORTED_APP_CONSTANTS = [
   'WEAPON_ALIASES',
   'DATA_INDEXES',
   'HIT_LOCATIONS',
+  'SOCIAL_CLASS_TABLES',
+  'CULTURE_TYPE_MAPPING',
   'GLORANTHA_CULTURES_DATA'
 ];
 const SOURCE_LOCATOR_KEYS = new Set(['source_pdf', 'source_path', 'canonical_locator', 'local_hint']);
@@ -33,6 +36,20 @@ const GOVERNED_APP_FACING_AUTHORITY_STATES = new Set([
 ]);
 const APP_FACING_EVIDENCE_STATES = new Set([
   'bounded_extraction_independent_vision_verified'
+]);
+const FINAL_APP_CONSTANT_DISPOSITIONS = new Set([
+  'governed-now',
+  'superseded',
+  'exempt/out-of-scope'
+]);
+const FINAL_FACT_STATUSES = new Set([
+  'verified',
+  'normalized',
+  'accepted',
+  'superseded'
+]);
+const FINAL_COVERAGE_STATUSES = new Set([
+  'verified'
 ]);
 
 function readJson(root, relPath) {
@@ -83,9 +100,18 @@ function globToRegExp(pattern) {
   return new RegExp(re);
 }
 
+const globRegexCache = new Map();
+
+function cachedGlobToRegExp(pattern) {
+  if (!globRegexCache.has(pattern)) {
+    globRegexCache.set(pattern, globToRegExp(pattern));
+  }
+  return globRegexCache.get(pattern);
+}
+
 function matchesDisposition(filePath, disposition) {
   if (disposition.path) return filePath === disposition.path;
-  if (disposition.path_glob) return globToRegExp(disposition.path_glob).test(filePath);
+  if (disposition.path_glob) return cachedGlobToRegExp(disposition.path_glob).test(filePath);
   return false;
 }
 
@@ -105,6 +131,15 @@ function isTrackedSourceLike(filePath) {
 }
 
 function canonicalize(value) {
+  if (value instanceof Map) {
+    const entries = Array.from(value.entries())
+      .map(([key, entryValue]) => [canonicalize(key), canonicalize(entryValue)])
+      .sort(([left], [right]) => left.localeCompare(right));
+    return `{"__type":"Map","entries":[${entries.map(([key, entryValue]) => `[${key},${entryValue}]`).join(',')}]}`;
+  }
+  if (value instanceof Set) {
+    return `{"__type":"Set","values":[${Array.from(value.values()).map(canonicalize).sort().join(',')}]}`;
+  }
   if (Array.isArray(value)) return `[${value.map(canonicalize).join(',')}]`;
   if (isObject(value)) {
     return `{${Object.keys(value).sort().map(key => `${JSON.stringify(key)}:${canonicalize(value[key])}`).join(',')}}`;
@@ -115,6 +150,77 @@ function canonicalize(value) {
 
 function valueHash(value) {
   return crypto.createHash('sha256').update(canonicalize(value), 'utf8').digest('hex');
+}
+
+function fileTreeHash(root, relPaths) {
+  const hash = crypto.createHash('sha256');
+  for (const relPath of [...relPaths].sort()) {
+    const absPath = path.join(root, relPath);
+    if (!fs.existsSync(absPath)) {
+      throw new Error(`missing hashed path ${relPath}`);
+    }
+    hash.update(relPath, 'utf8');
+    hash.update('\0');
+    hash.update(fs.readFileSync(absPath));
+    hash.update('\0');
+  }
+  return hash.digest('hex');
+}
+
+function extractConstLiteral(script, name) {
+  const marker = `const ${name} =`;
+  const markerIndex = script.indexOf(marker);
+  if (markerIndex === -1) return null;
+  let index = markerIndex + marker.length;
+  while (/\s/.test(script[index])) index++;
+  const start = index;
+  let depth = 0;
+  let quote = null;
+  let escaped = false;
+  for (; index < script.length; index++) {
+    const ch = script[index];
+    if (quote) {
+      if (escaped) {
+        escaped = false;
+      } else if (ch === '\\') {
+        escaped = true;
+      } else if (ch === quote) {
+        quote = null;
+      }
+      continue;
+    }
+    if (ch === '"' || ch === "'" || ch === '`') {
+      quote = ch;
+      continue;
+    }
+    if (ch === '{' || ch === '[' || ch === '(') depth++;
+    if (ch === '}' || ch === ']' || ch === ')') depth--;
+    if (ch === ';' && depth === 0) return script.slice(start, index).trim();
+  }
+  return null;
+}
+
+function loadInlineConstants(root, names = EXPORTED_APP_CONSTANTS) {
+  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const values = {};
+  const context = vm.createContext({
+    Map,
+    Object,
+    String,
+    normalizeLookupKey: value => String(value || '').trim().toLowerCase()
+  });
+
+  for (const name of EXPORTED_APP_CONSTANTS) {
+    const literal = extractConstLiteral(html, name);
+    if (!literal) {
+      values[name] = undefined;
+      continue;
+    }
+    values[name] = vm.runInContext(`(${literal})`, context, { filename: `index.html:${name}`, timeout: 1000 });
+    context[name] = values[name];
+  }
+
+  return Object.fromEntries(names.map(name => [name, values[name]]));
 }
 
 function validateDispositionShape(disposition, schema, errors, location) {
@@ -320,6 +426,14 @@ function validateSourceAuthorityMetadata(payload, disposition, manifestById = ne
   const refs = collectAuthoritySourceRefs(payload);
   const tracked = trackedFileSet || new Set(trackedFiles(root));
   const sourceAuthorityClaims = collectSourceAuthorityClaims(payload);
+  const refsBySourceId = new Map();
+  for (const ref of refs) {
+    if (!refsBySourceId.has(ref.source_id)) refsBySourceId.set(ref.source_id, []);
+    refsBySourceId.get(ref.source_id).push(ref);
+  }
+  if (payload?.verified === true && normalizeAuthorityState(payload.authority_state || '') === 'source_blocked') {
+    add(errors, disposition.id || 'source authority', 'source_blocked top-level authority cannot be marked verified:true');
+  }
 
   const invalidSourceAuthorityTypeMarkers = collectInvalidSourceAuthorityTypeMarkers(payload);
   for (const marker of invalidSourceAuthorityTypeMarkers) {
@@ -341,7 +455,7 @@ function validateSourceAuthorityMetadata(payload, disposition, manifestById = ne
 
   if (disposition.enforce_source_refs === true) {
     for (const sourceId of sourceIds) {
-      const matchingRefs = refs.filter(ref => ref.source_id === sourceId);
+      const matchingRefs = refsBySourceId.get(sourceId) || [];
       if (matchingRefs.length === 0) {
         add(errors, disposition.id || 'source authority', `missing source_ref for source_id ${sourceId}`);
         continue;
@@ -368,7 +482,9 @@ function validateSourceAuthorityMetadata(payload, disposition, manifestById = ne
   const governedSourceAuthorityNeedsEvidence = disposition.disposition === 'governed-now' &&
     sourceAuthorityClaims.length > 0;
   if (referenceAuthorityMarkers.length > 0 || governedSourceAuthorityNeedsEvidence) {
-    const scopedRefs = sourceIds.length > 0 ? refs.filter(ref => sourceIds.includes(ref.source_id)) : refs;
+    const scopedRefs = sourceIds.length > 0
+      ? sourceIds.flatMap(sourceId => refsBySourceId.get(sourceId) || [])
+      : refs;
     const refsMissingEvidence = scopedRefs.filter(ref => !hasEvidencePaths(ref));
     if (scopedRefs.length === 0 || refsMissingEvidence.length > 0) {
       const authorityMarkers = referenceAuthorityMarkers.length > 0
@@ -484,7 +600,7 @@ function validateLegacyDisposition(legacy, schema, root = ROOT) {
   return { ok: errors.length === 0, errors };
 }
 
-function validateIndexMap(indexMap, legacy, schema) {
+function validateIndexMap(indexMap, legacy, schema, root = ROOT) {
   const errors = [];
   if (!isObject(indexMap)) return ['index-html-map: must be an object'];
   if (indexMap.schemaVersion !== 1) add(errors, 'index-html-map.schemaVersion', 'expected 1');
@@ -492,6 +608,12 @@ function validateIndexMap(indexMap, legacy, schema) {
   if (!Array.isArray(indexMap.entries)) add(errors, 'index-html-map.entries', 'must be an array');
   const constantsByName = new Map((legacy.app_constants || []).map(item => [item.constant_name, item]));
   const entriesByName = new Map((indexMap.entries || []).map(item => [item.constant_name, item]));
+  let inlineConstants = {};
+  try {
+    inlineConstants = loadInlineConstants(root);
+  } catch (err) {
+    add(errors, 'index-html-map', err.message);
+  }
   for (const name of EXPORTED_APP_CONSTANTS) {
     const entry = entriesByName.get(name);
     if (!entry) {
@@ -501,23 +623,86 @@ function validateIndexMap(indexMap, legacy, schema) {
     const legacyEntry = constantsByName.get(name);
     if (legacyEntry && entry.disposition !== legacyEntry.disposition) add(errors, `index-html-map ${name}`, 'disposition differs from legacy-disposition app constant');
     if (!schema.fact_statuses.includes(entry.status)) add(errors, `index-html-map ${name}`, `invalid status ${entry.status}`);
+    if (!FINAL_FACT_STATUSES.has(entry.status)) add(errors, `index-html-map ${name}`, `final app provenance cannot remain ${entry.status}`);
+    if (!FINAL_APP_CONSTANT_DISPOSITIONS.has(entry.disposition)) add(errors, `index-html-map ${name}`, `final app provenance cannot use disposition ${entry.disposition}`);
     if (['verified', 'normalized', 'accepted'].includes(entry.status)) {
       for (const required of schema.provenance_map_schema.accepted_entry_required) {
         if (!(required in entry)) add(errors, `index-html-map ${name}`, `accepted entry missing ${required}`);
+      }
+      try {
+        if (inlineConstants[name] === undefined) throw new Error(`missing inline constant ${name}`);
+        const currentHash = valueHash(inlineConstants[name]);
+        if (entry.canonical_value_hash !== currentHash) {
+          add(errors, `index-html-map ${name}`, 'canonical_value_hash does not match current index.html constant');
+        }
+      } catch (err) {
+        add(errors, `index-html-map ${name}`, err.message);
       }
     }
   }
   return errors;
 }
 
-function validateReport(report, schema) {
+function validateIndexCoverage(coverage, root = ROOT) {
+  const errors = [];
+  if (!isObject(coverage)) return ['index-html-coverage: must be an object'];
+  if (coverage.schemaVersion !== 1) add(errors, 'index-html-coverage.schemaVersion', 'expected 1');
+  if (coverage.source !== 'index.html inline generated-data provenance coverage') {
+    add(errors, 'index-html-coverage.source', 'must describe index.html inline generated-data provenance coverage');
+  }
+  if (!Array.isArray(coverage.entries)) {
+    add(errors, 'index-html-coverage.entries', 'must be an array');
+    return errors;
+  }
+  for (const [index, entry] of coverage.entries.entries()) {
+    const location = `index-html-coverage.entries[${index}] ${entry.id || '<missing-id>'}`;
+    if (!FINAL_COVERAGE_STATUSES.has(entry.status)) add(errors, location, `final coverage cannot remain ${entry.status || '<missing>'}`);
+    if (!Array.isArray(entry.blockers) || entry.blockers.length !== 0) add(errors, location, 'final coverage must have an empty blockers array');
+    for (const [refIndex, reference] of (entry.references || []).entries()) {
+      if (reference.path && !fs.existsSync(path.join(root, reference.path))) {
+        add(errors, `${location}.references[${refIndex}]`, `missing reference path ${reference.path}`);
+      }
+      if (!reference.citation && !reference.source) {
+        add(errors, `${location}.references[${refIndex}]`, 'reference requires citation or source');
+      }
+    }
+  }
+  return errors;
+}
+
+function validateReport(report, schema, coverage, root = ROOT) {
   const errors = [];
   if (!isObject(report)) return ['validation-report: must be an object'];
   for (const field of schema.validation_report_schema.required) {
     if (!(field in report)) add(errors, 'validation-report', `missing ${field}`);
   }
+  if (report.status !== 'accepted') add(errors, 'validation-report.status', 'final report must be accepted');
   if (report.status === 'accepted' && !(report.inputs && report.inputs.tree_hash)) {
     add(errors, 'validation-report.inputs.tree_hash', 'accepted report requires input tree hash');
+  }
+  const hashedPaths = report.inputs?.hashed_paths;
+  if (!Array.isArray(hashedPaths) || hashedPaths.length === 0) {
+    add(errors, 'validation-report.inputs.hashed_paths', 'accepted report requires hashed_paths');
+  } else {
+    try {
+      const actualTreeHash = fileTreeHash(root, hashedPaths);
+      if (report.inputs.tree_hash !== actualTreeHash) {
+        add(errors, 'validation-report.inputs.tree_hash', `does not match hashed_paths tree (${actualTreeHash})`);
+      }
+    } catch (err) {
+      add(errors, 'validation-report.inputs.hashed_paths', err.message);
+    }
+  }
+  if (report.summary?.fact_level_entries_pending !== false) {
+    add(errors, 'validation-report.summary.fact_level_entries_pending', 'final report must not declare pending fact-level entries');
+  }
+  const declaredCoverageStates = Array.isArray(report.summary?.final_coverage_states)
+    ? [...new Set(report.summary.final_coverage_states)].sort()
+    : [];
+  const actualCoverageStates = [...new Set((coverage.entries || []).map(entry => entry.status || '<missing>'))].sort();
+  if (JSON.stringify(declaredCoverageStates) !== JSON.stringify(actualCoverageStates)) {
+    add(errors, 'validation-report.summary.final_coverage_states',
+      `must match actual coverage states ${actualCoverageStates.join(', ') || '<none>'}`);
   }
   return errors;
 }
@@ -527,11 +712,13 @@ function validateAll(options = {}) {
   const schema = readJson(root, 'references/provenance/schema.json');
   const legacy = readJson(root, 'references/provenance/legacy-disposition.json');
   const indexMap = readJson(root, 'references/provenance/index-html-map.json');
+  const indexCoverage = readJson(root, 'references/provenance/index-html-coverage.json');
   const report = readJson(root, 'references/provenance/validation-report.json');
   const legacyResult = validateLegacyDisposition(legacy, schema, root);
   const errors = [...legacyResult.errors];
-  errors.push(...validateIndexMap(indexMap, legacy, schema));
-  errors.push(...validateReport(report, schema));
+  errors.push(...validateIndexMap(indexMap, legacy, schema, root));
+  errors.push(...validateIndexCoverage(indexCoverage, root));
+  errors.push(...validateReport(report, schema, indexCoverage, root));
   return { ok: errors.length === 0, errors };
 }
 
@@ -552,11 +739,14 @@ module.exports = {
   EXPORTED_APP_CONSTANTS,
   canonicalize,
   valueHash,
+  extractConstLiteral,
+  loadInlineConstants,
   globToRegExp,
   isTrackedSourceLike,
   validateAll,
   validateLegacyDisposition,
   validateSourceAuthorityMetadata,
   validateIndexMap,
+  validateIndexCoverage,
   validateReport
 };

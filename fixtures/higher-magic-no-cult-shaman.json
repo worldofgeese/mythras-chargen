@@ -1,0 +1,180 @@
+{
+  "_disambiguationMap": {
+    "career:Binding (Cult, Totem or Tradition)": "Binding (Waha)"
+  },
+  "age": 27,
+  "armor": [],
+  "attributes": {
+    "actionPoints": 2,
+    "damageModifier": "-1d2",
+    "encumbrance": {
+      "burdened": 21,
+      "noMovement": 40,
+      "overloaded": 31,
+      "unencumbered": 20
+    },
+    "experienceModifier": 0,
+    "folkMagicBase": 52,
+    "healingRate": 2,
+    "hitPoints": {
+      "Abdomen": 5,
+      "Chest": 6,
+      "Head": 4,
+      "Left Arm": 3,
+      "Left Leg": 4,
+      "Right Arm": 3,
+      "Right Leg": 4
+    },
+    "initiativeBonus": 11,
+    "luckPoints": 3,
+    "magicPoints": 14,
+    "movementRate": 6,
+    "runeAffinities": {
+      "primary": 58,
+      "secondary": 48,
+      "tertiary": 38
+    }
+  },
+  "background": "",
+  "backgroundEvents": "",
+  "bonusSkills": {
+    "Athletics": 0,
+    "Binding (Waha)": 15,
+    "Endurance": 15,
+    "First Aid": 15,
+    "Healing": 15,
+    "Locale": 15,
+    "Navigate": 0,
+    "Perception": 15,
+    "Ride": 15,
+    "Stealth": 0,
+    "Survival": 15,
+    "Trance": 15,
+    "Willpower": 15
+  },
+  "boundSpiritSlots": 4,
+  "boundSpirits": [
+    "Ancestor Spirit — Sagacity (Int 1)",
+    "Nature Spirit — Camouflage (Int 2)"
+  ],
+  "career": "Shaman",
+  "careerFolkMagic": [
+    "Detect",
+    "Calm"
+  ],
+  "careerSkills": {
+    "Binding (Waha)": 15,
+    "Customs": 0,
+    "Dance": 0,
+    "Deceit": 0,
+    "Endurance": 15,
+    "Healing": 15,
+    "Influence": 0,
+    "Insight": 0,
+    "Locale": 0,
+    "Perception": 15,
+    "Survival": 15,
+    "Trance": 15,
+    "Willpower": 10
+  },
+  "charMethod": "point-buy",
+  "characteristics": {
+    "CHA": 8,
+    "CON": 10,
+    "DEX": 10,
+    "INT": 13,
+    "POW": 14,
+    "SIZ": 10,
+    "STR": 10
+  },
+  "combatStyles": [],
+  "companions": [],
+  "concept": "No-cult Shaman using the Core Animism career provider",
+  "cult": null,
+  "cultType": null,
+  "culturalSkills": {
+    "Athletics": 10,
+    "Endurance": 15,
+    "First Aid": 10,
+    "Locale": 10,
+    "Navigate": 15,
+    "Perception": 15,
+    "Ride": 15,
+    "Stealth": 10
+  },
+  "culture": "Praxian",
+  "devotionalPool": 0,
+  "equipment": [],
+  "family": "Bison Tribe",
+  "folkMagicSpells": [
+    "Heal",
+    "Spiritshield",
+    "Second Sight"
+  ],
+  "gender": "Male",
+  "hitPoints": {
+    "Abdomen": {
+      "current": 5,
+      "max": 5
+    },
+    "Chest": {
+      "current": 6,
+      "max": 6
+    },
+    "Head": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Arm": {
+      "current": 3,
+      "max": 3
+    },
+    "Left Leg": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Arm": {
+      "current": 3,
+      "max": 3
+    },
+    "Right Leg": {
+      "current": 4,
+      "max": 4
+    }
+  },
+  "hobbySkillName": null,
+  "homeland": "Prax",
+  "miracles": [],
+  "mysticismTalents": [],
+  "name": "Argrath Spirit-Seeker",
+  "notes": "Fixture regenerated through the browser runtime for higher-magic provider coverage.",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Loyalty (Bison Tribe)",
+      "value": 47
+    },
+    {
+      "custom": true,
+      "name": "Love (Family)",
+      "value": 47
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Spirit",
+    "secondary": "Man",
+    "tertiary": "Beast"
+  },
+  "schemaVersion": 1,
+  "selectedProfessionalSkills": [
+    "Binding (Waha)",
+    "Trance",
+    "Healing"
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 70,
+  "weapons": []
+}

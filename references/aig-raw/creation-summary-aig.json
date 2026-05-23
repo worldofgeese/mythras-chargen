@@ -91,18 +91,36 @@
         "Balazaring": "4d6x2",
         "Esrolian": "4d6x15",
         "God_Forgot": "4d6x15",
-        "Lunar_Heartland": "4d6x10",
-        "Praxian": "4d6x15",
-        "Provincial_Lunar_Tarsh": "4d6x5",
+        "Lunar_Heartland": "4d6x15",
+        "Praxian": "4d6x5",
+        "Provincial_Lunar_Tarsh": "4d6x10",
         "Sartarite_Heortling": "4d6x10",
         "Telmori": "4d6x2"
       },
-      "page": "p.24"
+      "page": "p.24",
+      "source_ref": {
+        "source_id": "aig",
+        "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+        "page_manifest_path": "references/sources/pages/aig.json",
+        "evidence_state": "bounded_extraction_independent_vision_verified",
+        "verification_state": "verified",
+        "pdf_pages": [
+          25
+        ],
+        "block_ids": [
+          "aig-p025-b001",
+          "aig-p025-b002"
+        ],
+        "evidence_paths": [
+          "references/sources/evidence/aig/page-0025-extraction.json",
+          "references/sources/evidence/aig/page-0025-verification.json"
+        ]
+      }
     },
     "step_12_prepare_for_adventure": {
       "note": "Give character a name and prepare to step out into Glorantha",
       "page": "p.25"
     }
   },
-  "validated_at": "2026-05-21"
+  "validated_at": "2026-05-23"
 }

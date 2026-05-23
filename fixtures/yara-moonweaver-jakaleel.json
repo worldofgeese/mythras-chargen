@@ -1,131 +1,150 @@
 {
-  "name": "Yara Moonweaver",
-  "concept": "Jakaleel witch of the Lunar Provincial garrison, spirit-binder and seer",
-  "characteristics": {
-    "STR": 8,
-    "CON": 11,
-    "SIZ": 9,
-    "DEX": 10,
-    "INT": 14,
-    "POW": 14,
-    "CHA": 9
-  },
-  "charMethod": "point-buy",
+  "_disambiguationMap": {},
+  "age": 26,
+  "armor": [],
   "attributes": {
     "actionPoints": 2,
+    "damageModifier": "-1d2",
+    "encumbrance": {
+      "burdened": 17,
+      "noMovement": 32,
+      "overloaded": 25,
+      "unencumbered": 16
+    },
     "experienceModifier": 0,
+    "folkMagicBase": 53,
     "healingRate": 2,
+    "hitPoints": {
+      "Abdomen": 5,
+      "Chest": 6,
+      "Head": 4,
+      "Left Arm": 3,
+      "Left Leg": 4,
+      "Right Arm": 3,
+      "Right Leg": 4
+    },
+    "initiativeBonus": 12,
     "luckPoints": 3,
     "magicPoints": 14,
-    "initiativeBonus": 12,
-    "damageModifier": "-1d2",
-    "hitPoints": {
-      "Head": 4,
-      "Chest": 6,
-      "Abdomen": 5,
-      "Right Arm": 3,
-      "Left Arm": 3,
-      "Right Leg": 4,
-      "Left Leg": 4
-    },
-    "encumbrance": {
-      "unencumbered": 16,
-      "burdened": 17,
-      "overloaded": 25,
-      "noMovement": 32
-    },
+    "movementRate": 6,
     "runeAffinities": {
       "primary": 58,
       "secondary": 48,
       "tertiary": 38
-    },
-    "folkMagicBase": 53,
-    "movementRate": 6
+    }
   },
-  "culture": "Lunar Provincial",
-  "homeland": "Tarsh",
+  "background": "",
+  "backgroundEvents": "",
+  "bonusSkills": {
+    "Athletics": 15,
+    "Endurance": 15,
+    "First Aid": 15,
+    "Influence": 15,
+    "Insight": 15,
+    "Locale": 15,
+    "Lore (Lunar Theology)": 15,
+    "Lore (Spirit World)": 15,
+    "Perception": 15,
+    "Willpower": 15
+  },
+  "boundSpiritSlots": 4,
+  "boundSpirits": [],
+  "career": "Priest",
+  "careerFolkMagic": [
+    "Second Sight",
+    "Heal"
+  ],
+  "careerSkills": {
+    "Athletics": 10,
+    "Customs": 0,
+    "Dance": 0,
+    "Deceit": 0,
+    "Endurance": 10,
+    "First Aid": 10,
+    "Healing": 0,
+    "Influence": 15,
+    "Insight": 15,
+    "Locale": 10,
+    "Lore (Lunar Theology)": 0,
+    "Lore (Spirit World)": 0,
+    "Perception": 15,
+    "Willpower": 15
+  },
+  "charMethod": "point-buy",
+  "characteristics": {
+    "CHA": 9,
+    "CON": 11,
+    "DEX": 10,
+    "INT": 14,
+    "POW": 14,
+    "SIZ": 9,
+    "STR": 8
+  },
+  "combatStyles": [],
+  "companions": [],
+  "concept": "Jakaleel witch of the Lunar Provincial garrison, spirit-binder and seer",
+  "cult": "7 Mothers - Jakaleel",
+  "cultType": {
+    "blockedTypes": [],
+    "isHybrid": true,
+    "primary": "theist",
+    "types": [
+      "theist",
+      "animist"
+    ]
+  },
   "culturalSkills": {
     "Athletics": 10,
     "Endurance": 10,
     "First Aid": 10,
+    "Influence": 15,
+    "Insight": 10,
     "Locale": 15,
     "Perception": 15,
-    "Willpower": 15,
-    "Influence": 15,
-    "Insight": 10
+    "Willpower": 15
   },
-  "runeAffinities": {
-    "primary": "Moon",
-    "secondary": "Darkness",
-    "tertiary": "Spirit"
-  },
+  "culture": "Lunar Provincial",
+  "devotionalPool": 7,
+  "equipment": [],
+  "family": "Lunar priestess lineage",
   "folkMagicSpells": [
     "Curse",
     "Spiritshield",
     "Witchsight"
   ],
-  "passions": [
-    {
-      "name": "Loyalty (Red Goddess)",
-      "value": 65,
-      "custom": true
-    },
-    {
-      "name": "Devotion (Jakaleel)",
-      "value": 60,
-      "custom": true
-    }
-  ],
-  "age": 26,
   "gender": "Female",
-  "family": "Lunar priestess lineage",
-  "backgroundEvents": "",
-  "career": "Priest",
-  "careerSkills": {
-    "Customs": 0,
-    "Dance": 0,
-    "Deceit": 0,
-    "Influence": 15,
-    "Insight": 15,
-    "Locale": 10,
-    "Willpower": 15,
-    "Lore (Lunar Theology)": 0,
-    "Lore (Spirit World)": 0,
-    "Healing": 0,
-    "Perception": 15,
-    "Endurance": 10,
-    "First Aid": 10,
-    "Athletics": 10
-  },
-  "careerFolkMagic": [
-    "Second Sight",
-    "Heal"
-  ],
-  "bonusSkills": {
-    "Willpower": 15,
-    "Perception": 15,
-    "Endurance": 15,
-    "Influence": 15,
-    "Insight": 15,
-    "First Aid": 15,
-    "Locale": 15,
-    "Athletics": 15,
-    "Lore (Lunar Theology)": 15,
-    "Lore (Spirit World)": 15
+  "hitPoints": {
+    "Abdomen": {
+      "current": 5,
+      "max": 5
+    },
+    "Chest": {
+      "current": 6,
+      "max": 6
+    },
+    "Head": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Arm": {
+      "current": 3,
+      "max": 3
+    },
+    "Left Leg": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Arm": {
+      "current": 3,
+      "max": 3
+    },
+    "Right Leg": {
+      "current": 4,
+      "max": 4
+    }
   },
   "hobbySkillName": null,
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 1,
-  "startingMoney": 70,
-  "equipment": [],
-  "weapons": [],
-  "armor": [],
-  "combatStyles": [],
-  "notes": "",
-  "background": "",
-  "hitPoints": {},
-  "companions": [],
-  "cult": "7 Mothers - Jakaleel",
+  "homeland": "Tarsh",
   "miracles": [
     "Dismiss Elemental",
     "Divination",
@@ -135,10 +154,36 @@
     "Madness",
     "Soul Sight"
   ],
-  "devotionalPool": 7,
+  "mysticismTalents": [],
+  "name": "Yara Moonweaver",
+  "notes": "",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Loyalty (Red Goddess)",
+      "value": 65
+    },
+    {
+      "custom": true,
+      "name": "Devotion (Jakaleel)",
+      "value": 60
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Moon",
+    "secondary": "Darkness",
+    "tertiary": "Spirit"
+  },
+  "schemaVersion": 1,
   "selectedProfessionalSkills": [
     "Lore (Lunar Theology)",
     "Lore (Spirit World)",
     "Healing"
-  ]
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 70,
+  "weapons": []
 }

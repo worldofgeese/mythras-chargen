@@ -1,19 +1,98 @@
 {
-  "name": "Korlmar Blackspear",
-  "concept": "Vengeful warrior of the Colymar tribe",
+  "_disambiguationMap": {},
+  "age": 21,
+  "armor": [
+    {
+      "ap": 1,
+      "cost": 0,
+      "locations": "7 location(s)",
+      "name": "Leather/Fur Full Armour Set"
+    }
+  ],
+  "attributes": {
+    "actionPoints": 2,
+    "damageModifier": "+1d2",
+    "encumbrance": {
+      "burdened": 31,
+      "noMovement": 60,
+      "overloaded": 46,
+      "unencumbered": 30
+    },
+    "experienceModifier": 0,
+    "folkMagicBase": 45,
+    "healingRate": 3,
+    "hitPoints": {
+      "Abdomen": 6,
+      "Chest": 7,
+      "Head": 5,
+      "Left Arm": 4,
+      "Left Leg": 5,
+      "Right Arm": 4,
+      "Right Leg": 5
+    },
+    "initiativeBonus": 10,
+    "luckPoints": 2,
+    "magicPoints": 8,
+    "movementRate": 6,
+    "runeAffinities": {
+      "primary": 46,
+      "secondary": 36,
+      "tertiary": 26
+    }
+  },
+  "background": "",
+  "backgroundEvents": "",
+  "bonusSkills": {
+    "Athletics": 15,
+    "Brawn": 15,
+    "Combat Style (Hill Clan Levy)": 15,
+    "Endurance": 15,
+    "Evade": 15,
+    "Lore (Strategy and Tactics)": 15,
+    "Perception": 15,
+    "Survival": 15,
+    "Unarmed": 15,
+    "Willpower": 15
+  },
+  "boundSpiritSlots": 0,
+  "boundSpirits": [],
+  "career": "Warrior",
+  "careerFolkMagic": [
+    "Disruption",
+    "Vigour"
+  ],
+  "careerSkills": {
+    "Athletics": 15,
+    "Brawn": 15,
+    "Combat Style (Hill Clan Levy)": 15,
+    "Endurance": 15,
+    "Evade": 10,
+    "Lore (Strategy and Tactics)": 10,
+    "Survival": 10,
+    "Unarmed": 10
+  },
+  "charMethod": "point-buy",
   "characteristics": {
-    "STR": 15,
+    "CHA": 7,
     "CON": 13,
-    "SIZ": 12,
     "DEX": 11,
     "INT": 9,
     "POW": 8,
-    "CHA": 7
+    "SIZ": 12,
+    "STR": 15
   },
-  "charMethod": "point-buy",
-  "attributes": {"actionPoints":2,"experienceModifier":0,"healingRate":3,"luckPoints":2,"magicPoints":8,"initiativeBonus":10,"damageModifier":"+1d2","hitPoints":{"Head":5,"Chest":7,"Abdomen":6,"Right Arm":4,"Left Arm":4,"Right Leg":5,"Left Leg":5},"encumbrance":{"unencumbered":30,"burdened":31,"overloaded":46,"noMovement":60},"runeAffinities":{"primary":46,"secondary":36,"tertiary":26},"folkMagicBase":45,"movementRate":6},
-  "culture": "Sartarite (Heortling)",
-  "homeland": "Boldhome",
+  "combatStyles": [],
+  "companions": [],
+  "concept": "Vengeful warrior of the Colymar tribe",
+  "cult": "Orlanth",
+  "cultType": {
+    "blockedTypes": [],
+    "isHybrid": false,
+    "primary": "theist",
+    "types": [
+      "theist"
+    ]
+  },
   "culturalSkills": {
     "Athletics": 15,
     "Brawn": 15,
@@ -21,161 +100,156 @@
     "Evade": 10,
     "Locale": 10,
     "Perception": 10,
-    "Willpower": 15,
-    "Ride": 10
+    "Ride": 10,
+    "Willpower": 15
   },
-  "runeAffinities": {
-    "primary": "Air",
-    "secondary": "Movement",
-    "tertiary": "Death"
-  },
+  "culture": "Sartarite (Heortling)",
+  "devotionalPool": 4,
+  "equipment": [
+    {
+      "cost": 0,
+      "enc": 1,
+      "name": "Two sets of common undecorated clothes",
+      "quantity": 1
+    },
+    {
+      "cost": 0,
+      "enc": 0,
+      "name": "Transport: Own back",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Backpack",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Waterskin",
+      "quantity": 1
+    },
+    {
+      "cost": 14,
+      "enc": 2,
+      "name": "Rations (1 week)",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Bedroll",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 0,
+      "name": "Flint & Tinder",
+      "quantity": 1
+    }
+  ],
+  "family": "Blackspear clan, Colymar tribe",
   "folkMagicSpells": [
     "Bladesharp",
     "Fanaticism",
     "Protection"
   ],
-  "passions": [
-    {
-      "name": "Loyalty (Colymar Tribe)",
-      "value": 47,
-      "custom": true
-    },
-    {
-      "name": "Hate (Lunars)",
-      "value": 47,
-      "custom": true
-    },
-    {
-      "name": "Honor",
-      "value": 47,
-      "custom": true
-    }
-  ],
-  "age": 21,
   "gender": "Male",
-  "family": "Blackspear clan, Colymar tribe",
-  "backgroundEvents": "",
-  "career": "Warrior",
-  "careerSkills": {
-    "Athletics": 15,
-    "Brawn": 15,
-    "Endurance": 15,
-    "Evade": 10,
-    "Unarmed": 10,
-    "Combat Style (Hill Clan Levy)": 15,
-    "Lore (Strategy and Tactics)": 10,
-    "Survival": 10
-  },
-  "careerFolkMagic": [
-    "Disruption",
-    "Vigour"
-  ],
-  "bonusSkills": {
-    "Athletics": 15,
-    "Brawn": 15,
-    "Endurance": 15,
-    "Evade": 15,
-    "Willpower": 15,
-    "Unarmed": 15,
-    "Combat Style (Hill Clan Levy)": 15,
-    "Lore (Strategy and Tactics)": 15,
-    "Survival": 15,
-    "Perception": 15
+  "hitPoints": {
+    "Abdomen": {
+      "current": 6,
+      "max": 6
+    },
+    "Chest": {
+      "current": 7,
+      "max": 7
+    },
+    "Head": {
+      "current": 5,
+      "max": 5
+    },
+    "Left Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Leg": {
+      "current": 5,
+      "max": 5
+    },
+    "Right Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Leg": {
+      "current": 5,
+      "max": 5
+    }
   },
   "hobbySkillName": null,
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 1,
-  "startingMoney": 140,
-  "equipment": [
-    {
-      "name": "Two sets of common undecorated clothes",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 0
-    },
-    {
-      "name": "Transport: Own back",
-      "enc": 0,
-      "quantity": 1,
-      "cost": 0
-    },
-    {
-      "name": "Backpack",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Waterskin",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Rations (1 week)",
-      "enc": 2,
-      "quantity": 1,
-      "cost": 14
-    },
-    {
-      "name": "Bedroll",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Flint & Tinder",
-      "enc": 0,
-      "quantity": 1,
-      "cost": 5
-    }
-  ],
-  "weapons": [
-    {
-      "name": "Broadsword",
-      "damage": "1d8",
-      "size": "M",
-      "reach": "M",
-      "ap": 6,
-      "hp": 10,
-      "skill": 0,
-      "quantity": 1
-    },
-    {
-      "name": "Viking Shield",
-      "damage": "1d4",
-      "size": "L",
-      "reach": "S",
-      "ap": 6,
-      "hp": 12,
-      "skill": 0,
-      "quantity": 1
-    }
-  ],
-  "armor": [
-    {
-      "name": "Leather/Fur Full Armour Set",
-      "ap": 1,
-      "locations": "7 location(s)",
-      "cost": 0
-    }
-  ],
-  "combatStyles": [],
-  "notes": "",
-  "background": "",
-  "hitPoints": {"Head":{"current":5,"max":5},"Chest":{"current":7,"max":7},"Abdomen":{"current":6,"max":6},"Right Arm":{"current":4,"max":4},"Left Arm":{"current":4,"max":4},"Right Leg":{"current":5,"max":5},"Left Leg":{"current":5,"max":5}},
-  "companions": [],
-  "cult": "Orlanth",
+  "homeland": "Boldhome",
   "miracles": [
     "Shield",
     "Lightning",
     "Wind Words",
     "Leap"
   ],
-  "devotionalPool": 4,
+  "mysticismTalents": [],
+  "name": "Korlmar Blackspear",
+  "notes": "",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Loyalty (Colymar Tribe)",
+      "value": 47
+    },
+    {
+      "custom": true,
+      "name": "Hate (Lunars)",
+      "value": 47
+    },
+    {
+      "custom": true,
+      "name": "Honor",
+      "value": 47
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Air",
+    "secondary": "Movement",
+    "tertiary": "Death"
+  },
+  "schemaVersion": 1,
   "selectedProfessionalSkills": [
     "Lore (Strategy and Tactics)",
     "Survival",
     "Gambling"
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 140,
+  "weapons": [
+    {
+      "ap": 6,
+      "damage": "1d8",
+      "hp": 10,
+      "name": "Broadsword",
+      "quantity": 1,
+      "reach": "M",
+      "size": "M",
+      "skill": 0
+    },
+    {
+      "ap": 6,
+      "damage": "1d4",
+      "hp": 12,
+      "name": "Viking Shield",
+      "quantity": 1,
+      "reach": "S",
+      "size": "L",
+      "skill": 0
+    }
   ]
 }

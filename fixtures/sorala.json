@@ -1,198 +1,213 @@
 {
-  "name": "Sorala Daughter of Toria",
-  "concept": "Esrolian scholar-warrior, multilingual sage, sorcerer",
-  "characteristics": {
-    "STR": 8,
-    "CON": 10,
-    "SIZ": 8,
-    "DEX": 13,
-    "INT": 14,
-    "POW": 11,
-    "CHA": 11
-  },
-  "charMethod": "point-buy",
-  "attributes": {},
-  "culture": "Esrolian",
-  "homeland": "Nochet",
-  "culturalSkills": {
-    "Athletics": 5,
-    "Brawn": 0,
-    "Endurance": 5,
-    "Evade": 10,
-    "Locale": 15,
-    "Perception": 15,
-    "Willpower": 15,
-    "Courtesy": 15,
-    "Commerce": 10,
-    "Healing": 10
-  },
-  "runeAffinities": {
-    "primary": "Fire/Sky",
-    "secondary": "Storm",
-    "tertiary": "Earth"
-  },
-  "folkMagicSpells": [
-    "Bladesharp",
-    "Heal",
-    "Protection"
-  ],
-  "passions": [
+  "_disambiguationMap": {},
+  "age": 21,
+  "armor": [
     {
-      "name": "Devotion (Lhankor Mhy)",
-      "value": 52,
-      "custom": true
-    },
-    {
-      "name": "Loyalty (Argrath)",
-      "value": 52,
-      "custom": true
-    },
-    {
-      "name": "Honor",
-      "value": 52,
-      "custom": true
+      "ap": 1,
+      "cost": 0,
+      "locations": "4 location(s)",
+      "name": "Bronze Basic Armour"
     }
   ],
-  "age": 21,
-  "gender": "Female",
-  "family": "Hulta clan, Nochet",
+  "attributes": {},
+  "background": "",
   "backgroundEvents": "",
-  "career": "Scholar",
-  "careerSkills": {
-    "Willpower": 10,
-    "Perception": 5,
-    "Combat Style (Citizen Legionary)": 10,
-    "Literacy": 15,
-    "Lore (History)": 15,
+  "bonusSkills": {
+    "Bureaucracy": 15,
+    "Combat Style (Citizen Legionary)": 15,
+    "Courtesy": 15,
+    "Evade": 15,
     "Language (Old Pavic)": 15,
-    "Language (Esrolian)": 15,
-    "Bureaucracy": 15
+    "Literacy": 15,
+    "Locale": 15,
+    "Lore (History)": 15,
+    "Perception": 15,
+    "Willpower": 15
   },
+  "boundSpiritSlots": 0,
+  "boundSpirits": [],
+  "career": "Scholar",
   "careerFolkMagic": [
     "Calculate",
     "Vigour"
   ],
-  "bonusSkills": {
-    "Locale": 15,
-    "Perception": 15,
-    "Willpower": 15,
-    "Courtesy": 15,
+  "careerSkills": {
+    "Bureaucracy": 15,
+    "Combat Style (Citizen Legionary)": 10,
+    "Language (Esrolian)": 15,
+    "Language (Old Pavic)": 15,
     "Literacy": 15,
     "Lore (History)": 15,
-    "Language (Old Pavic)": 15,
-    "Bureaucracy": 15,
-    "Combat Style (Citizen Legionary)": 15,
-    "Evade": 15
+    "Perception": 5,
+    "Willpower": 10
   },
-  "hobbySkillName": null,
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 1,
-  "startingMoney": 135,
-  "equipment": [
-    {
-      "name": "Two sets of common undecorated clothes",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 0
-    },
-    {
-      "name": "Transport: Beast of Burden",
-      "enc": 0,
-      "quantity": 1,
-      "cost": 0
-    },
-    {
-      "name": "Backpack",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Waterskin",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Rations (1 week)",
-      "enc": 2,
-      "quantity": 1,
-      "cost": 14
-    },
-    {
-      "name": "Bedroll",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Flint & Tinder",
-      "enc": 0,
-      "quantity": 1,
-      "cost": 5
-    }
-  ],
-  "weapons": [
-    {
-      "name": "Peltast Shield",
-      "damage": "1d4",
-      "size": "L",
-      "reach": "S",
-      "ap": 4,
-      "hp": 12,
-      "skill": 0,
-      "quantity": 1
-    },
-    {
-      "name": "Javelin",
-      "damage": "1d8+1",
-      "size": "M",
-      "reach": "H",
-      "ap": 3,
-      "hp": 8,
-      "skill": 0,
-      "quantity": 1
-    }
-  ],
-  "armor": [
-    {
-      "name": "Bronze Basic Armour",
-      "ap": 1,
-      "locations": "4 location(s)",
-      "cost": 0
-    }
-  ],
+  "charMethod": "point-buy",
+  "characteristics": {
+    "CHA": 11,
+    "CON": 10,
+    "DEX": 13,
+    "INT": 14,
+    "POW": 11,
+    "SIZ": 8,
+    "STR": 8
+  },
   "combatStyles": [
     {
       "name": "Citizen Legionary",
+      "notes": "",
+      "skill": 0,
+      "traits": [
+        "Formation Fighting",
+        "Shield Wall"
+      ],
       "weapons": [
         "Shortsword",
         "1H Spear",
         "Peltast Shield",
         "Javelin"
-      ],
-      "traits": [
-        "Formation Fighting",
-        "Shield Wall"
-      ],
-      "skill": 0,
-      "notes": ""
+      ]
     }
   ],
-  "notes": "",
-  "background": "",
-  "hitPoints": {},
   "companions": [],
+  "concept": "Esrolian scholar-warrior, multilingual sage, sorcerer",
   "cult": "Lhankor Mhy",
+  "cultType": {
+    "blockedTypes": [],
+    "isHybrid": false,
+    "primary": "theist",
+    "types": [
+      "theist"
+    ]
+  },
+  "culturalSkills": {
+    "Athletics": 5,
+    "Brawn": 0,
+    "Commerce": 10,
+    "Courtesy": 15,
+    "Endurance": 5,
+    "Evade": 10,
+    "Healing": 10,
+    "Locale": 15,
+    "Perception": 15,
+    "Willpower": 15
+  },
+  "culture": "Esrolian",
+  "devotionalPool": 0,
+  "equipment": [
+    {
+      "cost": 0,
+      "enc": 1,
+      "name": "Two sets of common undecorated clothes",
+      "quantity": 1
+    },
+    {
+      "cost": 0,
+      "enc": 0,
+      "name": "Transport: Beast of Burden",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Backpack",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Waterskin",
+      "quantity": 1
+    },
+    {
+      "cost": 14,
+      "enc": 2,
+      "name": "Rations (1 week)",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Bedroll",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 0,
+      "name": "Flint & Tinder",
+      "quantity": 1
+    }
+  ],
+  "family": "Hulta clan, Nochet",
+  "folkMagicSpells": [
+    "Bladesharp",
+    "Heal",
+    "Protection"
+  ],
+  "gender": "Female",
+  "hitPoints": {},
+  "hobbySkillName": null,
+  "homeland": "Nochet",
   "miracles": [
     "Analyze Magic",
     "Clairvoyance",
     "Knowledge"
   ],
-  "devotionalPool": 0,
+  "mysticismTalents": [],
+  "name": "Sorala Daughter of Toria",
+  "notes": "",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Devotion (Lhankor Mhy)",
+      "value": 52
+    },
+    {
+      "custom": true,
+      "name": "Loyalty (Argrath)",
+      "value": 52
+    },
+    {
+      "custom": true,
+      "name": "Honor",
+      "value": 52
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Fire/Sky",
+    "secondary": "Storm",
+    "tertiary": "Earth"
+  },
+  "schemaVersion": 1,
   "selectedProfessionalSkills": [
     "Literacy",
     "Lore (History)",
     "Language (Old Pavic)"
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 135,
+  "weapons": [
+    {
+      "ap": 4,
+      "damage": "1d4",
+      "hp": 12,
+      "name": "Peltast Shield",
+      "quantity": 1,
+      "reach": "S",
+      "size": "L",
+      "skill": 0
+    },
+    {
+      "ap": 3,
+      "damage": "1d8+1",
+      "hp": 8,
+      "name": "Javelin",
+      "quantity": 1,
+      "reach": "H",
+      "size": "M",
+      "skill": 0
+    }
   ]
 }

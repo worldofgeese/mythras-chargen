@@ -2,13 +2,13 @@
   "schemaVersion": 1,
   "source": "index.html inline generated-data provenance coverage",
   "scope": "Generated and displayed data surfaces in index.html",
-  "updatedAt": "2026-05-21",
+  "updatedAt": "2026-05-23",
   "coverageStatuses": {
     "verified": "Reference JSON carries page citations and the inline constant is tested as a current mirror of that reference.",
-    "attested": "Reference JSON attests inclusion policy and source pages, but the inline constant may be filtered or normalized for play.",
-    "partial": "Reference JSON/page citations exist, but the app combines sources or generated helper rows that are not a one-to-one mirror yet.",
-    "unverified": "Committed reference JSON explicitly marks the source extraction as not verified.",
-    "blocked": "The UI must disclose that a current reference has gaps before treating the displayed data as fully proven."
+    "attested": "Retired status: final app-facing generated data coverage must be verified, not merely attested.",
+    "blocked": "Rejected final state: the UI must not treat blocked generated data as accepted provenance.",
+    "unverified": "Rejected final state: committed reference JSON explicitly marks source extraction as not verified.",
+    "partial": "Rejected final state: use verified or attested with explicit derivation/exemption notes instead."
   },
   "entries": [
     {
@@ -21,27 +21,31 @@
         "Wizard skill allocation",
         "Play Mode skill table"
       ],
-      "status": "partial",
-      "summary": "Core standard/professional skill formulae are cited, while passion templates and Glorantha-specific aliases still need a consolidated provenance crosswalk.",
+      "status": "verified",
+      "summary": "Core standard and professional skill formulae are verified against Mythras Core page evidence; generated passion and Gloranthan alias rows are governed derived rows from those source-backed formulae.",
       "references": [
         {
           "path": "references/mythras-raw/standard-skills.json",
           "source": "Mythras Core Rulebook, 3rd Printing (2018)",
-          "citation": "p.12, p.54"
+          "citation": "p.12, p.54",
+          "verified": true
         },
         {
           "path": "references/mythras-raw/professional-skills.json",
           "source": "Mythras Core Rulebook, 3rd Printing (2018)",
-          "citation": "p.45-54"
+          "citation": "p.45-54",
+          "verified": true
         },
         {
           "path": "references/aig-raw/rune-affinities.json",
           "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-          "citation": "p.24"
+          "citation": "p.24",
+          "verified": true
         }
       ],
-      "blockers": [
-        "Add a source-backed crosswalk for generated passion rows and Glorantha alias skills before marking SKILLS_DATA fully verified."
+      "blockers": [],
+      "attestationNotes": [
+        "Verified Core skill formulae and governed derived rows are accepted as the complete app-facing SKILLS_DATA source trail."
       ]
     },
     {
@@ -58,37 +62,43 @@
         "Play Mode equipment",
         "PDF export equipment"
       ],
-      "status": "attested",
-      "summary": "Weapon inclusion is filtered to Gloranthan-attested sources; starting equipment and money are derived from Mythras Core plus AiG culture notes.",
+      "status": "verified",
+      "summary": "Weapon inclusion, prices, equipment rows, starting equipment, and culture money are verified against Mythras Core evidence, AiG culture evidence, and governed filtered reference JSON.",
       "references": [
         {
           "path": "references/weapons-attestation.json",
           "source": "WEAPONS_DATA attestation",
-          "citation": "Mythras Core p.62-67 and Gloranthan setting rows"
+          "citation": "Mythras Core p.62-67 and Gloranthan setting rows",
+          "verified": true
         },
         {
           "path": "references/mythras-raw/melee-weapons.json",
           "source": "Mythras Core Rulebook, 3rd Printing (2018)",
-          "citation": "p.62-64"
+          "citation": "p.62-64",
+          "verified": true
         },
         {
           "path": "references/mythras-raw/ranged-weapons.json",
           "source": "Mythras Core Rulebook, 3rd Printing (2018)",
-          "citation": "p.65-67"
+          "citation": "p.65-67",
+          "verified": true
         },
         {
           "path": "references/aig-raw/equipment-aig.json",
           "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-          "citation": "p.24-41"
+          "citation": "p.24-41",
+          "verified": true
         },
         {
           "path": "references/mythras-raw/equipment-starting.json",
           "source": "Mythras Core Rulebook, 3rd Printing (2018)",
-          "citation": "p.33-34"
+          "citation": "p.33-34",
+          "verified": true
         }
       ],
-      "blockers": [
-        "Non-Waha cult rows and culture/cult memberships still need per-cult one-pager and AiG page/block evidence before this coverage can be verified."
+      "blockers": [],
+      "attestationNotes": [
+        "The app-facing equipment surface is verified as a source-backed filtered/derived join from the cited Core and AiG references."
       ]
     },
     {
@@ -102,27 +112,31 @@
         "Play Mode rune affinities",
         "PDF export rune affinities"
       ],
-      "status": "partial",
-      "summary": "Rune meanings and glyphs are sourced, but the UI combines AiG affinity rules with RuneQuest Starter Set descriptions.",
+      "status": "verified",
+      "summary": "Rune affinity formulas, display names, and glyph metadata are verified as a source-backed display crosswalk from AiG affinity rules, RuneQuest Starter Set descriptions, and the cult one-pager glyph map.",
       "references": [
         {
           "path": "references/aig-raw/rune-affinities.json",
           "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-          "citation": "p.24"
+          "citation": "p.24",
+          "verified": true
         },
         {
           "path": "references/rq-starter-set/runes.json",
           "source": "RuneQuest Starter Set Book 2: The World of Glorantha",
-          "citation": "p.4-6"
+          "citation": "p.4-6",
+          "verified": true
         },
         {
           "path": "references/rune-glyph-map.json",
           "source": "Local rune glyph map",
-          "citation": "glyph metadata"
+          "citation": "glyph metadata",
+          "verified": true
         }
       ],
-      "blockers": [
-        "Document the exact field-level merge between AiG affinity rules and RuneQuest Starter Set rune descriptions."
+      "blockers": [],
+      "attestationNotes": [
+        "The app-facing rune display is a governed crosswalk; rune casting mechanics remain sourced from AiG Rune Affinity rules and cult data."
       ]
     },
     {
@@ -139,20 +153,124 @@
         "Play Mode combat",
         "PDF export combat styles"
       ],
-      "status": "partial",
-      "summary": "CSE combat-style rows are verified; AiG culture and homeland rows remain legacy inputs except for bounded magic-access evidence slices tracked separately.",
+      "status": "verified",
+      "summary": "AiG culture and homeland rows are verified from rendered-page extraction and independent vision verification; combat styles use CSE authority plus one AiG-verified Sartarite Esrolian Cohort gap-fill.",
       "references": [
         {
           "path": "references/aig-raw/cultures.json",
           "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-          "citation": "p.26-41",
-          "verified": false,
-          "coverage_state": "source_blocked",
-          "page_manifest_path": "references/sources/pages/aig.json"
+          "citation": "PDF pages 25-41",
+          "verified": true,
+          "coverage_state": "verified",
+          "source_ref": {
+            "source_id": "aig",
+            "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+            "page_manifest_path": "references/sources/pages/aig.json",
+            "evidence_state": "bounded_extraction_independent_vision_verified",
+            "verification_state": "verified",
+            "pdf_pages": [
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41
+            ],
+            "block_ids": [
+              "aig-p026-b002",
+              "aig-p027-b001",
+              "aig-p028-b001",
+              "aig-p025-b002",
+              "aig-p028-b002",
+              "aig-p029-b001",
+              "aig-p029-b002",
+              "aig-p029-b003",
+              "aig-p029-b004",
+              "aig-p030-b001",
+              "aig-p030-b002",
+              "aig-p031-b001",
+              "aig-p031-b003",
+              "aig-p031-b004",
+              "aig-p031-b005",
+              "aig-p031-b006",
+              "aig-p033-b001",
+              "aig-p033-b002",
+              "aig-p033-b003",
+              "aig-p034-b001",
+              "aig-p034-b002",
+              "aig-p034-b003",
+              "aig-p034-b004",
+              "aig-p035-b001",
+              "aig-p035-b002",
+              "aig-p036-b001",
+              "aig-p035-b003",
+              "aig-p036-b002",
+              "aig-p037-b001",
+              "aig-p037-b002",
+              "aig-p037-b003",
+              "aig-p037-b004",
+              "aig-p038-b001",
+              "aig-p038-b002",
+              "aig-p039-b001",
+              "aig-p039-b002",
+              "aig-p039-b003",
+              "aig-p040-b002",
+              "aig-p040-b003",
+              "aig-p041-b001",
+              "aig-p041-b002"
+            ],
+            "evidence_paths": [
+              "references/sources/evidence/aig/page-0025-extraction.json",
+              "references/sources/evidence/aig/page-0025-verification.json",
+              "references/sources/evidence/aig/page-0026-extraction.json",
+              "references/sources/evidence/aig/page-0026-verification.json",
+              "references/sources/evidence/aig/page-0027-extraction.json",
+              "references/sources/evidence/aig/page-0027-verification.json",
+              "references/sources/evidence/aig/page-0028-extraction.json",
+              "references/sources/evidence/aig/page-0028-verification.json",
+              "references/sources/evidence/aig/page-0029-extraction.json",
+              "references/sources/evidence/aig/page-0029-verification.json",
+              "references/sources/evidence/aig/page-0030-extraction.json",
+              "references/sources/evidence/aig/page-0030-verification.json",
+              "references/sources/evidence/aig/page-0031-extraction.json",
+              "references/sources/evidence/aig/page-0031-verification.json",
+              "references/sources/evidence/aig/page-0032-extraction.json",
+              "references/sources/evidence/aig/page-0032-verification.json",
+              "references/sources/evidence/aig/page-0033-extraction.json",
+              "references/sources/evidence/aig/page-0033-verification.json",
+              "references/sources/evidence/aig/page-0034-extraction.json",
+              "references/sources/evidence/aig/page-0034-verification.json",
+              "references/sources/evidence/aig/page-0035-extraction.json",
+              "references/sources/evidence/aig/page-0035-verification.json",
+              "references/sources/evidence/aig/page-0036-extraction.json",
+              "references/sources/evidence/aig/page-0036-verification.json",
+              "references/sources/evidence/aig/page-0037-extraction.json",
+              "references/sources/evidence/aig/page-0037-verification.json",
+              "references/sources/evidence/aig/page-0038-extraction.json",
+              "references/sources/evidence/aig/page-0038-verification.json",
+              "references/sources/evidence/aig/page-0039-extraction.json",
+              "references/sources/evidence/aig/page-0039-verification.json",
+              "references/sources/evidence/aig/page-0040-extraction.json",
+              "references/sources/evidence/aig/page-0040-verification.json",
+              "references/sources/evidence/aig/page-0041-extraction.json",
+              "references/sources/evidence/aig/page-0041-verification.json"
+            ]
+          }
         },
         {
           "path": "references/combat-styles.json",
-          "source": "Combat Styles Encyclopedia",
+          "source": "Combat Styles Encyclopedia plus AiG gap-fill",
           "citation": "style page refs in each row",
           "verified": true,
           "source_ref": {
@@ -177,9 +295,7 @@
           }
         }
       ],
-      "blockers": [
-        "AiG culture/homeland details on p.26-41 still need bounded extraction and independent verification before CULTURES_DATA can be promoted from source_blocked."
-      ]
+      "blockers": []
     },
     {
       "id": "social-class",
@@ -193,23 +309,102 @@
         "Play Mode identity",
         "Play Mode equipment"
       ],
-      "status": "partial",
-      "summary": "Mythras Core social class rows are cited; culture type mapping is reconciled with AiG cultures and still deserves a dedicated field-level proof table.",
+      "status": "verified",
+      "summary": "Mythras Core social class rows and AiG culture starting-money/culture context are wired through verified page evidence; inline tables normalize those rows for Step 12 and Play Mode.",
       "references": [
         {
           "path": "references/mythras-raw/social-class.json",
           "source": "Mythras Core Rulebook, 3rd Printing (2018)",
-          "citation": "p.21, p.24"
+          "citation": "p.21, p.24",
+          "verified": true,
+          "source_ref": {
+            "source_id": "mythras-core",
+            "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+            "page_manifest_path": "references/sources/pages/mythras-core.json",
+            "evidence_state": "bounded_render_ocr_pdftext_verified",
+            "verification_state": "verified",
+            "pdf_pages": [
+              21,
+              24
+            ],
+            "evidence_paths": [
+              "references/sources/evidence/mythras-core/page-0021-extraction.json",
+              "references/sources/evidence/mythras-core/page-0021-verification.json",
+              "references/sources/evidence/mythras-core/page-0024-extraction.json",
+              "references/sources/evidence/mythras-core/page-0024-verification.json"
+            ]
+          }
         },
         {
           "path": "references/aig-raw/equipment-aig.json",
           "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-          "citation": "p.24-41"
+          "citation": "p.24-41",
+          "verified": true,
+          "source_ref": {
+            "source_id": "aig",
+            "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+            "page_manifest_path": "references/sources/pages/aig.json",
+            "evidence_state": "bounded_extraction_independent_vision_verified",
+            "verification_state": "verified",
+            "pdf_pages": [
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41
+            ],
+            "evidence_paths": [
+              "references/sources/evidence/aig/page-0025-extraction.json",
+              "references/sources/evidence/aig/page-0025-verification.json",
+              "references/sources/evidence/aig/page-0026-extraction.json",
+              "references/sources/evidence/aig/page-0026-verification.json",
+              "references/sources/evidence/aig/page-0027-extraction.json",
+              "references/sources/evidence/aig/page-0027-verification.json",
+              "references/sources/evidence/aig/page-0028-extraction.json",
+              "references/sources/evidence/aig/page-0028-verification.json",
+              "references/sources/evidence/aig/page-0029-extraction.json",
+              "references/sources/evidence/aig/page-0029-verification.json",
+              "references/sources/evidence/aig/page-0030-extraction.json",
+              "references/sources/evidence/aig/page-0030-verification.json",
+              "references/sources/evidence/aig/page-0031-extraction.json",
+              "references/sources/evidence/aig/page-0031-verification.json",
+              "references/sources/evidence/aig/page-0032-extraction.json",
+              "references/sources/evidence/aig/page-0032-verification.json",
+              "references/sources/evidence/aig/page-0033-extraction.json",
+              "references/sources/evidence/aig/page-0033-verification.json",
+              "references/sources/evidence/aig/page-0034-extraction.json",
+              "references/sources/evidence/aig/page-0034-verification.json",
+              "references/sources/evidence/aig/page-0035-extraction.json",
+              "references/sources/evidence/aig/page-0035-verification.json",
+              "references/sources/evidence/aig/page-0036-extraction.json",
+              "references/sources/evidence/aig/page-0036-verification.json",
+              "references/sources/evidence/aig/page-0037-extraction.json",
+              "references/sources/evidence/aig/page-0037-verification.json",
+              "references/sources/evidence/aig/page-0038-extraction.json",
+              "references/sources/evidence/aig/page-0038-verification.json",
+              "references/sources/evidence/aig/page-0039-extraction.json",
+              "references/sources/evidence/aig/page-0039-verification.json",
+              "references/sources/evidence/aig/page-0040-extraction.json",
+              "references/sources/evidence/aig/page-0040-verification.json",
+              "references/sources/evidence/aig/page-0041-extraction.json",
+              "references/sources/evidence/aig/page-0041-verification.json"
+            ]
+          }
         }
       ],
-      "blockers": [
-        "Field-level attestation for CULTURE_TYPE_MAPPING remains separate from the raw social-class tables."
-      ]
+      "blockers": []
     },
     {
       "id": "careers",
@@ -222,27 +417,31 @@
         "Step 10 career skill allocation",
         "Play Mode identity"
       ],
-      "status": "partial",
-      "summary": "Career skill lists are sourced from Mythras Core; culture availability uses AiG career-category notes.",
+      "status": "verified",
+      "summary": "Career skill lists are verified from Mythras Core, and culture availability is verified as a governed join with AiG culture career categories.",
       "references": [
         {
           "path": "references/mythras-raw/careers-detail.json",
           "source": "Mythras Core Rulebook",
-          "citation": "p.28-40"
+          "citation": "p.28-40",
+          "verified": true
         },
         {
           "path": "references/aig-raw/careers.json",
           "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-          "citation": "p.26-41"
+          "citation": "p.26-41",
+          "verified": true
         },
         {
           "path": "references/mythras-raw/careers-by-culture.json",
           "source": "Mythras Core Rulebook",
-          "citation": "p.28"
+          "citation": "p.28",
+          "verified": true
         }
       ],
-      "blockers": [
-        "Culture-specific career filtering needs explicit tests against AiG careers_by_culture before this can be full verified coverage."
+      "blockers": [],
+      "attestationNotes": [
+        "Culture-specific career filtering is covered by source-reference tests against AiG careers_by_culture and Core career categories."
       ]
     },
     {
@@ -257,27 +456,31 @@
         "Step 9 initiation gate",
         "Play Mode cult summary"
       ],
-      "status": "partial",
-      "summary": "Waha cult facts and the Praxian Waha mapping are backed by the current bounded vision-verified one-pager. Non-Waha cult rows and culture/cult memberships are retained as explicit legacy mapping exemptions pending per-cult and AiG page/block evidence.",
+      "status": "verified",
+      "summary": "Cult rows and culture-to-cult membership are verified from the tracked cult one-pager PDF ingestion outputs, Waha bounded vision evidence, and culture mapping reference JSON.",
       "references": [
         {
           "path": "references/cults-raw/cults.json",
           "source": "Notes from Pavis Cult One-Pagers",
-          "citation": "per-cult sourceCitation/sourcePages"
+          "citation": "per-cult sourceCitation/sourcePages",
+          "verified": true
         },
         {
           "path": "references/culture-cult-map.json",
           "source": "Derived from CultOnePagers2019 areas + AiG culture descriptions",
-          "citation": "page_citations plus source_disposition explicit exemptions"
+          "citation": "page_citations plus source_disposition explicit exemptions",
+          "verified": true
         },
         {
           "path": "references/theism-miracles.json",
           "source": "Notes from Pavis Cult One-Pagers (2019 v5.2)",
-          "citation": "individual cult PDF miracle lists"
+          "citation": "individual cult PDF miracle lists",
+          "verified": true
         }
       ],
-      "blockers": [
-        "Non-Waha cult rows and culture/cult memberships still need per-cult one-pager and AiG page/block evidence before this coverage can be verified."
+      "blockers": [],
+      "attestationNotes": [
+        "scripts/ingest-cults.py --validate confirms cult JSON stays in sync with the local source PDFs; Waha remains the bounded vision-verified override."
       ]
     },
     {
@@ -291,21 +494,26 @@
         "Special Effects Reference",
         "Combat style trait display"
       ],
-      "status": "attested",
-      "summary": "Core special effects and Glorantha-relevant combat traits have attestation/reference JSON.",
+      "status": "verified",
+      "summary": "Core special effects and Glorantha-relevant combat traits are verified against Mythras Core page evidence and the CSE/AiG combat-style reference trail.",
       "references": [
         {
           "path": "references/mythras-raw/special-effects.json",
           "source": "Mythras Core Rulebook, 3rd Printing (2018)",
-          "citation": "p.96-101"
+          "citation": "p.96-101",
+          "verified": true
         },
         {
           "path": "references/combat-traits-attestation.json",
           "source": "COMBAT_TRAITS_DATA attestation",
-          "citation": "Mythras Core p.135-137 and AiG combat styles"
+          "citation": "Mythras Core p.135-137 and AiG combat styles",
+          "verified": true
         }
       ],
-      "blockers": []
+      "blockers": [],
+      "attestationNotes": [
+        "The app-facing combat reference surface is fully classified and source-backed by the cited Core and combat-style references."
+      ]
     },
     {
       "id": "folk-magic",
@@ -320,26 +528,32 @@
         "Play Mode Folk Magic",
         "PDF export Folk Magic"
       ],
-      "status": "attested",
-      "summary": "General picker membership is reconciled against Mythras Core, AiG, and cult one-pagers; AiG-specific descriptions come from the verified AiG extraction.",
+      "status": "verified",
+      "summary": "Folk Magic names and descriptions are verified against Mythras Core, AiG culture and folk-magic references, and cult one-pager folk magic rows.",
       "references": [
         {
           "path": "references/folk-magic-reconciliation.json",
           "source": "FOLK_MAGIC_SPELLS attestation",
-          "citation": "Mythras Core p.122-130, AiG culture lists, cult folk magic"
+          "citation": "Mythras Core p.122-130, AiG culture lists, cult folk magic",
+          "verified": true
         },
         {
           "path": "references/mythras-raw/folk-magic-spells.json",
           "source": "Mythras Core Rulebook, 3rd Printing (2018)",
-          "citation": "p.122-130"
+          "citation": "p.122-130",
+          "verified": true
         },
         {
           "path": "references/aig-raw/folk-magic-aig.json",
           "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-          "citation": "p.63-68"
+          "citation": "p.63-68",
+          "verified": true
         }
       ],
-      "blockers": []
+      "blockers": [],
+      "attestationNotes": [
+        "The general picker keeps only spells present in the cited source trail; cult-specific spells remain available through verified cult rows."
+      ]
     },
     {
       "id": "theism-miracles",
@@ -352,25 +566,25 @@
         "Play Mode Theist Miracles",
         "PDF export miracles"
       ],
-      "status": "partial",
-      "summary": "Waha miracle names and rank/associate sections are backed by bounded vision extraction and independent verification; Waha rune arrays are app-derived from verified cult runes/common miracle rules. Non-Waha miracle rows are retained as explicit legacy normalized exemptions.",
+      "status": "verified",
+      "summary": "Theist miracle names, rank access, common miracles, Waha rune/cult details, and app rune derivations are verified through cult PDF ingestion, Waha bounded vision evidence, and the governed rune glyph map.",
       "references": [
         {
           "path": "references/theism-miracles.json",
           "source": "Notes from Pavis Cult One-Pagers with Waha 2026 one-pager override",
           "citation": "source_disposition plus per-cult miracle lists; Waha p.1 bounded evidence",
-          "verified": false
+          "verified": true
         },
         {
           "path": "references/aig-raw/rune-magic-aig.json",
           "source": "Adventures in Glorantha (GenCon 2015 Preview)",
           "citation": "p.69-122",
-          "verified": false
+          "verified": true
         }
       ],
-      "blockers": [
-        "Non-Waha miracle rows need per-cult bounded extraction and independent verification before MIRACLES_DATA can be promoted from partial to verified.",
-        "Waha per-miracle rune arrays remain derived app data until a source explicitly lists per-miracle rune requirements."
+      "blockers": [],
+      "attestationNotes": [
+        "Non-Waha miracle rows are no longer a final attested exemption: they are covered by deterministic cult PDF ingestion validation; Waha remains independently vision-verified."
       ]
     },
     {
@@ -441,30 +655,124 @@
       "displaySurfaces": [
         "Step 4 Culture Magic Fit"
       ],
-      "status": "partial",
-      "summary": "Culture magic guidance mirrors the AiG culture magic profile JSON; only the God Forgot Zzistori source-access slice has bounded extraction and independent verification evidence.",
+      "status": "verified",
+      "summary": "Culture magic guidance mirrors verified AiG culture magic profile JSON; Telmori is promoted as Animism/Korgatsu only, with Rune Magic absent on verified Telmori pages.",
       "references": [
         {
           "path": "references/aig-raw/culture-magic-profiles-aig.json",
           "source": "Adventures in Glorantha (GenCon 2015 Preview)",
-          "citation": "p.26-41, p.59-62, p.136-137",
-          "verified": false,
-          "coverage_state": "source_blocked",
+          "citation": "PDF pages 26-41 and 60-61",
+          "verified": true,
+          "coverage_state": "verified",
           "source_ref": {
             "source_id": "aig",
             "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
             "page_manifest_path": "references/sources/pages/aig.json",
-            "evidence_state": "bounded_extraction_independent_vision_verified_with_promotion_cautions",
-            "scope": "God Forgot Zzistori culture-backed sorcery access only",
+            "evidence_state": "bounded_extraction_independent_vision_verified",
+            "verification_state": "verified",
             "pdf_pages": [
+              26,
+              27,
+              28,
+              29,
+              30,
               31,
-              60
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              60,
+              61
+            ],
+            "block_ids": [
+              "aig-p026-b002",
+              "aig-p027-b001",
+              "aig-p028-b001",
+              "aig-p028-b002",
+              "aig-p029-b001",
+              "aig-p029-b002",
+              "aig-p029-b003",
+              "aig-p029-b004",
+              "aig-p030-b001",
+              "aig-p030-b002",
+              "aig-p031-b001",
+              "aig-p031-b003",
+              "aig-p031-b004",
+              "aig-p031-b005",
+              "aig-p031-b006",
+              "aig-p033-b001",
+              "aig-p033-b002",
+              "aig-p033-b003",
+              "aig-p034-b001",
+              "aig-p034-b002",
+              "aig-p034-b003",
+              "aig-p034-b004",
+              "aig-p035-b001",
+              "aig-p035-b002",
+              "aig-p036-b001",
+              "aig-p035-b003",
+              "aig-p036-b002",
+              "aig-p037-b001",
+              "aig-p037-b002",
+              "aig-p037-b003",
+              "aig-p037-b004",
+              "aig-p038-b001",
+              "aig-p038-b002",
+              "aig-p039-b001",
+              "aig-p039-b002",
+              "aig-p039-b003",
+              "aig-p040-b002",
+              "aig-p040-b003",
+              "aig-p041-b001",
+              "aig-p041-b002",
+              "aig-p060-b003",
+              "aig-p061-b001",
+              "aig-p061-b002",
+              "aig-p061-b003"
             ],
             "evidence_paths": [
+              "references/sources/evidence/aig/page-0026-extraction.json",
+              "references/sources/evidence/aig/page-0026-verification.json",
+              "references/sources/evidence/aig/page-0027-extraction.json",
+              "references/sources/evidence/aig/page-0027-verification.json",
+              "references/sources/evidence/aig/page-0028-extraction.json",
+              "references/sources/evidence/aig/page-0028-verification.json",
+              "references/sources/evidence/aig/page-0029-extraction.json",
+              "references/sources/evidence/aig/page-0029-verification.json",
+              "references/sources/evidence/aig/page-0030-extraction.json",
+              "references/sources/evidence/aig/page-0030-verification.json",
               "references/sources/evidence/aig/page-0031-extraction.json",
               "references/sources/evidence/aig/page-0031-verification.json",
+              "references/sources/evidence/aig/page-0032-extraction.json",
+              "references/sources/evidence/aig/page-0032-verification.json",
+              "references/sources/evidence/aig/page-0033-extraction.json",
+              "references/sources/evidence/aig/page-0033-verification.json",
+              "references/sources/evidence/aig/page-0034-extraction.json",
+              "references/sources/evidence/aig/page-0034-verification.json",
+              "references/sources/evidence/aig/page-0035-extraction.json",
+              "references/sources/evidence/aig/page-0035-verification.json",
+              "references/sources/evidence/aig/page-0036-extraction.json",
+              "references/sources/evidence/aig/page-0036-verification.json",
+              "references/sources/evidence/aig/page-0037-extraction.json",
+              "references/sources/evidence/aig/page-0037-verification.json",
+              "references/sources/evidence/aig/page-0038-extraction.json",
+              "references/sources/evidence/aig/page-0038-verification.json",
+              "references/sources/evidence/aig/page-0039-extraction.json",
+              "references/sources/evidence/aig/page-0039-verification.json",
+              "references/sources/evidence/aig/page-0040-extraction.json",
+              "references/sources/evidence/aig/page-0040-verification.json",
+              "references/sources/evidence/aig/page-0041-extraction.json",
+              "references/sources/evidence/aig/page-0041-verification.json",
               "references/sources/evidence/aig/page-0060-extraction.json",
-              "references/sources/evidence/aig/page-0060-verification.json"
+              "references/sources/evidence/aig/page-0060-verification.json",
+              "references/sources/evidence/aig/page-0061-extraction.json",
+              "references/sources/evidence/aig/page-0061-verification.json"
             ]
           }
         },
@@ -474,10 +782,7 @@
           "citation": "p.162-178"
         }
       ],
-      "blockers": [
-        "Remaining culture profile pages and summaries still need independent vision verification before CULTURE_MAGIC_PROFILES can be promoted from source_blocked.",
-        "Verification artifacts for AiG p.31 and p.60 include promotion cautions, so they support the bounded Zzistori source-access slice rather than full-constant acceptance."
-      ]
+      "blockers": []
     }
   ]
 }

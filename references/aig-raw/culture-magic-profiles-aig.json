@@ -1,15 +1,15 @@
 {
   "source": "Adventures in Glorantha (GenCon 2015 Preview)",
   "extracted_at": "2026-05-21",
-  "page": "p.26-41, p.59-62, p.136-137",
-  "note": "Culture-level magic fit profiles derived from legacy vision/OCR validation, with bounded independent evidence now attached only to the God Forgot Zzistori source-access slice. These profiles summarize what the PDF supports for chargen guidance; they do not invent missing Lunar Magic rules.",
-  "validation_method": "Legacy non-vision validation predates the U5 authority gate; only sourceAccess.source_ref slices with bounded extraction and independent verification evidence are accepted as evidence-backed inputs.",
+  "page": "p.26-41, p.59-61",
+  "note": "Culture-level magic fit profiles are backed by bounded rendered-page extraction plus independent vision verification for the cited AiG pages. They summarize chargen guidance and do not invent missing Lunar Magic rules.",
+  "validation_method": "Bounded rendered-page extraction plus independent visual verification for culture pages, with verified AiG magic-overview pages 60-61 used for general magic rules.",
   "profiles": {
     "Balazaring": {
-      "summary": "Primitive hill culture with everyday folk magic and ancestor/hunting cult access; higher magic is normally through cult or shamanic practice rather than a distinct cultural system.",
+      "summary": "Primitive hill culture where Spirit Magic/animism prevails among indigenous hunter-gatherers, with common everyday folk magic and only citadel-mediated theist access.",
       "citations": [
         "AiG p.26-28",
-        "AiG p.59-62"
+        "AiG p.59-61"
       ],
       "folkMagic": {
         "status": "cultural",
@@ -28,12 +28,12 @@
         "notes": "Rune Magic is available through cult worship, not as a separate culture package."
       },
       "spiritMagic": {
-        "status": "available",
+        "status": "cultural",
         "pages": [
-          "p.60",
-          "p.26-28"
+          "p.26-28",
+          "p.60"
         ],
-        "notes": "Animist access is plausible through Daka Fal/Foundchild and local spirit practice, but not singled out as a dominant culture rule."
+        "notes": "The culture text says Spirit Magic prevails; only the shaman and those she tutors learn Spirit Magic, while favored clan members may receive spirit fetishes."
       },
       "sorcery": {
         "status": "unusual",
@@ -55,7 +55,7 @@
       "summary": "Civilised Earth-culture society with common folk magic and strong theist cult access, especially Ernalda and related Holy Country cults.",
       "citations": [
         "AiG p.28-29",
-        "AiG p.59-62"
+        "AiG p.59-61"
       ],
       "folkMagic": {
         "status": "cultural",
@@ -74,11 +74,11 @@
         "notes": "Theist Rune Magic is expected through Earth and city cults."
       },
       "spiritMagic": {
-        "status": "available",
+        "status": "cultural",
         "pages": [
-          "p.60"
+          "p.28-29"
         ],
-        "notes": "Spirit Magic exists in Glorantha but is not a defining Esrolian culture signal."
+        "notes": "Esrolian magic is explicitly a mixture of Divine and Spirit Traditions; every Grandmother is or employs a shaman for ancestor contact."
       },
       "sorcery": {
         "status": "unusual",
@@ -99,7 +99,7 @@
       "summary": "Atheist/secularist Brithini-descended culture where Zzistori sorcery is the cultural higher-magic signal; gods are not worshipped and Rune Magic is unavailable.",
       "citations": [
         "AiG p.30-31",
-        "AiG p.59-62"
+        "AiG p.59-61"
       ],
       "folkMagic": {
         "status": "cultural",
@@ -185,7 +185,7 @@
               "references/sources/evidence/aig/page-0060-verification.json"
             ],
             "promotion_cautions": [
-              "God Forgot Zzistori access is verified as a bounded slice only; the full culture profile constant remains blocked until remaining culture pages are independently verified."
+              "God Forgot Zzistori access is verified as a bounded slice and the broader AiG culture profiles now cite verified page/block evidence."
             ]
           }
         }
@@ -292,8 +292,7 @@
       "summary": "Nomad beast-rider culture with strong animist/spirit-magic signal alongside folk magic and cult Rune Magic through Waha, Eiritha, Daka Fal, Storm Bull, and others.",
       "citations": [
         "AiG p.34-36",
-        "AiG p.60",
-        "AiG p.136-137"
+        "AiG p.60"
       ],
       "folkMagic": {
         "status": "cultural",
@@ -315,10 +314,9 @@
         "status": "cultural",
         "pages": [
           "p.34-36",
-          "p.60",
-          "p.136-137"
+          "p.60"
         ],
-        "notes": "Praxian cult/tradition access and beast-rider culture strongly support animism and Spirit Magic."
+        "notes": "Praxians explicitly follow an Animist tradition and worship Waha, Eiritha, Storm Bull, and other Wastelands spirits."
       },
       "sorcery": {
         "status": "unusual",
@@ -339,7 +337,7 @@
       "summary": "Barbarian Orlanthi culture with common folk magic and strong cult-mediated Rune Magic through Orlanth, Ernalda, Humakt, and related gods.",
       "citations": [
         "AiG p.37-39",
-        "AiG p.59-62"
+        "AiG p.59-61"
       ],
       "folkMagic": {
         "status": "cultural",
@@ -358,11 +356,12 @@
         "notes": "Theist Rune Magic through Orlanthi and allied cults is the main higher-magic signal."
       },
       "spiritMagic": {
-        "status": "available",
+        "status": "minority-allowed",
         "pages": [
+          "p.37",
           "p.60"
         ],
-        "notes": "Available through traditions/cults but not the primary culture signal."
+        "notes": "Sartarites are primarily theists, but Orlanthi shamans can commune and bargain with spirits on behalf of the clan."
       },
       "sorcery": {
         "status": "unusual",
@@ -384,8 +383,7 @@
       "summary": "Primitive Hsunchen wolf people with folk magic and a strong Korgatsu/Telmor animist spirit-magic signal.",
       "citations": [
         "AiG p.39-41",
-        "AiG p.60",
-        "AiG p.136-137"
+        "AiG p.60"
       ],
       "folkMagic": {
         "status": "cultural",
@@ -396,21 +394,19 @@
         "notes": "Culture list includes Beastcall (Wolf), Find Prey, Find Food, Heat, Pathway, Pierce, and related wolf survival magic."
       },
       "runeMagic": {
-        "status": "cult-mediated",
+        "status": "absent",
         "pages": [
-          "p.59",
           "p.39-41"
         ],
-        "notes": "Cult-mediated magic exists through Telmor and related worship."
+        "notes": "Verified Telmori pages do not show a Rune cult, rune pool, or theistic magic package; Telmor appears in an animist Korgatsu/Telmor spirit context."
       },
       "spiritMagic": {
         "status": "cultural",
         "pages": [
           "p.39-41",
-          "p.60",
-          "p.136-137"
+          "p.60"
         ],
-        "notes": "The culture has explicit wolf/Hsunchen spirit and Korgatsu-style animist signals."
+        "notes": "The culture explicitly practices Animism through a Korgatsu Spirit Tradition variation; High Shamans tame Wolf Spirits in Spirit Combat."
       },
       "sorcery": {
         "status": "unusual",
@@ -429,248 +425,384 @@
     }
   },
   "source_id": "aig",
-  "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-  "authority_state": "source_blocked",
-  "authority_disposition": "legacy-stale-with-bounded-slice-evidence",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "authority_state": "reference_authority",
+  "authority_disposition": "bounded-vision-verified-culture-magic-reference",
   "page_index": "references/aig-raw/page-index.json",
   "page_coverage": "references/sources/pages/aig.json",
-  "source_blockers": [
-    "Only the God Forgot Zzistori source-access slice has bounded extraction and independent verification evidence.",
-    "Remaining culture profile pages and culture summaries still need independent vision verification before the full constant can be accepted."
-  ],
-  "provenance_note": "Legacy reference data predates the U5 vision-only authority gate. It remains source_blocked as a full constant; only nested source_ref slices with evidence paths may be treated as bounded evidence inputs.",
+  "source_blockers": [],
+  "provenance_note": "Full CULTURE_MAGIC_PROFILES is no longer broadly source-blocked; profile refs cite verified page/block evidence. Telmori Rune Magic is not promoted from pp.39-41 because the verified pages support Animism, not a Rune cult package.",
   "profile_source_refs": {
     "Balazaring": {
       "source_id": "aig",
-      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-      "citations": [
-        "AiG p.26-28",
-        "AiG p.59-62"
-      ],
+      "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+      "page_manifest_path": "references/sources/pages/aig.json",
+      "evidence_state": "bounded_extraction_independent_vision_verified",
+      "verification_state": "verified",
       "pdf_pages": [
         26,
         27,
         28,
-        59,
         60,
-        61,
-        62
+        61
       ],
-      "verification_state": "blocked",
+      "block_ids": [
+        "aig-p026-b002",
+        "aig-p027-b001",
+        "aig-p028-b001",
+        "aig-p060-b003",
+        "aig-p061-b001",
+        "aig-p061-b002",
+        "aig-p061-b003"
+      ],
+      "evidence_paths": [
+        "references/sources/evidence/aig/page-0026-extraction.json",
+        "references/sources/evidence/aig/page-0026-verification.json",
+        "references/sources/evidence/aig/page-0027-extraction.json",
+        "references/sources/evidence/aig/page-0027-verification.json",
+        "references/sources/evidence/aig/page-0028-extraction.json",
+        "references/sources/evidence/aig/page-0028-verification.json",
+        "references/sources/evidence/aig/page-0060-extraction.json",
+        "references/sources/evidence/aig/page-0060-verification.json",
+        "references/sources/evidence/aig/page-0061-extraction.json",
+        "references/sources/evidence/aig/page-0061-verification.json"
+      ],
+      "citations": [
+        "AiG PDF pages 26, 27, 28, 60, 61"
+      ],
       "page_records": [
         "references/aig-raw/pages/page-026.json",
         "references/aig-raw/pages/page-027.json",
         "references/aig-raw/pages/page-028.json",
-        "references/aig-raw/pages/page-059.json",
         "references/aig-raw/pages/page-060.json",
-        "references/aig-raw/pages/page-061.json",
-        "references/aig-raw/pages/page-062.json"
+        "references/aig-raw/pages/page-061.json"
       ]
     },
     "Esrolian": {
       "source_id": "aig",
-      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-      "citations": [
-        "AiG p.28-29",
-        "AiG p.59-62"
-      ],
+      "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+      "page_manifest_path": "references/sources/pages/aig.json",
+      "evidence_state": "bounded_extraction_independent_vision_verified",
+      "verification_state": "verified",
       "pdf_pages": [
         28,
         29,
-        59,
         60,
-        61,
-        62
+        61
       ],
-      "verification_state": "blocked",
+      "block_ids": [
+        "aig-p028-b002",
+        "aig-p029-b001",
+        "aig-p029-b002",
+        "aig-p029-b003",
+        "aig-p060-b003",
+        "aig-p061-b001",
+        "aig-p061-b002",
+        "aig-p061-b003"
+      ],
+      "evidence_paths": [
+        "references/sources/evidence/aig/page-0028-extraction.json",
+        "references/sources/evidence/aig/page-0028-verification.json",
+        "references/sources/evidence/aig/page-0029-extraction.json",
+        "references/sources/evidence/aig/page-0029-verification.json",
+        "references/sources/evidence/aig/page-0060-extraction.json",
+        "references/sources/evidence/aig/page-0060-verification.json",
+        "references/sources/evidence/aig/page-0061-extraction.json",
+        "references/sources/evidence/aig/page-0061-verification.json"
+      ],
+      "citations": [
+        "AiG PDF pages 28, 29, 60, 61"
+      ],
       "page_records": [
         "references/aig-raw/pages/page-028.json",
         "references/aig-raw/pages/page-029.json",
-        "references/aig-raw/pages/page-059.json",
         "references/aig-raw/pages/page-060.json",
-        "references/aig-raw/pages/page-061.json",
-        "references/aig-raw/pages/page-062.json"
+        "references/aig-raw/pages/page-061.json"
       ]
     },
     "God Forgot": {
       "source_id": "aig",
-      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-      "citations": [
-        "AiG p.30-31",
-        "AiG p.59-62"
-      ],
+      "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+      "page_manifest_path": "references/sources/pages/aig.json",
+      "evidence_state": "bounded_extraction_independent_vision_verified",
+      "verification_state": "verified",
       "pdf_pages": [
+        29,
         30,
         31,
-        59,
         60,
-        61,
-        62
+        61
       ],
-      "verification_state": "blocked_with_verified_source_access_slice",
+      "block_ids": [
+        "aig-p029-b004",
+        "aig-p030-b001",
+        "aig-p030-b002",
+        "aig-p031-b001",
+        "aig-p031-b003",
+        "aig-p031-b004",
+        "aig-p031-b005",
+        "aig-p060-b003",
+        "aig-p061-b001",
+        "aig-p061-b002",
+        "aig-p061-b003"
+      ],
+      "evidence_paths": [
+        "references/sources/evidence/aig/page-0029-extraction.json",
+        "references/sources/evidence/aig/page-0029-verification.json",
+        "references/sources/evidence/aig/page-0030-extraction.json",
+        "references/sources/evidence/aig/page-0030-verification.json",
+        "references/sources/evidence/aig/page-0031-extraction.json",
+        "references/sources/evidence/aig/page-0031-verification.json",
+        "references/sources/evidence/aig/page-0060-extraction.json",
+        "references/sources/evidence/aig/page-0060-verification.json",
+        "references/sources/evidence/aig/page-0061-extraction.json",
+        "references/sources/evidence/aig/page-0061-verification.json"
+      ],
+      "citations": [
+        "AiG PDF pages 29, 30, 31, 60, 61"
+      ],
       "page_records": [
+        "references/aig-raw/pages/page-029.json",
         "references/aig-raw/pages/page-030.json",
         "references/aig-raw/pages/page-031.json",
-        "references/aig-raw/pages/page-059.json",
         "references/aig-raw/pages/page-060.json",
-        "references/aig-raw/pages/page-061.json",
-        "references/aig-raw/pages/page-062.json"
-      ],
-      "verified_slices": [
-        {
-          "fact_id": "app:CULTURE_MAGIC_PROFILES:God Forgot:sorcery.sourceAccess",
-          "scope": "God Forgot Zzistori culture-backed sorcery access only",
-          "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
-          "evidence_state": "bounded_extraction_independent_vision_verified_with_promotion_cautions",
-          "page_manifest_path": "references/sources/pages/aig.json",
-          "pdf_pages": [
-            31,
-            60
-          ],
-          "block_ids": [
-            "aig-p031-b001",
-            "aig-p031-b003",
-            "aig-p031-b004",
-            "aig-p060-b003",
-            "aig-p060-b006"
-          ],
-          "evidence_paths": [
-            "references/sources/evidence/aig/page-0031-extraction.json",
-            "references/sources/evidence/aig/page-0031-verification.json",
-            "references/sources/evidence/aig/page-0060-extraction.json",
-            "references/sources/evidence/aig/page-0060-verification.json"
-          ],
-          "remaining_blocker": "Other God Forgot culture-profile fields still cite unverified culture pages in this legacy profile."
-        }
+        "references/aig-raw/pages/page-061.json"
       ]
     },
     "Lunar Heartland": {
       "source_id": "aig",
-      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-      "citations": [
-        "AiG p.31-34",
-        "AiG p.59-60"
-      ],
+      "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+      "page_manifest_path": "references/sources/pages/aig.json",
+      "evidence_state": "bounded_extraction_independent_vision_verified",
+      "verification_state": "verified",
       "pdf_pages": [
         31,
         32,
         33,
-        34,
-        59,
-        60
+        60,
+        61
       ],
-      "verification_state": "blocked",
+      "block_ids": [
+        "aig-p031-b006",
+        "aig-p033-b001",
+        "aig-p033-b002",
+        "aig-p060-b003",
+        "aig-p061-b001",
+        "aig-p061-b002",
+        "aig-p061-b003"
+      ],
+      "evidence_paths": [
+        "references/sources/evidence/aig/page-0031-extraction.json",
+        "references/sources/evidence/aig/page-0031-verification.json",
+        "references/sources/evidence/aig/page-0032-extraction.json",
+        "references/sources/evidence/aig/page-0032-verification.json",
+        "references/sources/evidence/aig/page-0033-extraction.json",
+        "references/sources/evidence/aig/page-0033-verification.json",
+        "references/sources/evidence/aig/page-0060-extraction.json",
+        "references/sources/evidence/aig/page-0060-verification.json",
+        "references/sources/evidence/aig/page-0061-extraction.json",
+        "references/sources/evidence/aig/page-0061-verification.json"
+      ],
+      "citations": [
+        "AiG PDF pages 31, 32, 33, 60, 61"
+      ],
       "page_records": [
         "references/aig-raw/pages/page-031.json",
         "references/aig-raw/pages/page-032.json",
         "references/aig-raw/pages/page-033.json",
-        "references/aig-raw/pages/page-034.json",
-        "references/aig-raw/pages/page-059.json",
-        "references/aig-raw/pages/page-060.json"
+        "references/aig-raw/pages/page-060.json",
+        "references/aig-raw/pages/page-061.json"
       ]
     },
     "Lunar Provincial": {
       "source_id": "aig",
-      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-      "citations": [
-        "AiG p.34-37",
-        "AiG p.59-60"
-      ],
+      "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+      "page_manifest_path": "references/sources/pages/aig.json",
+      "evidence_state": "bounded_extraction_independent_vision_verified",
+      "verification_state": "verified",
       "pdf_pages": [
+        33,
         34,
-        35,
-        36,
-        37,
-        59,
-        60
+        60,
+        61
       ],
-      "verification_state": "blocked",
+      "block_ids": [
+        "aig-p033-b003",
+        "aig-p034-b001",
+        "aig-p034-b002",
+        "aig-p034-b003",
+        "aig-p034-b004",
+        "aig-p060-b003",
+        "aig-p061-b001",
+        "aig-p061-b002",
+        "aig-p061-b003"
+      ],
+      "evidence_paths": [
+        "references/sources/evidence/aig/page-0033-extraction.json",
+        "references/sources/evidence/aig/page-0033-verification.json",
+        "references/sources/evidence/aig/page-0034-extraction.json",
+        "references/sources/evidence/aig/page-0034-verification.json",
+        "references/sources/evidence/aig/page-0060-extraction.json",
+        "references/sources/evidence/aig/page-0060-verification.json",
+        "references/sources/evidence/aig/page-0061-extraction.json",
+        "references/sources/evidence/aig/page-0061-verification.json"
+      ],
+      "citations": [
+        "AiG PDF pages 33, 34, 60, 61"
+      ],
       "page_records": [
+        "references/aig-raw/pages/page-033.json",
         "references/aig-raw/pages/page-034.json",
-        "references/aig-raw/pages/page-035.json",
-        "references/aig-raw/pages/page-036.json",
-        "references/aig-raw/pages/page-037.json",
-        "references/aig-raw/pages/page-059.json",
-        "references/aig-raw/pages/page-060.json"
+        "references/aig-raw/pages/page-060.json",
+        "references/aig-raw/pages/page-061.json"
       ]
     },
     "Praxian": {
       "source_id": "aig",
-      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-      "citations": [
-        "AiG p.34-36",
-        "AiG p.60",
-        "AiG p.136-137"
-      ],
+      "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+      "page_manifest_path": "references/sources/pages/aig.json",
+      "evidence_state": "bounded_extraction_independent_vision_verified",
+      "verification_state": "verified",
       "pdf_pages": [
-        34,
         35,
         36,
         60,
-        136,
-        137
+        61
       ],
-      "verification_state": "blocked",
+      "block_ids": [
+        "aig-p035-b001",
+        "aig-p035-b002",
+        "aig-p036-b001",
+        "aig-p060-b003",
+        "aig-p061-b001",
+        "aig-p061-b002",
+        "aig-p061-b003"
+      ],
+      "evidence_paths": [
+        "references/sources/evidence/aig/page-0035-extraction.json",
+        "references/sources/evidence/aig/page-0035-verification.json",
+        "references/sources/evidence/aig/page-0036-extraction.json",
+        "references/sources/evidence/aig/page-0036-verification.json",
+        "references/sources/evidence/aig/page-0060-extraction.json",
+        "references/sources/evidence/aig/page-0060-verification.json",
+        "references/sources/evidence/aig/page-0061-extraction.json",
+        "references/sources/evidence/aig/page-0061-verification.json"
+      ],
+      "citations": [
+        "AiG PDF pages 35, 36, 60, 61"
+      ],
       "page_records": [
-        "references/aig-raw/pages/page-034.json",
         "references/aig-raw/pages/page-035.json",
         "references/aig-raw/pages/page-036.json",
         "references/aig-raw/pages/page-060.json",
-        "references/aig-raw/pages/page-136.json",
-        "references/aig-raw/pages/page-137.json"
+        "references/aig-raw/pages/page-061.json"
       ]
     },
     "Sartarite (Heortling)": {
       "source_id": "aig",
-      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-      "citations": [
-        "AiG p.37-39",
-        "AiG p.59-62"
-      ],
+      "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+      "page_manifest_path": "references/sources/pages/aig.json",
+      "evidence_state": "bounded_extraction_independent_vision_verified",
+      "verification_state": "verified",
       "pdf_pages": [
+        35,
+        36,
         37,
         38,
         39,
-        59,
         60,
-        61,
-        62
+        61
       ],
-      "verification_state": "blocked",
+      "block_ids": [
+        "aig-p035-b003",
+        "aig-p036-b002",
+        "aig-p037-b001",
+        "aig-p037-b002",
+        "aig-p037-b003",
+        "aig-p037-b004",
+        "aig-p038-b001",
+        "aig-p038-b002",
+        "aig-p039-b001",
+        "aig-p060-b003",
+        "aig-p061-b001",
+        "aig-p061-b002",
+        "aig-p061-b003"
+      ],
+      "evidence_paths": [
+        "references/sources/evidence/aig/page-0035-extraction.json",
+        "references/sources/evidence/aig/page-0035-verification.json",
+        "references/sources/evidence/aig/page-0036-extraction.json",
+        "references/sources/evidence/aig/page-0036-verification.json",
+        "references/sources/evidence/aig/page-0037-extraction.json",
+        "references/sources/evidence/aig/page-0037-verification.json",
+        "references/sources/evidence/aig/page-0038-extraction.json",
+        "references/sources/evidence/aig/page-0038-verification.json",
+        "references/sources/evidence/aig/page-0039-extraction.json",
+        "references/sources/evidence/aig/page-0039-verification.json",
+        "references/sources/evidence/aig/page-0060-extraction.json",
+        "references/sources/evidence/aig/page-0060-verification.json",
+        "references/sources/evidence/aig/page-0061-extraction.json",
+        "references/sources/evidence/aig/page-0061-verification.json"
+      ],
+      "citations": [
+        "AiG PDF pages 35, 36, 37, 38, 39, 60, 61"
+      ],
       "page_records": [
+        "references/aig-raw/pages/page-035.json",
+        "references/aig-raw/pages/page-036.json",
         "references/aig-raw/pages/page-037.json",
         "references/aig-raw/pages/page-038.json",
         "references/aig-raw/pages/page-039.json",
-        "references/aig-raw/pages/page-059.json",
         "references/aig-raw/pages/page-060.json",
-        "references/aig-raw/pages/page-061.json",
-        "references/aig-raw/pages/page-062.json"
+        "references/aig-raw/pages/page-061.json"
       ]
     },
     "Telmori Hsunchen": {
       "source_id": "aig",
-      "source_revision_id": "aig:permission-pending:0edc1e549c56:2026-05-21",
-      "citations": [
-        "AiG p.39-41",
-        "AiG p.60",
-        "AiG p.136-137"
-      ],
+      "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+      "page_manifest_path": "references/sources/pages/aig.json",
+      "evidence_state": "bounded_extraction_independent_vision_verified",
+      "verification_state": "verified",
       "pdf_pages": [
         39,
         40,
         41,
         60,
-        136,
-        137
+        61
       ],
-      "verification_state": "blocked",
+      "block_ids": [
+        "aig-p039-b002",
+        "aig-p039-b003",
+        "aig-p040-b002",
+        "aig-p040-b003",
+        "aig-p041-b001",
+        "aig-p041-b002",
+        "aig-p060-b003",
+        "aig-p061-b001",
+        "aig-p061-b002",
+        "aig-p061-b003"
+      ],
+      "evidence_paths": [
+        "references/sources/evidence/aig/page-0039-extraction.json",
+        "references/sources/evidence/aig/page-0039-verification.json",
+        "references/sources/evidence/aig/page-0040-extraction.json",
+        "references/sources/evidence/aig/page-0040-verification.json",
+        "references/sources/evidence/aig/page-0041-extraction.json",
+        "references/sources/evidence/aig/page-0041-verification.json",
+        "references/sources/evidence/aig/page-0060-extraction.json",
+        "references/sources/evidence/aig/page-0060-verification.json",
+        "references/sources/evidence/aig/page-0061-extraction.json",
+        "references/sources/evidence/aig/page-0061-verification.json"
+      ],
+      "citations": [
+        "AiG PDF pages 39, 40, 41, 60, 61"
+      ],
       "page_records": [
         "references/aig-raw/pages/page-039.json",
         "references/aig-raw/pages/page-040.json",
         "references/aig-raw/pages/page-041.json",
         "references/aig-raw/pages/page-060.json",
-        "references/aig-raw/pages/page-136.json",
-        "references/aig-raw/pages/page-137.json"
+        "references/aig-raw/pages/page-061.json"
       ]
     }
   }

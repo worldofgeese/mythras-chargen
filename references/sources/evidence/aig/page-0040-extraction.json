@@ -1,0 +1,71 @@
+{
+  "artifact_id": "aig-page-0040-extraction-copilot-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 40,
+  "printed_page_label": "39",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0040.png",
+    "image_sha256": "6efecaf26ddaeeeca9b4d2132bab166dfd52e427487036992218515fe167059d",
+    "dimensions": {
+      "width": 1656,
+      "height": 2159
+    }
+  },
+  "tool_identity": "Claude Opus 4.7 vision extraction subagents via GitHub Copilot CLI",
+  "schema_version": 1,
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-culture-extract-c",
+  "blocks": [
+    {
+      "block_id": "aig-p040-b001",
+      "block_type": "sidebar",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Two Minor Human Cultures sidebar.",
+      "excerpt_hash": "7d13c0aa194b06b3956c1ac2c4ba2d47f4e1a1c26ebebf7e21f987b459eca414",
+      "facts": {
+        "verified": true
+      }
+    },
+    {
+      "block_id": "aig-p040-b002",
+      "block_type": "paragraph",
+      "reading_order": 2,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Telmori Cursed Strain.",
+      "excerpt_hash": "d99a65515661c523ab0a2833962d8b53893340cf0720a5e2b3f002c61f32c4cd",
+      "facts": {
+        "verified": true
+      }
+    },
+    {
+      "block_id": "aig-p040-b003",
+      "block_type": "paragraph",
+      "reading_order": 3,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Telmori Korgatsu Animism.",
+      "excerpt_hash": "7211cbfde324f1741b41c83c100abf56684c8ed3c54889f12cfc30c77f7f1fae",
+      "facts": {
+        "verified": true
+      }
+    }
+  ]
+}

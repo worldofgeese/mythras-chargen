@@ -1,138 +1,182 @@
 {
-  "name": "Norana Hearthkeeper",
-  "concept": "Hearth Mother spirit-healer and protector of the Impala clan",
-  "characteristics": {
-    "STR": 8,
-    "CON": 12,
-    "SIZ": 9,
-    "DEX": 11,
-    "INT": 13,
-    "POW": 15,
-    "CHA": 7
-  },
-  "charMethod": "point-buy",
+  "_disambiguationMap": {},
+  "age": 30,
+  "armor": [],
   "attributes": {
     "actionPoints": 2,
+    "damageModifier": "-1d2",
+    "encumbrance": {
+      "burdened": 17,
+      "noMovement": 32,
+      "overloaded": 25,
+      "unencumbered": 16
+    },
     "experienceModifier": 0,
+    "folkMagicBase": 52,
     "healingRate": 2,
+    "hitPoints": {
+      "Abdomen": 6,
+      "Chest": 7,
+      "Head": 5,
+      "Left Arm": 4,
+      "Left Leg": 5,
+      "Right Arm": 4,
+      "Right Leg": 5
+    },
+    "initiativeBonus": 12,
     "luckPoints": 3,
     "magicPoints": 15,
-    "initiativeBonus": 12,
-    "damageModifier": "-1d2",
-    "hitPoints": {
-      "Head": 5,
-      "Chest": 7,
-      "Abdomen": 6,
-      "Right Arm": 4,
-      "Left Arm": 4,
-      "Right Leg": 5,
-      "Left Leg": 5
-    },
-    "encumbrance": {
-      "unencumbered": 16,
-      "burdened": 17,
-      "overloaded": 25,
-      "noMovement": 32
-    },
+    "movementRate": 6,
     "runeAffinities": {
       "primary": 60,
       "secondary": 50,
       "tertiary": 40
-    },
-    "folkMagicBase": 52,
-    "movementRate": 6
+    }
   },
-  "culture": "Praxian",
-  "homeland": "Prax",
+  "background": "",
+  "backgroundEvents": "",
+  "bonusSkills": {
+    "Athletics": 20,
+    "Endurance": 20,
+    "First Aid": 20,
+    "Healing": 20,
+    "Locale": 20,
+    "Lore (Herbs)": 20,
+    "Perception": 20,
+    "Ride": 20,
+    "Survival": 20,
+    "Willpower": 20
+  },
+  "boundSpiritSlots": 3,
+  "boundSpirits": [],
+  "career": "Shaman",
+  "careerFolkMagic": [
+    "Bladesharp",
+    "Find Enemy"
+  ],
+  "careerSkills": {
+    "Athletics": 10,
+    "Customs": 0,
+    "Dance": 0,
+    "Deceit": 0,
+    "Endurance": 15,
+    "First Aid": 15,
+    "Healing": 0,
+    "Influence": 0,
+    "Insight": 0,
+    "Locale": 15,
+    "Lore (Herbs)": 0,
+    "Lore (Spirit World)": 0,
+    "Perception": 15,
+    "Ride": 5,
+    "Survival": 10,
+    "Willpower": 15
+  },
+  "charMethod": "point-buy",
+  "characteristics": {
+    "CHA": 7,
+    "CON": 12,
+    "DEX": 11,
+    "INT": 13,
+    "POW": 15,
+    "SIZ": 9,
+    "STR": 8
+  },
+  "combatStyles": [],
+  "companions": [],
+  "concept": "Hearth Mother spirit-healer and protector of the Impala clan",
+  "cult": "Hearth Mother",
+  "cultType": {
+    "blockedTypes": [],
+    "isHybrid": false,
+    "primary": "animist",
+    "types": [
+      "animist"
+    ]
+  },
   "culturalSkills": {
     "Athletics": 10,
     "Endurance": 10,
     "First Aid": 15,
     "Locale": 15,
     "Perception": 15,
-    "Willpower": 15,
     "Ride": 10,
-    "Survival": 10
+    "Survival": 10,
+    "Willpower": 15
   },
-  "runeAffinities": {
-    "primary": "Fertility",
-    "secondary": "Spirit",
-    "tertiary": "Earth"
-  },
+  "culture": "Praxian",
+  "devotionalPool": 0,
+  "equipment": [],
+  "family": "Healer lineage",
   "folkMagicSpells": [
     "Heal",
     "Calm",
     "Ignite"
   ],
-  "passions": [
-    {
-      "name": "Love (Impala Clan)",
-      "value": 65,
-      "custom": true
-    },
-    {
-      "name": "Devotion (Hearth Mother)",
-      "value": 60,
-      "custom": true
-    }
-  ],
-  "age": 30,
   "gender": "Female",
-  "family": "Healer lineage",
-  "backgroundEvents": "",
-  "career": "Shaman",
-  "careerSkills": {
-    "Customs": 0,
-    "Dance": 0,
-    "Deceit": 0,
-    "Influence": 0,
-    "Insight": 0,
-    "Locale": 15,
-    "Willpower": 15,
-    "Lore (Herbs)": 0,
-    "Healing": 0,
-    "Lore (Spirit World)": 0,
-    "Perception": 15,
-    "First Aid": 15,
-    "Endurance": 15,
-    "Survival": 10,
-    "Athletics": 10,
-    "Ride": 5
-  },
-  "careerFolkMagic": [
-    "Bladesharp",
-    "Find Enemy"
-  ],
-  "bonusSkills": {
-    "Willpower": 20,
-    "Perception": 20,
-    "First Aid": 20,
-    "Locale": 20,
-    "Endurance": 20,
-    "Survival": 20,
-    "Athletics": 20,
-    "Ride": 20,
-    "Lore (Herbs)": 20,
-    "Healing": 20
+  "hitPoints": {
+    "Abdomen": {
+      "current": 6,
+      "max": 6
+    },
+    "Chest": {
+      "current": 7,
+      "max": 7
+    },
+    "Head": {
+      "current": 5,
+      "max": 5
+    },
+    "Left Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Leg": {
+      "current": 5,
+      "max": 5
+    },
+    "Right Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Leg": {
+      "current": 5,
+      "max": 5
+    }
   },
   "hobbySkillName": null,
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 1,
-  "startingMoney": 70,
-  "equipment": [],
-  "weapons": [],
-  "armor": [],
-  "combatStyles": [],
-  "notes": "",
-  "background": "",
-  "hitPoints": {},
-  "companions": [],
-  "cult": "Hearth Mother",
+  "homeland": "Prax",
   "miracles": [],
-  "devotionalPool": 0,
+  "mysticismTalents": [],
+  "name": "Norana Hearthkeeper",
+  "notes": "",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Love (Impala Clan)",
+      "value": 65
+    },
+    {
+      "custom": true,
+      "name": "Devotion (Hearth Mother)",
+      "value": 60
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Fertility",
+    "secondary": "Spirit",
+    "tertiary": "Earth"
+  },
+  "schemaVersion": 1,
   "selectedProfessionalSkills": [
     "Lore (Herbs)",
     "Healing",
     "Lore (Spirit World)"
-  ]
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 70,
+  "weapons": []
 }

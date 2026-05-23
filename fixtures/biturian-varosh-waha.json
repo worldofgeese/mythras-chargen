@@ -1,131 +1,150 @@
 {
-  "name": "Biturian Varosh",
-  "concept": "Waha Khan of the Bison Tribe, spirit-warrior and butcher-priest",
-  "characteristics": {
-    "STR": 14,
-    "CON": 12,
-    "SIZ": 12,
-    "DEX": 10,
-    "INT": 10,
-    "POW": 12,
-    "CHA": 5
-  },
-  "charMethod": "point-buy",
+  "_disambiguationMap": {},
+  "age": 25,
+  "armor": [],
   "attributes": {
     "actionPoints": 2,
+    "damageModifier": "+1d2",
+    "encumbrance": {
+      "burdened": 29,
+      "noMovement": 56,
+      "overloaded": 43,
+      "unencumbered": 28
+    },
     "experienceModifier": -1,
+    "folkMagicBase": 47,
     "healingRate": 2,
+    "hitPoints": {
+      "Abdomen": 6,
+      "Chest": 7,
+      "Head": 5,
+      "Left Arm": 4,
+      "Left Leg": 5,
+      "Right Arm": 4,
+      "Right Leg": 5
+    },
+    "initiativeBonus": 10,
     "luckPoints": 2,
     "magicPoints": 12,
-    "initiativeBonus": 10,
-    "damageModifier": "+1d2",
-    "hitPoints": {
-      "Head": 5,
-      "Chest": 7,
-      "Abdomen": 6,
-      "Right Arm": 4,
-      "Left Arm": 4,
-      "Right Leg": 5,
-      "Left Leg": 5
-    },
-    "encumbrance": {
-      "unencumbered": 28,
-      "burdened": 29,
-      "overloaded": 43,
-      "noMovement": 56
-    },
+    "movementRate": 6,
     "runeAffinities": {
       "primary": 54,
       "secondary": 44,
       "tertiary": 34
-    },
-    "folkMagicBase": 47,
-    "movementRate": 6
+    }
   },
-  "culture": "Praxian",
-  "homeland": "Prax",
+  "background": "",
+  "backgroundEvents": "",
+  "bonusSkills": {
+    "Athletics": 15,
+    "Combat Style (Lance and Shield)": 15,
+    "Endurance": 15,
+    "First Aid": 15,
+    "Locale": 15,
+    "Lore (Waha)": 15,
+    "Perception": 15,
+    "Ride": 15,
+    "Survival": 15,
+    "Willpower": 15
+  },
+  "boundSpiritSlots": 2,
+  "boundSpirits": [],
+  "career": "Warrior",
+  "careerFolkMagic": [
+    "Countermagic",
+    "Protection"
+  ],
+  "careerSkills": {
+    "Athletics": 15,
+    "Brawn": 0,
+    "Combat Style (Agimori)": 0,
+    "Combat Style (Lance and Shield)": 0,
+    "Endurance": 15,
+    "Evade": 0,
+    "First Aid": 10,
+    "Locale": 10,
+    "Lore (Waha)": 0,
+    "Perception": 10,
+    "Ride": 15,
+    "Survival": 15,
+    "Unarmed": 0,
+    "Willpower": 10
+  },
+  "charMethod": "point-buy",
+  "characteristics": {
+    "CHA": 5,
+    "CON": 12,
+    "DEX": 10,
+    "INT": 10,
+    "POW": 12,
+    "SIZ": 12,
+    "STR": 14
+  },
+  "combatStyles": [],
+  "companions": [],
+  "concept": "Waha Khan of the Bison Tribe, spirit-warrior and butcher-priest",
+  "cult": "Waha",
+  "cultType": {
+    "blockedTypes": [],
+    "isHybrid": true,
+    "primary": "theist",
+    "types": [
+      "theist",
+      "animist"
+    ]
+  },
   "culturalSkills": {
     "Athletics": 15,
     "Endurance": 15,
     "First Aid": 10,
     "Locale": 10,
     "Perception": 10,
-    "Willpower": 15,
     "Ride": 15,
-    "Survival": 10
+    "Survival": 10,
+    "Willpower": 15
   },
-  "runeAffinities": {
-    "primary": "Death",
-    "secondary": "Man",
-    "tertiary": "Beast"
-  },
+  "culture": "Praxian",
+  "devotionalPool": 6,
+  "equipment": [],
+  "family": "Khan bloodline",
   "folkMagicSpells": [
     "Bladesharp",
     "Heal",
     "Speedart"
   ],
-  "passions": [
-    {
-      "name": "Loyalty (Bison Tribe)",
-      "value": 65,
-      "custom": true
-    },
-    {
-      "name": "Hate (Chaos)",
-      "value": 60,
-      "custom": true
-    }
-  ],
-  "age": 25,
   "gender": "Male",
-  "family": "Khan bloodline",
-  "backgroundEvents": "",
-  "career": "Warrior",
-  "careerSkills": {
-    "Athletics": 15,
-    "Brawn": 0,
-    "Endurance": 15,
-    "Evade": 0,
-    "Unarmed": 0,
-    "Combat Style (Agimori)": 0,
-    "Lore (Waha)": 0,
-    "Survival": 15,
-    "Perception": 10,
-    "Willpower": 10,
-    "Ride": 15,
-    "First Aid": 10,
-    "Locale": 10,
-    "Combat Style (Lance and Shield)": 0
-  },
-  "careerFolkMagic": [
-    "Countermagic",
-    "Protection"
-  ],
-  "bonusSkills": {
-    "Athletics": 15,
-    "Endurance": 15,
-    "Perception": 15,
-    "Willpower": 15,
-    "Ride": 15,
-    "Survival": 15,
-    "First Aid": 15,
-    "Locale": 15,
-    "Lore (Waha)": 15,
-    "Combat Style (Lance and Shield)": 15
+  "hitPoints": {
+    "Abdomen": {
+      "current": 6,
+      "max": 6
+    },
+    "Chest": {
+      "current": 7,
+      "max": 7
+    },
+    "Head": {
+      "current": 5,
+      "max": 5
+    },
+    "Left Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Leg": {
+      "current": 5,
+      "max": 5
+    },
+    "Right Arm": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Leg": {
+      "current": 5,
+      "max": 5
+    }
   },
   "hobbySkillName": null,
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 1,
-  "startingMoney": 70,
-  "equipment": [],
-  "weapons": [],
-  "armor": [],
-  "combatStyles": [],
-  "notes": "",
-  "background": "",
-  "hitPoints": {},
-  "companions": [],
-  "cult": "Waha",
+  "homeland": "Prax",
   "miracles": [
     "Extension",
     "Find (Specific Thing)",
@@ -134,10 +153,36 @@
     "Summon Gnome",
     "Warding"
   ],
-  "devotionalPool": 6,
+  "mysticismTalents": [],
+  "name": "Biturian Varosh",
+  "notes": "",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Loyalty (Bison Tribe)",
+      "value": 65
+    },
+    {
+      "custom": true,
+      "name": "Hate (Chaos)",
+      "value": 60
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Death",
+    "secondary": "Man",
+    "tertiary": "Beast"
+  },
+  "schemaVersion": 1,
   "selectedProfessionalSkills": [
     "Combat Style (Lance and Shield)",
     "Lore (Waha)",
     "Survival"
-  ]
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 70,
+  "weapons": []
 }

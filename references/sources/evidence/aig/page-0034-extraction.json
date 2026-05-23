@@ -1,0 +1,115 @@
+{
+  "artifact_id": "aig-page-0034-extraction-copilot-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 34,
+  "printed_page_label": "33",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0034.png",
+    "image_sha256": "5c870a7aba658cdfc3b22e365060fa56a850868bf070fac7962d3e8c0ad1e1e9",
+    "dimensions": {
+      "width": 1656,
+      "height": 2159
+    }
+  },
+  "tool_identity": "Claude Opus 4.7 vision extraction subagents via GitHub Copilot CLI",
+  "schema_version": 1,
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-culture-extract-d",
+  "blocks": [
+    {
+      "block_id": "aig-p034-b001",
+      "block_type": "paragraph",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Lunar Provincial magic.",
+      "excerpt_hash": "bd9dd86de171c5c0db3314aa13750736d5ea3c37acfcea92496439cdc9777e8a",
+      "facts": {
+        "verified": true
+      }
+    },
+    {
+      "block_id": "aig-p034-b002",
+      "block_type": "stat_block",
+      "reading_order": 2,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Lunar Provincial skills and careers.",
+      "excerpt_hash": "ebc9fc5d6ec77ce4b4bcce3f9fcfa45a3364304c48970df78da4c593a0ec7198",
+      "facts": {
+        "verified": true
+      }
+    },
+    {
+      "block_id": "aig-p034-b003",
+      "block_type": "stat_block",
+      "reading_order": 3,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Lunar Provincial combat styles.",
+      "excerpt_hash": "a27f95c072e353bb456d417d08b4abd250c32d52b1234ee12c3eaf0d3864f377",
+      "facts": {
+        "verified": true
+      }
+    },
+    {
+      "block_id": "aig-p034-b004",
+      "block_type": "stat_block",
+      "reading_order": 4,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Lunar Provincial folk magic and passions.",
+      "excerpt_hash": "3278c3bdf918e0c69f00c5ee56af06d1e0aa6e2f93958a4f87a00531353e987e",
+      "facts": {
+        "verified": true,
+        "app_fields": {
+          "name": "Lunar Provincial",
+          "careers": "Any Civilised. Tarshite characters choose either Lunar Provincial or Sartarite culture.",
+          "starting_money": "4d6x10",
+          "passions": [
+            {
+              "type": "Loyalty",
+              "focus": "Empire",
+              "formula": "formula not printed"
+            },
+            {
+              "type": "Love",
+              "focus": "Character's Choice",
+              "formula": "formula not printed"
+            },
+            {
+              "type": "Love or Hate",
+              "focus": "Locals",
+              "formula": "formula not printed"
+            }
+          ],
+          "combat_style_ids": [
+            "cse:lunar-provincial:colonial-noble",
+            "cse:lunar-provincial:colonial-survivalist",
+            "cse:lunar-provincial:lunar-corps-hoplite",
+            "cse:lunar-provincial:pelorian-cavalry"
+          ]
+        }
+      }
+    }
+  ]
+}

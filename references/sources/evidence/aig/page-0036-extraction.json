@@ -1,0 +1,55 @@
+{
+  "artifact_id": "aig-page-0036-extraction-copilot-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 36,
+  "printed_page_label": "35",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0036.png",
+    "image_sha256": "ff494daad0d63ce46696d2f85c5e4fd8f56d7fea7d7f2bb65cdd35c71d731ce9",
+    "dimensions": {
+      "width": 1656,
+      "height": 2159
+    }
+  },
+  "tool_identity": "Claude Opus 4.7 vision extraction subagents via GitHub Copilot CLI",
+  "schema_version": 1,
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-extract-36-38",
+  "blocks": [
+    {
+      "block_id": "aig-p036-b001",
+      "block_type": "table",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Praxian Combat Styles table.",
+      "excerpt_hash": "db15e6a28bb903c816abee6e117e85c6edc5e4f1324ff9afe78661f07bc61c46",
+      "facts": {
+        "verified": true
+      }
+    },
+    {
+      "block_id": "aig-p036-b002",
+      "block_type": "paragraph",
+      "reading_order": 2,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Sartarite narrative continues.",
+      "excerpt_hash": "d0e5e8dcce4b0b6b83b1494652863763e99b951ed16a4074af19dad7abc809db",
+      "facts": {
+        "verified": true
+      }
+    }
+  ]
+}

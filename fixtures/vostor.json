@@ -1,226 +1,230 @@
 {
-  "name": "Vostor Son of Pyjeem",
-  "concept": "Scarred Lunar deserter turned mercenary",
-  "characteristics": {
-    "STR": 14,
-    "CON": 12,
-    "SIZ": 12,
-    "DEX": 9,
-    "INT": 10,
-    "POW": 11,
-    "CHA": 7
-  },
-  "charMethod": "point-buy",
-  "attributes": {},
-  "culture": "Lunar Provincial",
-  "homeland": "Tarsh",
-  "culturalSkills": {
-    "Endurance": 15,
-    "Athletics": 10,
-    "Brawn": 15,
-    "Evade": 10,
-    "Perception": 10,
-    "Willpower": 10,
-    "Locale": 5,
-    "Survival": 15,
-    "Healing": 5,
-    "Courtesy": 5
-  },
-  "runeAffinities": {
-    "primary": "Moon",
-    "secondary": "Disorder",
-    "tertiary": "Illusion"
-  },
-  "folkMagicSpells": [
-    "Befuddle",
-    "Glamour",
-    "Heal"
-  ],
-  "passions": [
+  "_disambiguationMap": {},
+  "age": 21,
+  "armor": [
     {
-      "name": "Loyalty (Seven Mothers)",
-      "value": 48,
-      "needsSubject": false,
-      "subjectSuggestions": []
-    },
-    {
-      "name": "Hate (Rebels)",
-      "value": 48,
-      "needsSubject": false,
-      "subjectSuggestions": []
-    },
-    {
-      "name": "Honor",
-      "value": 48,
-      "custom": true
-    },
-    {
-      "name": "Fear (Harrek the Berserk)",
-      "value": 48,
-      "custom": true
+      "ap": 1,
+      "cost": 0,
+      "locations": "5 location(s)",
+      "name": "Bronze Basic Armour"
     }
   ],
-  "age": 21,
-  "gender": "Male",
-  "family": "Dunstop, Lunar Tarsh",
+  "attributes": {},
+  "background": "",
   "backgroundEvents": "",
-  "career": "Warrior",
-  "careerSkills": {
-    "Athletics": 10,
+  "bonusSkills": {
+    "Athletics": 15,
     "Brawn": 15,
-    "Endurance": 15,
-    "Evade": 10,
-    "Unarmed": 5,
     "Combat Style (Colonial Survivalist)": 15,
-    "Lore (Strategy and Tactics)": 10,
-    "Gambling": 5,
-    "Survival": 15
+    "Endurance": 15,
+    "Evade": 15,
+    "Locale": 15,
+    "Lore (Strategy and Tactics)": 15,
+    "Perception": 15,
+    "Survival": 15,
+    "Willpower": 15
   },
+  "boundSpiritSlots": 0,
+  "boundSpirits": [],
+  "career": "Warrior",
   "careerFolkMagic": [
     "Fanaticism",
     "Demoralise"
   ],
-  "bonusSkills": {
-    "Athletics": 15,
+  "careerSkills": {
+    "Athletics": 10,
     "Brawn": 15,
-    "Endurance": 15,
-    "Evade": 15,
-    "Willpower": 15,
-    "Perception": 15,
-    "Survival": 15,
-    "Lore (Strategy and Tactics)": 15,
     "Combat Style (Colonial Survivalist)": 15,
-    "Locale": 15
+    "Endurance": 15,
+    "Evade": 10,
+    "Gambling": 5,
+    "Lore (Strategy and Tactics)": 10,
+    "Survival": 15,
+    "Unarmed": 5
   },
-  "hobbySkillName": null,
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 1,
-  "startingMoney": 100,
-  "equipment": [
-    {
-      "name": "Two sets of common undecorated clothes",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 0
-    },
-    {
-      "name": "Transport: Handcart",
-      "enc": 0,
-      "quantity": 1,
-      "cost": 0
-    },
-    {
-      "name": "Backpack",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Waterskin",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Rations (1 week)",
-      "enc": 2,
-      "quantity": 1,
-      "cost": 14
-    },
-    {
-      "name": "Bedroll",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Flint & Tinder",
-      "enc": 0,
-      "quantity": 1,
-      "cost": 5
-    }
-  ],
-  "weapons": [
-    {
-      "name": "Pelorian Aspis",
-      "damage": "1d4",
-      "size": "H",
-      "reach": "S",
-      "ap": 6,
-      "hp": 15,
-      "skill": 0,
-      "quantity": 1
-    }
-  ],
-  "armor": [
-    {
-      "name": "Bronze Basic Armour",
-      "ap": 1,
-      "locations": "5 location(s)",
-      "cost": 0
-    }
-  ],
+  "charMethod": "point-buy",
+  "characteristics": {
+    "CHA": 7,
+    "CON": 12,
+    "DEX": 9,
+    "INT": 10,
+    "POW": 11,
+    "SIZ": 12,
+    "STR": 14
+  },
   "combatStyles": [
     {
       "name": "Colonial Survivalist",
+      "notes": "",
+      "skill": 23,
+      "traits": [
+        "Hidden Weapons"
+      ],
       "weapons": [
         "Shortsword",
         "Dagger",
         "Sling"
-      ],
-      "traits": [
-        "Hidden Weapons"
-      ],
-      "skill": 23,
-      "notes": ""
+      ]
     },
     {
       "name": "Lunar Corps Hoplite",
-      "weapons": [
-        "1H Spear",
-        "Pelorian Aspis",
-        "Sickle Sword/Khopesh"
-      ],
+      "notes": "only available to Warrior career",
+      "skill": 0,
       "traits": [
         "Formation Fighting",
         "Shield Wall",
         "Siege Warfare"
       ],
-      "skill": 0,
-      "notes": "only available to Warrior career"
+      "weapons": [
+        "1H Spear",
+        "Pelorian Aspis",
+        "Sickle Sword/Khopesh"
+      ]
     },
     {
       "name": "Pelorian Cavalry",
+      "notes": "only available to Warrior career",
+      "skill": 0,
+      "traits": [
+        "Beast-back Lancer",
+        "Mounted Combat",
+        "Mounted Skirmishing"
+      ],
       "weapons": [
         "Composite Bow",
         "Pelorian Aspis",
         "Sickle Sword/Khopesh",
         "Kontos",
         "Pelorian Peltast Shield"
-      ],
-      "traits": [
-        "Beast-back Lancer",
-        "Mounted Combat",
-        "Mounted Skirmishing"
-      ],
-      "skill": 0,
-      "notes": "only available to Warrior career"
+      ]
     }
   ],
-  "notes": "",
-  "background": "",
-  "hitPoints": {},
   "companions": [],
-  "cult": "Seven Mothers",
-  "miracles": [
-    "Madness",
-    "Mindblast",
-    "Shield"
-  ],
+  "concept": "Scarred Lunar deserter turned mercenary",
+  "cult": null,
+  "cultType": null,
+  "culturalSkills": {
+    "Athletics": 10,
+    "Brawn": 15,
+    "Courtesy": 5,
+    "Endurance": 15,
+    "Evade": 10,
+    "Healing": 5,
+    "Locale": 5,
+    "Perception": 10,
+    "Survival": 15,
+    "Willpower": 10
+  },
+  "culture": "Lunar Provincial",
   "devotionalPool": 0,
+  "equipment": [
+    {
+      "cost": 0,
+      "enc": 1,
+      "name": "Two sets of common undecorated clothes",
+      "quantity": 1
+    },
+    {
+      "cost": 0,
+      "enc": 0,
+      "name": "Transport: Handcart",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Backpack",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Waterskin",
+      "quantity": 1
+    },
+    {
+      "cost": 14,
+      "enc": 2,
+      "name": "Rations (1 week)",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Bedroll",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 0,
+      "name": "Flint & Tinder",
+      "quantity": 1
+    }
+  ],
+  "family": "Dunstop, Lunar Tarsh",
+  "folkMagicSpells": [
+    "Befuddle",
+    "Glamour",
+    "Heal"
+  ],
+  "gender": "Male",
+  "hitPoints": {},
+  "hobbySkillName": null,
+  "homeland": "Tarsh",
+  "miracles": [],
+  "mysticismTalents": [],
+  "name": "Vostor Son of Pyjeem",
+  "notes": "",
+  "passions": [
+    {
+      "name": "Loyalty (Seven Mothers)",
+      "needsSubject": false,
+      "subjectSuggestions": [],
+      "value": 48
+    },
+    {
+      "name": "Hate (Rebels)",
+      "needsSubject": false,
+      "subjectSuggestions": [],
+      "value": 48
+    },
+    {
+      "custom": true,
+      "name": "Honor",
+      "value": 48
+    },
+    {
+      "custom": true,
+      "name": "Fear (Harrek the Berserk)",
+      "value": 48
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Moon",
+    "secondary": "Disorder",
+    "tertiary": "Illusion"
+  },
+  "schemaVersion": 1,
   "selectedProfessionalSkills": [
     "Lore (Strategy and Tactics)",
     "Gambling",
     "Survival"
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 100,
+  "weapons": [
+    {
+      "ap": 6,
+      "damage": "1d4",
+      "hp": 15,
+      "name": "Pelorian Aspis",
+      "quantity": 1,
+      "reach": "S",
+      "size": "H",
+      "skill": 0
+    }
   ]
 }

@@ -1,262 +1,277 @@
 {
-  "name": "Harmast Baranthos' Son",
-  "concept": "Noble merchant-duelist, negotiator with a sword",
-  "characteristics": {
-    "STR": 11,
-    "CON": 10,
-    "SIZ": 9,
-    "DEX": 14,
-    "INT": 12,
-    "POW": 11,
-    "CHA": 8
-  },
-  "charMethod": "point-buy",
-  "attributes": {},
-  "culture": "Sartarite (Heortling)",
-  "homeland": "Sartar",
-  "culturalSkills": {
-    "Athletics": 10,
-    "Brawn": 5,
-    "Endurance": 10,
-    "Evade": 15,
-    "Locale": 10,
-    "Perception": 15,
-    "Ride": 15,
-    "Willpower": 10,
-    "Commerce": 10
-  },
-  "runeAffinities": {
-    "primary": "Storm",
-    "secondary": "Harmony",
-    "tertiary": "Movement"
-  },
-  "folkMagicSpells": [
-    "Glamour",
-    "Mobility",
-    "Protection"
-  ],
-  "passions": [
+  "_disambiguationMap": {},
+  "age": 21,
+  "armor": [
     {
-      "name": "Love (Family)",
-      "value": 49,
-      "custom": true
-    },
-    {
-      "name": "Loyalty (Sartar)",
-      "value": 49,
-      "custom": true
-    },
-    {
-      "name": "Hate (Grey Dog clan)",
-      "value": 49,
-      "custom": true
-    },
-    {
-      "name": "Honor",
-      "value": 49,
-      "custom": true
+      "ap": 3,
+      "cost": 0,
+      "locations": "6 location(s)",
+      "name": "Bronze Basic Armour"
     }
   ],
-  "age": 21,
-  "gender": "Male",
-  "family": "Ernaldori clan, Colymar Tribe",
+  "attributes": {},
+  "background": "",
   "backgroundEvents": "",
-  "career": "Merchant",
-  "careerSkills": {
-    "Athletics": 5,
-    "Brawn": 5,
-    "Endurance": 5,
-    "Evade": 10,
+  "bonusSkills": {
+    "Athletics": 15,
+    "Bargain": 15,
     "Combat Style (Hill Clan Levy)": 15,
     "Commerce": 15,
     "Courtesy": 15,
-    "Streetwise": 15,
-    "Language (New Pelorian)": 10,
-    "Bargain": 5
+    "Evade": 15,
+    "Language (New Pelorian)": 15,
+    "Perception": 15,
+    "Ride": 15,
+    "Streetwise": 15
   },
+  "boundSpiritSlots": 0,
+  "boundSpirits": [],
+  "career": "Merchant",
   "careerFolkMagic": [
     "Glamour",
     "Calculate"
   ],
-  "bonusSkills": {
-    "Athletics": 15,
-    "Evade": 15,
-    "Perception": 15,
-    "Ride": 15,
+  "careerSkills": {
+    "Athletics": 5,
+    "Bargain": 5,
+    "Brawn": 5,
+    "Combat Style (Hill Clan Levy)": 15,
     "Commerce": 15,
     "Courtesy": 15,
-    "Streetwise": 15,
-    "Combat Style (Hill Clan Levy)": 15,
-    "Language (New Pelorian)": 15,
-    "Bargain": 15
+    "Endurance": 5,
+    "Evade": 10,
+    "Language (New Pelorian)": 10,
+    "Streetwise": 15
   },
-  "hobbySkillName": null,
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 1,
-  "startingMoney": 170,
-  "equipment": [
-    {
-      "name": "Two sets of common undecorated clothes",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 0
-    },
-    {
-      "name": "Transport: Beast of Burden",
-      "enc": 0,
-      "quantity": 1,
-      "cost": 0
-    },
-    {
-      "name": "Backpack",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Waterskin",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Rations (1 week)",
-      "enc": 2,
-      "quantity": 1,
-      "cost": 14
-    },
-    {
-      "name": "Bedroll",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Flint & Tinder",
-      "enc": 0,
-      "quantity": 1,
-      "cost": 5
-    }
-  ],
-  "weapons": [
-    {
-      "name": "1H Axe",
-      "damage": "1d6+1",
-      "size": "M",
-      "reach": "M",
-      "ap": 4,
-      "hp": 8,
-      "skill": 0,
-      "quantity": 1
-    },
-    {
-      "name": "Orlanthi Round Shield",
-      "damage": "1d3",
-      "size": "L",
-      "reach": "S",
-      "ap": 4,
-      "hp": 9,
-      "skill": 0,
-      "quantity": 1
-    }
-  ],
-  "armor": [
-    {
-      "name": "Bronze Basic Armour",
-      "ap": 3,
-      "locations": "6 location(s)",
-      "cost": 0
-    }
-  ],
+  "charMethod": "point-buy",
+  "characteristics": {
+    "CHA": 8,
+    "CON": 10,
+    "DEX": 14,
+    "INT": 12,
+    "POW": 11,
+    "SIZ": 9,
+    "STR": 11
+  },
   "combatStyles": [
     {
       "name": "Hill Clan Levy",
+      "notes": "",
+      "skill": 0,
+      "traits": [
+        "Intimidating Scream",
+        "Throw Weapons"
+      ],
       "weapons": [
         "1H Axe",
         "1H Spear",
         "Orlanthi Round Shield",
         "Longbow",
         "Javelin"
-      ],
-      "traits": [
-        "Intimidating Scream",
-        "Throw Weapons"
-      ],
-      "skill": 0,
-      "notes": ""
+      ]
     }
   ],
-  "notes": "",
-  "background": "",
-  "hitPoints": {},
   "companions": [
     {
-      "name": "Riding Horse",
-      "species": "Riding Horse",
-      "characteristics": {
-        "STR": 22,
-        "CON": 13,
-        "SIZ": 31,
-        "DEX": 10,
-        "POW": 7
-      },
-      "hitLocations": {
-        "Right Hind Leg": {
-          "max": 9,
-          "ap": 1
-        },
-        "Left Hind Leg": {
-          "max": 9,
-          "ap": 1
-        },
-        "Hindquarters": {
-          "max": 10,
-          "ap": 1
-        },
-        "Forequarters": {
-          "max": 11,
-          "ap": 1
-        },
-        "Right Front Leg": {
-          "max": 8,
-          "ap": 1
-        },
-        "Left Front Leg": {
-          "max": 8,
-          "ap": 1
-        },
-        "Head": {
-          "max": 9,
-          "ap": 1
-        }
-      },
+      "armor": 1,
       "attacks": [
         {
-          "name": "Hoof",
-          "skill": 42,
           "damage": "1d6+1d12",
-          "notes": "Rear and Plunge"
+          "name": "Hoof",
+          "notes": "Rear and Plunge",
+          "skill": 42
         }
       ],
-      "armor": 1,
-      "movement": 12,
+      "characteristics": {
+        "CON": 13,
+        "DEX": 10,
+        "POW": 7,
+        "SIZ": 31,
+        "STR": 22
+      },
       "damageModifier": "+1d12",
-      "hitPointsTotal": 20,
       "healingRate": 2,
-      "strikeRank": 0,
-      "notes": "Riding horse. Not trained for combat — will flee unless cornered."
+      "hitLocations": {
+        "Forequarters": {
+          "ap": 1,
+          "max": 11
+        },
+        "Head": {
+          "ap": 1,
+          "max": 9
+        },
+        "Hindquarters": {
+          "ap": 1,
+          "max": 10
+        },
+        "Left Front Leg": {
+          "ap": 1,
+          "max": 8
+        },
+        "Left Hind Leg": {
+          "ap": 1,
+          "max": 9
+        },
+        "Right Front Leg": {
+          "ap": 1,
+          "max": 8
+        },
+        "Right Hind Leg": {
+          "ap": 1,
+          "max": 9
+        }
+      },
+      "hitPointsTotal": 20,
+      "movement": 12,
+      "name": "Riding Horse",
+      "notes": "Riding horse. Not trained for combat — will flee unless cornered.",
+      "species": "Riding Horse",
+      "strikeRank": 0
     }
   ],
+  "concept": "Noble merchant-duelist, negotiator with a sword",
   "cult": "Issaries",
+  "cultType": {
+    "blockedTypes": [],
+    "isHybrid": false,
+    "primary": "theist",
+    "types": [
+      "theist"
+    ]
+  },
+  "culturalSkills": {
+    "Athletics": 10,
+    "Brawn": 5,
+    "Commerce": 10,
+    "Endurance": 10,
+    "Evade": 15,
+    "Locale": 10,
+    "Perception": 15,
+    "Ride": 15,
+    "Willpower": 10
+  },
+  "culture": "Sartarite (Heortling)",
+  "devotionalPool": 0,
+  "equipment": [
+    {
+      "cost": 0,
+      "enc": 1,
+      "name": "Two sets of common undecorated clothes",
+      "quantity": 1
+    },
+    {
+      "cost": 0,
+      "enc": 0,
+      "name": "Transport: Beast of Burden",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Backpack",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Waterskin",
+      "quantity": 1
+    },
+    {
+      "cost": 14,
+      "enc": 2,
+      "name": "Rations (1 week)",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Bedroll",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 0,
+      "name": "Flint & Tinder",
+      "quantity": 1
+    }
+  ],
+  "family": "Ernaldori clan, Colymar Tribe",
+  "folkMagicSpells": [
+    "Glamour",
+    "Mobility",
+    "Protection"
+  ],
+  "gender": "Male",
+  "hitPoints": {},
+  "hobbySkillName": null,
+  "homeland": "Sartar",
   "miracles": [
     "Passage",
     "Path Watch",
     "Create Market"
   ],
-  "devotionalPool": 0,
+  "mysticismTalents": [],
+  "name": "Harmast Baranthos' Son",
+  "notes": "",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Love (Family)",
+      "value": 49
+    },
+    {
+      "custom": true,
+      "name": "Loyalty (Sartar)",
+      "value": 49
+    },
+    {
+      "custom": true,
+      "name": "Hate (Grey Dog clan)",
+      "value": 49
+    },
+    {
+      "custom": true,
+      "name": "Honor",
+      "value": 49
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Storm",
+    "secondary": "Harmony",
+    "tertiary": "Movement"
+  },
+  "schemaVersion": 1,
   "selectedProfessionalSkills": [
     "Commerce",
     "Courtesy",
     "Streetwise"
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 170,
+  "weapons": [
+    {
+      "ap": 4,
+      "damage": "1d6+1",
+      "hp": 8,
+      "name": "1H Axe",
+      "quantity": 1,
+      "reach": "M",
+      "size": "M",
+      "skill": 0
+    },
+    {
+      "ap": 4,
+      "damage": "1d3",
+      "hp": 9,
+      "name": "Orlanthi Round Shield",
+      "quantity": 1,
+      "reach": "S",
+      "size": "L",
+      "skill": 0
+    }
   ]
 }

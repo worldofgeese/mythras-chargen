@@ -363,19 +363,19 @@
     {
       "constant_name": "CULTURES_DATA",
       "artifact_class": "app_runtime",
-      "disposition": "migrate-in-this-plan",
+      "disposition": "governed-now",
       "source_files": [
         "references/aig-raw/cultures.json"
       ],
       "source_ids": [
         "aig"
       ],
-      "rationale": "AiG culture constants await U5/U8 verified extraction."
+      "rationale": "Inline AiG culture constants are governed by verified bounded extraction plus CSE combat-style authority."
     },
     {
       "constant_name": "CULTURE_BUILDS",
       "artifact_class": "app_runtime",
-      "disposition": "migrate-in-this-plan",
+      "disposition": "governed-now",
       "source_files": [
         "references/aig-raw/equipment-aig.json",
         "references/aig-raw/cultures.json"
@@ -383,19 +383,19 @@
       "source_ids": [
         "aig"
       ],
-      "rationale": "Culture builds await verified AiG rebuild."
+      "rationale": "Culture build constants are governed app-derived fixtures from verified AiG culture/equipment rows."
     },
     {
       "constant_name": "CULTURE_MAGIC_PROFILES",
       "artifact_class": "app_runtime",
-      "disposition": "migrate-in-this-plan",
+      "disposition": "governed-now",
       "source_files": [
         "references/aig-raw/culture-magic-profiles-aig.json"
       ],
       "source_ids": [
         "aig"
       ],
-      "rationale": "Magic profiles await verified AiG rebuild."
+      "rationale": "Culture magic profiles are governed by verified AiG culture/magic-overview evidence and Mythras Core magic references."
     },
     {
       "constant_name": "CAREERS_DATA",
@@ -409,7 +409,7 @@
     {
       "constant_name": "CULTS_DATA",
       "artifact_class": "app_runtime",
-      "disposition": "migrate-in-this-plan",
+      "disposition": "governed-now",
       "source_files": [
         "references/cults-raw/cults.json"
       ],
@@ -419,7 +419,7 @@
           "path": "references/cults-raw/praxian/waha.json"
         }
       ],
-      "rationale": "Cult constants await later cult/Waha provenance tightening."
+      "rationale": "Cult constants are governed as mixed authority: Waha is bounded-vision-verified and non-Waha rows are explicit legacy normalized exemptions."
     },
     {
       "constant_name": "CULTURE_CULT_MAP",
@@ -486,6 +486,32 @@
         "references/mythras-raw/combat-resolution.json"
       ],
       "rationale": "Base hit location table is classified for coverage."
+    },
+    {
+      "constant_name": "SOCIAL_CLASS_TABLES",
+      "artifact_class": "app_runtime",
+      "disposition": "governed-now",
+      "source_files": [
+        "references/mythras-raw/social-class.json"
+      ],
+      "source_ids": [
+        "mythras-core"
+      ],
+      "rationale": "Inline social class tables normalize Mythras Core social-class rows into roll ranges used by Step 12 and Play Mode."
+    },
+    {
+      "constant_name": "CULTURE_TYPE_MAPPING",
+      "artifact_class": "app_runtime",
+      "disposition": "governed-now",
+      "source_files": [
+        "references/mythras-raw/social-class.json",
+        "references/aig-raw/equipment-aig.json"
+      ],
+      "source_ids": [
+        "mythras-core",
+        "aig"
+      ],
+      "rationale": "Inline culture type mapping connects AiG cultures to Mythras Core social-class table categories for Step 12."
     },
     {
       "constant_name": "GLORANTHA_CULTURES_DATA",

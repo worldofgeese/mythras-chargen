@@ -1,351 +1,294 @@
 {
-  "name": "Ionara Grand-daughter of Thiralda",
-  "concept": "Grazelander priestess of the Earth-shaker, horse warrior",
-  "characteristics": {
-    "STR": 8,
-    "CON": 10,
-    "SIZ": 9,
-    "DEX": 11,
-    "INT": 12,
-    "POW": 14,
-    "CHA": 11
-  },
-  "charMethod": "point-buy",
+  "_disambiguationMap": {},
+  "age": 21,
+  "armor": [
+    {
+      "ap": 2,
+      "cost": 0,
+      "locations": "2 location(s)",
+      "name": "Leather/Bone Basic Armour"
+    }
+  ],
   "attributes": {
     "actionPoints": 2,
+    "damageModifier": "-1d2",
+    "encumbrance": {
+      "burdened": 17,
+      "noMovement": 32,
+      "overloaded": 25,
+      "unencumbered": 16
+    },
     "experienceModifier": 0,
+    "folkMagicBase": 55,
     "healingRate": 2,
+    "hitPoints": {
+      "Abdomen": 5,
+      "Chest": 6,
+      "Head": 4,
+      "Left Arm": 3,
+      "Left Leg": 4,
+      "Right Arm": 3,
+      "Right Leg": 4
+    },
+    "initiativeBonus": 11,
     "luckPoints": 3,
     "magicPoints": 14,
-    "initiativeBonus": 11,
-    "damageModifier": "-1d2",
-    "hitPoints": {
-      "Head": 4,
-      "Chest": 6,
-      "Abdomen": 5,
-      "Right Arm": 3,
-      "Left Arm": 3,
-      "Right Leg": 4,
-      "Left Leg": 4
-    },
-    "encumbrance": {
-      "unencumbered": 16,
-      "burdened": 17,
-      "overloaded": 25,
-      "noMovement": 32
-    },
+    "movementRate": 6,
     "runeAffinities": {
       "primary": 58,
       "secondary": 48,
       "tertiary": 38
-    },
-    "folkMagicBase": 55,
-    "movementRate": 6
+    }
   },
-  "culture": "Grazelander/Pure Horse",
-  "homeland": "Pure Horse People, Grazelands",
-  "culturalSkills": {
-    "Athletics": 5,
-    "Brawn": 0,
-    "Endurance": 10,
-    "Evade": 10,
-    "Locale": 10,
+  "background": "Ionara was born one of the Pure Horse People and is a skilled rider capable of sleeping in the saddle as well as fighting. Her grandmother Thiralda was also a priestess of Maran Gor, famed throughout the Grazelands. She fought the Lunar Empire across the Grazelands and at Pennel Ford, and now wanders Orlanthi lands with visible disdain for so-called civilization.",
+  "backgroundEvents": "",
+  "bonusSkills": {
+    "Combat Style (Grazelander Noble)": 15,
+    "Devotion (Maran Gor)": 15,
+    "Endurance": 15,
+    "Exhort": 15,
+    "Folk Magic": 15,
+    "Oratory": 15,
     "Perception": 15,
     "Ride": 15,
-    "Willpower": 15,
-    "Survival": 10,
-    "Healing": 10
+    "Survival": 15,
+    "Willpower": 15
   },
-  "runeAffinities": {
-    "primary": "Earth",
-    "secondary": "Death",
-    "tertiary": "Disorder"
-  },
-  "folkMagicSpells": [
-    "Bludgeon",
-    "Disruption",
-    "Heal"
-  ],
-  "passions": [
-    {
-      "name": "Devotion (Maran Gor)",
-      "value": 55,
-      "custom": true
-    },
-    {
-      "name": "Hate (Lunar Empire)",
-      "value": 55,
-      "custom": true
-    },
-    {
-      "name": "Loyalty (Feathered Horse Queen)",
-      "value": 55,
-      "custom": true
-    }
-  ],
-  "age": 21,
-  "gender": "Female",
-  "family": "Pure Horse People, Grazelands",
-  "backgroundEvents": "",
+  "boundSpiritSlots": 0,
+  "boundSpirits": [],
   "career": "Priest",
-  "careerSkills": {
-    "Endurance": 10,
-    "Willpower": 15,
-    "Combat Style (Grazelander Noble)": 10,
-    "Devotion (Maran Gor)": 15,
-    "Exhort": 15,
-    "Oratory": 15,
-    "Folk Magic": 15,
-    "Ride": 5
-  },
   "careerFolkMagic": [
     "Vigour",
     "Demoralise"
   ],
-  "bonusSkills": {
-    "Ride": 15,
-    "Perception": 15,
-    "Willpower": 15,
+  "careerSkills": {
+    "Combat Style (Grazelander Noble)": 10,
     "Devotion (Maran Gor)": 15,
+    "Endurance": 10,
     "Exhort": 15,
-    "Oratory": 15,
     "Folk Magic": 15,
-    "Endurance": 15,
-    "Combat Style (Grazelander Noble)": 15,
-    "Survival": 15
+    "Oratory": 15,
+    "Ride": 5,
+    "Willpower": 15
   },
-  "hobbySkillName": null,
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 1,
-  "startingMoney": 270,
-  "equipment": [
-    {
-      "name": "Two sets of common undecorated clothes",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 0
-    },
-    {
-      "name": "Transport: Riding horse (Teza)",
-      "enc": 0,
-      "quantity": 1,
-      "cost": 0
-    },
-    {
-      "name": "Backpack",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Waterskin",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Rations (1 week)",
-      "enc": 2,
-      "quantity": 1,
-      "cost": 14
-    },
-    {
-      "name": "Bedroll",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Flint & Tinder",
-      "enc": 0,
-      "quantity": 1,
-      "cost": 5
-    }
-  ],
-  "weapons": [
-    {
-      "name": "Mace",
-      "damage": "1d8",
-      "size": "M",
-      "reach": "S",
-      "ap": 6,
-      "hp": 6,
-      "skill": 0,
-      "quantity": 1
-    },
-    {
-      "name": "Small Shield",
-      "damage": "1d3",
-      "size": "M",
-      "reach": "S",
-      "ap": 4,
-      "hp": 8,
-      "skill": 0,
-      "quantity": 1
-    },
-    {
-      "name": "Lance",
-      "damage": "1d10+1",
-      "size": "H",
-      "reach": "VL",
-      "ap": 4,
-      "hp": 10,
-      "skill": 0,
-      "quantity": 1
-    },
-    {
-      "name": "Dagger",
-      "damage": "1d4+1",
-      "size": "S",
-      "reach": "S",
-      "ap": 6,
-      "hp": 8,
-      "skill": 0,
-      "quantity": 1
-    }
-  ],
-  "armor": [
-    {
-      "name": "Leather/Bone Basic Armour",
-      "ap": 2,
-      "locations": "2 location(s)",
-      "cost": 0
-    }
-  ],
+  "charMethod": "point-buy",
+  "characteristics": {
+    "CHA": 11,
+    "CON": 10,
+    "DEX": 11,
+    "INT": 12,
+    "POW": 14,
+    "SIZ": 9,
+    "STR": 8
+  },
   "combatStyles": [
     {
       "name": "Grazelander Noble",
-      "weapons": [
-        "Mace",
-        "Small Shield",
-        "Lance",
-        "Dagger"
-      ],
+      "notes": "Pregen custom style for Pure Horse/Grazelander mounted priestess",
+      "skill": 0,
       "traits": [
         "Intimidating Scream",
         "Mounted Combat",
         "Shield Wall"
       ],
-      "skill": 0,
-      "notes": "Pregen custom style for Pure Horse/Grazelander mounted priestess"
+      "weapons": [
+        "Mace",
+        "Small Shield",
+        "Lance",
+        "Dagger"
+      ]
     }
   ],
-  "notes": "Pure Horse People priestess of Maran Gor; granddaughter of Thiralda. Fought Lunars across the Grazelands and Pennel Ford; a direct, truth-loving wanderer in Orlanthi lands.",
-  "background": "Ionara was born one of the Pure Horse People and is a skilled rider capable of sleeping in the saddle as well as fighting. Her grandmother Thiralda was also a priestess of Maran Gor, famed throughout the Grazelands. She fought the Lunar Empire across the Grazelands and at Pennel Ford, and now wanders Orlanthi lands with visible disdain for so-called civilization.",
+  "companions": [
+    {
+      "armor": 1,
+      "attacks": [
+        {
+          "damage": "1D8+3D6",
+          "name": "Bite",
+          "notes": "",
+          "skill": 25
+        },
+        {
+          "damage": "1D6+3D6",
+          "name": "Kick",
+          "notes": "",
+          "skill": 25
+        },
+        {
+          "damage": "2D6+3D6",
+          "name": "Rear & Plunge",
+          "notes": "",
+          "skill": 25
+        },
+        {
+          "damage": "4D6",
+          "name": "Trample",
+          "notes": "Against downed foe only",
+          "skill": 25
+        }
+      ],
+      "characteristics": {
+        "CON": 17,
+        "DEX": 20,
+        "POW": 17,
+        "SIZ": 30,
+        "STR": 30
+      },
+      "damageModifier": "+3D6",
+      "healingRate": 3,
+      "hitLocations": {
+        "Forequarters": {
+          "ap": 1,
+          "current": 9,
+          "max": 9
+        },
+        "Head": {
+          "ap": 1,
+          "current": 7,
+          "max": 7
+        },
+        "Hindquarters": {
+          "ap": 1,
+          "current": 9,
+          "max": 9
+        },
+        "Left Front Leg": {
+          "ap": 1,
+          "current": 7,
+          "max": 7
+        },
+        "Left Hind Leg": {
+          "ap": 1,
+          "current": 7,
+          "max": 7
+        },
+        "Right Front Leg": {
+          "ap": 1,
+          "current": 7,
+          "max": 7
+        },
+        "Right Hind Leg": {
+          "ap": 1,
+          "current": 7,
+          "max": 7
+        }
+      },
+      "hitPointsTotal": 23,
+      "movement": 12,
+      "name": "Teza",
+      "notes": "Riding horse. Normally only attacks if life threatened. Owner attacks OR horse attacks — not both per round. Use mount's +3D6 damage bonus for lance charges.",
+      "species": "Riding Horse",
+      "strikeRank": 0
+    }
+  ],
+  "concept": "Grazelander priestess of the Earth-shaker, horse warrior",
+  "cult": "Maran Gor",
+  "cultType": {
+    "blockedTypes": [],
+    "isHybrid": false,
+    "primary": "theist",
+    "types": [
+      "theist"
+    ]
+  },
+  "culturalSkills": {
+    "Athletics": 5,
+    "Brawn": 0,
+    "Endurance": 10,
+    "Evade": 10,
+    "Healing": 10,
+    "Locale": 10,
+    "Perception": 15,
+    "Ride": 15,
+    "Survival": 10,
+    "Willpower": 15
+  },
+  "culture": "Grazelander/Pure Horse",
+  "devotionalPool": 7,
+  "equipment": [
+    {
+      "cost": 0,
+      "enc": 1,
+      "name": "Two sets of common undecorated clothes",
+      "quantity": 1
+    },
+    {
+      "cost": 0,
+      "enc": 0,
+      "name": "Transport: Riding horse (Teza)",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Backpack",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Waterskin",
+      "quantity": 1
+    },
+    {
+      "cost": 14,
+      "enc": 2,
+      "name": "Rations (1 week)",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Bedroll",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 0,
+      "name": "Flint & Tinder",
+      "quantity": 1
+    }
+  ],
+  "family": "Pure Horse People, Grazelands",
+  "folkMagicSpells": [
+    "Bludgeon",
+    "Disruption",
+    "Heal"
+  ],
+  "gender": "Female",
   "hitPoints": {
-    "Head": {
-      "current": 4,
-      "max": 4
+    "Abdomen": {
+      "current": 5,
+      "max": 5
     },
     "Chest": {
       "current": 6,
       "max": 6
     },
-    "Abdomen": {
-      "current": 5,
-      "max": 5
+    "Head": {
+      "current": 4,
+      "max": 4
     },
-    "Right Arm": {
+    "Left Arm": {
       "current": 3,
       "max": 3
     },
-    "Left Arm": {
+    "Left Leg": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Arm": {
       "current": 3,
       "max": 3
     },
     "Right Leg": {
       "current": 4,
       "max": 4
-    },
-    "Left Leg": {
-      "current": 4,
-      "max": 4
     }
   },
-  "companions": [
-    {
-      "name": "Teza",
-      "species": "Riding Horse",
-      "characteristics": {
-        "STR": 30,
-        "CON": 17,
-        "SIZ": 30,
-        "DEX": 20,
-        "POW": 17
-      },
-      "hitLocations": {
-        "Right Hind Leg": {
-          "current": 7,
-          "max": 7,
-          "ap": 1
-        },
-        "Left Hind Leg": {
-          "current": 7,
-          "max": 7,
-          "ap": 1
-        },
-        "Hindquarters": {
-          "current": 9,
-          "max": 9,
-          "ap": 1
-        },
-        "Forequarters": {
-          "current": 9,
-          "max": 9,
-          "ap": 1
-        },
-        "Right Front Leg": {
-          "current": 7,
-          "max": 7,
-          "ap": 1
-        },
-        "Left Front Leg": {
-          "current": 7,
-          "max": 7,
-          "ap": 1
-        },
-        "Head": {
-          "current": 7,
-          "max": 7,
-          "ap": 1
-        }
-      },
-      "attacks": [
-        {
-          "name": "Bite",
-          "skill": 25,
-          "damage": "1D8+3D6",
-          "notes": ""
-        },
-        {
-          "name": "Kick",
-          "skill": 25,
-          "damage": "1D6+3D6",
-          "notes": ""
-        },
-        {
-          "name": "Rear & Plunge",
-          "skill": 25,
-          "damage": "2D6+3D6",
-          "notes": ""
-        },
-        {
-          "name": "Trample",
-          "skill": 25,
-          "damage": "4D6",
-          "notes": "Against downed foe only"
-        }
-      ],
-      "armor": 1,
-      "movement": 12,
-      "damageModifier": "+3D6",
-      "hitPointsTotal": 23,
-      "healingRate": 3,
-      "strikeRank": 0,
-      "notes": "Riding horse. Normally only attacks if life threatened. Owner attacks OR horse attacks — not both per round. Use mount's +3D6 damage bonus for lance charges."
-    }
-  ],
-  "cult": "Maran Gor",
+  "hobbySkillName": null,
+  "homeland": "Pure Horse People, Grazelands",
   "miracles": [
     "Extension",
     "Find (Specific Thing)",
@@ -355,10 +298,82 @@
     "Shake Earth",
     "Summon Gnome"
   ],
-  "devotionalPool": 7,
+  "mysticismTalents": [],
+  "name": "Ionara Grand-daughter of Thiralda",
+  "notes": "Pure Horse People priestess of Maran Gor; granddaughter of Thiralda. Fought Lunars across the Grazelands and Pennel Ford; a direct, truth-loving wanderer in Orlanthi lands.",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Devotion (Maran Gor)",
+      "value": 55
+    },
+    {
+      "custom": true,
+      "name": "Hate (Lunar Empire)",
+      "value": 55
+    },
+    {
+      "custom": true,
+      "name": "Loyalty (Feathered Horse Queen)",
+      "value": 55
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Earth",
+    "secondary": "Death",
+    "tertiary": "Disorder"
+  },
+  "schemaVersion": 1,
   "selectedProfessionalSkills": [
     "Devotion (Maran Gor)",
     "Exhort",
     "Oratory"
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 270,
+  "weapons": [
+    {
+      "ap": 6,
+      "damage": "1d8",
+      "hp": 6,
+      "name": "Mace",
+      "quantity": 1,
+      "reach": "S",
+      "size": "M",
+      "skill": 0
+    },
+    {
+      "ap": 4,
+      "damage": "1d3",
+      "hp": 8,
+      "name": "Small Shield",
+      "quantity": 1,
+      "reach": "S",
+      "size": "M",
+      "skill": 0
+    },
+    {
+      "ap": 4,
+      "damage": "1d10+1",
+      "hp": 10,
+      "name": "Lance",
+      "quantity": 1,
+      "reach": "VL",
+      "size": "H",
+      "skill": 0
+    },
+    {
+      "ap": 6,
+      "damage": "1d4+1",
+      "hp": 8,
+      "name": "Dagger",
+      "quantity": 1,
+      "reach": "S",
+      "size": "S",
+      "skill": 0
+    }
   ]
 }

@@ -58,6 +58,7 @@ When orchestrating parallel or serial subagents, the parent agent must pass the 
 - Include required proof gates for the affected files: `node test-chargen.js`, `node test-agent-api.mjs` after magic/build changes, `./scripts/ingest-cults.py --validate` after cult/reference data changes, `decapod validate`, and human-style `agent-browser` QA after `index.html` changes.
 - Include Copyparty sync and verification rules whenever a subagent may touch mirrored files.
 - If a subagent finds bugs, bad data, source drift, or other unwanted behavior, create or update a Beads issue with the full finding context and fix it in-flight unless it is explicitly blocked or out of scope.
+- Require every subagent completion report to include the Bead ID, branch/worktree, commit SHA if one was created, files changed, proof gates run with pass/fail/skipped status, screenshots or public URLs when applicable, degraded checks, and linked follow-up Beads for unresolved work.
 - Treat subagent work as provisional until the orchestrator verifies the diff, proof gates, Beads state, and Copyparty obligations.
 
 #### Architecture decisions and ADRs
@@ -121,6 +122,8 @@ Verify with `curl -fsSL https://copyparty.hound-celsius.ts.net/00-START-HERE.htm
 All game data must trace to a source PDF with page citation. Flow: `PDF -> references/*.json -> inline constant -> UI`. Never edit inline game-data constants without the matching reference JSON.
 
 Source hierarchy: AiG for Gloranthan cultures/folk/rune magic; Mythras Core 3rd Printing 2018 for base rules, animism, sorcery, mysticism; Notes from Pavis one-pagers for cults; Bird in Hand/Monster Island for spirits; house rules for rune casting, devotional pool, and ranks.
+
+For rules, source-data, and player-facing content review, define the source packet before judging or editing: source IDs, PDF/page/revision evidence, target artifacts, scope boundaries, and house-rule boundaries. Treat false rules, unsupported source claims, hidden house rules, and player-facing contradictions as blocking findings; track reference-only or intentionally unpromoted source material with explicit Beads instead of implying app support.
 
 #### Quality gates and acceptance
 

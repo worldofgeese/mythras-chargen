@@ -1,0 +1,55 @@
+{
+  "artifact_id": "aig-page-0026-extraction-copilot-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 26,
+  "printed_page_label": "25",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0026.png",
+    "image_sha256": "5b96353d814d2901349125958c293e003692052cd2669a189a5a215fe7dcb4f4",
+    "dimensions": {
+      "width": 1656,
+      "height": 2159
+    }
+  },
+  "tool_identity": "Claude Opus 4.7 vision extraction subagents via GitHub Copilot CLI",
+  "schema_version": 1,
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-culture-extract-e",
+  "blocks": [
+    {
+      "block_id": "aig-p026-b001",
+      "block_type": "paragraph",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Gloranthan Combat Styles timing rules.",
+      "excerpt_hash": "86b66cec960e0499994fd1b714f46128c2098710ea4cc6beac3e5df6c4135aea",
+      "facts": {
+        "verified": true
+      }
+    },
+    {
+      "block_id": "aig-p026-b002",
+      "block_type": "heading",
+      "reading_order": 2,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Balazaring Culture begins.",
+      "excerpt_hash": "6dde9a4ac0074c4d5912bfb122f2181156d5772801a0d9a89ba31f5fbbec7126",
+      "facts": {
+        "verified": true
+      }
+    }
+  ]
+}

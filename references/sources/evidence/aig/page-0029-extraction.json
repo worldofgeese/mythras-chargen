@@ -1,0 +1,113 @@
+{
+  "artifact_id": "aig-page-0029-extraction-copilot-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 29,
+  "printed_page_label": "28",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0029.png",
+    "image_sha256": "c813bc3d3c808af7d9557f1e1bc8ffae88c1c31b2992b4e45b34bd4557193064",
+    "dimensions": {
+      "width": 1662,
+      "height": 2161
+    }
+  },
+  "tool_identity": "Claude Opus 4.7 vision extraction subagents via GitHub Copilot CLI",
+  "schema_version": 1,
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-culture-extract-f",
+  "blocks": [
+    {
+      "block_id": "aig-p029-b001",
+      "block_type": "sidebar",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Esrolian Social Class table.",
+      "excerpt_hash": "b5640a0de820a53c103e334ec60026f7ade98c4316d7ed4b9ca407e01b544de6",
+      "facts": {
+        "verified": true
+      }
+    },
+    {
+      "block_id": "aig-p029-b002",
+      "block_type": "paragraph",
+      "reading_order": 2,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Esrolian Magic mixes Divine and Spirit.",
+      "excerpt_hash": "526b095b54d83fb726acad5ac996195945bf96a1e521a87a5b41e58c22965a1f",
+      "facts": {
+        "verified": true
+      }
+    },
+    {
+      "block_id": "aig-p029-b003",
+      "block_type": "stat_block",
+      "reading_order": 3,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Esrolian culture stats.",
+      "excerpt_hash": "41ace896774281f744d60244e9106d7f2b4467753126f3b345a75e8e9965b744",
+      "facts": {
+        "verified": true,
+        "app_fields": {
+          "name": "Esrolian",
+          "starting_money": "4d6x15",
+          "passions": [
+            {
+              "type": "Loyalty",
+              "focus": "Clan",
+              "base_value": "POW+CHA+30%"
+            },
+            {
+              "type": "Loyalty",
+              "focus": "Grandmother",
+              "base_value": "POW+CHA+50%"
+            },
+            {
+              "type": "Loyalty",
+              "focus": "Queen",
+              "base_value": "POW+CHA+25%"
+            }
+          ],
+          "combat_style_ids": [
+            "cse:esrolian:citizen-legionary",
+            "cse:esrolian:city-state-phalangite",
+            "cse:esrolian:clan-protector"
+          ]
+        }
+      }
+    },
+    {
+      "block_id": "aig-p029-b004",
+      "block_type": "heading",
+      "reading_order": 4,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "God Forgot Culture begins.",
+      "excerpt_hash": "d3402f364db43af203940a999ac3bd241854a8eb2489861aec3dc36740e939a1",
+      "facts": {
+        "verified": true
+      }
+    }
+  ]
+}

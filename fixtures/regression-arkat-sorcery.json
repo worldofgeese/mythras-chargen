@@ -1,44 +1,123 @@
 {
-  "name": "Harmast the Grey",
-  "concept": "Regression test: Pure sorcery cult (Arkat). Tests sorcery picker renders in #sorcery-picker, 3-spell limit enforced, picker survives miracle picker having no miracles to show",
-  "characteristics": {"STR": 10, "CON": 11, "SIZ": 12, "DEX": 11, "INT": 18, "POW": 13, "CHA": 10},
-  "charMethod": "points",
-  "culture": "Sartarite (Heortling)",
-  "homeland": "Sartar",
-  "culturalSkills": {"Customs": 15, "Insight": 15, "Native Tongue": 15, "Locale": 10, "Willpower": 15, "Influence": 15, "Sing": 15},
-  "runeAffinities": {"primary": "Law", "secondary": "Truth", "tertiary": "Stasis"},
-  "folkMagicSpells": ["Coordination", "Detect Magic", "Light"],
-  "passions": [
-    {"name": "Hate (Chaos)", "value": 65},
-    {"name": "Loyalty (Arkat)", "value": 23}
-  ],
+  "_disambiguationMap": {},
   "age": 28,
-  "gender": "male",
-  "family": "Orphaned, raised by temple",
-  "backgroundEvents": [],
-  "career": "Scholar",
-  "careerSkills": {"Invocation (Arkat)": 15, "Lore (Cult)": 15, "Research": 15, "Literacy": 15, "Bureaucracy": 15, "Insight": 10, "Willpower": 15},
-  "careerFolkMagic": ["Detect Magic", "Disruption"],
-  "selectedProfessionalSkills": ["Invocation (Cult, School or Grimoire)", "Literacy", "Research"],
-  "bonusSkills": {"Invocation (Arkat)": 15, "Lore (Cult)": 10, "Willpower": 10, "Insight": 5},
-  "hobbySkillName": "",
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 0,
-  "startingMoney": 60,
-  "equipment": ["Grimoire (3 spells inscribed)", "Ink and quill", "Parchment (10 sheets)"],
-  "weapons": ["Staff"],
   "armor": [],
-  "combatStyles": [{"name": "Scholar's Defence", "weapons": ["Staff", "Dagger"]}],
-  "notes": "REGRESSION: Pure sorcery cult. #miracle-picker should be hidden (no miracles). #sorcery-picker should show with 3 spells selectable. Tests: toggleSorcerySpell preserves scroll, 3-spell max enforced, picker visible.",
+  "attributes": {},
   "background": "",
-  "hitPoints": {},
-  "companions": [],
-  "cult": "Arkat",
-  "cultType": {"primary": "sorcery", "types": ["sorcery"], "isHybrid": false},
-  "miracles": [],
-  "boundSpirits": [],
-  "devotionalPool": 0,
+  "backgroundEvents": "",
+  "bonusSkills": {
+    "Insight": 5,
+    "Invocation (Arkat)": 15,
+    "Lore (Cult)": 10,
+    "Willpower": 10
+  },
   "boundSpiritSlots": 0,
-  "sorcerySpells": ["Animate (Substance)", "Diminish (Characteristic)", "Protective Ward"],
-  "sorceryResource": 13
+  "boundSpirits": [],
+  "career": "Sorcerer",
+  "careerFolkMagic": [
+    "Detect Magic",
+    "Disruption"
+  ],
+  "careerSkills": {
+    "Insight": 10,
+    "Invocation (Arkat)": 15,
+    "Literacy": 15,
+    "Lore (Cult)": 15,
+    "Research": 15,
+    "Shaping": 15,
+    "Willpower": 15
+  },
+  "charMethod": "points",
+  "characteristics": {
+    "CHA": 10,
+    "CON": 11,
+    "DEX": 11,
+    "INT": 18,
+    "POW": 13,
+    "SIZ": 12,
+    "STR": 10
+  },
+  "combatStyles": [
+    {
+      "name": "Scholar's Defence",
+      "weapons": [
+        "Staff",
+        "Dagger"
+      ]
+    }
+  ],
+  "companions": [],
+  "concept": "Regression test: Pure sorcery cult (Arkat). Tests sorcery picker renders in #sorcery-picker, 3-spell limit enforced, picker survives miracle picker having no miracles to show",
+  "cult": "Arkat",
+  "cultType": {
+    "blockedTypes": [],
+    "isHybrid": false,
+    "primary": "sorcery",
+    "types": [
+      "sorcery"
+    ]
+  },
+  "culturalSkills": {
+    "Customs": 15,
+    "Influence": 15,
+    "Insight": 15,
+    "Locale": 10,
+    "Native Tongue": 15,
+    "Sing": 15,
+    "Willpower": 15
+  },
+  "culture": "Sartarite (Heortling)",
+  "devotionalPool": 0,
+  "equipment": [
+    "Grimoire (3 spells inscribed)",
+    "Ink and quill",
+    "Parchment (10 sheets)"
+  ],
+  "family": "Orphaned, raised by temple",
+  "folkMagicSpells": [
+    "Coordination",
+    "Detect Magic",
+    "Light"
+  ],
+  "gender": "male",
+  "hitPoints": {},
+  "hobbySkillName": null,
+  "homeland": "Sartar",
+  "miracles": [],
+  "mysticismTalents": [],
+  "name": "Harmast the Grey",
+  "notes": "REGRESSION: Pure sorcery cult. #miracle-picker should be hidden (no miracles). #sorcery-picker should show with 3 spells selectable. Tests: toggleSorcerySpell preserves scroll, 3-spell max enforced, picker visible.",
+  "passions": [
+    {
+      "name": "Hate (Chaos)",
+      "value": 65
+    },
+    {
+      "name": "Loyalty (Arkat)",
+      "value": 23
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Law",
+    "secondary": "Truth",
+    "tertiary": "Stasis"
+  },
+  "schemaVersion": 1,
+  "selectedProfessionalSkills": [
+    "Invocation (Arkat)",
+    "Shaping",
+    "Literacy"
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 13,
+  "sorcerySpells": [
+    "Animate (Substance)",
+    "Diminish (Characteristic)",
+    "Protective Ward"
+  ],
+  "startingMoney": 60,
+  "weapons": [
+    "Staff"
+  ]
 }

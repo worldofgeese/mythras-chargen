@@ -1,0 +1,179 @@
+{
+  "_disambiguationMap": {
+    "career:Invocation (Cult, School or Grimoire)": "Invocation (Zzistori School)",
+    "career:Lore (any)": "Lore (Sorcery)"
+  },
+  "age": 21,
+  "armor": [],
+  "attributes": {
+    "actionPoints": 2,
+    "damageModifier": "-1d2",
+    "encumbrance": {
+      "burdened": 17,
+      "noMovement": 32,
+      "overloaded": 25,
+      "unencumbered": 16
+    },
+    "experienceModifier": 0,
+    "folkMagicBase": 53,
+    "healingRate": 2,
+    "hitPoints": {
+      "Abdomen": 5,
+      "Chest": 6,
+      "Head": 4,
+      "Left Arm": 3,
+      "Left Leg": 4,
+      "Right Arm": 3,
+      "Right Leg": 4
+    },
+    "initiativeBonus": 12,
+    "luckPoints": 3,
+    "magicPoints": 15,
+    "movementRate": 6,
+    "runeAffinities": {
+      "primary": 60,
+      "secondary": 50,
+      "tertiary": 40
+    }
+  },
+  "background": "",
+  "backgroundEvents": "",
+  "bonusSkills": {
+    "Athletics": 0,
+    "Customs": 15,
+    "Deceit": 15,
+    "Endurance": 0,
+    "First Aid": 0,
+    "Influence": 15,
+    "Insight": 15,
+    "Invocation (Zzistori School)": 15,
+    "Locale": 15,
+    "Lore (Sorcery)": 15,
+    "Perception": 15,
+    "Shaping": 15,
+    "Willpower": 15
+  },
+  "boundSpiritSlots": 0,
+  "boundSpirits": [],
+  "career": "Sorcerer",
+  "careerFolkMagic": [
+    "Appraise",
+    "Befuddle"
+  ],
+  "careerSkills": {
+    "Customs": 10,
+    "Deceit": 10,
+    "Influence": 10,
+    "Insight": 10,
+    "Invocation (Zzistori School)": 10,
+    "Locale": 10,
+    "Lore (Sorcery)": 10,
+    "Perception": 10,
+    "Shaping": 10,
+    "Willpower": 10
+  },
+  "charMethod": "point-buy",
+  "characteristics": {
+    "CHA": 8,
+    "CON": 10,
+    "DEX": 9,
+    "INT": 15,
+    "POW": 15,
+    "SIZ": 10,
+    "STR": 8
+  },
+  "combatStyles": [],
+  "companions": [],
+  "concept": "God Forgot Zzistori sorcerer with source-backed Sorcery",
+  "cult": null,
+  "cultType": null,
+  "culturalSkills": {
+    "Athletics": 10,
+    "Endurance": 10,
+    "First Aid": 15,
+    "Influence": 10,
+    "Insight": 10,
+    "Locale": 15,
+    "Perception": 15,
+    "Willpower": 15
+  },
+  "culture": "God Forgot",
+  "devotionalPool": 0,
+  "equipment": [],
+  "family": "Zzistori school cell",
+  "folkMagicSpells": [
+    "Avert",
+    "Calm",
+    "Calculate"
+  ],
+  "gender": "Male",
+  "hitPoints": {
+    "Abdomen": {
+      "current": 5,
+      "max": 5
+    },
+    "Chest": {
+      "current": 6,
+      "max": 6
+    },
+    "Head": {
+      "current": 4,
+      "max": 4
+    },
+    "Left Arm": {
+      "current": 3,
+      "max": 3
+    },
+    "Left Leg": {
+      "current": 4,
+      "max": 4
+    },
+    "Right Arm": {
+      "current": 3,
+      "max": 3
+    },
+    "Right Leg": {
+      "current": 4,
+      "max": 4
+    }
+  },
+  "hobbySkillName": null,
+  "homeland": "God Forgot",
+  "miracles": [],
+  "mysticismTalents": [],
+  "name": "Talor Zzistori Eye",
+  "notes": "Fixture regenerated through the browser runtime for higher-magic provider coverage.",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Loyalty (Zzistori School)",
+      "value": 47
+    },
+    {
+      "custom": true,
+      "name": "Love (Knowledge)",
+      "value": 47
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Law",
+    "secondary": "Truth",
+    "tertiary": "Stasis"
+  },
+  "schemaVersion": 1,
+  "selectedProfessionalSkills": [
+    "Invocation (Zzistori School)",
+    "Shaping",
+    "Lore (Sorcery)"
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 15,
+  "sorcerySpells": [
+    "Holdfast",
+    "Animate (Substance)",
+    "Project (Sense)"
+  ],
+  "startingMoney": 180,
+  "weapons": []
+}

@@ -1,5 +1,5 @@
 {
-  "artifact_id": "aig-page-0031-extraction-opus-2026-05-22",
+  "artifact_id": "aig-page-0031-extraction-copilot-2026-05-23",
   "artifact_kind": "extraction",
   "workflow_id": "vision-page-workflow.v1",
   "source_id": "aig",
@@ -14,27 +14,25 @@
       "height": 2153
     }
   },
-  "extractor_prompt_id": "vision-extract-bounded-page.v1",
-  "extractor_run_id": "aig-magic-access-extract-opus-2026-05-22",
-  "tool_identity": "Claude Opus 4.7 via GitHub Copilot CLI vision subagent",
+  "tool_identity": "Claude Opus 4.7 vision extraction subagents via GitHub Copilot CLI",
   "schema_version": 1,
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-culture-extract-f",
   "blocks": [
     {
       "block_id": "aig-p031-b001",
       "block_type": "sidebar",
       "reading_order": 1,
       "region": {
-        "x": 0.06,
-        "y": 0.1,
-        "w": 0.4,
-        "h": 0.3
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
       },
-      "bounded_excerpt": "God Forgot sidebar: insular atheist culture; sorcery privileged.",
+      "bounded_excerpt": "God Forgotten Characters sidebar.",
+      "excerpt_hash": "c8e053defb22648392f1621e60da46ff8a96bf1668d991a930bbcb8728362274",
       "facts": {
-        "section_topic": "god_forgotten_characters_sidebar",
-        "atheism": true,
-        "preferred_magic": "sorcery",
-        "other_magic_lesser": true
+        "verified": true
       }
     },
     {
@@ -42,14 +40,15 @@
       "block_type": "heading",
       "reading_order": 2,
       "region": {
-        "x": 0.06,
-        "y": 0.49,
-        "w": 0.1,
-        "h": 0.025
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
       },
-      "bounded_excerpt": "MAGIC",
+      "bounded_excerpt": "MAGIC.",
+      "excerpt_hash": "2b486bf40e634bbf97435db20bc7bf2ec7940120fefbdf82135c0ccb2fdfb91a",
       "facts": {
-        "section_topic": "god_forgotten_magic"
+        "verified": true
       }
     },
     {
@@ -57,54 +56,95 @@
       "block_type": "paragraph",
       "reading_order": 3,
       "region": {
-        "x": 0.06,
-        "y": 0.51,
-        "w": 0.41,
-        "h": 0.18
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
       },
-      "bounded_excerpt": "God Forgotten magic: Zzistori exclusively practice sorcery; Rune unavailable; Spirit dismissed; Folk as diluted sorcery.",
+      "bounded_excerpt": "God Forgotten sorcery and magic limits.",
+      "excerpt_hash": "10aa29c03855a77caa8486f86d8de3f3e09744bbf149bd594b1ca11a2c7b798f",
       "facts": {
-        "sorcery_caste": "Zzistori",
-        "rune_magic_available": false,
-        "spirit_magic_practised": false,
-        "folk_magic_all_castes": true
+        "verified": true
       }
     },
     {
       "block_id": "aig-p031-b004",
-      "block_type": "table",
+      "block_type": "stat_block",
       "reading_order": 4,
       "region": {
-        "x": 0.5,
-        "y": 0.1,
-        "w": 0.45,
-        "h": 0.32
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
       },
-      "bounded_excerpt": "Caste/career: Zzistori Sorcerer. Folk samples: Alarm, Avert, Heal, Preserve, Protection.",
+      "bounded_excerpt": "God Forgot careers by caste.",
+      "excerpt_hash": "15ee6411d6afbcf6faafa33111bd5e5b6c601162782f164c62a789a7be749608",
       "facts": {
-        "caste_to_career": {
-          "Zzistori": [
-            "Sorcerer"
-          ]
-        },
-        "folk_magic_sample_count": 5
+        "verified": true
       }
     },
     {
       "block_id": "aig-p031-b005",
-      "block_type": "heading",
+      "block_type": "stat_block",
       "reading_order": 5,
       "region": {
-        "x": 0.5,
-        "y": 0.55,
-        "w": 0.4,
-        "h": 0.04
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
       },
-      "bounded_excerpt": "Lunar Heartland section begins.",
+      "bounded_excerpt": "God Forgot culture stats.",
+      "excerpt_hash": "02401509fa459e1e9ccb395f54a3c37b79de6bfe5ca85828a7902bde758e99a4",
       "facts": {
-        "section_topic": "lunar_heartland_culture_start"
+        "verified": true,
+        "app_fields": {
+          "name": "God Forgot",
+          "starting_money": "4d6x15",
+          "passions": [
+            {
+              "type": "Loyalty",
+              "focus": "Caste",
+              "formula": "formula not printed"
+            },
+            {
+              "type": "Despise",
+              "focus": "Gods",
+              "formula": "formula not printed"
+            },
+            {
+              "type": "Hate",
+              "focus": "Outsiders",
+              "formula": "formula not printed"
+            },
+            {
+              "type": "Suffer",
+              "focus": "Willingly",
+              "formula": "formula not printed"
+            }
+          ],
+          "combat_style_ids": [
+            "cse:god-forgot:holar-militia",
+            "cse:god-forgot:talar-defensive-school",
+            "cse:god-forgot:god-forgotten-holari"
+          ]
+        }
+      }
+    },
+    {
+      "block_id": "aig-p031-b006",
+      "block_type": "heading",
+      "reading_order": 6,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "Lunar Heartland Culture begins.",
+      "excerpt_hash": "fca1fa0c1ab20607d7490fbc651cd8039a9993b30d9190fd95242272b2b815a0",
+      "facts": {
+        "verified": true
       }
     }
-  ],
-  "page_boundary_notes": "God Forgot magic content is on this page; next page is Lunar Heartland continuation."
+  ]
 }

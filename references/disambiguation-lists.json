@@ -22,7 +22,7 @@
     "Lore": {
       "description": "Common Lore specializations for Lore (any) resolution",
       "source": "Mythras Core p.49 + Adventures in Glorantha cultural context",
-      "options": ["Alchemy", "Animals", "Astronomy", "Cult", "Earth", "Farming", "Herding", "History", "Human", "Minerals", "Military History", "Plants", "Regional", "Sea", "Strategy and Tactics", "World"]
+      "options": ["Alchemy", "Animals", "Astronomy", "Balazar", "Cult", "Dragon Pass", "Earth", "Esrolia", "Farming", "God Forgot", "Herding", "History", "Human", "Lunar Heartlands", "Minerals", "Military History", "Plants", "Prax", "Sartar", "Sea", "Strategy and Tactics", "Tarsh", "Telmori Wilds", "World"]
     },
     "Art": {
       "description": "Common Art specializations for Art (any) resolution",

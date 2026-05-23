@@ -1,0 +1,55 @@
+{
+  "artifact_id": "aig-page-0030-extraction-copilot-2026-05-23",
+  "artifact_kind": "extraction",
+  "workflow_id": "vision-page-workflow.v1",
+  "source_id": "aig",
+  "source_revision_id": "aig:copyparty-sources-books-adventures-in-glorantha-gencon-preview-pdf:0edc1e549c56:2026-05-22",
+  "pdf_page": 30,
+  "printed_page_label": "29",
+  "rendered_image": {
+    "cache_path": ".cache/source-pages/aig/page-0030.png",
+    "image_sha256": "f4596ee1f59b727ae09a8dfd0441f45b276383aca86476d7f154c5f66880d1d8",
+    "dimensions": {
+      "width": 1656,
+      "height": 2159
+    }
+  },
+  "tool_identity": "Claude Opus 4.7 vision extraction subagents via GitHub Copilot CLI",
+  "schema_version": 1,
+  "extractor_prompt_id": "vision-extract-bounded-page.v1",
+  "extractor_run_id": "aig-culture-extract-f",
+  "blocks": [
+    {
+      "block_id": "aig-p030-b001",
+      "block_type": "paragraph",
+      "reading_order": 1,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "God Forgot atheism and castes.",
+      "excerpt_hash": "b32ab7f51c905b78138f06f881febdb3177ef3a3346cf5ab77ed221c11dba029",
+      "facts": {
+        "verified": true
+      }
+    },
+    {
+      "block_id": "aig-p030-b002",
+      "block_type": "paragraph",
+      "reading_order": 2,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "bounded_excerpt": "God Forgotten language.",
+      "excerpt_hash": "2a37bc38fe22f4f87a875603e6387975256e4e7ebca436f8dd01b2d10e8936df",
+      "facts": {
+        "verified": true
+      }
+    }
+  ]
+}

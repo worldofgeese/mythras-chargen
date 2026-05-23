@@ -1,325 +1,341 @@
 {
-  "name": "Vishi Dunn",
-  "concept": "Praxian shaman, spirit world traveler, intensely loyal",
+  "_disambiguationMap": {},
+  "age": 21,
+  "armor": [
+    {
+      "ap": 2,
+      "cost": 0,
+      "locations": "6 location(s)",
+      "name": "Leather/Bone Basic Armour"
+    }
+  ],
+  "attributes": {},
+  "background": "",
+  "backgroundEvents": "",
+  "bonusSkills": {
+    "Binding": 15,
+    "Combat Style (High Llama)": 15,
+    "Endurance": 15,
+    "Locale": 15,
+    "Navigate": 15,
+    "Perception": 15,
+    "Spirit Combat": 15,
+    "Survival": 15,
+    "Trance": 15,
+    "Willpower": 15
+  },
+  "boundSpiritSlots": 5,
+  "boundSpirits": [],
+  "career": "Shaman",
+  "careerFolkMagic": [
+    "Spiritspeech",
+    "Detect Life"
+  ],
+  "careerSkills": {
+    "Binding": 15,
+    "Combat Style (High Llama)": 10,
+    "Endurance": 5,
+    "Perception": 10,
+    "Spirit Combat": 15,
+    "Survival": 15,
+    "Trance": 15,
+    "Willpower": 15
+  },
+  "charMethod": "point-buy",
   "characteristics": {
-    "STR": 8,
+    "CHA": 11,
     "CON": 10,
-    "SIZ": 8,
     "DEX": 11,
     "INT": 13,
     "POW": 14,
-    "CHA": 11
+    "SIZ": 8,
+    "STR": 8
   },
-  "charMethod": "point-buy",
-  "attributes": {},
-  "culture": "Praxian",
-  "homeland": "Prax",
+  "combatStyles": [
+    {
+      "name": "High Llama",
+      "notes": "",
+      "skill": 0,
+      "traits": [
+        "Mounted Combat"
+      ],
+      "weapons": [
+        "Lance",
+        "Dagger-axe (2H)",
+        "Dagger",
+        "Pole Lasso"
+      ]
+    }
+  ],
+  "companions": [
+    {
+      "armor": 2,
+      "attacks": [
+        {
+          "damage": "1d8",
+          "name": "Bite",
+          "notes": "",
+          "skill": 42
+        },
+        {
+          "damage": "1d8+2d6",
+          "name": "Kick",
+          "notes": "",
+          "skill": 42
+        },
+        {
+          "damage": "2d8+2d6",
+          "name": "Rear and Plunge",
+          "notes": "vs single foe",
+          "skill": 42
+        }
+      ],
+      "characteristics": {
+        "CON": 13,
+        "DEX": 9,
+        "POW": 9,
+        "SIZ": 35,
+        "STR": 31
+      },
+      "damageModifier": "+2d6",
+      "healingRate": 2,
+      "hitLocations": {
+        "Forequarters": {
+          "ap": 2,
+          "max": 11
+        },
+        "Head": {
+          "ap": 2,
+          "max": 9
+        },
+        "Hindquarters": {
+          "ap": 2,
+          "max": 10
+        },
+        "Left Foreleg": {
+          "ap": 2,
+          "max": 8
+        },
+        "Left Hind Leg": {
+          "ap": 2,
+          "max": 9
+        },
+        "Right Foreleg": {
+          "ap": 2,
+          "max": 8
+        },
+        "Right Hind Leg": {
+          "ap": 2,
+          "max": 9
+        }
+      },
+      "hitPointsTotal": 22,
+      "movement": 12,
+      "name": "War Llama",
+      "notes": "War-trained high llama. Riders hard to reach from ground (-1 grade melee from below). Use mount DM (+2d6) for lance charges.",
+      "species": "War High Llama (Praxian cavalry)",
+      "strikeRank": 0
+    },
+    {
+      "armor": 1,
+      "attacks": [
+        {
+          "damage": "1d6+1d4",
+          "name": "Claw",
+          "notes": "",
+          "skill": 47
+        },
+        {
+          "damage": "1d8+1d4",
+          "name": "Bite",
+          "notes": "",
+          "skill": 47
+        },
+        {
+          "damage": "1d6+1d4",
+          "name": "Short Spear",
+          "notes": "If armed",
+          "skill": 30
+        }
+      ],
+      "characteristics": {
+        "CHA": 9,
+        "CON": 10,
+        "DEX": 13,
+        "INT": 13,
+        "POW": 11,
+        "SIZ": 9,
+        "STR": 14
+      },
+      "damageModifier": "+0",
+      "healingRate": 2,
+      "hitLocations": {
+        "Abdomen": {
+          "ap": 1,
+          "max": 5
+        },
+        "Chest": {
+          "ap": 1,
+          "max": 6
+        },
+        "Head": {
+          "ap": 1,
+          "max": 4
+        },
+        "Left Arm": {
+          "ap": 1,
+          "max": 3
+        },
+        "Left Leg": {
+          "ap": 1,
+          "max": 4
+        },
+        "Right Arm": {
+          "ap": 1,
+          "max": 3
+        },
+        "Right Leg": {
+          "ap": 1,
+          "max": 4
+        }
+      },
+      "hitPointsTotal": 11,
+      "movement": 10,
+      "name": "Cousin",
+      "notes": "Sapient. Speaks (poorly) in human tongues. Climb 90%, Spirit Magic (Countermagic 2, Heal 2).",
+      "species": "Baboon (spirit-bonded familiar)",
+      "strikeRank": 3
+    }
+  ],
+  "concept": "Praxian shaman, spirit world traveler, intensely loyal",
+  "cult": "Waha",
+  "cultType": {
+    "blockedTypes": [],
+    "isHybrid": true,
+    "primary": "theist",
+    "types": [
+      "theist",
+      "animist"
+    ]
+  },
   "culturalSkills": {
     "Athletics": 5,
     "Brawn": 5,
     "Endurance": 10,
     "Evade": 10,
     "Locale": 10,
-    "Perception": 15,
     "Navigate": 15,
-    "Willpower": 15,
-    "Survival": 15
+    "Perception": 15,
+    "Survival": 15,
+    "Willpower": 15
   },
-  "runeAffinities": {
-    "primary": "Death",
-    "secondary": "Storm",
-    "tertiary": "Moon"
-  },
+  "culture": "Praxian",
+  "devotionalPool": 0,
+  "equipment": [
+    {
+      "cost": 0,
+      "enc": 1,
+      "name": "Two sets of common undecorated clothes",
+      "quantity": 1
+    },
+    {
+      "cost": 0,
+      "enc": 0,
+      "name": "Transport: Beast of Burden",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Backpack",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Waterskin",
+      "quantity": 1
+    },
+    {
+      "cost": 14,
+      "enc": 2,
+      "name": "Rations (1 week)",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 1,
+      "name": "Bedroll",
+      "quantity": 1
+    },
+    {
+      "cost": 5,
+      "enc": 0,
+      "name": "Flint & Tinder",
+      "quantity": 1
+    }
+  ],
+  "family": "Blue Llama Clan, High Llama Tribe",
   "folkMagicSpells": [
     "Spiritspeech",
     "Heal",
     "Countermagic"
   ],
-  "passions": [
-    {
-      "name": "Loyalty (Argrath)",
-      "value": 55,
-      "custom": true
-    },
-    {
-      "name": "Hate (Lunar Empire)",
-      "value": 55,
-      "custom": true
-    },
-    {
-      "name": "Loyalty (High Llama Tribe)",
-      "value": 55,
-      "custom": true
-    }
-  ],
-  "age": 21,
   "gender": "Male",
-  "family": "Blue Llama Clan, High Llama Tribe",
-  "backgroundEvents": "",
-  "career": "Shaman",
-  "careerSkills": {
-    "Endurance": 5,
-    "Willpower": 15,
-    "Perception": 10,
-    "Combat Style (High Llama)": 10,
-    "Binding": 15,
-    "Trance": 15,
-    "Spirit Combat": 15,
-    "Survival": 15
-  },
-  "careerFolkMagic": [
-    "Spiritspeech",
-    "Detect Life"
-  ],
-  "bonusSkills": {
-    "Willpower": 15,
-    "Perception": 15,
-    "Endurance": 15,
-    "Binding": 15,
-    "Trance": 15,
-    "Spirit Combat": 15,
-    "Survival": 15,
-    "Navigate": 15,
-    "Locale": 15,
-    "Combat Style (High Llama)": 15
-  },
-  "hobbySkillName": null,
-  "socialClass": "Freeman",
-  "socialClassMoneyMod": 1,
-  "startingMoney": 255,
-  "equipment": [
-    {
-      "name": "Two sets of common undecorated clothes",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 0
-    },
-    {
-      "name": "Transport: Beast of Burden",
-      "enc": 0,
-      "quantity": 1,
-      "cost": 0
-    },
-    {
-      "name": "Backpack",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Waterskin",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Rations (1 week)",
-      "enc": 2,
-      "quantity": 1,
-      "cost": 14
-    },
-    {
-      "name": "Bedroll",
-      "enc": 1,
-      "quantity": 1,
-      "cost": 5
-    },
-    {
-      "name": "Flint & Tinder",
-      "enc": 0,
-      "quantity": 1,
-      "cost": 5
-    }
-  ],
-  "weapons": [
-    {
-      "name": "Pole Lasso",
-      "damage": "",
-      "size": "",
-      "reach": "",
-      "ap": 0,
-      "hp": 0,
-      "skill": 0,
-      "quantity": 1
-    }
-  ],
-  "armor": [
-    {
-      "name": "Leather/Bone Basic Armour",
-      "ap": 2,
-      "locations": "6 location(s)",
-      "cost": 0
-    }
-  ],
-  "combatStyles": [
-    {
-      "name": "High Llama",
-      "weapons": [
-        "Lance",
-        "Dagger-axe (2H)",
-        "Dagger",
-        "Pole Lasso"
-      ],
-      "traits": [
-        "Mounted Combat"
-      ],
-      "skill": 0,
-      "notes": ""
-    }
-  ],
-  "notes": "",
-  "background": "",
   "hitPoints": {},
-  "companions": [
-    {
-      "name": "War Llama",
-      "species": "War High Llama (Praxian cavalry)",
-      "characteristics": {
-        "STR": 31,
-        "CON": 13,
-        "SIZ": 35,
-        "DEX": 9,
-        "POW": 9
-      },
-      "hitLocations": {
-        "Right Hind Leg": {
-          "max": 9,
-          "ap": 2
-        },
-        "Left Hind Leg": {
-          "max": 9,
-          "ap": 2
-        },
-        "Hindquarters": {
-          "max": 10,
-          "ap": 2
-        },
-        "Forequarters": {
-          "max": 11,
-          "ap": 2
-        },
-        "Right Foreleg": {
-          "max": 8,
-          "ap": 2
-        },
-        "Left Foreleg": {
-          "max": 8,
-          "ap": 2
-        },
-        "Head": {
-          "max": 9,
-          "ap": 2
-        }
-      },
-      "attacks": [
-        {
-          "name": "Bite",
-          "skill": 42,
-          "damage": "1d8",
-          "notes": ""
-        },
-        {
-          "name": "Kick",
-          "skill": 42,
-          "damage": "1d8+2d6",
-          "notes": ""
-        },
-        {
-          "name": "Rear and Plunge",
-          "skill": 42,
-          "damage": "2d8+2d6",
-          "notes": "vs single foe"
-        }
-      ],
-      "armor": 2,
-      "movement": 12,
-      "damageModifier": "+2d6",
-      "hitPointsTotal": 22,
-      "healingRate": 2,
-      "strikeRank": 0,
-      "notes": "War-trained high llama. Riders hard to reach from ground (-1 grade melee from below). Use mount DM (+2d6) for lance charges."
-    },
-    {
-      "name": "Cousin",
-      "species": "Baboon (spirit-bonded familiar)",
-      "characteristics": {
-        "STR": 14,
-        "CON": 10,
-        "SIZ": 9,
-        "DEX": 13,
-        "INT": 13,
-        "POW": 11,
-        "CHA": 9
-      },
-      "hitLocations": {
-        "Right Leg": {
-          "max": 4,
-          "ap": 1
-        },
-        "Left Leg": {
-          "max": 4,
-          "ap": 1
-        },
-        "Abdomen": {
-          "max": 5,
-          "ap": 1
-        },
-        "Chest": {
-          "max": 6,
-          "ap": 1
-        },
-        "Right Arm": {
-          "max": 3,
-          "ap": 1
-        },
-        "Left Arm": {
-          "max": 3,
-          "ap": 1
-        },
-        "Head": {
-          "max": 4,
-          "ap": 1
-        }
-      },
-      "attacks": [
-        {
-          "name": "Claw",
-          "skill": 47,
-          "damage": "1d6+1d4",
-          "notes": ""
-        },
-        {
-          "name": "Bite",
-          "skill": 47,
-          "damage": "1d8+1d4",
-          "notes": ""
-        },
-        {
-          "name": "Short Spear",
-          "skill": 30,
-          "damage": "1d6+1d4",
-          "notes": "If armed"
-        }
-      ],
-      "armor": 1,
-      "movement": 10,
-      "damageModifier": "+0",
-      "hitPointsTotal": 11,
-      "healingRate": 2,
-      "strikeRank": 3,
-      "notes": "Sapient. Speaks (poorly) in human tongues. Climb 90%, Spirit Magic (Countermagic 2, Heal 2)."
-    }
-  ],
-  "cult": "Waha",
+  "hobbySkillName": null,
+  "homeland": "Prax",
   "miracles": [
     "Axis Mundi",
     "Discorporation",
     "Shield"
   ],
-  "devotionalPool": 0,
+  "mysticismTalents": [],
+  "name": "Vishi Dunn",
+  "notes": "",
+  "passions": [
+    {
+      "custom": true,
+      "name": "Loyalty (Argrath)",
+      "value": 55
+    },
+    {
+      "custom": true,
+      "name": "Hate (Lunar Empire)",
+      "value": 55
+    },
+    {
+      "custom": true,
+      "name": "Loyalty (High Llama Tribe)",
+      "value": 55
+    }
+  ],
+  "runeAffinities": {
+    "primary": "Death",
+    "secondary": "Storm",
+    "tertiary": "Moon"
+  },
+  "schemaVersion": 1,
   "selectedProfessionalSkills": [
     "Binding",
     "Trance",
     "Spirit Combat"
+  ],
+  "socialClass": "Freeman",
+  "socialClassMoneyMod": 1,
+  "sorceryResource": 0,
+  "sorcerySpells": [],
+  "startingMoney": 255,
+  "weapons": [
+    {
+      "ap": 0,
+      "damage": "",
+      "hp": 0,
+      "name": "Pole Lasso",
+      "quantity": 1,
+      "reach": "",
+      "size": "",
+      "skill": 0
+    }
   ]
 }
