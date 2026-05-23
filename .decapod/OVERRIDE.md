@@ -82,6 +82,7 @@ Player-facing material is published to Copyparty on Loving Kypris.
 
 Mandatory sync rule:
 - If a local change affects any file mirrored on Copyparty, sync that change to the remote server before closing the task. This includes `index.html`, `docs/handouts/*.html`, active pregen character PDFs, and player source PDFs.
+- When a feature changes rules, character options, workflows, UI behavior, or any other information players need to understand at the table, update the relevant player-facing handouts in `docs/handouts/` as part of the same Bead before closeout.
 - Preserve the remote structure below exactly. Do not flatten directories, copy handouts or PDFs into `/w`, or rename player-facing paths unless the user explicitly asks for a fileserver reorganization.
 - Before changing the remote, inspect the live tree with `ssh worldofgeese@loving-kypris.hound-celsius.ts.net 'podman exec copyparty find /w -maxdepth 5 -mindepth 1 | sort'` and only update the path that corresponds to the local file.
 - After syncing, verify the affected public URL with `curl -fsSL` and include that verification in the handoff.
