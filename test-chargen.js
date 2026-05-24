@@ -3329,6 +3329,31 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
   }
 }
 
+// Test 1.13b: Allocation rows use shared uniform control classes
+{
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  const hasSharedStyles = html.includes('.allocation-row') &&
+    html.includes('.allocation-control') &&
+    html.includes('.points-input');
+  const stepContainersUseSharedList = html.includes('id="cultural-skills-list" class="allocation-list"') &&
+    html.includes('id="passions-list" class="allocation-list"') &&
+    html.includes('id="career-skills-list" class="allocation-list"') &&
+    html.includes('id="bonus-skills-list" class="allocation-list"') &&
+    html.includes('id="cult-boost-skills" class="allocation-list"');
+  const rowsUseSharedClasses = html.includes("row.className = 'allocation-row'") &&
+    html.includes("row.className = 'allocation-row allocation-row--triple'") &&
+    html.includes("row.className = 'cult-boost-row allocation-row'") &&
+    html.includes("row.className = 'skill-row allocation-row'");
+  const pointsInputCount = (html.match(/class="points-input"/g) || []).length;
+
+  if (hasSharedStyles && stepContainersUseSharedList && rowsUseSharedClasses && pointsInputCount >= 8) {
+    pass('Allocation rows render with shared uniform control classes');
+  } else {
+    fail('Allocation rows are missing shared uniform control classes',
+      JSON.stringify({ hasSharedStyles, stepContainersUseSharedList, rowsUseSharedClasses, pointsInputCount }));
+  }
+}
+
 // Test 1.14: Rejected capped checkbox selections roll back visually
 {
   const { App: AppObj, CharacterData: CD } = loadApp();

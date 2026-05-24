@@ -44,6 +44,37 @@ input[type="number"] { width: 60px; text-align: center; }
 input[type="text"] { width: 100%; }
 textarea { width: 100%; min-height: 60px; resize: vertical; }
 
+.allocation-list { display: grid; gap: 4px; }
+.allocation-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(72px, auto);
+  gap: 10px;
+  align-items: center;
+  margin: 4px 0;
+}
+.allocation-row--triple {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 72px;
+  gap: 6px;
+}
+.allocation-control {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+.points-input {
+  width: 64px;
+  min-width: 64px;
+  max-width: 64px;
+  box-sizing: border-box;
+  text-align: center;
+}
+.allocation-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 button {
   font: inherit;
   padding: 6px 12px;
@@ -13121,7 +13152,7 @@ App.renderStep5 = function() {
     </div>
 
     <h3>Cultural Skills</h3>
-    <div id="cultural-skills-list"></div>
+    <div id="cultural-skills-list" class="allocation-list"></div>
     
     <h3>Rune Affinities <span class="page-ref">(Adventures in Glorantha p.24)</span></h3>
     <p>Select three runes. Primary: POW×2+30, Secondary: POW×2+20, Tertiary: POW×2+10</p>
@@ -13156,13 +13187,13 @@ App.renderStep5 = function() {
         const storedChoice = item.storedChoice;
         const currentValue = storedChoice ? (CharacterData.culturalSkills[storedChoice] || 0) : 0;
         const row = document.createElement('div');
-        row.style.cssText = 'display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin: 4px 0;';
+        row.className = 'allocation-row';
         row.innerHTML = `
-          <select onchange="App.resolveChoiceSkill(${idx}, this.value, [${choices.map(c => `'${c}'`).join(',')}])">
+          <select class="allocation-control" onchange="App.resolveChoiceSkill(${idx}, this.value, [${choices.map(c => `'${c}'`).join(',')}])">
             <option value="">-- Choose one --</option>
             ${choices.map(c => `<option value="${c}" ${c === storedChoice ? 'selected' : ''}>${c}</option>`).join('')}
           </select>
-          <input type="number" min="0" max="15" value="${currentValue}" ${!storedChoice ? 'disabled' : ''}
+          <input class="points-input" type="number" min="0" max="15" value="${currentValue}" ${!storedChoice ? 'disabled' : ''}
             onchange="App.updateSkillPoints('cultural', '${storedChoice || ''}', parseInt(this.value), this)">
         `;
         skillsList.appendChild(row);
@@ -13183,14 +13214,14 @@ App.renderStep5 = function() {
       const pointsDisabled = !currentSelected ? 'disabled' : '';
 
       const row = document.createElement('div');
-      row.style.cssText = 'display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin: 4px 0;';
+      row.className = 'allocation-row';
       row.innerHTML = `
         <div>
           ${hintText ? `<small style="color:#666; display:block; margin-bottom:2px;">${category} — ${hintText}</small>` : ''}
           ${guidanceText ? `<small style="color:#555; display:block; margin-bottom:2px;">${this.escapeHtml(guidanceText)}</small>` : ''}
           <select
             onchange="App.disambiguateAndUpdateFreeText('cultural', '${skillName.replace(/'/g, "\\'")}', this.value, '${category}')"
-            style="width:100%; padding:6px; box-sizing: border-box; font-size: 14px; cursor: pointer;">
+            class="allocation-control" style="font-size: 14px; cursor: pointer;">
             <option value="">${currentSelected || `Select ${category}...`}</option>
             ${(Array.isArray(options) ? options : []).map(o => {
               const optVal = `${category} (${o})`;
@@ -13198,7 +13229,7 @@ App.renderStep5 = function() {
             }).join('')}
           </select>
         </div>
-        <input type="number" min="0" max="15" value="${currentValue}" ${pointsDisabled}
+        <input class="points-input" type="number" min="0" max="15" value="${currentValue}" ${pointsDisabled}
           onchange="App.updateSkillPoints('cultural', '${currentSelected || skillName.replace(/'/g, "\\'")}', parseInt(this.value), this)">
       `;
       skillsList.appendChild(row);
@@ -13208,11 +13239,11 @@ App.renderStep5 = function() {
     const currentValue = CharacterData.culturalSkills[skillName] || 0;
 
     const row = document.createElement('div');
-    row.style.cssText = 'display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin: 4px 0;';
+    row.className = 'allocation-row';
     row.setAttribute('data-testid', `skill-row-${skillName}`);
     row.innerHTML = `
       <label>${this.skillWithTooltip(skillName)}</label>
-      <input type="number" min="0" max="15" value="${currentValue}" data-testid="skill-input-${skillName}"
+      <input class="points-input" type="number" min="0" max="15" value="${currentValue}" data-testid="skill-input-${skillName}"
         onchange="App.updateSkillPoints('cultural', '${skillName}', parseInt(this.value), this)">
     `;
     skillsList.appendChild(row);
@@ -13586,7 +13617,7 @@ App.renderStep6 = function() {
     <p>Passions drive your character's behavior and can be invoked for bonuses.</p>
     
     <h3>Cultural Passions</h3>
-    <div id="passions-list"></div>
+    <div id="passions-list" class="allocation-list"></div>
     
     <h3>Additional Passions</h3>
     <p style="font-size: 0.85em; color: #555; margin-bottom: 6px;">Suggested passions for your culture (click to add):</p>
@@ -13606,40 +13637,40 @@ App.renderStep6 = function() {
   if (culture) {
     CharacterData.passions.forEach((passion, idx) => {
       const row = document.createElement('div');
-      row.style.cssText = 'display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin: 4px 0;';
+      row.className = 'allocation-row';
       
       if (passion.choice) {
         const subjectId = `passion-subject-${idx}`;
         const currentType = passion.name ? passion.name.replace(/\s*\(.*\)/, '') : '';
         const currentSubject = passion.name ? (passion.name.match(/\((.+)\)/) || [])[1] || '' : '';
         const needsSubject = passion.needsSubject !== false;
-        row.style.cssText = 'display: grid; grid-template-columns: 1fr 1fr 60px; gap: 6px; margin: 4px 0; align-items: center;';
+        row.className = 'allocation-row allocation-row--triple';
         row.innerHTML = `
-          <select onchange="App.updatePassionChoice(${idx}, this.value)">
+          <select class="allocation-control" onchange="App.updatePassionChoice(${idx}, this.value)">
             <option value="">-- Select --</option>
             ${passion.choice.map(c => `<option value="${c}" ${currentType === c ? 'selected' : ''}>${c}</option>`).join('')}
           </select>
-          ${needsSubject ? `<input type="text" id="${subjectId}" placeholder="(subject)" value="${currentSubject}" list="passion-suggestions-${idx}" onchange="App.updatePassionSubject(${idx}, this.value)" onblur="App.updatePassionSubject(${idx}, this.value)">` + (passion.subjectSuggestions && passion.subjectSuggestions.length > 0 ? `<datalist id="passion-suggestions-${idx}">${passion.subjectSuggestions.map(s => `<option value="${s}">`).join('')}</datalist>` : '') : '<span></span>'}
-          <input type="number" value="${passion.value}" readonly>
+          ${needsSubject ? `<input class="allocation-control" type="text" id="${subjectId}" placeholder="(subject)" value="${currentSubject}" list="passion-suggestions-${idx}" onchange="App.updatePassionSubject(${idx}, this.value)" onblur="App.updatePassionSubject(${idx}, this.value)">` + (passion.subjectSuggestions && passion.subjectSuggestions.length > 0 ? `<datalist id="passion-suggestions-${idx}">${passion.subjectSuggestions.map(s => `<option value="${s}">`).join('')}</datalist>` : '') : '<span></span>'}
+          <input class="points-input" type="number" value="${passion.value}" readonly>
         `;
       } else if (passion.needsSubject || passionTypeRequiresSubject(passion.type || parsePassionName(passion.name).type)) {
         const structured = buildStructuredPassion(passion, passion.value || 0, passion.custom || false);
         const currentSubject = structured.subject;
         const baseName = structured.type;
-        row.style.cssText = 'display: grid; grid-template-columns: auto 1fr 60px; gap: 6px; margin: 4px 0; align-items: center;';
+        row.className = 'allocation-row allocation-row--triple';
         row.innerHTML = `
           <span style="font-weight: 600;">${baseName}</span>
-          <input type="text" value="${currentSubject}" placeholder="(to what?)"
+          <input class="allocation-control" type="text" value="${currentSubject}" placeholder="(to what?)"
             list="passion-subject-ns-${idx}"
             onchange="App.updatePassionNameSubject(${idx}, '${baseName.replace(/'/g, "\\'")}', this.value)"
             onblur="App.updatePassionNameSubject(${idx}, '${baseName.replace(/'/g, "\\'")}', this.value)">
           ${passion.subjectSuggestions && passion.subjectSuggestions.length ? `<datalist id="passion-subject-ns-${idx}">${passion.subjectSuggestions.map(s => `<option value="${s}">`).join('')}</datalist>` : ''}
-          <input type="number" value="${passion.value}" readonly>
+          <input class="points-input" type="number" value="${passion.value}" readonly>
         `;
       } else {
         row.innerHTML = `
-          <input type="text" value="${passion.name}" readonly>
-          <input type="number" value="${passion.value}" readonly>
+          <input class="allocation-control" type="text" value="${passion.name}" readonly>
+          <input class="points-input" type="number" value="${passion.value}" readonly>
         `;
       }
       passionsList.appendChild(row);
@@ -15138,7 +15169,7 @@ App.renderCultSkillBoostPanel = function(skillDetails) {
         : `One click reallocates legal skill points as needed to meet initiation requirements, using remaining bonus points first and then safe non-cult donors.`}</p>
       <button onclick="App.autoBoostCultSkills()" style="margin-bottom: 10px; padding: 6px 12px; background: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;"
         ${boostableSkills.length === 0 ? 'disabled' : ''}>⚡ Quick Boost initiation skills</button>
-      <div id="cult-boost-skills" style="display: grid; gap: 4px;"></div>
+      <div id="cult-boost-skills" class="allocation-list"></div>
     </div>
   `;
 
@@ -15154,18 +15185,17 @@ App.renderCultSkillBoostPanel = function(skillDetails) {
       : '';
 
     const row = document.createElement('div');
-    row.className = 'cult-boost-row';
+    row.className = 'cult-boost-row allocation-row';
     row.setAttribute('data-skill', boostKey);
     row.setAttribute('data-cult-skill', skill.name);
-    row.style.cssText = 'display: grid; grid-template-columns: 1fr 70px; gap: 10px; align-items: center; padding: 4px 0; border-bottom: 1px solid #d4edfa;';
+    row.style.cssText = 'padding: 4px 0; border-bottom: 1px solid #d4edfa;';
     row.innerHTML = `
       <div style="font-size: 12px;">
         <strong>${skill.name}</strong>${matchedNote}
         <span class="boost-needs" style="color: #666; margin-left: 4px;">${skill.value}% → needs ${Math.max(0, needed)} more</span>
       </div>
-      <input type="number" min="0" max="${maxPerSkill}" value="${currentBonus}"
-        onchange="App.adjustCultBoost('${escapedBoostKey}', parseInt(this.value) || 0)"
-        style="width: 60px; padding: 4px; text-align: center;">
+      <input class="points-input" type="number" min="0" max="${maxPerSkill}" value="${currentBonus}"
+        onchange="App.adjustCultBoost('${escapedBoostKey}', parseInt(this.value) || 0)">
     `;
     boostContainer.appendChild(row);
   });
@@ -15772,7 +15802,7 @@ App.renderStep10 = function() {
     </div>
 
     <h3>Career Skills</h3>
-    <div id="career-skills-list"></div>
+    <div id="career-skills-list" class="allocation-list"></div>
 
     <h3>Additional Folk Magic (select 2 more)</h3>
     <div id="career-folk-magic-list"></div>
@@ -15826,13 +15856,13 @@ App.renderStep10 = function() {
         const pointsDisabled = !currentSelected ? 'disabled' : '';
 
         const row = document.createElement('div');
-        row.style.cssText = 'display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin: 4px 0;';
+        row.className = 'allocation-row';
         row.innerHTML = `
           <div>
             ${hintText ? `<small style="color:#666; display:block; margin-bottom:2px;">${category} — ${hintText}</small>` : ''}
             ${guidanceText ? `<small style="color:#555; display:block; margin-bottom:2px;">${App.escapeHtml(guidanceText)}</small>` : ''}
             <select
-              style="width:100%; padding:6px; box-sizing: border-box; font-size: 14px; cursor: pointer;">
+              class="allocation-control" style="font-size: 14px; cursor: pointer;">
               <option value="">${currentSelected || `Select ${category}...`}</option>
               ${(Array.isArray(options) ? options : []).map(o => {
                 const optVal = `${category} (${o})`;
@@ -15840,7 +15870,7 @@ App.renderStep10 = function() {
               }).join('')}
             </select>
           </div>
-          <input type="number" min="0" max="15" value="${currentValue}" ${pointsDisabled}
+          <input class="points-input" type="number" min="0" max="15" value="${currentValue}" ${pointsDisabled}
             data-skill="${this.escapeHtmlAttr(currentSelected || skillName)}">
         `;
         const selectEl = row.querySelector('select');
@@ -15863,11 +15893,11 @@ App.renderStep10 = function() {
       const skillAttr = this.escapeHtmlAttr(skillName);
 
       const row = document.createElement('div');
-      row.style.cssText = 'display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin: 4px 0;';
+      row.className = 'allocation-row';
       row.setAttribute('data-testid', `skill-row-${skillName}`);
       row.innerHTML = `
         <label>${this.skillWithTooltip(skillName)}</label>
-        <input type="number" min="0" max="15" value="${currentValue}" data-testid="skill-input-${skillAttr}" data-skill="${skillAttr}">
+        <input class="points-input" type="number" min="0" max="15" value="${currentValue}" data-testid="skill-input-${skillAttr}" data-skill="${skillAttr}">
       `;
       const inputEl = row.querySelector('input[type="number"]');
       if (inputEl) {
@@ -16024,7 +16054,7 @@ App.renderStep11 = function() {
     </div>
 
     <h3>Distribute Bonus Points</h3>
-    <div id="bonus-skills-list"></div>
+    <div id="bonus-skills-list" class="allocation-list"></div>
     <button onclick="App.addBonusSkill()">+ Add Hobby Skill (Professional Skill or Combat Style)</button>
   `;
 
@@ -16044,10 +16074,9 @@ App.renderStep11 = function() {
     const bonusPoints = points;
     const totalValue = baseValue + culturalPoints + careerPoints + bonusPoints;
     const row = document.createElement('div');
-    row.className = 'skill-row';
+    row.className = 'skill-row allocation-row';
     row.setAttribute('data-testid', `skill-row-${skillName}`);
     row.innerHTML = `
-      <div style="display: grid; grid-template-columns: 1fr auto; gap: 10px; width: 100%;">
         <div>
           <div style="display: flex; align-items: center; gap: 4px;">
             <strong>${skillName}</strong>
@@ -16057,12 +16086,11 @@ App.renderStep11 = function() {
             ${baseValue} base + ${culturalPoints} culture + ${careerPoints} career + ${bonusPoints} bonus = <strong>${totalValue}%</strong>
           </div>
         </div>
-        <div style="display: flex; gap: 6px; align-items: center;">
-          <input type="number" min="0" max="${ageCategory ? ageCategory.maxPerSkill : 100}" value="${points}" data-testid="skill-input-${skillAttr}" data-skill="${skillAttr}"
-            onchange="App.updateSkillPoints('bonus', this.dataset.skill, parseInt(this.value), this)" style="width: 60px;">
+        <div class="allocation-actions">
+          <input class="points-input" type="number" min="0" max="${ageCategory ? ageCategory.maxPerSkill : 100}" value="${points}" data-testid="skill-input-${skillAttr}" data-skill="${skillAttr}"
+            onchange="App.updateSkillPoints('bonus', this.dataset.skill, parseInt(this.value), this)">
           <button data-skill="${skillAttr}" onclick="App.removeBonusSkill(this.dataset.skill)">×</button>
         </div>
-      </div>
     `;
     skillsList.appendChild(row);
   });
