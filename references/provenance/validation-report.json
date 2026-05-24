@@ -6,10 +6,14 @@
   "generated_at": "2026-05-23T00:00:00Z",
   "status": "accepted",
   "inputs": {
-    "tree_hash": "8c26fc6f597559af2587212328fedab5e7234fa91e637c7fe5aec75d8c5a2d13",
+    "tree_hash": "47f0dabc44e5f94f0857121bc782eba26b4c2298fdc5d8e508ed42bcc9ef21b2",
     "hash_algorithm": "sha256",
     "hashed_paths": [
       "index.html",
+      "docs/handouts/magic-path.html",
+      "docs/handouts/prep-checklist.html",
+      "docs/handouts/rules-and-house-rules.html",
+      "docs/handouts/source-trail.html",
       "references/provenance/schema.json",
       "references/provenance/legacy-disposition.json",
       "references/provenance/index-html-map.json",

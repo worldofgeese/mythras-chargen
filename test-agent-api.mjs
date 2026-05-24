@@ -2064,6 +2064,49 @@ assert(ae4.selectedSpirits.length === 1, 'AE4: 1 bound spirit selected (animist 
 assert(ae4.limits.spirits === 4, 'AE4: Spirit slot limit = CHA/2 = 4');
 
 // ═══════════════════════════════════════════════════════════════
+console.log('\n\x1b[36m═══ UI Regression: Wizard Return Navigation ═══\x1b[0m\n');
+// ═══════════════════════════════════════════════════════════════
+
+reload();
+
+const wizardReturnNavigation = evalPageJSON(`JSON.stringify((() => {
+  App.agent.setStep(1, {name:'Wizard Return Check', concept:'Navigation regression'});
+  App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:10,POW:10,CHA:10}});
+  App.agent.setStep(4, {culture:'Sartarite (Heortling)', homeland:'Boldhome'});
+  App.agent.setStep(8, {career:'Warrior', professionalSkills:[{name:'Lore (any)', specialization:'Tactics'}, {name:'Craft (any)', specialization:'Weaponsmithing'}, 'Survival']});
+  App.agent.selectCult('Orlanth');
+  App.agent.setStep(12, {socialClass:'Freeman'});
+  App.currentStep = 13;
+  App.renderCurrentStep();
+  App.updateStepIndicator();
+  App.switchMode('play');
+  App.switchMode('wizard');
+  const prev = document.getElementById('btn-prev');
+  const before = {
+    step: App.currentStep,
+    disabled: Boolean(prev?.disabled),
+    indicator: document.getElementById('step-indicator')?.innerText || ''
+  };
+  prev?.click();
+  const after = {
+    step: App.currentStep,
+    disabled: Boolean(prev?.disabled),
+    indicator: document.getElementById('step-indicator')?.innerText || '',
+    wizardHidden: document.getElementById('wizard-mode')?.classList.contains('hidden') || false,
+    playHidden: document.getElementById('play-mode')?.classList.contains('hidden') || false
+  };
+  return {before, after};
+})())`);
+assert(wizardReturnNavigation.before.step === 13 &&
+  wizardReturnNavigation.before.disabled === false &&
+  /Step 13 of 13/.test(wizardReturnNavigation.before.indicator) &&
+  wizardReturnNavigation.after.step === 12 &&
+  /Step 12 of 13/.test(wizardReturnNavigation.after.indicator) &&
+  wizardReturnNavigation.after.wizardHidden === false &&
+  wizardReturnNavigation.after.playHidden === true,
+  'UI regression: Previous works after Wizard Step 13 returns from Play Mode');
+
+// ═══════════════════════════════════════════════════════════════
 // Teardown
 // ═══════════════════════════════════════════════════════════════
 

@@ -3394,6 +3394,30 @@ section('Risk 2: Play Mode Form State Consistency');
   }
 }
 
+// Test 2.6: Play Mode Passion rows keep names and percentages separated
+{
+  const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
+  if (AppObj && AppObj.renderPlayPassions && CD && _sandbox) {
+    CD.passions = [
+      { name: 'Loyalty (Empire)', value: 66 },
+      { name: 'Love (the Seven Mothers)', value: 68 }
+    ];
+
+    AppObj.renderPlayPassions();
+    const html = _sandbox.document.getElementById('play-passions').innerHTML;
+    const hasReadableSeparator = /Loyalty \(Empire\)<\/span>\s+<span class="passion-value">66%/.test(html) ||
+      /Loyalty \(Empire\)<\/span><span class="passion-value">\s+66%/.test(html);
+
+    if (hasReadableSeparator) {
+      pass('Play Mode Passion rows keep name and percentage visually separated');
+    } else {
+      fail('Play Mode Passion rows concatenate name and percentage', html);
+    }
+  } else {
+    fail('App.renderPlayPassions unavailable for Passion spacing test');
+  }
+}
+
 // Test 2.5: Play Mode weapon rows derive skill from matching combat style
 {
   const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
@@ -3584,6 +3608,40 @@ asyncTest('exportSinglePagePDF() magic wrapping capture failed', async () => {
   }
 });
 
+// Test 3.4: PDF passion rows keep names and percentages as separate text draws
+asyncTest('exportSinglePagePDF() passion spacing capture failed', async () => {
+  if (!App.App || !App.App.exportSinglePagePDF) return;
+
+  const { texts } = await captureSinglePagePdf(createPdfTestCharacter({
+    passions: [
+      { name: 'Loyalty (Empire)', value: 66 },
+      { name: 'Love (the Seven Mothers)', value: 68 },
+      { name: 'Hate (Sartarites)', value: 69 }
+    ],
+    weapons: [],
+    equipment: [],
+    armor: [],
+    combatStyles: [],
+    folkMagicSpells: [],
+    careerFolkMagic: [],
+    miracles: [],
+    boundSpirits: [],
+    sorcerySpells: []
+  }));
+  const drawn = texts.map(op => String(op.text || ''));
+  const hasSeparateNames = ['Loyalty (Empire)', 'Love (the Seven Mothers)', 'Hate (Sartarites)']
+    .every(name => drawn.includes(name));
+  const hasSeparateValues = ['66%', '68%', '69%'].every(value => drawn.includes(value));
+  const hasCombinedPassionRows = drawn.some(text => /Loyalty \(Empire\).*66%|Love \(the Seven Mothers\).*68%|Hate \(Sartarites\).*69%/.test(text));
+
+  if (hasSeparateNames && hasSeparateValues && !hasCombinedPassionRows) {
+    pass('exportSinglePagePDF() separates passion names and percentages');
+  } else {
+    fail('exportSinglePagePDF() still combines passion names and percentages',
+      JSON.stringify({ hasSeparateNames, hasSeparateValues, combined: drawn.filter(text => /Loyalty|Love|Hate/.test(text)) }));
+  }
+});
+
 // Test 3.4: PDF sorcery rules use RAW Invocation/Shaping, not rune affinity mappings
 asyncTest('exportSinglePagePDF() sorcery rule text capture failed', async () => {
   if (!App.App || !App.App.exportSinglePagePDF) return;
@@ -3639,7 +3697,7 @@ asyncTest('exportSinglePagePDF() Zzistori source-backed sorcery capture failed',
     text.includes('Magic Points: 15');
   const hasRawText = text.includes('Casting: Invocation skill') && text.includes('Shaping: Shaping skill');
   const hasSelectedSpells = ['Holdfast', 'Animate (Substance)', 'Project (Sense)'].every(spell => text.includes(spell));
-  const hasSourceCopy = text.includes('AiG p.30-31, p.59-60; Mythras Core p.162, p.166-177');
+  const hasSourceCopy = text.includes('AiG p.30-31, p.59-60; Mythras rulebook p.162, p.166-177');
   const hasTheistLeak = text.includes('THEIST MIRACLES') ||
     text.includes('Devotional Pool') ||
     text.includes('Shield');
@@ -5057,11 +5115,11 @@ section('ADR-005: Placeholder Skill Disambiguation');
         const loreGuidance = getSpecializationGuidance('Lore (any)');
         const regionalGuidance = getSpecializationGuidance('Lore (Regional)');
         if (
-          languageGuidance.includes('Mythras Core p.49') &&
+          languageGuidance.includes('Mythras rulebook p.49') &&
           languageGuidance.includes('Adventures in Glorantha p.26-41') &&
-          loreGuidance.includes('Mythras Core p.49') &&
+          loreGuidance.includes('Mythras rulebook p.49') &&
           loreGuidance.includes('Adventures in Glorantha p.26-41') &&
-          regionalGuidance.includes('Mythras Core p.49') &&
+          regionalGuidance.includes('Mythras rulebook p.49') &&
           regionalGuidance.includes('Adventures in Glorantha p.26-41')
         ) {
           pass('Ambiguous skill guidance points players to source pages');
@@ -6023,7 +6081,7 @@ const magicPdfCoverageCases = [
     name: 'Zzistori source-backed Sorcery PDF coverage',
     expected: [
       'SORCERY (Zzistori School (God Forgot sorcery))',
-      'Source: AiG p.30-31, p.59-60; Mythras Core p.162, p.166-177',
+      'Source: AiG p.30-31, p.59-60; Mythras rulebook p.162, p.166-177',
       'Holdfast',
       'Animate (Substance)',
       'Project (Sense)'
@@ -6636,7 +6694,7 @@ fixtures.forEach(fixtureInfo => {
     CD.boundSpirits = [{ name: 'Ancestor Spirit' }];
     CD.sorceryResource = 0;
     CD.sorcerySpells = [];
-    CD.companions = [{ name: 'Greywind', species: 'Bison' }];
+    CD.companions = [{ name: 'Greywind', species: 'Bison', autoPopulated: true }];
 
     const serialized = CD.toJSON();
     CD.boundSpiritSlots = 0;
@@ -6654,7 +6712,8 @@ fixtures.forEach(fixtureInfo => {
       CD.boundSpirits && CD.boundSpirits[0] && CD.boundSpirits[0].name === 'Ancestor Spirit' &&
       CD.sorceryResource === 0 &&
       CD.sorcerySpells && CD.sorcerySpells.length === 0 &&
-      CD.companions && CD.companions[0] && CD.companions[0].name === 'Greywind';
+      CD.companions && CD.companions[0] && CD.companions[0].name === 'Greywind' &&
+      CD.companions[0].autoPopulated === true;
 
     CD.name = 'Before Stale Round Trip';
     const staleSuccess = CD.fromJSON({
@@ -6668,7 +6727,8 @@ fixtures.forEach(fixtureInfo => {
       CD.boundSpiritSlots === normalizedBoundSpiritSlots &&
       CD.boundSpirits && CD.boundSpirits[0] && CD.boundSpirits[0].name === 'Ancestor Spirit' &&
       CD.sorcerySpells && CD.sorcerySpells.length === 0 &&
-      CD.companions && CD.companions[0] && CD.companions[0].name === 'Greywind';
+      CD.companions && CD.companions[0] && CD.companions[0].name === 'Greywind' &&
+      CD.companions[0].autoPopulated === true;
 
     if (preserved && staleRejected) {
       pass('Character JSON round-trip preserves valid magic and rejects stale sorcery state');
@@ -6845,7 +6905,7 @@ fixtures.forEach(fixtureInfo => {
     CD.boundSpirits = [];
     CD.sorceryResource = 13;
     CD.sorcerySpells = ['Dominate (Creatures)'];
-    CD.companions = [{ name: 'Hoofbeat', species: 'Horse' }];
+    CD.companions = [{ name: 'Hoofbeat', species: 'Horse', autoPopulated: true }];
     CD.saveToLocalStorage();
 
     CD.name = '';
@@ -6865,7 +6925,8 @@ fixtures.forEach(fixtureInfo => {
       CD.boundSpirits && CD.boundSpirits.length === 0 &&
       CD.sorceryResource === 13 &&
       CD.sorcerySpells && CD.sorcerySpells[0] === 'Dominate (Creatures)' &&
-      CD.companions && CD.companions[0] && CD.companions[0].name === 'Hoofbeat';
+      CD.companions && CD.companions[0] && CD.companions[0].name === 'Hoofbeat' &&
+      CD.companions[0].autoPopulated === true;
 
     if (preserved) {
       pass('localStorage round-trip preserves complete character state');
@@ -7578,7 +7639,7 @@ fixtures.forEach(fixtureInfo => {
     const hasMagicPoints = html.includes('Magic Points (15)');
     const hasRawSkills = /Invocation skill/i.test(html) && /Shaping skill/i.test(html);
     const hasSelectedSpells = ['Holdfast', 'Animate (Substance)', 'Project (Sense)'].every(spell => html.includes(spell));
-    const hasSourceCopy = html.includes('AiG p.30-31, p.59-60; Mythras Core p.162, p.166-177');
+    const hasSourceCopy = html.includes('AiG p.30-31, p.59-60; Mythras rulebook p.162, p.166-177');
     const hasTheistLeak = /Devotional Pool|data-testid="miracle-name"|Shield/.test(html);
 
     if (hasSourceLabel && hasMagicPoints && hasRawSkills && hasSelectedSpells && hasSourceCopy && !hasTheistLeak) {
@@ -7756,6 +7817,110 @@ fixtures.forEach(fixtureInfo => {
   }
 }
 
+// Test: returning from Play Mode to Wizard Mode refreshes Step 13 navigation
+{
+  const { App: AppObj, _sandbox: sandbox } = loadApp();
+  if (AppObj && AppObj.switchMode && AppObj.prevStep) {
+    AppObj.currentStep = AppObj.totalSteps || 13;
+    let renderCount = 0;
+    const originalRenderCurrentStep = AppObj.renderCurrentStep;
+    const originalUpdateStepIndicator = AppObj.updateStepIndicator;
+    AppObj.renderCurrentStep = () => { renderCount++; };
+    AppObj.updateStepIndicator = () => {};
+    sandbox.window.scrollTo = () => {};
+
+    AppObj.switchMode('play');
+    AppObj.switchMode('wizard');
+    AppObj.prevStep();
+
+    AppObj.renderCurrentStep = originalRenderCurrentStep;
+    AppObj.updateStepIndicator = originalUpdateStepIndicator;
+
+    if (renderCount >= 2 && AppObj.currentStep === 12) {
+      pass('Wizard Mode return from Play refreshes Step 13 and Previous moves to Step 12');
+    } else {
+      fail('Wizard Mode return from Play leaves Step 13 Previous stale',
+        JSON.stringify({ renderCount, currentStep: AppObj.currentStep }));
+    }
+  } else {
+    fail('Wizard navigation APIs not available for Play return regression');
+  }
+}
+
+// Test: build-defining changes clear stale auto-populated companions
+{
+  const CD = App.CharacterData;
+  const AppObj = App.App;
+
+  if (AppObj && AppObj.autoPopulateCompanion && AppObj.selectCult && AppObj.selectCareer) {
+    const origRender = AppObj.renderCurrentStep;
+    const origSave = AppObj.saveToLocalStorage;
+    AppObj.renderCurrentStep = function() {};
+    AppObj.saveToLocalStorage = function() {};
+
+    const seedWahaShamanCompanions = () => {
+      CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 10, POW: 12, CHA: 10 };
+      CD.culture = 'Praxian';
+      CD.cult = 'Waha';
+      CD.cultType = { primary: 'theist', types: ['theist', 'animist'], isHybrid: true };
+      CD.career = 'Shaman';
+      CD.socialClass = 'Freeman';
+      CD.combatStyles = [{ name: 'Bison Riders', weapons: ['bison lance'] }];
+      CD.careerSkills = {};
+      CD.miracles = [];
+      CD.boundSpirits = [];
+      CD.sorcerySpells = [];
+      CD.mysticismTalents = [];
+      CD.companions = [];
+      AppObj.autoPopulateCompanion();
+      return CD.companions.map(companion => companion.name);
+    };
+
+    const initialCultCompanions = seedWahaShamanCompanions();
+    const cultResult = AppObj.selectCult('Orlanth', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const afterCultChange = CD.companions.map(companion => companion.name);
+
+    const initialCareerCompanions = seedWahaShamanCompanions();
+    const careerResult = AppObj.selectCareer('Warrior');
+    const afterCareerChange = CD.companions.map(companion => companion.name);
+
+    CD.cult = 'Waha';
+    CD.career = 'Warrior';
+    CD.companions = [{ name: 'Manual Pack Alynx' }];
+    const manualCultResult = AppObj.selectCult('Orlanth', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const afterManualCultChange = CD.companions.map(companion => companion.name);
+
+    CD.career = 'Warrior';
+    CD.careerSkills = {};
+    CD.companions = [{ name: 'Manual Riding Horse' }];
+    const manualCareerResult = AppObj.selectCareer('Shaman');
+    const afterManualCareerChange = CD.companions.map(companion => companion.name);
+
+    AppObj.renderCurrentStep = origRender;
+    AppObj.saveToLocalStorage = origSave;
+
+    if (
+      initialCultCompanions.some(name => /Bison|Cousin/.test(name)) &&
+      initialCareerCompanions.some(name => /Bison|Cousin/.test(name)) &&
+      cultResult.success === true &&
+      careerResult.success === true &&
+      afterCultChange.length === 0 &&
+      afterCareerChange.length === 0 &&
+      manualCultResult.success === true &&
+      manualCareerResult.success === true &&
+      afterManualCultChange.includes('Manual Pack Alynx') &&
+      afterManualCareerChange.includes('Manual Riding Horse')
+    ) {
+      pass('Build changes clear stale auto-populated companions while preserving manual companions');
+    } else {
+      fail('Build changes leave stale companions attached',
+        JSON.stringify({ initialCultCompanions, afterCultChange, cultResult, initialCareerCompanions, afterCareerChange, careerResult, afterManualCultChange, manualCultResult, afterManualCareerChange, manualCareerResult }));
+    }
+  } else {
+    fail('Companion reset dependencies are missing');
+  }
+}
+
 // ============================================================
 section('Random Character Generator');
 // ============================================================
@@ -7780,6 +7945,7 @@ section('Random Character Generator');
     CD.bonusSkills = { 'Stealth': 8 };
     CD.weapons = [{ name: 'Old Sword', quantity: 1 }];
     CD.folkMagicSpells = ['Old Spell'];
+    CD.companions = [{ name: 'Old Mule', species: 'Mule' }];
 
     // Mock DOM-dependent functions for Node
     const origRender = AppObj.renderCurrentStep;
@@ -7923,6 +8089,12 @@ section('Random Character Generator');
 	    if (!CD.folkMagicSpells.includes('Old Spell')) pass('Random: old folkMagic cleared');
 	    else fail('Random: old spell "Old Spell" still present');
 
+    if (!CD.companions.some(companion => companion.name === 'Old Mule')) {
+      pass('Random: old companions cleared');
+    } else {
+      fail('Random: old companion "Old Mule" still present');
+    }
+
 	    AppObj.mode = 'play';
 	    let renderedPlayMode = false;
 	    const origPlayRender = AppObj.renderPlayMode;
@@ -8001,9 +8173,11 @@ section('Random Character Generator');
           animismProvider &&
           (CD.boundSpirits || []).length === expectedSpirits &&
           expectedSpirits > 0 &&
+          (CD.companions || []).some(companion => /bison/i.test(`${companion.name} ${companion.species}`)) &&
+          (CD.companions || []).some(companion => /baboon/i.test(`${companion.name} ${companion.species}`)) &&
           (CD.miracles || []).length === AppRef.getEffectiveInitiateMiracleLimit('Waha')
         ) {
-          pass('Random Waha Shaman satisfies cult gates and starting magic selections');
+          pass('Random Waha Shaman satisfies cult gates, companions, and starting magic selections');
         } else {
           fail('Random Waha Shaman remains blocked or incomplete',
             JSON.stringify({
@@ -8015,6 +8189,7 @@ section('Random Character Generator');
               culturalSkills: CD.culturalSkills,
               bonusSkills: CD.bonusSkills,
               spirits: (CD.boundSpirits || []).map(spirit => spirit.name || spirit),
+              companions: CD.companions,
               expectedSpirits,
               miracles: CD.miracles
             }));
@@ -9661,6 +9836,30 @@ section('Index Provenance Coverage');
 
 section('Player Handout Contract');
 
+// Test: character-generator player copy uses the handout wording for the book
+{
+  const htmlPath = path.join(__dirname, 'index.html');
+  const html = fs.existsSync(htmlPath) ? fs.readFileSync(htmlPath, 'utf8') : '';
+  const playerFacingCorePatterns = [
+    /<h2>Magic[\s\S]{0,160}Mythras Core/i,
+    /Read:\s*Mythras Core/i,
+    /page-ref">\([^<]*Mythras Core/i,
+    /showToast\('[^']*Mythras Core/i,
+    /spell-picker__source">Sources:\s*Mythras Core/i,
+    />Source:\s*Mythras Core/i,
+    /Mysticism uses raw Mythras Core rules/i
+  ];
+  const offenders = playerFacingCorePatterns
+    .filter(pattern => pattern.test(html))
+    .map(pattern => String(pattern));
+
+  if (offenders.length === 0 && html.includes('Mythras rulebook')) {
+    pass('Character generator player-facing copy uses Mythras rulebook wording');
+  } else {
+    fail('Character generator player-facing copy still says Mythras Core', offenders.join('; '));
+  }
+}
+
 // Test: player-facing handout set has a start route and required references
 {
   const handoutDir = path.join(__dirname, 'docs', 'handouts');
@@ -9729,6 +9928,34 @@ section('Player Handout Contract');
     pass('Player handout links are safe for Copyparty root and nested deployment');
   } else {
     fail('Player handout links are not deployment-safe', problems.slice(0, 8).join('; '));
+  }
+}
+
+// Test: actionable cult one-pager mentions link to the player folder or Source Trail
+{
+  const handoutDir = path.join(__dirname, 'docs', 'handouts');
+  const htmlFiles = fs.existsSync(handoutDir)
+    ? fs.readdirSync(handoutDir).filter(file => file.endsWith('.html'))
+    : [];
+  const onePagerFolder = 'https://drive.google.com/drive/folders/1CKNxkpoL4sWfzdbkglQyiYvCBXlmyFIj';
+  const problems = [];
+
+  for (const file of htmlFiles) {
+    const html = fs.readFileSync(path.join(handoutDir, file), 'utf8');
+    for (const match of html.matchAll(/cult one-pagers?|Waha one-pager/gi)) {
+      const start = Math.max(0, match.index - 180);
+      const end = Math.min(html.length, match.index + 220);
+      const context = html.slice(start, end);
+      if (!context.includes(onePagerFolder) && !/href="\/rules\/handouts\/source-trail\.html(?:#[^"]*)?"/i.test(context)) {
+        problems.push(`${file}: unlinked ${match[0]} near offset ${match.index}`);
+      }
+    }
+  }
+
+  if (problems.length === 0) {
+    pass('Cult one-pager mentions link to the player folder or Source Trail');
+  } else {
+    fail('Cult one-pager mentions are not linked', problems.slice(0, 10).join('; '));
   }
 }
 
@@ -10884,6 +11111,69 @@ section('Step 9 Initiation Gate');
 }
 
 {
+  const { App: AppRef, CharacterData: CD } = loadApp();
+
+  if (AppRef?.selectSocialClass && AppRef?.agent?.setStep && AppRef?.autoPopulateCompanion) {
+    const origRender = AppRef.renderCurrentStep;
+    const origSave = AppRef.saveToLocalStorage;
+    AppRef.renderCurrentStep = function() {};
+    AppRef.saveToLocalStorage = function() {};
+
+    const seedGentryHorse = () => {
+      CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 10, POW: 10, CHA: 10 };
+      CD.culture = 'Esrolian';
+      CD.cult = null;
+      CD.career = 'Farmer';
+      CD.socialClass = 'Gentry';
+      CD.socialClassMoneyMod = 3;
+      CD.combatStyles = [];
+      CD.companions = [];
+      AppRef.autoPopulateCompanion();
+      return CD.companions.map(companion => companion.name);
+    };
+
+    const uiBefore = seedGentryHorse();
+    AppRef.selectSocialClass('Freeman');
+    const uiAfter = CD.companions.map(companion => companion.name);
+
+    const agentBefore = seedGentryHorse();
+    const agentResult = AppRef.agent.setStep(12, { socialClass: 'Freeman' });
+    const agentAfter = CD.companions.map(companion => companion.name);
+
+    CD.socialClass = 'Gentry';
+    CD.companions = [{ name: 'Manual Stable Horse' }];
+    AppRef.selectSocialClass('Freeman');
+    const manualUiAfter = CD.companions.map(companion => companion.name);
+
+    CD.socialClass = 'Gentry';
+    CD.companions = [{ name: 'Manual Agent Horse' }];
+    const manualAgentResult = AppRef.agent.setStep(12, { socialClass: 'Freeman' });
+    const manualAgentAfter = CD.companions.map(companion => companion.name);
+
+    AppRef.renderCurrentStep = origRender;
+    AppRef.saveToLocalStorage = origSave;
+
+    if (
+      uiBefore.includes('Riding Horse') &&
+      agentBefore.includes('Riding Horse') &&
+      uiAfter.length === 0 &&
+      agentResult.success === true &&
+      agentAfter.length === 0 &&
+      manualUiAfter.includes('Manual Stable Horse') &&
+      manualAgentResult.success === true &&
+      manualAgentAfter.includes('Manual Agent Horse')
+    ) {
+      pass('Social class changes clear stale auto-populated companions while preserving manual companions');
+    } else {
+      fail('Social class changes leave stale companions attached',
+        JSON.stringify({ uiBefore, uiAfter, agentBefore, agentAfter, agentResult, manualUiAfter, manualAgentAfter, manualAgentResult }));
+    }
+  } else {
+    fail('Social-class companion reset dependencies not found');
+  }
+}
+
+{
   const { App: AppRef, CharacterData: CD, CULTURES_DATA: CulturesData, _sandbox: sandbox } = loadApp();
 
   if (AppRef?.agent?.setStep && AppRef.rollStartingMoneyForCulture) {
@@ -11433,7 +11723,7 @@ section('Step 9 Initiation Gate');
       html.includes('Casting:</strong> Invocation skill') &&
       html.includes('Shaping:</strong> Shaping skill') &&
       html.includes('AiG p.30-31') &&
-      html.includes('Mythras Core p.162, p.166-177') &&
+      html.includes('Mythras rulebook p.162, p.166-177') &&
       html.includes('Starting Spells') &&
       html.includes('Holdfast');
     const requiresSorcerySelection = missingSpellErrors.some(error => /sorcery spell/i.test(error));

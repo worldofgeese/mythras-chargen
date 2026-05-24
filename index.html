@@ -345,6 +345,24 @@ button.primary:hover { background: #333; }
   padding: 15px;
 }
 
+.passion-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  margin: 4px 0;
+  align-items: baseline;
+}
+
+.passion-row .passion-name {
+  font-size: 13px;
+}
+
+.passion-row .passion-value {
+  text-align: right;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 /* Collapsible */
 .collapsible {
   background: #f5f5f5;
@@ -496,9 +514,6 @@ button.primary:hover { background: #333; }
   .combat-style-card { border: 1px solid #999; padding: 10px; margin: 8px 0; border-radius: 4px; background: #f5f5f5; }
   .combat-style-card .style-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
   .combat-style-card .style-detail { font-size: 12px; color: #333; margin: 2px 0; }
-  .passion-row { display: grid; grid-template-columns: 2fr 60px; gap: 8px; margin: 4px 0; align-items: center; }
-  .passion-row .passion-name { font-size: 13px; }
-  .passion-row .passion-value { text-align: center; font-weight: 600; }
   .skill-row { grid-template-columns: 1fr; }
   .skill-row button { width: 100%; }
   .attributes-grid { grid-template-columns: 1fr; }
@@ -789,7 +804,7 @@ select:focus {
         <h2>Passions <span class="page-ref">(Mythras p.30)</span></h2>
         <div id="play-passions"></div>
 
-        <h2>Magic <span class="page-ref">(AiG p.63-122; Mythras Core p.131-178)</span></h2>
+        <h2>Magic <span class="page-ref">(AiG p.63-122; Mythras rulebook p.131-178)</span></h2>
         <div id="play-magic"></div>
 
         <h2>Equipment <span class="page-ref">(Mythras p.107-128)</span></h2>
@@ -4907,21 +4922,21 @@ function getSpecializationGuidance(skillName) {
   const normalizedHint = hint.toLowerCase();
 
   if (category === 'Lore' && normalizedHint.includes('regional')) {
-    return 'Choose a real region, people, species, or topic instead of leaving "Regional"; examples include Prax, Sartar, Dragon Pass, Balazar, God Forgot, Telmori Wilds, Animals, Plants, or Cult. Read: Mythras Core p.49 (Lore) plus Adventures in Glorantha p.26-41 for regional/culture descriptions.';
+    return 'Choose a real region, people, species, or topic instead of leaving "Regional"; examples include Prax, Sartar, Dragon Pass, Balazar, God Forgot, Telmori Wilds, Animals, Plants, or Cult. Read: Mythras rulebook p.49 (Lore) plus Adventures in Glorantha p.26-41 for regional/culture descriptions.';
   }
 
   const guidanceByCategory = {
-    Art: 'Name the art form this character practices, such as Calligraphy, Painting, Sculpture, or Weaving. Read: Mythras Core p.45 (Art).',
-    Binding: 'Name the spirit tradition, cult, totem, or other animist relationship this Binding skill serves; for Waha use Waha, otherwise use the shamanic tradition agreed with the GM. Read: Mythras Core p.131-154 (Animism) and the selected cult/tradition handout.',
-    Craft: 'Name the practical craft or trade, such as Alchemy, Animal Husbandry, Butchery, Mining, or Masonry. Read: Mythras Core p.47 (Craft).',
-    Culture: 'Name the culture or people this skill covers. Read: Mythras Core p.47 (Culture) and Adventures in Glorantha p.26-41 for Gloranthan culture descriptions.',
-    Devotion: 'Name the pantheon, cult, or god this Devotion skill serves. Read: Mythras Core p.184-187 (Theism skills) and the selected cult handout.',
-    Healing: 'Name the species or body of practice this Healing skill specializes in. Read: Mythras Core p.48 (Healing).',
-    Invocation: 'Name the sorcery cult, school, or grimoire this Invocation skill draws on. Read: Mythras Core p.162-165 (Sorcery) and the selected school/cult source.',
-    Language: 'Name the actual language, such as Heortling, Praxian, Tradetalk, or another language from the character background. Read: Mythras Core p.49 (Language and Literacy) plus Adventures in Glorantha p.26-41 for culture-language context.',
-    Lore: 'Name the actual body of knowledge, not a category label; examples include Cult, History, Prax, Sartar, Plants, Animals, Minerals, or Strategy and Tactics. Read: Mythras Core p.49 (Lore) plus Adventures in Glorantha p.26-41 for regional/cultural topics.',
-    Navigation: 'Name the environment or method this Navigation skill covers, such as Underground, Sea, River, or Wilderness. Read: Mythras Core p.50 (Navigation).',
-    Teach: 'Name the species or audience this Teach skill specializes in. Read: Mythras Core p.54 (Teach).'
+    Art: 'Name the art form this character practices, such as Calligraphy, Painting, Sculpture, or Weaving. Read: Mythras rulebook p.45 (Art).',
+    Binding: 'Name the spirit tradition, cult, totem, or other animist relationship this Binding skill serves; for Waha use Waha, otherwise use the shamanic tradition agreed with the GM. Read: Mythras rulebook p.131-154 (Animism) and the selected cult/tradition handout.',
+    Craft: 'Name the practical craft or trade, such as Alchemy, Animal Husbandry, Butchery, Mining, or Masonry. Read: Mythras rulebook p.47 (Craft).',
+    Culture: 'Name the culture or people this skill covers. Read: Mythras rulebook p.47 (Culture) and Adventures in Glorantha p.26-41 for Gloranthan culture descriptions.',
+    Devotion: 'Name the pantheon, cult, or god this Devotion skill serves. Read: Mythras rulebook p.184-187 (Theism skills) and the selected cult handout.',
+    Healing: 'Name the species or body of practice this Healing skill specializes in. Read: Mythras rulebook p.48 (Healing).',
+    Invocation: 'Name the sorcery cult, school, or grimoire this Invocation skill draws on. Read: Mythras rulebook p.162-165 (Sorcery) and the selected school/cult source.',
+    Language: 'Name the actual language, such as Heortling, Praxian, Tradetalk, or another language from the character background. Read: Mythras rulebook p.49 (Language and Literacy) plus Adventures in Glorantha p.26-41 for culture-language context.',
+    Lore: 'Name the actual body of knowledge, not a category label; examples include Cult, History, Prax, Sartar, Plants, Animals, Minerals, or Strategy and Tactics. Read: Mythras rulebook p.49 (Lore) plus Adventures in Glorantha p.26-41 for regional/cultural topics.',
+    Navigation: 'Name the environment or method this Navigation skill covers, such as Underground, Sea, River, or Wilderness. Read: Mythras rulebook p.50 (Navigation).',
+    Teach: 'Name the species or audience this Teach skill specializes in. Read: Mythras rulebook p.54 (Teach).'
   };
 
   return guidanceByCategory[category] || `Choose a concrete ${category || 'skill'} specialization for "${hint}".`;
@@ -10233,9 +10248,9 @@ function formatSorcerySourcePages(source) {
     pages.includes('AiG p.59-60') &&
     pages.includes('Mythras Core p.162') &&
     pages.includes('Mythras Core p.166-177');
-  if (hasZzistoriPages) return 'AiG p.30-31, p.59-60; Mythras Core p.162, p.166-177';
-  if (pages.length > 0) return pages.join('; ');
-  return 'Mythras Core p.162, p.166-177';
+  if (hasZzistoriPages) return 'AiG p.30-31, p.59-60; Mythras rulebook p.162, p.166-177';
+  if (pages.length > 0) return pages.map(page => String(page).replace(/^Mythras Core\b/, 'Mythras rulebook')).join('; ');
+  return 'Mythras rulebook p.162, p.166-177';
 }
 
 function slugifyMagicProviderPart(value) {
@@ -10809,6 +10824,7 @@ const CharacterData = {
       strikeRank: this.coerceNumber(companion.strikeRank),
       notes: this.coerceText(companion.notes)
     };
+    if (companion.autoPopulated === true) sanitized.autoPopulated = true;
 
     Object.entries(companion.characteristics || {}).forEach(([key, value]) => {
       sanitized.characteristics[this.coerceText(key)] = this.coerceNumber(value);
@@ -11262,7 +11278,9 @@ const App = {
     const pdfBtn = document.getElementById('btn-export-pdf');
     if (pdfBtn) { pdfBtn.disabled = mode !== 'play'; }
 
-        if (mode === 'play') {
+    if (mode === 'wizard') {
+      this.renderCurrentStep();
+    } else if (mode === 'play') {
       this.renderPlayMode();
     }
   },
@@ -12548,7 +12566,7 @@ App.renderStep5 = function() {
   div.innerHTML = `
     <div class="step-header">Step 5: Cultural Skills & Magic <span class="page-ref">(Adventures in Glorantha p.24)</span></div>
     <p>These are the skills your character learned growing up in their culture. You have 100 points to distribute among them. Put more points in skills you want your character to be good at.</p>
-    <p style="font-size: 0.9em; color: #555; margin-top: 4px;">Each skill can receive a maximum of 15 points <span class="page-ref">(Mythras Core p.20)</span></p>
+    <p style="font-size: 0.9em; color: #555; margin-top: 4px;">Each skill can receive a maximum of 15 points <span class="page-ref">(Mythras rulebook p.20)</span></p>
 
     <div class="budget-tracker ${remaining < 0 ? 'overspent' : remaining === 0 ? 'complete' : ''}" data-testid="budget-tracker">
       Points Remaining: ${remaining} / 100
@@ -12559,7 +12577,7 @@ App.renderStep5 = function() {
     
     <h3>Rune Affinities <span class="page-ref">(Adventures in Glorantha p.24)</span></h3>
     <p>Select three runes. Primary: POW×2+30, Secondary: POW×2+20, Tertiary: POW×2+10</p>
-    <p style="font-size: 0.85em; color: #555; margin-top: 2px;">POW (Power) represents magical potency and willpower <span class="page-ref">(Mythras Core p.9)</span>. Your POW is currently <strong>${CharacterData.characteristics.POW}</strong>.</p>
+    <p style="font-size: 0.85em; color: #555; margin-top: 2px;">POW (Power) represents magical potency and willpower <span class="page-ref">(Mythras rulebook p.9)</span>. Your POW is currently <strong>${CharacterData.characteristics.POW}</strong>.</p>
     <div class="grid-3">
       ${['primary', 'secondary', 'tertiary'].map(slot => {
         const others = ['primary','secondary','tertiary'].filter(s => s !== slot).map(s => CharacterData.runeAffinities[s]);
@@ -12675,7 +12693,7 @@ App.updateSkillPoints = function(category, skillName, points, inputEl) {
   // Enforce 15-point per-skill cap for cultural and career skills (RAW)
   if (category === 'cultural' || category === 'career') {
     if (points > 15) {
-      this.showToast('Maximum 15 points per skill (Mythras Core p.20)', 'error');
+      this.showToast('Maximum 15 points per skill (Mythras rulebook p.20)', 'error');
       points = 15;
     }
   }
@@ -13308,7 +13326,11 @@ App.selectCareer = function(careerName) {
         return {success: false, error: 'Career change cancelled'};
       }
     }
+    const careerChanged = CharacterData.career !== careerName;
     CharacterData.career = careerName;
+    if (careerChanged) {
+      this.clearAutoPopulatedCompanions();
+    }
     CharacterData.careerSkills = {};
     CharacterData.careerFolkMagic = [];
 
@@ -13713,7 +13735,7 @@ App.renderAnimismPickerPanel = function(provider, options = {}) {
       <h4>Starting Bound Spirits <span style="font-weight:normal">(${selectedCount} / ${maxStarting})</span></h4>
       <p class="spell-picker__hint">Select up to ${maxStarting} starting spirits (intensity 1-2). Consult GM for provider-specific options.</p>
       <div class="spell-picker__list">${spiritListHTML}</div>
-      <p class="spell-picker__source">Sources: Mythras Core p.131-154 and Bird in the Hand p.43-47</p>
+      <p class="spell-picker__source">Sources: Mythras rulebook p.131-154 and Bird in the Hand p.43-47</p>
     </div>
   `;
 };
@@ -13993,6 +14015,9 @@ App.selectCult = function(cultName, options = {}) {
   }
   const confirmedCultSelectionLoss = previousCult && previousCult !== cultName && options.allowMagicSelectionLoss;
   CharacterData.cult = cultName;
+  if (previousCult !== cultName) {
+    this.clearAutoPopulatedCompanions();
+  }
   if (previousCult && previousCult !== cultName) {
     CharacterData.miracles = [];
     CharacterData.mysticismTalents = [];
@@ -14108,6 +14133,7 @@ App.clearCultSelection = function() {
   CharacterData.cultType = null;
   CharacterData.devotionalPool = 0;
   CharacterData.miracles = [];
+  this.clearAutoPopulatedCompanions();
   this.normalizeHigherMagicState(CharacterData);
 };
 
@@ -15037,7 +15063,7 @@ App.renderStep10 = function() {
   div.innerHTML = `
     <div class="step-header">Step 10: Career Skills & Magic <span class="page-ref">(Adventures in Glorantha p.24)</span></div>
     <p>Distribute 100 points among your career's listed skills only.</p>
-    <p style="font-size: 0.9em; color: #555; margin-top: 4px;">Each skill can receive a maximum of 15 points <span class="page-ref">(Mythras Core p.20)</span></p>
+    <p style="font-size: 0.9em; color: #555; margin-top: 4px;">Each skill can receive a maximum of 15 points <span class="page-ref">(Mythras rulebook p.20)</span></p>
 
     <div class="budget-tracker ${remaining < 0 ? 'overspent' : remaining === 0 ? 'complete' : ''}" data-testid="budget-tracker">
       Points Remaining: ${remaining} / 100
@@ -15569,6 +15595,7 @@ App.generateRandomCharacter = function() {
   CharacterData.notes = '';
   CharacterData.background = '';
   CharacterData.hitPoints = {};
+  CharacterData.companions = [];
   CharacterData.cult = null;
   CharacterData.cultType = null;
   CharacterData.miracles = [];
@@ -16397,38 +16424,10 @@ App.autoPopulateCompanion = function() {
   if (cult === 'Waha' && career === 'Shaman') {
     // Shamans get baboon IN ADDITION to their mount (if Praxian)
     if (templateKey) {
-      // Already have a mount — add baboon as second companion
-      const baboonTemplate = COMPANION_TEMPLATES.baboon;
-      const baboon = {
-        name: 'Cousin',
-        species: baboonTemplate.species,
-        characteristics: { ...baboonTemplate.characteristics },
-        hitLocations: JSON.parse(JSON.stringify(baboonTemplate.hitLocations)),
-        attacks: JSON.parse(JSON.stringify(baboonTemplate.attacks)),
-        armor: baboonTemplate.armor,
-        movement: baboonTemplate.movement,
-        damageModifier: baboonTemplate.damageModifier,
-        hitPointsTotal: baboonTemplate.hitPointsTotal,
-        healingRate: baboonTemplate.healingRate,
-        strikeRank: baboonTemplate.strikeRank,
-        notes: baboonTemplate.notes
-      };
-      // First add the mount, then baboon
-      const mountTemplate = COMPANION_TEMPLATES[templateKey];
-      CharacterData.companions = [{
-        name: defaultName,
-        species: mountTemplate.species,
-        characteristics: { ...mountTemplate.characteristics },
-        hitLocations: JSON.parse(JSON.stringify(mountTemplate.hitLocations)),
-        attacks: JSON.parse(JSON.stringify(mountTemplate.attacks)),
-        armor: mountTemplate.armor,
-        movement: mountTemplate.movement,
-        damageModifier: mountTemplate.damageModifier,
-        hitPointsTotal: mountTemplate.hitPointsTotal,
-        healingRate: mountTemplate.healingRate,
-        strikeRank: mountTemplate.strikeRank,
-        notes: mountTemplate.notes
-      }, baboon];
+      CharacterData.companions = [
+        this.createCompanionFromTemplate(templateKey, defaultName, { autoPopulated: true }),
+        this.createCompanionFromTemplate('baboon', 'Cousin', { autoPopulated: true })
+      ].filter(Boolean);
       return;
     } else {
       templateKey = 'baboon';
@@ -16444,22 +16443,35 @@ App.autoPopulateCompanion = function() {
 
   // Apply template if found
   if (templateKey && COMPANION_TEMPLATES[templateKey]) {
-    const template = COMPANION_TEMPLATES[templateKey];
-    CharacterData.companions = [{
-      name: defaultName,
-      species: template.species,
-      characteristics: { ...template.characteristics },
-      hitLocations: JSON.parse(JSON.stringify(template.hitLocations)),
-      attacks: JSON.parse(JSON.stringify(template.attacks)),
-      armor: template.armor,
-      movement: template.movement,
-      damageModifier: template.damageModifier,
-      hitPointsTotal: template.hitPointsTotal,
-      healingRate: template.healingRate,
-      strikeRank: template.strikeRank,
-      notes: template.notes
-    }];
+    const companion = this.createCompanionFromTemplate(templateKey, defaultName, { autoPopulated: true });
+    CharacterData.companions = companion ? [companion] : [];
   }
+};
+
+App.createCompanionFromTemplate = function(templateKey, name, options = {}) {
+  const template = COMPANION_TEMPLATES[templateKey];
+  if (!template) return null;
+  const companion = {
+    name: name || template.species.split(' (')[0],
+    species: template.species,
+    characteristics: { ...template.characteristics },
+    hitLocations: JSON.parse(JSON.stringify(template.hitLocations)),
+    attacks: JSON.parse(JSON.stringify(template.attacks)),
+    armor: template.armor,
+    movement: template.movement,
+    damageModifier: template.damageModifier,
+    hitPointsTotal: template.hitPointsTotal,
+    healingRate: template.healingRate,
+    strikeRank: template.strikeRank,
+    notes: template.notes
+  };
+  if (options.autoPopulated) companion.autoPopulated = true;
+  return companion;
+};
+
+App.clearAutoPopulatedCompanions = function() {
+  CharacterData.companions = (CharacterData.companions || [])
+    .filter(companion => !companion.autoPopulated);
 };
 
 App.getAvailableCompanionTypes = function() {
@@ -16501,23 +16513,10 @@ App.getAvailableCompanionTypes = function() {
 };
 
 App.addCompanion = function(templateKey) {
-  const template = COMPANION_TEMPLATES[templateKey];
-  if (!template) return;
+  const companion = this.createCompanionFromTemplate(templateKey);
+  if (!companion) return;
   if (!CharacterData.companions) CharacterData.companions = [];
-  CharacterData.companions.push({
-    name: template.species.split(' (')[0],
-    species: template.species,
-    characteristics: { ...template.characteristics },
-    hitLocations: JSON.parse(JSON.stringify(template.hitLocations)),
-    attacks: JSON.parse(JSON.stringify(template.attacks)),
-    armor: template.armor,
-    movement: template.movement,
-    damageModifier: template.damageModifier,
-    hitPointsTotal: template.hitPointsTotal,
-    healingRate: template.healingRate,
-    strikeRank: template.strikeRank,
-    notes: template.notes
-  });
+  CharacterData.companions.push(companion);
   this.saveToLocalStorage();
   this.renderCurrentStep();
 };
@@ -16556,7 +16555,11 @@ App.rollSocialClass = function() {
   const roll = Math.floor(Math.random() * 100) + 1;
   const tier = table.find(t => roll >= t.d100_min && roll <= t.d100_max);
   if (tier) {
+    const socialClassChanged = CharacterData.socialClass !== tier.class;
     CharacterData.socialClass = tier.class;
+    if (socialClassChanged) {
+      this.clearAutoPopulatedCompanions();
+    }
     CharacterData.socialClassMoneyMod = tier.money_modifier;
     this.saveToLocalStorage();
     this.renderCurrentStep();
@@ -16569,7 +16572,11 @@ App.selectSocialClass = function(className) {
   const table = SOCIAL_CLASS_TABLES[cultureType];
   const tier = table.find(t => t.class === className);
   if (tier) {
+    const socialClassChanged = CharacterData.socialClass !== tier.class;
     CharacterData.socialClass = tier.class;
+    if (socialClassChanged) {
+      this.clearAutoPopulatedCompanions();
+    }
     CharacterData.socialClassMoneyMod = tier.money_modifier;
     this.saveToLocalStorage();
     this.renderCurrentStep();
@@ -16587,7 +16594,7 @@ App.renderStep12 = function() {
   const div = document.createElement('div');
   div.className = 'wizard-step';
   div.innerHTML = `
-    <div class="step-header">Step 12: Social Class <span class="page-ref">(Mythras Core p.21, 24)</span></div>
+    <div class="step-header">Step 12: Social Class <span class="page-ref">(Mythras rulebook p.21, 24)</span></div>
     <p>Your social class determines your starting wealth modifier and background resources. Roll d100 or select manually.</p>
 
     <div style="background: #f5f5f5; padding: 12px; border: 1px solid #999; margin-bottom: 12px;">
@@ -16673,7 +16680,7 @@ App.renderStep13 = function() {
       <p>Folk Magic: ${CharacterData.folkMagicSpells.length + CharacterData.careerFolkMagic.length} spells<br>
          Rune Affinities: ${esc(CharacterData.runeAffinities.primary || 'None')}, ${esc(CharacterData.runeAffinities.secondary || 'None')}, ${esc(CharacterData.runeAffinities.tertiary || 'None')}</p>
 
-      <h4>Equipment <span class="page-ref">(Background Equipment Table, Mythras Core p.33-34)</span></h4>
+      <h4>Equipment <span class="page-ref">(Background Equipment Table, Mythras rulebook p.33-34)</span></h4>
       ${CharacterData.socialClass ? `<p><strong>Social Class Equipment Tier:</strong> ${esc(CharacterData.socialClass)}</p>` : ''}
       ${CharacterData.weapons.length > 0 ? `<p><strong>Weapons:</strong> ${CharacterData.weapons.map(w => esc(w.name) + (w.damage ? ' (' + esc(w.damage) + ')' : '')).join(', ')}</p>` : ''}
       ${CharacterData.armor.length > 0 ? `<p><strong>Armour:</strong> ${CharacterData.armor.map(a => esc(a.name) + ' (AP ' + esc(a.ap) + ', ' + esc(a.locations) + ')').join(', ')}</p>` : ''}
@@ -17115,9 +17122,9 @@ App.renderPlayPassions = function() {
     return;
   }
   container.innerHTML = passions.map(p => {
-    const name = p.name || (p.choice ? '(not yet chosen)' : 'Unknown');
-    const value = p.value || 30;
-    return `<div class="passion-row"><span class="passion-name">${name}</span><span class="passion-value">${value}%</span></div>`;
+    const name = this.escapeHtml(p.name || (p.choice ? '(not yet chosen)' : 'Unknown'));
+    const value = this.escapeHtml(p.value || 30);
+    return `<div class="passion-row"><span class="passion-name">${name}</span> <span class="passion-value">${value}%</span></div>`;
   }).join('');
 };
 
@@ -17176,7 +17183,7 @@ App.renderPlayMagic = function() {
       ` : '<p style="font-size: 0.85em; color: #666;">No starting spirits selected.</p>'}
       <p style="font-size: 0.9em;"><strong>Casting:</strong> Spirit Rune affinity (Gloranthan spirit magic adaptation)</p>
       <p style="font-size: 0.85em; color: #555; font-style: italic;">Spirit selection during character creation: consult GM for available spirits from cult tradition. Typical starting spirits: 2-3 intensity 1-2 nature spirits in fetishes.</p>
-      <p style="font-size: 0.8em; color: #666;">Source: Mythras Core p.131-154 and Bird in the Hand p.43-47</p>
+      <p style="font-size: 0.8em; color: #666;">Source: Mythras rulebook p.131-154 and Bird in the Hand p.43-47</p>
     `;
   };
   const renderMysticismInfo = (provider) => {
@@ -17185,9 +17192,9 @@ App.renderPlayMagic = function() {
     const magicPoints = provider.magicPoints ?? getCharacterMagicPoints(CharacterData);
     return `
       <h3>Mysticism — ${esc(sourceLabel)}</h3>
-      <p style="font-size: 0.9em;"><strong>System:</strong> Meditation + Mysticism talents (Mythras Core p.155-161)</p>
+      <p style="font-size: 0.9em;"><strong>System:</strong> Meditation + Mysticism talents (Mythras rulebook p.155-161)</p>
       <p style="font-size: 0.9em;"><strong>Resource:</strong> Magic Points (${magicPoints}) when talents are activated</p>
-      <p style="font-size: 0.85em; color: #555; font-style: italic;">Mysticism uses raw Mythras Core rules. Max active talent Intensity = Meditation skill / 10. Talent picking awaits a verified talent catalog.</p>
+      <p style="font-size: 0.85em; color: #555; font-style: italic;">Mysticism uses the Mythras rulebook rules. Max active talent Intensity = Meditation skill / 10. Talent picking awaits a verified talent catalog.</p>
     `;
   };
 
@@ -17704,7 +17711,10 @@ App.exportSinglePagePDF = async function() {
         const x = L + col * passColW;
         const yPos = y - row * 7;
         if (yPos > 35) {
-          txt(`${p.name}: ${p.value || 30}%`, x, yPos, { size: 5.5 });
+          const valueText = `${p.value || 30}%`;
+          const valueWidth = font.widthOfTextAtSize(valueText, 5.5);
+          txt(p.name, x, yPos, { size: 5.5 });
+          txt(valueText, x + passColW - valueWidth - 4, yPos, { size: 5.5 });
         }
       });
       y -= Math.ceil(passions.length / 3) * 7 + 3;
@@ -18510,7 +18520,11 @@ App.agent.setStep = function(step, data) {
         const restoreStep8Snapshot = () => restoreTrustedCharacterSnapshot(step8Snapshot);
 
         // Apply career (mirrors App.selectCareer logic)
+        const careerChanged = CharacterData.career !== data.career;
         CharacterData.career = data.career;
+        if (careerChanged) {
+          App.clearAutoPopulatedCompanions();
+        }
         CharacterData.careerSkills = {};
         CharacterData.careerFolkMagic = [];
         // Add standard skills
@@ -18684,7 +18698,11 @@ App.agent.setStep = function(step, data) {
         const cultName = data.cult;
         if (cultName === null || cultName === undefined) {
           // No-cult path
+          const cultChanged = CharacterData.cult !== null;
           CharacterData.cult = null;
+          if (cultChanged) {
+            App.clearAutoPopulatedCompanions();
+          }
           CharacterData.cultType = null;
           CharacterData.devotionalPool = 0;
           CharacterData.boundSpiritSlots = 0;
@@ -18721,7 +18739,11 @@ App.agent.setStep = function(step, data) {
         }
 
         // Apply
+        const cultChanged = CharacterData.cult !== cultName;
         CharacterData.cult = cultName;
+        if (cultChanged) {
+          App.clearAutoPopulatedCompanions();
+        }
         CharacterData.cultType = agentCultType;
         CharacterData.devotionalPool = devPool;
         CharacterData.boundSpiritSlots = agentCultType.types.includes('animist') ? Math.floor(CharacterData.characteristics.CHA / 2) : 0;
@@ -18810,11 +18832,19 @@ App.agent.setStep = function(step, data) {
           const roll = Math.floor(Math.random() * 100) + 1;
           const entry = table.find(e => roll >= e.d100_min && roll <= e.d100_max);
           if (entry) {
+            const socialClassChanged = CharacterData.socialClass !== entry.class;
             CharacterData.socialClass = entry.class;
+            if (socialClassChanged) {
+              App.clearAutoPopulatedCompanions();
+            }
             CharacterData.socialClassMoneyMod = entry.money_modifier || 1;
           }
         } else if (data.socialClass) {
+          const socialClassChanged = CharacterData.socialClass !== data.socialClass;
           CharacterData.socialClass = data.socialClass;
+          if (socialClassChanged) {
+            App.clearAutoPopulatedCompanions();
+          }
           // Look up money modifier
           const ct = App.getCultureType(CharacterData.culture);
           const table = SOCIAL_CLASS_TABLES[ct] || [];
