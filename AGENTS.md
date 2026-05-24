@@ -1,6 +1,8 @@
-# AGENTS.md - Universal Agent Contract
+# AGENTS.md — Universal Agent Contract
 
-This is a Decapod-managed repository. Agents are bound to the Decapod control plane, this file, and the mirrored project overrides below. When generic Decapod scaffolding conflicts with project overrides, the override wins.
+This is a Decapod-managed repository. **Strict Dependency: You are strictly bound to the Decapod governance kernel.**
+
+This contract applies equally to Claude, Codex, Gemini, Cursor, Kilo, and any other agent operating here.
 
 ## Mandatory Initialization
 
@@ -9,72 +11,86 @@ cargo install decapod
 decapod validate && decapod docs ingest && decapod session acquire
 decapod rpc --op agent.init
 decapod workspace status
-bd prime
-bd create "<task>" && bd update <id> --claim
-decapod infer orientation --intent "<your-goal>"
+decapod todo add "<task>" && decapod todo claim --id <task-id>
+decapod infer orientation --task-id <task-id>
 decapod workspace ensure
 cd .decapod/workspaces/<your-worktree>
+decapod rpc --op constitution.get --params '{"section":"core/DECAPOD"}'
 decapod rpc --op context.resolve
 ```
 
 ## Control-Plane First Loop
 
 ```bash
+# Discover what this binary actually supports in this repo
 decapod capabilities --format json
 decapod data schema --deterministic
+
+# Resolve precise orientation before implementation
 decapod infer orientation --intent "<your-goal>" --task-id <id>
 decapod govern capsule query --topic "<topic>" --scope interfaces --task-id <task-id>
 decapod rpc --op context.scope --params '{"query":"<problem>","limit":8}'
 ```
 
-## Golden Rules
+## Golden Rules (Non-Negotiable)
 
-1. Refine intent before inference-heavy work.
-2. Use `decapod infer orientation` before non-trivial implementation.
-3. Stop for Decapod Decision Gates, conflicts, ambiguity, or unclear policy boundaries.
-4. Never work on main/master or mutate the root checkout; use `.decapod/workspaces/*`.
-5. Read `.decapod/config.toml`; treat it as human-editable project context.
-6. Do not claim done without `decapod validate`.
-7. Do not invent unsupported Decapod capabilities.
-8. Respect Interface abstraction boundaries and lock/contention failures.
+1. **MUST** refine intent with the user before inference-heavy work.
+2. **MUST** use `decapod infer orientation` before non-trivial implementation.
+3. **MUST** stop and ask the human when Decapod emits a **Decision Gate**.
+4. **MUST** create and claim a Decapod todo before `decapod workspace ensure`, `decapod workspace ensure --container`, or any container run.
+5. **MUST NOT** work on main/master or modify the root repository's active branch. **MUST** use `decapod workspace ensure`.
+6. **MUST** read [.decapod/config.toml](.decapod/config.toml) as user-editable project context.
+7. **MUST NOT** claim done without `decapod validate` passing.
+8. **MUST NOT** invent capabilities that are not exposed by the binary.
+9. **MUST** stop if requirements conflict or intent is ambiguous.
+10. **MUST** respect the interface abstraction boundary.
+11. **MUST** maintain **Living Specs**: treat `.decapod/generated/specs/*` as dynamic documents; align them with reality before and after every implementation.
+
+## Decapod Invocation Contract
+
+Agents act. Decapod orients.
+
+Decapod is not your executor, model runtime, or workflow replacement. You remain responsible for implementation. Call Decapod as the repo-native pressure relief valve when the next responsible step requires explicit intent, boundaries, context, coordination, or proof.
+
+## Living Specs & Governance
+
+The files under `.decapod/generated/specs/` are not static documentation; they are living contracts.
+- **Before Changes**: Review the specs. If the task changes intent, update [INTENT.md](.decapod/generated/specs/INTENT.md) first.
+- **During Implementation**: If architectural or interface decisions shift, update [ARCHITECTURE.md](.decapod/generated/specs/ARCHITECTURE.md) and [INTERFACES.md](.decapod/generated/specs/INTERFACES.md).
+- **After Changes**: Ensure all specs align with the new reality. Clarify code changes in the context of these spec updates. Spec changes should generally only occur when user intent has evolved.
+
+End users and host agents may use any task manager alongside Decapod. That external tracker does not replace Decapod todos: Decapod uses its own todo claims to isolate worktrees, scope containers, prove completion, and prevent multiple agents from working the same Decapod work item concurrently.
+
+Call Decapod before proceeding when continuing would require guessing about:
+- **Intent pressure:** what you are actually trying to do.
+- **Boundary/Context/Coordination/Proof/Completion pressure:** what matters, collides, or is allowed.
+
+Concrete triggers: ambiguous requests, public impact, unclear proof, todo lifecycle, scope expansion, conflicting intent/specs, context loss, multi-agent collision risk, or readiness to claim completion.
+
+Do not call Decapod for every trivial file read, local edit, or mechanical command. Call it at decision boundaries that need governance, memory, boundaries, coordination, or proof. Decapod calls should produce or update explicit artifacts.
+
+## Invariants (Normative)
+- **INV-DAEMONLESS**: Decapod MUST NOT leave background processes running.
+- **INV-BOUNDED-VALIDATE**: `decapod validate` MUST terminate within bounded time.
+- **INV-STORE-BOUNDARY**: Agents MUST NOT directly mutate `.decapod/*`; all access MUST use CLI.
+- **INV-SESSION-AUTH**: Mutations require active session with valid credentials.
+- **INV-PROOF-GATED**: Workunit status `VERIFIED` MUST have passed proof-plan gates.
+- **INV-ROOT-ISOLATION**: Agents MUST NOT check out branches or mutate files in the main repository checkout.
 
 ## Safety Invariants
-
-- ✅ Router pointer: `core/DECAPOD.md` | ✅ Validation gate: `decapod validate`
-- ✅ Constitution ingestion gate: `decapod docs ingest`
-- ✅ Workspace status gate: `decapod workspace status`
-- ✅ Claim-before-work gate: `decapod todo claim --id <task-id>` is superseded here by `bd update <id> --claim`; do not create or claim `decapod todo` items.
-- ✅ Session auth gate: `DECAPOD_SESSION_PASSWORD`
-- ✅ Workspace gate: Docker git workspaces; use Docker git workspaces and execute in `.decapod/workspaces/*` unless the project container override applies.
-- ✅ Privilege gate: request elevated permissions before Docker/container workspace commands
-- Invariants: daemonless Decapod, bounded validation, no direct `.decapod/*` mutation except through CLI, session-scoped mutations require credentials, VERIFIED work needs proof gates, and root checkout isolation is mandatory.
-
-## Mirrored Project-Specific Decapod Overrides
-
-- Beads workflow: run `bd prime`; use `bd ready`, `bd show <id>`, `bd update <id> --claim`, and `bd close <id>`; use `bd remember "insight"` for persistent project memory; do not create `MEMORY.md` files or markdown TODO tracking. Beads is the task-tracking authority and supersedes `decapod todo`. Create/update linked follow-up Beads immediately for unresolved bugs, bad data, source/provenance/validation/doc gaps, stale worktrees/branches, or scoped exceptions; do not bury them in chat, close reasons, or broad catch-all gates.
-- Orchestration: the headed/orchestrator agent is for planning, synthesis, high-complexity decisions, and final integration. After initialization for non-trivial work, start with `compound-engineering:ce-architecture-strategist`; delegate sufficiently scoped implementation/review/research to subagents; delegate vision-mode extraction/verification to vision-capable subagents with separate extractor/verifier contexts when possible; protect context fiercely; use `handoff` around 80% context; default to `/lfg` except for fully integrated Beads workflow work or `/ce-work` plan execution.
-- Fan-out/subagent prompts: each subagent must be told to read and obey `AGENTS.md` and `.decapod/OVERRIDE.md`, run `bd prime`, use/create/claim the assigned Beads issue, avoid `decapod todo`, work in an isolated Decapod worktree, run relevant proof gates, obey Copyparty sync rules, and treat its work as provisional until the orchestrator verifies diff, proof, Beads state, and publishing. Beads and prompts must include enough fresh-agent context: goal, background, scope, source/provenance constraints, files, acceptance criteria, required skills/tools, and proof gates; vision prompts must include image paths/source revision metadata, require vision-capable tooling, forbid OCR/text-layer authority unless allowed, and keep verifier context independent from extractor output. Completion reports must include Bead ID, branch/worktree, commit SHA when created, changed files, proof pass/fail/skipped status, evidence URLs/screenshots, degraded checks, and linked follow-up Beads.
-- ADRs: check `docs/adr/` before architecture, data model, source authority, workflow, or agent-operating decisions; create ADRs with the `adr` skill when durable decisions constrain future work.
-- Architecture: single-file vanilla HTML app in `index.html`; no framework/build step; inline constants mirror source JSON under `references/`; `docs/solutions/` uses YAML frontmatter keys `module`, `problem_type`, and `tags`.
-- Copyparty: player material lives on `worldofgeese@loving-kypris.hound-celsius.ts.net`, container `copyparty`, root `/w`, public root `https://copyparty.hound-celsius.ts.net/`, staging `~/staging/`. If mirrored files change (`index.html`, `docs/handouts/*.html`, active pregens, player PDFs), inspect live tree first, sync only matching paths, preserve layout, verify affected URLs with `curl -fsSL`, and mention verification in handoff.
-- Live layout: `/w/00-START-HERE.html`, `/w/01-Character-Generator.html`, `/w/characters/active-pregens/`, `/w/rules/handouts/`, `/w/sources/books/`. Keep `/w` to those launch files/directories; archive legacy files under `~/staging/archive/`; do not flatten or rename player-facing paths without explicit request.
-- Source PDFs: canonical/player-facing PDFs are available from Copyparty under `https://copyparty.hound-celsius.ts.net/sources/books/`; use `references/sources/manifest.json` for current canonical locators and hydrate ignored local hints under `references/sources/pdfs/` before rendering or verification.
-- Publish app: `scp index.html worldofgeese@loving-kypris.hound-celsius.ts.net:~/staging/01-Character-Generator.html` then `ssh ... 'podman cp ~/staging/01-Character-Generator.html copyparty:/w/ && rm -f ~/staging/01-Character-Generator.html'`; verify `/01-Character-Generator.html`.
-- Publish handouts: copy `docs/handouts/*.html` to staging, ensure `/w/rules/handouts`, copy staging `index.html` to `/w/00-START-HERE.html`, copy remaining handouts to `/w/rules/handouts/`, then verify `/00-START-HERE.html` and touched handouts.
-- Data attestability: all game data must trace `PDF -> references/*.json -> inline constant -> UI`; never edit inline game-data constants without matching reference JSON. Source hierarchy: AiG for Gloranthan cultures/folk/rune magic; Mythras Core 3rd Printing 2018 for base rules, animism, sorcery, mysticism; Notes from Pavis for cults; Bird in Hand/Monster Island for spirits; house rules for rune casting, devotional pool, and ranks. For rules/player-facing content, define source packet, page/revision evidence, scope, and house-rule boundaries first; false rules, unsupported claims, and player-facing contradictions are blocking findings.
-- Quality gates: run `node test-chargen.js` before commit; run `node test-agent-api.mjs` after magic-system changes; run `./scripts/ingest-cults.py --validate` after cult/reference data changes; run `decapod validate`; after `index.html` changes, use `agent-browser` like a human by clicking/typing/selecting, changing choices, using fresh refs after re-render, inspecting screenshots, and verifying Play Mode plus PDF export. After non-trivial `/lfg` or equivalent implementation, run `/ce-simplify-code`, then `compound-engineering:ce-code-simplicity-reviewer`, `compound-engineering:ce-correctness-reviewer`, and always finish review cycles with `compound-engineering:ce-adversarial-reviewer`.
-- In-flight findings: if bugs, bad data, source drift, or unwanted behavior are found, create/claim a Beads issue with full context and fix it in-flight unless explicitly blocked or out of scope.
-- Container scope: routine proof for this static app does not require Docker/Podman container execution; isolated Decapod worktrees plus project proof gates satisfy the workspace requirement. Containers become required only for new dependency managers, build systems, external services, or explicit human request.
-- Commit/publish: commit only verified work with the required Copilot co-author trailer; push final `main` to both `origin` and `paphos`; clean temporary servers with specific PIDs, never name-based killing.
+- ✅ Router: `decapod rpc --op constitution.get --params '{"section":"core/DECAPOD"}'`
+- ✅ Gates: `decapod validate` | `decapod docs ingest` | `cargo install decapod`
+- ✅ Claims: `decapod todo claim --id <task-id>` | ✅ Auth: `DECAPOD_SESSION_PASSWORD`
+- ✅ Workspace: Docker git workspaces | ✅ Privilege: request elevated permissions before Docker/container workspace commands
 
 ## Operating Notes
-
-Read `.decapod/OVERRIDE.md` for the canonical override, `decapod docs show core/DECAPOD.md` for binding contracts, and `decapod capabilities --format json` for available operations. Call Decapod before editing and let Decapod validate after editing. Keep generic behavioral guidance in global/user-level instructions; this repo file should mirror only Decapod and project-specific constraints.
-
-
+- Read `.decapod/config.toml` and `.decapod/OVERRIDE.md`.
+- External task managers are allowed, but Decapod todos are still mandatory for workspace isolation.
+- DO NOT mutate `.decapod/` state directly; use decapod CLI. Access to `.decapod/` is strictly via decapod CLI.
+- Use `decapod capabilities --format json` to discover available operations.
+- Stop if requirements conflict or intent is ambiguous. Respect the interface abstraction boundary.
+- Treat lock/contention failures as blocking until resolved.
 <!-- decapod-validator-anchors
-Stop if
-via decapod CLI
-Interface abstraction boundary
 Strict Dependency: You are strictly bound to the Decapod control plane
+Strict Dependency: You are strictly bound to the Decapod governance kernel
 -->
