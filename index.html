@@ -15042,14 +15042,14 @@ App.renderCultSkillBoostPanel = function(skillDetails) {
   panel.innerHTML = `
     <div style="background: ${requirementsMet ? '#e8f5e9' : '#e8f4fd'}; border: 1px solid ${requirementsMet ? '#a5d6a7' : '#b8daff'}; padding: 12px; margin: 8px 0; border-radius: 4px;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-        <strong style="font-size: 13px;">⬆ Quick Boost — Raise Cult Skills (from bonus pool)</strong>
+        <strong style="font-size: 13px;">⬆ Quick Boost — Meet Initiation Requirements</strong>
         <span id="cult-boost-budget" style="font-size: 12px; color: #004085;">Bonus points remaining: <strong>${remainingBonus}</strong> / ${totalBonusPool}</span>
       </div>
       <p style="font-size: 11px; color: #555; margin: 0 0 6px 0;">${requirementsMet
         ? `Initiation requirements already met (${qualifyCount} skills at 50%+). These ${boostableSkills.length} skills are still below 50% — boost them here if you want them higher for play. Points count toward your Step 11 budget (max ${maxPerSkill} per skill).`
-        : `Allocate bonus points here to meet initiation requirements. These count toward your Step 11 budget (max ${maxPerSkill} per skill).`}</p>
+        : `One click reallocates legal skill points as needed to meet initiation requirements, using remaining bonus points first and then safe non-cult donors.`}</p>
       <button onclick="App.autoBoostCultSkills()" style="margin-bottom: 10px; padding: 6px 12px; background: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;"
-        ${remainingBonus <= 0 || boostableSkills.length === 0 ? 'disabled' : ''}>⚡ Auto-boost all to 50%</button>
+        ${boostableSkills.length === 0 ? 'disabled' : ''}>⚡ Quick Boost initiation skills</button>
       <div id="cult-boost-skills" style="display: grid; gap: 4px;"></div>
     </div>
   `;
@@ -15300,6 +15300,220 @@ App.getStep9ValidationErrors = function() {
   return errors;
 };
 
+App.getCultInitiationBoostBudgets = function() {
+  const ageCategory = Calc.getAgeCategory(CharacterData.age);
+  return {
+    bonusSkills: {
+      total: ageCategory ? ageCategory.bonusPoints : 150,
+      maxPerSkill: ageCategory ? ageCategory.maxPerSkill : 15
+    },
+    culturalSkills: { total: 100, maxPerSkill: 15 },
+    careerSkills: { total: 100, maxPerSkill: 15 }
+  };
+};
+
+App.getCultInitiationBoostSkillKey = function(skill) {
+  const rawSkill = skill.key || skill.matchedName || skill.name;
+  return needsDisambiguation(rawSkill)
+    ? resolveRandomDisambiguatedSkill(rawSkill, CharacterData.culture)
+    : rawSkill;
+};
+
+App.getCultInitiationBoostTotal = function(skillKey, originalPools, plannedPools) {
+  const baseTotal = this.calculateSkillTotalForKey(skillKey).value;
+  return baseTotal + ['bonusSkills', 'culturalSkills', 'careerSkills'].reduce((delta, poolName) =>
+    delta + ((plannedPools[poolName]?.[skillKey] || 0) - (originalPools[poolName]?.[skillKey] || 0)), 0);
+};
+
+App.getCultInitiationBoostPoolRoom = function(poolName, skillKey, plannedPools, budgets) {
+  const current = plannedPools[poolName]?.[skillKey] || 0;
+  return Math.max(0, (budgets[poolName]?.maxPerSkill || 15) - current);
+};
+
+App.canAssignCultInitiationTargetToCulture = function(skillKey, plannedPools) {
+  return Object.prototype.hasOwnProperty.call(plannedPools.culturalSkills || {}, skillKey);
+};
+
+App.ensureCultInitiationCareerTarget = function(skillKey, plannedPools, plannedSelections, protectedKeys, selectionChanges) {
+  if (Object.prototype.hasOwnProperty.call(plannedPools.careerSkills || {}, skillKey)) return true;
+  const career = CAREERS_DATA.find(c => c.name === CharacterData.career);
+  if (!career) return false;
+  const normalized = this.normalizeSkillName(skillKey);
+  const isStandard = (career.standardSkills || []).some(skill => this.normalizeSkillName(skill) === normalized);
+  const isProfessional = (career.professionalSkills || []).some(skill => this.normalizeSkillName(skill) === normalized);
+  if (isStandard) {
+    plannedPools.careerSkills[skillKey] = 0;
+    return true;
+  }
+  if (!isProfessional) return false;
+  if (!plannedSelections.includes(skillKey) && plannedSelections.length >= 3) {
+    const replaced = plannedSelections.find(name => !protectedKeys.has(name) && (plannedPools.careerSkills[name] || 0) > 0);
+    if (!replaced) return false;
+    plannedSelections.splice(plannedSelections.indexOf(replaced), 1, skillKey);
+    selectionChanges.push({ action: 'replace-professional-skill', from: replaced, to: skillKey });
+  } else if (!plannedSelections.includes(skillKey)) {
+    plannedSelections.push(skillKey);
+    selectionChanges.push({ action: 'add-professional-skill', to: skillKey });
+  }
+  plannedPools.careerSkills[skillKey] = plannedPools.careerSkills[skillKey] || 0;
+  return true;
+};
+
+App.planCultInitiationBoost = function(options = {}) {
+  const cult = CULTS_DATA.find(c => c.name === CharacterData.cult);
+  if (!cult) return { success: false, error: 'No cult selected', moves: [], remainingGaps: [] };
+
+  const originalPools = {
+    bonusSkills: {...(CharacterData.bonusSkills || {})},
+    culturalSkills: {...(CharacterData.culturalSkills || {})},
+    careerSkills: {...(CharacterData.careerSkills || {})}
+  };
+  const plannedPools = {
+    bonusSkills: {...originalPools.bonusSkills},
+    culturalSkills: {...originalPools.culturalSkills},
+    careerSkills: {...originalPools.careerSkills}
+  };
+  const budgets = this.getCultInitiationBoostBudgets();
+  const plannedSelections = [...(CharacterData.selectedProfessionalSkills || [])];
+  const selectionChanges = [];
+  const moves = [];
+  const allSkills = this.getCultSkillRequirementDetails(cult).map(skill => ({
+    ...skill,
+    boostKey: this.getCultInitiationBoostSkillKey(skill)
+  }));
+  const requiredCount = Math.min(5, allSkills.length);
+  const protectedKeys = new Set(allSkills
+    .filter(skill => skill.value >= 50)
+    .flatMap(skill => [skill.name, skill.key, skill.matchedName, skill.boostKey])
+    .filter(Boolean));
+  let qualifyingCount = allSkills.filter(skill => skill.value >= 50).length;
+  if (qualifyingCount >= requiredCount) {
+    return { success: true, moves: [], selectionChanges: [], remainingGaps: [], targets: [], summary: 'Initiation requirements already met.' };
+  }
+
+  const totalSpent = poolName => Object.values(plannedPools[poolName] || {}).reduce((sum, value) => sum + value, 0);
+  const addMove = (poolName, from, to, points) => {
+    if (points <= 0) return;
+    if (from) {
+      plannedPools[poolName][from] = (plannedPools[poolName][from] || 0) - points;
+      if (plannedPools[poolName][from] <= 0) delete plannedPools[poolName][from];
+    }
+    plannedPools[poolName][to] = (plannedPools[poolName][to] || 0) + points;
+    moves.push({ pool: poolName, from, to, points });
+  };
+  const tryUseRemainingBonus = target => {
+    const room = this.getCultInitiationBoostPoolRoom('bonusSkills', target.boostKey, plannedPools, budgets);
+    const remainingPool = budgets.bonusSkills.total - totalSpent('bonusSkills');
+    const needed = Math.max(0, 50 - this.getCultInitiationBoostTotal(target.boostKey, originalPools, plannedPools));
+    const points = Math.min(room, remainingPool, needed);
+    addMove('bonusSkills', null, target.boostKey, points);
+  };
+  const donorEntries = poolName => Object.entries(plannedPools[poolName] || {})
+    .filter(([name, points]) => points > 0 && !protectedKeys.has(name))
+    .sort((a, b) => b[1] - a[1]);
+  const tryReallocatePool = (poolName, target) => {
+    if (poolName === 'careerSkills' &&
+        !this.ensureCultInitiationCareerTarget(target.boostKey, plannedPools, plannedSelections, protectedKeys, selectionChanges)) {
+      return;
+    }
+    if (poolName === 'culturalSkills' && !this.canAssignCultInitiationTargetToCulture(target.boostKey, plannedPools)) return;
+    for (const [donor, donorPoints] of donorEntries(poolName)) {
+      const room = this.getCultInitiationBoostPoolRoom(poolName, target.boostKey, plannedPools, budgets);
+      const needed = Math.max(0, 50 - this.getCultInitiationBoostTotal(target.boostKey, originalPools, plannedPools));
+      const points = Math.min(donorPoints, room, needed);
+      if (points <= 0) break;
+      addMove(poolName, donor, target.boostKey, points);
+      if (this.getCultInitiationBoostTotal(target.boostKey, originalPools, plannedPools) >= 50) break;
+    }
+  };
+
+  const candidates = allSkills
+    .filter(skill => skill.value < 50 && !needsDisambiguation(skill.boostKey))
+    .sort((a, b) => (50 - a.value) - (50 - b.value));
+  const targets = [];
+  for (const target of candidates) {
+    if (qualifyingCount >= requiredCount) break;
+    const beforeMoves = moves.length;
+    const beforeSelections = selectionChanges.length;
+    const beforePools = JSON.stringify(plannedPools);
+    const beforeSelected = JSON.stringify(plannedSelections);
+
+    tryUseRemainingBonus(target);
+    if (this.getCultInitiationBoostTotal(target.boostKey, originalPools, plannedPools) < 50) tryReallocatePool('bonusSkills', target);
+    if (this.getCultInitiationBoostTotal(target.boostKey, originalPools, plannedPools) < 50) tryReallocatePool('careerSkills', target);
+    if (this.getCultInitiationBoostTotal(target.boostKey, originalPools, plannedPools) < 50) tryReallocatePool('culturalSkills', target);
+
+    if (this.getCultInitiationBoostTotal(target.boostKey, originalPools, plannedPools) >= 50) {
+      qualifyingCount += 1;
+      targets.push(target.boostKey);
+      [target.name, target.key, target.matchedName, target.boostKey].filter(Boolean).forEach(key => protectedKeys.add(key));
+    } else {
+      moves.splice(beforeMoves);
+      selectionChanges.splice(beforeSelections);
+      const restoredPools = JSON.parse(beforePools);
+      plannedPools.bonusSkills = restoredPools.bonusSkills;
+      plannedPools.culturalSkills = restoredPools.culturalSkills;
+      plannedPools.careerSkills = restoredPools.careerSkills;
+      plannedSelections.splice(0, plannedSelections.length, ...JSON.parse(beforeSelected));
+    }
+  }
+
+  const remainingGaps = allSkills
+    .map(skill => ({...skill, plannedValue: this.getCultInitiationBoostTotal(skill.boostKey, originalPools, plannedPools)}))
+    .filter(skill => skill.plannedValue < 50);
+  const success = qualifyingCount >= requiredCount;
+  if (!success && options.allowPartial !== true) {
+    return {
+      success: false,
+      error: 'No legal one-click reallocation can meet initiation requirements.',
+      moves: [],
+      selectionChanges: [],
+      remainingGaps: allSkills.filter(skill => skill.value < 50)
+    };
+  }
+  return {
+    success,
+    moves,
+    selectionChanges,
+    remainingGaps,
+    targets,
+    summary: targets.length > 0
+      ? `Boosted ${targets.length} cult skill${targets.length === 1 ? '' : 's'} to initiation threshold.`
+      : 'No boosts needed.'
+  };
+};
+
+App.applyCultInitiationBoostPlan = function(plan) {
+  if (!plan || plan.success !== true) return false;
+  if (!CharacterData.bonusSkills) CharacterData.bonusSkills = {};
+  if (!CharacterData.culturalSkills) CharacterData.culturalSkills = {};
+  if (!CharacterData.careerSkills) CharacterData.careerSkills = {};
+  if (!CharacterData.selectedProfessionalSkills) CharacterData.selectedProfessionalSkills = [];
+
+  (plan.selectionChanges || []).forEach(change => {
+    if (change.action === 'replace-professional-skill') {
+      CharacterData.selectedProfessionalSkills = CharacterData.selectedProfessionalSkills.filter(name => name !== change.from);
+      if (!CharacterData.selectedProfessionalSkills.includes(change.to)) CharacterData.selectedProfessionalSkills.push(change.to);
+      delete CharacterData.careerSkills[change.from];
+      CharacterData.careerSkills[change.to] = CharacterData.careerSkills[change.to] || 0;
+    } else if (change.action === 'add-professional-skill' && !CharacterData.selectedProfessionalSkills.includes(change.to)) {
+      CharacterData.selectedProfessionalSkills.push(change.to);
+      CharacterData.careerSkills[change.to] = CharacterData.careerSkills[change.to] || 0;
+    }
+  });
+
+  (plan.moves || []).forEach(move => {
+    const pool = CharacterData[move.pool];
+    if (!pool || move.points <= 0) return;
+    if (move.from) {
+      pool[move.from] = (pool[move.from] || 0) - move.points;
+      if (pool[move.from] <= 0) delete pool[move.from];
+    }
+    pool[move.to] = (pool[move.to] || 0) + move.points;
+  });
+  return true;
+};
+
 App.autoBoostCultSkills = function(options = {}) {
   if (!CharacterData.bonusSkills) CharacterData.bonusSkills = {};
   const cult = CULTS_DATA.find(c => c.name === CharacterData.cult);
@@ -15307,98 +15521,23 @@ App.autoBoostCultSkills = function(options = {}) {
   const updateUi = options.updateUi !== false;
   if (!cult) return { success: false, remainingGaps: [], error: 'No cult selected' };
 
-  const ageCategory = Calc.getAgeCategory(CharacterData.age);
-  const maxPerSkill = ageCategory ? ageCategory.maxPerSkill : 15;
-  const totalBonusPool = ageCategory ? ageCategory.bonusPoints : 150;
-
-  // Idempotency guard: if all concrete cult skills already >= 50%, nothing to do
-  let cultSkills = this.getCultSkillRequirementDetails(cult);
-  const allSkillTotals = cultSkills.map(skill => skill.value);
-  const requiredCount = Math.min(5, cultSkills.length);
-  const alreadyQualified = allSkillTotals.filter(t => t >= 50).length;
-  if (alreadyQualified >= requiredCount && allSkillTotals.every(t => t >= 50)) {
-    if (!silent) this.showToast('All cult skills already at 50%+', 'success');
-    return { success: true, remainingGaps: [] };
+  const snapshot = createTrustedCharacterSnapshot();
+  const plan = this.planCultInitiationBoost();
+  if (!plan.success) {
+    restoreTrustedCharacterSnapshot(snapshot);
+    if (!silent) this.showToast(plan.error || 'Unable to meet initiation requirements with legal reallocations.', 'warning');
+    if (updateUi) App.updateCultRequirementUI();
+    return { success: false, remainingGaps: plan.remainingGaps || [], error: plan.error };
   }
 
-  // Build list of cult skills with their current totals (skip ambiguous/unresolved skills)
-  cultSkills = cultSkills.map(skill => {
-    const rawSkill = skill.key || skill.name;
-    const boostKey = needsDisambiguation(rawSkill)
-      ? resolveRandomDisambiguatedSkill(rawSkill, CharacterData.culture)
-      : rawSkill;
-    return {
-      ...skill,
-      total: skill.value,
-      boostKey,
-      currentBonus: CharacterData.bonusSkills[boostKey] || 0
-    };
-  });
-
-  // Sort by gap ascending (cheapest to fix first)
-  const needsBoost = cultSkills.filter(s => s.total < 50).sort((a, b) => (50 - a.total) - (50 - b.total));
-  const cultSkillNames = new Set(cultSkills.flatMap(s => [s.name, s.key, s.matchedName]).filter(Boolean));
-
-  // Phase 1: Allocate from remaining budget
-  needsBoost.forEach(skill => {
-    const boostKey = skill.boostKey || skill.key || skill.name;
-    const spentTotal = Object.values(CharacterData.bonusSkills).reduce((a, b) => a + b, 0);
-    const remaining = totalBonusPool - spentTotal;
-    if (remaining <= 0) return;
-
-    const needed = 50 - skill.total;
-    const canAllocate = Math.min(needed, maxPerSkill - skill.currentBonus, remaining);
-    if (canAllocate > 0) {
-      CharacterData.bonusSkills[boostKey] = skill.currentBonus + canAllocate;
-      skill.currentBonus += canAllocate;
-      skill.total += canAllocate;
-      skill.value = skill.total;
-    }
-  });
-
-  // Phase 2: random generation may reallocate generated bonus points; the UI Quick Boost never
-  // steals existing player allocations without an explicit opt-in path.
-  const stillNeedsBoost = needsBoost.filter(s => s.total < 50 && s.currentBonus < maxPerSkill);
-  if (options.allowReallocate === true && stillNeedsBoost.length > 0) {
-    // Find non-cult skills with bonus points that can be reclaimed
-    const reclaimable = Object.entries(CharacterData.bonusSkills)
-      .filter(([name, pts]) => pts > 0 && !cultSkillNames.has(name))
-      .sort((a, b) => b[1] - a[1]); // highest allocation first
-
-    for (const skill of stillNeedsBoost) {
-      const needed = Math.min(50 - skill.total, maxPerSkill - skill.currentBonus);
-      if (needed <= 0) continue;
-
-      let reclaimed = 0;
-      for (const [donorName, donorPts] of reclaimable) {
-        if (reclaimed >= needed) break;
-        const currentDonor = CharacterData.bonusSkills[donorName] || 0;
-        if (currentDonor <= 0) continue;
-        const take = Math.min(currentDonor, needed - reclaimed);
-        CharacterData.bonusSkills[donorName] -= take;
-        if (CharacterData.bonusSkills[donorName] <= 0) delete CharacterData.bonusSkills[donorName];
-        reclaimed += take;
-      }
-      if (reclaimed > 0) {
-        const boostKey = skill.boostKey || skill.key || skill.name;
-        CharacterData.bonusSkills[boostKey] = (CharacterData.bonusSkills[boostKey] || 0) + reclaimed;
-        skill.currentBonus += reclaimed;
-        skill.total += reclaimed;
-        skill.value = skill.total;
-      }
-    }
-  }
-
+  this.applyCultInitiationBoostPlan(plan);
   this.saveToLocalStorage();
   const remainingGaps = this.getCultSkillRequirementDetails(cult).filter(s => s.value < 50);
-  if (remainingGaps.length > 0) {
-    if (!silent) this.showToast('Applied available bonus points; some cult skills still need earlier cultural/career reallocation.', 'warning');
-  } else {
-    if (!silent) this.showToast('Cult skills boosted to 50%+', 'success');
-  }
+  const summary = this.getCultInitiationRequirementSummary(cult);
+  if (!silent) this.showToast(plan.summary || 'Cult initiation skills boosted to 50%+', 'success');
   // Re-render boost panel + warning in-place (no full page re-render)
   if (updateUi) App.updateCultRequirementUI();
-  return { success: remainingGaps.length === 0, remainingGaps };
+  return { success: summary.qualifies, remainingGaps, plan };
 };
 
 App.renderMiraclePicker = function(container) {
@@ -16359,7 +16498,7 @@ App.generateRandomCharacter = function() {
         const match = /^([^(]+)\(([^)]+)\)$/i.exec(String(cultSkill || '').trim());
         return match && App.normalizeSkillName(match[1]) === App.normalizeSkillName(String(skill || '').replace(/\(.*\)/, '').trim());
       });
-      if (cultMatch) return cultMatch;
+      if (cultMatch) return resolveRandomDisambiguatedSkill(cultMatch, culture.name);
       return resolveRandomDisambiguatedSkill(skill, culture.name);
     });
     CharacterData.selectedProfessionalSkills = selectedPro;
@@ -16410,7 +16549,8 @@ App.generateRandomCharacter = function() {
   CharacterData.bonusSkills = {};
   const bonusPool = ageCategory ? ageCategory.bonusPoints : 150;
   const maxPerBonus = ageCategory ? ageCategory.maxPerSkill : 15;
-  const allSkillNames = [...new Set([...Object.keys(CharacterData.culturalSkills), ...allCareerSkillNames])];
+  const allSkillNames = [...new Set([...Object.keys(CharacterData.culturalSkills), ...allCareerSkillNames]
+    .map(skill => resolveRandomDisambiguatedSkill(skill, culture.name)))];
   let bonusPtsLeft = bonusPool;
   // First pass
   allSkillNames.forEach(skill => {
@@ -16487,7 +16627,9 @@ App.generateRandomCharacter = function() {
           .sort((a, b) => (50 - a.value) - (50 - b.value));
         let changed = false;
         for (const skill of candidates) {
-          const targetKey = skill.key || skill.name;
+          const targetKey = App.getCultInitiationBoostSkillKey
+            ? App.getCultInitiationBoostSkillKey(skill)
+            : (skill.key || skill.name);
           const moved =
             transferRandomPoolPoints('careerSkills', targetKey, careerSkillKeys, 15, protectedKeys) ||
             transferRandomPoolPoints('culturalSkills', targetKey, culturalSkillKeys, 15, protectedKeys) ||

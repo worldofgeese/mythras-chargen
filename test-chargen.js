@@ -11551,27 +11551,41 @@ section('Auto-Boost to 50% (U2)');
 {
   const { App: AppRef, CharacterData: CD, CULTS_DATA: CultsData } = loadApp();
 
-  if (AppRef && AppRef.autoBoostCultSkills) {
+  if (AppRef && AppRef.autoBoostCultSkills && AppRef.planCultInitiationBoost) {
     // Setup: character with cult skills below 50%
     CD.cult = '7 Mothers - Irrippi Ontor';
-    CD.characteristics = { STR: 11, CON: 12, SIZ: 13, DEX: 14, INT: 15, POW: 5, CHA: 5 };
+    CD.characteristics = { STR: 18, CON: 18, SIZ: 18, DEX: 18, INT: 18, POW: 18, CHA: 18 };
     CD.bonusSkills = {};
     CD.culturalSkills = {};
     CD.careerSkills = {};
     CD.age = 22;
 
-    // Test 1: Auto-boost allocates points to reach 50%
-    AppRef.autoBoostCultSkills();
-    // Willpower base = POW+POW = 10. Needs 40 to reach 50. But max per skill is 15.
-    // So it should allocate 15 (capped).
-    const wpBoost = CD.bonusSkills['Willpower'] || 0;
-    if (wpBoost > 0 && wpBoost <= 15) {
-      pass('autoBoostCultSkills allocates points toward 50%');
+    // Test 1: planner is pure
+    const beforePlan = JSON.stringify({bonus: CD.bonusSkills, cultural: CD.culturalSkills, career: CD.careerSkills});
+    const planPreview = AppRef.planCultInitiationBoost();
+    const afterPlan = JSON.stringify({bonus: CD.bonusSkills, cultural: CD.culturalSkills, career: CD.careerSkills});
+    if (planPreview.success && beforePlan === afterPlan) {
+      pass('planCultInitiationBoost plans without mutating CharacterData');
     } else {
-      fail('autoBoostCultSkills allocates points toward 50%', `Willpower got ${wpBoost}`);
+      fail('planCultInitiationBoost plans without mutating CharacterData',
+        JSON.stringify({planPreview, beforePlan, afterPlan}));
     }
 
-    // Test 2: Does not exceed maxPerSkill per skill
+    // Test 2: Auto-boost allocates minimum necessary cult skills to reach initiation
+    const result = AppRef.autoBoostCultSkills();
+    const cult = CultsData.find(c => c.name === CD.cult);
+    const summary = AppRef.getCultInitiationRequirementSummary(cult);
+    const expectedBoostTargets = summary.requiredCount - summary.skillDetails.filter(s => s.qualifies && (CD.bonusSkills[s.key] || CD.bonusSkills[s.matchedName] || 0) === 0).length;
+    const boostedCultSkills = AppRef.getCultSkillRequirementDetails(cult)
+      .filter(s => (CD.bonusSkills[s.key] || CD.bonusSkills[s.matchedName] || 0) > 0);
+    if (result.success && summary.qualifies && boostedCultSkills.length === expectedBoostTargets) {
+      pass('autoBoostCultSkills satisfies initiation with minimum necessary boosts');
+    } else {
+      fail('autoBoostCultSkills satisfies initiation with minimum necessary boosts',
+        JSON.stringify({result, qualifies: summary.qualifies, boostedCultSkills: boostedCultSkills.map(s => s.key), expectedBoostTargets, bonus: CD.bonusSkills}));
+    }
+
+    // Test 3: Does not exceed maxPerSkill per skill
     const allValues = Object.values(CD.bonusSkills);
     const overMax = allValues.filter(v => v > 15);
     if (overMax.length === 0) {
@@ -11580,7 +11594,7 @@ section('Auto-Boost to 50% (U2)');
       fail('autoBoostCultSkills respects maxPerSkill per skill', `Found values > 15: ${overMax}`);
     }
 
-    // Test 3: Does not exceed total budget
+    // Test 4: Does not exceed total budget
     const totalSpent = Object.values(CD.bonusSkills).reduce((a, b) => a + b, 0);
     if (totalSpent <= 150) {
       pass('autoBoostCultSkills respects total budget');
@@ -11588,17 +11602,19 @@ section('Auto-Boost to 50% (U2)');
       fail('autoBoostCultSkills respects total budget', `Spent ${totalSpent} > 150`);
     }
 
-    // Test 4: Does not reallocate existing non-cult bonus skills without explicit opt-in
+    // Test 5: Reallocates existing non-cult bonus skills when the bonus pool is full
+    CD.characteristics = { STR: 18, CON: 18, SIZ: 18, DEX: 18, INT: 18, POW: 18, CHA: 18 };
     CD.bonusSkills = { 'Athletics': 15, 'Brawn': 15, 'Stealth': 15, 'Swim': 15,
       'Dance': 15, 'Ride': 15, 'Sing': 15, 'Endurance': 15, 'Evade': 15, 'First Aid': 15 };
-    const fullBudgetBefore = JSON.stringify(CD.bonusSkills);
-    AppRef.autoBoostCultSkills();
+    const fullBudgetBefore = {...CD.bonusSkills};
+    const fullBudgetResult = AppRef.autoBoostCultSkills();
     const wpAfter = CD.bonusSkills['Willpower'] || 0;
-    if (wpAfter === 0 && JSON.stringify(CD.bonusSkills) === fullBudgetBefore) {
-      pass('autoBoostCultSkills does not reallocate non-cult bonus skills by default');
+    const donorsReduced = Object.entries(fullBudgetBefore).some(([skill, value]) => (CD.bonusSkills[skill] || 0) < value);
+    if (fullBudgetResult.success && wpAfter > 0 && donorsReduced) {
+      pass('autoBoostCultSkills reallocates non-cult bonus donors when needed');
     } else {
-      fail('autoBoostCultSkills silently reallocated non-cult bonus skills',
-        JSON.stringify({before: fullBudgetBefore, after: CD.bonusSkills, willpower: wpAfter}));
+      fail('autoBoostCultSkills reallocates non-cult bonus donors when needed',
+        JSON.stringify({result: fullBudgetResult, before: fullBudgetBefore, after: CD.bonusSkills, willpower: wpAfter}));
     }
     // Verify total didn't exceed budget
     const totalAfter = Object.values(CD.bonusSkills).reduce((a, b) => a + b, 0);
@@ -11607,8 +11623,29 @@ section('Auto-Boost to 50% (U2)');
     } else {
       fail('autoBoostCultSkills default full-budget attempt exceeded budget', `Total: ${totalAfter}`);
     }
+
+    // Test 6: Uses legal cultural/career donors when bonus alone cannot meet the target
+    CultsData.push({ name: 'Quick Boost Test Cult', cultSkills: ['Devotion'] });
+    CD.cult = 'Quick Boost Test Cult';
+    CD.characteristics = { STR: 5, CON: 5, SIZ: 5, DEX: 5, INT: 5, POW: 5, CHA: 5 };
+    CD.bonusSkills = { Athletics: 15, Brawn: 15, Endurance: 15, Evade: 15, Influence: 15, Insight: 15, Locale: 15, Perception: 15, Ride: 15, Sing: 15 };
+    CD.culturalSkills = { 'Devotion (Quick Boost Test Cult)': 0, Dance: 15, Deceit: 15, NativeTongue: 15 };
+    CD.careerSkills = { 'Devotion (Quick Boost Test Cult)': 0, Commerce: 15, Courtesy: 15, Healing: 15 };
+    const mixedPoolResult = AppRef.autoBoostCultSkills();
+    const devotionKey = 'Devotion (Quick Boost Test Cult)';
+    const devotionTotal = AppRef.calculateSkillTotalForKey(devotionKey).value;
+    const mixedPoolUsed = (CD.bonusSkills[devotionKey] || 0) > 0 &&
+      (CD.culturalSkills[devotionKey] || 0) > 0 &&
+      (CD.careerSkills[devotionKey] || 0) > 0;
+    CultsData.pop();
+    if (mixedPoolResult.success && devotionTotal >= 50 && mixedPoolUsed) {
+      pass('autoBoostCultSkills reallocates legal cultural and career donors when bonus alone is insufficient');
+    } else {
+      fail('autoBoostCultSkills reallocates legal cultural and career donors when bonus alone is insufficient',
+        JSON.stringify({ result: mixedPoolResult, devotionTotal, cultural: CD.culturalSkills, career: CD.careerSkills, bonus: CD.bonusSkills }));
+    }
   } else {
-    fail('App.autoBoostCultSkills function not found');
+    fail('App.autoBoostCultSkills or planCultInitiationBoost function not found');
   }
 }
 
@@ -11629,16 +11666,16 @@ section('Auto-Boost Cultural/Career Pool Safety');
     CD.culturalSkills = { Athletics: 15, Brawn: 15, Dance: 15, Sing: 15, Ride: 10, Stealth: 10, Evade: 10, Perception: 10 };
     CD.careerSkills = { Dance: 15, Ride: 15, Sing: 15, Swim: 15 };
 
-    const beforeCultural = JSON.stringify(CD.culturalSkills);
-    const beforeCareer = JSON.stringify(CD.careerSkills);
+    const before = JSON.stringify({cultural: CD.culturalSkills, career: CD.careerSkills, bonus: CD.bonusSkills});
 
-    AppRef.autoBoostCultSkills();
+    const result = AppRef.autoBoostCultSkills();
+    const after = JSON.stringify({cultural: CD.culturalSkills, career: CD.careerSkills, bonus: CD.bonusSkills});
 
-    if (JSON.stringify(CD.culturalSkills) === beforeCultural && JSON.stringify(CD.careerSkills) === beforeCareer) {
-      pass('autoBoostCultSkills does not reallocate cultural/career points behind the UI');
+    if (!result.success && before === after) {
+      pass('autoBoostCultSkills impossible plans roll back without partial cultural/career changes');
     } else {
-      fail('autoBoostCultSkills reallocated cultural/career points behind the UI',
-        JSON.stringify({ beforeCultural, afterCultural: CD.culturalSkills, beforeCareer, afterCareer: CD.careerSkills }));
+      fail('autoBoostCultSkills impossible plans roll back without partial cultural/career changes',
+        JSON.stringify({ result, before, after }));
     }
   } else {
     fail('App.autoBoostCultSkills function not found');
