@@ -15458,19 +15458,54 @@ App.ensureCultInitiationCareerTarget = function(skillKey, plannedPools, plannedS
   if (!career) return false;
   const normalized = this.normalizeSkillName(skillKey);
   const isStandard = (career.standardSkills || []).some(skill => this.normalizeSkillName(skill) === normalized);
-  const isProfessional = (career.professionalSkills || []).some(skill => this.normalizeSkillName(skill) === normalized);
+  const acceptsProfessionalTarget = skill => {
+    if (this.normalizeSkillName(skill) === normalized) return true;
+    const skillPlaceholder = parsePlaceholderSkill(skill);
+    const targetPlaceholder = parsePlaceholderSkill(skillKey);
+    return Boolean(skillPlaceholder && targetPlaceholder && skillPlaceholder.category === targetPlaceholder.category);
+  };
+  const isProfessional = (career.professionalSkills || []).some(acceptsProfessionalTarget);
+  const disambiguationMap = CharacterData._disambiguationMap || {};
+  const dependenciesRemainValid = selections =>
+    validateProfessionalSkillDependencies(selections, career, disambiguationMap).length === 0;
   if (isStandard) {
     plannedPools.careerSkills[skillKey] = 0;
     return true;
   }
   if (!isProfessional) return false;
   if (!plannedSelections.includes(skillKey) && plannedSelections.length >= 3) {
-    const replaced = plannedSelections.find(name => !protectedKeys.has(name) && (plannedPools.careerSkills[name] || 0) > 0);
-    if (!replaced) return false;
-    plannedSelections.splice(plannedSelections.indexOf(replaced), 1, skillKey);
+    const selectedChoices = getSelectedProfessionalChoiceSet(plannedSelections, career, disambiguationMap);
+    const getChoiceForSelection = name => {
+      if ((career.professionalSkills || []).includes(name)) return name;
+      const mapped = Object.entries(disambiguationMap)
+        .find(([key, value]) => key.startsWith('career:') && value === name);
+      return mapped ? mapped[0].replace(/^career:/, '') : name;
+    };
+    const participatesInDependencyPair = name => {
+      const choice = getChoiceForSelection(name);
+      const secondary = getSecondaryPlaceholderFor(choice);
+      return Boolean(getProfessionalSkillDependency(choice, career) ||
+        (secondary && selectedChoices.has(secondary)));
+    };
+    const findReplacementIndex = preferIndependent => plannedSelections.findIndex(name => {
+      if (protectedKeys.has(name)) return false;
+      if (preferIndependent && participatesInDependencyPair(name)) return false;
+      const nextSelections = [...plannedSelections];
+      nextSelections.splice(nextSelections.indexOf(name), 1, skillKey);
+      return dependenciesRemainValid(nextSelections);
+    });
+    let replacementIndex = findReplacementIndex(true);
+    if (replacementIndex === -1) replacementIndex = findReplacementIndex(false);
+    if (replacementIndex === -1) return false;
+    const replaced = plannedSelections[replacementIndex];
+    plannedSelections.splice(replacementIndex, 1, skillKey);
     selectionChanges.push({ action: 'replace-professional-skill', from: replaced, to: skillKey });
   } else if (!plannedSelections.includes(skillKey)) {
     plannedSelections.push(skillKey);
+    if (!dependenciesRemainValid(plannedSelections)) {
+      plannedSelections.pop();
+      return false;
+    }
     selectionChanges.push({ action: 'add-professional-skill', to: skillKey });
   }
   plannedPools.careerSkills[skillKey] = plannedPools.careerSkills[skillKey] || 0;
@@ -15501,7 +15536,6 @@ App.planCultInitiationBoost = function(options = {}) {
   }));
   const requiredCount = Math.min(5, allSkills.length);
   const protectedKeys = new Set(allSkills
-    .filter(skill => skill.value >= 50)
     .flatMap(skill => [skill.name, skill.key, skill.matchedName, skill.boostKey])
     .filter(Boolean));
   let qualifyingCount = allSkills.filter(skill => skill.value >= 50).length;
@@ -16610,13 +16644,32 @@ App.generateRandomCharacter = function() {
     });
     selectedPro = enforceProfessionalSkillDependencySelection(selectedPro, career.professionalSkills || []);
     // Fix 2: Disambiguate (any) and placeholder skills in career professional skills (ADR-004 + ADR-005)
+    const claimedProfessionalSkills = new Set();
     selectedPro = selectedPro.map(skill => {
-      const cultMatch = selectedCultSkills.find(cultSkill => {
-        const match = /^([^(]+)\(([^)]+)\)$/i.exec(String(cultSkill || '').trim());
-        return match && App.normalizeSkillName(match[1]) === App.normalizeSkillName(String(skill || '').replace(/\(.*\)/, '').trim());
-      });
-      if (cultMatch) return resolveRandomDisambiguatedSkill(cultMatch, culture.name);
-      return resolveRandomDisambiguatedSkill(skill, culture.name);
+      const skillBase = App.normalizeSkillName(String(skill || '').replace(/\(.*\)/, '').trim());
+      const cultMatches = selectedCultSkills
+        .filter(cultSkill => {
+          const match = /^([^(]+)\(([^)]+)\)$/i.exec(String(cultSkill || '').trim());
+          return match && App.normalizeSkillName(match[1]) === skillBase;
+        })
+        .map(cultSkill => resolveRandomDisambiguatedSkill(cultSkill, culture.name));
+      const parsedSkill = parsePlaceholderSkill(skill);
+      const fallbackOptions = parsedSkill
+        ? getDisambiguationOptions(parsedSkill.category, culture.name)
+          .map(option => `${parsedSkill.category} (${option})`)
+        : [];
+      const candidates = [
+        ...cultMatches,
+        resolveRandomDisambiguatedSkill(skill, culture.name),
+        ...fallbackOptions
+      ];
+      const resolved = candidates.find(candidate =>
+        candidate &&
+        !needsDisambiguation(candidate) &&
+        !claimedProfessionalSkills.has(normalizeCharacterFacingSkillName(candidate))
+      ) || candidates.find(Boolean) || skill;
+      claimedProfessionalSkills.add(normalizeCharacterFacingSkillName(resolved));
+      return resolved;
     });
     CharacterData.selectedProfessionalSkills = selectedPro;
     selectedPro.forEach(skill => { CharacterData.careerSkills[skill] = 0; });

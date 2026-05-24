@@ -6454,6 +6454,62 @@ section('ADR-005: Placeholder Skill Disambiguation');
   }
 }
 
+// Test: Random generation does not collapse paired professional placeholders to duplicate cult specialties
+{
+  const {
+    App,
+    CharacterData: CD,
+    CAREERS_DATA,
+    CULTURES_DATA,
+    CULTURE_CULT_MAP,
+    normalizeCharacterFacingSkillName,
+    needsDisambiguation,
+    _sandbox
+  } = loadApp();
+  if (App && App.generateRandomCharacter && CAREERS_DATA && CULTURES_DATA && CULTURE_CULT_MAP &&
+      normalizeCharacterFacingSkillName && needsDisambiguation) {
+    const originalCareers = CAREERS_DATA.slice();
+    const originalCultures = CULTURES_DATA.slice();
+    const balazaring = originalCultures.find(culture => culture.name === 'Balazaring');
+    const fisher = originalCareers.find(career => career.name === 'Fisher');
+    const originalBalazaringMap = CULTURE_CULT_MAP.Balazaring
+      ? JSON.parse(JSON.stringify(CULTURE_CULT_MAP.Balazaring))
+      : null;
+    const originalRandom = _sandbox.Math.random;
+
+    try {
+      CAREERS_DATA.splice(0, CAREERS_DATA.length, fisher);
+      CULTURES_DATA.splice(0, CULTURES_DATA.length, balazaring);
+      CULTURE_CULT_MAP.Balazaring = { primary: ['Foundchild'], common: [], forbidden: [] };
+      _sandbox.Math.random = () => 0.2;
+      App.generateRandomCharacter();
+    } finally {
+      CAREERS_DATA.splice(0, CAREERS_DATA.length, ...originalCareers);
+      CULTURES_DATA.splice(0, CULTURES_DATA.length, ...originalCultures);
+      if (originalBalazaringMap) {
+        CULTURE_CULT_MAP.Balazaring = originalBalazaringMap;
+      } else {
+        delete CULTURE_CULT_MAP.Balazaring;
+      }
+      _sandbox.Math.random = originalRandom;
+    }
+
+    const normalizedSelected = (CD.selectedProfessionalSkills || []).map(normalizeCharacterFacingSkillName);
+    const duplicate = normalizedSelected.find((skill, index) => normalizedSelected.indexOf(skill) !== index);
+    const unresolved = normalizedSelected.find(skill => needsDisambiguation(skill));
+    const loreSelections = normalizedSelected.filter(skill => skill.startsWith('Lore ('));
+    if (CD.culture === 'Balazaring' && CD.career === 'Fisher' &&
+        !duplicate && !unresolved && loreSelections.length >= 2) {
+      pass('Random paired professional placeholders resolve to unique concrete specialties');
+    } else {
+      fail('Random paired professional placeholders collapsed or stayed unresolved',
+        JSON.stringify({ culture: CD.culture, career: CD.career, cult: CD.cult, selected: CD.selectedProfessionalSkills, duplicate, unresolved }));
+    }
+  } else {
+    fail('Could not test random paired professional placeholder uniqueness');
+  }
+}
+
 // Test: All 19 fixtures have no unresolved skills
 {
   const { needsDisambiguation } = loadApp();
@@ -11702,6 +11758,120 @@ section('Auto-Boost to 50% (U2)');
     } else {
       fail('autoBoostCultSkills reallocates legal cultural and career donors when bonus alone is insufficient',
         JSON.stringify({ result: mixedPoolResult, devotionTotal, cultural: CD.culturalSkills, career: CD.careerSkills, bonus: CD.bonusSkills }));
+    }
+
+    // Test 7: Uses a career's professional placeholder as a legal target and can replace 0-point choices
+    CultsData.push({ name: 'Quick Boost Priest Placeholder Cult', cultSkills: ['Devotion'] });
+    CD.culture = 'Sartarite (Heortling)';
+    CD.career = 'Priest';
+    CD.cult = 'Quick Boost Priest Placeholder Cult';
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 10, POW: 10, CHA: 10 };
+    CD.age = 22;
+    const priestDevotionKey = 'Devotion (Quick Boost Priest Placeholder Cult)';
+    CD.bonusSkills = {
+      [priestDevotionKey]: 15,
+      Athletics: 15,
+      Brawn: 15,
+      Dance: 15,
+      Endurance: 15,
+      Evade: 15,
+      Perception: 15,
+      Ride: 15,
+      Sing: 15,
+      Stealth: 15
+    };
+    CD.culturalSkills = {};
+    CD.careerSkills = { Customs: 15, Bureaucracy: 0, Exhort: 0, 'Folk Magic': 0 };
+    CD.selectedProfessionalSkills = ['Bureaucracy', 'Exhort', 'Folk Magic'];
+    CD._disambiguationMap = {};
+    const placeholderPlan = AppRef.planCultInitiationBoost();
+    const placeholderApplied = AppRef.applyCultInitiationBoostPlan(placeholderPlan);
+    CultsData.pop();
+    if (placeholderPlan.success &&
+        placeholderPlan.selectionChanges.some(change => change.action === 'replace-professional-skill' && change.to === priestDevotionKey) &&
+        placeholderPlan.moves.some(move => move.pool === 'careerSkills' && move.to === priestDevotionKey) &&
+        placeholderApplied &&
+        CD.selectedProfessionalSkills.includes(priestDevotionKey)) {
+      pass('autoBoostCultSkills can target career professional placeholders and replace 0-point choices');
+    } else {
+      fail('autoBoostCultSkills missed a legal professional placeholder target',
+        JSON.stringify({ placeholderPlan, selected: CD.selectedProfessionalSkills, career: CD.careerSkills }));
+    }
+
+    // Test 8: Professional replacement preserves primary/secondary dependency pairs
+    CultsData.push({ name: 'Quick Boost Oratory Cult', cultSkills: ['Oratory'] });
+    CD.culture = 'Balazaring';
+    CD.career = 'Scholar';
+    CD.cult = 'Quick Boost Oratory Cult';
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 10, POW: 10, CHA: 10 };
+    CD.age = 22;
+    CD.bonusSkills = {
+      Oratory: 15,
+      Athletics: 15,
+      Brawn: 15,
+      Dance: 15,
+      Endurance: 15,
+      Evade: 15,
+      Perception: 15,
+      Ride: 15,
+      Sing: 15,
+      Stealth: 15
+    };
+    CD.culturalSkills = {};
+    CD.careerSkills = { Customs: 15, 'Lore (Wolves)': 0, 'Lore (Local Legends)': 0, Literacy: 0 };
+    CD.selectedProfessionalSkills = ['Lore (Wolves)', 'Lore (Local Legends)', 'Literacy'];
+    CD._disambiguationMap = {
+      'career:Lore (Primary)': 'Lore (Wolves)',
+      'career:Lore (Secondary)': 'Lore (Local Legends)'
+    };
+    const dependencyPlan = AppRef.planCultInitiationBoost();
+    const dependencyApplied = AppRef.applyCultInitiationBoostPlan(dependencyPlan);
+    CultsData.pop();
+    if (dependencyPlan.success &&
+        dependencyPlan.selectionChanges.some(change => change.from === 'Literacy' && change.to === 'Oratory') &&
+        !dependencyPlan.selectionChanges.some(change => /^Lore \(/.test(change.from || '')) &&
+        dependencyApplied &&
+        CD.selectedProfessionalSkills.includes('Lore (Wolves)') &&
+        CD.selectedProfessionalSkills.includes('Lore (Local Legends)') &&
+        CD.selectedProfessionalSkills.includes('Oratory')) {
+      pass('autoBoostCultSkills preserves primary/secondary professional dependencies when replacing choices');
+    } else {
+      fail('autoBoostCultSkills broke or could not preserve primary/secondary professional dependencies',
+        JSON.stringify({ dependencyPlan, selected: CD.selectedProfessionalSkills, career: CD.careerSkills }));
+    }
+
+    // Test 9: Unmet cult skills are not used as donors for other cult skill boosts
+    CultsData.push({ name: 'Quick Boost Donor Safety Cult', cultSkills: ['Devotion', 'Willpower'] });
+    CD.culture = 'Sartarite (Heortling)';
+    CD.career = 'Priest';
+    CD.cult = 'Quick Boost Donor Safety Cult';
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 10, POW: 10, CHA: 10 };
+    CD.age = 22;
+    const donorDevotionKey = 'Devotion (Quick Boost Donor Safety Cult)';
+    CD.bonusSkills = {
+      Willpower: 15,
+      Athletics: 15,
+      Brawn: 15,
+      Dance: 15,
+      Endurance: 15,
+      Evade: 15,
+      Perception: 15,
+      Ride: 15,
+      Sing: 15,
+      Stealth: 15
+    };
+    CD.culturalSkills = {};
+    CD.careerSkills = { Customs: 15, Dance: 15, Deceit: 15, [donorDevotionKey]: 0, Willpower: 0 };
+    CD.selectedProfessionalSkills = [donorDevotionKey, 'Exhort', 'Folk Magic'];
+    CD._disambiguationMap = {};
+    const donorPlan = AppRef.planCultInitiationBoost();
+    CultsData.pop();
+    const cultDonorMoves = (donorPlan.moves || []).filter(move => move.from === donorDevotionKey || move.from === 'Willpower');
+    if (donorPlan.success && cultDonorMoves.length === 0) {
+      pass('autoBoostCultSkills does not spend unmet cult skills as donors');
+    } else {
+      fail('autoBoostCultSkills used unmet cult skills as donors',
+        JSON.stringify({ donorPlan, cultDonorMoves }));
     }
   } else {
     fail('App.autoBoostCultSkills or planCultInitiationBoost function not found');
