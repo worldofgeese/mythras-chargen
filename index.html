@@ -38,6 +38,8 @@ input, select, textarea {
   border: 1px solid #666;
   padding: 4px 6px;
   background: #fff;
+  min-height: 30px;
+  line-height: 1.3;
 }
 
 input[type="number"] { width: 60px; text-align: center; }
@@ -47,27 +49,57 @@ textarea { width: 100%; min-height: 60px; resize: vertical; }
 .allocation-list { display: grid; gap: 4px; }
 .allocation-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(72px, auto);
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 420px) 72px;
   gap: 10px;
-  align-items: center;
+  align-items: start;
   margin: 4px 0;
 }
+.allocation-row--simple {
+  grid-template-columns: minmax(0, 1fr) 72px;
+  align-items: center;
+}
+.allocation-row--simple > .allocation-control {
+  max-width: 420px;
+  justify-self: start;
+}
 .allocation-row--triple {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 72px;
-  gap: 6px;
+  grid-template-columns: minmax(160px, 220px) minmax(220px, 420px) 72px;
+}
+.allocation-row--bonus {
+  grid-template-columns: minmax(0, 1fr) 72px 32px;
+  align-items: center;
+}
+.allocation-row--bonus button {
+  justify-self: end;
+  margin-right: 0;
+  min-width: 28px;
+  padding: 6px 0;
+  width: 28px;
 }
 .allocation-control {
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
+  height: 30px;
 }
 .points-input {
   width: 64px;
   min-width: 64px;
   max-width: 64px;
+  height: 30px;
   box-sizing: border-box;
   text-align: center;
+  justify-self: end;
 }
+.allocation-label { align-self: center; }
+.allocation-help {
+  color: #555;
+  display: block;
+  font-size: 12px;
+  line-height: 1.35;
+  margin-bottom: 4px;
+}
+.allocation-help strong { color: #000; }
 .allocation-actions {
   display: flex;
   gap: 6px;
@@ -99,6 +131,22 @@ button.primary:hover { background: #333; }
 .field { margin-bottom: 8px; }
 .field label { display: block; font-weight: 600; font-size: 12px; margin-bottom: 2px; }
 .field input, .field select { width: 100%; }
+.professional-skills-picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 10px;
+  margin-top: 8px;
+}
+.professional-skill-option {
+  min-width: 0;
+}
+.professional-specialization-input {
+  display: block;
+  margin: 6px 0 0 20px;
+  width: calc(100% - 20px);
+  min-width: 0;
+  font-size: 13px;
+}
 
 /* Wizard navigation */
 .wizard-nav {
@@ -364,16 +412,19 @@ button.primary:hover { background: #333; }
   display: grid;
   grid-template-columns: 300px 1fr;
   gap: 20px;
+  min-width: 0;
 }
 
 .sidebar {
   border: 1px solid #000;
   padding: 15px;
+  min-width: 0;
 }
 
 .main-content {
   border: 1px solid #000;
   padding: 15px;
+  min-width: 0;
 }
 
 .passion-row {
@@ -529,9 +580,11 @@ button.primary:hover { background: #333; }
 
 /* Responsive */
 @media (max-width: 600px) {
+  body { padding: 10px; }
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
   .char-grid { grid-template-columns: repeat(3, 1fr); }
-  .play-layout { grid-template-columns: 1fr; }
+  .play-layout { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .sidebar, .main-content { padding: 10px; overflow-x: auto; }
   #play-combat .weapon-row { display: block; border: 1px solid #999; padding: 10px; margin: 8px 0; border-radius: 4px; background: #f9f9f9; }
   #play-combat .weapon-row:first-child { display: none; }
   #play-combat .weapon-row > div { margin: 4px 0; font-size: 13px; }
@@ -545,6 +598,10 @@ button.primary:hover { background: #333; }
   .combat-style-card { border: 1px solid #999; padding: 10px; margin: 8px 0; border-radius: 4px; background: #f5f5f5; }
   .combat-style-card .style-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
   .combat-style-card .style-detail { font-size: 12px; color: #333; margin: 2px 0; }
+  .allocation-row { grid-template-columns: 1fr; }
+  .allocation-row--simple { grid-template-columns: minmax(0, 1fr) 72px; }
+  .allocation-row--triple { grid-template-columns: 1fr; }
+  .allocation-row--bonus { grid-template-columns: minmax(0, 1fr) 72px 32px; }
   .skill-row { grid-template-columns: 1fr; }
   .skill-row button { width: 100%; }
   .attributes-grid { grid-template-columns: 1fr; }
@@ -5036,6 +5093,12 @@ function resolveRandomDisambiguatedSkill(skillName, cultureName) {
   if (!needsDisambiguation(skillName)) return skillName;
   const parsed = parsePlaceholderSkill(skillName);
   if (!parsed) return skillName;
+  if (parsed.category === 'Invocation') {
+    const sourceAccess = CULTURE_MAGIC_PROFILES[normalizeCultureName(cultureName)]?.sorcery?.sourceAccess;
+    if (sourceAccess?.cultRequired === false && sourceAccess.school) {
+      return `Invocation (${sourceAccess.school})`;
+    }
+  }
   const options = getDisambiguationOptions(parsed.category, cultureName);
   if (options.length === 0) return skillName;
   const option = parsed.hint ? options[Math.floor(Math.random() * options.length)] : options[0];
@@ -11164,7 +11227,8 @@ const CharacterData = {
     weapons.forEach(weaponEntry => {
       const weaponName = typeof weaponEntry === 'string' ? weaponEntry : (weaponEntry && weaponEntry.name);
       if (!weaponName) return;
-      const resolved = Helpers.resolveWeapon(weaponName);
+      const baseWeaponName = weaponName.replace(/\s*\((decorated|exquisite)\)\s*$/i, '');
+      const resolved = Helpers.resolveWeapon(weaponName) || Helpers.resolveWeapon(baseWeaponName);
       if (!resolved) {
         errors.push(`Weapon "${weaponName}" not found in WEAPONS_DATA`);
       }
@@ -13189,6 +13253,7 @@ App.renderStep5 = function() {
         const row = document.createElement('div');
         row.className = 'allocation-row';
         row.innerHTML = `
+          <span class="allocation-label">Choose one</span>
           <select class="allocation-control" onchange="App.resolveChoiceSkill(${idx}, this.value, [${choices.map(c => `'${c}'`).join(',')}])">
             <option value="">-- Choose one --</option>
             ${choices.map(c => `<option value="${c}" ${c === storedChoice ? 'selected' : ''}>${c}</option>`).join('')}
@@ -13217,18 +13282,18 @@ App.renderStep5 = function() {
       row.className = 'allocation-row';
       row.innerHTML = `
         <div>
-          ${hintText ? `<small style="color:#666; display:block; margin-bottom:2px;">${category} — ${hintText}</small>` : ''}
-          ${guidanceText ? `<small style="color:#555; display:block; margin-bottom:2px;">${this.escapeHtml(guidanceText)}</small>` : ''}
-          <select
-            onchange="App.disambiguateAndUpdateFreeText('cultural', '${skillName.replace(/'/g, "\\'")}', this.value, '${category}')"
-            class="allocation-control" style="font-size: 14px; cursor: pointer;">
-            <option value="">${currentSelected || `Select ${category}...`}</option>
-            ${(Array.isArray(options) ? options : []).map(o => {
-              const optVal = `${category} (${o})`;
-              return `<option value="${optVal}" ${optVal === currentSelected ? 'selected' : ''}>${optVal}</option>`;
-            }).join('')}
-          </select>
+          ${hintText ? `<span class="allocation-help"><strong>${category}</strong> — ${hintText}</span>` : `<span class="allocation-label">${category}</span>`}
+          ${guidanceText ? `<span class="allocation-help">${this.escapeHtml(guidanceText)}</span>` : ''}
         </div>
+        <select
+          onchange="App.disambiguateAndUpdateFreeText('cultural', '${skillName.replace(/'/g, "\\'")}', this.value, '${category}')"
+          class="allocation-control">
+          <option value="">${currentSelected || `Select ${category}...`}</option>
+          ${(Array.isArray(options) ? options : []).map(o => {
+            const optVal = `${category} (${o})`;
+            return `<option value="${optVal}" ${optVal === currentSelected ? 'selected' : ''}>${optVal}</option>`;
+          }).join('')}
+        </select>
         <input class="points-input" type="number" min="0" max="15" value="${currentValue}" ${pointsDisabled}
           onchange="App.updateSkillPoints('cultural', '${currentSelected || skillName.replace(/'/g, "\\'")}', parseInt(this.value), this)">
       `;
@@ -13239,7 +13304,7 @@ App.renderStep5 = function() {
     const currentValue = CharacterData.culturalSkills[skillName] || 0;
 
     const row = document.createElement('div');
-    row.className = 'allocation-row';
+    row.className = 'allocation-row allocation-row--simple';
     row.setAttribute('data-testid', `skill-row-${skillName}`);
     row.innerHTML = `
       <label>${this.skillWithTooltip(skillName)}</label>
@@ -13644,30 +13709,41 @@ App.renderStep6 = function() {
         const currentType = passion.name ? passion.name.replace(/\s*\(.*\)/, '') : '';
         const currentSubject = passion.name ? (passion.name.match(/\((.+)\)/) || [])[1] || '' : '';
         const needsSubject = passion.needsSubject !== false;
+        const subjectSuggestions = passion.subjectSuggestions || [];
+        const subjectListAttr = subjectSuggestions.length > 0 ? ` list="passion-suggestions-${idx}"` : '';
+        const subjectDatalist = subjectSuggestions.length > 0
+          ? `<datalist id="passion-suggestions-${idx}">${subjectSuggestions.map(s => `<option value="${s}">`).join('')}</datalist>`
+          : '';
         row.className = 'allocation-row allocation-row--triple';
         row.innerHTML = `
           <select class="allocation-control" onchange="App.updatePassionChoice(${idx}, this.value)">
             <option value="">-- Select --</option>
             ${passion.choice.map(c => `<option value="${c}" ${currentType === c ? 'selected' : ''}>${c}</option>`).join('')}
           </select>
-          ${needsSubject ? `<input class="allocation-control" type="text" id="${subjectId}" placeholder="(subject)" value="${currentSubject}" list="passion-suggestions-${idx}" onchange="App.updatePassionSubject(${idx}, this.value)" onblur="App.updatePassionSubject(${idx}, this.value)">` + (passion.subjectSuggestions && passion.subjectSuggestions.length > 0 ? `<datalist id="passion-suggestions-${idx}">${passion.subjectSuggestions.map(s => `<option value="${s}">`).join('')}</datalist>` : '') : '<span></span>'}
+          ${needsSubject ? `<input class="allocation-control" type="text" id="${subjectId}" placeholder="(subject)" value="${currentSubject}"${subjectListAttr} onchange="App.updatePassionSubject(${idx}, this.value)" onblur="App.updatePassionSubject(${idx}, this.value)">` + subjectDatalist : '<span></span>'}
           <input class="points-input" type="number" value="${passion.value}" readonly>
         `;
       } else if (passion.needsSubject || passionTypeRequiresSubject(passion.type || parsePassionName(passion.name).type)) {
         const structured = buildStructuredPassion(passion, passion.value || 0, passion.custom || false);
         const currentSubject = structured.subject;
         const baseName = structured.type;
+        const subjectSuggestions = passion.subjectSuggestions || [];
+        const subjectListAttr = subjectSuggestions.length > 0 ? ` list="passion-subject-ns-${idx}"` : '';
+        const subjectDatalist = subjectSuggestions.length > 0
+          ? `<datalist id="passion-subject-ns-${idx}">${subjectSuggestions.map(s => `<option value="${s}">`).join('')}</datalist>`
+          : '';
         row.className = 'allocation-row allocation-row--triple';
         row.innerHTML = `
-          <span style="font-weight: 600;">${baseName}</span>
+          <span class="allocation-label" style="font-weight: 600;">${baseName}</span>
           <input class="allocation-control" type="text" value="${currentSubject}" placeholder="(to what?)"
-            list="passion-subject-ns-${idx}"
+            ${subjectListAttr}
             onchange="App.updatePassionNameSubject(${idx}, '${baseName.replace(/'/g, "\\'")}', this.value)"
             onblur="App.updatePassionNameSubject(${idx}, '${baseName.replace(/'/g, "\\'")}', this.value)">
-          ${passion.subjectSuggestions && passion.subjectSuggestions.length ? `<datalist id="passion-subject-ns-${idx}">${passion.subjectSuggestions.map(s => `<option value="${s}">`).join('')}</datalist>` : ''}
+          ${subjectDatalist}
           <input class="points-input" type="number" value="${passion.value}" readonly>
         `;
       } else {
+        row.className = 'allocation-row allocation-row--simple';
         row.innerHTML = `
           <input class="allocation-control" type="text" value="${passion.name}" readonly>
           <input class="points-input" type="number" value="${passion.value}" readonly>
@@ -14192,7 +14268,7 @@ App.renderCareerDetails = function() {
 
       ${career.professionalSkills && career.professionalSkills.length > 0 ? `
         <h4 style="margin-top: 15px;">Professional Skills (choose 3)</h4>
-        <div id="professional-skills-picker" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 8px; margin-top: 8px;">
+        <div id="professional-skills-picker" class="professional-skills-picker">
           ${(() => {
             const claimedResolvedProfessionalSkills = new Set();
             return career.professionalSkills.map(skill => {
@@ -14207,8 +14283,8 @@ App.renderCareerDetails = function() {
             const requiredPrimaryLabel = requiredPrimary ? getProfessionalSkillChoiceLabel(requiredPrimary) : '';
             const disabledTitle = isDisabled ? ` title="Select ${this.escapeHtmlAttr(requiredPrimaryLabel)} first" disabled` : '';
             const guidance = renderProfessionalSkillGuidance(skill, career.name, CharacterData.cult);
-            const placeholder = needsSpec ? this.escapeHtmlAttr(getSpecializationGuidance(skill).split(';')[0] || 'Enter specialization') : '';
-            return `<div>
+            const placeholder = needsSpec ? this.escapeHtmlAttr(`${getProfessionalSkillChoiceLabel(skill).replace(/\s*\([^)]*\)\s*$/, '')} specialization`) : '';
+            return `<div class="professional-skill-option">
               <label style="font-size: 13px;">
                 <input type="checkbox"
                   ${isChecked ? 'checked' : ''}
@@ -14217,7 +14293,7 @@ App.renderCareerDetails = function() {
                   onchange="App.toggleProfessionalSkill(this.dataset.skill, this.checked, this)"> ${skillLabel}
               </label>
               ${guidance}
-              ${isChecked && needsSpec ? `<input type="text" placeholder="${placeholder}" value="${resolvedSpecAttr}" data-skill="${skillAttr}" style="display: block; margin: 4px 0 0 20px; font-size: 12px; padding: 3px 6px; width: calc(100% - 24px);" onchange="App.resolveProfessionalSkill(this.dataset.skill, this.value, this)">` : ''}
+              ${isChecked && needsSpec ? `<input class="professional-specialization-input" type="text" placeholder="${placeholder}" value="${resolvedSpecAttr}" title="${resolvedSpecAttr}" data-skill="${skillAttr}" onchange="App.resolveProfessionalSkill(this.dataset.skill, this.value, this)">` : ''}
             </div>`;
             }).join('');
           })()}
@@ -15185,7 +15261,7 @@ App.renderCultSkillBoostPanel = function(skillDetails) {
       : '';
 
     const row = document.createElement('div');
-    row.className = 'cult-boost-row allocation-row';
+    row.className = 'cult-boost-row allocation-row allocation-row--simple';
     row.setAttribute('data-skill', boostKey);
     row.setAttribute('data-cult-skill', skill.name);
     row.style.cssText = 'padding: 4px 0; border-bottom: 1px solid #d4edfa;';
@@ -15263,6 +15339,7 @@ App.adjustCultBoost = function(skillName, newValue) {
  */
 App.getQualifiedInitiateMiracles = function(cultName) {
   const cultMiracles = MIRACLES_DATA.cults[cultName]?.miracles || [];
+  const seen = new Set();
   return cultMiracles.filter(m =>
     m.rank === 'initiate' &&
     m.source !== 'associate' &&
@@ -15271,7 +15348,11 @@ App.getQualifiedInitiateMiracles = function(cultName) {
     !/^[?.:!]/.test(m.name) &&
     !/^[a-z]{1,4}\s[A-Z]/.test(m.name) &&
     !/\(a\):/.test(m.name)
-  );
+  ).filter(m => {
+    if (seen.has(m.name)) return false;
+    seen.add(m.name);
+    return true;
+  });
 };
 
 App.getEffectiveInitiateMiracleLimit = function(cultName) {
@@ -15448,8 +15529,26 @@ App.getCultInitiationBoostPoolRoom = function(poolName, skillKey, plannedPools, 
   return Math.max(0, (budgets[poolName]?.maxPerSkill || 15) - current);
 };
 
-App.canAssignCultInitiationTargetToCulture = function(skillKey, plannedPools) {
-  return Object.prototype.hasOwnProperty.call(plannedPools.culturalSkills || {}, skillKey);
+App.ensureCultInitiationCultureTarget = function(skillKey, plannedPools) {
+  if (Object.prototype.hasOwnProperty.call(plannedPools.culturalSkills || {}, skillKey)) return true;
+  const culture = CULTURES_DATA.find(c => c.name === CharacterData.culture);
+  if (!culture) return false;
+  const normalizedTarget = this.normalizeSkillName(skillKey);
+  const targetPlaceholder = parsePlaceholderSkill(skillKey);
+  const canCreateTarget = this.getCulturalSkillRenderPlan(culture, plannedPools.culturalSkills || {})
+    .some(item => {
+      if (item.type === 'choice') {
+        return item.storedChoice && this.normalizeSkillName(item.storedChoice) === normalizedTarget;
+      }
+      const skillName = item.skillName;
+      if (this.normalizeSkillName(skillName) === normalizedTarget) return true;
+      const skillPlaceholder = parsePlaceholderSkill(skillName);
+      return Boolean(skillPlaceholder && targetPlaceholder &&
+        skillPlaceholder.category === targetPlaceholder.category);
+    });
+  if (!canCreateTarget) return false;
+  plannedPools.culturalSkills[skillKey] = 0;
+  return true;
 };
 
 App.ensureCultInitiationCareerTarget = function(skillKey, plannedPools, plannedSelections, protectedKeys, selectionChanges) {
@@ -15499,7 +15598,10 @@ App.ensureCultInitiationCareerTarget = function(skillKey, plannedPools, plannedS
     if (replacementIndex === -1) return false;
     const replaced = plannedSelections[replacementIndex];
     plannedSelections.splice(replacementIndex, 1, skillKey);
-    selectionChanges.push({ action: 'replace-professional-skill', from: replaced, to: skillKey });
+    const transferredPoints = plannedPools.careerSkills[replaced] || 0;
+    delete plannedPools.careerSkills[replaced];
+    plannedPools.careerSkills[skillKey] = (plannedPools.careerSkills[skillKey] || 0) + transferredPoints;
+    selectionChanges.push({ action: 'replace-professional-skill', from: replaced, to: skillKey, transferredPoints });
   } else if (!plannedSelections.includes(skillKey)) {
     plannedSelections.push(skillKey);
     if (!dependenciesRemainValid(plannedSelections)) {
@@ -15568,7 +15670,7 @@ App.planCultInitiationBoost = function(options = {}) {
         !this.ensureCultInitiationCareerTarget(target.boostKey, plannedPools, plannedSelections, protectedKeys, selectionChanges)) {
       return;
     }
-    if (poolName === 'culturalSkills' && !this.canAssignCultInitiationTargetToCulture(target.boostKey, plannedPools)) return;
+    if (poolName === 'culturalSkills' && !this.ensureCultInitiationCultureTarget(target.boostKey, plannedPools)) return;
     for (const [donor, donorPoints] of donorEntries(poolName)) {
       const room = this.getCultInitiationBoostPoolRoom(poolName, target.boostKey, plannedPools, budgets);
       const needed = Math.max(0, 50 - this.getCultInitiationBoostTotal(target.boostKey, originalPools, plannedPools));
@@ -15595,11 +15697,12 @@ App.planCultInitiationBoost = function(options = {}) {
     if (this.getCultInitiationBoostTotal(target.boostKey, originalPools, plannedPools) < 50) tryReallocatePool('careerSkills', target);
     if (this.getCultInitiationBoostTotal(target.boostKey, originalPools, plannedPools) < 50) tryReallocatePool('culturalSkills', target);
 
-    if (this.getCultInitiationBoostTotal(target.boostKey, originalPools, plannedPools) >= 50) {
+    const targetTotal = this.getCultInitiationBoostTotal(target.boostKey, originalPools, plannedPools);
+    if (targetTotal >= 50) {
       qualifyingCount += 1;
       targets.push(target.boostKey);
       [target.name, target.key, target.matchedName, target.boostKey].filter(Boolean).forEach(key => protectedKeys.add(key));
-    } else {
+    } else if (options.allowPartial !== true) {
       moves.splice(beforeMoves);
       selectionChanges.splice(beforeSelections);
       const restoredPools = JSON.parse(beforePools);
@@ -15612,7 +15715,7 @@ App.planCultInitiationBoost = function(options = {}) {
 
   const remainingGaps = allSkills
     .map(skill => ({...skill, plannedValue: this.getCultInitiationBoostTotal(skill.boostKey, originalPools, plannedPools)}))
-    .filter(skill => skill.plannedValue < 50);
+    .filter(skill => !skill.qualifies && skill.plannedValue < 50);
   const success = qualifyingCount >= requiredCount;
   if (!success && options.allowPartial !== true) {
     return {
@@ -15625,6 +15728,7 @@ App.planCultInitiationBoost = function(options = {}) {
   }
   return {
     success,
+    allowPartial: options.allowPartial === true,
     moves,
     selectionChanges,
     remainingGaps,
@@ -15636,18 +15740,22 @@ App.planCultInitiationBoost = function(options = {}) {
 };
 
 App.applyCultInitiationBoostPlan = function(plan) {
-  if (!plan || plan.success !== true) return false;
+  if (!plan || (plan.success !== true && plan.allowPartial !== true)) return false;
+  if ((plan.moves || []).length === 0 && (plan.selectionChanges || []).length === 0) return false;
   if (!CharacterData.bonusSkills) CharacterData.bonusSkills = {};
   if (!CharacterData.culturalSkills) CharacterData.culturalSkills = {};
   if (!CharacterData.careerSkills) CharacterData.careerSkills = {};
   if (!CharacterData.selectedProfessionalSkills) CharacterData.selectedProfessionalSkills = [];
 
+  // Apply selection changes before point moves: replacement plans may move points
+  // from the replaced key, so preserving transferredPoints keeps pool totals stable.
   (plan.selectionChanges || []).forEach(change => {
     if (change.action === 'replace-professional-skill') {
       CharacterData.selectedProfessionalSkills = CharacterData.selectedProfessionalSkills.filter(name => name !== change.from);
       if (!CharacterData.selectedProfessionalSkills.includes(change.to)) CharacterData.selectedProfessionalSkills.push(change.to);
+      const transferredPoints = change.transferredPoints || 0;
       delete CharacterData.careerSkills[change.from];
-      CharacterData.careerSkills[change.to] = CharacterData.careerSkills[change.to] || 0;
+      CharacterData.careerSkills[change.to] = (CharacterData.careerSkills[change.to] || 0) + transferredPoints;
     } else if (change.action === 'add-professional-skill' && !CharacterData.selectedProfessionalSkills.includes(change.to)) {
       CharacterData.selectedProfessionalSkills.push(change.to);
       CharacterData.careerSkills[change.to] = CharacterData.careerSkills[change.to] || 0;
@@ -15674,8 +15782,8 @@ App.autoBoostCultSkills = function(options = {}) {
   if (!cult) return { success: false, remainingGaps: [], error: 'No cult selected' };
 
   const snapshot = createTrustedCharacterSnapshot();
-  const plan = this.planCultInitiationBoost();
-  if (!plan.success) {
+  const plan = this.planCultInitiationBoost({ allowPartial: true });
+  if (!plan.success && (plan.moves || []).length === 0 && (plan.selectionChanges || []).length === 0) {
     restoreTrustedCharacterSnapshot(snapshot);
     if (!silent) this.showToast(plan.error || 'Unable to meet initiation requirements with legal reallocations.', 'warning');
     if (updateUi) App.updateCultRequirementUI();
@@ -15686,7 +15794,13 @@ App.autoBoostCultSkills = function(options = {}) {
   this.saveToLocalStorage();
   const remainingGaps = this.getCultSkillRequirementDetails(cult).filter(s => s.value < 50);
   const summary = this.getCultInitiationRequirementSummary(cult);
-  if (!silent) this.showToast(plan.summary || 'Cult initiation skills boosted to 50%+', 'success');
+  if (!silent) {
+    const appliedPoints = (plan.moves || []).reduce((sum, move) => sum + move.points, 0);
+    const message = summary.qualifies
+      ? (plan.summary || 'Cult initiation skills boosted to 50%+')
+      : `Applied ${appliedPoints} legal point${appliedPoints === 1 ? '' : 's'}; initiation still needs ${remainingGaps.length} skill${remainingGaps.length === 1 ? '' : 's'} at 50%+.`;
+    this.showToast(message, summary.qualifies ? 'success' : 'warning');
+  }
   // Re-render boost panel + warning in-place (no full page re-render)
   if (updateUi) App.updateCultRequirementUI();
   return { success: summary.qualifies, remainingGaps, plan };
@@ -15893,17 +16007,16 @@ App.renderStep10 = function() {
         row.className = 'allocation-row';
         row.innerHTML = `
           <div>
-            ${hintText ? `<small style="color:#666; display:block; margin-bottom:2px;">${category} — ${hintText}</small>` : ''}
-            ${guidanceText ? `<small style="color:#555; display:block; margin-bottom:2px;">${App.escapeHtml(guidanceText)}</small>` : ''}
-            <select
-              class="allocation-control" style="font-size: 14px; cursor: pointer;">
-              <option value="">${currentSelected || `Select ${category}...`}</option>
-              ${(Array.isArray(options) ? options : []).map(o => {
-                const optVal = `${category} (${o})`;
-                return `<option value="${optVal}" ${optVal === currentSelected ? 'selected' : ''}>${optVal}</option>`;
-              }).join('')}
-            </select>
+            ${hintText ? `<span class="allocation-help"><strong>${category}</strong> — ${hintText}</span>` : `<span class="allocation-label">${category}</span>`}
+            ${guidanceText ? `<span class="allocation-help">${App.escapeHtml(guidanceText)}</span>` : ''}
           </div>
+          <select class="allocation-control">
+            <option value="">${currentSelected || `Select ${category}...`}</option>
+            ${(Array.isArray(options) ? options : []).map(o => {
+              const optVal = `${category} (${o})`;
+              return `<option value="${optVal}" ${optVal === currentSelected ? 'selected' : ''}>${optVal}</option>`;
+            }).join('')}
+          </select>
           <input class="points-input" type="number" min="0" max="15" value="${currentValue}" ${pointsDisabled}
             data-skill="${this.escapeHtmlAttr(currentSelected || skillName)}">
         `;
@@ -15927,7 +16040,7 @@ App.renderStep10 = function() {
       const skillAttr = this.escapeHtmlAttr(skillName);
 
       const row = document.createElement('div');
-      row.className = 'allocation-row';
+      row.className = 'allocation-row allocation-row--simple';
       row.setAttribute('data-testid', `skill-row-${skillName}`);
       row.innerHTML = `
         <label>${this.skillWithTooltip(skillName)}</label>
@@ -16108,7 +16221,7 @@ App.renderStep11 = function() {
     const bonusPoints = points;
     const totalValue = baseValue + culturalPoints + careerPoints + bonusPoints;
     const row = document.createElement('div');
-    row.className = 'skill-row allocation-row';
+    row.className = 'bonus-skill-row allocation-row allocation-row--bonus';
     row.setAttribute('data-testid', `skill-row-${skillName}`);
     row.innerHTML = `
         <div>
@@ -16120,11 +16233,9 @@ App.renderStep11 = function() {
             ${baseValue} base + ${culturalPoints} culture + ${careerPoints} career + ${bonusPoints} bonus = <strong>${totalValue}%</strong>
           </div>
         </div>
-        <div class="allocation-actions">
-          <input class="points-input" type="number" min="0" max="${ageCategory ? ageCategory.maxPerSkill : 100}" value="${points}" data-testid="skill-input-${skillAttr}" data-skill="${skillAttr}"
-            onchange="App.updateSkillPoints('bonus', this.dataset.skill, parseInt(this.value), this)">
-          <button data-skill="${skillAttr}" onclick="App.removeBonusSkill(this.dataset.skill)">×</button>
-        </div>
+        <input class="points-input" type="number" min="0" max="${ageCategory ? ageCategory.maxPerSkill : 100}" value="${points}" data-testid="skill-input-${skillAttr}" data-skill="${skillAttr}"
+          onchange="App.updateSkillPoints('bonus', this.dataset.skill, parseInt(this.value), this)">
+        <button data-skill="${skillAttr}" onclick="App.removeBonusSkill(this.dataset.skill)">×</button>
     `;
     skillsList.appendChild(row);
   });

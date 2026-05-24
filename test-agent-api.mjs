@@ -25,6 +25,7 @@ function openBrowser() {
     encoding: 'utf8',
     timeout: 30000
   });
+  waitForAgentApi();
 }
 
 function closeBrowser() {
@@ -33,7 +34,27 @@ function closeBrowser() {
   } catch (e) { /* ignore */ }
 }
 
+function waitForAgentApi() {
+  const deadline = Date.now() + 30000;
+  let lastOutput = '';
+  while (Date.now() < deadline) {
+    try {
+      const result = execSync(`agent-browser eval "typeof App !== 'undefined' && !!App.agent"`, {
+        encoding: 'utf8',
+        timeout: 5000
+      }).trim();
+      if (result === 'true') return;
+      lastOutput = result;
+    } catch (e) {
+      lastOutput = (e.stderr || e.message || '').toString().trim();
+    }
+    execSync('sleep 0.25');
+  }
+  throw new Error(`Timed out waiting for App.agent. Last output: ${lastOutput}`);
+}
+
 function evalPage(expr) {
+  waitForAgentApi();
   const result = execSync(`agent-browser eval "${expr.replace(/"/g, '\\"')}"`, {
     encoding: 'utf8',
     timeout: 15000
@@ -78,16 +99,20 @@ function assert(condition, msg) {
 }
 
 function reload() {
-  try {
-    execSync('agent-browser eval "localStorage.clear(); sessionStorage.clear();"', {
-      encoding: 'utf8',
-      timeout: 5000
-    });
-  } catch (e) { /* page may not be open yet */ }
+  execSync(`agent-browser open http://127.0.0.1:8765/index.html?storage-reset=${Date.now()}`, {
+    encoding: 'utf8',
+    timeout: 15000
+  });
+  waitForAgentApi();
+  execSync('agent-browser eval "localStorage.clear(); sessionStorage.clear();"', {
+    encoding: 'utf8',
+    timeout: 5000
+  });
   execSync(`agent-browser open http://127.0.0.1:8765/index.html?t=${Date.now()}`, {
     encoding: 'utf8',
     timeout: 15000
   });
+  waitForAgentApi();
 }
 
 // ═══════════════════════════════════════════════════════════════
