@@ -1,4 +1,5 @@
 {
+  "_cultBoundPlaceholderMap": {},
   "_disambiguationMap": {},
   "age": 28,
   "armor": [],
@@ -41,7 +42,7 @@
     {
       "name": "Scholar's Defence",
       "weapons": [
-        "Staff",
+        "Quarterstaff",
         "Dagger"
       ]
     }
@@ -118,6 +119,6 @@
   ],
   "startingMoney": 60,
   "weapons": [
-    "Staff"
+    "Quarterstaff"
   ]
 }

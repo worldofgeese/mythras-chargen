@@ -3333,8 +3333,14 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
 {
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
   const hasSharedStyles = html.includes('.allocation-row') &&
+    html.includes('.allocation-row--simple') &&
+    html.includes('.allocation-row--simple > .allocation-control') &&
+    html.includes('.allocation-row--bonus') &&
+    html.includes('max-width: 420px') &&
     html.includes('.allocation-control') &&
-    html.includes('.points-input');
+    html.includes('.points-input') &&
+    html.includes('.professional-skills-picker') &&
+    html.includes('.professional-specialization-input');
   const stepContainersUseSharedList = html.includes('id="cultural-skills-list" class="allocation-list"') &&
     html.includes('id="passions-list" class="allocation-list"') &&
     html.includes('id="career-skills-list" class="allocation-list"') &&
@@ -3342,8 +3348,8 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
     html.includes('id="cult-boost-skills" class="allocation-list"');
   const rowsUseSharedClasses = html.includes("row.className = 'allocation-row'") &&
     html.includes("row.className = 'allocation-row allocation-row--triple'") &&
-    html.includes("row.className = 'cult-boost-row allocation-row'") &&
-    html.includes("row.className = 'skill-row allocation-row'");
+    html.includes("row.className = 'cult-boost-row allocation-row allocation-row--simple'") &&
+    html.includes("row.className = 'bonus-skill-row allocation-row allocation-row--bonus'");
   const pointsInputCount = (html.match(/class="points-input"/g) || []).length;
 
   if (hasSharedStyles && stepContainersUseSharedList && rowsUseSharedClasses && pointsInputCount >= 8) {
@@ -3351,6 +3357,58 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
   } else {
     fail('Allocation rows are missing shared uniform control classes',
       JSON.stringify({ hasSharedStyles, stepContainersUseSharedList, rowsUseSharedClasses, pointsInputCount }));
+  }
+}
+
+// Test 1.13c: Passion subject inputs only advertise datalist dropdowns when options exist
+{
+  const { App: AppObj, CharacterData: CD, _sandbox: sandbox } = loadApp();
+  if (AppObj && AppObj.renderStep6) {
+    const originalCreateElement = sandbox.document.createElement;
+    const passionRows = [];
+    const suggestions = { appendChild: () => {} };
+    const passionsList = { appendChild: row => passionRows.push(row) };
+    sandbox.document.createElement = tag => ({
+      tagName: tag,
+      className: '',
+      textContent: '',
+      style: {},
+      onclick: null,
+      innerHTML: '',
+      querySelector: selector => {
+        if (selector === '#passions-list') return passionsList;
+        if (selector === '#passion-suggestions') return suggestions;
+        return null;
+      },
+      appendChild: () => {}
+    });
+    CD.culture = 'Sartarite (Heortling)';
+    CD.passions = [
+      { choice: ['Loyalty'], needsSubject: true, subjectSuggestions: ['Clan'], name: '', value: 60 },
+      { choice: ['Freedom'], needsSubject: true, subjectSuggestions: [], name: '', value: 60 },
+      { name: 'Love', type: 'Love', needsSubject: true, subjectSuggestions: ['Family'], value: 60 },
+      { name: 'Honor', type: 'Honor', needsSubject: true, subjectSuggestions: [], value: 60 },
+      { name: 'Despise (Gods)', value: 70 }
+    ];
+    AppObj.renderStep6();
+    sandbox.document.createElement = originalCreateElement;
+
+    const choiceWithSuggestions = passionRows[0]?.innerHTML.includes('list="passion-suggestions-0"') &&
+      passionRows[0]?.innerHTML.includes('<datalist id="passion-suggestions-0"');
+    const choiceWithoutSuggestions = !passionRows[1]?.innerHTML.includes('list="');
+    const namedWithSuggestions = passionRows[2]?.innerHTML.includes('list="passion-subject-ns-2"') &&
+      passionRows[2]?.innerHTML.includes('<datalist id="passion-subject-ns-2"');
+    const namedWithoutSuggestions = !passionRows[3]?.innerHTML.includes('list="');
+    const fixedPassionSimple = passionRows[4]?.className === 'allocation-row allocation-row--simple';
+
+    if (choiceWithSuggestions && choiceWithoutSuggestions && namedWithSuggestions && namedWithoutSuggestions && fixedPassionSimple) {
+      pass('Passion subject fields only show dropdown affordance when datalist options exist');
+    } else {
+      fail('Passion subject fields still advertise empty dropdowns',
+        JSON.stringify({ choiceWithSuggestions, choiceWithoutSuggestions, namedWithSuggestions, namedWithoutSuggestions, fixedPassionSimple, rows: passionRows.map(row => ({ className: row.className, html: row.innerHTML })) }));
+    }
+  } else {
+    fail('App.renderStep6 unavailable for passion dropdown affordance test');
   }
 }
 
@@ -4207,6 +4265,27 @@ section('Risk 5: Data Attestation & Validation Layer');
     }
 
     // Restore
+    App.CharacterData.weapons = originalWeapons;
+  }
+}
+
+// Test 5.5a: social-class weapon quality labels do not break validation
+{
+  if (App.CharacterData && App.CharacterData.validate) {
+    const originalWeapons = App.CharacterData.weapons;
+    App.CharacterData.weapons = [
+      { name: 'Short Bow (exquisite)', quantity: 1 },
+      { name: 'Broadsword (decorated)', quantity: 1 }
+    ];
+
+    const result = App.CharacterData.validate();
+    if (result.valid || !result.errors.some(e => /Short Bow|Broadsword/.test(e))) {
+      pass('Weapon reference validation accepts social-class quality labels');
+    } else {
+      fail('Weapon reference validation rejects social-class quality labels',
+        result.errors.join('; '));
+    }
+
     App.CharacterData.weapons = originalWeapons;
   }
 }
@@ -5431,6 +5510,21 @@ section('ADR-005: Placeholder Skill Disambiguation');
     }
   } else {
     fail('Combat Style disambiguation helpers not exported for ADR-0014 CSE test');
+  }
+}
+
+// Test: source-backed random sorcerers use the required culture school Invocation
+{
+  const { resolveRandomDisambiguatedSkill } = loadApp();
+  if (resolveRandomDisambiguatedSkill) {
+    const resolved = resolveRandomDisambiguatedSkill('Invocation (Cult, School or Grimoire)', 'God Forgot');
+    if (resolved === 'Invocation (Zzistori School)') {
+      pass('Random God Forgot Sorcerer Invocation resolves to Zzistori School');
+    } else {
+      fail('Random God Forgot Sorcerer Invocation can miss the Zzistori source gate', resolved);
+    }
+  } else {
+    fail('resolveRandomDisambiguatedSkill unavailable for God Forgot Invocation regression test');
   }
 }
 
@@ -11760,6 +11854,28 @@ section('Auto-Boost to 50% (U2)');
         JSON.stringify({ result: mixedPoolResult, devotionTotal, cultural: CD.culturalSkills, career: CD.careerSkills, bonus: CD.bonusSkills }));
     }
 
+    // Test 6b: Legal cultural targets do not need to be pre-created by prior UI edits
+    CultsData.push({ name: 'Quick Boost Hidden Legal Culture Cult', cultSkills: ['Endurance'] });
+    CD.culture = 'Sartarite (Heortling)';
+    CD.career = null;
+    CD.cult = 'Quick Boost Hidden Legal Culture Cult';
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 10, POW: 10, CHA: 10 };
+    CD.age = 22;
+    CD.bonusSkills = {};
+    CD.culturalSkills = { Athletics: 15, Brawn: 15 };
+    CD.careerSkills = {};
+    const hiddenCultureResult = AppRef.autoBoostCultSkills();
+    const hiddenCultureTotal = AppRef.calculateSkillTotalForKey('Endurance').value;
+    CultsData.pop();
+    if (hiddenCultureResult.success &&
+        Object.prototype.hasOwnProperty.call(CD.culturalSkills, 'Endurance') &&
+        hiddenCultureTotal >= 50) {
+      pass('Quick Boost can create absent-but-legal cultural targets');
+    } else {
+      fail('Quick Boost missed absent legal cultural target',
+        JSON.stringify({ hiddenCultureResult, hiddenCultureTotal, cultural: CD.culturalSkills, bonus: CD.bonusSkills }));
+    }
+
     // Test 7: Uses a career's professional placeholder as a legal target and can replace 0-point choices
     CultsData.push({ name: 'Quick Boost Priest Placeholder Cult', cultSkills: ['Devotion'] });
     CD.culture = 'Sartarite (Heortling)';
@@ -11796,6 +11912,59 @@ section('Auto-Boost to 50% (U2)');
     } else {
       fail('autoBoostCultSkills missed a legal professional placeholder target',
         JSON.stringify({ placeholderPlan, selected: CD.selectedProfessionalSkills, career: CD.careerSkills }));
+    }
+
+    if (AppRef.applyCultInitiationBoostPlan({ success: true, moves: [], selectionChanges: [] }) === false) {
+      pass('applyCultInitiationBoostPlan reports false for no-op plans');
+    } else {
+      fail('applyCultInitiationBoostPlan treated a no-op plan as applied');
+    }
+
+    // Test 6c: Illegal cultural targets are not auto-created by the planner
+    CD.culture = 'Sartarite (Heortling)';
+    const plannedPools = { culturalSkills: { Athletics: 15, Brawn: 15 } };
+    const illegalCultureResult = AppRef.ensureCultInitiationCultureTarget('Seamanship', plannedPools);
+    if (illegalCultureResult === false && !Object.prototype.hasOwnProperty.call(plannedPools.culturalSkills, 'Seamanship')) {
+      pass('Quick Boost does not create absent illegal cultural targets');
+    } else {
+      fail('Quick Boost created an illegal cultural target',
+        JSON.stringify({ illegalCultureResult, cultural: plannedPools.culturalSkills }));
+    }
+
+    // Test 7b: Replacing a professional choice must preserve already-spent career points
+    CultsData.push({ name: 'Quick Boost Priest Point Carry Cult', cultSkills: ['Devotion'] });
+    CD.culture = 'Sartarite (Heortling)';
+    CD.career = 'Priest';
+    CD.cult = 'Quick Boost Priest Point Carry Cult';
+    const pointCarryDevotionKey = 'Devotion (Quick Boost Priest Point Carry Cult)';
+    CD.bonusSkills = { [pointCarryDevotionKey]: 15 };
+    CD.culturalSkills = {};
+    CD.careerSkills = {
+      Customs: 15,
+      Bureaucracy: 13,
+      Exhort: 0,
+      'Folk Magic': 0,
+      Influence: 15,
+      Insight: 15,
+      Locale: 15,
+      Sing: 15,
+      Willpower: 12
+    };
+    CD.selectedProfessionalSkills = ['Bureaucracy', 'Exhort', 'Folk Magic'];
+    CD._disambiguationMap = {};
+    const careerSpentBeforeReplacement = Object.values(CD.careerSkills).reduce((sum, value) => sum + value, 0);
+    const pointCarryPlan = AppRef.planCultInitiationBoost({ allowPartial: true });
+    const pointCarryApplied = AppRef.applyCultInitiationBoostPlan(pointCarryPlan);
+    const careerSpentAfterReplacement = Object.values(CD.careerSkills).reduce((sum, value) => sum + value, 0);
+    CultsData.pop();
+    if (pointCarryApplied &&
+        !Object.prototype.hasOwnProperty.call(CD.careerSkills, 'Bureaucracy') &&
+        (CD.careerSkills[pointCarryDevotionKey] || 0) >= 13 &&
+        careerSpentAfterReplacement === careerSpentBeforeReplacement) {
+      pass('Quick Boost preserves career pool total when replacing a professional choice');
+    } else {
+      fail('Quick Boost lost career points while replacing a professional choice',
+        JSON.stringify({ pointCarryPlan, careerSpentBeforeReplacement, careerSpentAfterReplacement, career: CD.careerSkills }));
     }
 
     // Test 8: Professional replacement preserves primary/secondary dependency pairs
@@ -11886,25 +12055,31 @@ section('Auto-Boost Cultural/Career Pool Safety');
   const { App: AppRef, CharacterData: CD, CULTS_DATA: CultsData, Calc: CalcRef } = loadApp();
 
   if (AppRef && AppRef.autoBoostCultSkills) {
-    // Setup: cult with skills that need more than bonus max (15) can provide
-    CD.cult = 'Chalana Arroy';
-    CD.characteristics = { STR: 8, CON: 9, SIZ: 10, DEX: 11, INT: 12, POW: 12, CHA: 13 };
-    // Spend all 150 bonus on non-cult skills
-    CD.bonusSkills = { Athletics: 15, Brawn: 15, Dance: 15, Sing: 15, Swim: 15, Ride: 15, Stealth: 15, Evade: 15, Unarmed: 15, Perception: 15 };
-    // Cultural points on non-cult skills
-    CD.culturalSkills = { Athletics: 15, Brawn: 15, Dance: 15, Sing: 15, Ride: 10, Stealth: 10, Evade: 10, Perception: 10 };
-    CD.careerSkills = { Dance: 15, Ride: 15, Sing: 15, Swim: 15 };
-
-    const before = JSON.stringify({cultural: CD.culturalSkills, career: CD.careerSkills, bonus: CD.bonusSkills});
-
+    CultsData.push({ name: 'Quick Boost Partial Progress Cult', cultSkills: ['Willpower'] });
+    CD.cult = 'Quick Boost Partial Progress Cult';
+    CD.characteristics = { STR: 5, CON: 5, SIZ: 5, DEX: 5, INT: 5, POW: 10, CHA: 5 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.age = 22;
+    CD.bonusSkills = {};
+    CD.culturalSkills = {};
+    CD.careerSkills = {};
+    const toasts = [];
+    AppRef.showToast = (msg, type) => toasts.push({ msg, type });
     const result = AppRef.autoBoostCultSkills();
-    const after = JSON.stringify({cultural: CD.culturalSkills, career: CD.careerSkills, bonus: CD.bonusSkills});
+    const willpowerBonus = CD.bonusSkills.Willpower || 0;
+    CultsData.pop();
 
-    if (!result.success && before === after) {
-      pass('autoBoostCultSkills impossible plans roll back without partial cultural/career changes');
+    const warningToast = toasts.find(toast => toast.type === 'warning');
+    if (!result.success &&
+        willpowerBonus === 15 &&
+        result.remainingGaps.length > 0 &&
+        warningToast &&
+        warningToast.msg.includes('Applied 15 legal points') &&
+        warningToast.msg.includes('initiation still needs 1 skill')) {
+      pass('autoBoostCultSkills applies legal partial progress when initiation remains impossible');
     } else {
-      fail('autoBoostCultSkills impossible plans roll back without partial cultural/career changes',
-        JSON.stringify({ result, before, after }));
+      fail('autoBoostCultSkills failed to apply legal partial progress',
+        JSON.stringify({ result, willpowerBonus, bonus: CD.bonusSkills, toasts }));
     }
   } else {
     fail('App.autoBoostCultSkills function not found');
@@ -13574,6 +13749,38 @@ section('Miracle Pool Capping (pool > available qualified)');
     }
   } else {
     fail('App.agent.selectMiracle object-shaped miracle test dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, MIRACLES_DATA: MiraclesRef } = loadApp();
+
+  if (AppRef && AppRef.getAvailableInitiateMiracleNames && AppRef.getQualifiedInitiateMiracles &&
+      AppRef.getEffectiveInitiateMiracleLimit && AppRef.renderMiraclePicker && MiraclesRef?.cults?.Orlanth) {
+    CD.cult = 'Orlanth';
+    CD.cultType = { types: ['theist'], label: 'Theist' };
+    CD.runeAffinities = { primary: 'Air', secondary: 'Movement', tertiary: 'Death' };
+    CD.devotionalPool = 99;
+    CD.miracles = [];
+
+    const names = AppRef.getAvailableInitiateMiracleNames('Orlanth');
+    const qualifiedNames = AppRef.getQualifiedInitiateMiracles('Orlanth').map(m => m.name);
+    const availableDuplicate = names.find((name, index) => names.indexOf(name) !== index);
+    const qualifiedDuplicate = qualifiedNames.find((name, index) => qualifiedNames.indexOf(name) !== index);
+    const effectiveLimit = AppRef.getEffectiveInitiateMiracleLimit('Orlanth');
+    const container = { style: {}, innerHTML: '' };
+    AppRef.renderMiraclePicker(container);
+    const renderedCards = [...container.innerHTML.matchAll(/data-miracle="([^"]+)"/g)].map(match => match[1]);
+    const renderedDuplicate = renderedCards.find((name, index) => renderedCards.indexOf(name) !== index);
+
+    if (!availableDuplicate && !qualifiedDuplicate && !renderedDuplicate && effectiveLimit === names.length) {
+      pass('Available initiate miracles, picker cards, and limits are unique before random selection');
+    } else {
+      fail('Initiate miracle de-duplication missed a consumer',
+        JSON.stringify({ availableDuplicate, qualifiedDuplicate, renderedDuplicate, effectiveLimit, availableCount: names.length, qualifiedCount: qualifiedNames.length }));
+    }
+  } else {
+    fail('Available initiate miracle uniqueness test dependencies not found');
   }
 }
 
