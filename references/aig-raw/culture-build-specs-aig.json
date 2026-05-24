@@ -2255,7 +2255,7 @@
         "step8": {
           "career": "Sorcerer",
           "professionalSkills": [
-            "Invocation",
+            "Invocation (Zzistori School)",
             "Shaping",
             "Lore (Sorcery)"
           ]
@@ -2271,7 +2271,7 @@
         "step10": {
           "careerSkills": {
             "Combat Style (Talar Defensive School)": 15,
-            "Invocation": 15,
+            "Invocation (Zzistori School)": 15,
             "Shaping": 15,
             "Lore (Sorcery)": 15,
             "Willpower": 15,

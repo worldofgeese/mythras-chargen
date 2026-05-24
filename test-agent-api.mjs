@@ -412,7 +412,7 @@ const u4CareerProviderSkillGate = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Skill Gate Mystic', concept:'Missing provider skills'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:8,SIZ:8,DEX:8,INT:15,POW:20,CHA:8}});
   App.agent.setStep(4, {culture:'Esrolian', homeland:'Esrolia'});
-  const mysticStep8 = App.agent.setStep(8, {career:'Mystic', professionalSkills:['Folk Magic', 'Literacy', 'Musicianship']});
+  const mysticStep8 = App.agent.setStep(8, {career:'Mystic', professionalSkills:['Folk Magic', 'Literacy', {name:'Musicianship', specialization:'Drums'}]});
   const mysticOptions = App.agent.getOptions(9);
   const mysticTalentPayload = App.agent.setStep(9, {cult:null, mysticismTalents:['Unverified Talent']});
 
@@ -498,7 +498,7 @@ const u4MysticNoCult = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'No Cult Mystic', concept:'Core mysticism provider'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:8,SIZ:8,DEX:8,INT:15,POW:20,CHA:8}});
   App.agent.setStep(4, {culture:'Esrolian', homeland:'Esrolia'});
-  const step8 = App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', 'Mysticism', 'Musicianship']});
+  const step8 = App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', {name:'Mysticism', specialization:'Core Mysticism Path'}, {name:'Musicianship', specialization:'Drums'}]});
   const options = App.agent.getOptions(9);
   const step9 = App.agent.setStep(9, {cult:null});
   const talentPayload = App.agent.setStep(9, {cult:null, mysticismTalents:['Unverified Talent']});
@@ -527,7 +527,7 @@ const u4MysticOrlanth = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Orlanth Mystic', concept:'Theist with Core mysticism provider'});
   App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:15,POW:12,CHA:8}});
   App.agent.setStep(4, {culture:'Sartarite (Heortling)', homeland:'Boldhome'});
-  const step8 = App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', 'Mysticism', 'Musicianship']});
+  const step8 = App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', {name:'Mysticism', specialization:'Core Mysticism Path'}, {name:'Musicianship', specialization:'Drums'}]});
   const cultSelect = App.agent.selectCult('Orlanth');
   App.currentStep = 9;
   App.renderCurrentStep();
@@ -564,7 +564,7 @@ const u4ProviderPlayMode = evalPageJSON(`JSON.stringify((() => {
   CharacterData.mysticismTalents = [];
   App.agent.setStep(2, {characteristics:{STR:8,CON:8,SIZ:8,DEX:8,INT:15,POW:20,CHA:8}});
   App.agent.setStep(4, {culture:'Sartarite (Heortling)', homeland:'Boldhome'});
-  App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', 'Mysticism', 'Musicianship']});
+  App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', {name:'Mysticism', specialization:'Core Mysticism Path'}, {name:'Musicianship', specialization:'Drums'}]});
   App.agent.setStep(9, {cult:null});
   App.switchMode('play');
   const mysticHtml = document.getElementById('play-magic')?.innerText || '';
@@ -577,7 +577,7 @@ const u4ProviderPlayMode = evalPageJSON(`JSON.stringify((() => {
   CharacterData.mysticismTalents = [];
   App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:15,POW:12,CHA:8}});
   App.agent.setStep(4, {culture:'Sartarite (Heortling)', homeland:'Boldhome'});
-  App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', 'Mysticism', 'Musicianship']});
+  App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', {name:'Mysticism', specialization:'Core Mysticism Path'}, {name:'Musicianship', specialization:'Drums'}]});
   App.agent.selectCult('Orlanth');
   App.switchMode('play');
   const orlanthMysticHtml = document.getElementById('play-magic')?.innerText || '';
@@ -634,7 +634,7 @@ const u4NonMagicNoCult = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'No Cult Farmer', concept:'No higher magic provider'});
   App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:12,POW:13,CHA:10}});
   App.agent.setStep(4, {culture:'Esrolian'});
-  const step8 = App.agent.setStep(8, {career:'Farmer', professionalSkills:['Commerce', 'Navigation', 'Survival']});
+  const step8 = App.agent.setStep(8, {career:'Farmer', professionalSkills:['Commerce', {name:'Navigation', specialization:'Esrolia'}, 'Survival']});
   const options = App.agent.getOptions(9);
   const step9 = App.agent.setStep(9, {cult:null});
   App.currentStep = 9;
@@ -662,7 +662,7 @@ const u4ProviderlessValidation = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Providerless Validation', concept:'Stale magic selections'});
   App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:12,POW:13,CHA:10}});
   App.agent.setStep(4, {culture:'Esrolian'});
-  App.agent.setStep(8, {career:'Farmer', professionalSkills:['Commerce', 'Navigation', 'Survival']});
+  App.agent.setStep(8, {career:'Farmer', professionalSkills:['Commerce', {name:'Navigation', specialization:'Esrolia'}, 'Survival']});
   App.agent.setStep(9, {cult:null});
   CharacterData.boundSpirits = [{name:'Ancestor Spirit — Sagacity (Int 1)'}];
   CharacterData.sorcerySpells = ['Holdfast'];
@@ -723,7 +723,7 @@ const u5ProviderStateParity = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'U5 State Mystic', concept:'Provider state parity'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:8,SIZ:8,DEX:8,INT:15,POW:20,CHA:8}});
   App.agent.setStep(4, {culture:'Esrolian', homeland:'Esrolia'});
-  App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', 'Mysticism', 'Musicianship']});
+  App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', {name:'Mysticism', specialization:'Core Mysticism Path'}, {name:'Musicianship', specialization:'Drums'}]});
   App.agent.setStep(9, {cult:null});
   const mysticState = App.agent.getState();
 
@@ -925,7 +925,7 @@ console.log('\n\x1b[36m═══ AE3: Arkat (Sorcery) ═══\x1b[0m\n');
 
 reload();
 
-evalPageJSON(`JSON.stringify(App.agent.buildCharacter({step1:{name:'Malkion the Grey',concept:'Sorcerer philosopher'},step2:{characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:13,CHA:10}},step4:{culture:'God Forgot',homeland:'God Forgot'},step5:{culturalSkills:{Athletics:10,Endurance:10,'First Aid':15,Locale:15,Perception:15,Willpower:15,Influence:10,Insight:10},runeAffinities:{primary:'Law',secondary:'Truth',tertiary:'Stasis'},folkMagicSpells:['Avert','Calm','Calculate']},step6:{passions:[{type:'Loyalty',subject:'Brithini Order',value:47},{type:'Love',subject:'Knowledge',value:47}]},step7:{age:21,gender:'Male',family:'House Malkion'},step8:{career:'Sorcerer',professionalSkills:['Invocation','Shaping',{name:'Lore (any)',specialization:'Sorcery'}]},step9:{cult:'Arkat',sorcerySpells:['Holdfast']},step10:{careerSkills:{Willpower:15,Perception:15,Locale:15,Influence:15,Insight:15,'First Aid':10,Endurance:10,Athletics:5},careerFolkMagic:['Appraise','Befuddle']},step11:{bonusSkills:{Willpower:15,Perception:15,Locale:15,Influence:15,Insight:15,'First Aid':15,Endurance:15,Athletics:15,'Lore (Sorcery)':15,'Lore (Philosophy)':15}},step12:{socialClass:'Freeman'}}))`);
+evalPageJSON(`JSON.stringify(App.agent.buildCharacter({step1:{name:'Malkion the Grey',concept:'Sorcerer philosopher'},step2:{characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:13,CHA:10}},step4:{culture:'God Forgot',homeland:'God Forgot'},step5:{culturalSkills:{Athletics:10,Endurance:10,'First Aid':15,Locale:15,Perception:15,Willpower:15,Influence:10,Insight:10},runeAffinities:{primary:'Law',secondary:'Truth',tertiary:'Stasis'},folkMagicSpells:['Avert','Calm','Calculate']},step6:{passions:[{type:'Loyalty',subject:'Brithini Order',value:47},{type:'Love',subject:'Knowledge',value:47}]},step7:{age:21,gender:'Male',family:'House Malkion'},step8:{career:'Sorcerer',professionalSkills:[{name:'Invocation (Cult, School or Grimoire)',specialization:'Arkat'},'Shaping',{name:'Lore (any)',specialization:'Sorcery'}]},step9:{cult:'Arkat',sorcerySpells:['Holdfast']},step10:{careerSkills:{Willpower:15,Perception:15,Locale:15,Influence:15,Insight:15,'First Aid':10,Endurance:10,Athletics:5},careerFolkMagic:['Appraise','Befuddle']},step11:{bonusSkills:{Willpower:15,Perception:15,Locale:15,Influence:15,Insight:15,'First Aid':15,Endurance:15,Athletics:15,'Lore (Sorcery)':15,'Lore (Philosophy)':15}},step12:{socialClass:'Freeman'}}))`);
 const ae3 = evalPageJSON(`JSON.stringify(App.agent.getMagicState())`);
 
 assert(ae3.cultType.primary === 'sorcery', 'AE3: Arkat detected as sorcery');
@@ -1127,7 +1127,7 @@ const ae3bForgedStep8 = evalPageJSON(`JSON.stringify((() => {
   return {result, state: App.agent.getState()};
 })())`);
 assert(ae3bForgedStep8.result.success === false &&
-  ae3bForgedStep8.result.errors.some(error => /Invocation.*not.*Farmer|not available.*Farmer/i.test(error)) &&
+  ae3bForgedStep8.result.errors.some(error => /Invocation.*not.*Farmer|not available.*Farmer|Invocation.*requires a specialization/i.test(error)) &&
   ae3bForgedStep8.state.career !== 'Farmer',
   'AE3b invalid: Step 8 rejects forged Invocation for careers that do not grant it');
 
@@ -1162,7 +1162,7 @@ const ae3bNoCultSwitch = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Switching Zzistori', concept:'God Forgot school sorcerer'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
   App.agent.setStep(4, {culture:'God Forgot', homeland:'God Forgot'});
-  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Invocation', 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Arkat'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
   const arkat = App.agent.selectCult('Arkat');
   const arkatSpell = App.agent.toggleSpell('Holdfast');
   const before = App.agent.getMagicState();
@@ -1185,7 +1185,7 @@ const ae3bArkatSwitch = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Arkat Switching', concept:'God Forgot school sorcerer'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
   App.agent.setStep(4, {culture:'God Forgot', homeland:'God Forgot'});
-  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Invocation', 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Zzistori School'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
   App.agent.selectCult(null);
   App.agent.toggleSpell('Holdfast');
   const before = App.agent.getMagicState();
@@ -1208,7 +1208,7 @@ const ae3bPublicGenericSourceSwitch = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Public Generic Source Switch', concept:'God Forgot school sorcerer'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
   App.agent.setStep(4, {culture:'God Forgot', homeland:'God Forgot'});
-  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Invocation', 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Zzistori School'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
   App.agent.selectCult(null);
   App.agent.toggleSpell('Holdfast');
   const before = App.agent.getMagicState();
@@ -1320,7 +1320,7 @@ const ae3bAgentNonSorcerySwitch = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Agent Non Sorcery Switch', concept:'Arkat sorcerer tempted by Orlanth'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
   App.agent.setStep(4, {culture:'God Forgot', homeland:'God Forgot'});
-  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Invocation', 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Arkat'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
   App.agent.selectCult('Arkat');
   App.agent.toggleSpell('Holdfast');
   const before = App.agent.getMagicState();
@@ -1342,7 +1342,7 @@ const ae3bPublicNonSorcerySwitch = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Public Non Sorcery Switch', concept:'Arkat sorcerer tempted by Orlanth'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
   App.agent.setStep(4, {culture:'God Forgot', homeland:'God Forgot'});
-  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Invocation', 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Arkat'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
   App.agent.selectCult('Arkat');
   App.agent.toggleSpell('Holdfast');
   const before = App.agent.getMagicState();
@@ -1364,11 +1364,11 @@ const ae3bAgentCareerDropsSource = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Agent Career Switch', concept:'God Forgot sorcerer turns farmer'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
   App.agent.setStep(4, {culture:'God Forgot', homeland:'God Forgot'});
-  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Invocation', 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Zzistori School'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
   App.agent.selectCult(null);
   App.agent.toggleSpell('Holdfast');
   const beforeMagic = App.agent.getMagicState();
-  const result = App.agent.setStep(8, {career:'Farmer', professionalSkills:['Commerce', 'Navigation', 'Survival']});
+  const result = App.agent.setStep(8, {career:'Farmer', professionalSkills:['Commerce', {name:'Navigation', specialization:'Esrolia'}, 'Survival']});
   const afterMagic = App.agent.getMagicState();
   const afterState = App.agent.getState();
   return {beforeMagic, result, afterMagic, afterState};
@@ -1387,7 +1387,7 @@ const ae3bPublicCareerDropsSource = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Public Career Switch', concept:'God Forgot sorcerer turns farmer'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
   App.agent.setStep(4, {culture:'God Forgot', homeland:'God Forgot'});
-  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Invocation', 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Zzistori School'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
   App.agent.selectCult(null);
   App.agent.toggleSpell('Holdfast');
   const beforeMagic = App.agent.getMagicState();
@@ -1410,7 +1410,7 @@ const ae3bStep9NoSourceDropsSpells = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Direct Step 9 No Source', concept:'Esrolian Arkat sorcerer'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
   App.agent.setStep(4, {culture:'Esrolian', homeland:'Nochet'});
-  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Invocation', 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Arkat'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
   App.agent.selectCult('Arkat');
   App.agent.toggleSpell('Holdfast');
   const before = App.agent.getMagicState();
@@ -1432,7 +1432,7 @@ const ae3bStep9NoSourcePayloadSpells = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Direct Step 9 No Source Spell Payload', concept:'Farmer with forged spells'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:13,POW:12,CHA:8}});
   App.agent.setStep(4, {culture:'Esrolian', homeland:'Nochet'});
-  App.agent.setStep(8, {career:'Farmer', professionalSkills:['Commerce', 'Navigation', 'Survival']});
+  App.agent.setStep(8, {career:'Farmer', professionalSkills:['Commerce', {name:'Navigation', specialization:'Esrolia'}, 'Survival']});
   const beforeState = App.agent.getState();
   const beforeMagic = App.agent.getMagicState();
   const result = App.agent.setStep(9, {cult:null, sorcerySpells:['Holdfast']});
@@ -1479,7 +1479,7 @@ const ae3bStep9NonArraySpellPayload = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Direct Step 9 Non-Array Spell Payload', concept:'Farmer with malformed spell payload'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:13,POW:12,CHA:8}});
   App.agent.setStep(4, {culture:'Esrolian', homeland:'Nochet'});
-  App.agent.setStep(8, {career:'Farmer', professionalSkills:['Commerce', 'Navigation', 'Survival']});
+  App.agent.setStep(8, {career:'Farmer', professionalSkills:['Commerce', {name:'Navigation', specialization:'Esrolia'}, 'Survival']});
   const beforeState = App.agent.getState();
   const result = App.agent.setStep(9, {cult:null, sorcerySpells:'Holdfast'});
   const afterState = App.agent.getState();
@@ -1499,7 +1499,7 @@ const ae3bStep9ExternalDeferBypass = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Direct Step 9 External Defer', concept:'Malformed deferred spell payload'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:13,CHA:10}});
   App.agent.setStep(4, {culture:'God Forgot', homeland:'God Forgot'});
-  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Invocation', 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Arkat'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
   const beforeState = App.agent.getState();
   const result = App.agent.setStep(9, {cult:'Arkat', sorcerySpells:['Definitely Not A Spell'], __deferValidation:true});
   const afterState = App.agent.getState();
@@ -1520,7 +1520,7 @@ const ae3bStep9ArrayPayload = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Direct Step 9 Array Payload', concept:'Malformed step payload'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:13,CHA:10}});
   App.agent.setStep(4, {culture:'God Forgot', homeland:'God Forgot'});
-  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Invocation', 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Arkat'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
   const valid = App.agent.selectCult('Arkat');
   const before = App.agent.getMagicState();
   const result = App.agent.setStep(9, []);
@@ -1542,7 +1542,7 @@ const ae3bStep9PrimitivePayload = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Direct Step 9 Primitive Payload', concept:'Malformed primitive step payload'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:13,CHA:10}});
   App.agent.setStep(4, {culture:'God Forgot', homeland:'God Forgot'});
-  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Invocation', 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Zzistori School'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
   const result = App.agent.setStep(9, 'x');
   const after = App.agent.getMagicState();
   return {result, after};
@@ -1559,7 +1559,7 @@ const ae3bStep9PrototypePayload = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Direct Step 9 Prototype Payload', concept:'Inherited magic payload'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:13,CHA:10}});
   App.agent.setStep(4, {culture:'God Forgot', homeland:'God Forgot'});
-  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Invocation', 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Arkat'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
   App.agent.selectCult('Arkat');
   const payload = Object.create({cult:'Arkat', sorcerySpells:['Definitely Not A Spell']});
   const result = App.agent.setStep(9, payload);
@@ -1578,7 +1578,7 @@ const ae3bStep9NonSorceryDropsSpells = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Direct Step 9 Orlanth', concept:'Esrolian Arkat sorcerer'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
   App.agent.setStep(4, {culture:'Esrolian', homeland:'Nochet'});
-  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Invocation', 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Arkat'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
   App.agent.selectCult('Arkat');
   App.agent.toggleSpell('Holdfast');
   const before = App.agent.getMagicState();
@@ -1600,7 +1600,7 @@ const ae3bStep9SameSourceOmittedSpell = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Direct Step 9 Same Source', concept:'Arkat sorcerer partial payload'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
   App.agent.setStep(4, {culture:'Esrolian', homeland:'Nochet'});
-  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Invocation', 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Arkat'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
   App.agent.selectCult('Arkat');
   App.agent.toggleSpell('Holdfast');
   App.agent.toggleSpell('Animate (Substance)');
@@ -1625,7 +1625,7 @@ const ae3bAgentCultureDropsSource = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Agent Culture Switch', concept:'God Forgot sorcerer changes culture'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
   App.agent.setStep(4, {culture:'God Forgot', homeland:'God Forgot'});
-  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Invocation', 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Zzistori School'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
   App.agent.selectCult(null);
   App.agent.toggleSpell('Holdfast');
   const beforeMagic = App.agent.getMagicState();
@@ -1648,7 +1648,7 @@ const ae3bPublicCultureDropsSource = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Public Culture Switch', concept:'God Forgot sorcerer changes culture'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
   App.agent.setStep(4, {culture:'God Forgot', homeland:'God Forgot'});
-  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Invocation', 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Zzistori School'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
   App.agent.selectCult(null);
   App.agent.toggleSpell('Holdfast');
   const beforeMagic = App.agent.getMagicState();
@@ -1671,7 +1671,7 @@ const ae3bIdempotentAgentCultSelect = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Idempotent Arkat Select', concept:'Arkat sorcerer reselects cult'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
   App.agent.setStep(4, {culture:'God Forgot', homeland:'God Forgot'});
-  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Invocation', 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Arkat'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
   App.agent.selectCult('Arkat');
   App.agent.toggleSpell('Holdfast');
   const before = App.agent.getMagicState();
@@ -1741,7 +1741,7 @@ const ae3bUnknownPublicCult = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Unknown Cult Guard', concept:'Valid Arkat sorcerer'});
   App.agent.setStep(2, {characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}});
   App.agent.setStep(4, {culture:'God Forgot', homeland:'God Forgot'});
-  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:['Invocation', 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
+  App.agent.setStep(8, {career:'Sorcerer', professionalSkills:[{name:'Invocation (Cult, School or Grimoire)', specialization:'Arkat'}, 'Shaping', {name:'Lore (any)', specialization:'Sorcery'}]});
   App.agent.selectCult('Arkat');
   App.agent.toggleSpell('Holdfast');
   const before = App.agent.getMagicState();
@@ -1781,11 +1781,11 @@ assert(ae3bNoSourceSpellToggles.agentToggle?.success === false &&
   ae3bNoSourceSpellToggles.afterPublic.selectedSpells.length === 0,
   'AE3b invalid: sorcery spell toggles reject missing active source');
 
-const ae3bGenericWithMismatch = evalPageJSON(`JSON.stringify(App.agent.buildCharacter({step1:{name:'Generic Invocation Zzistori',concept:'Generic Invocation with stale specialization'},step2:{characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}},step4:{culture:'God Forgot',homeland:'God Forgot'},step5:{culturalSkills:{Athletics:10,Endurance:10,'First Aid':15,Locale:15,Perception:15,Willpower:15,Influence:10,Insight:10},runeAffinities:{primary:'Law',secondary:'Truth',tertiary:'Stasis'},folkMagicSpells:['Avert','Calm','Calculate']},step6:{passions:[{type:'Loyalty',subject:'Zzistori School',value:47},{type:'Love',subject:'Knowledge',value:47}]},step7:{age:21,gender:'Male',family:'Zzistori school cell'},step8:{career:'Sorcerer',professionalSkills:['Invocation',{name:'Invocation (Cult, School or Grimoire)',specialization:'Arkat'},'Shaping']},step9:{cult:null,sorcerySpells:['Holdfast']},step10:{careerSkills:{Customs:10,Deceit:10,Influence:10,Insight:10,Locale:10,Perception:10,Willpower:10,Invocation:10,'Invocation (Arkat)':10,Shaping:10},careerFolkMagic:['Appraise','Befuddle']},step11:{bonusSkills:{Customs:15,Deceit:15,Influence:15,Insight:15,Locale:15,Perception:15,Willpower:15,Invocation:15,'Invocation (Arkat)':15,Shaping:15}},step12:{socialClass:'Freeman'}}))`);
+const ae3bGenericWithMismatch = evalPageJSON(`JSON.stringify(App.agent.buildCharacter({step1:{name:'Zzistori Invocation',concept:'Source-backed Invocation specialization'},step2:{characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}},step4:{culture:'God Forgot',homeland:'God Forgot'},step5:{culturalSkills:{Athletics:10,Endurance:10,'First Aid':15,Locale:15,Perception:15,Willpower:15,Influence:10,Insight:10},runeAffinities:{primary:'Law',secondary:'Truth',tertiary:'Stasis'},folkMagicSpells:['Avert','Calm','Calculate']},step6:{passions:[{type:'Loyalty',subject:'Zzistori School',value:47},{type:'Love',subject:'Knowledge',value:47}]},step7:{age:21,gender:'Male',family:'Zzistori school cell'},step8:{career:'Sorcerer',professionalSkills:[{name:'Invocation (Cult, School or Grimoire)',specialization:'Zzistori School'},'Shaping',{name:'Lore (any)',specialization:'Sorcery'}]},step9:{cult:null,sorcerySpells:['Holdfast']},step10:{careerSkills:{Customs:10,Deceit:10,Influence:10,Insight:10,Locale:10,Perception:10,Willpower:10,'Invocation (Zzistori School)':10,Shaping:10,'Lore (Sorcery)':10},careerFolkMagic:['Appraise','Befuddle']},step11:{bonusSkills:{Customs:15,Deceit:15,Influence:15,Insight:15,Locale:15,Perception:15,Willpower:15,'Invocation (Zzistori School)':15,Shaping:15,'Lore (Sorcery)':15}},step12:{socialClass:'Freeman'}}))`);
 assert(ae3bGenericWithMismatch.success === true &&
   ae3bGenericWithMismatch.character?.sorcerySourceLabel === 'Zzistori School (God Forgot sorcery)' &&
   ae3bGenericWithMismatch.character?.sorcerySpells?.includes('Holdfast'),
-  'AE3b valid: generic RAW Invocation satisfies Zzistori even with another Invocation specialization');
+  'AE3b valid: source-backed Invocation specialization satisfies Zzistori');
 
 const ae3bInjectedGenericInvocation = evalPageJSON(`JSON.stringify(App.agent.buildCharacter({step1:{name:'Injected Invocation Zzistori',concept:'Injected generic Invocation allocation'},step2:{characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}},step4:{culture:'God Forgot',homeland:'God Forgot'},step5:{culturalSkills:{Athletics:10,Endurance:10,'First Aid':15,Locale:15,Perception:15,Willpower:15,Influence:10,Insight:10},runeAffinities:{primary:'Law',secondary:'Truth',tertiary:'Stasis'},folkMagicSpells:['Avert','Calm','Calculate']},step6:{passions:[{type:'Loyalty',subject:'Zzistori School',value:47},{type:'Love',subject:'Knowledge',value:47}]},step7:{age:21,gender:'Male',family:'Zzistori school cell'},step8:{career:'Sorcerer',professionalSkills:[{name:'Invocation (Cult, School or Grimoire)',specialization:'Arkat'},'Shaping',{name:'Lore (any)',specialization:'Sorcery'}]},step9:{cult:null,sorcerySpells:['Holdfast']},step10:{careerSkills:{Customs:10,Deceit:10,Influence:10,Insight:10,Locale:10,Perception:10,Willpower:10,'Invocation (Arkat)':10,Shaping:10,Invocation:10},careerFolkMagic:['Appraise','Befuddle']},step11:{bonusSkills:{Customs:15,Deceit:15,Influence:15,Insight:15,Locale:15,Perception:15,Willpower:15,'Invocation (Arkat)':15,Shaping:15,Invocation:15}},step12:{socialClass:'Freeman'}}))`);
 assert(ae3bInjectedGenericInvocation.success === false &&
@@ -1897,7 +1897,7 @@ assert(ae3bStep9Rollback.before.cultName === null &&
 reload();
 
 const ae3bBuildRollback = evalPageJSON(`JSON.stringify((() => {
-  const validSpec = {step1:{name:'Rollback Valid Zzistori',concept:'Valid source-backed sorcerer'},step2:{characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}},step4:{culture:'God Forgot',homeland:'God Forgot'},step5:{culturalSkills:{Athletics:10,Endurance:10,'First Aid':15,Locale:15,Perception:15,Willpower:15,Influence:10,Insight:10},runeAffinities:{primary:'Law',secondary:'Truth',tertiary:'Stasis'},folkMagicSpells:['Avert','Calm','Calculate']},step6:{passions:[{type:'Loyalty',subject:'Zzistori School',value:47},{type:'Love',subject:'Knowledge',value:47}]},step7:{age:21,gender:'Male',family:'Zzistori school cell'},step8:{career:'Sorcerer',professionalSkills:['Invocation','Shaping',{name:'Lore (any)',specialization:'Sorcery'}]},step9:{cult:null,sorcerySpells:['Holdfast']},step10:{careerSkills:{Customs:10,Deceit:10,Influence:10,Insight:10,Locale:10,Perception:10,Willpower:10,Invocation:10,Shaping:10,'Lore (Sorcery)':10},careerFolkMagic:['Appraise','Befuddle']},step11:{bonusSkills:{Customs:15,Deceit:15,Influence:15,Insight:15,Locale:15,Perception:15,Willpower:15,Invocation:15,Shaping:15,'Lore (Sorcery)':15}},step12:{socialClass:'Freeman'}};
+  const validSpec = {step1:{name:'Rollback Valid Zzistori',concept:'Valid source-backed sorcerer'},step2:{characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:15,CHA:8}},step4:{culture:'God Forgot',homeland:'God Forgot'},step5:{culturalSkills:{Athletics:10,Endurance:10,'First Aid':15,Locale:15,Perception:15,Willpower:15,Influence:10,Insight:10},runeAffinities:{primary:'Law',secondary:'Truth',tertiary:'Stasis'},folkMagicSpells:['Avert','Calm','Calculate']},step6:{passions:[{type:'Loyalty',subject:'Zzistori School',value:47},{type:'Love',subject:'Knowledge',value:47}]},step7:{age:21,gender:'Male',family:'Zzistori school cell'},step8:{career:'Sorcerer',professionalSkills:[{name:'Invocation (Cult, School or Grimoire)',specialization:'Zzistori School'},'Shaping',{name:'Lore (any)',specialization:'Sorcery'}]},step9:{cult:null,sorcerySpells:['Holdfast']},step10:{careerSkills:{Customs:10,Deceit:10,Influence:10,Insight:10,Locale:10,Perception:10,Willpower:10,'Invocation (Zzistori School)':10,Shaping:10,'Lore (Sorcery)':10},careerFolkMagic:['Appraise','Befuddle']},step11:{bonusSkills:{Customs:15,Deceit:15,Influence:15,Insight:15,Locale:15,Perception:15,Willpower:15,'Invocation (Zzistori School)':15,Shaping:15,'Lore (Sorcery)':15}},step12:{socialClass:'Freeman'}};
   const valid = App.agent.buildCharacter(validSpec);
   const before = App.agent.getMagicState();
   const invalidEarly = App.agent.buildCharacter({...validSpec, step1:{name:'Rejected Forged Step 8',concept:'Rejected early build'}, step8:{career:'Farmer', professionalSkills:['Invocation','Commerce','Track']}});
@@ -1961,7 +1961,7 @@ assert(ae3bBuildRollback.valid.success === true &&
 reload();
 
 const ae3bBuildDeferredNonSorceryRollback = evalPageJSON(`JSON.stringify((() => {
-  const validArkatSpec = {step1:{name:'Arkat Rollback Baseline',concept:'Existing Arkat sorcerer'},step2:{characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:13,CHA:10}},step4:{culture:'God Forgot',homeland:'God Forgot'},step5:{culturalSkills:{Athletics:10,Endurance:10,'First Aid':15,Locale:15,Perception:15,Willpower:15,Influence:10,Insight:10},runeAffinities:{primary:'Law',secondary:'Truth',tertiary:'Stasis'},folkMagicSpells:['Avert','Calm','Calculate']},step6:{passions:[{type:'Loyalty',subject:'Brithini Order',value:47},{type:'Love',subject:'Knowledge',value:47}]},step7:{age:21,gender:'Male',family:'House Malkion'},step8:{career:'Sorcerer',professionalSkills:['Invocation','Shaping',{name:'Lore (any)',specialization:'Sorcery'}]},step9:{cult:'Arkat',sorcerySpells:['Holdfast']},step10:{careerSkills:{Willpower:15,Perception:15,Locale:15,Influence:15,Insight:15,'First Aid':10,Endurance:10,Athletics:5},careerFolkMagic:['Appraise','Befuddle']},step11:{bonusSkills:{Willpower:15,Perception:15,Locale:15,Influence:15,Insight:15,'First Aid':15,Endurance:15,Athletics:15,'Lore (Sorcery)':15,'Lore (Philosophy)':15}},step12:{socialClass:'Freeman'}};
+  const validArkatSpec = {step1:{name:'Arkat Rollback Baseline',concept:'Existing Arkat sorcerer'},step2:{characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:13,CHA:10}},step4:{culture:'God Forgot',homeland:'God Forgot'},step5:{culturalSkills:{Athletics:10,Endurance:10,'First Aid':15,Locale:15,Perception:15,Willpower:15,Influence:10,Insight:10},runeAffinities:{primary:'Law',secondary:'Truth',tertiary:'Stasis'},folkMagicSpells:['Avert','Calm','Calculate']},step6:{passions:[{type:'Loyalty',subject:'Brithini Order',value:47},{type:'Love',subject:'Knowledge',value:47}]},step7:{age:21,gender:'Male',family:'House Malkion'},step8:{career:'Sorcerer',professionalSkills:[{name:'Invocation (Cult, School or Grimoire)',specialization:'Arkat'},'Shaping',{name:'Lore (any)',specialization:'Sorcery'}]},step9:{cult:'Arkat',sorcerySpells:['Holdfast']},step10:{careerSkills:{Willpower:15,Perception:15,Locale:15,Influence:15,Insight:15,'First Aid':10,Endurance:10,Athletics:5},careerFolkMagic:['Appraise','Befuddle']},step11:{bonusSkills:{Willpower:15,Perception:15,Locale:15,Influence:15,Insight:15,'First Aid':15,Endurance:15,Athletics:15,'Lore (Sorcery)':15,'Lore (Philosophy)':15}},step12:{socialClass:'Freeman'}};
   const valid = App.agent.buildCharacter(validArkatSpec);
   const before = App.agent.getMagicState();
   const invalid = App.agent.buildCharacter({
@@ -2005,10 +2005,10 @@ assert(ae3bBuildNonSorceryPayloadSpells.invalid.success === false &&
 reload();
 
 const ae3bBuildNonArraySpellPayload = evalPageJSON(`JSON.stringify((() => {
-  const validArkatSpec = {step1:{name:'Non-Array Payload Baseline',concept:'Existing Arkat sorcerer'},step2:{characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:13,CHA:10}},step4:{culture:'God Forgot',homeland:'God Forgot'},step5:{culturalSkills:{Athletics:10,Endurance:10,'First Aid':15,Locale:15,Perception:15,Willpower:15,Influence:10,Insight:10},runeAffinities:{primary:'Law',secondary:'Truth',tertiary:'Stasis'},folkMagicSpells:['Avert','Calm','Calculate']},step6:{passions:[{type:'Loyalty',subject:'Brithini Order',value:47},{type:'Love',subject:'Knowledge',value:47}]},step7:{age:21,gender:'Male',family:'House Malkion'},step8:{career:'Sorcerer',professionalSkills:['Invocation','Shaping',{name:'Lore (any)',specialization:'Sorcery'}]},step9:{cult:'Arkat',sorcerySpells:['Holdfast']},step10:{careerSkills:{Willpower:15,Perception:15,Locale:15,Influence:15,Insight:15,'First Aid':10,Endurance:10,Athletics:5},careerFolkMagic:['Appraise','Befuddle']},step11:{bonusSkills:{Willpower:15,Perception:15,Locale:15,Influence:15,Insight:15,'First Aid':15,Endurance:15,Athletics:15,'Lore (Sorcery)':15,'Lore (Philosophy)':15}},step12:{socialClass:'Freeman'}};
+  const validArkatSpec = {step1:{name:'Non-Array Payload Baseline',concept:'Existing Arkat sorcerer'},step2:{characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:15,POW:13,CHA:10}},step4:{culture:'God Forgot',homeland:'God Forgot'},step5:{culturalSkills:{Athletics:10,Endurance:10,'First Aid':15,Locale:15,Perception:15,Willpower:15,Influence:10,Insight:10},runeAffinities:{primary:'Law',secondary:'Truth',tertiary:'Stasis'},folkMagicSpells:['Avert','Calm','Calculate']},step6:{passions:[{type:'Loyalty',subject:'Brithini Order',value:47},{type:'Love',subject:'Knowledge',value:47}]},step7:{age:21,gender:'Male',family:'House Malkion'},step8:{career:'Sorcerer',professionalSkills:[{name:'Invocation (Cult, School or Grimoire)',specialization:'Arkat'},'Shaping',{name:'Lore (any)',specialization:'Sorcery'}]},step9:{cult:'Arkat',sorcerySpells:['Holdfast']},step10:{careerSkills:{Willpower:15,Perception:15,Locale:15,Influence:15,Insight:15,'First Aid':10,Endurance:10,Athletics:5},careerFolkMagic:['Appraise','Befuddle']},step11:{bonusSkills:{Willpower:15,Perception:15,Locale:15,Influence:15,Insight:15,'First Aid':15,Endurance:15,Athletics:15,'Lore (Sorcery)':15,'Lore (Philosophy)':15}},step12:{socialClass:'Freeman'}};
   const valid = App.agent.buildCharacter(validArkatSpec);
   const before = App.agent.getMagicState();
-  const invalid = App.agent.buildCharacter({step1:{name:'Rejected Non-Array Step 9',concept:'Malformed spell payload'},step2:{characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:13,POW:12,CHA:13}},step4:{culture:'Esrolian',homeland:'Nochet'},step8:{career:'Farmer',professionalSkills:['Commerce','Navigation','Survival']},step9:{cult:null,sorcerySpells:'Holdfast'}});
+  const invalid = App.agent.buildCharacter({step1:{name:'Rejected Non-Array Step 9',concept:'Malformed spell payload'},step2:{characteristics:{STR:8,CON:10,SIZ:10,DEX:9,INT:13,POW:12,CHA:13}},step4:{culture:'Esrolian',homeland:'Nochet'},step8:{career:'Farmer',professionalSkills:['Commerce',{name:'Navigation',specialization:'Esrolia'},'Survival']},step9:{cult:null,sorcerySpells:'Holdfast'}});
   const after = App.agent.getMagicState();
   const state = App.agent.getState();
   const invalidShape = App.agent.buildCharacter({...validArkatSpec, step1:{name:'Rejected Array Step 9',concept:'Malformed Step 9 shape'}, step9:[]});

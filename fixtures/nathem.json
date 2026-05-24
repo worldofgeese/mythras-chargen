@@ -18,7 +18,7 @@
     "Combat Style (Hill Clan Levy)": 15,
     "Endurance": 15,
     "Evade": 15,
-    "Navigation": 15,
+    "Navigation (Sartar)": 15,
     "Perception": 15,
     "Stealth": 15,
     "Survival": 15,
@@ -37,7 +37,7 @@
     "Combat Style (Hill Clan Levy)": 15,
     "Endurance": 10,
     "Evade": 10,
-    "Navigation": 15,
+    "Navigation (Sartar)": 15,
     "Stealth": 5,
     "Survival": 15,
     "Track": 15
@@ -319,7 +319,7 @@
   "selectedProfessionalSkills": [
     "Survival",
     "Track",
-    "Navigation"
+    "Navigation (Sartar)"
   ],
   "socialClass": "Freeman",
   "socialClassMoneyMod": 1,

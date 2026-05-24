@@ -4713,7 +4713,11 @@ const DISAMBIGUATION_LISTS = {
   'Craft':   ['Alchemy', 'Armouring', 'Basketry', 'Blacksmithing', 'Brewing', 'Butchery', 'Carpentry', 'Cooking', 'Dyeing', 'Farming', 'Fletching', 'Hunting', 'Leatherworking', 'Mining', 'Netmaking', 'Pottery', 'Shipbuilding', 'Smelting', 'Smithing', 'Stonemasonry', 'Tanning', 'Weaving', 'Woodcarving'],
   'Culture': null, // populated dynamically from CULTURES_DATA names
   'Healing': ['Horses', 'Cattle', 'Dogs', 'Hawks', 'Bison', 'Llamas', 'Impala', 'Sable'],
-  'Teach':   ['Horses', 'Cattle', 'Dogs', 'Hawks', 'Bison', 'Llamas', 'Impala', 'Sable']
+  'Teach':   ['Horses', 'Cattle', 'Dogs', 'Hawks', 'Bison', 'Llamas', 'Impala', 'Sable'],
+  'Navigation': ['Dragon Pass', 'Prax', 'Sartar', 'Tarsh', 'Underground', 'Riverways', 'Sea'],
+  'Musicianship': ['Drums', 'Flute', 'Harp', 'Horn', 'Singing'],
+  'Mysticism': ['Core Mysticism Path'],
+  'Invocation': ['Personal Grimoire', 'Mentor', 'Local Sorcery School']
 };
 
 // Native tongue mapping per culture
@@ -4740,21 +4744,24 @@ function disambiguateSkill(skillName, cultureName, random) {
   const match = skillName.match(/^(Language|Lore|Art|Craft|Culture)\s*\((any|local|any other)\)$/i);
   if (!match) return random ? skillName : null;
   const category = match[1];
-  let options;
-  if (category === 'Language') {
-    const langMap = DISAMBIGUATION_LISTS['Language'];
-    options = langMap[cultureName] || langMap['_default'];
-  } else if (category === 'Culture') {
-    options = CULTURES_DATA.map(c => c.name);
-  } else {
-    options = DISAMBIGUATION_LISTS[category] || [];
-  }
+  const options = getDisambiguationOptions(category, cultureName);
   if (!options || options.length === 0) return random ? skillName : [];
   if (random) {
     const pick = options[Math.floor(Math.random() * options.length)];
     return category + ' (' + pick + ')';
   }
   return options;
+}
+
+function getDisambiguationOptions(category, cultureName) {
+  if (category === 'Language') {
+    const langMap = DISAMBIGUATION_LISTS['Language'];
+    return langMap[cultureName] || langMap['_default'];
+  }
+  if (category === 'Culture') return CULTURES_DATA.map(c => c.name);
+  if (category === 'Combat Style') return (CharacterData.combatStyles || []).map(style => style.name).filter(Boolean);
+  const options = DISAMBIGUATION_LISTS[category] || [];
+  return Array.isArray(options) ? options : [];
 }
 
 /** Check if a skill name contains (any) or similar placeholder */
@@ -4773,6 +4780,45 @@ const KNOWN_CONCRETE_SPECIALIZATIONS = new Set([
   'Lore (Farming)', 'Lore (Herding)', 'Lore (Plants)', 'Lore (Animals)',
   'Navigation (Underground)'
 ]);
+
+const BARE_SPECIALIZATION_REQUIRED_SKILLS = new Set([
+  'Art', 'Craft', 'Culture', 'Language', 'Lore',
+  'Combat Style', 'Navigation', 'Musicianship', 'Mysticism', 'Invocation'
+]);
+
+const DISAMBIGUATION_CATEGORY_NAMES = new Map([
+  ['art', 'Art'],
+  ['craft', 'Craft'],
+  ['culture', 'Culture'],
+  ['language', 'Language'],
+  ['lore', 'Lore'],
+  ['combat style', 'Combat Style'],
+  ['navigation', 'Navigation'],
+  ['musicianship', 'Musicianship'],
+  ['mysticism', 'Mysticism'],
+  ['invocation', 'Invocation'],
+  ['healing', 'Healing'],
+  ['teach', 'Teach'],
+  ['devotion', 'Devotion'],
+  ['binding', 'Binding']
+]);
+
+const NORMALIZATION_ONLY_PARENTHESES = new Map([
+  ['shaping', 'Shaping'],
+  ['literacy', 'Literacy'],
+  ['read/write', 'Literacy'],
+  ['customs', 'Customs'],
+  ['ride', 'Ride'],
+  ['influence', 'Influence']
+]);
+
+const PASSION_TYPES_REQUIRING_SUBJECT = new Set([
+  'Devotion', 'Fear', 'Hate', 'Love', 'Loyalty'
+]);
+
+const PASSION_TYPE_CANONICAL_NAMES = new Map(
+  [...PASSION_TYPES_REQUIRING_SUBJECT].map(type => [type.toLowerCase(), type])
+);
 
 const PLACEHOLDER_PATTERNS = [
   /\(Primary\)$/i,
@@ -4814,7 +4860,147 @@ function isPlaceholderSkill(skillName) {
 
 /** Unified check: does this skill need disambiguation? (ADR-004 + ADR-005) */
 function needsDisambiguation(skillName) {
+  if (BARE_SPECIALIZATION_REQUIRED_SKILLS.has(skillName)) return true;
+  const parsed = parsePlaceholderSkill(skillName);
+  if (parsed && !String(parsed.hint || '').trim()) return true;
   return isAnySkill(skillName) || isPlaceholderSkill(skillName);
+}
+
+function normalizeCharacterFacingSkillName(skillName) {
+  const trimmed = String(skillName || '').trim();
+  const match = trimmed.match(/^(.+?)\s*\((.*)\)$/);
+  if (!match) return trimmed;
+  const normalized = NORMALIZATION_ONLY_PARENTHESES.get(match[1].trim().toLowerCase());
+  return normalized || trimmed;
+}
+
+function normalizeSkillPointMap(skillMap) {
+  if (!skillMap || typeof skillMap !== 'object' || Array.isArray(skillMap)) return {};
+  return Object.entries(skillMap).reduce((normalized, [name, points]) => {
+    const normalizedName = normalizeCharacterFacingSkillName(name);
+    normalized[normalizedName] = typeof normalized[normalizedName] === 'number' && typeof points === 'number'
+      ? normalized[normalizedName] + points
+      : points;
+    return normalized;
+  }, {});
+}
+
+function parsePassionName(name) {
+  const trimmed = String(name || '').trim();
+  const match = trimmed.match(/^(.+?)\s*\((.*)\)$/);
+  if (!match) return { type: trimmed, subject: '' };
+  return { type: match[1].trim(), subject: match[2].trim() };
+}
+
+function normalizePassionType(type) {
+  const trimmed = String(type || '').trim();
+  return PASSION_TYPE_CANONICAL_NAMES.get(trimmed.toLowerCase()) || trimmed;
+}
+
+function passionTypeRequiresSubject(type) {
+  return PASSION_TYPES_REQUIRING_SUBJECT.has(normalizePassionType(type));
+}
+
+function buildStructuredPassion(passion, defaultValue, customDefault) {
+  if (typeof passion === 'string') {
+    const match = passion.match(/^(.*?)(?::\s*(\d+))?$/);
+    const rawName = String(match?.[1] || passion).trim();
+    const parsed = parsePassionName(rawName);
+    const type = normalizePassionType(parsed.type);
+    const subject = parsed.subject;
+    const name = subject ? `${type} (${subject})` : type;
+    const value = match?.[2] ? parseInt(match[2], 10) : defaultValue || 0;
+    return {
+      name,
+      type,
+      subject,
+      description: name,
+      value,
+      custom: customDefault
+    };
+  }
+  const rawName = String(passion?.name || '').trim();
+  const parsed = rawName ? parsePassionName(rawName) : { type: String(passion?.type || '').trim(), subject: '' };
+  const type = normalizePassionType(passion?.type || parsed.type);
+  const subject = String(passion?.subject || parsed.subject || '').trim();
+  const name = subject ? `${type} (${subject})` : type;
+  const structured = {
+    ...passion,
+    name,
+    type,
+    subject,
+    description: String(passion?.description || name || '').trim(),
+    value: passion?.value || defaultValue || 0,
+    custom: passion?.custom !== undefined ? passion.custom : customDefault
+  };
+  if (!Object.prototype.hasOwnProperty.call(passion || {}, 'type') && !type) delete structured.type;
+  if (!Object.prototype.hasOwnProperty.call(passion || {}, 'subject') && !subject) delete structured.subject;
+  return structured;
+}
+
+function normalizeImportedPassion(passion) {
+  if (typeof passion === 'string') return buildStructuredPassion(passion, 0, false);
+  if (!passion || typeof passion !== 'object') return passion;
+  const parsed = parsePassionName(passion.name || '');
+  const hasStructuredFields = Object.prototype.hasOwnProperty.call(passion, 'type') ||
+    Object.prototype.hasOwnProperty.call(passion, 'subject');
+  const hasEmptyParentheticalName = /\(\s*\)$/.test(String(passion.name || ''));
+  if (hasEmptyParentheticalName) {
+    return buildStructuredPassion({
+      ...passion,
+      type: passion.type || parsed.type,
+      subject: passion.subject || parsed.subject
+    }, passion.value || 0, passion.custom || false);
+  }
+  if (hasStructuredFields) {
+    return buildStructuredPassion(passion, passion.value || 0, passion.custom || false);
+  }
+  return passion;
+}
+
+function hasUnresolvedPassion(passion) {
+  const structured = buildStructuredPassion(passion, passion?.value || 0, passion?.custom || false);
+  return !structured.type || (passionTypeRequiresSubject(structured.type) && !structured.subject);
+}
+
+function getCharacterFacingResolutionErrors(character = CharacterData) {
+  const errors = [];
+  const skillMaps = ['culturalSkills', 'careerSkills', 'bonusSkills'];
+  for (const mapName of skillMaps) {
+    const skillMap = normalizeSkillPointMap(character?.[mapName]);
+    for (const key of Object.keys(skillMap)) {
+      if (needsDisambiguation(key)) errors.push(`Unresolved skill "${key}" in ${mapName}`);
+    }
+  }
+  for (const skill of character?.selectedProfessionalSkills || []) {
+    const normalizedSkill = normalizeCharacterFacingSkillName(skill);
+    if (needsDisambiguation(normalizedSkill)) {
+      errors.push(`Unresolved skill "${normalizedSkill}" in professional skills`);
+    }
+  }
+  const normalizedProfessionalSkills = (character?.selectedProfessionalSkills || [])
+    .filter(skill => typeof skill === 'string')
+    .map(normalizeCharacterFacingSkillName);
+  getDuplicateSelectionNames(normalizedProfessionalSkills)
+    .forEach(skill => errors.push(`selectedProfessionalSkills contains duplicate "${skill}" after normalization`));
+  for (const passion of character?.passions || []) {
+    if (hasUnresolvedPassion(passion)) {
+      const structured = buildStructuredPassion(passion, passion?.value || 0, passion?.custom || false);
+      errors.push(`Unresolved Passion "${structured.name || structured.type}" requires a subject`);
+    }
+  }
+  return errors;
+}
+
+function resolveRandomDisambiguatedSkill(skillName, cultureName) {
+  if (isAnySkill(skillName)) return disambiguateSkill(skillName, cultureName, true);
+  if (!needsDisambiguation(skillName)) return skillName;
+  const parsed = parsePlaceholderSkill(skillName);
+  if (!parsed) return skillName;
+  const options = getDisambiguationOptions(parsed.category, cultureName);
+  if (options.length === 0) return skillName;
+  const option = parsed.hint ? options[Math.floor(Math.random() * options.length)] : options[0];
+  return `${parsed.category} (${option})`;
 }
 
 function getConcreteSpecializationError(originalSkillName, resolvedSkillName) {
@@ -4825,9 +5011,16 @@ function getConcreteSpecializationError(originalSkillName, resolvedSkillName) {
 
 /** Extract category and hint text from a placeholder skill name */
 function parsePlaceholderSkill(skillName) {
-  const match = skillName.match(/^(Language|Lore|Art|Craft|Culture|Healing|Teach|Navigation|Devotion|Binding|Invocation)\s*\((.+)\)$/i);
-  if (!match) return null;
-  return { category: match[1], hint: match[2] };
+  const trimmed = String(skillName || '').trim();
+  const match = trimmed.match(/^(Language|Lore|Art|Craft|Culture|Healing|Teach|Navigation|Devotion|Binding|Invocation|Combat Style|Musicianship|Mysticism)\s*\((.*)\)$/i);
+  if (match) {
+    return { category: DISAMBIGUATION_CATEGORY_NAMES.get(match[1].toLowerCase()) || match[1], hint: match[2].trim() };
+  }
+  const bareCategory = DISAMBIGUATION_CATEGORY_NAMES.get(trimmed.toLowerCase());
+  if (bareCategory && BARE_SPECIALIZATION_REQUIRED_SKILLS.has(bareCategory)) {
+    return { category: bareCategory, hint: '' };
+  }
+  return null;
 }
 
 function getPrimaryPlaceholderFor(skillName) {
@@ -7703,7 +7896,7 @@ const CULTURE_BUILD_SPECS = {
       "step8": {
         "career": "Sorcerer",
         "professionalSkills": [
-          "Invocation",
+          "Invocation (Zzistori School)",
           "Shaping",
           "Lore (Sorcery)"
         ]
@@ -7717,9 +7910,9 @@ const CULTURE_BUILD_SPECS = {
         ]
       },
       "step10": {
-        "careerSkills": {
+          "careerSkills": {
           "Combat Style (Talar Defensive School)": 15,
-          "Invocation": 15,
+          "Invocation (Zzistori School)": 15,
           "Shaping": 15,
           "Lore (Sorcery)": 15,
           "Willpower": 15,
@@ -10650,6 +10843,10 @@ function skillSatisfiesCareerMagicProviderRequirement(selectedSkill, requiredSki
   if (!selected || !required) return false;
   const requiredPlaceholder = parsePlaceholderSkill(required);
   if (!requiredPlaceholder) return selected === required;
+  if (!requiredPlaceholder.hint && BARE_SPECIALIZATION_REQUIRED_SKILLS.has(requiredPlaceholder.category)) {
+    return !needsDisambiguation(selected) &&
+      selected.toLowerCase().startsWith(`${requiredPlaceholder.category.toLowerCase()} (`);
+  }
   if (needsDisambiguation(selected)) return false;
   const requiredCategory = requiredPlaceholder.category.toLowerCase();
   return selected.toLowerCase().startsWith(`${requiredCategory} (`);
@@ -11239,6 +11436,9 @@ const CharacterData = {
       });
       getDuplicateSelectionNames(data.selectedProfessionalSkills)
         .forEach(skill => errors.push(`selectedProfessionalSkills contains duplicate "${skill}"`));
+      getDuplicateSelectionNames(data.selectedProfessionalSkills.map(skill =>
+        typeof skill === 'string' ? normalizeCharacterFacingSkillName(skill) : skill
+      )).forEach(skill => errors.push(`selectedProfessionalSkills contains duplicate "${skill}" after normalization`));
       const career = typeof data.career === 'string'
         ? CAREERS_DATA.find(candidate => candidate.name === data.career)
         : null;
@@ -11313,6 +11513,11 @@ const CharacterData = {
       console.error('applyPlainObject rejected data:', validationErrors[0]);
       return false;
     }
+    const resolutionErrors = getCharacterFacingResolutionErrors(data);
+    if (resolutionErrors.length > 0) {
+      console.error('applyPlainObject rejected data:', resolutionErrors[0]);
+      return false;
+    }
     this.name = data.name || '';
     this.concept = data.concept || '';
     this.characteristics = data.characteristics || {STR:10,CON:10,SIZ:10,DEX:10,INT:10,POW:10,CHA:10};
@@ -11320,10 +11525,12 @@ const CharacterData = {
     this.attributes = data.attributes || {};
     this.culture = normalizeCultureName(data.culture) || null;
     this.homeland = data.homeland || '';
-    this.culturalSkills = data.culturalSkills || {};
+    this.culturalSkills = normalizeSkillPointMap(data.culturalSkills);
     this.runeAffinities = data.runeAffinities || {primary:null,secondary:null,tertiary:null};
     this.folkMagicSpells = Array.isArray(data.folkMagicSpells) ? data.folkMagicSpells : [];
-    this.passions = Array.isArray(data.passions) ? data.passions : [];
+    this.passions = Array.isArray(data.passions)
+      ? data.passions.map(normalizeImportedPassion)
+      : [];
     this.age = this.coerceNumber(data.age, 21);
     this.gender = this.coerceText(data.gender);
     this.family = this.coerceText(data.family);
@@ -11338,10 +11545,12 @@ const CharacterData = {
     this.sorceryResource = data.sorceryResource || 0;
     this.sorcerySpells = Array.isArray(data.sorcerySpells) ? data.sorcerySpells : [];
     this.mysticismTalents = Array.isArray(data.mysticismTalents) ? data.mysticismTalents : [];
-    this.careerSkills = data.careerSkills || {};
+    this.careerSkills = normalizeSkillPointMap(data.careerSkills);
     this.careerFolkMagic = Array.isArray(data.careerFolkMagic) ? data.careerFolkMagic : [];
-    this.selectedProfessionalSkills = Array.isArray(data.selectedProfessionalSkills) ? data.selectedProfessionalSkills : [];
-    this.bonusSkills = data.bonusSkills || {};
+    this.selectedProfessionalSkills = Array.isArray(data.selectedProfessionalSkills)
+      ? data.selectedProfessionalSkills.map(normalizeCharacterFacingSkillName)
+      : [];
+    this.bonusSkills = normalizeSkillPointMap(data.bonusSkills);
     this.hobbySkillName = data.hobbySkillName || null;
     this.socialClass = data.socialClass || null;
     this.socialClassMoneyMod = data.socialClassMoneyMod || 1;
@@ -11510,6 +11719,13 @@ const App = {
   },
   
   switchMode(mode) {
+    if (mode === 'play') {
+      const resolutionErrors = getCharacterFacingResolutionErrors(CharacterData);
+      if (resolutionErrors.length > 0) {
+        this.showToast(`Cannot enter Play Mode: ${resolutionErrors[0]}`, 'error');
+        return false;
+      }
+    }
     this.mode = mode;
     const wizardMode = document.getElementById('wizard-mode');
     const playMode = document.getElementById('play-mode');
@@ -11531,6 +11747,7 @@ const App = {
     } else if (mode === 'play') {
       this.renderPlayMode();
     }
+    return true;
   },
   
   nextStep() {
@@ -11627,6 +11844,15 @@ const App = {
           this.showToast(`Please choose between: ${unresolvedChoice.choice.join(' or ')}`, 'error');
           return false;
         }
+      }
+    }
+
+    if (step === 6) {
+      const unresolvedPassion = (CharacterData.passions || []).find(passion => hasUnresolvedPassion(passion));
+      if (unresolvedPassion) {
+        const structured = buildStructuredPassion(unresolvedPassion, unresolvedPassion.value || 0, unresolvedPassion.custom || false);
+        this.showToast(`Please enter a subject for ${structured.type}`, 'error');
+        return false;
       }
     }
 
@@ -11911,28 +12137,10 @@ const App = {
 
   /** Validate loaded character data for unresolved placeholder skills */
   validateLoadedData(data) {
-    const errors = [];
     if (!CharacterData.isRecord(data)) {
       return ['Character data must be an object'];
     }
-    const skillMaps = ['culturalSkills', 'careerSkills', 'bonusSkills'];
-    for (const mapName of skillMaps) {
-      if (data[mapName]) {
-        for (const key of Object.keys(data[mapName])) {
-          if (needsDisambiguation(key)) {
-            errors.push(`Unresolved skill "${key}" in ${mapName}`);
-          }
-        }
-      }
-    }
-    if (data.selectedProfessionalSkills) {
-      for (const skill of data.selectedProfessionalSkills) {
-        if (needsDisambiguation(skill)) {
-          errors.push(`Unresolved skill "${skill}" in professional skills`);
-        }
-      }
-    }
-    return errors;
+    return getCharacterFacingResolutionErrors(data);
   },
 
   /**
@@ -12516,9 +12724,12 @@ App.selectCulture = function(cultureName) {
 
     CharacterData.folkMagicSpells = [];
     CharacterData.passions = culture.passions.map(p => {
-      if (typeof p === 'string') return {name: p, value: 30};
+      if (typeof p === 'string') return buildStructuredPassion({name: p, value: 30}, 30, false);
       if (p.choice) return {
         name: '',
+        type: '',
+        subject: '',
+        description: '',
         value: p.formula ? this.evaluateFormula(p.formula) : 30,
         choice: p.choice,
         needsSubject: p.needsSubject !== undefined ? p.needsSubject : false,
@@ -12527,8 +12738,7 @@ App.selectCulture = function(cultureName) {
       // Auto-resolve "(City)" token with homeland
       const resolvedName = p.name ? p.name.replace(/\(City\)/i, `(${CharacterData.homeland || 'City'})`) : p.name;
       return {
-        name: resolvedName,
-        value: this.evaluateFormula(p.formula),
+        ...buildStructuredPassion({name: resolvedName, value: this.evaluateFormula(p.formula)}, this.evaluateFormula(p.formula), false),
         needsSubject: p.needsSubject || false,
         subjectSuggestions: p.subjectSuggestions || []
       };
@@ -12703,13 +12913,13 @@ App.renderCultureDetails = function() {
               <label>Choose your combat style:</label>
               <select id="combat-style-select" onchange="App.selectCombatStyle(this.value)">
                 <option value="">-- Select Combat Style --</option>
-                ${unrestricted.map(cs => `<option value="${cs.name}" ${CharacterData.combatStyles.some(s => s.name === cs.name) ? 'selected' : ''}>${cs.name} — ${cs.weapons.join(', ')} (${cs.traits.join(', ')})</option>`).join('')}
+                ${unrestricted.map(cs => `<option value="${cs.name}" ${CharacterData.combatStyles.some(s => s.name === cs.name) ? 'selected' : ''}>${cs.name} — ${(cs.weapons || []).join(', ')} (${(cs.traits || []).join(', ')})</option>`).join('')}
               </select>
             </div>
-            ${culture.combatStyles.filter(cs => cs.restrictions).map(cs => `<p style="color:#666;"><strong>${cs.name}:</strong> ${cs.weapons.join(', ')} (${cs.traits.join(', ')}) <em>[${cs.restrictions}]</em></p>`).join('')}
+            ${culture.combatStyles.filter(cs => cs.restrictions).map(cs => `<p style="color:#666;"><strong>${cs.name}:</strong> ${(cs.weapons || []).join(', ')} (${(cs.traits || []).join(', ')}) <em>[${cs.restrictions}]</em></p>`).join('')}
           `;
         }
-        return culture.combatStyles.map(cs => `<p><strong>${cs.name}:</strong> ${cs.weapons.join(', ')} (${cs.traits.join(', ')})${cs.restrictions ? ' <em style="color:#666;">[' + cs.restrictions + ']</em>' : ''}</p>`).join('');
+        return culture.combatStyles.map(cs => `<p><strong>${cs.name}:</strong> ${(cs.weapons || []).join(', ')} (${(cs.traits || []).join(', ')})${cs.restrictions ? ' <em style="color:#666;">[' + cs.restrictions + ']</em>' : ''}</p>`).join('');
       })()}
       
       <h4>Folk Magic Options</h4>
@@ -12877,7 +13087,7 @@ App.renderStep5 = function() {
       const category = parsed ? parsed.category : (skillName.match(/^(Language|Lore|Art|Craft|Culture)/i)?.[1] || '');
       const hintText = parsed && !isAnySkill(skillName) ? parsed.hint : '';
       const guidanceText = getSpecializationGuidance(skillName);
-      const options = isAnySkill(skillName) ? disambiguateSkill(skillName, CharacterData.culture, false) : (DISAMBIGUATION_LISTS[category] || []);
+      const options = getDisambiguationOptions(category, CharacterData.culture);
       const storedKey = Object.keys(CharacterData.culturalSkills).find(k => k.startsWith(category + ' (') && !needsDisambiguation(k));
       const currentSelected = storedKey || '';
       const currentValue = storedKey ? (CharacterData.culturalSkills[storedKey] || 0) : 0;
@@ -12939,6 +13149,7 @@ App.renderStep5 = function() {
 
 App.updateSkillPoints = function(category, skillName, points, inputEl) {
   points = Math.max(0, parseInt(points) || 0);
+  const normalizedSkillName = normalizeCharacterFacingSkillName(skillName);
 
   // Enforce 15-point per-skill cap for cultural and career skills (RAW)
   if (category === 'cultural' || category === 'career') {
@@ -12958,11 +13169,14 @@ App.updateSkillPoints = function(category, skillName, points, inputEl) {
   }
 
   if (category === 'cultural') {
-    CharacterData.culturalSkills[skillName] = points;
+    if (normalizedSkillName !== skillName) delete CharacterData.culturalSkills[skillName];
+    CharacterData.culturalSkills[normalizedSkillName] = points;
   } else if (category === 'career') {
-    CharacterData.careerSkills[skillName] = points;
+    if (normalizedSkillName !== skillName) delete CharacterData.careerSkills[skillName];
+    CharacterData.careerSkills[normalizedSkillName] = points;
   } else if (category === 'bonus') {
-    CharacterData.bonusSkills[skillName] = points;
+    if (normalizedSkillName !== skillName) delete CharacterData.bonusSkills[skillName];
+    CharacterData.bonusSkills[normalizedSkillName] = points;
   }
   if (inputEl) {
     inputEl.value = String(points);
@@ -13021,11 +13235,19 @@ App.getValidationState = function() {
       .find(([skill, points]) => points > 0 && needsDisambiguation(skill))?.[0];
     if (unresolvedCultural) errors.push(`Cultural skill needs specialization: ${unresolvedCultural}`);
   }
+  if (step === 6) {
+    const unresolvedPassion = (CharacterData.passions || []).find(passion => hasUnresolvedPassion(passion));
+    if (unresolvedPassion) {
+      const structured = buildStructuredPassion(unresolvedPassion, unresolvedPassion.value || 0, unresolvedPassion.custom || false);
+      errors.push(`Passion needs subject: ${structured.type}`);
+    }
+  }
   if (step === 8) {
     if (!CharacterData.career) errors.push('No career selected');
     const proSkills = (CharacterData.selectedProfessionalSkills || []).length;
     if (proSkills !== 3) errors.push(`Professional skills: ${proSkills}/3 selected`);
-    const unresolvedSkill = (CharacterData.selectedProfessionalSkills || []).find(s => needsDisambiguation(s));
+    const unresolvedSkill = (CharacterData.selectedProfessionalSkills || [])
+      .find(s => needsDisambiguation(s));
     if (unresolvedSkill) errors.push(`Professional skill needs specialization: ${unresolvedSkill}`);
   }
   if (step === 9 && App.getStep9ValidationErrors) {
@@ -13074,6 +13296,7 @@ App.resolveChoiceSkill = function(idx, selectedSkill, choices) {
 // Handle disambiguation dropdown for (any) skills
 App.disambiguateAndUpdate = function(category, originalSkillName, newSkillName, skillCategory) {
   if (!newSkillName) return;
+  newSkillName = normalizeCharacterFacingSkillName(newSkillName);
   const store = category === 'cultural' ? CharacterData.culturalSkills :
                 category === 'career' ? CharacterData.careerSkills : CharacterData.bonusSkills;
   // Remove any previous disambiguation for this category
@@ -13104,6 +13327,7 @@ App.disambiguateAndUpdateFreeText = function(category, originalSkillName, inputV
   if (!inputValue.includes('(')) {
     newSkillName = `${skillCategory} (${inputValue})`;
   }
+  newSkillName = normalizeCharacterFacingSkillName(newSkillName);
   const unresolvedError = getConcreteSpecializationError(originalSkillName, newSkillName);
   if (unresolvedError) {
     if (typeof this.showToast === 'function') this.showToast(unresolvedError, 'error');
@@ -13310,9 +13534,10 @@ App.renderStep6 = function() {
           ${needsSubject ? `<input type="text" id="${subjectId}" placeholder="(subject)" value="${currentSubject}" list="passion-suggestions-${idx}" onchange="App.updatePassionSubject(${idx}, this.value)" onblur="App.updatePassionSubject(${idx}, this.value)">` + (passion.subjectSuggestions && passion.subjectSuggestions.length > 0 ? `<datalist id="passion-suggestions-${idx}">${passion.subjectSuggestions.map(s => `<option value="${s}">`).join('')}</datalist>` : '') : '<span></span>'}
           <input type="number" value="${passion.value}" readonly>
         `;
-      } else if (passion.needsSubject) {
-        const currentSubject = passion.name ? (passion.name.match(/\((.+)\)/) || [])[1] || '' : '';
-        const baseName = passion.name ? passion.name.replace(/\s*\(.*\)/, '') : '';
+      } else if (passion.needsSubject || passionTypeRequiresSubject(passion.type || parsePassionName(passion.name).type)) {
+        const structured = buildStructuredPassion(passion, passion.value || 0, passion.custom || false);
+        const currentSubject = structured.subject;
+        const baseName = structured.type;
         row.style.cssText = 'display: grid; grid-template-columns: auto 1fr 60px; gap: 6px; margin: 4px 0; align-items: center;';
         row.innerHTML = `
           <span style="font-weight: 600;">${baseName}</span>
@@ -13354,7 +13579,7 @@ App.renderStep6 = function() {
       btn.style.cssText = 'font-size: 0.8em; padding: 2px 8px; border: 1px solid #888; border-radius: 3px; background: #f5f5f5; cursor: pointer;';
       btn.onclick = () => {
         const baseValue = (CharacterData.characteristics?.POW || 10) + (CharacterData.characteristics?.CHA || 10) + 30;
-        CharacterData.passions.push({name: s, value: baseValue, custom: true});
+        CharacterData.passions.push(buildStructuredPassion({name: s, value: baseValue, custom: true}, baseValue, true));
         App.saveToLocalStorage();
         App.renderCurrentStep();
       };
@@ -13369,28 +13594,20 @@ App.updatePassionChoice = function(idx, type) {
   const p = CharacterData.passions[idx];
   const subjectInput = document.getElementById(`passion-subject-${idx}`);
   const subject = subjectInput ? subjectInput.value.trim() : '';
-  p.name = subject ? `${type} (${subject})` : type;
+  Object.assign(p, buildStructuredPassion({...p, type, subject}, p.value || 0, p.custom || false));
   App.saveToLocalStorage();
 };
 
 App.updatePassionSubject = function(idx, subject) {
   const p = CharacterData.passions[idx];
-  const type = p.name ? p.name.replace(/\s*\(.*\)/, '') : '';
-  if (type && subject.trim()) {
-    p.name = `${type} (${subject.trim()})`;
-  } else if (type) {
-    p.name = type;
-  }
+  const type = p.type || (p.name ? p.name.replace(/\s*\(.*\)/, '') : '');
+  Object.assign(p, buildStructuredPassion({...p, type, subject: subject.trim()}, p.value || 0, p.custom || false));
   App.saveToLocalStorage();
 };
 
 App.updatePassionNameSubject = function(idx, baseName, subject) {
   const p = CharacterData.passions[idx];
-  if (subject && subject.trim()) {
-    p.name = `${baseName} (${subject.trim()})`;
-  } else {
-    p.name = baseName;
-  }
+  Object.assign(p, buildStructuredPassion({...p, type: baseName, subject: subject.trim()}, p.value || 0, p.custom || false));
   App.saveToLocalStorage();
 };
 
@@ -13410,7 +13627,7 @@ App.confirmCustomPassion = function() {
   const name = input ? input.value.trim() : '';
   if (name) {
     const baseValue = (CharacterData.characteristics?.POW || 10) + (CharacterData.characteristics?.CHA || 10) + 30;
-    CharacterData.passions.push({name, value: baseValue, custom: true});
+    CharacterData.passions.push(buildStructuredPassion({name, value: baseValue, custom: true}, baseValue, true));
     this.saveToLocalStorage();
     this.renderCurrentStep();
   }
@@ -14357,10 +14574,8 @@ App.selectCult = function(cultName, options = {}) {
     const cultPassion = `Loyalty (${cultName})`;
     const hasPassion = CharacterData.passions.some(p => p.name && p.name.includes(cultName));
     if (!hasPassion) {
-      CharacterData.passions.push({
-        name: cultPassion,
-        value: CharacterData.characteristics.POW + CharacterData.characteristics.CHA
-      });
+      const value = CharacterData.characteristics.POW + CharacterData.characteristics.CHA;
+      CharacterData.passions.push(buildStructuredPassion({ name: cultPassion, value }, value, false));
     }
   } else {
     // Remove only cult-specific loyalty passion (preserve cultural passions like Loyalty (Clan))
@@ -15107,11 +15322,18 @@ App.autoBoostCultSkills = function(options = {}) {
   }
 
   // Build list of cult skills with their current totals (skip ambiguous/unresolved skills)
-  cultSkills = cultSkills.map(skill => ({
-    ...skill,
-    total: skill.value,
-    currentBonus: CharacterData.bonusSkills[skill.key || skill.name] || 0
-  }));
+  cultSkills = cultSkills.map(skill => {
+    const rawSkill = skill.key || skill.name;
+    const boostKey = needsDisambiguation(rawSkill)
+      ? resolveRandomDisambiguatedSkill(rawSkill, CharacterData.culture)
+      : rawSkill;
+    return {
+      ...skill,
+      total: skill.value,
+      boostKey,
+      currentBonus: CharacterData.bonusSkills[boostKey] || 0
+    };
+  });
 
   // Sort by gap ascending (cheapest to fix first)
   const needsBoost = cultSkills.filter(s => s.total < 50).sort((a, b) => (50 - a.total) - (50 - b.total));
@@ -15119,7 +15341,7 @@ App.autoBoostCultSkills = function(options = {}) {
 
   // Phase 1: Allocate from remaining budget
   needsBoost.forEach(skill => {
-    const boostKey = skill.key || skill.name;
+    const boostKey = skill.boostKey || skill.key || skill.name;
     const spentTotal = Object.values(CharacterData.bonusSkills).reduce((a, b) => a + b, 0);
     const remaining = totalBonusPool - spentTotal;
     if (remaining <= 0) return;
@@ -15158,7 +15380,7 @@ App.autoBoostCultSkills = function(options = {}) {
         reclaimed += take;
       }
       if (reclaimed > 0) {
-        const boostKey = skill.key || skill.name;
+        const boostKey = skill.boostKey || skill.key || skill.name;
         CharacterData.bonusSkills[boostKey] = (CharacterData.bonusSkills[boostKey] || 0) + reclaimed;
         skill.currentBonus += reclaimed;
         skill.total += reclaimed;
@@ -15355,7 +15577,7 @@ App.renderStep10 = function() {
         const category = parsed ? parsed.category : (skillName.match(/^(Language|Lore|Art|Craft|Culture)/i)?.[1] || '');
         const hintText = parsed && !isAnySkill(skillName) ? parsed.hint : '';
         const guidanceText = getSpecializationGuidance(skillName);
-        const options = isAnySkill(skillName) ? disambiguateSkill(skillName, CharacterData.culture, false) : (DISAMBIGUATION_LISTS[category] || []);
+        const options = getDisambiguationOptions(category, CharacterData.culture);
         // Use disambiguation map to find THIS placeholder's specific resolved key
         const disambigMap = CharacterData._disambiguationMap || {};
         const mapKey = `career:${skillName}`;
@@ -15959,18 +16181,7 @@ App.generateRandomCharacter = function() {
 
   // Fix 2: Disambiguate (any) and placeholder skills in cultural skills (ADR-004 + ADR-005)
   for (let i = 0; i < allCulturalSkills.length; i++) {
-    if (isAnySkill(allCulturalSkills[i])) {
-      allCulturalSkills[i] = disambiguateSkill(allCulturalSkills[i], culture.name, true);
-    } else if (isPlaceholderSkill(allCulturalSkills[i])) {
-      const parsed = parsePlaceholderSkill(allCulturalSkills[i]);
-      if (parsed) {
-        const opts = DISAMBIGUATION_LISTS[parsed.category] || [];
-        if (opts.length > 0) {
-          const pick = Array.isArray(opts) ? opts[Math.floor(Math.random() * opts.length)] : opts;
-          allCulturalSkills[i] = parsed.category + ' (' + pick + ')';
-        }
-      }
-    }
+    allCulturalSkills[i] = resolveRandomDisambiguatedSkill(allCulturalSkills[i], culture.name);
   }
 
   // First pass: distribute randomly
@@ -16037,25 +16248,34 @@ App.generateRandomCharacter = function() {
   CharacterData.passions = [];
   if (culture.passions) {
     culture.passions.forEach(p => {
+      const value = 60 + Math.floor(Math.random() * 20);
       if (typeof p === 'string') {
-        CharacterData.passions.push({ name: p, value: 60 + Math.floor(Math.random() * 20) });
+        CharacterData.passions.push(buildStructuredPassion({ name: p, value }, value, false));
       } else if (p.choice && Array.isArray(p.choice)) {
         // Passion with choice array — pick random type and subject
         const passionType = p.choice[Math.floor(Math.random() * p.choice.length)];
-        let passionName = passionType;
+        let subject = '';
         if (p.needsSubject && p.subjectSuggestions && p.subjectSuggestions.length > 0) {
-          const subject = p.subjectSuggestions[Math.floor(Math.random() * p.subjectSuggestions.length)];
-          passionName = passionType + ' (' + subject + ')';
+          subject = p.subjectSuggestions[Math.floor(Math.random() * p.subjectSuggestions.length)];
         }
-        CharacterData.passions.push({ name: passionName, value: 60 + Math.floor(Math.random() * 20) });
+        CharacterData.passions.push(buildStructuredPassion({
+          type: passionType,
+          subject,
+          description: subject ? `${passionType} (${subject})` : passionType,
+          value
+        }, value, false));
       } else if (p.name) {
         // Resolve subject for named passions with needsSubject
-        let passionName = p.name;
+        let subject = '';
         if (p.needsSubject && p.subjectSuggestions && p.subjectSuggestions.length > 0 && !p.name.includes('(')) {
-          const subject = p.subjectSuggestions[Math.floor(Math.random() * p.subjectSuggestions.length)];
-          passionName = p.name + ' (' + subject + ')';
+          subject = p.subjectSuggestions[Math.floor(Math.random() * p.subjectSuggestions.length)];
         }
-        CharacterData.passions.push({ name: passionName, value: 60 + Math.floor(Math.random() * 20) });
+        CharacterData.passions.push(buildStructuredPassion({
+          name: subject ? `${p.name} (${subject})` : p.name,
+          subject,
+          description: subject ? `${p.name} (${subject})` : p.name,
+          value
+        }, value, false));
       }
     });
   }
@@ -16076,10 +16296,8 @@ App.generateRandomCharacter = function() {
       CharacterData.boundSpiritSlots = randomCultType.types.includes('animist') ? Math.floor(CharacterData.characteristics.CHA / 2) : 0;
       CharacterData.sorceryResource = randomCultType.types.includes('sorcery') ? CharacterData.characteristics.POW : 0;
       // Add Loyalty (Cult) passion
-      CharacterData.passions.push({
-        name: `Loyalty (${CharacterData.cult})`,
-        value: CharacterData.characteristics.POW + CharacterData.characteristics.CHA
-      });
+      const value = CharacterData.characteristics.POW + CharacterData.characteristics.CHA;
+      CharacterData.passions.push(buildStructuredPassion({ name: `Loyalty (${CharacterData.cult})`, value }, value, false));
     }
   }
 
@@ -16089,7 +16307,9 @@ App.generateRandomCharacter = function() {
 
   // Add all career standard skills at 0 (so they appear in the UI)
   if (career.standardSkills) {
-    career.standardSkills.forEach(skill => { CharacterData.careerSkills[skill] = 0; });
+    career.standardSkills.forEach(skill => {
+      CharacterData.careerSkills[resolveRandomDisambiguatedSkill(skill, culture.name)] = 0;
+    });
   }
   // Add career combat styles at 0 — resolve placeholders to character's cultural style
   if (career.combatStyles) {
@@ -16140,17 +16360,7 @@ App.generateRandomCharacter = function() {
         return match && App.normalizeSkillName(match[1]) === App.normalizeSkillName(String(skill || '').replace(/\(.*\)/, '').trim());
       });
       if (cultMatch) return cultMatch;
-      if (isAnySkill(skill)) return disambiguateSkill(skill, culture.name, true);
-      if (isPlaceholderSkill(skill)) {
-        const parsed = parsePlaceholderSkill(skill);
-        if (parsed) {
-          const opts = DISAMBIGUATION_LISTS[parsed.category] || [];
-          if (Array.isArray(opts) && opts.length > 0) {
-            return parsed.category + ' (' + opts[Math.floor(Math.random() * opts.length)] + ')';
-          }
-        }
-      }
-      return skill;
+      return resolveRandomDisambiguatedSkill(skill, culture.name);
     });
     CharacterData.selectedProfessionalSkills = selectedPro;
     selectedPro.forEach(skill => { CharacterData.careerSkills[skill] = 0; });
@@ -16358,8 +16568,8 @@ App.generateRandomCharacter = function() {
         CharacterData.weapons.push({
           name: weaponData.name,
           damage: weaponData.damage || '',
-          size: weaponData.size || '',
-          reach: weaponData.reach || '',
+          size: weaponData.size || 'M',
+          reach: weaponData.reach || 'M',
           ap: weaponData.armour_points || 0,
           hp: weaponData.hit_points || 0,
           skill: 0,
@@ -17712,6 +17922,11 @@ App.ensurePDFLib = function() {
 
 App.exportSinglePagePDF = async function() {
   try {
+    const resolutionErrors = getCharacterFacingResolutionErrors(CharacterData);
+    if (resolutionErrors.length > 0) {
+      if (typeof App.showToast === 'function') App.showToast(`Cannot export PDF: ${resolutionErrors[0]}`, 'error');
+      return false;
+    }
     const { PDFDocument, rgb, StandardFonts } = await App.ensurePDFLib();
     const pdfDoc = await PDFDocument.create();
     const page = pdfDoc.addPage([595, 842]); // A4
@@ -18598,8 +18813,21 @@ App.agent.setStep = function(step, data) {
           return {success: false, errors, state: App.agent.getState()};
         }
         const activeSorcerySource = activeHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
+        const sourceError = getSorcerySourceSelectionError(step4Snapshot, previousSorcerySource, CharacterData, activeSorcerySource, {
+          lostSpellsMessage: lostSpells => `Changing culture would clear selected sorcery spells: ${lostSpells.join(', ')}`
+        });
+        if (sourceError) {
+          restoreStep4Snapshot();
+          errors.push(sourceError);
+          return {success: false, errors, state: App.agent.getState()};
+        }
         const previousSpells = Array.isArray(step4Snapshot.sorcerySpells) ? step4Snapshot.sorcerySpells : [];
         if (previousSorcerySource && previousSpells.length > 0) {
+          if (!activeSorcerySource) {
+            restoreStep4Snapshot();
+            errors.push(`Changing culture would clear selected sorcery spells: ${previousSpells.join(', ')}`);
+            return {success: false, errors, state: App.agent.getState()};
+          }
           const currentSpells = Array.isArray(CharacterData.sorcerySpells) ? CharacterData.sorcerySpells : [];
           const lostSpells = previousSpells.filter(spell => !currentSpells.includes(spell));
           if (lostSpells.length > 0) {
@@ -18633,12 +18861,16 @@ App.agent.setStep = function(step, data) {
 
         // Validate cultural skills
         const skills = data.culturalSkills;
+        const normalizedCulturalSkills = normalizeSkillPointMap(skills);
         if (!skills || typeof skills !== 'object') {
           errors.push('culturalSkills object is required');
         } else {
-          const total = Object.values(skills).reduce((a, b) => a + b, 0);
+          const total = Object.values(normalizedCulturalSkills).reduce((a, b) => a + b, 0);
           if (total !== 100) errors.push(`Cultural skills must total 100 (got ${total})`);
-          for (const [name, val] of Object.entries(skills)) {
+          for (const [name, val] of Object.entries(normalizedCulturalSkills)) {
+            if (needsDisambiguation(name)) {
+              errors.push(`Cultural skill "${name}" requires a concrete specialization before assigning points`);
+            }
             if (val > 15) errors.push(`Cultural skill "${name}" exceeds max 15 (got ${val})`);
             if (val < 0) errors.push(`Cultural skill "${name}" cannot be negative`);
           }
@@ -18662,12 +18894,13 @@ App.agent.setStep = function(step, data) {
         if (errors.length > 0) return {success: false, errors, state: App.agent.getState()};
 
         // Apply
-        CharacterData.culturalSkills = {...skills};
+        CharacterData.culturalSkills = {...normalizedCulturalSkills};
         CharacterData.runeAffinities = {primary: runes.primary, secondary: runes.secondary, tertiary: runes.tertiary};
         CharacterData.folkMagicSpells = [...spells];
         // Handle choiceSkill (e.g., "Ride or Swim" → "Ride")
         if (data.choiceSkill) {
-          CharacterData.culturalSkills[data.choiceSkill] = CharacterData.culturalSkills[data.choiceSkill] || 0;
+          const normalizedChoiceSkill = normalizeCharacterFacingSkillName(data.choiceSkill);
+          CharacterData.culturalSkills[normalizedChoiceSkill] = CharacterData.culturalSkills[normalizedChoiceSkill] || 0;
         }
         App.currentStep = 5;
         App.renderCurrentStep();
@@ -18683,16 +18916,19 @@ App.agent.setStep = function(step, data) {
           return {success: false, errors, state: App.agent.getState()};
         }
         for (const p of passions) {
-          if (!p.name && !p.type) errors.push('Each passion must have a name or type');
+          if (!p.name && !p.type) {
+            errors.push('Each passion must have a name or type');
+            continue;
+          }
+          const structured = buildStructuredPassion(p, p.value || 47, true);
+          if (passionTypeRequiresSubject(structured.type) && !structured.subject) {
+            errors.push(`${structured.type} Passion requires a subject`);
+          }
         }
         if (errors.length > 0) return {success: false, errors, state: App.agent.getState()};
 
         // Normalize: accept {type, subject, value} or {name, value}
-        CharacterData.passions = passions.map(p => {
-          if (p.name) return {name: p.name, value: p.value || 47, custom: p.custom !== undefined ? p.custom : true};
-          const name = p.subject ? `${p.type} (${p.subject})` : p.type;
-          return {name, value: p.value || 47, custom: true};
-        });
+        CharacterData.passions = passions.map(p => buildStructuredPassion(p, p.value || 47, true));
         App.currentStep = 6;
         App.renderCurrentStep();
         App.saveToLocalStorage();
@@ -18758,15 +18994,23 @@ App.agent.setStep = function(step, data) {
               errors.push(unresolvedError);
               continue;
             }
-            resolvedPro.push(resolvedName);
+            resolvedPro.push(normalizeCharacterFacingSkillName(resolvedName));
           } else if (needsResolving && !(typeof ps === 'object' && ps.specialization)) {
             // Placeholder without specialization — error
             errors.push(`Skill "${skillName}" requires a specialization`);
           } else {
-            resolvedPro.push(skillName);
+            resolvedPro.push(normalizeCharacterFacingSkillName(skillName));
           }
         }
         if (errors.length > 0) return {success: false, errors, state: App.agent.getState()};
+        const duplicateResolvedProfessionalSkills = getDuplicateSelectionNames(resolvedPro);
+        if (duplicateResolvedProfessionalSkills.length > 0) {
+          return {
+            success: false,
+            errors: [`Professional skills contain duplicate "${duplicateResolvedProfessionalSkills[0]}" after normalization`],
+            state: App.agent.getState()
+          };
+        }
         const invalidProfessionalSkills = getInvalidInvocationSkillsForCareer(career, resolvedPro);
         if (invalidProfessionalSkills.length > 0) {
           errors.push(`Professional skill(s) not available for ${career.name}: ${invalidProfessionalSkills.join(', ')}`);
@@ -19023,10 +19267,13 @@ App.agent.setStep = function(step, data) {
           errors.push('careerSkills object is required');
           return {success: false, errors, state: App.agent.getState()};
         }
-        const total10 = Object.values(careerSkills).reduce((a, b) => a + b, 0);
+        const normalizedCareerSkills = normalizeSkillPointMap(careerSkills);
+        const total10 = Object.values(normalizedCareerSkills).reduce((a, b) => a + b, 0);
         if (total10 !== 100) errors.push(`Career skills must total 100 (got ${total10})`);
-        for (const [name, val] of Object.entries(careerSkills)) {
-          if (needsDisambiguation(name)) errors.push(`Career skill "${name}" requires a concrete specialization before assigning points`);
+        for (const [name, val] of Object.entries(normalizedCareerSkills)) {
+          if (needsDisambiguation(name)) {
+            errors.push(`Career skill "${name}" requires a concrete specialization before assigning points`);
+          }
           if (val > 15) errors.push(`Career skill "${name}" exceeds max 15 (got ${val})`);
           if (val < 0) errors.push(`Career skill "${name}" cannot be negative`);
         }
@@ -19037,7 +19284,7 @@ App.agent.setStep = function(step, data) {
         if (errors.length > 0) return {success: false, errors, state: App.agent.getState()};
 
         // Apply — merge points into existing careerSkills (which has 0-value keys from Step 8)
-        for (const [name, val] of Object.entries(careerSkills)) {
+        for (const [name, val] of Object.entries(normalizedCareerSkills)) {
           CharacterData.careerSkills[name] = val;
         }
         CharacterData.careerFolkMagic = [...careerFM];
@@ -19055,7 +19302,7 @@ App.agent.setStep = function(step, data) {
           return {success: false, errors, state: App.agent.getState()};
         }
         const normalizedBonusCharacter = {
-          bonusSkills: {...bonusSkills},
+          bonusSkills: normalizeSkillPointMap(bonusSkills),
           _cultBoundPlaceholderMap: {...(CharacterData._cultBoundPlaceholderMap || {})}
         };
         resolveCultBoundPlaceholders(normalizedBonusCharacter, CharacterData.cult);
@@ -19561,7 +19808,12 @@ App.agent.allocateSkill = function(skillMap, pool) {
     const target = pool === 'cultural' ? 'culturalSkills'
                  : pool === 'career' ? 'careerSkills'
                  : 'bonusSkills';
-    CharacterData[target] = {...(CharacterData[target] || {}), ...skillMap};
+    const normalizedSkillMap = normalizeSkillPointMap(skillMap);
+    const resolutionErrors = getCharacterFacingResolutionErrors({[target]: normalizedSkillMap});
+    if (resolutionErrors.length > 0) {
+      return {success: false, error: resolutionErrors[0]};
+    }
+    CharacterData[target] = normalizeSkillPointMap({...(CharacterData[target] || {}), ...normalizedSkillMap});
     App.saveToLocalStorage();
     return {success: true, pool, allocated: CharacterData[target]};
   } catch (e) {

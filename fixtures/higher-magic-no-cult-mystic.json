@@ -42,8 +42,8 @@
     "Insight": 15,
     "Locale": 15,
     "Meditation": 15,
-    "Musicianship": 15,
-    "Mysticism": 15,
+    "Musicianship (Drums)": 15,
+    "Mysticism (Core Mysticism Path)": 15,
     "Perception": 15,
     "Sing": 15,
     "Willpower": 15
@@ -63,8 +63,8 @@
     "Evade": 0,
     "Insight": 15,
     "Meditation": 15,
-    "Musicianship": 15,
-    "Mysticism": 15,
+    "Musicianship (Drums)": 15,
+    "Mysticism (Core Mysticism Path)": 15,
     "Perception": 0,
     "Sing": 10,
     "Willpower": 15
@@ -160,8 +160,8 @@
   "schemaVersion": 1,
   "selectedProfessionalSkills": [
     "Meditation",
-    "Mysticism",
-    "Musicianship"
+    "Mysticism (Core Mysticism Path)",
+    "Musicianship (Drums)"
   ],
   "socialClass": "Freeman",
   "socialClassMoneyMod": 1,

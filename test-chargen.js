@@ -281,9 +281,12 @@ function loadApp() {
         isAnySkill: typeof isAnySkill !== 'undefined' ? isAnySkill : null,
         isPlaceholderSkill: typeof isPlaceholderSkill !== 'undefined' ? isPlaceholderSkill : null,
         needsDisambiguation: typeof needsDisambiguation !== 'undefined' ? needsDisambiguation : null,
+        normalizeCharacterFacingSkillName: typeof normalizeCharacterFacingSkillName !== 'undefined' ? normalizeCharacterFacingSkillName : null,
         parsePlaceholderSkill: typeof parsePlaceholderSkill !== 'undefined' ? parsePlaceholderSkill : null,
         getSpecializationGuidance: typeof getSpecializationGuidance !== 'undefined' ? getSpecializationGuidance : null,
         disambiguateSkill: typeof disambiguateSkill !== 'undefined' ? disambiguateSkill : null,
+        getDisambiguationOptions: typeof getDisambiguationOptions !== 'undefined' ? getDisambiguationOptions : null,
+        resolveRandomDisambiguatedSkill: typeof resolveRandomDisambiguatedSkill !== 'undefined' ? resolveRandomDisambiguatedSkill : null,
         DISAMBIGUATION_LISTS: typeof DISAMBIGUATION_LISTS !== 'undefined' ? DISAMBIGUATION_LISTS : null,
         detectCultType: typeof detectCultType !== 'undefined' ? detectCultType : null,
         MIRACLES_DATA: typeof MIRACLES_DATA !== 'undefined' ? MIRACLES_DATA : null,
@@ -2437,7 +2440,7 @@ section('Higher Magic Provider Resolution');
   const baseCharacteristics = { STR: 10, CON: 11, SIZ: 10, DEX: 10, INT: 15, POW: 14, CHA: 8 };
   const shamanProviderSkills = ['Binding (Waha)', 'Trance', 'Healing'];
   const sorcererProviderSkills = ['Invocation (Core Sorcery)', 'Shaping', 'Lore (Sorcery)'];
-  const mysticProviderSkills = ['Meditation', 'Mysticism', 'Musicianship'];
+  const mysticProviderSkills = ['Meditation', 'Mysticism (Core Mysticism Path)', 'Musicianship (Drums)'];
   const character = (overrides = {}) => ({
     culture: 'Sartarite (Heortling)',
     career: 'Warrior',
@@ -3780,7 +3783,7 @@ asyncTest('exportSinglePagePDF() core career provider magic capture failed', asy
     cultType: null,
     characteristics: mysticCharacteristics,
     attributes: App.Calc.calculateAllAttributes(mysticCharacteristics),
-    selectedProfessionalSkills: ['Meditation', 'Mysticism', 'Musicianship'],
+    selectedProfessionalSkills: ['Meditation', 'Mysticism (Core Mysticism Path)', 'Musicianship (Drums)'],
     miracles: [],
     devotionalPool: 0,
     boundSpirits: [],
@@ -5136,6 +5139,328 @@ section('ADR-005: Placeholder Skill Disambiguation');
     if (ok) pass('needsDisambiguation() correctly unifies (any) + placeholder detection');
   } else {
     fail('needsDisambiguation not exported');
+  }
+}
+
+// Test: ADR-0014 bare specialization-required skills cannot finalize as base labels
+{
+  const { needsDisambiguation } = loadApp();
+  if (needsDisambiguation) {
+    const should = ['Art', 'Craft', 'Culture', 'Language', 'Lore', 'Combat Style', 'Navigation', 'Musicianship', 'Mysticism', 'Invocation'];
+    const emptyParentheticalShould = ['Art ()', 'Craft ()', 'Culture ()', 'Language ()', 'Lore ()', 'Combat Style ()', 'Navigation ()', 'Musicianship ()', 'Mysticism ()', 'Invocation ()', 'Devotion ()', 'Binding ()'];
+    const shouldNot = ['Healing', 'Teach', 'Binding', 'Meditation', 'Shaping', 'Literacy', 'Customs', 'Ride', 'Influence'];
+    let ok = true;
+    for (const skill of should) {
+      if (!needsDisambiguation(skill)) {
+        fail(`needsDisambiguation should catch bare specialization skill "${skill}"`);
+        ok = false;
+        break;
+      }
+    }
+    if (ok) {
+      for (const skill of emptyParentheticalShould) {
+        if (!needsDisambiguation(skill)) {
+          fail(`needsDisambiguation should catch empty parenthetical specialization skill "${skill}"`);
+          ok = false;
+          break;
+        }
+      }
+    }
+    if (ok) {
+      for (const skill of shouldNot) {
+        if (needsDisambiguation(skill)) {
+          fail(`needsDisambiguation should not catch complete base skill "${skill}"`);
+          ok = false;
+          break;
+        }
+      }
+    }
+    if (ok) pass('needsDisambiguation catches ADR-0014 bare specialization-required skills only');
+  } else {
+    fail('needsDisambiguation not exported for ADR-0014 bare specialization skill test');
+  }
+}
+
+// Test: ADR-0014 normalization-only parentheticals collapse before final skill output
+{
+  const { normalizeCharacterFacingSkillName } = loadApp();
+  if (normalizeCharacterFacingSkillName) {
+    const cases = [
+      ['Shaping (Duration, Range, Targets, etc.)', 'Shaping'],
+      ['Literacy (Darktongue)', 'Literacy'],
+      ['Read/Write (multiple)', 'Literacy'],
+      ['Customs (Lunar Tarsh)', 'Customs'],
+      ['Ride (Bison)', 'Ride'],
+      ['Influence (Intimidate)', 'Influence'],
+      ['Navigation (Underground)', 'Navigation (Underground)'],
+      ['Musicianship (Drums)', 'Musicianship (Drums)']
+    ];
+    const mismatch = cases.find(([input, expected]) => normalizeCharacterFacingSkillName(input) !== expected);
+    if (!mismatch) {
+      pass('ADR-0014 normalization-only parentheticals collapse while true specializations remain');
+    } else {
+      fail('ADR-0014 normalization-only parenthetical mapping is wrong',
+        JSON.stringify({ input: mismatch[0], expected: mismatch[1], actual: normalizeCharacterFacingSkillName(mismatch[0]) }));
+    }
+  } else {
+    fail('normalizeCharacterFacingSkillName not exported for ADR-0014 normalization test');
+  }
+}
+
+// Test: ADR-0014 storage paths normalize rulebook base-skill parentheticals
+{
+  const { App: AppObj, CharacterData: CD, Calc } = loadApp();
+  if (AppObj?.updateSkillPoints && AppObj?.agent?.setStep && CD) {
+    AppObj.updateSkillPoints('bonus', 'Ride (Bison)', 12);
+    const updateNormalized = CD.bonusSkills.Ride === 12 && CD.bonusSkills['Ride (Bison)'] === undefined;
+    CD.culture = 'Sartarite (Heortling)';
+    CD.attributes = Calc.calculateAllAttributes(CD.characteristics);
+    AppObj.renderCurrentStep = () => {};
+    const resolvedCultural = AppObj.agent.setStep(5, {
+      culturalSkills: {
+        'Ride (Bison)': 10,
+        Athletics: 15,
+        Brawn: 15,
+        Endurance: 15,
+        Evade: 15,
+        Willpower: 15,
+        'First Aid': 15
+      },
+      runeAffinities: { primary: 'Air', secondary: 'Movement', tertiary: 'Man' },
+      folkMagicSpells: ['Bladesharp', 'Coordination', 'Heal']
+    });
+    const storedCultural = CD.culturalSkills.Ride === 10 && CD.culturalSkills['Ride (Bison)'] === undefined;
+    const unresolvedCultural = AppObj.agent.setStep(5, {
+      culturalSkills: {
+        'Lore ()': 10,
+        Athletics: 15,
+        Brawn: 15,
+        Endurance: 15,
+        Evade: 15,
+        Willpower: 15,
+        'First Aid': 15
+      },
+      runeAffinities: { primary: 'Air', secondary: 'Movement', tertiary: 'Man' },
+      folkMagicSpells: ['Bladesharp', 'Coordination', 'Heal']
+    });
+    if (updateNormalized && resolvedCultural.success && storedCultural && !unresolvedCultural.success &&
+        unresolvedCultural.errors.some(error => /requires a concrete specialization/.test(error))) {
+      pass('ADR-0014 skill-point storage normalizes base-skill parentheticals and rejects empty specializations');
+    } else {
+      fail('ADR-0014 skill-point storage did not normalize or reject unresolved skills',
+        JSON.stringify({ updateNormalized, resolvedCultural, storedCultural, unresolvedCultural, bonusSkills: CD.bonusSkills, culturalSkills: CD.culturalSkills }));
+    }
+  } else {
+    fail('App storage APIs unavailable for ADR-0014 storage normalization test');
+  }
+}
+
+// Test: ADR-0014 import and public allocation APIs cannot bypass final disambiguation guards
+{
+  const { App: AppObj, CharacterData: CD, Calc } = loadApp();
+  if (AppObj?.importCharacterData && AppObj?.agent?.allocateSkill && AppObj?.agent?.setStep && CD) {
+    AppObj.renderCurrentStep = () => {};
+    AppObj.showToast = () => {};
+    const fixture = loadFixture('vasana.json');
+    const unresolvedPassionFixture = JSON.parse(JSON.stringify(fixture));
+    unresolvedPassionFixture.passions = [{ name: 'Loyalty ()', value: 60 }];
+    const importRejected = AppObj.importCharacterData(unresolvedPassionFixture) === false;
+    const directImportRejected = CD.fromJSON(JSON.stringify(unresolvedPassionFixture)) === false;
+    const emptyCultSkillFixture = JSON.parse(JSON.stringify(fixture));
+    emptyCultSkillFixture.careerSkills = { ...(emptyCultSkillFixture.careerSkills || {}), 'Devotion ()': 1, 'Binding ()': 1 };
+    const emptyCultSkillRejected = CD.fromJSON(JSON.stringify(emptyCultSkillFixture)) === false;
+    const stringPassionFixture = JSON.parse(JSON.stringify(fixture));
+    stringPassionFixture.passions = ['Love (Family)'];
+    const stringPassionImported = CD.fromJSON(JSON.stringify(stringPassionFixture));
+    const storedStringPassion = CD.passions[0] || {};
+    const emptyOptionalPassionFixture = JSON.parse(JSON.stringify(fixture));
+    emptyOptionalPassionFixture.passions = ['Honor ()'];
+    const emptyOptionalPassionImported = CD.fromJSON(JSON.stringify(emptyOptionalPassionFixture));
+    const storedEmptyOptionalPassion = CD.passions[0] || {};
+    const emptyOptionalPassionObjectFixture = JSON.parse(JSON.stringify(fixture));
+    emptyOptionalPassionObjectFixture.passions = [{ name: 'Honor ()', value: 60 }];
+    const emptyOptionalPassionObjectImported = CD.fromJSON(JSON.stringify(emptyOptionalPassionObjectFixture));
+    const storedEmptyOptionalPassionObject = CD.passions[0] || {};
+    const contradictoryPassionFixture = JSON.parse(JSON.stringify(fixture));
+    contradictoryPassionFixture.passions = [{ name: 'Loyalty ()', type: 'Loyalty', subject: 'Clan', value: 60 }];
+    const contradictoryImported = CD.fromJSON(JSON.stringify(contradictoryPassionFixture));
+    const storedContradictoryPassion = CD.passions[0] || {};
+    const lowercasePassionResult = AppObj.agent.setStep(6, {
+      passions: [{ type: 'love', value: 60 }]
+    });
+
+    const unresolvedSkillAllocation = AppObj.agent.allocateSkill({ 'Lore ()': 1 }, 'bonus');
+    const normalizedSkillAllocation = AppObj.agent.allocateSkill({ 'Shaping (Duration, Range, Targets, etc.)': 3 }, 'bonus');
+
+    CD.culture = 'Sartarite (Heortling)';
+    CD.attributes = Calc.calculateAllAttributes(CD.characteristics);
+    const duplicateProSkillResult = AppObj.agent.setStep(8, {
+      career: 'Warrior',
+      professionalSkills: ['Ride', 'Ride (Bison)', 'Survival']
+    });
+
+    if (importRejected &&
+        directImportRejected &&
+        emptyCultSkillRejected &&
+        stringPassionImported &&
+        storedStringPassion.name === 'Love (Family)' &&
+        storedStringPassion.type === 'Love' &&
+        storedStringPassion.subject === 'Family' &&
+        emptyOptionalPassionImported &&
+        storedEmptyOptionalPassion.name === 'Honor' &&
+        storedEmptyOptionalPassion.type === 'Honor' &&
+        storedEmptyOptionalPassion.subject === '' &&
+        emptyOptionalPassionObjectImported &&
+        storedEmptyOptionalPassionObject.name === 'Honor' &&
+        storedEmptyOptionalPassionObject.type === 'Honor' &&
+        storedEmptyOptionalPassionObject.subject === '' &&
+        contradictoryImported &&
+        storedContradictoryPassion.name === 'Loyalty (Clan)' &&
+        storedContradictoryPassion.subject === 'Clan' &&
+        !lowercasePassionResult.success &&
+        lowercasePassionResult.errors.some(error => /Love Passion requires a subject/.test(error)) &&
+        !unresolvedSkillAllocation.success &&
+        /Unresolved skill/.test(unresolvedSkillAllocation.error || '') &&
+        normalizedSkillAllocation.success &&
+        CD.bonusSkills.Shaping === 3 &&
+        CD.bonusSkills['Shaping (Duration, Range, Targets, etc.)'] === undefined &&
+        !duplicateProSkillResult.success &&
+        duplicateProSkillResult.errors.some(error => /duplicate "Ride" after normalization/.test(error))) {
+        pass('ADR-0014 import and public allocation APIs reject unresolved values and normalize storage');
+    } else {
+      fail('ADR-0014 import/API bypass guards failed',
+        JSON.stringify({
+          importRejected,
+          directImportRejected,
+          emptyCultSkillRejected,
+          stringPassionImported,
+          storedStringPassion,
+          emptyOptionalPassionImported,
+          storedEmptyOptionalPassion,
+          emptyOptionalPassionObjectImported,
+          storedEmptyOptionalPassionObject,
+          contradictoryImported,
+          storedContradictoryPassion,
+          lowercasePassionResult,
+          unresolvedSkillAllocation,
+          normalizedSkillAllocation,
+          duplicateProSkillResult,
+          bonusSkills: CD.bonusSkills
+        }));
+    }
+  } else {
+    fail('App import/allocation APIs unavailable for ADR-0014 bypass regression test');
+  }
+}
+
+// Test: ADR-0014 Combat Style disambiguation uses the CSE-derived closed vocabulary
+{
+  const { CharacterData: CD, getDisambiguationOptions, resolveRandomDisambiguatedSkill } = loadApp();
+  if (CD && getDisambiguationOptions && resolveRandomDisambiguatedSkill) {
+    CD.combatStyles = [
+      { name: 'Sartarite Fyrd' },
+      { name: 'Praxian Nomad' }
+    ];
+    const options = getDisambiguationOptions('Combat Style');
+    const resolved = resolveRandomDisambiguatedSkill('Combat Style');
+    if (JSON.stringify(options) === JSON.stringify(['Sartarite Fyrd', 'Praxian Nomad']) &&
+        options.includes(resolved.replace(/^Combat Style \((.+)\)$/, '$1'))) {
+      pass('ADR-0014 Combat Style random/manual options are CSE-backed');
+    } else {
+      fail('ADR-0014 Combat Style disambiguation is not CSE-backed',
+        JSON.stringify({ options, resolved }));
+    }
+  } else {
+    fail('Combat Style disambiguation helpers not exported for ADR-0014 CSE test');
+  }
+}
+
+// Test: ADR-0014 structured Passion input rejects unresolved subject-bearing Passion types
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj?.agent?.setStep && CD) {
+    const unresolved = AppObj.agent.setStep(6, {
+      passions: [{ type: 'Love', value: 60 }]
+    });
+    const emptyParenthetical = AppObj.agent.setStep(6, {
+      passions: [{ name: 'Hate ()', value: 60 }]
+    });
+    const resolved = AppObj.agent.setStep(6, {
+      passions: [{ type: 'Love', subject: 'Family', description: 'Love of Family', value: 60 }]
+    });
+    const stored = CD.passions[0] || {};
+    if (!unresolved.success &&
+        unresolved.errors.some(error => /subject/i.test(error)) &&
+        !emptyParenthetical.success &&
+        emptyParenthetical.errors.some(error => /subject/i.test(error)) &&
+        resolved.success &&
+        stored.name === 'Love (Family)' &&
+        stored.type === 'Love' &&
+        stored.subject === 'Family') {
+      pass('ADR-0014 structured Passion input blocks unresolved subject-bearing types');
+    } else {
+      fail('ADR-0014 structured Passion input accepted an unresolved subject-bearing Passion',
+        JSON.stringify({ unresolved, emptyParenthetical, resolved, stored }));
+    }
+  } else {
+    fail('App.agent.setStep unavailable for ADR-0014 Passion structure test');
+  }
+}
+
+// Test: ADR-0014 manual flow blocks unresolved subject-bearing Passions before advancing
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj?.validateCurrentStep && CD) {
+    AppObj.currentStep = 6;
+    CD.passions = [{ name: 'Love', type: 'Love', value: 60 }];
+    const unresolvedAllowed = AppObj.validateCurrentStep();
+    CD.passions = [{ name: 'Love (Family)', type: 'Love', subject: 'Family', value: 60 }];
+    const resolvedAllowed = AppObj.validateCurrentStep();
+    if (!unresolvedAllowed && resolvedAllowed) {
+      pass('ADR-0014 manual Passion validation blocks unresolved subject-bearing types');
+    } else {
+      fail('ADR-0014 manual Passion validation did not enforce subjects',
+        JSON.stringify({ unresolvedAllowed, resolvedAllowed }));
+    }
+  } else {
+    fail('App.validateCurrentStep unavailable for ADR-0014 manual Passion test');
+  }
+}
+
+// Test: ADR-0014 custom subject-bearing Passions render a correction input
+{
+  const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
+  if (AppObj?.renderStep6 && CD && _sandbox?.document) {
+    const originalCreateElement = _sandbox.document.createElement;
+    const appendedRows = [];
+    const makeElement = () => ({
+      className: '',
+      innerHTML: '',
+      textContent: '',
+      style: {},
+      children: [],
+      appendChild(child) { this.children.push(child); },
+      querySelector(selector) {
+        if (selector === '#passions-list') return { appendChild: row => appendedRows.push(row.innerHTML) };
+        if (selector === '#passion-suggestions') return { appendChild: () => {} };
+        return null;
+      }
+    });
+    _sandbox.document.createElement = () => makeElement();
+    CD.culture = 'Sartarite (Heortling)';
+    CD.characteristics = { POW: 12, CHA: 10 };
+    CD.passions = [{ name: 'Love', type: 'Love', value: 60, custom: true }];
+    AppObj.renderStep6();
+    _sandbox.document.createElement = originalCreateElement;
+    const rowHtml = appendedRows.join('\n');
+    if (rowHtml.includes('placeholder="(to what?)"') &&
+        rowHtml.includes("App.updatePassionNameSubject(0, 'Love'")) {
+      pass('ADR-0014 custom subject-bearing Passions render a manual correction input');
+    } else {
+      fail('ADR-0014 custom subject-bearing Passion cannot be corrected manually', rowHtml);
+    }
+  } else {
+    fail('App.renderStep6 unavailable for ADR-0014 custom Passion correction test');
   }
 }
 
@@ -7608,8 +7933,8 @@ fixtures.forEach(fixtureInfo => {
       name: 'Empty Mysticism Import',
       career: 'Mystic',
       characteristics: { STR: 8, CON: 8, SIZ: 8, DEX: 8, INT: 15, POW: 20, CHA: 8 },
-      selectedProfessionalSkills: ['Meditation', 'Mysticism', 'Musicianship'],
-      careerSkills: { Meditation: 10, Mysticism: 10, Musicianship: 10 },
+      selectedProfessionalSkills: ['Meditation', 'Mysticism (Core Mysticism Path)', 'Musicianship (Drums)'],
+      careerSkills: { Meditation: 10, 'Mysticism (Core Mysticism Path)': 10, 'Musicianship (Drums)': 10 },
       cult: null,
       cultType: null,
       miracles: [],
@@ -7625,8 +7950,8 @@ fixtures.forEach(fixtureInfo => {
       name: 'Unsupported Mysticism Import',
       career: 'Mystic',
       characteristics: { STR: 8, CON: 8, SIZ: 8, DEX: 8, INT: 15, POW: 20, CHA: 8 },
-      selectedProfessionalSkills: ['Meditation', 'Mysticism', 'Musicianship'],
-      careerSkills: { Meditation: 10, Mysticism: 10, Musicianship: 10 },
+      selectedProfessionalSkills: ['Meditation', 'Mysticism (Core Mysticism Path)', 'Musicianship (Drums)'],
+      careerSkills: { Meditation: 10, 'Mysticism (Core Mysticism Path)': 10, 'Musicianship (Drums)': 10 },
       cult: null,
       cultType: null,
       miracles: [],
@@ -7737,8 +8062,8 @@ fixtures.forEach(fixtureInfo => {
         cult: null,
         cultType: null,
         characteristics: { STR: 11, CON: 12, SIZ: 13, DEX: 14, INT: 15, POW: 13, CHA: 10 },
-        selectedProfessionalSkills: ['Invocation', 'Shaping', 'Lore (Sorcery)'],
-        careerSkills: { Invocation: 10, Shaping: 10, 'Lore (Sorcery)': 10 },
+        selectedProfessionalSkills: ['Invocation (Zzistori School)', 'Shaping', 'Lore (Sorcery)'],
+        careerSkills: { 'Invocation (Zzistori School)': 10, Shaping: 10, 'Lore (Sorcery)': 10 },
         boundSpirits: [],
         sorceryResource: 0,
         sorcerySpells: ['Project (Sense)'],
@@ -8406,8 +8731,8 @@ fixtures.forEach(fixtureInfo => {
       cultType: null,
       characteristics,
       attributes: CalcRef.calculateAllAttributes(characteristics),
-      selectedProfessionalSkills: ['Invocation', 'Shaping', 'Lore (Sorcery)'],
-      careerSkills: { Invocation: 10, Shaping: 10, 'Lore (Sorcery)': 10 },
+      selectedProfessionalSkills: ['Invocation (Zzistori School)', 'Shaping', 'Lore (Sorcery)'],
+      careerSkills: { 'Invocation (Zzistori School)': 10, Shaping: 10, 'Lore (Sorcery)': 10 },
       miracles: [],
       devotionalPool: 0,
       sorceryResource: 0,
@@ -8831,6 +9156,16 @@ section('Random Character Generator');
     if (CD.passions.length > 0 && CD.passions[0].name && CD.passions[0].value > 0)
       pass('Random: passions have names and values (' + CD.passions.length + ')');
     else fail('Random: passions missing name or value');
+
+    const subjectRequiredPassion = new Set(['Devotion', 'Fear', 'Hate', 'Love', 'Loyalty']);
+    const unresolvedPassion = (CD.passions || []).find(p =>
+      !p.type ||
+      !p.description ||
+      (subjectRequiredPassion.has(p.type) && !p.subject)
+    );
+    if (!unresolvedPassion)
+      pass('Random: passions are structured and source-subjected when required');
+    else fail('Random: passion missing ADR-0014 structure or required subject', JSON.stringify(unresolvedPassion));
 
     // Hit points should be initialized with current/max for all 7 locations
     const hpKeys = Object.keys(CD.hitPoints || {});
@@ -9593,8 +9928,8 @@ section('Cult Data Tests');
       cult: null,
       cultType: null,
       characteristics: { STR: 11, CON: 12, SIZ: 13, DEX: 14, INT: 15, POW: 13, CHA: 10 },
-      selectedProfessionalSkills: ['Invocation', 'Shaping', 'Lore (Sorcery)'],
-      careerSkills: { Invocation: 10, Shaping: 10, 'Lore (Sorcery)': 10 },
+      selectedProfessionalSkills: ['Invocation (Zzistori School)', 'Shaping', 'Lore (Sorcery)'],
+      careerSkills: { 'Invocation (Zzistori School)': 10, Shaping: 10, 'Lore (Sorcery)': 10 },
       sorceryResource: 0,
       sorcerySpells: ['Project (Sense)', 'Animate (Substance)']
     };
@@ -9818,7 +10153,7 @@ section('Cult Data Tests');
     const inheritedArrayPayload = {
       ...validZzistoriPayload,
       name: 'Inherited Array Import',
-      selectedProfessionalSkills: createInheritedIndexedArray('Invocation', 'Shaping', 'Lore (Sorcery)'),
+      selectedProfessionalSkills: createInheritedIndexedArray('Invocation (Zzistori School)', 'Shaping', 'Lore (Sorcery)'),
       sorcerySpells: createInheritedIndexedArray('Project (Sense)')
     };
     const inheritedArrayErrors = CD.validatePlainObject(inheritedArrayPayload);
@@ -9994,7 +10329,7 @@ section('Cult Data Tests');
     AppObj.agent.setStep(1, { name: 'Rollback Transient State', concept: 'God Forgot sorcerer changes culture' });
     AppObj.agent.setStep(2, { characteristics: { STR: 8, CON: 10, SIZ: 10, DEX: 9, INT: 15, POW: 15, CHA: 8 } });
     AppObj.agent.setStep(4, { culture: 'God Forgot', homeland: 'God Forgot' });
-    AppObj.agent.setStep(8, { career: 'Sorcerer', professionalSkills: ['Invocation', 'Shaping', { name: 'Lore (any)', specialization: 'Sorcery' }] });
+    AppObj.agent.setStep(8, { career: 'Sorcerer', professionalSkills: [{ name: 'Invocation (Cult, School or Grimoire)', specialization: 'Zzistori School' }, 'Shaping', { name: 'Lore (any)', specialization: 'Sorcery' }] });
     AppObj.agent.selectCult(null);
     AppObj.agent.toggleSpell('Holdfast');
     CD._pendingCombatStyleSelection = false;
@@ -12490,8 +12825,8 @@ section('Step 9 Initiation Gate');
     CD.career = 'Sorcerer';
     CD.cult = null;
     CD.cultType = null;
-    CD.selectedProfessionalSkills = ['Invocation', 'Shaping', 'Lore (Sorcery)'];
-    CD.careerSkills = { Invocation: 10, Shaping: 10, 'Lore (Sorcery)': 10 };
+    CD.selectedProfessionalSkills = ['Invocation (Zzistori School)', 'Shaping', 'Lore (Sorcery)'];
+    CD.careerSkills = { 'Invocation (Zzistori School)': 10, Shaping: 10, 'Lore (Sorcery)': 10 };
     CD.devotionalPool = 0;
     CD.boundSpiritSlots = 0;
     CD.miracles = [];
@@ -12586,7 +12921,7 @@ section('Step 9 Initiation Gate');
     CD.career = 'Sorcerer';
     CD.cult = 'Arkat';
     CD.cultType = detectCultType(CULTS_DATA.find(cult => cult.name === 'Arkat'));
-    CD.selectedProfessionalSkills = ['Invocation', 'Shaping', 'Lore (Sorcery)'];
+    CD.selectedProfessionalSkills = ['Invocation (Arkat)', 'Shaping', 'Lore (Sorcery)'];
     CD.devotionalPool = 0;
     CD.boundSpiritSlots = 0;
     CD.miracles = [];
@@ -12621,7 +12956,7 @@ section('Step 9 Initiation Gate');
     CD.career = 'Sorcerer';
     CD.cult = 'Arkat';
     CD.cultType = detectCultType(CULTS_DATA.find(cult => cult.name === 'Arkat'));
-    CD.selectedProfessionalSkills = ['Invocation', 'Shaping', 'Lore (Sorcery)'];
+    CD.selectedProfessionalSkills = ['Invocation (Arkat)', 'Shaping', 'Lore (Sorcery)'];
     CD.devotionalPool = 0;
     CD.boundSpiritSlots = 0;
     CD.miracles = [];
@@ -12673,7 +13008,7 @@ section('Step 9 Initiation Gate');
     CD.career = 'Sorcerer';
     CD.cult = null;
     CD.cultType = null;
-    CD.selectedProfessionalSkills = ['Invocation', 'Shaping', 'Lore (Sorcery)'];
+    CD.selectedProfessionalSkills = ['Invocation (Zzistori School)', 'Shaping', 'Lore (Sorcery)'];
     CD.devotionalPool = 0;
     CD.boundSpiritSlots = 0;
     CD.miracles = [];

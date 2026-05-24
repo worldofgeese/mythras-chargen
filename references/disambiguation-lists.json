@@ -1,7 +1,7 @@
 {
-  "source": "ADR-004 (Language-to-Homeland Mapping) + ADR-005 (Placeholder Skill Disambiguation)",
+  "source": "ADR-004 (Language-to-Homeland Mapping) + ADR-005 (Placeholder Skill Disambiguation) + ADR-0014 (Source-Backed Skill Disambiguation and Passion Structure)",
   "extraction_date": "2026-05-03",
-  "note": "Documents the disambiguation option lists and native language mappings used when resolving (any)/(local)/(any other) and descriptive placeholder skills. Language options are Glorantha-specific from Adventures in Glorantha cultures. Craft/Lore/Art options are from Mythras Core professional skills descriptions p.45-54.",
+  "note": "Documents the disambiguation option lists and native language mappings used when resolving (any)/(local)/(any other), descriptive placeholder skills, and ADR-0014 bare specialization-required skill labels. Language options are Glorantha-specific from Adventures in Glorantha cultures. Craft/Lore/Art options are from Mythras Core professional skills descriptions p.45-54.",
   "disambiguation_lists": {
     "Language": {
       "description": "Culture-specific language options for Language (any) resolution",
@@ -48,7 +48,54 @@
       "description": "Species specializations for Teach (Specific Species) in Beast Handler career",
       "source": "Same as Healing — training specific animal species",
       "options": ["Horses", "Cattle", "Dogs", "Hawks", "Bison", "Llamas", "Impala", "Sable"]
+    },
+    "Navigation": {
+      "description": "Specific region or environment options for bare Navigation and Navigation placeholders",
+      "source": "Mythras Core p.50 states Navigation requires a specific region or environment; options are bounded to current Gloranthan play regions and common environments.",
+      "options": ["Dragon Pass", "Prax", "Sartar", "Tarsh", "Underground", "Riverways", "Sea"]
+    },
+    "Musicianship": {
+      "description": "Instrument or performance-mode options for bare Musicianship",
+      "source": "Mythras Core p.50 Musicianship is a professional skill; options are common performance specializations used for character-facing resolution.",
+      "options": ["Drums", "Flute", "Harp", "Horn", "Singing"]
+    },
+    "Mysticism": {
+      "description": "Mystical path options for bare Mysticism",
+      "source": "references/mythras-raw/mysticism.json: each Mysticism skill incidence is tied to a specific path.",
+      "options": ["Core Mysticism Path"]
+    },
+    "Invocation": {
+      "description": "Wellspring options for bare Invocation when no cult, school, or grimoire context is available",
+      "source": "references/mythras-raw/sorcery.json: each Invocation incidence must be assigned to a specific wellspring of sorcery.",
+      "options": ["Personal Grimoire", "Mentor", "Local Sorcery School"]
     }
+  },
+  "bare_specialization_required_skills": {
+    "description": "Character-facing bare skill labels that must be resolved before final/export; source/reference metadata may still use them as category labels.",
+    "source": "ADR-0014",
+    "skills": ["Art", "Craft", "Culture", "Language", "Lore", "Combat Style", "Navigation", "Musicianship", "Mysticism", "Invocation"]
+  },
+  "resolved_bare_base_skills": {
+    "description": "Bare base skills that are complete character-facing skills and must not be treated as unresolved solely because related parenthetical forms exist.",
+    "source": "ADR-0014",
+    "skills": ["Healing", "Teach", "Binding", "Meditation", "Shaping", "Literacy", "Customs", "Ride", "Influence"]
+  },
+  "normalization_only_parentheticals": {
+    "description": "Parenthetical forms whose qualifier is source/context metadata, not a character-facing specialization.",
+    "source": "ADR-0014",
+    "mappings": {
+      "Shaping": "Shaping",
+      "Literacy": "Literacy",
+      "Read/Write": "Literacy",
+      "Customs": "Customs",
+      "Ride": "Ride",
+      "Influence": "Influence"
+    }
+  },
+  "structured_passion_policy": {
+    "description": "Passion types that require an explicit subject in structured player/agent input.",
+    "source": "ADR-0014 + references/mythras-raw/passions.json",
+    "subject_required_types": ["Devotion", "Fear", "Hate", "Love", "Loyalty"]
   },
   "native_language_mapping": {
     "description": "Maps each AiG culture to its native tongue (the language automatically assigned at cultural skill base value)",
