@@ -1,5 +1,8 @@
 {
-  "_disambiguationMap": {},
+  "_disambiguationMap": {
+    "Language (any)": "Language (Tradetalk)",
+    "Lore (Cult)": "Lore (Etyries)"
+  },
   "age": 25,
   "armor": [],
   "attributes": {},
@@ -10,7 +13,7 @@
     "Devotion": 15,
     "Influence": 10,
     "Insight": 10,
-    "Lore (Cult)": 15,
+    "Lore (Etyries)": 15,
     "Runic Affinity": 15
   },
   "boundSpiritSlots": 0,
@@ -114,7 +117,7 @@
   "selectedProfessionalSkills": [
     "Bureaucracy",
     "Commerce",
-    "Language (any)"
+    "Language (Tradetalk)"
   ],
   "socialClass": "Freeman",
   "socialClassMoneyMod": 1,

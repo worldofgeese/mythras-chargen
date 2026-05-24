@@ -5095,7 +5095,7 @@ section('ADR-005: Placeholder Skill Disambiguation');
 {
   const { needsDisambiguation } = loadApp();
   if (needsDisambiguation) {
-    const should = ['Language (any)', 'Lore (any)', 'Craft (Primary)', 'Lore (Specific Species)', 'Lore (Regional)'];
+    const should = ['Language (any)', 'Lore (any)', 'Craft (Primary)', 'Lore (Specific Species)', 'Lore (Regional)', 'Lore (Cult)'];
     const shouldNot = ['Craft (Alchemy)', 'Language (Heortling)', 'Athletics', 'Perception'];
     let ok = true;
     for (const s of should) {
@@ -5119,6 +5119,8 @@ section('ADR-005: Placeholder Skill Disambiguation');
           languageGuidance.includes('Adventures in Glorantha p.26-41') &&
           loreGuidance.includes('Mythras rulebook p.49') &&
           loreGuidance.includes('Adventures in Glorantha p.26-41') &&
+          loreGuidance.includes('Lore (Waha)') &&
+          !loreGuidance.includes('examples include Cult') &&
           regionalGuidance.includes('Mythras rulebook p.49') &&
           regionalGuidance.includes('Adventures in Glorantha p.26-41')
         ) {
@@ -5139,8 +5141,8 @@ section('ADR-005: Placeholder Skill Disambiguation');
 
 // Test: Source professional skill placeholders are either resolved by disambiguation or concrete
 {
-  const { CAREERS_DATA, CULTURES_DATA, DISAMBIGUATION_LISTS, needsDisambiguation } = loadApp();
-  if (CAREERS_DATA && CULTURES_DATA && DISAMBIGUATION_LISTS && needsDisambiguation) {
+  const { CAREERS_DATA, CULTURES_DATA, CULTS_DATA, DISAMBIGUATION_LISTS, needsDisambiguation } = loadApp();
+  if (CAREERS_DATA && CULTURES_DATA && CULTS_DATA && DISAMBIGUATION_LISTS && needsDisambiguation) {
     const sources = [];
     for (const career of CAREERS_DATA) {
       for (const skill of career.professionalSkills || []) sources.push(`${career.name}: ${skill}`);
@@ -5148,18 +5150,21 @@ section('ADR-005: Placeholder Skill Disambiguation');
     for (const culture of CULTURES_DATA) {
       for (const skill of culture.professionalSkills || []) sources.push(`${culture.name}: ${skill}`);
     }
+    for (const cult of CULTS_DATA) {
+      for (const skill of cult.cultSkills || []) sources.push(`${cult.name}: ${skill}`);
+    }
 
     const descriptiveParenthetical = /\((?:any|any other|local|primary|secondary|specific|hunting related|regional(?:\s+or\s+specific)?|shipboard|physiological|alchemical|pantheon|cult|totem|tradition|school|grimoire)\b/i;
     const missed = sources.filter(entry => {
       const skill = entry.replace(/^.*?:\s*/, '');
       return descriptiveParenthetical.test(skill) && !needsDisambiguation(skill);
     });
-    const unresolvedLoreOption = (DISAMBIGUATION_LISTS.Lore || []).includes('Regional');
+    const unresolvedLoreOptions = (DISAMBIGUATION_LISTS.Lore || []).filter(option => ['Regional', 'Cult'].includes(option));
 
     if (missed.length > 0) {
       fail(`Source professional placeholder is not caught by needsDisambiguation(): ${missed[0]}`);
-    } else if (unresolvedLoreOption) {
-      fail('Lore disambiguation choices must not offer unresolved "Regional" as a final specialization');
+    } else if (unresolvedLoreOptions.length > 0) {
+      fail(`Lore disambiguation choices must not offer unresolved category labels: ${unresolvedLoreOptions.join(', ')}`);
     } else {
       pass('Source professional skill placeholders are caught before they can become final skill names');
     }
@@ -5201,7 +5206,7 @@ section('ADR-005: Placeholder Skill Disambiguation');
   }
 }
 
-// Test: free-text specialization rejects category labels like Lore (Regional)
+// Test: free-text specialization rejects category labels like Lore (Regional) and Lore (Cult)
 {
   const { App, CharacterData, _sandbox } = loadApp();
   if (App && App.resolveProfessionalSkill && App.disambiguateAndUpdateFreeText && CharacterData) {
@@ -5217,24 +5222,749 @@ section('ADR-005: Placeholder Skill Disambiguation');
     const checkboxRejected = App.resolveProfessionalSkill('Lore (any)', 'Regional', input) === false;
 
     CharacterData.selectedProfessionalSkills = ['Lore (any)'];
+    CharacterData.careerSkills = { 'Lore (any)': 0 };
+    CharacterData._disambiguationMap = {};
+    const cultInput = { value: 'Cult' };
+    const cultCheckboxRejected = App.resolveProfessionalSkill('Lore (any)', 'Cult', cultInput) === false;
+
+    CharacterData.selectedProfessionalSkills = ['Lore (any)'];
     CharacterData.careerSkills = { 'Lore (any)': 5 };
     CharacterData._disambiguationMap = {};
     const freeTextRejected = App.disambiguateAndUpdateFreeText('career', 'Lore (any)', 'Regional', 'Lore') === false;
 
     const noAmbiguousSkill =
       !Object.prototype.hasOwnProperty.call(CharacterData.careerSkills, 'Lore (Regional)') &&
-      !CharacterData.selectedProfessionalSkills.includes('Lore (Regional)');
+      !Object.prototype.hasOwnProperty.call(CharacterData.careerSkills, 'Lore (Cult)') &&
+      !CharacterData.selectedProfessionalSkills.includes('Lore (Regional)') &&
+      !CharacterData.selectedProfessionalSkills.includes('Lore (Cult)');
     const originalPreserved = CharacterData.careerSkills['Lore (any)'] === 5;
     const feedback = alerts.concat(toasts.map(t => t.message)).join(' ');
 
-    if (checkboxRejected && freeTextRejected && noAmbiguousSkill && originalPreserved && /category label|concrete/.test(feedback)) {
-      pass('free-text specialization rejects Lore (Regional) category labels before persistence');
+    if (checkboxRejected && cultCheckboxRejected && freeTextRejected && noAmbiguousSkill && originalPreserved && /category label|concrete/.test(feedback)) {
+      pass('free-text specialization rejects Lore category labels before persistence');
     } else {
-      fail('free-text specialization allowed ambiguous Lore (Regional)',
-        JSON.stringify({ checkboxRejected, freeTextRejected, noAmbiguousSkill, originalPreserved, inputValue: input.value, alerts, toasts, selected: CharacterData.selectedProfessionalSkills, careerSkills: CharacterData.careerSkills }));
+      fail('free-text specialization allowed ambiguous Lore category labels',
+        JSON.stringify({ checkboxRejected, cultCheckboxRejected, freeTextRejected, noAmbiguousSkill, originalPreserved, inputValue: input.value, cultInputValue: cultInput.value, alerts, toasts, selected: CharacterData.selectedProfessionalSkills, careerSkills: CharacterData.careerSkills }));
     }
   } else {
     fail('Could not test ambiguous professional specialization rejection');
+  }
+}
+
+// Test: selecting a cult resolves Lore (Cult) to the concrete cult Lore skill
+{
+  const { App, CharacterData: CD, Calc: CalcRef } = loadApp();
+  if (App && App.selectCult && App.resolveCultSkillRequirement && CD) {
+    CD.fromJSON(JSON.stringify(createTestCharacter('Praxian')));
+    CD.cult = null;
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 12, CHA: 12 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.culturalSkills = { 'Lore (Cult)': 10 };
+    CD.careerSkills = {
+      'Lore (Cult)': 15,
+      'Devotion (Pantheon, Cult or God)': 5
+    };
+    CD.bonusSkills = { 'Lore (Cult)': 25 };
+    CD.selectedProfessionalSkills = ['Lore (Cult)', 'Devotion (Pantheon, Cult or God)', 'Oratory'];
+    CD.passions = [];
+
+    const result = App.selectCult('Waha', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const allKeys = [
+      ...Object.keys(CD.culturalSkills || {}),
+      ...Object.keys(CD.careerSkills || {}),
+      ...Object.keys(CD.bonusSkills || {}),
+      ...(CD.selectedProfessionalSkills || [])
+    ];
+    const noLoreCult = !allKeys.includes('Lore (Cult)');
+    const loreResolved =
+      CD.culturalSkills['Lore (Waha)'] === 10 &&
+      CD.careerSkills['Lore (Waha)'] === 15 &&
+      CD.bonusSkills['Lore (Waha)'] === 25 &&
+      CD.selectedProfessionalSkills.includes('Lore (Waha)');
+    const devotionResolved = CD.selectedProfessionalSkills.includes('Devotion (Waha)');
+    const requirement = App.resolveCultSkillRequirement('Lore (Cult)');
+
+    if (result && result.success && noLoreCult && loreResolved && devotionResolved &&
+        requirement.key === 'Lore (Waha)' && requirement.value >= 50 && requirement.qualifies) {
+      pass('Cult selection resolves Lore (Cult) to concrete cult Lore across skill pools');
+    } else {
+      fail('Cult selection left Lore (Cult) unresolved or failed cult requirement matching',
+        JSON.stringify({ result, noLoreCult, loreResolved, devotionResolved, requirement, culturalSkills: CD.culturalSkills, careerSkills: CD.careerSkills, bonusSkills: CD.bonusSkills, selected: CD.selectedProfessionalSkills }));
+    }
+  } else {
+    fail('Could not test cult-bound Lore specialization resolution');
+  }
+}
+
+// Test: changing cult after placeholder resolution rekeys cult-bound skills to the new cult
+{
+  const { App, CharacterData: CD, Calc: CalcRef } = loadApp();
+  if (App && App.selectCult && App.resolveCultSkillRequirement && CD) {
+    CD.fromJSON(JSON.stringify(createTestCharacter('Praxian')));
+    CD.cult = null;
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 12, CHA: 12 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.culturalSkills = { 'Lore (Cult)': 10 };
+    CD.careerSkills = {
+      'Lore (Cult)': 15,
+      'Devotion (Pantheon, Cult or God)': 5
+    };
+    CD.bonusSkills = { 'Lore (Cult)': 25 };
+    CD.selectedProfessionalSkills = ['Lore (Cult)', 'Devotion (Pantheon, Cult or God)', 'Oratory'];
+    CD.passions = [];
+
+    const wahaResult = App.selectCult('Waha', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const orlanthResult = App.selectCult('Orlanth', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const allKeys = [
+      ...Object.keys(CD.culturalSkills || {}),
+      ...Object.keys(CD.careerSkills || {}),
+      ...Object.keys(CD.bonusSkills || {}),
+      ...(CD.selectedProfessionalSkills || [])
+    ];
+    const noStaleWahaKeys = !allKeys.some(key => key === 'Lore (Waha)' || key === 'Devotion (Waha)');
+    const orlanthLoreResolved =
+      CD.culturalSkills['Lore (Orlanth)'] === 10 &&
+      CD.careerSkills['Lore (Orlanth)'] === 15 &&
+      CD.bonusSkills['Lore (Orlanth)'] === 25 &&
+      CD.selectedProfessionalSkills.includes('Lore (Orlanth)');
+    const orlanthDevotionResolved = CD.careerSkills['Devotion (Orlanth)'] === 5 &&
+      CD.selectedProfessionalSkills.includes('Devotion (Orlanth)');
+    const requirement = App.resolveCultSkillRequirement('Lore (Cult)');
+
+    if (wahaResult?.success && orlanthResult?.success && noStaleWahaKeys &&
+        orlanthLoreResolved && orlanthDevotionResolved &&
+        requirement.key === 'Lore (Orlanth)' && requirement.value >= 50 && requirement.qualifies) {
+      pass('Changing cult rekeys resolved cult-bound skills to the new cult');
+    } else {
+      fail('Changing cult left stale cult-bound skill names',
+        JSON.stringify({ wahaResult, orlanthResult, noStaleWahaKeys, orlanthLoreResolved, orlanthDevotionResolved, requirement, culturalSkills: CD.culturalSkills, careerSkills: CD.careerSkills, bonusSkills: CD.bonusSkills, selected: CD.selectedProfessionalSkills }));
+    }
+  } else {
+    fail('Could not test cult-bound skill rekeying on cult changes');
+  }
+}
+
+// Test: changing cult does not rewrite fixed source skills that only happen to name the old cult
+{
+  const { App, CharacterData: CD, Calc: CalcRef } = loadApp();
+  if (App && App.selectCult && CD) {
+    CD.fromJSON(JSON.stringify(createTestCharacter('Sartarite (Heortling)')));
+    CD.cult = null;
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 12, CHA: 12 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.culturalSkills = { 'Lore (Orlanth)': 10 };
+    CD.careerSkills = { 'Lore (Orlanth)': 15 };
+    CD.bonusSkills = { 'Lore (Orlanth)': 25 };
+    CD.selectedProfessionalSkills = ['Lore (Orlanth)', 'Oratory', 'Commerce'];
+    CD._cultBoundPlaceholderMap = {};
+    CD.passions = [];
+
+    const orlanthResult = App.selectCult('Orlanth', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const ernaldaResult = App.selectCult('Ernalda', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const fixedSkillPreserved =
+      CD.culturalSkills['Lore (Orlanth)'] === 10 &&
+      CD.careerSkills['Lore (Orlanth)'] === 15 &&
+      CD.bonusSkills['Lore (Orlanth)'] === 25 &&
+      CD.selectedProfessionalSkills.includes('Lore (Orlanth)');
+    const notRekeyed =
+      !Object.keys(CD.culturalSkills).includes('Lore (Ernalda)') &&
+      !Object.keys(CD.careerSkills).includes('Lore (Ernalda)') &&
+      !Object.keys(CD.bonusSkills).includes('Lore (Ernalda)') &&
+      !CD.selectedProfessionalSkills.includes('Lore (Ernalda)');
+
+    if (orlanthResult?.success && ernaldaResult?.success && fixedSkillPreserved && notRekeyed) {
+      pass('Changing cult preserves fixed source Lore skills that match the previous cult name');
+    } else {
+      fail('Changing cult rewrote fixed source Lore skills',
+        JSON.stringify({ orlanthResult, ernaldaResult, fixedSkillPreserved, notRekeyed, culturalSkills: CD.culturalSkills, careerSkills: CD.careerSkills, bonusSkills: CD.bonusSkills, selected: CD.selectedProfessionalSkills, cultBoundMap: CD._cultBoundPlaceholderMap }));
+    }
+  } else {
+    fail('Could not test fixed source skill preservation on cult changes');
+  }
+}
+
+// Test: cult rekeying is scoped to placeholder-originated slots, not every matching skill name
+{
+  const { App, CharacterData: CD, Calc: CalcRef } = loadApp();
+  if (App && App.selectCult && CD) {
+    CD.fromJSON(JSON.stringify(createTestCharacter('Praxian')));
+    CD.cult = null;
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 12, CHA: 12 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.culturalSkills = { 'Lore (Waha)': 7 };
+    CD.careerSkills = { 'Lore (Cult)': 15 };
+    CD.bonusSkills = {};
+    CD.selectedProfessionalSkills = ['Lore (Cult)', 'Oratory', 'Commerce'];
+    CD.passions = [];
+
+    const wahaResult = App.selectCult('Waha', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const orlanthResult = App.selectCult('Orlanth', { skipConfirmation: true, allowMagicSelectionLoss: true });
+
+    const fixedCulturalPreserved = CD.culturalSkills['Lore (Waha)'] === 7 &&
+      !Object.keys(CD.culturalSkills).includes('Lore (Orlanth)');
+    const placeholderCareerRekeyed = CD.careerSkills['Lore (Orlanth)'] === 15 &&
+      !Object.keys(CD.careerSkills).includes('Lore (Waha)');
+    const selectedRekeyed = CD.selectedProfessionalSkills.includes('Lore (Orlanth)') &&
+      !CD.selectedProfessionalSkills.includes('Lore (Waha)');
+
+    if (wahaResult?.success && orlanthResult?.success &&
+        fixedCulturalPreserved && placeholderCareerRekeyed && selectedRekeyed) {
+      pass('Cult rekeying only updates placeholder-originated cult skills');
+    } else {
+      fail('Cult rekeying rewrote unrelated fixed cult-named skills',
+        JSON.stringify({ wahaResult, orlanthResult, fixedCulturalPreserved, placeholderCareerRekeyed, selectedRekeyed, culturalSkills: CD.culturalSkills, careerSkills: CD.careerSkills, selected: CD.selectedProfessionalSkills, cultBoundMap: CD._cultBoundPlaceholderMap }));
+    }
+  } else {
+    fail('Could not test cult rekeying scope');
+  }
+}
+
+// Test: migrated placeholder allocations keep their own amount when they collide with fixed skills
+{
+  const { App, CharacterData: CD, Calc: CalcRef } = loadApp();
+  if (App?.importCharacterData && App.selectCult && CD) {
+    const oldSave = {
+      ...createTestCharacter('Sartarite (Heortling)'),
+      cult: 'Orlanth',
+      characteristics: { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 12, CHA: 12 },
+      culturalSkills: { 'Lore (Orlanth)': 7, 'Lore (Cult)': 10 },
+      careerSkills: { 'Lore (Orlanth)': 4, 'Lore (Cult)': 15 },
+      bonusSkills: { 'Lore (Orlanth)': 3, 'Lore (Cult)': 25 },
+      selectedProfessionalSkills: ['Lore (Cult)', 'Oratory', 'Commerce'],
+      _disambiguationMap: {},
+      _cultBoundPlaceholderMap: {}
+    };
+    const toasts = [];
+    App.renderCurrentStep = () => {};
+    App.saveToLocalStorage = () => {};
+    App.showToast = (message, type) => toasts.push({ message, type });
+    const imported = App.importCharacterData(oldSave);
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    const ernaldaResult = App.selectCult('Ernalda', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const fixedAmountsPreserved =
+      CD.culturalSkills['Lore (Orlanth)'] === 7 &&
+      CD.careerSkills['Lore (Orlanth)'] === 4 &&
+      CD.bonusSkills['Lore (Orlanth)'] === 3;
+    const placeholderAmountsRekeyed =
+      CD.culturalSkills['Lore (Ernalda)'] === 10 &&
+      CD.careerSkills['Lore (Ernalda)'] === 15 &&
+      CD.bonusSkills['Lore (Ernalda)'] === 25 &&
+      CD.selectedProfessionalSkills.includes('Lore (Ernalda)');
+
+    if (imported && ernaldaResult?.success && fixedAmountsPreserved && placeholderAmountsRekeyed) {
+      pass('Migrated cult placeholder collisions only rekey placeholder-originated amounts');
+    } else {
+      fail('Migrated cult placeholder collision rekeyed fixed skill allocations',
+        JSON.stringify({ imported, ernaldaResult, toasts, fixedAmountsPreserved, placeholderAmountsRekeyed, culturalSkills: CD.culturalSkills, careerSkills: CD.careerSkills, bonusSkills: CD.bonusSkills, selected: CD.selectedProfessionalSkills, cultBoundMap: CD._cultBoundPlaceholderMap }));
+    }
+  } else {
+    fail('Could not test migrated placeholder collision rekeying');
+  }
+}
+
+// Test: zero-point placeholder resolutions move later allocations when the cult changes
+{
+  const { App, CharacterData: CD, Calc: CalcRef } = loadApp();
+  if (App && App.selectCult && CD) {
+    CD.fromJSON(JSON.stringify(createTestCharacter('Praxian')));
+    CD.cult = null;
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 12, CHA: 12 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.culturalSkills = {};
+    CD.careerSkills = { 'Lore (Cult)': 0 };
+    CD.bonusSkills = {};
+    CD.selectedProfessionalSkills = ['Lore (Cult)', 'Oratory', 'Commerce'];
+    CD.passions = [];
+
+    const wahaResult = App.selectCult('Waha', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    CD.careerSkills['Lore (Waha)'] = 15;
+    const orlanthResult = App.selectCult('Orlanth', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const allocationRekeyed = CD.careerSkills['Lore (Orlanth)'] === 15 &&
+      !Object.keys(CD.careerSkills).includes('Lore (Waha)');
+    const selectedRekeyed = CD.selectedProfessionalSkills.includes('Lore (Orlanth)') &&
+      !CD.selectedProfessionalSkills.includes('Lore (Waha)');
+
+    if (wahaResult?.success && orlanthResult?.success && allocationRekeyed && selectedRekeyed) {
+      pass('Cult rekeying moves points allocated after zero-point placeholder resolution');
+    } else {
+      fail('Cult rekeying left post-resolution allocations on the previous cult skill',
+        JSON.stringify({ wahaResult, orlanthResult, allocationRekeyed, selectedRekeyed, careerSkills: CD.careerSkills, selected: CD.selectedProfessionalSkills, cultBoundMap: CD._cultBoundPlaceholderMap }));
+    }
+  } else {
+    fail('Could not test post-resolution cult allocation rekeying');
+  }
+}
+
+// Test: selecting a first real cult rekeys tracked fallback cult-bound skills from no-cult random state
+{
+  const { App, CharacterData: CD, Calc: CalcRef } = loadApp();
+  if (App && App.selectCult && CD) {
+    CD.fromJSON(JSON.stringify(createTestCharacter('Sartarite (Heortling)')));
+    CD.cult = null;
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 12, CHA: 12 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.careerSkills = { 'Lore (Orlanth)': 15 };
+    CD.selectedProfessionalSkills = ['Lore (Orlanth)', 'Oratory', 'Commerce'];
+    CD._cultBoundPlaceholderMap = {
+      'careerSkills:Lore (Cult)': { skill: 'Lore (Orlanth)', preserveAmount: 0 },
+      'selectedProfessionalSkills:Lore (Cult)': 'Lore (Orlanth)'
+    };
+    CD.passions = [];
+
+    const ernaldaResult = App.selectCult('Ernalda', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const allocationRekeyed = CD.careerSkills['Lore (Ernalda)'] === 15 &&
+      !Object.keys(CD.careerSkills).includes('Lore (Orlanth)');
+    const selectedRekeyed = CD.selectedProfessionalSkills.includes('Lore (Ernalda)') &&
+      !CD.selectedProfessionalSkills.includes('Lore (Orlanth)');
+
+    if (ernaldaResult?.success && allocationRekeyed && selectedRekeyed) {
+      pass('First real cult selection rekeys tracked no-cult fallback skills');
+    } else {
+      fail('First real cult selection left tracked fallback skills on the implicit cult',
+        JSON.stringify({ ernaldaResult, allocationRekeyed, selectedRekeyed, careerSkills: CD.careerSkills, selected: CD.selectedProfessionalSkills, cultBoundMap: CD._cultBoundPlaceholderMap }));
+    }
+  } else {
+    fail('Could not test first-cult fallback skill rekeying');
+  }
+}
+
+// Test: no-cult suggested builds track concrete fallback Lore as placeholder-originated
+{
+  const { App, CharacterData: CD, CULTURE_BUILD_SPECS: CultureBuildSpecs } = loadApp();
+  const record = CultureBuildSpecs?.['sartarite-heortling-wind-lord-aspirant'];
+  if (App?.agent?.buildCharacter && App?.agent?.selectCult && CD && record?.spec) {
+    App.renderCurrentStep = () => {};
+    App.saveToLocalStorage = () => {};
+    App.switchMode = mode => { App.mode = mode; };
+
+    const built = App.agent.buildCharacter(record.spec);
+    const ernaldaResult = App.agent.selectCult('Ernalda');
+    const allocationRekeyed = CD.careerSkills['Lore (Ernalda)'] === 15 &&
+      !Object.keys(CD.careerSkills).includes('Lore (Orlanth)');
+    const bonusShadowClean = !Object.keys(CD.bonusSkills).includes('Lore (Orlanth)');
+    const selectedRekeyed = CD.selectedProfessionalSkills.includes('Lore (Ernalda)') &&
+      !CD.selectedProfessionalSkills.includes('Lore (Orlanth)');
+
+    if (built?.success && ernaldaResult?.success && allocationRekeyed && bonusShadowClean && selectedRekeyed) {
+      pass('No-cult suggested build rekeys fallback cult Lore on first real cult selection');
+    } else {
+      fail('No-cult suggested build left fallback Lore fixed to its implicit cult',
+        JSON.stringify({ built, ernaldaResult, allocationRekeyed, bonusShadowClean, selectedRekeyed, careerSkills: CD.careerSkills, bonusSkills: CD.bonusSkills, selected: CD.selectedProfessionalSkills, cultBoundMap: CD._cultBoundPlaceholderMap }));
+    }
+  } else {
+    fail('Could not test no-cult suggested build fallback Lore tracking');
+  }
+}
+
+// Test: legacy object-form cult placeholder tracking without preserveAmount remains loadable
+{
+  const { App, CharacterData: CD, Calc: CalcRef } = loadApp();
+  if (App?.importCharacterData && App.selectCult && CD) {
+    const oldSave = {
+      ...createTestCharacter('Praxian'),
+      cult: 'Waha',
+      characteristics: { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 12, CHA: 12 },
+      careerSkills: { 'Lore (Waha)': 15 },
+      selectedProfessionalSkills: ['Lore (Waha)', 'Oratory', 'Commerce'],
+      _cultBoundPlaceholderMap: {
+        'careerSkills:Lore (Cult)': { skill: 'Lore (Waha)' },
+        'selectedProfessionalSkills:Lore (Cult)': { skill: 'Lore (Waha)' }
+      }
+    };
+    const toasts = [];
+    App.renderCurrentStep = () => {};
+    App.saveToLocalStorage = () => {};
+    App.showToast = (message, type) => toasts.push({ message, type });
+    const imported = App.importCharacterData(oldSave);
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    const orlanthResult = App.selectCult('Orlanth', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const allocationRekeyed = CD.careerSkills['Lore (Orlanth)'] === 15 &&
+      !Object.keys(CD.careerSkills).includes('Lore (Waha)');
+    const selectedRekeyed = CD.selectedProfessionalSkills.includes('Lore (Orlanth)') &&
+      !CD.selectedProfessionalSkills.includes('Lore (Waha)');
+
+    if (imported && orlanthResult?.success && allocationRekeyed && selectedRekeyed) {
+      pass('Legacy object-form cult placeholder tracking remains loadable and rekeys');
+    } else {
+      fail('Legacy object-form cult placeholder tracking was rejected or failed to rekey',
+        JSON.stringify({ imported, orlanthResult, toasts, allocationRekeyed, selectedRekeyed, careerSkills: CD.careerSkills, selected: CD.selectedProfessionalSkills, cultBoundMap: CD._cultBoundPlaceholderMap }));
+    }
+  } else {
+    fail('Could not test legacy object-form cult placeholder tracking');
+  }
+}
+
+// Test: granular agent cult selection resolves cult-bound placeholders
+{
+  const { App, CharacterData: CD, Calc: CalcRef } = loadApp();
+  if (App?.agent?.selectCult && CD) {
+    CD.fromJSON(JSON.stringify(createTestCharacter('Praxian')));
+    CD.cult = null;
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 12, CHA: 12 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.careerSkills = {
+      'Lore (Cult)': 15,
+      'Devotion (Pantheon, Cult or God)': 5
+    };
+    CD.selectedProfessionalSkills = ['Lore (Cult)', 'Devotion (Pantheon, Cult or God)', 'Oratory'];
+    const result = App.agent.selectCult('Waha');
+    const selectedResolved = CD.selectedProfessionalSkills.includes('Lore (Waha)') &&
+      CD.selectedProfessionalSkills.includes('Devotion (Waha)');
+
+    if (result?.success && CD.careerSkills['Lore (Waha)'] === 15 &&
+        CD.careerSkills['Devotion (Waha)'] === 5 && selectedResolved &&
+        !CD.selectedProfessionalSkills.includes('Lore (Cult)')) {
+      pass('Agent selectCult resolves cult-bound placeholders');
+    } else {
+      fail('Agent selectCult left cult-bound placeholders unresolved',
+        JSON.stringify({ result, careerSkills: CD.careerSkills, selected: CD.selectedProfessionalSkills }));
+    }
+  } else {
+    fail('Could not test agent cult-bound placeholder resolution');
+  }
+}
+
+// Test: agent build Step 11 resolves cult-bound bonus placeholders after Step 9 cult selection
+{
+  const { App, CharacterData: CD } = loadApp();
+  if (App?.agent?.buildCharacter && CD) {
+    App.renderCurrentStep = () => {};
+    App.saveToLocalStorage = () => {};
+    App.switchMode = mode => { App.mode = mode; };
+
+    const result = App.agent.buildCharacter({
+      step1: { name: 'Korlmar Blackspear', concept: 'Vengeful warrior' },
+      step2: { characteristics: { STR: 14, CON: 12, SIZ: 11, DEX: 10, INT: 9, POW: 12, CHA: 7 } },
+      step4: { culture: 'Sartarite (Heortling)', homeland: 'Boldhome' },
+      step5: {
+        culturalSkills: { Athletics: 15, Brawn: 15, Endurance: 15, Evade: 10, Locale: 10, Perception: 10, Willpower: 15, Ride: 10 },
+        runeAffinities: { primary: 'Air', secondary: 'Movement', tertiary: 'Death' },
+        folkMagicSpells: ['Bladesharp', 'Fanaticism', 'Protection']
+      },
+      step6: {
+        passions: [
+          { type: 'Loyalty', subject: 'Colymar Tribe', value: 47 },
+          { type: 'Hate', subject: 'Lunars', value: 47 }
+        ]
+      },
+      step7: { age: 21, gender: 'Male', family: 'Blackspear clan' },
+      step8: {
+        career: 'Warrior',
+        professionalSkills: [
+          { name: 'Lore (any)', specialization: 'Tactics' },
+          { name: 'Craft (any)', specialization: 'Weaponsmithing' },
+          { name: 'Survival' }
+        ]
+      },
+      step9: { cult: 'Orlanth', miracles: ['Shield', 'Lightning', 'Wind Words', 'Flight', 'Extension', 'Summon Sylph'] },
+      step10: {
+        careerSkills: { Athletics: 15, Perception: 10, Endurance: 15, Evade: 10, Unarmed: 10, 'Combat Style (Hill Clan Levy)': 15, 'Lore (Tactics)': 10, Ride: 15 },
+        careerFolkMagic: ['Disruption', 'Vigour']
+      },
+      step11: {
+        bonusSkills: {
+          Athletics: 15,
+          Ride: 15,
+          Endurance: 15,
+          Evade: 15,
+          Willpower: 15,
+          Unarmed: 15,
+          'Combat Style (Hill Clan Levy)': 15,
+          'Lore (Cult)': 15,
+          'Devotion (Pantheon, Cult or God)': 15,
+          Perception: 15
+        }
+      },
+      step12: { socialClass: 'Freeman' }
+    });
+
+    const bonusResolved = CD.bonusSkills['Lore (Orlanth)'] === 15 &&
+      CD.bonusSkills['Devotion (Orlanth)'] === 15 &&
+      !Object.keys(CD.bonusSkills).includes('Lore (Cult)') &&
+      !Object.keys(CD.bonusSkills).includes('Devotion (Pantheon, Cult or God)');
+    const tracked = CD._cultBoundPlaceholderMap?.['bonusSkills:Lore (Cult)']?.skill === 'Lore (Orlanth)' &&
+      CD._cultBoundPlaceholderMap?.['bonusSkills:Devotion (Pantheon, Cult or God)']?.skill === 'Devotion (Orlanth)';
+
+    if (result?.success && bonusResolved && tracked) {
+      pass('Agent buildCharacter resolves Step 11 cult-bound bonus placeholders after cult selection');
+    } else {
+      fail('Agent buildCharacter left Step 11 cult-bound bonus placeholders unresolved',
+        JSON.stringify({ result, bonusResolved, tracked, bonusSkills: CD.bonusSkills, cultBoundMap: CD._cultBoundPlaceholderMap }));
+    }
+  } else {
+    fail('Could not test Step 11 cult-bound bonus placeholder resolution');
+  }
+}
+
+// Test: live professional disambiguation tracks cult-bound origins for later cult changes
+{
+  const { App, CharacterData: CD, Calc: CalcRef } = loadApp();
+  if (App?.resolveProfessionalSkill && App.selectCult && CD) {
+    CD.fromJSON(JSON.stringify(createTestCharacter('Sartarite (Heortling)')));
+    CD.cult = null;
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 12, CHA: 12 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.careerSkills = { 'Devotion (Pantheon, Cult or God)': 0 };
+    CD.selectedProfessionalSkills = ['Devotion (Pantheon, Cult or God)', 'Oratory', 'Commerce'];
+    CD.passions = [];
+    App.saveToLocalStorage = () => {};
+
+    const resolved = App.resolveProfessionalSkill('Devotion (Pantheon, Cult or God)', 'Orlanth', { value: 'Orlanth' });
+    CD.careerSkills['Devotion (Orlanth)'] = 12;
+    CD.bonusSkills = { 'Devotion (Orlanth)': 10 };
+    const ernaldaResult = App.selectCult('Ernalda', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const allocationRekeyed = CD.careerSkills['Devotion (Ernalda)'] === 12 &&
+      CD.bonusSkills['Devotion (Ernalda)'] === 10 &&
+      !Object.keys(CD.careerSkills).includes('Devotion (Orlanth)');
+    const bonusRekeyed = !Object.keys(CD.bonusSkills).includes('Devotion (Orlanth)');
+    const selectedRekeyed = CD.selectedProfessionalSkills.includes('Devotion (Ernalda)') &&
+      !CD.selectedProfessionalSkills.includes('Devotion (Orlanth)');
+
+    if (resolved && ernaldaResult?.success && allocationRekeyed && bonusRekeyed && selectedRekeyed) {
+      pass('Live professional cult-bound disambiguation rekeys on later cult changes');
+    } else {
+      fail('Live professional cult-bound disambiguation left stale cult skill names',
+        JSON.stringify({ resolved, ernaldaResult, allocationRekeyed, bonusRekeyed, selectedRekeyed, careerSkills: CD.careerSkills, bonusSkills: CD.bonusSkills, selected: CD.selectedProfessionalSkills, cultBoundMap: CD._cultBoundPlaceholderMap }));
+    }
+  } else {
+    fail('Could not test live cult-bound professional disambiguation tracking');
+  }
+}
+
+// Test: old saved characters with Lore (Cult) migrate before import validation
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj?.importCharacterData && CD) {
+    const oldSave = {
+      ...createTestCharacter('Praxian'),
+      cult: 'Waha',
+      culturalSkills: { 'Lore (Cult)': 10 },
+      careerSkills: { 'Lore (Cult)': 15 },
+      bonusSkills: { 'Lore (Cult)': 5 },
+      selectedProfessionalSkills: ['Lore (Cult)', 'Devotion (Pantheon, Cult or God)', 'Oratory'],
+      _disambiguationMap: {}
+    };
+    const toasts = [];
+    AppObj.renderCurrentStep = () => {};
+    AppObj.saveToLocalStorage = () => {};
+    AppObj.showToast = (message, type) => toasts.push({ message, type });
+    const imported = AppObj.importCharacterData(oldSave);
+
+    if (imported && CD.culturalSkills['Lore (Waha)'] === 10 &&
+        CD.careerSkills['Lore (Waha)'] === 15 &&
+        CD.bonusSkills['Lore (Waha)'] === 5 &&
+        CD.selectedProfessionalSkills.includes('Lore (Waha)') &&
+        !Object.keys(CD.careerSkills).includes('Lore (Cult)')) {
+      pass('Import migrates saved cult Lore placeholders before validation');
+    } else {
+      fail('Import rejected or failed to migrate saved Lore (Cult) placeholders',
+        JSON.stringify({ imported, toasts, culturalSkills: CD.culturalSkills, careerSkills: CD.careerSkills, bonusSkills: CD.bonusSkills, selected: CD.selectedProfessionalSkills }));
+    }
+  } else {
+    fail('Could not test saved cult Lore placeholder import migration');
+  }
+}
+
+// Test: legacy disambiguation maps preserve cult-placeholder origins for later rekeying
+{
+  const { App: AppObj, CharacterData: CD, Calc: CalcRef } = loadApp();
+  if (AppObj?.importCharacterData && AppObj.selectCult && CD) {
+    const oldSave = {
+      ...createTestCharacter('Lunar Heartland'),
+      cult: 'Etyries',
+      characteristics: { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 12, CHA: 12 },
+      culturalSkills: {
+        'Lore (Etyries)': 7
+      },
+      careerSkills: {
+        'Lore (Etyries)': 15,
+        'Binding (Etyries)': 5,
+        'Devotion (Etyries)': 10
+      },
+      selectedProfessionalSkills: ['Lore (Etyries)', 'Binding (Etyries)', 'Devotion (Etyries)'],
+      _disambiguationMap: {
+        'Lore (Cult)': 'Lore (Etyries)',
+        'career:Lore (Cult)': 'Lore (Etyries)',
+        'career:Binding (Cult, Totem or Tradition)': 'Binding (Etyries)',
+        'career:Devotion (Pantheon, Cult or God)': 'Devotion (Etyries)'
+      },
+      _cultBoundPlaceholderMap: {}
+    };
+    const toasts = [];
+    AppObj.renderCurrentStep = () => {};
+    AppObj.saveToLocalStorage = () => {};
+    AppObj.showToast = (message, type) => toasts.push({ message, type });
+    const imported = AppObj.importCharacterData(oldSave);
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    const wahaResult = AppObj.selectCult('Waha', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const allocationRekeyed = CD.careerSkills['Lore (Waha)'] === 15 &&
+      CD.careerSkills['Binding (Waha)'] === 5 &&
+      CD.careerSkills['Devotion (Waha)'] === 10 &&
+      !Object.keys(CD.careerSkills).some(skill => /\(Etyries\)$/.test(skill));
+    const fixedCulturalPreserved = CD.culturalSkills['Lore (Etyries)'] === 7 &&
+      !Object.keys(CD.culturalSkills).includes('Lore (Waha)');
+    const selectedRekeyed = CD.selectedProfessionalSkills.includes('Lore (Waha)') &&
+      CD.selectedProfessionalSkills.includes('Binding (Waha)') &&
+      CD.selectedProfessionalSkills.includes('Devotion (Waha)') &&
+      !CD.selectedProfessionalSkills.some(skill => /\(Etyries\)$/.test(skill));
+    const disambiguationRekeyed = CD._disambiguationMap?.['Lore (Cult)'] === 'Lore (Waha)' &&
+      CD._disambiguationMap?.['career:Lore (Cult)'] === 'Lore (Waha)' &&
+      CD._disambiguationMap?.['career:Binding (Cult, Totem or Tradition)'] === 'Binding (Waha)' &&
+      CD._disambiguationMap?.['career:Devotion (Pantheon, Cult or God)'] === 'Devotion (Waha)';
+
+    if (imported && wahaResult?.success && allocationRekeyed && fixedCulturalPreserved && selectedRekeyed && disambiguationRekeyed) {
+      pass('Import tracks legacy _disambiguationMap cult placeholder origins for later rekeying');
+    } else {
+      fail('Import left legacy _disambiguationMap cult placeholder origin untracked',
+        JSON.stringify({ imported, wahaResult, toasts, allocationRekeyed, fixedCulturalPreserved, selectedRekeyed, disambiguationRekeyed, culturalSkills: CD.culturalSkills, careerSkills: CD.careerSkills, selected: CD.selectedProfessionalSkills, disambiguationMap: CD._disambiguationMap, cultBoundMap: CD._cultBoundPlaceholderMap }));
+    }
+  } else {
+    fail('Could not test legacy disambiguation-map cult placeholder tracking');
+  }
+}
+
+// Test: stale legacy disambiguation origins reconcile to the imported current cult
+{
+  const { App: AppObj, CharacterData: CD, Calc: CalcRef } = loadApp();
+  if (AppObj?.importCharacterData && AppObj.selectCult && CD) {
+    const oldSave = {
+      ...createTestCharacter('Praxian'),
+      cult: 'Waha',
+      characteristics: { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 12, CHA: 12 },
+      culturalSkills: {
+        'Lore (Orlanth)': 7
+      },
+      careerSkills: {
+        'Lore (Orlanth)': 15,
+        'Devotion (Orlanth)': 10
+      },
+      bonusSkills: {
+        'Lore (Orlanth)': 5
+      },
+      selectedProfessionalSkills: ['Lore (Orlanth)', 'Devotion (Orlanth)', 'Oratory'],
+      _disambiguationMap: {
+        'career:Lore (Cult)': 'Lore (Orlanth)',
+        'career:Devotion (Pantheon, Cult or God)': 'Devotion (Orlanth)'
+      },
+      _cultBoundPlaceholderMap: {}
+    };
+    const toasts = [];
+    AppObj.renderCurrentStep = () => {};
+    AppObj.saveToLocalStorage = () => {};
+    AppObj.showToast = (message, type) => toasts.push({ message, type });
+    const imported = AppObj.importCharacterData(oldSave);
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    const importedCultReconciled = CD.careerSkills['Lore (Waha)'] === 15 &&
+      CD.careerSkills['Devotion (Waha)'] === 10 &&
+      CD.bonusSkills['Lore (Waha)'] === 5 &&
+      CD.selectedProfessionalSkills.includes('Lore (Waha)') &&
+      CD.selectedProfessionalSkills.includes('Devotion (Waha)') &&
+      !Object.keys(CD.careerSkills).some(skill => /\(Orlanth\)$/.test(skill)) &&
+      !Object.keys(CD.bonusSkills).some(skill => /\(Orlanth\)$/.test(skill));
+    const fixedCulturalPreserved = CD.culturalSkills['Lore (Orlanth)'] === 7 &&
+      !Object.keys(CD.culturalSkills).includes('Lore (Waha)');
+    const ernaldaResult = AppObj.selectCult('Ernalda', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const laterRekeyed = CD.careerSkills['Lore (Ernalda)'] === 15 &&
+      CD.careerSkills['Devotion (Ernalda)'] === 10 &&
+      CD.bonusSkills['Lore (Ernalda)'] === 5 &&
+      CD.selectedProfessionalSkills.includes('Lore (Ernalda)') &&
+      CD.selectedProfessionalSkills.includes('Devotion (Ernalda)') &&
+      !Object.keys(CD.careerSkills).some(skill => /\(Waha\)$|\(Orlanth\)$/.test(skill)) &&
+      !Object.keys(CD.bonusSkills).some(skill => /\(Waha\)$|\(Orlanth\)$/.test(skill));
+
+    if (imported && importedCultReconciled && fixedCulturalPreserved && ernaldaResult?.success && laterRekeyed) {
+      pass('Import reconciles stale cult-bound disambiguation origins to the current cult');
+    } else {
+      fail('Import left stale cult-bound disambiguation origins unrekeyable',
+        JSON.stringify({ imported, ernaldaResult, toasts, importedCultReconciled, fixedCulturalPreserved, laterRekeyed, culturalSkills: CD.culturalSkills, careerSkills: CD.careerSkills, bonusSkills: CD.bonusSkills, selected: CD.selectedProfessionalSkills, disambiguationMap: CD._disambiguationMap, cultBoundMap: CD._cultBoundPlaceholderMap }));
+    }
+  } else {
+    fail('Could not test stale cult-bound disambiguation origin reconciliation');
+  }
+}
+
+// Test: bare legacy disambiguation origins do not over-track ambiguous fixed skills
+{
+  const { App: AppObj, CharacterData: CD, Calc: CalcRef } = loadApp();
+  if (AppObj?.importCharacterData && AppObj.selectCult && CD) {
+    const oldSave = {
+      ...createTestCharacter('Lunar Heartland'),
+      cult: 'Etyries',
+      characteristics: { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 12, CHA: 12 },
+      culturalSkills: {
+        'Lore (Etyries)': 7
+      },
+      careerSkills: {},
+      bonusSkills: {
+        'Lore (Etyries)': 15
+      },
+      selectedProfessionalSkills: ['Bureaucracy', 'Commerce', 'Evaluate'],
+      _disambiguationMap: {
+        'Lore (Cult)': 'Lore (Etyries)'
+      },
+      _cultBoundPlaceholderMap: {}
+    };
+    const toasts = [];
+    AppObj.renderCurrentStep = () => {};
+    AppObj.saveToLocalStorage = () => {};
+    AppObj.showToast = (message, type) => toasts.push({ message, type });
+    const imported = AppObj.importCharacterData(oldSave);
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    const wahaResult = AppObj.selectCult('Waha', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const fixedCulturalPreserved = CD.culturalSkills['Lore (Etyries)'] === 7 &&
+      !Object.keys(CD.culturalSkills).includes('Lore (Waha)');
+    const ambiguousBonusNotGuessed = CD.bonusSkills['Lore (Etyries)'] === 15 &&
+      !Object.keys(CD.bonusSkills).includes('Lore (Waha)');
+
+    if (imported && wahaResult?.success && fixedCulturalPreserved && ambiguousBonusNotGuessed) {
+      pass('Bare legacy cult disambiguation keeps ambiguous fixed cult skills unchanged');
+    } else {
+      fail('Bare legacy cult disambiguation over-tracked ambiguous fixed skills',
+        JSON.stringify({ imported, wahaResult, toasts, fixedCulturalPreserved, ambiguousBonusNotGuessed, culturalSkills: CD.culturalSkills, bonusSkills: CD.bonusSkills, cultBoundMap: CD._cultBoundPlaceholderMap }));
+    }
+  } else {
+    fail('Could not test ambiguous bare legacy cult disambiguation tracking');
+  }
+}
+
+// Test: autosaved old characters with Lore (Cult) migrate through localStorage load
+{
+  const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
+  if (AppObj?.loadFromLocalStorage && CD && _sandbox) {
+    const oldSave = {
+      ...createTestCharacter('Praxian'),
+      cult: 'Waha',
+      culturalSkills: { 'Lore (Cult)': 10 },
+      careerSkills: { 'Lore (Cult)': 15 },
+      bonusSkills: { 'Lore (Cult)': 5 },
+      selectedProfessionalSkills: ['Lore (Cult)', 'Devotion (Pantheon, Cult or God)', 'Oratory'],
+      _disambiguationMap: {}
+    };
+    const storage = {
+      mythrasChargenCharacter: JSON.stringify({ version: 1, data: oldSave })
+    };
+    const toasts = [];
+    _sandbox.localStorage = {
+      getItem: key => storage[key] || null,
+      setItem: (key, value) => { storage[key] = value; },
+      removeItem: key => { delete storage[key]; }
+    };
+    AppObj.showToast = (message, type) => toasts.push({ message, type });
+
+    const loaded = AppObj.loadFromLocalStorage();
+
+    if (loaded && CD.culturalSkills['Lore (Waha)'] === 10 &&
+        CD.careerSkills['Lore (Waha)'] === 15 &&
+        CD.bonusSkills['Lore (Waha)'] === 5 &&
+        CD.selectedProfessionalSkills.includes('Lore (Waha)') &&
+        !Object.keys(CD.careerSkills).includes('Lore (Cult)')) {
+      pass('localStorage load migrates autosaved cult Lore placeholders');
+    } else {
+      fail('localStorage load failed to migrate autosaved Lore (Cult) placeholders',
+        JSON.stringify({ loaded, toasts, culturalSkills: CD.culturalSkills, careerSkills: CD.careerSkills, bonusSkills: CD.bonusSkills, selected: CD.selectedProfessionalSkills }));
+    }
+  } else {
+    fail('Could not test localStorage cult Lore placeholder migration');
   }
 }
 
@@ -5255,33 +5985,88 @@ section('ADR-005: Placeholder Skill Disambiguation');
 
 // Test: Random character generation resolves all placeholders for affected careers
 {
-  const { App, CharacterData, CAREERS_DATA, needsDisambiguation } = loadApp();
-  if (App && App.generateRandomCharacter && CAREERS_DATA && needsDisambiguation) {
-    // Test with "Fisher" career which has Lore (Primary Catch) and Lore (Secondary Catch)
-    const affectedCareers = ['Crafter', 'Fisher', 'Beast Handler', 'Hunter', 'Physician', 'Sailor', 'Scholar'];
-    let unresolvedFound = null;
+  const { App, CharacterData: CD, CAREERS_DATA, CULTURES_DATA, CULTURE_CULT_MAP, needsDisambiguation, _sandbox } = loadApp();
+  if (App && App.generateRandomCharacter && CAREERS_DATA && CULTURES_DATA && CULTURE_CULT_MAP && needsDisambiguation) {
+    const originalCareers = CAREERS_DATA.slice();
+    const originalCultures = CULTURES_DATA.slice();
+    const sartarite = originalCultures.find(culture => culture.name === 'Sartarite (Heortling)');
+    const priest = originalCareers.find(career => career.name === 'Priest');
+    const originalCultMap = JSON.parse(JSON.stringify(CULTURE_CULT_MAP['Sartarite (Heortling)']));
+    const originalRandom = _sandbox.Math.random;
 
-    for (const careerName of affectedCareers) {
-      try {
-        App.generateRandomCharacter();
-        // Force the career to match
-        const career = CAREERS_DATA.find(c => c.name === careerName);
-        if (!career) continue;
-
-        // Check if any career professional skills that are placeholders would be resolved
-        const proSkills = career.professionalSkills || [];
-        const placeholderSkills = proSkills.filter(s => typeof s === 'string' && needsDisambiguation(s));
-        if (placeholderSkills.length > 0) {
-          // The random gen should have resolved these — we can verify by checking the function exists
-          // Full integration test would require running with that specific career selected
-        }
-      } catch(e) {
-        // Random gen may fail due to missing DOM — that's OK for unit test
-      }
+    try {
+      CAREERS_DATA.splice(0, CAREERS_DATA.length, priest);
+      CULTURES_DATA.splice(0, CULTURES_DATA.length, sartarite);
+      CULTURE_CULT_MAP['Sartarite (Heortling)'] = { primary: ['Orlanth'], common: [], forbidden: [] };
+      _sandbox.Math.random = () => 0.2;
+      App.generateRandomCharacter();
+    } finally {
+      CAREERS_DATA.splice(0, CAREERS_DATA.length, ...originalCareers);
+      CULTURES_DATA.splice(0, CULTURES_DATA.length, ...originalCultures);
+      CULTURE_CULT_MAP['Sartarite (Heortling)'] = originalCultMap;
+      _sandbox.Math.random = originalRandom;
     }
-    pass('Random generation disambiguation code paths exist for all affected careers');
+
+    const allSkillNames = [
+      ...Object.keys(CD.culturalSkills || {}),
+      ...Object.keys(CD.careerSkills || {}),
+      ...Object.keys(CD.bonusSkills || {}),
+      ...(CD.selectedProfessionalSkills || [])
+    ];
+    const unresolvedFound = allSkillNames.find(skill => needsDisambiguation(skill));
+    const concreteCultLore = allSkillNames.includes('Lore (Orlanth)');
+
+    if (!unresolvedFound && concreteCultLore) {
+      pass('Random generation resolves cult Lore placeholders to concrete cult names');
+    } else {
+      fail('Random generation left unresolved placeholder skills',
+        JSON.stringify({ unresolvedFound, allSkillNames, cult: CD.cult, career: CD.career }));
+    }
   } else {
     fail('Could not test random generation — App or CAREERS_DATA missing');
+  }
+}
+
+// Test: Random generation clears stale cult-bound placeholder tracking before building
+{
+  const { App, CharacterData: CD, CAREERS_DATA, CULTURES_DATA, CULTURE_CULT_MAP, _sandbox } = loadApp();
+  if (App && App.generateRandomCharacter && CAREERS_DATA && CULTURES_DATA && CULTURE_CULT_MAP) {
+    const originalCareers = CAREERS_DATA.slice();
+    const originalCultures = CULTURES_DATA.slice();
+    const sartarite = originalCultures.find(culture => culture.name === 'Sartarite (Heortling)');
+    const priest = originalCareers.find(career => career.name === 'Priest');
+    const originalCultMap = JSON.parse(JSON.stringify(CULTURE_CULT_MAP['Sartarite (Heortling)']));
+    const originalRandom = _sandbox.Math.random;
+    CD._disambiguationMap = { 'Lore (Cult)': 'Lore (Stale Cult)' };
+    CD._cultBoundPlaceholderMap = {
+      'careerSkills:Lore (Cult)': { skill: 'Lore (Stale Cult)', preserveAmount: 0 },
+      'selectedProfessionalSkills:Lore (Cult)': 'Lore (Stale Cult)'
+    };
+
+    try {
+      CAREERS_DATA.splice(0, CAREERS_DATA.length, priest);
+      CULTURES_DATA.splice(0, CULTURES_DATA.length, sartarite);
+      CULTURE_CULT_MAP['Sartarite (Heortling)'] = { primary: ['Orlanth'], common: [], forbidden: [] };
+      _sandbox.Math.random = () => 0.2;
+      App.generateRandomCharacter();
+    } finally {
+      CAREERS_DATA.splice(0, CAREERS_DATA.length, ...originalCareers);
+      CULTURES_DATA.splice(0, CULTURES_DATA.length, ...originalCultures);
+      CULTURE_CULT_MAP['Sartarite (Heortling)'] = originalCultMap;
+      _sandbox.Math.random = originalRandom;
+    }
+
+    const staleTrackingGone = !JSON.stringify(CD._cultBoundPlaceholderMap || {}).includes('Stale Cult') &&
+      !JSON.stringify(CD._disambiguationMap || {}).includes('Stale Cult');
+
+    if (staleTrackingGone) {
+      pass('Random generation clears stale cult-bound placeholder tracking');
+    } else {
+      fail('Random generation retained stale cult-bound placeholder tracking',
+        JSON.stringify({ disambiguationMap: CD._disambiguationMap, cultBoundMap: CD._cultBoundPlaceholderMap }));
+    }
+  } else {
+    fail('Could not test random generation stale cult placeholder tracking reset');
   }
 }
 
@@ -5298,7 +6083,8 @@ section('ADR-005: Placeholder Skill Disambiguation');
       const allSkillKeys = [
         ...Object.keys(data.culturalSkills || {}),
         ...Object.keys(data.careerSkills || {}),
-        ...Object.keys(data.bonusSkills || {})
+        ...Object.keys(data.bonusSkills || {}),
+        ...(data.selectedProfessionalSkills || [])
       ];
       const bad = allSkillKeys.find(k => needsDisambiguation(k));
       if (bad) {

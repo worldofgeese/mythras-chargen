@@ -8,7 +8,7 @@
   "bonusSkills": {
     "Insight": 5,
     "Invocation (Arkat)": 15,
-    "Lore (Cult)": 10,
+    "Lore (Arkat)": 10,
     "Willpower": 10
   },
   "boundSpiritSlots": 0,
@@ -22,7 +22,7 @@
     "Insight": 10,
     "Invocation (Arkat)": 15,
     "Literacy": 15,
-    "Lore (Cult)": 15,
+    "Lore (Arkat)": 15,
     "Research": 15,
     "Shaping": 15,
     "Willpower": 15

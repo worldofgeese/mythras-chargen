@@ -4708,7 +4708,7 @@ const DISAMBIGUATION_LISTS = {
     'Telmori Hsunchen': ['Heortling'], // Live in Sartar, no Tradetalk (primitive)
     '_default':       ['Tradetalk', 'Heortling', 'Praxian', 'Stormspeech', 'Old Pavic']
   },
-  'Lore':    ['Alchemy', 'Animals', 'Astronomy', 'Balazar', 'Cult', 'Dragon Pass', 'Earth', 'Esrolia', 'Farming', 'God Forgot', 'Herding', 'History', 'Human', 'Lunar Heartlands', 'Minerals', 'Military History', 'Plants', 'Prax', 'Sartar', 'Sea', 'Strategy and Tactics', 'Tarsh', 'Telmori Wilds', 'World'],
+  'Lore':    ['Alchemy', 'Animals', 'Astronomy', 'Balazar', 'Dragon Pass', 'Earth', 'Esrolia', 'Farming', 'God Forgot', 'Herding', 'History', 'Human', 'Lunar Heartlands', 'Minerals', 'Military History', 'Plants', 'Prax', 'Sartar', 'Sea', 'Strategy and Tactics', 'Tarsh', 'Telmori Wilds', 'World'],
   'Art':     ['Calligraphy', 'Cartography', 'Drawing', 'Painting', 'Pottery', 'Sculpting', 'Weaving'],
   'Craft':   ['Alchemy', 'Armouring', 'Basketry', 'Blacksmithing', 'Brewing', 'Butchery', 'Carpentry', 'Cooking', 'Dyeing', 'Farming', 'Fletching', 'Hunting', 'Leatherworking', 'Mining', 'Netmaking', 'Pottery', 'Shipbuilding', 'Smelting', 'Smithing', 'Stonemasonry', 'Tanning', 'Weaving', 'Woodcarving'],
   'Culture': null, // populated dynamically from CULTURES_DATA names
@@ -4759,7 +4759,7 @@ function disambiguateSkill(skillName, cultureName, random) {
 
 /** Check if a skill name contains (any) or similar placeholder */
 function isAnySkill(skillName) {
-  return /\((any|local|any other)\)/i.test(skillName);
+  return /\((any|any weapon|local|any other)\)/i.test(skillName);
 }
 
 // ADR-005: Descriptive placeholder detection
@@ -4782,6 +4782,7 @@ const PLACEHOLDER_PATTERNS = [
   /\(Specific\s/i,
   /\(Hunting Related\)$/i,
   /\(Regional\)$/i,
+  /^Lore\s*\(Cult\)$/i,
   /\(Regional or Specific/i,
   /\(Shipboard\b/i,
   /\(Physiological\b/i,
@@ -4934,7 +4935,7 @@ function getSpecializationGuidance(skillName) {
     Healing: 'Name the species or body of practice this Healing skill specializes in. Read: Mythras rulebook p.48 (Healing).',
     Invocation: 'Name the sorcery cult, school, or grimoire this Invocation skill draws on. Read: Mythras rulebook p.162-165 (Sorcery) and the selected school/cult source.',
     Language: 'Name the actual language, such as Heortling, Praxian, Tradetalk, or another language from the character background. Read: Mythras rulebook p.49 (Language and Literacy) plus Adventures in Glorantha p.26-41 for culture-language context.',
-    Lore: 'Name the actual body of knowledge, not a category label; examples include Cult, History, Prax, Sartar, Plants, Animals, Minerals, or Strategy and Tactics. Read: Mythras rulebook p.49 (Lore) plus Adventures in Glorantha p.26-41 for regional/cultural topics.',
+    Lore: 'Name the actual body of knowledge, not a category label; examples include Lore (Waha), Lore (Orlanth), Lore (Prax), Lore (Sartar), Lore (Plants), Lore (Animals), Lore (Minerals), or Lore (Strategy and Tactics). Read: Mythras rulebook p.49 (Lore) plus Adventures in Glorantha p.26-41 for regional/cultural topics.',
     Navigation: 'Name the environment or method this Navigation skill covers, such as Underground, Sea, River, or Wilderness. Read: Mythras rulebook p.50 (Navigation).',
     Teach: 'Name the species or audience this Teach skill specializes in. Read: Mythras rulebook p.54 (Teach).'
   };
@@ -6187,18 +6188,21 @@ const CULTURE_BUILD_SPECS = {
         "professionalSkills": [
           "Devotion",
           "Oratory",
-          "Lore (Cult)"
+          "Lore (Orlanth)"
         ]
       },
       "step9": {
         "cult": null
+      },
+      "cultBoundPlaceholderResolutions": {
+        "Lore (Cult)": "Lore (Orlanth)"
       },
       "step10": {
         "careerSkills": {
           "Combat Style (Hill Clan Levy)": 15,
           "Devotion": 15,
           "Oratory": 15,
-          "Lore (Cult)": 15,
+          "Lore (Orlanth)": 15,
           "Influence": 15,
           "Willpower": 15,
           "Insight": 10
@@ -6535,18 +6539,21 @@ const CULTURE_BUILD_SPECS = {
         "professionalSkills": [
           "Devotion",
           "Oratory",
-          "Lore (Cult)"
+          "Lore (Seven Mothers)"
         ]
       },
       "step9": {
         "cult": null
+      },
+      "cultBoundPlaceholderResolutions": {
+        "Lore (Cult)": "Lore (Seven Mothers)"
       },
       "step10": {
         "careerSkills": {
           "Combat Style (Dara Happan Urbanite)": 15,
           "Devotion": 15,
           "Oratory": 15,
-          "Lore (Cult)": 15,
+          "Lore (Seven Mothers)": 15,
           "Influence": 15,
           "Willpower": 15,
           "Insight": 10
@@ -6767,18 +6774,21 @@ const CULTURE_BUILD_SPECS = {
         "professionalSkills": [
           "Devotion",
           "Oratory",
-          "Lore (Cult)"
+          "Lore (Ernalda)"
         ]
       },
       "step9": {
         "cult": null
+      },
+      "cultBoundPlaceholderResolutions": {
+        "Lore (Cult)": "Lore (Ernalda)"
       },
       "step10": {
         "careerSkills": {
           "Combat Style (Clan Protector)": 15,
           "Devotion": 15,
           "Oratory": 15,
-          "Lore (Cult)": 15,
+          "Lore (Ernalda)": 15,
           "Influence": 15,
           "Willpower": 15,
           "Insight": 10
@@ -10113,29 +10123,245 @@ function getMissingBuildCharacterSteps(spec) {
     );
 }
 
-function getCultPlaceholderResolutions(cultName) {
-  return cultName ? {
-    'Devotion (Pantheon, Cult or God)': `Devotion (${cultName})`,
-    'Binding (Cult, Totem or Tradition)': `Binding (${cultName})`,
-    'Invocation (Cult, School or Grimoire)': `Invocation (${cultName})`
-  } : {};
+const CULT_BOUND_PLACEHOLDERS = {
+  'Lore (Cult)': 'Lore',
+  'Devotion (Pantheon, Cult or God)': 'Devotion',
+  'Binding (Cult, Totem or Tradition)': 'Binding',
+  'Invocation (Cult, School or Grimoire)': 'Invocation'
+};
+
+function isCultBoundPlaceholder(skillName) {
+  return Object.prototype.hasOwnProperty.call(CULT_BOUND_PLACEHOLDERS, skillName);
 }
 
-function resolveCultBoundPlaceholders(character, cultName, options = {}) {
-  const replacements = getCultPlaceholderResolutions(cultName);
-  const skillMaps = options.skillMaps || ['culturalSkills', 'careerSkills', 'bonusSkills'];
+function getCultBoundPlaceholderFromKey(key) {
+  if (isCultBoundPlaceholder(key)) return key;
+  const unprefixed = String(key || '').replace(/^[^:]+:/, '');
+  return isCultBoundPlaceholder(unprefixed) ? unprefixed : null;
+}
+
+function getCultBoundDisambiguationScope(key, character = null, resolvedSkill = null) {
+  const match = String(key || '').match(/^([^:]+):/);
+  if (match) {
+    switch (match[1]) {
+      case 'career':
+        return { skillMaps: ['careerSkills'], includeSelectedProfessionalSkills: true };
+      case 'cultural':
+        return { skillMaps: ['culturalSkills'], includeSelectedProfessionalSkills: false };
+      case 'bonus':
+        return { skillMaps: ['bonusSkills'], includeSelectedProfessionalSkills: false };
+      default:
+        return null;
+    }
+  }
+  if (!character || typeof resolvedSkill !== 'string') return null;
+  const matchingMaps = ['culturalSkills', 'careerSkills', 'bonusSkills']
+    .filter(skillMap => character?.[skillMap]?.[resolvedSkill] !== undefined);
+  const selectedProfessional = Array.isArray(character.selectedProfessionalSkills) &&
+    character.selectedProfessionalSkills.includes(resolvedSkill);
+  if (selectedProfessional && matchingMaps.includes('careerSkills')) {
+    return { skillMaps: ['careerSkills'], includeSelectedProfessionalSkills: true };
+  }
+  if (matchingMaps.length === 1) {
+    return {
+      skillMaps: matchingMaps,
+      includeSelectedProfessionalSkills: selectedProfessional && matchingMaps[0] === 'careerSkills'
+    };
+  }
+  if (selectedProfessional && matchingMaps.length === 0) {
+    return { skillMaps: [], includeSelectedProfessionalSkills: true };
+  }
+  return { skillMaps: [], includeSelectedProfessionalSkills: false };
+}
+
+function isEquivalentCultBoundDisambiguationAlias(existingKey, key, value) {
+  const existingPlaceholder = getCultBoundPlaceholderFromKey(existingKey);
+  const currentPlaceholder = getCultBoundPlaceholderFromKey(key);
+  if (!existingPlaceholder || existingPlaceholder !== currentPlaceholder || typeof value !== 'string') return false;
+  const parsed = value.match(/^(.+) \((.+)\)$/);
+  return Boolean(parsed && parsed[1] === CULT_BOUND_PLACEHOLDERS[currentPlaceholder]);
+}
+
+function getCultPlaceholderResolutions(cultName) {
+  if (!cultName) return {};
+  const replacements = {};
+  Object.entries(CULT_BOUND_PLACEHOLDERS).forEach(([placeholder, category]) => {
+    replacements[placeholder] = `${category} (${cultName})`;
+  });
+  return replacements;
+}
+
+function getTrackedCultPlaceholderEntries(character, cultName, previousCultName) {
+  if (!cultName || previousCultName === cultName || !CharacterData.isRecord(character?._cultBoundPlaceholderMap)) {
+    return [];
+  }
+  return Object.entries(character._cultBoundPlaceholderMap).flatMap(([sourceKey, resolvedSkill]) => {
+    const trackedSkill = CharacterData.isRecord(resolvedSkill) ? resolvedSkill.skill : resolvedSkill;
+    const preserveAmount = CharacterData.isRecord(resolvedSkill) && Number.isFinite(resolvedSkill.preserveAmount)
+      ? resolvedSkill.preserveAmount
+      : null;
+    if (typeof trackedSkill !== 'string') return [];
+    const match = trackedSkill.match(/^(.+) \((.+)\)$/);
+    if (!match) return [];
+    if (previousCultName && match[2] !== previousCultName) return [];
+    if (!previousCultName && match[2] === cultName) return [];
+    return [{ sourceKey, from: trackedSkill, to: `${match[1]} (${cultName})`, preserveAmount }];
+  });
+}
+
+function trackCultBoundPlaceholder(character, sourceKey, resolvedSkill, preserveAmount = null) {
+  if (!character || !sourceKey || !resolvedSkill) return;
+  if (!CharacterData.isRecord(character._cultBoundPlaceholderMap)) {
+    character._cultBoundPlaceholderMap = {};
+  }
+  character._cultBoundPlaceholderMap[sourceKey] = Number.isFinite(preserveAmount)
+    ? { skill: resolvedSkill, preserveAmount }
+    : resolvedSkill;
+}
+
+function trackCultBoundResolutionInCharacter(character, placeholder, resolvedSkill, scope = null) {
+  const normalizedPlaceholder = getCultBoundPlaceholderFromKey(placeholder);
+  if (!character || !normalizedPlaceholder || typeof resolvedSkill !== 'string') return;
+  const parsed = resolvedSkill.match(/^(.+) \((.+)\)$/);
+  if (!parsed || parsed[1] !== CULT_BOUND_PLACEHOLDERS[normalizedPlaceholder]) return;
+  const sourceScope = scope || getCultBoundDisambiguationScope(placeholder, character, resolvedSkill);
+  const skillMaps = sourceScope?.skillMaps || ['culturalSkills', 'careerSkills', 'bonusSkills'];
   skillMaps.forEach(skillMap => {
+    if (character?.[skillMap]?.[resolvedSkill] !== undefined) {
+      trackCultBoundPlaceholder(character, `${skillMap}:${normalizedPlaceholder}`, resolvedSkill, 0);
+    }
+  });
+  const trackSelected = sourceScope ? sourceScope.includeSelectedProfessionalSkills : true;
+  if (trackSelected && CharacterData.isRecord(character?.bonusSkills)) {
+    trackCultBoundPlaceholder(character, `bonusSkills:${normalizedPlaceholder}`, resolvedSkill, 0);
+  }
+  if (trackSelected && Array.isArray(character?.selectedProfessionalSkills) && character.selectedProfessionalSkills.includes(resolvedSkill)) {
+    trackCultBoundPlaceholder(character, `selectedProfessionalSkills:${normalizedPlaceholder}`, resolvedSkill);
+  }
+}
+
+function getNumericSkillAllocation(skillMap, skillName) {
+  const value = Number(skillMap?.[skillName] || 0);
+  return Number.isFinite(value) ? value : 0;
+}
+
+function moveSkillAllocation(skillMap, from, to, options = {}) {
+  if (!skillMap || skillMap[from] === undefined) return null;
+  const current = Number(skillMap[from]);
+  if (!Number.isFinite(current)) return null;
+  const preserveAmount = Number.isFinite(options.preserveAmount)
+    ? Math.min(current, options.preserveAmount)
+    : 0;
+  const moved = current - preserveAmount;
+  if (moved > 0 || preserveAmount === 0) {
+    skillMap[to] = (skillMap[to] || 0) + moved;
+  }
+  if (preserveAmount > 0) {
+    skillMap[from] = preserveAmount;
+  } else {
+    delete skillMap[from];
+  }
+  return moved;
+}
+
+function resolveCultBoundPlaceholders(character, cultName, previousCultName = null) {
+  const placeholderReplacements = getCultPlaceholderResolutions(cultName);
+  const trackedEntries = getTrackedCultPlaceholderEntries(character, cultName, previousCultName);
+  ['culturalSkills', 'careerSkills', 'bonusSkills'].forEach(skillMap => {
     if (!character?.[skillMap]) return;
-    Object.entries(replacements).forEach(([placeholder, resolved]) => {
-      if (character[skillMap][placeholder] !== undefined) {
-        character[skillMap][resolved] = character[skillMap][placeholder];
-        delete character[skillMap][placeholder];
+    Object.entries(placeholderReplacements).forEach(([placeholder, resolved]) => {
+      const preserveAmount = getNumericSkillAllocation(character[skillMap], resolved);
+      const moved = moveSkillAllocation(character[skillMap], placeholder, resolved);
+      if (moved !== null) {
+        trackCultBoundPlaceholder(character, `${skillMap}:${placeholder}`, resolved, preserveAmount);
       }
     });
+    trackedEntries
+      .filter(entry => entry.sourceKey.startsWith(`${skillMap}:`))
+      .forEach(entry => {
+        const preserveAmount = getNumericSkillAllocation(character[skillMap], entry.to);
+        const moved = moveSkillAllocation(character[skillMap], entry.from, entry.to, { preserveAmount: entry.preserveAmount });
+        if (moved !== null) {
+          trackCultBoundPlaceholder(character, entry.sourceKey, entry.to, preserveAmount);
+        }
+      });
   });
-  if (options.includeSelectedProfessionalSkills && Array.isArray(character?.selectedProfessionalSkills)) {
-    character.selectedProfessionalSkills = character.selectedProfessionalSkills.map(skill => replacements[skill] || skill);
+  if (Array.isArray(character?.selectedProfessionalSkills)) {
+    character.selectedProfessionalSkills = character.selectedProfessionalSkills.map(skill => {
+      const resolved = placeholderReplacements[skill] || skill;
+      if (resolved !== skill && isCultBoundPlaceholder(skill)) {
+        trackCultBoundPlaceholder(character, `selectedProfessionalSkills:${skill}`, resolved);
+      }
+      return resolved;
+    });
+    trackedEntries
+      .filter(entry => entry.sourceKey.startsWith('selectedProfessionalSkills:'))
+      .forEach(entry => {
+        character.selectedProfessionalSkills = character.selectedProfessionalSkills.map(skill => {
+          if (skill !== entry.from) return skill;
+          trackCultBoundPlaceholder(character, entry.sourceKey, entry.to);
+          return entry.to;
+        });
+      });
   }
+  if (character?._disambiguationMap) {
+    Object.entries(character._disambiguationMap).forEach(([key, value]) => {
+      character._disambiguationMap[key] = placeholderReplacements[value] || value;
+    });
+    trackedEntries.forEach(entry => {
+      const placeholder = entry.sourceKey.replace(/^[^:]+:/, '');
+      Object.keys(character._disambiguationMap)
+        .filter(key => getCultBoundPlaceholderFromKey(key) === placeholder)
+        .forEach(key => {
+          character._disambiguationMap[key] = entry.to;
+        });
+    });
+  }
+}
+
+function trackDisambiguatedCultBoundOrigins(character) {
+  if (!CharacterData.isRecord(character?._disambiguationMap)) return;
+  const entries = Object.entries(character._disambiguationMap);
+  entries.forEach(([placeholder, resolvedSkill]) => {
+    const normalizedPlaceholder = getCultBoundPlaceholderFromKey(placeholder);
+    if (!normalizedPlaceholder) return;
+    if (!getCultBoundDisambiguationScope(placeholder)) {
+      const hasScopedAlias = entries.some(([otherKey, otherValue]) =>
+        otherKey !== placeholder &&
+        otherValue === resolvedSkill &&
+        getCultBoundPlaceholderFromKey(otherKey) === normalizedPlaceholder &&
+        Boolean(getCultBoundDisambiguationScope(otherKey))
+      );
+      if (hasScopedAlias) return;
+    }
+    const resolved = getCultPlaceholderResolutions(character.cult)[resolvedSkill] || resolvedSkill;
+    trackCultBoundResolutionInCharacter(character, placeholder, resolved);
+  });
+}
+
+function trackBuildCultBoundOrigins(character, spec) {
+  if (!CharacterData.isRecord(spec) || spec.step9?.cult) return;
+  const resolutions = spec.cultBoundPlaceholderResolutions;
+  if (!CharacterData.isRecord(resolutions)) return;
+  Object.entries(resolutions).forEach(([placeholder, resolvedSkill]) => {
+    trackCultBoundResolutionInCharacter(character, placeholder, resolvedSkill, {
+      skillMaps: ['culturalSkills', 'careerSkills', 'bonusSkills'],
+      includeSelectedProfessionalSkills: true
+    });
+  });
+}
+
+function migrateLoadedCultBoundPlaceholders(data) {
+  if (!CharacterData.isRecord(data)) return data;
+  const migrated = JSON.parse(JSON.stringify(data));
+  if (migrated.cult) {
+    resolveCultBoundPlaceholders(migrated, migrated.cult);
+  }
+  trackDisambiguatedCultBoundOrigins(migrated);
+  if (migrated.cult) {
+    resolveCultBoundPlaceholders(migrated, migrated.cult);
+  }
+  return migrated;
 }
 
 function getSorcerySourceSelectionError(snapshot, previousSource, currentCharacter, source, options = {}) {
@@ -10589,6 +10815,7 @@ const CharacterData = {
   // Companion creatures (mounts, pets, bonded animals)
   companions: [],
   _disambiguationMap: {},
+  _cultBoundPlaceholderMap: {},
 
   /**
    * Validate character data for completeness and correctness
@@ -10712,6 +10939,7 @@ const CharacterData = {
       hitPoints: this.cloneForSerialization(this.hitPoints, {}),
       companions: this.cloneForSerialization(this.companions, []),
       _disambiguationMap: {...(this._disambiguationMap || {})},
+      _cultBoundPlaceholderMap: this.cloneForSerialization(this._cultBoundPlaceholderMap, {}),
       schemaVersion: this.getSchemaVersion()
     };
   },
@@ -10878,7 +11106,7 @@ const CharacterData = {
 	      'careerFolkMagic', 'selectedProfessionalSkills', 'bonusSkills',
 	      'hobbySkillName', 'socialClass', 'socialClassMoneyMod', 'startingMoney',
 	      'equipment', 'weapons', 'armor', 'combatStyles', 'notes', 'background',
-	      'hitPoints', 'companions', '_disambiguationMap', 'schemaVersion'
+	      'hitPoints', 'companions', '_disambiguationMap', '_cultBoundPlaceholderMap', 'schemaVersion'
 	    ]);
 	    Object.keys(data).forEach(field => {
 	      if (!allowedFields.has(field)) {
@@ -10896,7 +11124,7 @@ const CharacterData = {
 
 	    const objectFields = [
 	      'characteristics', 'attributes', 'culturalSkills', 'runeAffinities',
-	      'careerSkills', 'bonusSkills', 'hitPoints', '_disambiguationMap'
+	      'careerSkills', 'bonusSkills', 'hitPoints', '_disambiguationMap', '_cultBoundPlaceholderMap'
 	    ];
     objectFields.forEach(field => {
       if (data[field] !== undefined && !this.isRecord(data[field])) {
@@ -11031,10 +11259,29 @@ const CharacterData = {
       Object.entries(data._disambiguationMap).forEach(([key, value]) => {
         if (typeof value !== 'string') {
           errors.push(`_disambiguationMap.${key} must be a string`);
-        } else if (value && seenResolvedSkills.has(value)) {
+        } else if (value && seenResolvedSkills.has(value) &&
+            !isEquivalentCultBoundDisambiguationAlias(seenResolvedSkills.get(value), key, value)) {
           errors.push(`_disambiguationMap maps both ${seenResolvedSkills.get(value)} and ${key} to "${value}"`);
         } else if (value) {
           seenResolvedSkills.set(value, key);
+        }
+      });
+    }
+    if (this.isRecord(data._cultBoundPlaceholderMap)) {
+      Object.entries(data._cultBoundPlaceholderMap).forEach(([key, value]) => {
+        if (typeof value === 'string') {
+          return;
+        }
+        if (!this.isRecord(value)) {
+          errors.push(`_cultBoundPlaceholderMap.${key} must be a string or object`);
+          return;
+        }
+        if (typeof value.skill !== 'string') {
+          errors.push(`_cultBoundPlaceholderMap.${key}.skill must be a string`);
+        }
+        if (value.preserveAmount !== undefined &&
+            (!Number.isFinite(value.preserveAmount) || value.preserveAmount < 0)) {
+          errors.push(`_cultBoundPlaceholderMap.${key}.preserveAmount must be a non-negative number`);
         }
       });
     }
@@ -11108,6 +11355,7 @@ const CharacterData = {
     this.hitPoints = data.hitPoints || {};
     this.companions = this.sanitizeCompanions(data.companions);
     this._disambiguationMap = data._disambiguationMap || {};
+    this._cultBoundPlaceholderMap = data._cultBoundPlaceholderMap || {};
     normalizeHigherMagicState(this);
     return true;
   },
@@ -11582,11 +11830,12 @@ const App = {
       const saved = localStorage.getItem('mythrasChargenCharacter');
       if (saved) {
         const data = CharacterData.loadFromLocalStorage(saved);
-        if (data && CharacterData.applyPlainObject(data)) {
+        const migratedData = migrateLoadedCultBoundPlaceholders(data);
+        if (migratedData && CharacterData.applyPlainObject(migratedData)) {
           CharacterData.attributes = Calc.calculateAllAttributes(CharacterData.characteristics);
           return true;
         }
-        if (data) {
+        if (migratedData) {
           this.showToast('Saved character data is invalid', 'error');
         }
       }
@@ -11641,13 +11890,14 @@ const App = {
       return false;
     }
 
-    const loadErrors = this.validateLoadedData(data);
+    const migratedData = migrateLoadedCultBoundPlaceholders(data);
+    const loadErrors = this.validateLoadedData(migratedData);
     if (loadErrors.length > 0) {
       this.showToast(`Cannot load: ${loadErrors[0]}. Open in Wizard Mode to fix.`, 'error');
       return false;
     }
 
-    if (!CharacterData.fromJSON(payload)) {
+    if (!CharacterData.applyPlainObject(migratedData)) {
       this.showToast('Invalid character file', 'error');
       return false;
     }
@@ -12890,6 +13140,7 @@ App.disambiguateAndUpdateFreeText = function(category, originalSkillName, inputV
 
   // Record the mapping
   CharacterData._disambiguationMap[mapKey] = newSkillName;
+  trackCultBoundResolutionInCharacter(CharacterData, mapKey, newSkillName);
 
   this.saveToLocalStorage();
   this.renderCurrentStep();
@@ -13542,6 +13793,7 @@ App.resolveProfessionalSkill = function(originalName, specialization, sourceElem
 
   // Record in disambiguation map
   CharacterData._disambiguationMap[mapKey] = resolvedName;
+  trackCultBoundResolutionInCharacter(CharacterData, mapKey, resolvedName);
 
   const activeHigherMagicProviders = this.resolveHigherMagicProviders(CharacterData);
   const providerLossError = getHigherMagicProviderSelectionLossError(skillSnapshot, activeHigherMagicProviders, {
@@ -14086,7 +14338,7 @@ App.selectCult = function(cultName, options = {}) {
   this.normalizeHigherMagicState(CharacterData);
 
   // Resolve cult-bound placeholder skills (ADR-005)
-  resolveCultBoundPlaceholders(CharacterData, cultName);
+  resolveCultBoundPlaceholders(CharacterData, cultName, previousCult);
 
   // Auto-add Devotion skill if a cult is selected and it's not already present
   if (cultName && !CharacterData.culturalSkills['Devotion']) {
@@ -14192,6 +14444,7 @@ App.calculateSkillTotalForKey = function(skillName, allSkillsArr = null) {
 
 App.resolveDefaultCultSkillKey = function(cultSkillName) {
   const normalized = this.normalizeSkillName(cultSkillName);
+  if (CharacterData.cult && normalized === 'lore (cult)') return `Lore (${CharacterData.cult})`;
   if (CharacterData.cult && normalized.startsWith('devotion')) return `Devotion (${CharacterData.cult})`;
   if (CharacterData.cult && normalized.startsWith('binding')) return `Binding (${CharacterData.cult})`;
   if (normalized.startsWith('trance')) return 'Trance';
@@ -15605,6 +15858,8 @@ App.generateRandomCharacter = function() {
   CharacterData.sorceryResource = 0;
   CharacterData.sorcerySpells = [];
   CharacterData.mysticismTalents = [];
+  CharacterData._disambiguationMap = {};
+  CharacterData._cultBoundPlaceholderMap = {};
 
   // Random name parts
   const firstNames = ['Argrath','Kallyr','Vasana','Yanioth','Sorala','Harmast','Biturian','Griselda','Jarang','Vostor','Leika','Erinestra','Vishi','Broyan','Hofstaring','Minaryth','Korol','Ernaldesta','Hendroste','Orgovalt'];
@@ -15726,7 +15981,9 @@ App.generateRandomCharacter = function() {
   });
   // Second pass: spend remaining points
   while (culturalPtsLeft > 0 && allCulturalSkills.length > 0) {
-    const skill = allCulturalSkills[Math.floor(Math.random() * allCulturalSkills.length)];
+    const eligibleSkills = allCulturalSkills.filter(skill => (CharacterData.culturalSkills[skill] || 0) < 15);
+    if (eligibleSkills.length === 0) break;
+    const skill = eligibleSkills[Math.floor(Math.random() * eligibleSkills.length)];
     const current = CharacterData.culturalSkills[skill] || 0;
     if (current < 15) {
       const add = Math.min(15 - current, culturalPtsLeft);
@@ -15914,10 +16171,7 @@ App.generateRandomCharacter = function() {
         cultNameForResolution = 'Orlanth'; // Universal fallback
       }
     }
-    resolveCultBoundPlaceholders(CharacterData, cultNameForResolution, {
-      skillMaps: ['careerSkills'],
-      includeSelectedProfessionalSkills: true
-    });
+    resolveCultBoundPlaceholders(CharacterData, cultNameForResolution);
   }
 
   // Now distribute ALL 100 career points across career skills
@@ -15931,7 +16185,9 @@ App.generateRandomCharacter = function() {
   });
   // Second pass: spend remaining
   while (careerPtsLeft > 0 && allCareerSkillNames.length > 0) {
-    const skill = allCareerSkillNames[Math.floor(Math.random() * allCareerSkillNames.length)];
+    const eligibleSkills = allCareerSkillNames.filter(skill => (CharacterData.careerSkills[skill] || 0) < 15);
+    if (eligibleSkills.length === 0) break;
+    const skill = eligibleSkills[Math.floor(Math.random() * eligibleSkills.length)];
     const current = CharacterData.careerSkills[skill] || 0;
     if (current < 15) {
       const add = Math.min(15 - current, careerPtsLeft);
@@ -15944,7 +16200,7 @@ App.generateRandomCharacter = function() {
   CharacterData.bonusSkills = {};
   const bonusPool = ageCategory ? ageCategory.bonusPoints : 150;
   const maxPerBonus = ageCategory ? ageCategory.maxPerSkill : 15;
-  const allSkillNames = [...new Set([...cultureStandard, ...culturePro, ...allCareerSkillNames])];
+  const allSkillNames = [...new Set([...Object.keys(CharacterData.culturalSkills), ...allCareerSkillNames])];
   let bonusPtsLeft = bonusPool;
   // First pass
   allSkillNames.forEach(skill => {
@@ -15954,7 +16210,9 @@ App.generateRandomCharacter = function() {
   });
   // Second pass: spend remaining
   while (bonusPtsLeft > 0 && allSkillNames.length > 0) {
-    const skill = allSkillNames[Math.floor(Math.random() * allSkillNames.length)];
+    const eligibleSkills = allSkillNames.filter(skill => (CharacterData.bonusSkills[skill] || 0) < maxPerBonus);
+    if (eligibleSkills.length === 0) break;
+    const skill = eligibleSkills[Math.floor(Math.random() * eligibleSkills.length)];
     const current = CharacterData.bonusSkills[skill] || 0;
     if (current < maxPerBonus) {
       const add = Math.min(maxPerBonus - current, bonusPtsLeft);
@@ -18739,7 +18997,8 @@ App.agent.setStep = function(step, data) {
         }
 
         // Apply
-        const cultChanged = CharacterData.cult !== cultName;
+        const previousCult = CharacterData.cult;
+        const cultChanged = previousCult !== cultName;
         CharacterData.cult = cultName;
         if (cultChanged) {
           App.clearAutoPopulatedCompanions();
@@ -18753,9 +19012,7 @@ App.agent.setStep = function(step, data) {
         CharacterData.sorcerySpells = [...requestedSorcerySpells];
         CharacterData.mysticismTalents = [...requestedMysticismTalents];
 
-        resolveCultBoundPlaceholders(CharacterData, cultName, {
-          includeSelectedProfessionalSkills: true
-        });
+        resolveCultBoundPlaceholders(CharacterData, cultName, previousCult);
         return finishStep9Selection();
       }
 
@@ -18797,6 +19054,12 @@ App.agent.setStep = function(step, data) {
           errors.push('bonusSkills object is required');
           return {success: false, errors, state: App.agent.getState()};
         }
+        const normalizedBonusCharacter = {
+          bonusSkills: {...bonusSkills},
+          _cultBoundPlaceholderMap: {...(CharacterData._cultBoundPlaceholderMap || {})}
+        };
+        resolveCultBoundPlaceholders(normalizedBonusCharacter, CharacterData.cult);
+        const resolvedBonusSkills = normalizedBonusCharacter.bonusSkills;
         const ageCategory = Calc.getAgeCategory ? Calc.getAgeCategory(CharacterData.age) : null;
         if (!ageCategory) {
           errors.push('Age must be 11 or older before assigning bonus points');
@@ -18804,15 +19067,17 @@ App.agent.setStep = function(step, data) {
         }
         const expectedTotal = ageCategory.bonusPoints;
         const maxPerSkill = ageCategory.maxPerSkill;
-        const total11 = Object.values(bonusSkills).reduce((a, b) => a + b, 0);
+        const total11 = Object.values(resolvedBonusSkills).reduce((a, b) => a + b, 0);
         if (total11 !== expectedTotal) errors.push(`Bonus points must total ${expectedTotal} (got ${total11})`);
-        for (const [name, val] of Object.entries(bonusSkills)) {
+        for (const [name, val] of Object.entries(resolvedBonusSkills)) {
+          if (needsDisambiguation(name)) errors.push(`Bonus skill "${name}" requires a concrete specialization before assigning points`);
           if (val > maxPerSkill) errors.push(`Bonus skill "${name}" exceeds max ${maxPerSkill} (got ${val})`);
           if (val < 0) errors.push(`Bonus skill "${name}" cannot be negative`);
         }
         if (errors.length > 0) return {success: false, errors, state: App.agent.getState()};
 
-        CharacterData.bonusSkills = {...bonusSkills};
+        CharacterData.bonusSkills = {...resolvedBonusSkills};
+        CharacterData._cultBoundPlaceholderMap = normalizedBonusCharacter._cultBoundPlaceholderMap || CharacterData._cultBoundPlaceholderMap || {};
         App.currentStep = 11;
         App.renderCurrentStep();
         App.saveToLocalStorage();
@@ -18972,6 +19237,7 @@ App.agent.buildCharacter = function(spec) {
         return {success: false, errors: result.errors, failedStep: step};
       }
     }
+    trackBuildCultBoundOrigins(CharacterData, spec);
     App.currentStep = 9;
     const step9Validation = App.getValidationState();
     if (!step9Validation.valid) {
@@ -19071,6 +19337,7 @@ App.agent.getMagicState = function() {
  */
 App.agent.selectCult = function(name) {
   const selectionSnapshot = createTrustedCharacterSnapshot();
+  const previousCult = CharacterData.cult;
   const previousSorcerySource = App.resolveActiveSorcerySource(CharacterData);
   const previousHigherMagicProviders = App.resolveHigherMagicProviders(CharacterData);
   const restoreSelectionSnapshot = () => {
@@ -19120,7 +19387,6 @@ App.agent.selectCult = function(name) {
     }
     const cult = CULTS_DATA.find(c => c.name === name);
     if (!cult) return {success: false, error: `Cult '${name}' not found`};
-    const previousCult = CharacterData.cult;
     CharacterData.cult = name;
     const cultType = detectCultType(cult);
     CharacterData.cultType = cultType;
@@ -19166,6 +19432,7 @@ App.agent.selectCult = function(name) {
     const sourceError = sourceSelectionError(activeSorcerySource);
     if (sourceError) return sourceError;
     App.normalizeHigherMagicState(CharacterData);
+    resolveCultBoundPlaceholders(CharacterData, name, previousCult);
     App.saveToLocalStorage();
     return {success: true, magicState: App.agent.getMagicState()};
   } catch (e) {

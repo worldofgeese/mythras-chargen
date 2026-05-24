@@ -740,18 +740,21 @@
           "professionalSkills": [
             "Devotion",
             "Oratory",
-            "Lore (Cult)"
+            "Lore (Orlanth)"
           ]
         },
         "step9": {
           "cult": null
+        },
+        "cultBoundPlaceholderResolutions": {
+          "Lore (Cult)": "Lore (Orlanth)"
         },
         "step10": {
           "careerSkills": {
             "Combat Style (Hill Clan Levy)": 15,
             "Devotion": 15,
             "Oratory": 15,
-            "Lore (Cult)": 15,
+            "Lore (Orlanth)": 15,
             "Influence": 15,
             "Willpower": 15,
             "Insight": 10
@@ -1088,18 +1091,21 @@
           "professionalSkills": [
             "Devotion",
             "Oratory",
-            "Lore (Cult)"
+            "Lore (Seven Mothers)"
           ]
         },
         "step9": {
           "cult": null
+        },
+        "cultBoundPlaceholderResolutions": {
+          "Lore (Cult)": "Lore (Seven Mothers)"
         },
         "step10": {
           "careerSkills": {
             "Combat Style (Dara Happan Urbanite)": 15,
             "Devotion": 15,
             "Oratory": 15,
-            "Lore (Cult)": 15,
+            "Lore (Seven Mothers)": 15,
             "Influence": 15,
             "Willpower": 15,
             "Insight": 10
@@ -1320,18 +1326,21 @@
           "professionalSkills": [
             "Devotion",
             "Oratory",
-            "Lore (Cult)"
+            "Lore (Ernalda)"
           ]
         },
         "step9": {
           "cult": null
+        },
+        "cultBoundPlaceholderResolutions": {
+          "Lore (Cult)": "Lore (Ernalda)"
         },
         "step10": {
           "careerSkills": {
             "Combat Style (Clan Protector)": 15,
             "Devotion": 15,
             "Oratory": 15,
-            "Lore (Cult)": 15,
+            "Lore (Ernalda)": 15,
             "Influence": 15,
             "Willpower": 15,
             "Insight": 10

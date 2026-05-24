@@ -1,5 +1,7 @@
 {
-  "_disambiguationMap": {},
+  "_disambiguationMap": {
+    "Binding (Cult, Totem or Tradition)": "Binding (Waha)"
+  },
   "age": 22,
   "armor": [],
   "attributes": {},
@@ -122,7 +124,7 @@
   },
   "schemaVersion": 1,
   "selectedProfessionalSkills": [
-    "Binding (Cult, Totem or Tradition)",
+    "Binding (Waha)",
     "Folk Magic",
     "Healing"
   ],
