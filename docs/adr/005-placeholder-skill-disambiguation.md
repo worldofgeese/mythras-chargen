@@ -6,6 +6,8 @@ decision-makers: Kypris
 
 # ADR-005: Resolve Descriptive Placeholder Skills to Concrete Specializations
 
+> Superseded and expanded by [ADR-0014: Source-Backed Skill Disambiguation and Passion Structure](ADR-0014-source-backed-disambiguation-and-passion-structure.md) for Passions, CSE combat styles, bare specialization-required skills, normalization-only parentheticals, malformed data handling, and Random/manual lifecycle rules.
+
 ## Context and Problem Statement
 
 Mythras career professional skills include descriptive placeholders like `Craft (Primary)`, `Lore (Specific Species)`, `Healing (Specific Species)` that serve as prompts for the player to choose their own specialization. The current `isAnySkill()` regex only catches `(any|local|any other)` patterns — 12 career skills with descriptive placeholders bypass this check and leak as literal text into Play Mode and PDF export.
