@@ -4983,6 +4983,14 @@ function getCharacterFacingResolutionErrors(character = CharacterData) {
     .map(normalizeCharacterFacingSkillName);
   getDuplicateSelectionNames(normalizedProfessionalSkills)
     .forEach(skill => errors.push(`selectedProfessionalSkills contains duplicate "${skill}" after normalization`));
+  const career = typeof character?.career === 'string'
+    ? CAREERS_DATA.find(candidate => candidate.name === character.career)
+    : null;
+  validateProfessionalSkillDependencies(
+    normalizedProfessionalSkills,
+    career,
+    character?._disambiguationMap || {}
+  ).forEach(error => errors.push(`selectedProfessionalSkills ${error}`));
   for (const passion of character?.passions || []) {
     if (hasUnresolvedPassion(passion)) {
       const structured = buildStructuredPassion(passion, passion?.value || 0, passion?.custom || false);
@@ -5039,6 +5047,71 @@ function getSecondaryPlaceholderFor(skillName) {
   if (hint === 'primary') return `${parsed.category} (Secondary)`;
   if (hint === 'primary catch') return `${parsed.category} (Secondary Catch)`;
   return null;
+}
+
+function getProfessionalSkillDependency(skillName, career = null) {
+  const requiredPrimary = getPrimaryPlaceholderFor(skillName);
+  if (!requiredPrimary) return null;
+  if (career && !(career.professionalSkills || []).includes(requiredPrimary)) return null;
+  return { skill: skillName, required: requiredPrimary };
+}
+
+function getSelectedProfessionalChoiceSet(selectedSkills, career, disambiguationMap = {}) {
+  const selected = Array.isArray(selectedSkills) ? selectedSkills : [];
+  const selectedChoices = new Set();
+  const claimedResolved = new Set();
+  const explicitlyMappedResolved = new Set(Object.values(disambiguationMap)
+    .filter(value => typeof value === 'string' && selected.includes(value)));
+  for (const skill of career?.professionalSkills || []) {
+    if (selected.includes(skill)) {
+      selectedChoices.add(skill);
+      continue;
+    }
+    const mapped = disambiguationMap[`career:${skill}`];
+    if (mapped && selected.includes(mapped) && !claimedResolved.has(mapped)) {
+      selectedChoices.add(skill);
+      claimedResolved.add(mapped);
+      continue;
+    }
+    const parsed = parsePlaceholderSkill(skill);
+    if (parsed) {
+      const resolvedEntry = selected.find(entry =>
+        entry.startsWith(parsed.category + ' (') &&
+        !needsDisambiguation(entry) &&
+        !claimedResolved.has(entry) &&
+        !explicitlyMappedResolved.has(entry)
+      );
+      if (resolvedEntry) {
+        selectedChoices.add(skill);
+        claimedResolved.add(resolvedEntry);
+      }
+    }
+  }
+  return selectedChoices;
+}
+
+function validateProfessionalSkillDependencies(selectedSkills, career, disambiguationMap = {}) {
+  if (!career) return [];
+  const selectedChoices = getSelectedProfessionalChoiceSet(selectedSkills, career, disambiguationMap);
+  const errors = [];
+  for (const skill of career.professionalSkills || []) {
+    const dependency = getProfessionalSkillDependency(skill, career);
+    if (dependency && selectedChoices.has(skill) && !selectedChoices.has(dependency.required)) {
+      errors.push(`${getProfessionalSkillChoiceLabel(skill)} requires ${getProfessionalSkillChoiceLabel(dependency.required)} first`);
+    }
+  }
+  return errors;
+}
+
+function enforceProfessionalSkillDependencySelection(selectedSkills, availableSkills) {
+  const selected = Array.isArray(selectedSkills) ? [...selectedSkills] : [];
+  for (let i = 0; i < selected.length; i++) {
+    const requiredPrimary = getPrimaryPlaceholderFor(selected[i]);
+    if (requiredPrimary && availableSkills.includes(requiredPrimary) && !selected.includes(requiredPrimary)) {
+      selected[i] = requiredPrimary;
+    }
+  }
+  return [...new Set(selected)];
 }
 
 function getProfessionalSkillChoiceLabel(skillName) {
@@ -11451,6 +11524,11 @@ const CharacterData = {
         if (invalidProfessionalSkills.length > 0) {
           errors.push(`selectedProfessionalSkills not available for ${career.name}: ${invalidProfessionalSkills.join(', ')}`);
         }
+        validateProfessionalSkillDependencies(
+          data.selectedProfessionalSkills.map(skill => typeof skill === 'string' ? normalizeCharacterFacingSkillName(skill) : skill),
+          career,
+          this.isRecord(data._disambiguationMap) ? data._disambiguationMap : {}
+        ).forEach(error => errors.push(`selectedProfessionalSkills ${error}`));
       }
     }
 
@@ -11870,6 +11948,16 @@ const App = {
       const unresolvedSkill = (CharacterData.selectedProfessionalSkills || []).find(s => needsDisambiguation(s));
       if (unresolvedSkill) {
         this.showToast(`Please enter a specialization for ${unresolvedSkill}`, 'error');
+        return false;
+      }
+      const career = CAREERS_DATA.find(candidate => candidate.name === CharacterData.career);
+      const dependencyErrors = validateProfessionalSkillDependencies(
+        CharacterData.selectedProfessionalSkills || [],
+        career,
+        CharacterData._disambiguationMap || {}
+      );
+      if (dependencyErrors.length > 0) {
+        this.showToast(dependencyErrors[0], 'error');
         return false;
       }
     }
@@ -16492,6 +16580,7 @@ App.generateRandomCharacter = function() {
         selectedPro.push(skill);
       }
     });
+    selectedPro = enforceProfessionalSkillDependencySelection(selectedPro, career.professionalSkills || []);
     // Fix 2: Disambiguate (any) and placeholder skills in career professional skills (ADR-004 + ADR-005)
     selectedPro = selectedPro.map(skill => {
       const cultMatch = selectedCultSkills.find(cultSkill => {
@@ -19116,12 +19205,15 @@ App.agent.setStep = function(step, data) {
 
         // Resolve professional skills (handle disambiguation)
         const resolvedPro = [];
+        const selectedOriginalPro = [];
+        const step8DisambiguationMap = {};
         for (const ps of proSkills) {
           const skillName = typeof ps === 'string' ? ps : ps.name;
           if (!skillName) {
             errors.push('Each professional skill must have a name');
             continue;
           }
+          selectedOriginalPro.push(skillName);
           const needsResolving = needsDisambiguation(skillName);
           if (needsResolving && (typeof ps === 'object' && ps.specialization)) {
             // Resolve placeholder: "Lore (Regional or Specific Species)" + "Plants" → "Lore (Plants)"
@@ -19136,7 +19228,9 @@ App.agent.setStep = function(step, data) {
               errors.push(unresolvedError);
               continue;
             }
-            resolvedPro.push(normalizeCharacterFacingSkillName(resolvedName));
+            const normalizedResolvedName = normalizeCharacterFacingSkillName(resolvedName);
+            resolvedPro.push(normalizedResolvedName);
+            step8DisambiguationMap[`career:${skillName}`] = normalizedResolvedName;
           } else if (needsResolving && !(typeof ps === 'object' && ps.specialization)) {
             // Placeholder without specialization — error
             errors.push(`Skill "${skillName}" requires a specialization`);
@@ -19157,6 +19251,10 @@ App.agent.setStep = function(step, data) {
         if (invalidProfessionalSkills.length > 0) {
           errors.push(`Professional skill(s) not available for ${career.name}: ${invalidProfessionalSkills.join(', ')}`);
           return {success: false, errors, state: App.agent.getState()};
+        }
+        const dependencyErrors = validateProfessionalSkillDependencies(selectedOriginalPro, career, step8DisambiguationMap);
+        if (dependencyErrors.length > 0) {
+          return {success: false, errors: dependencyErrors, state: App.agent.getState()};
         }
 
         const step8Snapshot = createTrustedCharacterSnapshot();
@@ -19196,6 +19294,10 @@ App.agent.setStep = function(step, data) {
         }
         // Set professional skills
         CharacterData.selectedProfessionalSkills = resolvedPro;
+        CharacterData._disambiguationMap = {
+          ...(CharacterData._disambiguationMap || {}),
+          ...step8DisambiguationMap
+        };
         resolvedPro.forEach(skill => { CharacterData.careerSkills[skill] = 0; });
         const activeHigherMagicProviders = App.resolveHigherMagicProviders(CharacterData);
         const providerLossError = getHigherMagicProviderSelectionLossError(step8Snapshot, activeHigherMagicProviders, {

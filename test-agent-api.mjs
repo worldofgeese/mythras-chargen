@@ -1131,6 +1131,21 @@ assert(ae3bForgedStep8.result.success === false &&
   ae3bForgedStep8.state.career !== 'Farmer',
   'AE3b invalid: Step 8 rejects forged Invocation for careers that do not grant it');
 
+const secondaryOnlyStep8 = evalPageJSON(`JSON.stringify((() => {
+  App.agent.setStep(1, {name:'Secondary Only', concept:'Invalid scholar'});
+  App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:13,POW:13,CHA:10}});
+  App.agent.setStep(4, {culture:'Sartarite (Heortling)', homeland:'Boldhome'});
+  const result = App.agent.setStep(8, {
+    career:'Scholar',
+    professionalSkills:[{name:'Lore (Secondary)', specialization:'Local Legends'}, 'Literacy', 'Oratory']
+  });
+  return {result, state: App.agent.getState()};
+})())`);
+assert(secondaryOnlyStep8.result.success === false &&
+  secondaryOnlyStep8.result.errors.some(error => /specialty 2.*requires.*specialty 1/i.test(error)) &&
+  secondaryOnlyStep8.state.career !== 'Scholar',
+  'Step 8 agent API rejects secondary-only professional specialties');
+
 const ae3bForgedPublicProfessionalSkill = evalPageJSON(`JSON.stringify((() => {
   CharacterData.career = 'Farmer';
   CharacterData.selectedProfessionalSkills = [];

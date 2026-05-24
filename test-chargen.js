@@ -3273,6 +3273,40 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
   }
 }
 
+// Test 1.12i: Step 8/import validation rejects secondary-only specialty selections
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj && AppObj.validateCurrentStep && CD && CD.fromJSON) {
+    const toasts = [];
+    AppObj.showToast = (message, type) => toasts.push({ message, type });
+    AppObj.currentStep = 8;
+    CD.culture = 'Balazaring';
+    CD.career = 'Scholar';
+    CD.selectedProfessionalSkills = ['Lore (Local Legends)', 'Literacy', 'Oratory'];
+    CD.careerSkills = { 'Lore (Local Legends)': 0, Literacy: 0, Oratory: 0 };
+    CD._disambiguationMap = { 'career:Lore (Secondary)': 'Lore (Local Legends)' };
+
+    const stepRejected = AppObj.validateCurrentStep() === false;
+    const importRejected = CD.fromJSON(JSON.stringify({
+      ...createTestCharacter('Balazaring'),
+      career: 'Scholar',
+      selectedProfessionalSkills: ['Lore (Local Legends)', 'Literacy', 'Oratory'],
+      careerSkills: { 'Lore (Local Legends)': 0, Literacy: 0, Oratory: 0 },
+      _disambiguationMap: { 'career:Lore (Secondary)': 'Lore (Local Legends)' }
+    })) === false;
+    const message = toasts[0]?.message || '';
+
+    if (stepRejected && importRejected && message.includes('Lore (specialty 2) requires Lore (specialty 1)')) {
+      pass('Step 8 and import reject secondary-only professional specialty selections');
+    } else {
+      fail('Step 8/import accepted secondary-only professional specialty selection',
+        JSON.stringify({ stepRejected, importRejected, toasts }));
+    }
+  } else {
+    fail('Step 8/import validation unavailable for secondary-only specialty test');
+  }
+}
+
 // Test 1.13: Skill point clamps also sync the visible input value
 {
   const { App: AppObj, CharacterData: CD } = loadApp();
