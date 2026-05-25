@@ -12471,6 +12471,79 @@ section('Step 9 Initiation Gate');
   const { App: AppRef, CharacterData: CD, Calc: CalcRef } = loadApp();
 
   if (AppRef?.selectCult && AppRef.agent?.selectCult) {
+    const setupUnresolvedInvocationPlaceholder = culture => {
+      CD.culture = culture;
+      CD.career = 'Sorcerer';
+      CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 13, CHA: 10 };
+      CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+      CD.selectedProfessionalSkills = ['Invocation (Cult, School or Grimoire)', 'Shaping', 'Literacy'];
+      CD.careerSkills = { 'Invocation (Cult, School or Grimoire)': 15, Shaping: 10, Literacy: 5 };
+      CD.culturalSkills = {};
+      CD.bonusSkills = {};
+      CD._cultBoundPlaceholderMap = {};
+      CD.cult = null;
+      CD.cultType = null;
+      CD.passions = [];
+      CD.miracles = [];
+      CD.boundSpirits = [];
+      CD.mysticismTalents = [];
+      CD.sorcerySpells = [];
+    };
+
+    setupUnresolvedInvocationPlaceholder('God Forgot');
+    const uiUnrelatedResult = AppRef.selectCult('Lhankor Mhy', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const uiUnrelatedPreserved = uiUnrelatedResult.success &&
+      CD.selectedProfessionalSkills.includes('Invocation (Cult, School or Grimoire)') &&
+      !CD.selectedProfessionalSkills.includes('Invocation (Lhankor Mhy)') &&
+      CD.careerSkills['Invocation (Cult, School or Grimoire)'] === 15 &&
+      CD.careerSkills['Invocation (Lhankor Mhy)'] === undefined;
+
+    setupUnresolvedInvocationPlaceholder('God Forgot');
+    const agentUnrelatedResult = AppRef.agent.selectCult('Lhankor Mhy');
+    const agentUnrelatedPreserved = agentUnrelatedResult.success &&
+      CD.selectedProfessionalSkills.includes('Invocation (Cult, School or Grimoire)') &&
+      !CD.selectedProfessionalSkills.includes('Invocation (Lhankor Mhy)') &&
+      CD.careerSkills['Invocation (Cult, School or Grimoire)'] === 15 &&
+      CD.careerSkills['Invocation (Lhankor Mhy)'] === undefined;
+
+    setupUnresolvedInvocationPlaceholder('Civilised');
+    const uiSorceryResult = AppRef.selectCult('Arkat', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const uiSorceryResolved = uiSorceryResult.success &&
+      CD.selectedProfessionalSkills.includes('Invocation (Arkat)') &&
+      !CD.selectedProfessionalSkills.includes('Invocation (Cult, School or Grimoire)') &&
+      CD.careerSkills['Invocation (Arkat)'] === 15 &&
+      CD.careerSkills['Invocation (Cult, School or Grimoire)'] === undefined;
+
+    setupUnresolvedInvocationPlaceholder('Civilised');
+    const agentSorceryResult = AppRef.agent.selectCult('Arkat');
+    const agentSorceryResolved = agentSorceryResult.success &&
+      CD.selectedProfessionalSkills.includes('Invocation (Arkat)') &&
+      !CD.selectedProfessionalSkills.includes('Invocation (Cult, School or Grimoire)') &&
+      CD.careerSkills['Invocation (Arkat)'] === 15 &&
+      CD.careerSkills['Invocation (Cult, School or Grimoire)'] === undefined;
+
+    if (uiUnrelatedPreserved && agentUnrelatedPreserved && uiSorceryResolved && agentSorceryResolved) {
+      pass('Unresolved Invocation placeholders only resolve for sorcery cults in UI and agent flows');
+    } else {
+      fail('Unresolved Invocation placeholder resolved against the wrong cult type',
+        JSON.stringify({
+          uiUnrelatedResult,
+          agentUnrelatedResult,
+          uiSorceryResult,
+          agentSorceryResult,
+          selectedProfessionalSkills: CD.selectedProfessionalSkills,
+          careerSkills: CD.careerSkills
+        }));
+    }
+  } else {
+    fail('Cult selection helpers unavailable for unresolved Invocation placeholder guard test');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, Calc: CalcRef } = loadApp();
+
+  if (AppRef?.selectCult && AppRef.agent?.selectCult) {
     const setupTrackedSorcererPlaceholder = () => {
       CD.culture = 'Civilised';
       CD.career = 'Sorcerer';

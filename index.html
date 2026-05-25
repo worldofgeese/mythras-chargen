@@ -10597,6 +10597,7 @@ function getCultPlaceholderResolutions(cultName) {
   if (!cultName) return {};
   const replacements = {};
   Object.entries(CULT_BOUND_PLACEHOLDERS).forEach(([placeholder, category]) => {
+    if (!shouldResolveCultBoundPlaceholderForCult(placeholder, cultName)) return;
     replacements[placeholder] = `${category} (${cultName})`;
   });
   return replacements;
@@ -10610,6 +10611,9 @@ function shouldResolveCultBoundPlaceholderForCult(placeholder, cultName) {
     return true;
   }
   const cult = CULTS_DATA.find(candidate => candidate.name === cultName);
+  if (!cult) {
+    return normalizedPlaceholder === 'Binding (Cult, Totem or Tradition)' && cultName === 'Korgatsu';
+  }
   const cultTypes = detectCultType(cult)?.types || [];
   if (normalizedPlaceholder === 'Invocation (Cult, School or Grimoire)') {
     return cultTypes.includes('sorcery');
