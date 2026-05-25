@@ -13424,6 +13424,7 @@ App.renderStep5 = function() {
             ${choices.map(c => `<option value="${c}" ${c === storedChoice ? 'selected' : ''}>${c}</option>`).join('')}
           </select>
           <input class="points-input" type="number" min="0" max="15" value="${currentValue}" ${!storedChoice ? 'disabled' : ''}
+            oninput="App.handleSkillPointsInput('cultural', '${storedChoice || ''}', this)"
             onchange="App.updateSkillPoints('cultural', '${storedChoice || ''}', parseInt(this.value), this)">
         `;
         skillsList.appendChild(row);
@@ -13460,6 +13461,7 @@ App.renderStep5 = function() {
           }).join('')}
         </select>
         <input class="points-input" type="number" min="0" max="15" value="${currentValue}" ${pointsDisabled}
+          oninput="App.handleSkillPointsInput('cultural', '${currentSelected || skillName.replace(/'/g, "\\'")}', this)"
           onchange="App.updateSkillPoints('cultural', '${currentSelected || skillName.replace(/'/g, "\\'")}', parseInt(this.value), this)">
       `;
       skillsList.appendChild(row);
@@ -13474,6 +13476,7 @@ App.renderStep5 = function() {
     row.innerHTML = `
       <label>${this.skillWithTooltip(skillName)}</label>
       <input class="points-input" type="number" min="0" max="15" value="${currentValue}" data-testid="skill-input-${skillName}"
+        oninput="App.handleSkillPointsInput('cultural', '${skillName}', this)"
         onchange="App.updateSkillPoints('cultural', '${skillName}', parseInt(this.value), this)">
     `;
     skillsList.appendChild(row);
@@ -13532,6 +13535,14 @@ App.updateSkillPoints = function(category, skillName, points, inputEl) {
   }
   this.saveToLocalStorage();
   this.refreshStepBudget(category);
+};
+
+App.handleSkillPointsInput = function(category, skillName, inputEl) {
+  if (inputEl && inputEl.value === '') {
+    this.updateSkillPoints(category, skillName, 0, null);
+    return;
+  }
+  this.updateSkillPoints(category, skillName, parseInt(inputEl?.value), inputEl);
 };
 
 // Targeted DOM update: only refresh the budget counter, not the entire step
@@ -15441,6 +15452,7 @@ App.renderCultSkillBoostPanel = function(skillDetails) {
         <span class="boost-needs" style="color: #666; margin-left: 4px;">${skill.value}% → needs ${Math.max(0, needed)} more</span>
       </div>
       <input class="points-input" type="number" min="0" max="${maxPerSkill}" value="${currentBonus}"
+        oninput="App.adjustCultBoost('${escapedBoostKey}', parseInt(this.value) || 0)"
         onchange="App.adjustCultBoost('${escapedBoostKey}', parseInt(this.value) || 0)">
     `;
     boostContainer.appendChild(row);
@@ -16225,6 +16237,9 @@ App.renderStep10 = function() {
         }
         const pointsEl = row.querySelector('input[type="number"]');
         if (pointsEl) {
+          pointsEl.addEventListener('input', function() {
+            App.handleSkillPointsInput('career', currentSelected || skillName, this);
+          });
           pointsEl.addEventListener('change', function() {
             App.updateSkillPoints('career', currentSelected || skillName, parseInt(this.value), this);
           });
@@ -16245,6 +16260,9 @@ App.renderStep10 = function() {
       `;
       const inputEl = row.querySelector('input[type="number"]');
       if (inputEl) {
+        inputEl.addEventListener('input', function() {
+          App.handleSkillPointsInput('career', skillName, this);
+        });
         inputEl.addEventListener('change', function() {
           App.updateSkillPoints('career', skillName, parseInt(this.value), this);
         });
@@ -16431,6 +16449,7 @@ App.renderStep11 = function() {
           </div>
         </div>
         <input class="points-input" type="number" min="0" max="${ageCategory ? ageCategory.maxPerSkill : 100}" value="${points}" data-testid="skill-input-${skillAttr}" data-skill="${skillAttr}"
+          oninput="App.handleSkillPointsInput('bonus', this.dataset.skill, this)"
           onchange="App.updateSkillPoints('bonus', this.dataset.skill, parseInt(this.value), this)">
         <button data-skill="${skillAttr}" onclick="App.removeBonusSkill(this.dataset.skill)">×</button>
     `;

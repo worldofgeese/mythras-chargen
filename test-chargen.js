@@ -2917,6 +2917,7 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
     const rowHtml = renderedRows.map(row => row.innerHTML).join('\n');
 
     if (rowHtml.includes(`data-skill="${trickySkill}"`) &&
+        rowHtml.includes("App.handleSkillPointsInput('bonus', this.dataset.skill") &&
         rowHtml.includes("App.updateSkillPoints('bonus', this.dataset.skill") &&
         rowHtml.includes('App.removeBonusSkill(this.dataset.skill)') &&
         !rowHtml.includes(`App.removeBonusSkill('${trickySkill}')`)) {
@@ -2926,6 +2927,37 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
     }
   } else {
     fail('App.renderStep11 not available for bonus skill handler test');
+  }
+}
+
+// Test 1.10b: Step 11 bonus inputs sync while typing, before blur/change
+{
+  const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
+  if (AppObj?.handleSkillPointsInput && CD && _sandbox) {
+    const tracker = { textContent: '', className: '' };
+    _sandbox.document.querySelector = selector => selector === '[data-testid="budget-tracker"]' ? tracker : null;
+    AppObj.renderCurrentStep = () => {};
+    CD.age = 21;
+    CD.bonusSkills = { Athletics: 0 };
+
+    const input = { value: '15' };
+    AppObj.handleSkillPointsInput('bonus', 'Athletics', input);
+    CD.culturalSkills = { Brawn: 0 };
+    const culturalInput = { value: '10' };
+    AppObj.handleSkillPointsInput('cultural', 'Brawn', culturalInput);
+
+    if (CD.bonusSkills.Athletics === 15 &&
+        CD.culturalSkills.Brawn === 10 &&
+        input.value === '15' &&
+        culturalInput.value === '10' &&
+        tracker.textContent === 'Points Remaining: 90 / 100') {
+      pass('Skill allocation inputs sync CharacterData and budget on input before blur');
+    } else {
+      fail('Skill allocation input handler waits for blur/change',
+        JSON.stringify({ bonusSkills: CD.bonusSkills, culturalSkills: CD.culturalSkills, inputValue: input.value, culturalInputValue: culturalInput.value, tracker: tracker.textContent }));
+    }
+  } else {
+    fail('App.handleSkillPointsInput not available for allocation input sync test');
   }
 }
 
