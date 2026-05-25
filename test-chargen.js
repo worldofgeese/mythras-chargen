@@ -3307,6 +3307,36 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
   }
 }
 
+// Test 1.12j: Core magic careers remain selectable for every culture
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj?.getAvailableCareersForCulture && AppObj.agent?.getOptions && AppObj.agent?.setStep) {
+    CD.culture = 'Balazaring';
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 13, POW: 13, CHA: 10 };
+    const primitiveCareerNames = AppObj.getAvailableCareersForCulture('Balazaring').map(career => career.name);
+    const agentOptions = AppObj.agent.getOptions(8);
+    const agentResult = AppObj.agent.setStep(8, {
+      career: 'Sorcerer',
+      professionalSkills: [
+        { name: 'Invocation (Cult, School or Grimoire)', specialization: 'Zzistori' },
+        'Shaping',
+        'Literacy'
+      ]
+    });
+    const hasGlobalMagicCareers = ['Mystic', 'Sorcerer', 'Shaman'].every(name =>
+      primitiveCareerNames.includes(name) && agentOptions.filteredForCulture.includes(name)
+    );
+    if (hasGlobalMagicCareers && agentResult.success && CD.career === 'Sorcerer') {
+      pass('Mystic, Sorcerer, and Shaman are selectable for primitive cultures in UI and agent flows');
+    } else {
+      fail('Core magic careers are still culture-filtered',
+        JSON.stringify({ primitiveCareerNames, filteredForCulture: agentOptions.filteredForCulture, agentResult, career: CD.career }));
+    }
+  } else {
+    fail('Career availability helpers unavailable for global magic career test');
+  }
+}
+
 // Test 1.13: Skill point clamps also sync the visible input value
 {
   const { App: AppObj, CharacterData: CD } = loadApp();
@@ -3360,6 +3390,23 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
   }
 }
 
+// Test 1.13c: Step 8 specialization inputs stay inside their grid cell
+{
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  const cssStart = html.indexOf('.professional-specialization-input');
+  const cssEnd = html.indexOf('/* Wizard navigation */');
+  const professionalCss = cssStart >= 0 && cssEnd > cssStart ? html.slice(cssStart, cssEnd) : '';
+  if (html.includes('.professional-skill-option .professional-specialization-input') &&
+      professionalCss.includes('box-sizing: border-box') &&
+      professionalCss.includes('width: calc(100% - 24px)') &&
+      professionalCss.includes('max-width: calc(100% - 24px)') &&
+      html.includes('.professional-skill-option label')) {
+    pass('Step 8 specialization inputs are constrained inside professional skill grid cells');
+  } else {
+    fail('Step 8 specialization inputs can overflow neighboring checkbox cells', professionalCss);
+  }
+}
+
 // Test 1.13c: Passion subject inputs only advertise datalist dropdowns when options exist
 {
   const { App: AppObj, CharacterData: CD, _sandbox: sandbox } = loadApp();
@@ -3409,6 +3456,59 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
     }
   } else {
     fail('App.renderStep6 unavailable for passion dropdown affordance test');
+  }
+}
+
+// Test 1.13d: Choice passions normalize stale undefined subjects without breaking dropdowns
+{
+  const { App: AppObj, CharacterData: CD, _sandbox: sandbox } = loadApp();
+  if (AppObj?.renderStep6) {
+    const originalCreateElement = sandbox.document.createElement;
+    const passionRows = [];
+    const suggestions = { appendChild: () => {} };
+    const passionsList = { appendChild: row => passionRows.push(row) };
+    sandbox.document.createElement = tag => ({
+      tagName: tag,
+      className: '',
+      textContent: '',
+      style: {},
+      onclick: null,
+      innerHTML: '',
+      querySelector: selector => {
+        if (selector === '#passions-list') return passionsList;
+        if (selector === '#passion-suggestions') return suggestions;
+        return null;
+      },
+      appendChild: () => {}
+    });
+    CD.culture = 'Balazaring';
+    CD.passions = [
+      { choice: ['Loyalty'], needsSubject: true, subjectSuggestions: ['Clan'], name: 'Loyalty (undefined)', value: 60 },
+      { choice: ['Loyalty'], needsSubject: true, subjectSuggestions: ['Clan'], name: 'Loyalty (Clan)', type: 'undefined', value: 60 }
+    ];
+    AppObj.renderStep6();
+    sandbox.document.createElement = originalCreateElement;
+
+    const undefinedSubjectHtml = passionRows[0]?.innerHTML || '';
+    const undefinedTypeHtml = passionRows[1]?.innerHTML || '';
+    const loyaltySelected = /<option value="Loyalty" selected>Loyalty<\/option>/.test(undefinedSubjectHtml) &&
+      /<option value="Loyalty" selected>Loyalty<\/option>/.test(undefinedTypeHtml);
+    const hasDropdown = undefinedSubjectHtml.includes('list="passion-suggestions-0"') &&
+      undefinedSubjectHtml.includes('<datalist id="passion-suggestions-0"') &&
+      undefinedTypeHtml.includes('list="passion-suggestions-1"') &&
+      undefinedTypeHtml.includes('<datalist id="passion-suggestions-1"');
+    if (loyaltySelected && hasDropdown &&
+        !undefinedSubjectHtml.includes('undefined') &&
+        !undefinedTypeHtml.includes('undefined') &&
+        /value=""/.test(undefinedSubjectHtml) &&
+        /value="Clan"/.test(undefinedTypeHtml)) {
+      pass('Choice passions render stale undefined subjects as blank usable dropdown fields');
+    } else {
+      fail('Choice passion still leaks undefined or loses dropdown affordance',
+        JSON.stringify({ undefinedSubjectHtml, undefinedTypeHtml }));
+    }
+  } else {
+    fail('App.renderStep6 unavailable for undefined passion regression test');
   }
 }
 
@@ -12042,6 +12142,50 @@ section('Auto-Boost to 50% (U2)');
       fail('autoBoostCultSkills used unmet cult skills as donors',
         JSON.stringify({ donorPlan, cultDonorMoves }));
     }
+
+    // Test 10: Surplus unmet cult skills may be abandoned when five other cult skills can qualify
+    CultsData.push({ name: 'Quick Boost Surplus Cult Donor', cultSkills: ['Athletics', 'Brawn', 'Endurance', 'Evade', 'Perception', 'Willpower'] });
+    CD.culture = 'Sartarite (Heortling)';
+    CD.career = 'Priest';
+    CD.cult = 'Quick Boost Surplus Cult Donor';
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 10, POW: 10, CHA: 10 };
+    CD.age = 22;
+    CD.bonusSkills = {
+      Athletics: 15,
+      Brawn: 15,
+      Endurance: 15,
+      Evade: 15,
+      Perception: 15
+    };
+    CD.culturalSkills = {
+      Athletics: 15,
+      Brawn: 15,
+      Endurance: 15,
+      Evade: 15,
+      Perception: 0
+    };
+    CD.careerSkills = {
+      Perception: 0,
+      Willpower: 15
+    };
+    CD.selectedProfessionalSkills = ['Exhort', 'Folk Magic', 'Devotion (Quick Boost Surplus Cult Donor)'];
+    CD._disambiguationMap = {};
+    const surplusDonorPlan = AppRef.planCultInitiationBoost();
+    const surplusDonorApplied = AppRef.applyCultInitiationBoostPlan(surplusDonorPlan);
+    const surplusDonorCult = CultsData.pop();
+    const surplusSummary = AppRef.getCultInitiationRequirementSummary(surplusDonorCult);
+    const perceptionAfter = AppRef.calculateSkillTotalForKey('Perception').value;
+    const willpowerAfter = AppRef.calculateSkillTotalForKey('Willpower').value;
+    const surplusDonorMove = (surplusDonorPlan.moves || []).find(move =>
+      move.pool === 'careerSkills' && move.from === 'Willpower' && move.to === 'Perception'
+    );
+    if (surplusDonorPlan.success && surplusDonorApplied && surplusSummary.qualifies &&
+        surplusDonorMove && perceptionAfter >= 50 && willpowerAfter < 50) {
+      pass('autoBoostCultSkills can swap points away from surplus unmet cult skills');
+    } else {
+      fail('autoBoostCultSkills failed to abandon a surplus unmet cult skill',
+        JSON.stringify({ surplusDonorPlan, surplusDonorMove, perceptionAfter, willpowerAfter, summary: surplusSummary, career: CD.careerSkills }));
+    }
   } else {
     fail('App.autoBoostCultSkills or planCultInitiationBoost function not found');
   }
@@ -12169,6 +12313,126 @@ section('Step 9 Initiation Gate');
     }
   } else {
     fail('App.resolveCultSkillRequirement function not found for stale cult skill regression');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD } = loadApp();
+
+  if (AppRef?.selectCult && AppRef.agent?.selectCult && AppRef.resolveHigherMagicProviders) {
+    CD.culture = 'Balazaring';
+    CD.career = 'Mystic';
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 12, POW: 40, CHA: 10 };
+    CD.selectedProfessionalSkills = ['Meditation', 'Mysticism (Core Mysticism Path)', 'Literacy'];
+    CD.careerSkills = { Meditation: 0, 'Mysticism (Core Mysticism Path)': 0, Literacy: 0 };
+    CD.cult = 'Orlanth';
+    CD.cultType = { primary: 'theist', types: ['theist'], isHybrid: false };
+    CD.mysticismTalents = ['Awareness'];
+    CD.miracles = [];
+
+    const uiResult = AppRef.selectCult(null, { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const uiProviders = AppRef.resolveHigherMagicProviders(CD);
+    const uiTalentsPreserved = uiResult.success &&
+      uiProviders.some(provider => provider.system === 'mysticism') &&
+      CD.mysticismTalents.includes('Awareness');
+
+    CD.cult = 'Orlanth';
+    CD.cultType = { primary: 'theist', types: ['theist'], isHybrid: false };
+    CD.mysticismTalents = ['Awareness'];
+    const agentResult = AppRef.agent.selectCult(null);
+    const agentProviders = AppRef.resolveHigherMagicProviders(CD);
+    const agentTalentsPreserved = agentResult.success &&
+      agentProviders.some(provider => provider.system === 'mysticism') &&
+      CD.mysticismTalents.includes('Awareness');
+
+    if (uiTalentsPreserved && agentTalentsPreserved) {
+      pass('Clearing a deity preserves unrelated career-backed Mysticism selections in UI and agent flows');
+    } else {
+      fail('Clearing a deity still wipes unrelated career-backed Mysticism selections',
+        JSON.stringify({ uiResult, uiProviders, uiTalents: CD.mysticismTalents, agentResult, agentProviders }));
+    }
+  } else {
+    fail('Cult clearing helpers unavailable for provider-scoped Mysticism preservation test');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD } = loadApp();
+
+  if (AppRef?.selectCult && AppRef.renderStep9 && AppRef.resolveHigherMagicProviders) {
+    CD.culture = 'Balazaring';
+    CD.career = 'Shaman';
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 12, POW: 12, CHA: 12 };
+    CD.selectedProfessionalSkills = ['Binding (Ancestor Tradition)', 'Trance', 'Healing'];
+    CD.careerSkills = { 'Binding (Ancestor Tradition)': 0, Trance: 0, Healing: 0 };
+    CD.cult = 'Orlanth';
+    CD.cultType = { primary: 'theist', types: ['theist'], isHybrid: false };
+    CD.boundSpirits = [{ name: 'Ancestor' }];
+    CD.miracles = [];
+
+    const clearResult = AppRef.selectCult(null, { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const providers = AppRef.resolveHigherMagicProviders(CD);
+    const stepHtml = AppRef.renderStep9().innerHTML;
+    if (clearResult.success &&
+        providers.some(provider => provider.system === 'animism' && provider.sourceKind === 'core-career') &&
+        CD.boundSpirits.some(spirit => spirit.name === 'Ancestor') &&
+        stepHtml.includes('Starting Bound Spirits')) {
+      pass('Clearing a deity preserves Shaman career-backed bound spirit selection UI');
+    } else {
+      fail('Clearing a deity removed Shaman bound spirit access',
+        JSON.stringify({ clearResult, providers, boundSpirits: CD.boundSpirits, stepHtml }));
+    }
+  } else {
+    fail('Cult clearing helpers unavailable for Shaman bound spirit preservation test');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD } = loadApp();
+
+  if (AppRef?.selectCult && AppRef.agent?.selectCult && AppRef.resolveHigherMagicProviders) {
+    CD.culture = 'Balazaring';
+    CD.career = 'Shaman';
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 12, POW: 12, CHA: 12 };
+    CD.selectedProfessionalSkills = ['Binding (Ancestor Tradition)', 'Trance', 'Healing'];
+    CD.careerSkills = { 'Binding (Ancestor Tradition)': 0, Trance: 0, Healing: 0 };
+    CD.cult = null;
+    CD.cultType = null;
+    CD.boundSpirits = [{ name: 'Ancestor' }];
+    CD.miracles = [];
+
+    const joinCultResult = AppRef.selectCult('Daka Fal', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const clearCultResult = AppRef.selectCult(null, { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const uiPreserved = joinCultResult.success &&
+      clearCultResult.success &&
+      CD.boundSpirits.some(spirit => spirit.name === 'Ancestor') &&
+      AppRef.resolveHigherMagicProviders(CD).some(provider => provider.id === 'core-career-shaman-animism');
+
+    CD.culture = 'Balazaring';
+    CD.career = 'Shaman';
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 12, POW: 12, CHA: 12 };
+    CD.selectedProfessionalSkills = ['Binding (Ancestor Tradition)', 'Trance', 'Healing'];
+    CD.careerSkills = { 'Binding (Ancestor Tradition)': 0, Trance: 0, Healing: 0 };
+    CD.cult = null;
+    CD.cultType = null;
+    CD.boundSpirits = [{ name: 'Ancestor' }];
+    CD.miracles = [];
+
+    const agentJoinCultResult = AppRef.agent.selectCult('Daka Fal');
+    const agentClearCultResult = AppRef.agent.selectCult(null);
+    const agentPreserved = agentJoinCultResult.success &&
+      agentClearCultResult.success &&
+      CD.boundSpirits.some(spirit => spirit.name === 'Ancestor') &&
+      AppRef.resolveHigherMagicProviders(CD).some(provider => provider.id === 'core-career-shaman-animism');
+
+    if (uiPreserved && agentPreserved) {
+      pass('Joining then clearing an animist cult preserves Shaman career-backed bound spirits');
+    } else {
+      fail('Animist cult join/clear cascade lost Shaman career-backed spirits',
+        JSON.stringify({ joinCultResult, clearCultResult, agentJoinCultResult, agentClearCultResult, boundSpirits: CD.boundSpirits }));
+    }
+  } else {
+    fail('Cult clearing helpers unavailable for animist cascade preservation test');
   }
 }
 
