@@ -10814,12 +10814,41 @@ function markBoundSpiritsOrigin(character, provider) {
   });
 }
 
-function canCarryBoundSpiritsAcrossAnimismProviderChange(snapshot, previousProvider, currentProvider) {
+function isCareerBackedAnimismOriginAvailable(character, providerId) {
+  if (!providerId) return false;
+  return resolveCareerBackedHigherMagicProviders(character)
+    .some(provider => provider.system === 'animism' && provider.id === providerId);
+}
+
+function canCarryBoundSpiritAcrossAnimismProviderChange(spirit, snapshot, previousProvider, currentProvider) {
   if (!previousProvider || !currentProvider || previousProvider.id === currentProvider.id) return true;
-  const previousSpirits = Array.isArray(snapshot?.boundSpirits) ? snapshot.boundSpirits : [];
   if (previousProvider.sourceKind === 'core-career' && currentProvider.sourceKind === 'cult') return true;
+  const originProviderId = getBoundSpiritOriginProviderId(spirit);
+  return originProviderId === currentProvider.id ||
+    isCareerBackedAnimismOriginAvailable(snapshot, originProviderId);
+}
+
+function canCarryBoundSpiritsAcrossAnimismProviderChange(snapshot, previousProvider, currentProvider) {
+  const previousSpirits = Array.isArray(snapshot?.boundSpirits) ? snapshot.boundSpirits : [];
   return previousSpirits.length > 0 &&
-    previousSpirits.every(spirit => getBoundSpiritOriginProviderId(spirit) === currentProvider.id);
+    previousSpirits.every(spirit =>
+      canCarryBoundSpiritAcrossAnimismProviderChange(spirit, snapshot, previousProvider, currentProvider)
+    );
+}
+
+function getNonCarryableBoundSpiritNamesAcrossAnimismProviderChange(snapshot, previousProvider, currentProvider) {
+  const previousSpirits = Array.isArray(snapshot?.boundSpirits) ? snapshot.boundSpirits : [];
+  return previousSpirits
+    .filter(spirit => !canCarryBoundSpiritAcrossAnimismProviderChange(spirit, snapshot, previousProvider, currentProvider))
+    .map(getBoundSpiritName)
+    .filter(Boolean);
+}
+
+function keepCarryableBoundSpiritsAcrossAnimismProviderChange(character, snapshot, previousProvider, currentProvider) {
+  if (!Array.isArray(character?.boundSpirits)) return;
+  character.boundSpirits = character.boundSpirits.filter(spirit =>
+    canCarryBoundSpiritAcrossAnimismProviderChange(spirit, snapshot, previousProvider, currentProvider)
+  );
 }
 
 function getHigherMagicProviderSelectionLossError(snapshot, providers, options = {}) {
@@ -10863,9 +10892,10 @@ function getHigherMagicProviderSelectionLossError(snapshot, providers, options =
       currentAnimismProvider &&
       previousAnimismProvider.id !== currentAnimismProvider.id &&
       !canCarryBoundSpiritsAcrossAnimismProviderChange(snapshot, previousAnimismProvider, currentAnimismProvider)) {
+    const affectedSpirits = getNonCarryableBoundSpiritNamesAcrossAnimismProviderChange(snapshot, previousAnimismProvider, currentAnimismProvider);
     return options.lostBoundSpiritsMessage
-      ? options.lostBoundSpiritsMessage(previousBoundSpirits)
-      : `Changing magic providers would clear selected bound spirits: ${previousBoundSpirits.join(', ')}`;
+      ? options.lostBoundSpiritsMessage(affectedSpirits)
+      : `Changing magic providers would clear selected bound spirits: ${affectedSpirits.join(', ')}`;
   }
   if (previousMysticismTalents.length > 0 && (!hasSystem('mysticism') || lostMysticismTalents.length > 0)) {
     const affectedTalents = lostMysticismTalents.length > 0 ? lostMysticismTalents : previousMysticismTalents;
@@ -14826,7 +14856,7 @@ App.selectCult = function(cultName, options = {}) {
       markBoundSpiritsOrigin(CharacterData, previousAnimismProvider);
     } else if (confirmedCultSelectionLoss &&
         !canCarryBoundSpiritsAcrossAnimismProviderChange(selectionSnapshot, previousAnimismProvider, activeAnimismProvider)) {
-      CharacterData.boundSpirits = [];
+      keepCarryableBoundSpiritsAcrossAnimismProviderChange(CharacterData, selectionSnapshot, previousAnimismProvider, activeAnimismProvider);
     }
   }
   if (previousCult && previousCult !== cultName) {

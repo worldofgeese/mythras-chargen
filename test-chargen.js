@@ -12437,6 +12437,82 @@ section('Step 9 Initiation Gate');
 }
 
 {
+  const { App: AppRef, CharacterData: CD } = loadApp();
+
+  if (AppRef?.selectCult && AppRef.agent?.selectCult && AppRef.resolveHigherMagicProviders) {
+    const setupCareerBackedShamanSpirit = () => {
+      CD.culture = 'Balazaring';
+      CD.career = 'Shaman';
+      CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 12, POW: 12, CHA: 12 };
+      CD.selectedProfessionalSkills = ['Binding (Ancestor Tradition)', 'Trance', 'Healing'];
+      CD.careerSkills = { 'Binding (Ancestor Tradition)': 0, Trance: 0, Healing: 0 };
+      CD.cult = null;
+      CD.cultType = null;
+      CD.boundSpirits = [{ name: 'Ancestor' }];
+      CD.miracles = [];
+      CD.sorcerySpells = [];
+      CD.mysticismTalents = [];
+    };
+
+    setupCareerBackedShamanSpirit();
+    const uiJoinCultResult = AppRef.selectCult('Daka Fal', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const uiSwitchCultResult = AppRef.selectCult('Waha', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const uiSwitched = uiJoinCultResult.success &&
+      uiSwitchCultResult.success &&
+      CD.cult === 'Waha' &&
+      CD.boundSpirits.some(spirit => spirit.name === 'Ancestor' && spirit.originProviderId === 'core-career-shaman-animism');
+
+    setupCareerBackedShamanSpirit();
+    const agentJoinCultResult = AppRef.agent.selectCult('Daka Fal');
+    const agentSwitchCultResult = AppRef.agent.selectCult('Waha');
+    const agentSwitched = agentJoinCultResult.success &&
+      agentSwitchCultResult.success &&
+      CD.cult === 'Waha' &&
+      CD.boundSpirits.some(spirit => spirit.name === 'Ancestor' && spirit.originProviderId === 'core-career-shaman-animism');
+
+    setupCareerBackedShamanSpirit();
+    const uiMixedJoinCultResult = AppRef.selectCult('Daka Fal', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    CD.boundSpirits.push({ name: 'Cult Ancestor', originProviderId: 'cult-daka-fal-animism' });
+    const uiMixedSwitchCultResult = AppRef.selectCult('Waha', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const uiMixedSwitched = uiMixedJoinCultResult.success &&
+      uiMixedSwitchCultResult.success &&
+      CD.cult === 'Waha' &&
+      CD.boundSpirits.some(spirit => spirit.name === 'Ancestor' && spirit.originProviderId === 'core-career-shaman-animism') &&
+      !CD.boundSpirits.some(spirit => spirit.name === 'Cult Ancestor');
+
+    setupCareerBackedShamanSpirit();
+    const agentMixedJoinCultResult = AppRef.agent.selectCult('Daka Fal');
+    CD.boundSpirits.push({ name: 'Cult Ancestor', originProviderId: 'cult-daka-fal-animism' });
+    const agentMixedSwitchCultResult = AppRef.agent.selectCult('Waha');
+    const agentMixedRejected = agentMixedJoinCultResult.success &&
+      agentMixedSwitchCultResult.success === false &&
+      CD.cult === 'Daka Fal' &&
+      CD.boundSpirits.some(spirit => spirit.name === 'Ancestor' && spirit.originProviderId === 'core-career-shaman-animism') &&
+      CD.boundSpirits.some(spirit => spirit.name === 'Cult Ancestor' && spirit.originProviderId === 'cult-daka-fal-animism');
+
+    if (uiSwitched && agentSwitched && uiMixedSwitched && agentMixedRejected) {
+      pass('Switching animist cults preserves Shaman career-backed bound spirits');
+    } else {
+      fail('Animist cult-to-cult switch lost Shaman career-backed spirits',
+        JSON.stringify({
+          uiJoinCultResult,
+          uiSwitchCultResult,
+          agentJoinCultResult,
+          agentSwitchCultResult,
+          uiMixedJoinCultResult,
+          uiMixedSwitchCultResult,
+          agentMixedJoinCultResult,
+          agentMixedSwitchCultResult,
+          cult: CD.cult,
+          boundSpirits: CD.boundSpirits
+        }));
+    }
+  } else {
+    fail('Cult selection helpers unavailable for animist cult switch preservation test');
+  }
+}
+
+{
   const { App: AppRef, CharacterData: CD, CULTURES_DATA: CulturesData } = loadApp();
 
   if (AppRef && AppRef.getCulturalSkillRenderPlan) {
