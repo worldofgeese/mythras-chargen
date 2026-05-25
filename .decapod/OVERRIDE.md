@@ -21,9 +21,10 @@ These repo-specific rules extend the embedded Decapod constitution and the canon
 
 This project uses Home Manager `bd` (beads) for durable issue tracking.
 
+- Decapod external-tracker/shadow-custody opt-in: `DECAPOD_EXTERNAL_TRACKER=true`. Decapod may still create internal coordination todos for runtime custody, workspace safety, and validation proof paths; those are not the human-facing project tracker.
 - Run `bd prime` for workflow context and command guidance.
 - Use `bd ready`, `bd show <id>`, `bd update <id> --claim`, and `bd close <id>`.
-- Beads is the task-tracking authority for this repository; `decapod todo ...` operations are superseded by the equivalent `bd ...` operations.
+- Beads is the human-facing task-tracking authority for this repository; agents should use equivalent `bd ...` operations instead of manually creating or claiming `decapod todo ...` work items.
 - Use `bd remember "insight"` for persistent project memory; do not create `MEMORY.md` files.
 - Do not use markdown TODO lists for task tracking.
 - When work uncovers a bug, bad data, source/provenance gap, validation gap, stale worktree/branch, documentation gap, or any other unresolved follow-up, create or update a Beads issue immediately with enough context for a fresh agent to act: observed problem, affected files/data, source/provenance constraints, dependencies, acceptance criteria, and proof gates.

@@ -18,3 +18,4 @@ product_type = "application"
 done_criteria = "tests and provenance validation pass"
 primary_languages = ["html"]
 detected_surfaces = ["web"]
+external_tracker = true

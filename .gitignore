@@ -62,3 +62,5 @@ references/sources/**/*.tmp
 .dolt/
 *.db
 .beads-credential-key
+!.decapod/generated/artifacts/custody/
+!.decapod/generated/artifacts/custody/*.md
