@@ -10242,6 +10242,15 @@ function getSorceryMagicPoints(source, character = CharacterData) {
   return source?.magicPoints ?? source?.resourceValue ?? character?.sorceryResource ?? getCharacterMagicPoints(character);
 }
 
+function getSorcerySpellDetails(spellName) {
+  const spellData = SORCERY_SPELLS.find(([name]) => name === spellName);
+  return {
+    name: spellName,
+    resist: spellData?.[1] || '',
+    description: spellData?.[2] || ''
+  };
+}
+
 function getUnknownSorcerySpellNames(spells, availableItems = null) {
   if (!Array.isArray(spells)) return [];
   const knownSpells = new Set(Array.isArray(availableItems) ? availableItems : SORCERY_SPELLS.map(([name]) => name));
@@ -10593,11 +10602,27 @@ function getCultPlaceholderResolutions(cultName) {
   return replacements;
 }
 
+function shouldResolveCultBoundPlaceholderForCult(placeholder, cultName) {
+  if (!cultName) return false;
+  const normalizedPlaceholder = getCultBoundPlaceholderFromKey(placeholder) || placeholder;
+  if (normalizedPlaceholder !== 'Invocation (Cult, School or Grimoire)' &&
+      normalizedPlaceholder !== 'Binding (Cult, Totem or Tradition)') {
+    return true;
+  }
+  const cult = CULTS_DATA.find(candidate => candidate.name === cultName);
+  const cultTypes = detectCultType(cult)?.types || [];
+  if (normalizedPlaceholder === 'Invocation (Cult, School or Grimoire)') {
+    return cultTypes.includes('sorcery');
+  }
+  return cultTypes.includes('animist');
+}
+
 function getTrackedCultPlaceholderEntries(character, cultName, previousCultName) {
   if (!cultName || previousCultName === cultName || !CharacterData.isRecord(character?._cultBoundPlaceholderMap)) {
     return [];
   }
   return Object.entries(character._cultBoundPlaceholderMap).flatMap(([sourceKey, resolvedSkill]) => {
+    if (!shouldResolveCultBoundPlaceholderForCult(sourceKey, cultName)) return [];
     const trackedSkill = CharacterData.isRecord(resolvedSkill) ? resolvedSkill.skill : resolvedSkill;
     const preserveAmount = CharacterData.isRecord(resolvedSkill) && Number.isFinite(resolvedSkill.preserveAmount)
       ? resolvedSkill.preserveAmount
@@ -11053,7 +11078,7 @@ function resolveCultBackedHigherMagicProviders(character = CharacterData) {
 }
 
 function resolveCultureBackedSorcerySource(character = CharacterData) {
-  if (!character || character.cult) return null;
+  if (!character) return null;
 
   const culture = normalizeCultureName(character.culture);
   const access = CULTURE_MAGIC_PROFILES[culture]?.sorcery?.sourceAccess;
@@ -13862,7 +13887,7 @@ App.renderStep6 = function() {
         `;
       } else if (passion.needsSubject || passionTypeRequiresSubject(passion.type || parsePassionName(passion.name).type)) {
         const structured = buildStructuredPassion(passion, passion.value || 0, passion.custom || false);
-        const currentSubject = structured.subject;
+        const currentSubject = structured.subject || '';
         const baseName = structured.type;
         const subjectSuggestions = passion.subjectSuggestions || [];
         const subjectListAttr = subjectSuggestions.length > 0 ? ` list="passion-subject-ns-${idx}"` : '';
@@ -18213,7 +18238,11 @@ App.renderPlayMagic = function() {
       ${sorcerySpells.length > 0 ? `
         <p style="font-size: 0.9em;"><strong>Selected Spells:</strong></p>
         <ul data-testid="sorcery-spells-list">
-          ${sorcerySpells.map(spell => `<li data-testid="sorcery-spell-name">${esc(spell)}</li>`).join('')}
+          ${sorcerySpells.map(spell => {
+            const spellDetails = getSorcerySpellDetails(spell);
+            const resistTag = spellDetails.resist ? ` <span class="spirit-ability">[Resist: ${esc(spellDetails.resist)}]</span>` : '';
+            return `<li data-testid="sorcery-spell-name">${esc(spell)}${resistTag}</li>`;
+          }).join('')}
         </ul>
       ` : '<p style="font-size: 0.85em; color: #666;">No sorcery spells selected.</p>'}
       <p style="font-size: 0.9em;"><strong>Casting:</strong> Invocation skill</p>
@@ -18887,9 +18916,9 @@ App.exportSinglePagePDF = async function() {
           y -= 7;
 	          spells.forEach(spellName => {
 	            if (y < 30) return;
-	            const spellData = SORCERY_SPELLS.find(s => s[0] === spellName);
-	            const desc = spellData && spellData[2] ? ` — ${spellData[2]}` : '';
-	            const resist = spellData && spellData[1] ? ` [${spellData[1]}]` : '';
+	            const spellDetails = getSorcerySpellDetails(spellName);
+	            const desc = spellDetails.description ? ` — ${spellDetails.description}` : '';
+	            const resist = spellDetails.resist ? ` [Resist: ${spellDetails.resist}]` : '';
 	            drawWrappedText(`• ${spellName}${resist}${desc}`, L + 4, W - 8, { size: 5.5, lineHeight: 6 });
 	          });
         }
@@ -18922,9 +18951,9 @@ App.exportSinglePagePDF = async function() {
         y -= 7;
         spells.forEach(spellName => {
           if (y < 30) return;
-          const spellData = SORCERY_SPELLS.find(s => s[0] === spellName);
-          const desc = spellData && spellData[2] ? ` — ${spellData[2]}` : '';
-          const resist = spellData && spellData[1] ? ` [${spellData[1]}]` : '';
+          const spellDetails = getSorcerySpellDetails(spellName);
+          const desc = spellDetails.description ? ` — ${spellDetails.description}` : '';
+          const resist = spellDetails.resist ? ` [Resist: ${spellDetails.resist}]` : '';
           drawWrappedText(`• ${spellName}${resist}${desc}`, L + 4, W - 8, { size: 5.5, lineHeight: 6 });
         });
       }
@@ -18947,9 +18976,9 @@ App.exportSinglePagePDF = async function() {
         y -= 7;
         spells.forEach(spellName => {
           if (y < 30) return;
-          const spellData = SORCERY_SPELLS.find(s => s[0] === spellName);
-          const desc = spellData && spellData[2] ? ` — ${spellData[2]}` : '';
-          const resist = spellData && spellData[1] ? ` [${spellData[1]}]` : '';
+          const spellDetails = getSorcerySpellDetails(spellName);
+          const desc = spellDetails.description ? ` — ${spellDetails.description}` : '';
+          const resist = spellDetails.resist ? ` [Resist: ${spellDetails.resist}]` : '';
           drawWrappedText(`• ${spellName}${resist}${desc}`, L + 4, W - 8, { size: 5.5, lineHeight: 6 });
         });
       }
