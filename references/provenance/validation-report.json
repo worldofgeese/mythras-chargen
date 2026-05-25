@@ -6,7 +6,7 @@
   "generated_at": "2026-05-23T00:00:00Z",
   "status": "accepted",
   "inputs": {
-    "tree_hash": "49b8050f2b33c2656fa3356a0ef33e5ba5fceaf513d67378e7a4e8dd54577826",
+    "tree_hash": "f5e02559cf6e775f0cf0322824c50292ce661c89a4da799e983d7030935397b4",
     "hash_algorithm": "sha256",
     "hashed_paths": [
       "index.html",
