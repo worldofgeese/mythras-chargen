@@ -3512,6 +3512,50 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
   }
 }
 
+// Test 1.13e: Non-choice culture passions with required subjects render blanks instead of undefined
+{
+  const { App: AppObj, CharacterData: CD, _sandbox: sandbox } = loadApp();
+  if (AppObj?.renderStep6 && AppObj?.selectCulture) {
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 10, POW: 10, CHA: 10 };
+    AppObj.selectCulture('Balazaring');
+
+    const originalCreateElement = sandbox.document.createElement;
+    const passionRows = [];
+    const suggestions = { appendChild: () => {} };
+    const passionsList = { appendChild: row => passionRows.push(row) };
+    sandbox.document.createElement = tag => ({
+      tagName: tag,
+      className: '',
+      textContent: '',
+      style: {},
+      onclick: null,
+      innerHTML: '',
+      querySelector: selector => {
+        if (selector === '#passions-list') return passionsList;
+        if (selector === '#passion-suggestions') return suggestions;
+        return null;
+      },
+      appendChild: () => {}
+    });
+
+    AppObj.renderStep6();
+    sandbox.document.createElement = originalCreateElement;
+
+    const loyaltyHtml = passionRows[0]?.innerHTML || '';
+    if (loyaltyHtml.includes('value=""') &&
+        loyaltyHtml.includes('list="passion-subject-ns-0"') &&
+        loyaltyHtml.includes('<datalist id="passion-subject-ns-0"') &&
+        !loyaltyHtml.includes('undefined')) {
+      pass('Balazaring Loyalty subject passion renders as blank dropdown-ready field');
+    } else {
+      fail('Balazaring Loyalty subject passion leaks undefined',
+        JSON.stringify({ loyaltyHtml, passions: CD.passions }));
+    }
+  } else {
+    fail('App.renderStep6/App.selectCulture unavailable for Balazaring passion regression test');
+  }
+}
+
 // Test 1.14: Rejected capped checkbox selections roll back visually
 {
   const { App: AppObj, CharacterData: CD } = loadApp();
@@ -7467,6 +7511,7 @@ const magicPdfCoverageCases = [
       'Casting: Invocation skill',
       'Shaping: Shaping skill',
       'Holdfast',
+      'Resist: Endurance',
       'Damage Resistance'
     ],
     forbidden: ['THEIST MIRACLES', 'SPIRIT MAGIC (']
@@ -7480,6 +7525,7 @@ const magicPdfCoverageCases = [
       'Casting: Invocation skill',
       'Shaping: Shaping skill',
       'Animate (Substance)',
+      'Resist: Special',
       'Diminish (Characteristic)',
       'Protective Ward'
     ],
@@ -7503,6 +7549,7 @@ const magicPdfCoverageCases = [
       'SORCERY (Zzistori School (God Forgot sorcery))',
       'Source: AiG p.30-31, p.59-60; Mythras rulebook p.162, p.166-177',
       'Holdfast',
+      'Resist: Endurance',
       'Animate (Substance)',
       'Project (Sense)'
     ],
@@ -9015,10 +9062,12 @@ fixtures.forEach(fixtureInfo => {
 
     if (html.includes('data-testid="sorcery-spells-list"') &&
         html.includes('Animate (Substance)') &&
-        html.includes('Dominate (Creatures)')) {
-      pass('Play Mode renders selected sorcery spells');
+        html.includes('Dominate (Creatures)') &&
+        html.includes('[Resist: Special]') &&
+        html.includes('[Resist: Willpower]')) {
+      pass('Play Mode renders selected sorcery spells with resist metadata');
     } else {
-      fail('Play Mode does not render selected sorcery spells');
+      fail('Play Mode does not render selected sorcery spell resist metadata', html);
     }
   } else {
     fail('App.renderPlayMagic not available for sorcery Play Mode test');
@@ -12353,6 +12402,128 @@ section('Step 9 Initiation Gate');
     }
   } else {
     fail('Cult clearing helpers unavailable for provider-scoped Mysticism preservation test');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, Calc: CalcRef } = loadApp();
+
+  if (AppRef?.selectCult && AppRef.renderStep9 && AppRef.resolveActiveSorcerySource) {
+    CD.culture = 'God Forgot';
+    CD.career = 'Sorcerer';
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 13, CHA: 10 };
+    CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+    CD.selectedProfessionalSkills = ['Invocation (Zzistori School)', 'Shaping', 'Literacy'];
+    CD.careerSkills = { 'Invocation (Zzistori School)': 0, Shaping: 0, Literacy: 0 };
+    CD._cultBoundPlaceholderMap = {
+      'selectedProfessionalSkills:Invocation (Cult, School or Grimoire)': 'Invocation (Zzistori School)',
+      'careerSkills:Invocation (Cult, School or Grimoire)': 'Invocation (Zzistori School)'
+    };
+    CD.cult = null;
+    CD.cultType = null;
+    CD.miracles = [];
+    CD.boundSpirits = [];
+    CD.mysticismTalents = [];
+    CD.sorcerySpells = ['Abjure (Substance/Process)', 'Animate (Substance)', 'Attract (Threat)'];
+    CD.sorceryResource = 13;
+    AppRef.currentStep = 9;
+
+    const joinResult = AppRef.selectCult('Lhankor Mhy', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const sourceWhileCultSelected = AppRef.resolveActiveSorcerySource(CD);
+    const invocationStillZzistori = CD.selectedProfessionalSkills.includes('Invocation (Zzistori School)') &&
+      Object.prototype.hasOwnProperty.call(CD.careerSkills, 'Invocation (Zzistori School)');
+
+    const clearResult = AppRef.selectCult(null, { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const sourceAfterClear = AppRef.resolveActiveSorcerySource(CD);
+    const stepHtml = AppRef.renderStep9().innerHTML;
+    const spellsPreserved = CD.sorcerySpells.includes('Abjure (Substance/Process)') &&
+      CD.sorcerySpells.includes('Animate (Substance)') &&
+      CD.sorcerySpells.includes('Attract (Threat)');
+
+    if (joinResult.success &&
+        invocationStillZzistori &&
+        sourceWhileCultSelected?.sourceLabel === 'Zzistori School (God Forgot sorcery)' &&
+        clearResult.success &&
+        CD.cult === null &&
+        sourceAfterClear?.sourceLabel === 'Zzistori School (God Forgot sorcery)' &&
+        spellsPreserved &&
+        stepHtml.includes('Starting Spells')) {
+      pass('Selecting then clearing an unrelated cult preserves Sorcerer school spells and UI');
+    } else {
+      fail('Unrelated cult selection/clear corrupted career-backed Sorcerer spell access',
+        JSON.stringify({
+          joinResult,
+          clearResult,
+          sourceWhileCultSelected,
+          sourceAfterClear,
+          selectedProfessionalSkills: CD.selectedProfessionalSkills,
+          careerSkills: CD.careerSkills,
+          sorcerySpells: CD.sorcerySpells,
+          stepHtml: stepHtml.slice(0, 500)
+        }));
+    }
+  } else {
+    fail('Cult clearing helpers unavailable for Sorcerer school spell preservation test');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, Calc: CalcRef } = loadApp();
+
+  if (AppRef?.selectCult && AppRef.agent?.selectCult) {
+    const setupTrackedSorcererPlaceholder = () => {
+      CD.culture = 'Civilised';
+      CD.career = 'Sorcerer';
+      CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 13, CHA: 10 };
+      CD.attributes = CalcRef.calculateAllAttributes(CD.characteristics);
+      CD.selectedProfessionalSkills = ['Invocation (Old School)', 'Shaping', 'Literacy'];
+      CD.careerSkills = { 'Invocation (Old School)': 15, Shaping: 10, Literacy: 5 };
+      CD._cultBoundPlaceholderMap = {
+        'selectedProfessionalSkills:Invocation (Cult, School or Grimoire)': 'Invocation (Old School)',
+        'careerSkills:Invocation (Cult, School or Grimoire)': 'Invocation (Old School)'
+      };
+      CD.cult = null;
+      CD.cultType = null;
+      CD.miracles = [];
+      CD.boundSpirits = [];
+      CD.mysticismTalents = [];
+      CD.sorcerySpells = [];
+    };
+
+    setupTrackedSorcererPlaceholder();
+    const uiResult = AppRef.selectCult('Arkat', { skipConfirmation: true, allowMagicSelectionLoss: true });
+    const uiRekeyed = uiResult.success &&
+      CD.selectedProfessionalSkills.includes('Invocation (Arkat)') &&
+      !CD.selectedProfessionalSkills.includes('Invocation (Old School)') &&
+      CD.careerSkills['Invocation (Arkat)'] === 15 &&
+      CD.careerSkills['Invocation (Old School)'] === undefined &&
+      CD._cultBoundPlaceholderMap['selectedProfessionalSkills:Invocation (Cult, School or Grimoire)'] === 'Invocation (Arkat)' &&
+      CD._cultBoundPlaceholderMap['careerSkills:Invocation (Cult, School or Grimoire)']?.skill === 'Invocation (Arkat)';
+
+    setupTrackedSorcererPlaceholder();
+    const agentResult = AppRef.agent.selectCult('Arkat');
+    const agentRekeyed = agentResult.success &&
+      CD.selectedProfessionalSkills.includes('Invocation (Arkat)') &&
+      !CD.selectedProfessionalSkills.includes('Invocation (Old School)') &&
+      CD.careerSkills['Invocation (Arkat)'] === 15 &&
+      CD.careerSkills['Invocation (Old School)'] === undefined &&
+      CD._cultBoundPlaceholderMap['selectedProfessionalSkills:Invocation (Cult, School or Grimoire)'] === 'Invocation (Arkat)' &&
+      CD._cultBoundPlaceholderMap['careerSkills:Invocation (Cult, School or Grimoire)']?.skill === 'Invocation (Arkat)';
+
+    if (uiRekeyed && agentRekeyed) {
+      pass('Selecting a sorcery cult rekeys tracked Invocation placeholders in UI and agent flows');
+    } else {
+      fail('Sorcery cult selection failed to rekey tracked Invocation placeholders',
+        JSON.stringify({
+          uiResult,
+          agentResult,
+          selectedProfessionalSkills: CD.selectedProfessionalSkills,
+          careerSkills: CD.careerSkills,
+          placeholderMap: CD._cultBoundPlaceholderMap
+        }));
+    }
+  } else {
+    fail('Cult selection helpers unavailable for sorcery placeholder rekey regression');
   }
 }
 
