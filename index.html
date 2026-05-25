@@ -10844,6 +10844,18 @@ function getNonCarryableBoundSpiritNamesAcrossAnimismProviderChange(snapshot, pr
     .filter(Boolean);
 }
 
+function getBoundSpiritOriginProviderMismatchNames(spirits, character, currentProvider) {
+  if (!Array.isArray(spirits) || !currentProvider) return [];
+  return spirits
+    .filter(spirit => {
+      const originProviderId = getBoundSpiritOriginProviderId(spirit);
+      if (!originProviderId || originProviderId === currentProvider.id) return false;
+      return !isCareerBackedAnimismOriginAvailable(character, originProviderId);
+    })
+    .map(getBoundSpiritName)
+    .filter(Boolean);
+}
+
 function keepCarryableBoundSpiritsAcrossAnimismProviderChange(character, snapshot, previousProvider, currentProvider) {
   if (!Array.isArray(character?.boundSpirits)) return;
   character.boundSpirits = character.boundSpirits.filter(spirit =>
@@ -19770,6 +19782,41 @@ App.agent.setStep = function(step, data) {
           if (unsupportedMagicErrors.length > 0) {
             restoreStep9Snapshot();
             return {success: false, errors: unsupportedMagicErrors, state: App.agent.getState()};
+          }
+          const previousStep9Providers = App.resolveHigherMagicProviders(step9Snapshot);
+          const previousAnimismProvider = getHigherMagicProviderBySystem(previousStep9Providers, 'animism');
+          const activeAnimismProvider = getHigherMagicProviderBySystem(activeHigherMagicProviders, 'animism');
+          const previousBoundSpiritNames = getMagicSelectionNames(step9Snapshot.boundSpirits, getBoundSpiritName);
+          const submittedOriginMismatchSpirits = getBoundSpiritOriginProviderMismatchNames(CharacterData.boundSpirits, CharacterData, activeAnimismProvider);
+          if (submittedOriginMismatchSpirits.length > 0) {
+            restoreStep9Snapshot();
+            return {
+              success: false,
+              errors: [`Updating magic selection would clear selected bound spirits: ${submittedOriginMismatchSpirits.join(', ')}`],
+              state: App.agent.getState()
+            };
+          }
+          if (previousBoundSpiritNames.length > 0 && previousAnimismProvider && !activeAnimismProvider) {
+            restoreStep9Snapshot();
+            return {
+              success: false,
+              errors: [`Updating magic selection would clear selected bound spirits: ${previousBoundSpiritNames.join(', ')}`],
+              state: App.agent.getState()
+            };
+          }
+          if (previousBoundSpiritNames.length > 0 &&
+              previousAnimismProvider &&
+              activeAnimismProvider &&
+              previousAnimismProvider.id !== activeAnimismProvider.id) {
+            const nonCarryableSpirits = getNonCarryableBoundSpiritNamesAcrossAnimismProviderChange(step9Snapshot, previousAnimismProvider, activeAnimismProvider);
+            if (nonCarryableSpirits.length > 0) {
+              restoreStep9Snapshot();
+              return {
+                success: false,
+                errors: [`Updating magic selection would clear selected bound spirits: ${nonCarryableSpirits.join(', ')}`],
+                state: App.agent.getState()
+              };
+            }
           }
           const noSourceSpellError = getSorcerySpellsWithoutSourceError(requestedSorcerySpells, activeSorcerySource);
           if (noSourceSpellError) {

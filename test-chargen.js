@@ -12490,7 +12490,42 @@ section('Step 9 Initiation Gate');
       CD.boundSpirits.some(spirit => spirit.name === 'Ancestor' && spirit.originProviderId === 'core-career-shaman-animism') &&
       CD.boundSpirits.some(spirit => spirit.name === 'Cult Ancestor' && spirit.originProviderId === 'cult-daka-fal-animism');
 
-    if (uiSwitched && agentSwitched && uiMixedSwitched && agentMixedRejected) {
+    setupCareerBackedShamanSpirit();
+    const agentStep9MixedJoinCultResult = AppRef.agent.selectCult('Daka Fal');
+    CD.boundSpirits.push({ name: 'Cult Ancestor', originProviderId: 'cult-daka-fal-animism' });
+    CD.bonusSkills = { Perception: 50, Survival: 50, Trance: 50, Oratory: 50, Dance: 50 };
+    const agentStep9MixedSwitchResult = AppRef.agent.setStep(9, {
+      cult: 'Waha',
+      miracles: [],
+      boundSpirits: CD.boundSpirits
+    });
+    const agentStep9MixedRejected = agentStep9MixedJoinCultResult.success &&
+      agentStep9MixedSwitchResult.success === false &&
+      /Cult Ancestor/.test((agentStep9MixedSwitchResult.errors || []).join('; ')) &&
+      CD.cult === 'Daka Fal' &&
+      CD.boundSpirits.some(spirit => spirit.name === 'Ancestor' && spirit.originProviderId === 'core-career-shaman-animism') &&
+      CD.boundSpirits.some(spirit => spirit.name === 'Cult Ancestor' && spirit.originProviderId === 'cult-daka-fal-animism');
+
+    setupCareerBackedShamanSpirit();
+    const agentStep9SubmittedJoinCultResult = AppRef.agent.selectCult('Daka Fal');
+    CD.bonusSkills = { Perception: 50, Survival: 50, Trance: 50, Oratory: 50, Dance: 50 };
+    const submittedOldCultSpirits = [
+      ...CD.boundSpirits,
+      { name: 'Cult Ancestor', originProviderId: 'cult-daka-fal-animism' }
+    ];
+    const agentStep9SubmittedOldCultResult = AppRef.agent.setStep(9, {
+      cult: 'Waha',
+      miracles: [],
+      boundSpirits: submittedOldCultSpirits
+    });
+    const agentStep9SubmittedOldCultRejected = agentStep9SubmittedJoinCultResult.success &&
+      agentStep9SubmittedOldCultResult.success === false &&
+      /Cult Ancestor/.test((agentStep9SubmittedOldCultResult.errors || []).join('; ')) &&
+      CD.cult === 'Daka Fal' &&
+      CD.boundSpirits.some(spirit => spirit.name === 'Ancestor' && spirit.originProviderId === 'core-career-shaman-animism') &&
+      !CD.boundSpirits.some(spirit => spirit.name === 'Cult Ancestor');
+
+    if (uiSwitched && agentSwitched && uiMixedSwitched && agentMixedRejected && agentStep9MixedRejected && agentStep9SubmittedOldCultRejected) {
       pass('Switching animist cults preserves Shaman career-backed bound spirits');
     } else {
       fail('Animist cult-to-cult switch lost Shaman career-backed spirits',
@@ -12503,6 +12538,10 @@ section('Step 9 Initiation Gate');
           uiMixedSwitchCultResult,
           agentMixedJoinCultResult,
           agentMixedSwitchCultResult,
+          agentStep9MixedJoinCultResult,
+          agentStep9MixedSwitchResult,
+          agentStep9SubmittedJoinCultResult,
+          agentStep9SubmittedOldCultResult,
           cult: CD.cult,
           boundSpirits: CD.boundSpirits
         }));
