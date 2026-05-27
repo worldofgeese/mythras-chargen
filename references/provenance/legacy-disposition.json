@@ -32,6 +32,22 @@
       "rationale": "Tracked documentation screenshots are retained visual proof assets, not source authority or rendered source pages."
     },
     {
+      "id": "adr0015-qa-screenshots",
+      "path_glob": "verification-artifacts/adr0015-qa/*.png",
+      "artifact_class": "generated_artifact",
+      "disposition": "exempt/out-of-scope",
+      "required_scope": true,
+      "rationale": "ADR-0015 manual browser QA screenshots are retained visual proof assets, not source authority, app assets, or rendered source pages."
+    },
+    {
+      "id": "source-specialization-qa-screenshots",
+      "path_glob": "verification-artifacts/source-specialization-qa/*.png",
+      "artifact_class": "generated_artifact",
+      "disposition": "exempt/out-of-scope",
+      "required_scope": true,
+      "rationale": "Source-specialization manual browser QA screenshots are retained visual proof assets, not source authority, app assets, or rendered source pages."
+    },
+    {
       "id": "fixtures",
       "path_glob": "fixtures/*.json",
       "artifact_class": "fixture",
@@ -233,6 +249,14 @@
       "scan_for_unverified": true,
       "rationale": "Current app-facing combat style authority with source citations.",
       "enforce_source_refs": true
+    },
+    {
+      "id": "combat-style-exceptions",
+      "path": "references/combat-style-exceptions.json",
+      "artifact_class": "normalized_authority_json",
+      "disposition": "governed-now",
+      "required_scope": true,
+      "rationale": "Source-blocked active pregen combat style exceptions; explicitly not promoted into CSE authority."
     },
     {
       "id": "combat-traits-attestation",

@@ -18,6 +18,9 @@ This directory contains ADRs for the mythras-chargen project. Each ADR is an exe
 | ADR-0010 | [Culture-Backed Sorcery Sources](ADR-0010-culture-backed-sorcery-sources.md) | proposed | 2026-05-21 |
 | ADR-0011 | [Agent Orchestration Governance](ADR-0011-agent-orchestration-governance.md) | accepted | 2026-05-22 |
 | ADR-0012 | [AiG Bounded Vision Source Lifecycle](ADR-0012-aig-bounded-vision-source-lifecycle.md) | accepted | 2026-05-22 |
+| ADR-0013 | [Source-Backed Higher Magic Access](ADR-0013-source-backed-higher-magic-access.md) | accepted | 2026-05-23 |
+| ADR-0014 | [Source-Backed Skill Disambiguation and Passion Structure](ADR-0014-source-backed-disambiguation-and-passion-structure.md) | accepted | 2026-05-24 |
+| ADR-0015 | [Strict Pregen Chargen Baseline](ADR-0015-strict-pregen-chargen-baseline.md) | accepted | 2026-05-27 |
 
 ## Conventions
 

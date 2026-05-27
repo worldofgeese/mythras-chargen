@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "authority": "Source-blocked active pregen combat style exceptions; not CSE promotions",
+  "policy": "Combat Styles Encyclopedia remains the closed combat-style authority. These records document active RQG Starter Set pregen styles that are retained as narrative fixture exceptions because no CSE entry covers them. They must not be treated as verified CSE styles.",
+  "source": "RQG Starter Set Pregen Folios PDF; narrative pregen source only, not vision-manifest promoted evidence.",
+  "beadIds": [
+    "mythras-chargen-m1rv"
+  ],
+  "exceptions": [
+    {
+      "id": "pregen:ionara:grazelander-noble",
+      "name": "Grazelander Noble",
+      "fixture": "fixtures/ionara.json",
+      "character": "Ionara Grand-daughter of Thiralda",
+      "culture": "Grazelander/Pure Horse",
+      "source_pdf": "RQG Starter Set Pregen Folios",
+      "source_pages": [
+        "PDF p.20"
+      ],
+      "approved_weapons": [
+        "Mace",
+        "Small Shield",
+        "Lance",
+        "Dagger"
+      ],
+      "approved_traits": [
+        "Intimidating Scream",
+        "Mounted Combat",
+        "Shield Wall"
+      ],
+      "status": "source_blocked_exception",
+      "coverage_state": "source_blocked",
+      "authority_state": "narrative_pregen_source",
+      "why_not_in_cse": "Grazelander/Pure Horse culture is absent from the current Combat Styles Encyclopedia authority set; no verified CSE row covers Ionara as a mounted Pure Horse People priestess.",
+      "nearest_cse_style_ids": [],
+      "nearest_cse_reason": "No CSE culture matches Grazelander/Pure Horse."
+    },
+    {
+      "id": "pregen:vasana:colymar-bison-cavalry",
+      "name": "Colymar Bison Cavalry",
+      "fixture": "fixtures/vasana.json",
+      "character": "Vasana Farnan's Daughter",
+      "culture": "Sartarite (Heortling)",
+      "source_pdf": "RQG Starter Set Pregen Folios",
+      "source_pages": [
+        "PDF p.2"
+      ],
+      "approved_weapons": [
+        "Broadsword",
+        "Battleaxe",
+        "Lance",
+        "Medium Shield",
+        "Composite Bow"
+      ],
+      "approved_traits": [
+        "Intimidating Scream",
+        "Mounted Combat",
+        "Shield Wall"
+      ],
+      "status": "source_blocked_exception",
+      "coverage_state": "source_blocked",
+      "authority_state": "narrative_pregen_source",
+      "why_not_in_cse": "No CSE entry covers this Sartarite/Colymar bison-mounted heavy cavalry kit. Praxian Bison is wrong culture and weapon set; Sartarite Hill Clan Levy lacks mounted combat and Battleaxe/Lance/Bison context.",
+      "nearest_cse_style_ids": [
+        "cse:sartarite-heortling:hill-clan-levy",
+        "cse:praxian:bison"
+      ],
+      "nearest_cse_reason": "Hill Clan Levy is Sartarite but not mounted; Praxian Bison is mounted but wrong culture and kit."
+    }
+  ]
+}

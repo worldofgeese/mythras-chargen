@@ -1,7 +1,7 @@
 ---
 title: "Source-Backed Skill Disambiguation and Passion Structure"
 adr: ADR-0014
-status: Proposed
+status: Accepted
 date: 2026-05-24
 prd: "N/A"
 decision: "Use source-backed disambiguation rules, CSE-backed combat styles, structured Passions, and explicit normalization for non-specialization parentheticals"
@@ -11,7 +11,7 @@ decision: "Use source-backed disambiguation rules, CSE-backed combat styles, str
 
 ## Status
 
-Proposed
+Accepted
 
 ## Date
 

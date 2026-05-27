@@ -7,15 +7,17 @@ This project now uses a strict conversion stance:
 - Mythras Core is the mechanical authority.
 - Every pregen is rebuilt from a strict **75-point** human characteristic base.
 - No custom skills remain on the finished sheets.
+- Step allocations remain wizard-possible: no cultural, career, or bonus allocation above 15.
+- Passion targets may come from folios, but active values are reconciled to app chargen formulas instead of importing higher RQG percentages.
 - RuneQuest weapon skills are replaced by combat styles.
-- Rune magic follows **Adventures in Glorantha** with rune-affinity casting and devotional pools.
+- Rune magic follows **Adventures in Glorantha** and cult one-pagers as future-initiation content; strict ADR-0015 chargen fixtures do not start with devotional pools or miracles.
 - Cult one-pagers are the cult-facing packet for the GM and players.
 
 ## Current Roster Summary
 
 | Character | Cult packet | Strict characteristics | Main combat style | Magic chassis |
 | --- | --- | --- | --- | --- |
-| Vasana | Vinga / Orlanth | `12/9/9/8/12/11/14` | `Vinga Cavalry 90` | `Devotion`, `Exhort`, `Folk Magic`, `Meditation` |
+| Vasana | Vinga / Orlanth | `14/10/8/10/9/12/12` | `Colymar Bison Cavalry` | Future initiation path; no starting cult miracles/devotional pool |
 | Yanioth | Ernalda | `8/9/12/11/12/11/12` | `Ernaldan Guard 65` | `Devotion`, `Exhort`, `Folk Magic`, `Meditation` |
 | Harmast | Issaries | `10/7/11/13/15/12/7` | `Issaries Duelist 100` | `Devotion`, `Exhort`, `Folk Magic`, `Meditation` |
 | Vishi | Waha | `9/9/10/9/14/13/11` | `Blue Llama Spirit Rider 60` | `Devotion`, `Exhort`, `Folk Magic`, `Binding`, `Trance`, `Meditation` |
@@ -24,7 +26,7 @@ This project now uses a strict conversion stance:
 | Nathem | Odayla | `10/12/11/12/10/11/9` | `Odaylan Hunter 70` | `Devotion`, `Exhort`, `Folk Magic`, `Meditation` |
 | Aranda | Babeester Gor | `12/10/11/12/10/10/10` | `Axe Maiden 100` | `Devotion`, `Exhort`, `Folk Magic`, `Meditation` |
 | Dazarim | Yelmalio / White Bull | `10/9/13/9/12/11/11` | `Sable Rider Nomad 85` | `Devotion (Yelmalio)`, `Devotion (White Bull)`, `Exhort`, `Folk Magic`, `Meditation` |
-| Ionara | Maran Gor | `8/9/10/10/14/12/12` | `Earthshaker Horse Guard 100` | `Devotion`, `Exhort`, `Folk Magic`, `Meditation` |
+| Ionara | Maran Gor | `8/10/9/11/12/14/11` | `Grazelander Noble` | Future initiation path; no starting cult miracles/devotional pool |
 
 Characteristic order is `STR/CON/SIZ/DEX/INT/POW/CHA`.
 
@@ -38,6 +40,27 @@ Characteristic order is `STR/CON/SIZ/DEX/INT/POW/CHA`.
 - The validated PDF template now keeps page 3 intact and writes overflow text only to the cloned `P3__More_1..29` rows.
 
 ## Source-Bound Interpretation Notes
+
+### Active pregen combat-style exceptions
+
+Combat Styles Encyclopedia remains the closed combat-style authority. Two active RQG Starter Set pregens keep narrative combat styles that are not present in CSE and are therefore recorded as source-blocked exceptions, not CSE promotions:
+
+| Character | Fixture style | Exception record | Source note |
+| --- | --- | --- | --- |
+| Ionara | `Grazelander Noble` | `pregen:ionara:grazelander-noble` | RQG Starter Set Pregen Folios PDF p.20; Grazelander/Pure Horse culture absent from CSE. |
+| Vasana | `Colymar Bison Cavalry` | `pregen:vasana:colymar-bison-cavalry` | RQG Starter Set Pregen Folios PDF p.2; no CSE entry covers this Sartarite bison-cavalry kit. |
+
+See `references/combat-style-exceptions.json`.
+
+### Vasana RQG spirit magic reconciliation
+
+The RQG folio lists Demoralize, Heal 2, and Mobility. Under strict ADR-0015 the folio's spirit/Rune magic is not automatically active in the chargen fixture. The reconciliation is recorded in `references/folk-magic-reconciliation.json`:
+
+| RQG folio spell | Mythras app spelling | Fixture status |
+| --- | --- | --- |
+| Demoralize | Demoralise | Withheld; requires cult/GM advancement. |
+| Heal 2 | Heal | Present as `Heal`; no intensity suffix in fixture spell names. |
+| Mobility | Mobility | Withheld; requires cult/GM advancement. |
 
 - Sorala keeps `Invocation` and `Shaping` because her folio explicitly presents her as both a Lhankor Mhy initiate and a sorcerous scholar.
 - Vostor's Seven Mothers sheet is anchored to the martial Yanafal Tarnils packet because the one-pager set provides Seven Mothers subcult packets rather than a single generic sheet.

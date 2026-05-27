@@ -131,7 +131,12 @@
       "name": "Sevara",
       "notes": "War-trained sable antelope. Fast and agile. Use mount DM (+1d10) for lance charges.",
       "species": "War Sable Antelope (Praxian cavalry)",
-      "strikeRank": 0
+      "strikeRank": 0,
+      "source": "RQG Starter Set Pregen Folios",
+      "sourcePages": [
+        "PDF pp.17-18"
+      ],
+      "sourceCitation": "Dazarim folio companion block"
     }
   ],
   "concept": "Sable Rider nomad, devoted sun warrior, bandit's son",

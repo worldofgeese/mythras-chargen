@@ -134,7 +134,12 @@
       "name": "War Llama",
       "notes": "War-trained high llama. Riders hard to reach from ground (-1 grade melee from below). Use mount DM (+2d6) for lance charges.",
       "species": "War High Llama (Praxian cavalry)",
-      "strikeRank": 0
+      "strikeRank": 0,
+      "source": "RQG Starter Set Pregen Folios",
+      "sourcePages": [
+        "PDF pp.7-8"
+      ],
+      "sourceCitation": "Vishi folio companion block"
     },
     {
       "armor": 1,
@@ -204,7 +209,12 @@
       "name": "Cousin",
       "notes": "Sapient. Speaks (poorly) in human tongues. Climb 90%, Spirit Magic (Countermagic 2, Heal 2).",
       "species": "Baboon (spirit-bonded familiar)",
-      "strikeRank": 3
+      "strikeRank": 3,
+      "source": "RQG Starter Set Pregen Folios",
+      "sourcePages": [
+        "PDF pp.7-8"
+      ],
+      "sourceCitation": "Vishi folio companion block"
     }
   ],
   "concept": "Praxian shaman, spirit world traveler, intensely loyal",

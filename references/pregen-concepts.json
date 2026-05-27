@@ -1,6 +1,4 @@
 {
-  "_source": "RQG Starter Set Pregen Folios, adapted for AiG/Mythras 75-point builds",
-  "_notes": "Each character concept from RQG needs a valid 75-point stat allocation. Key narrative features preserved; specific skill % will differ due to different point budgets.",
   "characters": [
     {
       "name": "Vasana Farnan's Daughter",
@@ -11,14 +9,50 @@
       "cult": "Orlanth",
       "age": 21,
       "gender": "Female",
-      "runeAffinities": {"primary": "Air", "secondary": "Movement", "tertiary": "Death"},
-      "keySkills": ["Ride (Bison)", "Combat Style", "Endurance", "Brawn"],
-      "keyPassions": ["Hate (Lunar Empire)", "Loyalty (Colymar Tribe)", "Devotion (Orlanth)", "Honor"],
-      "companion": {"type": "bison", "name": "Molon", "variant": "War-trained cavalry"},
+      "runeAffinities": {
+        "primary": "Air",
+        "secondary": "Movement",
+        "tertiary": "Death"
+      },
+      "keySkills": [
+        "Ride (Bison)",
+        "Combat Style",
+        "Endurance",
+        "Brawn"
+      ],
+      "keyPassions": [
+        "Hate (Lunar Empire)",
+        "Loyalty (Colymar Tribe)",
+        "Devotion (Orlanth)",
+        "Honor"
+      ],
+      "companion": {
+        "type": "bison",
+        "name": "Molon",
+        "variant": "War-trained cavalry"
+      },
       "statPriority": "STR > CHA > POW > CON > DEX > INT > SIZ",
-      "combatStyle": {"name": "Hill Clan Levy", "weapons": ["Broadsword", "Lance", "Composite Bow", "Medium Shield"], "traits": ["Mounted Combat"]},
-      "folkMagic": ["Bladesharp", "Protection", "Heal"],
-      "miracles": ["Fearless", "Lightning", "Shield"]
+      "combatStyle": {
+        "name": "Colymar Bison Cavalry",
+        "weapons": [
+          "Broadsword",
+          "Battleaxe",
+          "Lance",
+          "Medium Shield",
+          "Composite Bow"
+        ],
+        "traits": [
+          "Intimidating Scream",
+          "Mounted Combat",
+          "Shield Wall"
+        ]
+      },
+      "folkMagic": [
+        "Bladesharp",
+        "Protection",
+        "Heal"
+      ],
+      "miracles": []
     },
     {
       "name": "Yanioth Vareena's Daughter",
@@ -29,14 +63,44 @@
       "cult": "Ernalda",
       "age": 23,
       "gender": "Female",
-      "runeAffinities": {"primary": "Earth", "secondary": "Fertility", "tertiary": "Beast"},
-      "keySkills": ["Dance", "Orate", "First Aid", "Lore (Cult)"],
-      "keyPassions": ["Devotion (Ernalda)", "Love (Family)", "Loyalty (Colymar Tribe)"],
+      "runeAffinities": {
+        "primary": "Earth",
+        "secondary": "Fertility",
+        "tertiary": "Beast"
+      },
+      "keySkills": [
+        "Dance",
+        "Orate",
+        "First Aid",
+        "Lore (Cult)"
+      ],
+      "keyPassions": [
+        "Devotion (Ernalda)",
+        "Love (Family)",
+        "Loyalty (Colymar Tribe)"
+      ],
       "companion": null,
       "statPriority": "CHA > INT > POW > SIZ > DEX > CON > STR",
-      "combatStyle": {"name": "Ernaldori Militia", "weapons": ["Dagger", "Battle Axe", "Medium Shield", "Composite Bow"], "traits": []},
-      "folkMagic": ["Heal", "Vigour", "Befuddle"],
-      "miracles": ["Heal Body", "Inviolable", "Charisma"]
+      "combatStyle": {
+        "name": "Ernaldori Militia",
+        "weapons": [
+          "Dagger",
+          "Battle Axe",
+          "Medium Shield",
+          "Composite Bow"
+        ],
+        "traits": []
+      },
+      "folkMagic": [
+        "Heal",
+        "Vigour",
+        "Befuddle"
+      ],
+      "miracles": [
+        "Heal Body",
+        "Inviolable",
+        "Charisma"
+      ]
     },
     {
       "name": "Harmast Baranthos' Son",
@@ -47,14 +111,51 @@
       "cult": "Issaries",
       "age": 21,
       "gender": "Male",
-      "runeAffinities": {"primary": "Air", "secondary": "Harmony", "tertiary": "Movement"},
-      "keySkills": ["Bargain", "Orate", "Commerce", "Combat Style"],
-      "keyPassions": ["Love (Family)", "Loyalty (Sartar)", "Hate (Grey Dog clan)"],
-      "companion": {"type": "horse", "name": "Riding Zebras (x2)", "variant": "Riding (not combat-trained)"},
+      "runeAffinities": {
+        "primary": "Air",
+        "secondary": "Harmony",
+        "tertiary": "Movement"
+      },
+      "keySkills": [
+        "Bargain",
+        "Orate",
+        "Commerce",
+        "Combat Style"
+      ],
+      "keyPassions": [
+        "Love (Family)",
+        "Loyalty (Sartar)",
+        "Hate (Grey Dog clan)"
+      ],
+      "companion": {
+        "type": "horse",
+        "name": "Riding Zebras (x2)",
+        "variant": "Riding (not combat-trained)"
+      },
       "statPriority": "DEX > INT > POW > STR > CON > SIZ > CHA",
-      "combatStyle": {"name": "Colymar Duelist", "weapons": ["Broadsword", "Battle Axe", "Dagger", "Javelin", "Medium Shield"], "traits": ["Throw Weapons"]},
-      "folkMagic": ["Glamour", "Mobility", "Detect Enemies"],
-      "miracles": ["Passage", "Path Watch", "Spell Trading"]
+      "combatStyle": {
+        "name": "Colymar Duelist",
+        "weapons": [
+          "Broadsword",
+          "Battle Axe",
+          "Dagger",
+          "Javelin",
+          "Medium Shield"
+        ],
+        "traits": [
+          "Throw Weapons"
+        ]
+      },
+      "folkMagic": [
+        "Glamour",
+        "Mobility",
+        "Detect Enemies"
+      ],
+      "miracles": [
+        "Passage",
+        "Path Watch",
+        "Spell Trading"
+      ]
     },
     {
       "name": "Vishi Dunn",
@@ -65,14 +166,50 @@
       "cult": "Waha",
       "age": 21,
       "gender": "Male",
-      "runeAffinities": {"primary": "Death", "secondary": "Air", "tertiary": "Moon"},
-      "keySkills": ["Spirit Combat", "Trance", "Binding", "Survival"],
-      "keyPassions": ["Loyalty (Argrath)", "Hate (Lunar Empire)", "Loyalty (High Llama Tribe)"],
-      "companion": {"type": "highLlama", "name": "War Llama", "variant": "War-trained"},
+      "runeAffinities": {
+        "primary": "Death",
+        "secondary": "Air",
+        "tertiary": "Moon"
+      },
+      "keySkills": [
+        "Spirit Combat",
+        "Trance",
+        "Binding",
+        "Survival"
+      ],
+      "keyPassions": [
+        "Loyalty (Argrath)",
+        "Hate (Lunar Empire)",
+        "Loyalty (High Llama Tribe)"
+      ],
+      "companion": {
+        "type": "highLlama",
+        "name": "War Llama",
+        "variant": "War-trained"
+      },
       "statPriority": "POW > INT > DEX > CHA > CON > STR > SIZ",
-      "combatStyle": {"name": "Praxian Nomad", "weapons": ["Lance", "Dagger-axe (2H)", "Dagger", "Pole Lasso"], "traits": ["Mounted Combat"]},
-      "folkMagic": ["Spiritspeech", "Heal", "Countermagic"],
-      "miracles": ["Axis Mundi", "Discorporation", "Shield"],
+      "combatStyle": {
+        "name": "Praxian Nomad",
+        "weapons": [
+          "Lance",
+          "Dagger-axe (2H)",
+          "Dagger",
+          "Pole Lasso"
+        ],
+        "traits": [
+          "Mounted Combat"
+        ]
+      },
+      "folkMagic": [
+        "Spiritspeech",
+        "Heal",
+        "Countermagic"
+      ],
+      "miracles": [
+        "Axis Mundi",
+        "Discorporation",
+        "Shield"
+      ],
       "notes": "Also has Cousin Monkey (baboon companion) but this is a spirit-bonded familiar rather than a standard mount"
     },
     {
@@ -87,14 +224,47 @@
       "cultSelectionNote": "Seven Mothers is retained as the source/display grouping; app mechanics should use a cited 7 Mothers subcult packet when a selectable cult is required.",
       "age": 21,
       "gender": "Male",
-      "runeAffinities": {"primary": "Moon", "secondary": "Disorder", "tertiary": "Illusion"},
-      "keySkills": ["Combat Style", "Endurance", "Survival", "Customs (Lunar Tarsh)"],
-      "keyPassions": ["Loyalty (Fazzur Wideread)", "Honor", "Fear (Harrek the Berserk)"],
+      "runeAffinities": {
+        "primary": "Moon",
+        "secondary": "Disorder",
+        "tertiary": "Illusion"
+      },
+      "keySkills": [
+        "Combat Style",
+        "Endurance",
+        "Survival",
+        "Customs (Lunar Tarsh)"
+      ],
+      "keyPassions": [
+        "Loyalty (Fazzur Wideread)",
+        "Honor",
+        "Fear (Harrek the Berserk)"
+      ],
       "companion": null,
       "statPriority": "STR > CON > SIZ > POW > INT > DEX > CHA",
-      "combatStyle": {"name": "Lunar Infantry", "weapons": ["Kopis", "Dagger", "Large Shield", "Javelin", "Composite Bow"], "traits": ["Shield Wall"]},
-      "folkMagic": ["Befuddle", "Glamour", "Heal"],
-      "miracles": ["Madness", "Mindblast", "Summon Fire Elemental (small)"]
+      "combatStyle": {
+        "name": "Lunar Infantry",
+        "weapons": [
+          "Kopis",
+          "Dagger",
+          "Large Shield",
+          "Javelin",
+          "Composite Bow"
+        ],
+        "traits": [
+          "Shield Wall"
+        ]
+      },
+      "folkMagic": [
+        "Befuddle",
+        "Glamour",
+        "Heal"
+      ],
+      "miracles": [
+        "Madness",
+        "Mindblast",
+        "Summon Fire Elemental (small)"
+      ]
     },
     {
       "name": "Sorala Daughter of Toria",
@@ -105,14 +275,46 @@
       "cult": "Lhankor Mhy",
       "age": 21,
       "gender": "Female",
-      "runeAffinities": {"primary": "Fire/Sky", "secondary": "Air", "tertiary": "Earth"},
-      "keySkills": ["Read/Write (multiple)", "Lore (multiple)", "Bureaucracy", "Combat Style"],
-      "keyPassions": ["Devotion (Lhankor Mhy)", "Loyalty (Argrath)", "Honor"],
+      "runeAffinities": {
+        "primary": "Fire/Sky",
+        "secondary": "Air",
+        "tertiary": "Earth"
+      },
+      "keySkills": [
+        "Read/Write (multiple)",
+        "Lore (multiple)",
+        "Bureaucracy",
+        "Combat Style"
+      ],
+      "keyPassions": [
+        "Devotion (Lhankor Mhy)",
+        "Loyalty (Argrath)",
+        "Honor"
+      ],
       "companion": null,
       "statPriority": "INT > DEX > CHA > POW > CON > STR > SIZ",
-      "combatStyle": {"name": "Esrolian Noble", "weapons": ["Broadsword", "Battle Axe", "Medium Shield", "Sling", "Throwing Axe"], "traits": []},
-      "folkMagic": ["Bladesharp", "Demoralize", "Heal", "Vigor"],
-      "miracles": ["Analyze Magic", "Clairvoyance", "Knowledge"],
+      "combatStyle": {
+        "name": "Esrolian Noble",
+        "weapons": [
+          "Broadsword",
+          "Battle Axe",
+          "Medium Shield",
+          "Sling",
+          "Throwing Axe"
+        ],
+        "traits": []
+      },
+      "folkMagic": [
+        "Bladesharp",
+        "Demoralize",
+        "Heal",
+        "Vigour"
+      ],
+      "miracles": [
+        "Analyze Magic",
+        "Clairvoyance",
+        "Knowledge"
+      ],
       "notes": "Also knows Sorcery (Logician, Reveal Rune, Solace of the Logical Mind) — our chargen may not support sorcery"
     },
     {
@@ -124,14 +326,55 @@
       "cult": "Odayla",
       "age": 34,
       "gender": "Male",
-      "runeAffinities": {"primary": "Air", "secondary": "Movement", "tertiary": "Beast"},
-      "keySkills": ["Survival", "Track", "Ranged Combat", "Stealth"],
-      "keyPassions": ["Love (Family)", "Honor", "Loyalty (Hendarli Tribe)", "Loyalty (Shaker Temple)"],
-      "companion": {"type": "shadowcat", "name": "Rurik", "variant": "Spirit-bonded"},
+      "runeAffinities": {
+        "primary": "Air",
+        "secondary": "Movement",
+        "tertiary": "Beast"
+      },
+      "keySkills": [
+        "Survival",
+        "Track",
+        "Ranged Combat",
+        "Stealth"
+      ],
+      "keyPassions": [
+        "Love (Family)",
+        "Honor",
+        "Loyalty (Hendarli Tribe)",
+        "Loyalty (Shaker Temple)"
+      ],
+      "companion": {
+        "type": "shadowcat",
+        "name": "Rurik",
+        "variant": "Spirit-bonded"
+      },
       "statPriority": "CON > DEX > STR > SIZ > INT > POW > CHA",
-      "combatStyle": {"name": "Tarsh Hunter", "weapons": ["Composite Bow", "Battle Axe", "Dagger", "Broadsword", "Javelin", "Medium Shield"], "traits": ["Skirmishing"]},
-      "folkMagic": ["Detect Life", "Heal", "Mobility", "Speedart", "Strength"],
-      "miracles": ["Bear's Skin", "Bear's Strength", "Claws"]
+      "combatStyle": {
+        "name": "Tarsh Hunter",
+        "weapons": [
+          "Composite Bow",
+          "Battle Axe",
+          "Dagger",
+          "Broadsword",
+          "Javelin",
+          "Medium Shield"
+        ],
+        "traits": [
+          "Skirmishing"
+        ]
+      },
+      "folkMagic": [
+        "Detect Life",
+        "Heal",
+        "Mobility",
+        "Speedart",
+        "Strength"
+      ],
+      "miracles": [
+        "Bear's Skin",
+        "Bear's Strength",
+        "Claws"
+      ]
     },
     {
       "name": "Aranda of Nochet",
@@ -142,14 +385,54 @@
       "cult": "Babeester Gor",
       "age": 21,
       "gender": "Female",
-      "runeAffinities": {"primary": "Earth", "secondary": "Death", "tertiary": "Stasis"},
-      "keySkills": ["Combat Style (Axe)", "Intimidate", "Endurance", "Dodge"],
-      "keyPassions": ["Devotion (Babeester Gor)", "Honor", "Loyalty (Nochet)", "Loyalty (Queen Samastina)"],
-      "companion": {"type": "horse", "name": "Riding Horse", "variant": "Riding (not combat-trained)"},
+      "runeAffinities": {
+        "primary": "Earth",
+        "secondary": "Death",
+        "tertiary": "Stasis"
+      },
+      "keySkills": [
+        "Combat Style (Axe)",
+        "Intimidate",
+        "Endurance",
+        "Dodge"
+      ],
+      "keyPassions": [
+        "Devotion (Babeester Gor)",
+        "Honor",
+        "Loyalty (Nochet)",
+        "Loyalty (Queen Samastina)"
+      ],
+      "companion": {
+        "type": "horse",
+        "name": "Riding Horse",
+        "variant": "Riding (not combat-trained)"
+      },
       "statPriority": "STR > DEX > CON > SIZ > POW > INT > CHA",
-      "combatStyle": {"name": "Axe Maiden", "weapons": ["Battle Axe (1H)", "Battle Axe (2H)", "Medium Shield", "Self Bow", "Throwing Axe", "Short Spear"], "traits": ["Berserker"]},
-      "folkMagic": ["Bladesharp", "Demoralize", "Heal", "Vigor"],
-      "miracles": ["Berserker", "Earth Shield", "Slash"]
+      "combatStyle": {
+        "name": "Axe Maiden",
+        "weapons": [
+          "Battle Axe (1H)",
+          "Battle Axe (2H)",
+          "Medium Shield",
+          "Self Bow",
+          "Throwing Axe",
+          "Short Spear"
+        ],
+        "traits": [
+          "Berserker"
+        ]
+      },
+      "folkMagic": [
+        "Bladesharp",
+        "Demoralize",
+        "Heal",
+        "Vigour"
+      ],
+      "miracles": [
+        "Berserker",
+        "Earth Shield",
+        "Slash"
+      ]
     },
     {
       "name": "Dazarim Crescentblade",
@@ -160,14 +443,53 @@
       "cult": "Yelmalio",
       "age": 21,
       "gender": "Male",
-      "runeAffinities": {"primary": "Fire/Sky", "secondary": "Truth", "tertiary": "Movement"},
-      "keySkills": ["Combat Style", "Ride (Sable)", "Survival", "Track"],
-      "keyPassions": ["Devotion (White Bull)", "Devotion (Yelmalio)", "Loyalty (Sable Riders)", "Hate (Tusk Riders)"],
-      "companion": {"type": "sableAntelope", "name": "Sevara", "variant": "War-trained"},
+      "runeAffinities": {
+        "primary": "Fire/Sky",
+        "secondary": "Truth",
+        "tertiary": "Movement"
+      },
+      "keySkills": [
+        "Combat Style",
+        "Ride (Sable)",
+        "Survival",
+        "Track"
+      ],
+      "keyPassions": [
+        "Devotion (White Bull)",
+        "Devotion (Yelmalio)",
+        "Loyalty (Sable Riders)",
+        "Hate (Tusk Riders)"
+      ],
+      "companion": {
+        "type": "sableAntelope",
+        "name": "Sevara",
+        "variant": "War-trained"
+      },
       "statPriority": "DEX > STR > SIZ > CON > INT > POW > CHA",
-      "combatStyle": {"name": "Sable Raider", "weapons": ["Kopis", "Dagger", "Javelin", "Medium Shield"], "traits": ["Mounted Combat", "Throw Weapons"]},
-      "folkMagic": ["Coordination", "Detect Gold", "Farsee", "Repair"],
-      "miracles": ["Catseye", "Sunbright", "Sureshot"]
+      "combatStyle": {
+        "name": "Sable Raider",
+        "weapons": [
+          "Kopis",
+          "Dagger",
+          "Javelin",
+          "Medium Shield"
+        ],
+        "traits": [
+          "Mounted Combat",
+          "Throw Weapons"
+        ]
+      },
+      "folkMagic": [
+        "Coordination",
+        "Detect Gold",
+        "Farsee",
+        "Repair"
+      ],
+      "miracles": [
+        "Catseye",
+        "Sunbright",
+        "Sureshot"
+      ]
     },
     {
       "name": "Ionara Grand-daughter of Thiralda",
@@ -178,14 +500,56 @@
       "cult": "Maran Gor",
       "age": 21,
       "gender": "Female",
-      "runeAffinities": {"primary": "Earth", "secondary": "Death", "tertiary": "Disorder"},
-      "keySkills": ["Ride (Horse)", "Worship", "Dance", "Orate", "Intimidate"],
-      "keyPassions": ["Devotion (Maran Gor)", "Hate (Lunar Empire)", "Loyalty (Feathered Horse Queen)"],
-      "companion": {"type": "horse", "name": "Teza", "variant": "Riding"},
+      "runeAffinities": {
+        "primary": "Earth",
+        "secondary": "Death",
+        "tertiary": "Disorder"
+      },
+      "keySkills": [
+        "Ride (Horse)",
+        "Worship",
+        "Dance",
+        "Orate",
+        "Intimidate"
+      ],
+      "keyPassions": [
+        "Devotion (Maran Gor)",
+        "Hate (Lunar Empire)",
+        "Loyalty (Feathered Horse Queen)"
+      ],
+      "companion": {
+        "type": "horse",
+        "name": "Teza",
+        "variant": "Riding"
+      },
       "statPriority": "POW > CHA > INT > DEX > CON > SIZ > STR",
-      "combatStyle": {"name": "Grazelander Cavalry", "weapons": ["Mace", "Small Shield", "Lance", "Dagger"], "traits": ["Mounted Combat"]},
-      "folkMagic": ["Bludgeon", "Disruption", "Heal", "Vigor"],
-      "miracles": ["Blast Earth", "Create Fissure", "Shake Earth"]
+      "combatStyle": {
+        "name": "Grazelander Noble",
+        "weapons": [
+          "Mace",
+          "Small Shield",
+          "Lance",
+          "Dagger"
+        ],
+        "traits": [
+          "Intimidating Scream",
+          "Mounted Combat",
+          "Shield Wall"
+        ]
+      },
+      "folkMagic": [
+        "Bludgeon",
+        "Disruption",
+        "Heal",
+        "Vigour"
+      ],
+      "miracles": []
     }
-  ]
+  ],
+  "source": "RQG Starter Set Pregen Folios, adapted for AiG/Mythras 75-point builds",
+  "notes": "Each character concept from RQG needs a valid 75-point stat allocation. Key narrative features preserved; specific skill % will differ due to different point budgets.",
+  "fixtureDivergenceNotes": {
+    "Vasana Farnan's Daughter": "Superseded by strict ADR-0015 active fixture refresh: no starting cult miracles/devotional pool; custom combat style retained as source-blocked pregen exception.",
+    "Ionara Grand-daughter of Thiralda": "Superseded by strict ADR-0015 active fixture refresh: no starting cult miracles/devotional pool; custom combat style retained as source-blocked pregen exception."
+  }
 }

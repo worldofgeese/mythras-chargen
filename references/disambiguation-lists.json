@@ -73,7 +73,7 @@
   "bare_specialization_required_skills": {
     "description": "Character-facing bare skill labels that must be resolved before final/export; source/reference metadata may still use them as category labels.",
     "source": "ADR-0014",
-    "skills": ["Art", "Craft", "Culture", "Language", "Lore", "Combat Style", "Navigation", "Musicianship", "Mysticism", "Invocation"]
+    "skills": ["Art", "Craft", "Culture", "Language", "Lore", "Combat Style", "Navigation", "Musicianship", "Invocation"]
   },
   "resolved_bare_base_skills": {
     "description": "Bare base skills that are complete character-facing skills and must not be treated as unresolved solely because related parenthetical forms exist.",

@@ -138,7 +138,12 @@
       "name": "Rurik",
       "notes": "Sacred to Yinkin. Night Vision, Leaper. Stealthy ambush predator (Stealth 80%).",
       "species": "Shadowcat (bonded)",
-      "strikeRank": 3
+      "strikeRank": 3,
+      "source": "RQG Starter Set Pregen Folios",
+      "sourcePages": [
+        "PDF p.13"
+      ],
+      "sourceCitation": "Nathem folio companion block"
     },
     {
       "armor": 0,
@@ -206,7 +211,12 @@
       "name": "Shadowcat",
       "notes": "Sacred to Yinkin. Night Vision, Leaper. Stealthy ambush predator (Stealth 80%).",
       "species": "Shadowcat (bonded)",
-      "strikeRank": 3
+      "strikeRank": 3,
+      "source": "RQG Starter Set Pregen Folios",
+      "sourcePages": [
+        "PDF p.13"
+      ],
+      "sourceCitation": "Nathem folio companion block"
     }
   ],
   "concept": "Quiet wilderness hunter with bonded shadowcat",

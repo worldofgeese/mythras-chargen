@@ -6,7 +6,7 @@ This example reflects the **current strict build** that passes the validator.
 
 - Name: Vasana Farnan's Daughter
 - Homeland: Ernaldori clan of the Colymar Tribe, Sartar
-- Concept: scarred heavy cavalry leader and devout Vinga / Orlanth initiate
+- Concept: scarred heavy cavalry leader and Orlanth/Vinga future-initiation path
 - Career label on sheet: Heavy cavalrywoman
 - Cult packet: `Vinga.pdf` pp. 1-2 with `Orlanth.pdf` pp. 1-2 as the parent cult packet
 
@@ -14,13 +14,13 @@ This example reflects the **current strict build** that passes the validator.
 
 Original RuneQuest priorities were rescaled to this legal Mythras Core array:
 
-- `STR 12`
-- `CON 9`
-- `SIZ 9`
-- `DEX 8`
-- `INT 12`
-- `POW 11`
-- `CHA 14`
+- `STR 14`
+- `CON 10`
+- `SIZ 8`
+- `DEX 10`
+- `INT 9`
+- `POW 12`
+- `CHA 12`
 
 Total: `75`
 
@@ -30,11 +30,11 @@ Total: `75`
 - Damage Modifier: `+0`
 - Experience Modifier: `1`
 - Healing Rate: `2`
-- Initiative Bonus: `10`
+- Initiative Bonus: `9`
 - Luck Points: `2`
-- Personal Magic Points: `11`
-- Stored Magic Points: `+10` in the storage crystal
-- Devotional Pool: `3 / 3`
+- Personal Magic Points: `12`
+- Stored Magic Points: `+10` in the storage crystal (RQG folio narrative item)
+- Devotional Pool: `0 / 0` under strict ADR-0015 chargen baseline
 - Hit locations:
   - Head `4`
   - Chest `6`
@@ -76,35 +76,42 @@ The strict conversion removes every non-core name:
 
 No custom skills remain.
 
-## Magic Skills And Rune Magic
+## Passion Values
 
-Magic skills on the strict sheet:
+The RQG folio's passion targets are preserved, but active fixture values are reconciled to the app's strict chargen passion value (`54`) rather than importing RQG percentages such as Hate (Lunar Empire) 90. This keeps the active fixture wizard-possible while retaining the source identity.
 
-- `Devotion (Orlanth) 80`
-- `Exhort 55`
-- `Folk Magic 45`
-- `Meditation 25`
+## Magic Skills And Strict ADR-0015 Rune Magic
 
-Player-facing rune affinities:
+The RQG folio presents Vasana as an initiate with Fearless, Lightning, and Shield. The current app fixture follows strict ADR-0015 chargen policy instead:
 
-- Air `90%`
-- Movement `75%`
-- Death `75%`
+- Orlanth/Vinga is recorded as a future-initiation path.
+- No cult-backed miracles are active at chargen.
+- `devotionalPool` is `0`.
+- The folio's spirit/Rune magic requires GM conversion or later advancement.
 
-Casting policy:
+RQG folio spirit magic reconciliation:
 
-- `Fearless`, `Lightning`, and `Shield` are launched with the relevant rune affinity
-- `Devotion (Orlanth)` governs intensity or magnitude
-- the devotional pool is the sheet's miracle-use pool
+| RQG folio spell | Mythras app spelling | Fixture status |
+| --- | --- | --- |
+| Demoralize | Demoralise | Withheld under strict ADR-0015; not in general picker, requires cult/GM advancement. |
+| Heal 2 | Heal | Present as `Heal`; RQG intensity 2 is not encoded in fixture spell names. |
+| Mobility | Mobility | Withheld under strict ADR-0015; not in general picker, requires cult/GM advancement. |
+
+See `references/folk-magic-reconciliation.json` → `vasana_rqg_spirit_magic_mapping`.
+
+Player-facing rune affinities retain the app's compressed top-three identity:
+
+- Air primary
+- Movement secondary
+- Death tertiary
 
 ## Combat Styles
 
-- `Vinga Cavalry 90`
+- `Colymar Bison Cavalry` (fixture/test contract; source-blocked CSE exception documented in `references/combat-style-exceptions.json` and bead `mythras-chargen-m1rv`)
   - broadsword
-  - lance
   - battleaxe
+  - lance
   - medium shield
-- `Sartarite Archer 45`
   - composite bow
 
 ## Gear
@@ -119,6 +126,16 @@ Casting policy:
 - Steep Surface Climb `4`
 - Sheer Surface Climb `2`
 - Swim `2`
+
+## Companion
+
+Vasana's companion block is preserved in `fixtures/vasana.json` rather than summarized into the worked-example math above. The fixture's `Molon` object carries the game-stat block plus provenance fields:
+
+- `source`: RQG Starter Set Pregen Folios
+- `sourcePages`: PDF page 2
+- `sourceCitation`: Vasana/Molon folio companion block
+
+Keep companion stat changes source-backed and update those fields alongside any future Molon refresh.
 
 ## Validation
 

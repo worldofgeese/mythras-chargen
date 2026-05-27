@@ -3370,6 +3370,79 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
   }
 }
 
+// Test 1.12k: God Forgot Sorcerer auto-locks Invocation to Zzistori School
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj?.renderCareerDetails && AppObj.selectCareer && AppObj.selectCulture && CD) {
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 13, POW: 14, CHA: 10 };
+    CD.culture = 'God Forgot';
+    CD.cult = null;
+    CD.cultInitiated = false;
+    AppObj.selectCareer('Sorcerer');
+    const html = AppObj.renderCareerDetails();
+    const selectedLocked = CD.selectedProfessionalSkills.includes('Invocation (Zzistori School)') &&
+      !CD.selectedProfessionalSkills.includes('Invocation (Cult, School or Grimoire)');
+    const skillMoved = Object.prototype.hasOwnProperty.call(CD.careerSkills, 'Invocation (Zzistori School)') &&
+      !Object.prototype.hasOwnProperty.call(CD.careerSkills, 'Invocation (Cult, School or Grimoire)');
+    const uiLocked = html.includes('value="Zzistori School"') && html.includes('readonly') && html.includes('Auto-locked to your active sorcery school');
+
+    CD.culture = 'Esrolian';
+    CD.career = 'Sorcerer';
+    CD.cult = null;
+    CD.cultInitiated = false;
+    CD.selectedProfessionalSkills = ['Invocation (Arkat)', 'Shaping'];
+    CD.careerSkills = { 'Invocation (Arkat)': 7, Shaping: 0 };
+    AppObj.selectCulture('God Forgot');
+    const staleRewritten = CD.selectedProfessionalSkills.includes('Invocation (Zzistori School)') &&
+      !CD.selectedProfessionalSkills.includes('Invocation (Arkat)') &&
+      CD.careerSkills['Invocation (Zzistori School)'] === 7 &&
+      CD.careerSkills['Invocation (Arkat)'] === undefined;
+
+    CD.culture = 'Esrolian';
+    CD.career = 'Sorcerer';
+    CD.cult = null;
+    CD.cultInitiated = false;
+    CD.selectedProfessionalSkills = ['Invocation (Arkat)', 'Shaping', 'Literacy'];
+    CD.careerSkills = { 'Invocation (Arkat)': 7, Shaping: 0, Literacy: 0 };
+    const agentCultureResult = AppObj.agent.setStep(4, { culture: 'God Forgot', homeland: 'God Forgot' });
+    const agentRewritten = agentCultureResult.success &&
+      CD.selectedProfessionalSkills.includes('Invocation (Zzistori School)') &&
+      !CD.selectedProfessionalSkills.includes('Invocation (Arkat)') &&
+      CD.careerSkills['Invocation (Zzistori School)'] === 7 &&
+      CD.careerSkills['Invocation (Arkat)'] === undefined;
+
+    if (selectedLocked && skillMoved && uiLocked && staleRewritten && agentRewritten) {
+      pass('God Forgot Sorcerer Invocation auto-locks to Zzistori School');
+    } else {
+      fail('God Forgot Sorcerer Invocation did not auto-lock to Zzistori School', JSON.stringify({ selected: CD.selectedProfessionalSkills, careerSkills: CD.careerSkills, uiLocked, selectedLocked, skillMoved, staleRewritten, agentCultureResult, agentRewritten }));
+    }
+  } else {
+    fail('App.renderCareerDetails/App.selectCareer/App.selectCulture unavailable for Zzistori auto-lock test');
+  }
+}
+
+// Test 1.12l: Legacy specialized Mysticism renders as the Mystic locked skill
+{
+  const { App: AppObj, CharacterData: CD } = loadApp();
+  if (AppObj?.renderCareerDetails && CD) {
+    CD.culture = 'Esrolian';
+    CD.career = 'Mystic';
+    CD.selectedProfessionalSkills = ['Meditation', 'Mysticism (Path of Harmony)', 'Stealth'];
+    CD.careerSkills = { Meditation: 0, 'Mysticism (Path of Harmony)': 5, Stealth: 0 };
+    const html = AppObj.renderCareerDetails();
+    const mysticismInput = html.match(/<input type="checkbox"[^>]*data-skill="Mysticism"[^>]*>/)?.[0] || '';
+    const checked = mysticismInput.includes('checked');
+    const specializedSatisfies = AppObj.resolveHigherMagicProviders(CD).some(provider => provider.system === 'mysticism');
+    if (checked && specializedSatisfies) {
+      pass('Legacy specialized Mysticism renders as the Mystic skill');
+    } else {
+      fail('Legacy specialized Mysticism does not render as selected', JSON.stringify({ mysticismInput, selected: CD.selectedProfessionalSkills, specializedSatisfies }));
+    }
+  } else {
+    fail('App.renderCareerDetails unavailable for legacy Mysticism render test');
+  }
+}
+
 // Test 1.13: Skill point clamps also sync the visible input value
 {
   const { App: AppObj, CharacterData: CD } = loadApp();
@@ -3478,12 +3551,14 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
       passionRows[2]?.innerHTML.includes('<datalist id="passion-subject-ns-2"');
     const namedWithoutSuggestions = !passionRows[3]?.innerHTML.includes('list="');
     const fixedPassionSimple = passionRows[4]?.className === 'allocation-row allocation-row--simple';
+    const noFocusPicker = passionRows.every(row => !row.innerHTML.includes('onfocus="if (this.showPicker) this.showPicker();"'));
+    const noDuplicateBlurSave = passionRows.every(row => !row.innerHTML.includes('onblur="App.updatePassion'));
 
-    if (choiceWithSuggestions && choiceWithoutSuggestions && namedWithSuggestions && namedWithoutSuggestions && fixedPassionSimple) {
+    if (choiceWithSuggestions && choiceWithoutSuggestions && namedWithSuggestions && namedWithoutSuggestions && fixedPassionSimple && noFocusPicker && noDuplicateBlurSave) {
       pass('Passion subject fields only show dropdown affordance when datalist options exist');
     } else {
-      fail('Passion subject fields still advertise empty dropdowns',
-        JSON.stringify({ choiceWithSuggestions, choiceWithoutSuggestions, namedWithSuggestions, namedWithoutSuggestions, fixedPassionSimple, rows: passionRows.map(row => ({ className: row.className, html: row.innerHTML })) }));
+      fail('Passion subject fields still advertise empty dropdowns or duplicate focus/blur saves',
+        JSON.stringify({ choiceWithSuggestions, choiceWithoutSuggestions, namedWithSuggestions, namedWithoutSuggestions, fixedPassionSimple, noFocusPicker, noDuplicateBlurSave, rows: passionRows.map(row => ({ className: row.className, html: row.innerHTML })) }));
     }
   } else {
     fail('App.renderStep6 unavailable for passion dropdown affordance test');
@@ -5461,9 +5536,9 @@ section('ADR-005: Placeholder Skill Disambiguation');
 {
   const { needsDisambiguation } = loadApp();
   if (needsDisambiguation) {
-    const should = ['Art', 'Craft', 'Culture', 'Language', 'Lore', 'Combat Style', 'Navigation', 'Musicianship', 'Mysticism', 'Invocation'];
+    const should = ['Art', 'Craft', 'Culture', 'Language', 'Lore', 'Combat Style', 'Navigation', 'Musicianship', 'Invocation'];
     const emptyParentheticalShould = ['Art ()', 'Craft ()', 'Culture ()', 'Language ()', 'Lore ()', 'Combat Style ()', 'Navigation ()', 'Musicianship ()', 'Mysticism ()', 'Invocation ()', 'Devotion ()', 'Binding ()'];
-    const shouldNot = ['Healing', 'Teach', 'Binding', 'Meditation', 'Shaping', 'Literacy', 'Customs', 'Ride', 'Influence'];
+    const shouldNot = ['Mysticism', 'Healing', 'Teach', 'Binding', 'Meditation', 'Shaping', 'Literacy', 'Customs', 'Ride', 'Influence'];
     let ok = true;
     for (const skill of should) {
       if (!needsDisambiguation(skill)) {
@@ -7327,11 +7402,23 @@ fixtures.forEach(fixtureInfo => {
     if (culturalTotal !== 100) errors.push(`cultural ${culturalTotal}/100`);
     if (careerTotal !== 100) errors.push(`career ${careerTotal}/100`);
     if (bonusTotal !== expectedBonusTotal) errors.push(`bonus ${bonusTotal}/${expectedBonusTotal}`);
+    ['culturalSkills', 'careerSkills', 'bonusSkills'].forEach(mapName => {
+      Object.entries(fixture[mapName] || {}).forEach(([skillName, points]) => {
+        if (points > 15) errors.push(`${mapName}.${skillName} ${points}/15`);
+      });
+    });
+    const expectedPassionValue = (Number(fixture.characteristics?.POW) || 0) + (Number(fixture.characteristics?.CHA) || 0) + 30;
+    (fixture.passions || []).forEach(passion => {
+      if (passion.value !== expectedPassionValue) errors.push(`${passion.name} passion ${passion.value}/${expectedPassionValue}`);
+      ['name', 'type', 'subject', 'description', 'value', 'custom', 'needsSubject', 'subjectSuggestions'].forEach(field => {
+        if (!Object.prototype.hasOwnProperty.call(passion, field)) errors.push(`${passion.name || fixtureInfo.file} missing passion.${field}`);
+      });
+    });
     if ((fixture.folkMagicSpells || []).length !== 3) errors.push(`folk magic ${(fixture.folkMagicSpells || []).length}/3`);
     if ((fixture.selectedProfessionalSkills || []).length !== 3) errors.push(`professional skills ${(fixture.selectedProfessionalSkills || []).length}/3`);
 
     if (errors.length === 0) {
-      pass(`${fixtureInfo.name}: chargen point budgets are complete`);
+      pass(`${fixtureInfo.name}: chargen point budgets and per-step caps are complete`);
     } else {
       fail(`${fixtureInfo.name}: chargen point budget mismatch`, errors.join(', '));
     }
@@ -7342,24 +7429,29 @@ fixtures.forEach(fixtureInfo => {
     App.CharacterData.attributes = App.Calc.calculateAllAttributes(App.CharacterData.characteristics);
     App.App.currentStep = 9;
 
-    const expectedPool = Math.floor(App.CharacterData.characteristics.POW / 2);
     const validation = App.App.getValidationState();
     const errors = [];
-    if (App.CharacterData.devotionalPool !== expectedPool) {
-      errors.push(`devotionalPool ${App.CharacterData.devotionalPool}/${expectedPool}`);
+    if (App.CharacterData.devotionalPool !== 0) {
+      errors.push(`devotionalPool ${App.CharacterData.devotionalPool}/0`);
     }
-    if (!validation.valid) {
-      errors.push(...validation.errors);
+    if ((App.CharacterData.miracles || []).length !== 0) {
+      errors.push(`miracles ${(App.CharacterData.miracles || []).join(', ')}`);
+    }
+    const cultMagicErrors = (validation.errors || []).filter(error => /miracle|devotional pool|cult-backed/i.test(error));
+    if (cultMagicErrors.length > 0) {
+      errors.push(...cultMagicErrors);
     }
 
     if (errors.length === 0) {
-      pass(`${fixtureInfo.name}: cult initiation and magic choices are valid`);
+      pass(`${fixtureInfo.name}: strict ADR-0015 pregen has no cult-backed magic at chargen`);
     } else {
-      fail(`${fixtureInfo.name}: cult initiation validation failed`, errors.join('; '));
+      fail(`${fixtureInfo.name}: strict ADR-0015 cult magic validation failed`, errors.join('; '));
     }
   }
 });
 
+// Active pregen companion/combat contracts cite the RQG Starter Set Pregen Folios:
+// Ionara/Teza from PDF page 20; Vasana/Molon from PDF page 2.
 const activePregenContracts = {
   Ionara: {
     culture: 'Grazelander/Pure Horse',
@@ -7386,7 +7478,7 @@ const activePregenContracts = {
   Vasana: {
     combatStyle: {
       name: 'Colymar Bison Cavalry',
-      weapons: ['Broadsword', 'Lance', 'Medium Shield', 'Composite Bow']
+      weapons: ['Broadsword', 'Battleaxe', 'Lance', 'Medium Shield', 'Composite Bow']
     },
     companion: {
       name: 'Molon',
@@ -7465,6 +7557,114 @@ Object.entries(activePregenContracts).forEach(([name, contract]) => {
     fail(`${name}: active player pregen contract mismatch`, errors.join('; '));
   }
 });
+
+{
+  const missing = [];
+  fixtures.forEach(fixtureInfo => {
+    const fixture = loadFixture(fixtureInfo.file);
+    (fixture?.companions || []).forEach(companion => {
+      if (!companion.source || !Array.isArray(companion.sourcePages) || companion.sourcePages.length === 0 || !companion.sourceCitation) {
+        missing.push(`${fixtureInfo.file}:${companion.name}`);
+      }
+    });
+  });
+
+  if (missing.length === 0) {
+    pass('Fixture companions carry source provenance fields');
+  } else {
+    fail('Fixture companions lack source provenance fields', missing.join(', '));
+  }
+}
+
+{
+  const combatStyles = readJson('references/combat-styles.json');
+  const exceptions = readJson('references/combat-style-exceptions.json');
+  const cseNames = new Set((combatStyles.styles || []).map(style => style.name));
+  const exceptionEntries = exceptions.exceptions || [];
+  const exceptionByName = new Map(exceptionEntries.map(entry => [entry.name, entry]));
+  const sameSet = (actual, expected) => {
+    const actualSet = new Set(actual || []);
+    const expectedSet = new Set(expected || []);
+    return actualSet.size === expectedSet.size && [...actualSet].every(value => expectedSet.has(value));
+  };
+  const errors = [];
+
+  exceptionEntries.forEach(entry => {
+    if (entry.coverage_state !== 'source_blocked' || entry.authority_state !== 'narrative_pregen_source') {
+      errors.push(`${entry.id} missing source-blocked exception metadata`);
+    }
+    if (!entry.fixture || !entry.character || !entry.name) errors.push(`${entry.id} missing fixture/character/name`);
+  });
+
+  [...new Set(exceptionEntries.map(entry => path.basename(entry.fixture || '')))].forEach(file => {
+    const fixture = loadFixture(file);
+    if (!fixture) {
+      errors.push(`${file} missing fixture`);
+      return;
+    }
+    (fixture.combatStyles || []).forEach(style => {
+      if (cseNames.has(style.name)) return;
+      const exception = exceptionByName.get(style.name);
+      if (!exception) {
+        errors.push(`${file}:${style.name} missing exception`);
+        return;
+      }
+      const weaponsMatch = sameSet(style.weapons || [], exception.approved_weapons || []);
+      const traitsMatch = sameSet(style.traits || [], exception.approved_traits || []);
+      const citation = style.citation || {};
+      if (!weaponsMatch || !traitsMatch) errors.push(`${file}:${style.name} exception mismatch`);
+      if (citation.coverage_state !== 'source_blocked' || citation.authority_state !== 'narrative_pregen_source') {
+        errors.push(`${file}:${style.name} missing source-blocked citation`);
+      }
+      const note = String(style.notes || '').toLowerCase();
+      if (!note.includes('rqg') || !note.includes('pregen') || !note.includes('cse')) {
+        errors.push(`${file}:${style.name} missing explanatory notes`);
+      }
+    });
+  });
+
+  if (errors.length === 0) {
+    pass('Active pregen custom combat styles are source-blocked exceptions');
+  } else {
+    fail('Active pregen custom combat style exception coverage failed', errors.join('; '));
+  }
+}
+
+{
+  const reconciliation = readJson('references/folk-magic-reconciliation.json');
+  const mapping = reconciliation.vasana_rqg_spirit_magic_mapping || {};
+  const spells = mapping.spells || [];
+  const byRqg = new Map(spells.map(spell => [spell.rqg_name, spell]));
+  const vasana = loadFixture('vasana.json');
+  const errors = [];
+
+  ['Demoralize', 'Heal 2', 'Mobility'].forEach(name => {
+    if (!byRqg.has(name)) errors.push(`missing mapping ${name}`);
+  });
+  const spellKeys = spells.map(spell => Object.keys(spell).sort().join('|'));
+  if (new Set(spellKeys).size !== 1) errors.push('mapping spell schema is not uniform');
+  if (byRqg.get('Demoralize')?.mythras_name !== 'Demoralise') errors.push('Demoralize mapping');
+  if (byRqg.get('Demoralize')?.fixture_status !== 'withheld_adr0015') errors.push('Demoralize status');
+  if (byRqg.get('Heal 2')?.fixture_status !== 'present') errors.push('Heal 2 status');
+  if (byRqg.get('Mobility')?.fixture_status !== 'withheld_adr0015') errors.push('Mobility status');
+  if ((vasana.folkMagicSpells || []).includes('Demoralise') || (vasana.folkMagicSpells || []).includes('Mobility')) {
+    errors.push('withheld spells active in Vasana fixture');
+  }
+  if (!(vasana.folkMagicSpells || []).includes('Heal')) errors.push('Heal missing from Vasana fixture');
+  const note = String(vasana.notes || '');
+  if (!note.includes('Demoralize') || !note.includes('Heal 2') || !note.includes('Mobility')) {
+    errors.push('Vasana notes omit complete folio spirit magic trio');
+  }
+  if (note.includes('Demoralized') || note.includes('Heal 20')) {
+    errors.push('Vasana notes contain misleading spirit magic near-match text');
+  }
+
+  if (errors.length === 0) {
+    pass('Vasana RQG spirit magic reconciliation is documented and gated');
+  } else {
+    fail('Vasana RQG spirit magic reconciliation drifted', errors.join('; '));
+  }
+}
 
 // ============================================================
 section('Wave 3 Goal 3: PDF Content Regression Tests');
@@ -7642,9 +7842,8 @@ const wizardPlayPdfFidelityCases = [
       'Ionara Grand-daughter of Thiralda',
       'Grazelander/Pure Horse',
       'Priest',
-      'THEIST MIRACLES (Maran Gor)',
-      'Blast Earth',
-      'Summon Gnome',
+      'Devotion (Maran Gor)',
+      'Hate (Old Tarshites)',
       'Grazelander Noble',
       'Mace',
       'Lance',
@@ -7658,11 +7857,11 @@ const wizardPlayPdfFidelityCases = [
       "Vasana Farnan's Daughter",
       'Sartarite (Heortling)',
       'Warrior',
-      'THEIST MIRACLES (Orlanth)',
-      'Lightning',
-      'Shield',
+      'Devotion (Orlanth)',
+      'Hate (Lunar Empire)',
       'Colymar Bison Cavalry',
       'Broadsword',
+      'Battleaxe',
       'Composite Bow',
       'COMPANION: Molon (Bison (War-trained))'
     ]
@@ -10310,11 +10509,21 @@ section('Cult Data Tests');
     vostor?.cultDisplayGroup === 'Seven Mothers' &&
     !(App.CULTS_DATA || []).some(cult => cult.name === 'Seven Mothers');
 
-  if (vostorCultureCanonical && displayOnlyCult) {
+  const metadataNormalized = Boolean(pregen.source) && Boolean(pregen.notes) && !Object.prototype.hasOwnProperty.call(pregen, '_source') && !Object.prototype.hasOwnProperty.call(pregen, '_notes');
+  const privateCharacterFields = (pregen.characters || []).flatMap(character => Object.keys(character).filter(key => key.startsWith('_')));
+  const divergenceNotes = pregen.fixtureDivergenceNotes || {};
+  const divergenceTargets = Object.keys(divergenceNotes).sort();
+  const characterNames = new Set((pregen.characters || []).map(character => character.name));
+  const exceptions = readJson('references/combat-style-exceptions.json');
+  const exceptionCharacters = new Set((exceptions.exceptions || []).map(entry => entry.character));
+  const divergenceNotesMatch = divergenceTargets.length > 0 &&
+    divergenceTargets.every(name => characterNames.has(name) && exceptionCharacters.has(name) && divergenceNotes[name]);
+
+  if (vostorCultureCanonical && displayOnlyCult && metadataNormalized && privateCharacterFields.length === 0 && divergenceNotesMatch) {
     pass('Vostor concept uses canonical Lunar Provincial culture while preserving source labels/display-only cult group');
   } else {
-    fail('Vostor concept still has an unsupported culture or selectable aggregate cult assumption',
-      JSON.stringify({ vostorCultureCanonical, displayOnlyCult, vostor }));
+    fail('Pregen concepts metadata or Vostor culture/cult assumptions drifted',
+      JSON.stringify({ vostorCultureCanonical, displayOnlyCult, metadataNormalized, privateCharacterFields, divergenceTargets, exceptionCharacters: [...exceptionCharacters], vostor }));
   }
 }
 

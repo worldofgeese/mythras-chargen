@@ -85,7 +85,7 @@
   "combatStyles": [
     {
       "name": "Grazelander Noble",
-      "notes": "Pregen custom style for Pure Horse/Grazelander mounted priestess",
+      "notes": "RQG-narrative pregen style. Pure Horse People mounted priestess combat style. Grazelander/Pure Horse culture is absent from CSE; see references/combat-style-exceptions.json.",
       "skill": 0,
       "traits": [
         "Intimidating Scream",
@@ -97,7 +97,16 @@
         "Small Shield",
         "Lance",
         "Dagger"
-      ]
+      ],
+      "citation": {
+        "source": "RQG Starter Set Pregen Folios",
+        "source_id": "rqg-pregen-folios",
+        "page": 20,
+        "coverage_state": "source_blocked",
+        "authority_state": "narrative_pregen_source",
+        "source_blocked_reason": "Grazelander/Pure Horse culture absent from current CSE authority set; narrative pregen source retained without CSE promotion.",
+        "exception_id": "pregen:ionara:grazelander-noble"
+      }
     }
   ],
   "companions": [
@@ -180,7 +189,12 @@
       "name": "Teza",
       "notes": "Riding horse. Normally only attacks if life threatened. Owner attacks OR horse attacks \u2014 not both per round. Use mount's +3D6 damage bonus for lance charges.",
       "species": "Riding Horse",
-      "strikeRank": 0
+      "strikeRank": 0,
+      "source": "RQG Starter Set Pregen Folios",
+      "sourcePages": [
+        "PDF p.20"
+      ],
+      "sourceCitation": "Ionara/Teza folio companion block"
     }
   ],
   "concept": "Grazelander priestess of the Earth-shaker, horse warrior",
@@ -206,7 +220,7 @@
     "Willpower": 15
   },
   "culture": "Grazelander/Pure Horse",
-  "devotionalPool": 7,
+  "devotionalPool": 0,
   "equipment": [
     {
       "cost": 0,
@@ -249,6 +263,24 @@
       "enc": 0,
       "name": "Flint & Tinder",
       "quantity": 1
+    },
+    {
+      "cost": 0,
+      "enc": 1,
+      "name": "Finely made magical lyre (+20% Play Instrument in RQG folio; retained as narrative item)",
+      "quantity": 1
+    },
+    {
+      "cost": 60,
+      "enc": 2,
+      "name": "Artifacts and regalia of Maran Gor; noble clothing",
+      "quantity": 1
+    },
+    {
+      "cost": 450,
+      "enc": 3,
+      "name": "Jewelry, vessels, and luxury goods (RQG folio treasure)",
+      "quantity": 1
     }
   ],
   "family": "Pure Horse People, Grazelands",
@@ -290,33 +322,70 @@
   },
   "hobbySkillName": null,
   "homeland": "Pure Horse People, Grazelands",
-  "miracles": [
-    "Extension",
-    "Find (Specific Thing)",
-    "Divination",
-    "Blast Earth",
-    "Create Fissure",
-    "Shake Earth",
-    "Summon Gnome"
-  ],
+  "miracles": [],
   "mysticismTalents": [],
   "name": "Ionara Grand-daughter of Thiralda",
-  "notes": "Pure Horse People priestess of Maran Gor; granddaughter of Thiralda. Fought Lunars across the Grazelands and Pennel Ford; a direct, truth-loving wanderer in Orlanthi lands.",
+  "notes": "Pure Horse People priestess of Maran Gor; granddaughter of Thiralda. Fought Lunars across the Grazelands and Pennel Ford; a direct, truth-loving wanderer in Orlanthi lands. Strict ADR-0015 fixture: RQG initiate Rune magic is withheld at chargen; Maran Gor miracles are future-initiation content. Spirit magic follows current Mythras fixture conversion. Active passion values are reconciled to the app's strict chargen formula (55) rather than the higher RQG folio values; folio passion targets are preserved as identity evidence.",
   "passions": [
     {
-      "custom": true,
       "name": "Devotion (Maran Gor)",
-      "value": 55
+      "type": "Devotion",
+      "subject": "Maran Gor",
+      "description": "Devotion directed toward Maran Gor.",
+      "value": 55,
+      "needsSubject": false,
+      "subjectSuggestions": [],
+      "custom": false
     },
     {
-      "custom": true,
       "name": "Hate (Lunar Empire)",
-      "value": 55
+      "type": "Hate",
+      "subject": "Lunar Empire",
+      "description": "Hate directed toward Lunar Empire.",
+      "value": 55,
+      "needsSubject": false,
+      "subjectSuggestions": [],
+      "custom": false
     },
     {
-      "custom": true,
+      "name": "Hate (Old Tarshites)",
+      "type": "Hate",
+      "subject": "Old Tarshites",
+      "description": "Hate directed toward Old Tarshites.",
+      "value": 55,
+      "needsSubject": false,
+      "subjectSuggestions": [],
+      "custom": false
+    },
+    {
+      "name": "Honor",
+      "type": "Honor",
+      "subject": "",
+      "description": "Honor as a personal code.",
+      "value": 55,
+      "needsSubject": false,
+      "subjectSuggestions": [],
+      "custom": false
+    },
+    {
       "name": "Loyalty (Feathered Horse Queen)",
-      "value": 55
+      "type": "Loyalty",
+      "subject": "Feathered Horse Queen",
+      "description": "Loyalty directed toward Feathered Horse Queen.",
+      "value": 55,
+      "needsSubject": false,
+      "subjectSuggestions": [],
+      "custom": false
+    },
+    {
+      "name": "Loyalty (Shaker Temple)",
+      "type": "Loyalty",
+      "subject": "Shaker Temple",
+      "description": "Loyalty directed toward Shaker Temple.",
+      "value": 55,
+      "needsSubject": false,
+      "subjectSuggestions": [],
+      "custom": false
     }
   ],
   "runeAffinities": {
@@ -334,7 +403,7 @@
   "socialClassMoneyMod": 1,
   "sorceryResource": 0,
   "sorcerySpells": [],
-  "startingMoney": 270,
+  "startingMoney": 160,
   "weapons": [
     {
       "ap": 6,

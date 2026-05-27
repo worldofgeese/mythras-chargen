@@ -108,7 +108,12 @@
       "name": "Riding Horse",
       "notes": "Riding horse. Not trained for combat \u2014 will flee unless cornered.",
       "species": "Riding Horse",
-      "strikeRank": 0
+      "strikeRank": 0,
+      "source": "RQG Starter Set Pregen Folios",
+      "sourcePages": [
+        "PDF p.15"
+      ],
+      "sourceCitation": "Aranda folio companion block"
     }
   ],
   "concept": "Fearless axe maiden of the death goddess",
