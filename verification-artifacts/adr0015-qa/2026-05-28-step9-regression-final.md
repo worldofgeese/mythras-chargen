@@ -70,7 +70,7 @@ Synced at 2026-05-28 00:17 local time:
 - Ionara PDF → `/w/characters/active-pregens/Ionara-Grand-daughter-of-Thiralda.pdf` (6.7K)
 - Vasana PDF → `/w/characters/active-pregens/Vasana-Farnans-Daughter.pdf` (7.1K)
 
-Public URL verification succeeded via `fetch_content` response `mpoml4luu3dcl1` for:
+Public URL verification succeeded via `fetch_content` response `mpon4y5zsf33t1` after final root rebase/push and re-sync at 2026-05-28 00:33 local time for:
 
 - `https://copyparty.hound-celsius.ts.net/01-Character-Generator.html`
 - `https://copyparty.hound-celsius.ts.net/00-START-HERE.html`
