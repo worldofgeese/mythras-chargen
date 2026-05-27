@@ -4904,9 +4904,14 @@ const KNOWN_CONCRETE_SPECIALIZATIONS = new Set([
   'Navigation (Underground)'
 ]);
 
+const INVOCATION_PLACEHOLDER_SKILL = 'Invocation (Cult, School or Grimoire)';
+
+// Mysticism intentionally excluded: Mythras Core treats bare Mysticism as a
+// complete professional skill, while legacy/source-backed Mysticism (Path)
+// values still satisfy provider requirements. See skillSatisfiesCareerMagicProviderRequirement.
 const BARE_SPECIALIZATION_REQUIRED_SKILLS = new Set([
   'Art', 'Craft', 'Culture', 'Language', 'Lore',
-  'Combat Style', 'Navigation', 'Musicianship', 'Mysticism', 'Invocation'
+  'Combat Style', 'Navigation', 'Musicianship', 'Invocation'
 ]);
 
 const DISAMBIGUATION_CATEGORY_NAMES = new Map([
@@ -4918,7 +4923,6 @@ const DISAMBIGUATION_CATEGORY_NAMES = new Map([
   ['combat style', 'Combat Style'],
   ['navigation', 'Navigation'],
   ['musicianship', 'Musicianship'],
-  ['mysticism', 'Mysticism'],
   ['invocation', 'Invocation'],
   ['healing', 'Healing'],
   ['teach', 'Teach'],
@@ -5268,10 +5272,62 @@ function isProfessionalSkillSelected(skillName) {
   return Boolean(resolved && selected.includes(resolved));
 }
 
+function getSorcerySchoolVariants(school) {
+  const canonical = String(school || '').trim();
+  if (!canonical) return new Set();
+  const variants = new Set([canonical]);
+  const base = canonical.replace(/\s+School$/i, '').trim();
+  if (base) variants.add(base);
+  return variants;
+}
+
+function getAutoLockedProfessionalSkillResolution(skillName, character = CharacterData) {
+  if (String(skillName || '').trim() !== INVOCATION_PLACEHOLDER_SKILL) return null;
+  const source = resolveCultureBackedSorcerySource(character);
+  if (source?.isCultBacked || !source?.school) return null;
+  return `Invocation (${source.school})`;
+}
+
+function applyAutoLockedProfessionalSkillResolutions(character = CharacterData) {
+  if (!character || !Array.isArray(character.selectedProfessionalSkills)) return false;
+  const placeholder = INVOCATION_PLACEHOLDER_SKILL;
+  const resolved = getAutoLockedProfessionalSkillResolution(placeholder, character);
+  if (!resolved) return false;
+  let changed = false;
+
+  const isInvocationSpec = skill => /^Invocation\s*\([^)]+\)$/i.test(String(skill || '').trim());
+  character.selectedProfessionalSkills = character.selectedProfessionalSkills.map(skill => {
+    if (String(skill || '').trim() === placeholder || isInvocationSpec(skill)) {
+      changed = changed || skill !== resolved;
+      return resolved;
+    }
+    return skill;
+  });
+
+  if (character.careerSkills) {
+    Object.keys(character.careerSkills)
+      .filter(skill => skill !== resolved && (skill === placeholder || isInvocationSpec(skill)))
+      .forEach(skill => {
+        character.careerSkills[resolved] = Math.max(Number(character.careerSkills[resolved]) || 0, Number(character.careerSkills[skill]) || 0);
+        delete character.careerSkills[skill];
+        changed = true;
+      });
+  }
+
+  if (!character._disambiguationMap) character._disambiguationMap = {};
+  if (character._disambiguationMap[`career:${placeholder}`] !== resolved) {
+    character._disambiguationMap[`career:${placeholder}`] = resolved;
+    changed = true;
+  }
+  return changed;
+}
+
 function getProfessionalSkillRenderState(skillName, claimedResolvedSkills) {
   const selected = CharacterData.selectedProfessionalSkills || [];
   if (!needsDisambiguation(skillName)) {
-    return { isChecked: selected.includes(skillName), resolved: '' };
+    const selectedDirectly = selected.includes(skillName);
+    const selectedSpecializedMysticism = skillName === 'Mysticism' && selected.some(s => /^Mysticism\s*\([^)]+\)$/i.test(String(s || '').trim()));
+    return { isChecked: selectedDirectly || selectedSpecializedMysticism, resolved: '' };
   }
 
   if (!CharacterData._disambiguationMap) CharacterData._disambiguationMap = {};
@@ -10504,6 +10560,19 @@ function getSorcerySpellsWithoutSourceError(spells, source) {
     : null;
 }
 
+function inferImportedCultInitiated(data) {
+  if (!CharacterData.isRecord(data)) return false;
+  if (data.cultInitiated === true) return true;
+  if (data.cultInitiated === false) return false;
+  const hasCult = typeof data.cult === 'string' && data.cult.trim().length > 0;
+  const hasLegacyMiracles = Array.isArray(data.miracles) && data.miracles.length > 0;
+  const hasLegacyDevotionalPool = Number(data.devotionalPool) > 0;
+  const hasLegacyBoundSpirits = Array.isArray(data.boundSpirits) && data.boundSpirits.length > 0;
+  const hasLegacySorcerySpells = Array.isArray(data.sorcerySpells) && data.sorcerySpells.length > 0;
+  const hasLegacyMysticismTalents = Array.isArray(data.mysticismTalents) && data.mysticismTalents.length > 0;
+  return hasCult && (hasLegacyMiracles || hasLegacyDevotionalPool || hasLegacyBoundSpirits || hasLegacySorcerySpells || hasLegacyMysticismTalents);
+}
+
 function getUnsupportedMagicSelectionErrors(cultName, cultType, selections = {}) {
   const types = Array.isArray(cultType?.types) ? cultType.types : [];
   const providers = Array.isArray(selections.providers) ? selections.providers : null;
@@ -10821,7 +10890,7 @@ function getSorcerySourceSelectionError(snapshot, previousSource, currentCharact
   return null;
 }
 
-function getHigherMagicProviderBySystem(providers, system) {
+function findProviderBySystemInList(providers, system) {
   return (Array.isArray(providers) ? providers : []).find(provider => provider.system === system) || null;
 }
 
@@ -10895,8 +10964,8 @@ function keepCarryableBoundSpiritsAcrossAnimismProviderChange(character, snapsho
 function getHigherMagicProviderSelectionLossError(snapshot, providers, options = {}) {
   const activeProviders = Array.isArray(providers) ? providers : [];
   const previousProviders = resolveHigherMagicProviders(snapshot);
-  const previousAnimismProvider = getHigherMagicProviderBySystem(previousProviders, 'animism');
-  const currentAnimismProvider = getHigherMagicProviderBySystem(activeProviders, 'animism');
+  const previousAnimismProvider = findProviderBySystemInList(previousProviders, 'animism');
+  const currentAnimismProvider = findProviderBySystemInList(activeProviders, 'animism');
   const hasSystem = system => activeProviders.some(provider => provider.system === system);
   const currentCharacter = options.currentCharacter || CharacterData;
   const previousSorcerySpells = getMagicSelectionNames(snapshot?.sorcerySpells);
@@ -10978,8 +11047,9 @@ function getSorcerySourceSchoolErrors(character, source) {
     .map(skillName => String(skillName || '').match(/^Invocation\s*\(([^)]+)\)$/i)?.[1]?.trim())
     .filter(Boolean);
   const uniqueSpecializations = [...new Set(specializations)];
-  const mismatches = uniqueSpecializations.filter(specialization => specialization !== school);
-  if (uniqueSpecializations.includes(school) && mismatches.length === 0) return [];
+  const schoolVariants = getSorcerySchoolVariants(school);
+  const mismatches = uniqueSpecializations.filter(specialization => !schoolVariants.has(specialization));
+  if (uniqueSpecializations.some(specialization => schoolVariants.has(specialization)) && mismatches.length === 0) return [];
   return [`Invocation specialization must match ${school} for ${source.sourceLabel} (found ${mismatches.join(', ') || 'none'})`];
 }
 
@@ -11071,7 +11141,7 @@ function createCultBackedMagicProvider(character, cult, cultType, system) {
 }
 
 function resolveCultBackedHigherMagicProviders(character = CharacterData) {
-  if (!character?.cult) return [];
+  if (!character?.cult || character?.cultInitiated !== true) return [];
 
   const cult = CULTS_DATA.find(c => c.name === character.cult);
   const cultType = detectCultType(cult);
@@ -11164,7 +11234,12 @@ function skillSatisfiesCareerMagicProviderRequirement(selectedSkill, requiredSki
   const required = String(requiredSkill || '').trim();
   if (!selected || !required) return false;
   const requiredPlaceholder = parsePlaceholderSkill(required);
-  if (!requiredPlaceholder) return selected === required;
+  if (!requiredPlaceholder) {
+    // Mysticism is a complete bare skill in Mythras Core, but legacy/source-backed
+    // Mysticism (Path) values still satisfy the Core Mystic provider.
+    if (required === 'Mysticism') return selected === required || /^Mysticism\s*\([^)]+\)$/i.test(selected);
+    return selected === required;
+  }
   if (!requiredPlaceholder.hint && BARE_SPECIALIZATION_REQUIRED_SKILLS.has(requiredPlaceholder.category)) {
     return !needsDisambiguation(selected) &&
       selected.toLowerCase().startsWith(`${requiredPlaceholder.category.toLowerCase()} (`);
@@ -11217,7 +11292,14 @@ function resolveActiveSorcerySource(character = CharacterData) {
   return resolveHigherMagicProviderBySystem('sorcery', character);
 }
 
+function stripCultMagicWhenUninitiated(character = CharacterData) {
+  if (!character || character.cultInitiated === true) return;
+  character.miracles = [];
+  character.devotionalPool = 0;
+}
+
 function normalizeHigherMagicState(character = CharacterData) {
+  stripCultMagicWhenUninitiated(character);
   const providers = resolveHigherMagicProviders(character);
   const animismProvider = providers.find(provider => provider.system === 'animism');
   const sorceryProvider = providers.find(provider => provider.system === 'sorcery');
@@ -11302,6 +11384,8 @@ const CharacterData = {
   
   // Step 9: Cult Selection
   cult: null,
+  cultChoiceMade: false,
+  cultInitiated: false,
   cultType: null,  // ADR-0006: detected magic system type(s)
   miracles: [],  // Selected theist miracles from cult
   devotionalPool: 0,  // POW/2 for Theist Initiates (auto-calculated)
@@ -11441,6 +11525,8 @@ const CharacterData = {
       backgroundEvents: this.backgroundEvents,
       career: this.career,
       cult: this.cult,
+      cultChoiceMade: this.cultChoiceMade === true,
+      cultInitiated: this.cultInitiated === true,
       cultType: this.cloneForSerialization(this.cultType, null),
       miracles: [...(this.miracles || [])],
       devotionalPool: this.devotionalPool,
@@ -11580,6 +11666,9 @@ const CharacterData = {
       notes: this.coerceText(companion.notes)
     };
     if (companion.autoPopulated === true) sanitized.autoPopulated = true;
+    if (companion.source !== undefined) sanitized.source = this.coerceText(companion.source);
+    if (Array.isArray(companion.sourcePages)) sanitized.sourcePages = companion.sourcePages.map(page => this.coerceText(page));
+    if (companion.sourceCitation !== undefined) sanitized.sourceCitation = this.coerceText(companion.sourceCitation);
 
     Object.entries(companion.characteristics || {}).forEach(([key, value]) => {
       sanitized.characteristics[this.coerceText(key)] = this.coerceNumber(value);
@@ -11628,7 +11717,7 @@ const CharacterData = {
 	      'name', 'concept', 'characteristics', 'charMethod', 'attributes',
 	      'culture', 'homeland', 'culturalSkills', 'runeAffinities', 'folkMagicSpells',
 	      'passions', 'age', 'gender', 'family', 'backgroundEvents', 'career',
-	      'cult', 'cultType', 'miracles', 'devotionalPool', 'boundSpiritSlots',
+	      'cult', 'cultChoiceMade', 'cultInitiated', 'cultType', 'miracles', 'devotionalPool', 'boundSpiritSlots',
 	      'boundSpirits', 'sorceryResource', 'sorcerySpells', 'mysticismTalents', 'careerSkills',
 	      'careerFolkMagic', 'selectedProfessionalSkills', 'bonusSkills',
 	      'hobbySkillName', 'socialClass', 'socialClassMoneyMod', 'startingMoney',
@@ -11666,6 +11755,12 @@ const CharacterData = {
     } else {
       errors.push(...getObjectFieldOwnershipErrors(data.cultType, 'cultType'));
     }
+    if (data.cultChoiceMade !== undefined && typeof data.cultChoiceMade !== 'boolean') {
+      errors.push('cultChoiceMade must be a boolean');
+    }
+    if (data.cultInitiated !== undefined && typeof data.cultInitiated !== 'boolean') {
+      errors.push('cultInitiated must be a boolean');
+    }
 
     if (typeof data.culture === 'string' && data.culture.trim()) {
       if (!isKnownImportCultureName(data.culture)) {
@@ -11695,7 +11790,10 @@ const CharacterData = {
       }
     });
 
-    errors.push(...getInvalidMiracleEntryErrors(data.miracles));
+    const importedCultInitiated = inferImportedCultInitiated(data);
+    const importedMiracles = importedCultInitiated && Array.isArray(data.miracles) ? data.miracles : [];
+
+    errors.push(...getInvalidMiracleEntryErrors(importedMiracles));
     errors.push(...getInvalidBoundSpiritEntryErrors(data.boundSpirits));
 
     const unknownSorcerySpells = getUnknownSorcerySpellNames(data.sorcerySpells);
@@ -11706,7 +11804,7 @@ const CharacterData = {
     if (duplicateSorcerySpells.length > 0) {
       errors.push(`Duplicate sorcery spell(s): ${duplicateSorcerySpells.join(', ')}`);
     }
-    const duplicateMiracles = getDuplicateSelectionNames(data.miracles);
+    const duplicateMiracles = getDuplicateSelectionNames(importedMiracles);
     if (duplicateMiracles.length > 0) {
       errors.push(`Duplicate miracle(s): ${duplicateMiracles.join(', ')}`);
     }
@@ -11714,18 +11812,25 @@ const CharacterData = {
     if (duplicateBoundSpirits.length > 0) {
       errors.push(`Duplicate bound spirit(s): ${duplicateBoundSpirits.join(', ')}`);
     }
-    const importedSorcerySpells = Array.isArray(data.sorcerySpells) ? data.sorcerySpells : [];
+    const rawImportedSorcerySpells = Array.isArray(data.sorcerySpells) ? data.sorcerySpells : [];
+    const rawImportedBoundSpirits = Array.isArray(data.boundSpirits) ? data.boundSpirits : [];
     const importedCult = typeof data.cult === 'string' ? CULTS_DATA.find(cult => cult.name === data.cult) : null;
     const importedCultType = importedCult ? detectCultType(importedCult) : null;
-    const importedHigherMagicProviders = resolveHigherMagicProviders(data);
+    const importedHigherMagicProviders = resolveHigherMagicProviders({
+      ...data,
+      cultInitiated: importedCultInitiated
+    });
     const importedSorcerySource = importedHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
     const importedAnimismProvider = importedHigherMagicProviders.find(provider => provider.system === 'animism') || null;
+    const hasImportedCult = typeof data.cult === 'string' && data.cult.trim().length > 0;
+    const importedSorcerySpells = (!hasImportedCult || importedCultInitiated || (importedSorcerySource && !importedSorcerySource.isCultBacked)) ? rawImportedSorcerySpells : [];
+    const importedBoundSpirits = (!hasImportedCult || importedCultInitiated || (importedAnimismProvider && !importedAnimismProvider.isCultBacked)) ? rawImportedBoundSpirits : [];
     errors.push(...getUnsupportedMagicSelectionErrors(data.cult || null, importedCultType, {
-      miracles: data.miracles,
-      boundSpirits: data.boundSpirits,
+      miracles: importedMiracles,
+      boundSpirits: importedBoundSpirits,
       providers: importedHigherMagicProviders
     }));
-    const noSourceSpellError = getSorcerySpellsWithoutSourceError(data.sorcerySpells, importedSorcerySource);
+    const noSourceSpellError = getSorcerySpellsWithoutSourceError(importedSorcerySpells, importedSorcerySource);
     if (noSourceSpellError) {
       errors.push(noSourceSpellError);
     }
@@ -11735,7 +11840,6 @@ const CharacterData = {
     if (importedSorcerySpells.length > 0) {
       errors.push(...getSorcerySourceSchoolErrors(data, importedSorcerySource));
     }
-    const importedBoundSpirits = Array.isArray(data.boundSpirits) ? data.boundSpirits : [];
     if (importedAnimismProvider && importedBoundSpirits.length > 0) {
       if (!importedAnimismProvider.isCultBacked) {
         const unknownBoundSpirits = getUnknownBoundSpiritNames(importedBoundSpirits, importedAnimismProvider.availableItems);
@@ -11872,9 +11976,11 @@ const CharacterData = {
     this.backgroundEvents = this.coerceText(data.backgroundEvents);
     this.career = data.career || null;
     this.cult = data.cult || null;
+    this.cultChoiceMade = data.cultChoiceMade === true || !!this.cult;
+    this.cultInitiated = inferImportedCultInitiated(data);
     this.cultType = this.cult ? detectCultType(CULTS_DATA.find(c => c.name === this.cult)) : null;
-    this.miracles = Array.isArray(data.miracles) ? data.miracles : [];
-    this.devotionalPool = data.devotionalPool || 0;
+    this.miracles = this.cultInitiated && Array.isArray(data.miracles) ? data.miracles : [];
+    this.devotionalPool = this.cultInitiated ? (data.devotionalPool || 0) : 0;
     this.boundSpiritSlots = data.boundSpiritSlots || 0;
     this.boundSpirits = Array.isArray(data.boundSpirits) ? data.boundSpirits : [];
     this.sorceryResource = data.sorceryResource || 0;
@@ -12881,7 +12987,7 @@ App.updateCharacteristic = function(stat, value) {
     value = Math.max(3, Math.min(21, value));
   }
   CharacterData.characteristics[stat] = value;
-  CharacterData.attributes = Calc.calculateAllAttributes(CharacterData.characteristics);
+  this.recomputeDerivedCharacterState(CharacterData);
   this.saveToLocalStorage();
   // Targeted update: only refresh budget counter, don't destroy the input that has focus
   if (CharacterData.charMethod === 'point-buy') {
@@ -12913,7 +13019,7 @@ App.rollAllCharacteristics = function(formula) {
   ['STR', 'CON', 'SIZ', 'DEX', 'INT', 'POW', 'CHA'].forEach(stat => {
     CharacterData.characteristics[stat] = this.rollDice(formula);
   });
-  CharacterData.attributes = Calc.calculateAllAttributes(CharacterData.characteristics);
+  this.recomputeDerivedCharacterState(CharacterData);
   this.saveToLocalStorage();
   this.renderCurrentStep();
 };
@@ -13123,6 +13229,7 @@ App.selectCulture = function(cultureName) {
         });
       }
     }
+    applyAutoLockedProfessionalSkillResolutions(CharacterData);
     const activeHigherMagicProviders = this.normalizeHigherMagicState(CharacterData);
     const providerLossError = getHigherMagicProviderSelectionLossError(cultureSnapshot, activeHigherMagicProviders, {
       lostSpellsMessage: lostSpells => `Changing culture would clear selected sorcery spells: ${lostSpells.join(', ')}`,
@@ -13897,7 +14004,7 @@ App.renderStep6 = function() {
             <option value="">-- Select --</option>
             ${passion.choice.map(c => `<option value="${this.escapeHtmlAttr(c)}" ${currentType === c ? 'selected' : ''}>${this.escapeHtml(c)}</option>`).join('')}
           </select>
-          ${needsSubject ? `<input class="allocation-control" type="text" id="${subjectId}" placeholder="(subject)" value="${this.escapeHtmlAttr(currentSubject)}"${subjectListAttr} onchange="App.updatePassionSubject(${idx}, this.value)" onblur="App.updatePassionSubject(${idx}, this.value)">` + subjectDatalist : '<span></span>'}
+          ${needsSubject ? `<input class="allocation-control" type="text" id="${subjectId}" placeholder="(subject)" value="${this.escapeHtmlAttr(currentSubject)}"${subjectListAttr} onclick="this.focus(); if (this.showPicker) this.showPicker();" onchange="App.updatePassionSubject(${idx}, this.value)">` + subjectDatalist : '<span></span>'}
           <input class="points-input" type="number" value="${passion.value}" readonly>
         `;
       } else if (passion.needsSubject || passionTypeRequiresSubject(passion.type || parsePassionName(passion.name).type)) {
@@ -13914,8 +14021,8 @@ App.renderStep6 = function() {
           <span class="allocation-label" style="font-weight: 600;">${this.escapeHtml(baseName)}</span>
           <input class="allocation-control" type="text" value="${this.escapeHtmlAttr(currentSubject)}" placeholder="(to what?)"
             ${subjectListAttr}
-            onchange="App.updatePassionNameSubject(${idx}, '${baseName.replace(/'/g, "\\'")}', this.value)"
-            onblur="App.updatePassionNameSubject(${idx}, '${baseName.replace(/'/g, "\\'")}', this.value)">
+            onclick="this.focus(); if (this.showPicker) this.showPicker();"
+            onchange="App.updatePassionNameSubject(${idx}, '${baseName.replace(/'/g, "\\'")}', this.value)">
           ${subjectDatalist}
           <input class="points-input" type="number" value="${passion.value}" readonly>
         `;
@@ -14212,6 +14319,21 @@ App.selectCareer = function(careerName) {
     // Reset professional skill selection on career change (BUG-013)
     CharacterData.selectedProfessionalSkills = [];
 
+    // Auto-select required skills for magic careers
+    const autoSelectMap = {
+      'Mystic': ['Meditation', 'Mysticism'],
+      'Shaman': ['Binding (Cult, Totem or Tradition)', 'Trance'],
+      'Sorcerer': ['Invocation (Cult, School or Grimoire)', 'Shaping']
+    };
+    const requiredSkills = autoSelectMap[careerName] || [];
+    for (const skill of requiredSkills) {
+      if (!CharacterData.selectedProfessionalSkills.includes(skill)) {
+        CharacterData.selectedProfessionalSkills.push(skill);
+        CharacterData.careerSkills[skill] = 0;
+      }
+    }
+    applyAutoLockedProfessionalSkillResolutions(CharacterData);
+
     const activeHigherMagicProviders = this.resolveHigherMagicProviders(CharacterData);
     const providerLossError = getHigherMagicProviderSelectionLossError(careerSnapshot, activeHigherMagicProviders, {
       lostSpellsMessage: lostSpells => `Changing career would clear selected sorcery spells: ${lostSpells.join(', ')}`,
@@ -14453,10 +14575,28 @@ App.renderCareerDetails = function() {
             const skillAttr = this.escapeHtmlAttr(skill);
             const skillLabel = this.escapeHtml(getProfessionalSkillChoiceLabel(skill));
             const resolvedSpecAttr = this.escapeHtmlAttr(resolvedSpec);
+            const autoLockedResolution = getAutoLockedProfessionalSkillResolution(skill, CharacterData);
+            const autoLockedSpec = autoLockedResolution ? (autoLockedResolution.match(/\((.+)\)/) || [])[1] || '' : '';
+            const autoLockedSpecAttr = this.escapeHtmlAttr(autoLockedSpec);
             const requiredPrimaryLabel = requiredPrimary ? getProfessionalSkillChoiceLabel(requiredPrimary) : '';
             const disabledTitle = isDisabled ? ` title="Select ${this.escapeHtmlAttr(requiredPrimaryLabel)} first" disabled` : '';
             const guidance = renderProfessionalSkillGuidance(skill, career.name, CharacterData.cult);
             const placeholder = needsSpec ? this.escapeHtmlAttr(`${getProfessionalSkillChoiceLabel(skill).replace(/\s*\([^)]*\)\s*$/, '')} specialization`) : '';
+            let specInput = '';
+            if (isChecked && needsSpec) {
+              if (autoLockedSpec) {
+                specInput = `<input class="professional-specialization-input" type="text" value="${autoLockedSpecAttr}" title="${autoLockedSpecAttr}" data-skill="${skillAttr}" readonly>
+                  <p class="field-help" style="font-size: 12px; color: #555; margin: 4px 0 0 22px;">Auto-locked to your active sorcery school.</p>`;
+              } else if (skill === 'Musicianship') {
+                const options = DISAMBIGUATION_LISTS['Musicianship'] || [];
+                specInput = `<select class="professional-specialization-select" data-skill="${skillAttr}" onchange="App.resolveProfessionalSkill(this.dataset.skill, this.value, this)">
+                  <option value="">-- Select instrument --</option>
+                  ${options.map(opt => `<option value="${this.escapeHtmlAttr(opt)}" ${resolvedSpec === opt ? 'selected' : ''}>${this.escapeHtml(opt)}</option>`).join('')}
+                </select>`;
+              } else {
+                specInput = `<input class="professional-specialization-input" type="text" placeholder="${placeholder}" value="${resolvedSpecAttr}" title="${resolvedSpecAttr}" data-skill="${skillAttr}" onchange="App.resolveProfessionalSkill(this.dataset.skill, this.value, this)" oninput="App.debouncedResolveProfessionalSkill(this.dataset.skill, this.value, this)">`;
+              }
+            }
             return `<div class="professional-skill-option">
               <label style="font-size: 13px;">
                 <input type="checkbox"
@@ -14466,7 +14606,7 @@ App.renderCareerDetails = function() {
                   onchange="App.toggleProfessionalSkill(this.dataset.skill, this.checked, this)"> ${skillLabel}
               </label>
               ${guidance}
-              ${isChecked && needsSpec ? `<input class="professional-specialization-input" type="text" placeholder="${placeholder}" value="${resolvedSpecAttr}" title="${resolvedSpecAttr}" data-skill="${skillAttr}" onchange="App.resolveProfessionalSkill(this.dataset.skill, this.value, this)">` : ''}
+              ${specInput}
             </div>`;
             }).join('');
           })()}
@@ -14623,14 +14763,14 @@ App.renderStep9 = function() {
   const div = document.createElement('div');
   div.className = 'wizard-step';
   div.innerHTML = `
-    <div class="step-header">Step 9: Cult Selection (Optional) <span class="page-ref">(Adventures in Glorantha Cult One-Pagers)</span></div>
-    <p>Choose a cult to worship. Cults provide magical benefits, skills, and personality guidance. You may also choose "No Cult" — some cultures (like God Forgot) rarely worship the gods.</p>
+    <div class="step-header">Step 9: Cult Affiliation <span class="page-ref">(Adventures in Glorantha Cult One-Pagers)</span></div>
+    <p>Choose a cult affiliation for future initiation and roleplay identity. During character generation, cult-backed miracles and devotional pools are not granted yet. You may also choose "No Cult".</p>
     ${this.renderCultDisplayGroupNotice(cultMap)}
 
     <div style="margin: 15px 0;">
       <button onclick="App.selectCult(null)"
-        style="${!CharacterData.cult ? 'background: #000; color: #fff;' : ''}"
-        class="${!CharacterData.cult ? 'primary' : ''}">
+        style="${CharacterData.cultChoiceMade && !CharacterData.cult ? 'background: #000; color: #fff;' : ''}"
+        class="${CharacterData.cultChoiceMade && !CharacterData.cult ? 'primary' : ''}">
         ✓ No Cult
       </button>
     </div>
@@ -14651,8 +14791,6 @@ App.renderStep9 = function() {
       <p style="font-style: italic; color: #666;">No cults are typically available for ${culture} culture. ${cultMap && cultMap.note ? cultMap.note : ''}</p>
     ` : ''}
 
-    <div id="cult-requirement-warning"></div>
-    <div id="cult-skill-boost-panel"></div>
     <div id="cult-passion-notice" style="margin-top: 10px;"></div>
     ${sourceBackedProviderPanelsHTML ? `<div id="available-magic-sources" style="margin-top: 20px;"><h3>Available Magic Sources</h3>${sourceBackedProviderPanelsHTML}</div>` : ''}
     <div id="miracle-picker" style="margin-top: 20px; display: none;"></div>
@@ -14693,46 +14831,42 @@ App.renderStep9 = function() {
       const cultPassion = CharacterData.passions.find(p => p.name && p.name.includes(CharacterData.cult));
       if (cultPassion) {
         noticeEl.innerHTML = `<div class="magic-panel magic-panel--notice">
-          <strong>Cult Passion Added:</strong> ${cultPassion.name}: ${cultPassion.value}% has been added to your passions (visible in Step 6).
+          <strong>Cult Passion Added:</strong> ${cultPassion.name}: ${cultPassion.value}% has been added to your passions (visible in Step 6).<br>
+          <strong>Initiation:</strong> Affiliation recorded. Cult-backed miracles unlock after initiation in play.
         </div>`;
       }
     }
 
-    // ADR-0006: Render magic system UI based on cult type
-    const pickerEl = div.querySelector('#miracle-picker');
-    if (pickerEl) {
-      const cult = CULTS_DATA.find(c => c.name === CharacterData.cult);
-      const cultType = CharacterData.cultType || detectCultType(cult);
+    // Cult-backed pickers appear only after initiation; chargen uses source-backed providers.
+    if (CharacterData.cultInitiated === true) {
+      const pickerEl = div.querySelector('#miracle-picker');
+      if (pickerEl) {
+        const cult = CULTS_DATA.find(c => c.name === CharacterData.cult);
+        const cultType = CharacterData.cultType || detectCultType(cult);
 
-      // Show miracle picker for theist cults
-      if (cultType.types.includes('theist')) {
-        this.renderMiraclePicker(pickerEl);
-      }
+        if (cultType.types.includes('theist')) {
+          this.renderMiraclePicker(pickerEl);
+        }
 
-      // Show animist info + spirit picker for animist cults (separate container so toggleMiracle doesn't wipe it)
-      if (cultType.types.includes('animist')) {
-        const spiritPickerEl = div.querySelector('#spirit-picker');
-        if (spiritPickerEl) {
-          const animismProvider = activeHigherMagicProviders.find(provider => provider.system === 'animism');
-          spiritPickerEl.innerHTML = this.renderAnimismPickerPanel(animismProvider, { isHybrid: cultType.isHybrid });
-          spiritPickerEl.style.display = 'block';
+        if (cultType.types.includes('animist')) {
+          const spiritPickerEl = div.querySelector('#spirit-picker');
+          if (spiritPickerEl) {
+            const animismProvider = activeHigherMagicProviders.find(provider => provider.system === 'animism');
+            spiritPickerEl.innerHTML = this.renderAnimismPickerPanel(animismProvider, { isHybrid: cultType.isHybrid });
+            spiritPickerEl.style.display = 'block';
+          }
+        }
+
+        if (cultType.types.includes('sorcery')) {
+          const sorceryPickerEl = div.querySelector('#sorcery-picker');
+          if (sorceryPickerEl) {
+            const sorcerySource = this.resolveActiveSorcerySource(CharacterData);
+            sorceryPickerEl.innerHTML = this.renderSorceryPickerPanel(sorcerySource, { isHybrid: cultType.isHybrid });
+            sorceryPickerEl.style.display = 'block';
+          }
         }
       }
-
-      // Show sorcery info + spell picker for sorcery cults (separate container so toggleMiracle doesn't wipe it)
-      if (cultType.types.includes('sorcery')) {
-        const sorceryPickerEl = div.querySelector('#sorcery-picker');
-        if (sorceryPickerEl) {
-          const sorcerySource = this.resolveActiveSorcerySource(CharacterData);
-          sorceryPickerEl.innerHTML = this.renderSorceryPickerPanel(sorcerySource, { isHybrid: cultType.isHybrid });
-          sorceryPickerEl.style.display = 'block';
-        }
-      }
-
     }
-  }
-  if (CharacterData.cult && typeof setTimeout === 'function') {
-    setTimeout(() => App.updateCultRequirementUI(), 0);
   }
   return div;
 };
@@ -14774,7 +14908,8 @@ App.renderCultCard = function(cult) {
 
     miraclesHTML = `
       <div style="font-size: 11px; margin-top: 8px; padding-top: 6px; border-top: 1px solid #ddd;">
-        <strong>Miracles (sample):</strong> ${miracleItems}${cultMiracles.length > 6 ? '...' : ''}
+        <strong>Future initiate miracles:</strong> ${miracleItems}${cultMiracles.length > 6 ? '...' : ''}
+        <div style="font-size: 10px; color: #666; margin-top: 4px;">Unlock after initiation in play.</div>
       </div>
     `;
   }
@@ -14802,6 +14937,25 @@ App.renderCultCard = function(cult) {
   `;
 
   return card;
+};
+
+App.syncCultLoyaltyPassion = function(cultName) {
+  const cultNames = (CULTS_DATA || []).map(c => c.name);
+  CharacterData.passions = (CharacterData.passions || []).filter(passion => {
+    if (!passion?.name) return true;
+    const exactCultLoyalty = cultNames.find(name => passion.name === `Loyalty (${name})`);
+    if (!exactCultLoyalty) return true;
+    return cultName && exactCultLoyalty === cultName;
+  });
+
+  if (!cultName) return;
+
+  const cultPassion = `Loyalty (${cultName})`;
+  const hasPassion = CharacterData.passions.some(passion => passion?.name === cultPassion);
+  if (!hasPassion) {
+    const value = (CharacterData.characteristics?.POW || 0) + (CharacterData.characteristics?.CHA || 0);
+    CharacterData.passions.push(buildStructuredPassion({ name: cultPassion, value }, value, false));
+  }
 };
 
 App.selectCult = function(cultName, options = {}) {
@@ -14850,8 +15004,11 @@ App.selectCult = function(cultName, options = {}) {
     );
     return {success: false, pendingConfirmation: true};
   }
+  const sameCultSelection = previousCult === cultName;
   const confirmedCultSelectionLoss = previousCult && previousCult !== cultName && options.allowMagicSelectionLoss;
   CharacterData.cult = cultName;
+  CharacterData.cultChoiceMade = true;
+  if (!sameCultSelection) CharacterData.cultInitiated = false;
   if (previousCult !== cultName) {
     this.clearAutoPopulatedCompanions();
   }
@@ -14859,46 +15016,22 @@ App.selectCult = function(cultName, options = {}) {
     CharacterData.miracles = [];
   }
 
-  // ADR-0006: Calculate magic resources based on detected cult type
   if (cultName) {
     const cult = selectedCult;
-    const cultType = detectCultType(cult);
-    CharacterData.cultType = cultType;
-
-    // Only theist cults get a Devotional Pool (POW/2)
-    if (cultType.types.includes('theist')) {
-      CharacterData.devotionalPool = Math.floor(CharacterData.characteristics.POW / 2);
-    } else {
-      CharacterData.devotionalPool = 0;
-    }
-
-    // Animist cults get bound spirit slots (CHA/2 for Spirit Worshipper rank)
-    if (cultType.types.includes('animist')) {
-      CharacterData.boundSpiritSlots = Math.floor(CharacterData.characteristics.CHA / 2);
-    } else {
-      CharacterData.boundSpiritSlots = 0;
-    }
-
-    // Sorcery cults use Magic Points as resource
-    if (cultType.types.includes('sorcery')) {
-      CharacterData.sorceryResource = CharacterData.characteristics.POW; // Magic Points = POW
-    } else {
-      CharacterData.sorceryResource = 0;
-    }
-    // Soft validation: update requirement warning + boost panel (deferred until DOM is ready)
-    if (cult && cult.cultSkills) {
-      setTimeout(() => App.updateCultRequirementUI(), 0);
-    }
+    CharacterData.cultType = detectCultType(cult);
   } else {
-    CharacterData.devotionalPool = 0;
-    CharacterData.boundSpiritSlots = 0;
-    CharacterData.sorceryResource = 0;
     CharacterData.cultType = null;
     CharacterData.miracles = [];
   }
+  if (!sameCultSelection) {
+    CharacterData.devotionalPool = 0;
+    CharacterData.boundSpiritSlots = 0;
+    CharacterData.sorceryResource = 0;
+    CharacterData.miracles = [];
+  }
   const activeHigherMagicProviders = this.resolveHigherMagicProviders(CharacterData);
-  const previousAnimismProvider = getHigherMagicProviderBySystem(previousHigherMagicProviders, 'animism');
-  const activeAnimismProvider = getHigherMagicProviderBySystem(activeHigherMagicProviders, 'animism');
+  const previousAnimismProvider = findProviderBySystemInList(previousHigherMagicProviders, 'animism');
+  const activeAnimismProvider = findProviderBySystemInList(activeHigherMagicProviders, 'animism');
   if (Array.isArray(CharacterData.boundSpirits) &&
       CharacterData.boundSpirits.length > 0 &&
       previousAnimismProvider &&
@@ -14926,7 +15059,7 @@ App.selectCult = function(cultName, options = {}) {
     return {success: false, error: providerLossError};
   }
   const activeSorcerySource = activeHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
-  const sourceError = sourceSelectionError(activeSorcerySource);
+  const sourceError = confirmedCultSelectionLoss ? null : sourceSelectionError(activeSorcerySource);
   if (sourceError) return sourceError;
   this.normalizeHigherMagicState(CharacterData);
 
@@ -14945,23 +15078,7 @@ App.selectCult = function(cultName, options = {}) {
     }
   }
 
-  // Auto-add Loyalty (Cult) passion if a cult is selected
-  if (cultName) {
-    const cultPassion = `Loyalty (${cultName})`;
-    const hasPassion = CharacterData.passions.some(p => p.name && p.name.includes(cultName));
-    if (!hasPassion) {
-      const value = CharacterData.characteristics.POW + CharacterData.characteristics.CHA;
-      CharacterData.passions.push(buildStructuredPassion({ name: cultPassion, value }, value, false));
-    }
-  } else {
-    // Remove only cult-specific loyalty passion (preserve cultural passions like Loyalty (Clan))
-    CharacterData.passions = CharacterData.passions.filter(p => {
-      if (!p.name) return true;
-      // Only remove passions that match a known cult name
-      const cultNames = CULTS_DATA.map(c => c.name);
-      return !cultNames.some(cn => p.name === `Loyalty (${cn})`);
-    });
-  }
+  this.syncCultLoyaltyPassion(cultName);
 
   this.saveToLocalStorage();
   // Preserve scroll position across re-render (selectCult is triggered by in-page clicks)
@@ -14973,9 +15090,12 @@ App.selectCult = function(cultName, options = {}) {
 
 App.clearCultSelection = function() {
   CharacterData.cult = null;
+  CharacterData.cultChoiceMade = false;
+  CharacterData.cultInitiated = false;
   CharacterData.cultType = null;
   CharacterData.devotionalPool = 0;
   CharacterData.miracles = [];
+  this.syncCultLoyaltyPassion(null);
   this.clearAutoPopulatedCompanions();
   this.normalizeHigherMagicState(CharacterData);
 };
@@ -15325,200 +15445,21 @@ App.getCultInitiationRequirementSummary = function(cultObj, allSkillsArr = null)
   };
 };
 
-App.shouldDeferCultSkillGateToPostAllocation = function(cultType) {
-  return !!cultType?.types?.includes('sorcery');
-};
-
-App.getCultInitiationGateErrors = function(options = {}) {
+App.getCultInitiationGateErrors = function() {
   const errors = [];
-  if (!CharacterData.cult) return errors;
+  if (!CharacterData.cult || CharacterData.cultInitiated !== true) return errors;
 
   const cultObj = CULTS_DATA.find(c => c.name === CharacterData.cult);
   if (!cultObj) return errors;
 
-  const cultType = CharacterData.cultType || detectCultType(cultObj);
-  if (options.deferSorcery && this.shouldDeferCultSkillGateToPostAllocation(cultType)) {
-    return errors;
-  }
-
   const allSkillsArr = App.compileAllSkills ? App.compileAllSkills() : [];
   const summary = App.getCultInitiationRequirementSummary(cultObj, allSkillsArr);
   if (!summary.qualifies) {
-    errors.push(`Initiation requires ${summary.requiredCount} cult skills at 50%+. You have ${summary.qualifyingSkills.length}. Use Quick Boost to raise skills, or go back to reallocate cultural/career points.`);
+    errors.push(`Initiation requires ${summary.requiredCount} cult skills at 50%+. You have ${summary.qualifyingSkills.length}.`);
   }
   return errors;
 };
 
-/**
- * Update the cult requirement warning + boost panel in-place.
- * Shared between selectCult (via setTimeout) and autoBoostCultSkills (direct).
- */
-App.updateCultRequirementUI = function() {
-  if (typeof document === 'undefined') return; // Skip in test environment
-  const cult = CULTS_DATA.find(c => c.name === CharacterData.cult);
-  if (!cult || !cult.cultSkills) return;
-
-  const allSkills = App.compileAllSkills ? App.compileAllSkills() : [];
-  const summary = App.getCultInitiationRequirementSummary(cult, allSkills);
-  const { skillDetails, requiredCount, qualifyingSkills } = summary;
-  const warning = document.getElementById('cult-requirement-warning');
-  const cultType = CharacterData.cultType || detectCultType(cult);
-  const deferredGate = App.shouldDeferCultSkillGateToPostAllocation(cultType);
-
-  if (qualifyingSkills.length >= requiredCount) {
-    if (warning) {
-      warning.innerHTML = `<div style="background: #d4edda; border: 1px solid #28a745; padding: 10px; margin: 8px 0; font-size: 12px; border-radius: 4px;">
-        <strong>\u2705 Initiation requirements met!</strong> ${qualifyingSkills.length} cult skills at 50%+.
-        You may continue to adjust points below if desired.
-      </div>`;
-    }
-  } else {
-    if (warning) {
-      const skillList = skillDetails.map(s => {
-        const matched = s.matchedName && s.matchedName !== s.name ? ` <em>(${s.matchedName})</em>` : '';
-        return `<span style="color: ${s.qualifies ? '#155724' : '#856404'};">${s.name}${matched}: ${s.value}%${s.qualifies ? ' \u2713' : ''}</span>`;
-      }).join(', ');
-      warning.innerHTML = `<div style="background: #fff3cd; border: 1px solid #ffc107; padding: 10px; margin: 8px 0; font-size: 12px; border-radius: 4px;">
-        <strong>\u26a0\ufe0f Initiation requires ${requiredCount} cult skills at 50%+.</strong> Currently ${qualifyingSkills.length}/${requiredCount}.
-        ${deferredGate
-          ? 'Sorcery uses RAW Invocation and Shaping; finish career points in Step 10 and bonus points in Step 11 before the final gate is checked.'
-          : 'Use Quick Boost below, or go back to reallocate cultural/career skill points.'}
-        <div style="margin-top: 6px; line-height: 1.6;"><strong>Cult skills:</strong> ${skillList}</div>
-      </div>`;
-    }
-  }
-  App.renderCultSkillBoostPanel(skillDetails);
-};
-
-App.renderCultSkillBoostPanel = function(skillDetails) {
-  const panel = document.getElementById('cult-skill-boost-panel');
-  if (!panel) return;
-
-  // Only show skills below 50% that could be boosted
-  // Skip ambiguous skills that need disambiguation — they must be resolved in earlier steps
-  const boostableSkills = skillDetails.filter(s => !s.qualifies && !needsDisambiguation(s.name));
-  if (boostableSkills.length === 0) {
-    panel.innerHTML = '';
-    return;
-  }
-
-  // Calculate bonus budget
-  const ageCategory = Calc.getAgeCategory(CharacterData.age);
-  const totalBonusPool = ageCategory ? ageCategory.bonusPoints : 150;
-  const spentBonus = Object.values(CharacterData.bonusSkills || {}).reduce((a, b) => a + b, 0);
-  const remainingBonus = totalBonusPool - spentBonus;
-  const maxPerSkill = ageCategory ? ageCategory.maxPerSkill : 15;
-
-  // Determine if requirements already met (changes panel wording)
-  const qualifyCount = skillDetails.filter(s => s.qualifies).length;
-  const cult = CULTS_DATA.find(c => c.name === CharacterData.cult);
-  const requiredForInit = Math.min(5, (cult?.cultSkills || skillDetails).length);
-  const requirementsMet = qualifyCount >= requiredForInit;
-
-  panel.innerHTML = `
-    <div style="background: ${requirementsMet ? '#e8f5e9' : '#e8f4fd'}; border: 1px solid ${requirementsMet ? '#a5d6a7' : '#b8daff'}; padding: 12px; margin: 8px 0; border-radius: 4px;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-        <strong style="font-size: 13px;">⬆ Quick Boost — Meet Initiation Requirements</strong>
-        <span id="cult-boost-budget" style="font-size: 12px; color: #004085;">Bonus points remaining: <strong>${remainingBonus}</strong> / ${totalBonusPool}</span>
-      </div>
-      <p style="font-size: 11px; color: #555; margin: 0 0 6px 0;">${requirementsMet
-        ? `Initiation requirements already met (${qualifyCount} skills at 50%+). These ${boostableSkills.length} skills are still below 50% — boost them here if you want them higher for play. Points count toward your Step 11 budget (max ${maxPerSkill} per skill).`
-        : `One click reallocates legal skill points as needed to meet initiation requirements, using remaining bonus points first and then safe non-cult donors.`}</p>
-      <button onclick="App.autoBoostCultSkills()" style="margin-bottom: 10px; padding: 6px 12px; background: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;"
-        ${boostableSkills.length === 0 ? 'disabled' : ''}>⚡ Quick Boost initiation skills</button>
-      <div id="cult-boost-skills" class="allocation-list"></div>
-    </div>
-  `;
-
-  const boostContainer = panel.querySelector('#cult-boost-skills');
-  if (!boostContainer) return;
-  boostableSkills.forEach(skill => {
-    const boostKey = skill.key || skill.name;
-    const escapedBoostKey = boostKey.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
-    const currentBonus = (CharacterData.bonusSkills || {})[boostKey] || 0;
-    const needed = Math.max(0, 50 - skill.value);
-    const matchedNote = skill.matchedName && skill.matchedName !== skill.name
-      ? `<span style="color: #666; margin-left: 4px;">(${skill.matchedName})</span>`
-      : '';
-
-    const row = document.createElement('div');
-    row.className = 'cult-boost-row allocation-row allocation-row--simple';
-    row.setAttribute('data-skill', boostKey);
-    row.setAttribute('data-cult-skill', skill.name);
-    row.style.cssText = 'padding: 4px 0; border-bottom: 1px solid #d4edfa;';
-    row.innerHTML = `
-      <div style="font-size: 12px;">
-        <strong>${skill.name}</strong>${matchedNote}
-        <span class="boost-needs" style="color: #666; margin-left: 4px;">${skill.value}% → needs ${Math.max(0, needed)} more</span>
-      </div>
-      <input class="points-input" type="number" min="0" max="${maxPerSkill}" value="${currentBonus}"
-        oninput="App.adjustCultBoost('${escapedBoostKey}', parseInt(this.value) || 0)"
-        onchange="App.adjustCultBoost('${escapedBoostKey}', parseInt(this.value) || 0)">
-    `;
-    boostContainer.appendChild(row);
-  });
-};
-
-App.adjustCultBoost = function(skillName, newValue) {
-  if (!CharacterData.bonusSkills) CharacterData.bonusSkills = {};
-  const ageCategory = Calc.getAgeCategory(CharacterData.age);
-  const maxPerSkill = ageCategory ? ageCategory.maxPerSkill : 15;
-  const totalBonusPool = ageCategory ? ageCategory.bonusPoints : 150;
-  const spentOther = Object.entries(CharacterData.bonusSkills)
-    .filter(([k]) => k !== skillName)
-    .reduce((a, [, v]) => a + v, 0);
-  const remainingWithout = totalBonusPool - spentOther;
-
-  // Clamp: min 0, max per-skill cap, max remaining budget
-  let clamped = Math.max(0, Math.min(newValue, maxPerSkill, remainingWithout));
-
-  if (clamped === 0) {
-    delete CharacterData.bonusSkills[skillName];
-  } else {
-    CharacterData.bonusSkills[skillName] = clamped;
-  }
-
-  this.saveToLocalStorage();
-
-  // Targeted DOM update — no full re-render
-  const spent = Object.values(CharacterData.bonusSkills).reduce((a, b) => a + b, 0);
-  const remaining = totalBonusPool - spent;
-  const budgetEl = document.getElementById('cult-boost-budget');
-  if (budgetEl) {
-    budgetEl.innerHTML = `Bonus points remaining: <strong>${remaining}</strong> / ${totalBonusPool}`;
-  }
-  // Refresh all sibling inputs' max attribute to prevent exceeding remaining budget
-  const allRows = document.querySelectorAll('.cult-boost-row input[type="number"]');
-  allRows.forEach(input => {
-    const siblingSkill = input.closest('.cult-boost-row')?.getAttribute('data-skill');
-    if (siblingSkill) {
-      const siblingCurrent = CharacterData.bonusSkills[siblingSkill] || 0;
-      input.max = Math.min(maxPerSkill, siblingCurrent + remaining);
-    }
-  });
-  // Update the input value and display text
-  const row = document.querySelector(`.cult-boost-row[data-skill="${CSS.escape(skillName)}"]`);
-  if (row) {
-    const input = row.querySelector('input[type="number"]');
-    if (input && parseInt(input.value) !== clamped) input.value = clamped;
-    // Update the 'needs X more' display
-    const needsSpan = row.querySelector('.boost-needs');
-    if (needsSpan) {
-      const cultSkillName = row.getAttribute('data-cult-skill') || skillName;
-      const resolved = App.resolveCultSkillRequirement
-        ? App.resolveCultSkillRequirement(cultSkillName)
-        : App.calculateSkillTotalForKey(skillName);
-      const total = resolved.value;
-      const needed = Math.max(0, 50 - total);
-      needsSpan.textContent = `${total}% \u2192 needs ${needed} more`;
-    }
-  }
-};
-
-/**
- * Get filtered initiate miracles for a cult (excludes OCR garbage and associates).
- * Shared between renderMiraclePicker and validateCurrentStep.
- */
 App.getQualifiedInitiateMiracles = function(cultName) {
   const cultMiracles = MIRACLES_DATA.cults[cultName]?.miracles || [];
   const seen = new Set();
@@ -15637,16 +15578,21 @@ App.getStep9ValidationErrors = function() {
 
   const cultObj = CULTS_DATA.find(c => c.name === CharacterData.cult);
   const cultType = CharacterData.cultType || detectCultType(cultObj || CharacterData.cult);
+  const isCultInitiated = CharacterData.cultInitiated === true;
+  const selectedMiracleEntries = CharacterData.miracles || [];
 
-  errors.push(...App.getCultInitiationGateErrors({ deferSorcery: true }));
+  errors.push(...App.getCultInitiationGateErrors());
   errors.push(...getUnsupportedMagicSelectionErrors(CharacterData.cult, cultType, {
-    miracles: CharacterData.miracles,
+    miracles: isCultInitiated ? selectedMiracleEntries : [],
     boundSpirits: CharacterData.boundSpirits,
     providers: activeHigherMagicProviders
   }));
 
-  if (cultType.types.includes('theist')) {
-    const selectedMiracleEntries = CharacterData.miracles || [];
+  if (!isCultInitiated && selectedMiracleEntries.length > 0) {
+    errors.push(`miracles require initiation in ${CharacterData.cult}`);
+  }
+
+  if (isCultInitiated && cultType.types.includes('theist')) {
     const availableMiracles = App.getAvailableInitiateMiracleNames(CharacterData.cult);
     const unknownMiracles = selectedMiracleEntries.filter(miracle =>
       typeof miracle !== 'string' ||
@@ -15681,339 +15627,6 @@ App.getStep9ValidationErrors = function() {
   return errors;
 };
 
-App.getCultInitiationBoostBudgets = function() {
-  const ageCategory = Calc.getAgeCategory(CharacterData.age);
-  return {
-    bonusSkills: {
-      total: ageCategory ? ageCategory.bonusPoints : 150,
-      maxPerSkill: ageCategory ? ageCategory.maxPerSkill : 15
-    },
-    culturalSkills: { total: 100, maxPerSkill: 15 },
-    careerSkills: { total: 100, maxPerSkill: 15 }
-  };
-};
-
-App.getCultInitiationBoostSkillKey = function(skill) {
-  const rawSkill = skill.key || skill.matchedName || skill.name;
-  return needsDisambiguation(rawSkill)
-    ? resolveRandomDisambiguatedSkill(rawSkill, CharacterData.culture)
-    : rawSkill;
-};
-
-App.getCultInitiationBoostTotal = function(skillKey, originalPools, plannedPools) {
-  const baseTotal = this.calculateSkillTotalForKey(skillKey).value;
-  return baseTotal + ['bonusSkills', 'culturalSkills', 'careerSkills'].reduce((delta, poolName) =>
-    delta + ((plannedPools[poolName]?.[skillKey] || 0) - (originalPools[poolName]?.[skillKey] || 0)), 0);
-};
-
-App.getCultInitiationBoostPoolRoom = function(poolName, skillKey, plannedPools, budgets) {
-  const current = plannedPools[poolName]?.[skillKey] || 0;
-  return Math.max(0, (budgets[poolName]?.maxPerSkill || 15) - current);
-};
-
-App.ensureCultInitiationCultureTarget = function(skillKey, plannedPools) {
-  if (Object.prototype.hasOwnProperty.call(plannedPools.culturalSkills || {}, skillKey)) return true;
-  const culture = CULTURES_DATA.find(c => c.name === CharacterData.culture);
-  if (!culture) return false;
-  const normalizedTarget = this.normalizeSkillName(skillKey);
-  const targetPlaceholder = parsePlaceholderSkill(skillKey);
-  const canCreateTarget = this.getCulturalSkillRenderPlan(culture, plannedPools.culturalSkills || {})
-    .some(item => {
-      if (item.type === 'choice') {
-        return item.storedChoice && this.normalizeSkillName(item.storedChoice) === normalizedTarget;
-      }
-      const skillName = item.skillName;
-      if (this.normalizeSkillName(skillName) === normalizedTarget) return true;
-      const skillPlaceholder = parsePlaceholderSkill(skillName);
-      return Boolean(skillPlaceholder && targetPlaceholder &&
-        skillPlaceholder.category === targetPlaceholder.category);
-    });
-  if (!canCreateTarget) return false;
-  plannedPools.culturalSkills[skillKey] = 0;
-  return true;
-};
-
-App.ensureCultInitiationCareerTarget = function(skillKey, plannedPools, plannedSelections, protectedKeys, selectionChanges) {
-  if (Object.prototype.hasOwnProperty.call(plannedPools.careerSkills || {}, skillKey)) return true;
-  const career = CAREERS_DATA.find(c => c.name === CharacterData.career);
-  if (!career) return false;
-  const normalized = this.normalizeSkillName(skillKey);
-  const isStandard = (career.standardSkills || []).some(skill => this.normalizeSkillName(skill) === normalized);
-  const acceptsProfessionalTarget = skill => {
-    if (this.normalizeSkillName(skill) === normalized) return true;
-    const skillPlaceholder = parsePlaceholderSkill(skill);
-    const targetPlaceholder = parsePlaceholderSkill(skillKey);
-    return Boolean(skillPlaceholder && targetPlaceholder && skillPlaceholder.category === targetPlaceholder.category);
-  };
-  const isProfessional = (career.professionalSkills || []).some(acceptsProfessionalTarget);
-  const disambiguationMap = CharacterData._disambiguationMap || {};
-  const dependenciesRemainValid = selections =>
-    validateProfessionalSkillDependencies(selections, career, disambiguationMap).length === 0;
-  if (isStandard) {
-    plannedPools.careerSkills[skillKey] = 0;
-    return true;
-  }
-  if (!isProfessional) return false;
-  if (!plannedSelections.includes(skillKey) && plannedSelections.length >= 3) {
-    const selectedChoices = getSelectedProfessionalChoiceSet(plannedSelections, career, disambiguationMap);
-    const getChoiceForSelection = name => {
-      if ((career.professionalSkills || []).includes(name)) return name;
-      const mapped = Object.entries(disambiguationMap)
-        .find(([key, value]) => key.startsWith('career:') && value === name);
-      return mapped ? mapped[0].replace(/^career:/, '') : name;
-    };
-    const participatesInDependencyPair = name => {
-      const choice = getChoiceForSelection(name);
-      const secondary = getSecondaryPlaceholderFor(choice);
-      return Boolean(getProfessionalSkillDependency(choice, career) ||
-        (secondary && selectedChoices.has(secondary)));
-    };
-    const findReplacementIndex = preferIndependent => plannedSelections.findIndex(name => {
-      if (protectedKeys.has(name)) return false;
-      if (preferIndependent && participatesInDependencyPair(name)) return false;
-      const nextSelections = [...plannedSelections];
-      nextSelections.splice(nextSelections.indexOf(name), 1, skillKey);
-      return dependenciesRemainValid(nextSelections);
-    });
-    let replacementIndex = findReplacementIndex(true);
-    if (replacementIndex === -1) replacementIndex = findReplacementIndex(false);
-    if (replacementIndex === -1) return false;
-    const replaced = plannedSelections[replacementIndex];
-    plannedSelections.splice(replacementIndex, 1, skillKey);
-    const transferredPoints = plannedPools.careerSkills[replaced] || 0;
-    delete plannedPools.careerSkills[replaced];
-    plannedPools.careerSkills[skillKey] = (plannedPools.careerSkills[skillKey] || 0) + transferredPoints;
-    selectionChanges.push({ action: 'replace-professional-skill', from: replaced, to: skillKey, transferredPoints });
-  } else if (!plannedSelections.includes(skillKey)) {
-    plannedSelections.push(skillKey);
-    if (!dependenciesRemainValid(plannedSelections)) {
-      plannedSelections.pop();
-      return false;
-    }
-    selectionChanges.push({ action: 'add-professional-skill', to: skillKey });
-  }
-  plannedPools.careerSkills[skillKey] = plannedPools.careerSkills[skillKey] || 0;
-  return true;
-};
-
-App.planCultInitiationBoost = function(options = {}) {
-  const cult = CULTS_DATA.find(c => c.name === CharacterData.cult);
-  if (!cult) return { success: false, error: 'No cult selected', moves: [], remainingGaps: [] };
-
-  const originalPools = {
-    bonusSkills: {...(CharacterData.bonusSkills || {})},
-    culturalSkills: {...(CharacterData.culturalSkills || {})},
-    careerSkills: {...(CharacterData.careerSkills || {})}
-  };
-  const plannedPools = {
-    bonusSkills: {...originalPools.bonusSkills},
-    culturalSkills: {...originalPools.culturalSkills},
-    careerSkills: {...originalPools.careerSkills}
-  };
-  const budgets = this.getCultInitiationBoostBudgets();
-  const plannedSelections = [...(CharacterData.selectedProfessionalSkills || [])];
-  const selectionChanges = [];
-  const moves = [];
-  const allSkills = this.getCultSkillRequirementDetails(cult).map(skill => ({
-    ...skill,
-    boostKey: this.getCultInitiationBoostSkillKey(skill)
-  }));
-  const requiredCount = Math.min(5, allSkills.length);
-  const protectedKeys = new Set(allSkills
-    .flatMap(skill => [skill.name, skill.key, skill.matchedName, skill.boostKey])
-    .filter(Boolean));
-  const cultRequirementByKey = new Map();
-  allSkills.forEach(skill => {
-    [skill.name, skill.key, skill.matchedName, skill.boostKey]
-      .filter(Boolean)
-      .forEach(key => cultRequirementByKey.set(key, skill));
-  });
-  let qualifyingCount = allSkills.filter(skill => skill.value >= 50).length;
-  if (qualifyingCount >= requiredCount) {
-    return { success: true, moves: [], selectionChanges: [], remainingGaps: [], targets: [], summary: 'Initiation requirements already met.' };
-  }
-
-  const totalSpent = poolName => Object.values(plannedPools[poolName] || {}).reduce((sum, value) => sum + value, 0);
-  const addMove = (poolName, from, to, points) => {
-    if (points <= 0) return;
-    if (from) {
-      plannedPools[poolName][from] = (plannedPools[poolName][from] || 0) - points;
-      if (plannedPools[poolName][from] <= 0) delete plannedPools[poolName][from];
-    }
-    plannedPools[poolName][to] = (plannedPools[poolName][to] || 0) + points;
-    moves.push({ pool: poolName, from, to, points });
-  };
-  const tryUseRemainingBonus = target => {
-    const room = this.getCultInitiationBoostPoolRoom('bonusSkills', target.boostKey, plannedPools, budgets);
-    const remainingPool = budgets.bonusSkills.total - totalSpent('bonusSkills');
-    const needed = Math.max(0, 50 - this.getCultInitiationBoostTotal(target.boostKey, originalPools, plannedPools));
-    const points = Math.min(room, remainingPool, needed);
-    addMove('bonusSkills', null, target.boostKey, points);
-  };
-  const getCultDonorTransferCap = (poolName, donor, donorPoints, target) => {
-    if (!protectedKeys.has(donor)) return donorPoints;
-    const donorRequirement = cultRequirementByKey.get(donor);
-    if (!donorRequirement || donorRequirement.boostKey === target.boostKey) return 0;
-
-    const donorTotal = this.getCultInitiationBoostTotal(donorRequirement.boostKey, originalPools, plannedPools);
-    if (donorTotal >= 50) return Math.min(donorPoints, donorTotal - 50);
-
-    const targetTotal = this.getCultInitiationBoostTotal(target.boostKey, originalPools, plannedPools);
-    const targetRoom = this.getCultInitiationBoostPoolRoom(poolName, target.boostKey, plannedPools, budgets);
-    const possiblePoints = Math.min(donorPoints, targetRoom, Math.max(0, 50 - targetTotal));
-    if (possiblePoints <= 0 || targetTotal + possiblePoints < 50) return 0;
-
-    const qualifyingWithoutDonorOrTarget = allSkills.filter(skill =>
-      skill.boostKey !== donorRequirement.boostKey &&
-      skill.boostKey !== target.boostKey &&
-      this.getCultInitiationBoostTotal(skill.boostKey, originalPools, plannedPools) >= 50
-    ).length;
-    return qualifyingWithoutDonorOrTarget + 1 >= requiredCount ? donorPoints : 0;
-  };
-  const donorEntries = (poolName, target) => Object.entries(plannedPools[poolName] || {})
-    .map(([name, points]) => [name, getCultDonorTransferCap(poolName, name, points, target)])
-    .filter(([, points]) => points > 0)
-    .sort((a, b) => b[1] - a[1]);
-  const tryReallocatePool = (poolName, target) => {
-    if (poolName === 'careerSkills' &&
-        !this.ensureCultInitiationCareerTarget(target.boostKey, plannedPools, plannedSelections, protectedKeys, selectionChanges)) {
-      return;
-    }
-    if (poolName === 'culturalSkills' && !this.ensureCultInitiationCultureTarget(target.boostKey, plannedPools)) return;
-    for (const [donor, donorPoints] of donorEntries(poolName, target)) {
-      const room = this.getCultInitiationBoostPoolRoom(poolName, target.boostKey, plannedPools, budgets);
-      const needed = Math.max(0, 50 - this.getCultInitiationBoostTotal(target.boostKey, originalPools, plannedPools));
-      const points = Math.min(donorPoints, room, needed);
-      if (points <= 0) break;
-      addMove(poolName, donor, target.boostKey, points);
-      if (this.getCultInitiationBoostTotal(target.boostKey, originalPools, plannedPools) >= 50) break;
-    }
-  };
-
-  const candidates = allSkills
-    .filter(skill => skill.value < 50 && !needsDisambiguation(skill.boostKey))
-    .sort((a, b) => (50 - a.value) - (50 - b.value));
-  const targets = [];
-  for (const target of candidates) {
-    if (qualifyingCount >= requiredCount) break;
-    const beforeMoves = moves.length;
-    const beforeSelections = selectionChanges.length;
-    const beforePools = JSON.stringify(plannedPools);
-    const beforeSelected = JSON.stringify(plannedSelections);
-
-    tryUseRemainingBonus(target);
-    if (this.getCultInitiationBoostTotal(target.boostKey, originalPools, plannedPools) < 50) tryReallocatePool('bonusSkills', target);
-    if (this.getCultInitiationBoostTotal(target.boostKey, originalPools, plannedPools) < 50) tryReallocatePool('careerSkills', target);
-    if (this.getCultInitiationBoostTotal(target.boostKey, originalPools, plannedPools) < 50) tryReallocatePool('culturalSkills', target);
-
-    const targetTotal = this.getCultInitiationBoostTotal(target.boostKey, originalPools, plannedPools);
-    if (targetTotal >= 50) {
-      qualifyingCount += 1;
-      targets.push(target.boostKey);
-      [target.name, target.key, target.matchedName, target.boostKey].filter(Boolean).forEach(key => protectedKeys.add(key));
-    } else if (options.allowPartial !== true) {
-      moves.splice(beforeMoves);
-      selectionChanges.splice(beforeSelections);
-      const restoredPools = JSON.parse(beforePools);
-      plannedPools.bonusSkills = restoredPools.bonusSkills;
-      plannedPools.culturalSkills = restoredPools.culturalSkills;
-      plannedPools.careerSkills = restoredPools.careerSkills;
-      plannedSelections.splice(0, plannedSelections.length, ...JSON.parse(beforeSelected));
-    }
-  }
-
-  const remainingGaps = allSkills
-    .map(skill => ({...skill, plannedValue: this.getCultInitiationBoostTotal(skill.boostKey, originalPools, plannedPools)}))
-    .filter(skill => !skill.qualifies && skill.plannedValue < 50);
-  const success = qualifyingCount >= requiredCount;
-  if (!success && options.allowPartial !== true) {
-    return {
-      success: false,
-      error: 'No legal one-click reallocation can meet initiation requirements.',
-      moves: [],
-      selectionChanges: [],
-      remainingGaps: allSkills.filter(skill => skill.value < 50)
-    };
-  }
-  return {
-    success,
-    allowPartial: options.allowPartial === true,
-    moves,
-    selectionChanges,
-    remainingGaps,
-    targets,
-    summary: targets.length > 0
-      ? `Boosted ${targets.length} cult skill${targets.length === 1 ? '' : 's'} to initiation threshold.`
-      : 'No boosts needed.'
-  };
-};
-
-App.applyCultInitiationBoostPlan = function(plan) {
-  if (!plan || (plan.success !== true && plan.allowPartial !== true)) return false;
-  if ((plan.moves || []).length === 0 && (plan.selectionChanges || []).length === 0) return false;
-  if (!CharacterData.bonusSkills) CharacterData.bonusSkills = {};
-  if (!CharacterData.culturalSkills) CharacterData.culturalSkills = {};
-  if (!CharacterData.careerSkills) CharacterData.careerSkills = {};
-  if (!CharacterData.selectedProfessionalSkills) CharacterData.selectedProfessionalSkills = [];
-
-  // Apply selection changes before point moves: replacement plans may move points
-  // from the replaced key, so preserving transferredPoints keeps pool totals stable.
-  (plan.selectionChanges || []).forEach(change => {
-    if (change.action === 'replace-professional-skill') {
-      CharacterData.selectedProfessionalSkills = CharacterData.selectedProfessionalSkills.filter(name => name !== change.from);
-      if (!CharacterData.selectedProfessionalSkills.includes(change.to)) CharacterData.selectedProfessionalSkills.push(change.to);
-      const transferredPoints = change.transferredPoints || 0;
-      delete CharacterData.careerSkills[change.from];
-      CharacterData.careerSkills[change.to] = (CharacterData.careerSkills[change.to] || 0) + transferredPoints;
-    } else if (change.action === 'add-professional-skill' && !CharacterData.selectedProfessionalSkills.includes(change.to)) {
-      CharacterData.selectedProfessionalSkills.push(change.to);
-      CharacterData.careerSkills[change.to] = CharacterData.careerSkills[change.to] || 0;
-    }
-  });
-
-  (plan.moves || []).forEach(move => {
-    const pool = CharacterData[move.pool];
-    if (!pool || move.points <= 0) return;
-    if (move.from) {
-      pool[move.from] = (pool[move.from] || 0) - move.points;
-      if (pool[move.from] <= 0) delete pool[move.from];
-    }
-    pool[move.to] = (pool[move.to] || 0) + move.points;
-  });
-  return true;
-};
-
-App.autoBoostCultSkills = function(options = {}) {
-  if (!CharacterData.bonusSkills) CharacterData.bonusSkills = {};
-  const cult = CULTS_DATA.find(c => c.name === CharacterData.cult);
-  const silent = options.silent === true;
-  const updateUi = options.updateUi !== false;
-  if (!cult) return { success: false, remainingGaps: [], error: 'No cult selected' };
-
-  const snapshot = createTrustedCharacterSnapshot();
-  const plan = this.planCultInitiationBoost({ allowPartial: true });
-  if (!plan.success && (plan.moves || []).length === 0 && (plan.selectionChanges || []).length === 0) {
-    restoreTrustedCharacterSnapshot(snapshot);
-    if (!silent) this.showToast(plan.error || 'Unable to meet initiation requirements with legal reallocations.', 'warning');
-    if (updateUi) App.updateCultRequirementUI();
-    return { success: false, remainingGaps: plan.remainingGaps || [], error: plan.error };
-  }
-
-  this.applyCultInitiationBoostPlan(plan);
-  this.saveToLocalStorage();
-  const remainingGaps = this.getCultSkillRequirementDetails(cult).filter(s => s.value < 50);
-  const summary = this.getCultInitiationRequirementSummary(cult);
-  if (!silent) {
-    const appliedPoints = (plan.moves || []).reduce((sum, move) => sum + move.points, 0);
-    const message = summary.qualifies
-      ? (plan.summary || 'Cult initiation skills boosted to 50%+')
-      : `Applied ${appliedPoints} legal point${appliedPoints === 1 ? '' : 's'}; initiation still needs ${remainingGaps.length} skill${remainingGaps.length === 1 ? '' : 's'} at 50%+.`;
-    this.showToast(message, summary.qualifies ? 'success' : 'warning');
-  }
-  // Re-render boost panel + warning in-place (no full page re-render)
-  if (updateUi) App.updateCultRequirementUI();
-  return { success: summary.qualifies, remainingGaps, plan };
-};
 
 App.renderMiraclePicker = function(container) {
   if (!CharacterData.cult) {
@@ -16688,6 +16301,8 @@ App.generateRandomCharacter = function() {
   CharacterData.hitPoints = {};
   CharacterData.companions = [];
   CharacterData.cult = null;
+  CharacterData.cultChoiceMade = false;
+  CharacterData.cultInitiated = false;
   CharacterData.cultType = null;
   CharacterData.miracles = [];
   CharacterData.devotionalPool = 0;
@@ -16900,7 +16515,7 @@ App.generateRandomCharacter = function() {
   CharacterData.family = pick(familyOptions);
   CharacterData.backgroundEvents = pick(bgEventOptions);
 
-  // 13.5. Select a cult (90% of time) or "No cult" (10% of time)
+  // 13.5. Select a cult (90% of time) or explicit No Cult (10% of time)
   if (Math.random() > 0.1) {
     const cultMap = CULTURE_CULT_MAP[normalizeCultureName(CharacterData.culture)];
     if (cultMap && cultMap.primary && cultMap.primary.length > 0) {
@@ -16916,6 +16531,8 @@ App.generateRandomCharacter = function() {
       CharacterData.passions.push(buildStructuredPassion({ name: `Loyalty (${CharacterData.cult})`, value }, value, false));
     }
   }
+  CharacterData.cultChoiceMade = true;
+  CharacterData.cultInitiated = false;
 
   // 14. Career skills — replicate what selectCareer() does
   CharacterData.careerSkills = {};
@@ -17077,85 +16694,13 @@ App.generateRandomCharacter = function() {
     CharacterData.careerFolkMagic = shuffledFM.slice(0, Math.min(2, shuffledFM.length));
   }
 
-  // 16.5. Random builds should be playable immediately: satisfy selected cult
-  // gates where bonus points can do so, then fill source-backed starting magic.
-  this.normalizeHigherMagicState(CharacterData);
-  if (CharacterData.cult) {
-    this.autoBoostCultSkills({ silent: true, updateUi: false, allowReallocate: true });
-    const randomCult = CULTS_DATA.find(c => c.name === CharacterData.cult);
-    const culturalSkillKeys = new Set(allCulturalSkills);
-    const careerSkillKeys = new Set(allCareerSkillNames);
-    const transferRandomPoolPoints = (poolName, targetKey, legalKeys, maxPerSkillForPool, protectedKeys) => {
-      const pool = CharacterData[poolName] || {};
-      if (!targetKey || (!legalKeys.has(targetKey) && !Object.prototype.hasOwnProperty.call(pool, targetKey))) return false;
-      const currentTarget = pool[targetKey] || 0;
-      const room = maxPerSkillForPool - currentTarget;
-      if (room <= 0) return false;
-      const donors = Object.entries(pool)
-        .filter(([key, points]) => key !== targetKey && points > 0 && !protectedKeys.has(key))
-        .sort((a, b) => b[1] - a[1]);
-      let moved = 0;
-      for (const [donorKey] of donors) {
-        if (moved >= room) break;
-        const donorCurrent = pool[donorKey] || 0;
-        const take = Math.min(donorCurrent, room - moved);
-        if (take <= 0) continue;
-        pool[donorKey] -= take;
-        if (pool[donorKey] <= 0) delete pool[donorKey];
-        moved += take;
-      }
-      if (moved > 0) {
-        pool[targetKey] = currentTarget + moved;
-        CharacterData[poolName] = pool;
-        return true;
-      }
-      return false;
-    };
-    const nudgeRandomCultSkills = () => {
-      if (!randomCult) return false;
-      for (let i = 0; i < 8; i++) {
-        const summary = this.getCultInitiationRequirementSummary(randomCult);
-        if (summary.qualifies) return true;
-        const protectedKeys = new Set(summary.skillDetails.flatMap(skill =>
-          [skill.name, skill.key, skill.matchedName].filter(Boolean)
-        ));
-        const candidates = summary.skillDetails
-          .filter(skill => !skill.qualifies && skill.value < 50)
-          .sort((a, b) => (50 - a.value) - (50 - b.value));
-        let changed = false;
-        for (const skill of candidates) {
-          const targetKey = App.getCultInitiationBoostSkillKey
-            ? App.getCultInitiationBoostSkillKey(skill)
-            : (skill.key || skill.name);
-          const moved =
-            transferRandomPoolPoints('careerSkills', targetKey, careerSkillKeys, 15, protectedKeys) ||
-            transferRandomPoolPoints('culturalSkills', targetKey, culturalSkillKeys, 15, protectedKeys) ||
-            transferRandomPoolPoints('bonusSkills', targetKey, new Set([...protectedKeys, targetKey]), maxPerBonus, protectedKeys);
-          changed = moved || changed;
-          if (moved && this.getCultInitiationRequirementSummary(randomCult).qualifies) return true;
-        }
-        if (!changed) break;
-      }
-      return this.getCultInitiationRequirementSummary(randomCult).qualifies;
-    };
-    nudgeRandomCultSkills();
-    if (this.getCultInitiationGateErrors().length > 0) {
-      const selectedCult = CharacterData.cult;
-      CharacterData.cult = null;
-      CharacterData.cultType = null;
-      CharacterData.devotionalPool = 0;
-      CharacterData.miracles = [];
-      CharacterData.passions = CharacterData.passions.filter(p => p.name !== `Loyalty (${selectedCult})`);
-      this.normalizeHigherMagicState(CharacterData);
-    }
-  }
+  // 16.5. Fill source-backed starting magic only (cult-backed initiation is future play).
   const activeRandomProviders = this.normalizeHigherMagicState(CharacterData);
   const randomSorcerySource = activeRandomProviders.find(provider => provider.system === 'sorcery') || null;
   const randomAnimismProvider = activeRandomProviders.find(provider => provider.system === 'animism') || null;
-  if (CharacterData.cult) {
-    const randomMiracleLimit = this.getEffectiveInitiateMiracleLimit(CharacterData.cult);
-    CharacterData.miracles = this.getAvailableInitiateMiracleNames(CharacterData.cult).slice(0, randomMiracleLimit);
-  }
+
+  CharacterData.miracles = [];
+  CharacterData.devotionalPool = 0;
   if (randomAnimismProvider) {
     const spiritLimit = Math.min(3, randomAnimismProvider.itemLimit || CharacterData.boundSpiritSlots || 0);
     const spiritNames = Array.isArray(randomAnimismProvider.availableItems) ? randomAnimismProvider.availableItems : [];
@@ -17900,13 +17445,24 @@ App.renderPlayCharacteristics = function() {
   });
 };
 
+App.recomputeDerivedCharacterState = function(character = CharacterData) {
+  character.attributes = Calc.calculateAllAttributes(character.characteristics);
+  const cultType = character.cultType || (character.cult ? detectCultType(CULTS_DATA.find(c => c.name === character.cult)) : null);
+  character.devotionalPool = character.cultInitiated === true && cultType?.types?.includes('theist')
+    ? Math.floor((Number(character.characteristics?.POW) || 0) / 2)
+    : 0;
+  normalizeHigherMagicState(character);
+  return character;
+};
+
 App.updatePlayCharacteristic = function(stat, value) {
   CharacterData.characteristics[stat] = value;
-  CharacterData.attributes = Calc.calculateAllAttributes(CharacterData.characteristics);
+  this.recomputeDerivedCharacterState(CharacterData);
   this.saveToLocalStorage();
   this.renderPlayAttributes();
   this.renderPlayHitLocations();
   this.renderPlaySkills();
+  this.renderPlayMagic();
 };
 
 App.renderPlayAttributes = function() {
@@ -19140,9 +18696,11 @@ App.agent.getState = function() {
       culture: CharacterData.culture || null,
       homeland: CharacterData.homeland || '',
       characteristics: {...CharacterData.characteristics},
-      attributes: {...(CharacterData.attributes || {})},
+      attributes: Calc.calculateAllAttributes(CharacterData.characteristics),
       career: CharacterData.career || null,
       cult: CharacterData.cult || null,
+      cultChoiceMade: CharacterData.cultChoiceMade === true,
+      cultInitiated: CharacterData.cultInitiated === true,
       cultType: CharacterData.cultType ? {...CharacterData.cultType} : null,
       higherMagicProviders: activeHigherMagicProviders.map(provider => ({...provider})),
       magic: magicState,
@@ -19172,7 +18730,8 @@ App.agent.getState = function() {
       startingMoney: CharacterData.startingMoney || 0,
       equipment: [...(CharacterData.equipment || [])],
       weapons: [...(CharacterData.weapons || [])],
-      armor: [...(CharacterData.armor || [])]
+      armor: [...(CharacterData.armor || [])],
+      companions: (CharacterData.companions || []).map(companion => ({...companion}))
     };
   } catch (e) {
     return {error: e.message};
@@ -19374,7 +18933,7 @@ App.agent.setStep = function(step, data) {
         if (errors.length > 0) return {success: false, errors, state: App.agent.getState()};
         CharacterData.characteristics = {...chars};
         CharacterData.charMethod = 'point-buy';
-        CharacterData.attributes = Calc.calculateAllAttributes(CharacterData.characteristics);
+        App.recomputeDerivedCharacterState(CharacterData);
         App.currentStep = 2;
         App.renderCurrentStep();
         App.saveToLocalStorage();
@@ -19440,6 +18999,7 @@ App.agent.setStep = function(step, data) {
           const rolledMoney = App.rollStartingMoneyForCulture(culture);
           if (rolledMoney) CharacterData.startingMoney = rolledMoney.total;
         }
+        applyAutoLockedProfessionalSkillResolutions(CharacterData);
         const activeHigherMagicProviders = App.normalizeHigherMagicState(CharacterData);
         const providerLossError = getHigherMagicProviderSelectionLossError(step4Snapshot, activeHigherMagicProviders, {
           lostSpellsMessage: lostSpells => `Changing culture would clear selected sorcery spells: ${lostSpells.join(', ')}`,
@@ -19790,7 +19350,8 @@ App.agent.setStep = function(step, data) {
           };
         };
         const requestedSorcerySpells = getRequestedSorcerySpells(data);
-        const requestedMiracles = Array.isArray(data.miracles) ? data.miracles : [];
+        const requestedCultInitiated = data.cultInitiated === true;
+        const requestedMiracles = requestedCultInitiated && Array.isArray(data.miracles) ? data.miracles : [];
         const requestedBoundSpirits = Array.isArray(data.boundSpirits)
           ? data.boundSpirits
           : [];
@@ -19836,8 +19397,8 @@ App.agent.setStep = function(step, data) {
             return {success: false, errors: unsupportedMagicErrors, state: App.agent.getState()};
           }
           const previousStep9Providers = App.resolveHigherMagicProviders(step9Snapshot);
-          const previousAnimismProvider = getHigherMagicProviderBySystem(previousStep9Providers, 'animism');
-          const activeAnimismProvider = getHigherMagicProviderBySystem(activeHigherMagicProviders, 'animism');
+          const previousAnimismProvider = findProviderBySystemInList(previousStep9Providers, 'animism');
+          const activeAnimismProvider = findProviderBySystemInList(activeHigherMagicProviders, 'animism');
           const previousBoundSpiritNames = getMagicSelectionNames(step9Snapshot.boundSpirits, getBoundSpiritName);
           const submittedOriginMismatchSpirits = getBoundSpiritOriginProviderMismatchNames(CharacterData.boundSpirits, CharacterData, activeAnimismProvider);
           if (submittedOriginMismatchSpirits.length > 0) {
@@ -19899,16 +19460,19 @@ App.agent.setStep = function(step, data) {
           // No-cult path
           const cultChanged = CharacterData.cult !== null;
           CharacterData.cult = null;
+          CharacterData.cultChoiceMade = true;
+          CharacterData.cultInitiated = false;
           if (cultChanged) {
             App.clearAutoPopulatedCompanions();
           }
           CharacterData.cultType = null;
           CharacterData.devotionalPool = 0;
           CharacterData.boundSpiritSlots = 0;
-          CharacterData.miracles = [...requestedMiracles];
+          CharacterData.miracles = [];
           CharacterData.boundSpirits = [...requestedBoundSpirits];
           CharacterData.sorcerySpells = [...requestedSorcerySpells];
           CharacterData.mysticismTalents = [...requestedMysticismTalents];
+          App.syncCultLoyaltyPassion(null);
           return finishStep9Selection();
         }
         if (typeof cultName !== 'string') {
@@ -19920,12 +19484,12 @@ App.agent.setStep = function(step, data) {
           errors.push(`Cult "${cultName}" not found in CULTS_DATA`);
           return {success: false, errors, state: App.agent.getState()};
         }
-        // ADR-0006: Calculate resources based on cult type
         const agentCultType = detectCultType(cult);
-        const devPool = agentCultType.types.includes('theist') ? Math.floor(CharacterData.characteristics.POW / 2) : 0;
         const prospectiveProviders = App.resolveHigherMagicProviders({
           ...CharacterData,
           cult: cultName,
+          cultChoiceMade: true,
+          cultInitiated: requestedCultInitiated,
           cultType: agentCultType
         });
         const unsupportedMagicErrors = getUnsupportedMagicSelectionErrors(cultName, agentCultType, {
@@ -19941,19 +19505,24 @@ App.agent.setStep = function(step, data) {
         const previousCult = CharacterData.cult;
         const cultChanged = previousCult !== cultName;
         CharacterData.cult = cultName;
+        CharacterData.cultChoiceMade = true;
+        CharacterData.cultInitiated = requestedCultInitiated;
         if (cultChanged) {
           App.clearAutoPopulatedCompanions();
         }
         CharacterData.cultType = agentCultType;
-        CharacterData.devotionalPool = devPool;
-        CharacterData.boundSpiritSlots = agentCultType.types.includes('animist') ? Math.floor(CharacterData.characteristics.CHA / 2) : 0;
-        CharacterData.sorceryResource = agentCultType.types.includes('sorcery') ? CharacterData.characteristics.POW : 0;
-        CharacterData.miracles = [...requestedMiracles];
+        CharacterData.devotionalPool = CharacterData.cultInitiated === true && agentCultType.types.includes('theist')
+          ? Math.floor(CharacterData.characteristics.POW / 2)
+          : 0;
+        CharacterData.boundSpiritSlots = 0;
+        CharacterData.sorceryResource = 0;
+        CharacterData.miracles = CharacterData.cultInitiated === true ? [...requestedMiracles] : [];
         CharacterData.boundSpirits = [...requestedBoundSpirits];
         CharacterData.sorcerySpells = [...requestedSorcerySpells];
         CharacterData.mysticismTalents = [...requestedMysticismTalents];
 
         resolveCultBoundPlaceholders(CharacterData, cultName, previousCult);
+        App.syncCultLoyaltyPassion(cultName);
         return finishStep9Selection();
       }
 
@@ -20209,15 +19778,23 @@ App.agent.buildCharacter = function(spec) {
  * Useful for agent-browser tests to verify which step/mode is active.
  */
 App.agent.getUIState = function() {
+  const isVisible = element => Boolean(element) && element.hidden !== true && (
+    typeof element.getClientRects === 'function'
+      ? element.getClientRects().length > 0
+      : element.style?.display !== 'none'
+  );
+  const miraclePicker = document.getElementById('miracle-picker');
+  const spiritPicker = document.getElementById('spirit-picker');
+  const sorceryPicker = document.getElementById('sorcery-picker');
   try {
     return {
       currentStep: App.currentStep || 1,
       totalSteps: App.totalSteps || 13,
       mode: App.mode || 'wizard',
-      cultPickerVisible: !!document.querySelector('.miracle-picker, .spirit-picker, .sorcery-picker'),
-      miraclePickerVisible: !!document.querySelector('.miracle-picker'),
-      spiritPickerVisible: !!document.querySelector('.spirit-picker'),
-      sorceryPickerVisible: !!document.querySelector('.sorcery-picker'),
+      cultPickerVisible: [miraclePicker, spiritPicker, sorceryPicker].some(isVisible),
+      miraclePickerVisible: isVisible(miraclePicker),
+      spiritPickerVisible: isVisible(spiritPicker),
+      sorceryPickerVisible: isVisible(sorceryPicker),
       errors: Array.from(document.querySelectorAll('.error, .validation-error')).map(el => el.textContent.trim()),
       toasts: Array.from(document.querySelectorAll('.toast, .notification')).map(el => el.textContent.trim())
     };
@@ -20241,26 +19818,30 @@ App.agent.getMagicState = function() {
       ? MIRACLES_DATA.cults[CharacterData.cult].miracles || []
       : [];
 
+    const initiated = CharacterData.cultInitiated === true;
+
     return {
       cultType: cultType,
       cultName: CharacterData.cult || null,
+      cultChoiceMade: CharacterData.cultChoiceMade === true,
+      cultInitiated: initiated,
       higherMagicProviders: activeHigherMagicProviders.map(provider => ({...provider})),
       activeSorcerySource: activeSorcerySource ? {...activeSorcerySource} : null,
       sorcerySource: activeSorcerySource ? {...activeSorcerySource} : null,
       sorcerySourceLabel: activeSorcerySource?.sourceLabel || null,
       sorcerySourceType: activeSorcerySource?.sourceType || null,
-      devotionalPool: CharacterData.devotionalPool || 0,
+      devotionalPool: initiated ? (CharacterData.devotionalPool || 0) : 0,
       boundSpiritSlots: activeAnimismProvider?.itemLimit || CharacterData.boundSpiritSlots || 0,
       sorceryResource: activeSorcerySource?.magicPoints || CharacterData.sorceryResource || 0,
-      selectedMiracles: [...(CharacterData.miracles || [])],
+      selectedMiracles: initiated ? [...(CharacterData.miracles || [])] : [],
       selectedSpells: [...(CharacterData.sorcerySpells || [])],
       selectedSpirits: [...(CharacterData.boundSpirits || [])],
       selectedTalents: [...(CharacterData.mysticismTalents || [])],
-      availableMiracles: cultMiracles,
+      availableMiracles: initiated ? cultMiracles : [],
       availableSpells: activeSorcerySource?.availableItems ? [...activeSorcerySource.availableItems] : [],
       availableSpirits: activeAnimismProvider?.availableItems ? [...activeAnimismProvider.availableItems] : [],
       limits: {
-        miracles: App.getEffectiveInitiateMiracleLimit(CharacterData.cult),
+        miracles: initiated ? App.getEffectiveInitiateMiracleLimit(CharacterData.cult) : 0,
         sorcerySpells: activeSorcerySource?.startingSpellLimit || 3,
         spirits: activeAnimismProvider?.itemLimit || CharacterData.boundSpiritSlots || 0,
         startingSpirits: Math.min(3, activeAnimismProvider?.itemLimit || CharacterData.boundSpiritSlots || 0)
@@ -20275,123 +19856,44 @@ App.agent.getMagicState = function() {
 // AGENT API — Phase 2: Granular Action API
 // =============================================================================
 
+App.agent.refreshAfterMutation = function() {
+  if (App.mode === 'play' && typeof App.renderPlayMode === 'function') {
+    App.renderPlayMode();
+  } else if (typeof App.renderCurrentStep === 'function') {
+    App.rerenderPreservingScroll ? App.rerenderPreservingScroll() : App.renderCurrentStep();
+  }
+};
+
 /**
  * App.agent.selectCult(name) — Select a cult, triggering resource pool calculation.
  * Returns the resulting magic state.
  */
 App.agent.selectCult = function(name) {
-  const selectionSnapshot = createTrustedCharacterSnapshot();
-  const previousCult = CharacterData.cult;
-  const previousSorcerySource = App.resolveActiveSorcerySource(CharacterData);
-  const previousHigherMagicProviders = App.resolveHigherMagicProviders(CharacterData);
-  const restoreSelectionSnapshot = () => {
-    restoreTrustedCharacterSnapshot(selectionSnapshot);
-    App.saveToLocalStorage();
-  };
-  const sourceSelectionError = source => {
-    const error = getSorcerySourceSelectionError(selectionSnapshot, previousSorcerySource, CharacterData, source);
-    if (error) {
-      restoreSelectionSnapshot();
-      return {success: false, error, magicState: App.agent.getMagicState()};
-    }
-    return null;
-  };
   try {
-    if (name === null || name === undefined) {
-      CharacterData.cult = null;
-      CharacterData.cultType = null;
-      CharacterData.devotionalPool = 0;
-      CharacterData.boundSpiritSlots = 0;
-      CharacterData.miracles = [];
-      const activeHigherMagicProviders = App.resolveHigherMagicProviders(CharacterData);
-      const previousAnimismProvider = getHigherMagicProviderBySystem(previousHigherMagicProviders, 'animism');
-      const activeAnimismProvider = getHigherMagicProviderBySystem(activeHigherMagicProviders, 'animism');
-      if (Array.isArray(CharacterData.boundSpirits) &&
-          CharacterData.boundSpirits.length > 0 &&
-          previousAnimismProvider &&
-          activeAnimismProvider &&
-          previousAnimismProvider.id !== activeAnimismProvider.id &&
-          previousAnimismProvider.sourceKind === 'core-career' &&
-          activeAnimismProvider.sourceKind === 'cult') {
-        markBoundSpiritsOrigin(CharacterData, previousAnimismProvider);
-      }
-      if (!previousSorcerySource) {
-        CharacterData.sorcerySpells = [];
-      }
-      const providerLossError = getHigherMagicProviderSelectionLossError(selectionSnapshot, activeHigherMagicProviders, {
-        lostSpellsMessage: lostSpells => `Changing cult would clear selected sorcery spells: ${lostSpells.join(', ')}`,
-        lostBoundSpiritsMessage: lostSpirits => `Changing cult would clear selected bound spirits: ${lostSpirits.join(', ')}`,
-        lostMysticismTalentsMessage: lostTalents => `Changing cult would clear selected mysticism talents: ${lostTalents.join(', ')}`
-      });
-      if (providerLossError) {
-        restoreSelectionSnapshot();
-        return {success: false, error: providerLossError, magicState: App.agent.getMagicState()};
-      }
-      const activeSorcerySource = activeHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
-      const sourceError = sourceSelectionError(activeSorcerySource);
-      if (sourceError) return sourceError;
-      App.normalizeHigherMagicState(CharacterData);
-      App.saveToLocalStorage();
-      return {success: true, magicState: App.agent.getMagicState()};
-    }
-    const cult = CULTS_DATA.find(c => c.name === name);
-    if (!cult) return {success: false, error: `Cult '${name}' not found`};
-    CharacterData.cult = name;
-    const cultType = detectCultType(cult);
-    CharacterData.cultType = cultType;
-    // Calculate resource pools
-    if (cultType.types.includes('theist')) {
-      CharacterData.devotionalPool = Math.floor(CharacterData.characteristics.POW / 2);
-    } else {
-      CharacterData.devotionalPool = 0;
-    }
-    if (cultType.types.includes('animist')) {
-      CharacterData.boundSpiritSlots = Math.floor(CharacterData.characteristics.CHA / 2);
-    } else {
-      CharacterData.boundSpiritSlots = 0;
-    }
-    if (cultType.types.includes('sorcery')) {
-      CharacterData.sorceryResource = CharacterData.characteristics.POW || 0;
-    } else {
-      CharacterData.sorceryResource = 0;
-    }
-    if (previousCult !== name) {
-      CharacterData.miracles = [];
-    }
-    const activeHigherMagicProviders = App.resolveHigherMagicProviders(CharacterData);
-    const previousAnimismProvider = getHigherMagicProviderBySystem(previousHigherMagicProviders, 'animism');
-    const activeAnimismProvider = getHigherMagicProviderBySystem(activeHigherMagicProviders, 'animism');
-    if (Array.isArray(CharacterData.boundSpirits) &&
-        CharacterData.boundSpirits.length > 0 &&
-        previousAnimismProvider &&
-        activeAnimismProvider &&
-        previousAnimismProvider.id !== activeAnimismProvider.id &&
-        previousAnimismProvider.sourceKind === 'core-career' &&
-        activeAnimismProvider.sourceKind === 'cult') {
-      markBoundSpiritsOrigin(CharacterData, previousAnimismProvider);
-    }
-    if (previousCult !== name && !previousSorcerySource) {
-      CharacterData.sorcerySpells = [];
-    }
-    const providerLossError = getHigherMagicProviderSelectionLossError(selectionSnapshot, activeHigherMagicProviders, {
-      lostSpellsMessage: lostSpells => `Changing cult would clear selected sorcery spells: ${lostSpells.join(', ')}`,
-      lostBoundSpiritsMessage: lostSpirits => `Changing cult would clear selected bound spirits: ${lostSpirits.join(', ')}`,
-      lostMysticismTalentsMessage: lostTalents => `Changing cult would clear selected mysticism talents: ${lostTalents.join(', ')}`
+    const result = App.selectCult(name, {
+      skipConfirmation: true,
+      allowMagicSelectionLoss: true
     });
-    if (providerLossError) {
-      restoreSelectionSnapshot();
-      return {success: false, error: providerLossError, magicState: App.agent.getMagicState()};
+
+    if (!result?.success) {
+      if (result?.pendingConfirmation) {
+        return {
+          success: false,
+          error: 'Cult change requires confirmation in UI context',
+          pendingConfirmation: true,
+          magicState: App.agent.getMagicState()
+        };
+      }
+      return {
+        success: false,
+        error: result?.error || (Array.isArray(result?.errors) ? result.errors[0] : 'Cult selection failed'),
+        magicState: App.agent.getMagicState()
+      };
     }
-    const activeSorcerySource = activeHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
-    const sourceError = sourceSelectionError(activeSorcerySource);
-    if (sourceError) return sourceError;
-    App.normalizeHigherMagicState(CharacterData);
-    resolveCultBoundPlaceholders(CharacterData, name, previousCult);
-    App.saveToLocalStorage();
-    return {success: true, magicState: App.agent.getMagicState()};
+
+    return { success: true, magicState: App.agent.getMagicState() };
   } catch (e) {
-    restoreSelectionSnapshot();
-    return {success: false, error: e.message};
+    return { success: false, error: e.message, magicState: App.agent.getMagicState() };
   }
 };
 
@@ -20429,6 +19931,7 @@ App.agent.toggleSpell = function(name) {
     }
     CharacterData.sorcerySpells = spells;
     App.saveToLocalStorage();
+    App.agent.refreshAfterMutation();
     return {success: true, selected: spells.length, limit, spells: [...spells]};
   } catch (e) {
     return {success: false, error: e.message};
@@ -20466,6 +19969,7 @@ App.agent.toggleSpirit = function(name) {
     }
     CharacterData.boundSpirits = spirits;
     App.saveToLocalStorage();
+    App.agent.refreshAfterMutation();
     const limit = Math.min(3, activeAnimismProvider?.itemLimit || CharacterData.boundSpiritSlots || 0);
     return {success: true, used: spirits.length, limit, spirits: spirits.map(s => typeof s === 'string' ? s : s.name)};
   } catch (e) {
@@ -20496,6 +20000,7 @@ App.agent.selectMiracle = function(name) {
     }
     CharacterData.miracles = miracles;
     App.saveToLocalStorage();
+    App.agent.refreshAfterMutation();
     return {success: true, selected: miracles.length, limit: App.getEffectiveInitiateMiracleLimit(CharacterData.cult), miracles: [...miracles]};
   } catch (e) {
     return {success: false, error: e.message};
@@ -20522,6 +20027,7 @@ App.agent.allocateSkill = function(skillMap, pool) {
     }
     CharacterData[target] = normalizeSkillPointMap({...(CharacterData[target] || {}), ...normalizedSkillMap});
     App.saveToLocalStorage();
+    App.agent.refreshAfterMutation();
     return {success: true, pool, allocated: CharacterData[target]};
   } catch (e) {
     return {success: false, error: e.message};
@@ -20542,8 +20048,10 @@ App.agent.setCharacteristic = function(name, value) {
       return {success: false, error: `Value must be 3-18, got: ${value}`};
     }
     CharacterData.characteristics[name] = value;
+    App.recomputeDerivedCharacterState(CharacterData);
     App.saveToLocalStorage();
-    return {success: true, characteristics: {...CharacterData.characteristics}};
+    App.agent.refreshAfterMutation();
+    return {success: true, characteristics: {...CharacterData.characteristics}, attributes: {...CharacterData.attributes}, magic: App.agent.getMagicState()};
   } catch (e) {
     return {success: false, error: e.message};
   }
@@ -20626,13 +20134,13 @@ App.agent.assertPlayMode = function() {
     const magicState = App.agent.getMagicState();
     if (magicState.cultName || magicState.activeSorcerySource) {
       sections.push('magic');
-      if (magicState.cultType.types.includes('theist') && magicState.selectedMiracles.length === 0) {
-        errors.push('Theist cult but no miracles selected');
+      if (magicState.cultInitiated === true && magicState.cultType.types.includes('theist') && magicState.selectedMiracles.length === 0) {
+        errors.push('Initiated theist cult but no miracles selected');
       }
-      if (magicState.cultType.types.includes('animist') && magicState.selectedSpirits.length === 0) {
-        errors.push('Animist cult but no spirits bound');
+      if (magicState.cultInitiated === true && magicState.cultType.types.includes('animist') && magicState.selectedSpirits.length === 0) {
+        errors.push('Initiated animist cult but no spirits bound');
       }
-      if ((magicState.cultType.types.includes('sorcery') || magicState.activeSorcerySource) && magicState.selectedSpells.length === 0) {
+      if ((magicState.activeSorcerySource || (magicState.cultInitiated === true && magicState.cultType.types.includes('sorcery'))) && magicState.selectedSpells.length === 0) {
         errors.push('Sorcery source but no spells selected');
       }
     } else {

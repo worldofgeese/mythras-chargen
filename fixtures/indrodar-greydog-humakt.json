@@ -85,7 +85,7 @@
   },
   "combatStyles": [],
   "companions": [],
-  "concept": "Humakt Sword — death-sworn warrior who has severed all kin ties",
+  "concept": "Humakt Sword \u2014 death-sworn warrior who has severed all kin ties",
   "cult": "Humakt",
   "cultType": {
     "blockedTypes": [],
@@ -184,5 +184,7 @@
   "sorceryResource": 0,
   "sorcerySpells": [],
   "startingMoney": 70,
-  "weapons": []
+  "weapons": [],
+  "cultChoiceMade": true,
+  "cultInitiated": true
 }

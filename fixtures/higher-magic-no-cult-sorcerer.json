@@ -174,5 +174,7 @@
     "Damage Resistance"
   ],
   "startingMoney": 255,
-  "weapons": []
+  "weapons": [],
+  "cultChoiceMade": false,
+  "cultInitiated": false
 }

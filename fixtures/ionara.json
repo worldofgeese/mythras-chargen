@@ -178,7 +178,7 @@
       "hitPointsTotal": 23,
       "movement": 12,
       "name": "Teza",
-      "notes": "Riding horse. Normally only attacks if life threatened. Owner attacks OR horse attacks — not both per round. Use mount's +3D6 damage bonus for lance charges.",
+      "notes": "Riding horse. Normally only attacks if life threatened. Owner attacks OR horse attacks \u2014 not both per round. Use mount's +3D6 damage bonus for lance charges.",
       "species": "Riding Horse",
       "strikeRank": 0
     }
@@ -376,5 +376,7 @@
       "size": "S",
       "skill": 0
     }
-  ]
+  ],
+  "cultChoiceMade": true,
+  "cultInitiated": false
 }

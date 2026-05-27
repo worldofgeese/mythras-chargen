@@ -111,14 +111,12 @@
   ],
   "socialClass": "Freeman",
   "socialClassMoneyMod": 1,
-  "sorceryResource": 13,
-  "sorcerySpells": [
-    "Animate (Substance)",
-    "Diminish (Characteristic)",
-    "Protective Ward"
-  ],
+  "sorceryResource": 0,
+  "sorcerySpells": [],
   "startingMoney": 60,
   "weapons": [
     "Quarterstaff"
-  ]
+  ],
+  "cultChoiceMade": true,
+  "cultInitiated": false
 }

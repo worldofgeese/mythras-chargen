@@ -72,7 +72,7 @@
     "Willpower": 10
   },
   "culture": "Sartarite (Heortling)",
-  "devotionalPool": 6,
+  "devotionalPool": 0,
   "equipment": [
     "Basket-weaving frame",
     "Leather scraps",
@@ -88,15 +88,10 @@
   "hitPoints": {},
   "hobbySkillName": "Language (Tradetalk)",
   "homeland": "Sartar",
-  "miracles": [
-    "Extension",
-    "Find (Specific Thing)",
-    "Divination",
-    "Chastise"
-  ],
+  "miracles": [],
   "mysticismTalents": [],
   "name": "Berena Basketweaver",
-  "notes": "REGRESSION: Tests disambiguation. _disambiguationMap tracks 3 resolutions. Craft (Primary)=Basketry and Craft (Secondary)=Leatherwork must be independent — deselecting one must NOT remove the other. Language (any) in cult skills should trigger promptSkillDisambiguation with culture-aware options (Heortling, Tradetalk, Stormspeech for Sartarite).",
+  "notes": "REGRESSION: Tests disambiguation. _disambiguationMap tracks 3 resolutions. Craft (Primary)=Basketry and Craft (Secondary)=Leatherwork must be independent \u2014 deselecting one must NOT remove the other. Language (any) in cult skills should trigger promptSkillDisambiguation with culture-aware options (Heortling, Tradetalk, Stormspeech for Sartarite).",
   "passions": [
     {
       "name": "Love of Craft",
@@ -125,5 +120,7 @@
   "startingMoney": 80,
   "weapons": [
     "Knife"
-  ]
+  ],
+  "cultChoiceMade": true,
+  "cultInitiated": false
 }

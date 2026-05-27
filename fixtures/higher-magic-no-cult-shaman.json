@@ -55,8 +55,8 @@
   },
   "boundSpiritSlots": 4,
   "boundSpirits": [
-    "Ancestor Spirit — Sagacity (Int 1)",
-    "Nature Spirit — Camouflage (Int 2)"
+    "Ancestor Spirit \u2014 Sagacity (Int 1)",
+    "Nature Spirit \u2014 Camouflage (Int 2)"
   ],
   "career": "Shaman",
   "careerFolkMagic": [
@@ -177,5 +177,7 @@
   "sorceryResource": 0,
   "sorcerySpells": [],
   "startingMoney": 70,
-  "weapons": []
+  "weapons": [],
+  "cultChoiceMade": false,
+  "cultInitiated": false
 }

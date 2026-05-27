@@ -3,6 +3,14 @@
 You are working in a Decapod-managed repository.
 See `AGENTS.md` for the universal contract.
 
+## Orientation & Documentation
+
+- **Read `docs/agent/api-index.md` before using Decapod beyond help/version checks.**
+- Use `docs/agent/command-contracts.md` instead of guessing command arguments.
+- Treat Decapod errors as recovery instructions.
+- Respect repo-local config policy and workspace boundaries.
+- Do not bypass Decapod boundaries to appear productive.
+
 ## Project Context
 
 - Read `.decapod/config.toml` before planning; it captures project name, summary, architecture, primary languages, and entrypoint preferences.
@@ -13,8 +21,9 @@ See `AGENTS.md` for the universal contract.
 ## Quick Start
 
 ```bash
-cargo install decapod
-decapod validate && decapod docs ingest && decapod session acquire
+# Smart bootstrap: only install/init if a newer version is available
+(decapod capabilities --format json | grep -q '"is_latest":true') || (cargo install decapod && decapod init --proof)
+decapod docs ingest && decapod validate && decapod session acquire
 decapod rpc --op agent.init
 decapod workspace status
 decapod todo add "<task>" && decapod todo claim --id <task-id>
@@ -50,13 +59,7 @@ decapod data schema --deterministic
 - Capability authority: `decapod capabilities --format json`.
 -- Scoped context feature: `decapod rpc --op context.scope --params '{"query":"<problem>","op":"<op>"}'` or `decapod rpc --op context.scope`.
 
-## Living Specs Governance
-
-Treat `.decapod/generated/specs/*` as living documents.
-- **Continuous Alignment**: Adjust specs as intent and code change over time.
-- **Intent-Driven**: Generally, specs only change when user intent evolves.
-- **Clarification**: When specs change, clarify the code change in terms of the updated intent.
-
+Treat `.decapod/generated/specs/*` as living documents. Adjust specs as intent and code change over time.
 
 Stop if requirements are ambiguous or conflicting.
 <!-- decapod-validator-anchors

@@ -57,8 +57,8 @@
   },
   "boundSpiritSlots": 4,
   "boundSpirits": [
-    "Nature Spirit — Camouflage (Int 2)",
-    "Bless Spirit — Initiative (Int 1)"
+    "Nature Spirit \u2014 Camouflage (Int 2)",
+    "Bless Spirit \u2014 Initiative (Int 1)"
   ],
   "career": "Shaman",
   "careerFolkMagic": [
@@ -193,5 +193,7 @@
   "sorceryResource": 0,
   "sorcerySpells": [],
   "startingMoney": 60,
-  "weapons": []
+  "weapons": [],
+  "cultChoiceMade": true,
+  "cultInitiated": true
 }

@@ -176,5 +176,7 @@
   "sorceryResource": 13,
   "sorcerySpells": [],
   "startingMoney": 70,
-  "weapons": []
+  "weapons": [],
+  "cultChoiceMade": true,
+  "cultInitiated": false
 }

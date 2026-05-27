@@ -91,7 +91,7 @@
   "combatStyles": [
     {
       "name": "Colymar Bison Cavalry",
-      "notes": "",
+      "notes": "RQG-narrative pregen style. Colymar bison-mounted heavy cavalry. No CSE entry covers this Sartarite bison cavalry combination; see references/combat-style-exceptions.json.",
       "skill": 0,
       "traits": [
         "Intimidating Scream",
@@ -100,10 +100,20 @@
       ],
       "weapons": [
         "Broadsword",
+        "Battleaxe",
         "Lance",
         "Medium Shield",
         "Composite Bow"
-      ]
+      ],
+      "citation": {
+        "source": "RQG Starter Set Pregen Folios",
+        "source_id": "rqg-pregen-folios",
+        "page": 2,
+        "coverage_state": "source_blocked",
+        "authority_state": "narrative_pregen_source",
+        "source_blocked_reason": "No CSE entry covers Colymar/Sartarite bison-mounted heavy cavalry with this weapon kit; narrative pregen source retained without CSE promotion.",
+        "exception_id": "pregen:vasana:colymar-bison-cavalry"
+      }
     }
   ],
   "companions": [
@@ -174,7 +184,12 @@
       "name": "Molon",
       "notes": "War-trained cavalry bison. Use mount's +3D6 damage bonus for lance charges. Can head butt OR trample per round, not both.",
       "species": "Bison (War-trained)",
-      "strikeRank": 3
+      "strikeRank": 3,
+      "source": "RQG Starter Set Pregen Folios",
+      "sourcePages": [
+        "PDF p.2"
+      ],
+      "sourceCitation": "Vasana/Molon folio companion block"
     }
   ],
   "concept": "Vengeful bison cavalrywoman, natural leader",
@@ -200,7 +215,7 @@
     "Willpower": 10
   },
   "culture": "Sartarite (Heortling)",
-  "devotionalPool": 6,
+  "devotionalPool": 0,
   "equipment": [
     {
       "cost": 0,
@@ -243,6 +258,18 @@
       "enc": 0,
       "name": "Flint & Tinder",
       "quantity": 1
+    },
+    {
+      "cost": 0,
+      "enc": 0,
+      "name": "10-point magic point storage crystal (RQG folio treasure; Mythras table approval required)",
+      "quantity": 1
+    },
+    {
+      "cost": 0,
+      "enc": 0,
+      "name": "Bronze image of Orlanth (+10% Worship in RQG folio; retained as narrative item)",
+      "quantity": 1
     }
   ],
   "family": "Ernaldori clan, Colymar Tribe",
@@ -284,60 +311,90 @@
   },
   "hobbySkillName": null,
   "homeland": "Sartar",
-  "miracles": [
-    "Extension",
-    "Find (Specific Thing)",
-    "Divination",
-    "Fearless",
-    "Lightning",
-    "Shield"
-  ],
+  "miracles": [],
   "mysticismTalents": [],
   "name": "Vasana Farnan's Daughter",
-  "notes": "Daughter of Farnan, slain by the Crimson Bat; scarred at Moonbroth. Natural born Ernaldori/Colymar leader, fearsome bison rider, and devout Orlanth Adventurous initiate. Uses Molon's +3D6 damage bonus for lance charges.",
+  "notes": "Daughter of Farnan, slain by the Crimson Bat; scarred at Moonbroth. Natural born Ernaldori/Colymar leader, fearsome bison rider, and Orlanth Adventurous/Vinga future-initiation path. Strict ADR-0015 fixture: RQG initiate Rune magic is withheld at chargen; folio spirit magic and cult magic require GM conversion/advancement. Uses Molon's +3D6 damage bonus for lance charges. RQG folio Battle Axe is represented by Mythras Battleaxe. RQG folio spirit magic (Demoralize, Heal 2, Mobility) maps to Mythras Demoralise/Heal/Mobility (Mythras Core Rules p.122-130): Heal is present; Demoralise and Mobility are withheld under strict ADR-0015 because they are not in the general picker and require cult/GM advancement. See references/folk-magic-reconciliation.json \u00a7vasana_rqg_spirit_magic_mapping. Active passion values are reconciled to the app's strict chargen formula (54) rather than the higher RQG folio values; folio passion targets are preserved as identity evidence.",
   "passions": [
     {
-      "name": "Loyalty (Clan)",
-      "needsSubject": false,
-      "subjectSuggestions": [],
-      "value": 54
-    },
-    {
-      "name": "Love (Freedom)",
-      "needsSubject": false,
-      "subjectSuggestions": [],
-      "value": 54
-    },
-    {
-      "choice": [
-        "Hate"
-      ],
-      "name": "Hate (Lunar Empire)",
-      "needsSubject": true,
-      "subjectSuggestions": [
-        "Telmori",
-        "Lunar Tarshites",
-        "Greydogs",
-        "Delecti's Undead",
-        "Beastfolk"
-      ],
-      "value": 54
-    },
-    {
-      "name": "Hate (Lunar Oppression)",
-      "needsSubject": false,
-      "subjectSuggestions": [],
-      "value": 54
-    },
-    {
-      "custom": true,
       "name": "Devotion (Orlanth)",
-      "value": 54
+      "type": "Devotion",
+      "subject": "Orlanth",
+      "description": "Devotion directed toward Orlanth.",
+      "value": 54,
+      "needsSubject": false,
+      "subjectSuggestions": [],
+      "custom": false
     },
     {
-      "custom": true,
+      "name": "Hate (Lunar Empire)",
+      "type": "Hate",
+      "subject": "Lunar Empire",
+      "description": "Hate directed toward Lunar Empire.",
+      "value": 54,
+      "needsSubject": false,
+      "subjectSuggestions": [],
+      "custom": false
+    },
+    {
       "name": "Honor",
-      "value": 54
+      "type": "Honor",
+      "subject": "",
+      "description": "Honor as a personal code.",
+      "value": 54,
+      "needsSubject": false,
+      "subjectSuggestions": [],
+      "custom": false
+    },
+    {
+      "name": "Love (Family)",
+      "type": "Love",
+      "subject": "Family",
+      "description": "Love directed toward Family.",
+      "value": 54,
+      "needsSubject": false,
+      "subjectSuggestions": [],
+      "custom": false
+    },
+    {
+      "name": "Loyalty (Argrath)",
+      "type": "Loyalty",
+      "subject": "Argrath",
+      "description": "Loyalty directed toward Argrath.",
+      "value": 54,
+      "needsSubject": false,
+      "subjectSuggestions": [],
+      "custom": false
+    },
+    {
+      "name": "Loyalty (Colymar Tribe)",
+      "type": "Loyalty",
+      "subject": "Colymar Tribe",
+      "description": "Loyalty directed toward Colymar Tribe.",
+      "value": 54,
+      "needsSubject": false,
+      "subjectSuggestions": [],
+      "custom": false
+    },
+    {
+      "name": "Loyalty (Ernaldori Clan)",
+      "type": "Loyalty",
+      "subject": "Ernaldori Clan",
+      "description": "Loyalty directed toward Ernaldori Clan.",
+      "value": 54,
+      "needsSubject": false,
+      "subjectSuggestions": [],
+      "custom": false
+    },
+    {
+      "name": "Loyalty (Sartar)",
+      "type": "Loyalty",
+      "subject": "Sartar",
+      "description": "Loyalty directed toward Sartar.",
+      "value": 54,
+      "needsSubject": false,
+      "subjectSuggestions": [],
+      "custom": false
     }
   ],
   "runeAffinities": {
@@ -355,13 +412,23 @@
   "socialClassMoneyMod": 1,
   "sorceryResource": 0,
   "sorcerySpells": [],
-  "startingMoney": 170,
+  "startingMoney": 20,
   "weapons": [
     {
       "ap": 6,
       "damage": "1d8",
       "hp": 10,
       "name": "Broadsword",
+      "quantity": 1,
+      "reach": "M",
+      "size": "M",
+      "skill": 0
+    },
+    {
+      "ap": 4,
+      "damage": "1d6+1",
+      "hp": 8,
+      "name": "Battleaxe",
       "quantity": 1,
       "reach": "M",
       "size": "M",
@@ -397,5 +464,7 @@
       "size": "H",
       "skill": 0
     }
-  ]
+  ],
+  "cultChoiceMade": true,
+  "cultInitiated": false
 }

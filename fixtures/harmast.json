@@ -125,7 +125,7 @@
       "hitPointsTotal": 20,
       "movement": 12,
       "name": "Riding Horse",
-      "notes": "Riding horse. Not trained for combat — will flee unless cornered.",
+      "notes": "Riding horse. Not trained for combat \u2014 will flee unless cornered.",
       "species": "Riding Horse",
       "strikeRank": 0
     }
@@ -274,5 +274,7 @@
       "size": "L",
       "skill": 0
     }
-  ]
+  ],
+  "cultChoiceMade": true,
+  "cultInitiated": true
 }

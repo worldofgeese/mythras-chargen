@@ -47,7 +47,7 @@
     }
   ],
   "companions": [],
-  "concept": "Regression test: Foundchild (17 cult skills, many at 0%). Tests auto-boost Phase 1→2→3 reallocation, idempotency guard, boost panel shows remaining-below-50 with correct wording",
+  "concept": "Regression test: Foundchild (17 cult skills, many at 0%). Tests auto-boost Phase 1\u21922\u21923 reallocation, idempotency guard, boost panel shows remaining-below-50 with correct wording",
   "cult": "Foundchild",
   "cultType": {
     "blockedTypes": [],
@@ -67,7 +67,7 @@
     "Track": 15
   },
   "culture": "Balazaring",
-  "devotionalPool": 6,
+  "devotionalPool": 0,
   "equipment": [
     "Bow case",
     "20 arrows",
@@ -118,5 +118,7 @@
     "Short Bow",
     "Javelin",
     "Hatchet"
-  ]
+  ],
+  "cultChoiceMade": true,
+  "cultInitiated": false
 }

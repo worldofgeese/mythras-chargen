@@ -176,5 +176,7 @@
     "Project (Sense)"
   ],
   "startingMoney": 180,
-  "weapons": []
+  "weapons": [],
+  "cultChoiceMade": false,
+  "cultInitiated": false
 }

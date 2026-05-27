@@ -338,5 +338,7 @@
       "size": "M",
       "skill": 0
     }
-  ]
+  ],
+  "cultChoiceMade": true,
+  "cultInitiated": true
 }
