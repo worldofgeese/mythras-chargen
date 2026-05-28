@@ -92,6 +92,16 @@ For rules, source-data, and player-facing content review, define the source pack
 - Run `./scripts/ingest-cults.py --validate` after cult/reference data changes.
 - Run `decapod validate` before claiming done.
 - After `index.html` changes, use `agent-browser` like a human: click/type/select, try changed choices, use fresh DOM refs after re-render, inspect screenshots, and verify Play Mode/PDF export.
+- For UI-visible `index.html` changes, complete this UI proof sequence before review or commit:
+  1. Capture the user-problem screenshot or reproduce the failing state.
+  2. Define the geometric or interaction invariant that proves the bug is fixed.
+  3. Implement the change.
+  4. Measure relevant DOM boxes or state transitions with browser evidence.
+  5. Capture an after screenshot.
+  6. Proceed to review/commit only when the measured invariant and screenshot both pass.
+- UI reviewers must receive the before/after screenshots, measured browser evidence, and exact visual acceptance criteria. Code-only review is insufficient for UI-visible changes.
+- Subagent completion reports for UI work must include proof artifact paths and concrete metric values. Do not accept generic statements such as "visual proof done" without the screenshot path and measurement output.
+- Run Decapod documentation ingestion and other high-volume Decapod commands only through context-filtered tooling (`ctx_execute`, `ctx_batch_execute`, or equivalent) that returns concise summaries; do not dump raw Decapod docs or validation corpora into the conversation context.
 - After non-trivial `/lfg` or equivalent implementation work, run `/ce-simplify-code` before final review when available.
 - Then run `ce-code-simplicity-reviewer` and `ce-correctness-reviewer`.
 - Always finish review cycles with the custom review subagent `ce-adversarial-reviewer`.
