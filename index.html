@@ -136,10 +136,52 @@ textarea { width: 100%; min-height: 60px; resize: vertical; }
 .choice-option input[type="checkbox"],
 .spell-picker__list input[type="checkbox"],
 .professional-skill-option input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
   align-self: start;
   block-size: 1em;
   inline-size: 1em;
   margin: 0;
+  box-sizing: border-box;
+  border: 2px solid #666;
+  background: #fff;
+}
+.choice-option input[type="radio"] {
+  border-radius: 50%;
+}
+.choice-option input[type="checkbox"],
+.spell-picker__list input[type="checkbox"],
+.professional-skill-option input[type="checkbox"] {
+  border-radius: 2px;
+}
+.choice-option input[type="radio"]:checked {
+  background: radial-gradient(circle, #000 0%, #000 40%, transparent 40%, transparent 100%);
+}
+.choice-option input[type="checkbox"]:checked,
+.spell-picker__list input[type="checkbox"]:checked,
+.professional-skill-option input[type="checkbox"]:checked {
+  background: #000;
+  position: relative;
+}
+.choice-option input[type="checkbox"]:checked::after,
+.spell-picker__list input[type="checkbox"]:checked::after,
+.professional-skill-option input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 0.15em;
+  top: 0.05em;
+  width: 0.3em;
+  height: 0.6em;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.choice-option input[type="radio"]:focus-visible,
+.choice-option input[type="checkbox"]:focus-visible,
+.spell-picker__list input[type="checkbox"]:focus-visible,
+.professional-skill-option input[type="checkbox"]:focus-visible {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
 }
 .spell-picker__list label > span,
 .professional-skill-option label > span,
