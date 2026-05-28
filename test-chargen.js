@@ -3565,7 +3565,102 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
   }
 }
 
-// Test 1.13d: Choice passions normalize stale undefined subjects without breaking dropdowns
+// Test 1.13d: Step 6 dropdown controls expose full-width click handlers
+{
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  const hasDropdownControlClass = html.includes('class="allocation-control passion-dropdown-control"');
+  const hasDropdownClickHandler = html.includes('onclick="App.openDropdownControl(this, event)"');
+  const keepsNoDuplicateBlurSave = !html.includes('onblur="App.updatePassion');
+  if (hasDropdownControlClass && hasDropdownClickHandler && keepsNoDuplicateBlurSave) {
+    pass('Step 6 dropdown controls use full-width click handlers without duplicate blur saves');
+  } else {
+    fail('Step 6 dropdown controls are missing full-width click handlers or reintroduced blur saves',
+      JSON.stringify({ hasDropdownControlClass, hasDropdownClickHandler, keepsNoDuplicateBlurSave }));
+  }
+}
+
+// Test 1.13e: Step 8 next-step click resolves focused specialization in one attempt
+{
+  const { App: AppObj, CharacterData: CD, CAREERS_DATA: Careers, needsDisambiguation, _sandbox: sandbox } = loadApp();
+  if (AppObj?.nextStep && AppObj?.commitStep8FocusedSpecialization && CD && Array.isArray(Careers) && typeof needsDisambiguation === 'function') {
+    const shaman = Careers.find(career => career.name === 'Shaman');
+    const unresolvedSkill = (shaman?.professionalSkills || []).find(skill => typeof skill === 'string' && needsDisambiguation(skill));
+    const concreteSkills = (shaman?.professionalSkills || []).filter(skill => typeof skill === 'string' && !needsDisambiguation(skill));
+    CD.culture = 'Praxian';
+    CD.career = 'Shaman';
+    CD.selectedProfessionalSkills = [unresolvedSkill, ...concreteSkills].slice(0, 3);
+    CD.careerSkills = Object.fromEntries(CD.selectedProfessionalSkills.map(skill => [skill, 0]));
+    CD._disambiguationMap = {};
+    AppObj.currentStep = 8;
+    const originalValidate = AppObj.validateCurrentStep;
+    const originalRender = AppObj.renderCurrentStep;
+    const originalUpdate = AppObj.updateStepIndicator;
+    const originalScrollTo = sandbox.window.scrollTo;
+    let validateSawResolved = false;
+    try {
+      sandbox.document.activeElement = {
+        classList: { contains: className => className === 'professional-specialization-input' },
+        dataset: { skill: unresolvedSkill },
+        value: 'Waha'
+      };
+      AppObj.validateCurrentStep = () => {
+        validateSawResolved = (CD.selectedProfessionalSkills || []).some(skill => skill === 'Binding (Waha)');
+        return true;
+      };
+      AppObj.renderCurrentStep = () => {};
+      AppObj.updateStepIndicator = () => {};
+      sandbox.window.scrollTo = () => {};
+      AppObj.nextStep();
+      if (validateSawResolved && CD.selectedProfessionalSkills.includes('Binding (Waha)') && AppObj.currentStep === 9) {
+        pass('Step 8 next-step click resolves focused specialization without a second click');
+      } else {
+        fail('Step 8 next-step click did not commit focused specialization before validation',
+          JSON.stringify({ validateSawResolved, selectedProfessionalSkills: CD.selectedProfessionalSkills, currentStep: AppObj.currentStep }));
+      }
+    } finally {
+      AppObj.validateCurrentStep = originalValidate;
+      AppObj.renderCurrentStep = originalRender;
+      AppObj.updateStepIndicator = originalUpdate;
+      sandbox.window.scrollTo = originalScrollTo;
+    }
+  } else {
+    fail('Step 8 next-step specialization dependencies unavailable');
+  }
+}
+
+// Test 1.13f: Toggle rerenders preserve scroll position and active item focus
+{
+  const { App: AppObj, _sandbox: sandbox } = loadApp();
+  if (AppObj?.rerenderPreservingScroll && AppObj?.getScrollPreserveSelector) {
+    let restoredScroll = null;
+    let focused = false;
+    const focusTarget = { focus: () => { focused = true; } };
+    sandbox.document.activeElement = { dataset: { spell: 'Bladesharp' } };
+    sandbox.document.scrollingElement = { scrollTop: 240 };
+    sandbox.document.querySelector = selector => selector === 'input[data-spell="Bladesharp"]' ? focusTarget : null;
+    sandbox.requestAnimationFrame = fn => fn();
+    const originalRender = AppObj.renderCurrentStep;
+    const originalScrollTo = sandbox.window.scrollTo;
+    try {
+      AppObj.renderCurrentStep = () => { sandbox.document.scrollingElement.scrollTop = 0; };
+      sandbox.window.scrollTo = (_x, y) => { restoredScroll = y; };
+      AppObj.rerenderPreservingScroll();
+      if (sandbox.document.scrollingElement.scrollTop === 240 && restoredScroll === 240 && focused) {
+        pass('Toggle rerenders preserve scroll position and active item focus');
+      } else {
+        fail('Toggle rerender did not restore scroll/focus',
+          JSON.stringify({ scrollTop: sandbox.document.scrollingElement.scrollTop, restoredScroll, focused }));
+      }
+    } finally {
+      AppObj.renderCurrentStep = originalRender;
+      sandbox.window.scrollTo = originalScrollTo;
+    }
+  } else {
+    fail('Scroll-preserving rerender helpers unavailable');
+  }
+}
+
+// Test 1.13g: Choice passions normalize stale undefined subjects without breaking dropdowns
 {
   const { App: AppObj, CharacterData: CD, _sandbox: sandbox } = loadApp();
   if (AppObj?.renderStep6) {

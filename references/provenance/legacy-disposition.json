@@ -72,6 +72,14 @@
       "rationale": "Full browser QA screenshots are retained visual proof assets, not source authority, app assets, or rendered source pages."
     },
     {
+      "id": "step6-step8-salvage-qa-screenshots",
+      "path_glob": "verification-artifacts/step6-step8-salvage/*.png",
+      "artifact_class": "generated_artifact",
+      "disposition": "exempt/out-of-scope",
+      "required_scope": true,
+      "rationale": "Step 6 and Step 8 interaction QA screenshots are retained visual proof assets, not source authority, app assets, or rendered source pages."
+    },
+    {
       "id": "fixtures",
       "path_glob": "fixtures/*.json",
       "artifact_class": "fixture",

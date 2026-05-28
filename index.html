@@ -82,6 +82,12 @@ textarea { width: 100%; min-height: 60px; resize: vertical; }
   box-sizing: border-box;
   height: 30px;
 }
+.passion-dropdown-control {
+  cursor: pointer;
+}
+.passion-dropdown-control::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
 .points-input {
   width: 64px;
   min-width: 64px;
@@ -12301,7 +12307,19 @@ const App = {
     return true;
   },
   
+  commitStep8FocusedSpecialization() {
+    if (this.currentStep !== 8 || typeof document === 'undefined') return;
+    const active = document.activeElement;
+    if (!active || !active.classList || typeof active.classList.contains !== 'function') return;
+    if (!active.classList.contains('professional-specialization-input')) return;
+    const skillName = active.dataset?.skill;
+    const specialization = String(active.value || '').trim();
+    if (!skillName || !specialization) return;
+    this.resolveProfessionalSkill(skillName, specialization, active);
+  },
+
   nextStep() {
+    this.commitStep8FocusedSpecialization();
     if (!this.validateCurrentStep()) {
       return;
     }
@@ -13994,11 +14012,59 @@ App.toggleFolkMagicSpell = function(spell, checked, maxCount, inputEl) {
  * Re-render current step while preserving scroll position.
  * Use instead of bare this.renderCurrentStep() for in-page interactions.
  */
+App.getScrollPreserveSelector = function(activeElement) {
+  if (!activeElement || !activeElement.dataset) return null;
+  const dataset = activeElement.dataset;
+  const esc = value => {
+    const text = String(value || '');
+    if (typeof CSS !== 'undefined' && typeof CSS.escape === 'function') {
+      return CSS.escape(text);
+    }
+    return text.replace(/(["\\])/g, '\\$1');
+  };
+  if (dataset.spirit) return `input[data-spirit="${esc(dataset.spirit)}"]`;
+  if (dataset.spell) return `input[data-spell="${esc(dataset.spell)}"]`;
+  if (dataset.miracle) return `input[data-miracle="${esc(dataset.miracle)}"]`;
+  if (dataset.talent) return `input[data-talent="${esc(dataset.talent)}"]`;
+  if (dataset.testid) return `[data-testid="${esc(dataset.testid)}"]`;
+  return null;
+};
+
 App.rerenderPreservingScroll = function() {
-  const scrollY = (typeof window !== 'undefined' && window.scrollY) || 0;
+  const doc = typeof document !== 'undefined' ? document : null;
+  const scrollingElement = doc?.scrollingElement || doc?.documentElement || doc?.body || null;
+  const scrollTop = scrollingElement ? scrollingElement.scrollTop : ((typeof window !== 'undefined' && window.scrollY) || 0);
+  const preserveSelector = this.getScrollPreserveSelector(doc?.activeElement || null);
+
   this.renderCurrentStep();
-  if (typeof window !== 'undefined' && window.scrollTo) {
-    requestAnimationFrame(() => window.scrollTo(0, scrollY));
+
+  if (typeof requestAnimationFrame !== 'function') return;
+  requestAnimationFrame(() => {
+    if (scrollingElement) scrollingElement.scrollTop = scrollTop;
+    if (typeof window !== 'undefined' && window.scrollTo) window.scrollTo(0, scrollTop);
+    if (preserveSelector && doc?.querySelector) {
+      const preserveTarget = doc.querySelector(preserveSelector);
+      if (preserveTarget && typeof preserveTarget.focus === 'function') {
+        try {
+          preserveTarget.focus({ preventScroll: true });
+        } catch (_err) {
+          preserveTarget.focus();
+        }
+      }
+    }
+  });
+};
+
+App.openDropdownControl = function(control, event) {
+  if (event && typeof event.stopPropagation === 'function') event.stopPropagation();
+  if (!control) return;
+  if (typeof control.focus === 'function') control.focus();
+  if (typeof control.showPicker === 'function') {
+    try {
+      control.showPicker();
+    } catch (_err) {
+      // showPicker is browser-dependent; focus fallback above is sufficient.
+    }
   }
 };
 
@@ -14128,11 +14194,11 @@ App.renderStep6 = function() {
           : '';
         row.className = 'allocation-row allocation-row--triple';
         row.innerHTML = `
-          <select class="allocation-control" onchange="App.updatePassionChoice(${idx}, this.value)">
+          <select class="allocation-control passion-dropdown-control" onclick="App.openDropdownControl(this, event)" onchange="App.updatePassionChoice(${idx}, this.value)">
             <option value="">-- Select --</option>
             ${passion.choice.map(c => `<option value="${this.escapeHtmlAttr(c)}" ${currentType === c ? 'selected' : ''}>${this.escapeHtml(c)}</option>`).join('')}
           </select>
-          ${needsSubject ? `<input class="allocation-control" type="text" id="${subjectId}" placeholder="(subject)" value="${this.escapeHtmlAttr(currentSubject)}"${subjectListAttr} onclick="this.focus(); if (this.showPicker) this.showPicker();" onchange="App.updatePassionSubject(${idx}, this.value)">` + subjectDatalist : '<span></span>'}
+          ${needsSubject ? `<input class="allocation-control passion-dropdown-control" type="text" id="${subjectId}" placeholder="(subject)" value="${this.escapeHtmlAttr(currentSubject)}"${subjectListAttr} onclick="App.openDropdownControl(this, event)" onchange="App.updatePassionSubject(${idx}, this.value)">` + subjectDatalist : '<span></span>'}
           <input class="points-input" type="number" value="${passion.value}" readonly>
         `;
       } else if (passion.needsSubject || passionTypeRequiresSubject(passion.type || parsePassionName(passion.name).type)) {
@@ -14147,9 +14213,9 @@ App.renderStep6 = function() {
         row.className = 'allocation-row allocation-row--triple';
         row.innerHTML = `
           <span class="allocation-label" style="font-weight: 600;">${this.escapeHtml(baseName)}</span>
-          <input class="allocation-control" type="text" value="${this.escapeHtmlAttr(currentSubject)}" placeholder="(to what?)"
+          <input class="allocation-control passion-dropdown-control" type="text" value="${this.escapeHtmlAttr(currentSubject)}" placeholder="(to what?)"
             ${subjectListAttr}
-            onclick="this.focus(); if (this.showPicker) this.showPicker();"
+            onclick="App.openDropdownControl(this, event)"
             onchange="App.updatePassionNameSubject(${idx}, '${baseName.replace(/'/g, "\\'")}', this.value)">
           ${subjectDatalist}
           <input class="points-input" type="number" value="${passion.value}" readonly>
@@ -14650,6 +14716,11 @@ App.resolveProfessionalSkill = function(originalName, specialization, sourceElem
   // Do NOT re-render here — the input already shows the correct value and re-rendering
   // would destroy focus/cause jarring UX. The state is saved and will render correctly
   // on next navigation or explicit re-render.
+  return true;
+};
+
+App.debouncedResolveProfessionalSkill = function(originalName, specialization, sourceElement) {
+  if (sourceElement) sourceElement.dataset.pendingValue = String(specialization || '');
   return true;
 };
 
