@@ -17,56 +17,15 @@
 
 These repo-specific rules extend the embedded Decapod constitution and the canonical agent entrypoints.
 
-#### Beads workflow
+#### Project tracking and Decapod custody
 
-This project uses Home Manager `bd` (beads) for durable issue tracking.
+This repository uses the global Beads Rust and Agent Mail conventions with the project-specific constraints below.
 
 - Decapod external-tracker/shadow-custody opt-in: `DECAPOD_EXTERNAL_TRACKER=true`. Decapod may still create internal coordination todos for runtime custody, workspace safety, and validation proof paths; those are not the human-facing project tracker.
-- Run `bd prime` for workflow context and command guidance.
-- Use `bd ready`, `bd show <id>`, `bd update <id> --claim`, and `bd close <id>`.
-- Beads is the human-facing task-tracking authority for this repository; agents should use equivalent `bd ...` operations instead of manually creating or claiming `decapod todo ...` work items.
-- Use `bd remember "insight"` for persistent project memory; do not create `MEMORY.md` files.
-- Do not use markdown TODO lists for task tracking.
-- When work uncovers a bug, bad data, source/provenance gap, validation gap, stale worktree/branch, documentation gap, or any other unresolved follow-up, create or update a Beads issue immediately with enough context for a fresh agent to act: observed problem, affected files/data, source/provenance constraints, dependencies, acceptance criteria, and proof gates.
+- Beads is the human-facing task-tracking authority for this repository; agents should use `br ...` operations instead of manually creating or claiming `decapod todo ...` work items.
+- When work uncovers a Mythras chargen bug, bad data, source/provenance gap, validation gap, stale worktree/branch, documentation gap, player-facing contradiction, or any other unresolved follow-up, create or update a Bead immediately with enough context for a fresh agent to act: observed problem, affected files/data, source/provenance constraints, dependencies, acceptance criteria, and proof gates.
 - Do not leave unresolved findings buried in chat, handoff notes, broad catch-all gates, or close reasons. Before closing a Bead, every unresolved finding discovered during that work must be fixed, explicitly blocked, or tracked by a linked follow-up Bead.
 - If a Bead closes with a scoped exception such as `source_blocked`, `partial`, reference-only, or intentionally unpromoted data, create a dedicated follow-up Bead for that exception and wire it as a blocker to the relevant provenance, pregen, publication, or acceptance gates.
-
-#### Agent orchestration and context discipline
-
-The headed/orchestrator agent is for planning, synthesis, high-complexity decisions, and final integration. It is not the default workhorse for sufficiently scoped implementation.
-
-- After Decapod/Beads initialization for non-trivial work, start by running `compound-engineering:ce-architecture-strategist` to check architectural fit and scope boundaries.
-- Fiercely protect the orchestrator context window: dispatch to subagents whenever tasks are sufficiently scoped, especially for implementation units, review passes, source investigations, and independent verification.
-- Vision-mode extraction or verification must be delegated to vision-capable subagents whenever possible; use separate extractor/verifier contexts for independent verification and keep the orchestrator focused on synthesis, integration, and proof review.
-- When approaching roughly 80% of the context window, stop expanding scope and create a handoff with the `handoff` skill before continuing.
-- Use `/lfg` as the default workhorse pipeline for scoped implementation when available. `/lfg` includes `/ce-work`; whenever `/lfg` invokes `/ce-work`, that execution phase must use the `/tdd` skill/test-first posture.
-- Exceptions to the `/lfg` default:
-  - Use the full Beads workflow directly when the task is tracker/governance/coordination work or when Beads create/update/close operations are integral throughout the task.
-  - Use `/ce-work` directly only for execution of approved plans or implementation units where the `ce-work` workflow is explicitly requested or clearly better-fitting than the full `/lfg` pipeline; direct `/ce-work` also uses `/tdd` for feature/bug implementation unless the work is non-code coordination.
-- Practice merge-as-you-go discipline: as each Bead is claimed, built, proofed, and closed, use `/compound-engineering:ce-commit` (or the platform-listed `ce-commit` skill) to commit the scoped work, push it, and merge it back to `main` before accumulating unrelated Beads.
-- After completed branches are merged, and before claiming more unrelated work, use `/compound-engineering:ce-clean-gone-branches` (or the platform-listed `ce-clean-gone-branches` skill) to prune gone local branches and their associated worktrees. Do not leave completed Decapod worktrees or merged branches behind.
-- These orchestration rules do not replace Decapod initialization, Beads task authority, isolated worktrees, proof gates, or Copyparty obligations.
-
-#### Fan-out and subagent prompts
-
-When orchestrating parallel or serial subagents, the parent agent must pass the repo contract into each subagent prompt instead of relying on ambient context.
-
-- Tell every subagent to read and obey `AGENTS.md` and `.decapod/OVERRIDE.md` before editing.
-- Tell every subagent to run `bd prime` and use Beads for durable task tracking; do not create or claim `decapod todo` work items.
-- Include the relevant Beads issue ID or require the subagent to create/claim a Beads issue before implementation.
-- Put enough context in each Bead and subagent prompt for a fresh agent to complete the work: goal, background, scope boundaries, source/provenance constraints, files likely to change, acceptance criteria, required skills/tools, and required proof gates.
-- For vision-mode evidence, explicitly require a vision-capable model/tool, provide image paths and source revision metadata, forbid OCR/text-layer authority unless the governing ADR allows it, and keep verifier prompts independent of extractor output, scratchpads, rationale, and run context.
-- Include required proof gates for the affected files: `node test-chargen.js`, `node test-agent-api.mjs` after magic/build changes, `./scripts/ingest-cults.py --validate` after cult/reference data changes, `decapod validate`, and human-style `agent-browser` QA after `index.html` changes.
-- Include Copyparty sync and verification rules whenever a subagent may touch mirrored files.
-- If a subagent finds bugs, bad data, source drift, or other unwanted behavior, create or update a Beads issue with the full finding context and fix it in-flight unless it is explicitly blocked or out of scope.
-- Require every subagent completion report to include the Bead ID, branch/worktree, commit SHA if one was created, files changed, proof gates run with pass/fail/skipped status, screenshots or public URLs when applicable, degraded checks, and linked follow-up Beads for unresolved work.
-- Treat subagent work as provisional until the orchestrator verifies the diff, proof gates, Beads state, and Copyparty obligations.
-
-#### Architecture decisions and ADRs
-
-- Check `docs/adr/` before making architecture, data model, source authority, workflow, or agent-operating decisions that may constrain future work.
-- Create ADRs with the `adr` skill when a durable decision has multiple viable approaches, lasting consequences, disagreement potential, or future constraints.
-- Do not create ADRs for routine implementation details, transient bugs, local refactors, or decisions already covered by an existing ADR.
 
 #### Project architecture
 
@@ -134,8 +93,8 @@ For rules, source-data, and player-facing content review, define the source pack
 - Run `decapod validate` before claiming done.
 - After `index.html` changes, use `agent-browser` like a human: click/type/select, try changed choices, use fresh DOM refs after re-render, inspect screenshots, and verify Play Mode/PDF export.
 - After non-trivial `/lfg` or equivalent implementation work, run `/ce-simplify-code` before final review when available.
-- Then run `compound-engineering:ce-code-simplicity-reviewer` and `compound-engineering:ce-correctness-reviewer`.
-- Always finish review cycles with the custom review subagent `compound-engineering:ce-adversarial-reviewer`.
+- Then run `ce-code-simplicity-reviewer` and `ce-correctness-reviewer`.
+- Always finish review cycles with the custom review subagent `ce-adversarial-reviewer`.
 - When review finds bugs, bad data, or unwanted behavior, create/claim a Beads issue and fix it in-flight before closeout unless the issue is explicitly blocked or out of scope.
 
 #### Container testing scope
@@ -154,7 +113,7 @@ Use container workspaces only when a change introduces a dependency manager, bui
 #### Commit, merge, cleanup, and publish
 
 - Commit only verified work with the required Copilot co-author trailer.
-- Do not batch unrelated Beads into long-lived branches. Close the SDLC loop for each Bead or tightly-coupled Bead set: proof, commit with `/compound-engineering:ce-commit`, push, merge to `main`, push `main`, then clean branches/worktrees with `/compound-engineering:ce-clean-gone-branches`.
+- Do not batch unrelated Beads into long-lived branches. Close the SDLC loop for each Bead or tightly-coupled Bead set: proof, commit with `ce-commit`, push, merge to `main`, push `main`, then clean branches/worktrees with `ce-clean-gone-branches`.
 - Keep `main` moving as the integration branch for completed Beads; avoid parking verified work only on agent/worktree branches.
 - Push final `main` to both `origin` and `paphos`.
 - Clean up temporary servers with specific PIDs, not name-based process killing.
