@@ -8543,16 +8543,19 @@ fixtures.forEach(fixtureInfo => {
       miracles: [],
       boundSpirits: [],
       sorcerySpells: [],
-      mysticismTalents: ['Unverified Talent']
+      mysticismPath: 'Core Mysticism Path',
+      mysticismTalents: ['Awareness']
     };
-    const unsupportedMysticismErrors = CD.validatePlainObject(unsupportedMysticismPayload);
-    const unsupportedMysticismSuccess = CD.fromJSON(JSON.stringify(unsupportedMysticismPayload));
-    const unsupportedMysticismRejected = unsupportedMysticismErrors.some(error => /Mysticism talent selection requires a verified talent catalog/i.test(error)) &&
-      unsupportedMysticismSuccess === false &&
-      CD.name === 'Before Unsupported Mysticism Import';
+    const supportedMysticismErrors = CD.validatePlainObject(unsupportedMysticismPayload);
+    const supportedMysticismSuccess = CD.fromJSON(JSON.stringify(unsupportedMysticismPayload));
+    const supportedMysticismAccepted = supportedMysticismErrors.length === 0 &&
+      supportedMysticismSuccess === true &&
+      CD.name === 'Unsupported Mysticism Import' &&
+      CD.mysticismPath === 'Core Mysticism Path' &&
+      CD.mysticismTalents.includes('Awareness');
 
-    if (preserved && unknownSpiritRejected && overLimitSpiritRejected && zeroSlotSpiritRejected && emptyMysticismClearsStale && unsupportedMysticismRejected) {
-      pass('Provider-backed Animism import validates spirits and handles unsupported Mysticism talents explicitly');
+    if (preserved && unknownSpiritRejected && overLimitSpiritRejected && zeroSlotSpiritRejected && emptyMysticismClearsStale && supportedMysticismAccepted) {
+      pass('Provider-backed Animism import validates spirits and accepts source-guided Mysticism talents');
     } else {
       fail('Provider-backed Animism/Mysticism import validation is incomplete',
         JSON.stringify({
@@ -8569,8 +8572,8 @@ fixtures.forEach(fixtureInfo => {
           zeroSlotSpiritRejected,
           emptyMysticismSuccess,
           emptyMysticismClearsStale,
-          unsupportedMysticismErrors,
-          unsupportedMysticismRejected
+          supportedMysticismErrors,
+          supportedMysticismAccepted
         }));
     }
   } else {
@@ -9266,7 +9269,7 @@ fixtures.forEach(fixtureInfo => {
   }
 }
 
-// Test 6.17b: advancing into Step 13 prepares starting equipment before render
+// Test 6.17b: advancing into final Step 12 prepares starting equipment before render
 {
   const { App: AppObj, CharacterData: CD, _sandbox } = loadApp();
   if (AppObj && AppObj.nextStep && CD && _sandbox) {
@@ -9274,8 +9277,8 @@ fixtures.forEach(fixtureInfo => {
     let rendered = false;
     CD.fromJSON(JSON.stringify(createTestCharacter()));
     CD.equipment = [];
-    AppObj.currentStep = 12;
-    AppObj.totalSteps = 13;
+    AppObj.currentStep = 11;
+    AppObj.totalSteps = 12;
     AppObj.validateCurrentStep = () => true;
     AppObj.autoPopulateStartingEquipment = () => {
       populated = true;
@@ -9287,17 +9290,17 @@ fixtures.forEach(fixtureInfo => {
 
     AppObj.nextStep();
 
-    if (AppObj.currentStep === 13 && populated && rendered && CD.equipment.length === 1) {
-      pass('Advancing into Step 13 initializes equipment before rendering review');
+    if (AppObj.currentStep === 12 && populated && rendered && CD.equipment.length === 1) {
+      pass('Advancing into Step 12 initializes equipment before rendering review');
     } else {
-      fail('Advancing into Step 13 does not initialize equipment before rendering review');
+      fail('Advancing into Step 12 does not initialize equipment before rendering review');
     }
   } else {
-    fail('App.nextStep not available for Step 13 preparation test');
+    fail('App.nextStep not available for Step 12 preparation test');
   }
 }
 
-// Test 6.17c: direct agent setStep(13) prepares and renders the final step
+// Test 6.17c: direct agent setStep(12) prepares and renders the final step
 {
   const { App: AppObj, CharacterData: CD } = loadApp();
   if (AppObj && AppObj.agent && AppObj.agent.setStep && CD) {
@@ -9305,8 +9308,8 @@ fixtures.forEach(fixtureInfo => {
     let rendered = false;
     let saved = false;
     CD.fromJSON(JSON.stringify(createTestCharacter()));
-    AppObj.currentStep = 12;
-    AppObj.totalSteps = 13;
+    AppObj.currentStep = 11;
+    AppObj.totalSteps = 12;
     AppObj.prepareStep = step => {
       preparedStep = step;
       CD.equipment = [{ name: 'Prepared By Agent', quantity: 1, enc: 0 }];
@@ -9314,22 +9317,22 @@ fixtures.forEach(fixtureInfo => {
     AppObj.renderCurrentStep = () => { rendered = true; };
     AppObj.saveToLocalStorage = () => { saved = true; };
 
-    const result = AppObj.agent.setStep(13, {});
+    const result = AppObj.agent.setStep(12, {});
 
     if (result.success &&
-        AppObj.currentStep === 13 &&
-        preparedStep === 13 &&
+        AppObj.currentStep === 12 &&
+        preparedStep === 12 &&
         rendered && saved &&
-        result.state.step === 13 &&
-        result.state.totalSteps === 13 &&
+        result.state.step === 12 &&
+        result.state.totalSteps === 12 &&
         CD.equipment.length === 1) {
-      pass('App.agent.setStep(13) prepares, renders, saves, and returns final state');
+      pass('App.agent.setStep(12) prepares, renders, saves, and returns final state');
     } else {
-      fail('App.agent.setStep(13) did not perform final-step preparation',
+      fail('App.agent.setStep(12) did not perform final-step preparation',
         JSON.stringify({ result, currentStep: AppObj.currentStep, preparedStep, rendered, saved }));
     }
   } else {
-    fail('App.agent.setStep not available for Step 13 direct transition test');
+    fail('App.agent.setStep not available for Step 12 direct transition test');
   }
 }
 
@@ -9624,10 +9627,10 @@ fixtures.forEach(fixtureInfo => {
   if (AppObj && AppObj.agent && AppObj.agent.getState && AppObj.agent.getUIState) {
     const state = AppObj.agent.getState();
     const ui = AppObj.agent.getUIState();
-    if (state.totalSteps === 13 && ui.totalSteps === 13) {
-      pass('Agent state APIs expose totalSteps = 13');
+    if (state.totalSteps === 12 && ui.totalSteps === 12) {
+      pass('Agent state APIs expose totalSteps = 12');
     } else {
-      fail('Agent state APIs do not expose totalSteps = 13');
+      fail('Agent state APIs do not expose totalSteps = 12');
     }
   } else {
     fail('Agent state APIs not available for wizard contract test');
@@ -9657,31 +9660,32 @@ fixtures.forEach(fixtureInfo => {
   }
 }
 
-// Test 6.23: Agent next() completes at Step 13 instead of advancing to Step 14
+// Test 6.23: Agent next() completes at Step 12 instead of advancing past the final review step
 {
   const { App: AppObj } = loadApp();
   if (AppObj && AppObj.agent && AppObj.agent.next) {
-    AppObj.currentStep = 13;
+    AppObj.currentStep = 12;
     AppObj.mode = 'wizard';
     AppObj.renderCurrentStep = () => {};
+    AppObj.getValidationState = () => ({ valid: true, errors: [], step: 12 });
     AppObj.switchMode = mode => { AppObj.mode = mode; };
 
     const result = AppObj.agent.next();
-    if (result.success && result.completed && result.newStep === 13 && AppObj.mode === 'play') {
-      pass('Agent next() completes the 13-step wizard into Play Mode');
+    if (result.success && result.completed && result.newStep === 12 && AppObj.mode === 'play') {
+      pass('Agent next() completes the 12-step wizard into Play Mode');
     } else {
-      fail('Agent next() does not complete correctly from Step 13');
+      fail('Agent next() does not complete correctly from Step 12');
     }
   } else {
     fail('App.agent.next not available for wizard completion test');
   }
 }
 
-// Test: returning from Play Mode to Wizard Mode refreshes Step 13 navigation
+// Test: returning from Play Mode to Wizard Mode refreshes Step 12 navigation
 {
   const { App: AppObj, _sandbox: sandbox } = loadApp();
   if (AppObj && AppObj.switchMode && AppObj.prevStep) {
-    AppObj.currentStep = AppObj.totalSteps || 13;
+    AppObj.currentStep = AppObj.totalSteps || 12;
     let renderCount = 0;
     const originalRenderCurrentStep = AppObj.renderCurrentStep;
     const originalUpdateStepIndicator = AppObj.updateStepIndicator;
@@ -9696,10 +9700,10 @@ fixtures.forEach(fixtureInfo => {
     AppObj.renderCurrentStep = originalRenderCurrentStep;
     AppObj.updateStepIndicator = originalUpdateStepIndicator;
 
-    if (renderCount >= 2 && AppObj.currentStep === 12) {
-      pass('Wizard Mode return from Play refreshes Step 13 and Previous moves to Step 12');
+    if (renderCount >= 2 && AppObj.currentStep === 11) {
+      pass('Wizard Mode return from Play refreshes Step 12 and Previous moves to Step 11');
     } else {
-      fail('Wizard Mode return from Play leaves Step 13 Previous stale',
+      fail('Wizard Mode return from Play leaves Step 12 Previous stale',
         JSON.stringify({ renderCount, currentStep: AppObj.currentStep }));
     }
   } else {
@@ -13776,26 +13780,60 @@ section('Step 9 Initiation Gate');
     CD.culture = 'Praxian';
     CD.socialClass = null;
     CD.socialClassMoneyMod = 1;
+    CD.startingMoney = 0;
 
-    const blocked = AppRef.validateCurrentStep();
+    const generated = AppRef.validateCurrentStep();
     const state = AppRef.getValidationState();
-    if (blocked === false && state.valid === false && state.errors.some(e => e.includes('social class'))) {
-      pass('Step 12 blocks advancement until social class is rolled or selected');
+    if (generated === true && state.valid === true && CD.socialClass && CD.startingMoney > 0) {
+      pass('Step 12 auto-generates social class and starting money before review');
     } else {
-      fail('Step 12 allowed blank social class', JSON.stringify({ blocked, state }));
+      fail('Step 12 did not auto-generate required resources', JSON.stringify({ generated, state, socialClass: CD.socialClass, startingMoney: CD.startingMoney }));
     }
 
     CD.socialClass = 'Freeman';
     CD.socialClassMoneyMod = 1;
+    CD.startingMoney = 42;
     const allowed = AppRef.validateCurrentStep();
     const allowedState = AppRef.getValidationState();
     if (allowed === true && allowedState.valid === true) {
-      pass('Step 12 allows advancement after social class selection');
+      pass('Step 12 allows advancement after automatic social class selection');
     } else {
-      fail('Step 12 blocked valid social class selection', JSON.stringify({ allowed, allowedState }));
+      fail('Step 12 blocked valid automatic social class selection', JSON.stringify({ allowed, allowedState }));
     }
   } else {
     fail('App.validateCurrentStep or App.getValidationState function not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD } = loadApp();
+
+  if (AppRef?.renderStep12 && CD?.fromJSON) {
+    CD.fromJSON(JSON.stringify(createTestCharacter()));
+    CD.culture = 'Esrolian';
+    CD.career = 'Mystic';
+    CD.cult = null;
+    CD.cultChoiceMade = true;
+    CD.socialClass = 'Gentry';
+    CD.socialClassMoneyMod = 5;
+    CD.startingMoney = 250;
+    CD.mysticismPath = 'Path of Harmony';
+    CD.mysticismTalents = ['Awareness'];
+    CD.sorcerySpells = [];
+    CD.boundSpirits = [];
+    CD.miracles = [];
+
+    const html = AppRef.renderStep12().innerHTML;
+    const includesGeneratedResources = html.includes('Gentry') && html.includes('250') && html.includes('Starting Money');
+    const includesMagicChoices = html.includes('Path of Harmony') || html.includes('Awareness');
+
+    if (includesGeneratedResources && includesMagicChoices) {
+      pass('Step 12 review shows automatic resources and Mystic choices');
+    } else {
+      fail('Step 12 review omits automatic resources or Mystic choices', JSON.stringify({ includesGeneratedResources, includesMagicChoices }));
+    }
+  } else {
+    fail('App.renderStep12 unavailable for automatic resource review test');
   }
 }
 
@@ -13869,13 +13907,13 @@ section('Step 9 Initiation Gate');
     const oldRandom = sandbox.Math.random;
     try {
       sandbox.Math.random = () => 0;
-      CD.socialClass = 'Test Double Money';
-      CD.socialClassMoneyMod = 2;
+      CD.socialClass = null;
+      CD.socialClassMoneyMod = 1;
       CD.startingMoney = 0;
-      const stepResult = AppRef.agent.setStep(4, { culture: 'Praxian', homeland: 'Prax', rollMoney: true });
+      const stepResult = AppRef.agent.setStep(4, { culture: 'Praxian', homeland: 'Prax', socialClass: 'Ruling', rollMoney: true });
       const praxian = CulturesData.find(culture => culture.name === 'Praxian');
-      const helperRoll = AppRef.rollStartingMoneyForCulture(praxian, 2);
-      if (stepResult?.success === true && CD.startingMoney === helperRoll?.total && CD.startingMoney === 40) {
+      const helperRoll = AppRef.rollStartingMoneyForCulture(praxian, 3);
+      if (stepResult?.success === true && CD.socialClass === 'Ruling' && CD.startingMoney === helperRoll?.total && CD.startingMoney === 60) {
         pass('Agent Step 4 starting money applies the same social-class multiplier as the UI helper');
       } else {
         fail('Agent Step 4 starting money diverges from UI helper',
@@ -14861,7 +14899,7 @@ section('Miracle Pool Capping (pool > available qualified)');
       CD.careerSkills = { 'Lore (Cult)': 15, Devotion: 15, 'Runic Affinity': 15 };
       CD.miracles = ['Extension', 'Find (Specific Thing)', 'Divination', 'Chastise'];
       AppRef.currentStep = 9;
-      AppRef.totalSteps = 13;
+      AppRef.totalSteps = 12;
       AppRef.prepareStep = () => {};
       AppRef.renderCurrentStep = () => {};
 

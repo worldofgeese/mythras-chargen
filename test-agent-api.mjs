@@ -343,8 +343,8 @@ assert(u4ShamanNoCult.step8.success === true &&
   u4ShamanNoCult.magic.cultName === null &&
   u4ShamanNoCult.magic.boundSpiritSlots === 4 &&
   u4ShamanNoCult.magic.selectedSpirits.some(spirit => (typeof spirit === 'string' ? spirit : spirit.name) === 'Ancestor Spirit — Sagacity (Int 1)') &&
-  /Available Magic Sources/i.test(u4ShamanNoCult.html) &&
-  /Core Animism via Shaman career/i.test(u4ShamanNoCult.html) &&
+  /Your Magic Training/i.test(u4ShamanNoCult.html) &&
+  /Shamanic Training/i.test(u4ShamanNoCult.html) &&
   /Starting Bound Spirits/i.test(u4ShamanNoCult.html),
   'U4: No Cult Shaman exposes Core Animism source, spirit slots, and provider-scoped spirit selection');
 
@@ -507,8 +507,8 @@ assert(u4SorcererNoCult.step8.success === true &&
   u4SorcererNoCult.magic.cultName === null &&
   u4SorcererNoCult.magic.sorcerySourceLabel === 'Core Sorcery via Sorcerer career' &&
   u4SorcererNoCult.magic.selectedSpells.includes('Holdfast') &&
-  /Available Magic Sources/i.test(u4SorcererNoCult.html) &&
-  /Core Sorcery via Sorcerer career/i.test(u4SorcererNoCult.html) &&
+  /Your Magic Training/i.test(u4SorcererNoCult.html) &&
+  /Sorcerer Training/i.test(u4SorcererNoCult.html) &&
   /Starting Spells/i.test(u4SorcererNoCult.html) &&
   !/Zzistori School/i.test(u4SorcererNoCult.html),
   'U4: No Cult Sorcerer exposes Core Sorcery source and provider-scoped spell selection');
@@ -525,28 +525,28 @@ const u4MysticNoCult = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(4, {culture:'Esrolian', homeland:'Esrolia'});
   const step8 = App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', {name:'Mysticism', specialization:'Core Mysticism Path'}, {name:'Musicianship', specialization:'Drums'}]});
   const options = App.agent.getOptions(9);
-  const step9 = App.agent.setStep(9, {cult:null});
-  const talentPayload = App.agent.setStep(9, {cult:null, mysticismTalents:['Unverified Talent']});
+  const step9 = App.agent.setStep(9, {cult:null, mysticismPath:'Core Mysticism Path', mysticismTalents:['Awareness']});
+  const talentPayload = step9;
   App.currentStep = 9;
   App.renderCurrentStep();
   const html = document.body.innerText;
-  const hasTalentPicker = Boolean(document.querySelector('[data-talent], [data-mysticism-talent], input[name="mysticismTalent"]'));
+  const hasTalentPicker = Boolean(document.querySelector('[data-talent], [data-mysticism-talent], input[name="mysticismTalent"], [data-testid="mysticism-talent-0"]'));
   return {step8, options, step9, talentPayload, html, hasTalentPicker};
 })())`);
 assert(u4MysticNoCult.step8.success === true &&
   u4MysticNoCult.options.noCult?.higherMagicProviders?.some(provider => provider.id === 'core-career-mystic-mysticism') &&
   u4MysticNoCult.step9.success === true &&
-  u4MysticNoCult.talentPayload.success === false &&
-  /verified talent catalog/i.test((u4MysticNoCult.talentPayload.errors || []).join('; ')) &&
-  /Available Magic Sources/i.test(u4MysticNoCult.html) &&
-  /Core Mysticism via Mystic career/i.test(u4MysticNoCult.html) &&
-  /Magic Points \(20\).*activation/i.test(u4MysticNoCult.html) &&
+  u4MysticNoCult.talentPayload.success === true &&
+  /Your Magic Training/i.test(u4MysticNoCult.html) &&
+  /Mystic Training/i.test(u4MysticNoCult.html) &&
+  /Magic Points \(20\).*activate/i.test(u4MysticNoCult.html) &&
+  /Mystic Path/i.test(u4MysticNoCult.html) &&
+  /Talent 1/i.test(u4MysticNoCult.html) &&
   /Meditation/i.test(u4MysticNoCult.html) &&
   /Mysticism/i.test(u4MysticNoCult.html) &&
-  /verified talent catalog/i.test(u4MysticNoCult.html) &&
-  !/no MP cost|no external resource/i.test(u4MysticNoCult.html) &&
-  u4MysticNoCult.hasTalentPicker === false,
-  'U4: No Cult Mystic exposes Core Mysticism as MP-based informational provider without talent picker');
+  !/no MP cost|no external resource|not ready for selection|debug catalog/i.test(u4MysticNoCult.html) &&
+  u4MysticNoCult.hasTalentPicker === true,
+  'U4: No Cult Mystic exposes Core Mysticism with path and talent selection');
 
 const u4MysticOrlanth = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'Orlanth Mystic', concept:'Theist with Core mysticism provider'});
@@ -566,9 +566,9 @@ assert(u4MysticOrlanth.step8.success === true &&
   u4MysticOrlanth.magic.cultInitiated === false &&
   u4MysticOrlanth.magic.devotionalPool === 0 &&
   /Orlanth/i.test(u4MysticOrlanth.html) &&
-  /Available Magic Sources/i.test(u4MysticOrlanth.html) &&
-  /Core Mysticism via Mystic career/i.test(u4MysticOrlanth.html) &&
-  /Magic Points \(12\).*activation/i.test(u4MysticOrlanth.html),
+  /Your Magic Training/i.test(u4MysticOrlanth.html) &&
+  /Mystic Training/i.test(u4MysticOrlanth.html) &&
+  /Magic Points \(12\).*activate/i.test(u4MysticOrlanth.html),
   'U4: Mystic with unrelated Orlanth cult stays uninitiated while retaining Core Mysticism provider');
 
 reload();
@@ -674,7 +674,7 @@ const u4NonMagicNoCult = evalPageJSON(`JSON.stringify((() => {
 assert(u4NonMagicNoCult.step8.success === true &&
   u4NonMagicNoCult.options.noCult?.higherMagicProviders?.length === 0 &&
   u4NonMagicNoCult.step9.success === true &&
-  !/Available Magic Sources|Starting Spells|Starting Bound Spirits|Core Mysticism/i.test(u4NonMagicNoCult.html) &&
+  !/Your Magic Training|Starting Spells|Starting Bound Spirits|Core Mysticism/i.test(u4NonMagicNoCult.html) &&
   u4NonMagicNoCult.spiritToggle.success === false &&
   /active animism provider|animist cult or provider/i.test(u4NonMagicNoCult.spiritToggle.error || '') &&
   u4NonMagicNoCult.talentPayload.success === false &&
@@ -2069,7 +2069,7 @@ const wizardReturnNavigation = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(8, {career:'Warrior', professionalSkills:[{name:'Lore (any)', specialization:'Tactics'}, {name:'Craft (any)', specialization:'Weaponsmithing'}, 'Survival']});
   App.agent.selectCult('Orlanth');
   App.agent.setStep(12, {socialClass:'Freeman'});
-  App.currentStep = 13;
+  App.currentStep = 12;
   App.renderCurrentStep();
   App.updateStepIndicator();
   App.switchMode('play');
@@ -2090,14 +2090,14 @@ const wizardReturnNavigation = evalPageJSON(`JSON.stringify((() => {
   };
   return {before, after};
 })())`);
-assert(wizardReturnNavigation.before.step === 13 &&
+assert(wizardReturnNavigation.before.step === 12 &&
   wizardReturnNavigation.before.disabled === false &&
-  /Step 13 of 13/.test(wizardReturnNavigation.before.indicator) &&
-  wizardReturnNavigation.after.step === 12 &&
-  /Step 12 of 13/.test(wizardReturnNavigation.after.indicator) &&
+  /Step 12 of 12/.test(wizardReturnNavigation.before.indicator) &&
+  wizardReturnNavigation.after.step === 11 &&
+  /Step 11 of 12/.test(wizardReturnNavigation.after.indicator) &&
   wizardReturnNavigation.after.wizardHidden === false &&
   wizardReturnNavigation.after.playHidden === true,
-  'UI regression: Previous works after Wizard Step 13 returns from Play Mode');
+  'UI regression: Previous works after Wizard Step 12 returns from Play Mode');
 
 // ═══════════════════════════════════════════════════════════════
 // Teardown
