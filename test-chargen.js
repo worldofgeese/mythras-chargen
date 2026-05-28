@@ -4187,7 +4187,7 @@ asyncTest('exportSinglePagePDF() Zzistori source-backed sorcery capture failed',
     text.includes('Magic Points: 15');
   const hasRawText = text.includes('Casting: Invocation skill') && text.includes('Shaping: Shaping skill');
   const hasSelectedSpells = ['Holdfast', 'Animate (Substance)', 'Project (Sense)'].every(spell => text.includes(spell));
-  const hasSourceCopy = text.includes('AiG p.30-31, p.59-60; Mythras rulebook p.162, p.166-177');
+  const hasSourceCopy = text.includes('AiG p.30-31, p.59-60; Mythras Core Rules p.162, p.166-177');
   const hasTheistLeak = text.includes('THEIST MIRACLES') ||
     text.includes('Devotional Pool') ||
     text.includes('Shield');
@@ -5626,13 +5626,13 @@ section('ADR-005: Placeholder Skill Disambiguation');
         const loreGuidance = getSpecializationGuidance('Lore (any)');
         const regionalGuidance = getSpecializationGuidance('Lore (Regional)');
         if (
-          languageGuidance.includes('Mythras rulebook p.49') &&
+          languageGuidance.includes('Mythras Core Rules p.49') &&
           languageGuidance.includes('Adventures in Glorantha p.26-41') &&
-          loreGuidance.includes('Mythras rulebook p.49') &&
+          loreGuidance.includes('Mythras Core Rules p.49') &&
           loreGuidance.includes('Adventures in Glorantha p.26-41') &&
           loreGuidance.includes('Lore (Waha)') &&
           !loreGuidance.includes('examples include Cult') &&
-          regionalGuidance.includes('Mythras rulebook p.49') &&
+          regionalGuidance.includes('Mythras Core Rules p.49') &&
           regionalGuidance.includes('Adventures in Glorantha p.26-41')
         ) {
           pass('Ambiguous skill guidance points players to source pages');
@@ -7894,7 +7894,7 @@ const magicPdfCoverageCases = [
     name: 'Zzistori source-backed Sorcery PDF coverage',
     expected: [
       'SORCERY (Zzistori School (God Forgot sorcery))',
-      'Source: AiG p.30-31, p.59-60; Mythras rulebook p.162, p.166-177',
+      'Source: AiG p.30-31, p.59-60; Mythras Core Rules p.162, p.166-177',
       'Holdfast',
       'Resist: Endurance',
       'Animate (Substance)',
@@ -9603,7 +9603,7 @@ fixtures.forEach(fixtureInfo => {
     const hasMagicPoints = html.includes('Magic Points (15)');
     const hasRawSkills = /Invocation skill/i.test(html) && /Shaping skill/i.test(html);
     const hasSelectedSpells = ['Holdfast', 'Animate (Substance)', 'Project (Sense)'].every(spell => html.includes(spell));
-    const hasSourceCopy = html.includes('AiG p.30-31, p.59-60; Mythras rulebook p.162, p.166-177');
+    const hasSourceCopy = html.includes('AiG p.30-31, p.59-60; Mythras Core Rules p.162, p.166-177');
     const hasTheistLeak = /Devotional Pool|data-testid="miracle-name"|Shield/.test(html);
 
     if (hasSourceLabel && hasMagicPoints && hasRawSkills && hasSelectedSpells && hasSourceCopy && !hasTheistLeak) {
@@ -11907,23 +11907,15 @@ section('Player Handout Contract');
 {
   const htmlPath = path.join(__dirname, 'index.html');
   const html = fs.existsSync(htmlPath) ? fs.readFileSync(htmlPath, 'utf8') : '';
-  const playerFacingCorePatterns = [
-    /<h2>Magic[\s\S]{0,160}Mythras Core/i,
-    /Read:\s*Mythras Core/i,
-    /page-ref">\([^<]*Mythras Core/i,
-    /showToast\('[^']*Mythras Core/i,
-    /spell-picker__source">Sources:\s*Mythras Core/i,
-    />Source:\s*Mythras Core/i,
-    /Mysticism uses raw Mythras Core rules/i
-  ];
-  const offenders = playerFacingCorePatterns
-    .filter(pattern => pattern.test(html))
-    .map(pattern => String(pattern));
+  const staleRulebookWording = /Mythras rulebook/i.test(html);
+  const usesCoreRulesWording = html.includes('Mythras Core Rules');
+  const usesAwkwardPossessive = /Mythras Core Rules(?:'s| rules)/i.test(html);
 
-  if (offenders.length === 0 && html.includes('Mythras rulebook')) {
-    pass('Character generator player-facing copy uses Mythras rulebook wording');
+  if (!staleRulebookWording && usesCoreRulesWording && !usesAwkwardPossessive) {
+    pass('Character generator player-facing copy uses Mythras Core Rules wording');
   } else {
-    fail('Character generator player-facing copy still says Mythras Core', offenders.join('; '));
+    fail('Character generator player-facing copy has stale or awkward rulebook wording',
+      JSON.stringify({ staleRulebookWording, usesCoreRulesWording, usesAwkwardPossessive }));
   }
 }
 
@@ -12086,7 +12078,7 @@ section('Player Handout Contract');
   const hasForbiddenClaim = forbiddenClaims.some(pattern => pattern.test(html));
   const hasHouseRuleLabel = /House rule/i.test(html);
   const hasSystemSpecificRows = /Cult Rune Magic[\s\S]*Rune Affinity[\s\S]*Animism[\s\S]*Spirit Rune[\s\S]*Sorcery[\s\S]*Invocation[\s\S]*Shaping[\s\S]*Mysticism/i.test(html);
-  const explainsTerms = /Rune Affinity[\s\S]*Adventures in Glorantha[\s\S]*Spirit Rune[\s\S]*spirit[\s\S]*Invocation[\s\S]*Shaping[\s\S]*Mythras rulebook/i.test(html);
+  const explainsTerms = /Rune Affinity[\s\S]*Adventures in Glorantha[\s\S]*Spirit Rune[\s\S]*spirit[\s\S]*Invocation[\s\S]*Shaping[\s\S]*Mythras Core Rules/i.test(html);
   const hasPlayerSources = /A-Bird-in-the-Hand\.pdf[\s\S]*Monster-Island\.pdf[\s\S]*drive\.google\.com\/drive\/folders\/1CKNxkpoL4sWfzdbkglQyiYvCBXlmyFIj/i.test(html);
   const explainsDevotionalPoolLabel = /Devotional Pool\s*\(your cult magic pool\)[\s\S]*POW\/2/i.test(html);
 
@@ -14656,7 +14648,7 @@ section('Step 9 Initiation Gate');
       html.includes('Casting:</strong> Invocation skill') &&
       html.includes('Shaping:</strong> Shaping skill') &&
       html.includes('AiG p.30-31') &&
-      html.includes('Mythras rulebook p.162, p.166-177') &&
+      html.includes('Mythras Core Rules p.162, p.166-177') &&
       html.includes('Starting Spells') &&
       html.includes('Holdfast');
     const requiresSorcerySelection = missingSpellErrors.some(error => /sorcery spell/i.test(error));

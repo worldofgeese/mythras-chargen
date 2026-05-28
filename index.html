@@ -985,7 +985,7 @@ select:focus {
         <h2>Passions <span class="page-ref">(Mythras p.30)</span></h2>
         <div id="play-passions"></div>
 
-        <h2>Magic <span class="page-ref">(AiG p.63-122; Mythras rulebook p.131-178)</span></h2>
+        <h2>Magic <span class="page-ref">(AiG p.63-122; Mythras Core Rules p.131-178)</span></h2>
         <div id="play-magic"></div>
 
         <h2>Equipment <span class="page-ref">(Mythras p.107-128)</span></h2>
@@ -5459,22 +5459,22 @@ function getSpecializationGuidance(skillName) {
   const normalizedHint = hint.toLowerCase();
 
   if (category === 'Lore' && normalizedHint.includes('regional')) {
-    return 'Choose a real region, people, species, or topic instead of leaving "Regional"; examples include Prax, Sartar, Dragon Pass, Balazar, God Forgot, Telmori Wilds, Animals, Plants, or Cult. Read: Mythras rulebook p.49 (Lore) plus Adventures in Glorantha p.26-41 for regional/culture descriptions.';
+    return 'Choose a real region, people, species, or topic instead of leaving "Regional"; examples include Prax, Sartar, Dragon Pass, Balazar, God Forgot, Telmori Wilds, Animals, Plants, or Cult. Read: Mythras Core Rules p.49 (Lore) plus Adventures in Glorantha p.26-41 for regional/culture descriptions.';
   }
 
   const guidanceByCategory = {
-    Art: 'Name the art form this character practices, such as Calligraphy, Painting, Sculpture, or Weaving. Read: Mythras rulebook p.45 (Art).',
-    Binding: 'Name the spirit tradition, cult, totem, or other animist relationship this Binding skill serves; for Waha use Waha, otherwise use the shamanic tradition agreed with the GM. Read: Mythras rulebook p.131-154 (Animism) and the selected cult/tradition handout.',
-    Craft: 'Name the practical craft or trade, such as Alchemy, Animal Husbandry, Butchery, Mining, or Masonry. Read: Mythras rulebook p.47 (Craft).',
-    Culture: 'Name the culture or people this skill covers. Read: Mythras rulebook p.47 (Culture) and Adventures in Glorantha p.26-41 for Gloranthan culture descriptions.',
-    Devotion: 'Name the pantheon, cult, or god this Devotion skill serves. Read: Mythras rulebook p.184-187 (Theism skills) and the selected cult handout.',
-    Healing: 'Name the species or body of practice this Healing skill specializes in. Read: Mythras rulebook p.48 (Healing).',
-    Invocation: 'Name the sorcery cult, school, or grimoire this Invocation skill draws on. Read: Mythras rulebook p.162-165 (Sorcery) and the selected school/cult source.',
-    Language: 'Name the actual language, such as Heortling, Praxian, Tradetalk, or another language from the character background. Read: Mythras rulebook p.49 (Language and Literacy) plus Adventures in Glorantha p.26-41 for culture-language context.',
-    Lore: 'Name the actual body of knowledge, not a category label; examples include Lore (Waha), Lore (Orlanth), Lore (Prax), Lore (Sartar), Lore (Plants), Lore (Animals), Lore (Minerals), or Lore (Strategy and Tactics). Read: Mythras rulebook p.49 (Lore) plus Adventures in Glorantha p.26-41 for regional/cultural topics.',
-    Musicianship: 'Choose the instrument or performance tradition this skill covers, such as Drums, Flute, Harp, Horn, or Voice. Read: Mythras rulebook p.50 (Musicianship).',
-    Navigation: 'Name the environment or method this Navigation skill covers, such as Underground, Sea, River, or Wilderness. Read: Mythras rulebook p.50 (Navigation).',
-    Teach: 'Name the species or audience this Teach skill specializes in. Read: Mythras rulebook p.54 (Teach).'
+    Art: 'Name the art form this character practices, such as Calligraphy, Painting, Sculpture, or Weaving. Read: Mythras Core Rules p.45 (Art).',
+    Binding: 'Name the spirit tradition, cult, totem, or other animist relationship this Binding skill serves; for Waha use Waha, otherwise use the shamanic tradition agreed with the GM. Read: Mythras Core Rules p.131-154 (Animism) and the selected cult/tradition handout.',
+    Craft: 'Name the practical craft or trade, such as Alchemy, Animal Husbandry, Butchery, Mining, or Masonry. Read: Mythras Core Rules p.47 (Craft).',
+    Culture: 'Name the culture or people this skill covers. Read: Mythras Core Rules p.47 (Culture) and Adventures in Glorantha p.26-41 for Gloranthan culture descriptions.',
+    Devotion: 'Name the pantheon, cult, or god this Devotion skill serves. Read: Mythras Core Rules p.184-187 (Theism skills) and the selected cult handout.',
+    Healing: 'Name the species or body of practice this Healing skill specializes in. Read: Mythras Core Rules p.48 (Healing).',
+    Invocation: 'Name the sorcery cult, school, or grimoire this Invocation skill draws on. Read: Mythras Core Rules p.162-165 (Sorcery) and the selected school/cult source.',
+    Language: 'Name the actual language, such as Heortling, Praxian, Tradetalk, or another language from the character background. Read: Mythras Core Rules p.49 (Language and Literacy) plus Adventures in Glorantha p.26-41 for culture-language context.',
+    Lore: 'Name the actual body of knowledge, not a category label; examples include Lore (Waha), Lore (Orlanth), Lore (Prax), Lore (Sartar), Lore (Plants), Lore (Animals), Lore (Minerals), or Lore (Strategy and Tactics). Read: Mythras Core Rules p.49 (Lore) plus Adventures in Glorantha p.26-41 for regional/cultural topics.',
+    Musicianship: 'Choose the instrument or performance tradition this skill covers, such as Drums, Flute, Harp, Horn, or Voice. Read: Mythras Core Rules p.50 (Musicianship).',
+    Navigation: 'Name the environment or method this Navigation skill covers, such as Underground, Sea, River, or Wilderness. Read: Mythras Core Rules p.50 (Navigation).',
+    Teach: 'Name the species or audience this Teach skill specializes in. Read: Mythras Core Rules p.54 (Teach).'
   };
 
   if (guidanceByCategory[category]) return guidanceByCategory[category];
@@ -5996,7 +5996,7 @@ const MYSTICISM_PATHS = [
   {
     name: 'Path of Abjuration',
     description: 'A denial and endurance discipline suited to novice ascetics and survival-focused mystics.',
-    source: 'Mythras rulebook p.155-156',
+    source: 'Mythras Core Rules p.155-156',
     talents: [
       'Augment Endurance',
       'Augment Survival',
@@ -6010,7 +6010,7 @@ const MYSTICISM_PATHS = [
   {
     name: 'Path of Shadows',
     description: 'A stealth and perception discipline used by Mju\'s example mystical training.',
-    source: 'Mythras rulebook p.155-156',
+    source: 'Mythras Core Rules p.155-156',
     talents: [
       'Augment Perception',
       'Augment Stealth',
@@ -6024,7 +6024,7 @@ const MYSTICISM_PATHS = [
   {
     name: 'Path of the Jerboa',
     description: 'Mju\'s self-developed desert retreat path; use with GM approval for player characters.',
-    source: 'Mythras rulebook p.157',
+    source: 'Mythras Core Rules p.157',
     talents: [
       'Augment Athletics',
       'Enhance Movement Rate'
@@ -11181,9 +11181,9 @@ function formatSorcerySourcePages(source) {
     pages.includes('AiG p.59-60') &&
     pages.includes('Mythras Core p.162') &&
     pages.includes('Mythras Core p.166-177');
-  if (hasZzistoriPages) return 'AiG p.30-31, p.59-60; Mythras rulebook p.162, p.166-177';
-  if (pages.length > 0) return pages.map(page => String(page).replace(/^Mythras Core\b/, 'Mythras rulebook')).join('; ');
-  return 'Mythras rulebook p.162, p.166-177';
+  if (hasZzistoriPages) return 'AiG p.30-31, p.59-60; Mythras Core Rules p.162, p.166-177';
+  if (pages.length > 0) return pages.map(page => String(page).replace(/^Mythras Core\b/, 'Mythras Core Rules')).join('; ');
+  return 'Mythras Core Rules p.162, p.166-177';
 }
 
 function slugifyMagicProviderPart(value) {
@@ -13659,7 +13659,7 @@ App.renderStep5 = function() {
   div.innerHTML = `
     <div class="step-header">Step 5: Cultural Skills & Magic <span class="page-ref">(Adventures in Glorantha p.24)</span></div>
     <p>These are the skills your character learned growing up in their culture. You have 100 points to distribute among them. Put more points in skills you want your character to be good at.</p>
-    <p style="font-size: 0.9em; color: #555; margin-top: 4px;">Each skill can receive a maximum of 15 points <span class="page-ref">(Mythras rulebook p.20)</span></p>
+    <p style="font-size: 0.9em; color: #555; margin-top: 4px;">Each skill can receive a maximum of 15 points <span class="page-ref">(Mythras Core Rules p.20)</span></p>
 
     <div class="budget-tracker ${remaining < 0 ? 'overspent' : remaining === 0 ? 'complete' : ''}" data-testid="budget-tracker">
       Points Remaining: ${remaining} / 100
@@ -13670,7 +13670,7 @@ App.renderStep5 = function() {
     
     <h3>Rune Affinities <span class="page-ref">(Adventures in Glorantha p.24)</span></h3>
     <p>Select three runes. Primary: POW×2+30, Secondary: POW×2+20, Tertiary: POW×2+10</p>
-    <p style="font-size: 0.85em; color: #555; margin-top: 2px;">POW (Power) represents magical potency and willpower <span class="page-ref">(Mythras rulebook p.9)</span>. Your POW is currently <strong>${CharacterData.characteristics.POW}</strong>.</p>
+    <p style="font-size: 0.85em; color: #555; margin-top: 2px;">POW (Power) represents magical potency and willpower <span class="page-ref">(Mythras Core Rules p.9)</span>. Your POW is currently <strong>${CharacterData.characteristics.POW}</strong>.</p>
     <div class="grid-3">
       ${['primary', 'secondary', 'tertiary'].map(slot => {
         const others = ['primary','secondary','tertiary'].filter(s => s !== slot).map(s => CharacterData.runeAffinities[s]);
@@ -13791,7 +13791,7 @@ App.updateSkillPoints = function(category, skillName, points, inputEl) {
   // Enforce 15-point per-skill cap for cultural and career skills (RAW)
   if (category === 'cultural' || category === 'career') {
     if (points > 15) {
-      this.showToast('Maximum 15 points per skill (Mythras rulebook p.20)', 'error');
+      this.showToast('Maximum 15 points per skill (Mythras Core Rules p.20)', 'error');
       points = 15;
     }
   }
@@ -14940,7 +14940,7 @@ App.renderAnimismPickerPanel = function(provider, options = {}) {
       <h4>Starting Bound Spirits <span style="font-weight:normal">(${selectedCount} / ${maxStarting})</span></h4>
       <p class="spell-picker__hint">Select up to ${maxStarting} starting spirits (intensity 1-2). Consult GM for provider-specific options.</p>
       <div class="spell-picker__list">${spiritListHTML}</div>
-      <p class="spell-picker__source">Sources: Mythras rulebook p.131-154 and Bird in the Hand p.43-47</p>
+      <p class="spell-picker__source">Sources: Mythras Core Rules p.131-154 and A Bird in the Hand p.43-47</p>
     </div>
   `;
 };
@@ -15011,7 +15011,7 @@ App.renderMysticismProviderPanel = function(provider, options = {}) {
           </div>
         </div>
       ` : ''}
-      <p class="spell-picker__source">Sources: Mythras rulebook p.155-157; paths and talents use the Core examples only.</p>
+      <p class="spell-picker__source">Sources: Mythras Core Rules p.155-157; paths and talents use the Core examples only.</p>
     </div>
   `;
 };
@@ -16089,7 +16089,7 @@ App.renderStep10 = function() {
   div.innerHTML = `
     <div class="step-header">Step 10: Career Skills & Magic <span class="page-ref">(Adventures in Glorantha p.24)</span></div>
     <p>Distribute 100 points among your career's listed skills only.</p>
-    <p style="font-size: 0.9em; color: #555; margin-top: 4px;">Each skill can receive a maximum of 15 points <span class="page-ref">(Mythras rulebook p.20)</span></p>
+    <p style="font-size: 0.9em; color: #555; margin-top: 4px;">Each skill can receive a maximum of 15 points <span class="page-ref">(Mythras Core Rules p.20)</span></p>
 
     <div class="budget-tracker ${remaining < 0 ? 'overspent' : remaining === 0 ? 'complete' : ''}" data-testid="budget-tracker">
       Points Remaining: ${remaining} / 100
@@ -17645,7 +17645,7 @@ App.renderReviewStep = function() {
       ${(CharacterData.mysticismTalents || []).filter(Boolean).length > 0 ? `<p><strong>Mystic Talents:</strong> ${CharacterData.mysticismTalents.filter(Boolean).map(esc).join(', ')}</p>` : ''}
       ${(CharacterData.miracles || []).length > 0 ? `<p><strong>Miracles:</strong> ${CharacterData.miracles.map(esc).join(', ')}</p>` : ''}
 
-      <h4>Equipment <span class="page-ref">(Background Equipment Table, Mythras rulebook p.33-34)</span></h4>
+      <h4>Equipment <span class="page-ref">(Background Equipment Table, Mythras Core Rules p.33-34)</span></h4>
       ${CharacterData.socialClass ? `<p><strong>Social Class Equipment Tier:</strong> ${esc(CharacterData.socialClass)}</p>` : ''}
       ${CharacterData.weapons.length > 0 ? `<p><strong>Weapons:</strong> ${CharacterData.weapons.map(w => esc(w.name) + (w.damage ? ' (' + esc(w.damage) + ')' : '')).join(', ')}</p>` : ''}
       ${CharacterData.armor.length > 0 ? `<p><strong>Armour:</strong> ${CharacterData.armor.map(a => esc(a.name) + ' (AP ' + esc(a.ap) + ', ' + esc(a.locations) + ')').join(', ')}</p>` : ''}
@@ -18165,7 +18165,7 @@ App.renderPlayMagic = function() {
       ` : '<p style="font-size: 0.85em; color: #666;">No starting spirits selected.</p>'}
       <p style="font-size: 0.9em;"><strong>Casting:</strong> Spirit Rune affinity (Gloranthan spirit magic adaptation)</p>
       <p style="font-size: 0.85em; color: #555; font-style: italic;">Spirit selection during character creation: consult GM for available spirits from cult tradition. Typical starting spirits: 2-3 intensity 1-2 nature spirits in fetishes.</p>
-      <p style="font-size: 0.8em; color: #666;">Source: Mythras rulebook p.131-154 and Bird in the Hand p.43-47</p>
+      <p style="font-size: 0.8em; color: #666;">Source: Mythras Core Rules p.131-154 and A Bird in the Hand p.43-47</p>
     `;
   };
   const renderMysticismInfo = (provider) => {
@@ -18174,9 +18174,9 @@ App.renderPlayMagic = function() {
     const magicPoints = provider.magicPoints ?? getCharacterMagicPoints(CharacterData);
     return `
       <h3>Mysticism — ${esc(sourceLabel)}</h3>
-      <p style="font-size: 0.9em;"><strong>System:</strong> Meditation + Mysticism talents (Mythras rulebook p.155-161)</p>
+      <p style="font-size: 0.9em;"><strong>System:</strong> Meditation + Mysticism talents (Mythras Core Rules p.155-161)</p>
       <p style="font-size: 0.9em;"><strong>Resource:</strong> Magic Points (${magicPoints}) when talents are activated</p>
-      <p style="font-size: 0.85em; color: #555; font-style: italic;">Mysticism uses the Mythras rulebook rules. Max active talent Intensity = Meditation skill / 10. Talent picking awaits a verified talent catalog.</p>
+      <p style="font-size: 0.85em; color: #555; font-style: italic;">Mysticism uses the Mythras Core Rules. Starting path and talent choices are chosen during Step 9; max active talent Intensity = Meditation skill / 10.</p>
     `;
   };
 

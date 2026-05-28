@@ -88,6 +88,14 @@
       "rationale": "Cult card affordance QA screenshots are retained visual proof assets, not source authority, app assets, or rendered source pages."
     },
     {
+      "id": "handout-wording-audit-qa-screenshots",
+      "path_glob": "verification-artifacts/handout-wording-audit/*.png",
+      "artifact_class": "generated_artifact",
+      "disposition": "exempt/out-of-scope",
+      "required_scope": true,
+      "rationale": "Handout and generator wording QA screenshots are retained visual proof assets, not source authority, app assets, or rendered source pages."
+    },
+    {
       "id": "fixtures",
       "path_glob": "fixtures/*.json",
       "artifact_class": "fixture",
