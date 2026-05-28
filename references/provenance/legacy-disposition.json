@@ -96,6 +96,14 @@
       "rationale": "Handout and generator wording QA screenshots are retained visual proof assets, not source authority, app assets, or rendered source pages."
     },
     {
+      "id": "radio-alignment-qa-screenshots",
+      "path_glob": "verification-artifacts/radio-alignment/*.png",
+      "artifact_class": "generated_artifact",
+      "disposition": "exempt/out-of-scope",
+      "required_scope": true,
+      "rationale": "Radio and checkbox alignment QA screenshots are retained visual proof assets, not source authority, app assets, or rendered source pages."
+    },
+    {
       "id": "fixtures",
       "path_glob": "fixtures/*.json",
       "artifact_class": "fixture",

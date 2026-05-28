@@ -114,18 +114,17 @@ textarea { width: 100%; min-height: 60px; resize: vertical; }
 }
 
 .choice-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 18px;
-  align-items: center;
+  display: grid;
+  gap: 8px 18px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, max-content));
   margin: 12px 0;
 }
 .choice-option,
 .spell-picker__list label,
 .professional-skill-option label {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
+  align-items: start;
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
   line-height: 1.35;
   margin: 4px 0;
 }
@@ -133,10 +132,12 @@ textarea { width: 100%; min-height: 60px; resize: vertical; }
 .choice-option input[type="checkbox"],
 .spell-picker__list input[type="checkbox"],
 .professional-skill-option input[type="checkbox"] {
-  flex: 0 0 auto;
-  width: 14px;
+  align-self: start;
   height: 14px;
-  margin: 2px 0 0;
+  justify-self: center;
+  margin: 0;
+  transform: translateY(0.18em);
+  width: 14px;
 }
 .spell-picker__list label > span,
 .professional-skill-option label > span,
@@ -13775,8 +13776,8 @@ App.renderStep5 = function() {
     const tooltip = desc ? `<span class="skill-tooltip" tabindex="-1" aria-label="${App.escapeHtmlAttr(desc)}">ℹ️<span class="tooltip-text">${desc}</span></span>` : '';
     const row = document.createElement('div');
     row.innerHTML = `
-      <label><input type="checkbox" ${checked ? 'checked' : ''} data-testid="spell-${spell}"
-        onchange="App.toggleFolkMagicSpell('${spell}', this.checked, 3, this)"> ${spell}</label>${tooltip}
+      <label class="choice-option"><input type="checkbox" ${checked ? 'checked' : ''} data-testid="spell-${spell}"
+        onchange="App.toggleFolkMagicSpell('${spell}', this.checked, 3, this)"> <span>${spell}</span></label>${tooltip}
     `;
     folkList.appendChild(row);
   });

@@ -3494,7 +3494,25 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
   }
 }
 
-// Test 1.13c: Cult cards expose prominent selected-state styling and status text
+// Test 1.13c: Radio and checkbox labels use a fixed two-column grid
+{
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  const hasChoiceGrid = html.includes('.choice-option,') &&
+    html.includes('display: grid;') &&
+    html.includes('grid-template-columns: 18px minmax(0, 1fr);');
+  const step2RadioSpans = html.includes('<span>Point Buy (75 points, default)</span>') &&
+    html.includes('<span>Dice Rolling (3d6 or 2d6+6)</span>');
+  const folkMagicSpans = html.includes('<label class="choice-option"><input type="checkbox"') &&
+    html.includes('<span>${spell}</span>');
+  if (hasChoiceGrid && step2RadioSpans && folkMagicSpans) {
+    pass('Radio and checkbox labels use a fixed two-column grid');
+  } else {
+    fail('Radio and checkbox labels are not on a fixed grid with text column',
+      JSON.stringify({ hasChoiceGrid, step2RadioSpans, folkMagicSpans }));
+  }
+}
+
+// Test 1.13d: Cult cards expose prominent selected-state styling and status text
 {
   const { App: AppObj, CharacterData: CD, CULTS_DATA: Cults } = loadApp();
   if (AppObj?.renderCultCard && Array.isArray(Cults) && Cults.length > 0) {
