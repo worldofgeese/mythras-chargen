@@ -119,17 +119,23 @@ textarea { width: 100%; min-height: 60px; resize: vertical; }
   grid-template-columns: repeat(auto-fit, minmax(220px, max-content));
   margin: 12px 0;
 }
-/* Form control alignment: structural grid positions radio/checkbox controls.
-   Grid: max-content control column + fluid text column. No transform/top nudges.
-   1em sizing follows font-size for zoom/accessibility. */
+/* Reusable form-control alignment.
+   Research-backed pattern: grid/flex keeps the control in its own column and
+   line-height math aligns the control's top edge with the text glyph top,
+   not the line box top. This is not a guessed x/y nudge. */
+:root {
+  --form-control-size: 1em;
+  --form-control-line-height: 1.35;
+  --form-control-gap: 6px;
+}
 .choice-option,
 .spell-picker__list label,
 .professional-skill-option label {
   align-items: start;
-  column-gap: 6px;
+  column-gap: var(--form-control-gap);
   display: grid;
-  grid-template-columns: max-content minmax(0, 1fr);
-  line-height: 1.35;
+  grid-template-columns: var(--form-control-size) minmax(0, 1fr);
+  line-height: var(--form-control-line-height);
   margin: 4px 0;
 }
 .choice-option input[type="radio"],
@@ -139,12 +145,18 @@ textarea { width: 100%; min-height: 60px; resize: vertical; }
   appearance: none;
   -webkit-appearance: none;
   align-self: start;
-  block-size: 1em;
-  inline-size: 1em;
-  margin: 0;
-  box-sizing: border-box;
-  border: 2px solid #666;
   background: #fff;
+  block-size: var(--form-control-size);
+  border: 1px solid #666;
+  box-sizing: border-box;
+  height: var(--form-control-size);
+  inline-size: var(--form-control-size);
+  min-height: var(--form-control-size);
+  padding: 0;
+  inset-block-start: calc((1em * var(--form-control-line-height) - var(--form-control-size)) / 2);
+  margin: 0;
+  width: var(--form-control-size);
+  position: relative;
 }
 .choice-option input[type="radio"] {
   border-radius: 50%;
@@ -155,26 +167,26 @@ textarea { width: 100%; min-height: 60px; resize: vertical; }
   border-radius: 2px;
 }
 .choice-option input[type="radio"]:checked {
-  background: radial-gradient(circle, #000 0%, #000 40%, transparent 40%, transparent 100%);
+  background: radial-gradient(circle, #06f 0%, #06f 42%, transparent 45%, transparent 100%);
 }
 .choice-option input[type="checkbox"]:checked,
 .spell-picker__list input[type="checkbox"]:checked,
 .professional-skill-option input[type="checkbox"]:checked {
-  background: #000;
-  position: relative;
+  background: #06f;
+  border-color: #06f;
 }
 .choice-option input[type="checkbox"]:checked::after,
 .spell-picker__list input[type="checkbox"]:checked::after,
 .professional-skill-option input[type="checkbox"]:checked::after {
-  content: '';
-  position: absolute;
-  left: 0.15em;
-  top: 0.05em;
-  width: 0.3em;
-  height: 0.6em;
+  block-size: 0.55em;
   border: solid #fff;
   border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+  content: '';
+  inline-size: 0.28em;
+  inset-block-start: 0.08em;
+  inset-inline-start: 0.28em;
+  position: absolute;
+  rotate: 45deg;
 }
 .choice-option input[type="radio"]:focus-visible,
 .choice-option input[type="checkbox"]:focus-visible,
@@ -191,6 +203,37 @@ textarea { width: 100%; min-height: 60px; resize: vertical; }
 .info-icon,
 .skill-tooltip {
   line-height: 1;
+}
+.play-companion-hit-table {
+  border-collapse: collapse;
+  font-size: 12px;
+  margin-bottom: 8px;
+  table-layout: fixed;
+  width: 100%;
+}
+.play-companion-hit-table th,
+.play-companion-hit-table td {
+  box-sizing: border-box;
+  padding: 4px;
+  vertical-align: middle;
+}
+.play-companion-hit-table .play-companion-location { width: 55%; }
+.play-companion-hit-table .play-companion-ap { text-align: center; width: 15%; }
+.play-companion-hit-table .play-companion-hp { width: 30%; }
+.play-companion-hp-control {
+  align-items: center;
+  display: inline-grid;
+  gap: 4px;
+  grid-template-columns: 56px max-content;
+}
+input.play-companion-hp-input {
+  box-sizing: border-box;
+  height: 24px;
+  min-height: 24px;
+  min-width: 56px;
+  padding-inline: 4px;
+  text-align: center;
+  width: 56px;
 }
 
 button {
@@ -13821,7 +13864,7 @@ App.renderStep5 = function() {
     const row = document.createElement('div');
     row.innerHTML = `
       <label class="choice-option"><input type="checkbox" ${checked ? 'checked' : ''} data-testid="spell-${spell}"
-        onchange="App.toggleFolkMagicSpell('${spell}', this.checked, 3, this)"> <span>${spell}</span></label>${tooltip}
+        onchange="App.toggleFolkMagicSpell('${spell}', this.checked, 3, this)"> <span>${spell}${tooltip ? ` ${tooltip}` : ''}</span></label>
     `;
     folkList.appendChild(row);
   });
@@ -14930,7 +14973,7 @@ App.renderSorceryPickerPanel = function(source, options = {}) {
       ? ` disabled aria-disabled="true" aria-describedby="sorcery-spell-cap" title="${this.escapeHtmlAttr(`${capReachedCopy}; deselect a selected spell to choose this one`)}"`
       : '';
     const labelClass = disabled ? ' class="spell-picker__option--disabled"' : '';
-    return `<label${labelClass}><input type="checkbox" ${checked ? 'checked' : ''}${disabledAttrs} data-spell="${this.escapeHtmlAttr(name)}" onchange="App.toggleSorcerySpell(this.dataset.spell, this)"> ${this.escapeHtml(name)}${resistTag}${tooltip}</label>`;
+    return `<label${labelClass}><input type="checkbox" ${checked ? 'checked' : ''}${disabledAttrs} data-spell="${this.escapeHtmlAttr(name)}" onchange="App.toggleSorcerySpell(this.dataset.spell, this)"> <span>${this.escapeHtml(name)}${resistTag}${tooltip}</span></label>`;
   }).join('');
 
   return `
@@ -14971,7 +15014,7 @@ App.renderAnimismPickerPanel = function(provider, options = {}) {
       const checked = CharacterData.boundSpirits.some(s => getBoundSpiritName(s) === spirit.name);
       const stats = spirit.pow ? ` POW ${spirit.pow}, CHA ${spirit.cha}` : '';
       const srcRef = spirit.source ? ` <span class="skill-tooltip" tabindex="-1" aria-label="${this.escapeHtmlAttr(spirit.source)}" title="${this.escapeHtmlAttr(spirit.source)}">📚</span>` : '';
-      return `<label><input type="checkbox" ${checked ? 'checked' : ''} data-spirit="${this.escapeHtmlAttr(spirit.name)}" onchange="App.toggleBoundSpirit(this.dataset.spirit, this)"> <strong>${this.escapeHtml(spirit.name)}</strong>${srcRef}<br><span class="spirit-ability">[${this.escapeHtml(spirit.type)}]${stats} — ${this.escapeHtml(spirit.ability)}</span></label>`;
+      return `<label><input type="checkbox" ${checked ? 'checked' : ''} data-spirit="${this.escapeHtmlAttr(spirit.name)}" onchange="App.toggleBoundSpirit(this.dataset.spirit, this)"> <span><strong>${this.escapeHtml(spirit.name)}</strong>${srcRef}<br><span class="spirit-ability">[${this.escapeHtml(spirit.type)}]${stats} — ${this.escapeHtml(spirit.ability)}</span></span></label>`;
     }).join('');
 
   return `
@@ -16273,8 +16316,8 @@ App.renderStep10 = function() {
         const checked = CharacterData.careerFolkMagic.includes(spell);
         const row = document.createElement('div');
         row.innerHTML = `
-          <label><input type="checkbox" ${checked ? 'checked' : ''} 
-            onchange="App.toggleCareerFolkMagicSpell('${spell}', this.checked, this)"> ${spell}</label>
+          <label class="choice-option"><input type="checkbox" ${checked ? 'checked' : ''} 
+            onchange="App.toggleCareerFolkMagicSpell('${spell}', this.checked, this)"> <span>${spell}</span></label>
         `;
         spellContainer.appendChild(row);
       });
@@ -16287,8 +16330,8 @@ App.renderStep10 = function() {
       const checked = CharacterData.careerFolkMagic.includes(spell);
       const row = document.createElement('div');
       row.innerHTML = `
-        <label><input type="checkbox" ${checked ? 'checked' : ''} 
-          onchange="App.toggleCareerFolkMagicSpell('${spell}', this.checked, this)"> ${spell}</label>
+        <label class="choice-option"><input type="checkbox" ${checked ? 'checked' : ''} 
+          onchange="App.toggleCareerFolkMagicSpell('${spell}', this.checked, this)"> <span>${spell}</span></label>
       `;
       folkList.appendChild(row);
     });
@@ -18408,14 +18451,14 @@ App.renderPlayCompanions = function() {
       <div><strong>Healing Rate:</strong> ${esc(comp.healingRate || '—')}</div>
       <div><strong>Strike Rank:</strong> ${esc(comp.strikeRank || '—')}</div>
     </div>
-    <table style="width:100%;font-size:12px;border-collapse:collapse;margin-bottom:8px;">
-      <tr style="background:#333;color:#fff;"><th style="padding:4px;">Location</th><th>AP</th><th>HP</th></tr>
+    <table class="play-companion-hit-table">
+      <tr style="background:#333;color:#fff;"><th class="play-companion-location">Location</th><th class="play-companion-ap">AP</th><th class="play-companion-hp">HP</th></tr>
       ${Object.entries(comp.hitLocations || {}).map(([loc, data]) => `
         <tr style="border-bottom:1px solid #ddd;">
-          <td style="padding:4px;">${esc(loc)}</td>
-          <td>${esc(data.ap || 0)}</td>
-          <td><input type="number" value="${attr(data.current !== undefined ? data.current : data.max)}" min="0" max="${attr(data.max)}" data-location="${attr(loc)}" style="width:40px;"
-            onchange="App.updateCompanionHitLocation(${ci}, this.dataset.location, this.value);"> / ${esc(data.max)}</td>
+          <td class="play-companion-location">${esc(loc)}</td>
+          <td class="play-companion-ap">${esc(data.ap || 0)}</td>
+          <td class="play-companion-hp"><span class="play-companion-hp-control"><input class="play-companion-hp-input" type="number" value="${attr(data.current !== undefined ? data.current : data.max)}" min="0" max="${attr(data.max)}" data-location="${attr(loc)}"
+            onchange="App.updateCompanionHitLocation(${ci}, this.dataset.location, this.value);"><span>/ ${esc(data.max)}</span></span></td>
         </tr>`).join('')}
     </table>
     <table style="width:100%;font-size:12px;border-collapse:collapse;margin-bottom:8px;">

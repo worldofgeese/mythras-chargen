@@ -3494,30 +3494,37 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
   }
 }
 
-// Test 1.13c: Radio and checkbox labels use structural grid for alignment with custom appearance
+// Test 1.13c: Radio and checkbox labels use one reusable structural alignment pattern
 {
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
   const hasChoiceGrid = html.includes('.choice-option,') &&
     html.includes('display: grid;') &&
-    html.includes('grid-template-columns: max-content minmax(0, 1fr);') &&
-    html.includes('column-gap: 6px;');
+    html.includes('grid-template-columns: var(--form-control-size) minmax(0, 1fr);') &&
+    html.includes('column-gap: var(--form-control-gap);');
   const controlCssStart = html.indexOf('.choice-option input[type="radio"]');
   const controlCssEnd = html.indexOf('.choice-option input[type="radio"] {', controlCssStart);
   const baseControlCss = controlCssStart >= 0 && controlCssEnd > controlCssStart ? html.slice(controlCssStart, controlCssEnd) : '';
   const hasAlignSelf = baseControlCss.includes('align-self: start;');
-  const hasSizing = baseControlCss.includes('block-size: 1em;') && baseControlCss.includes('inline-size: 1em;');
+  const hasSizing = baseControlCss.includes('block-size: var(--form-control-size);') &&
+    baseControlCss.includes('inline-size: var(--form-control-size);') &&
+    baseControlCss.includes('height: var(--form-control-size);') &&
+    baseControlCss.includes('min-height: var(--form-control-size);') &&
+    baseControlCss.includes('padding: 0;') &&
+    baseControlCss.includes('width: var(--form-control-size);');
   const hasCustomAppearance = baseControlCss.includes('appearance: none;') && baseControlCss.includes('-webkit-appearance: none;');
+  const hasLineHeightFormula = baseControlCss.includes('inset-block-start: calc((1em * var(--form-control-line-height) - var(--form-control-size)) / 2);');
   const inputOnlyRules = baseControlCss.split(/::after|::before/)[0];
-  const hasInputNudge = /(?<!::after|::before)\s*(?:transform:\s*translateY|top:\s*[0-9])/.test(inputOnlyRules);
+  const hasGuessedNudge = /transform:\s*translateY|\btop:\s*-?\d/.test(inputOnlyRules);
   const step2RadioSpans = html.includes('<span>Point Buy (75 points, default)</span>') &&
     html.includes('<span>Dice Rolling (3d6 or 2d6+6)</span>');
-  const folkMagicSpans = html.includes('<label class="choice-option"><input type="checkbox"') &&
-    html.includes('<span>${spell}</span>');
-  if (hasChoiceGrid && hasAlignSelf && hasSizing && hasCustomAppearance && !hasInputNudge && step2RadioSpans && folkMagicSpans) {
-    pass('Radio and checkbox labels use structural grid for top-line alignment with custom controls');
+  const folkMagicTooltipInsideLabel = html.includes('<span>${spell}${tooltip ? ` ${tooltip}` : \'\'}</span></label>');
+  const spellPickerTextWrapped = html.includes('<span>${this.escapeHtml(name)}${resistTag}${tooltip}</span>') &&
+    html.includes('<span><strong>${this.escapeHtml(spirit.name)}</strong>${srcRef}<br><span class="spirit-ability">');
+  if (hasChoiceGrid && hasAlignSelf && hasSizing && hasCustomAppearance && hasLineHeightFormula && !hasGuessedNudge && step2RadioSpans && folkMagicTooltipInsideLabel && spellPickerTextWrapped) {
+    pass('Radio and checkbox labels use reusable structural alignment with wrapped text cells');
   } else {
-    fail('Radio and checkbox grid alignment incomplete, missing custom appearance, or has input element nudges',
-      JSON.stringify({ hasChoiceGrid, hasAlignSelf, hasSizing, hasCustomAppearance, hasInputNudge, step2RadioSpans, folkMagicSpans }));
+    fail('Radio and checkbox alignment is missing shared structure, line-height formula, or wrapped text cells',
+      JSON.stringify({ hasChoiceGrid, hasAlignSelf, hasSizing, hasCustomAppearance, hasLineHeightFormula, hasGuessedNudge, step2RadioSpans, folkMagicTooltipInsideLabel, spellPickerTextWrapped }));
   }
 }
 
@@ -9524,8 +9531,10 @@ fixtures.forEach(fixtureInfo => {
 
     if (!html.includes('<img src=x') && !html.includes('<svg') && !html.includes('<script>') &&
         !html.includes("hitLocations['Head'];window.__xss=1;//']") &&
-        html.includes('data-location=')) {
-      pass('Companion play rendering escapes labels and avoids handler injection');
+        html.includes('data-location=') &&
+        html.includes('class="play-companion-hit-table"') &&
+        html.includes('class="play-companion-hp-input"')) {
+      pass('Companion play rendering escapes labels, avoids handler injection, and uses aligned HP controls');
     } else {
       fail('Companion play rendering allows markup or handler injection');
     }
