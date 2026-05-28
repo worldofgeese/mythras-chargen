@@ -1,0 +1,78 @@
+{
+  "load": {
+    "title": "Adventures in Glorantha Character Sheet",
+    "step": "Step 1 of 12",
+    "hasWizard": true
+  },
+  "mystic_flow": {
+    "success": true,
+    "stepResults": [
+      {
+        "success": true,
+        "errors": []
+      },
+      {
+        "success": true,
+        "errors": []
+      },
+      {
+        "success": true,
+        "errors": []
+      },
+      {
+        "success": true,
+        "errors": []
+      },
+      {
+        "success": true,
+        "errors": []
+      },
+      {
+        "success": true,
+        "errors": []
+      }
+    ],
+    "limit": 1,
+    "step": 9,
+    "path": true,
+    "talents": true,
+    "freeform": false,
+    "errors": []
+  },
+  "review": {
+    "stepIndicator": "Step 12 of 12",
+    "hasReview": true,
+    "hasPath": true,
+    "hasTalent": true,
+    "hasSocial": true,
+    "hasMoney": true
+  },
+  "play_mode": {
+    "clicked": true,
+    "visible": true,
+    "hasIdentity": true,
+    "hasMagic": true,
+    "exportEnabled": true
+  },
+  "sorcery_switch": {
+    "before": [
+      "Animate (Substance)",
+      "Attract (Threat)",
+      "Banish"
+    ],
+    "result": true,
+    "career": "Mystic",
+    "after": [],
+    "source": null
+  },
+  "pdf_smoke": {
+    "anchorClicked": true,
+    "error": null
+  },
+  "alignment": {
+    "radioAligned": true,
+    "checkboxAligned": true,
+    "radioCount": 2,
+    "checkboxCount": 8
+  }
+}
