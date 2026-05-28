@@ -80,6 +80,14 @@
       "rationale": "Step 6 and Step 8 interaction QA screenshots are retained visual proof assets, not source authority, app assets, or rendered source pages."
     },
     {
+      "id": "cult-card-salvage-qa-screenshots",
+      "path_glob": "verification-artifacts/cult-card-salvage/*.png",
+      "artifact_class": "generated_artifact",
+      "disposition": "exempt/out-of-scope",
+      "required_scope": true,
+      "rationale": "Cult card affordance QA screenshots are retained visual proof assets, not source authority, app assets, or rendered source pages."
+    },
+    {
       "id": "fixtures",
       "path_glob": "fixtures/*.json",
       "artifact_class": "fixture",

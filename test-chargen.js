@@ -3494,7 +3494,30 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
   }
 }
 
-// Test 1.13c: Step 8 specialization inputs stay inside their grid cell
+// Test 1.13c: Cult cards expose prominent selected-state styling and status text
+{
+  const { App: AppObj, CharacterData: CD, CULTS_DATA: Cults } = loadApp();
+  if (AppObj?.renderCultCard && Array.isArray(Cults) && Cults.length > 0) {
+    const cult = Cults.find(item => item.name === 'Orlanth') || Cults[0];
+    CD.cult = cult.name;
+    const selectedCard = AppObj.renderCultCard(cult);
+    CD.cult = null;
+    const unselectedCard = AppObj.renderCultCard(cult);
+    if ((selectedCard.className || '').includes('cult-card--selected') &&
+        (selectedCard.innerHTML || '').includes('Selected Cult') &&
+        (unselectedCard.innerHTML || '').includes('Select Cult') &&
+        !(unselectedCard.className || '').includes('cult-card--selected')) {
+      pass('Step 9 selected cult card has prominent styling and status label');
+    } else {
+      fail('Step 9 selected cult card styling is still too subtle',
+        JSON.stringify({ selectedClass: selectedCard.className, selectedHtml: selectedCard.innerHTML, unselectedClass: unselectedCard.className, unselectedHtml: unselectedCard.innerHTML }));
+    }
+  } else {
+    fail('App.renderCultCard unavailable for selected cult prominence test');
+  }
+}
+
+// Test 1.13d: Step 8 specialization inputs stay inside their grid cell
 {
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
   const cssStart = html.indexOf('.professional-specialization-input');
