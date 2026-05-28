@@ -16530,6 +16530,7 @@ App.generateRandomCharacter = function() {
   CharacterData.boundSpirits = [];
   CharacterData.sorceryResource = 0;
   CharacterData.sorcerySpells = [];
+  CharacterData.mysticismPath = '';
   CharacterData.mysticismTalents = [];
   CharacterData._disambiguationMap = {};
   CharacterData._cultBoundPlaceholderMap = {};
@@ -16919,6 +16920,7 @@ App.generateRandomCharacter = function() {
   const activeRandomProviders = this.normalizeHigherMagicState(CharacterData);
   const randomSorcerySource = activeRandomProviders.find(provider => provider.system === 'sorcery') || null;
   const randomAnimismProvider = activeRandomProviders.find(provider => provider.system === 'animism') || null;
+  const randomMysticismProvider = activeRandomProviders.find(provider => provider.system === 'mysticism') || null;
 
   CharacterData.miracles = [];
   CharacterData.devotionalPool = 0;
@@ -16932,7 +16934,14 @@ App.generateRandomCharacter = function() {
     const spellNames = Array.isArray(randomSorcerySource.availableItems) ? randomSorcerySource.availableItems : [];
     CharacterData.sorcerySpells = spellNames.slice(0, spellLimit);
   }
+  CharacterData.mysticismPath = '';
   CharacterData.mysticismTalents = [];
+  if (randomMysticismProvider && Array.isArray(MYSTICISM_PATHS) && MYSTICISM_PATHS.length > 0) {
+    const randomPath = pick(MYSTICISM_PATHS);
+    CharacterData.mysticismPath = randomPath.name;
+    const talentLimit = App.getMysticismTalentLimit();
+    CharacterData.mysticismTalents = randomPath.talents.slice(0, Math.min(talentLimit, randomPath.talents.length));
+  }
 
   // 17. Social Class — roll random
   const rndCultureType = App.getCultureType(CharacterData.culture);

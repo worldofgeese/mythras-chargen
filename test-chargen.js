@@ -10265,6 +10265,48 @@ section('Cult Data Tests');
   }
 }
 
+{
+  const { App: AppRef, CharacterData: CD, CULTURES_DATA: CulturesData, CAREERS_DATA: CareersData, _sandbox: sandbox } = loadApp();
+
+  if (AppRef?.generateRandomCharacter && Array.isArray(CulturesData) && Array.isArray(CareersData)) {
+    const originalCultures = CulturesData.slice();
+    const originalCareers = CareersData.slice();
+    const oldRandom = sandbox.Math.random;
+    try {
+      const sartarite = originalCultures.find(culture => culture.name === 'Sartarite (Heortling)');
+      const mystic = originalCareers.find(career => career.name === 'Mystic');
+      if (!sartarite || !mystic) {
+        fail('Random Mystic regression fixture data missing');
+      } else {
+        CulturesData.splice(0, CulturesData.length, sartarite);
+        CareersData.splice(0, CareersData.length, mystic);
+        let randomState = 17;
+        sandbox.Math.random = () => {
+          randomState = (randomState * 48271) % 2147483647;
+          return randomState / 2147483647;
+        };
+        AppRef.generateRandomCharacter();
+        const knownPaths = ['Path of Abjuration', 'Path of Shadows', 'Path of the Jerboa'];
+        const validationErrors = AppRef.getStep9ValidationErrors ? AppRef.getStep9ValidationErrors() : [];
+        if (CD.career === 'Mystic' && knownPaths.includes(CD.mysticismPath) &&
+            Array.isArray(CD.mysticismTalents) && CD.mysticismTalents.length > 0 &&
+            validationErrors.length === 0) {
+          pass('Random Mystic generation selects a catalog path and starting talent');
+        } else {
+          fail('Random Mystic generation left Step 9 incomplete',
+            JSON.stringify({ career: CD.career, path: CD.mysticismPath, talents: CD.mysticismTalents, validationErrors }));
+        }
+      }
+    } finally {
+      sandbox.Math.random = oldRandom;
+      CulturesData.splice(0, CulturesData.length, ...originalCultures);
+      CareersData.splice(0, CareersData.length, ...originalCareers);
+    }
+  } else {
+    fail('Random Mystic regression dependencies not found');
+  }
+}
+
 // Test: Inline cult data is clean without load-time mutation
 {
   const badTraits = ['Savag', 'Instinctiv', 'Asceti', 'Dynami', 'Energeti', 'Hones', 'Pruden', 'Adventurou', 'Chao', 'Jus', 'Toleran'];
