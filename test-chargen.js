@@ -8543,18 +8543,24 @@ fixtures.forEach(fixtureInfo => {
       miracles: [],
       boundSpirits: [],
       sorcerySpells: [],
-      mysticismPath: 'Core Mysticism Path',
-      mysticismTalents: ['Awareness']
+      mysticismPath: 'Path of Shadows',
+      mysticismTalents: ['Augment Perception']
     };
     const supportedMysticismErrors = CD.validatePlainObject(unsupportedMysticismPayload);
     const supportedMysticismSuccess = CD.fromJSON(JSON.stringify(unsupportedMysticismPayload));
     const supportedMysticismAccepted = supportedMysticismErrors.length === 0 &&
       supportedMysticismSuccess === true &&
       CD.name === 'Unsupported Mysticism Import' &&
-      CD.mysticismPath === 'Core Mysticism Path' &&
-      CD.mysticismTalents.includes('Awareness');
+      CD.mysticismPath === 'Path of Shadows' &&
+      CD.mysticismTalents.includes('Augment Perception');
+    const freeformMysticismErrors = CD.validatePlainObject({
+      ...unsupportedMysticismPayload,
+      mysticismPath: 'Path of Harmony',
+      mysticismTalents: ['Awareness']
+    });
+    const freeformMysticismRejected = freeformMysticismErrors.some(error => /Core example path|not available/i.test(error));
 
-    if (preserved && unknownSpiritRejected && overLimitSpiritRejected && zeroSlotSpiritRejected && emptyMysticismClearsStale && supportedMysticismAccepted) {
+    if (preserved && unknownSpiritRejected && overLimitSpiritRejected && zeroSlotSpiritRejected && emptyMysticismClearsStale && supportedMysticismAccepted && freeformMysticismRejected) {
       pass('Provider-backed Animism import validates spirits and accepts source-guided Mysticism talents');
     } else {
       fail('Provider-backed Animism/Mysticism import validation is incomplete',
@@ -8573,7 +8579,9 @@ fixtures.forEach(fixtureInfo => {
           emptyMysticismSuccess,
           emptyMysticismClearsStale,
           supportedMysticismErrors,
-          supportedMysticismAccepted
+          supportedMysticismAccepted,
+          freeformMysticismErrors,
+          freeformMysticismRejected
         }));
     }
   } else {
@@ -12795,23 +12803,25 @@ section('Step 9 Initiation Gate');
     CD.careerSkills = { Meditation: 0, 'Mysticism (Core Mysticism Path)': 0, Literacy: 0 };
     CD.cult = 'Orlanth';
     CD.cultType = { primary: 'theist', types: ['theist'], isHybrid: false };
-    CD.mysticismTalents = ['Awareness'];
+    CD.mysticismPath = 'Path of Abjuration';
+    CD.mysticismTalents = ['Augment Endurance'];
     CD.miracles = [];
 
     const uiResult = AppRef.selectCult(null, { skipConfirmation: true, allowMagicSelectionLoss: true });
     const uiProviders = AppRef.resolveHigherMagicProviders(CD);
     const uiTalentsPreserved = uiResult.success &&
       uiProviders.some(provider => provider.system === 'mysticism') &&
-      CD.mysticismTalents.includes('Awareness');
+      CD.mysticismTalents.includes('Augment Endurance');
 
     CD.cult = 'Orlanth';
     CD.cultType = { primary: 'theist', types: ['theist'], isHybrid: false };
-    CD.mysticismTalents = ['Awareness'];
+    CD.mysticismPath = 'Path of Abjuration';
+    CD.mysticismTalents = ['Augment Endurance'];
     const agentResult = AppRef.agent.selectCult(null);
     const agentProviders = AppRef.resolveHigherMagicProviders(CD);
     const agentTalentsPreserved = agentResult.success &&
       agentProviders.some(provider => provider.system === 'mysticism') &&
-      CD.mysticismTalents.includes('Awareness');
+      CD.mysticismTalents.includes('Augment Endurance');
 
     if (uiTalentsPreserved && agentTalentsPreserved) {
       pass('Clearing a deity preserves unrelated career-backed Mysticism selections in UI and agent flows');
@@ -13817,15 +13827,15 @@ section('Step 9 Initiation Gate');
     CD.socialClass = 'Gentry';
     CD.socialClassMoneyMod = 5;
     CD.startingMoney = 250;
-    CD.mysticismPath = 'Path of Harmony';
-    CD.mysticismTalents = ['Awareness'];
+    CD.mysticismPath = 'Path of Shadows';
+    CD.mysticismTalents = ['Augment Perception'];
     CD.sorcerySpells = [];
     CD.boundSpirits = [];
     CD.miracles = [];
 
     const html = AppRef.renderStep12().innerHTML;
     const includesGeneratedResources = html.includes('Gentry') && html.includes('250') && html.includes('Starting Money');
-    const includesMagicChoices = html.includes('Path of Harmony') || html.includes('Awareness');
+    const includesMagicChoices = html.includes('Path of Shadows') && html.includes('Augment Perception');
 
     if (includesGeneratedResources && includesMagicChoices) {
       pass('Step 12 review shows automatic resources and Mystic choices');
@@ -13924,6 +13934,32 @@ section('Step 9 Initiation Gate');
     }
   } else {
     fail('Starting-money parity dependencies not found');
+  }
+}
+
+{
+  const { App: AppRef, CharacterData: CD, _sandbox } = loadApp();
+
+  if (AppRef?.selectCareer && _sandbox) {
+    CD.culture = 'Esrolian';
+    CD.career = 'Sorcerer';
+    CD.characteristics = { STR: 10, CON: 10, SIZ: 10, DEX: 10, INT: 15, POW: 14, CHA: 10 };
+    CD.selectedProfessionalSkills = ['Invocation (Personal Grimoire)', 'Shaping', 'Literacy'];
+    CD.careerSkills = { 'Invocation (Personal Grimoire)': 10, Shaping: 10, Literacy: 0 };
+    CD.sorcerySpells = ['Animate (Substance)', 'Attract (Threat)', 'Banish'];
+    CD.sorceryResource = 14;
+    const oldConfirm = _sandbox.confirm;
+    _sandbox.confirm = () => true;
+    const result = AppRef.selectCareer('Mystic');
+    _sandbox.confirm = oldConfirm;
+
+    if (result.success === true && CD.career === 'Mystic' && CD.sorcerySpells.length === 0) {
+      pass('Changing away from Sorcerer auto-clears sorcery spells without blocking career change');
+    } else {
+      fail('Changing away from Sorcerer still blocks or preserves stale sorcery spells', JSON.stringify({ result, career: CD.career, sorcerySpells: CD.sorcerySpells }));
+    }
+  } else {
+    fail('Career selection unavailable for sorcery auto-clear regression test');
   }
 }
 

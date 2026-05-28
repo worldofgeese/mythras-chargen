@@ -117,17 +117,25 @@ textarea { width: 100%; min-height: 60px; resize: vertical; }
 .choice-option,
 .spell-picker__list label,
 .professional-skill-option label {
-  display: inline-flex;
+  display: flex;
   align-items: flex-start;
-  gap: 7px;
+  gap: 8px;
   line-height: 1.35;
+  margin: 4px 0;
 }
 .choice-option input[type="radio"],
 .choice-option input[type="checkbox"],
 .spell-picker__list input[type="checkbox"],
 .professional-skill-option input[type="checkbox"] {
   flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
   margin: 2px 0 0;
+}
+.spell-picker__list label > span,
+.professional-skill-option label > span,
+.choice-option > span {
+  min-width: 0;
 }
 .info-icon,
 .skill-tooltip {
@@ -168,7 +176,6 @@ button.primary:hover { background: #333; }
   min-width: 0;
 }
 .professional-skill-option label {
-  display: block;
   min-width: 0;
 }
 .professional-skill-option .professional-specialization-input,
@@ -754,6 +761,18 @@ select:focus {
   max-height: 240px;
   overflow-y: auto;
   padding-right: 8px;
+}
+.mysticism-path-field select { min-height: 34px; }
+.mysticism-talent-picker { margin-top: 12px; }
+.mysticism-talent-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 6px 14px;
+  max-height: none;
+}
+.mysticism-talent-list label {
+  min-height: 30px;
+  align-items: center;
 }
 .spell-picker__list label {
   display: block;
@@ -5932,6 +5951,46 @@ const CORE_CAREER_MAGIC_PROVIDERS = {
     }
   ]
 };
+
+const MYSTICISM_PATHS = [
+  {
+    name: 'Path of Abjuration',
+    description: 'A denial and endurance discipline suited to novice ascetics and survival-focused mystics.',
+    source: 'Mythras rulebook p.155-156',
+    talents: [
+      'Augment Endurance',
+      'Augment Survival',
+      'Invoke Denial (Food)',
+      'Invoke Denial (Water)',
+      'Invoke Denial (Sleep)',
+      'Enhance Fatigue',
+      'Enhance Hit Points'
+    ]
+  },
+  {
+    name: 'Path of Shadows',
+    description: 'A stealth and perception discipline used by Mju\'s example mystical training.',
+    source: 'Mythras rulebook p.155-156',
+    talents: [
+      'Augment Perception',
+      'Augment Stealth',
+      'Augment Ranged Combat Style',
+      'Invoke Adhesion',
+      'Invoke Astral Projection',
+      'Invoke Dark Sight',
+      'Enhance Fatigue'
+    ]
+  },
+  {
+    name: 'Path of the Jerboa',
+    description: 'Mju\'s self-developed desert retreat path; use with GM approval for player characters.',
+    source: 'Mythras rulebook p.157',
+    talents: [
+      'Augment Athletics',
+      'Enhance Movement Rate'
+    ]
+  }
+];
 
 const CULTURE_BUILDS = {
   "Praxian": [
@@ -11895,8 +11954,18 @@ const CharacterData = {
       }
     }
     if (Array.isArray(data.mysticismTalents)) {
-      getDuplicateSelectionNames(data.mysticismTalents.map(talent => String(talent || '').trim()).filter(Boolean))
+      const importedMysticPath = MYSTICISM_PATHS.find(path => path.name === data.mysticismPath) || null;
+      const importedTalents = data.mysticismTalents.map(talent => String(talent || '').trim()).filter(Boolean);
+      getDuplicateSelectionNames(importedTalents)
         .forEach(talent => errors.push(`mysticismTalents contains duplicate "${talent}"`));
+      if (importedTalents.length > 0 && !importedMysticPath) {
+        errors.push('mysticismPath must be selected from the Core example path list');
+      } else if (importedMysticPath) {
+        const unknownMysticTalents = importedTalents.filter(talent => !importedMysticPath.talents.includes(talent));
+        if (unknownMysticTalents.length > 0) {
+          errors.push(`mysticismTalents not available for ${importedMysticPath.name}: ${unknownMysticTalents.join(', ')}`);
+        }
+      }
     }
 
     if (Array.isArray(data.selectedProfessionalSkills)) {
@@ -14393,21 +14462,16 @@ App.selectCareer = function(careerName) {
     }
     applyAutoLockedProfessionalSkillResolutions(CharacterData);
 
-    const activeHigherMagicProviders = this.resolveHigherMagicProviders(CharacterData);
-    const providerLossError = getHigherMagicProviderSelectionLossError(careerSnapshot, activeHigherMagicProviders, {
-      lostSpellsMessage: lostSpells => `Changing career would clear selected sorcery spells: ${lostSpells.join(', ')}`,
-      lostBoundSpiritsMessage: lostSpirits => `Changing career would clear selected bound spirits: ${lostSpirits.join(', ')}`,
-      lostMysticismTalentsMessage: lostTalents => `Changing career would clear selected mysticism talents: ${lostTalents.join(', ')}`
-    });
-    if (providerLossError) {
-      return rejectCareerChange(providerLossError);
-    }
-    const activeSorcerySource = activeHigherMagicProviders.find(provider => provider.system === 'sorcery') || null;
-    const sourceError = getSorcerySourceSelectionError(careerSnapshot, previousSorcerySource, CharacterData, activeSorcerySource, {
-      lostSpellsMessage: lostSpells => `Changing career would clear selected sorcery spells: ${lostSpells.join(', ')}`
-    });
-    if (sourceError) {
-      return rejectCareerChange(sourceError);
+    let activeHigherMagicProviders = this.resolveHigherMagicProviders(CharacterData);
+    if (careerChanged) {
+      const hasProvider = system => activeHigherMagicProviders.some(provider => provider.system === system);
+      if (!hasProvider('sorcery')) CharacterData.sorcerySpells = [];
+      if (!hasProvider('animism')) CharacterData.boundSpirits = [];
+      if (!hasProvider('mysticism')) {
+        CharacterData.mysticismPath = '';
+        CharacterData.mysticismTalents = [];
+      }
+      activeHigherMagicProviders = this.normalizeHigherMagicState(CharacterData);
     }
     this.normalizeHigherMagicState(CharacterData);
     this.saveToLocalStorage();
@@ -14776,55 +14840,105 @@ App.renderAnimismPickerPanel = function(provider, options = {}) {
   `;
 };
 
+App.getMysticismPath = function(pathName) {
+  return MYSTICISM_PATHS.find(path => path.name === pathName) || null;
+};
+
+App.getMysticismTalentLimit = function(provider) {
+  return provider?.itemLimit || getMagicProviderItemLimit('mysticism', CharacterData);
+};
+
+App.normalizeMysticismSelection = function(provider) {
+  const talentLimit = this.getMysticismTalentLimit(provider);
+  const path = this.getMysticismPath(CharacterData.mysticismPath);
+  if (!path) {
+    CharacterData.mysticismTalents = [];
+    return { path: null, talentLimit, selectedTalents: [], availableTalents: [] };
+  }
+  const availableTalents = path.talents || [];
+  const selectedTalents = (CharacterData.mysticismTalents || [])
+    .map(talent => String(talent || '').trim())
+    .filter(talent => availableTalents.includes(talent))
+    .slice(0, talentLimit);
+  CharacterData.mysticismTalents = selectedTalents;
+  return { path, talentLimit, selectedTalents, availableTalents };
+};
+
 App.renderMysticismProviderPanel = function(provider, options = {}) {
   if (!provider) return '';
   const magicPoints = provider.magicPoints ?? getCharacterMagicPoints(CharacterData);
-  const talentLimit = provider.itemLimit || getMagicProviderItemLimit('mysticism', CharacterData);
   const sourceLabel = provider.sourceLabel || 'Mysticism';
   const heading = options.heading || (provider.sourceKind === 'core-career' ? 'Mystic Training' : sourceLabel);
   const skills = Array.isArray(provider.skills) && provider.skills.length > 0
     ? provider.skills.join(' + ')
     : 'Meditation + Mysticism';
-  const selectedTalents = Array.isArray(CharacterData.mysticismTalents) ? CharacterData.mysticismTalents : [];
-  while (selectedTalents.length < talentLimit) selectedTalents.push('');
-  if (selectedTalents.length > talentLimit) selectedTalents.length = talentLimit;
-  CharacterData.mysticismTalents = selectedTalents;
+  const { path, talentLimit, selectedTalents, availableTalents } = this.normalizeMysticismSelection(provider);
+  const selectedCount = selectedTalents.length;
+  const capReached = selectedCount >= talentLimit;
 
   return `
     <div class="magic-panel magic-panel--mysticism">
       <h3>${this.escapeHtml(heading)}</h3>
-      <p><strong>Path:</strong> Choose the school, guru, sacred text, or discipline your Mystic follows.</p>
+      <p><strong>Path:</strong> Choose one example path from Mythras Core. Custom paths are a GM/table decision outside this generator.</p>
       <p><strong>Resource:</strong> Magic Points (${magicPoints}) to activate talents</p>
       <p><strong>Skills:</strong> ${this.escapeHtml(skills)}</p>
       <p><strong>Starting Talents:</strong> ${talentLimit} known talent${talentLimit === 1 ? '' : 's'} (Mysticism skill ${getCharacterMysticismSkillValue(CharacterData)} / 20)</p>
-      <div class="field">
+      <div class="field mysticism-path-field">
         <label>Mystic Path</label>
-        <input type="text" data-testid="mysticism-path" value="${this.escapeHtmlAttr(CharacterData.mysticismPath || '')}" placeholder="Example: Path of Harmony, Drum Trance, Lunar Illumination" oninput="App.updateMysticismPath(this.value)">
+        <select data-testid="mysticism-path" onchange="App.updateMysticismPath(this.value)">
+          <option value="">-- Select Mystic Path --</option>
+          ${MYSTICISM_PATHS.map(candidate => `<option value="${this.escapeHtmlAttr(candidate.name)}" ${CharacterData.mysticismPath === candidate.name ? 'selected' : ''}>${this.escapeHtml(candidate.name)}</option>`).join('')}
+        </select>
+        ${path ? `<p class="field-help">${this.escapeHtml(path.description)} <span class="page-ref">${this.escapeHtml(path.source)}</span></p>` : '<p class="field-help">Pick a path first, then choose starting talents from that path.</p>'}
       </div>
-      <div class="allocation-list">
-        ${selectedTalents.map((talent, index) => `
-          <div class="allocation-row allocation-row--simple">
-            <div class="allocation-label"><strong>Talent ${index + 1}</strong><span class="allocation-help">Choose a named talent from your path. Check Mythras rulebook p.156-161 with your GM.</span></div>
-            <input class="allocation-control" type="text" data-testid="mysticism-talent-${index}" value="${this.escapeHtmlAttr(talent || '')}" placeholder="Talent name" oninput="App.updateMysticismTalent(${index}, this.value)">
+      ${path ? `
+        <div class="spell-picker mysticism-talent-picker">
+          <h4>Starting Mystic Talents <span style="font-weight:normal">(${selectedCount} / ${talentLimit})</span></h4>
+          <p class="spell-picker__hint">Choose the least-potent novice talents that fit the path. You can learn stronger or additional talents in play.</p>
+          <div class="spell-picker__list mysticism-talent-list">
+            ${availableTalents.map(talent => {
+              const checked = selectedTalents.includes(talent);
+              const disabled = capReached && !checked;
+              const disabledAttrs = disabled ? ' disabled aria-disabled="true"' : '';
+              const labelClass = disabled ? ' class="spell-picker__option--disabled"' : '';
+              return `<label${labelClass}><input type="checkbox" ${checked ? 'checked' : ''}${disabledAttrs} data-talent="${this.escapeHtmlAttr(talent)}" data-testid="mysticism-talent-${this.escapeHtmlAttr(slugifyMagicProviderPart(talent))}" onchange="App.toggleMysticismTalent(this.dataset.talent, this)"> <span>${this.escapeHtml(talent)}</span></label>`;
+            }).join('')}
           </div>
-        `).join('')}
-      </div>
-      <p class="spell-picker__source">Mystics choose one path at character creation and begin with known talents from that path. Use the Mythras rulebook Mysticism chapter (p.155-161) to choose flavorful talents that fit the character.</p>
+        </div>
+      ` : ''}
+      <p class="spell-picker__source">Sources: Mythras rulebook p.155-157; paths and talents use the Core examples only.</p>
     </div>
   `;
 };
 
 App.updateMysticismPath = function(pathName) {
   CharacterData.mysticismPath = String(pathName || '');
-  this.requestSaveToLocalStorage();
+  CharacterData.mysticismTalents = [];
+  this.saveToLocalStorage();
+  this.rerenderPreservingScroll();
 };
 
-App.updateMysticismTalent = function(index, talentName) {
-  const talentIndex = Number(index);
-  if (!Number.isInteger(talentIndex) || talentIndex < 0) return;
-  CharacterData.mysticismTalents = Array.isArray(CharacterData.mysticismTalents) ? CharacterData.mysticismTalents : [];
-  CharacterData.mysticismTalents[talentIndex] = String(talentName || '');
-  this.requestSaveToLocalStorage();
+App.toggleMysticismTalent = function(talentName, inputEl) {
+  const activeMysticismProvider = this.resolveHigherMagicProviders(CharacterData).find(provider => provider.system === 'mysticism') || null;
+  const { talentLimit, selectedTalents, availableTalents } = this.normalizeMysticismSelection(activeMysticismProvider);
+  if (!availableTalents.includes(talentName)) {
+    if (inputEl) inputEl.checked = false;
+    this.showToast('Choose a talent from your selected Mystic path', 'error');
+    return false;
+  }
+  if (inputEl && inputEl.checked) {
+    if (selectedTalents.length >= talentLimit && !selectedTalents.includes(talentName)) {
+      inputEl.checked = false;
+      this.showToast(`You can select ${talentLimit} Mystic talent${talentLimit === 1 ? '' : 's'} at character creation`, 'error');
+      return false;
+    }
+    if (!CharacterData.mysticismTalents.includes(talentName)) CharacterData.mysticismTalents.push(talentName);
+  } else {
+    CharacterData.mysticismTalents = (CharacterData.mysticismTalents || []).filter(talent => talent !== talentName);
+  }
+  this.saveToLocalStorage();
+  this.rerenderPreservingScroll();
+  return true;
 };
 
 App.renderStep9 = function() {
@@ -15645,8 +15759,15 @@ App.getStep9ValidationErrors = function() {
       return;
     }
     const talentLimit = provider.itemLimit || getMagicProviderItemLimit('mysticism', CharacterData);
+    const selectedPath = App.getMysticismPath(CharacterData.mysticismPath);
+    const availableTalents = selectedPath?.talents || [];
+    const unknownTalents = filledTalents.filter(talent => !availableTalents.includes(talent));
     if (!String(CharacterData.mysticismPath || '').trim()) {
-      errors.push('Please name your Mystic path');
+      errors.push('Please choose your Mystic path');
+    } else if (!selectedPath) {
+      errors.push('Please choose a Mystic path from the list');
+    } else if (unknownTalents.length > 0) {
+      errors.push(`Mystic talent(s) not available for ${selectedPath.name}: ${unknownTalents.join(', ')}`);
     } else if (filledTalents.length < talentLimit) {
       errors.push(`Please choose your Mystic talents (${filledTalents.length}/${talentLimit})`);
     } else if (filledTalents.length > talentLimit) {

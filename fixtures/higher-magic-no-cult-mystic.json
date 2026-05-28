@@ -138,7 +138,11 @@
   "hobbySkillName": null,
   "homeland": "Esrolia",
   "miracles": [],
-  "mysticismTalents": [],
+  "mysticismPath": "Path of Shadows",
+  "mysticismTalents": [
+    "Augment Perception",
+    "Augment Stealth"
+  ],
   "name": "Sereth Breath-Watcher",
   "notes": "Fixture regenerated through the browser runtime for higher-magic provider coverage.",
   "passions": [

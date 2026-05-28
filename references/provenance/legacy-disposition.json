@@ -48,6 +48,22 @@
       "rationale": "Source-specialization manual browser QA screenshots are retained visual proof assets, not source authority, app assets, or rendered source pages."
     },
     {
+      "id": "ux-hardening-qa-screenshots",
+      "path_glob": "verification-artifacts/ux-hardening/*.png",
+      "artifact_class": "generated_artifact",
+      "disposition": "exempt/out-of-scope",
+      "required_scope": true,
+      "rationale": "UX hardening browser QA screenshots are retained visual proof assets, not source authority, app assets, or rendered source pages."
+    },
+    {
+      "id": "mystic-catalog-alignment-qa-screenshots",
+      "path_glob": "verification-artifacts/mystic-catalog-alignment/*.png",
+      "artifact_class": "generated_artifact",
+      "disposition": "exempt/out-of-scope",
+      "required_scope": true,
+      "rationale": "Mystic catalog and alignment browser QA screenshots are retained visual proof assets, not source authority, app assets, or rendered source pages."
+    },
+    {
       "id": "fixtures",
       "path_glob": "fixtures/*.json",
       "artifact_class": "fixture",

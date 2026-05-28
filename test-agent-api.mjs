@@ -525,12 +525,12 @@ const u4MysticNoCult = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(4, {culture:'Esrolian', homeland:'Esrolia'});
   const step8 = App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', {name:'Mysticism', specialization:'Core Mysticism Path'}, {name:'Musicianship', specialization:'Drums'}]});
   const options = App.agent.getOptions(9);
-  const step9 = App.agent.setStep(9, {cult:null, mysticismPath:'Core Mysticism Path', mysticismTalents:['Awareness']});
+  const step9 = App.agent.setStep(9, {cult:null, mysticismPath:'Path of Shadows', mysticismTalents:['Augment Perception']});
   const talentPayload = step9;
   App.currentStep = 9;
   App.renderCurrentStep();
   const html = document.body.innerText;
-  const hasTalentPicker = Boolean(document.querySelector('[data-talent], [data-mysticism-talent], input[name="mysticismTalent"], [data-testid="mysticism-talent-0"]'));
+  const hasTalentPicker = Boolean(document.querySelector('[data-talent], [data-mysticism-talent], input[name="mysticismTalent"], [data-testid="mysticism-talent-augment-perception"]'));
   return {step8, options, step9, talentPayload, html, hasTalentPicker};
 })())`);
 assert(u4MysticNoCult.step8.success === true &&
@@ -541,10 +541,11 @@ assert(u4MysticNoCult.step8.success === true &&
   /Mystic Training/i.test(u4MysticNoCult.html) &&
   /Magic Points \(20\).*activate/i.test(u4MysticNoCult.html) &&
   /Mystic Path/i.test(u4MysticNoCult.html) &&
-  /Talent 1/i.test(u4MysticNoCult.html) &&
+  /Path of Shadows/i.test(u4MysticNoCult.html) &&
+  /Augment Perception/i.test(u4MysticNoCult.html) &&
   /Meditation/i.test(u4MysticNoCult.html) &&
   /Mysticism/i.test(u4MysticNoCult.html) &&
-  !/no MP cost|no external resource|not ready for selection|debug catalog/i.test(u4MysticNoCult.html) &&
+  !/no MP cost|no external resource|not ready for selection|debug catalog|Talent name|Path of Harmony/i.test(u4MysticNoCult.html) &&
   u4MysticNoCult.hasTalentPicker === true,
   'U4: No Cult Mystic exposes Core Mysticism with path and talent selection');
 
@@ -553,6 +554,7 @@ const u4MysticOrlanth = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:15,POW:12,CHA:8}});
   App.agent.setStep(4, {culture:'Sartarite (Heortling)', homeland:'Boldhome'});
   const step8 = App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', {name:'Mysticism', specialization:'Core Mysticism Path'}, {name:'Musicianship', specialization:'Drums'}]});
+  App.agent.setStep(9, {cult:null, mysticismPath:'Path of Abjuration', mysticismTalents:['Augment Endurance']});
   const cultSelect = App.agent.selectCult('Orlanth');
   App.currentStep = 9;
   App.renderCurrentStep();
@@ -591,7 +593,7 @@ const u4ProviderPlayMode = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(2, {characteristics:{STR:8,CON:8,SIZ:8,DEX:8,INT:15,POW:20,CHA:8}});
   App.agent.setStep(4, {culture:'Sartarite (Heortling)', homeland:'Boldhome'});
   App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', {name:'Mysticism', specialization:'Core Mysticism Path'}, {name:'Musicianship', specialization:'Drums'}]});
-  App.agent.setStep(9, {cult:null});
+  App.agent.setStep(9, {cult:null, mysticismPath:'Path of Shadows', mysticismTalents:['Augment Perception']});
   App.switchMode('play');
   const mysticHtml = document.getElementById('play-magic')?.innerText || '';
 
@@ -750,7 +752,7 @@ const u5ProviderStateParity = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(2, {characteristics:{STR:8,CON:8,SIZ:8,DEX:8,INT:15,POW:20,CHA:8}});
   App.agent.setStep(4, {culture:'Esrolian', homeland:'Esrolia'});
   App.agent.setStep(8, {career:'Mystic', professionalSkills:['Meditation', {name:'Mysticism', specialization:'Core Mysticism Path'}, {name:'Musicianship', specialization:'Drums'}]});
-  App.agent.setStep(9, {cult:null});
+  App.agent.setStep(9, {cult:null, mysticismPath:'Path of Abjuration', mysticismTalents:['Augment Endurance']});
   const mysticState = App.agent.getState();
 
   return {shamanState, sorcererState, mysticState};
@@ -794,9 +796,14 @@ const u5ProviderIdValidation = evalPageJSON(`JSON.stringify((() => {
   App.agent.setStep(1, {name:'U5 Provider IDs', concept:'Provider-shaped Step 9 payloads'});
   App.agent.setStep(2, {characteristics:{STR:10,CON:10,SIZ:10,DEX:10,INT:13,POW:14,CHA:8}});
   App.agent.setStep(4, {culture:'Praxian', homeland:'Prax'});
+  CharacterData.cult = null;
+  CharacterData.cultChoiceMade = false;
+  CharacterData.cultInitiated = false;
+  CharacterData.cultType = null;
   CharacterData.miracles = [];
   CharacterData.boundSpirits = [];
   CharacterData.sorcerySpells = [];
+  CharacterData.mysticismPath = '';
   CharacterData.mysticismTalents = [];
   App.agent.setStep(8, {career:'Shaman', professionalSkills:[{name:'Binding (Cult, Totem or Tradition)', specialization:'Waha'}, 'Trance', 'Healing']});
   const unknown = App.agent.setStep(9, {cult:null, higherMagicProviderIds:['bogus-provider'], boundSpirits:['Ancestor Spirit — Sagacity (Int 1)']});
@@ -818,7 +825,7 @@ const u5ProviderIdValidation = evalPageJSON(`JSON.stringify((() => {
   return {unknown, afterUnknown, duplicate, inherited, brokenPrototype, empty, valid, afterValid, subset, afterSubset};
 })())`);
 assert(u5ProviderIdValidation.unknown.success === false &&
-  /higher magic provider id/i.test((u5ProviderIdValidation.unknown.errors || []).join('; ')) &&
+  /higher magic provider id|higherMagicProviderIds/i.test((u5ProviderIdValidation.unknown.errors || []).join('; ')) &&
   u5ProviderIdValidation.afterUnknown.selectedSpirits.length === 0 &&
   u5ProviderIdValidation.duplicate.success === false &&
   /Duplicate higher magic provider id/i.test((u5ProviderIdValidation.duplicate.errors || []).join('; ')) &&
@@ -842,6 +849,7 @@ const u5ProviderSelectionLoss = evalPageJSON(`JSON.stringify((() => {
     CharacterData.miracles = [];
     CharacterData.boundSpirits = [];
     CharacterData.sorcerySpells = [];
+    CharacterData.mysticismPath = '';
     CharacterData.mysticismTalents = [];
   };
   const setupCultBackedShaman = () => {
@@ -1406,11 +1414,11 @@ const ae3bPublicCareerDropsSource = evalPageJSON(`JSON.stringify((() => {
 })())`);
 assert(ae3bPublicCareerDropsSource.beforeMagic.sorcerySourceLabel === 'Zzistori School (God Forgot sorcery)' &&
   ae3bPublicCareerDropsSource.beforeMagic.selectedSpells.includes('Holdfast') &&
-  ae3bPublicCareerDropsSource.result?.success === false &&
-  ae3bPublicCareerDropsSource.afterState.career === 'Sorcerer' &&
-  ae3bPublicCareerDropsSource.afterMagic.sorcerySourceLabel === 'Zzistori School (God Forgot sorcery)' &&
-  ae3bPublicCareerDropsSource.afterMagic.selectedSpells.includes('Holdfast'),
-  'AE3b invalid: public App.selectCareer rejects career switch that would drop source-backed spells');
+  ae3bPublicCareerDropsSource.result?.success === true &&
+  ae3bPublicCareerDropsSource.afterState.career === 'Farmer' &&
+  ae3bPublicCareerDropsSource.afterMagic.sorcerySourceLabel === null &&
+  ae3bPublicCareerDropsSource.afterMagic.selectedSpells.length === 0,
+  'AE3b valid: public App.selectCareer auto-clears source-backed spells when leaving Sorcerer');
 
 reload();
 

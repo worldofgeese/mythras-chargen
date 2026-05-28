@@ -292,6 +292,73 @@
           "references/sources/evidence/mythras-core/page-0196-verification.json"
         ]
       }
+    },
+    "path_examples": {
+      "note": "App-facing Mystic chargen uses only named examples from the Mythras Core Mysticism chapter. Freeform path/talent entry is intentionally excluded from player flow; custom paths remain a GM/table decision outside the generator.",
+      "page": "p.155-156",
+      "paths": [
+        {
+          "name": "Path of Abjuration",
+          "description": "A denial and endurance discipline suited to novice ascetics and survival-focused mystics.",
+          "talents": [
+            "Augment Endurance",
+            "Augment Survival",
+            "Invoke Denial (Food)",
+            "Invoke Denial (Water)",
+            "Invoke Denial (Sleep)",
+            "Enhance Fatigue",
+            "Enhance Hit Points"
+          ]
+        },
+        {
+          "name": "Path of Shadows",
+          "description": "A stealth and perception discipline used by Mju's example mystical training.",
+          "talents": [
+            "Augment Perception",
+            "Augment Stealth",
+            "Augment Ranged Combat Style",
+            "Invoke Adhesion",
+            "Invoke Astral Projection",
+            "Invoke Dark Sight",
+            "Enhance Fatigue"
+          ]
+        },
+        {
+          "name": "Path of the Jerboa",
+          "description": "Mju's self-developed desert retreat path; available here as a worked example but should be approved by the GM for player characters.",
+          "talents": [
+            "Augment Athletics",
+            "Enhance Movement Rate"
+          ]
+        }
+      ],
+      "source_ref": {
+        "source_id": "mythras-core",
+        "source_revision_id": "mythras-core:copyparty-sources-books-mythras-core-rulebook-3rd-printing-2018-pdf:de88d7107f93:2026-05-22",
+        "pages": [
+          156,
+          157
+        ],
+        "pdf_pages": [
+          156,
+          157
+        ],
+        "page_manifest_path": "references/sources/pages/mythras-core.json",
+        "coverage_state": "verified",
+        "evidence_state": "bounded_extraction_independent_vision_verified_reference_only",
+        "block_ids": [
+          "mythras-core-p0156-b002",
+          "mythras-core-p0156-b003",
+          "mythras-core-p0157-b001"
+        ],
+        "block_state": "verified_page_block_evidence",
+        "evidence_paths": [
+          "references/sources/evidence/mythras-core/page-0156-extraction.json",
+          "references/sources/evidence/mythras-core/page-0156-verification.json",
+          "references/sources/evidence/mythras-core/page-0157-extraction.json",
+          "references/sources/evidence/mythras-core/page-0157-verification.json"
+        ]
+      }
     }
   }
 }
