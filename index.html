@@ -119,12 +119,16 @@ textarea { width: 100%; min-height: 60px; resize: vertical; }
   grid-template-columns: repeat(auto-fit, minmax(220px, max-content));
   margin: 12px 0;
 }
+/* Form control alignment: structural grid positions radio/checkbox controls.
+   Grid: max-content control column + fluid text column. No transform/top nudges.
+   1em sizing follows font-size for zoom/accessibility. */
 .choice-option,
 .spell-picker__list label,
 .professional-skill-option label {
   align-items: start;
+  column-gap: 6px;
   display: grid;
-  grid-template-columns: 18px minmax(0, 1fr);
+  grid-template-columns: max-content minmax(0, 1fr);
   line-height: 1.35;
   margin: 4px 0;
 }
@@ -133,11 +137,9 @@ textarea { width: 100%; min-height: 60px; resize: vertical; }
 .spell-picker__list input[type="checkbox"],
 .professional-skill-option input[type="checkbox"] {
   align-self: start;
-  height: 14px;
-  justify-self: center;
+  block-size: 1em;
+  inline-size: 1em;
   margin: 0;
-  transform: translateY(0.18em);
-  width: 14px;
 }
 .spell-picker__list label > span,
 .professional-skill-option label > span,

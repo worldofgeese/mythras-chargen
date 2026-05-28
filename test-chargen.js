@@ -3494,21 +3494,28 @@ asyncTest('exportSinglePagePDF() companion label normalization failed', async ()
   }
 }
 
-// Test 1.13c: Radio and checkbox labels use a fixed two-column grid
+// Test 1.13c: Radio and checkbox labels use structural grid for alignment
 {
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
   const hasChoiceGrid = html.includes('.choice-option,') &&
     html.includes('display: grid;') &&
-    html.includes('grid-template-columns: 18px minmax(0, 1fr);');
+    html.includes('grid-template-columns: max-content minmax(0, 1fr);') &&
+    html.includes('column-gap: 6px;');
+  const controlCssStart = html.indexOf('.choice-option input[type="radio"]');
+  const controlCssEnd = html.indexOf('.spell-picker__list label > span', controlCssStart);
+  const controlCss = controlCssStart >= 0 && controlCssEnd > controlCssStart ? html.slice(controlCssStart, controlCssEnd) : '';
+  const hasAlignSelf = controlCss.includes('align-self: start;');
+  const hasSizing = controlCss.includes('block-size: 1em;') && controlCss.includes('inline-size: 1em;');
+  const hasTransformNudge = /transform:\s*translateY|top:\s*[0-9]/.test(controlCss);
   const step2RadioSpans = html.includes('<span>Point Buy (75 points, default)</span>') &&
     html.includes('<span>Dice Rolling (3d6 or 2d6+6)</span>');
   const folkMagicSpans = html.includes('<label class="choice-option"><input type="checkbox"') &&
     html.includes('<span>${spell}</span>');
-  if (hasChoiceGrid && step2RadioSpans && folkMagicSpans) {
-    pass('Radio and checkbox labels use a fixed two-column grid');
+  if (hasChoiceGrid && hasAlignSelf && hasSizing && !hasTransformNudge && step2RadioSpans && folkMagicSpans) {
+    pass('Radio and checkbox labels use structural grid for alignment');
   } else {
-    fail('Radio and checkbox labels are not on a fixed grid with text column',
-      JSON.stringify({ hasChoiceGrid, step2RadioSpans, folkMagicSpans }));
+    fail('Radio and checkbox grid alignment incomplete or has transform/top nudges',
+      JSON.stringify({ hasChoiceGrid, hasAlignSelf, hasSizing, hasTransformNudge, step2RadioSpans, folkMagicSpans }));
   }
 }
 
