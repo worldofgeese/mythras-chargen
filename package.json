@@ -7,7 +7,9 @@
   "description": "A character creation tool for the Mythras roleplaying game, with optional Glorantha support via Adventures in Glorantha.",
   "main": "index.html",
   "scripts": {
-    "test": "node test-chargen.js"
+    "test": "node test-chargen.js",
+    "test:consent": "node --test server/glorantha-consent-endpoint.test.js",
+    "consent-server": "node server/glorantha-consent-endpoint.js"
   },
   "repository": {
     "type": "git",

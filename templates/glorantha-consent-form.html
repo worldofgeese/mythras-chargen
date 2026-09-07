@@ -419,19 +419,16 @@
 
         const message = lines.join('\n');
 
-        const res = await fetch('https://api.telegram.org/bot7935991058:AAFK1w0w0i_J00OGsU0OvpTT1o0-0naGJ78/sendMessage', {
+        const res = await fetch('/api/glorantha-consent', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-          body: JSON.stringify({
-            chat_id: '488228716',
-            text: message
-          })
+          body: JSON.stringify({ message })
         });
-
         const data = await res.json().catch(() => ({}));
+
         if (!res.ok || !data?.ok) {
           throw new Error(data?.description || data?.error || 'submit failed');
         }
